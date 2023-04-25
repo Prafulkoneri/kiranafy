@@ -71,7 +71,7 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                       width: 322.w,
                       height: 86.h,
                       // color: Colors.white,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: Row(
@@ -147,74 +147,61 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
+                                //
                                 // SizedBox(
-                                //   width: 10.w,
+                                //   height: 10.h,
                                 // ),
-                                // Text(
-                                //   '\u{20B9}${25.00}',
-                                //   style: GoogleFonts.dmSans(
-                                //     textStyle: TextStyle(
-                                //         color: Black,
-                                //         letterSpacing: .5,
-                                //         fontSize: 12.sp,
-                                //         fontWeight: FontWeight.w500),
-                                //   ),
-                                // ),
-                                SizedBox(
-                                  height: 13.h,
-                                ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  // mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Text(
-                                      '\u{20B9}${25.00}',
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                            color: Black,
-                                            letterSpacing: .5,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5.w,
-                                    ),
-                                    Text(
-                                      '\u{20B9}${25.00}',
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            // decoration:
-                                            // TextDecoration.lineThrough,
-                                            color: Black,
-                                            letterSpacing: .5,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w500),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 13.w),
+                                      child: Text(
+                                        '\u{20B9}${25.00}',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              color: Black,
+                                              letterSpacing: .5,
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(
-                                        left: 24.w,
-                                      ),
-                                      child: SvgPicture.asset(
-                                        'assets/images/add.svg',
-                                        // width: 30.w,
-                                        // height: 30.h,
+                                      padding:
+                                          EdgeInsets.only(top: 13.w, left: 5.w),
+                                      child: Text(
+                                        '\u{20B9}${25.00}',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              // decoration:
+                                              // TextDecoration.lineThrough,
+                                              color: Black,
+                                              letterSpacing: .5,
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                     ),
-                                    // Row(
-                                    //   // mainAxisAlignment: MainAxisAlignment.end,
-                                    //   crossAxisAlignment:
-                                    //       CrossAxisAlignment.start,
-                                    //   children: [
-                                    //     SvgPicture.asset(
-                                    //       'assets/images/add.svg',
-                                    //       // width: 15.w,
-                                    //       // height: 19.h,
-                                    //     ),
-                                    //   ],
-                                    // )
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 100.w),
+                                          child: SvgPicture.asset(
+                                            'assets/images/add.svg',
+                                            // width: 30.w,
+                                            // height: 30.h,
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                   ],
                                 ),
                               ],

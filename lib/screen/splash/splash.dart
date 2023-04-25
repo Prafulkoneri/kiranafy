@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
@@ -25,9 +26,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
+      children: [
         Padding(
-          padding: const EdgeInsets.only(right: 45, top: 10),
+          padding: EdgeInsets.only(right: 45.w),
           child: Image(
             image: AssetImage("assets/images/splash1.png"),
           ),
@@ -36,8 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
           image: AssetImage("assets/images/splash3.png"),
         ),
         Padding(
-          padding: const EdgeInsets.only(
-            left: 45,
+          padding: EdgeInsets.only(
+            left: 45.w,
           ),
           child: Image(
             image: AssetImage("assets/images/splash2.png"),

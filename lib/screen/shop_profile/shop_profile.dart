@@ -11,6 +11,8 @@ import 'package:local_supper_market/screen/Home/coupons.dart';
 import 'package:local_supper_market/screen/shop_profile/Seasonal_products.dart';
 import 'package:local_supper_market/screen/shop_profile/offer_products.dart';
 import 'package:local_supper_market/screen/shop_profile/recommendation_products.dart';
+import 'package:local_supper_market/screen/shop_profile/view_all_offer_products.dart';
+import 'package:local_supper_market/screen/shop_profile/view_all_seasonal_products.dart';
 
 class ShopProfile extends StatefulWidget {
   const ShopProfile({super.key});
@@ -246,14 +248,23 @@ class _ShopProfileState extends State<ShopProfile> {
                         fontWeight: FontWeight.w600),
                   ),
                 ),
-                Text(
-                  "See all",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: CouponsText,
-                        letterSpacing: .3,
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.w500),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AllOfferProducts()),
+                    );
+                  },
+                  child: Text(
+                    "See all",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: CouponsText,
+                          letterSpacing: .3,
+                          fontSize: 11.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
               ],
@@ -283,14 +294,23 @@ class _ShopProfileState extends State<ShopProfile> {
                         fontWeight: FontWeight.w600),
                   ),
                 ),
-                Text(
-                  "See all",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: CouponsText,
-                        letterSpacing: .3,
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.w500),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AllSeasonalProducts()),
+                    );
+                  },
+                  child: Text(
+                    "See all",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: CouponsText,
+                          letterSpacing: .3,
+                          fontSize: 11.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
               ],
@@ -300,18 +320,29 @@ class _ShopProfileState extends State<ShopProfile> {
             padding: EdgeInsets.only(top: 15.w),
             child: const SeasonalProducts(),
           ),
-          Text(
-            "Shop By Category",
-            style: GoogleFonts.dmSans(
-              textStyle: TextStyle(
-                  color: Black,
-                  letterSpacing: .5,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600),
+          Padding(
+            padding: EdgeInsets.only(top: 30.h, left: 19.h, bottom: 15.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Shop By Category",
+                  style: GoogleFonts.dmSans(
+                    textStyle: TextStyle(
+                        color: Black,
+                        letterSpacing: .5,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
             ),
           ),
           const ShopCategory(),
-          const CouponsScreen(),
+          Padding(
+            padding: EdgeInsets.only(top: 17.w),
+            child: const CouponsScreen(),
+          ),
           const RecommendationProducts(),
         ]),
       ),

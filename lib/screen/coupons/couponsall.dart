@@ -19,16 +19,7 @@ class AllCoupons extends StatefulWidget {
 
 class _AllCouponsState extends State<AllCoupons> {
   String? selectedValue;
-  final List<String> genderItems = [
-    // 'Low To Heigh',
-    // 'Low To Heigh',
-    // 'Heigh to low',
-    // 'Heigh to low',
-    // 'Heigh to low',
-    // 'Heigh to low',
-    // 'Heigh to low',
-    // 'Heigh to low',
-  ];
+  final List<String> genderItems = [];
 
   @override
   Widget build(BuildContext context) {

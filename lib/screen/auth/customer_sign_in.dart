@@ -9,7 +9,6 @@ import 'package:local_supper_market/screen/Home/home_screen.dart';
 import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
 import 'package:local_supper_market/screen/auth/shop_registration.dart';
 import 'package:local_supper_market/screen/intro/intro_one.dart';
-import 'package:local_supper_market/test.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
@@ -32,7 +31,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
             alignment: Alignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 45),
+                padding: EdgeInsets.only(right: 45.w),
                 child: AspectRatio(
                   aspectRatio: 1.45,
                   child: Image.asset(
@@ -41,11 +40,11 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 50),
+                padding: EdgeInsets.only(top: 50.w),
                 child: ClipRRect(
                   child: Image.asset(
                     'assets/images/splash3.png',
-                    width: 200,
+                    width: 180.w,
                   ),
                 ),
               ),

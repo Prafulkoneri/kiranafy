@@ -4,15 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/Home/nearby_shop.dart';
 import 'package:local_supper_market/screen/Home/category.dart';
 import 'package:local_supper_market/screen/Home/home_screen.dart';
+import 'package:local_supper_market/screen/advertisementform/advertisementform.dart';
 import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
 import 'package:local_supper_market/screen/auth/shop_registration.dart';
 import 'package:local_supper_market/screen/auth/shope_owner.dart';
+import 'package:local_supper_market/screen/cart/cart_screen.dart';
+import 'package:local_supper_market/screen/cart/empty_cart.dart';
+import 'package:local_supper_market/screen/category/category.dart';
 import 'package:local_supper_market/screen/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/near_shops/all_near_shops.dart';
+import 'package:local_supper_market/screen/order_summery/order_delivery_virw.dart';
+import 'package:local_supper_market/screen/order_summery/order_summery.dart';
 import 'package:local_supper_market/screen/shop_profile/shop_profile.dart';
+import 'package:local_supper_market/screen/shop_profile/view_all_offer_products.dart';
 import 'package:local_supper_market/screen/splash/splash.dart';
-import 'package:local_supper_market/test.dart';
-
 import 'const/color.dart';
 import 'screen/auth/customer_sign_up.dart';
 import 'screen/auth/upload_documents.dart';
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
               ),
               debugShowCheckedModeBanner: false,
-              home: ShopProfile());
+              home: OrderDeliveryView());
         });
   }
 }

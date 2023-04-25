@@ -139,14 +139,14 @@ class _AllNearShopsState extends State<AllNearShops> {
                                         onTap: () {},
                                         child: SvgPicture.asset(
                                           "assets/images/favorite.svg",
-                                          width: 26,
-                                          height: 14,
+                                          width: 26.w,
+                                          height: 14.h,
                                         ),
                                       ),
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 62.h,
+                                    height: 60.h,
                                   ),
                                   Text("New Balaji Trading Co..",
                                       style: GoogleFonts.roboto(
@@ -213,14 +213,14 @@ class _AllNearShopsState extends State<AllNearShops> {
                                       onTap: () {},
                                       child: SvgPicture.asset(
                                         "assets/images/favorite.svg",
-                                        width: 26,
-                                        height: 14,
+                                        width: 26.w,
+                                        height: 14.h,
                                       ),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 92.h,
+                                  height: 90.h,
                                 ),
                                 Text("New Balaji Trading Co..",
                                     style: GoogleFonts.roboto(
@@ -232,10 +232,9 @@ class _AllNearShopsState extends State<AllNearShops> {
                                 Row(
                                   children: [
                                     SvgPicture.asset(
-                                      "assets/images/location.svg",
-                                      width: 12,
-                                      height: 15,
-                                    ),
+                                        "assets/images/location.svg",
+                                        width: 8.w,
+                                        height: 10.h),
                                     Padding(
                                       padding: EdgeInsets.only(left: 8.w),
                                       child: Text("Vishrantwadi, Pune",
