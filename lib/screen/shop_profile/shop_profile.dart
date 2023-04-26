@@ -60,19 +60,19 @@ class _ShopProfileState extends State<ShopProfile> {
                   children: [
                     SvgPicture.asset(
                       'assets/images/location1.svg',
-                      // width: 15.w,
-                      // height: 19.h,
+                      width: 15.w,
+                      height: 19.h,
                     ),
                     SizedBox(
                       width: 5.w,
                     ),
                     Text(
                       "Vishrantwadi, Pune",
-                      style: GoogleFonts.dmSans(
+                      style: GoogleFonts.roboto(
                         textStyle: TextStyle(
                             color: SplashText1,
-                            letterSpacing: .5,
-                            fontSize: 13.sp,
+                            // letterSpacing: .5,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w400),
                       ),
                     )
@@ -122,7 +122,7 @@ class _ShopProfileState extends State<ShopProfile> {
                     children: [
                       Text(
                         "New Balaji Trading Company",
-                        style: GoogleFonts.dmSans(
+                        style: GoogleFonts.roboto(
                           textStyle: TextStyle(
                               color: Colors.white,
                               // letterSpacing: .5,
@@ -131,7 +131,7 @@ class _ShopProfileState extends State<ShopProfile> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 35.w),
+                        padding: EdgeInsets.only(left: 45.w),
                         child: Container(
                           height: 24.h,
                           width: 55.w,
@@ -187,26 +187,25 @@ class _ShopProfileState extends State<ShopProfile> {
                   padding: EdgeInsets.only(left: 12.w, top: 20.w, bottom: 20.w),
                   child: SvgPicture.asset(
                     'assets/images/location2.svg',
-                    // width: 15.w,
-                    // height: 19.h,
+                    width: 23.w,
+                    height: 28.h,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 8.w, top: 24.w, bottom: 15.w),
+                  padding: EdgeInsets.only(left: 8.w, top: 15.w, bottom: 15.w),
                   child: Text(
                     "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                    style: GoogleFonts.dmSans(
+                    style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                           color: Black,
-                          letterSpacing: .5,
+                          // letterSpacing: .5,
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: 36.h, right: 11.w, top: 12.w, bottom: 12.w),
+                  padding: EdgeInsets.only(left: 40.h, top: 12.w, bottom: 12.w),
                   child: Row(
                     children: [
                       SvgPicture.asset(
@@ -240,10 +239,10 @@ class _ShopProfileState extends State<ShopProfile> {
               children: [
                 Text(
                   "Offer Products",
-                  style: GoogleFonts.dmSans(
+                  style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                        color: Black,
-                        letterSpacing: .3,
+                        color: DarkBlack,
+                        // letterSpacing: .3,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600),
                   ),
@@ -286,10 +285,10 @@ class _ShopProfileState extends State<ShopProfile> {
               children: [
                 Text(
                   "Seasonal Products",
-                  style: GoogleFonts.dmSans(
+                  style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                        color: Black,
-                        letterSpacing: .3,
+                        color: DarkBlack,
+                        // letterSpacing: .3,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600),
                   ),
@@ -304,10 +303,10 @@ class _ShopProfileState extends State<ShopProfile> {
                   },
                   child: Text(
                     "See all",
-                    style: GoogleFonts.dmSans(
+                    style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                           color: CouponsText,
-                          letterSpacing: .3,
+                          // letterSpacing: .3,
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w500),
                     ),

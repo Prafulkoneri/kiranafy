@@ -32,7 +32,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
                       left: index == 0 ? 19.w : 0,
                       right: index == 2 ? 19.w : 5.w),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.w),
+                      borderRadius: BorderRadius.circular(13.w),
                       image: const DecorationImage(
                           image: AssetImage('assets/images/property1.png'),
                           fit: BoxFit.fill)),
@@ -46,14 +46,14 @@ class _HomeCarousalState extends State<HomeCarousal> {
                             style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.white,
-                                    letterSpacing: .5,
+                                    // letterSpacing: .5,
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w600))),
                         Text("Vishrantwadi, Pune",
                             style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.white,
-                                    letterSpacing: .5,
+                                    // letterSpacing: .5,
                                     fontSize: 12.sp,
                                     // height: 10,
                                     fontWeight: FontWeight.w400))),

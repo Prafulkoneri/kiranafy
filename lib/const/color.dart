@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color SplashText = Color(0xff39C19D);
+const Color Red = Color(0xffFF6258);
 const Color lightsky = Color(0xffE2FFF7);
 const Color SplashText1 = Color(0xff115B7A);
 const Color Black = Color(0xff000000);
@@ -39,3 +40,8 @@ Color lighrgreen = Color(0xff44B8CA);
 Color grey6 = Color(0xffEFEFEF);
 Color grey7 = Color(0xffE8E8E8);
 Color DarkGrey = Color(0xffD1D1D1);
+Color Yellow = Color(0xffE4C400);
+Color lightblue = Color(0xffEFFDFF);
+Color grey8 = Color(0xffB3B3B3);
+Color lightblack = Color(0xff5B5B5B);
+Color lightblack1 = Color(0xff6F6F6F);

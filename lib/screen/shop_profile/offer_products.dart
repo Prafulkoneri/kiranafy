@@ -27,12 +27,23 @@ class _OfferProductsState extends State<OfferProducts> {
             return Row(
               children: [
                 Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade200,
+                        spreadRadius: 10,
+                        blurRadius: 200,
+                        offset: Offset(0, 5), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   width: 182.w,
                   height: 156.h,
                   margin: EdgeInsets.only(
                       left: index == 0 ? 19.w : 0,
                       right: index == 2 ? 19.w : 5.w),
                   child: Card(
+                    elevation: 1,
                     // color: black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -48,7 +59,10 @@ class _OfferProductsState extends State<OfferProducts> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(
-                                    top: 14.w, left: 34.w, right: 34.w),
+                                    top: 14.w,
+                                    left: 34.w,
+                                    right: 40.w,
+                                    bottom: 2.w),
                                 child: Card(
                                     child: Image.asset(
                                         "assets/images/redlabel.png")),
@@ -57,10 +71,10 @@ class _OfferProductsState extends State<OfferProducts> {
                           ),
                           Text(
                             "Red Label",
-                            style: GoogleFonts.dmSans(
+                            style: GoogleFonts.roboto(
                               textStyle: TextStyle(
                                   color: Black1,
-                                  letterSpacing: .5,
+                                  // letterSpacing: .5,
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -70,10 +84,10 @@ class _OfferProductsState extends State<OfferProducts> {
                           ),
                           Text(
                             "100g",
-                            style: GoogleFonts.dmSans(
+                            style: GoogleFonts.roboto(
                               textStyle: TextStyle(
                                   color: Black1,
-                                  letterSpacing: .5,
+                                  // letterSpacing: .5,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -84,10 +98,10 @@ class _OfferProductsState extends State<OfferProducts> {
                             children: [
                               Text(
                                 '\u{20B9}${40}',
-                                style: GoogleFonts.dmSans(
+                                style: GoogleFonts.roboto(
                                   textStyle: TextStyle(
                                       color: Black1,
-                                      letterSpacing: .5,
+                                      // letterSpacing: .5,
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w600),
                                 ),

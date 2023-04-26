@@ -27,7 +27,7 @@ class _OfferPageState extends State<OfferPage> {
           width: 352.w,
           decoration: BoxDecoration(
               color: Coupons,
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+              borderRadius: const BorderRadius.all(Radius.circular(15))),
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
@@ -35,20 +35,18 @@ class _OfferPageState extends State<OfferPage> {
               children: [
                 Text(
                   "Say Hello to Offers!",
-                  style: GoogleFonts.dmSans(
+                  style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                        color: Black,
-                        letterSpacing: .5,
+                        color: DarkBlack,
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
                 Text(
                   "Best price ever of all time",
-                  style: GoogleFonts.dmSans(
+                  style: GoogleFonts.roboto(
                     textStyle: TextStyle(
                         color: Grey,
-                        letterSpacing: .5,
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w400),
                   ),
@@ -64,7 +62,7 @@ class _OfferPageState extends State<OfferPage> {
                   child: ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: 3,
                       itemBuilder: (BuildContext, index) {
@@ -72,7 +70,7 @@ class _OfferPageState extends State<OfferPage> {
                           width: 322.w,
                           height: 86.h,
                           // color: Colors.white,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
@@ -96,7 +94,7 @@ class _OfferPageState extends State<OfferPage> {
                                     endIndent: 5),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(left: 9.w, top: 10.h),
+                                padding: EdgeInsets.only(left: 0.w, top: 10.h),
                                 child: Column(
                                   // mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,31 +107,39 @@ class _OfferPageState extends State<OfferPage> {
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: Black,
-                                                  letterSpacing: .5,
+                                                  // letterSpacing: .5,
                                                   fontSize: 14.sp,
                                                   fontWeight: FontWeight.w700),
                                             )),
-                                        SizedBox(
-                                          width: 25.w,
-                                        ),
-                                        Container(
-                                          width: 60.w,
-                                          height: 20.h,
-                                          decoration: BoxDecoration(
-                                              color: lightgreen,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.w))),
-                                          child: Center(
-                                            child: Text("50% off",
-                                                // textAlign: TextAlign.center,
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      letterSpacing: .5,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                )),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 48.0),
+                                          child: Container(
+                                            width: 60.w,
+                                            height: 20.h,
+                                            decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    lightgreen.withOpacity(0.6),
+                                                    lightgreen.withOpacity(0.6)
+                                                  ],
+                                                ),
+
+                                                // color:
+                                                //     lightgreen.withOpacity(1.0),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.w))),
+                                            child: Center(
+                                              child: Text("50% off",
+                                                  // textAlign: TextAlign.center,
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        // letterSpacing: .5,
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  )),
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -150,7 +156,7 @@ class _OfferPageState extends State<OfferPage> {
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: Grey,
-                                                letterSpacing: .5,
+                                                // letterSpacing: .5,
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500),
                                           ),
@@ -171,7 +177,7 @@ class _OfferPageState extends State<OfferPage> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 13.h,
+                                      height: 12.h,
                                     ),
                                     Row(
                                       children: [
@@ -188,7 +194,7 @@ class _OfferPageState extends State<OfferPage> {
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: Black,
-                                                letterSpacing: .5,
+                                                // letterSpacing: .5,
                                                 fontSize: 13.sp,
                                                 fontWeight: FontWeight.w500),
                                           ),

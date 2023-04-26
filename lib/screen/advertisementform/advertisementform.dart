@@ -43,8 +43,8 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
           "Advertisement Request form",
           style: GoogleFonts.dmSans(
             textStyle: TextStyle(
-                color: Black,
-                letterSpacing: .5,
+                color: DarkBlack,
+                // letterSpacing: .5,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w700),
           ),
@@ -79,9 +79,9 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
               Text(
                 "Name",
                 style: GoogleFonts.dmSans(
-                  textStyle: const TextStyle(
-                      color: Black,
-                      letterSpacing: .5,
+                  textStyle: TextStyle(
+                      color: Black1,
+                      // letterSpacing: .5,
                       fontSize: 14,
                       fontWeight: FontWeight.w500),
                 ),
@@ -106,9 +106,10 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1, color: grey6), //<-- SEE HERE
+                      borderSide: BorderSide(width: 1, color: Grey),
                       borderRadius: BorderRadius.circular(10.0),
+
+                      //<-- SEE HERE
                     ),
                     filled: true,
                   ),
@@ -118,11 +119,11 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                 height: 10.h,
               ),
               Text(
-                "Name",
+                "Contact No",
                 style: GoogleFonts.dmSans(
-                  textStyle: const TextStyle(
-                      color: Black,
-                      letterSpacing: .5,
+                  textStyle: TextStyle(
+                      color: Black1,
+                      // letterSpacing: .5,/
                       fontSize: 14,
                       fontWeight: FontWeight.w500),
                 ),
@@ -147,9 +148,10 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1, color: grey6), //<-- SEE HERE
+                      borderSide: BorderSide(width: 1, color: Grey),
                       borderRadius: BorderRadius.circular(10.0),
+
+                      //<-- SEE HERE
                     ),
                     filled: true,
                   ),
@@ -159,11 +161,11 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                 height: 10.h,
               ),
               Text(
-                "Name",
+                "Your Shop Name",
                 style: GoogleFonts.dmSans(
-                  textStyle: const TextStyle(
-                      color: Black,
-                      letterSpacing: .5,
+                  textStyle: TextStyle(
+                      color: Black1,
+                      // letterSpacing: .5,//
                       fontSize: 14,
                       fontWeight: FontWeight.w500),
                 ),
@@ -188,9 +190,10 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1, color: grey6), //<-- SEE HERE
+                      borderSide: BorderSide(width: 1, color: Grey),
                       borderRadius: BorderRadius.circular(10.0),
+
+                      //<-- SEE HERE
                     ),
                     filled: true,
                   ),
@@ -200,11 +203,11 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                 height: 10.h,
               ),
               Text(
-                "Name",
+                "Plan for Start",
                 style: GoogleFonts.dmSans(
                   textStyle: const TextStyle(
                       color: Black,
-                      letterSpacing: .5,
+                      // letterSpacing: .5,
                       fontSize: 14,
                       fontWeight: FontWeight.w500),
                 ),
@@ -238,9 +241,10 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1, color: grey6), //<-- SEE HERE
+                      borderSide: BorderSide(width: 1, color: Grey),
                       borderRadius: BorderRadius.circular(10.0),
+
+                      //<-- SEE HERE
                     ),
                     filled: true,
                   ),
@@ -259,101 +263,98 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(right: 50.w),
-                child: Column(
-                  children: [
-                    RadioListTile(
-                      activeColor: SplashText,
-                      title: Text(
-                        "7 days",
-                        style: GoogleFonts.dmSans(
-                          textStyle: const TextStyle(
-                              color: Black,
-                              letterSpacing: .5,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
+              Column(
+                children: [
+                  RadioListTile(
+                    activeColor: SplashText,
+                    title: Text(
+                      "7 days",
+                      style: GoogleFonts.dmSans(
+                        textStyle: const TextStyle(
+                            color: Black,
+                            // letterSpacing: .5,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
-                      value: "7 days",
-                      groupValue: gender,
-                      onChanged: (value) {
-                        setState(() {
-                          gender = value.toString();
-                        });
-                      },
                     ),
-                    RadioListTile(
-                      title: Text(
-                        "15 days",
-                        style: GoogleFonts.dmSans(
-                          textStyle: const TextStyle(
-                              color: Black,
-                              letterSpacing: .5,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
+                    value: "7 days",
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value.toString();
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    title: Text(
+                      "15 days",
+                      style: GoogleFonts.dmSans(
+                        textStyle: const TextStyle(
+                            color: Black,
+                            // letterSpacing: .5,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
-                      activeColor: SplashText,
-                      value: "15 days",
-                      groupValue: gender,
-                      onChanged: (value) {
-                        setState(() {
-                          gender = value.toString();
-                        });
-                      },
                     ),
-                    RadioListTile(
-                      title: Text(
-                        "30 days",
-                        style: GoogleFonts.dmSans(
-                          textStyle: const TextStyle(
-                              color: Black,
-                              letterSpacing: .5,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
+                    activeColor: SplashText,
+                    value: "15 days",
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value.toString();
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    title: Text(
+                      "30 days",
+                      style: GoogleFonts.dmSans(
+                        textStyle: const TextStyle(
+                            color: Black,
+                            // letterSpacing: .5,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
-                      activeColor: SplashText,
-                      value: "30 days",
-                      groupValue: gender,
-                      onChanged: (value) {
-                        setState(() {
-                          gender = value.toString();
-                        });
-                      },
                     ),
-                    RadioListTile(
-                      title: Text(
-                        "60 days",
-                        style: GoogleFonts.dmSans(
-                          textStyle: const TextStyle(
-                              color: Black,
-                              letterSpacing: .5,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
+                    activeColor: SplashText,
+                    value: "30 days",
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value.toString();
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    title: Text(
+                      "60 days",
+                      style: GoogleFonts.dmSans(
+                        textStyle: const TextStyle(
+                            color: Black,
+                            // letterSpacing: .5,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
-                      activeColor: SplashText,
-                      value: "60 days",
-                      groupValue: gender,
-                      onChanged: (value) {
-                        setState(() {
-                          gender = value.toString();
-                        });
-                      },
                     ),
-                  ],
-                ),
+                    activeColor: SplashText,
+                    value: "60 days",
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value.toString();
+                      });
+                    },
+                  ),
+                ],
               ),
               Padding(
-                padding: EdgeInsets.only(top: 19.w, bottom: 10.w),
+                padding: EdgeInsets.only(top: 10.w, bottom: 10.w),
                 child: Text(
                   "Ads Content",
                   style: GoogleFonts.dmSans(
                     textStyle: TextStyle(
                         color: Black1,
-                        letterSpacing: .5,
+                        // letterSpacing: .5,
                         fontSize: 14,
                         fontWeight: FontWeight.w500),
                   ),
@@ -363,6 +364,13 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                 // height: 200.h,
                 child: TextField(
                   decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 1, color: Grey),
+                      borderRadius: BorderRadius.circular(10.0),
+
+                      //<-- SEE HERE
+                    ),
+
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 80.w), // <-- SEE HERE
 
@@ -380,11 +388,11 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                         style: BorderStyle.none,
                       ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1, color: grey6), //<-- SEE HERE
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+                    // enabledBorder: OutlineInputBorder(
+                    //   borderSide:
+                    //       BorderSide(width: 1, color: grey6), //<-- SEE HERE
+                    //   borderRadius: BorderRadius.circular(10.0),
+                    // ),
                     filled: true,
                   ),
                 ),
@@ -409,10 +417,10 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                     child: Text(
                       'Submit',
                       style: GoogleFonts.dmSans(
-                        textStyle: const TextStyle(
-                            // color: SplashTex
-                            letterSpacing: .5,
-                            fontSize: 20,
+                        textStyle: TextStyle(
+                            color: Colors.white,
+                            // letterSpacing: .5,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.w700),
                       ),
                     ),
@@ -424,9 +432,9 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                 child: Text(
                   "Note",
                   style: GoogleFonts.dmSans(
-                    textStyle: const TextStyle(
-                        // color: SplashTex
-                        letterSpacing: .5,
+                    textStyle: TextStyle(
+                        color: Black1,
+                        // letterSpacing: .5,
                         fontSize: 16,
                         fontWeight: FontWeight.w500),
                   ),
@@ -454,7 +462,7 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                         textAlign: TextAlign.justify,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
-                              color: black,
+                              color: Black1,
                               height: 1.5,
 
                               // letterSpacing: .05,
@@ -485,7 +493,7 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
                             height: 1.5,
-                            color: black,
+                            color: Black1,
                             letterSpacing: .5,
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w400),
@@ -512,7 +520,7 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
                             height: 1.5,
-                            color: black,
+                            color: Black1,
                             letterSpacing: .5,
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w400),

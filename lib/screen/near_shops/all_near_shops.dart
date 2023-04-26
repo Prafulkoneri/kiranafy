@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_profile/shop_profile.dart';
 
 class AllNearShops extends StatefulWidget {
   const AllNearShops({super.key});
@@ -48,11 +49,11 @@ class _AllNearShopsState extends State<AllNearShops> {
                         ),
                         Text(
                           "Vishrantwadi, Pune",
-                          style: GoogleFonts.dmSans(
+                          style: GoogleFonts.roboto(
                             textStyle: TextStyle(
                                 color: SplashText1,
-                                letterSpacing: .5,
-                                fontSize: 13.sp,
+                                // letterSpacing: .5,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w400),
                           ),
                         )
@@ -67,37 +68,52 @@ class _AllNearShopsState extends State<AllNearShops> {
                   left: 19.0.w,
                   top: 13.h,
                 ),
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: splashnone),
-                        borderRadius: BorderRadius.circular(8.w)),
-                    hintText: 'Search your shop and products..',
-                    hintStyle: TextStyle(
-                        color: kgrey,
-                        letterSpacing: .5,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
-                    prefixIcon: IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: Black,
-                        size: 25.h,
+                child: SizedBox(
+                  width: 351.w,
+                  height: 36.h,
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 1, color: splashnone),
+                          borderRadius: BorderRadius.circular(8.w)),
+                      hintText: 'Search your shop and products..',
+                      hintStyle: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Grey,
+                              // letterSpacing: .5,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w400)),
+
+                      // Add a clear button to the search bar
+
+                      // Add a search icon or button to the search bar
+                      prefixIcon: IconButton(
+                        icon: SvgPicture.asset(
+                          'assets/images/search.svg',
+                          width: 15.w,
+                          height: 15.h,
+                        ),
+                        onPressed: () {
+                          // Perform the search here
+                        },
                       ),
-                      onPressed: () {},
+
+                      // border: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(15.w),
+                      // ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 23.w, left: 19.0.w, bottom: 15.w),
+                padding: EdgeInsets.only(top: 20.w, left: 19.0.w, bottom: 15.w),
                 child: Text(
                   "Nearby Shops",
-                  style: GoogleFonts.dmSans(
+                  style: GoogleFonts.roboto(
                     textStyle: TextStyle(
                         color: Black,
-                        letterSpacing: .5,
+                        // letterSpacing: .5,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600),
                   ),
@@ -148,18 +164,29 @@ class _AllNearShopsState extends State<AllNearShops> {
                                   SizedBox(
                                     height: 60.h,
                                   ),
+                                  // ShaderMask(
+                                  //   shaderCallback: (Rect bounds) {
+                                  //     return LinearGradient(
+                                  //       colors: [
+                                  //         Colors.white.withOpacity(0.9),
+                                  //         Colors.black.withOpacity(6),
+                                  //       ],
+                                  //     ).createShader(bounds);
+                                  //   },
+                                  //   child:
                                   Text("New Balaji Trading Co..",
                                       style: GoogleFonts.roboto(
                                           textStyle: TextStyle(
                                               color: Colors.white,
-                                              letterSpacing: .5,
+                                              // letterSpacing: .5,
                                               fontSize: 13.sp,
                                               fontWeight: FontWeight.w600))),
+                                  // ),
                                   Text("Vishrantwadi, Pune",
                                       style: GoogleFonts.roboto(
                                           textStyle: TextStyle(
                                               color: Colors.white,
-                                              letterSpacing: .5,
+                                              // letterSpacing: .5,
                                               fontSize: 12.sp,
                                               // height: 10,
                                               fontWeight: FontWeight.w400))),
@@ -180,116 +207,122 @@ class _AllNearShopsState extends State<AllNearShops> {
                     shrinkWrap: true,
                     itemCount: 10,
                     itemBuilder: (BuildContext, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                            left: 19.w,
-                            right: 12,
-                            // top: 20.w,
-                            bottom: 14.w),
-                        child: Container(
-                          height: 160.h,
-                          width: 352.w,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShopProfile()),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 19.w,
+                              right: 12,
+                              // top: 20.w,
+                              bottom: 14.w),
+                          child: Container(
+                            height: 160.h,
+                            width: 352.w,
 
-                          // margin: EdgeInsets.only(
-                          //     left: index == 0 ? 19.w : 0,
-                          //     right: index == 2 ? 19.w : 5.w),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15.w),
-                              image: DecorationImage(
-                                  // scale: 1.0,
-                                  image:
-                                      AssetImage('assets/images/nearshop2.png'),
-                                  fit: BoxFit.fill)),
-                          child: Padding(
-                            padding: EdgeInsets.all(10.h),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {},
-                                      child: SvgPicture.asset(
-                                        "assets/images/favorite.svg",
-                                        width: 26.w,
-                                        height: 14.h,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 90.h,
-                                ),
-                                Text("New Balaji Trading Co..",
-                                    style: GoogleFonts.roboto(
-                                        textStyle: TextStyle(
-                                            color: Colors.white,
-                                            letterSpacing: .5,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w600))),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                        "assets/images/location.svg",
-                                        width: 8.w,
-                                        height: 10.h),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 8.w),
-                                      child: Text("Vishrantwadi, Pune",
-                                          style: GoogleFonts.roboto(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  // height: 10,
-                                                  fontWeight:
-                                                      FontWeight.w400))),
-                                    ),
-                                    // SizedBox(
-                                    //   width: 130.w,
-                                    // ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 128.w),
-                                      child: Container(
-                                        height: 22.h,
-                                        width: 50.w,
-                                        decoration: BoxDecoration(
-                                          color: yellow,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                            // margin: EdgeInsets.only(
+                            //     left: index == 0 ? 19.w : 0,
+                            //     right: index == 2 ? 19.w : 5.w),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.w),
+                                image: DecorationImage(
+                                    // scale: 1.0,
+                                    image: AssetImage(
+                                        'assets/images/nearshop2.png'),
+                                    fit: BoxFit.fill)),
+                            child: Padding(
+                              padding: EdgeInsets.all(10.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: SvgPicture.asset(
+                                          "assets/images/favorite.svg",
+                                          width: 26.w,
+                                          height: 14.h,
                                         ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              "assets/images/star.svg",
-                                              height: 12.h,
-                                              width: 12.w,
-                                            ),
-                                            SizedBox(
-                                              width: 4.3.w,
-                                            ),
-                                            Text(
-                                              "4.5",
-                                              style: GoogleFonts.dmSans(
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 85.h,
+                                  ),
+                                  Text("New Balaji Trading Co..",
+                                      style: GoogleFonts.roboto(
+                                          textStyle: TextStyle(
+                                              color: Colors.white,
+                                              // letterSpacing: .5,
+                                              fontSize: 15.sp,
+                                              fontWeight: FontWeight.w600))),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                          "assets/images/location.svg",
+                                          width: 12.w,
+                                          height: 16.h),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 8.w),
+                                        child: Text("Vishrantwadi, Pune",
+                                            style: GoogleFonts.roboto(
                                                 textStyle: TextStyle(
-                                                    color: Black,
+                                                    color: Colors.white,
                                                     letterSpacing: .5,
                                                     fontSize: 12.sp,
+                                                    // height: 10,
                                                     fontWeight:
-                                                        FontWeight.w400),
+                                                        FontWeight.w400))),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 124.w),
+                                        child: Container(
+                                          height: 21.49.h,
+                                          width: 49.w,
+                                          decoration: BoxDecoration(
+                                            color: yellow,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(15)),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SvgPicture.asset(
+                                                "assets/images/star.svg",
+                                                height: 12.h,
+                                                width: 12.w,
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(
+                                                width: 4.3.w,
+                                              ),
+                                              Text(
+                                                "4.5",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black,
+                                                      letterSpacing: .5,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

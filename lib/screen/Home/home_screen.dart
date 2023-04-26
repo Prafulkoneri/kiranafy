@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/Home/nearby_shop.dart';
 import 'package:local_supper_market/screen/Home/category.dart';
 import 'package:local_supper_market/screen/Home/coupons.dart';
 import 'package:local_supper_market/screen/Home/offers.dart';
+import 'package:local_supper_market/screen/advertisementform/advertisementform.dart';
 import 'package:local_supper_market/screen/near_shops/all_near_shops.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -78,19 +79,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       SvgPicture.asset(
                         'assets/images/location1.svg',
-                        // width: 15.w,
-                        // height: 19.h,
+                        width: 15.w,
+                        height: 19.h,
                       ),
                       SizedBox(
                         width: 5.w,
                       ),
                       Text(
                         "Vishrantwadi, Pune",
-                        style: GoogleFonts.dmSans(
+                        style: GoogleFonts.roboto(
                           textStyle: TextStyle(
                               color: SplashText1,
-                              letterSpacing: .5,
-                              fontSize: 13.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w400),
                         ),
                       )
@@ -106,36 +106,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 left: 19.0.w,
                 top: 13.h,
               ),
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1, color: splashnone),
-                      borderRadius: BorderRadius.circular(8.w)),
-                  hintText: 'Search your shop and products..',
-                  hintStyle: TextStyle(
-                      color: kgrey,
-                      letterSpacing: .5,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400),
+              child: SizedBox(
+                width: 351.w,
+                height: 36.h,
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: splashnone),
+                        borderRadius: BorderRadius.circular(8.w)),
+                    hintText: 'Search your shop and products..',
+                    hintStyle: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Grey,
+                            // letterSpacing: .5,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w400)),
 
-                  // Add a clear button to the search bar
+                    // Add a clear button to the search bar
 
-                  // Add a search icon or button to the search bar
-                  prefixIcon: IconButton(
-                    icon: Icon(
-                      Icons.search,
-                      color: Black,
-                      size: 25.h,
+                    // Add a search icon or button to the search bar
+                    prefixIcon: IconButton(
+                      icon: SvgPicture.asset(
+                        'assets/images/search.svg',
+                        width: 15.w,
+                        height: 15.h,
+                      ),
+                      onPressed: () {
+                        // Perform the search here
+                      },
                     ),
-                    onPressed: () {
-                      // Perform the search here
-                    },
-                  ),
 
-                  // border: OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(15.w),
-                  // ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15.w),
+                    // ),
+                  ),
                 ),
               ),
             ),
@@ -145,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ////image
             SizedBox(
-              // width: MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width,
               height: 170.w,
               child: PageView.builder(
                   itemCount: images.length,
@@ -185,22 +190,22 @@ class _HomeScreenState extends State<HomeScreen> {
             ////
 
             Padding(
-              padding: EdgeInsets.only(right: 19.0.w, top: 27.w, left: 19.0.w),
+              padding: EdgeInsets.only(
+                  right: 19.0.w, top: 15.w, bottom: 15.w, left: 19.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Nearby Shops",
-                    style: GoogleFonts.dmSans(
+                    style: GoogleFonts.roboto(
                       textStyle: TextStyle(
-                          color: Black,
-                          letterSpacing: .5,
+                          color: DarkBlack,
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => AllNearShops()),
@@ -208,10 +213,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Text(
                       "View All",
-                      style: GoogleFonts.dmSans(
+                      style: GoogleFonts.roboto(
                         textStyle: TextStyle(
                             color: SplashText,
-                            letterSpacing: .5,
+                            // letterSpacing: .5,
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w500),
                       ),
@@ -224,12 +229,13 @@ class _HomeScreenState extends State<HomeScreen> {
             HomeCarousal(),
 
             Padding(
-              padding: EdgeInsets.only(right: 19.0.w, left: 19.0.w, top: 30.h),
+              padding: EdgeInsets.only(
+                  right: 19.0.w, bottom: 15.w, left: 19.0.w, top: 30.h),
               child: Text(
                 "Shop By Category",
-                style: GoogleFonts.dmSans(
+                style: GoogleFonts.roboto(
                   textStyle: TextStyle(
-                      color: Black,
+                      color: DarkBlack,
                       letterSpacing: .5,
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600),
@@ -237,13 +243,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            SizedBox(
-              height: 15.h,
-            ),
+            // SizedBox(
+            //   height: 15.h,
+            // ),
             ShopCategory(),
-            SizedBox(
-              height: 20.h,
-            ),
+            // SizedBox(
+            //   height: 20.h,
+            // ),
             CouponsScreen(),
 
             OfferPage(),
@@ -253,14 +259,55 @@ class _HomeScreenState extends State<HomeScreen> {
                 left: 19.w,
                 right: 19.w,
                 // top: 18.w,
-                // bottom: 17.h,
+                // bottom: 11.h,/
               ),
               child: Image(
                 image: AssetImage("assets/images/banner.png"),
                 height: 163.h,
                 width: 352.w,
               ),
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20.0.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 25.h,
+                    width: 105.w,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(0),
+                        backgroundColor: MaterialStateProperty.all(SplashText),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdvertisementForm()),
+                        );
+                      },
+                      child: Text(
+                        "Place Your Ad",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+
+                      //
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

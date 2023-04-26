@@ -12,6 +12,8 @@ import 'package:local_supper_market/screen/cart/cart_screen.dart';
 import 'package:local_supper_market/screen/cart/empty_cart.dart';
 import 'package:local_supper_market/screen/category/category.dart';
 import 'package:local_supper_market/screen/coupons/couponsall.dart';
+import 'package:local_supper_market/screen/delivery_view/delivery_view_pending.dart';
+import 'package:local_supper_market/screen/my_order/my_order.dart';
 import 'package:local_supper_market/screen/near_shops/all_near_shops.dart';
 import 'package:local_supper_market/screen/order_summery/order_delivery_virw.dart';
 import 'package:local_supper_market/screen/order_summery/order_summery.dart';
@@ -22,6 +24,7 @@ import 'const/color.dart';
 import 'screen/auth/customer_sign_up.dart';
 import 'screen/auth/upload_documents.dart';
 import 'screen/intro/intro_one.dart';
+import 'screen/order_payment/order_payment.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,7 +47,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
               ),
               debugShowCheckedModeBanner: false,
-              home: OrderDeliveryView());
+              home: HomeScreen());
         });
   }
 }
