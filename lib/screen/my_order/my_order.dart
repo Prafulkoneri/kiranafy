@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/cart/empty_cart.dart';
 
+import '../delivery_view/delivery_view_pending.dart';
+
 class MyOrder extends StatelessWidget {
   const MyOrder({super.key});
 
@@ -130,7 +132,14 @@ class MyOrder extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const OrderPendingView()),
+                                );
+                              },
                               child: Text(
                                 "Pending",
                                 style: GoogleFonts.dmSans(

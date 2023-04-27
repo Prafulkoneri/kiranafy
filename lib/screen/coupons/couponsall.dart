@@ -666,7 +666,10 @@ class _AllCouponsState extends State<AllCoupons> {
                     );
                   }),
             ),
-          ))
+          )),
+          SizedBox(
+            height: 80.h,
+          )
         ],
       ),
     );

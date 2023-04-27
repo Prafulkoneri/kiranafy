@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/Home/category.dart';
+import 'package:local_supper_market/screen/Home/category1.dart';
 import 'package:local_supper_market/screen/Home/coupons.dart';
 import 'package:local_supper_market/screen/shop_profile/Seasonal_products.dart';
 import 'package:local_supper_market/screen/shop_profile/offer_products.dart';
@@ -337,7 +338,7 @@ class _ShopProfileState extends State<ShopProfile> {
               ],
             ),
           ),
-          const ShopCategory(),
+          const ShopCategoryOne(),
           Padding(
             padding: EdgeInsets.only(top: 17.w),
             child: const CouponsScreen(),

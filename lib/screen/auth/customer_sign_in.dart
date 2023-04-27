@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/Home/home_screen.dart';
 import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
 import 'package:local_supper_market/screen/auth/shop_registration.dart';
 import 'package:local_supper_market/screen/intro/intro_one.dart';
+import 'package:local_supper_market/screen/main_screen/views/main_screen_view.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
@@ -52,7 +53,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(top: 54.w, bottom: 130.w),
+                padding: EdgeInsets.only(top: 54.w, bottom: 170.w),
                 child: Text(
                   "Customer Sign In",
                   style: GoogleFonts.dmSans(
@@ -75,6 +76,97 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                       'assets/images/splash2.png',
                     ),
                   ),
+                  // Stack(
+                  //   children: [
+                  //     Padding(
+                  //       padding: EdgeInsets.only(left: 24.w, right: 23.w),
+                  //       child: Positioned(
+                  //         bottom: 1,
+                  //         top: 1,
+                  //         // left: 2,
+                  //         // right: 2,
+                  //         child: Container(
+                  //           // height: 10.h,
+                  //           width: 80.w,
+                  //           decoration: BoxDecoration(
+                  //             color: Colors.white,
+                  //             borderRadius: BorderRadius.circular(5),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Padding(
+                  //       padding: EdgeInsets.only(right: 23.0.w),
+                  //       child: SizedBox(
+                  //         height: 38.h,
+                  //         child: InternationalPhoneNumberInput(
+                  //           // selectorConfig: const SelectorConfig(
+                  //           //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                  //           //     setSelectorButtonAsPrefixIcon: true,
+                  //           //     leadingPadding: 20,
+                  //           //     useEmoji: true,
+                  //           //   ),
+                  //           onInputChanged: (PhoneNumber number) {
+                  //             print(number.phoneNumber);
+                  //           },
+                  //           onInputValidated: (bool value) {
+                  //             print(value);
+                  //           },
+                  //           selectorConfig: const SelectorConfig(
+                  //               selectorType:
+                  //                   PhoneInputSelectorType.BOTTOM_SHEET,
+                  //               // setSelectorButtonAsPrefixIcon: true,
+                  //               setSelectorButtonAsPrefixIcon: false),
+                  //           ignoreBlank: false,
+                  //           autoValidateMode: AutovalidateMode.disabled,
+                  //           selectorTextStyle: TextStyle(color: kgrey),
+                  //           initialValue: number,
+                  //           textFieldController: controller,
+                  //           // formatInput: true,
+                  //           // fillColor: Colors.white,
+
+                  //           // inputBorder: InputBorder.none,
+                  //           inputDecoration: InputDecoration(
+                  //               enabledBorder: OutlineInputBorder(
+                  //                 borderSide:
+                  //                     BorderSide(width: 1, color: Colors.white),
+                  //                 borderRadius: BorderRadius.circular(5.0),
+                  //                 //<-- SEE HERE
+                  //               ),
+                  //               border: InputBorder.none,
+                  //               // border: OutlineInputBorder(
+                  //               //   borderRadius: BorderRadius.circular(10.0),
+
+                  //               // ),
+
+                  //               // borderRadius: BorderRadius.circular(5),
+
+                  //               hintText: "Phone Number",
+                  //               hintStyle: GoogleFonts.dmSans(
+                  //                 textStyle: TextStyle(
+                  //                     color: kgrey,
+                  //                     // letterSpacing: .5,er a
+                  //                     fontSize: 16.sp,
+                  //                     fontWeight: FontWeight.w400),
+                  //               ),
+                  //               fillColor: Colors.white,
+                  //               filled: true),
+                  //           // filled: true,
+                  //           keyboardType: const TextInputType.numberWithOptions(
+                  //               signed: true, decimal: true),
+                  //           // inputBorder: OutlineInputBorder(
+                  //           //   // borderSide: BorderSide.,
+                  //           //   borderRadius: BorderRadius.circular(20),
+                  //           // ),
+
+                  //           onSaved: (PhoneNumber number) {
+                  //             print('On Saved: $number');
+                  //           },
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   Padding(
                     padding: EdgeInsets.only(left: 24.w, right: 23.w),
                     child: Stack(
@@ -83,6 +175,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                           bottom: 1,
                           top: 1,
                           // left: 2,
+                          // right: 5,
                           child: Container(
                             // height: 10.h,
                             width: 90.w,
@@ -93,70 +186,61 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 15.w),
-                          child: InternationalPhoneNumberInput(
-                            // selectorConfig: const SelectorConfig(
-                            //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                            //     setSelectorButtonAsPrefixIcon: true,
-                            //     leadingPadding: 20,
-                            //     useEmoji: true,
-                            //   ),
-                            onInputChanged: (PhoneNumber number) {
-                              print(number.phoneNumber);
-                            },
-                            onInputValidated: (bool value) {
-                              print(value);
-                            },
-                            selectorConfig: const SelectorConfig(
-                                selectorType:
-                                    PhoneInputSelectorType.BOTTOM_SHEET,
-                                // setSelectorButtonAsPrefixIcon: true,
-                                setSelectorButtonAsPrefixIcon: false),
-                            ignoreBlank: false,
-                            autoValidateMode: AutovalidateMode.disabled,
-                            selectorTextStyle: TextStyle(color: kgrey),
-                            initialValue: number,
-                            textFieldController: controller,
-                            // formatInput: true,
-                            // fillColor: Colors.white,
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: SizedBox(
+                            height: 38.h,
+                            child: InternationalPhoneNumberInput(
+                              onInputChanged: (PhoneNumber number) {
+                                print(number.phoneNumber);
+                              },
+                              onInputValidated: (bool value) {
+                                print(value);
+                              },
+                              selectorConfig: const SelectorConfig(
+                                  selectorType:
+                                      PhoneInputSelectorType.BOTTOM_SHEET,
+                                  // setSelectorButtonAsPrefixIcon: true,
+                                  setSelectorButtonAsPrefixIcon: false),
+                              ignoreBlank: false,
+                              autoValidateMode: AutovalidateMode.disabled,
+                              selectorTextStyle: TextStyle(color: kgrey),
+                              initialValue: number,
+                              textFieldController: controller,
+                              // formatInput: true,
+                              // fillColor: Colors.white,
 
-                            // inputBorder: InputBorder.none,
-                            inputDecoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 1, color: Colors.white),
-                                  borderRadius: BorderRadius.circular(5.0),
-//<-- SEE HERE
-                                ),
-                                border: InputBorder.none,
-                                // border: OutlineInputBorder(
-                                //   borderRadius: BorderRadius.circular(10.0),
+                              // inputBorder: InputBorder.none,
+                              inputDecoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1, color: Colors.white),
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    //<-- SEE HERE
+                                  ),
+                                  border: InputBorder.none,
+                                  hintText: "Phone Number",
+                                  hintStyle: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: kgrey,
+                                        // letterSpacing: .5,er a
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true),
+                              // filled: true,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      signed: true, decimal: true),
+                              inputBorder: OutlineInputBorder(
+                                // borderSide: BorderSide.,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
 
-                                // ),
-
-                                // borderRadius: BorderRadius.circular(5),
-
-                                hintText: "Phone Number",
-                                hintStyle: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: kgrey,
-                                      // letterSpacing: .5,er a
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                fillColor: Colors.white,
-                                filled: true),
-                            // filled: true,
-                            keyboardType: const TextInputType.numberWithOptions(
-                                signed: true, decimal: true),
-                            inputBorder: OutlineInputBorder(
-                              // borderSide: BorderSide.,
-                              borderRadius: BorderRadius.circular(20),
+                              onSaved: (PhoneNumber number) {
+                                print('On Saved: $number');
+                              },
                             ),
-
-                            onSaved: (PhoneNumber number) {
-                              print('On Saved: $number');
-                            },
                           ),
                         ),
                       ],
@@ -288,7 +372,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            const HomeScreen()),
+                                                            const MainScreenView()),
                                                   );
                                                 },
                                                 child: Text(
@@ -344,7 +428,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 205),
+                    padding: const EdgeInsets.only(top: 220),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

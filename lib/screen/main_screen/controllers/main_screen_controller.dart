@@ -3,8 +3,11 @@ import 'package:local_supper_market/screen/Home/category.dart';
 import 'package:local_supper_market/screen/Home/home_screen.dart';
 import 'package:local_supper_market/screen/Home/offers.dart';
 import 'package:local_supper_market/screen/cart/cart_screen.dart';
+import 'package:local_supper_market/screen/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/shop_profile/offer_products.dart';
 
+import '../../account/profile.dart';
+import '../../near_shops/all_near_shops.dart';
 
 class MainScreenController extends ChangeNotifier {
   int currentIndex = 0;
@@ -32,25 +35,25 @@ class MainScreenController extends ChangeNotifier {
 
   void onShopPressed() {
     currentTab = 1;
-    currentScreen = ShopCategory();
+    currentScreen = AllNearShops();
     notifyListeners();
   }
 
-  void onMyCartPressed(){
-    currentTab=2;
-    currentScreen=CartScreen();
+  void onMyCartPressed() {
+    currentTab = 2;
+    currentScreen = CartScreen();
     notifyListeners();
   }
 
-  void onOfferPressed(){
-    currentTab=3;
-    currentScreen=OfferPage();
+  void onOfferPressed() {
+    currentTab = 3;
+    currentScreen = AllCoupons();
     notifyListeners();
   }
 
-  void onAccountPressed(){
-    currentTab=4;
-    currentScreen=OfferProducts();
+  void onAccountPressed() {
+    currentTab = 4;
+    currentScreen = MyProfile();
     notifyListeners();
   }
 }

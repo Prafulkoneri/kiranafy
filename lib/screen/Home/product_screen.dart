@@ -14,9 +14,9 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   List<String> images = [
-    "assets/images/sprite_products.png",
-    "assets/images/sprite_products.png",
-    "assets/images/sprite_products.png",
+    'assets/images/sprite.png',
+    'assets/images/sprite.png',
+    'assets/images/sprite.png',
   ];
   PageController? _pageController;
   int activePage = 0;
@@ -76,7 +76,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           height: 54.w,
                         ),
                         Text("New Balaji Trading Company",
-                            style: GoogleFonts.dmSans(
+                            style: GoogleFonts.roboto(
                               textStyle: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w600,
@@ -231,13 +231,12 @@ class _ProductScreenState extends State<ProductScreen> {
               height: 22.w,
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child:
-                Column(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                        physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         itemCount: 2,
@@ -304,48 +303,56 @@ class _ProductScreenState extends State<ProductScreen> {
                                               textStyle: TextStyle(
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 12.sp,
-                                                color:Color(0xff53B175),
+                                                color: Color(0xff53B175),
                                               ),
                                             )),
                                       ],
                                     ),
                                   ],
                                 ),
-                               Row(
-                                 children: [
-                                   Container(
-
-                                     decoration: BoxDecoration(
-                                         color: Color(0xffE0E0E0),
-                                         borderRadius: BorderRadius.circular(5.w)
-                                     ),
-                                     height: 30.w,
-                                     width: 30.w,
-                                     child: Padding(
-                                       padding: EdgeInsets.only(bottom: 20.w),
-                                       child:Icon(Icons.minimize_sharp),
-                                     ),
-                                   ),
-                                   SizedBox(
-                                     width: 12.w,
-                                   ),
-                                   Text("1",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w500,color: Colors.black),),
-                                   SizedBox(
-                                     width: 12.w,
-                                   ),
-                                   Container(
-                                     decoration: BoxDecoration(
-                                       color: Color(0xffFF844C),
-                                       borderRadius: BorderRadius.circular(5.w)
-                                     ),
-                                     height: 30.w,
-                                     width: 30.w,
-                                     child: Center(
-                                       child: Icon(Icons.add,color: Colors.white,),
-                                     ),
-                                   ),
-                                 ],
-                               ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Color(0xffE0E0E0),
+                                          borderRadius:
+                                              BorderRadius.circular(5.w)),
+                                      height: 30.w,
+                                      width: 30.w,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(bottom: 20.w),
+                                        child: Icon(Icons.minimize_sharp),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 12.w,
+                                    ),
+                                    Text(
+                                      "1",
+                                      style: TextStyle(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black),
+                                    ),
+                                    SizedBox(
+                                      width: 12.w,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Color(0xffFF844C),
+                                          borderRadius:
+                                              BorderRadius.circular(5.w)),
+                                      height: 30.w,
+                                      width: 30.w,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           );
@@ -370,7 +377,8 @@ class _ProductScreenState extends State<ProductScreen> {
                     SizedBox(
                       height: 4.w,
                     ),
-                    Text("Coffee is a beverage prepared from roasted coffee beans. Darkly coloured, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content. It has the highest sales in the world market for hot drinks.",
+                    Text(
+                        "Coffee is a beverage prepared from roasted coffee beans. Darkly coloured, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content. It has the highest sales in the world market for hot drinks.",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -393,67 +401,95 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                     Container(
                       height: 185.w,
-                      child: ListView.builder(itemCount:4,shrinkWrap: true,scrollDirection: Axis.horizontal,itemBuilder: (BuildContext,index){
-                        return Container(
-                                width: 156.w,
-                          decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10.w),boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 0,
-                              spreadRadius: 0.8
-                            ),
-                          ]),
-                          padding: EdgeInsets.only(top: 14.w,bottom: 12.w,left: 17.w,right: 12.w),
-                          margin: EdgeInsets.only(left: 10.w),
-                          child:
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height:89.w,
-                                  width: 89.w,
-                                  child: Image.asset("assets/images/redlabel.png"),
-                                ),
-                                SizedBox(
-                                  height: 3.w,
-                                ),
-                                Row(
+                      child: ListView.builder(
+                          itemCount: 4,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext, index) {
+                            return Container(
+                              width: 156.w,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10.w),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 0,
+                                        spreadRadius: 0.8),
+                                  ]),
+                              padding: EdgeInsets.only(
+                                  top: 14.w,
+                                  bottom: 12.w,
+                                  left: 17.w,
+                                  right: 12.w),
+                              margin: EdgeInsets.only(left: 10.w),
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Red Label",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600),)
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 2.w,
-                                ),
-                                Row(
-                                  children: [
-                                    Text("100g",style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w600),)
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("₹40",style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w400),),
-
                                     Container(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xffFF844C),
-                                          borderRadius: BorderRadius.circular(5.w)
-                                      ),
-                                      height: 30.w,
-                                      width: 30.w,
-                                      child: Center(
-                                        child: Icon(Icons.add,color: Colors.white,),
-                                      ),
+                                      height: 89.w,
+                                      width: 89.w,
+                                      child: Image.asset(
+                                          "assets/images/redlabel.png"),
+                                    ),
+                                    SizedBox(
+                                      height: 3.w,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Red Label",
+                                          style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 2.w,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "100g",
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "₹40",
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffFF844C),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.w)),
+                                          height: 30.w,
+                                          width: 30.w,
+                                          child: Center(
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
+                              ),
+                            );
+                          }),
                     ),
                     SizedBox(
                       height: 30.w,

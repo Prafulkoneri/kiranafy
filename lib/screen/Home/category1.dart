@@ -6,16 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/category/category.dart';
 
-import '../near_shops/all_near_shops.dart';
-
-class ShopCategory extends StatefulWidget {
-  const ShopCategory({super.key});
+class ShopCategoryOne extends StatefulWidget {
+  const ShopCategoryOne({super.key});
 
   @override
-  State<ShopCategory> createState() => _ShopCategoryState();
+  State<ShopCategoryOne> createState() => _ShopCategoryOneState();
 }
 
-class _ShopCategoryState extends State<ShopCategory> {
+class _ShopCategoryOneState extends State<ShopCategoryOne> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -41,7 +39,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AllNearShops()));
+                                builder: (context) => CategoryScreen()));
                       },
                       child: Row(
                         children: [

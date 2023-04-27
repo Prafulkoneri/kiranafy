@@ -7,6 +7,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 
+import '../order_status/order_status.dart';
+
 class OrderPayment extends StatefulWidget {
   const OrderPayment({super.key});
 
@@ -169,14 +171,20 @@ class _OrderPaymentState extends State<OrderPayment> {
                 ],
               ),
             ),
-            Text(
-              "Mode of Payment",
-              style: GoogleFonts.dmSans(
-                textStyle: TextStyle(
-                    color: Black,
-                    letterSpacing: .5,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 19.w,
+                top: 40.w,
+              ),
+              child: Text(
+                "Mode of Payment",
+                style: GoogleFonts.dmSans(
+                  textStyle: TextStyle(
+                      color: Black,
+                      letterSpacing: .5,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
             Padding(
@@ -416,7 +424,12 @@ class _OrderPaymentState extends State<OrderPayment> {
                     //   ),
                     // ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => OderStatus()),
+                    );
+                  },
                   child: Text(
                     "Submit Order",
                     style: GoogleFonts.dmSans(

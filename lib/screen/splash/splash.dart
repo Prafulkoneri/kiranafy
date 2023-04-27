@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
 import 'package:local_supper_market/screen/intro/intro_one.dart';
+import 'package:local_supper_market/screen/main_screen/views/main_screen_view.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -17,8 +18,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => IntroOne())));
+        () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => MainScreenView())));
   }
 
   @override

@@ -93,9 +93,9 @@
 
 //   }
 
-import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -427,7 +427,6 @@ Widget CouponsBottomSheet() {
           right: 0.w,
           child: InkWell(
             onTap: () {
-              Navigator.pop(context as BuildContext);
             },
             child: Container(
               height: 50.w,
@@ -447,4 +446,74 @@ Widget CouponsBottomSheet() {
           ))
     ],
   );
+}
+
+
+class PrimaryTextFormField extends StatelessWidget {
+  final String ? titleHeader;
+  final bool ? readOnly;
+  void Function(String)? onChanged;
+  final LengthLimitingTextInputFormatter ? lengthLimitingTextInputFormatter;
+  final TextEditingController ? controller;
+  final String ? hintText;
+  final Widget ? suffix;
+   PrimaryTextFormField({Key? key,this.suffix,this.controller,this.titleHeader,this.readOnly,this.onChanged,this.lengthLimitingTextInputFormatter,this.hintText}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              titleHeader ?? "",
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                  color: Color(0xff3A3A3A)),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10.w,
+        ),
+        Container(
+          height: 48.w,
+          width: MediaQuery.of(context).size.width,
+          child: TextFormField(
+            readOnly:readOnly??false,
+            onChanged:onChanged,
+            inputFormatters: [
+              lengthLimitingTextInputFormatter??LengthLimitingTextInputFormatter(1000),
+            ],
+            controller: controller,
+            decoration: InputDecoration(
+              suffixIcon: suffix,
+              fillColor: Colors.white,
+              filled: true,
+              hintText: hintText,
+              contentPadding: EdgeInsets.only(left: 10.w),
+              hintStyle: TextStyle(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black.withOpacity(0.7)),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color:Color(0xffEFEFEF),
+                ),
+                borderRadius: BorderRadius.circular(5.w),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color:Color(0xffEFEFEF),
+                ),
+                borderRadius: BorderRadius.circular(5.w),
+              ),
+            ),
+          ),
+        ),
+
+      ],
+    );
+  }
 }

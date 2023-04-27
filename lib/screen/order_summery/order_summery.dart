@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/screen/order_payment/order_payment.dart';
 import 'package:local_supper_market/screen/order_summery/cravings_products.dart';
 import 'package:local_supper_market/screen/order_summery/order_products.dart';
 
@@ -872,7 +873,14 @@ class _OrderSummeryState extends State<OrderSummery> {
                   //   ),
                   // ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const OrderPayment()),
+                  );
+                },
+
                 child: Text(
                   "Confirm",
                   style: GoogleFonts.dmSans(

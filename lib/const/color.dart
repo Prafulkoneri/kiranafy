@@ -39,9 +39,16 @@ Color DarkBlack = Color(0xff333333);
 Color lighrgreen = Color(0xff44B8CA);
 Color grey6 = Color(0xffEFEFEF);
 Color grey7 = Color(0xffE8E8E8);
+Color grey9 = Color(0xffC4C4C4);
 Color DarkGrey = Color(0xffD1D1D1);
 Color Yellow = Color(0xffE4C400);
 Color lightblue = Color(0xffEFFDFF);
 Color grey8 = Color(0xffB3B3B3);
 Color lightblack = Color(0xff5B5B5B);
 Color lightblack1 = Color(0xff6F6F6F);
+
+class Constants {
+  static const kPurpleColor = Color(0xFFB97DFE);
+  static const kRedColor = Color(0xFFFE4067);
+  static const kGreenColor = Color(0xFFADE9E3);
+}
