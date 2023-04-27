@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/advertisementform/advertisementform.d
 import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
 import 'package:local_supper_market/screen/auth/shop_registration.dart';
 import 'package:local_supper_market/screen/auth/shope_owner.dart';
+import 'package:local_supper_market/screen/boarding/view/boarding_screen_view.dart';
 import 'package:local_supper_market/screen/cart/cart_screen.dart';
 import 'package:local_supper_market/screen/cart/empty_cart.dart';
 import 'package:local_supper_market/screen/category/category.dart';
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
               ),
               debugShowCheckedModeBanner: false,
-              home: MainScreenView());
+              home: BoardingScreenView());
         });
   }
 }
