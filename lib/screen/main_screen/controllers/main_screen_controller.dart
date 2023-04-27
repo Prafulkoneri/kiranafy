@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:intellect_flutter/screens/chat_list/views/chat_list_screen_view.dart';
-import 'package:intellect_flutter/screens/dashboard/controllers/dash_board_controller.dart';
-import 'package:intellect_flutter/screens/dashboard/views/dash_board_view.dart';
-import 'package:intellect_flutter/screens/my_connect/views/my_connect_screen_view.dart';
-import 'package:intellect_flutter/screens/profile/views/profile_screen_view.dart';
-import 'package:intellect_flutter/screens/search/views/search_screen_view.dart';
-import 'package:intellect_flutter/screens/view_all/views/view_all_screen_view.dart';
+import 'package:local_supper_market/screen/Home/category.dart';
+import 'package:local_supper_market/screen/Home/home_screen.dart';
+import 'package:local_supper_market/screen/Home/offers.dart';
+import 'package:local_supper_market/screen/cart/cart_screen.dart';
+import 'package:local_supper_market/screen/shop_profile/offer_products.dart';
+
 
 class MainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = DashBoardView();
+  Widget currentScreen = HomeScreen();
 
   void onBottomNavChanged(index) {
     currentIndex = index;
@@ -25,49 +24,33 @@ class MainScreenController extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void onDashboardPressed() {
+  void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = DashBoardView();
+    currentScreen = HomeScreen();
     notifyListeners();
   }
 
-  void onViewAllPressed(){
-    currentTab=0;
-    currentScreen=ViewAllScreenView();
-    notifyListeners();
-  }
-
-  void onViewAllScreenBackButtonPressed(){
-    currentTab=0;
-    currentScreen=DashBoardView();
-    notifyListeners();
-  }
-
-  void onSearchPressed() {
+  void onShopPressed() {
     currentTab = 1;
-    print(currentTab);
-    currentScreen = SearchScreenView();
+    currentScreen = ShopCategory();
     notifyListeners();
   }
 
-  void onMyConnectPressed(){
+  void onMyCartPressed(){
     currentTab=2;
-    currentScreen=MyConnectScreenView();
+    currentScreen=CartScreen();
     notifyListeners();
   }
 
-  void onProfilePressed(){
+  void onOfferPressed(){
     currentTab=3;
-    currentScreen=ProfileScreenView();
+    currentScreen=OfferPage();
     notifyListeners();
   }
 
-  void onChatPressed(){
+  void onAccountPressed(){
     currentTab=4;
-    currentScreen=ChatListScreenView();
+    currentScreen=OfferProducts();
     notifyListeners();
   }
-
-
-
 }

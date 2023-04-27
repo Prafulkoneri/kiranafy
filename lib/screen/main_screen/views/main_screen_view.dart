@@ -2,19 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intellect_flutter/screens/chat_list/controllers/chat_list_controller.dart';
+import 'package:local_supper_market/const/color.dart';
 
-import 'package:intellect_flutter/screens/chat_list/views/chat_list_screen_view.dart';
-import 'package:intellect_flutter/screens/dashboard/controllers/dash_board_controller.dart';
-import 'package:intellect_flutter/screens/dashboard/views/dash_board_view.dart';
-import 'package:intellect_flutter/screens/drawer/views/drawer.dart';
-import 'package:intellect_flutter/screens/main_screen/controllers/main_screen_controller.dart';
-import 'package:intellect_flutter/screens/my_connect/views/my_connect_screen_view.dart';
-import 'package:intellect_flutter/screens/profile/views/profile_screen_view.dart';
-import 'package:intellect_flutter/screens/search/views/search_screen_view.dart';
-import 'package:intellect_flutter/screens/student_forms/views/student_academic_details_view.dart';
-import 'package:intellect_flutter/screens/view_all/views/view_all_screen_view.dart';
-import 'package:intellect_flutter/widgets/app_header.dart';
+import 'package:local_supper_market/screen/main_screen/controllers/main_screen_controller.dart';
 import 'package:provider/provider.dart';
 
 class MainScreenView extends StatefulWidget {
@@ -29,16 +19,12 @@ class _MainScreenViewState extends State<MainScreenView> {
 
   @override
   Widget build(BuildContext context) {
-    final watchDashBoardController = context.watch<DashBoardController>();
-    final readDashBoardController = context.read<DashBoardController>();
     final read = context.read<MainScreenController>();
     final watch = context.watch<MainScreenController>();
     return Scaffold(
-      key: watchDashBoardController.scaffoldKey,
-      drawer: DrawerScreenView(),
       extendBody: true,
       bottomNavigationBar: Container(
-          height: 70.w,
+          height: 81.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(30.w),
@@ -66,7 +52,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                   children: [
                     InkWell(
                       onTap: () {
-                        read.onDashboardPressed();
+                        read.onHomeScreenPressed();
                       },
                       child: watch.currentTab == 0
                           ? Column(
@@ -75,8 +61,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   height: 20.w,
                                   width: 21.w,
                                   child: SvgPicture.asset(
-                                    "assets/icons/home.svg",
-                                    color: Color(0xff1C2C51),
+                                    "assets/icons/home_selected.svg",
                                   ),
                                 ),
                                 SizedBox(
@@ -86,8 +71,8 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   "Home",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 10.sp,
-                                      color: Color(0xff1C2C51)),
+                                      fontSize: 11.sp,
+                                      color: CouponsText),
                                 )
                               ],
                             )
@@ -98,7 +83,6 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   width: 21.w,
                                   child: SvgPicture.asset(
                                     "assets/icons/home.svg",
-                                    color: Color(0xffABABAB),
                                   ),
                                 ),
                                 SizedBox(
@@ -108,20 +92,17 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   "Home",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 10.sp,
-                                      color: Color(0xff1C2C51)),
+                                      fontSize: 11.sp,
+                                      color: Black1),
                                 )
                               ],
                             ),
                     ),
                     Row(
                       children: [
-                        SizedBox(
-                          width: 20.w,
-                        ),
                         InkWell(
                           onTap: () {
-                            read.onSearchPressed();
+                            read.onShopPressed();
                           },
                           child: watch.currentTab == 1
                               ? Column(
@@ -130,19 +111,20 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
-                                        "assets/icons/search.svg",
-                                        color: Color(0xff1C2C51),
+                                        "assets/icons/shop_selected.svg",
+                                        height: 20.w,
+                                        width: 20.w,
                                       ),
                                     ),
                                     SizedBox(
                                       height: 5.w,
                                     ),
                                     Text(
-                                      "Search",
+                                      "Shop",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 10.sp,
-                                          color: Color(0xff1C2C51)),
+                                          fontSize: 11.sp,
+                                          color: CouponsText),
                                     )
                                   ],
                                 )
@@ -152,31 +134,29 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
-                                          "assets/icons/search.svg"),
+                                          "assets/icons/shop.svg"),
                                     ),
                                     SizedBox(
                                       height: 5.w,
                                     ),
                                     Text(
-                                      "Search",
+                                      "Shop",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 10.sp,
-                                          color: Color(0xff1C2C51)),
+                                          fontSize: 11.sp,
+                                          color: Black1),
                                     )
                                   ],
                                 ),
                         ),
                       ],
                     ),
-                    Container(
-                      margin: EdgeInsets.only(right: 50.w),
-                    ),
+
                     Row(
                       children: [
                         InkWell(
                           onTap: () {
-                            read.onMyConnectPressed();
+                            read.onMyCartPressed();
                           },
                           child: watch.currentTab == 2
                               ? Column(
@@ -184,20 +164,19 @@ class _MainScreenViewState extends State<MainScreenView> {
                                     Container(
                                       height: 20.w,
                                       width: 21.w,
-                                      child: Image.asset(
-                                        "assets/images/connect_bottom_nav.png",
-                                        color: Color(0xff1C2C51),
+                                      child: SvgPicture.asset(
+                                        "assets/icons/cart_selected.svg",
                                       ),
                                     ),
                                     SizedBox(
                                       height: 5.w,
                                     ),
                                     Text(
-                                      "My Connects",
+                                      "Cart",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 10.sp,
-                                          color: Color(0xff1C2C51)),
+                                          fontSize: 11.sp,
+                                          color: CouponsText),
                                     )
                                   ],
                                 )
@@ -206,20 +185,19 @@ class _MainScreenViewState extends State<MainScreenView> {
                                     Container(
                                       height: 20.w,
                                       width: 21.w,
-                                      child: Image.asset(
-                                        "assets/images/connect_bottom_nav.png",
-                                        color: Color(0xffABABAB),
+                                      child: SvgPicture.asset(
+                                        "assets/icons/cart.svg",
                                       ),
                                     ),
                                     SizedBox(
                                       height: 5.w,
                                     ),
                                     Text(
-                                      "My Connects",
+                                      "Cart",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 10.sp,
-                                          color: Color(0xff1C2C51)),
+                                          fontSize: 11.sp,
+                                          color: Black1),
                                     )
                                   ],
                                 ),
@@ -228,7 +206,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                     ),
                     InkWell(
                       onTap: () {
-                        read.onProfilePressed();
+                        read.onOfferPressed();
                       },
                       child: watch.currentTab == 3
                           ? Column(
@@ -237,19 +215,19 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   height: 20.w,
                                   width: 21.w,
                                   child: SvgPicture.asset(
-                                    "assets/icons/profile.svg",
-                                    color: Color(0xff1C2C51),
+                                    "assets/icons/offers.svg",
+                                    color: CouponsText,
                                   ),
                                 ),
                                 SizedBox(
                                   height: 5.w,
                                 ),
                                 Text(
-                                  "Profile",
+                                  "Offers",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 10.sp,
-                                      color: Color(0xff1C2C51)),
+                                      fontSize:11.sp,
+                                      color:CouponsText),
                                 )
                               ],
                             )
@@ -259,16 +237,63 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   height: 20.w,
                                   width: 21.w,
                                   child: SvgPicture.asset(
-                                      "assets/icons/profile.svg"),
+                                      "assets/icons/offers.svg"),
                                 ),
                                 SizedBox(
                                   height: 5.w,
                                 ),
                                 Text(
-                                  "Profile",
+                                  "Offers",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 10.sp),
+                                      fontSize: 11.sp),
+                                )
+                              ],
+                            ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        read.onAccountPressed();
+                      },
+                      child: watch.currentTab == 4
+                          ? Column(
+                              children: [
+                                Container(
+                                  height: 20.w,
+                                  width: 21.w,
+                                  child: SvgPicture.asset(
+                                    "assets/icons/account_selected.svg",
+                                    color: CouponsText,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.w,
+                                ),
+                                Text(
+                                  "Account",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize:11.sp,
+                                      color:CouponsText),
+                                )
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                Container(
+                                  height: 20.w,
+                                  width: 21.w,
+                                  child: SvgPicture.asset(
+                                      "assets/icons/account.svg"),
+                                ),
+                                SizedBox(
+                                  height: 5.w,
+                                ),
+                                Text(
+                                  "Account",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 11.sp),
                                 )
                               ],
                             ),
@@ -278,40 +303,6 @@ class _MainScreenViewState extends State<MainScreenView> {
               ),
             ),
           )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: InkWell(
-        onTap: () {
-          read.onChatPressed();
-        },
-        child: Container(
-          margin: EdgeInsets.only(bottom: 60.w),
-          height: 62.w,
-          width: 62.w,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                right: 0,
-                top: 40.w,
-                left: 0,
-                child: Container(
-                  height: 62.w,
-                  width: 62.w,
-                  child: Image.asset(
-                    "assets/images/fab_rectangle.png",
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 0,
-                left: 0,
-                bottom:-23.w,
-                child: SvgPicture.asset("assets/icons/chat.svg"),
-              ),
-            ],
-          ),
-        ),
-      ),
       body: PageStorage(
         bucket: watch.bucket,
         child: watch.currentScreen,
