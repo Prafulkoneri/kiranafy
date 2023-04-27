@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/Home/nearby_shop.dart';
 import 'package:local_supper_market/screen/Home/category.dart';
 import 'package:local_supper_market/screen/Home/home_screen.dart';
+import 'package:local_supper_market/screen/Home/product_screen.dart';
 import 'package:local_supper_market/screen/advertisementform/advertisementform.dart';
 import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
 import 'package:local_supper_market/screen/auth/shop_registration.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
               ),
               debugShowCheckedModeBanner: false,
-              home: BoardingScreenView());
+              home: ProductScreen());
         });
   }
 }
