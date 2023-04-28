@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/screen/Home/home_screen.dart';
+import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
+import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
 import 'package:local_supper_market/screen/boarding/view/boarding_screen_view.dart';
+import 'package:local_supper_market/screen/cart/cart_detail.dart';
 
 import 'package:local_supper_market/screen/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/splash/splash.dart';
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
               ),
               debugShowCheckedModeBanner: false,
-              home:   BoardingScreenView());
+              home: CartDetail());
         });
   }
 }
