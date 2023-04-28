@@ -12,6 +12,7 @@ class PrimaryButton extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
 
+
   const PrimaryButton(
       {Key? key,
       this.leading,
