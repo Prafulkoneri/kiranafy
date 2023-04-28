@@ -420,39 +420,111 @@ class CartDetail extends StatelessWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 scrollable: true,
-                                title: Text("saved ₹132.00",
+                                title: Text("Conditions",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: Black,
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.w700),
                                     )),
-                                content: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Form(
-                                    child: Column(
-                                      children: <Widget>[
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            labelText: 'Name',
-                                            icon: Icon(Icons.account_box),
+                                content: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 6.w),
+                                      child: Row(
+                                        // crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 20.w),
+                                              child: Icon(
+                                                Icons.circle_rounded,
+                                                size: 5.w,
+                                              )),
+                                          SizedBox(
+                                            width: 10,
                                           ),
-                                        ),
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            labelText: 'Email',
-                                            icon: Icon(Icons.email),
+                                          Flexible(
+                                            child: Text(
+                                              // softWrap: true,
+                                              // maxLines: 3,//
+                                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sit nunc, netus ac vulputate sed",
+                                              textAlign: TextAlign.justify,
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Black1,
+                                                    height: 1.5,
+
+                                                    // letterSpacing: .05,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontSize: 14.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            labelText: 'Message',
-                                            icon: Icon(Icons.message),
-                                          ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 6.w, top: 5.w),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 0.w),
+                                              child: Icon(
+                                                Icons.circle_rounded,
+                                                size: 5.w,
+                                              )),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "Lorem ipsum dolor sit amet, consectetur",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  height: 1.5,
+                                                  color: Black1,
+                                                  letterSpacing: .5,
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 6.w, top: 5.w),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 0.w),
+                                              child: Icon(
+                                                Icons.circle_rounded,
+                                                size: 5.w,
+                                              )),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "Lorem ipsum dolor sit amet, consectetur",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  height: 1.5,
+                                                  color: Black1,
+                                                  letterSpacing: .5,
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 actions: [
                                   ElevatedButton(
