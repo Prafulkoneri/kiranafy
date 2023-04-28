@@ -8,8 +8,10 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/auth/shop_registration.dart';
 import 'package:local_supper_market/screen/intro/intro_one.dart';
+import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 
 class ShopeOwner extends StatefulWidget {
   @override
@@ -20,8 +22,6 @@ class _ShopeOwnerState extends State<ShopeOwner> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
-    String initialCountry = 'IN';
-    PhoneNumber number = PhoneNumber(isoCode: 'IN');
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -99,45 +99,8 @@ class _ShopeOwnerState extends State<ShopeOwner> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: InternationalPhoneNumberInput(
-                          // selectorConfig: const SelectorConfig(
-                          //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                          //     setSelectorButtonAsPrefixIcon: true,
-                          //     leadingPadding: 20,
-                          //     useEmoji: true,
-                          //   ),
-                          onInputChanged: (PhoneNumber number) {
-                            print(number.phoneNumber);
-                          },
-                          onInputValidated: (bool value) {
-                            print(value);
-                          },
-                          selectorConfig: const SelectorConfig(
-                              selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                              // setSelectorButtonAsPrefixIcon: true,
-                              setSelectorButtonAsPrefixIcon: false),
-                          ignoreBlank: false,
-                          autoValidateMode: AutovalidateMode.disabled,
-                          selectorTextStyle:
-                              const TextStyle(color: Colors.black),
-                          initialValue: number,
-                          textFieldController: controller,
-                          // formatInput: true,
-                          // fillColor: Colors.white,
-                          inputBorder: InputBorder.none,
-                          inputDecoration: const InputDecoration(
-                              fillColor: Colors.white, filled: true),
-                          // filled: true,
-                          keyboardType: const TextInputType.numberWithOptions(
-                              signed: true, decimal: true),
-                          // inputBorder: OutlineInputBorder(),
-
-                          onSaved: (PhoneNumber number) {
-                            print('On Saved: $number');
-                          },
-                        ),
+                      MobileNoTextFormField(
+                        controller: controller,
                       ),
                     ],
                   ),
