@@ -27,16 +27,16 @@ class _OfferProductsState extends State<OfferProducts> {
             return Row(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade200,
-                        spreadRadius: 10,
-                        blurRadius: 200,
-                        offset: Offset(0, 5), // changes position of shadow
-                      ),
-                    ],
-                  ),
+                  // decoration: BoxDecoration(
+                  //   boxShadow: [
+                  //     BoxShadow(
+                  //       color: Colors.grey.shade200,
+                  //       spreadRadius: 10,
+                  //       blurRadius: 200,
+                  //       offset: Offset(0, 5), // changes position of shadow
+                  //     ),
+                  //   ],
+                  // ),
                   width: 182.w,
                   height: 156.h,
                   margin: EdgeInsets.only(
