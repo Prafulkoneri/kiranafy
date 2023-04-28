@@ -94,21 +94,214 @@ class _BoardingScreenViewState extends State<BoardingScreenView> {
                             fontWeight: FontWeight.w400,
                             color: Colors.black),
                       ),
-                      // SizedBox(
-                      //   height: currentIndex==0?40.w:currentIndex==1?40:currentIndex==2?60.w:currentIndex==3?40.w:0.w,
-                      // ),
+                      SizedBox(
+                        height: currentIndex==0?17.98.w:currentIndex==1?55.5:currentIndex==2?100.w:currentIndex==3?40.w:0.w,
+                      ),
+                      ExpandablePageView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 20.w,
+                                ),
+                                Image.asset(
+                                  "assets/images/introone.png",
+                                  height: 262.w,
+                                  width: 262.w,
+                                ),
+                                SizedBox(
+                                  height: 15.w,
+                                ),
+                                Text(
+                                  "We Are Open",
+                                  style: TextStyle(
+                                      fontSize: 26.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff006F94),
+                                      letterSpacing: 1),
+                                ),
+                                SizedBox(
+                                  height: 3.w,
+                                ),
+                                Text(
+                                  "On Online",
+                                  style: TextStyle(
+                                      fontSize: 26.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff006F94),
+                                      letterSpacing: 1),
+                                ),
+                                SizedBox(
+                                  height: 22.w,
+                                ),
+                                Container(
+                                  margin:
+                                  EdgeInsets.only(left: 34.w, right: 34.w),
+                                  child: Text(
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor.",
+                                    style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xff263238)),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 25.w,
+                                ),
+                                Image.asset(
+                                  "assets/images/introtwo.png",
+                                  height: 232.w,
+                                  width: 304.96.w,
+                                ),
+                                SizedBox(
+                                  height: 40.w,
+                                ),
+                                Text(
+                                  "You Can Find",
+                                  style: TextStyle(
+                                      fontSize: 26.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff006F94),
+                                      letterSpacing: 1),
+                                ),
+                                SizedBox(
+                                  height: 3.w,
+                                ),
+                                Text(
+                                  "Local Location",
+                                  style: TextStyle(
+                                      fontSize: 26.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff006F94),
+                                      letterSpacing: 1),
+                                ),
+                                SizedBox(
+                                  height: 22.w,
+                                ),
+                                Container(
+                                  margin:
+                                  EdgeInsets.only(left: 34.w, right: 34.w),
+                                  child: Text(
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor.",
+                                    style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xff263238)),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
 
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 69.w,
+                                ),
+                                Image.asset(
+                                  "assets/images/introthree.png",
+                                  height: 185.w,
+                                  width: 285.7.w,
+                                ),
+                                SizedBox(
+                                  height:43.w,
+                                ),
 
-                      ExpandablePageView(children: [
+                                Text(
+                                  "Maintain",
+                                  style: TextStyle(
+                                      fontSize: 26.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff006F94),
+                                      letterSpacing: 1),
+                                ),
+                                SizedBox(
+                                  height: 3.w,
+                                ),
+                                Text(
+                                  "Orders On App",
+                                  style: TextStyle(
+                                      fontSize: 26.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff006F94),
+                                      letterSpacing: 1),
+                                ),
+                                SizedBox(
+                                  height: 22.w,
+                                ),
+                                Container(
+                                  margin:
+                                  EdgeInsets.only(left: 34.w, right: 34.w),
+                                  child: Text(
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor.",
+                                    style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xff263238)),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
 
-                      ]),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 10.w,
+                                ),
+                                Image.asset(
+                                  "assets/images/introfour.png",
+                                  height: 250.w,
+                                  width: 250.w,
+                                ),
+                                SizedBox(
+                                  height: 37.w,
+                                ),
+                                Text(
+                                  "Grow Your",
+                                  style: TextStyle(
+                                      fontSize: 26.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff006F94),
+                                      letterSpacing: 1),
+                                ),
+                                SizedBox(
+                                  height: 3.w,
+                                ),
+                                Text(
+                                  "Shop Business",
+                                  style: TextStyle(
+                                      fontSize: 26.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff006F94),
+                                      letterSpacing: 1),
+                                ),
+                                SizedBox(
+                                  height: 22.w,
+                                ),
+                                Container(
+                                  margin:
+                                  EdgeInsets.only(left: 34.w, right: 34.w),
+                                  child: Text(
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor.",
+                                    style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xff263238)),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
 
-
-
-
-
-
-
+                              ],
+                            ),
+                          ],
+                        ),
                       // Container(
                       //   height:currentIndex==0? 409.w:currentIndex==1?404.w:currentIndex==2?365.w:currentIndex==3?460.w:0,
                       //   child: PageView(
@@ -348,6 +541,9 @@ class _BoardingScreenViewState extends State<BoardingScreenView> {
                             width: 27.w,
                           ),
                         ],
+                      ),
+                      SizedBox(
+                        height: 20.w,
                       ),
                     ],
                   ),
