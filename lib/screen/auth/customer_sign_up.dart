@@ -4,9 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
 import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
@@ -18,6 +20,8 @@ class CustomerSignUp extends StatefulWidget {
   @override
   _CustomerSignUpState createState() => _CustomerSignUpState();
 }
+
+TextEditingController mobileController = TextEditingController();
 
 class _CustomerSignUpState extends State<CustomerSignUp> {
   @override
@@ -118,21 +122,48 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                         ),
                       ),
                     ),
+                    // Padding(
+                    //   padding:
+                    //       EdgeInsets.only(left: 23.w, right: 23.w, top: 16.w),
+                    //   child: SizedBox(
+                    //     height: 48.h,
+                    //     width: 334.w,
+                    //     child: TextField(
+                    //       decoration: InputDecoration(
+                    //         fillColor: Colors.white,
+                    //         filled: true,
+                    //         border:
+                    //             OutlineInputBorder(borderSide: BorderSide.none),
+                    //         // labelText: 'Name',
+                    //         hintText: 'Name',
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Padding(
-                      padding:
-                          EdgeInsets.only(left: 23.w, right: 23.w, top: 16.w),
-                      child: SizedBox(
-                        height: 48.h,
-                        width: 334.w,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            border:
-                                OutlineInputBorder(borderSide: BorderSide.none),
-                            // labelText: 'Name',
-                            hintText: 'Name',
-                          ),
+                      padding: EdgeInsets.only(
+                          left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
+                      child: Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              bottom: 1,
+                              top: 1,
+                              left: 0,
+                              child: Container(
+                                // height: 200.h,
+                                width: 70.h,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  // borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
+                            MobileNoTextFormField(
+                              controller: mobileController,
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -350,7 +381,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CustomerSignUp()),
+                                    builder: (context) => CustomerSignIn()),
                               );
                             },
                             child: Text(

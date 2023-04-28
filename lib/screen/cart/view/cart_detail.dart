@@ -516,7 +516,7 @@ class CartDetail extends StatelessWidget {
                                               textStyle: TextStyle(
                                                   height: 1.5,
                                                   color: Black1,
-                                                  letterSpacing: .5,
+                                                  // letterSpacing: .5,
                                                   fontSize: 14.sp,
                                                   fontWeight: FontWeight.w400),
                                             ),

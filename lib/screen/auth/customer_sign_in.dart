@@ -123,7 +123,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                     // ),
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 23.w, right: 23.w, top: 16.w),
+                          EdgeInsets.only(left: 23.w, right: 23.w, top: 10.w),
                       child: SizedBox(
                         height: 48.h,
                         width: 334.w,
@@ -141,7 +141,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 25.w, top: 6.w, right: 0.w),
+                          EdgeInsets.only(left: 25.w, top: 16.w, right: 0.w),
                       child: Row(
                         children: [
                           Text(
@@ -353,7 +353,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CustomerSignIn()),
+                                    builder: (context) => CustomerSignUp()),
                               );
                             },
                             child: Text(
@@ -372,9 +372,9 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                     )
                   ],
                 ),
-                // SizedBox(
-                //   height: 20.h,
-                // )
+                SizedBox(
+                  height: 20.h,
+                )
               ],
             ),
           ),

@@ -7,6 +7,8 @@ import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
 import 'package:local_supper_market/screen/intro/intro_one.dart';
 import 'package:local_supper_market/screen/main_screen/views/main_screen_view.dart';
 
+import '../on_boarding/view/on_boarding_screen_view.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -19,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => MainScreenView())));
+            MaterialPageRoute(builder: (context) => OnBoardingScreenView())));
   }
 
   @override
