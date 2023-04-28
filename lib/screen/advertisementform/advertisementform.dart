@@ -224,7 +224,7 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
                       padding:
                           EdgeInsets.only(right: 16.w, top: 16.w, bottom: 16.w),
                       child: SvgPicture.asset(
-                        'assets/images/cal1.svg',
+                        'assets/icons/calendar1.svg',
                         width: 20.w,
                         height: 30.h,
                       ),

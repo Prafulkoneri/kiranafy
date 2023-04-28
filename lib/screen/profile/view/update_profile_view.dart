@@ -7,11 +7,8 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
-// import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/textfield.dart';
-// import 'package:local_supper_market/widget/dropdown_field.dart';
-import 'package:local_supper_market/widget/textfield.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+
 
 class UpdateProfileView extends StatefulWidget {
   const UpdateProfileView({Key? key}) : super(key: key);

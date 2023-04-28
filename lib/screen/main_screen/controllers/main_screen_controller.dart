@@ -5,8 +5,6 @@ import 'package:local_supper_market/screen/Home/offers.dart';
 import 'package:local_supper_market/screen/cart/cart_screen.dart';
 import 'package:local_supper_market/screen/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/shop_profile/offer_products.dart';
-
-import '../../account/profile.dart';
 import '../../near_shops/all_near_shops.dart';
 
 class MainScreenController extends ChangeNotifier {
@@ -53,7 +51,9 @@ class MainScreenController extends ChangeNotifier {
 
   void onAccountPressed() {
     currentTab = 4;
-    currentScreen = MyProfile();
+    currentScreen = Center(
+      child: Text("Accounts"),
+    );
     notifyListeners();
   }
 }
