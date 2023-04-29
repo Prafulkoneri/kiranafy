@@ -4,9 +4,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/category/category.dart';
 
-import '../near_shops/all_near_shops.dart';
+
+import '../../near_shops/all_near_shops.dart';
 
 class ShopCategory extends StatefulWidget {
   const ShopCategory({super.key});

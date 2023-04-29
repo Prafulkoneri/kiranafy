@@ -1,3 +1,4 @@
+import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,21 +8,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/Home/nearby_shop.dart';
-import 'package:local_supper_market/screen/Home/category.dart';
-import 'package:local_supper_market/screen/Home/coupons.dart';
-import 'package:local_supper_market/screen/Home/offers.dart';
+import 'package:local_supper_market/screen/Home/view/nearby_shop.dart';
+import 'package:local_supper_market/screen/Home/view/category.dart';
+import 'package:local_supper_market/screen/Home/view/coupons.dart';
+import 'package:local_supper_market/screen/Home/view/offers.dart';
 import 'package:local_supper_market/screen/advertisementform/advertisementform.dart';
 import 'package:local_supper_market/screen/near_shops/all_near_shops.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreenView extends StatefulWidget {
+  const HomeScreenView({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreenView> createState() => _HomeScreenViewState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenViewState extends State<HomeScreenView> {
   // This controller will store the value of the search bar
   final TextEditingController _searchController = TextEditingController();
   PageController? _pageController;
@@ -54,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -151,8 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ////image
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: 170.w,
-              child: PageView.builder(
+              child: ExpandablePageView.builder(
                   itemCount: images.length,
                   physics: BouncingScrollPhysics(),
                   padEnds: false,
@@ -314,3 +315,22 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+// SingleChildScrollView(
+// scrollDirection: Axis.horizontal,
+// physics: BouncingScrollPhysics(),
+// child: Row(
+// children: List.generate(
+// widget.items?.length ?? 0,
+// (index) => Container(
+// padding: EdgeInsets.only(
+// left: 15,
+// bottom: 10,
+// right: index + 1 == widget.items?.length ? 20 : 0),
+// child: Image.network(
+// widget.items?[index]["image"],
+// fit: BoxFit.cover,
+// ),
+// )
+// ),
+// ),
+// ),

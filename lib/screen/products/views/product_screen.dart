@@ -5,14 +5,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({Key? key}) : super(key: key);
+class ProductScreenView extends StatefulWidget {
+  const ProductScreenView({Key? key}) : super(key: key);
 
   @override
-  _ProductScreenState createState() => _ProductScreenState();
+  _ProductScreenViewState createState() => _ProductScreenViewState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _ProductScreenViewState extends State<ProductScreenView> {
   List<String> images = [
     'assets/images/sprite.png',
     'assets/images/sprite.png',

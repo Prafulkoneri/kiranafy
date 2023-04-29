@@ -3,15 +3,23 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/products/views/product_screen.dart';
+
+import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 
+<<<<<<< HEAD:lib/screen/cart/view/cart_detail.dart
 import '../../../const/color.dart';
 import '../../../widget/app_bar.dart';
 import '../../Home/product_screen.dart';
 import '../../order_summery/order_summery.dart';
+=======
+>>>>>>> f5dc7c5ea80617038f9db8508daaf7dd3e5d10be:lib/screen/cart/view/cart_detail_view.dart
 
-class CartDetail extends StatelessWidget {
-  const CartDetail({super.key});
+
+class CartDetailView extends StatelessWidget {
+  const CartDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +114,7 @@ class CartDetail extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ProductScreen()));
+                                  builder: (context) => ProductScreenView()));
                         },
                         child: Column(
                           children: [
