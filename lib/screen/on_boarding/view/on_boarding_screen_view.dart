@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
+import 'package:local_supper_market/screen/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 
 import 'package:local_supper_market/widget/buttons.dart';
@@ -560,7 +560,9 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                           Expanded(
                             child: PrimaryButton(
                               color: Color(0xff4EEFC1),
-                              onTap: () {},
+                              onTap: () {
+  read.onCustomerBtnPressed(context);
+                              },
                               textColor: Colors.black,
                               text: "Customer",
                             ),

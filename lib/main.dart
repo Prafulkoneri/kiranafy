@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/screen/auth/controller/customer_sign_in_controller.dart';
+import 'package:local_supper_market/screen/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
@@ -15,6 +17,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => MainScreenController()),
         ChangeNotifierProvider(create: (_) => OnBoardingController()),
+        ChangeNotifierProvider(create: (_) => CustomerSignInController()),
+        ChangeNotifierProvider(create: (_) => CustomerSignUpController()),
       ],
       child: const MyApp(),
     ),

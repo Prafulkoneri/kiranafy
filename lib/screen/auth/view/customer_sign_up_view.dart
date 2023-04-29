@@ -4,15 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
-import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
+import 'package:local_supper_market/screen/auth/controller/customer_sign_up_controller.dart';
+import 'package:local_supper_market/screen/auth/view/customer_sign_in_view.dart';
+import 'package:local_supper_market/screen/auth/view/customer_sign_up_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
-
-import '../main_screen/views/main_screen_view.dart';
+import 'package:provider/provider.dart';
+import '../../main_screen/views/main_screen_view.dart';
 
 class CustomerSignUp extends StatefulWidget {
   const CustomerSignUp({Key? key}) : super(key: key);
@@ -21,11 +22,13 @@ class CustomerSignUp extends StatefulWidget {
   _CustomerSignUpState createState() => _CustomerSignUpState();
 }
 
-TextEditingController mobileController = TextEditingController();
+
 
 class _CustomerSignUpState extends State<CustomerSignUp> {
   @override
   Widget build(BuildContext context) {
+    final read=context.read<CustomerSignUpController>();
+    final watch=context.watch<CustomerSignUpController>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -143,28 +146,8 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              bottom: 1,
-                              top: 1,
-                              left: 0,
-                              child: Container(
-                                // height: 200.h,
-                                width: 70.h,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  // borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                            ),
-                            MobileNoTextFormField(
-                              controller: mobileController,
-                            ),
-                          ],
-                        ),
+                      child:  MobileNoTextFormField(
+                        controller: watch.mobileController,
                       ),
                     ),
                     Padding(
@@ -299,12 +282,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                                                   ),
                                                   // style: style,
                                                   onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const MainScreenView()),
-                                                    );
+                                                  read.onOtpSubmitPressed(context);
                                                   },
                                                   child: Text(
                                                     'Submit',
@@ -381,7 +359,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CustomerSignIn()),
+                                    builder: (context) => CustomerSignInView()),
                               );
                             },
                             child: Text(

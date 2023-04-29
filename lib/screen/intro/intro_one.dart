@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
-import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
+import 'package:local_supper_market/screen/auth/view/customer_sign_in_view.dart';
+
 import 'package:local_supper_market/screen/auth/shope_owner.dart';
 import 'package:local_supper_market/screen/intro/intro_one.dart';
 
@@ -78,7 +78,7 @@ class IntroOne extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CustomerSignIn()),
+                                builder: (context) => CustomerSignInView()),
                           );
                         },
                         child: Text(

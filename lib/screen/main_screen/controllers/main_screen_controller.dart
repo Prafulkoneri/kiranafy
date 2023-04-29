@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:local_supper_market/screen/Home/view/home_screen_view.dart';
-
-
 import 'package:local_supper_market/screen/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/coupons/couponsall.dart';
-import 'package:local_supper_market/screen/shop_profile/offer_products.dart';
 import '../../near_shops/all_near_shops.dart';
 
 class MainScreenController extends ChangeNotifier {

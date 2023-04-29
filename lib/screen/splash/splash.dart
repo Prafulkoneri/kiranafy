@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/auth/customer_sign_up.dart';
+
 import 'package:local_supper_market/screen/intro/intro_one.dart';
 import 'package:local_supper_market/screen/main_screen/views/main_screen_view.dart';
 
@@ -36,9 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
             image: AssetImage("assets/images/splash1.png"),
           ),
         ),
-        Image(
-          image: AssetImage("assets/images/splash3.png"),
-        ),
+        Image.asset("assets/images/splash_logo.png",height: 297.36.w,width: 228.81.w,),
+
         Padding(
           padding: EdgeInsets.only(
             left: 45.w,

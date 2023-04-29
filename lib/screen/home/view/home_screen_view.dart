@@ -14,7 +14,7 @@ import 'package:local_supper_market/screen/Home/view/coupons.dart';
 import 'package:local_supper_market/screen/Home/view/offers.dart';
 import 'package:local_supper_market/screen/advertisementform/advertisementform.dart';
 import 'package:local_supper_market/screen/near_shops/all_near_shops.dart';
-
+import 'package:provider/provider.dart';
 class HomeScreenView extends StatefulWidget {
   const HomeScreenView({super.key});
 
@@ -34,7 +34,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   ];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pageController = PageController(viewportFraction: 0.9, initialPage: 1);
   }
@@ -93,9 +92,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           textStyle: TextStyle(
                               color: SplashText1,
                               fontSize: 12.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      )
+                              fontWeight: FontWeight.w400),),
+                      ),
                     ],
                   ),
                 ],
@@ -187,9 +185,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: indicators(images.length, activePage)),
-
-            ////
-
             Padding(
               padding: EdgeInsets.only(
                   right: 19.0.w, top: 15.w, bottom: 15.w, left: 19.0.w),
@@ -228,7 +223,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             ),
             //
             HomeCarousal(),
-
             Padding(
               padding: EdgeInsets.only(
                   right: 19.0.w, bottom: 15.w, left: 19.0.w, top: 30.h),
@@ -302,8 +296,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               fontWeight: FontWeight.w500),
                         ),
                       ),
-
-                      //
                     ),
                   ),
                 ],

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/auth/customer_sign_in.dart';
+import 'package:local_supper_market/screen/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/auth/shope_owner.dart';
 
 class OnBoardingController extends ChangeNotifier{
@@ -30,10 +30,14 @@ class OnBoardingController extends ChangeNotifier{
   }
 
   void onSkipPressed(context){
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>CustomerSignIn()));
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>CustomerSignInView()));
   }
 
   void onShopOwnerBtnPressed(context){
     Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopeOwner()));
+  }
+
+  void onCustomerBtnPressed(context){
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>CustomerSignInView()));
   }
 }

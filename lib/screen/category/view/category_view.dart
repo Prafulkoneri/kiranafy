@@ -238,8 +238,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(14.0)),
-                                  minimumSize:
-                                      const Size(100, 40), //////// HERE
+                                  minimumSize: const Size(100, 40), //////// HERE
                                 ),
                                 // style: style,
                                 onPressed: () {},
