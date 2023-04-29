@@ -1,16 +1,8 @@
 import 'package:flutter/cupertino.dart';
-<<<<<<< HEAD
-import 'package:local_supper_market/screen/Home/category.dart';
-import 'package:local_supper_market/screen/Home/home_screen.dart';
-import 'package:local_supper_market/screen/Home/offers.dart';
-import 'package:local_supper_market/screen/cart/view/cart_screen.dart';
-=======
 
 import 'package:local_supper_market/screen/Home/view/home_screen_view.dart';
 
-
 import 'package:local_supper_market/screen/cart/view/cart_screen_view.dart';
->>>>>>> f5dc7c5ea80617038f9db8508daaf7dd3e5d10be
 import 'package:local_supper_market/screen/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/shop_profile/offer_products.dart';
 import '../../near_shops/all_near_shops.dart';
