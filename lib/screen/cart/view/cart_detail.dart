@@ -5,10 +5,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 
-import '../../const/color.dart';
-import '../../widget/app_bar.dart';
-import '../Home/product_screen.dart';
-import '../order_summery/order_summery.dart';
+import '../../../const/color.dart';
+import '../../../widget/app_bar.dart';
+import '../../Home/product_screen.dart';
+import '../../order_summery/order_summery.dart';
 
 class CartDetail extends StatelessWidget {
   const CartDetail({super.key});
@@ -292,7 +292,21 @@ class CartDetail extends StatelessWidget {
                                                     SizedBox(
                                                       width: 12.w,
                                                     ),
-                                                    Text("1"),
+                                                    Text(
+                                                      "1",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            // decoration:
+                                                            // TextDecoration.lineThrough,
+                                                            color: Black,
+                                                            // letterSpacing:
+                                                            //     .5,
+                                                            fontSize: 16.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    ),
                                                     SizedBox(
                                                       width: 12.w,
                                                     ),

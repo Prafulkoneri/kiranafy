@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/screen/cart/cart_detail.dart';
+import 'package:local_supper_market/screen/cart/view/cart_detail.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 

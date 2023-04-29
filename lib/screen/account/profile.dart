@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/account/update_profile_view.dart';
-import 'package:local_supper_market/screen/cart/cart_detail.dart';
+import 'package:local_supper_market/screen/cart/view/cart_detail.dart';
 import 'package:local_supper_market/screen/my_order/my_order.dart';
 
 class MyProfile extends StatefulWidget {
