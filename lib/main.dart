@@ -5,6 +5,7 @@ import 'package:local_supper_market/screen/notifications/view/notification_view.
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/splash/splash.dart';
 import 'package:provider/provider.dart';
 
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'dm_sans_regular'
               ),
               debugShowCheckedModeBanner: false,
-              home:   NotificationsScreenView());
+              home: SplashScreen());
         });
   }
 }

@@ -4,7 +4,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/category/category.dart';
+import 'package:local_supper_market/screen/category/view/category_view.dart';
+
 
 class ShopCategoryOne extends StatefulWidget {
   const ShopCategoryOne({super.key});
@@ -39,7 +40,7 @@ class _ShopCategoryOneState extends State<ShopCategoryOne> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CategoryScreen()));
+                                builder: (context) => CategoryScreenView()));
                       },
                       child: Row(
                         children: [

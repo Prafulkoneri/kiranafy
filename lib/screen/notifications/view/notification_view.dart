@@ -53,8 +53,8 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                         width: 15.2.w,
                       ),
                       VerticalDivider(
-                        color: Colors.black,
-                        thickness: 2,
+                        color: Color(0xffEFEFEF),
+                        thickness: 1,
                       ),
                       SizedBox(
                         width: 15.w,

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:local_supper_market/screen/Home/category.dart';
-import 'package:local_supper_market/screen/Home/home_screen.dart';
-import 'package:local_supper_market/screen/Home/offers.dart';
 
-import 'package:local_supper_market/screen/cart/view/cart_screen.dart';
+import 'package:local_supper_market/screen/Home/view/home_screen_view.dart';
+
+
+import 'package:local_supper_market/screen/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/shop_profile/offer_products.dart';
 import '../../near_shops/all_near_shops.dart';
@@ -12,7 +12,7 @@ class MainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = HomeScreen();
+  Widget currentScreen = HomeScreenView();
 
   void onBottomNavChanged(index) {
     currentIndex = index;
@@ -28,7 +28,7 @@ class MainScreenController extends ChangeNotifier {
 
   void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = HomeScreen();
+    currentScreen = HomeScreenView();
     notifyListeners();
   }
 
@@ -40,7 +40,7 @@ class MainScreenController extends ChangeNotifier {
 
   void onMyCartPressed() {
     currentTab = 2;
-    currentScreen = CartScreen();
+    currentScreen = CartScreenView();
     notifyListeners();
   }
 

@@ -6,13 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/cart/view/empty_cart.dart';
+import 'package:local_supper_market/screen/cart/view/empty_cart_view.dart';
 
 
-import '../delivery_view/delivery_view_pending.dart';
+import '../../delivery_view/delivery_view_pending.dart';
 
-class MyOrder extends StatelessWidget {
-  const MyOrder({super.key});
+class MyOrderView extends StatelessWidget {
+  const MyOrderView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class MyOrder extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EmptyCart()),
+                  MaterialPageRoute(builder: (context) => const EmptyCartView()),
                 );
               },
               child: SvgPicture.asset(

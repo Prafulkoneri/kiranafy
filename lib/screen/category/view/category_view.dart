@@ -8,17 +8,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../const/color.dart';
-import '../Home/product_screen.dart';
+import '../../../const/color.dart';
+import '../../products/views/product_screen.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class CategoryScreenView extends StatefulWidget {
+  const CategoryScreenView({super.key});
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<CategoryScreenView> createState() => _CategoryScreenViewState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _CategoryScreenViewState extends State<CategoryScreenView> {
   final TextEditingController _searchController = TextEditingController();
 
   bool checkedValue = false;
@@ -413,7 +413,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProductScreen()));
+                                builder: (context) => ProductScreenView()));
                       },
                       child: Column(
                         children: [

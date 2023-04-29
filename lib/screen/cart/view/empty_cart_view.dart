@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 
-class EmptyCart extends StatelessWidget {
-  const EmptyCart({super.key});
+class EmptyCartView extends StatelessWidget {
+  const EmptyCartView({super.key});
 
   @override
   Widget build(BuildContext context) {
