@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 
-import 'package:local_supper_market/screen/main_screen/controllers/main_screen_controller.dart';
 import 'package:provider/provider.dart';
 
 class MainScreenView extends StatefulWidget {
@@ -151,7 +151,6 @@ class _MainScreenViewState extends State<MainScreenView> {
                         ),
                       ],
                     ),
-
                     Row(
                       children: [
                         InkWell(
@@ -226,8 +225,8 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   "Offers",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      fontSize:11.sp,
-                                      color:CouponsText),
+                                      fontSize: 11.sp,
+                                      color: CouponsText),
                                 )
                               ],
                             )
@@ -273,8 +272,8 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   "Account",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      fontSize:11.sp,
-                                      color:CouponsText),
+                                      fontSize: 11.sp,
+                                      color: CouponsText),
                                 )
                               ],
                             )
