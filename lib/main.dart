@@ -6,6 +6,9 @@ import 'package:local_supper_market/screen/customer/account/view/controller/prof
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/splash/splash.dart';
+import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/subscription_screen.dart';
 
 import 'package:provider/provider.dart';
@@ -21,6 +24,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => CustomerSignInController()),
         ChangeNotifierProvider(create: (_) => CustomerSignUpController()),
         ChangeNotifierProvider(create: (_) => ProfileController()),
+        ChangeNotifierProvider(create: (_) => ShopSignInController()),
+        ChangeNotifierProvider(create: (_) => ShopRegistrationController()),
       ],
       child: const MyApp(),
     ),
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SubscriptionScreenView());
+              home: SplashScreen());
         });
   }
 }
