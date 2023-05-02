@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -132,7 +136,6 @@ class MobileNoTextFormField extends StatelessWidget {
             // fillColor: Colors.white,
             inputBorder: InputBorder.none,
             inputDecoration: InputDecoration(
-
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(color: Colors.white),

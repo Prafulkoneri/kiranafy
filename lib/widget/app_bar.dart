@@ -6,12 +6,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class PrimaryAppBar extends StatelessWidget {
-  final String ? title;
-  final Widget ? action;
+  final String? title;
+  final Widget? action;
   void Function()? onActionTap;
-   PrimaryAppBar({Key? key,required this.title,this.action,this.onActionTap}) : super(key: key);
+  PrimaryAppBar({Key? key, required this.title, this.action, this.onActionTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +32,11 @@ class PrimaryAppBar extends StatelessWidget {
         onPressed: () => Navigator.of(context).pop(),
       ),
       title: Text(
-        title??"",
+        title ?? "",
         style: GoogleFonts.dmSans(
-          textStyle: const TextStyle(
-              color: Black,
-              letterSpacing: .5,
+          textStyle: TextStyle(
+              color: DarkBlack,
+              // letterSpacing: .5,
               fontSize: 14,
               fontWeight: FontWeight.w700),
         ),
@@ -65,11 +65,10 @@ class PrimaryAppBar extends StatelessWidget {
             onActionTap;
           },
           child: Padding(
-            padding: EdgeInsets.only(
-              right: 20.w,
-            ),
-            child:action
-          ),
+              padding: EdgeInsets.only(
+                right: 20.w,
+              ),
+              child: action),
         ),
       ],
     );
