@@ -57,6 +57,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
 
     return Scaffold(
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -267,34 +268,16 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 25.h,
-                    width: 105.w,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        elevation: MaterialStateProperty.all(0),
-                        backgroundColor: MaterialStateProperty.all(SplashText),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AdvertisementForm()),
-                        );
-                      },
-                      child: Text(
-                        "Place Your Ad",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(color: Color(0xff39C19D),
+                      borderRadius: BorderRadius.circular(7.w)),
+                      padding: EdgeInsets.symmetric(horizontal: 14.w,vertical: 2.w),
+                      child: Center(
+                        child: Text("Place Your Ad",style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500),),
                       ),
                     ),
                   ),
