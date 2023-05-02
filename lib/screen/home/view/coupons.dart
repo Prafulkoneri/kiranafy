@@ -97,7 +97,10 @@ class _CouponsScreenState extends State<CouponsScreen> {
             children: List.generate(
               5,
               (index) => Container(
-                width: 352.w,
+                margin: EdgeInsets.only(
+                    left: index==0?19.w:5.w
+                ),
+                width: 326.w,
                 child: Stack(
                   alignment: AlignmentDirectional.centerStart,
                   children: <Widget>[
@@ -242,9 +245,9 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                   children: [
                                     Container(
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: 11.33.w, vertical: 7.w),
+                                          horizontal: 10.33.w, vertical: 6.w),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8.w),
+                                          borderRadius: BorderRadius.circular(5.w),
                                           border: Border.all(color: SplashText)),
                                       child: Center(
                                         child: Row(
@@ -253,7 +256,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                               "OFF100",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w700,
-                                                  fontSize: 16.sp,
+                                                  fontSize: 12.sp,
                                                   color: SplashText),
                                             ),
                                             SizedBox(
@@ -261,8 +264,8 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                             ),
                                             SvgPicture.asset(
                                               'assets/images/svg2.svg',
-                                              width: 17.w,
-                                              height: 17.h,
+                                              width: 14.w,
+                                              height: 14.w,
                                             ),
                                           ],
                                         ),
@@ -286,6 +289,9 @@ class _CouponsScreenState extends State<CouponsScreen> {
               ),
             ),
           ),
+        ),
+        SizedBox(
+          height: 14.w,
         ),
       ]),
     );
