@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/auth/shope_owner.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
+import 'package:local_supper_market/screen/shop_owner/auth/view/shop_sign_in_view.dart';
 
 class OnBoardingController extends ChangeNotifier {
   int currentIndex = 0;
@@ -36,7 +37,7 @@ class OnBoardingController extends ChangeNotifier {
 
   void onShopOwnerBtnPressed(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ShopeOwner()));
+        context, MaterialPageRoute(builder: (context) => ShopSignInView()));
   }
 
   void onCustomerBtnPressed(context) {

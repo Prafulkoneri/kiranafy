@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/auth/shop_registration.dart';
+import 'package:local_supper_market/screen/shop_owner/auth/view/shop_registration_view.dart';
 
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -283,7 +283,7 @@ class _ShopeOwnerState extends State<ShopeOwner> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ShopRegistration()),
+                              builder: (context) => ShopRegistrationView()),
                         );
                       },
                       child: Text(

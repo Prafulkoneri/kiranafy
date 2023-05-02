@@ -8,10 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/Home/view/nearby_shop.dart';
-import 'package:local_supper_market/screen/Home/view/category.dart';
-import 'package:local_supper_market/screen/Home/view/coupons.dart';
-import 'package:local_supper_market/screen/Home/view/offers.dart';
+
+import 'package:local_supper_market/screen/customer/home/view/category.dart';
+import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
+import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
+import 'package:local_supper_market/screen/customer/home/view/offers.dart';
 import 'package:local_supper_market/screen/customer/near_shops/all_near_shops.dart';
 
 import 'package:provider/provider.dart';

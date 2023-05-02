@@ -9,19 +9,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/auth/upload_documents.dart';
+import 'package:local_supper_market/widget/dropdown_field.dart';
+import 'package:local_supper_market/widget/textfield.dart';
 
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
-class ShopRegistration extends StatefulWidget {
-  ShopRegistration({super.key});
+class ShopRegistrationView extends StatefulWidget {
+  ShopRegistrationView({super.key});
 
   @override
-  State<ShopRegistration> createState() => _ShopRegistrationState();
+  State<ShopRegistrationView> createState() => _ShopRegistrationViewState();
   // String dropdownValue = 'Dog';
 }
 
-class _ShopRegistrationState extends State<ShopRegistration> {
+class _ShopRegistrationViewState extends State<ShopRegistrationView> {
   String? dropdown;
   final maxLines = 5;
   final List<String> genderItems = [
@@ -97,59 +99,23 @@ class _ShopRegistrationState extends State<ShopRegistration> {
             const SizedBox(
               height: 20,
             ),
-            const TextField(
-              decoration: InputDecoration(
-                // fillColor: Colors.white,
-                // filled: true,
-                border: OutlineInputBorder(
-                  // borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
+                PrimarySTextFormField(
+                  hintText: "Shop Name",
                 ),
-                // labelText: 'Name',
-                hintText: ' Shop Name',
-              ),
-            ),
             const SizedBox(
-              height: 10,
+              height: 18,
             ),
-            const TextField(
-              decoration: InputDecoration(
-                // fillColor: Colors.white,
-                // filled: true,
-                border: OutlineInputBorder(
-                  // borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
+                PrimarySTextFormField(
+                  hintText: "Owner Name",
                 ),
-                // labelText: 'Name',
-                hintText: 'Owner Name',
-              ),
-            ),
             const SizedBox(
-              height: 10,
+              height: 18,
             ),
-            const TextField(
-              decoration: InputDecoration(
-                // fillColor: Colors.white,
-                // filled: true,
-                border: OutlineInputBorder(
-                  // borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
+                SDropDownField(
+                  hint: "Shop Type",
                 ),
-                // labelText: 'Name',
-                hintText: ' Mobile Number',
-              ),
-            ),
             const SizedBox(
-              height: 10,
+              height: 18,
             ),
             const TextField(
               decoration: InputDecoration(

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:local_supper_market/screen/Home/view/home_screen_view.dart';
+
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 
 import '../../near_shops/all_near_shops.dart';
 

@@ -11,11 +11,13 @@ class PrimaryButton extends StatelessWidget {
   final double? height;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final Color ? borderColor;
 
 
   const PrimaryButton(
       {Key? key,
       this.leading,
+        this.borderColor,
       this.width,
       this.height,
       this.fontSize,
@@ -36,6 +38,7 @@ class PrimaryButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(7.w),
+            border: Border.all(color: borderColor??Colors.transparent)
           ),
           child: leading == null
               ? Center(

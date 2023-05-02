@@ -74,7 +74,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               SizedBox(
                 height: 10.5.w,
               ),
-              PrimaryTextFormField(
+              PrimaryCTextFormField(
                 titleHeader: "Name",
               ),
               SizedBox(
@@ -120,7 +120,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               SizedBox(
                 height: 20.w,
               ),
-              PrimaryTextFormField(
+              PrimaryCTextFormField(
                 titleHeader: "Email ID",
               ),
               SizedBox(
@@ -227,7 +227,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               SizedBox(
                 height: 13.w,
               ),
-              PrimaryTextFormField(
+              PrimaryCTextFormField(
                   titleHeader: "Date of Birth",
                   suffix: Icon(
                     Icons.calendar_today_outlined,
@@ -240,7 +240,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                      child: DropDownField(
+                      child: CDropDownField(
                     hint: "Country",
                     titleHeader: "Country",
                   )),
@@ -248,7 +248,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                     width: 30.w,
                   ),
                   Expanded(
-                      child: DropDownField(
+                      child: CDropDownField(
                     hint: "State",
                     titleHeader: "State",
                   )),
@@ -261,7 +261,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                      child: DropDownField(
+                      child: CDropDownField(
                     hint: "City",
                     titleHeader: "City",
                   )),
@@ -269,7 +269,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                     width: 30.w,
                   ),
                   Expanded(
-                      child: PrimaryTextFormField(
+                      child: PrimaryCTextFormField(
                     titleHeader: "Pinconde",
                     hintText: "Pincode",
                   )),
@@ -278,7 +278,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               SizedBox(
                 height: 22.w,
               ),
-              PrimaryTextFormField(
+              PrimaryCTextFormField(
                 titleHeader: "Address",
                 hintText: "Address",
               ),
