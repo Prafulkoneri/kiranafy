@@ -48,6 +48,8 @@ Color lightblue = Color(0xffEFFDFF);
 Color grey8 = Color(0xffB3B3B3);
 Color lightblack = Color(0xff5B5B5B);
 Color lightblack1 = Color(0xff6F6F6F);
+Color yellow1 = Color(0xffFF9577);
+Color yellow2 = Color(0xffFFC229);
 
 class Constants {
   static const kPurpleColor = Color(0xFFB97DFE);
