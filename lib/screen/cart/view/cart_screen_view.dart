@@ -6,13 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-<<<<<<< HEAD:lib/screen/cart/view/cart_screen.dart
-import 'package:local_supper_market/screen/cart/view/cart_detail.dart';
-=======
-import 'package:local_supper_market/screen/cart/view/cart_detail_view.dart';
->>>>>>> f5dc7c5ea80617038f9db8508daaf7dd3e5d10be:lib/screen/cart/view/cart_screen_view.dart
 
-
+import 'cart_detail_view.dart';
 import 'empty_cart_view.dart';
 
 class CartScreenView extends StatefulWidget {
@@ -79,7 +74,8 @@ class _CartScreenViewState extends State<CartScreenView> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EmptyCartView()),
+                  MaterialPageRoute(
+                      builder: (context) => const EmptyCartView()),
                 );
               },
               child: SvgPicture.asset(
@@ -219,7 +215,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const CartDetailView()),
+                                                  CartDetailView()),
                                         );
                                       },
                                       child: Text(

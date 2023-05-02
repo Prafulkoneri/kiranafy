@@ -9,7 +9,6 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 
-
 class UpdateProfileView extends StatefulWidget {
   const UpdateProfileView({Key? key}) : super(key: key);
 
@@ -96,67 +95,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Container(
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        bottom: 1,
-                        top: 1,
-                        left: 0,
-                        child: Container(
-                          width: 80.h,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            // borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: InternationalPhoneNumberInput(
-                          // selectorConfig: const SelectorConfig(
-                          //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                          //     setSelectorButtonAsPrefixIcon: true,
-                          //     leadingPadding: 20,
-                          //     useEmoji: true,
-                          //   ),
-                          onInputChanged: (PhoneNumber number) {
-                            print(number.phoneNumber);
-                          },
-                          onInputValidated: (bool value) {
-                            print(value);
-                          },
-                          selectorConfig: const SelectorConfig(
-                              selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                              // setSelectorButtonAsPrefixIcon: true,
-                              setSelectorButtonAsPrefixIcon: false),
-                          ignoreBlank: false,
-                          autoValidateMode: AutovalidateMode.disabled,
-                          selectorTextStyle:
-                              const TextStyle(color: Colors.black),
-                          initialValue: number,
-                          textFieldController: controller,
-                          // formatInput: true,
-                          // fillColor: Colors.white,
-                          inputBorder: InputBorder.none,
-                          inputDecoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 0),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xffEFEFEF))),
-                              fillColor: Colors.white,
-                              filled: true),
-                          // filled: true,
-                          keyboardType: const TextInputType.numberWithOptions(
-                              signed: true, decimal: true),
-                          // inputBorder: OutlineInputBorder(),
-
-                          onSaved: (PhoneNumber number) {
-                            print('On Saved: $number');
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    child: MobileNoTextFormField(controller: controller)),
               ),
               SizedBox(
                 height: 20.w,
@@ -176,67 +115,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Container(
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        bottom: 1,
-                        top: 1,
-                        left: 0,
-                        child: Container(
-                          width: 80.h,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            // borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: InternationalPhoneNumberInput(
-                          // selectorConfig: const SelectorConfig(
-                          //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                          //     setSelectorButtonAsPrefixIcon: true,
-                          //     leadingPadding: 20,
-                          //     useEmoji: true,
-                          //   ),
-                          onInputChanged: (PhoneNumber number) {
-                            print(number.phoneNumber);
-                          },
-                          onInputValidated: (bool value) {
-                            print(value);
-                          },
-                          selectorConfig: const SelectorConfig(
-                              selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                              // setSelectorButtonAsPrefixIcon: true,
-                              setSelectorButtonAsPrefixIcon: false),
-                          ignoreBlank: false,
-                          autoValidateMode: AutovalidateMode.disabled,
-                          selectorTextStyle:
-                              const TextStyle(color: Colors.black),
-                          initialValue: number,
-                          textFieldController: controller,
-                          // formatInput: true,
-                          // fillColor: Colors.white,
-                          inputBorder: InputBorder.none,
-                          inputDecoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 0),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xffEFEFEF))),
-                              fillColor: Colors.white,
-                              filled: true),
-                          // filled: true,
-                          keyboardType: const TextInputType.numberWithOptions(
-                              signed: true, decimal: true),
-                          // inputBorder: OutlineInputBorder(),
-
-                          onSaved: (PhoneNumber number) {
-                            print('On Saved: $number');
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    child: MobileNoTextFormField(controller: controller)),
               ),
               SizedBox(
                 height: 20.w,

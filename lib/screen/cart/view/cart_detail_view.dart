@@ -9,15 +9,6 @@ import 'package:local_supper_market/screen/products/views/product_screen.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 
-<<<<<<< HEAD:lib/screen/cart/view/cart_detail.dart
-import '../../../const/color.dart';
-import '../../../widget/app_bar.dart';
-import '../../Home/product_screen.dart';
-import '../../order_summery/order_summery.dart';
-=======
->>>>>>> f5dc7c5ea80617038f9db8508daaf7dd3e5d10be:lib/screen/cart/view/cart_detail_view.dart
-
-
 class CartDetailView extends StatelessWidget {
   const CartDetailView({super.key});
 

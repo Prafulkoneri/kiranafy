@@ -6,13 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-<<<<<<< HEAD:lib/screen/my_order/my_order.dart
-import 'package:local_supper_market/screen/cart/view/empty_cart.dart';
-=======
-import 'package:local_supper_market/screen/cart/view/empty_cart_view.dart';
->>>>>>> f5dc7c5ea80617038f9db8508daaf7dd3e5d10be:lib/screen/my_order/view/my_order_view.dart
 
-
+import '../../cart/view/empty_cart_view.dart';
 import '../../delivery_view/delivery_view_pending.dart';
 
 class MyOrderView extends StatelessWidget {
@@ -74,7 +69,8 @@ class MyOrderView extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EmptyCartView()),
+                  MaterialPageRoute(
+                      builder: (context) => const EmptyCartView()),
                 );
               },
               child: SvgPicture.asset(

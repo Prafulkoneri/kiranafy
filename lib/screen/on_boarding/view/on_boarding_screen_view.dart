@@ -83,7 +83,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                           read.onSkipPressed(context);
+                              read.onSkipPressed(context);
                             },
                             child: Text(
                               "SKIP",
@@ -560,7 +560,13 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                           Expanded(
                             child: PrimaryButton(
                               color: Color(0xff4EEFC1),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CustomerSignIn()),
+                                );
+                              },
                               textColor: Colors.black,
                               text: "Customer",
                             ),
@@ -572,7 +578,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                             child: PrimaryButton(
                               color: Color(0xff4689EC),
                               onTap: () {
-                           read.onShopOwnerBtnPressed(context);
+                                read.onShopOwnerBtnPressed(context);
                               },
                               textColor: Colors.white,
                               text: "Shop Owner",
