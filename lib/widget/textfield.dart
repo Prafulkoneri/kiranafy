@@ -104,10 +104,13 @@ class PrimarySTextFormField extends StatelessWidget {
   final Widget? suffix;
   final Color ? color;
   final bool ? enableBorder;
+  final double? hintFontSize;
   PrimarySTextFormField(
+
       {Key? key,
         this.color,
         this.height,
+        this.hintFontSize,
         this.maxLines,
         this.enableBorder,
       this.suffix,
@@ -157,7 +160,7 @@ class PrimarySTextFormField extends StatelessWidget {
 
               contentPadding: EdgeInsets.only(left: 10.w,top: 30.w),
               hintStyle: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: hintFontSize??16.sp,
                   fontWeight: FontWeight.w400,
                   color: Color(0xffB7B7B7)),
               enabledBorder: OutlineInputBorder(
@@ -169,7 +172,8 @@ class PrimarySTextFormField extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Color(0xffEFEFEF),
+                  width: 1.w,
+                  color: enableBorder??false?Color(0xffE0E0E0):Color(0xffEFEFEF),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
