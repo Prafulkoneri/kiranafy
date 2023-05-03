@@ -50,6 +50,8 @@ Color lightblack = Color(0xff5B5B5B);
 Color lightblack1 = Color(0xff6F6F6F);
 Color yellow1 = Color(0xffFF9577);
 Color yellow2 = Color(0xffFFC229);
+Color green = Color(0xff4BB0DD);
+Color green1 = Color(0xff4FEBC4);
 
 class Constants {
   static const kPurpleColor = Color(0xFFB97DFE);

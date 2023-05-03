@@ -127,105 +127,109 @@ class _AllNearShopsState extends State<AllNearShops> {
                       mainAxisSize: MainAxisSize.max,
                       children: List.generate(
                           5,
-                          (index) => Stack(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 120.h,
-                                        width: 200.w,
-                                        margin: EdgeInsets.only(
-                                            left: index == 0 ? 19.w : 0,
-                                            right: index == 2 ? 19.w : 5.w),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15.w),
-                                            image: DecorationImage(
-                                                scale: 1.0,
-                                                image: AssetImage(
-                                                    'assets/images/nearshop2.png'),
-                                                fit: BoxFit.fill)),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(10.h),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {},
-                                                    child: SvgPicture.asset(
-                                                      "assets/images/favorite.svg",
-                                                      width: 26.w,
-                                                      height: 14.h,
+                          (index) => GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ShopProfile()),
+                                  );
+                                },
+                                child: Stack(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          height: 120.h,
+                                          width: 200.w,
+                                          margin: EdgeInsets.only(
+                                              left: index == 0 ? 19.w : 0,
+                                              right: index == 2 ? 19.w : 5.w),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15.w),
+                                              image: DecorationImage(
+                                                  scale: 1.0,
+                                                  image: AssetImage(
+                                                      'assets/images/nearshop2.png'),
+                                                  fit: BoxFit.fill)),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(10.h),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {},
+                                                      child: SvgPicture.asset(
+                                                        "assets/images/favorite.svg",
+                                                        width: 26.w,
+                                                        height: 14.h,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                      "New Balaji Trading Co..",
-                                                      style: GoogleFonts.roboto(
-                                                          textStyle: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              // letterSpacing: .5,
-                                                              fontSize: 13.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600))),
-                                                  // ),
-                                                  Text("Vishrantwadi, Pune",
-                                                      style: GoogleFonts.roboto(
-                                                          textStyle: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              // letterSpacing: .5,
-                                                              fontSize: 12.sp,
-                                                              // height: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400))),
-                                                ],
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                        "New Balaji Trading Co..",
+                                                        style: GoogleFonts.roboto(
+                                                            textStyle: TextStyle(
+                                                                color: Colors.white,
+                                                                // letterSpacing: .5,
+                                                                fontSize: 13.sp,
+                                                                fontWeight: FontWeight.w600))),
+                                                    // ),
+                                                    Text("Vishrantwadi, Pune",
+                                                        style: GoogleFonts.roboto(
+                                                            textStyle: TextStyle(
+                                                                color: Colors.white,
+                                                                // letterSpacing: .5,
+                                                                fontSize: 12.sp,
+                                                                // height: 10,
+                                                                fontWeight: FontWeight.w400))),
+                                                  ],
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Positioned(
-                                      child: Container(
-                                    margin: EdgeInsets.only(
-                                        left: index == 0 ? 19.w : 0,
-                                        right: index == 2 ? 19.w : 5.w),
-                                    height: 120.h,
-                                    width: 200.w,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(13.w),
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          stops: [
-                                            0.1,
-                                            0.9,
-                                          ],
-                                          colors: [
-                                            Colors.white.withOpacity(0),
-                                            Colors.black.withOpacity(0.05),
-                                          ],
-                                        )),
-                                  )),
-                                ],
+                                      ],
+                                    ),
+                                    Positioned(
+                                        child: Container(
+                                      margin: EdgeInsets.only(
+                                          left: index == 0 ? 19.w : 0,
+                                          right: index == 2 ? 19.w : 5.w),
+                                      height: 120.h,
+                                      width: 200.w,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(13.w),
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            stops: [
+                                              0.1,
+                                              0.9,
+                                            ],
+                                            colors: [
+                                              Colors.white.withOpacity(0),
+                                              Colors.black.withOpacity(0.05),
+                                            ],
+                                          )),
+                                    )),
+                                  ],
+                                ),
                               )))),
               // SizedBox(
               //   height: 120.h,

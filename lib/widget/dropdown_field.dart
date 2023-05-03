@@ -35,16 +35,20 @@ class _CDropDownFieldState extends State<CDropDownField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.titleHeader??"",
+        Text(
+          widget.titleHeader ?? "",
           style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14.sp,
-              color: Color(0xff3A3A3A)),),
+              color: Color(0xff3A3A3A)),
+        ),
         SizedBox(
           height: 10.w,
         ),
         DropdownButtonFormField2(
           decoration: const InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
             //Add isDense true and zero Padding.
             //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
             isDense: true,
@@ -84,7 +88,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
           onSaved: (value) {
             selectedValue = value.toString();
           },
-          buttonStyleData:  ButtonStyleData(
+          buttonStyleData: ButtonStyleData(
             height: 48.w,
             // padding: EdgeInsets.only(left: 20, right: 10),
           ),
@@ -106,7 +110,6 @@ class _CDropDownFieldState extends State<CDropDownField> {
   }
 }
 
-
 class SDropDownField extends StatefulWidget {
   final String? hint;
   final Function(dynamic)? onChanged;
@@ -116,11 +119,11 @@ class SDropDownField extends StatefulWidget {
 
   const SDropDownField(
       {Key? key,
-        this.value,
-        this.hint,
-        this.onChanged,
-        this.items,
-        this.titleHeader})
+      this.value,
+      this.hint,
+      this.onChanged,
+      this.items,
+      this.titleHeader})
       : super(key: key);
 
   @override
@@ -140,18 +143,24 @@ class _SDropDownFieldState extends State<SDropDownField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.titleHeader!=null?  Text(widget.titleHeader??"",
-          style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14.sp,
-              color: Color(0xff3A3A3A)),):Container(),
-        widget.titleHeader!=null?  SizedBox(
-          height: 10.w,
-        ):Container(),
+        widget.titleHeader != null
+            ? Text(
+                widget.titleHeader ?? "",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14.sp,
+                    color: Color(0xff3A3A3A)),
+              )
+            : Container(),
+        widget.titleHeader != null
+            ? SizedBox(
+                height: 10.w,
+              )
+            : Container(),
         Container(
           height: 45.w,
           child: DropdownButtonFormField2(
-            decoration:  InputDecoration(
+            decoration: InputDecoration(
               //Add isDense true and zero Padding.
               //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
               isDense: true,
@@ -159,7 +168,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
               filled: true,
               contentPadding: EdgeInsets.zero,
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6.w),
+                  borderRadius: BorderRadius.circular(6.w),
                   borderSide: BorderSide(color: Color(0xffEFEFEF))),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.w),
@@ -170,18 +179,22 @@ class _SDropDownFieldState extends State<SDropDownField> {
             isExpanded: true,
             hint: Text(
               widget.hint ?? "",
-              style: TextStyle(fontSize: 16.sp,color: Color(0xffB7B7B7),fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  color: Color(0xffB7B7B7),
+                  fontWeight: FontWeight.w400),
             ),
             items: genderItems
                 .map((item) => DropdownMenuItem<String>(
-              value: item,
-              child: Text(
-                item,
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-            )).toList(),
+                      value: item,
+                      child: Text(
+                        item,
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ))
+                .toList(),
             validator: (value) {
               if (value == null) {
                 return 'Please select gender.';
@@ -194,7 +207,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
             onSaved: (value) {
               selectedValue = value.toString();
             },
-            buttonStyleData:  ButtonStyleData(
+            buttonStyleData: ButtonStyleData(
               height: 48.w,
               // padding: EdgeInsets.only(left: 20, right: 10),
             ),
