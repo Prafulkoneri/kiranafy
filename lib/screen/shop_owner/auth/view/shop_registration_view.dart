@@ -163,40 +163,40 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       text: TextSpan(
                           text: "By continuing you agree to our\n",
                           style: GoogleFonts.dmSans(
-                            textStyle: const TextStyle(
+                            textStyle:  TextStyle(
                                 color: Black,
                                 // letterSpacing: .5,
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w400),
                           ),
                           children: [
                             TextSpan(
                               text: 'Term of Condition',
                               style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
+                                textStyle:  TextStyle(
                                     color: SplashText1,
                                     // letterSpacing: .5,
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
                             TextSpan(
                               text: 'and',
                               style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
+                                textStyle:  TextStyle(
                                     color: Black,
                                     // letterSpacing: .5,
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
                             TextSpan(
                               text: ' Privacy Policy',
                               style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
+                                textStyle:  TextStyle(
                                     color: SplashText1,
                                     // letterSpacing: .5,
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
