@@ -95,6 +95,8 @@ class PrimaryCTextFormField extends StatelessWidget {
 class PrimarySTextFormField extends StatelessWidget {
   final String? titleHeader;
   final bool? readOnly;
+  final double ? height;
+  final int ? maxLines;
   void Function(String)? onChanged;
   final LengthLimitingTextInputFormatter? lengthLimitingTextInputFormatter;
   final TextEditingController? controller;
@@ -105,6 +107,8 @@ class PrimarySTextFormField extends StatelessWidget {
   PrimarySTextFormField(
       {Key? key,
         this.color,
+        this.height,
+        this.maxLines,
         this.enableBorder,
       this.suffix,
       this.controller,
@@ -134,9 +138,10 @@ class PrimarySTextFormField extends StatelessWidget {
           height: 10.w,
         ):Container(),
         Container(
-          height: 48.w,
+          height: height??48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
+            maxLines: maxLines??1,
             readOnly: readOnly ?? false,
             onChanged: onChanged,
             inputFormatters: [
@@ -150,23 +155,23 @@ class PrimarySTextFormField extends StatelessWidget {
               filled: true,
               hintText: hintText,
 
-              contentPadding: EdgeInsets.only(left: 10.w),
+              contentPadding: EdgeInsets.only(left: 10.w,top: 30.w),
               hintStyle: TextStyle(
-                  fontSize: 13.sp,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
-                  color: Colors.black.withOpacity(0.7)),
+                  color: Color(0xffB7B7B7)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1.w,
                   color: enableBorder??false?Color(0xffE0E0E0):Color(0xffEFEFEF),
                 ),
-                borderRadius: BorderRadius.circular(10.w),
+                borderRadius: BorderRadius.circular(5.w),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Color(0xffEFEFEF),
                 ),
-                borderRadius: BorderRadius.circular(10.w),
+                borderRadius: BorderRadius.circular(5.w),
               ),
             ),
           ),
@@ -227,6 +232,12 @@ class MobileNoTextFormField extends StatelessWidget {
             // fillColor: Colors.white,
             inputBorder: InputBorder.none,
             inputDecoration: InputDecoration(
+              hintText: "Phone Number",
+                hintStyle: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xffB7B7B7),
+                ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(width: 1.w,color:enableOrder??false?Color(0xffE0E0E0):Colors.white),
@@ -236,6 +247,7 @@ class MobileNoTextFormField extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.white),
                 ),
                 fillColor: Colors.white,
+                contentPadding: EdgeInsets.only(top: 10.w,left: 10.w),
                 filled: true),
             // filled: true,
             keyboardType: const TextInputType.numberWithOptions(

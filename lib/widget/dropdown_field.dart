@@ -149,9 +149,9 @@ class _SDropDownFieldState extends State<SDropDownField> {
           height: 10.w,
         ):Container(),
         Container(
-          height: 48.w,
+          height: 45.w,
           child: DropdownButtonFormField2(
-            decoration: const InputDecoration(
+            decoration:  InputDecoration(
               //Add isDense true and zero Padding.
               //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
               isDense: true,
@@ -159,8 +159,10 @@ class _SDropDownFieldState extends State<SDropDownField> {
               filled: true,
               contentPadding: EdgeInsets.zero,
               enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6.w),
                   borderSide: BorderSide(color: Color(0xffEFEFEF))),
               focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6.w),
                   borderSide: BorderSide(color: Color(0xffEFEFEF))),
               //Add more decoration as you want here
               //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
@@ -198,7 +200,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
             ),
             iconStyleData: const IconStyleData(
               icon: Icon(
-                Icons.arrow_drop_down,
+                Icons.keyboard_arrow_down,
                 color: Colors.black45,
               ),
               iconSize: 30,
