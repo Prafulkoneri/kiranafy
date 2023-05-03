@@ -179,8 +179,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
                   fontSize: 14,
                 ),
               ),
-            ))
-                .toList(),
+            )).toList(),
             validator: (value) {
               if (value == null) {
                 return 'Please select gender.';
