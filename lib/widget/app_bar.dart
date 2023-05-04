@@ -60,10 +60,9 @@ class PrimaryAppBar extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        InkWell(
-          onTap: () {
-            onActionTap;
-          },
+        GestureDetector(
+          onTap:onActionTap,
+
           child: Padding(
               padding: EdgeInsets.only(
                 right: 20.w,

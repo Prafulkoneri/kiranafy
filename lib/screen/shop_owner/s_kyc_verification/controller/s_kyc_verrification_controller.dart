@@ -1,7 +1,8 @@
  import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/shop_owner/select_category/view/s_select_category.dart';
+import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
+
 
 class SKycVerificationController extends ChangeNotifier{
   void onFileUploadClicked()async{
