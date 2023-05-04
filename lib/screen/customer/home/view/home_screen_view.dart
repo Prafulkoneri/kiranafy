@@ -17,7 +17,6 @@ import 'package:local_supper_market/screen/customer/near_shops/all_near_shops.da
 
 import 'package:provider/provider.dart';
 
-import '../../advertisementform/advertisementform.dart';
 
 class HomeScreenView extends StatefulWidget {
   const HomeScreenView({super.key});

@@ -9,10 +9,14 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/splash/splash.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/subscription_screen.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 
 import 'package:provider/provider.dart';
 
@@ -32,8 +36,12 @@ void main() {
         ChangeNotifierProvider(create: (_) => ShopSignInController()),
         ChangeNotifierProvider(create: (_) => SKycVerificationController()),
         ChangeNotifierProvider(create: (_) => SSelectCategoryController()),
+        ChangeNotifierProvider(create: (_) => SSubscriptionController()),
+        ChangeNotifierProvider(create: (_) => SMainScreenController()),
+        ChangeNotifierProvider(create: (_) => SDashBoardController()),
+        ChangeNotifierProvider(create: (_) => SCategoryListController()),
       ],
-      child: const MyApp(),
+      child:  MyApp(),
     ),
   );
 }
@@ -54,7 +62,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: AddProductView());
+              home: SplashScreen());
         });
   }
 }

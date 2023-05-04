@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/dashboard/controller/s_dashboard_controller.dart';
 
+import 'package:provider/provider.dart';
 class ShopDashBoard extends StatefulWidget {
   const ShopDashBoard({super.key});
 
@@ -17,6 +19,8 @@ class ShopDashBoard extends StatefulWidget {
 class _ShopDashBoardState extends State<ShopDashBoard> {
   @override
   Widget build(BuildContext context) {
+    final read=context.read<SDashBoardController>();
+    final watch=context.watch<SDashBoardController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
@@ -401,46 +405,52 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 width: 19.w,
               ),
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(
-                      left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
-                  // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                  // height: 50.h,/
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          end: Alignment.topCenter,
-                          begin: Alignment.bottomCenter,
-                          colors: <Color>[
-                            green.withOpacity(0.55),
-                            green1.withOpacity(0.98),
-                          ]),
-                      color: Custlogin,
-                      // border: Border.all(width: 1, color: Black),
-                      borderRadius: BorderRadius.circular(8)),
+                child:
+                GestureDetector(
+                  onTap: (){
+                    read.onCategorySelect(context);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
+                    // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                    // height: 50.h,/
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            end: Alignment.topCenter,
+                            begin: Alignment.bottomCenter,
+                            colors: <Color>[
+                              green.withOpacity(0.55),
+                              green1.withOpacity(0.98),
+                            ]),
+                        color: Custlogin,
+                        // border: Border.all(width: 1, color: Black),
+                        borderRadius: BorderRadius.circular(8)),
 
-                  child: Column(
-                    children: [
-                      Text(
-                        "5",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
+                    child: Column(
+                      children: [
+                        Text(
+                          "5",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w700),
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Category",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              // letterSpacing: .5,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700),
+                        Text(
+                          "Category",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -12,18 +12,19 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/customer/on_boarding/controller/on_boarding_controller.dart';
 import 'package:local_supper_market/screen/customer/order_status/order_status.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/subscription_screen.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:provider/provider.dart';
 
-class SubscriptionScreenView extends StatefulWidget {
-  const SubscriptionScreenView({Key? key}) : super(key: key);
+class SSubscriptionScreenView extends StatefulWidget {
+  const SSubscriptionScreenView({Key? key}) : super(key: key);
 
   @override
-  _SubscriptionScreenViewState createState() => _SubscriptionScreenViewState();
+  _SSubscriptionScreenViewState createState() => _SSubscriptionScreenViewState();
 }
 
 String? selectedValue;
@@ -40,16 +41,16 @@ bool _checkbox = false;
 
 List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
 
-class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
+class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
   @override
   Widget build(BuildContext context) {
+    final read=context.read<SSubscriptionController>();
+    final watch=context.watch<SSubscriptionController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           title: "Update Profile",
-          // action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () {},
         ),
       ),
       body: Column(
@@ -821,7 +822,10 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                 elevation: MaterialStateProperty.all(0),
                 backgroundColor: MaterialStateProperty.all(SplashText),
               ),
-              onPressed: () {},
+              onPressed: () {
+                print("hello");
+                read.onMakePaymentClicked(context);
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
