@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 
 
 class SKycVerificationController extends ChangeNotifier{
@@ -17,6 +18,6 @@ class SKycVerificationController extends ChangeNotifier{
   }
   
   void onUploadClicked(context){
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>SSelectCategoryView()));
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>SSubscriptionScreenView()));
   }
 }

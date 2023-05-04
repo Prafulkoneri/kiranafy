@@ -384,11 +384,8 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                 ),
                               ],
                             ),
-
-                            //
                           ),
                         ),
-
                         //
                       ],
                     ),
