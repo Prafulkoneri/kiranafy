@@ -42,6 +42,7 @@ Color grey7 = Color(0xffE8E8E8);
 Color grey9 = Color(0xffC4C4C4);
 Color grey10 = Color(0xffF0F0F0);
 Color grey11 = Color(0xffDCDCDC);
+Color grey12 = Color(0xffE6E6E6);
 Color DarkGrey = Color(0xffD1D1D1);
 Color Yellow = Color(0xffE4C400);
 Color lightblue = Color(0xffEFFDFF);

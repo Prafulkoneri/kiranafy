@@ -11,19 +11,20 @@ class PrimaryButton extends StatelessWidget {
   final double? height;
   final double? fontSize;
   final FontWeight? fontWeight;
-  final Color ? borderColor;
-
+  final Color? borderColor;
+  final Widget? child;
 
   const PrimaryButton(
       {Key? key,
       this.leading,
-        this.borderColor,
+      this.child,
+      this.borderColor,
       this.width,
       this.height,
       this.fontSize,
       this.fontWeight,
       this.textColor,
-      required this.text,
+      this.text,
       required this.color,
       required this.onTap})
       : super(key: key);
@@ -36,19 +37,19 @@ class PrimaryButton extends StatelessWidget {
           width: width ?? MediaQuery.of(context).size.width,
           height: height ?? 45.w,
           decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(7.w),
-            border: Border.all(color: borderColor??Colors.transparent)
-          ),
+              color: color,
+              borderRadius: BorderRadius.circular(7.w),
+              border: Border.all(color: borderColor ?? Colors.transparent)),
           child: leading == null
               ? Center(
-                  child: Text(
-                  "${text}",
-                  style: TextStyle(
-                      color: textColor ?? Colors.white,
-                      fontWeight: fontWeight ?? FontWeight.w700,
-                      fontSize: fontSize ?? 14.sp),
-                ))
+                  child: child ??
+                      Text(
+                        "${text}",
+                        style: TextStyle(
+                            color: textColor ?? Colors.white,
+                            fontWeight: fontWeight ?? FontWeight.w700,
+                            fontSize: fontSize ?? 14.sp),
+                      ))
               : leading),
     );
   }

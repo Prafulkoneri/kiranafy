@@ -273,14 +273,19 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 children: [
                   InkWell(
                     child: Container(
-                      decoration: BoxDecoration(color: Color(0xff39C19D),
-                      borderRadius: BorderRadius.circular(7.w)),
-                      padding: EdgeInsets.symmetric(horizontal: 14.w,vertical: 2.w),
+                      decoration: BoxDecoration(
+                          color: Color(0xff39C19D),
+                          borderRadius: BorderRadius.circular(7.w)),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 14.w, vertical: 2.w),
                       child: Center(
-                        child: Text("Place Your Ad",style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500),),
+                        child: Text(
+                          "Place Your Ad",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),

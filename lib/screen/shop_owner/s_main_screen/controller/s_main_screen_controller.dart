@@ -5,13 +5,13 @@ import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.d
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/all_near_shops.dart';
-import 'package:local_supper_market/screen/shop_owner/dashboard/view/dash_board_view.dart';
+import 'package:local_supper_market/screen/shop_owner/dashboard/view/s_dash_board_view.dart';
 
 class SMainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = HomeScreenView();
+  Widget currentScreen = ShopDashBoard();
 
   void onBottomNavChanged(index) {
     currentIndex = index;

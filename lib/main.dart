@@ -9,7 +9,10 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/splash/splash.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
@@ -18,6 +21,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/
 import 'package:provider/provider.dart';
 
 import 'screen/customer/on_boarding/controller/on_boarding_controller.dart';
+import 'screen/shop_owner/s_products/view/s_add_product_view.dart';
 
 void main() {
   runApp(
@@ -34,6 +38,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => SSelectCategoryController()),
         ChangeNotifierProvider(create: (_) => SSubscriptionController()),
         ChangeNotifierProvider(create: (_) => SMainScreenController()),
+        ChangeNotifierProvider(create: (_) => SDashBoardController()),
+        ChangeNotifierProvider(create: (_) => SCategoryListController()),
       ],
       child:  MyApp(),
     ),
