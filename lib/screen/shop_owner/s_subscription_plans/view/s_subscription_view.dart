@@ -833,7 +833,9 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                 elevation: MaterialStateProperty.all(0),
                 backgroundColor: MaterialStateProperty.all(SplashText),
               ),
-              onPressed: () {},
+              onPressed: () {
+                read.onMakePaymentClicked(context);
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,

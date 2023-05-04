@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_account_screen_view/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
@@ -23,7 +24,8 @@ class SAccountScreenView extends StatefulWidget {
 class _SAccountScreenViewState extends State<SAccountScreenView> {
   @override
   Widget build(BuildContext context) {
-
+ final read=context.read<SAccountScreenController>();
+ final watch=context.watch<SAccountScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -98,10 +100,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                       fontWeight: FontWeight.w700),
                                 ),
                               ),
-                              SvgPicture.asset(
-                                'assets/icons/edit.svg',
-                                width: 14.w,
-                                height: 14.h,
+                              GestureDetector(
+                                onTap: (){
+                                  read.onEditBtnClicked(context);
+                                },
+                                child: SvgPicture.asset(
+                                  'assets/icons/edit.svg',
+                                  width: 14.w,
+                                  height: 14.h,
+                                ),
                               ),
                             ],
                           ),
@@ -174,7 +181,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             GestureDetector(
               onTap: () {
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>SShopConfigurationView()));
+   read.onShopConfigurationClicked(context);
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w),

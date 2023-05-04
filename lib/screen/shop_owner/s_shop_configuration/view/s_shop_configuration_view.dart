@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
+import 'package:provider/provider.dart';
+
 class SShopConfigurationView extends StatefulWidget {
   const SShopConfigurationView({Key? key}) : super(key: key);
 
@@ -15,12 +19,14 @@ class SShopConfigurationView extends StatefulWidget {
 class _SShopConfigurationViewState extends State<SShopConfigurationView> {
   @override
   Widget build(BuildContext context) {
+    final watch=context.watch<SShopConfigurationController>();
+    final read=context.read<SShopConfigurationController>();
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          title: "Select Categories",
+          title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: (){
 
@@ -29,6 +35,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(left: 19.w,right: 19.w,top: 26.w),
           child: Column(
@@ -68,6 +75,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               PrimarySTextFormField(
                 hintText: "Type UPI ID",
                 titleHeader: "UPI ID",
+                hintFontSize: 15.sp,
               ),
               SizedBox(
                 height: 20.w,
@@ -85,16 +93,21 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
     Row(
       mainAxisAlignment:MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          width: 155.w,
+        Expanded(
+          // width: 155.w,
           child: SDropDownField(
             hint: "Opening Time",
+            hintSize: 15.sp,
           ),
         ),
-        Container(
-          width: 155.w,
+        SizedBox(
+          width: 12.w,
+        ),
+        Expanded(
           child: SDropDownField(
             hint: "Closing Time",
+            hintSize: 15.sp,
+
           ),
         ),
       ],
@@ -105,34 +118,23 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               PrimarySTextFormField(
                 titleHeader: "Support Number",
                 hintText: "Enter Support Number",
+                hintFontSize: 15.sp,
               ),
               SizedBox(
                 height: 40.w,
               ),
               Text("Delivery Type",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp),),
+             SizedBox(
+               height: 13.w,
+             ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Checkbox(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3)),
-                    side: MaterialStateBorderSide.resolveWith(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.selected)) {
-                          return BorderSide(
-                              width: 1, color: SplashText);
-                        }
-                        return BorderSide(width: 0, color: Grey);
-                      },
-                    ),
-                    checkColor: Colors.white,
-                    activeColor: SplashText,
-                    value: false,
-                    onChanged: (value) {
-                      setState(() {
-
-                      });
+                  PrimaryCheckBox(
+                    onChanged:(value){
+                      read.onCustomerPickupSelected();
                     },
+                    value:watch.isCustomerPickupSelected,
                   ),
                   Text(
                     'Customer Pickup',
@@ -146,39 +148,21 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     width: 30.w
                     ,
                   ),
-                  Checkbox(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3)),
-                    side: MaterialStateBorderSide.resolveWith(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.selected)) {
-                          return BorderSide(
-                              width: 1, color: SplashText);
-                        }
-                        return BorderSide(width: 0, color: Grey);
-                      },
-                    ),
-                    checkColor: Colors.white,
-                    activeColor: SplashText,
-                    value: true,
-                    onChanged: (value) {
-                      setState(() {
-
-                      });
+                  PrimaryCheckBox(
+                    onChanged:(value){
+                      read.onDeliveryCustomerSelected();
                     },
+                    value:watch.isDeliveryCustomerSelected,
                   ),
                   
                   Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 10.w),
-                      child: Text(
-                        'Deliver To Customer',
-                        style:  TextStyle(
-                            color: Black1,
-                            // letterSpacing: .5,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
+                    child: Text(
+                      'Deliver To Customer',
+                      style:  TextStyle(
+                          color: Black1,
+                          // letterSpacing: .5,
+                          fontSize: 13.4.sp,
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
                 ],
@@ -189,15 +173,17 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 155.w,
+                  Expanded(
+
                     child: Text("Order Amount",style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
                         color: Color(0xff3A3A3A)),),
                   ),
-                  Container(
-                    width: 155.w,
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
                     child: Text("Delivery Charge",style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
@@ -211,16 +197,20 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 mainAxisAlignment:MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 155.w,
+                  Expanded(
                     child: SDropDownField(
                       hint: "1 to 500",
+                      hintSize: 15.sp,
                     ),
                   ),
-                  Container(
-                    width: 155.w,
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
+
                     child: SDropDownField(
                       hint: "Delivery Charge",
+                      hintSize: 15.sp,
                     ),
                   ),
                 ],
@@ -231,15 +221,17 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 155.w,
+                  Expanded(
+
                     child: Text("Order Amount",style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
                         color: Color(0xff3A3A3A)),),
                   ),
-                  Container(
-                    width: 155.w,
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
                     child: Text("Delivery Charge",style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
@@ -253,16 +245,20 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 mainAxisAlignment:MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 155.w,
+                  Expanded(
                     child: SDropDownField(
                       hint: "500 to 1200",
+                      hintSize: 15.sp,
                     ),
                   ),
-                  Container(
-                    width: 155.w,
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
+
                     child: SDropDownField(
                       hint: "Delivery Charge",
+                      hintSize: 15.sp,
                     ),
                   ),
                 ],
@@ -273,15 +269,17 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 155.w,
+                  Expanded(
+
                     child: Text("Order Amount",style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
                         color: Color(0xff3A3A3A)),),
                   ),
-                  Container(
-                    width: 155.w,
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
                     child: Text("Delivery Charge",style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
@@ -295,16 +293,20 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 mainAxisAlignment:MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 155.w,
+                  Expanded(
                     child: SDropDownField(
                       hint: "1200 to 2500",
+                      hintSize: 15.sp,
                     ),
                   ),
-                  Container(
-                    width: 155.w,
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
+
                     child: SDropDownField(
                       hint: "Delivery Charge",
+                      hintSize: 15.sp,
                     ),
                   ),
                 ],
@@ -315,15 +317,17 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 155.w,
+                  Expanded(
+
                     child: Text("Order Amount",style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
                         color: Color(0xff3A3A3A)),),
                   ),
-                  Container(
-                    width: 155.w,
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
                     child: Text("Delivery Charge",style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
@@ -337,16 +341,20 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 mainAxisAlignment:MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 155.w,
+                  Expanded(
                     child: SDropDownField(
                       hint: "2500 to 5000",
+                      hintSize: 15.sp,
                     ),
                   ),
-                  Container(
-                    width: 155.w,
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
+
                     child: SDropDownField(
                       hint: "Delivery Charge",
+                      hintSize: 15.sp,
                     ),
                   ),
                 ],
@@ -364,27 +372,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Checkbox(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3)),
-                    side: MaterialStateBorderSide.resolveWith(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.selected)) {
-                          return BorderSide(
-                              width: 1, color: SplashText);
-                        }
-                        return BorderSide(width: 0, color: Grey);
-                      },
-                    ),
-                    checkColor: Colors.white,
-                    activeColor: SplashText,
-                    value: false,
-                    onChanged: (value) {
-                      setState(() {
-
-                      });
-                    },
-                  ),
+                PrimaryCheckBox(
+                  value: true,
+                ),
                   Text(
                     '9am to 12pm',
                     style:  TextStyle(
@@ -394,28 +384,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
-                    width: 30.w,
+                    width: 70.w,
                   ),
-                  Checkbox(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3)),
-                    side: MaterialStateBorderSide.resolveWith(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.selected)) {
-                          return BorderSide(
-                              width: 1, color: SplashText);
-                        }
-                        return BorderSide(width: 0, color: Grey);
-                      },
-                    ),
-                    checkColor: Colors.white,
-                    activeColor: SplashText,
-                    value: true,
-                    onChanged: (value) {
-                      setState(() {
-
-                      });
-                    },
+                  PrimaryCheckBox(
+                    value: false,
                   ),
 
                   Flexible(
@@ -440,29 +412,11 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Checkbox(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3)),
-                    side: MaterialStateBorderSide.resolveWith(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.selected)) {
-                          return BorderSide(
-                              width: 1, color: SplashText);
-                        }
-                        return BorderSide(width: 0, color: Grey);
-                      },
-                    ),
-                    checkColor: Colors.white,
-                    activeColor: SplashText,
-                    value: false,
-                    onChanged: (value) {
-                      setState(() {
-
-                      });
-                    },
+                  PrimaryCheckBox(
+                    value: true,
                   ),
                   Text(
-                    '9am to 12pm',
+                    '12pm to 3pm',
                     style:  TextStyle(
                         color: Black1,
                         // letterSpacing: .5,
@@ -470,35 +424,17 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
-                    width: 30.w,
+                    width: 70.w,
                   ),
-                  Checkbox(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3)),
-                    side: MaterialStateBorderSide.resolveWith(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.selected)) {
-                          return BorderSide(
-                              width: 1, color: SplashText);
-                        }
-                        return BorderSide(width: 0, color: Grey);
-                      },
-                    ),
-                    checkColor: Colors.white,
-                    activeColor: SplashText,
-                    value: true,
-                    onChanged: (value) {
-                      setState(() {
-
-                      });
-                    },
+                  PrimaryCheckBox(
+                    value: false,
                   ),
 
                   Flexible(
                     child: Padding(
                       padding: EdgeInsets.only(top: 0.w),
                       child: Text(
-                        '3pm to 6pm',
+                        '6pm to 9pm',
                         style:  TextStyle(
                             color: Black1,
                             // letterSpacing: .5,

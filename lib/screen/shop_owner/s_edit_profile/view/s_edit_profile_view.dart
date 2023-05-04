@@ -10,11 +10,11 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 
-class EditProfileView extends StatefulWidget {
-  const EditProfileView({super.key});
+class SEditProfileView extends StatefulWidget {
+  const SEditProfileView({super.key});
 
   @override
-  State<EditProfileView> createState() => _EditProfileViewState();
+  State<SEditProfileView> createState() => _SEditProfileViewState();
 }
 
 final TextEditingController controller = TextEditingController();
@@ -33,7 +33,7 @@ String? selectedValue;
 // r Radio Button.
 int id = 1;
 
-class _EditProfileViewState extends State<EditProfileView> {
+class _SEditProfileViewState extends State<SEditProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,7 +177,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 0),
                     child: Container(
-                        child: MobileNoTextFormField(controller: controller)),
+                        child: MobileNoTextFormField(controller: controller,enableOrder: true,)),
                   ),
                   SizedBox(
                     height: 20.w,
