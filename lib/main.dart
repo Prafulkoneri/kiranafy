@@ -10,8 +10,10 @@ import 'package:local_supper_market/screen/customer/splash/splash.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/edit_profile/view/edit_profile.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
@@ -40,8 +42,9 @@ void main() {
         ChangeNotifierProvider(create: (_) => SMainScreenController()),
         ChangeNotifierProvider(create: (_) => SDashBoardController()),
         ChangeNotifierProvider(create: (_) => SCategoryListController()),
+        ChangeNotifierProvider(create: (_) => SAddProductsController()),
       ],
-      child:  MyApp(),
+      child: MyApp(),
     ),
   );
 }
@@ -62,7 +65,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SplashScreen());
+              home: EditProfileView());
         });
   }
 }

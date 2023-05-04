@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../widget/app_bar.dart';
 
@@ -21,6 +23,8 @@ final TextEditingController _searchController = TextEditingController();
 class _ShopProductViewState extends State<ShopProductView> {
   @override
   Widget build(BuildContext context) {
+    final read = context.read<SAddProductsController>();
+    final watch = context.watch<SAddProductsController>();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
@@ -67,7 +71,7 @@ class _ShopProductViewState extends State<ShopProductView> {
                                 fontWeight: FontWeight.w400)),
                         prefixIcon: IconButton(
                           icon: SvgPicture.asset(
-                            'assets/images/search.svg',
+                            'assets/icons/search.svg',
                             width: 20.w,
                             height: 20.h,
                           ),
@@ -90,7 +94,9 @@ class _ShopProductViewState extends State<ShopProductView> {
                           height: 40.h,
                           // width: 164.w,
                           color: Custlogin,
-                          onTap: () {},
+                          onTap: () {
+                            read.onAddProduct(context);
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -99,7 +105,7 @@ class _ShopProductViewState extends State<ShopProductView> {
                                 width: 11.w,
                               ),
                               Text(
-                                "Nearby Shops",
+                                "Custom Product",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Colors.white,
