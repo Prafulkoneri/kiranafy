@@ -158,7 +158,7 @@ class PrimarySTextFormField extends StatelessWidget {
               filled: true,
               hintText: hintText,
 
-              contentPadding: EdgeInsets.only(left: 10.w,top: 30.w),
+              contentPadding: EdgeInsets.only(left: 10.w,top: maxLines!=null?30.w:0.w),
               hintStyle: TextStyle(
                   fontSize: hintFontSize??16.sp,
                   fontWeight: FontWeight.w400,

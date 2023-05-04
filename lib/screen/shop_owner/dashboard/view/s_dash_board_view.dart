@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 
 import 'package:provider/provider.dart';
 class ShopDashBoard extends StatefulWidget {
@@ -21,6 +23,8 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
   Widget build(BuildContext context) {
     final read=context.read<SDashBoardController>();
     final watch=context.watch<SDashBoardController>();
+    final watchMainScreen=context.watch<SMainScreenController>();
+    final readMainScreen=context.watch<SMainScreenController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
@@ -408,7 +412,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 child:
                 GestureDetector(
                   onTap: (){
-                    read.onCategorySelect(context);
+                    readMainScreen.onCategoryPressed(context);
                   },
                   child: Container(
                     padding: EdgeInsets.only(

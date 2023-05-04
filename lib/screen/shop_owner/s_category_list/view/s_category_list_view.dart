@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -18,11 +19,13 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
   Widget build(BuildContext context) {
     final read=context.read<SCategoryListController>();
     final watch=context.watch<SCategoryListController>();
+    final watchMainScreen=context.watch<SMainScreenController>();
+    final readMainScreen=context.watch<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(title: "Categories",action:SvgPicture.asset("assets/icons/addressadd.svg"),onActionTap: (){
-          read.onAddBtnClicked(context);
+          readMainScreen.onCategoryAddPressed();
         },),
       ),
       body: Column(

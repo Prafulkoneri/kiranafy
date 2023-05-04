@@ -44,14 +44,14 @@ class _SMainScreenViewState extends State<SMainScreenView> {
             ),
             child: BottomAppBar(
               child: Container(
-                padding: EdgeInsets.only(left: 35.w, right: 35.w, top: 16.w),
+                padding: EdgeInsets.only(left: 21.w, right: 25.w, top: 16.w),
                 height: 70.w,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         read.onHomeScreenPressed();
                       },
@@ -101,7 +101,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                     ),
                     Row(
                       children: [
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             read.onShopPressed();
                           },
@@ -112,7 +112,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                                 height: 20.w,
                                 width: 21.w,
                                 child: SvgPicture.asset(
-                                  "assets/icons/shop_selected.svg",
+                                  "assets/icons/orders_selected.svg",
                                   height: 20.w,
                                   width: 20.w,
                                 ),
@@ -121,7 +121,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                                 height: 5.w,
                               ),
                               Text(
-                                "Shop",
+                                "Orders",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 11.sp,
@@ -135,13 +135,13 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                                 height: 20.w,
                                 width: 21.w,
                                 child: SvgPicture.asset(
-                                    "assets/icons/shop.svg"),
+                                    "assets/icons/orders.svg"),
                               ),
                               SizedBox(
                                 height: 5.w,
                               ),
                               Text(
-                                "Shop",
+                                "Orders",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 11.sp,
@@ -154,7 +154,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                     ),
                     Row(
                       children: [
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             read.onMyCartPressed();
                           },
@@ -165,14 +165,14 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                                 height: 20.w,
                                 width: 21.w,
                                 child: SvgPicture.asset(
-                                  "assets/icons/cart_selected.svg",
+                                  "assets/icons/payment_selected.svg",
                                 ),
                               ),
                               SizedBox(
                                 height: 5.w,
                               ),
                               Text(
-                                "Cart",
+                                "Payment",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 11.sp,
@@ -186,14 +186,14 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                                 height: 20.w,
                                 width: 21.w,
                                 child: SvgPicture.asset(
-                                  "assets/icons/cart.svg",
+                                  "assets/icons/payments.svg",
                                 ),
                               ),
                               SizedBox(
                                 height: 5.w,
                               ),
                               Text(
-                                "Cart",
+                                "Payment",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 11.sp,
@@ -204,7 +204,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                         ),
                       ],
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         read.onOfferPressed();
                       },
@@ -215,8 +215,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                             height: 20.w,
                             width: 21.w,
                             child: SvgPicture.asset(
-                              "assets/icons/offers.svg",
-                              color: CouponsText,
+                              "assets/icons/offers_selected.svg",
                             ),
                           ),
                           SizedBox(
@@ -251,7 +250,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                         ],
                       ),
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         read.onAccountPressed();
                       },

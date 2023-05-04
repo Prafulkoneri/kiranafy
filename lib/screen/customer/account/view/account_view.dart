@@ -125,8 +125,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 'designtest@gmail.com',
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
-                                      // decoration:
-                                      // TextDecoration.lineThrough,
+                                    // decoration:
+                                    // TextDecoration.lineThrough,
                                       color: Black,
                                       // letterSpacing:
                                       //     .5,
@@ -216,87 +216,77 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
 
             ////////////////////////
 
-            GestureDetector(
-              onTap: () {
-                read.myOrdersPressed(context);
-              },
-              child: Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+            Container(
+              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+              padding: EdgeInsets.only(bottom: 15.w),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(width: 1, color: grey10),
+                ),
+                // color: Colors.white,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    width: 5,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
+                  SvgPicture.asset(
+                    'assets/icons/myorders.svg',
+                    // width: 14.w,
+                    // height: 13.h,
+                  ),
+                  SizedBox(
+                    width: 18.w,
+                  ),
+                  Text(
+                    'My Orders',
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400),
                     ),
-                    SvgPicture.asset(
-                      'assets/icons/myorders.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'My Orders',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             ///////////////////////
-            GestureDetector(
-              onTap: () {
-                read.myNotificationsPressed(context);
-              },
-              child: Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+            Container(
+              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+              padding: EdgeInsets.only(bottom: 15.w),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(width: 1, color: grey10),
+                ),
+                // color: Colors.white,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    width: 5,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
+                  SvgPicture.asset(
+                    'assets/icons/notification.svg',
+                    // width: 14.w,
+                    // height: 13.h,
+                  ),
+                  SizedBox(
+                    width: 18.w,
+                  ),
+                  Text(
+                    'Notifications',
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400),
                     ),
-                    SvgPicture.asset(
-                      'assets/icons/notification.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Notifications',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             ////////////////////
