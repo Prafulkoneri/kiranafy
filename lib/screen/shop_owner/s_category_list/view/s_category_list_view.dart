@@ -6,6 +6,7 @@ import 'package:local_supper_market/screen/shop_owner/s_category_list/controller
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
+
 class SSCategoryListView extends StatefulWidget {
   const SSCategoryListView({Key? key}) : super(key: key);
 
@@ -16,14 +17,18 @@ class SSCategoryListView extends StatefulWidget {
 class _SSCategoryListViewState extends State<SSCategoryListView> {
   @override
   Widget build(BuildContext context) {
-    final read=context.read<SCategoryListController>();
-    final watch=context.watch<SCategoryListController>();
+    final read = context.read<SCategoryListController>();
+    final watch = context.watch<SCategoryListController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
-        child: PrimaryAppBar(title: "Categories",action:SvgPicture.asset("assets/icons/addressadd.svg"),onActionTap: (){
-          read.onAddBtnClicked(context);
-        },),
+        child: PrimaryAppBar(
+          title: "Categories",
+          action: SvgPicture.asset("assets/icons/addressadd.svg"),
+          onActionTap: () {
+            read.onAddBtnClicked(context);
+          },
+        ),
       ),
       body: Column(
         children: [
@@ -38,66 +43,72 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
               itemBuilder: (BuildContext, index) {
                 return Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.03.w),
-                              blurRadius: 5,
-                              spreadRadius: 0,
-                              offset: Offset(5, 6)),
-                        ],
-                        border:
-                            Border.all(color: Colors.black.withOpacity(0.07)),
-                        borderRadius: BorderRadius.circular(7.w),
-                      ),
-                      padding: EdgeInsets.only(
-                          top: 16.w, bottom: 16.w, right: 20.w, left: 11.w),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 55.w,
-                            height: 40.w,
-                            child: Image.asset("assets/images/gridone.png"),
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Expanded(
-                            child: Column(
+                    GestureDetector(
+                      onTap: () {
+                        read.onProductSelect(context);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black.withOpacity(0.03.w),
+                                blurRadius: 5,
+                                spreadRadius: 0,
+                                offset: Offset(5, 6)),
+                          ],
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.07)),
+                          borderRadius: BorderRadius.circular(7.w),
+                        ),
+                        padding: EdgeInsets.only(
+                            top: 16.w, bottom: 16.w, right: 20.w, left: 11.w),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 55.w,
+                              height: 40.w,
+                              child: Image.asset("assets/images/gridone.png"),
+                            ),
+                            SizedBox(
+                              width: 12.w,
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Cold Drinks & Juices",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16.sp,
+                                            color: Black1),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "20 Products",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14.sp,
+                                            color: Black1),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            Row(
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Cold Drinks & Juices",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16.sp,
-                                          color: Black1),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "20 Products",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14.sp,
-                                          color: Black1),
-                                    ),
-                                  ],
-                                )
+                                SvgPicture.asset(
+                                    "assets/icons/arrow_right.svg"),
                               ],
                             ),
-                          ),
-                          Row(
-                            children: [
-                              SvgPicture.asset("assets/icons/arrow_right.svg"),
-                            ],
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(

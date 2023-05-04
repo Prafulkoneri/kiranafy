@@ -24,18 +24,17 @@ class SSubscriptionScreenView extends StatefulWidget {
   const SSubscriptionScreenView({Key? key}) : super(key: key);
 
   @override
-  _SSubscriptionScreenViewState createState() => _SSubscriptionScreenViewState();
+  _SSubscriptionScreenViewState createState() =>
+      _SSubscriptionScreenViewState();
 }
 
 String? selectedValue;
-// Group Value
+
 String radioButtonItem = '';
-// r Radio Button.
+
 bool _isChecked = true;
 String _currText = '';
-//  String? selectedValue;
-// Group Value fo
-// r Radio Button.
+
 int id = 1;
 bool _checkbox = false;
 
@@ -44,8 +43,8 @@ List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
 class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
   @override
   Widget build(BuildContext context) {
-    final read=context.read<SSubscriptionController>();
-    final watch=context.watch<SSubscriptionController>();
+    final read = context.read<SSubscriptionController>();
+    final watch = context.watch<SSubscriptionController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -640,7 +639,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                          left: 18.w,
+                          left: 19.w,
                         ),
                         child: Text(
                           'Add on Services:',
@@ -653,149 +652,161 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                           ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(3)),
-                            side: MaterialStateBorderSide.resolveWith(
-                              (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.selected)) {
-                                  return BorderSide(
-                                      width: 1, color: SplashText);
-                                }
-                                return BorderSide(width: 0, color: Grey);
-                              },
+                      Container(
+                        padding: EdgeInsets.only(left: 5.w),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3)),
+                                  side: MaterialStateBorderSide.resolveWith(
+                                    (Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return BorderSide(
+                                            width: 1, color: SplashText);
+                                      }
+                                      return BorderSide(width: 0, color: Grey);
+                                    },
+                                  ),
+                                  checkColor: Colors.white,
+                                  activeColor: SplashText,
+                                  value: _checkbox,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _checkbox = !_checkbox;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'One time shop setup in the app',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        // letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
                             ),
-                            checkColor: Colors.white,
-                            activeColor: SplashText,
-                            value: _checkbox,
-                            onChanged: (value) {
-                              setState(() {
-                                _checkbox = !_checkbox;
-                              });
-                            },
-                          ),
-                          Text(
-                            'One time shop setup in the app',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black1,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
+                            Row(
+                              children: [
+                                Checkbox(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3)),
+                                  side: MaterialStateBorderSide.resolveWith(
+                                    (Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return BorderSide(
+                                            width: 1, color: SplashText);
+                                      }
+                                      return BorderSide(width: 0, color: Grey);
+                                    },
+                                  ),
+                                  checkColor: Colors.white,
+                                  activeColor: SplashText,
+                                  value: _checkbox,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _checkbox = !_checkbox;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'Product price maintenance support',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        // letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                            Row(
+                              children: [
+                                Checkbox(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3)),
+                                  side: MaterialStateBorderSide.resolveWith(
+                                    (Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return BorderSide(
+                                            width: 1, color: SplashText);
+                                      }
+                                      return BorderSide(width: 0, color: Grey);
+                                    },
+                                  ),
+                                  checkColor: Colors.white,
+                                  activeColor: SplashText,
+                                  value: _checkbox,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _checkbox = !_checkbox;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'Shop Digital Marketing',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        // letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Checkbox(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3)),
+                                  side: MaterialStateBorderSide.resolveWith(
+                                    (Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return BorderSide(
+                                            width: 1, color: SplashText);
+                                      }
+                                      return BorderSide(width: 0, color: Grey);
+                                    },
+                                  ),
+                                  checkColor: Colors.white,
+                                  activeColor: SplashText,
+                                  value: _checkbox,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _checkbox = !_checkbox;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'Prime and catchy location on app',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        // letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(3)),
-                            side: MaterialStateBorderSide.resolveWith(
-                              (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.selected)) {
-                                  return BorderSide(
-                                      width: 1, color: SplashText);
-                                }
-                                return BorderSide(width: 0, color: Grey);
-                              },
-                            ),
-                            checkColor: Colors.white,
-                            activeColor: SplashText,
-                            value: _checkbox,
-                            onChanged: (value) {
-                              setState(() {
-                                _checkbox = !_checkbox;
-                              });
-                            },
-                          ),
-                          Text(
-                            'Product price maintenance support',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black1,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(3)),
-                            side: MaterialStateBorderSide.resolveWith(
-                              (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.selected)) {
-                                  return BorderSide(
-                                      width: 1, color: SplashText);
-                                }
-                                return BorderSide(width: 0, color: Grey);
-                              },
-                            ),
-                            checkColor: Colors.white,
-                            activeColor: SplashText,
-                            value: _checkbox,
-                            onChanged: (value) {
-                              setState(() {
-                                _checkbox = !_checkbox;
-                              });
-                            },
-                          ),
-                          Text(
-                            'Shop Digital Marketing',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black1,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(3)),
-                            side: MaterialStateBorderSide.resolveWith(
-                              (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.selected)) {
-                                  return BorderSide(
-                                      width: 1, color: SplashText);
-                                }
-                                return BorderSide(width: 0, color: Grey);
-                              },
-                            ),
-                            checkColor: Colors.white,
-                            activeColor: SplashText,
-                            value: _checkbox,
-                            onChanged: (value) {
-                              setState(() {
-                                _checkbox = !_checkbox;
-                              });
-                            },
-                          ),
-                          Text(
-                            'Prime and catchy location on app',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black1,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
+
                       Padding(
                         padding: EdgeInsets.only(
-                          left: 15.w,
+                          left: 19.w,
                         ),
                         child: Text(
                           "To know more about add-on services and pricing\n details, request for a call back.",
@@ -822,10 +833,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                 elevation: MaterialStateProperty.all(0),
                 backgroundColor: MaterialStateProperty.all(SplashText),
               ),
-              onPressed: () {
-                print("hello");
-                read.onMakePaymentClicked(context);
-              },
+              onPressed: () {},
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -864,7 +872,10 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                             color: Colors.white,
                             height: 36.h,
                             width: 160.w,
-                            onTap: () {},
+                            onTap: () {
+                              print("hello");
+                              read.onMakePaymentClicked(context);
+                            },
                             text: 'Make Payment',
                             textColor: SplashText1,
                             fontSize: 16.sp,
