@@ -1191,13 +1191,13 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10.w, top: 15.w, right: 3.w),
+            padding: EdgeInsets.only(left: 10.w, top: 15.w, right: 0.w),
             child: Stack(
               alignment: Alignment.bottomCenter,
               clipBehavior: Clip.none,
               children: <Widget>[
                 Image.asset(
-                  'assets/images/subscription.png',
+                  'assets/images/dash.png',
                   // width: 450.w,
                   // height: 119.h,
                 ),
@@ -1206,198 +1206,95 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   right: 17.w,
                   left: 8.w,
                   child: Image.asset(
-                    'assets/images/subscription1.png',
+                    'assets/images/dash1.png',
                     // width: 352.w,
                     // height: 60.h,
                   ),
                 ),
                 Positioned(
-                  bottom: 32.w,
+                  top: 15.w,
                   left: 25.w,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    // mainAxisAlignment: MainAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            'Standard Plan',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  // letterSpacing: .5,
-                                  fontSize: 22.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 73.w,
-                            height: 20.h,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  primary:
-                                      Colors.transparent.withOpacity(0.35)),
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return Dialog(
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 11.w,
-                                                    right: 14.w,
-                                                    left: 25.w),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                        "Standard Plan - ₹4000",
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color: Black,
-                                                              fontSize: 16.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                        )),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: SvgPicture.asset(
-                                                          "assets/icons/pop_delete.svg"),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              Divider(),
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                  left: 23.w,
-                                                  right: 16.w,
-                                                ),
-                                                height: 646.h,
-                                                // width: 362.w,
-                                                child: ListView.builder(
-                                                  itemCount: 20,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return Column(
-                                                      children: <Widget>[
-                                                        Container(
-                                                          child: Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            // mainAxisAlignment:
-                                                            //     MainAxisAlignment.center,
-                                                            children: [
-                                                              Icon(
-                                                                Icons
-                                                                    .circle_rounded,
-                                                                size: 5.w,
-                                                              ),
-                                                              SizedBox(
-                                                                width: 10,
-                                                              ),
-                                                              Text(
-                                                                // softWrap: true,
-                                                                // maxLines: 3,//
-                                                                "Ready grocery item master",
-
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .dmSans(
-                                                                  textStyle: TextStyle(
-                                                                      color: Black1,
-                                                                      height: 1.5,
-
-                                                                      // letterSpacing: .05,
-                                                                      // overflow: TextOverflow.ellipsis,
-                                                                      fontSize: 14.sp,
-                                                                      fontWeight: FontWeight.w400),
-                                                                ),
-                                                              ),
-                                                              Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        left: 32
-                                                                            .w,
-                                                                        right: 32
-                                                                            .w),
-                                                                child:
-                                                                    Container(
-                                                                  width: 1.w,
-                                                                  height: 35.w,
-                                                                  color: grey11,
-                                                                ),
-                                                              ),
-                                                              SvgPicture.asset(
-                                                                  "assets/icons/correct.svg")
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    });
-                              },
-                              child: Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.start,
-                                // mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Active',
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ), // <-- Text
-                                  SizedBox(width: 4.w),
-                                  SvgPicture.asset("assets/icons/forward1.svg"),
-                                ],
+                      Container(
+                        padding: EdgeInsets.only(right: 67.w),
+                        width: ScreenUtil().screenWidth,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Standard Plan',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    // letterSpacing: .5,
+                                    fontSize: 22.sp,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            '1 Year Validity ',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
+                            SizedBox(
+                              width: 73.w,
+                              height: 20.h,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    primary:
+                                        Colors.transparent.withOpacity(0.35)),
+                                onPressed: () {},
+                                child: Text(
+                                  'Active',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Colors.white,
+                                        // letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 85.w,
-                          ),
-                        ],
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7.w,
+                      ),
+                      Container(
+                        width: ScreenUtil().screenWidth,
+                        padding: EdgeInsets.only(right: 67.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '1 Year Validity ',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    // letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            Text(
+                              'Exp Date - 25 Dec 2023',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    // letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            // SizedBox(
+                            //   width: 85.w,
+                            // ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
