@@ -148,14 +148,14 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SizedBox(
                     height: 10.5.w,
                   ),
-                  PrimaryCTextFormField(
+                  PrimarySTextFormField(
                     titleHeader: "Shop Name",
                     hintText: "Shop Name",
                   ),
                   SizedBox(
                     height: 20.w,
                   ),
-                  PrimaryCTextFormField(
+                  PrimarySTextFormField(
                     titleHeader: "Owner Name",
                     hintText: "Owner Name",
                   ),
@@ -177,12 +177,15 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 0),
                     child: Container(
-                        child: MobileNoTextFormField(controller: controller,enableOrder: true,)),
+                        child: MobileNoTextFormField(
+                      controller: controller,
+                      enableOrder: true,
+                    )),
                   ),
                   SizedBox(
                     height: 20.w,
                   ),
-                  PrimaryCTextFormField(
+                  PrimarySTextFormField(
                     titleHeader: "Email ID",
                     hintText: "Email ID",
                   ),
@@ -193,7 +196,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                          child: CDropDownField(
+                          child: SDropDownField(
                         hint: "Country",
                         titleHeader: "Country",
                       )),
@@ -201,7 +204,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                         width: 30.w,
                       ),
                       Expanded(
-                          child: CDropDownField(
+                          child: SDropDownField(
                         hint: "State",
                         titleHeader: "State",
                       )),
@@ -210,7 +213,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SizedBox(
                     height: 22.w,
                   ),
-                  CDropDownField(
+                  SDropDownField(
                     hint: "City",
                     titleHeader: "City",
                   ),
@@ -220,14 +223,14 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SizedBox(
                     height: 22.w,
                   ),
-                  PrimaryCTextFormField(
+                  PrimarySTextFormField(
                     titleHeader: "Shop Address",
                     hintText: "Shop Address",
                   ),
                   SizedBox(
                     height: 22.w,
                   ),
-                  PrimaryCTextFormField(
+                  PrimarySTextFormField(
                     titleHeader: "Pincode",
                     hintText: "Pincode",
                   ),

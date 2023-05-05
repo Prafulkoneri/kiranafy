@@ -270,7 +270,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                   ),
                   Expanded(
                       child: PrimaryCTextFormField(
-                    titleHeader: "Pinconde",
+                    titleHeader: "Pincode",
                     hintText: "Pincode",
                   )),
                 ],

@@ -305,20 +305,24 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                                               SizedBox(
                                                 height: 15.h,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 100.h),
-                                                child: Text(
-                                                  'Resend OTP',
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: const TextStyle(
-                                                        // color: SplashTex
-                                                        letterSpacing: .5,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Resend OTP',
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                              // color: SplashTex
+                                                              letterSpacing: .5,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                    ),
                                                   ),
-                                                ),
+                                                ],
                                               ),
                                             ],
                                           ),

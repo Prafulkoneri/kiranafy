@@ -95,7 +95,7 @@ class _ShopProductViewState extends State<ShopProductView> {
                           // width: 164.w,
                           color: Custlogin,
                           onTap: () {
-                            read.onAddProduct(context);
+                            read.onAddProductClick(context);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +124,9 @@ class _ShopProductViewState extends State<ShopProductView> {
                           height: 40.h,
                           width: 164.w,
                           color: Custlogin,
-                          onTap: () {},
+                          onTap: () {
+                            read.onCustomeAddProductClick(context);
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
