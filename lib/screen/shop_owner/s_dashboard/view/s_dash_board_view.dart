@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/dashboard/controller/s_dashboard_controller.dart';
+
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 
 import 'package:provider/provider.dart';
 
@@ -1318,111 +1319,111 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
             ),
           ),
 
-          // Stack(
-          //   children: [
-          //     Container(
-          //       // height: 74.h,
-          //       // width: 350.w,
-          //       decoration: BoxDecoration(
-          //           color: Custlogin,
-          //           gradient: LinearGradient(
-          //               end: Alignment.topCenter,
-          //               begin: Alignment.bottomCenter,
-          //               colors: <Color>[
-          //                 yellow1.withOpacity(0.55),
-          //                 yellow2.withOpacity(0.98),
-          //               ]),
+          Stack(
+            children: [
+              Container(
+                // height: 74.h,
+                // width: 350.w,
+                decoration: BoxDecoration(
+                    color: Custlogin,
+                    gradient: LinearGradient(
+                        end: Alignment.topCenter,
+                        begin: Alignment.bottomCenter,
+                        colors: <Color>[
+                          yellow1.withOpacity(0.55),
+                          yellow2.withOpacity(0.98),
+                        ]),
 
-          //           // border: Border.all(width: 1, color: Black),
-          //           borderRadius: BorderRadius.circular(10)),
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.start,
-          //         children: [
-          //           Row(
-          //             children: [
-          //               Text(
-          //                 'My Subscription Plan',
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Colors.white,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 12.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //               SizedBox(
-          //                 width: 73.w,
-          //                 height: 20.h,
-          //                 child: ElevatedButton(
-          //                   style: ElevatedButton.styleFrom(
-          //                       shape: RoundedRectangleBorder(
-          //                         borderRadius: BorderRadius.circular(5),
-          //                       ),
-          //                       primary: Colors.transparent.withOpacity(0.35)),
-          //                   onPressed: () {},
-          //                   child: Row(
-          //                     mainAxisAlignment: MainAxisAlignment.center,
-          //                     // mainAxisSize: MainAxisSize.min,
-          //                     children: [
-          //                       Text(
-          //                         'Active',
-          //                         style: GoogleFonts.dmSans(
-          //                           textStyle: TextStyle(
-          //                               color: Colors.white,
-          //                               // letterSpacing: .5,
-          //                               fontSize: 12.sp,
-          //                               fontWeight: FontWeight.w400),
-          //                         ),
-          //                       ), // <-- Text
-          //                       SizedBox(width: 5.w),
-          //                       SvgPicture.asset("assets/icons/forward1.svg"),
-          //                     ],
-          //                   ),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //           Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //             children: [
-          //               Text(
-          //                 'Standard Plan',
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Colors.white,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 18.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 'Exp Date - 25 Dec 2023',
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Colors.white,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 12.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //     Positioned(
-          //       top: 23.w,
-          //       right: 11.w,
-          //       // left: 8.w,
-          //       child: Image.asset(
-          //         'assets/images/subcurve.png',
-          //         width: 352.w,
-          //         height: 52.h,
-          //       ),
-          //     ),
-          //   ],
-          // ),
+                    // border: Border.all(width: 1, color: Black),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          'My Subscription Plan',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 73.w,
+                          height: 20.h,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                primary: Colors.transparent.withOpacity(0.35)),
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Active',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Colors.white,
+                                        // letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ), // <-- Text
+                                SizedBox(width: 5.w),
+                                SvgPicture.asset("assets/icons/forward1.svg"),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Standard Plan',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        Text(
+                          'Exp Date - 25 Dec 2023',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 23.w,
+                right: 11.w,
+                // left: 8.w,
+                child: Image.asset(
+                  'assets/images/subcurve.png',
+                  width: 352.w,
+                  height: 52.h,
+                ),
+              ),
+            ],
+          ),
 
           SizedBox(
             height: 80.w,

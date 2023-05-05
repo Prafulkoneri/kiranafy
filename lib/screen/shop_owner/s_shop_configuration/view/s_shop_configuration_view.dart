@@ -208,9 +208,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Expanded(
 
-                    child: SDropDownField(
-                      hint: "Delivery Charge",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      hintText: "Delivery Charge",
+                      hintFontSize: 15.sp,
                     ),
                   ),
                 ],
@@ -256,9 +256,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Expanded(
 
-                    child: SDropDownField(
-                      hint: "Delivery Charge",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      hintText: "Delivery Charge",
+                      hintFontSize: 15.sp,
                     ),
                   ),
                 ],
@@ -304,9 +304,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Expanded(
 
-                    child: SDropDownField(
-                      hint: "Delivery Charge",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      hintText: "Delivery Charge",
+                      hintFontSize: 15.sp,
                     ),
                   ),
                 ],
@@ -352,9 +352,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Expanded(
 
-                    child: SDropDownField(
-                      hint: "Delivery Charge",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      hintText: "Delivery Charge",
+                      hintFontSize: 15.sp,
                     ),
                   ),
                 ],

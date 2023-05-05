@@ -233,7 +233,10 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   ),
                 ],
               ),
-            )
+            ),
+            SizedBox(
+              height: 22.w,
+            ),
           ],
         ),
       ),
