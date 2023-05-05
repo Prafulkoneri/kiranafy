@@ -49,7 +49,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          title: "Update Profile",
+          title: "Subscription Plans",
         ),
       ),
       body: Column(
@@ -280,20 +280,22 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                                                   SizedBox(
                                                                                     width: 10,
                                                                                   ),
-                                                                                  Text(
-                                                                                    // softWrap: true,
-                                                                                    // maxLines: 3,//
-                                                                                    "Ready grocery item master",
+                                                                                  Flexible(
+                                                                                    child: Text(
+                                                                                      // softWrap: true,
+                                                                                      // maxLines: 3,//
+                                                                                      "Ready grocery item master",
 
-                                                                                    style: GoogleFonts.dmSans(
-                                                                                      textStyle: TextStyle(
-                                                                                          color: Black1,
-                                                                                          height: 1.5,
+                                                                                      style: GoogleFonts.dmSans(
+                                                                                        textStyle: TextStyle(
+                                                                                            color: Black1,
+                                                                                            height: 1.5,
 
-                                                                                          // letterSpacing: .05,
-                                                                                          // overflow: TextOverflow.ellipsis,
-                                                                                          fontSize: 14.sp,
-                                                                                          fontWeight: FontWeight.w400),
+                                                                                            // letterSpacing: .05,
+                                                                                            // overflow: TextOverflow.ellipsis,
+                                                                                            fontSize: 14.sp,
+                                                                                            fontWeight: FontWeight.w400),
+                                                                                      ),
                                                                                     ),
                                                                                   ),
                                                                                   Padding(

@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CDropDownField extends StatefulWidget {
   final String? hint;
@@ -116,13 +117,15 @@ class SDropDownField extends StatefulWidget {
   final List<DropdownMenuItem>? items;
   final String? titleHeader;
   final String? value;
-  final double ? hintSize;
+  final double? hintSize;
+  final double? height;
 
   const SDropDownField(
       {Key? key,
       this.value,
+      this.height,
       this.hint,
-        this.hintSize,
+      this.hintSize,
       this.onChanged,
       this.items,
       this.titleHeader})
@@ -160,8 +163,9 @@ class _SDropDownFieldState extends State<SDropDownField> {
               )
             : Container(),
         Container(
-          height: 45.w,
+          // height: 45.w,
           child: DropdownButtonFormField2(
+            isDense: true,
             decoration: InputDecoration(
               //Add isDense true and zero Padding.
               //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
@@ -182,7 +186,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
             hint: Text(
               widget.hint ?? "",
               style: TextStyle(
-                  fontSize: widget.hintSize?? 16.sp,
+                  fontSize: widget.hintSize ?? 16.sp,
                   color: Color(0xffB7B7B7),
                   fontWeight: FontWeight.w400),
             ),
@@ -210,15 +214,15 @@ class _SDropDownFieldState extends State<SDropDownField> {
               selectedValue = value.toString();
             },
             buttonStyleData: ButtonStyleData(
-              height: 48.w,
+              height: widget.height ?? 48.w,
               // padding: EdgeInsets.only(left: 20, right: 10),
             ),
-            iconStyleData: const IconStyleData(
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: Colors.black45,
+            iconStyleData: IconStyleData(
+              icon: Padding(
+                padding: EdgeInsets.only(right: 3.w),
+                child: SvgPicture.asset("assets/icons/dropdown.svg"),
               ),
-              iconSize: 30,
+              // iconSize: 30,
             ),
             dropdownStyleData: DropdownStyleData(
               decoration: BoxDecoration(

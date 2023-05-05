@@ -85,14 +85,16 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "New Balaji Trading Company",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                // letterSpacing: .5,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w700),
+                        Flexible(
+                          child: Text(
+                            "New Balaji Trading Company",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  // letterSpacing: .5,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
                           ),
                         ),
                         Container(
@@ -213,6 +215,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       borderRadius: BorderRadius.circular(8)),
 
                   child: Column(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         "120",
@@ -226,11 +229,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Total Customer Ordered",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
                               // letterSpacing: .5,
-                              fontSize: 11.5.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w700),
                         ),
                       ),
@@ -265,11 +269,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Customer Linked to Shop",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
                               // letterSpacing: .5,
-                              fontSize: 11.93.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w700),
                         ),
                       ),
@@ -305,6 +310,8 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               ),
               Expanded(
                 child: Container(
+                  // height: 55.h,
+                  // width: 170.w,
                   padding: EdgeInsets.only(
                       left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
@@ -328,11 +335,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Product Offer",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
                               // letterSpacing: .5,
-                              fontSize: 11.7.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w700),
                         ),
                       ),
@@ -367,6 +375,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Coupons",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -598,6 +607,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Fulfil your cravings",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -668,11 +678,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Total Orders",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
                               // letterSpacing: .5,
-                              fontSize: 11.1.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w700),
                         ),
                       ),
@@ -715,6 +726,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Pending",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -762,11 +774,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Confirmed",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
                               // letterSpacing: .5,
-                              fontSize: 12.sp,
+                              fontSize: 11.sp,
                               fontWeight: FontWeight.w700),
                         ),
                       ),
@@ -820,6 +833,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "In process",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -966,6 +980,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     children: [
                       Text(
                         "INR 2000",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -976,11 +991,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Pending Refund",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
                               // letterSpacing: .5,
-                              fontSize: 11.53.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w700),
                         ),
                       ),
@@ -1005,16 +1021,18 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     children: [
                       Text(
                         "INR 3500",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
                               // letterSpacing: .5,
-                              fontSize: 15.2.sp,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w700),
                         ),
                       ),
                       Text(
                         "Refunded",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -1132,6 +1150,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     children: [
                       Text(
                         "INR 10,000",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -1142,6 +1161,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Total Refund Amount",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -1178,6 +1198,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     children: [
                       Text(
                         "INR 15,000",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -1188,6 +1209,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       ),
                       Text(
                         "Total Cancelled Amount",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,

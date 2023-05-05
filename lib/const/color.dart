@@ -53,6 +53,7 @@ Color yellow1 = Color(0xffFF9577);
 Color yellow2 = Color(0xffFFC229);
 Color green = Color(0xff4BB0DD);
 Color green1 = Color(0xff4FEBC4);
+Color DarkGreen = Color(0xff32D74B);
 
 class Constants {
   static const kPurpleColor = Color(0xFFB97DFE);
