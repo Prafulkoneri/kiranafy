@@ -57,7 +57,7 @@ class _ShopBankAccountDetailsViewState
               child: Column(
                 children: [
                   SizedBox(
-                    height: 10.5.w,
+                    height: 20.w,
                   ),
                   PrimarySTextFormField(
                     titleHeader: "Name of the Bank",
@@ -78,28 +78,25 @@ class _ShopBankAccountDetailsViewState
                     hintText: "Enter Account Number",
                   ),
                   SizedBox(
-                    height: 10.w,
+                    height: 20.w,
                   ),
                   SDropDownField(
-                    hint: "City",
-                    titleHeader: "City",
+                    hint: "Select Type of Account",
+                    titleHeader: "Type of Account",
                   ),
                   SizedBox(
-                    width: 30.w,
-                  ),
-                  SizedBox(
-                    height: 22.w,
+                    height: 20.w,
                   ),
                   PrimarySTextFormField(
-                    titleHeader: "Shop Address",
-                    hintText: "Shop Address",
+                    titleHeader: "IFSC Code",
+                    hintText: "Enter IFSC Code",
                   ),
                   SizedBox(
-                    height: 22.w,
+                    height: 20.w,
                   ),
                   PrimarySTextFormField(
-                    titleHeader: "Pincode",
-                    hintText: "Pincode",
+                    titleHeader: "Bank Branch",
+                    hintText: "Enter Bank Branch",
                   ),
                 ],
               ),

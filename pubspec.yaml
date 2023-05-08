@@ -54,6 +54,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
+  flutter_expanded_tile: ^0.3.7
 
 dev_dependencies:
   flutter_test:
@@ -94,9 +95,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: dm_sans_regular
-       fonts:
-         - asset: assets/fonts/dm_sans.ttf
+    - family: dm_sans_regular
+      fonts:
+        - asset: assets/fonts/dm_sans.ttf
 
   #         style: italic
   #   - family: Trajan Pro

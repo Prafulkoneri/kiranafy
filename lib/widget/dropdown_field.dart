@@ -219,7 +219,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
             ),
             iconStyleData: IconStyleData(
               icon: Padding(
-                padding: EdgeInsets.only(right: 3.w),
+                padding: EdgeInsets.only(right: 22.w),
                 child: SvgPicture.asset("assets/icons/dropdown.svg"),
               ),
               // iconSize: 30,

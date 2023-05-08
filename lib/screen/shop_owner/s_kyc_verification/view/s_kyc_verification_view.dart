@@ -396,12 +396,12 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.w),
                   child: PrimaryButton(
-                    height: 45.w,
-fontSize: 20.sp,
+                      height: 45.w,
+                      fontSize: 20.sp,
                       text: "Upload Documents",
                       color: Color(0xff4689EC),
                       onTap: () {
-                      read.onUploadClicked(context);
+                        read.onUploadClicked(context);
                       }),
                 ),
                 SizedBox(

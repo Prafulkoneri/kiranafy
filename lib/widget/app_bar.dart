@@ -9,8 +9,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PrimaryAppBar extends StatelessWidget {
   final String? title;
   final Widget? action;
+  final bool? isBackButtonEnabled;
   void Function()? onActionTap;
-  PrimaryAppBar({Key? key, required this.title, this.action, this.onActionTap})
+  PrimaryAppBar(
+      {Key? key,
+      this.isBackButtonEnabled,
+      required this.title,
+      this.action,
+      this.onActionTap})
       : super(key: key);
 
   @override
@@ -27,10 +33,12 @@ class PrimaryAppBar extends StatelessWidget {
       ),
       toolbarHeight: 65,
       // backgroundColor: kappbar,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      leading: isBackButtonEnabled ?? true
+          ? IconButton(
+              icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          : Container(),
       title: Text(
         title ?? "",
         style: GoogleFonts.dmSans(
@@ -61,8 +69,7 @@ class PrimaryAppBar extends StatelessWidget {
       ),
       actions: <Widget>[
         GestureDetector(
-          onTap:onActionTap,
-
+          onTap: onActionTap,
           child: Padding(
               padding: EdgeInsets.only(
                 right: 20.w,

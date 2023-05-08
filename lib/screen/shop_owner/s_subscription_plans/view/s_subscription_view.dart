@@ -51,7 +51,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          title: "Subscription Plans",
+          title: "Update Profile",
         ),
       ),
       body: Column(
@@ -86,9 +86,9 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsets.only(left: 10.w, top: 15.w, right: 3.w),
+                            EdgeInsets.only(left: 19.w, top: 15.w, right: 19.w),
                         child: Stack(
-                          alignment: Alignment.bottomCenter,
+                          alignment: Alignment.topCenter,
                           clipBehavior: Clip.none,
                           children: <Widget>[
                             Stack(
@@ -100,8 +100,8 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                           end: Alignment.topCenter,
                                           begin: Alignment.bottomCenter,
                                           colors: <Color>[
-                                            yellow1.withOpacity(0.55),
-                                            yellow2.withOpacity(0.98),
+                                            yellow1.withOpacity(1),
+                                            yellow2.withOpacity(1),
                                           ]),
 
                                       // border: Border.all(width: 1, color: Black),
@@ -139,12 +139,11 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                       SizedBox(
                                         height: 22.w,
                                       ),
-                                      Positioned(
-                                        bottom: 0.w,
-                                        right: 17.w,
-                                        left: 8.w,
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(10.w),
                                         child: Image.asset(
-                                          'assets/images/dash1.png',
+                                          'assets/images/subscription3.png',
                                           // width: 352.w,
                                           // height: 60.h,
                                         ),
@@ -171,7 +170,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                         ),
                                         Container(
                                           width:
-                                              ScreenUtil().screenWidth / 1.17.w,
+                                              ScreenUtil().screenWidth / 1.23.w,
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -186,25 +185,8 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                     color: Colors.white),
                                               ),
                                               Container(
-                                                margin: EdgeInsets.only(
-                                                    right: 10.w),
-                                                width: 110.w,
-                                                height: 30.h,
-                                                child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
-                                                          primary: Colors
-                                                              .transparent
-                                                              .withOpacity(
-                                                                  0.35)),
-                                                  onPressed: () {
+                                                child: GestureDetector(
+                                                  onTap: () {
                                                     showDialog(
                                                         context: context,
                                                         builder: (BuildContext
@@ -280,20 +262,22 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                                                   SizedBox(
                                                                                     width: 10,
                                                                                   ),
-                                                                                  Text(
-                                                                                    // softWrap: true,
-                                                                                    // maxLines: 3,//
-                                                                                    "Ready grocery item master",
+                                                                                  Flexible(
+                                                                                    child: Text(
+                                                                                      // softWrap: true,
+                                                                                      // maxLines: 3,//
+                                                                                      "Ready grocery item master",
 
-                                                                                    style: GoogleFonts.dmSans(
-                                                                                      textStyle: TextStyle(
-                                                                                          color: Black1,
-                                                                                          height: 1.5,
+                                                                                      style: GoogleFonts.dmSans(
+                                                                                        textStyle: TextStyle(
+                                                                                            color: Black1,
+                                                                                            height: 1.5,
 
-                                                                                          // letterSpacing: .05,
-                                                                                          // overflow: TextOverflow.ellipsis,
-                                                                                          fontSize: 14.sp,
-                                                                                          fontWeight: FontWeight.w400),
+                                                                                            // letterSpacing: .05,
+                                                                                            // overflow: TextOverflow.ellipsis,
+                                                                                            fontSize: 14.sp,
+                                                                                            fontWeight: FontWeight.w400),
+                                                                                      ),
                                                                                     ),
                                                                                   ),
                                                                                   Padding(
@@ -319,29 +303,44 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                           );
                                                         });
                                                   },
-                                                  child: Row(
-                                                    // mainAxisAlignment:
-                                                    //     MainAxisAlignment.start,
-                                                    // mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      Text(
-                                                        'View Benefits',
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              // letterSpacing: .5,
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ), // <-- Text
-                                                      SizedBox(width: 4.w),
-                                                      SvgPicture.asset(
-                                                          "assets/icons/forward1.svg"),
-                                                    ],
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 11.w,
+                                                            vertical: 4.w),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              7.w),
+                                                      color: Color(0xff000000)
+                                                          .withOpacity(0.35),
+                                                    ),
+                                                    child: Row(
+                                                      // mainAxisAlignment:
+                                                      //     MainAxisAlignment.start,
+                                                      // mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        Text(
+                                                          'View Benefits',
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle:
+                                                                TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    // letterSpacing: .5,
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                          ),
+                                                        ), // <-- Text
+                                                        SizedBox(width: 4.w),
+                                                        SvgPicture.asset(
+                                                            "assets/icons/forward1.svg"),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
