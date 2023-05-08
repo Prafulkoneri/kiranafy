@@ -9,8 +9,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PrimaryAppBar extends StatelessWidget {
   final String? title;
   final Widget? action;
+  final PreferredSizeWidget? bottom;
   void Function()? onActionTap;
-  PrimaryAppBar({Key? key, required this.title, this.action, this.onActionTap})
+
+  PrimaryAppBar({Key? key, required this.title, this.action, this.onActionTap,this.bottom})
       : super(key: key);
 
   @override
@@ -25,7 +27,7 @@ class PrimaryAppBar extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
         statusBarBrightness: Brightness.dark, // For iOS (dark icons)
       ),
-      toolbarHeight: 65,
+      // toolbarHeight: 65,
       // backgroundColor: kappbar,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
@@ -70,6 +72,7 @@ class PrimaryAppBar extends StatelessWidget {
               child: action),
         ),
       ],
+bottom: bottom,
     );
   }
 }

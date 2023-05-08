@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
@@ -9,20 +8,15 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/splash/splash.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
-
-import 'package:local_supper_market/screen/shop_owner/s_account_screen_view/controller/s_account_screen_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
-import 'package:local_supper_market/utils/location_service.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 
@@ -49,10 +43,10 @@ void main() {
         ChangeNotifierProvider(create: (_) => SDashBoardController()),
         ChangeNotifierProvider(create: (_) => SCategoryListController()),
         ChangeNotifierProvider(create: (_) => SAddProductsController()),
-        ChangeNotifierProvider(create: (_) => SAccountScreenController()),
         ChangeNotifierProvider(create: (_) => PrimaryCheckBoxController()),
         ChangeNotifierProvider(create: (_) => SShopConfigurationController()),
         ChangeNotifierProvider(create: (_) => MobileNoController()),
+        ChangeNotifierProvider(create: (_) => SOrderStatusController()),
       ],
       child: MyApp(),
     ),

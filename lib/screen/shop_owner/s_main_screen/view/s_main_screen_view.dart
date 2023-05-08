@@ -103,7 +103,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            read.onShopPressed();
+                            read.onOrdersPressed();
                           },
                           child: watch.currentTab == 1
                               ? Column(
@@ -156,7 +156,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            read.onMyCartPressed();
+                            read.onPaymentPressed();
                           },
                           child: watch.currentTab == 2
                               ? Column(
