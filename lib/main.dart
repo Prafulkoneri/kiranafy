@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/customer/splash/splash.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 
 
 
@@ -54,6 +55,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => SShopConfigurationController()),
         ChangeNotifierProvider(create: (_) => MobileNoController()),
         ChangeNotifierProvider(create: (_) => SOrderStatusController()),
+        ChangeNotifierProvider(create: (_) => SAccountScreenController()),
       ],
       child: MyApp(),
     ),
