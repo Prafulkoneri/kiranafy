@@ -9,7 +9,6 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/splash/splash.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_account_screen_view/controller/s_account_screen_controller.dart';
 
@@ -76,7 +75,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: ShopBankAccountDetailsView());
+              home: SplashScreen());
         });
   }
 }
