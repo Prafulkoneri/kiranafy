@@ -9,10 +9,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PrimaryAppBar extends StatelessWidget {
   final String? title;
   final Widget? action;
-  final PreferredSizeWidget? bottom;
+  final bool? isBackButtonEnabled;
   void Function()? onActionTap;
-
-  PrimaryAppBar({Key? key, required this.title, this.action, this.onActionTap,this.bottom})
+  PrimaryAppBar(
+      {Key? key,
+      this.isBackButtonEnabled,
+      required this.title,
+      this.action,
+      this.onActionTap})
       : super(key: key);
 
   @override
@@ -27,12 +31,14 @@ class PrimaryAppBar extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
         statusBarBrightness: Brightness.dark, // For iOS (dark icons)
       ),
-      // toolbarHeight: 65,
+      toolbarHeight: 65,
       // backgroundColor: kappbar,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      leading: isBackButtonEnabled ?? true
+          ? IconButton(
+              icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          : Container(),
       title: Text(
         title ?? "",
         style: GoogleFonts.dmSans(
@@ -63,8 +69,7 @@ class PrimaryAppBar extends StatelessWidget {
       ),
       actions: <Widget>[
         GestureDetector(
-          onTap:onActionTap,
-
+          onTap: onActionTap,
           child: Padding(
               padding: EdgeInsets.only(
                 right: 20.w,
@@ -72,7 +77,6 @@ class PrimaryAppBar extends StatelessWidget {
               child: action),
         ),
       ],
-bottom: bottom,
     );
   }
 }

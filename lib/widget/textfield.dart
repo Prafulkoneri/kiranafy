@@ -389,9 +389,8 @@ class MobileNoFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String number;
-    final read=context.read<MobileNoController>();
-    final watch=context.watch<MobileNoController>();
+    final read = context.read<MobileNoController>();
+    final watch = context.watch<MobileNoController>();
     return Container(
       margin: EdgeInsets.only(right: 0.w),
       width: 101.w,
@@ -401,8 +400,7 @@ class MobileNoFormField extends StatelessWidget {
             context: context,
             showPhoneCode: true,
             onSelect: (Country country) {
-              read.onCountrySelected(
-                  country.phoneCode, country.flagEmoji);
+              read.onCountrySelected(country.phoneCode, country.flagEmoji);
               print("flag :${country.flagEmoji}");
               print('Select country: ${country.displayName}');
             },
