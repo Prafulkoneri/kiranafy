@@ -24,6 +24,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/contr
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/utils/location_service.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/textfield.dart';
 
 import 'package:provider/provider.dart';
 
@@ -51,6 +52,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => SAccountScreenController()),
         ChangeNotifierProvider(create: (_) => PrimaryCheckBoxController()),
         ChangeNotifierProvider(create: (_) => SShopConfigurationController()),
+        ChangeNotifierProvider(create: (_) => MobileNoController()),
       ],
       child: MyApp(),
     ),

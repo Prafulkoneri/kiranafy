@@ -1,7 +1,8 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -307,22 +308,21 @@ class MobileNoTextFormField extends StatelessWidget {
     PhoneNumber number = PhoneNumber(isoCode: 'IN');
     return Stack(
       children: [
-        Positioned(
-          bottom: 1,
-          top: 1,
-          left: 0,
-          child: Container(
-            // height: 200.h,
-            width: 70.h,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                  color:
-                      enableOrder ?? false ? Color(0xffE0E0E0) : Colors.white),
-              borderRadius: BorderRadius.circular(7.w),
-            ),
-          ),
-        ),
+        // Positioned(
+        //   bottom: 1,
+        //   top: 1,
+        //   left: 0,
+        //   child: Center(
+        //     child: Container(
+        //       width: 70.h,
+        //       decoration: BoxDecoration(
+        //         // border: Border.all(
+        //         //     color:
+        //         //         enableOrder ?? false ? Color(0xffE0E0E0) : Colors.white),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         Container(
           height: 48.w,
           child: InternationalPhoneNumberInput(
@@ -335,6 +335,7 @@ class MobileNoTextFormField extends StatelessWidget {
             selectorConfig: const SelectorConfig(
                 leadingPadding: 10,
                 trailingSpace: false,
+                // useEmoji: true,
                 selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                 // setSelectorButtonAsPrefixIcon: true,
                 setSelectorButtonAsPrefixIcon: false),
@@ -382,3 +383,105 @@ class MobileNoTextFormField extends StatelessWidget {
     );
   }
 }
+
+class MobileNoFormField extends StatelessWidget {
+  const MobileNoFormField({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final read=context.read<MobileNoController>();
+    final watch=context.watch<MobileNoController>();
+    return Container(
+      margin: EdgeInsets.only(right: 0.w),
+      width: 101.w,
+      child: InkWell(
+        onTap: () {
+          showCountryPicker(
+            context: context,
+            showPhoneCode: true,
+            onSelect: (Country country) {
+              read.onCountrySelected(
+                  country.phoneCode, country.flagEmoji);
+              print("flag :${country.flagEmoji}");
+              print('Select country: ${country.displayName}');
+            },
+          );
+        },
+        child: Container(
+          height: 30.w,
+          child: Row(
+            children: [
+              SizedBox(
+                width: 7.w,
+              ),
+              Text(
+                watch.flagIcon,
+                style: TextStyle(fontSize: 20.sp),
+              ),
+              Text("${watch.countryCode}"),
+              Icon(
+                Icons.keyboard_arrow_down_outlined,
+                color: Color(0xff4D4D4D),
+              ),
+            ],
+          ),
+        ),
+      ),
+
+      // InternationalPhoneNumberInput(
+      //   onInputChanged:(code){
+      //   },
+      //   onInputValidated: (bool value) {
+      //     print(value);
+      //   },
+      //   selectorConfig: SelectorConfig(
+      //     leadingPadding: 10.w,
+      //     trailingSpace: false,
+      //     useEmoji: false,
+      //     showFlags: true,
+      //     setSelectorButtonAsPrefixIcon: true,
+      //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+      //   ),
+      //   ignoreBlank: false,
+      //   autoValidateMode: AutovalidateMode.disabled,
+      //   selectorTextStyle: TextStyle(color: Colors.black),
+      //   initialValue: number,
+      //   textFieldController: controller,
+      //   formatInput: true,
+      //   inputDecoration: InputDecoration(
+      //     border: OutlineInputBorder(
+      //       borderSide: BorderSide(color: Colors.transparent),
+      //     ),
+      //     focusedBorder: OutlineInputBorder(
+      //       borderSide: BorderSide(
+      //         color: Colors.transparent,
+      //       ),
+      //     ),
+      //     enabledBorder: OutlineInputBorder(
+      //       borderSide: BorderSide(
+      //         color: Colors.transparent,
+      //       ),
+      //     ),
+      //     contentPadding: EdgeInsets.zero,
+      //   ),
+      //   keyboardType: TextInputType.numberWithOptions(
+      //       signed: true, decimal: true),
+      //   inputBorder: OutlineInputBorder(),
+      //   onSaved: (PhoneNumber number) {
+      //     print('On Saved: $number');
+      //   },
+      // ),
+    );
+  }
+}
+
+class MobileNoController extends ChangeNotifier{
+  String flagIcon = "";
+  String countryCode = "+91";
+  void onCountrySelected(code, icon) {
+    countryCode = "+" + code;
+    flagIcon = icon;
+    notifyListeners();
+  }
+}
+

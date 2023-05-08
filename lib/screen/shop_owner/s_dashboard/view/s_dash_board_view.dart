@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/widget/radio_button.dart';
 
 import 'package:provider/provider.dart';
 
@@ -1229,226 +1230,253 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10.w, top: 15.w, right: 0.w),
+            padding: EdgeInsets.only(
+                left: 19.w, top: 15.w, right: 19.w, bottom: 80.w),
             child: Stack(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.topCenter,
               clipBehavior: Clip.none,
               children: <Widget>[
-                Image.asset(
-                  'assets/images/dash.png',
-                  // width: 450.w,
-                  // height: 119.h,
-                ),
-                Positioned(
-                  bottom: 17.w,
-                  right: 17.w,
-                  left: 8.w,
-                  child: Image.asset(
-                    'assets/images/dash1.png',
-                    // width: 352.w,
-                    // height: 60.h,
-                  ),
-                ),
-                Positioned(
-                  top: 15.w,
-                  left: 25.w,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(right: 67.w),
-                        width: ScreenUtil().screenWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Custlogin,
+                          gradient: LinearGradient(
+                              end: Alignment.topCenter,
+                              begin: Alignment.bottomCenter,
+                              colors: <Color>[
+                                yellow1.withOpacity(1),
+                                yellow2.withOpacity(1),
+                              ]),
+
+                          // border: Border.all(width: 1, color: Black),
+                          borderRadius: BorderRadius.circular(10.w)),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 30.w,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.w),
+                            child: Image.asset(
+                              'assets/images/subscription4.png',
+                              // width: 352.w,
+                              // height: 60.h,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                        top: 14.w,
+                        left: 15.w,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Standard Plan',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Colors.white,
-                                    // letterSpacing: .5,
-                                    fontSize: 22.sp,
-                                    fontWeight: FontWeight.w500),
+                            Container(
+                              width: ScreenUtil().screenWidth/1.13.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "My Subscription Plan",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
+                                        fontSize: 12.sp),
+                                  ),
+                                  Container(
+
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext
+                                            context) {
+                                              return Dialog(
+                                                child:
+                                                SingleChildScrollView(
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.only(
+                                                            top: 11
+                                                                .w,
+                                                            right: 14
+                                                                .w,
+                                                            left: 25
+                                                                .w),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                                "Advanced Plan - ₹6000",
+                                                                style:
+                                                                GoogleFonts.dmSans(
+                                                                  textStyle: TextStyle(color: Black, fontSize: 16.sp, fontWeight: FontWeight.w700),
+                                                                )),
+                                                            InkWell(
+                                                              onTap:
+                                                                  () {
+                                                                Navigator.pop(context);
+                                                              },
+                                                              child:
+                                                              SvgPicture.asset("assets/icons/pop_delete.svg"),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Divider(),
+                                                      Container(
+                                                        padding:
+                                                        EdgeInsets
+                                                            .only(
+                                                          left:
+                                                          23.w,
+                                                          right:
+                                                          16.w,
+                                                        ),
+                                                        height:
+                                                        646.h,
+                                                        // width: 362.w,
+                                                        child: ListView
+                                                            .builder(
+                                                          itemCount:
+                                                          20,
+                                                          itemBuilder:
+                                                              (context,
+                                                              index) {
+                                                            return Column(
+                                                              children: <
+                                                                  Widget>[
+                                                                Container(
+                                                                  child: Row(
+                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                    // mainAxisAlignment:
+                                                                    //     MainAxisAlignment.center,
+                                                                    children: [
+                                                                      Icon(
+                                                                        Icons.circle_rounded,
+                                                                        size: 5.w,
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width: 10,
+                                                                      ),
+                                                                      Text(
+                                                                        // softWrap: true,
+                                                                        // maxLines: 3,//
+                                                                        "Ready grocery item master",
+
+                                                                        style: GoogleFonts.dmSans(
+                                                                          textStyle: TextStyle(
+                                                                              color: Black1,
+                                                                              height: 1.5,
+
+                                                                              // letterSpacing: .05,
+                                                                              // overflow: TextOverflow.ellipsis,
+                                                                              fontSize: 14.sp,
+                                                                              fontWeight: FontWeight.w400),
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsets.only(left: 32.w, right: 32.w),
+                                                                        child: Container(
+                                                                          width: 1.w,
+                                                                          height: 35.w,
+                                                                          color: grey11,
+                                                                        ),
+                                                                      ),
+                                                                      SvgPicture.asset("assets/icons/correct.svg")
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            });
+                                      },
+                                      child:  Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 11.w,vertical: 4.w),
+                                        decoration:  BoxDecoration(
+                                          borderRadius: BorderRadius.circular(7.w),
+                                          color:Color(0xff000000).withOpacity(0.35),
+                                        ),
+                                        child: Row(
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.start,
+                                          // mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'Active',
+                                              style:
+                                              GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color:
+                                                    Colors.white,
+                                                    // letterSpacing: .5,
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w400),
+                                              ),
+                                            ), // <-- Text
+                                          ],
+
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             SizedBox(
-                              width: 73.w,
-                              height: 20.h,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    primary:
-                                        Colors.transparent.withOpacity(0.35)),
-                                onPressed: () {},
-                                child: Text(
-                                  'Active',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
+                              height: 7.w,
+                            ),
+                            Container(
+                              width: ScreenUtil().screenWidth / 1.13.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Standard Plan",
+                                    style: TextStyle(
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
                                   ),
-                                ),
+                                  Text(
+                                    "Exp Date - 25 Dec 2023",
+                                    style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
+                                  ),
+                                ],
                               ),
+                            ),
+                            SizedBox(
+                              height: 22.w,
                             ),
                           ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 7.w,
-                      ),
-                      Container(
-                        width: ScreenUtil().screenWidth,
-                        padding: EdgeInsets.only(right: 67.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              '1 Year Validity ',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Colors.white,
-                                    // letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                            Text(
-                              'Exp Date - 25 Dec 2023',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Colors.white,
-                                    // letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                            // SizedBox(
-                            //   width: 85.w,
-                            // ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                        )),
+                  ],
                 ),
               ],
             ),
           ),
 
-          Stack(
-            children: [
-              Container(
-                // height: 74.h,
-                // width: 350.w,
-                decoration: BoxDecoration(
-                    color: Custlogin,
-                    gradient: LinearGradient(
-                        end: Alignment.topCenter,
-                        begin: Alignment.bottomCenter,
-                        colors: <Color>[
-                          yellow1.withOpacity(0.55),
-                          yellow2.withOpacity(0.98),
-                        ]),
-
-                    // border: Border.all(width: 1, color: Black),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'My Subscription Plan',
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                // letterSpacing: .5,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 73.w,
-                          height: 20.h,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                primary: Colors.transparent.withOpacity(0.35)),
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              // mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Active',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ), // <-- Text
-                                SizedBox(width: 5.w),
-                                SvgPicture.asset("assets/icons/forward1.svg"),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Standard Plan',
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                // letterSpacing: .5,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        Text(
-                          'Exp Date - 25 Dec 2023',
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                // letterSpacing: .5,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 23.w,
-                right: 11.w,
-                // left: 8.w,
-                child: Image.asset(
-                  'assets/images/subcurve.png',
-                  width: 352.w,
-                  height: 52.h,
-                ),
-              ),
-            ],
-          ),
-
           SizedBox(
-            height: 80.w,
+            height: 16.w,
           ),
         ]),
       ),
