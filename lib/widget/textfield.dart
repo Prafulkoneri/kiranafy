@@ -389,6 +389,7 @@ class MobileNoFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String number;
     final read=context.read<MobileNoController>();
     final watch=context.watch<MobileNoController>();
     return Container(
