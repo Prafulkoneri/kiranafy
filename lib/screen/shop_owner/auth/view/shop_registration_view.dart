@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -99,9 +100,49 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SizedBox(
                         height: 18.w,
                       ),
-                      MobileNoTextFormField(
-                        controller: watch.mobController,
-                        enableOrder: true,
+                      // MobileNoTextFormField(
+                      //   controller: watch.mobController,
+                      //   enableOrder: true,
+                      // ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            //SizedBox(height: 20.0),
+                            child:  Container(
+                              decoration: BoxDecoration(
+
+                              ),
+
+                              child: CountryCodePicker(
+                                onChanged: print,
+                                // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                                initialSelection: 'IT',
+                                favorite: ['+39','FR'],
+                                // optional. Shows only country name and flag
+                                showCountryOnly: false,
+                                // optional. Shows only country name and flag when popup is closed.
+                                showOnlyCountryWhenClosed: false,
+                                // optional. aligns the flag and the Text left
+                                alignLeft: false,
+
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            //SizedBox(height: 20.0),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Mobile no.',
+                                border: OutlineInputBorder(),
+                              ),
+
+                              onChanged: (val) {
+
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 18.w,

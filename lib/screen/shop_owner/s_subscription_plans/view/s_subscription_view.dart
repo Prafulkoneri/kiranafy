@@ -18,6 +18,8 @@ import 'package:local_supper_market/widget/app_bar.dart';
 
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:provider/provider.dart';
 
 class SSubscriptionScreenView extends StatefulWidget {
@@ -89,385 +91,104 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                           alignment: Alignment.bottomCenter,
                           clipBehavior: Clip.none,
                           children: <Widget>[
-                            Image.asset(
-                              'assets/images/subscription.png',
-                              // width: 450.w,
-                              // height: 119.h,
-                            ),
-                            Positioned(
-                              bottom: 17.w,
-                              right: 17.w,
-                              left: 8.w,
-                              child: Image.asset(
-                                'assets/images/subscription1.png',
-                                // width: 352.w,
-                                // height: 60.h,
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 32.w,
-                              left: 25.w,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                // mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                            Stack(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Custlogin,
+                                      gradient: LinearGradient(
+                                          end: Alignment.topCenter,
+                                          begin: Alignment.bottomCenter,
+                                          colors: <Color>[
+                                            yellow1.withOpacity(0.55),
+                                            yellow2.withOpacity(0.98),
+                                          ]),
+
+                                      // border: Border.all(width: 1, color: Black),
+                                      borderRadius:
+                                          BorderRadius.circular(10.w)),
+                                  child: Column(
                                     children: [
-                                      Radio(
-                                        materialTapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                        visualDensity: const VisualDensity(
-                                          horizontal:
-                                              VisualDensity.minimumDensity,
-                                          vertical:
-                                              VisualDensity.minimumDensity,
-                                        ),
-                                        fillColor:
-                                            MaterialStateColor.resolveWith(
-                                                (states) => Colors.white),
-                                        value: 1,
-                                        groupValue: id,
-                                        onChanged: (val) {
-                                          setState(() {
-                                            radioButtonItem = 'Selected Plan';
-                                            id = 1;
-                                          });
-                                        },
-                                      ),
                                       SizedBox(
-                                        width: 5.w,
+                                        height: 10.w,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Row(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'Standard Plan',
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      // letterSpacing: .5,
-                                                      fontSize: 22.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ),
-                                            ],
+                                          SizedBox(
+                                            width: 14.w,
+                                          ),
+                                          PrimaryRadioButton(
+                                            value: true,
+                                            groupValue: true,
+                                            onChanged: (value) {},
+                                            leading: "",
+                                          ),
+                                          SizedBox(
+                                            width: 7.w,
                                           ),
                                           Text(
-                                            'INR 4000',
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 28.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            // crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '1 Year Validity ',
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      // letterSpacing: .5,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 85.w,
-                                              ),
-                                              SizedBox(
-                                                width: 101.w,
-                                                height: 30.h,
-                                                child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
-                                                          primary: Colors
-                                                              .transparent
-                                                              .withOpacity(
-                                                                  0.35)),
-                                                  onPressed: () {
-                                                    showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return Dialog(
-                                                            child:
-                                                                SingleChildScrollView(
-                                                              child: Column(
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(
-                                                                        top: 11
-                                                                            .w,
-                                                                        right: 14
-                                                                            .w,
-                                                                        left: 25
-                                                                            .w),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Text(
-                                                                            "Standard Plan - ₹4000",
-                                                                            style:
-                                                                                GoogleFonts.dmSans(
-                                                                              textStyle: TextStyle(color: Black, fontSize: 16.sp, fontWeight: FontWeight.w700),
-                                                                            )),
-                                                                        InkWell(
-                                                                          onTap:
-                                                                              () {
-                                                                            Navigator.pop(context);
-                                                                          },
-                                                                          child:
-                                                                              SvgPicture.asset("assets/icons/pop_delete.svg"),
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  Divider(),
-                                                                  Container(
-                                                                    padding:
-                                                                        EdgeInsets
-                                                                            .only(
-                                                                      left:
-                                                                          23.w,
-                                                                      right:
-                                                                          16.w,
-                                                                    ),
-                                                                    height:
-                                                                        646.h,
-                                                                    // width: 362.w,
-                                                                    child: ListView
-                                                                        .builder(
-                                                                      itemCount:
-                                                                          20,
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              index) {
-                                                                        return Column(
-                                                                          children: <
-                                                                              Widget>[
-                                                                            Container(
-                                                                              child: Row(
-                                                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                // mainAxisAlignment:
-                                                                                //     MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Icon(
-                                                                                    Icons.circle_rounded,
-                                                                                    size: 5.w,
-                                                                                  ),
-                                                                                  SizedBox(
-                                                                                    width: 10,
-                                                                                  ),
-                                                                                  Flexible(
-                                                                                    child: Text(
-                                                                                      // softWrap: true,
-                                                                                      // maxLines: 3,//
-                                                                                      "Ready grocery item master",
-
-                                                                                      style: GoogleFonts.dmSans(
-                                                                                        textStyle: TextStyle(
-                                                                                            color: Black1,
-                                                                                            height: 1.5,
-
-                                                                                            // letterSpacing: .05,
-                                                                                            // overflow: TextOverflow.ellipsis,
-                                                                                            fontSize: 14.sp,
-                                                                                            fontWeight: FontWeight.w400),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                  Padding(
-                                                                                    padding: EdgeInsets.only(left: 32.w, right: 32.w),
-                                                                                    child: Container(
-                                                                                      width: 1.w,
-                                                                                      height: 35.w,
-                                                                                      color: grey11,
-                                                                                    ),
-                                                                                  ),
-                                                                                  SvgPicture.asset("assets/icons/correct.svg")
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          );
-                                                        });
-                                                  },
-                                                  child: Row(
-                                                    // mainAxisAlignment:
-                                                    //     MainAxisAlignment.start,
-                                                    // mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      Text(
-                                                        'View Benefits',
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              // letterSpacing: .5,
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ), // <-- Text
-                                                      SizedBox(width: 4.w),
-                                                      SvgPicture.asset(
-                                                          "assets/icons/forward1.svg"),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                            "Standard Plan",
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      //////////////////////// SubScription second///////////////////
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: 10.w, top: 15.w, right: 3.w),
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
-                          clipBehavior: Clip.none,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/sub2.png',
-                              // width: 450.w,
-                              // height: 119.h,
-                            ),
-                            Positioned(
-                              bottom: 17.w,
-                              right: 17.w,
-                              left: 8.w,
-                              child: Image.asset(
-                                'assets/images/subcurve.png',
-                                // width: 352.w,
-                                // height: 60.h,
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 32.w,
-                              left: 25.w,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                // mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Radio(
-                                        materialTapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                        visualDensity: const VisualDensity(
-                                          horizontal:
-                                              VisualDensity.minimumDensity,
-                                          vertical:
-                                              VisualDensity.minimumDensity,
-                                        ),
-                                        fillColor:
-                                            MaterialStateColor.resolveWith(
-                                                (states) => Colors.white),
-                                        value: 1,
-                                        groupValue: id,
-                                        onChanged: (val) {
-                                          setState(() {
-                                            radioButtonItem = 'Selected Plan';
-                                            id = 1;
-                                          });
-                                        },
+                                      SizedBox(
+                                        height: 30.w,
                                       ),
                                       SizedBox(
-                                        width: 5.w,
+                                        height: 22.w,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'Advanced Plan',
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      // letterSpacing: .5,
-                                                      fontSize: 22.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            'INR 6000',
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 28.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                          Row(
+                                      Positioned(
+                                        bottom: 0.w,
+                                        right: 17.w,
+                                        left: 8.w,
+                                        child: Image.asset(
+                                          'assets/images/dash1.png',
+                                          // width: 352.w,
+                                          // height: 60.h,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                    top: 35.w,
+                                    left: 37.w,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "INR 4000",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white,
+                                              fontSize: 28.sp),
+                                        ),
+                                        SizedBox(
+                                          height: 4.w,
+                                        ),
+                                        Container(
+                                          width:
+                                              ScreenUtil().screenWidth / 1.17.w,
+                                          child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            // crossAxisAlignment: CrossAxisAlignment.center,
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '1 Year Validity ',
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      // letterSpacing: .5,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
+                                                "1 Year Validity",
+                                                style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.white),
                                               ),
-                                              SizedBox(
-                                                width: 85.w,
-                                              ),
-                                              SizedBox(
-                                                width: 101.w,
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    right: 10.w),
+                                                width: 110.w,
                                                 height: 30.h,
                                                 child: ElevatedButton(
                                                   style:
@@ -626,22 +347,295 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                               ),
                                             ],
                                           ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  //////////
-
-                                  ////////////
-                                ],
-                              ),
+                                        ),
+                                        SizedBox(
+                                          height: 22.w,
+                                        ),
+                                      ],
+                                    ))
+                              ],
                             ),
                           ],
                         ),
                       ),
+
+                      //////////////////////// SubScription second///////////////////
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: 19.w, top: 15.w, right: 19.w),
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          clipBehavior: Clip.none,
+                          children: <Widget>[
+                            Stack(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Custlogin,
+                                      gradient: LinearGradient(
+                                          end: Alignment.topCenter,
+                                          begin: Alignment.bottomCenter,
+                                          colors: <Color>[
+                                            Color(0xff4EC0FA).withOpacity(1),
+                                            Color(0xff32DFAC).withOpacity(1),
+                                          ]),
+
+                                      // border: Border.all(width: 1, color: Black),
+                                      borderRadius:
+                                          BorderRadius.circular(10.w)),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10.w,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 14.w,
+                                          ),
+                                          PrimaryRadioButton(
+                                            value: true,
+                                            groupValue: true,
+                                            onChanged: (value) {},
+                                            leading: "",
+                                          ),
+                                          SizedBox(
+                                            width: 7.w,
+                                          ),
+                                          Text(
+                                            "Standard Plan",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 30.w,
+                                      ),
+                                      SizedBox(
+                                        height: 22.w,
+                                      ),
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(10.w),
+                                        child: Image.asset(
+                                          'assets/images/subscription2.png',
+                                          // width: 352.w,
+                                          // height: 60.h,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                    top: 35.w,
+                                    left: 37.w,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "INR 4000",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white,
+                                              fontSize: 28.sp),
+                                        ),
+                                        SizedBox(
+                                          height: 4.w,
+                                        ),
+                                        Container(
+                                          width:
+                                              ScreenUtil().screenWidth / 1.23.w,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "1 Year Validity",
+                                                style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.white),
+                                              ),
+                                              Container(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return Dialog(
+                                                            child:
+                                                                SingleChildScrollView(
+                                                              child: Column(
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        top: 11
+                                                                            .w,
+                                                                        right: 14
+                                                                            .w,
+                                                                        left: 25
+                                                                            .w),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        Text(
+                                                                            "Advanced Plan - ₹6000",
+                                                                            style:
+                                                                                GoogleFonts.dmSans(
+                                                                              textStyle: TextStyle(color: Black, fontSize: 16.sp, fontWeight: FontWeight.w700),
+                                                                            )),
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            Navigator.pop(context);
+                                                                          },
+                                                                          child:
+                                                                              SvgPicture.asset("assets/icons/pop_delete.svg"),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Divider(),
+                                                                  Container(
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .only(
+                                                                      left:
+                                                                          23.w,
+                                                                      right:
+                                                                          16.w,
+                                                                    ),
+                                                                    height:
+                                                                        646.h,
+                                                                    // width: 362.w,
+                                                                    child: ListView
+                                                                        .builder(
+                                                                      itemCount:
+                                                                          20,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              index) {
+                                                                        return Column(
+                                                                          children: <
+                                                                              Widget>[
+                                                                            Container(
+                                                                              child: Row(
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                // mainAxisAlignment:
+                                                                                //     MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  Icon(
+                                                                                    Icons.circle_rounded,
+                                                                                    size: 5.w,
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    width: 10,
+                                                                                  ),
+                                                                                  Text(
+                                                                                    // softWrap: true,
+                                                                                    // maxLines: 3,//
+                                                                                    "Ready grocery item master",
+
+                                                                                    style: GoogleFonts.dmSans(
+                                                                                      textStyle: TextStyle(
+                                                                                          color: Black1,
+                                                                                          height: 1.5,
+
+                                                                                          // letterSpacing: .05,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontSize: 14.sp,
+                                                                                          fontWeight: FontWeight.w400),
+                                                                                    ),
+                                                                                  ),
+                                                                                  Padding(
+                                                                                    padding: EdgeInsets.only(left: 32.w, right: 32.w),
+                                                                                    child: Container(
+                                                                                      width: 1.w,
+                                                                                      height: 35.w,
+                                                                                      color: grey11,
+                                                                                    ),
+                                                                                  ),
+                                                                                  SvgPicture.asset("assets/icons/correct.svg")
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        });
+                                                  },
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 11.w,
+                                                            vertical: 4.w),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              7.w),
+                                                      color: Color(0xff000000)
+                                                          .withOpacity(0.35),
+                                                    ),
+                                                    child: Row(
+                                                      // mainAxisAlignment:
+                                                      //     MainAxisAlignment.start,
+                                                      // mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        Text(
+                                                          'View Benefits',
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle:
+                                                                TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    // letterSpacing: .5,
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                          ),
+                                                        ), // <-- Text
+                                                        SizedBox(width: 4.w),
+                                                        SvgPicture.asset(
+                                                            "assets/icons/forward1.svg"),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 22.w,
+                                        ),
+                                      ],
+                                    ))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
                       Padding(
                         padding: EdgeInsets.only(
                           left: 19.w,
+                          top: 30.w,
                         ),
                         child: Text(
                           'Add on Services:',
@@ -655,33 +649,15 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 5.w),
+                        padding: EdgeInsets.only(left: 19.w, bottom: 22.w),
                         child: Column(
                           children: [
+                            SizedBox(
+                              height: 17.w,
+                            ),
                             Row(
                               children: [
-                                Checkbox(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(3)),
-                                  side: MaterialStateBorderSide.resolveWith(
-                                    (Set<MaterialState> states) {
-                                      if (states
-                                          .contains(MaterialState.selected)) {
-                                        return BorderSide(
-                                            width: 1, color: SplashText);
-                                      }
-                                      return BorderSide(width: 0, color: Grey);
-                                    },
-                                  ),
-                                  checkColor: Colors.white,
-                                  activeColor: SplashText,
-                                  value: _checkbox,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _checkbox = !_checkbox;
-                                    });
-                                  },
-                                ),
+                                PrimaryCheckBox(),
                                 Text(
                                   'One time shop setup in the app',
                                   style: GoogleFonts.dmSans(
@@ -694,30 +670,12 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 17.w,
+                            ),
                             Row(
                               children: [
-                                Checkbox(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(3)),
-                                  side: MaterialStateBorderSide.resolveWith(
-                                    (Set<MaterialState> states) {
-                                      if (states
-                                          .contains(MaterialState.selected)) {
-                                        return BorderSide(
-                                            width: 1, color: SplashText);
-                                      }
-                                      return BorderSide(width: 0, color: Grey);
-                                    },
-                                  ),
-                                  checkColor: Colors.white,
-                                  activeColor: SplashText,
-                                  value: _checkbox,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _checkbox = !_checkbox;
-                                    });
-                                  },
-                                ),
+                                PrimaryCheckBox(),
                                 Text(
                                   'Product price maintenance support',
                                   style: GoogleFonts.dmSans(
@@ -730,30 +688,12 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 17.w,
+                            ),
                             Row(
                               children: [
-                                Checkbox(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(3)),
-                                  side: MaterialStateBorderSide.resolveWith(
-                                    (Set<MaterialState> states) {
-                                      if (states
-                                          .contains(MaterialState.selected)) {
-                                        return BorderSide(
-                                            width: 1, color: SplashText);
-                                      }
-                                      return BorderSide(width: 0, color: Grey);
-                                    },
-                                  ),
-                                  checkColor: Colors.white,
-                                  activeColor: SplashText,
-                                  value: _checkbox,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _checkbox = !_checkbox;
-                                    });
-                                  },
-                                ),
+                                PrimaryCheckBox(),
                                 Text(
                                   'Shop Digital Marketing',
                                   style: GoogleFonts.dmSans(
@@ -766,30 +706,12 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 17.w,
+                            ),
                             Row(
                               children: [
-                                Checkbox(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(3)),
-                                  side: MaterialStateBorderSide.resolveWith(
-                                    (Set<MaterialState> states) {
-                                      if (states
-                                          .contains(MaterialState.selected)) {
-                                        return BorderSide(
-                                            width: 1, color: SplashText);
-                                      }
-                                      return BorderSide(width: 0, color: Grey);
-                                    },
-                                  ),
-                                  checkColor: Colors.white,
-                                  activeColor: SplashText,
-                                  value: _checkbox,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _checkbox = !_checkbox;
-                                    });
-                                  },
-                                ),
+                                PrimaryCheckBox(),
                                 Text(
                                   'Prime and catchy location on app',
                                   style: GoogleFonts.dmSans(

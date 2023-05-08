@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/splash/splash.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_account_screen_view/controller/s_account_screen_controller.dart';
 
@@ -24,6 +25,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/contr
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/utils/location_service.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/textfield.dart';
 
 import 'package:provider/provider.dart';
 
@@ -51,6 +53,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => SAccountScreenController()),
         ChangeNotifierProvider(create: (_) => PrimaryCheckBoxController()),
         ChangeNotifierProvider(create: (_) => SShopConfigurationController()),
+        ChangeNotifierProvider(create: (_) => MobileNoController()),
       ],
       child: MyApp(),
     ),
@@ -73,7 +76,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SplashScreen());
+              home: ShopBankAccountDetailsView());
         });
   }
 }
