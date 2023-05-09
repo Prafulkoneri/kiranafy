@@ -18,35 +18,13 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
 // import 'package:country_code_picker/country_code_picker.dart';
-enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET } //otp
 
 class ShopSignInView extends StatefulWidget {
   @override
   State<ShopSignInView> createState() => _ShopSignInViewState();
 }
 
-FirebaseAuth _auth = FirebaseAuth.instance; //otp
-LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET; //
-OtpFieldController otpController = OtpFieldController();
-
 class _ShopSignInViewState extends State<ShopSignInView> {
-  void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential) async {
-    try {
-      final authCred = await _auth.signInWithCredential(phoneAuthCredential);
-
-      if (authCred.user != null) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ShopDashBoard()));
-      }
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Some Error Occured. Try Again Later')));
-    }
-  }
-
-  String verificationID = ""; //otp
-
   @override
   Widget build(BuildContext context) {
     final read = context.read<ShopSignInController>();
@@ -273,24 +251,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                           color: Color(0xff4689EC),
                           onTap: () async {
                             //otp vrification
-                            await _auth.verifyPhoneNumber(
-                                phoneNumber: "+91${watch.mobController.text}",
-                                verificationCompleted:
-                                    (phoneAuthCredential) async {},
-                                verificationFailed: (verificationFailed) {
-                                  print(verificationFailed);
-                                },
-                                codeSent:
-                                    (verificationID, resendingToken) async {
-                                  setState(() {
-                                    currentState =
-                                        LoginScreen.SHOW_OTP_FORM_WIDGET;
-                                    this.verificationID = verificationID;
-                                  });
-                                },
-                                timeout: const Duration(seconds: 40),
-                                codeAutoRetrievalTimeout:
-                                    (verificationID) async {});
 
                             ////end
 
@@ -351,7 +311,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                 ),
                                               ),
                                               OTPTextField(
-                                                controller: otpController,
                                                 // controller: watch.otpController.text,
                                                 length: 6,
                                                 width: MediaQuery.of(context)
@@ -393,18 +352,8 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   ),
                                                   // style: style,
                                                   onPressed: () {
-                                                    AuthCredential
-                                                        phoneAuthCredential =
-                                                        PhoneAuthProvider.credential(
-                                                            verificationId:
-                                                                verificationID,
-                                                            smsCode:
-                                                                otpController
-                                                                    .toString());
-                                                    signInWithPhoneAuthCred(
-                                                        phoneAuthCredential);
-                                                    // read.onOtpSubmitPressed(
-                                                    //     context);
+                                                    read.onOtpSubmitPressed(
+                                                        context);
                                                   },
                                                   child: Text(
                                                     'Submit',
