@@ -11,7 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_payments/view/s_payment_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 
 class SMainScreenController extends ChangeNotifier {

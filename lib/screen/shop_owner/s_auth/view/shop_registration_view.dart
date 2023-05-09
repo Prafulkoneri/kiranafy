@@ -9,8 +9,9 @@ import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
-import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
+
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
@@ -104,46 +105,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       //   controller: watch.mobController,
                       //   enableOrder: true,
                       // ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            //SizedBox(height: 20.0),
-                            child:  Container(
-                              decoration: BoxDecoration(
-
-                              ),
-
-                              child: CountryCodePicker(
-                                onChanged: print,
-                                // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                                initialSelection: 'IT',
-                                favorite: ['+39','FR'],
-                                // optional. Shows only country name and flag
-                                showCountryOnly: false,
-                                // optional. Shows only country name and flag when popup is closed.
-                                showOnlyCountryWhenClosed: false,
-                                // optional. aligns the flag and the Text left
-                                alignLeft: false,
-
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            //SizedBox(height: 20.0),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Mobile no.',
-                                border: OutlineInputBorder(),
-                              ),
-
-                              onChanged: (val) {
-
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                      MobileNoTextFormField(controller: watch.mobController,enableOrder: true,),
                       SizedBox(
                         height: 18.w,
                       ),

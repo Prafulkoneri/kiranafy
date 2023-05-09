@@ -6,8 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/auth/view/shop_registration_view.dart';
-import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
@@ -107,54 +106,25 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                   SizedBox(
                     height: 120.h,
                   ),
-                  // Padding(
-                  //   padding:
-                  //       EdgeInsets.only(left: 28.w, right: 23.w, top: 82.h),
-                  //   child: SizedBox(
-                  //     height: 48.h,
-                  //     width: 334.w,
-                  //     child: TextField(
-                  //       decoration: InputDecoration(
-                  //         fillColor: Colors.white,
-                  //         filled: true,
-                  //         border:
-                  //             OutlineInputBorder(borderSide: BorderSide.none),
-                  //         // labelText: 'Name',
-                  //         hintText: 'Name',
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
-                    padding: EdgeInsets.only(
-                        left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            bottom: 1,
-                            top: 1,
-                            left: 0,
-                            child: Container(
-                              // height: 200.h,
-                              width: 70.w,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ),
-                          MobileNoTextFormField(
-                            enableOrder: true,
-                            controller: watch.mobController,
-                          ),
-                        ],
+                    padding:
+                        EdgeInsets.only(left: 28.w, right: 23.w, top: 0.h),
+                      child:  MobileNoTextFormField(
+                        onChanged: (value){
+                          read.checkMobNoExist(context);
+                        },
+                        onCountryCodeChanged: (value){
+                         read.onCountryCodeSelected(value);
+                        },
+                        enableOrder: true,
+                        controller: watch.mobController,
+
                       ),
-                    ),
+
                   ),
+
                   Padding(
-                    padding: EdgeInsets.only(left: 25.w, right: 0.w),
+                    padding: EdgeInsets.only(left: 25.w, right: 0.w, top:15.w),
                     child: Row(
                       children: [
                         Text(
@@ -193,6 +163,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                           text: TextSpan(
                               text: "By continuing you agree to our,\n",
                               style: TextStyle(
+                                height: 1.5,
                                   color: Black,
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w400),
@@ -206,6 +177,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                     },
                                   style: TextStyle(
                                       color: SplashText1,
+                                      height: 1.5,
                                       // letterSpacing: .5,
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400),
@@ -214,6 +186,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                   text: ' and',
                                   style: TextStyle(
                                       color: Black,
+                                      height: 1.5,
                                       // letterSpacing: .5,
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400),
@@ -226,6 +199,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                     },
                                   style: TextStyle(
                                       color: SplashText1,
+                                      height: 1.5,
                                       // letterSpacing: .5,
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400),
