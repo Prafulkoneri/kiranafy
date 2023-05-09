@@ -19,19 +19,25 @@ class _SPaymentsViewState extends State<SPaymentsView> {
         child: PrimaryAppBar(title: "Payments"),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-         SizedBox(
-           height: 20.w,
-         ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Payment Overview",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w700,color:Black1),),
-                Text("Payment Overview",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w700,color:Black1),)
-              ],
-            ),
-          ],
+        child: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 19.w),
+          child: Column(
+            children: [
+           SizedBox(
+             height: 20.w,
+           ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Payment Overview",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w700,color:Black1),),
+                  Text("15 March 2023",style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w400,color:Black1),)
+                ],
+              ),
+              SizedBox(
+                height: 20.w,
+              ),
+            ],
+          ),
         ),
       ),
     );
