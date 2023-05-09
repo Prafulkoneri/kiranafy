@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -30,6 +31,12 @@ class ShopRegistrationView extends StatefulWidget {
 
 class _ShopRegistrationViewState extends State<ShopRegistrationView> {
   String? selectedValue;
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ShopRegistrationController>().initState();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +71,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
               ),
             ),
             SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.only(
                     left: 24.w, right: 24.w, top: 20.w, bottom: 20.w),
@@ -120,6 +128,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         children: [
                           Expanded(
                               child: SDropDownField(
+
                             hint: "Country",
                           )),
                           SizedBox(
