@@ -5,22 +5,22 @@
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:local_supper_market/const/color.dart';
 // // import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
-//
+
 // class Example extends StatefulWidget {
 //   @override
 //   _ExampleState createState() => _ExampleState();
 // }
-//
+
 // class _ExampleState extends State<Example> {
 //   // Controller
 //   late ExpandedTileController _controller;
-//
+
 //   void initState() {
 //     // initialize controller
 //     _controller = ExpandedTileController(isExpanded: true);
 //     super.initState();
 //   }
-//
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(

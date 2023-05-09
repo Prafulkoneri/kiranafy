@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "650523093722",
+    "project_id": "local-supermart-224c3",
+    "storage_bucket": "local-supermart-224c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650523093722:android:0943a65bbc6c5c76c793e3",
+        "android_client_info": {
+          "package_name": "com.example.local_supper_market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650523093722-6e6hofovkn10fa82dl8ham1fc93avktb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiQxN-d65acBkuDlbra-Gz0Qwe9H1R-wc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650523093722-6e6hofovkn10fa82dl8ham1fc93avktb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
