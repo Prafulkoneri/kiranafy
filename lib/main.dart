@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +12,8 @@ import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 
-
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
@@ -33,7 +33,9 @@ import 'screen/customer/on_boarding/controller/on_boarding_controller.dart';
 import 'screen/shop_owner/s_my_subscription/view/s_my_subscription-plans.dart';
 import 'screen/shop_owner/s_products/view/s_add_product_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     MultiProvider(
       providers: [
