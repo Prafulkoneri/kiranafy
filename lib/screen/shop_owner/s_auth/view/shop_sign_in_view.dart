@@ -3,12 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/auth/view/shop_registration_view.dart';
-import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
+
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -18,13 +19,48 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
 // import 'package:country_code_picker/country_code_picker.dart';
+enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET } //otp
 
 class ShopSignInView extends StatefulWidget {
   @override
   State<ShopSignInView> createState() => _ShopSignInViewState();
 }
 
+// TextEditingController phoneController = TextEditingController();
+// OtpFieldController otpController = OtpFieldController();
+// LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
+// FirebaseAuth _auth = FirebaseAuth.instance;
+
+// void SignOutME() async {
+//   await _auth.signOut();
+// }
+
 class _ShopSignInViewState extends State<ShopSignInView> {
+  // TextEditingController phoneController = TextEditingController();
+  // OtpFieldController otpController = OtpFieldController();
+  // LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
+  // FirebaseAuth _auth = FirebaseAuth.instance;
+  // String verificationID = "";
+
+  // void SignOutME() async {
+  //   await _auth.signOut();
+  // }
+
+  // void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential) async {
+  //   try {
+  //     final authCred = await _auth.signInWithCredential(phoneAuthCredential);
+
+  //     if (authCred.user != null) {
+  //       Navigator.pushReplacement(
+  //           context, MaterialPageRoute(builder: (context) => ShopDashBoard()));
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     print(e.message);
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text('Some Error Occured. Try Again Later')));
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<ShopSignInController>();
@@ -110,52 +146,51 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                   SizedBox(
                     height: 120.h,
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 28.w, right: 23.w, top: 0.h),
+                    child: MobileNoTextFormField(
+                      onChanged: (value) {
+                        read.checkMobNoExist(context);
+                      },
+                      onCountryCodeChanged: (value) {
+                        read.onCountryCodeSelected(value);
+                      },
+                      enableOrder: true,
+                      controller: watch.mobController,
+                    ),
+                  ),
                   // Padding(
-                  //   padding:
-                  //       EdgeInsets.only(left: 28.w, right: 23.w, top: 82.h),
-                  //   child: SizedBox(
-                  //     height: 48.h,
-                  //     width: 334.w,
-                  //     child: TextField(
-                  //       decoration: InputDecoration(
-                  //         fillColor: Colors.white,
-                  //         filled: true,
-                  //         border:
-                  //             OutlineInputBorder(borderSide: BorderSide.none),
-                  //         // labelText: 'Name',
-                  //         hintText: 'Name',
-                  //       ),
+                  //   padding: EdgeInsets.only(
+                  //       left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(0),
+                  //     child: Stack(
+                  //       children: [
+                  //         Positioned(
+                  //           bottom: 1,
+                  //           top: 1,
+                  //           left: 0,
+                  //           child: Container(
+                  //             // height: 200.h,
+                  //             width: 70.w,
+                  //             decoration: BoxDecoration(
+                  //               color: Colors.white,
+                  //               borderRadius: BorderRadius.circular(20),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         TextField(
+                  //           controller: watch.mobController,
+                  //           keyboardType: TextInputType.number,
+                  //           decoration: InputDecoration(
+                  //               border: OutlineInputBorder(
+                  //                   borderRadius: BorderRadius.circular(12)),
+                  //               hintText: "Enter Your PhoneNumber"),
+                  //         ),
+                  //       ],
                   //     ),
                   //   ),
                   // ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            bottom: 1,
-                            top: 1,
-                            left: 0,
-                            child: Container(
-                              // height: 200.h,
-                              width: 70.w,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ),
-                          MobileNoTextFormField(
-                            enableOrder: true,
-                            controller: watch.mobController,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                   Padding(
                     padding: EdgeInsets.only(left: 25.w, right: 0.w),
                     child: Row(
@@ -251,7 +286,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                           color: Color(0xff4689EC),
                           onTap: () async {
                             //otp vrification
-
+                            read.onLoginClick();
                             ////end
 
                             showModalBottomSheet(
@@ -310,24 +345,57 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   ),
                                                 ),
                                               ),
-                                              OTPTextField(
-                                                // controller: watch.otpController.text,
-                                                length: 6,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                fieldWidth: 50,
-                                                style: const TextStyle(
-                                                    fontSize: 17),
-                                                textFieldAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                fieldStyle:
-                                                    FieldStyle.underline,
-                                                onCompleted: (pin) {
-                                                  print("Completed: " + pin);
+                                              // TextField(
+                                              //   controller: otpController,
+                                              //   keyboardType:
+                                              //       TextInputType.number,
+                                              //   decoration: InputDecoration(
+                                              //       border: OutlineInputBorder(
+                                              //           borderRadius:
+                                              //               BorderRadius
+                                              //                   .circular(12)),
+                                              //       hintText: "Enter Your OTP"),
+                                              // ),
+                                              OtpTextField(
+                                                //  controller: otpController,
+                                                numberOfFields: 6,
+                                                borderColor: Color(0xFF512DA8),
+                                                //set to true to show as box or false to show as dash
+                                                showFieldAsBox: false,
+                                                //runs when a code is typed in
+                                                onCodeChanged: (String code) {
+                                                  print(code);
+                                                  //handle validation or checks here
                                                 },
+                                                //runs when every textfield is filled
+                                                onSubmit:
+                                                    (String verificationCode) {
+                                                  print(verificationCode);
+                                                  read.onOtpEntered(
+                                                      verificationCode);
+                                                }, // end onSubmit
                                               ),
+
+                                              // OTPTextField(
+                                              //   controller: otpController,
+                                              //   // controller: watch.otpController.text,
+                                              //   length: 6,
+                                              //   width: MediaQuery.of(context)
+                                              //       .size
+                                              //       .width,
+                                              //   fieldWidth: 50,
+                                              //   style: const TextStyle(
+                                              //       fontSize: 17),
+                                              //   textFieldAlignment:
+                                              //       MainAxisAlignment
+                                              //           .spaceAround,
+                                              //   fieldStyle:
+                                              //       FieldStyle.underline,
+                                              //   onCompleted: (pin) {
+                                              //     print("Completed: " + pin);
+                                              //   },
+
+                                              // ),
                                               const SizedBox(
                                                 height: 20,
                                               ),
@@ -352,8 +420,10 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   ),
                                                   // style: style,
                                                   onPressed: () {
-                                                    read.onOtpSubmitPressed(
+                                                    read.onCodeVerification(
                                                         context);
+                                                    // read.onOtpSubmitPressed(
+                                                    //     context);
                                                   },
                                                   child: Text(
                                                     'Submit',

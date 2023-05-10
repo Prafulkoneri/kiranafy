@@ -7,10 +7,10 @@ import 'package:local_supper_market/screen/customer/auth/controller/customer_sig
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/splash/splash.dart';
-import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_registration_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_registration_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
