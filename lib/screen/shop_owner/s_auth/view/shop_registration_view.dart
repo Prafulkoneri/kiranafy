@@ -92,12 +92,14 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 20.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.shopNameController,
                         hintText: "Shop Name",
                       ),
                       SizedBox(
                         height: 18.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.ownerNameController,
                         hintText: "Owner Name",
                       ),
                       SizedBox(
@@ -118,6 +120,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.emailIdController,
                         hintText: "Email ID",
                       ),
                       SizedBox(
@@ -150,7 +153,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                           Expanded(
                               child: SDropDownField(
                                 onChanged: (value)async{
-                                 print(value);
+                                 await read.onStateSelected(value);
+                              await read.getCityList(context);
                                 },
                                 items: watch.stateList?.map((item) => DropdownMenuItem<String>(
                                   value: item.id.toString(),
@@ -170,13 +174,47 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       SDropDownField(
+                        onChanged: (value)async{
+                          await read.onCitySelected(value);
+                          await read.getAreaList(context);
+                        },
+                        items: watch.cityList?.map((item) => DropdownMenuItem<String>(
+                          value: item.id.toString(),
+                          child: Text(
+                            item.cityName??"",
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
+                            .toList(),
                         hint: "City",
+                      ),
+                      SizedBox(
+                        height: 18.w,
+                      ),
+                      SDropDownField(
+                        onChanged: (value)async{
+
+                        },
+                        items: watch.areaList?.map((item) => DropdownMenuItem<String>(
+                          value: item.id.toString(),
+                          child: Text(
+                            item.areaName??"",
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
+                            .toList(),
+                        hint: "Area",
                       ),
                       SizedBox(
                         height: 18.w,
                       ),
                       Container(
                         child: PrimarySTextFormField(
+                          controller: watch.addressController,
                           height: 108.w,
                           maxLines: 5,
                           hintText: "Address",
@@ -186,12 +224,14 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.pincodeController,
                         hintText: "Pincode",
                       ),
                       SizedBox(
                         height: 18.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.upiController,
                         hintText: "UPI",
                       ),
                       SizedBox(

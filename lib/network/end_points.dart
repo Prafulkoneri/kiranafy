@@ -9,6 +9,7 @@ class Endpoint {
   //Get State List
 static const String getStateList='${baseUrl}lsm-state-list';
   //Get City List
-  static const String getCityList='${baseUrl}lsm-state-list';
-  //
+  static const String getCityList='${baseUrl}lsm-city-list';
+  //Get Area List
+  static const String getAreaList='${baseUrl}lsm-area-list';
 }

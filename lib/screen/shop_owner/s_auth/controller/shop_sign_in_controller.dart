@@ -14,7 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registrat
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_sign_in_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 
 class ShopSignInController extends ChangeNotifier {
@@ -31,7 +31,7 @@ class ShopSignInController extends ChangeNotifier {
 
   void onOtpSubmitPressed(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+        context, MaterialPageRoute(builder: (context) => ShopRegistrationView()));
   }
 
   void onNewShopPressed(context) {
@@ -91,10 +91,6 @@ class ShopSignInController extends ChangeNotifier {
     otpCode = value;
     notifyListeners();
   }
-
-  //  TextEditingController phoneController = TextEditingController();
-
-  // LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
 
   void SignOutME() async {
     await _auth.signOut();
