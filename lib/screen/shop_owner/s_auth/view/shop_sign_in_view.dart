@@ -1,26 +1,66 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
+
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+
 // import 'package:country_code_picker/country_code_picker.dart';
+enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET } //otp
 
 class ShopSignInView extends StatefulWidget {
   @override
   State<ShopSignInView> createState() => _ShopSignInViewState();
 }
 
+// TextEditingController phoneController = TextEditingController();
+// OtpFieldController otpController = OtpFieldController();
+// LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
+// FirebaseAuth _auth = FirebaseAuth.instance;
+
+// void SignOutME() async {
+//   await _auth.signOut();
+// }
+
 class _ShopSignInViewState extends State<ShopSignInView> {
+  // TextEditingController phoneController = TextEditingController();
+  // OtpFieldController otpController = OtpFieldController();
+  // LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
+  // FirebaseAuth _auth = FirebaseAuth.instance;
+  // String verificationID = "";
+
+  // void SignOutME() async {
+  //   await _auth.signOut();
+  // }
+
+  // void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential) async {
+  //   try {
+  //     final authCred = await _auth.signInWithCredential(phoneAuthCredential);
+
+  //     if (authCred.user != null) {
+  //       Navigator.pushReplacement(
+  //           context, MaterialPageRoute(builder: (context) => ShopDashBoard()));
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     print(e.message);
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text('Some Error Occured. Try Again Later')));
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<ShopSignInController>();
@@ -107,22 +147,65 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                     height: 120.h,
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.only(left: 28.w, right: 23.w, top: 0.h),
-                      child:  MobileNoTextFormField(
-                        onChanged: (value){
-                          read.checkMobNoExist(context);
-                        },
-                        onCountryCodeChanged: (value){
-                         read.onCountryCodeSelected(value);
-                        },
-                        enableOrder: true,
-                        controller: watch.mobController,
-                      ),
+                    padding: EdgeInsets.only(left: 28.w, right: 23.w, top: 0.h),
+                    child: MobileNoTextFormField(
+                      onChanged: (value) {
+                        read.checkMobNoExist(context);
+                      },
+                      onCountryCodeChanged: (value) {
+                        read.onCountryCodeSelected(value);
+                      },
+                      enableOrder: true,
+                      controller: watch.mobController,
+                    ),
+//                     padding:
+//                         EdgeInsets.only(left: 28.w, right: 23.w, top: 0.h),
+//                       child:  MobileNoTextFormField(
+//                         onChanged: (value){
+//                           read.checkMobNoExist(context);
+//                         },
+//                         onCountryCodeChanged: (value){
+//                          read.onCountryCodeSelected(value);
+//                         },
+//                         enableOrder: true,
+//                         controller: watch.mobController,
+//                       ),
+// >>>>>>> 0fa1dab541a4f6f92373e5514a3320d7ebe4bd63
                   ),
-
+                  // Padding(
+                  //   padding: EdgeInsets.only(
+                  //       left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(0),
+                  //     child: Stack(
+                  //       children: [
+                  //         Positioned(
+                  //           bottom: 1,
+                  //           top: 1,
+                  //           left: 0,
+                  //           child: Container(
+                  //             // height: 200.h,
+                  //             width: 70.w,
+                  //             decoration: BoxDecoration(
+                  //               color: Colors.white,
+                  //               borderRadius: BorderRadius.circular(20),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         TextField(
+                  //           controller: watch.mobController,
+                  //           keyboardType: TextInputType.number,
+                  //           decoration: InputDecoration(
+                  //               border: OutlineInputBorder(
+                  //                   borderRadius: BorderRadius.circular(12)),
+                  //               hintText: "Enter Your PhoneNumber"),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
-                    padding: EdgeInsets.only(left: 25.w, right: 0.w, top:15.w),
+                    padding: EdgeInsets.only(left: 25.w, right: 0.w),
                     child: Row(
                       children: [
                         Text(
@@ -161,7 +244,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                           text: TextSpan(
                               text: "By continuing you agree to our,\n",
                               style: TextStyle(
-                                height: 1.5,
                                   color: Black,
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w400),
@@ -175,7 +257,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                     },
                                   style: TextStyle(
                                       color: SplashText1,
-                                      height: 1.5,
                                       // letterSpacing: .5,
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400),
@@ -184,7 +265,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                   text: ' and',
                                   style: TextStyle(
                                       color: Black,
-                                      height: 1.5,
                                       // letterSpacing: .5,
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400),
@@ -197,7 +277,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                     },
                                   style: TextStyle(
                                       color: SplashText1,
-                                      height: 1.5,
                                       // letterSpacing: .5,
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w400),
@@ -218,7 +297,205 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                       Expanded(
                         child: PrimaryButton(
                           color: Color(0xff4689EC),
+                          onTap: () async {
+                            //otp vrification
+                            read.onLoginClick();
+                            ////end
+
+                            showModalBottomSheet(
+                              backgroundColor: Colors.white,
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30))),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Theme(
+                                  data: Theme.of(context)
+                                      .copyWith(canvasColor: Colors.white),
+                                  child: Material(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(16.0),
+                                          topRight: Radius.circular(16.0)),
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                            bottom: MediaQuery.of(context)
+                                                .viewInsets
+                                                .bottom),
+                                        // height: 335,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(25.h),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            // mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Enter Verification Code",
+                                                style: GoogleFonts.inter(
+                                                  textStyle: const TextStyle(
+                                                      color: Custlogin,
+                                                      letterSpacing: .5,
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 20.0.h),
+                                                child: Text(
+                                                  "We have sent SMS to :\n046 XXX XX XX",
+                                                  style: GoogleFonts.inter(
+                                                    textStyle: TextStyle(
+                                                        color: Black,
+                                                        letterSpacing: .5,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+                                              ),
+                                              // TextField(
+                                              //   controller: otpController,
+                                              //   keyboardType:
+                                              //       TextInputType.number,
+                                              //   decoration: InputDecoration(
+                                              //       border: OutlineInputBorder(
+                                              //           borderRadius:
+                                              //               BorderRadius
+                                              //                   .circular(12)),
+                                              //       hintText: "Enter Your OTP"),
+                                              // ),
+                                              OtpTextField(
+                                                //  controller: otpController,
+                                                numberOfFields: 6,
+                                                borderColor: Color(0xFF512DA8),
+                                                //set to true to show as box or false to show as dash
+                                                showFieldAsBox: false,
+                                                //runs when a code is typed in
+                                                onCodeChanged: (String code) {
+                                                  print(code);
+                                                  //handle validation or checks here
+                                                },
+                                                //runs when every textfield is filled
+                                                onSubmit:
+                                                    (String verificationCode) {
+                                                  print(verificationCode);
+                                                  read.onOtpEntered(
+                                                      verificationCode);
+                                                }, // end onSubmit
+                                              ),
+
+                                              // OTPTextField(
+                                              //   controller: otpController,
+                                              //   // controller: watch.otpController.text,
+                                              //   length: 6,
+                                              //   width: MediaQuery.of(context)
+                                              //       .size
+                                              //       .width,
+                                              //   fieldWidth: 50,
+                                              //   style: const TextStyle(
+                                              //       fontSize: 17),
+                                              //   textFieldAlignment:
+                                              //       MainAxisAlignment
+                                              //           .spaceAround,
+                                              //   fieldStyle:
+                                              //       FieldStyle.underline,
+                                              //   onCompleted: (pin) {
+                                              //     print("Completed: " + pin);
+                                              //   },
+
+                                              // ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              SizedBox(
+                                                width: 400, // <-- Your width
+                                                height: 60,
+                                                child: ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: Button,
+                                                    // onPrimary: Colors.white,
+                                                    // shadowColor: Colors.greenAccent,
+                                                    elevation: 3,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        14.0)),
+                                                    minimumSize: const Size(
+                                                        100, 40), //////// HERE
+                                                  ),
+                                                  // style: style,
+                                                  onPressed: () {
+                                                    read.onCodeVerification(
+                                                        context);
+                                                    // read.onOtpSubmitPressed(
+                                                    //     context);
+                                                  },
+                                                  child: Text(
+                                                    'Submit',
+                                                    style: GoogleFonts.inter(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                              // color: SplashTex
+                                                              letterSpacing: .5,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.h,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Resend OTP',
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                              // color: SplashTex
+                                                              letterSpacing: .5,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )),
+                                );
+                              },
+                            );
+                          },
+                          textColor: Colors.white,
+                          text: "Login",
+                        ),
+                      ),
+                      SizedBox(
+                        width: 17.w,
+                      ),
+                      Expanded(
+                        child: PrimaryButton(
+                          color: Colors.transparent,
+                          borderColor: Color(0xff4689EC),
                           onTap: () {
+                            // read.onNewShopPressed(context);
                             showModalBottomSheet(
                               backgroundColor: Colors.white,
                               isScrollControlled: true,
@@ -363,20 +640,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                 );
                               },
                             );
-                          },
-                          textColor: Colors.white,
-                          text: "Login",
-                        ),
-                      ),
-                      SizedBox(
-                        width: 17.w,
-                      ),
-                      Expanded(
-                        child: PrimaryButton(
-                          color: Colors.transparent,
-                          borderColor: Color(0xff4689EC),
-                          onTap: () {
-                            read.onNewShopPressed(context);
                           },
                           textColor: Color(0xff4689EC),
                           text: "New Shop",
