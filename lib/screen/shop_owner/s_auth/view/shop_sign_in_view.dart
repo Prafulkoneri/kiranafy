@@ -158,6 +158,19 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                       enableOrder: true,
                       controller: watch.mobController,
                     ),
+//                     padding:
+//                         EdgeInsets.only(left: 28.w, right: 23.w, top: 0.h),
+//                       child:  MobileNoTextFormField(
+//                         onChanged: (value){
+//                           read.checkMobNoExist(context);
+//                         },
+//                         onCountryCodeChanged: (value){
+//                          read.onCountryCodeSelected(value);
+//                         },
+//                         enableOrder: true,
+//                         controller: watch.mobController,
+//                       ),
+// >>>>>>> 0fa1dab541a4f6f92373e5514a3320d7ebe4bd63
                   ),
                   // Padding(
                   //   padding: EdgeInsets.only(
