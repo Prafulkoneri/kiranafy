@@ -19,8 +19,8 @@ class SShopConfigurationView extends StatefulWidget {
 class _SShopConfigurationViewState extends State<SShopConfigurationView> {
   @override
   Widget build(BuildContext context) {
-    final watch=context.watch<SShopConfigurationController>();
-    final read=context.read<SShopConfigurationController>();
+    final watch = context.watch<SShopConfigurationController>();
+    final read = context.read<SShopConfigurationController>();
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: PreferredSize(
@@ -28,8 +28,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
         child: PrimaryAppBar(
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: (){
-
+          onActionTap: () {
             // read.onAppBarActionPressed(context);
           },
         ),
@@ -37,21 +36,26 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.only(left: 19.w,right: 19.w,top: 26.w),
+          padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Upload Payment QR Code Image",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w500,color:Black1),),
-            SizedBox(
-              height: 10.w,
-            ),
+              Text(
+                "Upload Payment QR Code Image",
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Black1),
+              ),
+              SizedBox(
+                height: 10.w,
+              ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: (Color(0xffEFEFEF)))
-                ),
+                    color: Colors.white,
+                    border: Border.all(color: (Color(0xffEFEFEF)))),
                 height: 142.w,
-                width:ScreenUtil().screenWidth,
+                width: ScreenUtil().screenWidth,
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -60,11 +64,16 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                       SizedBox(
                         height: 6.w,
                       ),
-                      Text('Upload QR Code',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp,color: Color(0xffB7B7B7)),),
+                      Text(
+                        'Upload QR Code',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14.sp,
+                            color: Color(0xffB7B7B7)),
+                      ),
                       SizedBox(
                         height: 20.w,
                       ),
-
                     ],
                   ),
                 ),
@@ -82,36 +91,38 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               ),
               Container(
                 width: 140.w,
-                child: Text("Shop Timing",style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
-                    color: Color(0xff3A3A3A)),),
+                child: Text(
+                  "Shop Timing",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14.sp,
+                      color: Color(0xff3A3A3A)),
+                ),
               ),
               SizedBox(
                 height: 10.w,
               ),
-    Row(
-      mainAxisAlignment:MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          // width: 155.w,
-          child: SDropDownField(
-            hint: "Opening Time",
-            hintSize: 15.sp,
-          ),
-        ),
-        SizedBox(
-          width: 12.w,
-        ),
-        Expanded(
-          child: SDropDownField(
-            hint: "Closing Time",
-            hintSize: 15.sp,
-
-          ),
-        ),
-      ],
-    ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    // width: 155.w,
+                    child: SDropDownField(
+                      hint: "Opening Time",
+                      hintSize: 15.sp,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Expanded(
+                    child: SDropDownField(
+                      hint: "Closing Time",
+                      hintSize: 15.sp,
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(
                 height: 20.w,
               ),
@@ -123,42 +134,43 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               SizedBox(
                 height: 40.w,
               ),
-              Text("Delivery Type",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp),),
-             SizedBox(
-               height: 13.w,
-             ),
+              Text(
+                "Delivery Type",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
+              ),
+              SizedBox(
+                height: 13.w,
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   PrimaryCheckBox(
-                    onChanged:(value){
+                    onChanged: (value) {
                       read.onCustomerPickupSelected();
                     },
-                    value:watch.isCustomerPickupSelected,
+                    value: watch.isCustomerPickupSelected,
                   ),
                   Text(
                     'Customer Pickup',
-                    style:  TextStyle(
-                          color: Black1,
-                          // letterSpacing: .5,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                        color: Black1,
+                        // letterSpacing: .5,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
-                    width: 30.w
-                    ,
+                    width: 30.w,
                   ),
                   PrimaryCheckBox(
-                    onChanged:(value){
+                    onChanged: (value) {
                       read.onDeliveryCustomerSelected();
                     },
-                    value:watch.isDeliveryCustomerSelected,
+                    value: watch.isDeliveryCustomerSelected,
                   ),
-                  
                   Flexible(
                     child: Text(
                       'Deliver To Customer',
-                      style:  TextStyle(
+                      style: TextStyle(
                           color: Black1,
                           // letterSpacing: .5,
                           fontSize: 13.4.sp,
@@ -174,20 +186,25 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-
-                    child: Text("Order Amount",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),),
+                    child: Text(
+                      "Order Amount",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
                   ),
                   SizedBox(
                     width: 12.w,
                   ),
                   Expanded(
-                    child: Text("Delivery Charge",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),),
+                    child: Text(
+                      "Delivery Charge",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
                   ),
                 ],
               ),
@@ -195,7 +212,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 10.w,
               ),
               Row(
-                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: SDropDownField(
@@ -207,7 +224,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     width: 12.w,
                   ),
                   Expanded(
-
                     child: PrimarySTextFormField(
                       hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
@@ -222,20 +238,25 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-
-                    child: Text("Order Amount",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),),
+                    child: Text(
+                      "Order Amount",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
                   ),
                   SizedBox(
                     width: 12.w,
                   ),
                   Expanded(
-                    child: Text("Delivery Charge",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),),
+                    child: Text(
+                      "Delivery Charge",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
                   ),
                 ],
               ),
@@ -243,7 +264,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 10.w,
               ),
               Row(
-                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: SDropDownField(
@@ -255,7 +276,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     width: 12.w,
                   ),
                   Expanded(
-
                     child: PrimarySTextFormField(
                       hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
@@ -270,20 +290,25 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-
-                    child: Text("Order Amount",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),),
+                    child: Text(
+                      "Order Amount",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
                   ),
                   SizedBox(
                     width: 12.w,
                   ),
                   Expanded(
-                    child: Text("Delivery Charge",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),),
+                    child: Text(
+                      "Delivery Charge",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
                   ),
                 ],
               ),
@@ -291,7 +316,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 10.w,
               ),
               Row(
-                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: SDropDownField(
@@ -303,7 +328,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     width: 12.w,
                   ),
                   Expanded(
-
                     child: PrimarySTextFormField(
                       hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
@@ -318,20 +342,25 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-
-                    child: Text("Order Amount",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),),
+                    child: Text(
+                      "Order Amount",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
                   ),
                   SizedBox(
                     width: 12.w,
                   ),
                   Expanded(
-                    child: Text("Delivery Charge",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),),
+                    child: Text(
+                      "Delivery Charge",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
                   ),
                 ],
               ),
@@ -339,7 +368,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 10.w,
               ),
               Row(
-                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: SDropDownField(
@@ -351,7 +380,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     width: 12.w,
                   ),
                   Expanded(
-
                     child: PrimarySTextFormField(
                       hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
@@ -362,22 +390,25 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               SizedBox(
                 height: 37.w,
               ),
-              Text("Slot Selection",style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16.sp,
-                  color: Color(0xff3A3A3A)),),
+              Text(
+                "Slot Selection",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.sp,
+                    color: Color(0xff3A3A3A)),
+              ),
               SizedBox(
                 height: 15.w,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                PrimaryCheckBox(
-                  value: true,
-                ),
+                  PrimaryCheckBox(
+                    value: true,
+                  ),
                   Text(
                     '9am to 12pm',
-                    style:  TextStyle(
+                    style: TextStyle(
                         color: Black1,
                         // letterSpacing: .5,
                         fontSize: 14.sp,
@@ -389,13 +420,12 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   PrimaryCheckBox(
                     value: false,
                   ),
-
                   Flexible(
                     child: Padding(
                       padding: EdgeInsets.only(top: 0.w),
                       child: Text(
                         '3pm to 6pm',
-                        style:  TextStyle(
+                        style: TextStyle(
                             color: Black1,
                             // letterSpacing: .5,
                             fontSize: 14.sp,
@@ -403,7 +433,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                       ),
                     ),
                   ),
-
                 ],
               ),
               SizedBox(
@@ -417,7 +446,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Text(
                     '12pm to 3pm',
-                    style:  TextStyle(
+                    style: TextStyle(
                         color: Black1,
                         // letterSpacing: .5,
                         fontSize: 14.sp,
@@ -429,13 +458,12 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   PrimaryCheckBox(
                     value: false,
                   ),
-
                   Flexible(
                     child: Padding(
                       padding: EdgeInsets.only(top: 0.w),
                       child: Text(
                         '6pm to 9pm',
-                        style:  TextStyle(
+                        style: TextStyle(
                             color: Black1,
                             // letterSpacing: .5,
                             fontSize: 14.sp,
@@ -443,7 +471,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                       ),
                     ),
                   ),
-
                 ],
               ),
               SizedBox(
