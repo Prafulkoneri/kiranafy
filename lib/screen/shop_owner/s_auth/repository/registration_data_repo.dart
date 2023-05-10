@@ -14,7 +14,7 @@ class RegistrationDataRepo{
   }
   Future<http.Response> getStateList(GetStateListReqModel reqModel)async{
     try{
-      return await http.post(Uri.parse(Endpoint.getStateList));
+      return await http.post(Uri.parse(Endpoint.getStateList),body: reqModel.toJson());
     }
     catch(e){
       throw Exception(e);

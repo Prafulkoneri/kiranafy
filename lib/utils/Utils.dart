@@ -14,7 +14,7 @@ enum SnackType {
   debugError,
 }
 
-class Util{
+class Utils{
 
   static ScaffoldFeatureController showPrimarySnackbar(BuildContext context, text, {SnackType? type}) {
     ScaffoldMessenger.of(context).clearSnackBars();

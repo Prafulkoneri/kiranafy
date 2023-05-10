@@ -6,12 +6,13 @@ class GetStateListReqModel{
   Map<String,dynamic> toJson(){
     final Map<String, dynamic> data = {};
     data["country_id"]=countryId;
+    print(data);
     return data;
   }
 }
 
 class GetStateListResModel {
-  String? status;
+  int? status;
   String? message;
   List<StateData>? stateData;
 

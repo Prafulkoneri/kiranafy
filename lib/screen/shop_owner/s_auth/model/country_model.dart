@@ -1,5 +1,5 @@
 class GetCountryListResModel {
-  String? status;
+  int? status;
   String? message;
   List<CountryData>? countryData;
 

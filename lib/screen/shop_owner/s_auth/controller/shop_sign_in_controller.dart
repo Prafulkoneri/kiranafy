@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/check_mob_no_
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/check_mob_no_exist_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/utils/Utils.dart';
 
 class ShopSignInController extends ChangeNotifier {
   CheckMobileNoExistRepo checkMobileNoExistRepo = CheckMobileNoExistRepo();
@@ -49,20 +50,30 @@ class ShopSignInController extends ChangeNotifier {
     await checkMobileNoExistRepo
         .checkMobileNoExist(_checkMobNoExistReqModel)
         .then((response) {
-          print(mobController.text);
-          print(countryCode);
+      final result =
+      CheckMobNoExistResModel.fromJson(jsonDecode(response.body));
       if (mobController.text.length == 10) {
         print(response.body);
+
         if (response.statusCode == 200) {
-          final result = CheckMobNoExistResModel.fromJson(jsonDecode(response.body));
-          debugPrint("checkMobNoExist ${response.body}");
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(message)));
-          message = result.message ?? "";
+
+        }
+        else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
         }
       }
     }).onError((error, stackTrace) {
-      debugPrint(error.toString());
-    });
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+    ;
   }
 }

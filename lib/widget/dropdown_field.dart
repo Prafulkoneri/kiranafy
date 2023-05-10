@@ -127,7 +127,7 @@ class SDropDownField extends StatefulWidget {
       this.hint,
       this.hintSize,
       this.onChanged,
-      this.items,
+        this.items,
       this.titleHeader})
       : super(key: key);
 
@@ -136,10 +136,10 @@ class SDropDownField extends StatefulWidget {
 }
 
 class _SDropDownFieldState extends State<SDropDownField> {
-  final List<String> genderItems = [
-    'Male',
-    'Female',
-  ];
+  // final List<String> genderItems = [
+  //   'Male',
+  //   'Female',
+  // ];
 
   String? selectedValue;
 
@@ -190,26 +190,14 @@ class _SDropDownFieldState extends State<SDropDownField> {
                   color: Color(0xffB7B7B7),
                   fontWeight: FontWeight.w400),
             ),
-            items: genderItems
-                .map((item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        style: const TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ))
-                .toList(),
+            items: widget.items,
             validator: (value) {
               if (value == null) {
                 return 'Please select gender.';
               }
               return null;
             },
-            onChanged: (value) {
-              //Do something when changing the item if you want.
-            },
+            onChanged:widget.onChanged,
             onSaved: (value) {
               selectedValue = value.toString();
             },

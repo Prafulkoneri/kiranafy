@@ -34,7 +34,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ShopRegistrationController>().initState();
+      context.read<ShopRegistrationController>().initState(context);
     });
   }
 
@@ -128,14 +128,40 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         children: [
                           Expanded(
                               child: SDropDownField(
-
-                            hint: "Country",
+                                onChanged: (value)async{
+                                  await read.onCountrySelected(value);
+                                  await read.getStateList(context);
+                                },
+                                items: watch.countryList?.map((item) => DropdownMenuItem<String>(
+                                  value: item.id.toString(),
+                                  child: Text(
+                                    item.countryName??"",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                                    .toList(),
+                                hint: "Country",
                           )),
                           SizedBox(
                             width: 13.w,
                           ),
                           Expanded(
                               child: SDropDownField(
+                                onChanged: (value)async{
+                                 print(value);
+                                },
+                                items: watch.stateList?.map((item) => DropdownMenuItem<String>(
+                                  value: item.id.toString(),
+                                  child: Text(
+                                    item.stateName??"",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                                    .toList(),
                             hint: "State",
                           )),
                         ],
