@@ -54,9 +54,8 @@ class ShopSignInController extends ChangeNotifier {
       if (mobController.text.length == 10) {
         print(response.body);
         if (response.statusCode == 200) {
-          print("checking");
           final result = CheckMobNoExistResModel.fromJson(jsonDecode(response.body));
-          print("checkMobNoExist ${response.body}");
+          debugPrint("checkMobNoExist ${response.body}");
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(message)));
           message = result.message ?? "";

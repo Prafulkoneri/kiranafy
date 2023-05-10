@@ -118,9 +118,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                         },
                         enableOrder: true,
                         controller: watch.mobController,
-
                       ),
-
                   ),
 
                   Padding(
