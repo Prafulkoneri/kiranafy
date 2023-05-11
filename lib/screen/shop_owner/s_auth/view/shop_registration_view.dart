@@ -113,7 +113,10 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       //   controller: watch.mobController,
                       //   enableOrder: true,
                       // ),
-                      MobileNoTextFormField(controller: watch.mobController,enableOrder: true,),
+                      MobileNoTextFormField(
+                        controller: watch.mobController,
+                        enableOrder: true,
+                      ),
                       SizedBox(
                         height: 18.w,
                       ),
@@ -128,40 +131,42 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         children: [
                           Expanded(
                               child: SDropDownField(
-                                onChanged: (value)async{
-                                  await read.onCountrySelected(value);
-                                  await read.getStateList(context);
-                                },
-                                items: watch.countryList?.map((item) => DropdownMenuItem<String>(
-                                  value: item.id.toString(),
-                                  child: Text(
-                                    item.countryName??"",
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
-                                    .toList(),
-                                hint: "Country",
+                            onChanged: (value) async {
+                              await read.onCountrySelected(value);
+                              await read.getStateList(context);
+                            },
+                            items: watch.countryList
+                                ?.map((item) => DropdownMenuItem<String>(
+                                      value: item.id.toString(),
+                                      child: Text(
+                                        item.countryName ?? "",
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            hint: "Country",
                           )),
                           SizedBox(
                             width: 13.w,
                           ),
                           Expanded(
                               child: SDropDownField(
-                                onChanged: (value)async{
-                                 print(value);
-                                },
-                                items: watch.stateList?.map((item) => DropdownMenuItem<String>(
-                                  value: item.id.toString(),
-                                  child: Text(
-                                    item.stateName??"",
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
-                                    .toList(),
+                            onChanged: (value) async {
+                              print(value);
+                            },
+                            items: watch.stateList
+                                ?.map((item) => DropdownMenuItem<String>(
+                                      value: item.id.toString(),
+                                      child: Text(
+                                        item.stateName ?? "",
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
                             hint: "State",
                           )),
                         ],

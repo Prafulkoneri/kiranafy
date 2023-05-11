@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sig
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
@@ -63,6 +64,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => MobileNoController()),
         ChangeNotifierProvider(create: (_) => SOrderStatusController()),
         ChangeNotifierProvider(create: (_) => SAccountScreenController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopEditProfileDetailController()),
       ],
       child: MyApp(),
     ),

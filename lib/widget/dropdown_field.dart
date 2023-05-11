@@ -127,7 +127,7 @@ class SDropDownField extends StatefulWidget {
       this.hint,
       this.hintSize,
       this.onChanged,
-        this.items,
+      this.items,
       this.titleHeader})
       : super(key: key);
 
@@ -165,6 +165,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
         Container(
           // height: 45.w,
           child: DropdownButtonFormField2(
+            value: widget.value,
             isDense: true,
             decoration: InputDecoration(
               //Add isDense true and zero Padding.
@@ -197,7 +198,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
               }
               return null;
             },
-            onChanged:widget.onChanged,
+            onChanged: widget.onChanged,
             onSaved: (value) {
               selectedValue = value.toString();
             },
