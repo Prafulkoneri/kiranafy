@@ -205,7 +205,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                   //   ),
                   // ),
                   Padding(
-                    padding: EdgeInsets.only(left: 25.w, right: 0.w),
+                    padding: EdgeInsets.only(left: 25.w, right: 0.w, top: 15.w),
                     child: Row(
                       children: [
                         Text(
@@ -299,189 +299,197 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                           color: Color(0xff4689EC),
                           onTap: () async {
                             //otp vrification
-                            read.onLoginClick();
-                            ////end
-
-                            showModalBottomSheet(
-                              backgroundColor: Colors.white,
-                              isScrollControlled: true,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30))),
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Theme(
-                                  data: Theme.of(context)
-                                      .copyWith(canvasColor: Colors.white),
-                                  child: Material(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0)),
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            bottom: MediaQuery.of(context)
-                                                .viewInsets
-                                                .bottom),
-                                        // height: 335,
-                                        child: Padding(
-                                          padding: EdgeInsets.all(25.h),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            // mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Enter Verification Code",
-                                                style: GoogleFonts.inter(
-                                                  textStyle: const TextStyle(
-                                                      color: Custlogin,
-                                                      letterSpacing: .5,
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.w700),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 20.0.h),
-                                                child: Text(
-                                                  "We have sent SMS to :\n046 XXX XX XX",
+                            await read.onLoginClick(context).then((value) {
+                              if(!watch.isLoginBtnEnabled){
+                                return;
+                              }
+                              showModalBottomSheet(
+                                backgroundColor: Colors.white,
+                                isScrollControlled: true,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30))),
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Theme(
+                                    data: Theme.of(context)
+                                        .copyWith(canvasColor: Colors.white),
+                                    child: Material(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(16.0),
+                                            topRight: Radius.circular(16.0)),
+                                        child: Container(
+                                          padding: EdgeInsets.only(
+                                              bottom: MediaQuery.of(context)
+                                                  .viewInsets
+                                                  .bottom),
+                                          // height: 335,
+                                          child: Padding(
+                                            padding: EdgeInsets.all(25.h),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              // mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Enter Verification Code",
                                                   style: GoogleFonts.inter(
-                                                    textStyle: TextStyle(
-                                                        color: Black,
+                                                    textStyle: const TextStyle(
+                                                        color: Custlogin,
                                                         letterSpacing: .5,
-                                                        fontSize: 18,
+                                                        fontSize: 20,
                                                         fontWeight:
-                                                            FontWeight.w500),
+                                                            FontWeight.w700),
                                                   ),
                                                 ),
-                                              ),
-                                              // TextField(
-                                              //   controller: otpController,
-                                              //   keyboardType:
-                                              //       TextInputType.number,
-                                              //   decoration: InputDecoration(
-                                              //       border: OutlineInputBorder(
-                                              //           borderRadius:
-                                              //               BorderRadius
-                                              //                   .circular(12)),
-                                              //       hintText: "Enter Your OTP"),
-                                              // ),
-                                              OtpTextField(
-                                                //  controller: otpController,
-                                                numberOfFields: 6,
-                                                borderColor: Color(0xFF512DA8),
-                                                //set to true to show as box or false to show as dash
-                                                showFieldAsBox: false,
-                                                //runs when a code is typed in
-                                                onCodeChanged: (String code) {
-                                                  print(code);
-                                                  //handle validation or checks here
-                                                },
-                                                //runs when every textfield is filled
-                                                onSubmit:
-                                                    (String verificationCode) {
-                                                  print(verificationCode);
-                                                  read.onOtpEntered(
-                                                      verificationCode);
-                                                }, // end onSubmit
-                                              ),
-
-                                              // OTPTextField(
-                                              //   controller: otpController,
-                                              //   // controller: watch.otpController.text,
-                                              //   length: 6,
-                                              //   width: MediaQuery.of(context)
-                                              //       .size
-                                              //       .width,
-                                              //   fieldWidth: 50,
-                                              //   style: const TextStyle(
-                                              //       fontSize: 17),
-                                              //   textFieldAlignment:
-                                              //       MainAxisAlignment
-                                              //           .spaceAround,
-                                              //   fieldStyle:
-                                              //       FieldStyle.underline,
-                                              //   onCompleted: (pin) {
-                                              //     print("Completed: " + pin);
-                                              //   },
-
-                                              // ),
-                                              const SizedBox(
-                                                height: 20,
-                                              ),
-                                              SizedBox(
-                                                width: 400, // <-- Your width
-                                                height: 60,
-                                                child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    primary: Button,
-                                                    // onPrimary: Colors.white,
-                                                    // shadowColor: Colors.greenAccent,
-                                                    elevation: 3,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        14.0)),
-                                                    minimumSize: const Size(
-                                                        100, 40), //////// HERE
-                                                  ),
-                                                  // style: style,
-                                                  onPressed: () {
-                                                    read.onCodeVerification(
-                                                        context);
-                                                    // read.onOtpSubmitPressed(
-                                                    //     context);
-                                                  },
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 20.0.h),
                                                   child: Text(
-                                                    'Submit',
+                                                    "We have sent SMS to :\n046 XXX XX XX",
                                                     style: GoogleFonts.inter(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              // color: SplashTex
-                                                              letterSpacing: .5,
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
+                                                      textStyle: TextStyle(
+                                                          color: Black,
+                                                          letterSpacing: .5,
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w500),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 15.h,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Resend OTP',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              // color: SplashTex
-                                                              letterSpacing: .5,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
+                                                // TextField(
+                                                //   controller: otpController,
+                                                //   keyboardType:
+                                                //       TextInputType.number,
+                                                //   decoration: InputDecoration(
+                                                //       border: OutlineInputBorder(
+                                                //           borderRadius:
+                                                //               BorderRadius
+                                                //                   .circular(12)),
+                                                //       hintText: "Enter Your OTP"),
+                                                // ),
+                                                OtpTextField(
+                                                  //  controller: otpController,
+                                                  numberOfFields: 6,
+                                                  borderColor:
+                                                      Color(0xFF512DA8),
+                                                  //set to true to show as box or false to show as dash
+                                                  showFieldAsBox: false,
+                                                  //runs when a code is typed in
+                                                  onCodeChanged: (String code) {
+                                                    print(code);
+                                                    //handle validation or checks here
+                                                  },
+                                                  //runs when every textfield is filled
+                                                  onSubmit: (String
+                                                      verificationCode) {
+                                                    print(verificationCode);
+                                                    read.onOtpEntered(
+                                                        verificationCode);
+                                                  }, // end onSubmit
+                                                ),
+
+                                                // OTPTextField(
+                                                //   controller: otpController,
+                                                //   // controller: watch.otpController.text,
+                                                //   length: 6,
+                                                //   width: MediaQuery.of(context)
+                                                //       .size
+                                                //       .width,
+                                                //   fieldWidth: 50,
+                                                //   style: const TextStyle(
+                                                //       fontSize: 17),
+                                                //   textFieldAlignment:
+                                                //       MainAxisAlignment
+                                                //           .spaceAround,
+                                                //   fieldStyle:
+                                                //       FieldStyle.underline,
+                                                //   onCompleted: (pin) {
+                                                //     print("Completed: " + pin);
+                                                //   },
+
+                                                // ),
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+                                                SizedBox(
+                                                  width: 400,
+                                                  // <-- Your width
+                                                  height: 60,
+                                                  child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      primary: Button,
+                                                      // onPrimary: Colors.white,
+                                                      // shadowColor: Colors.greenAccent,
+                                                      elevation: 3,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          14.0)),
+                                                      minimumSize: const Size(
+                                                          100,
+                                                          40), //////// HERE
+                                                    ),
+                                                    // style: style,
+                                                    onPressed: () {
+                                                      read.onCodeVerification(
+                                                          context);
+                                                      // read.onOtpSubmitPressed(
+                                                      //     context);
+                                                    },
+                                                    child: Text(
+                                                      'Submit',
+                                                      style: GoogleFonts.inter(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                                // color: SplashTex
+                                                                letterSpacing:
+                                                                    .5,
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700),
+                                                      ),
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            ],
+                                                ),
+                                                SizedBox(
+                                                  height: 15.h,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Resend OTP',
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                                // color: SplashTex
+                                                                letterSpacing:
+                                                                    .5,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      )),
-                                );
-                              },
-                            );
+                                        )),
+                                  );
+                                },
+                              );
+                            });
+                            ////end
                           },
                           textColor: Colors.white,
                           text: "Login",
@@ -494,9 +502,13 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                         child: PrimaryButton(
                           color: Colors.transparent,
                           borderColor: Color(0xff4689EC),
-                          onTap: () {
-                            // read.onNewShopPressed(context);
-                            showModalBottomSheet(
+                          onTap: () async{
+                            print(watch.isNewShopBtnEnabled);
+                          await  read.onNewShopPressed(context);
+                          if(!watch.isNewShopBtnEnabled){
+                            return;
+                          }
+                           await showModalBottomSheet(
                               backgroundColor: Colors.white,
                               isScrollControlled: true,
                               shape: const RoundedRectangleBorder(
@@ -573,7 +585,8 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                 height: 20,
                                               ),
                                               SizedBox(
-                                                width: 400, // <-- Your width
+                                                width: 400,
+                                                // <-- Your width
                                                 height: 60,
                                                 child: ElevatedButton(
                                                   style:

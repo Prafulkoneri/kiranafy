@@ -208,6 +208,7 @@ class MobileNoTextFormField extends StatelessWidget {
   final bool? enableOrder;
   final void Function(CountryCode)? onCountryCodeChanged;
   final void Function(String)? onChanged;
+  final String ? initialSelection;
 
   const MobileNoTextFormField({
     Key? key,
@@ -215,6 +216,7 @@ class MobileNoTextFormField extends StatelessWidget {
     this.onChanged,
     required this.controller,
     this.onCountryCodeChanged,
+    this.initialSelection,
   }) : super(key: key);
 
   @override
@@ -236,7 +238,7 @@ class MobileNoTextFormField extends StatelessWidget {
             padding: EdgeInsets.zero,
             onChanged: onCountryCodeChanged,
             // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-            initialSelection: 'IN',
+            initialSelection:initialCountry,
             showFlagDialog: true,
             showFlag: true,
             showFlagMain: true,

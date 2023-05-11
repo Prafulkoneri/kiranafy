@@ -1,10 +1,10 @@
-class CheckMobNoExistReqModel{
+class MobNoRegisterReqModel{
   String ? countryCode;
   String ? mobileNo;
-  CheckMobNoExistReqModel({
+  MobNoRegisterReqModel({
     this.countryCode,
     this.mobileNo,
-});
+  });
   Map<String,dynamic> toJson(){
     final Map<String, dynamic> data = {};
     data["mobile_number"]=mobileNo;
@@ -12,21 +12,21 @@ class CheckMobNoExistReqModel{
     return data;
   }
 }
-class CheckMobNoExistResModel{
+class MobNoRegisterResModel{
   int ? status;
   String ? message;
-  String ? kycUploaded;
-  String ? registrationCompleted;
-  CheckMobNoExistResModel({
+  String ? mobileNo;
+  String ? countryCode;
+  MobNoRegisterResModel({
     this.status,
     this.message,
-    this.kycUploaded,
-    this.registrationCompleted,
+    this.mobileNo,
+    this.countryCode,
   });
-  CheckMobNoExistResModel.fromJson(Map<String, dynamic> json){
+  MobNoRegisterResModel.fromJson(Map<String, dynamic> json){
     status = json["status"];
     message = json["message"];
-    kycUploaded = json["kyc_uploaded"];
-    registrationCompleted = json["registration_completed"];
+    countryCode = json["country_code"];
+    mobileNo = json["mobile_number"];
   }
 }

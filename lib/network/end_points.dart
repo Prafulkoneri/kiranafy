@@ -12,4 +12,8 @@ static const String getStateList='${baseUrl}lsm-state-list';
   static const String getCityList='${baseUrl}lsm-city-list';
   //Get Area List
   static const String getAreaList='${baseUrl}lsm-area-list';
+  //Get Area List
+  static const String shopOwnerRegister='${baseUrl}lsm-shop-owner-register';
+  //Get Area List
+  static const String shopOwnerRegisterMobileNo='${baseUrl}lsm-shop-owner-register-mobile-number';
 }
