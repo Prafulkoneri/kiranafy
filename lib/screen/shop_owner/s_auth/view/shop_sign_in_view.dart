@@ -26,41 +26,7 @@ class ShopSignInView extends StatefulWidget {
   State<ShopSignInView> createState() => _ShopSignInViewState();
 }
 
-// TextEditingController phoneController = TextEditingController();
-// OtpFieldController otpController = OtpFieldController();
-// LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
-// FirebaseAuth _auth = FirebaseAuth.instance;
-
-// void SignOutME() async {
-//   await _auth.signOut();
-// }
-
 class _ShopSignInViewState extends State<ShopSignInView> {
-  // TextEditingController phoneController = TextEditingController();
-  // OtpFieldController otpController = OtpFieldController();
-  // LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
-  // FirebaseAuth _auth = FirebaseAuth.instance;
-  // String verificationID = "";
-
-  // void SignOutME() async {
-  //   await _auth.signOut();
-  // }
-
-  // void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential) async {
-  //   try {
-  //     final authCred = await _auth.signInWithCredential(phoneAuthCredential);
-
-  //     if (authCred.user != null) {
-  //       Navigator.pushReplacement(
-  //           context, MaterialPageRoute(builder: (context) => ShopDashBoard()));
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     print(e.message);
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(content: Text('Some Error Occured. Try Again Later')));
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     final read = context.read<ShopSignInController>();
@@ -158,52 +124,8 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                       enableOrder: true,
                       controller: watch.mobController,
                     ),
-//                     padding:
-//                         EdgeInsets.only(left: 28.w, right: 23.w, top: 0.h),
-//                       child:  MobileNoTextFormField(
-//                         onChanged: (value){
-//                           read.checkMobNoExist(context);
-//                         },
-//                         onCountryCodeChanged: (value){
-//                          read.onCountryCodeSelected(value);
-//                         },
-//                         enableOrder: true,
-//                         controller: watch.mobController,
-//                       ),
-// >>>>>>> 0fa1dab541a4f6f92373e5514a3320d7ebe4bd63
+//
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.only(
-                  //       left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(0),
-                  //     child: Stack(
-                  //       children: [
-                  //         Positioned(
-                  //           bottom: 1,
-                  //           top: 1,
-                  //           left: 0,
-                  //           child: Container(
-                  //             // height: 200.h,
-                  //             width: 70.w,
-                  //             decoration: BoxDecoration(
-                  //               color: Colors.white,
-                  //               borderRadius: BorderRadius.circular(20),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         TextField(
-                  //           controller: watch.mobController,
-                  //           keyboardType: TextInputType.number,
-                  //           decoration: InputDecoration(
-                  //               border: OutlineInputBorder(
-                  //                   borderRadius: BorderRadius.circular(12)),
-                  //               hintText: "Enter Your PhoneNumber"),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: EdgeInsets.only(left: 25.w, right: 0.w, top: 15.w),
                     child: Row(
@@ -300,7 +222,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                           onTap: () async {
                             //otp vrification
                             await read.onLoginClick(context).then((value) {
-                              if(!watch.isLoginBtnEnabled){
+                              if (!watch.isLoginBtnEnabled) {
                                 return;
                               }
                               showModalBottomSheet(
@@ -359,17 +281,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                     ),
                                                   ),
                                                 ),
-                                                // TextField(
-                                                //   controller: otpController,
-                                                //   keyboardType:
-                                                //       TextInputType.number,
-                                                //   decoration: InputDecoration(
-                                                //       border: OutlineInputBorder(
-                                                //           borderRadius:
-                                                //               BorderRadius
-                                                //                   .circular(12)),
-                                                //       hintText: "Enter Your OTP"),
-                                                // ),
                                                 OtpTextField(
                                                   //  controller: otpController,
                                                   numberOfFields: 6,
@@ -390,27 +301,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                         verificationCode);
                                                   }, // end onSubmit
                                                 ),
-
-                                                // OTPTextField(
-                                                //   controller: otpController,
-                                                //   // controller: watch.otpController.text,
-                                                //   length: 6,
-                                                //   width: MediaQuery.of(context)
-                                                //       .size
-                                                //       .width,
-                                                //   fieldWidth: 50,
-                                                //   style: const TextStyle(
-                                                //       fontSize: 17),
-                                                //   textFieldAlignment:
-                                                //       MainAxisAlignment
-                                                //           .spaceAround,
-                                                //   fieldStyle:
-                                                //       FieldStyle.underline,
-                                                //   onCompleted: (pin) {
-                                                //     print("Completed: " + pin);
-                                                //   },
-
-                                                // ),
                                                 const SizedBox(
                                                   height: 20,
                                                 ),
@@ -439,8 +329,6 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                     onPressed: () {
                                                       read.onCodeVerification(
                                                           context);
-                                                      // read.onOtpSubmitPressed(
-                                                      //     context);
                                                     },
                                                     child: Text(
                                                       'Submit',
@@ -495,23 +383,26 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                           text: "Login",
                         ),
                       ),
+
                       SizedBox(
                         width: 17.w,
                       ),
+
+                      ///////////////////New Shop Start///////////////////////////
                       Expanded(
                         child: PrimaryButton(
                           color: Colors.transparent,
-                          borderColor: Color(0xff4689EC),
-                          onTap: () async{
+                          borderColor: const Color(0xff4689EC),
+                          onTap: () async {
                             print(watch.isNewShopBtnEnabled);
-                          await  read.onNewShopPressed(context);
-                          if(!watch.isNewShopBtnEnabled){
-                            return;
-                          }
-                           await showModalBottomSheet(
+                            await read.onNewShopPressed(context);
+                            if (!watch.isNewShopBtnEnabled) {
+                              return;
+                            }
+                            await showModalBottomSheet(
                               backgroundColor: Colors.white,
                               isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
+                              shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(30),
                                       topRight: Radius.circular(30))),
@@ -529,14 +420,12 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                             bottom: MediaQuery.of(context)
                                                 .viewInsets
                                                 .bottom),
-                                        // height: 335,
                                         child: Padding(
                                           padding: EdgeInsets.all(25.h),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             mainAxisSize: MainAxisSize.min,
-                                            // mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Text(
                                                 "Enter Verification Code",
@@ -570,8 +459,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                     .size
                                                     .width,
                                                 fieldWidth: 50,
-                                                style: const TextStyle(
-                                                    fontSize: 17),
+                                                style: TextStyle(fontSize: 17),
                                                 textFieldAlignment:
                                                     MainAxisAlignment
                                                         .spaceAround,
@@ -581,7 +469,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   print("Completed: " + pin);
                                                 },
                                               ),
-                                              const SizedBox(
+                                              SizedBox(
                                                 height: 20,
                                               ),
                                               SizedBox(
@@ -601,7 +489,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                                 BorderRadius
                                                                     .circular(
                                                                         14.0)),
-                                                    minimumSize: const Size(
+                                                    minimumSize: Size(
                                                         100, 40), //////// HERE
                                                   ),
                                                   // style: style,
@@ -612,14 +500,12 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   child: Text(
                                                     'Submit',
                                                     style: GoogleFonts.inter(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              // color: SplashTex
-                                                              letterSpacing: .5,
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
+                                                      textStyle: TextStyle(
+                                                          // color: SplashTex
+                                                          letterSpacing: .5,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w700),
                                                     ),
                                                   ),
                                                 ),
@@ -634,14 +520,12 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   Text(
                                                     'Resend OTP',
                                                     style: GoogleFonts.dmSans(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              // color: SplashTex
-                                                              letterSpacing: .5,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
+                                                      textStyle: TextStyle(
+                                                          // color: SplashTex
+                                                          letterSpacing: .5,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w500),
                                                     ),
                                                   ),
                                                 ],

@@ -109,7 +109,7 @@ class PrimarySTextFormField extends StatelessWidget {
   final bool? enableBorder;
   final double? hintFontSize;
   final EdgeInsetsGeometry? padding;
-  final TextInputType ? textInputType;
+  final TextInputType? textInputType;
 
   PrimarySTextFormField(
       {Key? key,
@@ -126,7 +126,7 @@ class PrimarySTextFormField extends StatelessWidget {
       this.readOnly,
       this.onChanged,
       this.lengthLimitingTextInputFormatter,
-        this.textInputType,
+      this.textInputType,
       this.hintText})
       : super(key: key);
 
@@ -157,7 +157,7 @@ class PrimarySTextFormField extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
             maxLines: maxLines ?? 1,
-            keyboardType:textInputType,
+            keyboardType: textInputType,
             readOnly: readOnly ?? false,
             onChanged: onChanged,
             inputFormatters: [
@@ -208,15 +208,15 @@ class MobileNoTextFormField extends StatelessWidget {
   final bool? enableOrder;
   final void Function(CountryCode)? onCountryCodeChanged;
   final void Function(String)? onChanged;
-  final String ? initialSelection;
+  final String? initialSelection;
 
   const MobileNoTextFormField({
     Key? key,
     this.enableOrder,
     this.onChanged,
+    this.initialSelection,
     required this.controller,
     this.onCountryCodeChanged,
-    this.initialSelection,
   }) : super(key: key);
 
   @override
@@ -238,7 +238,7 @@ class MobileNoTextFormField extends StatelessWidget {
             padding: EdgeInsets.zero,
             onChanged: onCountryCodeChanged,
             // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-            initialSelection:initialCountry,
+            initialSelection: 'IN',
             showFlagDialog: true,
             showFlag: true,
             showFlagMain: true,
@@ -253,14 +253,16 @@ class MobileNoTextFormField extends StatelessWidget {
           width: 10.w,
         ),
         Expanded(
-            child: PrimarySTextFormField(
-              controller: controller,
-              lengthLimitingTextInputFormatter:LengthLimitingTextInputFormatter(10),
-              onChanged:onChanged,
-          hintText: "Phone Number",
-          textInputType: TextInputType.number,
-          padding: EdgeInsets.symmetric(vertical: 14.w, horizontal: 10.w),
-        ),),
+          child: PrimarySTextFormField(
+            controller: controller,
+            lengthLimitingTextInputFormatter:
+                LengthLimitingTextInputFormatter(10),
+            onChanged: onChanged,
+            hintText: "Phone Number",
+            textInputType: TextInputType.number,
+            padding: EdgeInsets.symmetric(vertical: 14.w, horizontal: 10.w),
+          ),
+        ),
       ],
     );
   }

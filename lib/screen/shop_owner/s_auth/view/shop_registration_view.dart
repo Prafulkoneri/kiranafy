@@ -106,21 +106,30 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       SDropDownField(
-                        onChanged: (value){
+                        onChanged: (value) {
                           read.onShopTypeSelected(value);
                         },
                         hint: "Shop Type",
                         items: [
-                          DropdownMenuItem(value: "1",child:Text("Retailer",
-                        style:  TextStyle(
-                          fontSize: 14.sp,
-                        ),
-                      ),),
-                          DropdownMenuItem(value: "2",child:Text("wholesaler",
-                            style:  TextStyle(
-                              fontSize: 14.sp,
+                          DropdownMenuItem(
+                            value: "1",
+                            child: Text(
+                              "Retailer",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                              ),
                             ),
-                          ),)],
+                          ),
+                          DropdownMenuItem(
+                            value: "2",
+                            child: Text(
+                              "wholesaler",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                       SizedBox(
                         height: 18.w,
@@ -129,7 +138,10 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       //   controller: watch.mobController,
                       //   enableOrder: true,
                       // ),
-                      MobileNoTextFormField(controller: watch.mobController,enableOrder: true,),
+                      MobileNoTextFormField(
+                        controller: watch.mobController,
+                        enableOrder: true,
+                      ),
                       SizedBox(
                         height: 18.w,
                       ),
@@ -145,41 +157,43 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         children: [
                           Expanded(
                               child: SDropDownField(
-                                onChanged: (value)async{
-                                  await read.onCountrySelected(value);
-                                  await read.getStateList(context);
-                                },
-                                items: watch.countryList?.map((item) => DropdownMenuItem<String>(
-                                  value: item.id.toString(),
-                                  child: Text(
-                                    item.countryName??"",
-                                    style:  TextStyle(
-                                      fontSize: 14.sp,
-                                    ),
-                                  ),
-                                ))
-                                    .toList(),
-                                hint: "Country",
+                            onChanged: (value) async {
+                              await read.onCountrySelected(value);
+                              await read.getStateList(context);
+                            },
+                            items: watch.countryList
+                                ?.map((item) => DropdownMenuItem<String>(
+                                      value: item.id.toString(),
+                                      child: Text(
+                                        item.countryName ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            hint: "Country",
                           )),
                           SizedBox(
                             width: 13.w,
                           ),
                           Expanded(
                               child: SDropDownField(
-                                onChanged: (value)async{
-                                 await read.onStateSelected(value);
+                            onChanged: (value) async {
+                              await read.onStateSelected(value);
                               await read.getCityList(context);
-                                },
-                                items: watch.stateList?.map((item) => DropdownMenuItem<String>(
-                                  value: item.id.toString(),
-                                  child: Text(
-                                    item.stateName??"",
-                                    style:  TextStyle(
-                                      fontSize: 14.sp,
-                                    ),
-                                  ),
-                                ))
-                                    .toList(),
+                            },
+                            items: watch.stateList
+                                ?.map((item) => DropdownMenuItem<String>(
+                                      value: item.id.toString(),
+                                      child: Text(
+                                        item.stateName ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
                             hint: "State",
                           )),
                         ],
@@ -188,19 +202,20 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       SDropDownField(
-                        onChanged: (value)async{
+                        onChanged: (value) async {
                           await read.onCitySelected(value);
                           await read.getAreaList(context);
                         },
-                        items: watch.cityList?.map((item) => DropdownMenuItem<String>(
-                          value: item.id.toString(),
-                          child: Text(
-                            item.cityName??"",
-                            style:  TextStyle(
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                        ))
+                        items: watch.cityList
+                            ?.map((item) => DropdownMenuItem<String>(
+                                  value: item.id.toString(),
+                                  child: Text(
+                                    item.cityName ?? "",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                ))
                             .toList(),
                         hint: "City",
                       ),
@@ -208,18 +223,21 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       SDropDownField(
-                        onChanged: (value)async{
-                 read.onAreaSelected(value);
+                        onChanged: (value) async {
+                          read.onAreaSelected(value);
                         },
-                        items: watch.areaList?.map((item) => DropdownMenuItem<String>(
-                          value: item.id.toString(),
-                          child: Text(
-                            item.areaName??"",
-                            style:  TextStyle(
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                        ),)
+                        items: watch.areaList
+                            ?.map(
+                              (item) => DropdownMenuItem<String>(
+                                value: item.id.toString(),
+                                child: Text(
+                                  item.areaName ?? "",
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                  ),
+                                ),
+                              ),
+                            )
                             .toList(),
                         hint: "Area",
                       ),
@@ -321,7 +339,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         text: "Next",
                         color: Color(0xff4689EC),
                         onTap: () {
-                         read.onNextClicked(context);
+                          read.onNextClicked(context);
                         },
                       ),
                     ]),

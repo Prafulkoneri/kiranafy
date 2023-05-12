@@ -57,6 +57,12 @@ Color DarkGreen = Color(0xff32D74B);
 Color DarkGreen1 = Color(0xff0D9D0C);
 Color LightGreen1 = Color(0xffE0FFE0);
 
+///////////////
+Color orange = Color(0xffFF961C);
+Color grey = Color(0xffE2E2E2);
+Color gradient = Color(0xff319FB0);
+Color underline = Color(0xffF0F0F0);
+
 class Constants {
   static const kPurpleColor = Color(0xFFB97DFE);
   static const kRedColor = Color(0xFFFE4067);
