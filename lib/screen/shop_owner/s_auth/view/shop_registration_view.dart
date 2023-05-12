@@ -92,19 +92,44 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 20.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.shopNameController,
                         hintText: "Shop Name",
                       ),
                       SizedBox(
                         height: 18.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.ownerNameController,
                         hintText: "Owner Name",
                       ),
                       SizedBox(
                         height: 18.w,
                       ),
                       SDropDownField(
+                        onChanged: (value) {
+                          read.onShopTypeSelected(value);
+                        },
                         hint: "Shop Type",
+                        items: [
+                          DropdownMenuItem(
+                            value: "1",
+                            child: Text(
+                              "Retailer",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ),
+                          DropdownMenuItem(
+                            value: "2",
+                            child: Text(
+                              "wholesaler",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                       SizedBox(
                         height: 18.w,
@@ -121,6 +146,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.emailIdController,
                         hintText: "Email ID",
                       ),
                       SizedBox(
@@ -140,8 +166,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                       value: item.id.toString(),
                                       child: Text(
                                         item.countryName ?? "",
-                                        style: const TextStyle(
-                                          fontSize: 14,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
                                         ),
                                       ),
                                     ))
@@ -154,15 +180,16 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                           Expanded(
                               child: SDropDownField(
                             onChanged: (value) async {
-                              print(value);
+                              await read.onStateSelected(value);
+                              await read.getCityList(context);
                             },
                             items: watch.stateList
                                 ?.map((item) => DropdownMenuItem<String>(
                                       value: item.id.toString(),
                                       child: Text(
                                         item.stateName ?? "",
-                                        style: const TextStyle(
-                                          fontSize: 14,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
                                         ),
                                       ),
                                     ))
@@ -175,13 +202,51 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       SDropDownField(
+                        onChanged: (value) async {
+                          await read.onCitySelected(value);
+                          await read.getAreaList(context);
+                        },
+                        items: watch.cityList
+                            ?.map((item) => DropdownMenuItem<String>(
+                                  value: item.id.toString(),
+                                  child: Text(
+                                    item.cityName ?? "",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
                         hint: "City",
+                      ),
+                      SizedBox(
+                        height: 18.w,
+                      ),
+                      SDropDownField(
+                        onChanged: (value) async {
+                          read.onAreaSelected(value);
+                        },
+                        items: watch.areaList
+                            ?.map(
+                              (item) => DropdownMenuItem<String>(
+                                value: item.id.toString(),
+                                child: Text(
+                                  item.areaName ?? "",
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        hint: "Area",
                       ),
                       SizedBox(
                         height: 18.w,
                       ),
                       Container(
                         child: PrimarySTextFormField(
+                          controller: watch.addressController,
                           height: 108.w,
                           maxLines: 5,
                           hintText: "Address",
@@ -191,12 +256,15 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       PrimarySTextFormField(
+                        textInputType: TextInputType.number,
+                        controller: watch.pincodeController,
                         hintText: "Pincode",
                       ),
                       SizedBox(
                         height: 18.w,
                       ),
                       PrimarySTextFormField(
+                        controller: watch.upiController,
                         hintText: "UPI",
                       ),
                       SizedBox(
@@ -271,124 +339,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         text: "Next",
                         color: Color(0xff4689EC),
                         onTap: () {
-                          showModalBottomSheet(
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    topRight: Radius.circular(30))),
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom),
-                                // height: 335,
-                                child: Padding(
-                                  padding: EdgeInsets.all(25.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    // mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Enter Verification Code",
-                                        style: GoogleFonts.inter(
-                                          textStyle: const TextStyle(
-                                              color: Custlogin,
-                                              letterSpacing: .5,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 20.0.h),
-                                        child: Text(
-                                          "We have sent SMS to :\n046 XXX XX XX",
-                                          style: GoogleFonts.inter(
-                                            textStyle: const TextStyle(
-                                                color: Black,
-                                                letterSpacing: .5,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      ),
-                                      OTPTextField(
-                                        length: 5,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        fieldWidth: 50,
-                                        style: const TextStyle(fontSize: 17),
-                                        textFieldAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        fieldStyle: FieldStyle.underline,
-                                        onCompleted: (pin) {
-                                          print("Completed: " + pin);
-                                        },
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      SizedBox(
-                                        width: 400, // <-- Your width
-                                        height: 60,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: Button,
-                                            // onPrimary: Colors.white,
-                                            // shadowColor: Colors.greenAccent,
-                                            elevation: 3,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        14.0)),
-                                            minimumSize: const Size(
-                                                100, 40), //////// HERE
-                                          ),
-                                          // style: style,
-                                          onPressed: () {
-                                            read.onOtpSubmitBtnPressed(context);
-                                          },
-                                          child: Text(
-                                            'Submit',
-                                            style: GoogleFonts.inter(
-                                              textStyle: const TextStyle(
-                                                  // color: SplashTex
-                                                  letterSpacing: .5,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 15.h,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Resend OTP',
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: const TextStyle(
-                                                  // color: SplashTex
-                                                  letterSpacing: .5,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
+                          read.onNextClicked(context);
                         },
                       ),
                     ]),

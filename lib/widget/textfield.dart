@@ -238,7 +238,7 @@ class MobileNoTextFormField extends StatelessWidget {
             padding: EdgeInsets.zero,
             onChanged: onCountryCodeChanged,
             // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-            initialSelection: initialSelection ?? '+91',
+            initialSelection: 'IN',
             showFlagDialog: true,
             showFlag: true,
             showFlagMain: true,

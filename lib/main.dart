@@ -2,7 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/screen/customer/about_us.dart';
+import 'package:local_supper_market/screen/customer/account.dart';
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
+import 'package:local_supper_market/screen/customer/accounts.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/advertisementform.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';

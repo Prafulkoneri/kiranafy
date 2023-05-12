@@ -5,15 +5,13 @@ class GetCityListReqModel{
   });
   Map<String,dynamic> toJson(){
     final Map<String, dynamic> data = {};
-    data["country_id"]=stateId;
+    data["state_id"]=stateId;
     return data;
   }
 }
 
-
-
 class GetCityListResModel {
-  String? status;
+  int? status;
   String? message;
   List<CityData>? cityData;
 
@@ -46,6 +44,6 @@ class CityData {
 
   CityData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    cityName = json["state_name"];
+    cityName = json["city_name"];
   }
 }
