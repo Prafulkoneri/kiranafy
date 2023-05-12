@@ -141,7 +141,7 @@ class _ReviewState extends State<Review> {
                                 children: <Widget>[
                                   Row(
                                     children: [
-                                      Image.asset('assets/images/profile.png'),
+                                      Image.asset('assets/images/profile.svg'),
                                       Column(
                                         children: [
                                           Padding(
