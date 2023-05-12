@@ -139,8 +139,11 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       //   enableOrder: true,
                       // ),
                       MobileNoTextFormField(
+                        readOnly: true,
+                        initialSelection: watch.selectedCountryCode,
                         controller: watch.mobController,
                         enableOrder: true,
+
                       ),
                       SizedBox(
                         height: 18.w,

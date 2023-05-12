@@ -28,4 +28,6 @@ class Endpoint {
   static const String shopOwnerRegisterMobileNo='${baseUrl}lsm-shop-owner-register-mobile-number';
   // Shop Owner Register Mobile No
   static const String shopOwnerLogin='${baseUrl}lsm-shop-owner-login';
+  // Shop Owner Register Mobile No
+  static const String subscriptionPlan='${baseUrl}lsm-shop-owner-get-subscriptions-list';
 }

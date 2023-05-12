@@ -6,7 +6,6 @@ class ShopLoginRepo{
 
   Future<http.Response> shopLogin(LoginReqModel reqModel) async {
     try{
-      print(reqModel.toJson());
       return await http.post(Uri.parse(Endpoint.shopOwnerRegisterMobileNo),body: reqModel.toJson());
     }
     catch(e){

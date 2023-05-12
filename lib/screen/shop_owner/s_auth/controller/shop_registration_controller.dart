@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
@@ -11,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registra
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/shop_owner_register_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopRegistrationController extends ChangeNotifier {
   RegistrationDataRepo registrationDataRepo = RegistrationDataRepo();
@@ -33,9 +33,13 @@ class ShopRegistrationController extends ChangeNotifier {
   int areaId=0;
   int shopId=0;
   String countryCode="+91";
+  String selectedCountryCode="";
   String successToken="";
 
   Future<void> initState(context) async {
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    mobController.text=pref.getString("mobileNo").toString();
+    selectedCountryCode=pref.getString("countryCode").toString();
     await getCountryList(context);
   }
 
@@ -78,6 +82,7 @@ class ShopRegistrationController extends ChangeNotifier {
 
   Future<void> onCountrySelected(value) async {
     countryId = int.parse(value.toString());
+
     notifyListeners();
   }
 

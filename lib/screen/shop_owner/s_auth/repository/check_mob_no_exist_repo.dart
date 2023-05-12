@@ -7,9 +7,9 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/check_mob_no_
 class CheckMobileNoExistRepo {
   Future<http.Response> checkMobileNoExist(
       CheckMobNoExistReqModel reqModel) async {
-    print(Uri.parse(Endpoint.shopOwnerRegisterMobileNo));
+    print(Uri.parse(Endpoint.checkMobNoExist));
     try {
-      return await http.post(Uri.parse(Endpoint.shopOwnerRegisterMobileNo),
+      return await http.post(Uri.parse(Endpoint.checkMobNoExist),
           body: reqModel.toJson());
     } catch (e) {
       throw Exception(e);

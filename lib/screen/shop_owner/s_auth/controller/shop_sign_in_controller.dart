@@ -26,7 +26,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ShopSignInController extends ChangeNotifier {
   CheckMobileNoExistRepo checkMobileNoExistRepo = CheckMobileNoExistRepo();
   MobileNoRegisterRepo mobileNoRegisterRepo = MobileNoRegisterRepo();
-  ShopLoginRepo shopLoginRepo=ShopLoginRepo();
+  ShopLoginRepo shopLoginRepo = ShopLoginRepo();
 
   bool isVerifyChecked = false;
   TextEditingController mobController = TextEditingController();
@@ -38,24 +38,42 @@ class ShopSignInController extends ChangeNotifier {
   String otpCode = "";
   bool isLoginBtnEnabled = false;
   bool isNewShopBtnEnabled = false;
-  String kycVerificationStatus="";
+  String kycVerificationStatus = "";
 
-
-  void onOtpSubmitPressed(context)async {
+  void onOtpSubmitPressed(context) async {
+    onCodeVerification(context);
     await mobileRegister(context);
   }
 
-  Future<void> onNewShopPressed(context)async{
-    if(mobController.text.length<10){
-      Utils.showPrimarySnackbar(context,"Please Enter Mobile No",
+  Future<void> onNewShopPressed(context) async {
+    if (mobController.text.length < 10) {
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
           type: SnackType.error);
       notifyListeners();
       return;
     }
-  if(!isNewShopBtnEnabled){
-    Utils.showPrimarySnackbar(context,"The Number is Already Registered",
-        type: SnackType.success);
-  }
+    if (!isVerifyChecked) {
+      Utils.showPrimarySnackbar(
+          context, "Please agree to our terms and condition",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+    if (!isNewShopBtnEnabled) {
+      Utils.showPrimarySnackbar(context, "The Number is Already Registered",
+          type: SnackType.success);
+    }
+    await _auth.verifyPhoneNumber(
+        phoneNumber: "$countryCode${mobController.text}",
+        verificationCompleted: (phoneAuthCredential) async {},
+        verificationFailed: (verificationFailed) {
+          print(verificationFailed);
+        },
+        codeSent: (verificationID, resendingToken) async {
+          LoginScreen.SHOW_OTP_FORM_WIDGET;
+          this.verificationID = verificationID;
+        },
+        codeAutoRetrievalTimeout: (verificationID) async {});
   }
 
   void onVerifyChecked(value) {
@@ -80,36 +98,38 @@ class ShopSignInController extends ChangeNotifier {
       final result =
           CheckMobNoExistResModel.fromJson(jsonDecode(response.body));
       if (mobController.text.length == 10) {
-        if (response.statusCode == 200) {
-          kycVerificationStatus=result.kycUploaded??"";
+        print(response.body);
+        if (response.statusCode==200){
+          kycVerificationStatus = result.kycUploaded ?? "";
           print(kycVerificationStatus);
           print(result.kycUploaded);
           print(result.registrationCompleted);
-          if (result.kycUploaded == "yes" &&
-              result.registrationCompleted=="yes") {
-            isLoginBtnEnabled = true;
-            isNewShopBtnEnabled = false;
+          if (result.kycUploaded=="yes" && result.registrationCompleted=="yes"){
+            isLoginBtnEnabled=true;
+            print("isLoginBtnEnabled${isLoginBtnEnabled}");
+            isNewShopBtnEnabled=false;
             print(isNewShopBtnEnabled);
             Utils.showPrimarySnackbar(context, result.message,
                 type: SnackType.success);
             notifyListeners();
             return;
           }
-          if(result.kycUploaded=="no" && result.registrationCompleted=="yes"){
+          if(result.kycUploaded=="no" && result.registrationCompleted=="yes") {
             isLoginBtnEnabled = false;
             isNewShopBtnEnabled = true;
             Utils.showPrimarySnackbar(context, result.message,
                 type: SnackType.success);
             notifyListeners();
             return;
-
           }
           else{
-            isNewShopBtnEnabled=true;
-            isLoginBtnEnabled=false;
+            isNewShopBtnEnabled = true;
+            print("hello hi bye bye");
+            isLoginBtnEnabled = false;
             notifyListeners();
           }
-        } else {
+        }
+        else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
@@ -142,8 +162,12 @@ class ShopSignInController extends ChangeNotifier {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
 
       if (authCred.user != null) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ShopDashBoard()));
+        if (isLoginBtnEnabled) {
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => MainScreenView()));
+        }
+        if(isNewShopBtnEnabled){
+          await mobileRegister(context);
+        }
       }
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -153,14 +177,22 @@ class ShopSignInController extends ChangeNotifier {
   }
 
   Future<void> onLoginClick(context) async {
-    if(mobController.text.length<10){
-      Utils.showPrimarySnackbar(context,"Please Enter Mobile No",
+    if (mobController.text.length < 10) {
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
           type: SnackType.error);
       notifyListeners();
       return;
     }
-    if(!isLoginBtnEnabled){
-      Utils.showPrimarySnackbar(context,"Please Sign Up",
+    if (!isVerifyChecked) {
+      Utils.showPrimarySnackbar(
+          context, "Please agree to our terms and condition",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+    print(isLoginBtnEnabled);
+    if (!isLoginBtnEnabled) {
+      Utils.showPrimarySnackbar(context, "Please Sign Up",
           type: SnackType.success);
       return;
     }
@@ -183,58 +215,31 @@ class ShopSignInController extends ChangeNotifier {
     signInWithPhoneAuthCred(phoneAuthCredential, context);
   }
 
-  MobNoRegisterReqModel get mobNoRegisterReqModel=>MobNoRegisterReqModel(
-    mobileNo: mobController.text,
-    countryCode: countryCode,
-  );
+  MobNoRegisterReqModel get mobNoRegisterReqModel => MobNoRegisterReqModel(
+        mobileNo: mobController.text,
+        countryCode: countryCode,
+      );
 
-  Future<void> mobileRegister(context)async{
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    mobileNoRegisterRepo.mobileNoRegister(mobNoRegisterReqModel).then((response){
+  Future<void> mobileRegister(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    mobileNoRegisterRepo
+        .mobileNoRegister(mobNoRegisterReqModel)
+        .then((response) {
       print(response.body);
       final result = MobNoRegisterResModel.fromJson(jsonDecode(response.body));
-        if (response.statusCode == 200) {
-          pref.setString("countryCode",result.countryCode??"");
-          pref.setString('mobileNo',result.mobileNo??"");
-         Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopRegistrationView()));
-        } else {
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.error);
-        }
-
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-          (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
-  LoginReqModel get loginReqModel=>LoginReqModel(
-    countryCode: countryCode,
-    mobileNo: mobController.text,
-  );
-
-  Future<void> onLogin(context)async{
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    shopLoginRepo.shopLogin(loginReqModel).then((response){
-      final result=LoginResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        pref.setString("token",result.successToken?.token??"");
-        Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView()));
+        pref.setString("countryCode", result.countryCode ?? "");
+        pref.setString('mobileNo', result.mobileNo ?? "");
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ShopRegistrationView()));
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
-
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -244,4 +249,33 @@ class ShopSignInController extends ChangeNotifier {
     );
   }
 
+  LoginReqModel get loginReqModel => LoginReqModel(
+        countryCode: countryCode,
+        mobileNo: mobController.text,
+      );
+
+  Future<void> onLogin(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopLoginRepo.shopLogin(loginReqModel).then((response) {
+      final result = LoginResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        pref.setString("token", result.successToken?.token ?? "");
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SMainScreenView()));
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 }

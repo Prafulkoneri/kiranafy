@@ -225,6 +225,9 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                               if (!watch.isLoginBtnEnabled) {
                                 return;
                               }
+                              if(!watch.isVerifyChecked){
+                                return;
+                              }
                               showModalBottomSheet(
                                 backgroundColor: Colors.white,
                                 isScrollControlled: true,
@@ -399,6 +402,9 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                             if (!watch.isNewShopBtnEnabled) {
                               return;
                             }
+                            if(!watch.isVerifyChecked){
+                              return;
+                            }
                             await showModalBottomSheet(
                               backgroundColor: Colors.white,
                               isScrollControlled: true,
@@ -453,21 +459,25 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   ),
                                                 ),
                                               ),
-                                              OTPTextField(
-                                                length: 5,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                fieldWidth: 50,
-                                                style: TextStyle(fontSize: 17),
-                                                textFieldAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                fieldStyle:
-                                                    FieldStyle.underline,
-                                                onCompleted: (pin) {
-                                                  print("Completed: " + pin);
+                                              OtpTextField(
+                                                //  controller: otpController,
+                                                numberOfFields: 6,
+                                                borderColor:
+                                                Color(0xFF512DA8),
+                                                //set to true to show as box or false to show as dash
+                                                showFieldAsBox: false,
+                                                //runs when a code is typed in
+                                                onCodeChanged: (String code) {
+                                                  print(code);
+                                                  //handle validation or checks here
                                                 },
+                                                //runs when every textfield is filled
+                                                onSubmit: (String
+                                                verificationCode) {
+                                                  print(verificationCode);
+                                                  read.onOtpEntered(
+                                                      verificationCode);
+                                                }, // end onSubmit
                                               ),
                                               SizedBox(
                                                 height: 20,
@@ -494,8 +504,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   ),
                                                   // style: style,
                                                   onPressed: () {
-                                                    read.onOtpSubmitPressed(
-                                                        context);
+                                                    read.onCodeVerification(context);
                                                   },
                                                   child: Text(
                                                     'Submit',

@@ -220,9 +220,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                 ),
               ),
             ),
-
             ////////////////////////
-
             GestureDetector(
               onTap: () {
 
@@ -307,7 +305,6 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
               ),
             ),
             ////////////////////
-
             Container(
               margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
               padding: EdgeInsets.only(bottom: 15.w),
@@ -344,9 +341,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                 ],
               ),
             ),
-
             /////////////////////
-
             GestureDetector(
               onTap: () {
 

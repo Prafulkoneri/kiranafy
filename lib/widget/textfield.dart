@@ -209,10 +209,12 @@ class MobileNoTextFormField extends StatelessWidget {
   final void Function(CountryCode)? onCountryCodeChanged;
   final void Function(String)? onChanged;
   final String? initialSelection;
+  final bool ? readOnly;
 
   const MobileNoTextFormField({
     Key? key,
     this.enableOrder,
+    this.readOnly,
     this.onChanged,
     this.initialSelection,
     required this.controller,
@@ -233,6 +235,7 @@ class MobileNoTextFormField extends StatelessWidget {
                   color:
                       enableOrder ?? false ? Color(0xffE0E0E0) : Colors.white)),
           child: CountryCodePicker(
+            enabled: readOnly==true?false:true,
             flagWidth: 20.w,
             flagDecoration: BoxDecoration(),
             padding: EdgeInsets.zero,
@@ -254,6 +257,7 @@ class MobileNoTextFormField extends StatelessWidget {
         ),
         Expanded(
           child: PrimarySTextFormField(
+            readOnly: readOnly,
             controller: controller,
             lengthLimitingTextInputFormatter:
                 LengthLimitingTextInputFormatter(10),
