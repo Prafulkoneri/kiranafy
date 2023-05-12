@@ -7,7 +7,7 @@ class MobileNoRegisterRepo {
       MobNoRegisterReqModel reqModel) async {
     try{
       print(reqModel.toJson());
-      return await http.post(Uri.parse(Endpoint.shopOwnerRegister),body: reqModel.toJson());
+      return await http.post(Uri.parse(Endpoint.shopOwnerRegisterMobileNo),body: reqModel.toJson());
     }
     catch(e){
       throw Exception(e);

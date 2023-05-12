@@ -1,3 +1,5 @@
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/login_model.dart';
+
 class ShopOwnerRegisterReqModel {
   String? shopName;
   String? shopOwnerName;
@@ -69,17 +71,5 @@ class ShopOwnerRegisterResModel {
     message = json["message"];
     successToken = json['success_token'] != null ? SuccessToken.fromJson(json['success_token']) : null;
     kycStatus = json["kyc_status"];
-  }
-}
-
-class SuccessToken {
-  String? token;
-
-  SuccessToken({
-    this.token,
-  });
-
-  SuccessToken.fromJson(Map<String, dynamic> json) {
-    token = json["token"];
   }
 }

@@ -9,19 +9,24 @@ import 'package:http/http.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/check_mob_no_exist_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/login_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/mobile_no_register_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/check_mob_no_exist_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/mob_no_register_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/repository/shop_login_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/repository/shop_owner_register_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_sign_in_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:otp_text_field/otp_text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopSignInController extends ChangeNotifier {
   CheckMobileNoExistRepo checkMobileNoExistRepo = CheckMobileNoExistRepo();
   MobileNoRegisterRepo mobileNoRegisterRepo = MobileNoRegisterRepo();
+  ShopLoginRepo shopLoginRepo=ShopLoginRepo();
 
   bool isVerifyChecked = false;
   TextEditingController mobController = TextEditingController();
@@ -41,6 +46,12 @@ class ShopSignInController extends ChangeNotifier {
   }
 
   Future<void> onNewShopPressed(context)async{
+    if(mobController.text.length<10){
+      Utils.showPrimarySnackbar(context,"Please Enter Mobile No",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
   if(!isNewShopBtnEnabled){
     Utils.showPrimarySnackbar(context,"The Number is Already Registered",
         type: SnackType.success);
@@ -142,6 +153,12 @@ class ShopSignInController extends ChangeNotifier {
   }
 
   Future<void> onLoginClick(context) async {
+    if(mobController.text.length<10){
+      Utils.showPrimarySnackbar(context,"Please Enter Mobile No",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
     if(!isLoginBtnEnabled){
       Utils.showPrimarySnackbar(context,"Please Sign Up",
           type: SnackType.success);
@@ -172,9 +189,13 @@ class ShopSignInController extends ChangeNotifier {
   );
 
   Future<void> mobileRegister(context)async{
+    SharedPreferences pref=await SharedPreferences.getInstance();
     mobileNoRegisterRepo.mobileNoRegister(mobNoRegisterReqModel).then((response){
+      print(response.body);
       final result = MobNoRegisterResModel.fromJson(jsonDecode(response.body));
         if (response.statusCode == 200) {
+          pref.setString("countryCode",result.countryCode??"");
+          pref.setString('mobileNo',result.mobileNo??"");
          Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopRegistrationView()));
         } else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -193,4 +214,34 @@ class ShopSignInController extends ChangeNotifier {
       },
     );
   }
+  LoginReqModel get loginReqModel=>LoginReqModel(
+    countryCode: countryCode,
+    mobileNo: mobController.text,
+  );
+
+  Future<void> onLogin(context)async{
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    shopLoginRepo.shopLogin(loginReqModel).then((response){
+      final result=LoginResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        pref.setString("token",result.successToken?.token??"");
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView()));
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
 }

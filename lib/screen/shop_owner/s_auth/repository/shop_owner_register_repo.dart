@@ -6,7 +6,7 @@ class ShopOwnerRegisterRepo {
       ShopOwnerRegisterReqModel reqModel) async {
     try{
       print(reqModel.toJson());
-      return await http.post(Uri.parse(Endpoint.shopOwnerRegister),body: reqModel.toJson());
+      return await http.post(Uri.parse(Endpoint.shopOwnerLogin),body: reqModel.toJson());
     }
     catch(e){
       throw Exception(e);

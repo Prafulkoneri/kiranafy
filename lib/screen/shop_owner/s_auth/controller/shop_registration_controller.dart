@@ -149,6 +149,7 @@ class ShopRegistrationController extends ChangeNotifier {
     notifyListeners();
   }
 
+
   GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
         cityId: cityId.toString(),
       );
@@ -162,6 +163,7 @@ class ShopRegistrationController extends ChangeNotifier {
     shopId = int.parse(value.toString());
     notifyListeners();
   }
+
 
   Future<void> getAreaList(context) async {
     registrationDataRepo.getAreaList(_areaListReqModel).then((response) {
