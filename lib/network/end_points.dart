@@ -21,10 +21,11 @@ class Endpoint {
 
   static const String getCityList = '${baseUrl}lsm-city-list';
   //Get Area List
-  static const String getAreaList = '${baseUrl}lsm-area-list';
-  //Get Area List
-  static const String shopOwnerRegister = '${baseUrl}lsm-shop-owner-register';
-  //Get Area List
-  static const String shopOwnerRegisterMobileNo =
-      '${baseUrl}lsm-shop-owner-register-mobile-number';
+  static const String getAreaList='${baseUrl}lsm-area-list';
+  // Shop Owner Register
+  static const String shopOwnerRegister='${baseUrl}lsm-shop-owner-register';
+  // Shop Owner Register Mobile No
+  static const String shopOwnerRegisterMobileNo='${baseUrl}lsm-shop-owner-register-mobile-number';
+  // Shop Owner Register Mobile No
+  static const String shopOwnerLogin='${baseUrl}lsm-shop-owner-login';
 }

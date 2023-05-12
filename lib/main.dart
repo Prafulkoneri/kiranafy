@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/screen/customer/about_us.dart';
+import 'package:local_supper_market/screen/customer/customerList.dart';
+import 'package:local_supper_market/screen/customer/review/view/c_review_view.dart';
 import 'package:local_supper_market/screen/customer/account.dart';
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/accounts.dart';
@@ -15,7 +15,6 @@ import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
@@ -91,7 +90,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SplashScreen());
+              home: CustomerList());
         });
   }
 }

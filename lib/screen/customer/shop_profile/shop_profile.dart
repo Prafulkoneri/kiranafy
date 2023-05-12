@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/Review.dart';
+import 'package:local_supper_market/screen/customer/review/view/c_review_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/category.dart';
 
 import 'package:local_supper_market/screen/customer/home/view/category1.dart';
@@ -142,7 +142,8 @@ class _ShopProfileState extends State<ShopProfile> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Review()),
+                              MaterialPageRoute(
+                                  builder: (context) => CReviewScreenView()),
                             );
                           },
                           child: Container(
