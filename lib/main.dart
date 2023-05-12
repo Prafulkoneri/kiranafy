@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SEditProfileView());
+              home: SplashScreen());
         });
   }
 }
