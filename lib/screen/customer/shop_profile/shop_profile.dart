@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/review/view/c_review_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/category.dart';
 
 import 'package:local_supper_market/screen/customer/home/view/category1.dart';
@@ -116,57 +117,71 @@ class _ShopProfileState extends State<ShopProfile> {
                 Positioned(
                   //<-- SEE HERE
                   // right: 15.w,
-                  left: 15.w,
-                  top: 160.w,
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "New Balaji Trading Company",
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              // letterSpacing: .5,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 45.w),
-                        child: Container(
-                          height: 24.h,
-                          width: 55.w,
-                          decoration: BoxDecoration(
-                            color: yellow,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                  // left: 0.w,
+                  bottom: 10.w,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 16.w),
+                    width: ScreenUtil().screenWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            "New Balaji Trading Company",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  // letterSpacing: .5,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/images/star.svg",
-                                height: 14.h,
-                                width: 14.w,
-                              ),
-                              SizedBox(
-                                width: 4.3.w,
-                              ),
-                              Text(
-                                "4.5",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      letterSpacing: .5,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CReviewScreenView()),
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 15.w),
+                            height: 24.h,
+                            width: 55.w,
+                            decoration: BoxDecoration(
+                              color: yellow,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/images/star.svg",
+                                  height: 14.h,
+                                  width: 14.w,
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  width: 4.3.w,
+                                ),
+                                Text(
+                                  "4.5",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black,
+                                        // letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -174,6 +189,7 @@ class _ShopProfileState extends State<ShopProfile> {
             ),
           ),
           Container(
+            padding: EdgeInsets.all(12.w),
             height: 70.h,
             decoration: BoxDecoration(
               border: Border(
@@ -184,47 +200,46 @@ class _ShopProfileState extends State<ShopProfile> {
 
             // color: Colors.white,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 12.w, top: 20.w, bottom: 20.w),
-                  child: SvgPicture.asset(
-                    'assets/images/location2.svg',
-                    width: 23.w,
-                    height: 28.h,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 8.w, top: 15.w, bottom: 15.w),
-                  child: Text(
-                    "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                          color: Black,
-                          // letterSpacing: .5,
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/location2.svg',
+                      width: 23.w,
+                      height: 28.h,
                     ),
-                  ),
+                    SizedBox(
+                      width: 8.w,
+                    ),
+                    Text(
+                      "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                            color: Black,
+                            // letterSpacing: .5,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 40.h, top: 12.w, bottom: 12.w),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/call.svg',
-                        // width: 15.w,
-                        // height: 19.h,
-                      ),
-                      SizedBox(
-                        width: 13.w,
-                      ),
-                      SvgPicture.asset(
-                        'assets/images/fvrt.svg',
-                        // width: 15.w,
-                        // height: 19.h,
-                      ),
-                    ],
-                  ),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/call.svg',
+                      // width: 15.w,
+                      // height: 19.h,
+                    ),
+                    SizedBox(
+                      width: 13.w,
+                    ),
+                    SvgPicture.asset(
+                      'assets/images/fvrt.svg',
+                      // width: 15.w,
+                      // height: 19.h,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -259,10 +274,10 @@ class _ShopProfileState extends State<ShopProfile> {
                   },
                   child: Text(
                     "See all",
-                    style: GoogleFonts.dmSans(
+                    style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                           color: CouponsText,
-                          letterSpacing: .3,
+                          // letterSpacing: .3,
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w500),
                     ),

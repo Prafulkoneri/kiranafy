@@ -190,7 +190,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                         width: 110.w,
                         decoration: BoxDecoration(boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
+                            color: Colors.red.withOpacity(0.05),
                             blurRadius: 10.0,
                           ),
                         ]),

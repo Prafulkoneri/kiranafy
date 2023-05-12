@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/screen/customer/about_us.dart';
 import 'package:local_supper_market/screen/customer/account.dart';
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/accounts.dart';
@@ -30,7 +29,6 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 
@@ -92,7 +90,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SSubscriptionScreenView());
+              home: SplashScreen());
         });
   }
 }
