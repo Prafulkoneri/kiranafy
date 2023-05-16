@@ -6,9 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import 'package:provider/provider.dart';
 
@@ -24,6 +27,8 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
   Widget build(BuildContext context) {
     final read = context.read<SDashBoardController>();
     final watch = context.watch<SDashBoardController>();
+    final watchMainScreen = context.watch<SMainScreenController>();
+    final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
@@ -206,41 +211,51 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 width: 19.w,
               ),
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(
-                      left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
-                  // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                  // height: 50.h,/
-                  decoration: BoxDecoration(
-                      color: SplashText,
-                      // border: Border.all(width: 1, color: Black),
-                      borderRadius: BorderRadius.circular(8)),
+                child: InkWell(
+                  onTap: (){
+                    PersistentNavBarNavigator.pushNewScreen(
+                      context,
+                      screen: SSCategoryListView(),
+                      withNavBar: true,
+                      pageTransitionAnimation: PageTransitionAnimation.sizeUp
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                    // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                    // height: 50.h,/
+                    decoration: BoxDecoration(
+                        color: SplashText,
+                        // border: Border.all(width: 1, color: Black),
+                        borderRadius: BorderRadius.circular(8)),
 
-                  child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "120",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
+                    child: Column(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "120",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w700),
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Total Customer Ordered",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              // letterSpacing: .5,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700),
+                        Text(
+                          "Total Customer Ordered",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -419,7 +434,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    read.onCategorySelect(context);
+readMainScreen.onCategoryPressed(context);
                   },
                   child: Container(
                     padding: EdgeInsets.only(

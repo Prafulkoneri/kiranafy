@@ -22,13 +22,14 @@ class SSubscriptionController extends ChangeNotifier{
   Future<void> getSubscriptionPlanDetails(context)async{
     SharedPreferences pref=await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    subscriptionPlansRepo.getSubscriptionPlans("5|XkqvWDZhM5U2IgTVXVEmTQHXgTP88WALbk6fGK6O").then((response){
+    subscriptionPlansRepo.getSubscriptionPlans(pref.getString("successToken")).then((response){
 
       final result = ShopSubscriptionPlansResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
         print(response.body);
         subscriptionData=result.subscriptionData;
+        notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

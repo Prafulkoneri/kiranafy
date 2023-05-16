@@ -5,7 +5,7 @@ class ShopAllCategoriesRepo {
   Future<http.Response> shopAllCategoriesList() async {
     try {
       return await http.get(Uri.parse(Endpoint.categorieslist), headers: {
-        "Authorization": "Bearer 7|gzVC2Sm1OLUy7pcRfPuXS8oGti47SlblBSTja7yq",
+        "Authorization": "Bearer 3|5ktydqqG4ed3sXnYyyuoXxik17T2IpjwZXqxRaCn",
         'Content-Type': 'application/json',
       });
     } catch (e) {

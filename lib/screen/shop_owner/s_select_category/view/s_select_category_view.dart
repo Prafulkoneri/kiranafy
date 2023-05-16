@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -26,15 +27,18 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
   Widget build(BuildContext context) {
     final watch = context.watch<SSelectCategoryController>();
     final read = context.read<SSelectCategoryController>();
+    final watchMainScreen = context.watch<SMainScreenController>();
+    final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () {
+          onActionTap: () async{
             print("hello");
-            read.onAppBarActionPressed(context);
+           await read.addCategory(context);
+            readMainScreen.onCategorySelectUpdatePressed(context);
           },
         ),
       ),
@@ -52,7 +56,9 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
           itemBuilder: (BuildContext context, int index) {
             final element = watch.categoriesList?[index];
             return GestureDetector(
-              onTap: () {},
+              onTap:(){
+                read.onCategorySelected(index,element?.id);
+              },
               child: Container(
                 decoration: BoxDecoration(),
                 child: Column(
@@ -65,20 +71,21 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                           height: 60.w,
                           width: 80.w,
                         ),
-                        index == 0 || index == 3 || index == 8
-                            ? Positioned(
-                                right: -5.w,
-                                top: -5.w,
-                                child: SvgPicture.asset(
-                                    "assets/icons/category_select.svg"))
-                            : Container()
+                        Positioned(
+                                right: 0.w,
+                                top: 0.w,
+                                child: GestureDetector(
+
+                                  child: watch.selectedCategoryList[index]?SvgPicture.asset(
+                                      "assets/icons/category_select.svg"):Container(),
+                                )),
                       ],
                     ),
                     SizedBox(
                       height: 5.w,
                     ),
                     Text(
-                      "${element?.categoryImageName}",
+                      "${element?.categoryName}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w500,

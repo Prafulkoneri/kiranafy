@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/bottom_nav_1.dart';
+import 'package:local_supper_market/bottom_navigation_bar.dart';
 import 'package:local_supper_market/screen/customer/account.dart';
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/accounts.dart';
@@ -100,7 +102,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SSCategoryListView());
+              home: BottomNavigationBarScreen());
         });
   }
 }

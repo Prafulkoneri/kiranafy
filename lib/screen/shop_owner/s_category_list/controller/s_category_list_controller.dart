@@ -7,6 +7,7 @@ import 'package:local_supper_market/screen/shop_owner/s_category_list/repository
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../s_products/view/shop_custome_products_view.dart';
 
@@ -37,7 +38,8 @@ class SCategoryListController extends ChangeNotifier {
 
   ////////////////// shop owner get selected categories list/////
   Future<void> shopOwnerSelectedCategoriesList(context) async {
-    SelectedCategoriesListRepo.shopSelectedCategoriesList().then((response) {
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    SelectedCategoriesListRepo.shopSelectedCategoriesList(pref.getString("successToken")).then((response) {
       print(response.statusCode);
       print(response.body);
       final result =

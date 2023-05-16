@@ -40,6 +40,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           title: "Categories",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
+
             readMainScreen.onCategoryAddPressed();
           },
         ),
@@ -51,7 +52,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           ),
           ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 15.w),
-              itemCount: watch.selectedCategoriesList?.length,
+              itemCount: watch.selectedCategoriesList?.length ?? 0,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               itemBuilder: (BuildContext, index) {
