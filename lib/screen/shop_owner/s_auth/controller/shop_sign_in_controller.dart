@@ -52,10 +52,28 @@ class ShopSignInController extends ChangeNotifier {
       notifyListeners();
       return;
     }
+    if(!isVerifyChecked){
+      Utils.showPrimarySnackbar(context,"Please agree our terms and condition",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
   if(!isNewShopBtnEnabled){
     Utils.showPrimarySnackbar(context,"The Number is Already Registered",
         type: SnackType.success);
   }
+    await _auth.verifyPhoneNumber(
+        phoneNumber: "$countryCode${mobController.text}",
+        verificationCompleted: (phoneAuthCredential) async {},
+        verificationFailed: (verificationFailed) {
+          Utils.showPrimarySnackbar(context,verificationFailed,
+              type: SnackType.error);
+        },
+        codeSent: (verificationID, resendingToken) async {
+          LoginScreen.SHOW_OTP_FORM_WIDGET;
+          this.verificationID = verificationID;
+        },
+        codeAutoRetrievalTimeout: (verificationID) async {});
   }
 
   void onVerifyChecked(value) {
@@ -74,19 +92,22 @@ class ShopSignInController extends ChangeNotifier {
       );
 
   Future<void> checkMobNoExist(context) async {
-    await checkMobileNoExistRepo
-        .checkMobileNoExist(_checkMobNoExistReqModel)
-        .then((response) {
-      final result =
-          CheckMobNoExistResModel.fromJson(jsonDecode(response.body));
-      if (mobController.text.length == 10) {
+    if (mobController.text.length == 10) {
+      await checkMobileNoExistRepo
+          .checkMobileNoExist(_checkMobNoExistReqModel)
+          .then((response) {
+            print(response.body);
+        final result =
+        CheckMobNoExistResModel.fromJson(jsonDecode(response.body));
+
         if (response.statusCode == 200) {
-          kycVerificationStatus=result.kycUploaded??"";
+          print(response.body);
+          kycVerificationStatus = result.kycUploaded ?? "";
           print(kycVerificationStatus);
           print(result.kycUploaded);
           print(result.registrationCompleted);
           if (result.kycUploaded == "yes" &&
-              result.registrationCompleted=="yes") {
+              result.registrationCompleted == "yes") {
             isLoginBtnEnabled = true;
             isNewShopBtnEnabled = false;
             print(isNewShopBtnEnabled);
@@ -95,36 +116,36 @@ class ShopSignInController extends ChangeNotifier {
             notifyListeners();
             return;
           }
-          if(result.kycUploaded=="no" && result.registrationCompleted=="yes"){
+          if (result.kycUploaded == "no" &&
+              result.registrationCompleted == "yes") {
             isLoginBtnEnabled = false;
             isNewShopBtnEnabled = true;
             Utils.showPrimarySnackbar(context, result.message,
                 type: SnackType.success);
             notifyListeners();
             return;
-
           }
-          else{
-            isNewShopBtnEnabled=true;
-            isLoginBtnEnabled=false;
+          else {
+            isNewShopBtnEnabled = true;
+            isLoginBtnEnabled = false;
             notifyListeners();
           }
         } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+            (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    }
   }
 
   void onOtpEntered(value) {
@@ -142,13 +163,24 @@ class ShopSignInController extends ChangeNotifier {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
 
       if (authCred.user != null) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ShopDashBoard()));
+        if(isLoginBtnEnabled){
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => MainScreenView()));
+          return;
+        }
+        else{
+          mobileRegister(context);
+
+        }
+
+      }
+      else{
+        Utils.showPrimarySnackbar(context, "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again", type: SnackType.error);
       }
     } on FirebaseAuthException catch (e) {
-      print(e.message);
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Some Error Occured. Try Again Later')));
+      print("888");
+      print(e.message);print("888");
+      Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
     }
   }
 
@@ -159,22 +191,18 @@ class ShopSignInController extends ChangeNotifier {
       notifyListeners();
       return;
     }
+    if(!isVerifyChecked){
+      Utils.showPrimarySnackbar(context,"Please agree our terms and condition",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
     if(!isLoginBtnEnabled){
       Utils.showPrimarySnackbar(context,"Please Sign Up",
           type: SnackType.success);
       return;
     }
-    await _auth.verifyPhoneNumber(
-        phoneNumber: "$countryCode${mobController.text}",
-        verificationCompleted: (phoneAuthCredential) async {},
-        verificationFailed: (verificationFailed) {
-          print(verificationFailed);
-        },
-        codeSent: (verificationID, resendingToken) async {
-          LoginScreen.SHOW_OTP_FORM_WIDGET;
-          this.verificationID = verificationID;
-        },
-        codeAutoRetrievalTimeout: (verificationID) async {});
+
   }
 
   Future<void> onCodeVerification(context) async {
@@ -224,7 +252,7 @@ class ShopSignInController extends ChangeNotifier {
     shopLoginRepo.shopLogin(loginReqModel).then((response){
       final result=LoginResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        pref.setString("token",result.successToken?.token??"");
+        pref.setString("sucessToken",result.successToken?.token??"");
         Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView()));
       } else {
         Utils.showPrimarySnackbar(context, result.message,

@@ -9,7 +9,8 @@ import 'package:local_supper_market/screen/customer/advertisement_form/advertise
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/splash/splash.dart';
+import 'package:local_supper_market/screen/customer/splash/controller/splash_controller.dart';
+import 'package:local_supper_market/screen/customer/splash/view/splash_view.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_registration_controller.dart';
@@ -29,6 +30,8 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_subscription_plans_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 
@@ -47,6 +50,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => SplashController()),
         ChangeNotifierProvider(create: (_) => MainScreenController()),
         ChangeNotifierProvider(create: (_) => OnBoardingController()),
         ChangeNotifierProvider(create: (_) => CustomerSignInController()),
@@ -90,7 +94,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SplashScreen());
+              home: SSubscriptionScreenView());
         });
   }
 }

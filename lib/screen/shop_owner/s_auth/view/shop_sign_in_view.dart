@@ -202,6 +202,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                               style: TextStyle(
                                   color: Black,
                                   fontSize: 16.sp,
+                                  height: 1.3.w,
                                   fontWeight: FontWeight.w400),
                               children: [
                                 TextSpan(
@@ -309,7 +310,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   padding: EdgeInsets.only(
                                                       top: 20.0.h),
                                                   child: Text(
-                                                    "We have sent SMS to :\n046 XXX XX XX",
+                                                    "We have sent SMS to :\n ${watch.mobController.text.isNotEmpty?watch.mobController.text.substring(0,3):""} XXX XX XX",
                                                     style: GoogleFonts.inter(
                                                       textStyle: TextStyle(
                                                           color: Black,
@@ -484,7 +485,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                 padding: EdgeInsets.only(
                                                     top: 20.0.h),
                                                 child: Text(
-                                                  "We have sent SMS to :\n046 XXX XX XX",
+                                                  "We have sent SMS to :\n ${watch.mobController.text.isNotEmpty?watch.mobController.text.substring(0,3):""} XXX XX XX",
                                                   style: GoogleFonts.inter(
                                                     textStyle: const TextStyle(
                                                         color: Black,

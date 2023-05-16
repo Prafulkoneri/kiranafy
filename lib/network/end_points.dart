@@ -18,7 +18,7 @@ class Endpoint {
   ////Shop Update Profile
   static const String ShopUpdateAccountDetails =
       '${baseUrl}lsm-shop-owner-update-account-details';
-
+//Shop city List
   static const String getCityList = '${baseUrl}lsm-city-list';
   //Get Area List
   static const String getAreaList='${baseUrl}lsm-area-list';
@@ -26,8 +26,8 @@ class Endpoint {
   static const String shopOwnerRegister='${baseUrl}lsm-shop-owner-register';
   // Shop Owner Register Mobile No
   static const String shopOwnerRegisterMobileNo='${baseUrl}lsm-shop-owner-register-mobile-number';
-  // Shop Owner Register Mobile No
-  static const String shopOwnerLogin='${baseUrl}lsm-shop-owner-login';
-  // Shop Owner Register Mobile No
+  // Shop Owner Register
+  static const String shopOwnerLogin='${baseUrl}lsm-shop-owner-register';
+  // Shop Owner Subscription Plan
   static const String subscriptionPlan='${baseUrl}lsm-shop-owner-get-subscriptions-list';
 }
