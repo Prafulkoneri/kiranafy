@@ -32,6 +32,12 @@ class Endpoint {
   // Shop Owner Register Mobile No
   static const String subscriptionPlan =
       '${baseUrl}lsm-shop-owner-get-subscriptions-list';
+
+  /// all Categories list
   static const String categorieslist =
       '${baseUrl}lsm-shop-owner-get-category-list';
+
+  ///Shop Owner get Selected Categories List
+  static const String shopownerselectedcategorieslist =
+      '${baseUrl}lsm-shop-owner-get-selected-categories';
 }
