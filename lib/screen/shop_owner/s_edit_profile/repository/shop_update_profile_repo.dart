@@ -12,7 +12,7 @@ class UpdateProfileRepo {
           body: reqModel.toJson(),
           headers: {
             "Authorization":
-                "Bearer 6|5EHy0ExJuBjXKdXqvkuwmVngPXfGQGzalC9EARa1",
+                "Bearer 1|6IsMSEsKCuGqH0aOHPhy8uAp3bMznB7PWGxbuhZ3",
           });
     } catch (e) {
       throw Exception(e);

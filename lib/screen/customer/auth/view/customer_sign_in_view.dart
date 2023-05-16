@@ -56,7 +56,7 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 150.w,
+                      height: 140.w,
                     ),
                     Image.asset(
                       "assets/images/splash4.png",
@@ -108,54 +108,28 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                     SizedBox(
                       height: 120.h,
                     ),
-                    // Padding(
-                    //   padding:
-                    //       EdgeInsets.only(left: 28.w, right: 23.w, top: 82.h),
-                    //   child: SizedBox(
-                    //     height: 48.h,
-                    //     width: 334.w,
-                    //     child: TextField(
-                    //       decoration: InputDecoration(
-                    //         fillColor: Colors.white,
-                    //         filled: true,
-                    //         border:
-                    //             OutlineInputBorder(borderSide: BorderSide.none),
-                    //         // labelText: 'Name',
-                    //         hintText: 'Name',
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-
-
-
                     Padding(
-                      padding: EdgeInsets.only(
-                          left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              bottom: 1,
-                              top: 1,
-                              left: 0,
-                              child: Container(
-                                // height: 200.h,
-                                width: 70.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
+                      padding: EdgeInsets.only(left: 28.w, right: 23.w),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            bottom: 1,
+                            top: 1,
+                            left: 0,
+                            child: Container(
+                              // height: 200.h,
+                              width: 70.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-
-
-                            MobileNoTextFormField(
-                              controller: watch.mobileController,
-                            ),
-                          ],
-                        ),
+                          ),
+                          MobileNoTextFormField(
+                            enableOrder: false,
+                            controller: watch.mobileController,
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
