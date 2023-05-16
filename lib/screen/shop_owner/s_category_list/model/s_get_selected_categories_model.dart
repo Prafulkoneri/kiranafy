@@ -1,49 +1,46 @@
-class AllCategoryResponseModel {
+class GetSelectedCategoryResponseModel {
   int? status;
   String? message;
-  List<CategoryData>? data;
+  List<SelectedCategoryData>? data;
 
-  AllCategoryResponseModel.fromJson(Map<String, dynamic> json) {
+  GetSelectedCategoryResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     if (json["data"] != null) {
-      data = <CategoryData>[];
+      data = <SelectedCategoryData>[];
       json["data"].forEach((v) {
-        data!.add(CategoryData.fromJson(v));
+        data!.add(SelectedCategoryData.fromJson(v));
       });
     }
   }
 
-  AllCategoryResponseModel({
+  GetSelectedCategoryResponseModel({
     required this.status,
     required this.message,
     required this.data,
   });
 }
 
-class CategoryData {
+class SelectedCategoryData {
   int? id;
   String? categoryName;
   int? categorySequence;
   String? categoryImagePath;
   String? categoryImageName;
-  String? selectedByShopOwner;
 
-  CategoryData({
+  SelectedCategoryData({
     required this.id,
     required this.categoryName,
     required this.categorySequence,
     required this.categoryImagePath,
     required this.categoryImageName,
-    required this.selectedByShopOwner,
   });
 
-  CategoryData.fromJson(Map<String, dynamic> json) {
+  SelectedCategoryData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     categoryName = json["category_name"];
     categorySequence = json["category_sequence"];
     categoryImagePath = json["category_image_path"];
     categoryImageName = json["category_image_name"];
-    selectedByShopOwner = json["selected_by_shop_owner"];
   }
 }

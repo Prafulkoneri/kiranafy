@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
@@ -19,6 +20,13 @@ class SSCategoryListView extends StatefulWidget {
 }
 
 class _SSCategoryListViewState extends State<SSCategoryListView> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<SCategoryListController>().initState(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<SCategoryListController>();
@@ -43,10 +51,11 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           ),
           ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 15.w),
-              itemCount: 5,
+              itemCount: watch.selectedCategoriesList?.length,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               itemBuilder: (BuildContext, index) {
+                final element = watch.selectedCategoriesList?[index];
                 return Column(
                   children: [
                     GestureDetector(
@@ -74,7 +83,8 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                             Container(
                               width: 55.w,
                               height: 40.w,
-                              child: Image.asset("assets/images/gridone.png"),
+                              child: Image.network(
+                                  "${element?.categoryImagePath}"),
                             ),
                             SizedBox(
                               width: 12.w,
@@ -85,7 +95,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                   Row(
                                     children: [
                                       Text(
-                                        "Cold Drinks & Juices",
+                                        "${element?.categoryName}",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 16.sp,

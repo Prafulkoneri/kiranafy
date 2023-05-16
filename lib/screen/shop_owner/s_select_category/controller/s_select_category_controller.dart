@@ -10,6 +10,11 @@ import 'package:local_supper_market/utils/Utils.dart';
 class SSelectCategoryController extends ChangeNotifier {
   ShopAllCategoriesRepo categoriesListRepo = ShopAllCategoriesRepo();
   List<CategoryData>? categoriesList;
+
+  Future<void> initState(context) async {
+    await getCategoriesList(context);
+  }
+
   void onAppBarActionPressed(context) {
     print("hello");
     Navigator.push(
@@ -17,7 +22,7 @@ class SSelectCategoryController extends ChangeNotifier {
   }
 
   /////////////////////////////////  Start All Categories List/////////////////////
-  Future<void> getCountryList(context) async {
+  Future<void> getCategoriesList(context) async {
     categoriesListRepo.shopAllCategoriesList().then((response) {
       print(response.statusCode);
       print(response.body);
