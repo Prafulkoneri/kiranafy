@@ -41,6 +41,7 @@ class ShopRegistrationController extends ChangeNotifier {
     mobController.text=pref.getString("mobileNo").toString();
     selectedCountryCode=pref.getString("countryCode").toString();
     await getCountryList(context);
+    notifyListeners();
   }
 
   void onOtpSubmitBtnPressed(context) {
@@ -272,12 +273,14 @@ class ShopRegistrationController extends ChangeNotifier {
   );
 
   Future<void> shopRegister(context)async{
+    SharedPreferences pref=await SharedPreferences.getInstance();
     shopOwnerRegisterRepo.shopOwnerRegistration(shopOwnerRegisterReqModel).then((response){
       final result = ShopOwnerRegisterResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
         print(response.body);
-     successToken=result.successToken?.token??"";
+        pref.setString("sucessToken",result.successToken?.token??"");
+       pref.setString("kycStatus", result.kycStatus.toString());
      notifyListeners();
      Navigator.push(context,MaterialPageRoute(builder: (context)=>SKycVerificationView()));
       } else {

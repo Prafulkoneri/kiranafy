@@ -1,5 +1,5 @@
 class ShopSubscriptionPlansResModel {
-  String? status;
+  int? status;
   String? message;
   List<SubscriptionData>? subscriptionData;
 
@@ -12,6 +12,7 @@ class ShopSubscriptionPlansResModel {
       subscriptionData = <SubscriptionData>[];
       json["data"].forEach((v) {
         subscriptionData!.add(SubscriptionData.fromJson(v));
+        print(subscriptionData?.length);
       });
     }
   }
