@@ -261,7 +261,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                               if (!watch.isLoginBtnEnabled) {
                                 return;
                               }
-                              if(!watch.isVerifyChecked){
+                              if (!watch.isVerifyChecked) {
                                 return;
                               }
                               showModalBottomSheet(
@@ -438,7 +438,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                             if (!watch.isNewShopBtnEnabled) {
                               return;
                             }
-                            if(!watch.isVerifyChecked){
+                            if (!watch.isVerifyChecked) {
                               return;
                             }
                             await showModalBottomSheet(
@@ -498,8 +498,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                               OtpTextField(
                                                 //  controller: otpController,
                                                 numberOfFields: 6,
-                                                borderColor:
-                                                Color(0xFF512DA8),
+                                                borderColor: Color(0xFF512DA8),
                                                 //set to true to show as box or false to show as dash
                                                 showFieldAsBox: false,
                                                 //runs when a code is typed in
@@ -508,8 +507,8 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   //handle validation or checks here
                                                 },
                                                 //runs when every textfield is filled
-                                                onSubmit: (String
-                                                verificationCode) {
+                                                onSubmit:
+                                                    (String verificationCode) {
                                                   print(verificationCode);
                                                   read.onOtpEntered(
                                                       verificationCode);
@@ -540,7 +539,8 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                                   ),
                                                   // style: style,
                                                   onPressed: () {
-                                                    read.onCodeVerification(context);
+                                                    read.onCodeVerification(
+                                                        context);
                                                   },
                                                   child: Text(
                                                     'Submit',

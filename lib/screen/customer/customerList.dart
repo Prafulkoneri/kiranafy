@@ -27,7 +27,7 @@ class _CustomerListState extends State<CustomerList> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           title: "Customers",
-          action: SvgPicture.asset("assets/icons/filter.svg"),
+          action: SvgPicture.asset("assets/images/filter.svg"),
           onActionTap: () {},
         ),
       ),
