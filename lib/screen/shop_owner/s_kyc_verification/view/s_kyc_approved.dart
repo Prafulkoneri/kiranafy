@@ -63,10 +63,6 @@ class _KycApprovedViewState extends State<KycApprovedView> {
                     style: GoogleFonts.poppins(
                       textStyle: TextStyle(
                           color: Color(0xff20BF55),
-                          // height: 1.5,
-
-                          // letterSpacing: .05,
-                          // overflow: TextOverflow.ellipsis,
                           fontSize: 32.sp,
                           fontWeight: FontWeight.w400),
                     ),

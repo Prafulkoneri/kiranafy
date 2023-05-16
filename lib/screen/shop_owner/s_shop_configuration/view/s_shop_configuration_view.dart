@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
@@ -17,6 +18,13 @@ class SShopConfigurationView extends StatefulWidget {
 }
 
 class _SShopConfigurationViewState extends State<SShopConfigurationView> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<SShopConfigurationController>().initState(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<SShopConfigurationController>();
@@ -82,6 +90,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 20.w,
               ),
               PrimarySTextFormField(
+                controller: watch.UpiIdController,
                 hintText: "Type UPI ID",
                 titleHeader: "UPI ID",
                 hintFontSize: 15.sp,
@@ -107,18 +116,20 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     // width: 155.w,
-                    child: SDropDownField(
-                      hint: "Opening Time",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      controller: watch.StartShopTimeController,
+                      // hint: "Opening Time",
+                      // hintSize: 15.sp,
                     ),
                   ),
                   SizedBox(
                     width: 12.w,
                   ),
                   Expanded(
-                    child: SDropDownField(
-                      hint: "Closing Time",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      controller: watch.EndShopTimeController,
+                      // hint: "Closing Time",
+                      // hintSize: 15.sp,
                     ),
                   ),
                 ],
@@ -127,6 +138,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 20.w,
               ),
               PrimarySTextFormField(
+                controller: watch.SupportNumberController,
                 titleHeader: "Support Number",
                 hintText: "Enter Support Number",
                 hintFontSize: 15.sp,
@@ -180,6 +192,27 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 ],
               ),
               SizedBox(
+                height: 15.w,
+              ),
+              Row(
+                children: [
+                  PrimaryCheckBox(
+                    onChanged: (value) {
+                      read.onDeliveryCharge();
+                    },
+                    value: watch.isDeliveryChargesSelected,
+                  ),
+                  Text(
+                    'Delivery Charges Free',
+                    style: TextStyle(
+                        color: Black1,
+                        // letterSpacing: .5,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ],
+              ),
+              SizedBox(
                 height: 45.w,
               ),
               Row(
@@ -215,9 +248,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: SDropDownField(
-                      hint: "1 to 500",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      hintText: "1 to 500", hintFontSize: 15.sp,
+                      // hint: "1 to 500",
+                      // hintSize: 15.sp,
                     ),
                   ),
                   SizedBox(
@@ -225,6 +259,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.FirstDeliveryController,
                       hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
                     ),
@@ -267,9 +302,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: SDropDownField(
-                      hint: "500 to 1200",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      hintText: "500 to 1200",
+                      hintFontSize: 15.sp,
                     ),
                   ),
                   SizedBox(
@@ -277,6 +312,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.SecondDeliveryController,
                       hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
                     ),
@@ -319,9 +355,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: SDropDownField(
-                      hint: "1200 to 2500",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      hintText: "1200 to 2500",
+                      hintFontSize: 15.sp,
                     ),
                   ),
                   SizedBox(
@@ -329,6 +365,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.ThirdDeliveryController,
                       hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
                     ),
@@ -371,9 +408,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: SDropDownField(
-                      hint: "2500 to 5000",
-                      hintSize: 15.sp,
+                    child: PrimarySTextFormField(
+                      hintText: "2500 to 5000",
+                      hintFontSize: 15.sp,
                     ),
                   ),
                   SizedBox(
@@ -382,6 +419,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   Expanded(
                     child: PrimarySTextFormField(
                       hintText: "Delivery Charge",
+                      controller: watch.FourthDeliveryController,
                       hintFontSize: 15.sp,
                     ),
                   ),
@@ -404,7 +442,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   PrimaryCheckBox(
-                    value: true,
+                    onChanged: (value) {
+                      read.onNineToTwelve();
+                    },
+                    value: watch.isNineToTwelve,
                   ),
                   Text(
                     '9am to 12pm',
@@ -418,7 +459,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     width: 70.w,
                   ),
                   PrimaryCheckBox(
-                    value: false,
+                    onChanged: (value) {
+                      read.onThreeToSix();
+                    },
+                    value: watch.isThreeToSix,
                   ),
                   Flexible(
                     child: Padding(
@@ -442,7 +486,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   PrimaryCheckBox(
-                    value: true,
+                    onChanged: (value) {
+                      read.onTwelveToThree();
+                    },
+                    value: watch.isTwelveToThree,
                   ),
                   Text(
                     '12pm to 3pm',
@@ -456,19 +503,19 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     width: 70.w,
                   ),
                   PrimaryCheckBox(
-                    value: false,
+                    onChanged: (value) {
+                      read.onSixToNine();
+                    },
+                    value: watch.isSixToNine,
                   ),
                   Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 0.w),
-                      child: Text(
-                        '6pm to 9pm',
-                        style: TextStyle(
-                            color: Black1,
-                            // letterSpacing: .5,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
+                    child: Text(
+                      '6pm to 9pm',
+                      style: TextStyle(
+                          color: Black1,
+                          // letterSpacing: .5,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
                 ],
