@@ -12,17 +12,16 @@ class ShopSubscriptionPlansResModel {
       subscriptionData = <SubscriptionData>[];
       json["data"].forEach((v) {
         subscriptionData!.add(SubscriptionData.fromJson(v));
-        print(subscriptionData?.length);
       });
     }
   }
 }
 
 class SubscriptionData{
-  String? id;
+  int? id;
   String? planName;
-  String? subscriptionPrice;
-  String? validityNumbers;
+  int? subscriptionPrice;
+  int? validityNumbers;
   String? validityIn;
   String? planBenifits;
 
@@ -35,11 +34,11 @@ class SubscriptionData{
       this.validityNumbers});
 
   SubscriptionData.fromJson(Map<String, dynamic> json) {
-    json["id"] = id;
-    json["plan_name"] = planName;
-    json["subscription_price"] = subscriptionPrice;
-    json["validity_numbers"] = validityNumbers;
-    json["validity_in"] = validityIn;
-    json["plan_benifits"] = planBenifits;
+     id = json["id"] ;
+     planName = json["plan_name"]  ;
+     subscriptionPrice = json["subscription_price"]  ;
+     validityNumbers  = json["validity_numbers"];
+    validityIn = json["validity_in"] ;
+     planBenifits = json["plan_benifits"] ;
   }
 }

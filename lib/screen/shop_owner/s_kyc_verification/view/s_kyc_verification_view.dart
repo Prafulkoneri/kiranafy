@@ -85,7 +85,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () async {
-                                  read.onFileUploadClicked();
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
@@ -147,7 +147,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () async {
-                                  read.onFileUploadClicked();
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
@@ -232,7 +232,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () async {
-                                  read.onFileUploadClicked();
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
@@ -301,7 +301,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () async {
-                                  read.onFileUploadClicked();
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(

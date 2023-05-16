@@ -1,5 +1,6 @@
 import 'dart:async';
 
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
@@ -14,19 +15,18 @@ class SplashController extends ChangeNotifier {
     Timer(Duration(seconds: 3), () async{
 
       SharedPreferences pref=await SharedPreferences.getInstance();
-      if(pref.getString("kycStatus")==null){
+      if(pref.getString("kycStatus")!=null){
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => SKycVerificationView()));
       }
-      if(pref.getString("sucessToken").toString()!=null){
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => MainScreenView()));
-      }
-      if(pref.getString("mobileNo")!=null) {
+      else if(pref.getString("mobileNo")!=null) {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => ShopRegistrationView()));
       }
-
+      else if(pref.getString("sucessToken").toString()!=null){
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => MainScreenView()));
+      }
       else{
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => OnBoardingScreenView()));

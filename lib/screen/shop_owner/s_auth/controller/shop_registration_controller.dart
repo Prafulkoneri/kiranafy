@@ -280,9 +280,11 @@ class ShopRegistrationController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print(response.body);
         pref.setString("sucessToken",result.successToken?.token??"");
+        pref.getString("sucessToken");
+
        pref.setString("kycStatus", result.kycStatus.toString());
      notifyListeners();
-     Navigator.push(context,MaterialPageRoute(builder: (context)=>SKycVerificationView()));
+     // Navigator.push(context,MaterialPageRoute(builder: (context)=>SKycVerificationView()));
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

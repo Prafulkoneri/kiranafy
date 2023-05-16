@@ -32,6 +32,10 @@ class Endpoint {
   // Shop Owner Register Mobile No
   static const String subscriptionPlan =
       '${baseUrl}lsm-shop-owner-get-subscriptions-list';
+  // Get Category List
   static const String categorieslist =
       '${baseUrl}lsm-shop-owner-get-category-list';
+  // Send KYC Verification Data
+  static const String kycVerification =
+      '${baseUrl}lsm-shop-owner-kyc-submit';
 }
