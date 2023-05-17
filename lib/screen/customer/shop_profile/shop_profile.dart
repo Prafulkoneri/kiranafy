@@ -46,8 +46,8 @@ class _ShopProfileState extends State<ShopProfile> {
       // backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(children: [
-          Padding(
-            padding: EdgeInsets.only(left: 19.w, top: 40.h, right: 20.w),
+          Container(
+            padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -74,123 +74,120 @@ class _ShopProfileState extends State<ShopProfile> {
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
                             color: SplashText1,
-                            // letterSpacing: .5,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10.w),
-            child: Stack(
-              children: [
-                Align(
-                  child: SizedBox(
-                    height: 181.0.h,
-                    // width: 390.0,
-                    child: const Carousel(
-                      images: [
-                        AssetImage(
-                          "assets/images/property1.png",
-                        ),
-                        AssetImage(
-                          "assets/images/property2.png",
-                        ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Stack(
+            children: [
+              Align(
+                child: SizedBox(
+                  height: 181.0.h,
+                  // width: 390.0,
+                  child: const Carousel(
+                    images: [
+                      AssetImage(
+                        "assets/images/property1.png",
+                      ),
+                      AssetImage(
+                        "assets/images/property2.png",
+                      ),
 
-                        // ExactAssetImage("images/image-carousel.jpeg"),
-                      ],
-                      autoplay: true,
-                      animationDuration: Duration(milliseconds: 1000),
-                      dotBgColor: Colors.red,
-                      showIndicator: false,
-                      // dotSize: 6.0,
-                      // dotSpacing: 15.0,
-                      // dotColor: Colors.lightGreenAccent,
-                      // borderRadius: true,
-                    ),
+                      // ExactAssetImage("images/image-carousel.jpeg"),
+                    ],
+                    autoplay: true,
+                    animationDuration: Duration(milliseconds: 1000),
+                    dotBgColor: Colors.red,
+                    showIndicator: false,
+                    // dotSize: 6.0,
+                    // dotSpacing: 15.0,
+                    // dotColor: Colors.lightGreenAccent,
+                    // borderRadius: true,
                   ),
                 ),
-                Positioned(
-                  //<-- SEE HERE
-                  // right: 15.w,
-                  // left: 0.w,
-                  bottom: 10.w,
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
-                    width: ScreenUtil().screenWidth,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            "New Balaji Trading Company",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  // letterSpacing: .5,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w700),
-                            ),
+              ),
+              Positioned(
+                //<-- SEE HERE
+                // right: 15.w,
+                // left: 0.w,
+                bottom: 10.w,
+                child: Container(
+                  padding: EdgeInsets.only(left: 15.w, right: 15.w),
+                  width: ScreenUtil().screenWidth,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "New Balaji Trading Company",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w700),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CReviewScreenView()),
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(right: 15.w),
-                            height: 24.h,
-                            width: 55.w,
-                            decoration: BoxDecoration(
-                              color: yellow,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/images/star.svg",
-                                  height: 14.h,
-                                  width: 14.w,
-                                ),
-                                SizedBox(
-                                  width: 4.3.w,
-                                ),
-                                Text(
-                                  "4.5",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                            ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CReviewScreenView()),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 5.w, horizontal: 10.w),
+                          decoration: BoxDecoration(
+                            color: yellow,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
-                        )
-                      ],
-                    ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/images/star.svg",
+                                height: 14.h,
+                                width: 14.w,
+                              ),
+                              SizedBox(
+                                width: 4.3.w,
+                              ),
+                              Text(
+                                "4.5",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black,
+                                      // letterSpacing: .5,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ],
-              // child:
-            ),
+              ),
+            ],
+            // child:
           ),
           Container(
             padding: EdgeInsets.all(12.w),
-            height: 70.h,
+            // height: 70.h,
             decoration: BoxDecoration(
               border: Border(
                 // top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
@@ -244,11 +241,13 @@ class _ShopProfileState extends State<ShopProfile> {
               ],
             ),
           ),
-          Padding(
+          SizedBox(
+            height: 20.h,
+          ),
+          Container(
             padding: EdgeInsets.only(
               left: 19.h,
-              right: 20.w,
-              top: 15.w,
+              right: 19.w,
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -286,10 +285,10 @@ class _ShopProfileState extends State<ShopProfile> {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 15.w),
-            child: const OfferProducts(),
+          SizedBox(
+            height: 15.h,
           ),
+          const OfferProducts(),
           Padding(
             padding: EdgeInsets.only(
               left: 19.h,

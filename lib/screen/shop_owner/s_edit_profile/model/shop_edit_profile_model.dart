@@ -18,6 +18,7 @@ class AccountDetailsResModel {
     required this.areas,
     required this.shopBannerImages,
   });
+
   AccountDetailsResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];

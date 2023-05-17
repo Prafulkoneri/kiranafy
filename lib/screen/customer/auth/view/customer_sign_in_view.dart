@@ -132,9 +132,11 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
                     Padding(
-                      padding:
-                          EdgeInsets.only(left: 25.w, top: 16.w, right: 0.w),
+                      padding: EdgeInsets.only(left: 25.w),
                       child: Row(
                         children: [
                           Text(
@@ -150,218 +152,207 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsets.only(top: 45.w, left: 24.w, right: 23.w),
-                      child: SizedBox(
-                        width: 330.w, // <-- Your width
-                        height: 45.h,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Button,
+                    SizedBox(
+                      height: 45.h,
+                    ),
+                    SizedBox(
+                      width: 300.w, // <-- Your width
+                      height: 45.h,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Button,
 
-                            // elevation: 3,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                            minimumSize: const Size(100, 40), //////// HERE
-                          ),
-                          // style: style,
-                          onPressed: () {
-                            showModalBottomSheet(
-                              backgroundColor: Colors.white,
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30))),
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Theme(
-                                  data: Theme.of(context)
-                                      .copyWith(canvasColor: Colors.white),
-                                  child: Material(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0)),
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            bottom: MediaQuery.of(context)
-                                                .viewInsets
-                                                .bottom),
-                                        // height: 335,
-                                        child: Padding(
-                                          padding: EdgeInsets.all(25.h),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            // mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Enter Verification Code",
+                          // elevation: 3,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          minimumSize: const Size(100, 40), //////// HERE
+                        ),
+                        // style: style,
+                        onPressed: () {
+                          showModalBottomSheet(
+                            backgroundColor: Colors.white,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30))),
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Theme(
+                                data: Theme.of(context)
+                                    .copyWith(canvasColor: Colors.white),
+                                child: Material(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(16.0),
+                                        topRight: Radius.circular(16.0)),
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      // height: 335,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(25.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          // mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Enter Verification Code",
+                                              style: GoogleFonts.inter(
+                                                textStyle: const TextStyle(
+                                                    color: Custlogin,
+                                                    letterSpacing: .5,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 20.0.h),
+                                              child: Text(
+                                                "We have sent SMS to :\n046 XXX XX XX",
                                                 style: GoogleFonts.inter(
                                                   textStyle: const TextStyle(
-                                                      color: Custlogin,
-                                                      letterSpacing: .5,
-                                                      fontSize: 20,
+                                                      color: Black,
+                                                      fontSize: 18,
                                                       fontWeight:
-                                                          FontWeight.w700),
+                                                          FontWeight.w500),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 20.0.h),
+                                            ),
+                                            OTPTextField(
+                                              length: 6,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              fieldWidth: 50,
+                                              style:
+                                                  const TextStyle(fontSize: 17),
+                                              textFieldAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              fieldStyle: FieldStyle.underline,
+                                              onCompleted: (pin) {
+                                                print("Completed: " + pin);
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            SizedBox(
+                                              width: 400, // <-- Your width
+                                              height: 60,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Button,
+                                                  // onPrimary: Colors.white,
+                                                  // shadowColor: Colors.greenAccent,
+                                                  elevation: 3,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              14.0)),
+                                                  minimumSize: const Size(
+                                                      100, 40), //////// HERE
+                                                ),
+                                                // style: style,
+                                                onPressed: () {
+                                                  read.onOtpSubmitPressed(
+                                                      context);
+                                                },
                                                 child: Text(
-                                                  "We have sent SMS to :\n046 XXX XX XX",
+                                                  'Submit',
                                                   style: GoogleFonts.inter(
                                                     textStyle: const TextStyle(
-                                                        color: Black,
+                                                        // color: SplashTex
                                                         letterSpacing: .5,
-                                                        fontSize: 18,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Resend OTP',
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: const TextStyle(
+                                                        // color: SplashTex
+                                                        letterSpacing: .5,
+                                                        fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.w500),
                                                   ),
                                                 ),
-                                              ),
-                                              OTPTextField(
-                                                length: 5,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                fieldWidth: 50,
-                                                style: const TextStyle(
-                                                    fontSize: 17),
-                                                textFieldAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                fieldStyle:
-                                                    FieldStyle.underline,
-                                                onCompleted: (pin) {
-                                                  print("Completed: " + pin);
-                                                },
-                                              ),
-                                              const SizedBox(
-                                                height: 20,
-                                              ),
-                                              SizedBox(
-                                                width: 400, // <-- Your width
-                                                height: 60,
-                                                child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    primary: Button,
-                                                    // onPrimary: Colors.white,
-                                                    // shadowColor: Colors.greenAccent,
-                                                    elevation: 3,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        14.0)),
-                                                    minimumSize: const Size(
-                                                        100, 40), //////// HERE
-                                                  ),
-                                                  // style: style,
-                                                  onPressed: () {
-                                                    read.onOtpSubmitPressed(
-                                                        context);
-                                                  },
-                                                  child: Text(
-                                                    'Submit',
-                                                    style: GoogleFonts.inter(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              // color: SplashTex
-                                                              letterSpacing: .5,
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 15.h,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Resend OTP',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              // color: SplashTex
-                                                              letterSpacing: .5,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                      )),
-                                );
-                              },
-                            );
-                          },
-                          child: Text(
-                            'Next',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  // color: SplashTex
-                                  letterSpacing: .5,
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w700),
-                            ),
+                                      ),
+                                    )),
+                              );
+                            },
+                          );
+                        },
+                        child: Text(
+                          'Next',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                // color: SplashTex
+                                letterSpacing: .5,
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don't have an account?",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black,
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                letterSpacing: .5,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        // Text("data")
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CustomerSignUp()),
+                            );
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                  color: Custlogin,
                                   letterSpacing: .5,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
-                          // Text("data")
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CustomerSignUp()),
-                              );
-                            },
-                            child: Text(
-                              "Sign Up",
-                              style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
-                                    color: Custlogin,
-                                    letterSpacing: .5,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     )
                   ],
                 ),

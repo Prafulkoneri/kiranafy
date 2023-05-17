@@ -89,19 +89,12 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 10.w, right: 30.w),
-                                  child: Card(
-                                      child: Image.asset(
-                                          "assets/images/redlabel.png")),
-                                ),
-                              ],
-                            ),
+                            Card(
+                                child: Image.asset(
+                              "assets/images/mango.png",
+                              height: 72.w,
+                              width: 114.w,
+                            )),
                             SizedBox(
                               height: 3.w,
                             ),

@@ -50,7 +50,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         read.onHomeScreenPressed();
                       },
@@ -100,7 +100,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                     ),
                     Row(
                       children: [
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             read.onShopPressed();
                           },
@@ -153,7 +153,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                     ),
                     Row(
                       children: [
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             read.onMyCartPressed();
                           },
@@ -203,7 +203,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                         ),
                       ],
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         read.onOfferPressed();
                       },
@@ -250,7 +250,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                               ],
                             ),
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         read.onAccountPressed();
                       },
