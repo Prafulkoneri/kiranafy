@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/account/view/account_view.dart';
@@ -41,6 +43,8 @@ class SMainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   void onCategoryPressed(context){
    currentIndex=0;
    currentScreen=SSCategoryListView();
@@ -83,6 +87,19 @@ class SMainScreenController extends ChangeNotifier {
   void onAccountPressed() {
     currentTab = 4;
     currentScreen = SAccountScreenView();
+    notifyListeners();
+  }
+
+  void onBackPressed(tabIndex,screenName){
+    currentTab=tabIndex;
+    currentScreen=screenName;
+    notifyListeners();
+  }
+  void onNavigation(tabIndex,screenName,context){
+    print(screenName);
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>screenName));
+    currentTab=tabIndex;
+    currentScreen=screenName();
     notifyListeners();
   }
 }

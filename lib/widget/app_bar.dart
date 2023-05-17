@@ -11,10 +11,12 @@ class PrimaryAppBar extends StatelessWidget {
   final Widget? action;
   final bool? isBackButtonEnabled;
   void Function()? onActionTap;
+ final void Function()? onBackBtnPressed;
   PrimaryAppBar(
       {Key? key,
       this.isBackButtonEnabled,
       required this.title,
+        this.onBackBtnPressed,
       this.action,
       this.onActionTap})
       : super(key: key);
@@ -36,7 +38,7 @@ class PrimaryAppBar extends StatelessWidget {
       leading: isBackButtonEnabled ?? true
           ? IconButton(
               icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed:onBackBtnPressed,
             )
           : Container(),
       title: Text(

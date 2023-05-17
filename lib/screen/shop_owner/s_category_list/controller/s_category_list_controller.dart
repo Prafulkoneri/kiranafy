@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/model/s_get_selected_categories_model.dart';
@@ -16,6 +16,7 @@ class SCategoryListController extends ChangeNotifier {
       ShopSelectedCategoriesRepo();
 
   List<SelectedCategoryData>? selectedCategoriesList;
+  bool isLoading = true;
 
   Future<void> initState(context) async {
     await shopOwnerSelectedCategoriesList(context);
@@ -38,15 +39,18 @@ class SCategoryListController extends ChangeNotifier {
 
   ////////////////// shop owner get selected categories list/////
   Future<void> shopOwnerSelectedCategoriesList(context) async {
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    SelectedCategoriesListRepo.shopSelectedCategoriesList(pref.getString("successToken")).then((response) {
+    isLoading = true;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    SelectedCategoriesListRepo.shopSelectedCategoriesList(
+            pref.getString("successToken"))
+        .then((response) {
       print(response.statusCode);
-      print(response.body);
+      log(response.body);
       final result =
           GetSelectedCategoryResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("${response.body}");
         selectedCategoriesList = result.data;
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

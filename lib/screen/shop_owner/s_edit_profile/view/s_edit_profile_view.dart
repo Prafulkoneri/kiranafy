@@ -63,6 +63,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(

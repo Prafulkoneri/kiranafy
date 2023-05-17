@@ -18,6 +18,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/repository/shop_own
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_sign_in_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:otp_text_field/otp_text_field.dart';
@@ -39,6 +40,7 @@ class ShopSignInController extends ChangeNotifier {
   bool isLoginBtnEnabled = false;
   bool isNewShopBtnEnabled = false;
   String kycVerificationStatus="";
+  String shopRegistrationStatus="";
 
 
   void onOtpSubmitPressed(context)async {
@@ -103,6 +105,8 @@ class ShopSignInController extends ChangeNotifier {
         if (response.statusCode == 200) {
           print(response.body);
           kycVerificationStatus = result.kycUploaded ?? "";
+          shopRegistrationStatus = result.registrationCompleted ?? "";
+
           print(kycVerificationStatus);
           print(result.kycUploaded);
           print(result.registrationCompleted);
@@ -224,12 +228,20 @@ class ShopSignInController extends ChangeNotifier {
         if (response.statusCode == 200) {
           pref.setString("countryCode",result.countryCode??"");
           pref.setString('mobileNo',result.mobileNo??"");
-         Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopRegistrationView()));
+          pref.setString('status','numberRegistered');
+          print(pref.getString('status'));
+          if(kycVerificationStatus=="no" && shopRegistrationStatus=="yes"){
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => SKycVerificationView()));
+          }
+else {
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => ShopRegistrationView()));
+          }
         } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
-
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
@@ -253,6 +265,7 @@ class ShopSignInController extends ChangeNotifier {
       final result=LoginResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         pref.setString("sucessToken",result.successToken?.token??"");
+        pref.setString("status","loggedIn");
         Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView()));
       } else {
         Utils.showPrimarySnackbar(context, result.message,

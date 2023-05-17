@@ -281,7 +281,8 @@ class ShopRegistrationController extends ChangeNotifier {
         print(response.body);
         pref.setString("successToken",result.successToken?.token??"");
         print(pref.getString("successToken"));
-        pref.setString("kycStatus", result.kycStatus.toString());
+        // pref.setString("kycStatus", result.kycStatus.toString());
+        pref.setString('status','shopRegistered');
      notifyListeners();
      Navigator.push(context,MaterialPageRoute(builder: (context)=>SKycVerificationView()));
       } else {

@@ -4,7 +4,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/screen/customer/on_boarding/controller/on_boarding_controller.dart';
+import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
+
 
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';

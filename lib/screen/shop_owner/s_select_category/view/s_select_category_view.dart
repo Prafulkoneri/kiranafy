@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -33,16 +34,22 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: (){
+            print("hello");
+            Navigator.pop(context);
+          },
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async{
-            print("hello");
            await read.addCategory(context);
-            readMainScreen.onCategorySelectUpdatePressed(context);
           },
         ),
       ),
-      body: GridView.builder(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(
+        ),
+      ):
+      GridView.builder(
           padding:
               EdgeInsets.only(left: 50.w, right: 50.w, top: 40.w, bottom: 40.w),
           shrinkWrap: true,

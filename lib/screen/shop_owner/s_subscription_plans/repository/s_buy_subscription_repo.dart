@@ -4,8 +4,8 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_buy_subscription_model.dart';
 
 class ShopBuySubscriptionsRepo {
-  Future<http.Response> BuySubScription(
-      BuySubscriptionRequestModel reqModel) async {
+  Future<http.Response> buySubScription(
+      BuySubscriptionRequestModel reqModel,token) async {
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.shopbuyscription));
     try {
@@ -13,7 +13,7 @@ class ShopBuySubscriptionsRepo {
           body: reqModel.toJson(),
           headers: {
             "Authorization":
-                "Bearer 10|78G8mC9MzyuxNNvCKtc2n5luBAeG7fDcnpc6Qvcm",
+                "Bearer $token",
           });
     } catch (e) {
       throw Exception(e);

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
@@ -30,6 +31,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
     final watchMainScreen = context.watch<SMainScreenController>();
     final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
+
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -434,7 +436,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-readMainScreen.onCategoryPressed(context);
+Navigator.push(context,MaterialPageRoute(builder:(context)=>SSCategoryListView()));
                   },
                   child: Container(
                     padding: EdgeInsets.only(

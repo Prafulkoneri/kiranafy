@@ -55,9 +55,9 @@ class Endpoint {
 
   // Send KYC Verification Data
   static const String kycVerification = '${baseUrl}lsm-shop-owner-kyc-submit';
-  //
+
+  // Add Category
   static const String addCategory = '${baseUrl}lsm-shop-owner-add-category';
-  static const String kycVerification = '${baseUrl}lsm-shop-owner-kyc-submit';
 
   ///// shop buy subcription
   static const String shopbuyscription =

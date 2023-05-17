@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopEditProfileDetailController extends ChangeNotifier {
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
@@ -22,7 +23,6 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String selectedStateId = "";
   String selectedCityId = "";
   String selectedAreaId = "";
-
   List<CountryData>? countryDataList;
   List<StatedData>? stateDataList;
   List<CityData>? cityDataList;
@@ -30,6 +30,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   List<ShopBannerImageData>? bannerImageList;
 
   String countryCode = "+91";
+
   Future<void> initState(
     context,
   ) async {
@@ -38,15 +39,19 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
   /////start edit Profile/////////////////
   Future<void> getShopEditProfileDetails(context) async {
-    shopEditProfileRepo.getShopEditProfileDetails().then((response) {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    shopEditProfileRepo
+        .getShopEditProfileDetails(pref.getString("successToken"))
+        .then((response) {
+
       final result = AccountDetailsResModel.fromJson(
         jsonDecode(response.body),
       );
-
       if (response.statusCode == 200) {
         final shopDetails = result.shopDetails;
         print(shopDetails);
-        print("${response.body}");
+        log("${response.body}");
         ShopNameController.text = shopDetails?.shopName ?? "";
         print(ShopNameController.text);
         OwnerNameController.text = shopDetails?.shopOwnerName ?? "";
@@ -85,6 +90,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       },
     );
   }
+
   /////End edit Profile/////////////////
 
   /////Start Update Profile/////////////////
@@ -130,6 +136,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       },
     );
   }
+
   /////End Update Profile/////////////////
 
   //////////////////Image Picker/////////////////////////////
