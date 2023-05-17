@@ -37,7 +37,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            // read.onAppBarActionPressed(context);
+            read.EditShopconfig(context);
           },
         ),
       ),

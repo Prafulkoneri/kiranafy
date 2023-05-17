@@ -161,18 +161,8 @@ class _AllCouponsState extends State<AllCoupons> {
                                 //Add isDense true and zero Padding.
                                 //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                                 isDense: true,
-                                contentPadding: EdgeInsets.zero,
-                                // border: OutlineInputBorder(
-                                //     // borderRadius: BorderRadius.circular(15),
-                                //     ),
-                                //Add more decoration as you want here
-                                //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                               ),
                               isExpanded: true,
-                              // hint: const Text(
-                              //   'City',
-                              //   style: TextStyle(fontSize: 14),
-                              // ),
                               items: genderItems
                                   .map((item) => DropdownMenuItem<String>(
                                         value: item,
@@ -437,7 +427,6 @@ class _AllCouponsState extends State<AllCoupons> {
               // height: 125.h,
               // width: 352.w,
               child: ListView.builder(
-                  padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
                   physics: BouncingScrollPhysics(),
                   // physics: NeverScrollableScrollPhysics(),
@@ -485,60 +474,59 @@ class _AllCouponsState extends State<AllCoupons> {
                               space: 3.0,
                             ),
                           ),
-                          Padding(
+                          Container(
                             padding: EdgeInsets.only(
-                              left: 75.h,
+                              left: 80.h,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  // mainAxisAlignment:
-                                  //     MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: 20.w,
-                                      // height: 15.w,
-                                    ),
-                                    Text(
-                                      "Hi Choice Supermarket",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black,
-                                            letterSpacing: .5,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w700),
+                                Container(
+                                  padding:
+                                      EdgeInsets.only(left: 19.w, right: 9.w),
+                                  child: Row(
+                                    // crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Hi Choice Supermarket",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w700),
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 40.w,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        showModalBottomSheet(
-                                            backgroundColor: Colors.white,
-                                            isScrollControlled: true,
-                                            shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(30),
-                                                    topRight:
-                                                        Radius.circular(30))),
-                                            context: context,
-                                            builder: (context) {
-                                              // using a scaffold helps to more easily position the FAB
-                                              return CouponsBottomSheet();
-                                            });
-                                      },
-                                      child: SvgPicture.asset(
-                                        'assets/images/logo1.svg',
-                                        width: 15.w,
-                                        height: 15.h,
+                                      InkWell(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                              backgroundColor: Colors.white,
+                                              isScrollControlled: true,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(30),
+                                                              topRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          30))),
+                                              context: context,
+                                              builder: (context) {
+                                                // using a scaffold helps to more easily position the FAB
+                                                return CouponsBottomSheet();
+                                              });
+                                        },
+                                        child: SvgPicture.asset(
+                                          'assets/images/logo1.svg',
+                                          width: 15.w,
+                                          height: 15.h,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 5.h,

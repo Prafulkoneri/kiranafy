@@ -1,12 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_response_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repository/s_shop_configuration_edit_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repository/s_shop_configuration_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SShopConfigurationController extends ChangeNotifier {
   ShopConfigurationRepo shopConfigRepo = ShopConfigurationRepo();
+  EditConfigRepo shopEditConfigRepo = EditConfigRepo();
   TextEditingController UpiIdController = TextEditingController();
   TextEditingController SupportNumberController = TextEditingController();
   TextEditingController FirstDeliveryController = TextEditingController();
@@ -15,6 +19,7 @@ class SShopConfigurationController extends ChangeNotifier {
   TextEditingController FourthDeliveryController = TextEditingController();
   TextEditingController StartShopTimeController = TextEditingController();
   TextEditingController EndShopTimeController = TextEditingController();
+  TextEditingController ImageNameController = TextEditingController();
   bool isCustomerPickupSelected = false;
   bool isDeliveryCustomerSelected = false;
   bool isDeliveryChargesSelected = false;
@@ -139,46 +144,52 @@ class SShopConfigurationController extends ChangeNotifier {
   /////////////////////////
 //  Edit//////
 
-//  ShopUpdateProfileReqModel get shopUpdateProfileReqModel =>
-//       ShopUpdateProfileReqModel(
-//         shopName: ShopNameController.text,
-//         shopOwnerName: OwnerNameController.text,
-//         shopOwnerCountryCode: countryCode,
-//         selectedAreaId: (selectedAreaId),
-//         selectedCityId: (selectedCityId),
-//         selectedCountryId: (selectedCountryId),
-//         selectedStateId: (selectedStateId),
-//         shopAddress: ShopAddressController.text,
-//         shopOwnerEmail: EmailIdController.text,
-//         shopOwnerMobileNumber: (PhoneNumberController.text),
-//         shopPincode: (PinCodeController.text),
-//         shopBannerImages: "",
-//       );
+  ShopConfigRequestModel get shopConfigRequestModel => ShopConfigRequestModel(
+      shopOwnerAmount1DeliveryCharges: FirstDeliveryController.text,
+      shopOwnerAmount2DeliveryCharges: SecondDeliveryController.text,
+      shopOwnerAmount3DeliveryCharges: ThirdDeliveryController.text,
+      shopOwnerAmount4DeliveryCharges: FourthDeliveryController.text,
+      shopOwnerCustomerPickup: isCustomerPickupSelected ? "active" : "inactive",
+      shopOwnerDeliveryChargesFree:
+          isDeliveryCustomerSelected ? "active" : "inactive",
+      shopOwnerDeliveryToCustomer:
+          isDeliveryChargesSelected ? "active" : "inactive",
+      shopOwnerPaymentQrCodeImageName: '',
+      shopOwnerPaymentQrCodeImagePath: '',
+      shopOwnerShopCloseTime: EndShopTimeController.text,
+      shopOwnerShopOpeningTime: StartShopTimeController.text,
+      shopOwnerSlot12To3: isTwelveToThree ? "active" : "inactive",
+      shopOwnerSlot3To6: isThreeToSix ? "active" : "inactive",
+      shopOwnerSlot6To9: isSixToNine ? "active" : "inactive",
+      shopOwnerSlot9To12: isNineToTwelve ? "active" : "inactive",
+      shopOwnerSupportNumber: SupportNumberController.text,
+      shopOwnerUpiId: UpiIdController.text);
 
-//   Future<void> UpdateProfile(context) async {
-//     shopUpdateProfileRepo.UpdateProfile(shopUpdateProfileReqModel)
-//         .then((response) {
-//       final result =
-//           ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
+  Future<void> EditShopconfig(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopEditConfigRepo.EditShopconfig(
+            shopConfigRequestModel, pref.getString("successToken"))
+        .then((response) {
+      final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
 
-//       if (response.statusCode == 200) {
-//         Utils.showPrimarySnackbar(context, result.message,
-//             type: SnackType.success);
-//         notifyListeners();
-//       } else {
-//         Utils.showPrimarySnackbar(context, result.message,
-//             type: SnackType.error);
-//       }
-//     }).onError((error, stackTrace) {
-//       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-//     }).catchError(
-//       (Object e) {
-//         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-//       },
-//       test: (Object e) {
-//         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-//         return false;
-//       },
-//     );
-//   }
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 }

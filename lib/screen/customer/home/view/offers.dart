@@ -27,7 +27,7 @@ class _OfferPageState extends State<OfferPage> {
           width: 352.w,
           decoration: BoxDecoration(
               color: Coupons,
-              borderRadius: const BorderRadius.all(Radius.circular(15))),
+              borderRadius: const BorderRadius.all(Radius.circular(10))),
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
@@ -42,6 +42,9 @@ class _OfferPageState extends State<OfferPage> {
                         fontWeight: FontWeight.w600),
                   ),
                 ),
+                SizedBox(
+                  height: 5.h,
+                ),
                 Text(
                   "Best price ever of all time",
                   style: GoogleFonts.roboto(
@@ -54,166 +57,152 @@ class _OfferPageState extends State<OfferPage> {
                 SizedBox(
                   height: 15.h,
                 ),
-                Container(
-                  // width: 322.w,
-                  // height: 86.h,
-                  // color: Colors.white,
-
-                  child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 3,
-                      itemBuilder: (BuildContext, index) {
-                        return Container(
-                          width: 322.w,
-                          height: 86.h,
-                          // color: Colors.white,
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 9.h, bottom: 9.h),
-                                child: Image(
-                                  image:
-                                      AssetImage("assets/images/offerone.png"),
-                                  height: 68.h,
-                                  width: 68.w,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 70.h,
-                                child: VerticalDivider(
-                                    color: lightgrey,
-                                    thickness: 0.5,
-                                    indent: 5,
-                                    endIndent: 5),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 0.w, top: 10.h),
-                                child: Column(
-                                  // mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      // mainAxisAlignment:
-                                      //     MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Nescafe Coffee",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Black,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w700),
-                                            )),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 48.0),
-                                          child: Container(
-                                            width: 60.w,
-                                            height: 20.h,
-                                            decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    lightgreen.withOpacity(0.6),
-                                                    lightgreen.withOpacity(0.6)
-                                                  ],
-                                                ),
-
-                                                // color:
-                                                //     lightgreen.withOpacity(1.0),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5.w))),
-                                            child: Center(
-                                              child: Text("50% off",
-                                                  // textAlign: TextAlign.center,
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: TextStyle(
-                                                        color: Colors.white,
-                                                        // letterSpacing: .5,
-                                                        fontSize: 12.sp,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  )),
+                ListView.builder(
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 3,
+                    itemBuilder: (BuildContext, index) {
+                      return Container(
+                        padding: EdgeInsets.only(
+                            top: 9.w, bottom: 10.h, right: 12.w),
+                        width: ScreenUtil().screenWidth,
+                        // color: Colors.white,
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Row(
+                          children: [
+                            Image(
+                              image: AssetImage("assets/images/offerone.png"),
+                              height: 68.h,
+                              width: 68.w,
+                            ),
+                            SizedBox(
+                              height: 70.h,
+                              child: VerticalDivider(
+                                  color: lightgrey,
+                                  thickness: 0.5,
+                                  indent: 5,
+                                  endIndent: 5),
+                            ),
+                            Expanded(
+                              child: Column(
+                                // mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Nescafe Coffee",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black,
+                                                // letterSpacing: .5,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w700),
+                                          )),
+                                      Container(
+                                        width: 60.w,
+                                        height: 20.h,
+                                        decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                lightgreen.withOpacity(0.6),
+                                                lightgreen.withOpacity(0.6)
+                                              ],
                                             ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 6.h,
-                                    ),
-                                    Row(
-                                      // mainAxisAlignment:
-                                      //     MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "500g",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Grey,
-                                                // letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        Text(
-                                          '\u{20B9}${25.00}',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 12.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/images/location.svg',
-                                          width: 10.w,
-                                          height: 12.h,
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Text(
-                                          'Kirana Store, Pune',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                // letterSpacing: .5,
-                                                fontSize: 13.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          margin:
-                              EdgeInsets.only(bottom: index == 2 ? 5 : 10.h),
-                        );
-                      }
-                      // child:
 
-                      ),
-                )
+                                            // color:
+                                            //     lightgreen.withOpacity(1.0),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.w))),
+                                        child: Center(
+                                          child: Text("50% off",
+                                              // textAlign: TextAlign.center,
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    // letterSpacing: .5,
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              )),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 6.h,
+                                  ),
+                                  Row(
+                                    // mainAxisAlignment:
+                                    //     MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "500g",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Grey,
+                                              // letterSpacing: .5,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      Text(
+                                        '\u{20B9}${25.00}',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black,
+                                              letterSpacing: .5,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/images/location.svg',
+                                        width: 10.w,
+                                        height: 12.h,
+                                      ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Text(
+                                        'Kirana Store, Pune',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black,
+                                              // letterSpacing: .5,
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        margin: EdgeInsets.only(bottom: index == 2 ? 5 : 10.h),
+                      );
+                    }
+                    // child:
+
+                    )
               ],
             ),
           ),

@@ -17,7 +17,6 @@ import 'package:local_supper_market/screen/customer/near_shops/all_near_shops.da
 
 import 'package:provider/provider.dart';
 
-
 class HomeScreenView extends StatefulWidget {
   const HomeScreenView({super.key});
 
@@ -66,7 +65,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             // SizedBox(
             //   height: 12.h,
             // ),
-            Padding(
+            Container(
               padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,12 +102,14 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 13.h,
+            ),
 
             Padding(
               padding: EdgeInsets.only(
                 right: 19.0.w,
                 left: 19.0.w,
-                top: 13.h,
               ),
               child: SizedBox(
                 width: 351.w,
@@ -189,9 +190,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: indicators(images.length, activePage)),
-            Padding(
-              padding: EdgeInsets.only(
-                  right: 19.0.w, top: 15.w, bottom: 15.w, left: 19.0.w),
+            SizedBox(
+              height: 15.h,
+            ),
+            Container(
+              padding: EdgeInsets.only(right: 19.0.w, left: 19.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -225,11 +228,19 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 15.h,
+            ),
             //
             HomeCarousal(),
-            Padding(
+            SizedBox(
+              height: 30.h,
+            ),
+            Container(
               padding: EdgeInsets.only(
-                  right: 19.0.w, bottom: 15.w, left: 19.0.w, top: 30.h),
+                right: 19.0.w,
+                left: 19.0.w,
+              ),
               child: Text(
                 "Shop By Category",
                 style: GoogleFonts.roboto(
@@ -242,9 +253,9 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               ),
             ),
 
-            // SizedBox(
-            //   height: 15.h,
-            // ),
+            SizedBox(
+              height: 15.h,
+            ),
             ShopCategory(),
             // SizedBox(
             //   height: 20.h,
@@ -257,8 +268,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               padding: EdgeInsets.only(
                 left: 19.w,
                 right: 19.w,
-                // top: 18.w,
-                // bottom: 11.h,/
               ),
               child: Image(
                 image: AssetImage("assets/images/banner.png"),
@@ -266,32 +275,32 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 width: 352.w,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 100.0.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xff39C19D),
-                          borderRadius: BorderRadius.circular(7.w)),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 14.w, vertical: 2.w),
-                      child: Center(
-                        child: Text(
-                          "Place Your Ad",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xff39C19D),
+                        borderRadius: BorderRadius.circular(7.w)),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 2.w),
+                    child: Center(
+                      child: Text(
+                        "Place Your Ad",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+            SizedBox(
+              height: 100.h,
+            )
           ],
         ),
       ),

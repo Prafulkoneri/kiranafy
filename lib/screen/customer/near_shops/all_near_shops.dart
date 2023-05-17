@@ -385,27 +385,30 @@ class _AllNearShopsState extends State<AllNearShops> {
                                 ),
                               ),
                               Positioned(
+                                  left: 19.w,
+                                  right: 12.w,
                                   child: Container(
-                                margin: EdgeInsets.only(
-                                    left: index == 0 ? 19.w : 0,
-                                    right: index == 2 ? 19.w : 5.w),
-                                height: 160.h,
-                                width: 352.w,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(13.w),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      stops: [
-                                        0.1,
-                                        0.9,
-                                      ],
-                                      colors: [
-                                        Colors.white.withOpacity(0),
-                                        Colors.black.withOpacity(0.15),
-                                      ],
-                                    )),
-                              )),
+                                    // margin: EdgeInsets.only(
+                                    //     left: index == 0 ? 19.w : 0,
+                                    //     right: index == 2 ? 19.w : 5.w),
+                                    height: 160.h,
+                                    width: 352.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(13.w),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          stops: [
+                                            0.1,
+                                            0.9,
+                                          ],
+                                          colors: [
+                                            Colors.white.withOpacity(0),
+                                            Colors.black.withOpacity(0.15),
+                                          ],
+                                        )),
+                                  )),
                             ],
                           ),
                         );

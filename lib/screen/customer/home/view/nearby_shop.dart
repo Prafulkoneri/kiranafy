@@ -47,7 +47,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
                               image: AssetImage('assets/images/property3.png'),
                               fit: BoxFit.fill),
                         ),
-                        child: Padding(
+                        child: Container(
                           padding: EdgeInsets.all(10.h),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

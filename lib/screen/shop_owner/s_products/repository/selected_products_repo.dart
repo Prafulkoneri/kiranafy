@@ -1,0 +1,21 @@
+import 'package:http/http.dart' as http;
+import 'package:local_supper_market/network/end_points.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/model/selected_products_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
+
+class SelectedProductsRepo {
+  Future<http.Response> SelectedProducts(
+      SelecteProductsRequestModel reqModel, token) async {
+    print(reqModel.toJson());
+    print(Uri.parse(Endpoint.selectedProducts));
+    try {
+      return await http.post(Uri.parse(Endpoint.selectedProducts),
+          body: reqModel.toJson(),
+          headers: {
+            "Authorization": "Bearer $token",
+          });
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+}
