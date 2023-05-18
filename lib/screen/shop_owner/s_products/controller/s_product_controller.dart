@@ -9,7 +9,31 @@ import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SAddProductsController extends ChangeNotifier {
+  bool isLoading = true;
+  List<SelectedProducts>? selectedProductList;
+
   SelectedProductsRepo selectedProductRepo = SelectedProductsRepo();
+  List<bool> selectedList = [];
+  String categoryId = "";
+  Future<void> initState(context, id) async {
+    print("object");
+    print(id);
+    await selectedProducts(context, id);
+    notifyListeners();
+  }
+
+  // void onProductSelected(index, id) {
+  //   selectedList[index] = !selectedList[index];
+  //   if (selectedList[index]) {
+  //     selectedId.removeWhere((item) => item == id);
+  //     selectedId.insert(0, id);
+  //   } else {
+  //     selectedId.removeWhere((item) => item == id);
+  //   }
+  //   print(selectedId);
+  //   notifyListeners();
+  // }
+
   void onAddProductClick(context) {
     print("hello");
     Navigator.push(
@@ -22,16 +46,19 @@ class SAddProductsController extends ChangeNotifier {
         MaterialPageRoute(builder: (context) => ShopCustomProductView()));
   }
 
-  ////////////////Select Category
+  ////////////////Select product
   SelecteProductsRequestModel get selecteProductRequestModel =>
-      SelecteProductsRequestModel();
+      SelecteProductsRequestModel(category_id: "6");
 
-  Future<void> selectedProducts(context) async {
+  Future<void> selectedProducts(context, id) async {
+    print("hello");
     SharedPreferences pref = await SharedPreferences.getInstance();
+    categoryId = id;
     selectedProductRepo
         .selectedProducts(
             selecteProductRequestModel, pref.getString("successToken"))
         .then((response) {
+      print(response.body);
       final result =
           GetSelectedProductsResponseModel.fromJson(jsonDecode(response.body));
 

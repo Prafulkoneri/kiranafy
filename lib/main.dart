@@ -20,29 +20,24 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_reg
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
-import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
-import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
+
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
+
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
+
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_subscription_plans_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
+
 import 'package:local_supper_market/screen/splash/controller/splash_controller.dart';
 import 'package:local_supper_market/screen/splash/view/splash_view.dart';
-import 'package:local_supper_market/testing.dart';
+
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
@@ -97,11 +92,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
-              home: ExpansionTileExample());
-=======
-              home: SSubscriptionScreenView());
->>>>>>> 8e23ec8bcfced11978ae84c517a7dc626387c59a
+              home: SplashScreen());
         });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,8 @@ import 'package:provider/provider.dart';
 import '../../../../widget/app_bar.dart';
 
 class ShopProductView extends StatefulWidget {
-  const ShopProductView({super.key});
+  final String? categoryId;
+  const ShopProductView({super.key, this.categoryId});
 
   @override
   State<ShopProductView> createState() => _ShopProductViewState();
@@ -21,6 +23,15 @@ class ShopProductView extends StatefulWidget {
 final TextEditingController _searchController = TextEditingController();
 
 class _ShopProductViewState extends State<ShopProductView> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<SAddProductsController>()
+          .initState(context, widget.categoryId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<SAddProductsController>();
@@ -152,17 +163,17 @@ class _ShopProductViewState extends State<ShopProductView> {
                   height: 22.h,
                 ),
                 ListView.builder(
-                  itemCount: 1,
+                  itemCount: watch.selectedProductList?.length ?? 0,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
+                    final element = watch.selectedProductList?[index];
                     return Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(
-                              left: 21.w, bottom: 11.w, top: 13.w, right: 21.w),
-                          // height: 200,
-                          // width: 200,
+                          // padding: EdgeInsets.only(
+                          //     left: 21.w, bottom: 11.w, top: 13.w, right: 21.w),
+
                           decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -177,364 +188,417 @@ class _ShopProductViewState extends State<ShopProductView> {
                           // decoration: BoxDecoration(
 
                           //     border: Border.all(width: 1, color: Black1)),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Image(
-                                        image: AssetImage(
-                                            "assets/images/sprite.png"),
-                                        height: 61.h,
-                                        width: 60.w,
-                                      ),
-                                      Text(
-                                        "Coca Cola",
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: Black1,
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    // crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      // Text("data"),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: grey6,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 10.0,
-                                                spreadRadius: 2.0,
-                                              ), //BoxShadow
-                                            ],
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: SvgPicture.asset(
-                                            'assets/icons/e1.svg'),
-                                      ),
-                                      SizedBox(
-                                        width: 8.w,
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: grey6,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 10.0,
-                                                spreadRadius: 2.0,
-                                              ), //BoxShadow
-                                            ],
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: SvgPicture.asset(
-                                            'assets/icons/delete2.svg'),
-                                      )
-                                      // Text("data"),
+                          child: Theme(
+                            data: ThemeData()
+                                .copyWith(dividerColor: Colors.transparent),
+                            child: ListTileTheme(
+                              contentPadding: EdgeInsets.all(0),
+                              dense: true,
+                              // horizontalTitleGap: 5.0,
+                              // minLeadingWidth: 6,
+                              child: ExpansionTile(
+                                trailing: SizedBox.shrink(),
 
-                                      // SvgPicture.asset(
-                                      //     'assets/icons/reddelete.svg'),
-                                    ],
-                                  )
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image(
+                                          image: NetworkImage(
+                                              "${element?.productImagePath}"),
+                                          height: 61.h,
+                                          width: 60.w,
+                                        ),
+                                        Text(
+                                          "${element?.productName}",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black1,
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(8),
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: grey6,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 10.0,
+                                                  spreadRadius: 2.0,
+                                                ), //BoxShadow
+                                              ],
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: SvgPicture.asset(
+                                              'assets/icons/e1.svg'),
+                                        ),
+                                        SizedBox(
+                                          width: 8.w,
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.all(8),
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: grey6,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 10.0,
+                                                  spreadRadius: 2.0,
+                                                ), //BoxShadow
+                                              ],
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: SvgPicture.asset(
+                                              'assets/icons/delete2.svg'),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 11.w, bottom: 11.w, right: 11.w),
+                                    child: Column(
+                                      children: [
+                                        Divider(),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(10)
+                                                // topLeft: Radius.circular(10),
+                                                // topRight: Radius.circular(10),
+                                                ),
+                                          ),
+                                          padding: EdgeInsets.only(
+                                              left: 11.w, right: 11.w),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Product Unit",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black1,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "MRP",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 12.w,
+                                                  ),
+                                                  Text(
+                                                    "Offer price",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.h,
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: 12.w,
+                                              right: 20.w,
+                                              top: 7.w,
+                                              bottom: 8.w),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              // color: Black1,
+                                              border: Border.all(
+                                                  width: 1, color: grey6)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "200 ml",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black1,
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "40",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                          color: Black1,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 18.w,
+                                                  ),
+                                                  Text(
+                                                    "INR 30",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: 12.w,
+                                              right: 20.w,
+                                              top: 7.w,
+                                              bottom: 8.w),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              // color: Black1,
+                                              border: Border.all(
+                                                  width: 1, color: grey6)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "200 ml",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black1,
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "40",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                          color: Black1,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 18.w,
+                                                  ),
+                                                  Text(
+                                                    "INR 30",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: 12.w,
+                                              right: 20.w,
+                                              top: 7.w,
+                                              bottom: 8.w),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              // color: Black1,
+                                              border: Border.all(
+                                                  width: 1, color: grey6)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "200 ml",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black1,
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "40",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                          color: Black1,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 18.w,
+                                                  ),
+                                                  Text(
+                                                    "INR 30",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: 12.w,
+                                              right: 20.w,
+                                              top: 7.w,
+                                              bottom: 8.w),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              // color: Black1,
+                                              border: Border.all(
+                                                  width: 1, color: grey6)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "200 ml",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black1,
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "40",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                          color: Black1,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 18.w,
+                                                  ),
+                                                  Text(
+                                                    "INR 30",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ],
+                                // child:
                               ),
-                              Divider(),
-                              Container(
-                                padding:
-                                    EdgeInsets.only(left: 11.w, right: 11.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Product Unit",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black1,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "MRP",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        Text(
-                                          "Offer price",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 12.w,
-                                    right: 20.w,
-                                    top: 7.w,
-                                    bottom: 8.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    // color: Black1,
-                                    border: Border.all(width: 1, color: grey6)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "200 ml",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black1,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "40",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.lineThrough,
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 18.w,
-                                        ),
-                                        Text(
-                                          "INR 30",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 12.w,
-                                    right: 20.w,
-                                    top: 7.w,
-                                    bottom: 8.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    // color: Black1,
-                                    border: Border.all(width: 1, color: grey6)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "200 ml",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black1,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "40",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.lineThrough,
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 18.w,
-                                        ),
-                                        Text(
-                                          "INR 30",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 12.w,
-                                    right: 20.w,
-                                    top: 7.w,
-                                    bottom: 8.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    // color: Black1,
-                                    border: Border.all(width: 1, color: grey6)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "200 ml",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black1,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "40",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.lineThrough,
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 18.w,
-                                        ),
-                                        Text(
-                                          "INR 30",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 12.w,
-                                    right: 20.w,
-                                    top: 7.w,
-                                    bottom: 8.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    // color: Black1,
-                                    border: Border.all(width: 1, color: grey6)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "200 ml",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black1,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "40",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.lineThrough,
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 18.w,
-                                        ),
-                                        Text(
-                                          "INR 30",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -544,93 +608,93 @@ class _ShopProductViewState extends State<ShopProductView> {
                     );
                   },
                 ),
-                Container(
-                  padding: EdgeInsets.only(
-                      left: 21.w, bottom: 7.w, top: 6.w, right: 21.w),
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.09),
-                            blurRadius: 5,
-                            offset: Offset(-.0, 5.0),
-                            spreadRadius: 0),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      border: Border.all(width: 1, color: grey1)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Image(
-                            image: AssetImage("assets/images/sprite.png"),
-                            height: 61.h,
-                            width: 60.w,
-                          ),
-                          Text(
-                            "Coca Cola",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black1,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // Text("data"),
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: grey6,
-                                    offset: const Offset(
-                                      5.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 10.0,
-                                    spreadRadius: 2.0,
-                                  ), //BoxShadow
-                                ],
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: SvgPicture.asset('assets/icons/e1.svg'),
-                          ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: grey6,
-                                    offset: const Offset(
-                                      5.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 10.0,
-                                    spreadRadius: 2.0,
-                                  ), //BoxShadow
-                                ],
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: SvgPicture.asset('assets/icons/delete2.svg'),
-                          )
-                          // Text("data"),
+                // Container(
+                //   padding: EdgeInsets.only(
+                //       left: 21.w, bottom: 7.w, top: 6.w, right: 21.w),
+                //   decoration: BoxDecoration(
+                //       boxShadow: [
+                //         BoxShadow(
+                //             color: Colors.black.withOpacity(0.09),
+                //             blurRadius: 5,
+                //             offset: Offset(-.0, 5.0),
+                //             spreadRadius: 0),
+                //       ],
+                //       borderRadius: BorderRadius.circular(10),
+                //       color: Colors.white,
+                //       border: Border.all(width: 1, color: grey1)),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Row(
+                //         children: [
+                //           Image(
+                //             image: AssetImage("assets/images/sprite.png"),
+                //             height: 61.h,
+                //             width: 60.w,
+                //           ),
+                //           Text(
+                //             "Coca Cola",
+                //             style: GoogleFonts.dmSans(
+                //               textStyle: TextStyle(
+                //                   color: Black1,
+                //                   fontSize: 16.sp,
+                //                   fontWeight: FontWeight.w700),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //       Row(
+                //         // crossAxisAlignment: CrossAxisAlignment.center,
+                //         children: [
+                //           // Text("data"),
+                //           Container(
+                //             padding: EdgeInsets.all(8),
+                //             decoration: BoxDecoration(
+                //                 boxShadow: [
+                //                   BoxShadow(
+                //                     color: grey6,
+                //                     offset: const Offset(
+                //                       5.0,
+                //                       5.0,
+                //                     ),
+                //                     blurRadius: 10.0,
+                //                     spreadRadius: 2.0,
+                //                   ), //BoxShadow
+                //                 ],
+                //                 color: Colors.white,
+                //                 borderRadius: BorderRadius.circular(15)),
+                //             child: SvgPicture.asset('assets/icons/e1.svg'),
+                //           ),
+                //           SizedBox(
+                //             width: 8.w,
+                //           ),
+                //           Container(
+                //             padding: EdgeInsets.all(8),
+                //             decoration: BoxDecoration(
+                //                 boxShadow: [
+                //                   BoxShadow(
+                //                     color: grey6,
+                //                     offset: const Offset(
+                //                       5.0,
+                //                       5.0,
+                //                     ),
+                //                     blurRadius: 10.0,
+                //                     spreadRadius: 2.0,
+                //                   ), //BoxShadow
+                //                 ],
+                //                 color: Colors.white,
+                //                 borderRadius: BorderRadius.circular(15)),
+                //             child: SvgPicture.asset('assets/icons/delete2.svg'),
+                //           )
+                //           // Text("data"),
 
-                          // SvgPicture.asset(
-                          //     'assets/icons/reddelete.svg'),
-                        ],
-                      )
-                    ],
-                  ),
-                )
+                //           // SvgPicture.asset(
+                //           //     'assets/icons/reddelete.svg'),
+                //         ],
+                //       )
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ),
