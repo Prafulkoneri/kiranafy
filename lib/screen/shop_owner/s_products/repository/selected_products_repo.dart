@@ -4,7 +4,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/model/selected_
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
 
 class SelectedProductsRepo {
-  Future<http.Response> SelectedProducts(
+  Future<http.Response> selectedProducts(
       SelecteProductsRequestModel reqModel, token) async {
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.selectedProducts));

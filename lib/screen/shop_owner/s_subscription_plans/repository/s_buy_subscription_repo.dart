@@ -5,15 +5,15 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model
 
 class ShopBuySubscriptionsRepo {
   Future<http.Response> buySubScription(
-      BuySubscriptionRequestModel reqModel,token) async {
+      BuySubscriptionRequestModel reqModel, token) async {
+    print(token);
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.shopbuyscription));
     try {
       return await http.post(Uri.parse(Endpoint.shopbuyscription),
           body: reqModel.toJson(),
           headers: {
-            "Authorization":
-                "Bearer $token",
+            "Authorization": "Bearer $token",
           });
     } catch (e) {
       throw Exception(e);

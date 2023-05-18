@@ -101,7 +101,7 @@ class SSubscriptionController extends ChangeNotifier {
 
   void onRadioBtnChanged(value, id) {
     radioGrpValue = value;
-    selectedPlanId = id;
+    selectedPlanId = id.toString();
     notifyListeners();
   }
 }
