@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +16,7 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SEditProfileView extends StatefulWidget {
   const SEditProfileView({super.key});
@@ -28,6 +31,7 @@ PhoneNumber number = PhoneNumber(isoCode: 'IN');
 String radioButtonItem = '';
 String? dropdown;
 final maxLines = 5;
+
 final List<String> genderItems = [
   'Male',
   'Female',
@@ -39,6 +43,12 @@ String? selectedValue;
 int id = 1;
 
 class _SEditProfileViewState extends State<SEditProfileView> {
+  ImagePicker picker = ImagePicker();
+
+  late File imageFile1 = File("");
+  late File imageFile2 = File("");
+  late File imageFile3 = File("");
+
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -82,40 +92,253 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                 ],
               ),
             ),
+            // Container(
+            //     width: ScreenUtil().screenWidth,
+            //     height: 70.h,
+            //     child: ListView.builder(
+            //       padding: EdgeInsets.only(left: 19.w),
+            //       scrollDirection: Axis.horizontal,
+            //       physics: BouncingScrollPhysics(),
+            //       shrinkWrap: true,
+            //       itemCount: watch.bannerImageList?.length,
+            //       itemBuilder: (BuildContext, index) {
+            //         return watch.bannerImageList!.isEmpty
+            //             ? Row(
+            //                 children: [
+            //                   index == 0
+            //                       ? GestureDetector(
+            //                     onTap:(){
+            //                       read.openGallery();
+            //                     },
+            //                         child: Container(
+            //                             height: 70.h,
+            //                             width: 84.41.w,
+            //                             decoration: BoxDecoration(
+            //                                 borderRadius:
+            //                                     BorderRadius.circular(8),
+            //                                 border: Border.all(
+            //                                     width: 1, color: grey6)),
+            //
+            //                               child: Image.file(watch.imageFileList[index],fit: BoxFit.cover,)
+            //
+            //                           ),
+            //                       )
+            //                       :
+            //                   GestureDetector(
+            //                     onTap:(){
+            //                       read.openGallery();
+            //                     },
+            //                     child:Container(
+            //                       height: 70.h,
+            //                       width: 84.41.w,
+            //                       decoration: BoxDecoration(
+            //                           borderRadius:
+            //                           BorderRadius.circular(8),
+            //                           border: Border.all(
+            //                               width: 1, color: grey6)),
+            //                     ),
+            //                   ),
+            //
+            //                   SizedBox(
+            //                     width: 5.w,
+            //                   ),
+            //                 ],
+            //               )
+            //             : Row(
+            //           children: [
+            //
+            //           ],
+            //         );
+            //       },
+            //     )),
+
             Container(
               width: ScreenUtil().screenWidth,
               height: 70.h,
               child: ListView(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
                 children: [
                   Row(
                     children: [
                       SizedBox(
                         width: 19.w,
                       ),
-                      Container(
-                        height: 70.h,
-                        width: 84.41.w,
-                        // padding:
-                        //     EdgeInsets.symmetric(vertical: 25.w, horizontal: 32.w),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(width: 1, color: grey6)),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            "assets/icons/camera1.svg",
-                            // height: 19.w,
-                            // width: 21.w,
+                      GestureDetector(
+                        onTap: () {
+                          read.openGallery1();
+                        },
+                        child: watch.networkImage1 != ""
+                            ? Container(
+                                height: 70.h,
+                                width: 84.41.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(width: 1, color: grey6)),
+                                child: Image.network(
+                                  watch.networkImage1,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : watch.fileImage1.path != ""
+                                ? Container(
+                                    height: 70.h,
+                                    width: 84.41.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border:
+                                            Border.all(width: 1, color: grey6)),
+                                    child: Image.file(
+                                      watch.fileImage1,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Container(
+                                    height: 70.h,
+                                    width: 84.41.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border:
+                                            Border.all(width: 1, color: grey6)),
+                                    child: Center(
+                                      child: SvgPicture.asset(
+                                          "assets/icons/camera1.svg"),
+                                    ),
+                                  ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          read.openGallery2();
+                        },
+                        child: watch.networkImage2 != ""
+                            ? Container(
+                                height: 70.h,
+                                width: 84.41.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(width: 1, color: grey6)),
+                                child: Image.network(
+                                  watch.networkImage2,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : watch.fileImage2.path != ""
+                                ? Container(
+                                    height: 70.h,
+                                    width: 84.41.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border:
+                                            Border.all(width: 1, color: grey6)),
+                                    child: Image.file(
+                                      watch.fileImage2,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Container(
+                                    height: 70.h,
+                                    width: 84.41.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border:
+                                            Border.all(width: 1, color: grey6)),
+                                  ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          read.openGallery3();
+                        },
+                        child: watch.networkImage3 != ""
+                            ? Container(
+                                height: 70.h,
+                                width: 84.41.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(width: 1, color: grey6)),
+                                child: Image.network(
+                                  watch.networkImage3,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : watch.fileImage3.path != ""
+                                ? Container(
+                                    height: 70.h,
+                                    width: 84.41.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border:
+                                            Border.all(width: 1, color: grey6)),
+                                    child: Image.file(
+                                      watch.fileImage3,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Container(
+                                    height: 70.h,
+                                    width: 84.41.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border:
+                                            Border.all(width: 1, color: grey6)),
+                                  ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          read.openGallery4();
+                        },
+                        child: watch.networkImage4 != ""
+                            ? Container(
+                          height: 70.h,
+                          width: 84.41.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(width: 1, color: grey6)),
+                          child: Image.network(
+                            watch.networkImage4,
+                            fit: BoxFit.cover,
                           ),
+                        )
+                            : watch.fileImage4.path != ""
+                            ? Container(
+                          height: 70.h,
+                          width: 84.41.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border:
+                              Border.all(width: 1, color: grey6)),
+                          child: Image.file(
+                            watch.fileImage4,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                            : Container(
+                          height: 70.h,
+                          width: 84.41.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border:
+                              Border.all(width: 1, color: grey6)),
                         ),
                       ),
                       SizedBox(
-                        width: 4.w,
+                        width: 10.w,
                       ),
                     ],
                   ),
                 ],
-              )
+              ),
             ),
+
             Container(
               width: ScreenUtil().screenWidth,
               padding: EdgeInsets.symmetric(horizontal: 19.w),

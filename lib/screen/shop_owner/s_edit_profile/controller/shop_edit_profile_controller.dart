@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
@@ -27,17 +28,94 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   List<StatedData>? stateDataList;
   List<CityData>? cityDataList;
   List<AreaData>? areaDataList;
+  List<File> imageFileList = [];
   List<ShopBannerImageData>? bannerImageList;
-
+  File fileImage1=File("");
+  File fileImage2=File("");
+  File fileImage3=File("");
+  File fileImage4=File("");
+  String networkImage1="";
+  String networkImage2="";
+  String networkImage3="";
+  String networkImage4="";
   String countryCode = "+91";
 
   Future<void> initState(
     context,
   ) async {
+    print(fileImage1.path);
     await getShopEditProfileDetails(context);
   }
 
+
+
+
+
+
   /////start edit Profile/////////////////
+
+  void  openGallery1() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage1="";
+      fileImage1=File(pickedFile.path);
+
+    }
+
+    notifyListeners();
+  }
+  void  openGallery2() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage2="";
+      fileImage2=File(pickedFile.path);
+
+    }
+
+    notifyListeners();
+  }
+  void  openGallery3() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage3="";
+      fileImage3=File(pickedFile.path);
+
+    }
+
+    notifyListeners();
+  }
+  void  openGallery4() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage4="";
+      fileImage4=File(pickedFile.path);
+
+    }
+
+    notifyListeners();
+  }
+
+
   Future<void> getShopEditProfileDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -73,6 +151,21 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         areaDataList = result.areas;
         PinCodeController.text = shopDetails?.shopPincode.toString() ?? "";
         bannerImageList = result.shopBannerImages;
+        if(bannerImageList!.isNotEmpty) {
+          print(bannerImageList!.asMap().containsKey(0));
+          if(bannerImageList!.asMap().containsKey(0)){
+            networkImage1 = bannerImageList?[0].shopBannerImagePath ?? "";
+          }
+          if(bannerImageList!.asMap().containsKey(1)){
+            networkImage2 = bannerImageList?[1].shopBannerImagePath ?? "";
+          }
+          if(bannerImageList!.asMap().containsKey(2)){
+            networkImage3 = bannerImageList?[2].shopBannerImagePath ?? "";
+          }
+          if(bannerImageList!.asMap().containsKey(3)){
+            networkImage4 = bannerImageList?[2].shopBannerImagePath ?? "";
+          }
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -94,6 +187,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   /////End edit Profile/////////////////
 
   /////Start Update Profile/////////////////
+
+
   ShopUpdateProfileReqModel get shopUpdateProfileReqModel =>
       ShopUpdateProfileReqModel(
         shopName: ShopNameController.text,
@@ -107,7 +202,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         shopOwnerEmail: EmailIdController.text,
         shopOwnerMobileNumber: (PhoneNumberController.text),
         shopPincode: (PinCodeController.text),
-        shopBannerImages: "",
+        shopBannerImages:"",
       );
 
   Future<void> UpdateProfile(context) async {
@@ -140,7 +235,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   /////End Update Profile/////////////////
 
   //////////////////Image Picker/////////////////////////////
-  ///
+
+  void checkIfUrl(bannerImageList)async{
+
+  }
+
   ImagePicker picker = ImagePicker();
   late File imageFile1 = File("");
   late File imageFile2 = File("");

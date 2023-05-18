@@ -97,11 +97,9 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
-              home: ExpansionTileExample());
-=======
-              home: SSubscriptionScreenView());
->>>>>>> 8e23ec8bcfced11978ae84c517a7dc626387c59a
+
+              home: SplashScreen());
+
         });
   }
 }

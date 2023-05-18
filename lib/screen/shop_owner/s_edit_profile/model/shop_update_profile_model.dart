@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class ShopUpdateProfileReqModel {
   String? shopName;
   String? shopOwnerName;
