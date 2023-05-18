@@ -12,12 +12,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SSubscriptionController extends ChangeNotifier {
   SubscriptionPlansRepo subscriptionPlansRepo = SubscriptionPlansRepo();
-  ShopBuySubscriptionsRepo shopBuySubscriptionsRepo =
-      ShopBuySubscriptionsRepo();
+  ShopBuySubscriptionsRepo shopBuySubscriptionsRepo = ShopBuySubscriptionsRepo();
   List<SubscriptionData>? subscriptionData;
   List radioValue = [];
-  String radioGrpValue = "";
-  String selectedPlanId = "1";
+  String radioGrpValue = "0";
+  String selectedPlanId = "0";
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
@@ -100,8 +99,8 @@ class SSubscriptionController extends ChangeNotifier {
   }
 
   void onRadioBtnChanged(value, id) {
-    radioGrpValue = value;
-    selectedPlanId = id;
+    radioGrpValue = value.toString();
+    selectedPlanId = id.toString();
     notifyListeners();
   }
 }

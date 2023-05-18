@@ -264,9 +264,10 @@ else {
     shopLoginRepo.shopLogin(loginReqModel).then((response){
       final result=LoginResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        pref.setString("sucessToken",result.successToken?.token??"");
+        pref.setString("successToken",result.successToken?.token??"");
+        print(pref.getString("successToken"));
         pref.setString("status","loggedIn");
-        Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView()));
+        // Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView()));
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
