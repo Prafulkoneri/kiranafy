@@ -83,56 +83,38 @@ class _SEditProfileViewState extends State<SEditProfileView> {
               ),
             ),
             Container(
+              width: ScreenUtil().screenWidth,
               height: 70.h,
-              child: ListView.builder(
-                padding: EdgeInsets.only(left: 19.w),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: watch.bannerImageList?.length ?? 1,
-                itemBuilder: (context, index) {
-                  final element = watch.bannerImageList?[index];
-                  return Row(
+              child: ListView(
+                children: [
+                  Row(
                     children: [
-                      // Container(
-                      //   height: 70.h,
-                      //   width: 84.41.w,
-                      //   // padding:
-                      //   //     EdgeInsets.symmetric(vertical: 25.w, horizontal: 32.w),
-                      //   decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(8),
-                      //       border: Border.all(width: 1, color: grey6)),
-                      //   child: Image.network(
-                      //     element?.shopBannerImagePath ?? "",
-                      //     fit: BoxFit.cover,
-                      //   ),
-                      // ),
-                      watch.bannerImageList?.length == 0
-                          ? Container(
-                              height: 70.h,
-                              width: 84.41.w,
-                              // padding:
-                              //     EdgeInsets.symmetric(vertical: 25.w, horizontal: 32.w),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(width: 1, color: grey6)),
-                              child: Center(
-                                child: SvgPicture.asset(
-                                  "assets/icons/camera1.svg",
-                                  // height: 19.w,
-                                  // width: 21.w,
-                                ),
-                              ),
-                            )
-                          : Container(),
+                      SizedBox(
+                        width: 19.w,
+                      ),
+                      Container(
+                        height: 70.h,
+                        width: 84.41.w,
+                        // padding:
+                        //     EdgeInsets.symmetric(vertical: 25.w, horizontal: 32.w),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(width: 1, color: grey6)),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            "assets/icons/camera1.svg",
+                            // height: 19.w,
+                            // width: 21.w,
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         width: 4.w,
                       ),
                     ],
-                  );
-                },
-
-                // physics: AlwaysScrollableScrollPhysics(),
-              ),
+                  ),
+                ],
+              )
             ),
             Container(
               width: ScreenUtil().screenWidth,

@@ -16,8 +16,8 @@ class SSubscriptionController extends ChangeNotifier {
       ShopBuySubscriptionsRepo();
   List<SubscriptionData>? subscriptionData;
   List radioValue = [];
-  String radioGrpValue = "";
-  String selectedPlanId = "1";
+  String radioGrpValue = "0";
+  String selectedPlanId = "0";
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);

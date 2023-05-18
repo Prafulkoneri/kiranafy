@@ -273,8 +273,7 @@ class ShopSignInController extends ChangeNotifier {
     shopLoginRepo.shopLogin(loginReqModel).then((response) {
       final result = LoginResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        pref.setString("successToken", result.successToken?.token ?? "");
-        print(pref.getString("successToken"));
+        pref.setString("sucessToken", result.successToken?.token ?? "");
         pref.setString("status", "loggedIn");
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => SMainScreenView()));
