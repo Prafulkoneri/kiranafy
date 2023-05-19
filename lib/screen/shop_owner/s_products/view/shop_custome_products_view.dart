@@ -50,7 +50,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          title: "Add Products",
+          title: "Custome Products",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {},
         ),

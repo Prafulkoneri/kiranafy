@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,10 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
 
 class AddProductView extends StatefulWidget {
-  const AddProductView({super.key});
+  final String? categoryId;
+  const AddProductView({super.key, this.categoryId});
 
   @override
   State<AddProductView> createState() => _AddProductViewState();
@@ -19,6 +22,14 @@ class AddProductView extends StatefulWidget {
 bool _checkbox = false;
 
 class _AddProductViewState extends State<AddProductView> {
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<SAddProductsController>()
+          .initState(context, widget.categoryId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<SAddProductsController>();
@@ -57,25 +68,12 @@ class _AddProductViewState extends State<AddProductView> {
                     ),
 
                     ///check Box
-                    Checkbox(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(3)),
-                      side: MaterialStateBorderSide.resolveWith(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.selected)) {
-                            return BorderSide(width: 1, color: SplashText);
-                          }
-                          return BorderSide(width: 0, color: Grey);
-                        },
-                      ),
-                      checkColor: Colors.white,
-                      activeColor: SplashText,
-                      value: _checkbox,
+                    PrimaryCheckBox(
+                      // value: watch.selectedProduct[index],
                       onChanged: (value) {
-                        setState(() {
-                          _checkbox = !_checkbox;
-                        });
+                        read.onSelecteAllProducts();
                       },
+                      value: watch.isSelectAll,
                     ),
                   ],
                 ),
@@ -88,10 +86,11 @@ class _AddProductViewState extends State<AddProductView> {
                     left: 19.w,
                     right: 19.w,
                   ),
-                  itemCount: 5,
+                  itemCount: watch.productDetails?.length ?? 0,
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (BuildContext, index) {
+                    final element = watch.productDetails?[index];
                     return Column(
                       children: [
                         Container(
@@ -115,8 +114,8 @@ class _AddProductViewState extends State<AddProductView> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset(
-                                "assets/images/sprite.png",
+                              Image.network(
+                                "${element?.productImagePath}",
                                 width: 28.w,
                                 height: 61.h,
                               ),
@@ -135,7 +134,7 @@ class _AddProductViewState extends State<AddProductView> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Coca Cola",
+                                          "${element?.productName}",
                                           style: TextStyle(
                                               fontWeight: FontWeight.w700,
                                               fontSize: 16.sp,
@@ -147,7 +146,7 @@ class _AddProductViewState extends State<AddProductView> {
                                       height: 10.w,
                                     ),
                                     Text(
-                                      "500ml, 250ml",
+                                      "${element?.unitWithWeight}",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 14.sp,
@@ -156,27 +155,13 @@ class _AddProductViewState extends State<AddProductView> {
                                   ],
                                 ),
                               ),
-                              Checkbox(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(3)),
-                                side: MaterialStateBorderSide.resolveWith(
-                                  (Set<MaterialState> states) {
-                                    if (states
-                                        .contains(MaterialState.selected)) {
-                                      return BorderSide(
-                                          width: 1, color: SplashText);
-                                    }
-                                    return BorderSide(width: 0, color: Grey);
-                                  },
-                                ),
-                                checkColor: Colors.white,
-                                activeColor: SplashText,
-                                value: _checkbox,
+                              PrimaryCheckBox(
+                                // value: watch.selectedProduct[index],
                                 onChanged: (value) {
-                                  setState(() {
-                                    _checkbox = !_checkbox;
-                                  });
+                                  read.onProductsSelected(
+                                      index, element?.id.toString());
                                 },
+                                value: watch.selectedProduct[index],
                               ),
                             ],
                           ),

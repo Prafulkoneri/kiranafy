@@ -17,47 +17,62 @@ class SelecteProductsRequestModel {
 class GetSelectedProductsResponseModel {
   int? status;
   String? message;
-  List<SelectedProducts>? data;
+  Data? data;
 
   GetSelectedProductsResponseModel({
     required this.status,
     required this.message,
     required this.data,
   });
-
   GetSelectedProductsResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-
-    if (json["data"] != null) {
-      data = <SelectedProducts>[];
-      json["data"].forEach((v) {
-        data!.add(SelectedProducts.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 }
 
-class SelectedProducts {
+class Data {
+  List<ProductsFromAdmin>? productsFromAdmin;
+  int? totalSelectedAndCustomProducts;
+
+  Data({
+    required this.productsFromAdmin,
+    required this.totalSelectedAndCustomProducts,
+  });
+  Data.fromJson(Map<String, dynamic> json) {
+    if (json["products_from_admin"] != null) {
+      productsFromAdmin = <ProductsFromAdmin>[];
+      json["products_from_admin"].forEach((v) {
+        productsFromAdmin!.add(ProductsFromAdmin.fromJson(v));
+      });
+    }
+    totalSelectedAndCustomProducts = json['total_selected_and_custom_products'];
+  }
+}
+
+class ProductsFromAdmin {
   int? id;
   String? productName;
+  String? productType;
   String? productImagePath;
   List<UnitDetail>? unitDetails;
 
-  SelectedProducts({
+  ProductsFromAdmin({
     required this.id,
     required this.productName,
+    required this.productType,
     required this.productImagePath,
     required this.unitDetails,
   });
-  SelectedProducts.fromJson(Map<String, dynamic> json) {
+  ProductsFromAdmin.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    productImagePath = json["product_image_path"];
     productName = json["product_name"];
+    productType = json["product_type"];
+    productImagePath = json['product_image_path'];
 
-    if (json["countries"] != null) {
+    if (json["unit_details"] != null) {
       unitDetails = <UnitDetail>[];
-      json["countries"].forEach((v) {
+      json["unit_details"].forEach((v) {
         unitDetails!.add(UnitDetail.fromJson(v));
       });
     }
@@ -77,7 +92,7 @@ class UnitDetail {
 
   UnitDetail.fromJson(Map<String, dynamic> json) {
     weightAndUnit = json["weight_and_unit"];
-    mrpPrice = json["mrp_price"];
     offerPrice = json["offer_price"];
+    mrpPrice = json["mrp_price"];
   }
 }

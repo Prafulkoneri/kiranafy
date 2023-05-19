@@ -1,5 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_view.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -126,6 +128,12 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                             ),
                           ),
                           MobileNoTextFormField(
+                            onChanged: (value) {
+                              read.mobileNumberCheck(context);
+                            },
+                            onCountryCodeChanged: (value) {
+                              read.onCountryCodeSelected(value);
+                            },
                             enableOrder: false,
                             controller: watch.mobileController,
                           ),
@@ -153,7 +161,73 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                       ),
                     ),
                     SizedBox(
-                      height: 45.h,
+                      height: 34.h,
+                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(
+                    //     left: 25.w,
+                    //   ),
+                    //   child: Row(
+                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                    //     children: [
+                    //       Padding(
+                    //         padding: EdgeInsets.only(bottom: 15.w),
+                    //         child: PrimaryCheckBox(
+                    //           value: watch.isVerifyChecked,
+                    //           onChanged: (value) {
+                    //             read.onVerifyChecked(value);
+                    //           },
+                    //         ),
+                    //       ),
+                    //       RichText(
+                    //         text: TextSpan(
+                    //             text: "By continuing you agree to our,\n",
+                    //             style: TextStyle(
+                    //                 color: Black,
+                    //                 fontSize: 16.sp,
+                    //                 height: 1.3.w,
+                    //                 fontWeight: FontWeight.w400),
+                    //             children: [
+                    //               TextSpan(
+                    //                 children: [],
+                    //                 text: 'Term of Condition',
+                    //                 recognizer: TapGestureRecognizer()
+                    //                   ..onTap = () {
+                    //                     print('Login Text Clicked');
+                    //                   },
+                    //                 style: TextStyle(
+                    //                     color: SplashText1,
+                    //                     // letterSpacing: .5,
+                    //                     fontSize: 16.sp,
+                    //                     fontWeight: FontWeight.w400),
+                    //               ),
+                    //               TextSpan(
+                    //                 text: ' and',
+                    //                 style: TextStyle(
+                    //                     color: Black,
+                    //                     // letterSpacing: .5,
+                    //                     fontSize: 16.sp,
+                    //                     fontWeight: FontWeight.w400),
+                    //               ),
+                    //               TextSpan(
+                    //                 text: ' Privacy Policy',
+                    //                 recognizer: TapGestureRecognizer()
+                    //                   ..onTap = () {
+                    //                     print('Login Text Clicked');
+                    //                   },
+                    //                 style: TextStyle(
+                    //                     color: SplashText1,
+                    //                     // letterSpacing: .5,
+                    //                     fontSize: 16.sp,
+                    //                     fontWeight: FontWeight.w400),
+                    //               ),
+                    //             ]),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: 26.h,
                     ),
                     SizedBox(
                       width: 300.w, // <-- Your width
@@ -168,141 +242,159 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                           minimumSize: const Size(100, 40), //////// HERE
                         ),
                         // style: style,
-                        onPressed: () {
-                          showModalBottomSheet(
-                            backgroundColor: Colors.white,
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    topRight: Radius.circular(30))),
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Theme(
-                                data: Theme.of(context)
-                                    .copyWith(canvasColor: Colors.white),
-                                child: Material(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(16.0),
-                                        topRight: Radius.circular(16.0)),
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context)
-                                              .viewInsets
-                                              .bottom),
-                                      // height: 335,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(25.h),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          // mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Enter Verification Code",
-                                              style: GoogleFonts.inter(
-                                                textStyle: const TextStyle(
-                                                    color: Custlogin,
-                                                    letterSpacing: .5,
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 20.0.h),
-                                              child: Text(
-                                                "We have sent SMS to :\n046 XXX XX XX",
+                        onPressed: () async {
+                          await read.onNextClick(context).then((value) {
+                            if (!watch.isLoginBtnEnabled) {
+                              return;
+                            }
+                            if (!watch.isVerifyChecked) {
+                              return;
+                            }
+
+                            showModalBottomSheet(
+                              backgroundColor: Colors.white,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30))),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Theme(
+                                  data: Theme.of(context)
+                                      .copyWith(canvasColor: Colors.white),
+                                  child: Material(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(16.0),
+                                          topRight: Radius.circular(16.0)),
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                            bottom: MediaQuery.of(context)
+                                                .viewInsets
+                                                .bottom),
+                                        // height: 335,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(25.h),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            // mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Enter Verification Code",
                                                 style: GoogleFonts.inter(
                                                   textStyle: const TextStyle(
-                                                      color: Black,
-                                                      fontSize: 18,
+                                                      color: Custlogin,
+                                                      letterSpacing: .5,
+                                                      fontSize: 20,
                                                       fontWeight:
-                                                          FontWeight.w500),
+                                                          FontWeight.w700),
                                                 ),
                                               ),
-                                            ),
-                                            OTPTextField(
-                                              length: 6,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              fieldWidth: 50,
-                                              style:
-                                                  const TextStyle(fontSize: 17),
-                                              textFieldAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              fieldStyle: FieldStyle.underline,
-                                              onCompleted: (pin) {
-                                                print("Completed: " + pin);
-                                              },
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            SizedBox(
-                                              width: 400, // <-- Your width
-                                              height: 60,
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Button,
-                                                  // onPrimary: Colors.white,
-                                                  // shadowColor: Colors.greenAccent,
-                                                  elevation: 3,
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              14.0)),
-                                                  minimumSize: const Size(
-                                                      100, 40), //////// HERE
-                                                ),
-                                                // style: style,
-                                                onPressed: () {
-                                                  read.onOtpSubmitPressed(
-                                                      context);
-                                                },
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 20.0.h),
                                                 child: Text(
-                                                  'Submit',
+                                                  "We have sent SMS to :\n046 XXX XX XX",
                                                   style: GoogleFonts.inter(
                                                     textStyle: const TextStyle(
-                                                        // color: SplashTex
-                                                        letterSpacing: .5,
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w700),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 15.h,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'Resend OTP',
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: const TextStyle(
-                                                        // color: SplashTex
-                                                        letterSpacing: .5,
-                                                        fontSize: 14,
+                                                        color: Black,
+                                                        fontSize: 18,
                                                         fontWeight:
                                                             FontWeight.w500),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          ],
+                                              ),
+                                              OTPTextField(
+                                                length: 6,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                fieldWidth: 50,
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                                textFieldAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                fieldStyle:
+                                                    FieldStyle.underline,
+                                                onCompleted: (pin) {
+                                                  print("Completed: " + pin);
+                                                },
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              SizedBox(
+                                                width: 400, // <-- Your width
+                                                height: 60,
+                                                child: ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: Button,
+                                                    // onPrimary: Colors.white,
+                                                    // shadowColor: Colors.greenAccent,
+                                                    elevation: 3,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        14.0)),
+                                                    minimumSize: const Size(
+                                                        100, 40), //////// HERE
+                                                  ),
+                                                  // style: style,
+                                                  onPressed: () {
+                                                    read.onOtpSubmitPressed(
+                                                        context);
+                                                  },
+                                                  child: Text(
+                                                    'Submit',
+                                                    style: GoogleFonts.inter(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                              // color: SplashTex
+                                                              letterSpacing: .5,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.h,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Resend OTP',
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                              // color: SplashTex
+                                                              letterSpacing: .5,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    )),
-                              );
-                            },
-                          );
+                                      )),
+                                );
+                              },
+                            );
+                          });
                         },
                         child: Text(
                           'Next',
