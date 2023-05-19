@@ -109,8 +109,7 @@ class ShopSignInController extends ChangeNotifier {
           print(kycVerificationStatus);
           print(result.kycUploaded);
           print(result.registrationCompleted);
-          if (result.kycUploaded == "yes" &&
-              result.registrationCompleted == "yes") {
+          if (result.registrationCompleted == "yes") {
             isLoginBtnEnabled = true;
             isNewShopBtnEnabled = false;
             print(isNewShopBtnEnabled);
@@ -119,15 +118,16 @@ class ShopSignInController extends ChangeNotifier {
             notifyListeners();
             return;
           }
-          if (result.kycUploaded == "no" &&
-              result.registrationCompleted == "yes") {
-            isLoginBtnEnabled = false;
-            isNewShopBtnEnabled = true;
-            Utils.showPrimarySnackbar(context, result.message,
-                type: SnackType.success);
-            notifyListeners();
-            return;
-          } else {
+          // if (result.kycUploaded == "no" &&
+          //     result.registrationCompleted == "yes") {
+          //   isLoginBtnEnabled = false;
+          //   isNewShopBtnEnabled = true;
+          //   Utils.showPrimarySnackbar(context, result.message,
+          //       type: SnackType.success);
+          //   notifyListeners();
+          //   return;
+          // }
+          else {
             isNewShopBtnEnabled = true;
             isLoginBtnEnabled = false;
             notifyListeners();

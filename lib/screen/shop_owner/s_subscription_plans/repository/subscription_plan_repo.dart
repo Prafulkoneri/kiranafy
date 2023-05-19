@@ -7,7 +7,7 @@ class SubscriptionPlansRepo {
     try {
       return await http.get(Uri.parse(Endpoint.subscriptionPlan), headers: {
         // "Authorization": "Bearer $token",
-        "Authorization": "Bearer 10|78G8mC9MzyuxNNvCKtc2n5luBAeG7fDcnpc6Qvcm",
+        "Authorization": "Bearer $token",
         'Content-Type': 'application/json',
       });
     } catch (e) {

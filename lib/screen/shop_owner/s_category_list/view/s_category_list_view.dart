@@ -54,8 +54,8 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
       ),
       body: watch.isLoading
           ? Center(
-        child: CircularProgressIndicator(),
-      )
+              child: CircularProgressIndicator(),
+            )
           : RefreshIndicator(
               onRefresh: () async {
                 Navigator.push(
@@ -87,7 +87,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    read.onProductSelect(context);
+                                    read.onProductSelect(context, element?.id);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

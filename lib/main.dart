@@ -30,6 +30,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
 import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/custom_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
@@ -42,7 +43,6 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/screen/splash/controller/splash_controller.dart';
 import 'package:local_supper_market/screen/splash/view/splash_view.dart';
-import 'package:local_supper_market/testing.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
@@ -73,6 +73,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => MobileNoController()),
         ChangeNotifierProvider(create: (_) => SOrderStatusController()),
         ChangeNotifierProvider(create: (_) => SAccountScreenController()),
+        ChangeNotifierProvider(create: (_) => CustomProductController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],

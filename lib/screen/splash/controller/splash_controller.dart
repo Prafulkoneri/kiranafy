@@ -16,18 +16,17 @@ class SplashController extends ChangeNotifier {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ShopRegistrationView()));
       }
       if(pref.getString("status")=="shopRegistered"){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SKycVerificationView()));
-      }
-      if(pref.getString("status")=="kycCompleted"){
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SMainScreenView()));
       }
+      // if(pref.getString("status")=="kycCompleted"){
+      //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+      // }
       if(pref.getString("status")=="loggedIn"){
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SMainScreenView()));
       }
       if(pref.getString("status")==null){
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
       }
-
     });
   }
 }

@@ -30,16 +30,16 @@ class ShopRegistrationController extends ChangeNotifier {
   int countryId = 0;
   int stateId = 0;
   int cityId = 0;
-  int areaId=0;
-  int shopId=0;
-  String countryCode="+91";
-  String selectedCountryCode="";
-  String successToken="";
+  int areaId = 0;
+  int shopId = 0;
+  String countryCode = "+91";
+  String selectedCountryCode = "";
+  String successToken = "";
 
   Future<void> initState(context) async {
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    mobController.text=pref.getString("mobileNo").toString();
-    selectedCountryCode=pref.getString("countryCode").toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    mobController.text = pref.getString("mobileNo").toString();
+    selectedCountryCode = pref.getString("countryCode").toString();
     await getCountryList(context);
     notifyListeners();
   }
@@ -155,7 +155,6 @@ class ShopRegistrationController extends ChangeNotifier {
     notifyListeners();
   }
 
-
   GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
         cityId: cityId.toString(),
       );
@@ -169,7 +168,6 @@ class ShopRegistrationController extends ChangeNotifier {
     shopId = int.parse(value.toString());
     notifyListeners();
   }
-
 
   Future<void> getAreaList(context) async {
     registrationDataRepo.getAreaList(_areaListReqModel).then((response) {
@@ -200,91 +198,104 @@ class ShopRegistrationController extends ChangeNotifier {
 
   Future<void> validateField(context) async {
     if (shopNameController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context,"Enter Shop Name", type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Shop Name",
+          type: SnackType.error);
       return;
     }
     if (ownerNameController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context,"Enter Owner Name", type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Owner Name",
+          type: SnackType.error);
       return;
     }
-    if(shopId==0){
-      Utils.showPrimarySnackbar(context,"Select shop Type", type: SnackType.error);
+    if (shopId == 0) {
+      Utils.showPrimarySnackbar(context, "Select shop Type",
+          type: SnackType.error);
       return;
     }
     if (emailIdController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context,"Enter Email Id", type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Email Id",
+          type: SnackType.error);
       return;
     }
-    if(countryId==0){
-      Utils.showPrimarySnackbar(context,"Select Country", type: SnackType.error);
+    if (countryId == 0) {
+      Utils.showPrimarySnackbar(context, "Select Country",
+          type: SnackType.error);
       return;
     }
-    if(stateId==0){
-      Utils.showPrimarySnackbar(context,"Select State", type: SnackType.error);
+    if (stateId == 0) {
+      Utils.showPrimarySnackbar(context, "Select State", type: SnackType.error);
       return;
     }
-    if(cityId==0){
-      Utils.showPrimarySnackbar(context,"Select City", type: SnackType.error);
+    if (cityId == 0) {
+      Utils.showPrimarySnackbar(context, "Select City", type: SnackType.error);
       return;
     }
-    if(areaId==0){
-      Utils.showPrimarySnackbar(context,"Select Area", type: SnackType.error);
+    if (areaId == 0) {
+      Utils.showPrimarySnackbar(context, "Select Area", type: SnackType.error);
       return;
     }
     if (addressController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context,"Enter Address", type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Address",
+          type: SnackType.error);
       return;
     }
     if (pincodeController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context,"Enter Pincode", type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Pincode",
+          type: SnackType.error);
       return;
     }
-    if (pincodeController.text.length<6) {
-      Utils.showPrimarySnackbar(context,"Incorrect Pincode", type: SnackType.error);
+    if (pincodeController.text.length < 6) {
+      Utils.showPrimarySnackbar(context, "Incorrect Pincode",
+          type: SnackType.error);
       return;
     }
 
     if (upiController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context,"Enter Upi", type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Upi", type: SnackType.error);
       return;
     }
   }
 
-  Future<void> onNextClicked(context)async{
+  Future<void> onNextClicked(context) async {
     await validateField(context);
     await shopRegister(context);
   }
 
-  ShopOwnerRegisterReqModel get shopOwnerRegisterReqModel=>ShopOwnerRegisterReqModel(
-    shopName: shopNameController.text,
-    shopOwnerName: ownerNameController.text,
-    countryCode: "$countryCode",
-    mobileNo: (mobController.text),
-    email: emailIdController.text,
-    shopType: stateId==1?"Retailer":"Wholesaler",
-    countryId: countryId.toString(),
-    stateId: stateId.toString(),
-    cityId: cityId.toString(),
-    areaId: areaId.toString(),
-    shopAddress: addressController.text,
-    shopPincode: (pincodeController.text),
-    shopUpiId: upiController.text,
-    fcmToken: "ghjklhvghjk"
-  );
+  ShopOwnerRegisterReqModel get shopOwnerRegisterReqModel =>
+      ShopOwnerRegisterReqModel(
+          shopName: shopNameController.text,
+          shopOwnerName: ownerNameController.text,
+          countryCode: "$countryCode",
+          mobileNo: (mobController.text),
+          email: emailIdController.text,
+          shopType: stateId == 1 ? "Retailer" : "Wholesaler",
+          countryId: countryId.toString(),
+          stateId: stateId.toString(),
+          cityId: cityId.toString(),
+          areaId: areaId.toString(),
+          shopAddress: addressController.text,
+          shopPincode: (pincodeController.text),
+          shopUpiId: upiController.text,
+          fcmToken: "ghjklhvghjk");
 
-  Future<void> shopRegister(context)async{
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    shopOwnerRegisterRepo.shopOwnerRegistration(shopOwnerRegisterReqModel).then((response){
-      final result = ShopOwnerRegisterResModel.fromJson(jsonDecode(response.body));
+  Future<void> shopRegister(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopOwnerRegisterRepo
+        .shopOwnerRegistration(shopOwnerRegisterReqModel)
+        .then((response) {
+          print(response.body);
+      final result =
+          ShopOwnerRegisterResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
         print(response.body);
-        pref.setString("successToken",result.successToken?.token??"");
+        pref.setString("successToken", result.successToken?.token ?? "");
         print(pref.getString("successToken"));
         // pref.setString("kycStatus", result.kycStatus.toString());
-        pref.setString('status','shopRegistered');
-     notifyListeners();
-     Navigator.push(context,MaterialPageRoute(builder: (context)=>SKycVerificationView()));
+        pref.setString('status', 'shopRegistered');
+        notifyListeners();
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SKycVerificationView()));
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -292,7 +303,7 @@ class ShopRegistrationController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -301,5 +312,4 @@ class ShopRegistrationController extends ChangeNotifier {
       },
     );
   }
-
 }

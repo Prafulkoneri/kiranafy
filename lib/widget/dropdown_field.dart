@@ -119,10 +119,12 @@ class SDropDownField extends StatefulWidget {
   final String? value;
   final double? hintSize;
   final double? height;
+  final EdgeInsets ? iconPadding;
 
   const SDropDownField(
       {Key? key,
       this.value,
+        this.iconPadding,
       this.height,
       this.hint,
       this.hintSize,
@@ -208,7 +210,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
             ),
             iconStyleData: IconStyleData(
               icon: Padding(
-                padding: EdgeInsets.only(right: 22.w),
+                padding: widget.iconPadding??EdgeInsets.only(right: 22.w),
                 child: SvgPicture.asset("assets/icons/dropdown.svg"),
               ),
               // iconSize: 30,

@@ -59,4 +59,7 @@ class Endpoint {
   ////selected Products
   static const String selectedProducts =
       '${baseUrl}lsm-shop-owner-products-list';
+  ////selected Products
+  static const String createCustomProduct =
+      '${baseUrl}lsm-shop-owner-create-custom-product';
 }

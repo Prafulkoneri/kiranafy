@@ -236,27 +236,4 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
   //////////////////Image Picker/////////////////////////////
 
-  void checkIfUrl(bannerImageList)async{
-
-  }
-
-  ImagePicker picker = ImagePicker();
-  late File imageFile1 = File("");
-  late File imageFile2 = File("");
-  late File imageFile3 = File("");
-
-  openCamera(context) async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.camera,
-      maxHeight: double.infinity,
-      maxWidth: double.infinity,
-      imageQuality: 100,
-    );
-
-    if (pickedFile != null) {
-      Navigator.pop(context);
-
-      imageFile1 = File(pickedFile.path);
-    }
-  }
 }

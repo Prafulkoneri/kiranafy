@@ -27,9 +27,11 @@ class SCategoryListController extends ChangeNotifier {
         MaterialPageRoute(builder: (context) => SSelectCategoryView()));
   }
 
-  void onProductSelect(context) {
+  void onProductSelect(context, id) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ShopProductView()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => ShopProductView(categoryId: id.toString())));
   }
 
   void onCustomProductSelect(context) {
