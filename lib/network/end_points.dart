@@ -56,10 +56,31 @@ class Endpoint {
       '${baseUrl}lsm-shop-owner-update-configuration-details';
   ////add category
   static const String addCategory = '${baseUrl}lsm-shop-owner-add-category';
-  ////selected Products
+  //// shop owner get selected Products
   static const String selectedProducts =
+      "${baseUrl}lsm-shop-owner-get-selected-products";
+
+//shop get products list
+  static const String getallselectedproductlist =
       '${baseUrl}lsm-shop-owner-products-list';
   ////selected Products
   static const String createCustomProduct =
       '${baseUrl}lsm-shop-owner-create-custom-product';
+
+  ///upload Add Products
+  static const String uploadAddProducts =
+      '${baseUrl}lsm-shop-owner-add-product-of-category';
+
+  ///Edit Custome Products
+  static const String editCustomeProducts =
+      "${baseUrl}lsm-shop-owner-edit-product-of-category";
+
+///////////////////////////////Customer Screen Apis///////////////////
+//OnBoarding Screen
+  static const String onBoardingScreen =
+      "${baseUrl}lsm-customer-get-splash-screen";
+
+  ////Mobile Number check
+  static const String mobileNumberChecks =
+      "${baseUrl}lsm-customer-mobile-number-exists";
 }

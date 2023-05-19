@@ -47,6 +47,8 @@ import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
+import 'screen/shop_owner/s_products/controller/shop_add_product_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -74,6 +76,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SOrderStatusController()),
         ChangeNotifierProvider(create: (_) => SAccountScreenController()),
         ChangeNotifierProvider(create: (_) => CustomProductController()),
+        ChangeNotifierProvider(create: (_) => ShopGetSelectedProducts()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],

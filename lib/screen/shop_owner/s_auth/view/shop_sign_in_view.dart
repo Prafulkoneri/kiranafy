@@ -18,7 +18,6 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
-// import 'package:country_code_picker/country_code_picker.dart';
 enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET } //otp
 
 class ShopSignInView extends StatefulWidget {
@@ -26,41 +25,7 @@ class ShopSignInView extends StatefulWidget {
   State<ShopSignInView> createState() => _ShopSignInViewState();
 }
 
-// TextEditingController phoneController = TextEditingController();
-// OtpFieldController otpController = OtpFieldController();
-// LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
-// FirebaseAuth _auth = FirebaseAuth.instance;
-
-// void SignOutME() async {
-//   await _auth.signOut();
-// }
-
 class _ShopSignInViewState extends State<ShopSignInView> {
-  // TextEditingController phoneController = TextEditingController();
-  // OtpFieldController otpController = OtpFieldController();
-  // LoginScreen currentState = LoginScreen.SHOW_MOBILE_ENTER_WIDGET;
-  // FirebaseAuth _auth = FirebaseAuth.instance;
-  // String verificationID = "";
-
-  // void SignOutME() async {
-  //   await _auth.signOut();
-  // }
-
-  // void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential) async {
-  //   try {
-  //     final authCred = await _auth.signInWithCredential(phoneAuthCredential);
-
-  //     if (authCred.user != null) {
-  //       Navigator.pushReplacement(
-  //           context, MaterialPageRoute(builder: (context) => ShopDashBoard()));
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     print(e.message);
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(content: Text('Some Error Occured. Try Again Later')));
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     final read = context.read<ShopSignInController>();

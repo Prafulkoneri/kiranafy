@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/shop_add_product_controller.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:provider/provider.dart';
 
@@ -27,15 +28,15 @@ class _ShopProductViewState extends State<ShopProductView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
-          .read<SAddProductsController>()
+          .read<ShopGetSelectedProducts>()
           .initState(context, widget.categoryId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<SAddProductsController>();
-    final watch = context.watch<SAddProductsController>();
+    final read = context.read<ShopGetSelectedProducts>();
+    final watch = context.watch<ShopGetSelectedProducts>();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
@@ -103,7 +104,6 @@ class _ShopProductViewState extends State<ShopProductView> {
                     Expanded(
                       child: PrimaryButton(
                           height: 40.h,
-                          // width: 164.w,
                           color: Custlogin,
                           onTap: () {
                             read.onAddProductClick(context);
@@ -116,7 +116,7 @@ class _ShopProductViewState extends State<ShopProductView> {
                                 width: 11.w,
                               ),
                               Text(
-                                "Custom Product",
+                                "Add Product",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Colors.white,
@@ -146,7 +146,7 @@ class _ShopProductViewState extends State<ShopProductView> {
                                 width: 11.w,
                               ),
                               Text(
-                                "Add Product",
+                                "Custome Product",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Colors.white,
@@ -163,11 +163,13 @@ class _ShopProductViewState extends State<ShopProductView> {
                   height: 22.h,
                 ),
                 ListView.builder(
-                  itemCount: watch.selectedProductList?.length ?? 0,
+                  itemCount: watch.productsFromAdmin?.length ?? 0,
+                  //  watch.selectedProductList?.length ?? 0,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    final element = watch.selectedProductList?[index];
+                    final element = watch.productsFromAdmin?[index];
+                    print(element?.unitDetails);
                     return Column(
                       children: [
                         Container(
@@ -207,12 +209,14 @@ class _ShopProductViewState extends State<ShopProductView> {
                                       children: [
                                         Image(
                                           image: NetworkImage(
-                                              "${element?.productImagePath}"),
+                                            "${element?.productImagePath}",
+                                          ),
                                           height: 61.h,
                                           width: 60.w,
                                         ),
                                         Text(
                                           "${element?.productName}",
+                                          // "${element?.productName}",
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: Black1,
@@ -335,55 +339,42 @@ class _ShopProductViewState extends State<ShopProductView> {
                                         SizedBox(
                                           height: 5.h,
                                         ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 12.w,
-                                              right: 20.w,
-                                              top: 7.w,
-                                              bottom: 8.w),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              // color: Black1,
-                                              border: Border.all(
-                                                  width: 1, color: grey6)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "200 ml",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                              Row(
+                                        ListView.builder(
+                                          itemCount: watch
+                                                  .productsFromAdmin?[index]
+                                                  .unitDetails
+                                                  ?.length ??
+                                              0,
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemBuilder: (context, int) {
+                                            // final unitDetail = watch
+                                            //     .productsFromAdmin?[index]
+                                            //     .unitDetails?[int];
+                                            final element = watch
+                                                .productsFromAdmin?[index]
+                                                .unitDetails?[index];
+
+                                            return Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 12.w,
+                                                  right: 20.w,
+                                                  top: 7.w,
+                                                  bottom: 8.w),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  // color: Black1,
+                                                  border: Border.all(
+                                                      width: 1, color: grey6)),
+                                              child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    "40",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough,
-                                                          color: Black1,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 18.w,
-                                                  ),
-                                                  Text(
-                                                    "INR 30",
+                                                    "${element?.mrpPrice}",
                                                     style: GoogleFonts.dmSans(
                                                       textStyle: TextStyle(
                                                           color: Black1,
@@ -391,207 +382,49 @@ class _ShopProductViewState extends State<ShopProductView> {
                                                           fontWeight:
                                                               FontWeight.w400),
                                                     ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        "${element?.weightAndUnit}",
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .lineThrough,
+                                                              color: Black1,
+                                                              fontSize: 14.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 18.w,
+                                                      ),
+                                                      Text(
+                                                        "${element?.offerPrice}",
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Black1,
+                                                              fontSize: 14.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 12.w,
-                                              right: 20.w,
-                                              top: 7.w,
-                                              bottom: 8.w),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              // color: Black1,
-                                              border: Border.all(
-                                                  width: 1, color: grey6)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "200 ml",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "40",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough,
-                                                          color: Black1,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 18.w,
-                                                  ),
-                                                  Text(
-                                                    "INR 30",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black1,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 12.w,
-                                              right: 20.w,
-                                              top: 7.w,
-                                              bottom: 8.w),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              // color: Black1,
-                                              border: Border.all(
-                                                  width: 1, color: grey6)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "200 ml",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "40",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough,
-                                                          color: Black1,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 18.w,
-                                                  ),
-                                                  Text(
-                                                    "INR 30",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black1,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 12.w,
-                                              right: 20.w,
-                                              top: 7.w,
-                                              bottom: 8.w),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              // color: Black1,
-                                              border: Border.all(
-                                                  width: 1, color: grey6)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "200 ml",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "40",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough,
-                                                          color: Black1,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 18.w,
-                                                  ),
-                                                  Text(
-                                                    "INR 30",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black1,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                            );
+                                          },
+                                        )
                                       ],
                                     ),
                                   ),
