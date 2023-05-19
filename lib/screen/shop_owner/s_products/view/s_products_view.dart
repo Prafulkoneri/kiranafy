@@ -6,8 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/shop_add_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:provider/provider.dart';
 
@@ -37,11 +40,17 @@ class _ShopProductViewState extends State<ShopProductView> {
   Widget build(BuildContext context) {
     final read = context.read<ShopGetSelectedProducts>();
     final watch = context.watch<ShopGetSelectedProducts>();
+    final watchMainScreen = context.watch<SMainScreenController>();
+    final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
+
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
+            onBackBtnPressed: (){
+              readMainScreen.onBackPressed(0,SSCategoryListView());
+            },
             title: "Cold Drinks & Juices - 2",
             // action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {},
@@ -106,7 +115,7 @@ class _ShopProductViewState extends State<ShopProductView> {
                           height: 40.h,
                           color: Custlogin,
                           onTap: () {
-                            read.onAddProductClick(context);
+                            readMainScreen.onNavigation(0,AddProductView(),context);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

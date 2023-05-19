@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
@@ -34,11 +36,15 @@ class _AddProductViewState extends State<AddProductView> {
   Widget build(BuildContext context) {
     final read = context.read<SAddProductsController>();
     final watch = context.watch<SAddProductsController>();
+    final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
+            onBackBtnPressed: (){
+              readMainScreen.onBackPressed(0,ShopProductView());
+            },
             title: "Add Products",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {},

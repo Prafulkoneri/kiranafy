@@ -41,8 +41,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SMainScreenView()));
+            readMainScreen.onBackPressed(0,ShopDashBoard());
           },
           title: "Categories",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
@@ -56,125 +55,123 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : RefreshIndicator(
-              onRefresh: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SSCategoryListView()));
-              },
-              child: WillPopScope(
-                onWillPop: () async {
-                  return false;
-                },
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 5.w,
-                      ),
-                      ListView.builder(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 19.w, vertical: 15.w),
-                          itemCount: watch.selectedCategoriesList?.length ?? 0,
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (BuildContext, index) {
-                            final element =
-                                watch.selectedCategoriesList?[index];
-                            return Column(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    read.onProductSelect(context, element?.id);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black
-                                                .withOpacity(0.03.w),
-                                            blurRadius: 5,
-                                            spreadRadius: 0,
-                                            offset: Offset(5, 6)),
-                                      ],
-                                      border: Border.all(
-                                          color:
-                                              Colors.black.withOpacity(0.07)),
-                                      borderRadius: BorderRadius.circular(7.w),
-                                    ),
-                                    padding: EdgeInsets.only(
-                                        top: 16.w,
-                                        bottom: 16.w,
-                                        right: 20.w,
-                                        left: 11.w),
-                                    child: Row(
+
+          : WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: RefreshIndicator(
+            onRefresh: ()async{
+              readMainScreen.onNavigation(0,SSCategoryListView(), context);
+            },
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 5.w,
+                ),
+                ListView.builder(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 19.w, vertical: 15.w),
+                    itemCount: watch.selectedCategoriesList?.length ?? 0,
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (BuildContext, index) {
+                      final element =
+                      watch.selectedCategoriesList?[index];
+                      return Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              readMainScreen.onNavigation(0,ShopProductView(categoryId:element?.id.toString()),context);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black
+                                          .withOpacity(0.03.w),
+                                      blurRadius: 5,
+                                      spreadRadius: 0,
+                                      offset: Offset(5, 6)),
+                                ],
+                                border: Border.all(
+                                    color:
+                                    Colors.black.withOpacity(0.07)),
+                                borderRadius: BorderRadius.circular(7.w),
+                              ),
+                              padding: EdgeInsets.only(
+                                  top: 16.w,
+                                  bottom: 16.w,
+                                  right: 20.w,
+                                  left: 11.w),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 55.w,
+                                    height: 40.w,
+                                    child: Image.network(
+                                        "${element?.categoryImagePath}"),
+                                  ),
+                                  SizedBox(
+                                    width: 12.w,
+                                  ),
+                                  Expanded(
+                                    child: Column(
                                       children: [
-                                        Container(
-                                          width: 55.w,
-                                          height: 40.w,
-                                          child: Image.network(
-                                              "${element?.categoryImagePath}"),
-                                        ),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "${element?.categoryName}",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp,
-                                                        color: Black1),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "20 Products",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 14.sp,
-                                                        color: Black1),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "${element?.categoryName}",
+                                              style: TextStyle(
+                                                  fontWeight:
+                                                  FontWeight.w500,
+                                                  fontSize: 16.sp,
+                                                  color: Black1),
+                                            ),
+                                          ],
                                         ),
                                         Row(
                                           children: [
-                                            SvgPicture.asset(
-                                                "assets/icons/arrow_right.svg"),
+                                            Text(
+                                              "20 Products",
+                                              style: TextStyle(
+                                                  fontWeight:
+                                                  FontWeight.w400,
+                                                  fontSize: 14.sp,
+                                                  color: Black1),
+                                            ),
                                           ],
-                                        ),
+                                        )
                                       ],
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 15.w,
-                                ),
-                              ],
-                            );
-                          }),
-                      SizedBox(
-                        height: 65.w,
-                      ),
-                    ],
-                  ),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                          "assets/icons/arrow_right.svg"),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15.w,
+                          ),
+                        ],
+                      );
+                    }),
+                SizedBox(
+                  height: 65.w,
                 ),
-              ),
+              ],
             ),
+          ),
+        ),
+      ),
     );
   }
 }

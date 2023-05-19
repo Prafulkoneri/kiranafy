@@ -96,10 +96,11 @@ class SMainScreenController extends ChangeNotifier {
     notifyListeners();
   }
   void onNavigation(tabIndex,screenName,context){
+    print("hello");
     print(screenName);
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>screenName));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>SMainScreenView()));
     currentTab=tabIndex;
-    currentScreen=screenName();
+    currentScreen=screenName;
     notifyListeners();
   }
 }
