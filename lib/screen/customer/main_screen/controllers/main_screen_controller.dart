@@ -31,7 +31,6 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-
   void onShopPressed() {
     currentTab = 1;
     currentScreen = AllNearShops();

@@ -10,6 +10,7 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import '../../products/views/product_screen.dart';
 import 'package:provider/provider.dart';
 
+// import '../controller/profile_controller.dart';
 import 'controller/profile_controller.dart';
 
 class ProfileScreenView extends StatefulWidget {
@@ -125,8 +126,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 'designtest@gmail.com',
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
-                                    // decoration:
-                                    // TextDecoration.lineThrough,
+                                      // decoration:
+                                      // TextDecoration.lineThrough,
                                       color: Black,
                                       // letterSpacing:
                                       //     .5,
