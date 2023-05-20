@@ -143,7 +143,6 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         initialSelection: watch.selectedCountryCode,
                         controller: watch.mobController,
                         enableOrder: true,
-
                       ),
                       SizedBox(
                         height: 18.w,
@@ -228,6 +227,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SDropDownField(
                         onChanged: (value) async {
                           read.onAreaSelected(value);
+                          read.getPinCodeList(context);
                         },
                         items: watch.areaList
                             ?.map(
@@ -244,6 +244,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                             .toList(),
                         hint: "Area",
                       ),
+
                       SizedBox(
                         height: 18.w,
                       ),
@@ -258,10 +259,25 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SizedBox(
                         height: 18.w,
                       ),
-                      PrimarySTextFormField(
-                        textInputType: TextInputType.number,
-                        controller: watch.pincodeController,
-                        hintText: "Pincode",
+                      SDropDownField(
+                        onChanged: (value) async {
+                          print(value);
+                          read.onAreaSelected(value);
+                        },
+                        items: watch.pincodeList
+                            ?.map(
+                              (item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item ?? "",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ),
+                        )
+                            .toList(),
+                        hint: "Pincode",
                       ),
                       SizedBox(
                         height: 18.w,
