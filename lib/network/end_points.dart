@@ -83,4 +83,7 @@ class Endpoint {
   ////Mobile Number check
   static const String mobileNumberChecks =
       "${baseUrl}lsm-customer-mobile-number-exists";
+
+  ////Shop Sign Up
+  static const String customerSignup = "${baseUrl}lsm-customer-signup";
 }

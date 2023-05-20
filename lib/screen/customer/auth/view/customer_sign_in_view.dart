@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
@@ -16,6 +17,8 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:provider/provider.dart';
 import '../../main_screen/views/main_screen_view.dart';
+
+// enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET }
 
 class CustomerSignInView extends StatefulWidget {
   const CustomerSignInView({Key? key}) : super(key: key);
@@ -306,22 +309,24 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                                                   ),
                                                 ),
                                               ),
-                                              OTPTextField(
-                                                length: 6,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                fieldWidth: 50,
-                                                style: const TextStyle(
-                                                    fontSize: 17),
-                                                textFieldAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                fieldStyle:
-                                                    FieldStyle.underline,
-                                                onCompleted: (pin) {
-                                                  print("Completed: " + pin);
+                                              OtpTextField(
+                                                //  controller: otpController,
+                                                numberOfFields: 6,
+                                                borderColor: Color(0xFF512DA8),
+                                                //set to true to show as box or false to show as dash
+                                                showFieldAsBox: false,
+                                                //runs when a code is typed in
+                                                onCodeChanged: (String code) {
+                                                  print(code);
+                                                  //handle validation or checks here
                                                 },
+                                                //runs when every textfield is filled
+                                                onSubmit:
+                                                    (String verificationCode) {
+                                                  print(verificationCode);
+                                                  read.onOtpEntered(
+                                                      verificationCode);
+                                                }, // end onSubmit
                                               ),
                                               const SizedBox(
                                                 height: 20,

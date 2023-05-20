@@ -159,6 +159,7 @@ class ShopSignInController extends ChangeNotifier {
     await _auth.signOut();
   }
 
+  ///firbase
   void signInWithPhoneAuthCred(
       AuthCredential phoneAuthCredential, context) async {
     try {
