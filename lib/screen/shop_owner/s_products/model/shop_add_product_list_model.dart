@@ -31,15 +31,18 @@ class ShopAddProductsListResponse {
 }
 
 class Data {
+  String ? categoryName;
   int? allProductsCount;
   List<ProductDetail>? productDetails;
 
   Data({
     required this.allProductsCount,
+    this.categoryName,
     required this.productDetails,
   });
 
   Data.fromJson(Map<String, dynamic> json) {
+    categoryName=json["category_name"];
     allProductsCount = json['all_products_count'];
     // productDetails = json['product_details'];
 

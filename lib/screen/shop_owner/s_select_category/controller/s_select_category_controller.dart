@@ -23,9 +23,9 @@ class SSelectCategoryController extends ChangeNotifier {
   bool isLoading=true;
 
   Future<void> initState(context) async {
-    isLoading=true;
+
     await getCategoriesList(context);
-  isLoading=false;
+
   notifyListeners();
   }
 
@@ -43,6 +43,7 @@ class SSelectCategoryController extends ChangeNotifier {
 
   /////////////////////////////////  Start All Categories List/////////////////////
   Future<void> getCategoriesList(context) async {
+    isLoading=true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     categoriesListRepo.shopAllCategoriesList(pref.getString("successToken")).then((response) {
       print(response.statusCode);
@@ -63,6 +64,7 @@ class SSelectCategoryController extends ChangeNotifier {
         }
         print(selectedCategoryList);
         print(selectedCategoryId);
+        isLoading=false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

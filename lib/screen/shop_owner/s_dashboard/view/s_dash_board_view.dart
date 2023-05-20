@@ -34,6 +34,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
 
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
             padding: EdgeInsets.only(left: 19.w, top: 40.w, right: 23.w),
@@ -436,7 +437,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-Navigator.push(context,MaterialPageRoute(builder:(context)=>SSCategoryListView()));
+readMainScreen.onNavigation(0,SSCategoryListView(), context);
                   },
                   child: Container(
                     padding: EdgeInsets.only(

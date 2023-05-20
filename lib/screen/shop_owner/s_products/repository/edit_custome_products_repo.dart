@@ -7,9 +7,9 @@ class EditCustomeProductsRepo {
   Future<http.Response> editCustomeProducts(
       EditCustomeProductsRequestModel reqModel, token) async {
     print(reqModel.toJson());
-    print(Uri.parse(Endpoint.editCustomeProducts));
+    print(Uri.parse(Endpoint.editCustomProducts));
     try {
-      return await http.post(Uri.parse(Endpoint.editCustomeProducts),
+      return await http.post(Uri.parse(Endpoint.editCustomProducts),
           body: reqModel.toJson(),
           headers: {
             "Authorization": "Bearer $token",

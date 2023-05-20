@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/shop_owner_register_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
@@ -19,6 +20,7 @@ class ShopRegistrationController extends ChangeNotifier {
   List<StateData>? stateList;
   List<CityData>? cityList;
   List<AreaData>? areaList;
+  List ? pincodeList;
   TextEditingController shopNameController = TextEditingController();
   TextEditingController ownerNameController = TextEditingController();
   TextEditingController mobController = TextEditingController();
@@ -35,6 +37,7 @@ class ShopRegistrationController extends ChangeNotifier {
   String countryCode = "+91";
   String selectedCountryCode = "";
   String successToken = "";
+  String pincode = "";
 
   Future<void> initState(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -164,6 +167,8 @@ class ShopRegistrationController extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   Future<void> onShopTypeSelected(value) async {
     shopId = int.parse(value.toString());
     notifyListeners();
@@ -194,6 +199,44 @@ class ShopRegistrationController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+
+  GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
+    areaId: areaId.toString(),
+  );
+
+  Future<void> getPinCodeList(context) async {
+    registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
+      final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        pincodeList = result.pincodeData;
+        print(pincodeList);
+        if (result.pincodeData!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "No Pincode Found",
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> onPincodeSelected(value) async {
+    pincode = value.toString();
+    notifyListeners();
   }
 
   Future<void> validateField(context) async {
@@ -239,26 +282,20 @@ class ShopRegistrationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    if (pincodeController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context, "Enter Pincode",
+    if (pincode=="") {
+      Utils.showPrimarySnackbar(context, "Select Pincode",
           type: SnackType.error);
       return;
     }
-    if (pincodeController.text.length < 6) {
-      Utils.showPrimarySnackbar(context, "Incorrect Pincode",
-          type: SnackType.error);
-      return;
-    }
-
     if (upiController.text.isEmpty) {
       Utils.showPrimarySnackbar(context, "Enter Upi", type: SnackType.error);
       return;
     }
+   await shopRegister(context);
   }
 
   Future<void> onNextClicked(context) async {
     await validateField(context);
-    await shopRegister(context);
   }
 
   ShopOwnerRegisterReqModel get shopOwnerRegisterReqModel =>
@@ -268,13 +305,13 @@ class ShopRegistrationController extends ChangeNotifier {
           countryCode: "$countryCode",
           mobileNo: (mobController.text),
           email: emailIdController.text,
-          shopType: stateId == 1 ? "Retailer" : "Wholesaler",
+          shopType: stateId == 1 ? "Retailer":"Wholesaler",
           countryId: countryId.toString(),
           stateId: stateId.toString(),
           cityId: cityId.toString(),
           areaId: areaId.toString(),
           shopAddress: addressController.text,
-          shopPincode: (pincodeController.text),
+          shopPincode: (pincode),
           shopUpiId: upiController.text,
           fcmToken: "ghjklhvghjk");
 

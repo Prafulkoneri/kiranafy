@@ -35,8 +35,7 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: (){
-            print("hello");
-            Navigator.pop(context);
+            readMainScreen.onNavigation(0,SSCategoryListView(), context);
           },
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),

@@ -6,48 +6,61 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/controller/shop_add_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/shop_custome_products_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../widget/app_bar.dart';
 
-class ShopProductView extends StatefulWidget {
+class SSelectedProductView extends StatefulWidget {
   final String? categoryId;
-  const ShopProductView({super.key, this.categoryId});
+  const SSelectedProductView({super.key,required this.categoryId});
 
   @override
-  State<ShopProductView> createState() => _ShopProductViewState();
+  State<SSelectedProductView> createState() => _SSelectedProductViewState();
 }
 
 final TextEditingController _searchController = TextEditingController();
 
-class _ShopProductViewState extends State<ShopProductView> {
+class _SSelectedProductViewState extends State<SSelectedProductView> {
   @override
   void initState() {
+     print("widget.categoryId ${widget.categoryId}");
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
-          .read<ShopGetSelectedProducts>()
+          .read<SSelectedProductsController>()
           .initState(context, widget.categoryId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<ShopGetSelectedProducts>();
-    final watch = context.watch<ShopGetSelectedProducts>();
+    final read = context.read<SSelectedProductsController>();
+    final watch = context.watch<SSelectedProductsController>();
+    final watchMainScreen = context.watch<SMainScreenController>();
+    final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
+
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
+            onBackBtnPressed: (){
+              readMainScreen.onBackPressed(0,SSCategoryListView());
+            },
             title: "Cold Drinks & Juices - 2",
             // action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {},
           ),
         ),
-        body: SingleChildScrollView(
+        body: watch.isLoading?Center(
+          child: CircularProgressIndicator(),
+        ):SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
               right: 19.0.w,
@@ -75,11 +88,12 @@ class _ShopProductViewState extends State<ShopProductView> {
                           borderSide: BorderSide(width: 1, color: grey12),
                         ),
                         hintText: 'Search Products',
+                        contentPadding: EdgeInsets.only(bottom: 10.w),
                         hintStyle: GoogleFonts.dmSans(
                             textStyle: TextStyle(
                                 color: Grey,
                                 // letterSpacing: .5,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w400)),
                         prefixIcon: IconButton(
                           icon: SvgPicture.asset(
@@ -106,53 +120,75 @@ class _ShopProductViewState extends State<ShopProductView> {
                           height: 40.h,
                           color: Custlogin,
                           onTap: () {
-                            read.onAddProductClick(context);
+                            readMainScreen.onNavigation(0,AddProductView(categoryId:watch.categoryId,),context);
                           },
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SvgPicture.asset('assets/icons/pluse.svg'),
-                              SizedBox(
-                                width: 11.w,
+
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 15.w,
+                                  ),
+                                  SvgPicture.asset('assets/icons/pluse.svg'),
+                                ],
                               ),
-                              Text(
-                                "Add Product",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700),
-                                ),
+
+                              Row(
+                                children: [
+                                  Text(
+                                    "Add Product",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 17.w,
+                                  ),
+                                ],
                               ),
                             ],
                           )),
                     ),
                     SizedBox(
-                      width: 20.w,
+                      width: 15.w,
                     ),
                     Expanded(
                       child: PrimaryButton(
                           height: 40.h,
-                          width: 164.w,
                           color: Custlogin,
                           onTap: () {
-                            read.onCustomeAddProductClick(context);
+                            readMainScreen.onNavigation(0,ShopCustomProductView(categoryId: watch.categoryId), context);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SvgPicture.asset('assets/icons/pluse.svg'),
+                              Row(
+                                children: [
+
+                                  SvgPicture.asset('assets/icons/pluse.svg'),
+
+                                ],
+                              ),
                               SizedBox(
                                 width: 11.w,
                               ),
-                              Text(
-                                "Custome Product",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700),
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Custom Product",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           )),
@@ -169,7 +205,6 @@ class _ShopProductViewState extends State<ShopProductView> {
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final element = watch.productsFromAdmin?[index];
-                    print(element?.unitDetails);
                     return Column(
                       children: [
                         Container(
@@ -251,25 +286,30 @@ class _ShopProductViewState extends State<ShopProductView> {
                                         SizedBox(
                                           width: 8.w,
                                         ),
-                                        Container(
-                                          padding: EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: grey6,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 10.0,
-                                                  spreadRadius: 2.0,
-                                                ), //BoxShadow
-                                              ],
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          child: SvgPicture.asset(
-                                              'assets/icons/delete2.svg'),
+                                        GestureDetector(
+                                          onTap:(){
+                                            read.deleteProduct(context, index);
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: grey6,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 10.0,
+                                                    spreadRadius: 2.0,
+                                                  ), //BoxShadow
+                                                ],
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            child: SvgPicture.asset(
+                                                'assets/icons/delete2.svg'),
+                                          ),
                                         )
                                       ],
                                     )

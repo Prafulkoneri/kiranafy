@@ -22,6 +22,8 @@ class Endpoint {
   static const String getCityList = '${baseUrl}lsm-city-list';
   //Get Area List
   static const String getAreaList = '${baseUrl}lsm-area-list';
+  //Get Area List
+  static const String getPincodeList = '${baseUrl}lsm-pincode-list';
   // Shop Owner Register
   static const String shopOwnerRegister = '${baseUrl}lsm-shop-owner-register';
   // Shop Owner Register Mobile No
@@ -71,9 +73,13 @@ class Endpoint {
   static const String uploadAddProducts =
       '${baseUrl}lsm-shop-owner-add-product-of-category';
 
-  ///Edit Custome Products
-  static const String editCustomeProducts =
+  ///Edit Custom Products
+  static const String editCustomProducts =
       "${baseUrl}lsm-shop-owner-edit-product-of-category";
+
+  ///Edit Custome Products
+  static const String deleteAdminProduct =
+      "${baseUrl}lsm-shop-owner-delete-product-of-category";
 
 ///////////////////////////////Customer Screen Apis///////////////////
 //OnBoarding Screen
@@ -84,6 +90,6 @@ class Endpoint {
   static const String mobileNumberChecks =
       "${baseUrl}lsm-customer-mobile-number-exists";
 
-  ////Shop Sign Up
-  static const String customerSignup = "${baseUrl}lsm-customer-signup";
+  static const String submitCustomProduct =
+      "${baseUrl}lsm-shop-owner-add-custom-product";
 }

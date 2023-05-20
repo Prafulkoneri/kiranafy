@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_add_product_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/repository/selected_products_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/repository/shop_add_product_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_selected_products_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_add_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_add_products_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/shop_custome_products_view.dart';
@@ -26,9 +26,11 @@ class SAddProductsController extends ChangeNotifier {
   String categoryId = "";
   String productId = "";
   bool isSelectAll = false;
+  String categoryName="";
+
+
+
   Future<void> initState(context, id) async {
-    print("object");
-    print(id);
     await shopAddProducts(context, id);
     notifyListeners();
   }
@@ -37,13 +39,13 @@ class SAddProductsController extends ChangeNotifier {
   void onProductsSelected(index, id) {
     selectedProduct[index] = !selectedProduct[index];
     if (selectedProduct[index]) {
-      print(selectedProductsId);
+
       selectedProductsId.removeWhere((item) => item == int.parse(id));
       selectedProductsId.insert(0, id);
     } else {
       selectedProductsId.removeWhere((item) => item == int.parse(id));
     }
-    print(selectedProductsId);
+
     notifyListeners();
   }
   // void onProductSelected(index, id) {
@@ -66,9 +68,10 @@ class SAddProductsController extends ChangeNotifier {
       ShopAddProductsListRequestModel(category_id: "6");
 
   Future<void> shopAddProducts(context, id) async {
-    print("hello");
+    isLoading=true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     categoryId = id.toString();
+    print("categoryId$categoryId");
     shopAddProductRepo
         .shopAddProducts(
             shopAddProductRequestModel, pref.getString("successToken"))
@@ -80,6 +83,7 @@ class SAddProductsController extends ChangeNotifier {
       if (response.statusCode == 200) {
         productData = result.data;
         productDetails = result.data?.productDetails;
+        categoryName=result.data?.categoryName??"";
         allProductsCount = productData?.allProductsCount ?? 0;
 
         selectedProduct = List<bool>.filled(productDetails?.length ?? 0, false,
@@ -92,10 +96,10 @@ class SAddProductsController extends ChangeNotifier {
             selectedProductsId.add(productDetails?[i].id);
           }
         }
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        isLoading=false;
         notifyListeners();
-      } else {
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -112,8 +116,50 @@ class SAddProductsController extends ChangeNotifier {
     );
   }
 
+
+
+  UploadAddProductsRequestModel get uploadAddProductsRequestModel=>UploadAddProductsRequestModel(
+    product_id: productId,
+    category_id: "6",
+  );
+
+  Future<void> uploadAddProducts(context)async{
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    String a = '';
+    for (int i = 0; i < selectedProductsId.length; i++) {
+      a += "${selectedProductsId[i]},";
+    }
+    a = a.substring(0, a.length - 1);
+    productId = a;
+    uploadAddProductRepo.uploadAddProduct(uploadAddProductsRequestModel,pref.getString("successToken")).then((response){
+      print(response.body);
+      final result =
+      UploadAddProductResponseModel.fromJson(jsonDecode(response.body));
+
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      }
+      else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
   void onSelecteAllProducts() {
-    print("object");
+
     isSelectAll = !isSelectAll;
     if (isSelectAll) {
       selectedProduct =
@@ -128,44 +174,9 @@ class SAddProductsController extends ChangeNotifier {
           List<bool>.filled(productDetails?.length ?? 0, false, growable: true);
       selectedProductsId.clear();
     }
-    print(selectedProductsId);
+
     notifyListeners();
   }
 
-  UploadAddProductsRequestModel get uploadAddProductRequestModel =>
-      UploadAddProductsRequestModel(category_id: "6");
 
-  Future<void> uploadAddProduct(context, id) async {
-    print("hello");
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    categoryId = id.toString();
-    productId = id.toString();
-    uploadAddProductRepo
-        .uploadAddProduct(
-            uploadAddProductRequestModel, pref.getString("successToken"))
-        .then((response) {
-      print(response.body);
-      final result =
-          UploadAddProductResponseModel.fromJson(jsonDecode(response.body));
-
-      if (response.statusCode == 200) {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
 }

@@ -8,12 +8,12 @@ import 'package:local_supper_market/screen/shop_owner/s_category_list/controller
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
-import '../../s_products/view/s_products_view.dart';
+import '../../s_products/view/s_selected_products_view.dart';
 
 class SSCategoryListView extends StatefulWidget {
   const SSCategoryListView({Key? key}) : super(key: key);
@@ -41,14 +41,12 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SMainScreenView()));
+            readMainScreen.onBackPressed(0, ShopDashBoard());
           },
           title: "Categories",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SSelectCategoryView()));
+            readMainScreen.onNavigation(0, SSelectCategoryView(), context);
           },
         ),
       ),
@@ -56,19 +54,17 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : RefreshIndicator(
-              onRefresh: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SSCategoryListView()));
+          : WillPopScope(
+              onWillPop: () async {
+                return false;
               },
-              child: WillPopScope(
-                onWillPop: () async {
-                  return false;
-                },
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    readMainScreen.onNavigation(
+                        0, SSCategoryListView(), context);
+                  },
                   child: Column(
                     children: [
                       SizedBox(
@@ -87,7 +83,11 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    read.onProductSelect(context, element?.id);
+                                    readMainScreen.onNavigation(
+                                        0,
+                                        SSelectedProductView(
+                                            categoryId: element?.id.toString()),
+                                        context);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

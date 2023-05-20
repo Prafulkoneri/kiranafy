@@ -4,12 +4,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/repository/custom_product_data_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_custom_product_data_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_custom_product_data_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomProductController extends ChangeNotifier {
-  CustomProductDataRepo customProductDataRepo = CustomProductDataRepo();
+  SCustomProductDataRepo customProductDataRepo = SCustomProductDataRepo();
   bool isLoading = true;
   Data? data;
   String selectedCategory = "1";
@@ -22,6 +23,10 @@ class CustomProductController extends ChangeNotifier {
   bool fullFillCravings = false;
   File productImage = File("");
   List<Widget> cards = [];
+  String brandId="";
+  String taxId="";
+  TextEditingController productDescriptionController=TextEditingController();
+
   List<bool> switchValue = [true];
   List<XFile> imagefiles1 = [];
   List<XFile> imagefiles2 = [];
@@ -35,6 +40,23 @@ class CustomProductController extends ChangeNotifier {
     await getCustomProductData(context);
     await onAddWidget(createCard);
     switchValue = List<bool>.filled(cards.length, true,growable: true);
+  }
+
+  UploadCustomProductReqModel get uploadCustomProductReqModel =>UploadCustomProductReqModel(
+    categoryId: selectedCategory,
+    brandId:brandId,
+    taxId: taxId,
+    productDescription: productDescriptionController.text,
+  );
+
+  void onBrandSelected(value){
+    brandId=value;
+    notifyListeners();
+  }
+
+  void onTax(value){
+    taxId=value;
+    notifyListeners();
   }
 
   Future<void> getCustomProductData(context) async {
@@ -155,42 +177,4 @@ class CustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-// void openUnitGallery1(index) async {
-//   PickedFile? pickedFile = await ImagePicker().getImage(
-//     source: ImageSource.gallery,
-//     maxHeight: double.infinity,
-//     maxWidth: double.infinity,
-//     imageQuality: 100,
-//   );
-//   if (pickedFile != null) {
-//     imagefiles?[index]=pickedFile.path??;
-//   }
-//   notifyListeners();
-// }
-//
-// void openUnitGallery2() async {
-//   PickedFile? pickedFile = await ImagePicker().getImage(
-//     source: ImageSource.gallery,
-//     maxHeight: double.infinity,
-//     maxWidth: double.infinity,
-//     imageQuality: 100,
-//   );
-//   if (pickedFile != null) {
-//     unitImage2.add(File(pickedFile.path));
-//   }
-//   notifyListeners();
-// }
-//
-// void openUnitGallery3() async {
-//   PickedFile? pickedFile = await ImagePicker().getImage(
-//     source: ImageSource.gallery,
-//     maxHeight: double.infinity,
-//     maxWidth: double.infinity,
-//     imageQuality: 100,
-//   );
-//   if (pickedFile != null) {
-//     unitImage3.add(File(pickedFile.path));
-//   }
-//   notifyListeners();
-// }
 }

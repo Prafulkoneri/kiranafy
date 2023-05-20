@@ -18,6 +18,7 @@ import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
@@ -30,10 +31,10 @@ import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
 import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/controller/custom_product_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
@@ -47,7 +48,7 @@ import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
-import 'screen/shop_owner/s_products/controller/shop_add_product_controller.dart';
+import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,7 +77,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SOrderStatusController()),
         ChangeNotifierProvider(create: (_) => SAccountScreenController()),
         ChangeNotifierProvider(create: (_) => CustomProductController()),
-        ChangeNotifierProvider(create: (_) => ShopGetSelectedProducts()),
+        ChangeNotifierProvider(create: (_) => SSelectedProductsController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],

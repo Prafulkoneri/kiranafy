@@ -11,8 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/controller/custom_product_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -22,7 +22,8 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
 class ShopCustomProductView extends StatefulWidget {
-  const ShopCustomProductView({super.key});
+  final String ? categoryId;
+  const ShopCustomProductView({super.key,required this.categoryId});
 
   @override
   State<ShopCustomProductView> createState() => _ShopCustomProductViewState();
@@ -115,7 +116,9 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                     children: [
                       Expanded(
                         child: SDropDownField(
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            read.onBrandSelected(value);
+                          },
                           items: watch.brandData
                               ?.map((item) => DropdownMenuItem<String>(
                                     value: item.id.toString(),
@@ -230,6 +233,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                   ),
                   Container(
                     child: PrimarySTextFormField(
+                      controller: watch.productDescriptionController,
                       height: 150.w,
                       maxLines: 8,
                       hintText: "Product Details",
