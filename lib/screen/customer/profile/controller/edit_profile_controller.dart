@@ -8,13 +8,14 @@ import 'package:local_supper_market/screen/customer/account/repository/c_profile
 import 'package:local_supper_market/screen/customer/account/repository/edit_profile_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
+import 'package:local_supper_market/screen/customer/profile/model/update_profile_model.dart';
+import 'package:local_supper_market/screen/customer/profile/repository/update_profile_repo.dart';
 import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../notifications/view/notification_view.dart';
-
-class ProfileController extends ChangeNotifier {
+class UpdateProfileController extends ChangeNotifier {
+  EditCustomerProfileRepo editCustomerProfileRepo = EditCustomerProfileRepo();
   TextEditingController nameController = TextEditingController();
   TextEditingController mobilrController = TextEditingController();
   TextEditingController alernetMobileController = TextEditingController();
@@ -28,46 +29,32 @@ class ProfileController extends ChangeNotifier {
     await getCustoerProfileDetails(context);
   }
 
-  CustomerProfileRepo customerProfileRepo = CustomerProfileRepo(); ////;
-  void onEditProfilePressed(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => UpdateProfileView()));
-  }
+  EditCustomerProfileRepo customerProfileRepo = EditCustomerProfileRepo(); ////;
 
-  void myOrdersPressed(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MyOrderView()));
-  }
+  /////End Detail Profile
 
-  void myNotificationsPressed(context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => NotificationsScreenView()));
-  }
-
-  void favouritesPressed(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MyOrderView()));
-  }
-
-  void myDeliveryAddressPressed(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MyDeliveryAddress()));
-  }
-
-////Detail Profile
   Future<void> getCustoerProfileDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    customerProfileRepo
-        .getCustomerProfileReo(pref.getString("successToken"))
+    editCustomerProfileRepo
+        .editCustomerProfileRepo(pref.getString("successToken"))
         .then((response) {
-      final result = CustomerProfileDetailsRes.fromJson(
+      final result = CustomerEditProfileDetails.fromJson(
         jsonDecode(response.body),
       );
       if (response.statusCode == 200) {
-        final data = result.data;
-        print(data);
+        final CustomerProfileDetails = result.customerProfileDetails;
+        print(CustomerProfileDetails);
         log("${response.body}");
+        nameController.text = CustomerProfileDetails?.customerName ?? "";
+        mobilrController.text =
+            CustomerProfileDetails?.customerMobileNumber.toString() ?? "";
+        alernetMobileController.text =
+            CustomerProfileDetails?.customerAlternateMobileNumber.toString() ??
+                "";
+        addressController.text = CustomerProfileDetails?.customerAddress ?? "";
+        dateOfBirthController.text =
+            CustomerProfileDetails?.customerDateOfBirth ?? "";
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -85,5 +72,4 @@ class ProfileController extends ChangeNotifier {
       },
     );
   }
-  /////End Detail Profile
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +23,13 @@ class ProfileScreenView extends StatefulWidget {
 
 class _ProfileScreenViewState extends State<ProfileScreenView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileController>().initState(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final read = context.read<ProfileController>();
     final watch = context.watch<ProfileController>();
@@ -42,16 +50,6 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               decoration: BoxDecoration(
                 // color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                // border: Border.all(
-                //     color: Colors.black.withOpacity(0.07), width: 1),
-
-                // gradient: LinearGradient(
-                //     end: Alignment.topCenter,
-                //     begin: Alignment.bottomCenter,
-                //     colors: <Color>[
-                //       kappbar.withOpacity(0.5),
-                //       kstatusbar.withOpacity(0.99),
-                //     ]),
                 gradient: LinearGradient(
                     end: Alignment.topCenter,
                     begin: Alignment.bottomCenter,
@@ -142,14 +140,9 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                             height: 11.h,
                           ),
                           Row(
-                            // crossAxisAlignment:
-                            //     CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               SvgPicture.asset(
                                 'assets/icons/call.svg',
-                                // width: 14.w,
-                                // height: 13.h,
                               ),
                               SizedBox(
                                 width: 10.w,

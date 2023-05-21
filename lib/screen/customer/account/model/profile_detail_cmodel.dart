@@ -11,9 +11,6 @@ class CustomerProfileDetailsRes {
   CustomerProfileDetailsRes.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-
-    //array Shop Details
-
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 }
