@@ -158,24 +158,25 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                              child: SDropDownField(
-                            onChanged: (value) async {
-                              await read.onCountrySelected(value);
-                              await read.getStateList(context);
-                            },
-                            items: watch.countryList
-                                ?.map((item) => DropdownMenuItem<String>(
-                                      value: item.id.toString(),
-                                      child: Text(
-                                        item.countryName ?? "",
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
+                            child: SDropDownField(
+                              onChanged: (value) async {
+                                await read.onCountrySelected(value);
+                                await read.getStateList(context);
+                              },
+                              items: watch.countryList
+                                  ?.map((item) => DropdownMenuItem<String>(
+                                        value: item.id.toString(),
+                                        child: Text(
+                                          item.countryName ?? "",
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                          ),
                                         ),
-                                      ),
-                                    ))
-                                .toList(),
-                            hint: "Country",
-                          )),
+                                      ))
+                                  .toList(),
+                              hint: "Country",
+                            ),
+                          ),
                           SizedBox(
                             width: 13.w,
                           ),
@@ -262,20 +263,21 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SDropDownField(
                         onChanged: (value) async {
                           print(value);
+                          read.onPincodeSelected(context);
                           read.onAreaSelected(value);
                         },
                         items: watch.pincodeList
                             ?.map(
                               (item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item ?? "",
-                              style: TextStyle(
-                                fontSize: 14.sp,
+                                value: item,
+                                child: Text(
+                                  item ?? "",
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        )
+                            )
                             .toList(),
                         hint: "Pincode",
                       ),

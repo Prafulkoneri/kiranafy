@@ -33,134 +33,119 @@ class _AccountsState extends State<Accounts> {
         child: Column(
           children: [
             Container(
-              color: Color(0xff44B8CA),
+              margin: EdgeInsets.only(
+                  left: 10.w, top: 10.w, right: 20.w, bottom: 0.w),
+              decoration: BoxDecoration(
+                color: Color(0xff44B8CA),
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Column(
-                children: [Container(child: Row())],
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                          end: Alignment.topCenter,
+                          begin: Alignment.bottomCenter,
+                          colors: <Color>[
+                            kappbar.withOpacity(0.55),
+                            kstatusbar.withOpacity(0.98),
+                          ]),
+                    ),
+                    padding: EdgeInsets.only(
+                        left: 10.w, bottom: 9, right: 20.w, top: 10.w),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Image.asset(
+                            'assets/images/profile1.png',
+                            width: 80.w,
+                            height: 80.h,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "New Trading Balaji Company",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Black1,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w800),
+                                    ),
+                                  ),
+                                  SvgPicture.asset(
+                                    'assets/icons/edit.svg',
+                                    width: 14.w,
+                                    height: 14.h,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 7.2.h,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Rohit Singh',
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Black,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                                // ),
+                              ),
+                              SizedBox(
+                                height: 11.h,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10.w, bottom: 3, top: 3.w),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Shop KYC Approved',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/ok.svg',
+                          width: 14.w,
+                          height: 14.h,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                ],
               ),
             ),
-            // Container(
-            //   margin: EdgeInsets.only(left: 14.w, right: 14.w, top: 20.w),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(10),
-            //     gradient: LinearGradient(
-            //         end: Alignment.topCenter,
-            //         begin: Alignment.bottomCenter,
-            //         colors: <Color>[
-            //           kappbar.withOpacity(0.55),
-            //           kstatusbar.withOpacity(0.98),
-            //         ]),
-            //   ),
-
-            //   child: Padding(
-            //     padding: EdgeInsets.only(
-            //         left: 10.w, right: 20.w, top: 10.w, bottom: 10),
-            //     child: Row(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         Container(
-            //           child: Image.asset(
-            //             'assets/images/profile1.png',
-            //             width: 80.w,
-            //             height: 80.h,
-            //           ),
-            //         ),
-            //         SizedBox(
-            //           width: 17.w,
-            //         ),
-            //         Expanded(
-            //           child: Column(
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             mainAxisAlignment: MainAxisAlignment.start,
-            //             children: [
-            //               SizedBox(
-            //                 height: 5.h,
-            //               ),
-            //               Row(
-            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                 children: [
-            //                   Text(
-            //                     "New Trading Balaji Company",
-            //                     style: GoogleFonts.dmSans(
-            //                       textStyle: TextStyle(
-            //                           color: Black1,
-            //                           // letterSpacing: .5,
-            //                           fontSize: 12.sp,
-            //                           fontWeight: FontWeight.w800),
-            //                     ),
-            //                   ),
-            //                   SvgPicture.asset(
-            //                     'assets/icons/edit.svg',
-            //                     width: 14.w,
-            //                     height: 14.h,
-            //                   ),
-            //                 ],
-            //               ),
-            //               SizedBox(
-            //                 height: 7.2.h,
-            //               ),
-            //               Row(
-            //                 children: [
-            //                   Text(
-            //                     'Rohit Singh',
-            //                     style: GoogleFonts.dmSans(
-            //                       textStyle: TextStyle(
-            //                           // decoration:
-            //                           // TextDecoration.lineThrough,
-            //                           color: Black,
-            //                           // letterSpacing:
-            //                           //     .5,
-            //                           fontSize: 15.sp,
-            //                           fontWeight: FontWeight.w400),
-            //                     ),
-            //                   ),
-            //                 ],
-            //                 // ),
-            //               ),
-            //               SizedBox(
-            //                 height: 11.h,
-            //               ),
-            //             ],
-            //           ),
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            // Container(
-            //   margin: EdgeInsets.only(left: 14.w, right: 14.w),
-            //   decoration: BoxDecoration(
-            //     color: Color(0xff44B8CA),
-            //     borderRadius: BorderRadius.only(
-            //         bottomLeft: Radius.circular(10.0),
-            //         bottomRight: Radius.circular(10.0)),
-            //   ),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.start,
-            //     crossAxisAlignment: CrossAxisAlignment.end,
-            //     children: [
-            //       SizedBox(
-            //         width: 15,
-            //       ),
-            //       Text(
-            //         'Shop KYC Approved',
-            //         style: GoogleFonts.dmSans(
-            //           textStyle: TextStyle(
-            //               color: Colors.white,
-            //               fontSize: 14.sp,
-            //               fontWeight: FontWeight.w400),
-            //         ),
-            //       ),
-            //       SizedBox(
-            //         width: 10.w,
-            //       ),
-            //       SvgPicture.asset(
-            //         'assets/icons/ok.svg',
-            //         width: 14.w,
-            //         height: 13.h,
-            //       ),
-            //     ],
-            //   ),
-            // ),
 
             SizedBox(
               height: 15.h,
@@ -187,8 +172,6 @@ class _AccountsState extends State<Accounts> {
                     ),
                     SvgPicture.asset(
                       'assets/icons/shop.svg',
-                      // width: 14.w,
-                      // height: 13.h,
                     ),
                     SizedBox(
                       width: 18.w,

@@ -20,7 +20,7 @@ class ShopRegistrationController extends ChangeNotifier {
   List<StateData>? stateList;
   List<CityData>? cityList;
   List<AreaData>? areaList;
-  List ? pincodeList;
+  List? pincodeList;
   TextEditingController shopNameController = TextEditingController();
   TextEditingController ownerNameController = TextEditingController();
   TextEditingController mobController = TextEditingController();
@@ -167,8 +167,6 @@ class ShopRegistrationController extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   Future<void> onShopTypeSelected(value) async {
     shopId = int.parse(value.toString());
     notifyListeners();
@@ -201,10 +199,9 @@ class ShopRegistrationController extends ChangeNotifier {
     );
   }
 
-
   GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
-    areaId: areaId.toString(),
-  );
+        areaId: areaId.toString(),
+      );
 
   Future<void> getPinCodeList(context) async {
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
@@ -236,6 +233,7 @@ class ShopRegistrationController extends ChangeNotifier {
 
   Future<void> onPincodeSelected(value) async {
     pincode = value.toString();
+    // print(object);
     notifyListeners();
   }
 
@@ -282,7 +280,7 @@ class ShopRegistrationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    if (pincode=="") {
+    if (pincode == "") {
       Utils.showPrimarySnackbar(context, "Select Pincode",
           type: SnackType.error);
       return;
@@ -291,7 +289,7 @@ class ShopRegistrationController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, "Enter Upi", type: SnackType.error);
       return;
     }
-   await shopRegister(context);
+    await shopRegister(context);
   }
 
   Future<void> onNextClicked(context) async {
@@ -305,13 +303,13 @@ class ShopRegistrationController extends ChangeNotifier {
           countryCode: "$countryCode",
           mobileNo: (mobController.text),
           email: emailIdController.text,
-          shopType: stateId == 1 ? "Retailer":"Wholesaler",
+          shopType: stateId == 1 ? "Retailer" : "Wholesaler",
           countryId: countryId.toString(),
           stateId: stateId.toString(),
           cityId: cityId.toString(),
           areaId: areaId.toString(),
           shopAddress: addressController.text,
-          shopPincode: (pincode),
+          shopPincode: pincode,
           shopUpiId: upiController.text,
           fcmToken: "ghjklhvghjk");
 
@@ -320,7 +318,7 @@ class ShopRegistrationController extends ChangeNotifier {
     shopOwnerRegisterRepo
         .shopOwnerRegistration(shopOwnerRegisterReqModel)
         .then((response) {
-          print(response.body);
+      print(response.body);
       final result =
           ShopOwnerRegisterResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
