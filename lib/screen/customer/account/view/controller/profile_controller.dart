@@ -7,8 +7,10 @@ import 'package:local_supper_market/screen/customer/account/model/profile_detail
 import 'package:local_supper_market/screen/customer/account/repository/c_profile_repo.dart';
 
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
+import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
+import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,6 +50,18 @@ class ProfileController extends ChangeNotifier {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => MyOrderView()));
   }
+void onLogout(context)async{
+  SharedPreferences pref=await SharedPreferences.getInstance();
+  pref.clear();
+  Navigator.push(context,MaterialPageRoute(builder: (context)=>OnBoardingScreenView()));
+}
+
+  void onFavouritesClicked(context)async{
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    pref.clear();
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>CFavouritesView()));
+  }
+
 
   void myDeliveryAddressPressed(context) {
     Navigator.push(

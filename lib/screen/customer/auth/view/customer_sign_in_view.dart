@@ -246,11 +246,11 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                         ),
                         // style: style,
                         onPressed: () async {
-                          await read.onNextClick(context).then((value) {
-                            if (!watch.isLoginBtnEnabled) {
+                          await read.onNextClick(context);
+                            if (watch.mobileController.text.length < 10) {
                               return;
                             }
-                            if (!watch.isVerifyChecked) {
+                            if (!watch.isLoginBtnEnabled) {
                               return;
                             }
 
@@ -399,7 +399,7 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                                 );
                               },
                             );
-                          });
+
                         },
                         child: Text(
                           'Next',

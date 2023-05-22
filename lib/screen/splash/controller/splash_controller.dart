@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
@@ -23,6 +24,9 @@ class SplashController extends ChangeNotifier {
       // }
       if(pref.getString("status")=="loggedIn"){
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+      }
+      if(pref.getString("status")=="customerLoggedIn"){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainScreenView()));
       }
       if(pref.getString("status")==null){
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnBoardingScreenView()));

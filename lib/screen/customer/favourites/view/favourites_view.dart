@@ -4,11 +4,16 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/delivery_view_pending.dart';
+import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
+import 'package:local_supper_market/screen/customer/favourites/view/favourites_products_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/shop_profile.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
-
+import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:provider/provider.dart';
 import 'favourites_shop_view.dart';
 
 class CFavouritesView extends StatefulWidget {
@@ -21,6 +26,8 @@ class CFavouritesView extends StatefulWidget {
 class _CFavouritesViewState extends State<CFavouritesView> {
   @override
   Widget build(BuildContext context) {
+    final read=context.read<FavouritesController>();
+    final watch=context.watch<FavouritesController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -37,85 +44,37 @@ class _CFavouritesViewState extends State<CFavouritesView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 30.h,
-                      width: 165.w,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          // backgroundColor: ,
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              side: BorderSide(color: Color(0xff39C19D)
-                                  // width: 1,
-                                  ),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "Favourite Shops",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Color(0xff39C19D),
-                                // letterSpacing: .5,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
 
-                        //
-                      ),
-                    ),
-                  ),
+                  Expanded(child:PrimaryButton(
+                    onTap: (){
+                      read.onFavouriteShopTapped();
+                    },
+                    child: Text("Favourite Shop",style: TextStyle( color: watch.isFavShopPressed?Color(0xff39C19D):Color(0xff3A3A3A),fontSize: 16.sp,fontWeight: FontWeight.w500),),
+                    color: Colors.transparent,
+                    borderColor:watch.isFavShopPressed? Color(0xff39C19D):Colors.transparent
+
+
+                  )),
                   SizedBox(
                     width: 20.w,
                   ),
-                  Expanded(
-                    child: SizedBox(
-                      height: 30.h,
-                      width: 165.w,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          // backgroundColor: ,
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              side: BorderSide(color: Color(0xff39C19D)
-                                  // width: 1,
-                                  ),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "Favourite Products",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Color(0xff39C19D),
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                  Expanded(child:PrimaryButton(
+                      onTap: (){
+                        read.onFavouriteProductTapped();
+                      },
+                      child: Text("Favourite Product",style: TextStyle( color: watch.isFavShopPressed?Color(0xff3A3A3A):Color(0xff39C19D),fontSize: 16.sp,fontWeight: FontWeight.w500),),
+                      color: Colors.transparent,
+                      borderColor:watch.isFavShopPressed?Colors.transparent:Color(0xff39C19D)
 
-                        //
-                      ),
-                    ),
-                  ),
+
+                  )),
                 ],
               ),
             ),
             SizedBox(
               height: 24.h,
             ),
-            CFavouritesShopView()
+            // watch.isFavShopPressed?CFavouritesShopView():CFavouritesProductView()
             // SizedBox(
             //   child: ListView.builder(
             //       // scrollDirection: Axis.vertical,p

@@ -44,7 +44,7 @@ class CustomerSignUpController extends ChangeNotifier {
   }
 
   /////NewCustomer
-  Future<void> onNewCustomer(context) async {
+  Future<void> onNextClick(context) async {
     if (mobileController.text.length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
           type: SnackType.error);
@@ -123,13 +123,13 @@ class CustomerSignUpController extends ChangeNotifier {
   Future<void> onsignUp(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     customerSignUpRepo
-        .customerSignUpDetail(customerSignupReqModel, context)
+        .customerSignUpDetail(customerSignupReqModel)
         .then((response) {
       final result =
           CustomerSignUpResponcesModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
-        pref.setString("status", "loggedIn");
+        pref.setString("status", "customerLoggedIn");
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => MainScreenView()));
       } else {

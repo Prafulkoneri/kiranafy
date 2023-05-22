@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../products/views/product_screen.dart';
 import 'package:provider/provider.dart';
@@ -285,40 +287,45 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
             ),
             ////////////////////
 
-            Container(
-              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              padding: EdgeInsets.only(bottom: 15.w),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1, color: grey10),
+            GestureDetector(
+              onTap: (){
+                read.onFavouritesClicked(context);
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                padding: EdgeInsets.only(bottom: 15.w),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: grey10),
+                  ),
+                  // color: Colors.white,
                 ),
-                // color: Colors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: 5,
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/favourites.svg',
-                    // width: 14.w,
-                    // height: 13.h,
-                  ),
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  Text(
-                    'Favourites',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 5,
                     ),
-                  ),
-                ],
+                    SvgPicture.asset(
+                      'assets/icons/favourites.svg',
+                      // width: 14.w,
+                      // height: 13.h,
+                    ),
+                    SizedBox(
+                      width: 18.w,
+                    ),
+                    Text(
+                      'Favourites',
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
 
@@ -581,41 +588,48 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              padding: EdgeInsets.only(bottom: 15.w),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1, color: grey10),
+            GestureDetector(
+              onTap: ()async{
+               read.onLogout(context);
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                padding: EdgeInsets.only(bottom: 15.w),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: grey10),
+                  ),
+                  // color: Colors.white,
                 ),
-                // color: Colors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: 5,
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/signout.svg',
-                    // width: 14.w,
-                    // height: 13.h,
-                  ),
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  Text(
-                    'Sign Out',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 5,
                     ),
-                  ),
-                ],
+                    SvgPicture.asset(
+                      'assets/icons/signout.svg',
+                      // width: 14.w,
+                      // height: 13.h,
+                    ),
+                    SizedBox(
+                      width: 18.w,
+                    ),
+                    Text(
+                      'Sign Out',
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ),SizedBox(
+              height: 90.w,
             ),
           ],
         ),
