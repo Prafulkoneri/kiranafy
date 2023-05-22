@@ -19,7 +19,6 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controll
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
@@ -48,6 +47,9 @@ import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
+import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
+import 'screen/customer/profile/controller/edit_profile_controller.dart';
+import 'screen/customer/profile/view/update_profile_view.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
 
 void main() async {
@@ -78,6 +80,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SAccountScreenController()),
         ChangeNotifierProvider(create: (_) => CustomProductController()),
         ChangeNotifierProvider(create: (_) => SSelectedProductsController()),
+        ChangeNotifierProvider(create: (_) => UpdateProfileController()),
+        ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],
@@ -102,9 +106,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-
-              home: SplashScreen());
-
+              home: Accounts());
         });
   }
 }

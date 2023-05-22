@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/profile/controller/edit_profile_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
+import 'package:provider/provider.dart';
 
 class UpdateProfileView extends StatefulWidget {
   const UpdateProfileView({Key? key}) : super(key: key);
@@ -17,7 +20,7 @@ class UpdateProfileView extends StatefulWidget {
 }
 
 class _UpdateProfileViewState extends State<UpdateProfileView> {
-  final TextEditingController controller = TextEditingController();
+  // final TextEditingController controller = TextEditingController();
   String initialCountry = 'IN';
   PhoneNumber number = PhoneNumber(isoCode: 'IN');
   String radioButtonItem = '';
@@ -33,7 +36,16 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
   // r Radio Button.
   int id = 1;
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<UpdateProfileController>().initState(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final read = context.read<UpdateProfileController>();
+    final watch = context.watch<UpdateProfileController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -75,6 +87,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                 height: 10.5.w,
               ),
               PrimaryCTextFormField(
+                controller: watch.nameController,
                 titleHeader: "Name",
               ),
               SizedBox(
@@ -95,7 +108,9 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Container(
-                    child: MobileNoTextFormField(controller: controller)),
+                    child: MobileNoTextFormField(
+                  controller: watch.mobilrController,
+                )),
               ),
               SizedBox(
                 height: 20.w,
@@ -115,12 +130,15 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Container(
-                    child: MobileNoTextFormField(controller: controller)),
+                    child: MobileNoTextFormField(
+                  controller: watch.alernetMobileController,
+                )),
               ),
               SizedBox(
                 height: 20.w,
               ),
               PrimaryCTextFormField(
+                controller: watch.emailController,
                 titleHeader: "Email ID",
               ),
               SizedBox(
@@ -228,6 +246,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                 height: 13.w,
               ),
               PrimaryCTextFormField(
+                  controller: watch.dateOfBirthController,
                   titleHeader: "Date of Birth",
                   suffix: Icon(
                     Icons.calendar_today_outlined,
@@ -279,6 +298,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                 height: 22.w,
               ),
               PrimaryCTextFormField(
+                controller: watch.addressController,
                 titleHeader: "Address",
                 hintText: "Address",
               ),
