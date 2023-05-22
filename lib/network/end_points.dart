@@ -92,4 +92,7 @@ class Endpoint {
 
   static const String submitCustomProduct =
       "${baseUrl}lsm-shop-owner-add-custom-product";
+
+static const String customerSignup =
+      "${baseUrl}lsm-customer-signup";
 }
