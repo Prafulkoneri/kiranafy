@@ -27,10 +27,10 @@ class SSubscriptionController extends ChangeNotifier {
     await getSubscriptionPlanDetails(context);
   }
 
-  // void onMakePaymentClicked(context) {
-  //   Navigator.push(
-  //       context, MaterialPageRoute(builder: (context) => SMainScreenView()));
-  // }
+  void onMakePaymentClicked(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+  }
 
 void  onTimeShopSetup(){
   oneTimeShop=!oneTimeShop;
@@ -55,6 +55,7 @@ void onProductPrice(){
     subscriptionPlansRepo
         .getSubscriptionPlans(pref.getString("successToken"))
         .then((response) {
+      print("successToken");
       final result =
           ShopSubscriptionPlansResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);

@@ -24,12 +24,12 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
   String initialCountry = 'IN';
   PhoneNumber number = PhoneNumber(isoCode: 'IN');
   String radioButtonItem = '';
-  String? dropdown;
-  final maxLines = 5;
-  final List<String> genderItems = [
-    'Male',
-    'Female',
-  ];
+  // String? dropdown;
+  // final maxLines = 5;
+  // final List<String> genderItems = [
+  //   'Male',
+  //   'Female',
+  // ];
 
   String? selectedValue;
   // Group Value fo
@@ -259,11 +259,11 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: SDropDownField(
-                      // onChanged: (value) async {
-                      //   await read.onCountrySelected(value);
-                      //   await read.getStateList(context);
-                      // },
+                    child: CDropDownField(
+                      onChanged: (value) async {
+                        await read.onCountrySelected(value);
+                        // await read.getStateList(context);
+                      },
                       items: watch.countryList
                           ?.map((item) => DropdownMenuItem<String>(
                                 value: item.id.toString(),
@@ -276,19 +276,30 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               ))
                           .toList(),
                       hint: "Country",
+                      titleHeader: "Country",
                     ),
-                    //      CDropDownField(
-                    //   hint: "Country",
-                    //   titleHeader: "Country",
-                    // )
                   ),
                   SizedBox(
                     width: 30.w,
                   ),
                   Expanded(
                       child: CDropDownField(
+                    onChanged: (value) async {
+                      await read.onStateSelected(value);
+                      // await read.getCityList(context);
+                    },
+                    items: watch.stateList
+                        ?.map((item) => DropdownMenuItem<String>(
+                              value: item.id.toString(),
+                              child: Text(
+                                item.stateName ?? "",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ))
+                        .toList(),
                     hint: "State",
-                    titleHeader: "State",
                   )),
                 ],
               ),
@@ -307,11 +318,18 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                     width: 30.w,
                   ),
                   Expanded(
-                      child: PrimaryCTextFormField(
-                    titleHeader: "Pincode",
-                    hintText: "Pincode",
+                      child: CDropDownField(
+                    hint: "Area",
+                    titleHeader: "Area",
                   )),
                 ],
+              ),
+              SizedBox(
+                height: 22.w,
+              ),
+              CDropDownField(
+                hint: "pinCode",
+                titleHeader: "Pincode",
               ),
               SizedBox(
                 height: 22.w,

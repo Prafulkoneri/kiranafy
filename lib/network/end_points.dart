@@ -93,8 +93,7 @@ class Endpoint {
   ////Customer Sign Up
   static const String customerSignup = "${baseUrl}lsm-customer-signup";
   ////Customer Sign Up
-  static const String customerSignIn =
-      "${baseUrl}lsm-customer-login";
+  static const String customerSignIn = "${baseUrl}lsm-customer-login";
 //Customer Profile
   static const String customerProfile = "${baseUrl}lsm-customer-profile";
   ////Edit Customer Profile
@@ -127,4 +126,6 @@ class Endpoint {
   static const String submitCustomProduct =
       "${baseUrl}lsm-shop-owner-add-custom-product";
 
+//////////Banner
+  static const String BannerAds = "${baseUrl}lsm-customer-get-banner-ads";
 }

@@ -1,6 +1,7 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 
 import 'package:local_supper_market/screen/customer/home/view/category.dart';
 import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
@@ -34,11 +36,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     "assets/images/caurosal.png",
     "assets/images/caurosal.png",
   ];
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(viewportFraction: 0.9, initialPage: 1);
-  }
 
   int activePage = 0;
   List<Widget> indicators(imagesLength, currentIndex) {
@@ -55,7 +52,18 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeScreenController>().initState(context);
+    });
+    _pageController = PageController(viewportFraction: 0.9, initialPage: 1);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final read = context.read<HomeScreenController>();
+    final watch = context.watch<HomeScreenController>();
     return Scaffold(
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -264,16 +272,36 @@ class _HomeScreenViewState extends State<HomeScreenView> {
 
             OfferPage(),
             //
-            Padding(
-              padding: EdgeInsets.only(
-                left: 19.w,
-                right: 19.w,
-              ),
-              child: Image(
-                image: AssetImage("assets/images/banner.png"),
-                height: 163.h,
-                width: 352.w,
-              ),
+            SizedBox(
+              height: 10.h,
+            ),
+            ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: watch.data?.length ?? 0,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final element = watch.data?[index];
+                return Container(
+                    padding: EdgeInsets.only(
+                      right: 19.0.w,
+                      left: 19.0.w,
+                    ),
+                    width: ScreenUtil().screenWidth,
+                    // height: 100.h,
+                    child: Image.network(
+                      "${element?.bannerImagePath}",
+                      fit: BoxFit.cover,
+                    )
+                    // Image(
+                    //   image: AssetImage("assets/images/banner.png"),
+                    //   height: 163.h,
+                    //   width: 352.w,
+                    // ),
+                    );
+              },
+            ),
+            SizedBox(
+              height: 10.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
