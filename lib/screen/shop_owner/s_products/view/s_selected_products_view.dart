@@ -162,7 +162,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                           height: 40.h,
                           color: Custlogin,
                           onTap: () {
-                            readMainScreen.onNavigation(0,ShopCustomProductView(categoryId: watch.categoryId), context);
+                            // readMainScreen.onNavigation(0,ShopCustomProductView(categoryId: watch.categoryId), context);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

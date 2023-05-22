@@ -4,13 +4,11 @@ import 'package:local_supper_market/screen/customer/auth/model/customer_sign_up_
 
 class CustomerSignUpRepo {
   Future<http.Response> customerSignUpDetail(
-      CustomerSignUpRequestModel requestModel, token) async {
+      CustomerSignUpRequestModel requestModel) async {
     try {
       return await http.post(Uri.parse(Endpoint.customerSignup),
           body: requestModel.toJson(),
-          headers: {
-            "Authorization": "Bearer $token",
-          });
+          );
     } catch (e) {
       throw Exception(e);
     }

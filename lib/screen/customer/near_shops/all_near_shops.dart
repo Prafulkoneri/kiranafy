@@ -262,10 +262,6 @@ class _AllNearShopsState extends State<AllNearShops> {
                                 child: Container(
                                   height: 160.h,
                                   width: 352.w,
-
-                                  // margin: EdgeInsets.only(
-                                  //     left: index == 0 ? 19.w : 0,
-                                  //     right: index == 2 ? 19.w : 5.w),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15.w),
                                       image: DecorationImage(

@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopEditProfileDetailController extends ChangeNotifier {
@@ -30,7 +31,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   List<AreaData>? areaDataList;
   List<File> imageFileList = [];
   List<ShopBannerImageData>? bannerImageList;
+
   File fileImage1=File("");
+  String image1="";
+  String image2="";
+  String image3="";
+  String image4="";
   File fileImage2=File("");
   File fileImage3=File("");
   File fileImage4=File("");
@@ -47,14 +53,9 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     await getShopEditProfileDetails(context);
   }
 
-
-
-
-
-
   /////start edit Profile/////////////////
 
-  void  openGallery1() async {
+  void openGallery1() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxHeight: double.infinity,
@@ -62,14 +63,22 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
+
       networkImage1="";
       fileImage1=File(pickedFile.path);
+      final bytes = await compressFile(fileImage1);
+
+      image1= base64Encode(bytes as List<int>);
+
+      networkImage1 = "";
+      fileImage1 = File(pickedFile.path);
 
     }
 
     notifyListeners();
   }
-  void  openGallery2() async {
+
+  void openGallery2() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxHeight: double.infinity,
@@ -77,14 +86,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      networkImage2="";
-      fileImage2=File(pickedFile.path);
-
+      networkImage2 = "";
+      fileImage2 = File(pickedFile.path);
     }
 
     notifyListeners();
   }
-  void  openGallery3() async {
+
+  void openGallery3() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxHeight: double.infinity,
@@ -92,14 +101,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      networkImage3="";
-      fileImage3=File(pickedFile.path);
-
+      networkImage3 = "";
+      fileImage3 = File(pickedFile.path);
     }
 
     notifyListeners();
   }
-  void  openGallery4() async {
+
+  void openGallery4() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxHeight: double.infinity,
@@ -107,14 +116,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      networkImage4="";
-      fileImage4=File(pickedFile.path);
-
+      networkImage4 = "";
+      fileImage4 = File(pickedFile.path);
     }
 
     notifyListeners();
   }
-
 
   Future<void> getShopEditProfileDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -122,7 +129,6 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     shopEditProfileRepo
         .getShopEditProfileDetails(pref.getString("successToken"))
         .then((response) {
-
       final result = AccountDetailsResModel.fromJson(
         jsonDecode(response.body),
       );
@@ -151,18 +157,18 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         areaDataList = result.areas;
         PinCodeController.text = shopDetails?.shopPincode.toString() ?? "";
         bannerImageList = result.shopBannerImages;
-        if(bannerImageList!.isNotEmpty) {
+        if (bannerImageList!.isNotEmpty) {
           print(bannerImageList!.asMap().containsKey(0));
-          if(bannerImageList!.asMap().containsKey(0)){
+          if (bannerImageList!.asMap().containsKey(0)) {
             networkImage1 = bannerImageList?[0].shopBannerImagePath ?? "";
           }
-          if(bannerImageList!.asMap().containsKey(1)){
+          if (bannerImageList!.asMap().containsKey(1)) {
             networkImage2 = bannerImageList?[1].shopBannerImagePath ?? "";
           }
-          if(bannerImageList!.asMap().containsKey(2)){
+          if (bannerImageList!.asMap().containsKey(2)) {
             networkImage3 = bannerImageList?[2].shopBannerImagePath ?? "";
           }
-          if(bannerImageList!.asMap().containsKey(3)){
+          if (bannerImageList!.asMap().containsKey(3)) {
             networkImage4 = bannerImageList?[2].shopBannerImagePath ?? "";
           }
         }
@@ -188,7 +194,6 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
   /////Start Update Profile/////////////////
 
-
   ShopUpdateProfileReqModel get shopUpdateProfileReqModel =>
       ShopUpdateProfileReqModel(
         shopName: ShopNameController.text,
@@ -202,12 +207,19 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         shopOwnerEmail: EmailIdController.text,
         shopOwnerMobileNumber: (PhoneNumberController.text),
         shopPincode: (PinCodeController.text),
-        shopBannerImages:"",
+
+        shopBannerImages:image1,
+
       );
 
+
+
   Future<void> UpdateProfile(context) async {
-    shopUpdateProfileRepo.UpdateProfile(shopUpdateProfileReqModel)
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopUpdateProfileRepo.UpdateProfile(
+            shopUpdateProfileReqModel, pref.getString("successToken"))
         .then((response) {
+          print(response.body);
       final result =
           ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 
@@ -235,5 +247,4 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   /////End Update Profile/////////////////
 
   //////////////////Image Picker/////////////////////////////
-
 }

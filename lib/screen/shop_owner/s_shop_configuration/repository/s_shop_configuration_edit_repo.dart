@@ -12,7 +12,7 @@ class EditConfigRepo {
           body: reqModel.toJson(),
           headers: {
             "Authorization":
-                "Bearer 15|g7VpItLGh5Jwr4cyYZxgRR9QcpzC3TEV83dCcD8W",
+                "Bearer $token",
           });
     } catch (e) {
       throw Exception(e);

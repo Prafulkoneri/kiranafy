@@ -81,6 +81,14 @@ class Endpoint {
   static const String deleteAdminProduct =
       "${baseUrl}lsm-shop-owner-delete-product-of-category";
 
+
+// submit custom product
+  static const String submitCustomProduct =
+      "${baseUrl}lsm-shop-owner-add-custom-product";
+
+
+
+
 ///////////////////////////////Customer Screen Apis///////////////////
 //OnBoarding Screen
   static const String onBoardingScreen =
@@ -90,9 +98,40 @@ class Endpoint {
   static const String mobileNumberChecks =
       "${baseUrl}lsm-customer-mobile-number-exists";
 
-  static const String submitCustomProduct =
-      "${baseUrl}lsm-shop-owner-add-custom-product";
 
-static const String customerSignup =
+  ////Customer Sign Up
+  static const String customerSignup =
       "${baseUrl}lsm-customer-signup";
+  ////Customer Sign Up
+  static const String customerSignIn =
+      "${baseUrl}lsm-customer-login";
+//Customer Profile
+  static const String customerProfile = "${baseUrl}lsm-customer-profile";
+  ////Edit Customer Profile
+  static const String editCustomerProfile =
+      "${baseUrl}lsm-customer-edit-profile-details";
+////Custome Update Profile
+  static const String customerUpdateProfile =
+      "${baseUrl}lsm-customer-update-profile-details";
+  ////Custome Shop As Per Pin Code (All Near Shops) Profile
+  static const String allNearShopAsPerPincode =
+      "${baseUrl}lsm-customer-shop-list-as-per-pincode";
+  ////Custome all Categories
+  static const String allCategories =
+      "${baseUrl}lsm-customer-category-list-as-per-pincode";
+  ////Customer Add Fvrt Shops
+  static const String customerfvrtshops =
+      "${baseUrl}lsm-customer-add-shop-to-favourite";
+  ////Customer All Favrt Shops
+  static const String customersAllfvrtShopd =
+      "${baseUrl}lsm-customer-add-shop-to-favourite";
+
+  ///Remove Fvrt Shops
+  static const String removeFrvtShops =
+      "${baseUrl}lsm-customer-remove-shop-from-favourite";
+
+  /////
+//   static const String submitCustomProduct =
+//       "${baseUrl}lsm-shop-owner-add-custom-product";
+//
 }

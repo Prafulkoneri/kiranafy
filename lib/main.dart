@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/customer/auth/controller/customer_sig
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/customer/customerList.dart';
+import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
@@ -19,7 +20,6 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controll
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
@@ -48,7 +48,11 @@ import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
+import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
+import 'screen/customer/profile/controller/edit_profile_controller.dart';
+import 'screen/customer/profile/view/update_profile_view.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,6 +82,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SAccountScreenController()),
         ChangeNotifierProvider(create: (_) => CustomProductController()),
         ChangeNotifierProvider(create: (_) => SSelectedProductsController()),
+        ChangeNotifierProvider(create: (_) => UpdateProfileController()),
+        ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
+        ChangeNotifierProvider(create: (_) => FavouritesController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],
@@ -86,12 +93,27 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+var fcmToken;
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    FirebaseMessaging.instance.getToken().then((newToken){
+      fcmToken=newToken;
+      print("fcmToken${fcmToken}");
+    });
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
@@ -102,9 +124,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-
               home: SplashScreen());
-
         });
   }
 }

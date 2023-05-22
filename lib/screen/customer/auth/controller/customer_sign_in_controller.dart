@@ -3,26 +3,30 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/main.dart';
+import 'package:local_supper_market/screen/customer/auth/model/customer_sign_in_model.dart';
 import 'package:local_supper_market/screen/customer/auth/model/mobile_number_check_model.dart';
+import 'package:local_supper_market/screen/customer/auth/repository/customer_sign_in_repo.dart';
 import 'package:local_supper_market/screen/customer/auth/repository/mobile_number_check_repo.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
+import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerSignInController extends ChangeNotifier {
   TextEditingController mobileController = TextEditingController();
   MobileNumberCheckRepo mobileNumberCheckRepo = MobileNumberCheckRepo();
+  CustomerSignInRepo customerSignInRepo = CustomerSignInRepo();
   String countryCode = "+91";
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isVerifyChecked = false;
   String otpCode = "";
   String verificationID = "";
   bool isLoginBtnEnabled = false;
+  bool isNextBtnEnabled = false;
   void onOtpSubmitPressed(context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const MainScreenView()),
-    );
+    onCodeVerification(context);
   }
 
   void onVerifyChecked(value) {
@@ -34,6 +38,8 @@ class CustomerSignInController extends ChangeNotifier {
     otpCode = value;
     notifyListeners();
   }
+
+
 
   void onCountryCodeSelected(value) {
     countryCode = value.toString();
@@ -57,7 +63,15 @@ class CustomerSignInController extends ChangeNotifier {
             MobileNumberCheckResponseModel.fromJson(jsonDecode(response.body));
 
         if (response.statusCode == 200) {
-          print(response.body);
+          if(result.status==404){
+            isLoginBtnEnabled=false;
+          }
+          else{
+            isLoginBtnEnabled=true;
+          }
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
@@ -90,17 +104,82 @@ class CustomerSignInController extends ChangeNotifier {
           type: SnackType.success);
       return;
     }
-    // await _auth.verifyPhoneNumber(
-    //     phoneNumber: "$countryCode${mobileController.text}",
-    //     verificationCompleted: (phoneAuthCredential) async {},
-    //     verificationFailed: (verificationFailed) {
-    //       Utils.showPrimarySnackbar(context, verificationFailed,
-    //           type: SnackType.error);
-    //     },
-    //     // codeSent: (verificationID, resendingToken) async {
-    //     //   LoginScreen.SHOW_OTP_FORM_WIDGET;
-    //     //   this.verificationID = verificationID;
-    //     // },
-    //     codeAutoRetrievalTimeout: (verificationID) async {});
+
+
+    await _auth.verifyPhoneNumber(
+        phoneNumber: "$countryCode${mobileController.text}",
+        verificationCompleted: (phoneAuthCredential) async {},
+        verificationFailed: (verificationFailed) {
+          Utils.showPrimarySnackbar(context, verificationFailed,
+              type: SnackType.error);
+        },
+        codeSent: (verificationID, resendingToken) async {
+          LoginScreen.SHOW_OTP_FORM_WIDGET;
+          this.verificationID = verificationID;
+        },
+        codeAutoRetrievalTimeout: (verificationID) async {});
+
   }
+
+  CustomerSignInReqModel get customerSignInReqModel =>
+      CustomerSignInReqModel(
+          customerCountryCode: countryCode,
+          customerMobileNo: mobileController.text,
+          customerFcmToken:fcmToken);
+
+  Future<void> onsignIn(context) async {
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    customerSignInRepo
+        .customerSignIn(customerSignInReqModel)
+        .then((response) {
+      final result =
+      CustomerSignInResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        pref.setString("successToken", result.successToken?.token ?? "");
+        pref.setString("status", "customerLoggedIn");
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MainScreenView()));
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  void signInWithPhoneAuthCred(
+      AuthCredential phoneAuthCredential, context) async {
+    try {
+      final authCred = await _auth.signInWithCredential(phoneAuthCredential);
+      if (authCred.user != null) {
+        onsignIn(context);
+      } else {
+        Utils.showPrimarySnackbar(context,
+            "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
+            type: SnackType.error);
+      }
+    } on FirebaseAuthException catch (e) {
+      print("888");
+      print(e.message);
+      print("888");
+      Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
+    }
+  }
+  Future<void> onCodeVerification(context) async {
+    AuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
+        verificationId: verificationID, smsCode: otpCode);
+    signInWithPhoneAuthCred(phoneAuthCredential, context);
+  }
+
+
+
 }

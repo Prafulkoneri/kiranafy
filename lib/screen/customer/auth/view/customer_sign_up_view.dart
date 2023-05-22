@@ -236,7 +236,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                         color: Button,
                         // style: style,
                         onTap: () async {
-                          await read.onNewCustomer(context);
+                          await read.onNextClick(context);
                           if (watch.mobileController.text.length < 10) {
                             return;
                           }

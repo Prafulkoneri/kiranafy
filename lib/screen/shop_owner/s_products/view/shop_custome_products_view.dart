@@ -11,8 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -29,33 +32,17 @@ class ShopCustomProductView extends StatefulWidget {
   State<ShopCustomProductView> createState() => _ShopCustomProductViewState();
 }
 
-final TextEditingController controller = TextEditingController();
-String initialCountry = 'IN';
-PhoneNumber number = PhoneNumber(isoCode: 'IN');
-String radioButtonItem = '';
-String? dropdown;
-final maxLines = 5;
-final List<String> genderItems = [
-  'Male',
-  'Female',
-];
 
-String? selectedValue;
-// Group Value fo
-// r Radio Button.
-int id = 1;
-bool switchValue = true;
-bool switchValue1 = true;
 
 class _ShopCustomProductViewState extends State<ShopCustomProductView> {
-  Map<int, File> files = {};
+
 
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<CustomProductController>()
-          .initState(context, CreateWidget());
+          .initState(context, CreateWidget(0),0);
     });
   }
 
@@ -63,14 +50,20 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
   Widget build(BuildContext context) {
     final watch = context.watch<CustomProductController>();
     final read = context.read<CustomProductController>();
+    final readMain = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: (){
+            readMain.onNavigation(0,SSelectedProductView(categoryId: widget.categoryId),context);
+          },
           title: "Custom Products",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () {},
+          onActionTap: () {
+            read.uploadCustomProduct(context);
+          },
         ),
       ),
       body: SingleChildScrollView(
@@ -106,6 +99,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                     height: 15.w,
                   ),
                   PrimarySTextFormField(
+                    controller: watch.productNameController,
                     // titleHeader: "Shop Name",
                     hintText: "Product Name",
                   ),
@@ -138,7 +132,9 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                       ),
                       Expanded(
                         child: SDropDownField(
-                          onChanged: (value){},
+                          onChanged: (value){
+                            read.onTax(value);
+                          },
                           items: watch.taxData
                               ?.map((item) => DropdownMenuItem<String>(
                                     value: item.id.toString(),
@@ -326,43 +322,82 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          read.onAddWidget(CreateWidget());
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 6.w, vertical: 2.w),
-                          // margin: EdgeInsets.only(right: 15.w),
-                          // height: 24.h,
-                          // width: 55.w,
-                          decoration: BoxDecoration(
-                            color: SplashText,
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              read.onAddWidget(CreateWidget(watch.cards.length),watch.cards.length);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 6.w, vertical: 2.w),
+                              // margin: EdgeInsets.only(right: 15.w),
+                              // height: 24.h,
+                              // width: 55.w,
+                              decoration: BoxDecoration(
+                                color: SplashText,
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                              ),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Add",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        // letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  SizedBox(
+                                    width: 7.w,
+                                  ),
+                                  SvgPicture.asset(
+                                    'assets/icons/pluse.svg',
+                                    height: 7.h,
+                                    width: 7.w,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Add",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    // letterSpacing: .5,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              SizedBox(
-                                width: 7.w,
-                              ),
-                              SvgPicture.asset(
-                                'assets/icons/pluse.svg',
-                                height: 7.h,
-                                width: 7.w,
-                              ),
-                            ],
-                          ),
-                        ),
+
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     read.onRemoveWidget(watch.cards.length-1);
+                          //   },
+                          //   child: Container(
+                          //     padding: EdgeInsets.symmetric(
+                          //         horizontal: 6.w, vertical: 2.w),
+                          //     // margin: EdgeInsets.only(right: 15.w),
+                          //     // height: 24.h,
+                          //     // width: 55.w,
+                          //     decoration: BoxDecoration(
+                          //       color: Colors.red,
+                          //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                          //     ),
+                          //     child: Row(
+                          //       // mainAxisAlignment: MainAxisAlignment.center,
+                          //       children: [
+                          //         Text(
+                          //           "Delete",
+                          //           style: TextStyle(
+                          //               color: Colors.white,
+                          //               // letterSpacing: .5,
+                          //               fontSize: 12.sp,
+                          //               fontWeight: FontWeight.w400),
+                          //         ),
+                          //         SizedBox(
+                          //           width: 7.w,
+                          //         ),
+                          //        Icon(Icons.clear,color: Colors.white,size: 14.w,)
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
                       ),
+
                     ],
                   ),
                   SizedBox(
@@ -378,7 +413,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                             Stack(
                               alignment: Alignment.topRight,
                               children: [
-                                CreateWidget(),
+                                CreateWidget(index),
                                 CupertinoSwitch(
                                   value: watch.switchValue[index],
                                   activeColor: DarkGreen,
@@ -567,15 +602,20 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
     );
   }
 
-  Widget CreateWidget() {
+  Widget CreateWidget(index) {
     // final read=context.read<CustomProductController>();
     final watch=Provider.of<CustomProductController>(context, listen: false);
+    final read=Provider.of<CustomProductController>(context, listen: false);
     return Column(
       children: [
         Row(
           children: [
             Expanded(
               child: PrimarySTextFormField(
+                onChanged: (value){
+
+                },
+                controller: watch.valueController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",
                 hintText: "value",
@@ -586,7 +626,9 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
             Expanded(
                 child: SDropDownField(
                   iconPadding: EdgeInsets.only(right: 5.w),
-                  onChanged: (value){},
+                  onChanged: (value){
+                   read.onUnitDataSelect(value,index);
+                  },
                   items: watch.unitData
                       ?.map((item) => DropdownMenuItem<String>(
                     value: item.id.toString(),
@@ -605,6 +647,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
+                controller: watch.mrpController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",
                 hintText: "MRP",
@@ -614,6 +657,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
+                controller: watch.offerController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",
                 hintText: "Offer Price",
