@@ -401,6 +401,9 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                           onTap: () async {
                             print(watch.isNewShopBtnEnabled);
                             await read.onNewShopPressed(context);
+                            if (watch.mobController.text.length < 10) {
+                              return;
+                            }
                             if (!watch.isNewShopBtnEnabled) {
                               return;
                             }

@@ -86,7 +86,6 @@ class ShopRegistrationController extends ChangeNotifier {
 
   Future<void> onCountrySelected(value) async {
     countryId = int.parse(value.toString());
-
     notifyListeners();
   }
 

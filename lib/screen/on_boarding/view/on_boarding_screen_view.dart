@@ -57,7 +57,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
               clipBehavior: Clip.none,
               children: [
                 Positioned(
-                  left: 0.w,
+                  // left: 0.w,
                   child: Image.asset(
                     "assets/images/splash1.png",
                     height: 235.w,
@@ -77,7 +77,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                   children: [
                     Expanded(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(
                             height: 45.w,
@@ -154,11 +154,6 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                   SizedBox(
                                     height: 20.w,
                                   ),
-                                  // Image.asset(
-                                  //   "assets/images/introone.png",
-                                  //   height: 262.w,
-                                  //   width: 262.w,
-                                  // ),
                                   Image.network(
                                       "${element?.splashScreenImagePath}"),
                                   SizedBox(
@@ -166,17 +161,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                   ),
                                   Text(
                                     "${element?.title}",
-                                    style: TextStyle(
-                                        fontSize: 30.sp,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xff006F94),
-                                        letterSpacing: 0.5),
-                                  ),
-                                  SizedBox(
-                                    height: 3.w,
-                                  ),
-                                  Text(
-                                    "On Online",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 30.sp,
                                         fontWeight: FontWeight.w700,
@@ -202,218 +187,12 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                               );
                             },
                           ),
-                          // Container(
-                          //   height:currentIndex==0? 409.w:currentIndex==1?404.w:currentIndex==2?365.w:currentIndex==3?460.w:0,
-                          //   child: PageView(
-                          //     onPageChanged: (int index){
-                          //       setState(() {
-                          //         currentIndex=index;
-                          //       });
-                          //     },
-                          //     padEnds: true,
-                          //     children: [
-                          //       Column(
-                          //         children: [
-                          //           Image.asset(
-                          //             "assets/images/introone.png",
-                          //             height: 262.w,
-                          //             width: 262.w,
-                          //           ),
-                          //           SizedBox(
-                          //             height: 15.w,
-                          //           ),
-                          //           Text(
-                          //             "We Are Open",
-                          //             style: TextStyle(
-                          //                 fontSize: 26.sp,
-                          //                 fontWeight: FontWeight.w700,
-                          //                 color: Color(0xff006F94),
-                          //                 letterSpacing: 1),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 3.w,
-                          //           ),
-                          //           Text(
-                          //             "On Online",
-                          //             style: TextStyle(
-                          //                 fontSize: 26.sp,
-                          //                 fontWeight: FontWeight.w700,
-                          //                 color: Color(0xff006F94),
-                          //                 letterSpacing: 1),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 22.w,
-                          //           ),
-                          //           Container(
-                          //             margin:
-                          //                 EdgeInsets.only(left: 34.w, right: 34.w),
-                          //             child: Text(
-                          //               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor.",
-                          //               style: TextStyle(
-                          //                   fontSize: 15.sp,
-                          //                   fontWeight: FontWeight.w500,
-                          //                   color: Color(0xff263238)),
-                          //               textAlign: TextAlign.center,
-                          //             ),
-                          //           ),
-                          //
-                          //         ],
-                          //       ),
-                          //       Column(
-                          //         children: [
-                          //           Image.asset(
-                          //             "assets/images/introtwo.png",
-                          //             height: 232.w,
-                          //             width: 304.96.w,
-                          //           ),
-                          //           SizedBox(
-                          //             height: 40.w,
-                          //           ),
-                          //           Text(
-                          //             "You Can Find",
-                          //             style: TextStyle(
-                          //                 fontSize: 26.sp,
-                          //                 fontWeight: FontWeight.w700,
-                          //                 color: Color(0xff006F94),
-                          //                 letterSpacing: 1),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 3.w,
-                          //           ),
-                          //           Text(
-                          //             "Local Location",
-                          //             style: TextStyle(
-                          //                 fontSize: 26.sp,
-                          //                 fontWeight: FontWeight.w700,
-                          //                 color: Color(0xff006F94),
-                          //                 letterSpacing: 1),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 22.w,
-                          //           ),
-                          //           Container(
-                          //             margin:
-                          //             EdgeInsets.only(left: 34.w, right: 34.w),
-                          //             child: Text(
-                          //               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor.",
-                          //               style: TextStyle(
-                          //                   fontSize: 15.sp,
-                          //                   fontWeight: FontWeight.w500,
-                          //                   color: Color(0xff263238)),
-                          //               textAlign: TextAlign.center,
-                          //             ),
-                          //           ),
-                          //
-                          //         ],
-                          //       ),
-                          //       Column(
-                          //         children: [
-                          //           Image.asset(
-                          //             "assets/images/introthree.png",
-                          //             height: 185.w,
-                          //             width: 285.7.w,
-                          //           ),
-                          //           SizedBox(
-                          //             height:43.w,
-                          //           ),
-                          //
-                          //           Text(
-                          //             "Maintain",
-                          //             style: TextStyle(
-                          //                 fontSize: 26.sp,
-                          //                 fontWeight: FontWeight.w700,
-                          //                 color: Color(0xff006F94),
-                          //                 letterSpacing: 1),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 3.w,
-                          //           ),
-                          //           Text(
-                          //             "Orders On App",
-                          //             style: TextStyle(
-                          //                 fontSize: 26.sp,
-                          //                 fontWeight: FontWeight.w700,
-                          //                 color: Color(0xff006F94),
-                          //                 letterSpacing: 1),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 22.w,
-                          //           ),
-                          //           Container(
-                          //             margin:
-                          //             EdgeInsets.only(left: 34.w, right: 34.w),
-                          //             child: Text(
-                          //               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor.",
-                          //               style: TextStyle(
-                          //                   fontSize: 15.sp,
-                          //                   fontWeight: FontWeight.w500,
-                          //                   color: Color(0xff263238)),
-                          //               textAlign: TextAlign.center,
-                          //             ),
-                          //           ),
-                          //
-                          //         ],
-                          //       ),
-                          //       Column(
-                          //         children: [
-                          //           Image.asset(
-                          //             "assets/images/introfour.png",
-                          //             height: 250.w,
-                          //             width: 250.w,
-                          //           ),
-                          //           SizedBox(
-                          //             height: 37.w,
-                          //           ),
-                          //           Text(
-                          //             "Grow Your",
-                          //             style: TextStyle(
-                          //                 fontSize: 26.sp,
-                          //                 fontWeight: FontWeight.w700,
-                          //                 color: Color(0xff006F94),
-                          //                 letterSpacing: 1),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 3.w,
-                          //           ),
-                          //           Text(
-                          //             "Shop Business",
-                          //             style: TextStyle(
-                          //                 fontSize: 26.sp,
-                          //                 fontWeight: FontWeight.w700,
-                          //                 color: Color(0xff006F94),
-                          //                 letterSpacing: 1),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 22.w,
-                          //           ),
-                          //           Container(
-                          //             margin:
-                          //             EdgeInsets.only(left: 34.w, right: 34.w),
-                          //             child: Text(
-                          //               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor.",
-                          //               style: TextStyle(
-                          //                   fontSize: 15.sp,
-                          //                   fontWeight: FontWeight.w500,
-                          //                   color: Color(0xff263238)),
-                          //               textAlign: TextAlign.center,
-                          //             ),
-                          //           ),
-                          //
-                          //         ],
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                           SizedBox(
                             height: 20.w,
                           ),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: indicators(
-                                  // watch.onBoardingData == null
-                                  //     ? 0
-                                  //     :
-                                  watch.onBoardingData?.length,
+                              children: indicators(watch.onBoardingData?.length,
                                   watch.currentIndex)),
                           SizedBox(
                             height: 35.w,

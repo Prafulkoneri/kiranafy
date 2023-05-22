@@ -12,7 +12,7 @@ class ShopOwnerRegisterReqModel {
   String? cityId;
   String? areaId;
   String? shopAddress;
-  String ? pincode;
+  String? pincode;
   String? shopPincode;
   String? shopUpiId;
   String? fcmToken;
@@ -51,7 +51,7 @@ class ShopOwnerRegisterReqModel {
     data["shop_pincode"] = shopPincode;
     data["shop_owner_upi_id"] = shopUpiId;
     data["shop_owner_fcm_token"] = fcmToken;
-    data["shop_pincode"]=pincode;
+
     return data;
   }
 }
@@ -72,7 +72,9 @@ class ShopOwnerRegisterResModel {
   ShopOwnerRegisterResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    successToken = json['success_token'] != null ? SuccessToken.fromJson(json['success_token']) : null;
+    successToken = json['success_token'] != null
+        ? SuccessToken.fromJson(json['success_token'])
+        : null;
     kycStatus = json["kyc_status"];
   }
 }

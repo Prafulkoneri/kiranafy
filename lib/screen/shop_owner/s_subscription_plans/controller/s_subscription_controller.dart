@@ -23,10 +23,10 @@ class SSubscriptionController extends ChangeNotifier {
     await getSubscriptionPlanDetails(context);
   }
 
-  // void onMakePaymentClicked(context) {
-  //   Navigator.push(
-  //       context, MaterialPageRoute(builder: (context) => SMainScreenView()));
-  // }
+  void onMakePaymentClicked(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+  }
 
   Future<void> getSubscriptionPlanDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -34,6 +34,7 @@ class SSubscriptionController extends ChangeNotifier {
     subscriptionPlansRepo
         .getSubscriptionPlans(pref.getString("successToken"))
         .then((response) {
+      print("successToken");
       final result =
           ShopSubscriptionPlansResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);

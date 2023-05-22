@@ -2,13 +2,11 @@ class CustomerEditProfileDetails {
   int? status;
   String? message;
   CustomerProfileDetails? customerProfileDetails;
-  List<Country>? countries;
 
   CustomerEditProfileDetails({
     required this.status,
     required this.message,
     required this.customerProfileDetails,
-    required this.countries,
   });
 
   CustomerEditProfileDetails.fromJson(Map<String, dynamic> json) {
@@ -18,27 +16,6 @@ class CustomerEditProfileDetails {
     customerProfileDetails = json['customer_profile_details'] != null
         ? CustomerProfileDetails.fromJson(json['customer_profile_details'])
         : null;
-
-    if (json["countries"] != null) {
-      countries = <Country>[];
-      json["countries"].forEach((v) {
-        countries!.add(Country.fromJson(v));
-      });
-    }
-  }
-}
-
-class Country {
-  int? id;
-  String? countryName;
-
-  Country({
-    required this.id,
-    required this.countryName,
-  });
-  Country.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    countryName = json["country_name"];
   }
 }
 

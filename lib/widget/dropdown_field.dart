@@ -24,11 +24,6 @@ class CDropDownField extends StatefulWidget {
 }
 
 class _CDropDownFieldState extends State<CDropDownField> {
-  final List<String> genderItems = [
-    'Male',
-    'Female',
-  ];
-
   String? selectedValue;
 
   @override
@@ -66,17 +61,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
             widget.hint ?? "",
             style: TextStyle(fontSize: 14),
           ),
-          items: genderItems
-              .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ))
-              .toList(),
+          items: widget.items,
           validator: (value) {
             if (value == null) {
               return 'Please select gender.';
@@ -119,12 +104,12 @@ class SDropDownField extends StatefulWidget {
   final String? value;
   final double? hintSize;
   final double? height;
-  final EdgeInsets ? iconPadding;
+  final EdgeInsets? iconPadding;
 
   const SDropDownField(
       {Key? key,
       this.value,
-        this.iconPadding,
+      this.iconPadding,
       this.height,
       this.hint,
       this.hintSize,
@@ -210,7 +195,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
             ),
             iconStyleData: IconStyleData(
               icon: Padding(
-                padding: widget.iconPadding??EdgeInsets.only(right: 22.w),
+                padding: widget.iconPadding ?? EdgeInsets.only(right: 22.w),
                 child: SvgPicture.asset("assets/icons/dropdown.svg"),
               ),
               // iconSize: 30,

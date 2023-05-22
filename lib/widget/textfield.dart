@@ -1,5 +1,4 @@
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -209,7 +208,7 @@ class MobileNoTextFormField extends StatelessWidget {
   final void Function(CountryCode)? onCountryCodeChanged;
   final void Function(String)? onChanged;
   final String? initialSelection;
-  final bool ? readOnly;
+  final bool? readOnly;
 
   const MobileNoTextFormField({
     Key? key,
@@ -235,7 +234,7 @@ class MobileNoTextFormField extends StatelessWidget {
                   color:
                       enableOrder ?? false ? Color(0xffE0E0E0) : Colors.white)),
           child: CountryCodePicker(
-            enabled: readOnly==true?false:true,
+            enabled: readOnly == true ? false : true,
             flagWidth: 20.w,
             flagDecoration: BoxDecoration(),
             padding: EdgeInsets.zero,

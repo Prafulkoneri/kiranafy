@@ -30,7 +30,7 @@ class ShopRegistrationView extends StatefulWidget {
 }
 
 class _ShopRegistrationViewState extends State<ShopRegistrationView> {
-  String? selectedValue;
+  // String? selectedValue;
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -260,6 +260,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SizedBox(
                         height: 18.w,
                       ),
+
                       SDropDownField(
                         onChanged: (value) async {
                           print(value);
