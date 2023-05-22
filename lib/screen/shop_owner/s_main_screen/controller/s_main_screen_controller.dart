@@ -8,7 +8,7 @@ import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.d
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/near_shops/all_near_shops.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 
 

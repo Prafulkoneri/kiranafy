@@ -114,8 +114,6 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                 colors: [
                                                  index.isEven?yellow1.withOpacity(1): Color(0xff4EC0FA).withOpacity(1),
                                                  index.isEven? yellow2.withOpacity(1): Color(0xff32DFAC).withOpacity(1),
-
-
                                                 ]),
 
                                             // border: Border.all(width: 1, color: Black),
@@ -679,8 +677,9 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                               children: [
                                 PrimaryCheckBox(
                                   onChanged: (value) {
-                                    // read.onClickFirstServices();
+                                    read.onTimeShopSetup();
                                   },
+                                  value: watch.oneTimeShop,
                                 ),
                                 Text(
                                   'One time shop setup in the app',
@@ -699,7 +698,12 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                             ),
                             Row(
                               children: [
-                                PrimaryCheckBox(),
+                                PrimaryCheckBox(
+                                  onChanged: (value) {
+                                    read.onProductPrice();
+                                  },
+                                  value: watch.productPrice,
+                                ),
                                 Text(
                                   'Product price maintenance support',
                                   style: GoogleFonts.dmSans(
@@ -717,7 +721,12 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                             ),
                             Row(
                               children: [
-                                PrimaryCheckBox(),
+                                PrimaryCheckBox(
+                                  onChanged: (value) {
+                                    read.onShopDigital();
+                                  },
+                                  value: watch.shopDigital,
+                                ),
                                 Text(
                                   'Shop Digital Marketing',
                                   style: GoogleFonts.dmSans(
@@ -735,7 +744,12 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                             ),
                             Row(
                               children: [
-                                PrimaryCheckBox(),
+                                PrimaryCheckBox(
+                                  onChanged: (value) {
+                                    read.onPrimeCatchy();
+                                  },
+                                  value: watch.primeCatchy,
+                                ),
                                 Text(
                                   'Prime and catchy location on app',
                                   style: GoogleFonts.dmSans(

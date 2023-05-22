@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/main.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
@@ -233,6 +234,7 @@ class ShopRegistrationController extends ChangeNotifier {
 
   Future<void> onPincodeSelected(value) async {
     pincode = value.toString();
+    print("$pincode pincode");
     // print(object);
     notifyListeners();
   }
@@ -309,9 +311,9 @@ class ShopRegistrationController extends ChangeNotifier {
           cityId: cityId.toString(),
           areaId: areaId.toString(),
           shopAddress: addressController.text,
-          shopPincode: pincode,
+          shopPincode: pincode.toString(),
           shopUpiId: upiController.text,
-          fcmToken: "ghjklhvghjk");
+          fcmToken: fcmToken);
 
   Future<void> shopRegister(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();

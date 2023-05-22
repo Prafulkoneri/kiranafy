@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,6 +25,11 @@ class CFavouritesView extends StatefulWidget {
 }
 
 class _CFavouritesViewState extends State<CFavouritesView> {
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<FavouritesController>().initState(context);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final read=context.read<FavouritesController>();
@@ -36,7 +42,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
           title: "Favourites",
         ),
       ),
-      body: SingleChildScrollView(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -74,177 +82,266 @@ class _CFavouritesViewState extends State<CFavouritesView> {
             SizedBox(
               height: 24.h,
             ),
-            // watch.isFavShopPressed?CFavouritesShopView():CFavouritesProductView()
-            // SizedBox(
-            //   child: ListView.builder(
-            //       // scrollDirection: Axis.vertical,p
-            //       physics: NeverScrollableScrollPhysics(),
-            //       // physics: BouncingScrollPhysics(),
-            //       shrinkWrap: true,
-            //       itemCount: 10,
-            //       itemBuilder: (BuildContext, index) {
-            //         return GestureDetector(
-            //           onTap: () {
-            //             Navigator.push(
-            //               context,
-            //               MaterialPageRoute(
-            //                   builder: (context) => ShopProfile()),
-            //             );
-            //           },
-            //           child: Stack(
-            //             children: [
-            //               Padding(
-            //                 padding: EdgeInsets.only(
-            //                     left: 19.w,
-            //                     right: 12,
-            //                     // top: 20.w,
-            //                     bottom: 14.w),
-            //                 child: Container(
-            //                   height: 160.h,
-            //                   width: 352.w,
 
-            //                   // margin: EdgeInsets.only(
-            //                   //     left: index == 0 ? 19.w : 0,
-            //                   //     right: index == 2 ? 19.w : 5.w),
-            //                   decoration: BoxDecoration(
-            //                       borderRadius: BorderRadius.circular(15.w),
-            //                       image: DecorationImage(
-            //                           // scale: 1.0,
-            //                           image: AssetImage(
-            //                               'assets/images/nearshop2.png'),
-            //                           fit: BoxFit.fill)),
-            //                   child: Padding(
-            //                     padding: EdgeInsets.all(10.h),
-            //                     child: Column(
-            //                       crossAxisAlignment: CrossAxisAlignment.start,
-            //                       mainAxisAlignment:
-            //                           MainAxisAlignment.spaceBetween,
-            //                       children: [
-            //                         Row(
-            //                           mainAxisAlignment: MainAxisAlignment.end,
-            //                           children: [
-            //                             InkWell(
-            //                               onTap: () {},
-            //                               child: SvgPicture.asset(
-            //                                 "assets/images/favorite.svg",
-            //                                 width: 26.w,
-            //                                 height: 14.h,
-            //                               ),
-            //                             ),
-            //                           ],
-            //                         ),
-            //                         Column(
-            //                           children: [
-            //                             Row(
-            //                               children: [
-            //                                 Text("New Balaji Trading Co..",
-            //                                     style: GoogleFonts.roboto(
-            //                                         textStyle: TextStyle(
-            //                                             color: Colors.white,
-            //                                             // letterSpacing: .5,
-            //                                             fontSize: 15.sp,
-            //                                             fontWeight:
-            //                                                 FontWeight.w600))),
-            //                               ],
-            //                             ),
-            //                             Row(
-            //                               mainAxisAlignment:
-            //                                   MainAxisAlignment.spaceBetween,
-            //                               children: [
-            //                                 Row(
-            //                                   children: [
-            //                                     SvgPicture.asset(
-            //                                         "assets/icons/location1.svg",
-            //                                         width: 12.w,
-            //                                         height: 16.h),
-            //                                     Padding(
-            //                                       padding: EdgeInsets.only(
-            //                                           left: 8.w),
-            //                                       child: Text(
-            //                                           "Vishrantwadi, Pune",
-            //                                           style: GoogleFonts.roboto(
-            //                                               textStyle: TextStyle(
-            //                                                   color:
-            //                                                       Colors.white,
-            //                                                   letterSpacing: .5,
-            //                                                   fontSize: 12.sp,
-            //                                                   // height: 10,
-            //                                                   fontWeight:
-            //                                                       FontWeight
-            //                                                           .w400))),
-            //                                     ),
-            //                                   ],
-            //                                 ),
-            //                                 Container(
-            //                                   height: 21.49.h,
-            //                                   width: 49.w,
-            //                                   decoration: BoxDecoration(
-            //                                     color: yellow,
-            //                                     borderRadius: BorderRadius.all(
-            //                                         Radius.circular(15)),
-            //                                   ),
-            //                                   child: Row(
-            //                                     mainAxisAlignment:
-            //                                         MainAxisAlignment.center,
-            //                                     children: [
-            //                                       SvgPicture.asset(
-            //                                         "assets/images/star.svg",
-            //                                         height: 12.h,
-            //                                         width: 12.w,
-            //                                       ),
-            //                                       SizedBox(
-            //                                         width: 4.3.w,
-            //                                       ),
-            //                                       Text(
-            //                                         "4.5",
-            //                                         style: GoogleFonts.dmSans(
-            //                                           textStyle: TextStyle(
-            //                                               color: Black,
-            //                                               letterSpacing: .5,
-            //                                               fontSize: 12.sp,
-            //                                               fontWeight:
-            //                                                   FontWeight.w400),
-            //                                         ),
-            //                                       ),
-            //                                     ],
-            //                                   ),
-            //                                 ),
-            //                               ],
-            //                             ),
-            //                           ],
-            //                         ),
-            //                       ],
-            //                     ),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Positioned(
-            //                   child: Container(
-            //                 margin: EdgeInsets.only(
-            //                     left: index == 0 ? 19.w : 0,
-            //                     right: index == 2 ? 19.w : 5.w),
-            //                 height: 160.h,
-            //                 width: 352.w,
-            //                 decoration: BoxDecoration(
-            //                     borderRadius: BorderRadius.circular(13.w),
-            //                     gradient: LinearGradient(
-            //                       begin: Alignment.topCenter,
-            //                       end: Alignment.bottomCenter,
-            //                       stops: [
-            //                         0.1,
-            //                         0.9,
-            //                       ],
-            //                       colors: [
-            //                         Colors.white.withOpacity(0),
-            //                         Colors.black.withOpacity(0.15),
-            //                       ],
-            //                     )),
-            //               )),
-            //             ],
-            //           ),
-            //         );
-            //       }),
-            // )
+            watch.isFavShopPressed?Container(
+              child: SizedBox(
+                child: ListView.builder(
+                  // scrollDirection: Axis.vertical,p
+                    physics: NeverScrollableScrollPhysics(),
+                    // physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: watch.favShopList?.length??0,
+                    itemBuilder: (BuildContext, index) {
+                      final element=watch.favShopList?[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ShopProfile()),
+                          );
+                        },
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 19.w,
+                                  right: 12,
+                                  // top: 20.w,
+                                  bottom: 14.w),
+                              child: Container(
+                                height: 160.h,
+                                width: 352.w,
+
+                                // margin: EdgeInsets.only(
+                                //     left: index == 0 ? 19.w : 0,
+                                //     right: index == 2 ? 19.w : 5.w),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.w),
+                                    image: DecorationImage(
+                                      // scale: 1.0,
+                                        image:
+                                        NetworkImage('${element?.shopBannerImagePath}'),
+                                        fit: BoxFit.fill)),
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.h),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {},
+                                            child: SvgPicture.asset(
+                                              "assets/images/favorite.svg",
+                                              width: 26.w,
+                                              height: 14.h,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text("${element?.shopName}",
+                                                  style: GoogleFonts.roboto(
+                                                      textStyle: TextStyle(
+                                                          color: Colors.white,
+                                                          // letterSpacing: .5,
+                                                          fontSize: 15.sp,
+                                                          fontWeight:
+                                                          FontWeight.w600))),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                      "assets/icons/location1.svg",
+                                                      width: 12.w,
+                                                      height: 16.h),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(left: 8.w),
+                                                    child: Text("${element?.shopName}",
+                                                        style: GoogleFonts.roboto(
+                                                            textStyle: TextStyle(
+                                                                color: Colors.white,
+                                                                letterSpacing: .5,
+                                                                fontSize: 12.sp,
+                                                                // height: 10,
+                                                                fontWeight:
+                                                                FontWeight.w400))),
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                height: 21.49.h,
+                                                width: 49.w,
+                                                decoration: BoxDecoration(
+                                                  color: yellow,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(15)),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                      "assets/images/star.svg",
+                                                      height: 12.h,
+                                                      width: 12.w,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 4.3.w,
+                                                    ),
+                                                    Text(
+                                                      "4.5",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Black,
+                                                            letterSpacing: .5,
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                            FontWeight.w400),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      left: index == 0 ? 19.w : 0,
+                                      right: index == 2 ? 19.w : 5.w),
+                                  height: 160.h,
+                                  width: 352.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(13.w),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        stops: [
+                                          0.1,
+                                          0.9,
+                                        ],
+                                        colors: [
+                                          Colors.white.withOpacity(0),
+                                          Colors.black.withOpacity(0.15),
+                                        ],
+                                      )),
+                                )),
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+            ):
+            Container(
+              padding:
+              EdgeInsets.only(left: 12.h, top: 20.w, right: 12.h, bottom: 15.w),
+              child: SizedBox(
+                // height: 156.h,
+                // width: 2.w,
+                child: GridView.builder(
+                  shrinkWrap: true,
+                    itemCount: 10,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, crossAxisSpacing: 4.0, mainAxisSpacing: 4.0),
+                    itemBuilder: (BuildContext, index) {
+                      return Card(
+                        // color: black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.only(left: 17.h, top: 13.w, bottom: 14.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  child: Center(
+                                      child:
+                                      Image.asset("assets/images/redlabel.png"))),
+                              SizedBox(
+                                height: 3.w,
+                              ),
+                              Text(
+                                "Red Label",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black1,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 2.w,
+                              ),
+                              Text(
+                                "100g",
+                                style: TextStyle(
+                                    color: Black1,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(
+                                height: 2.w,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '\u{20B9}${40}',
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: Black1,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: SvgPicture.asset(
+                                      'assets/icons/fvrt_products.svg',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 4.w,
+                              ),
+                              Text(
+                                "Maharaj Kirana Store",
+                                style: TextStyle(
+                                    color: Black1,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            )
+
+            // watch.isFavShopPressed?CFavouritesShopView():CFavouritesProductView()
           ],
         ),
       ),

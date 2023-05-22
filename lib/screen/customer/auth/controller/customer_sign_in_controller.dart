@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -137,6 +136,7 @@ class CustomerSignInController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "customerLoggedIn");
+        print("token ${pref.getString("successToken")}");
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => MainScreenView()));
       } else {

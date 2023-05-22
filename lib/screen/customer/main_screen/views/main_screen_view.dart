@@ -21,6 +21,7 @@ class _MainScreenViewState extends State<MainScreenView> {
   Widget build(BuildContext context) {
     final read = context.read<MainScreenController>();
     final watch = context.watch<MainScreenController>();
+
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: Container(

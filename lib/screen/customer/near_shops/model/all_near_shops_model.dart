@@ -1,14 +1,14 @@
-class UpdateProfileDetailReqModel {
-  int? customerPincode;
+class AllNearShopsReqModel {
+  String? pincode;
 
-  UpdateProfileDetailReqModel({
-    required this.customerPincode,
+  AllNearShopsReqModel({
+    required this.pincode,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
 
-    data["customer_pincode"] = customerPincode;
+    data["pincode"] = pincode;
 
     return data;
   }
@@ -60,11 +60,12 @@ class AllNearShops {
   });
   AllNearShops.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    shopName = json["country_name"];
-    shopAreaId = json["country_name"];
-    areaName = json["country_name"];
-    cityName = json["country_name"];
-    shopBannerImagePath = json["country_name"];
-    isFavourite = json["country_name"];
+    shopName = json["shop_name"];
+    shopAreaId = json["shop_area_id"];
+    shopCityId = json["shop_city_id"];
+    areaName = json["area_name"];
+    cityName = json["city_name"];
+    shopBannerImagePath = json["shop_banner_image_path"];
+    isFavourite = json["is_favourite"];
   }
 }

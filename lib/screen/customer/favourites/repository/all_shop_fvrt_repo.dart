@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 
-class AllFvrtShops {
+class AllFvrtShopsRepo {
   Future<http.Response> allfvrtShops(token) async {
     try {
       return await http

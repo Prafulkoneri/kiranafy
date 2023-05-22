@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/shop_profile.dart';
-
+import 'package:provider/provider.dart';
 class HomeCarousal extends StatefulWidget {
   const HomeCarousal({super.key});
 
@@ -14,16 +16,27 @@ class HomeCarousal extends StatefulWidget {
 }
 
 class _HomeCarousalState extends State<HomeCarousal> {
+
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<AllNearShopsAsPerPincode>().initState(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final watch=context.watch<AllNearShopsAsPerPincode>();
+    final read=context.read<AllNearShopsAsPerPincode>();
     return SizedBox(
       height: 120.h,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           physics: BouncingScrollPhysics(),
           shrinkWrap: true,
-          itemCount: 3,
+          itemCount: watch.nearByShopList?.length??0,
           itemBuilder: (BuildContext, index) {
+            final element=watch.nearByShopList?[index];
             return GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -43,8 +56,8 @@ class _HomeCarousalState extends State<HomeCarousal> {
                             right: index == 2 ? 19.w : 5.w),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(13.w),
-                          image: const DecorationImage(
-                              image: AssetImage('assets/images/property3.png'),
+                          image:  DecorationImage(
+                              image: NetworkImage("${element?.shopBannerImagePath}"),
                               fit: BoxFit.fill),
                         ),
                         child: Container(
@@ -53,14 +66,14 @@ class _HomeCarousalState extends State<HomeCarousal> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text("New Balaji Trading Co..",
+                              Text("${element?.shopName}",
                                   style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                           color: Colors.white,
                                           // letterSpacing: .5,
                                           fontSize: 13.sp,
                                           fontWeight: FontWeight.w600))),
-                              Text("Vishrantwadi, Pune",
+                              Text("${element?.areaName}",
                                   style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                           color: Colors.white,

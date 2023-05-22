@@ -16,10 +16,9 @@ class CFavouritesProductView extends StatefulWidget {
 class _CFavouritesProductViewState extends State<CFavouritesProductView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Container(
       padding:
-          EdgeInsets.only(left: 12.h, top: 20.w, right: 12.h, bottom: 15.w),
+      EdgeInsets.only(left: 12.h, top: 20.w, right: 12.h, bottom: 15.w),
       child: SizedBox(
         // height: 156.h,
         // width: 2.w,
@@ -41,7 +40,7 @@ class _CFavouritesProductViewState extends State<CFavouritesProductView> {
                       Expanded(
                           child: Center(
                               child:
-                                  Image.asset("assets/images/redlabel.png"))),
+                              Image.asset("assets/images/redlabel.png"))),
                       SizedBox(
                         height: 3.w,
                       ),
@@ -105,6 +104,6 @@ class _CFavouritesProductViewState extends State<CFavouritesProductView> {
               );
             }),
       ),
-    ));
+    );
   }
 }

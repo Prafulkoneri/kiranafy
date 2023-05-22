@@ -51,7 +51,6 @@ class SKycVerificationController extends ChangeNotifier {
 
   void onUploadClicked(context) async{
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("status","kycCompleted");
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => SSubscriptionScreenView()));
   }

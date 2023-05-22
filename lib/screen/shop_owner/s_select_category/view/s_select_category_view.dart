@@ -81,7 +81,6 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                                 right: 0.w,
                                 top: 0.w,
                                 child: GestureDetector(
-
                                   child: watch.selectedCategoryList[index]?SvgPicture.asset(
                                       "assets/icons/category_select.svg"):Container(),
                                 )),

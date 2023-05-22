@@ -12,7 +12,6 @@ class ShopOwnerRegisterReqModel {
   String? cityId;
   String? areaId;
   String? shopAddress;
-  String ? pincode;
   String? shopPincode;
   String? shopUpiId;
   String? fcmToken;
@@ -32,7 +31,6 @@ class ShopOwnerRegisterReqModel {
     this.shopType,
     this.shopUpiId,
     this.fcmToken,
-    this.pincode,
   });
 
   Map<String, dynamic> toJson() {
@@ -51,7 +49,6 @@ class ShopOwnerRegisterReqModel {
     data["shop_pincode"] = shopPincode;
     data["shop_owner_upi_id"] = shopUpiId;
     data["shop_owner_fcm_token"] = fcmToken;
-    data["shop_pincode"]=pincode;
     return data;
   }
 }

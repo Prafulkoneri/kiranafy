@@ -13,7 +13,7 @@ import 'package:local_supper_market/screen/customer/home/view/category.dart';
 import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
 import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
 import 'package:local_supper_market/screen/customer/home/view/offers.dart';
-import 'package:local_supper_market/screen/customer/near_shops/all_near_shops.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops.dart';
 
 import 'package:provider/provider.dart';
 

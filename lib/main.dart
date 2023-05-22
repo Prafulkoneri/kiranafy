@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_v
 import 'package:local_supper_market/screen/customer/customerList.dart';
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
@@ -85,10 +86,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CustomProductController()),
         ChangeNotifierProvider(create: (_) => SSelectedProductsController()),
         ChangeNotifierProvider(create: (_) => UpdateProfileController()),
-        // ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
         ChangeNotifierProvider(create: (_) => FavouritesController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
+        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
       ],
       child: MyApp(),
     ),
@@ -96,26 +96,26 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-
   const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
-var fcmToken;
-class _MyAppState extends State<MyApp> {
 
+var fcmToken;
+
+class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    FirebaseMessaging.instance.getToken().then((newToken){
-      fcmToken=newToken;
+    FirebaseMessaging.instance.getToken().then((newToken) {
+      fcmToken = newToken;
       print("fcmToken${fcmToken}");
     });
   }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,

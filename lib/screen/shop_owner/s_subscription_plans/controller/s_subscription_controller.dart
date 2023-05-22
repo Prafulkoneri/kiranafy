@@ -18,6 +18,10 @@ class SSubscriptionController extends ChangeNotifier {
   List radioValue = [];
   String radioGrpValue = "0";
   String selectedPlanId = "0";
+  bool oneTimeShop=false;
+  bool productPrice=false;
+  bool shopDigital=false;
+  bool primeCatchy=false;
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
@@ -28,6 +32,23 @@ class SSubscriptionController extends ChangeNotifier {
   //       context, MaterialPageRoute(builder: (context) => SMainScreenView()));
   // }
 
+void  onTimeShopSetup(){
+  oneTimeShop=!oneTimeShop;
+  notifyListeners();
+}
+
+void onProductPrice(){
+  productPrice=!productPrice;
+  notifyListeners();
+}
+  void onShopDigital(){
+    shopDigital=!shopDigital;
+    notifyListeners();
+  }
+  void onPrimeCatchy(){
+    primeCatchy=!primeCatchy;
+    notifyListeners();
+  }
   Future<void> getSubscriptionPlanDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -70,33 +91,35 @@ class SSubscriptionController extends ChangeNotifier {
       );
 
   Future<void> buySubscriptionPlan(context) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    shopBuySubscriptionsRepo
-        .buySubScription(
-            buySubscriptionRequestModel, pref.getString("successToken"))
-        .then((response) {
-      final result =
-          BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
-      print(response.statusCode);
-      if (response.statusCode == 200) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SMainScreenView()));
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => SMainScreenView()));
+    // SharedPreferences pref = await SharedPreferences.getInstance();
+    // shopBuySubscriptionsRepo
+    //     .buySubScription(
+    //         buySubscriptionRequestModel, pref.getString("successToken"))
+    //     .then((response) {
+    //   final result =
+    //       BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
+    //   print(response.statusCode);
+    //   if (response.statusCode == 200) {
+    //     Navigator.push(context,
+    //         MaterialPageRoute(builder: (context) => SMainScreenView()));
+    //     notifyListeners();
+    //   } else {
+    //     Utils.showPrimarySnackbar(context, result.message,
+    //         type: SnackType.error);
+    //   }
+    // }).onError((error, stackTrace) {
+    //   Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    // }).catchError(
+    //   (Object e) {
+    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+    //   },
+    //   test: (Object e) {
+    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+    //     return false;
+    //   },
+    // );
   }
 
   void onRadioBtnChanged(value, id) {

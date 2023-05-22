@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/shop_profile.dart';
-
+import 'package:provider/provider.dart';
 class AllNearShops extends StatefulWidget {
   const AllNearShops({super.key});
 
@@ -17,11 +19,18 @@ class AllNearShops extends StatefulWidget {
 
 class _AllNearShopsState extends State<AllNearShops> {
   final TextEditingController _searchController = TextEditingController();
-
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<AllNearShopsAsPerPincode>().initState(context);
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    final watch=context.watch<AllNearShopsAsPerPincode>();
+    final read=context.read<AllNearShopsAsPerPincode>();
     return Scaffold(
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +119,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                 ),
                 Padding(
                   padding:
-                      EdgeInsets.only(top: 20.w, left: 19.0.w, bottom: 15.w),
+                  EdgeInsets.only(top: 20.w, left: 19.0.w, bottom: 15.w),
                   child: Text(
                     "Nearby Shops",
                     style: GoogleFonts.roboto(
@@ -128,88 +137,78 @@ class _AllNearShopsState extends State<AllNearShops> {
                     child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: List.generate(
-                            5,
-                            (index) => GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ShopProfile()),
-                                    );
-                                  },
-                                  child: Stack(
+                            watch.nearByShopList?.length??0,
+                                (index) {
+                              final element=watch.nearByShopList?[index];
+                                   return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ShopProfile()),
+                                );
+                              },
+                              child: Stack(
+                                children: [
+                                  Row(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            height: 120.h,
-                                            width: 200.w,
-                                            margin: EdgeInsets.only(
-                                                left: index == 0 ? 19.w : 0,
-                                                right: index == 2 ? 19.w : 5.w),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(15.w),
-                                                image: DecorationImage(
-                                                    scale: 1.0,
-                                                    image: AssetImage(
-                                                        'assets/images/nearshop2.png'),
-                                                    fit: BoxFit.fill)),
-                                            child: Padding(
-                                              padding: EdgeInsets.all(10.h),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                      Container(
+                                        height: 120.h,
+                                        width: 200.w,
+                                        margin: EdgeInsets.only(
+                                            left: index == 0 ? 19.w : 0,
+                                            right: index == 2 ? 19.w : 5.w),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                            BorderRadius.circular(15.w),
+                                            image: DecorationImage(
+                                                scale: 1.0,
+                                                image: AssetImage(
+                                                    'assets/images/nearshop2.png'),
+                                                fit: BoxFit.fill)),
+                                        child:Padding(
+                                          padding: EdgeInsets.all(10.h),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                            children: [
+Container(),
+                                              Column(
                                                 children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: () {},
-                                                        child: SvgPicture.asset(
-                                                          "assets/images/favorite.svg",
-                                                          width: 26.w,
-                                                          height: 14.h,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      Text(
-                                                          "New Balaji Trading Co..",
-                                                          style: GoogleFonts.roboto(
-                                                              textStyle: TextStyle(
-                                                                  color: Colors.white,
-                                                                  // letterSpacing: .5,
-                                                                  fontSize: 13.sp,
-                                                                  fontWeight: FontWeight.w600))),
-                                                      // ),
-                                                      Text("Vishrantwadi, Pune",
-                                                          style: GoogleFonts.roboto(
-                                                              textStyle: TextStyle(
-                                                                  color: Colors.white,
-                                                                  // letterSpacing: .5,
-                                                                  fontSize: 12.sp,
-                                                                  // height: 10,
-                                                                  fontWeight: FontWeight.w400))),
-                                                    ],
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                  ),
+                                                  Text(
+                                                      "${element?.shopName}",
+                                                      style: GoogleFonts.roboto(
+                                                          textStyle: TextStyle(
+                                                              color: Colors.white,
+                                                              // letterSpacing: .5,
+                                                              fontSize: 13.sp,
+                                                              fontWeight: FontWeight.w600))),
+                                                  // ),
+                                                  Text("${element?.areaName}",
+                                                      style: GoogleFonts.roboto(
+                                                          textStyle: TextStyle(
+                                                              color: Colors.white,
+                                                              // letterSpacing: .5,
+                                                              fontSize: 12.sp,
+                                                              // height: 10,
+                                                              fontWeight: FontWeight.w400))),
                                                 ],
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .start,
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
+
                                       ),
-                                      Positioned(
-                                          child: Container(
+                                    ],
+                                  ),
+                                  Positioned(
+                                      child: Container(
                                         margin: EdgeInsets.only(
                                             left: index == 0 ? 19.w : 0,
                                             right: index == 2 ? 19.w : 5.w),
@@ -217,7 +216,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                                         width: 200.w,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(13.w),
+                                            BorderRadius.circular(13.w),
                                             gradient: LinearGradient(
                                               begin: Alignment.topCenter,
                                               end: Alignment.bottomCenter,
@@ -231,13 +230,36 @@ class _AllNearShopsState extends State<AllNearShops> {
                                               ],
                                             )),
                                       )),
-                                    ],
+                                  Positioned(
+                                    right:12.w,
+                                      top:8.w,
+                                      child: InkWell(
+                                        onTap: () {
+                                          watch.fav[index]?
+                                         read.removeFavList(context,element?.id,index):read.updateFavList(context,element?.id,index);
+                                        },
+                                        child:
+                                        watch.fav[index]?
+                                        SvgPicture.asset(
+                                          "assets/icons/fav_selected.svg",
+                                          width: 26.w,
+                                          height: 14.h,
+                                        )
+                                            :
+                                        SvgPicture.asset(
+                                          "assets/images/favorite.svg",
+                                          width: 26.w,
+                                          height: 14.h,
+                                        ),
+                                      ),
                                   ),
-                                )))),
+                                ],
+                              ),
+                            );}))),
                 SizedBox(
                   // height: 400.h,
                   child: ListView.builder(
-                      // scrollDirection: Axis.vertical,p
+                    // scrollDirection: Axis.vertical,p
                       physics: NeverScrollableScrollPhysics(),
                       // physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
@@ -265,7 +287,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15.w),
                                       image: DecorationImage(
-                                          // scale: 1.0,
+                                        // scale: 1.0,
                                           image: AssetImage(
                                               'assets/images/nearshop2.png'),
                                           fit: BoxFit.fill)),
@@ -273,13 +295,13 @@ class _AllNearShopsState extends State<AllNearShops> {
                                     padding: EdgeInsets.all(10.h),
                                     child: Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.end,
+                                          MainAxisAlignment.end,
                                           children: [
                                             InkWell(
                                               onTap: () {},
@@ -302,14 +324,14 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                             // letterSpacing: .5,
                                                             fontSize: 15.sp,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .w600))),
+                                                            FontWeight
+                                                                .w600))),
                                               ],
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              MainAxisAlignment
+                                                  .spaceBetween,
                                               children: [
                                                 Row(
                                                   children: [
@@ -338,14 +360,14 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                   decoration: BoxDecoration(
                                                     color: yellow,
                                                     borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                15)),
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            15)),
                                                   ),
                                                   child: Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                    MainAxisAlignment
+                                                        .center,
                                                     children: [
                                                       SvgPicture.asset(
                                                         "assets/images/star.svg",
@@ -358,14 +380,14 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                       Text(
                                                         "4.5",
                                                         style:
-                                                            GoogleFonts.dmSans(
+                                                        GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
                                                               color: Black,
                                                               letterSpacing: .5,
                                                               fontSize: 12.sp,
                                                               fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
+                                                              FontWeight
+                                                                  .w400),
                                                         ),
                                                       ),
                                                     ],
@@ -391,7 +413,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                                     width: 352.w,
                                     decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(13.w),
+                                        BorderRadius.circular(13.w),
                                         gradient: LinearGradient(
                                           begin: Alignment.topCenter,
                                           end: Alignment.bottomCenter,

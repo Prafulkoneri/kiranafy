@@ -110,11 +110,14 @@ class Endpoint {
   static const String allCategories =
       "${baseUrl}lsm-customer-category-list-as-per-pincode";
   ////Customer Add Fvrt Shops
-  static const String customerfvrtshops =
+  static const String customerAddFvrtshops =
       "${baseUrl}lsm-customer-add-shop-to-favourite";
+  ////Customer Remove Fvrt Shops
+  static const String customerRemoveFvrtshops =
+      "${baseUrl}lsm-customer-remove-shop-from-favourite";
   ////Customer All Favrt Shops
   static const String customersAllfvrtShopd =
-      "${baseUrl}lsm-customer-add-shop-to-favourite";
+      "${baseUrl}lsm-customer-get-all-favourite-shops";
 
   ///Remove Fvrt Shops
   static const String removeFrvtShops =

@@ -57,8 +57,6 @@ void onLogout(context)async{
 }
 
   void onFavouritesClicked(context)async{
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    pref.clear();
     Navigator.push(context,MaterialPageRoute(builder: (context)=>CFavouritesView()));
   }
 

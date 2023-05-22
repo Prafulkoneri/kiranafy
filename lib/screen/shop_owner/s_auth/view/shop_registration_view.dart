@@ -263,8 +263,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SDropDownField(
                         onChanged: (value) async {
                           print(value);
-                          read.onPincodeSelected(context);
-                          read.onAreaSelected(value);
+                          read.onPincodeSelected(value);
                         },
                         items: watch.pincodeList
                             ?.map(

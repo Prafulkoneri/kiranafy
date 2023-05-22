@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
-import '../../near_shops/all_near_shops.dart';
+import '../../near_shops/view/all_near_shops.dart';
 
 class MyDeliveryAddress extends StatefulWidget {
   const MyDeliveryAddress({super.key});
