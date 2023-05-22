@@ -259,11 +259,11 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: SDropDownField(
-                      // onChanged: (value) async {
-                      //   await read.onCountrySelected(value);
-                      //   await read.getStateList(context);
-                      // },
+                    child: CDropDownField(
+                      onChanged: (value) async {
+                        await read.onCountrySelected(value);
+                        // await read.getStateList(context);
+                      },
                       items: watch.countryList
                           ?.map((item) => DropdownMenuItem<String>(
                                 value: item.id.toString(),
@@ -276,6 +276,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               ))
                           .toList(),
                       hint: "Country",
+                      titleHeader: "Country",
                     ),
                     //      CDropDownField(
                     //   hint: "Country",
