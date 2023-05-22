@@ -76,7 +76,8 @@ class SShopConfigurationController extends ChangeNotifier {
 
   ////// Shop Configuration start
   Future<void> getShopConfiguration(context) async {
-    shopConfigRepo.shopCongurationDetails().then((response) {
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    shopConfigRepo.shopCongurationDetails(pref.getString("successToken")).then((response) {
       final result = ShopConfigurationResponse.fromJson(
         jsonDecode(response.body),
       );

@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopEditProfileDetailController extends ChangeNotifier {
@@ -31,6 +32,10 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   List<File> imageFileList = [];
   List<ShopBannerImageData>? bannerImageList;
   File fileImage1=File("");
+  String image1="";
+  String image2="";
+  String image3="";
+  String image4="";
   File fileImage2=File("");
   File fileImage3=File("");
   File fileImage4=File("");
@@ -64,7 +69,9 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     if (pickedFile != null) {
       networkImage1="";
       fileImage1=File(pickedFile.path);
+      final bytes = await compressFile(fileImage1);
 
+      image1= base64Encode(bytes as List<int>);
     }
 
     notifyListeners();
@@ -202,12 +209,15 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         shopOwnerEmail: EmailIdController.text,
         shopOwnerMobileNumber: (PhoneNumberController.text),
         shopPincode: (PinCodeController.text),
-        shopBannerImages:"",
+        shopBannerImages:image1,
       );
+
+
 
   Future<void> UpdateProfile(context) async {
     shopUpdateProfileRepo.UpdateProfile(shopUpdateProfileReqModel)
         .then((response) {
+          print(response.body);
       final result =
           ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 

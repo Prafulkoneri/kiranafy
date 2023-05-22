@@ -81,6 +81,14 @@ class Endpoint {
   static const String deleteAdminProduct =
       "${baseUrl}lsm-shop-owner-delete-product-of-category";
 
+
+// submit custom product
+  static const String submitCustomProduct =
+      "${baseUrl}lsm-shop-owner-add-custom-product";
+
+
+
+
 ///////////////////////////////Customer Screen Apis///////////////////
 //OnBoarding Screen
   static const String onBoardingScreen =
@@ -90,6 +98,7 @@ class Endpoint {
   static const String mobileNumberChecks =
       "${baseUrl}lsm-customer-mobile-number-exists";
 
-  static const String submitCustomProduct =
-      "${baseUrl}lsm-shop-owner-add-custom-product";
+  ////Customer Sign Up
+  static const String customerSignup =
+      "${baseUrl}lsm-customer-customer-signup";
 }

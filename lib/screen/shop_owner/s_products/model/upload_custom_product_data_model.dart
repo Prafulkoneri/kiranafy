@@ -9,14 +9,14 @@ String ? showUnderSeasonalProduct;
 String ? showUnderRecommendedProduct;
 String ? showUnderFullfillCravings;
 String ? productImagePath;
-List ? unitID;
-List ? weight;
-List ? mrpPrice;
-List ? offerPrice;
-List ? status;
-List ? unitBasedProductImage1;
-List ? unitBasedProductImage2;
-List ? unitBasedProductImage3;
+String ? unitID;
+String ? weight;
+String ? mrpPrice;
+String ? offerPrice;
+String ? status;
+String ? unitBasedProductImage1;
+String ? unitBasedProductImage2;
+String ? unitBasedProductImage3;
 UploadCustomProductReqModel({
   this.status,this.categoryId,this.brandId,this.mrpPrice,this.offerPrice,this.productDescription,this.productImagePath,this.productName,this.showUnderFullfillCravings,this.showUnderRecommendedProduct,this.showUnderSeasonalProduct,this.taxId,this.totalRows,this.unitBasedProductImage1,this.unitBasedProductImage2,this.unitBasedProductImage3,this.unitID,this.weight
 });
@@ -31,16 +31,31 @@ Map<String,dynamic> toJson(){
   data["show_under_seasonal_products"]=showUnderSeasonalProduct;
   data["show_under_recommanded_products"]=showUnderRecommendedProduct;
   data["show_under_fullfill_your_cravings"]=showUnderFullfillCravings;
-  data["product_image_path"]=productImagePath;
+  // data["product_image_path"]=productImagePath;
   data["unit_id_0"]=unitID;
   data["weight_0"]=weight;
   data["mrp_price_0"]=mrpPrice;
   data["offer_price_0"]=offerPrice;
   data["status_0"]=status;
-  data["unit_based_product_image_1_path_0"]=unitBasedProductImage1;
-  data["unit_based_product_image_2_path_0"]=unitBasedProductImage2;
-  data["unit_based_product_image_3_path_0"]=unitBasedProductImage3;
+  // data["unit_based_product_image_1_path_0"]=unitBasedProductImage1;
+  // data["unit_based_product_image_2_path_0"]=unitBasedProductImage2;
+  // data["unit_based_product_image_3_path_0"]=unitBasedProductImage3;
   return data;
 }
 
+}
+
+class UploadCustomProductResModel {
+  int? status;
+  String? message;
+
+  UploadCustomProductResModel({
+    this.status,
+    this.message,
+  });
+
+  UploadCustomProductResModel.fromJson(Map<String,dynamic>json){
+    status=json["status"];
+    message=json["message"];
+  }
 }

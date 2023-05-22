@@ -47,7 +47,6 @@ class ShopUpdateProfileReqModel {
     data["shop_address"] = shopAddress;
     data["shop_pincode"] = shopPincode;
     data["shop_banner_image_path"] = shopBannerImages;
-
     return data;
   }
 }
