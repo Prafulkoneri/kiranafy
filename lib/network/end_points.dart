@@ -128,4 +128,7 @@ class Endpoint {
 
 //////////Banner
   static const String BannerAds = "${baseUrl}lsm-customer-get-banner-ads";
+
+  ///Dash Board
+  static const String ShopDashBoard = "${baseUrl}lsm-shop-owner-dashboard";
 }

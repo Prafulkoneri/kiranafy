@@ -41,9 +41,7 @@ class UpdateProfileController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     editCustomerProfileRepo
-        .editCustomerProfileRepo(
-            // pref.getString("successToken")
-            )
+        .editCustomerProfileRepo(pref.getString("successToken"))
         .then((response) {
       final result = CustomerEditProfileDetails.fromJson(
         jsonDecode(response.body),
@@ -82,7 +80,7 @@ class UpdateProfileController extends ChangeNotifier {
 ////////////Country
   Future<void> onCountrySelected(value) async {
     countryId = int.parse(value.toString());
-    print("nhjvwuriuiwbytiuywi");
+    // print("nhjvwuriuiwbytiuywi");
     print(countryId);
     notifyListeners();
   }
@@ -128,6 +126,7 @@ class UpdateProfileController extends ChangeNotifier {
       final result = GetStateListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         stateList = result.stateData;
+        print("${stateList},uiyjjjjbwvymhbwnhhmwyhmbvhmwhvbh");
         if (result.stateData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No State Found",
               type: SnackType.error);

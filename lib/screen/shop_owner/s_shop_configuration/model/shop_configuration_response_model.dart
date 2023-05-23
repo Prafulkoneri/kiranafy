@@ -2,6 +2,7 @@ class ShopConfigurationResponse {
   int? status;
   String? message;
   Data? data;
+  String? upiid;
 
   ShopConfigurationResponse({
     required this.status,
@@ -13,6 +14,7 @@ class ShopConfigurationResponse {
     message = json["message"];
 
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    upiid = json["upi_id"];
   }
 }
 
@@ -33,7 +35,6 @@ class Data {
   String? shopOwnerSlot12To3;
   String? shopOwnerSlot3To6;
   String? shopOwnerSlot6To9;
-  String? shopOwnerUpiId;
 
   Data({
     required this.shopOwnerPaymentQrCodeImagePath,
@@ -52,7 +53,6 @@ class Data {
     required this.shopOwnerSlot12To3,
     required this.shopOwnerSlot3To6,
     required this.shopOwnerSlot6To9,
-    required this.shopOwnerUpiId,
   });
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -79,6 +79,5 @@ class Data {
     shopOwnerSlot12To3 = json['shop_owner_slot_12_to_3'];
     shopOwnerSlot3To6 = json['shop_owner_slot_3_to_6'];
     shopOwnerSlot6To9 = json['shop_owner_slot_6_to_9'];
-    shopOwnerUpiId = json['shop_owner_upi_id'];
   }
 }

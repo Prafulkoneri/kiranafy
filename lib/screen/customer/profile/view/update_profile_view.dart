@@ -262,7 +262,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                     child: CDropDownField(
                       onChanged: (value) async {
                         await read.onCountrySelected(value);
-                        // await read.getStateList(context);
+                        await read.getStateList(context);
                       },
                       items: watch.countryList
                           ?.map((item) => DropdownMenuItem<String>(
@@ -286,6 +286,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       child: CDropDownField(
                     onChanged: (value) async {
                       await read.onStateSelected(value);
+
                       // await read.getCityList(context);
                     },
                     items: watch.stateList

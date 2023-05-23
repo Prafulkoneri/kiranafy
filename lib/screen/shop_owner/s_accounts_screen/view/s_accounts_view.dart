@@ -9,10 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controll
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
-
 import 'package:provider/provider.dart';
-
-
 
 class SAccountScreenView extends StatefulWidget {
   const SAccountScreenView({super.key});
@@ -24,8 +21,8 @@ class SAccountScreenView extends StatefulWidget {
 class _SAccountScreenViewState extends State<SAccountScreenView> {
   @override
   Widget build(BuildContext context) {
- final read=context.read<SAccountScreenController>();
- final watch=context.watch<SAccountScreenController>();
+    final read = context.read<SAccountScreenController>();
+    final watch = context.watch<SAccountScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -43,16 +40,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
               decoration: BoxDecoration(
                 // color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                // border: Border.all(
-                //     color: Colors.black.withOpacity(0.07), width: 1),
 
-                // gradient: LinearGradient(
-                //     end: Alignment.topCenter,
-                //     begin: Alignment.bottomCenter,
-                //     colors: <Color>[
-                //       kappbar.withOpacity(0.5),
-                //       kstatusbar.withOpacity(0.99),
-                //     ]),
                 gradient: LinearGradient(
                     end: Alignment.topCenter,
                     begin: Alignment.bottomCenter,
@@ -101,7 +89,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   read.onEditBtnClicked(context);
                                 },
                                 child: SvgPicture.asset(
@@ -132,8 +120,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                 'designtest@gmail.com',
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
-                                    // decoration:
-                                    // TextDecoration.lineThrough,
+                                      // decoration:
+                                      // TextDecoration.lineThrough,
                                       color: Black,
                                       // letterSpacing:
                                       //     .5,
@@ -181,7 +169,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             GestureDetector(
               onTap: () {
-   read.onShopConfigurationClicked(context);
+                read.onShopConfigurationClicked(context);
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w),
@@ -222,9 +210,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             ////////////////////////
             GestureDetector(
-              onTap: () {
-
-              },
+              onTap: () {},
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
@@ -264,9 +250,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             ///////////////////////
             GestureDetector(
-              onTap: () {
-
-              },
+              onTap: () {},
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
@@ -343,9 +327,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             /////////////////////
             GestureDetector(
-              onTap: () {
-
-              },
+              onTap: () {},
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
@@ -617,8 +599,6 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   SvgPicture.asset(
                     'assets/icons/signout.svg',
-                    // width: 14.w,
-                    // height: 13.h,
                   ),
                   SizedBox(
                     width: 18.w,

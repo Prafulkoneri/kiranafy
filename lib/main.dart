@@ -11,7 +11,6 @@ import 'package:local_supper_market/screen/customer/auth/controller/customer_sig
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
@@ -41,6 +40,7 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
@@ -79,7 +79,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => HomeScreenController()),
         ChangeNotifierProvider(create: (_) => FavouritesController()),
         ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
-        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopEditProfileDetailController()),
       ],
       child: MyApp(),
     ),
