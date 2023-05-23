@@ -262,7 +262,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "120",
+                          "0",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
                                 color: Colors.white,
@@ -303,7 +303,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "200",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -366,7 +366,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "10",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -406,7 +406,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "9",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -595,7 +595,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "25",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -641,7 +641,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "50",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -712,7 +712,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "3000",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -743,24 +743,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 child: Container(
                   padding: EdgeInsets.only(
                       left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
-                  // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                  // height: 50.h,/
                   decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      //     end: Alignment.topCenter,
-                      //     begin: Alignment.bottomCenter,
-                      //     colors: <Color>[
-                      //       green.withOpacity(0.55),
-                      //       green1.withOpacity(0.98),
-                      //     ]),
-                      color: Custlogin,
-                      // border: Border.all(width: 1, color: Black),
-                      borderRadius: BorderRadius.circular(8)),
-
+                      color: Custlogin, borderRadius: BorderRadius.circular(8)),
                   child: Column(
                     children: [
                       Text(
-                        "200",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -791,24 +779,14 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 child: Container(
                   padding: EdgeInsets.only(
                       left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
-                  // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                  // height: 50.h,/
                   decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      //     end: Alignment.topCenter,
-                      //     begin: Alignment.bottomCenter,
-                      //     colors: <Color>[
-                      //       green.withOpacity(0.55),
-                      //       green1.withOpacity(0.98),
-                      //     ]),
                       color: Custlogin,
                       // border: Border.all(width: 1, color: Black),
                       borderRadius: BorderRadius.circular(8)),
-
                   child: Column(
                     children: [
                       Text(
-                        "370",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -853,13 +831,6 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      //     end: Alignment.topCenter,
-                      //     begin: Alignment.bottomCenter,
-                      //     colors: <Color>[
-                      //       green.withOpacity(0.55),
-                      //       green1.withOpacity(0.98),
-                      //     ]),
                       color: Custlogin,
                       // border: Border.all(width: 1, color: Black),
                       borderRadius: BorderRadius.circular(8)),
@@ -867,7 +838,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "3000",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -915,7 +886,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "200",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -962,7 +933,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "370",
+                        "0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -1024,7 +995,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "INR 2000",
+                        "INR 0",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
@@ -1065,7 +1036,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "INR 3500",
+                        "INR 0",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
@@ -1146,7 +1117,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                         ),
                       ),
                       Text(
-                        "INR 3,00,500",
+                        "INR 0",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -1194,7 +1165,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "INR 10,000",
+                        "INR 0",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
@@ -1242,7 +1213,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   child: Column(
                     children: [
                       Text(
-                        "INR 15,000",
+                        "INR 0",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(

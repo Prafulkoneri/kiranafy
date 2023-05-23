@@ -34,6 +34,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: () {},
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {

@@ -215,7 +215,7 @@ class SShopConfigurationController extends ChangeNotifier {
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
-        Utils.showPrimarySnackbar(context, result.message,
+        Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         notifyListeners();
       } else {

@@ -28,9 +28,9 @@ class _ShopProfileState extends State<ShopProfile> {
   PageController? _pageController;
 
   List<String> images = [
-    "assets/images/property1.png",
-    "assets/images/property1.png",
-    "assets/images/property1.png",
+    "assets/images/customerBanner.png",
+    "assets/images/customerBanner.png",
+    "assets/images/customerBanner.png",
   ];
   @override
   void initState() {
