@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
@@ -42,136 +43,6 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Container(
-            //   margin: EdgeInsets.only(
-            //       left: 14.w, right: 14.w, top: 20.w, bottom: 24.w),
-            //   decoration: BoxDecoration(
-            //     // color: Colors.white,
-            //     borderRadius: BorderRadius.circular(10),
-
-            //     gradient: LinearGradient(
-            //         end: Alignment.topCenter,
-            //         begin: Alignment.bottomCenter,
-            //         colors: <Color>[
-            //           kappbar.withOpacity(0.55),
-            //           kstatusbar.withOpacity(0.98),
-            //         ]),
-            //   ),
-            //   // height: 100.h,
-            //   // width: 363.w,
-            //   child: Padding(
-            //     padding: EdgeInsets.only(
-            //         left: 10.w, right: 20.w, top: 10.w, bottom: 10),
-            //     child: Row(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         Container(
-            //           child: Image.asset(
-            //             'assets/images/profile1.png',
-            //             width: 80.w,
-            //             height: 80.h,
-            //           ),
-            //         ),
-            //         SizedBox(
-            //           width: 17.w,
-            //         ),
-            //         Expanded(
-            //           child: Column(
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             mainAxisAlignment: MainAxisAlignment.start,
-            //             children: [
-            //               SizedBox(
-            //                 height: 5.h,
-            //               ),
-            //               Row(
-            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                 children: [
-            // Flexible(
-            //   child: Text(
-            //     "${watch.name}",
-            //     // "Rachel Green",
-            //     style: GoogleFonts.dmSans(
-            //       textStyle: TextStyle(
-            //           color: Black1,
-            //           // letterSpacing: .5,
-            //           fontSize: 18.sp,
-            //           fontWeight: FontWeight.w700),
-            //     ),
-            //   ),
-            // ),
-            //                   GestureDetector(
-            //                     onTap: () {
-            //                       read.onEditBtnClicked(context);
-            //                     },
-            //                     child: SvgPicture.asset(
-            //                       'assets/icons/edit.svg',
-            //                       width: 14.w,
-            //                       height: 14.h,
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //               SizedBox(
-            //                 height: 7.2.h,
-            //               ),
-            //               Row(
-            //                 // crossAxisAlignment:
-            //                 //     CrossAxisAlignment.start,
-            //                 // mainAxisAlignment: MainAxisAlignment.end,
-            //                 children: [
-            //                   SvgPicture.asset(
-            //                     'assets/icons/email.svg',
-            //                     width: 17.w,
-            //                     height: 13.h,
-            //                   ),
-            //                   SizedBox(
-            //                     width: 10.w,
-            //                   ),
-            //                   Text(
-            //                     "${watch.email}",
-            //                     style: GoogleFonts.dmSans(
-            //                       textStyle: TextStyle(
-            //                           // decoration:
-            //                           // TextDecoration.lineThrough,
-            //                           color: Black,
-            //                           // letterSpacing:
-            //                           //     .5,
-            //                           fontSize: 15.sp,
-            //                           fontWeight: FontWeight.w400),
-            //                     ),
-            //                   ),
-            //                 ],
-            //                 // ),
-            //               ),
-            //               SizedBox(
-            //                 height: 11.h,
-            //               ),
-            //               Row(
-            //                 children: [
-            //                   SvgPicture.asset(
-            //                     'assets/icons/call.svg',
-            //                   ),
-            //                   SizedBox(
-            //                     width: 10.w,
-            //                   ),
-            //                   Text(
-            //                     "${watch.number}",
-            //                     style: GoogleFonts.dmSans(
-            //                       textStyle: TextStyle(
-            //                           color: Black,
-            //                           fontSize: 15.sp,
-            //                           fontWeight: FontWeight.w400),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             ],
-            //           ),
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            // ),
             Container(
               margin: EdgeInsets.only(
                   left: 10.w, top: 10.w, right: 20.w, bottom: 0.w),
@@ -226,10 +97,19 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                       ),
                                     ),
                                   ),
-                                  SvgPicture.asset(
-                                    'assets/icons/edit.svg',
-                                    width: 14.w,
-                                    height: 14.h,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SEditProfileView()));
+                                    },
+                                    child: SvgPicture.asset(
+                                      'assets/icons/edit.svg',
+                                      width: 14.w,
+                                      height: 14.h,
+                                    ),
                                   ),
                                 ],
                               ),

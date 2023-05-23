@@ -281,6 +281,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      readOnly: true,
                       hintText: "1 to 500", hintFontSize: 15.sp,
                       // hint: "1 to 500",
                       // hintSize: 15.sp,
@@ -335,6 +336,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      readOnly: true,
                       hintText: "500 to 1200",
                       hintFontSize: 15.sp,
                     ),
@@ -388,6 +390,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      readOnly: true,
                       hintText: "1200 to 2500",
                       hintFontSize: 15.sp,
                     ),
@@ -441,6 +444,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      readOnly: true,
                       hintText: "2500 to 5000",
                       hintFontSize: 15.sp,
                     ),
