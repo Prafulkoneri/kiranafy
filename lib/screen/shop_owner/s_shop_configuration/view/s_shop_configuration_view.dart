@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,13 +31,14 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
   Widget build(BuildContext context) {
     final watch = context.watch<SShopConfigurationController>();
     final read = context.read<SShopConfigurationController>();
+    final readMainScreen=context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: (){
-            Navigator.pop(context);
+            readMainScreen.onNavigation(4,SAccountScreenView(), context);
           },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -284,6 +287,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      readOnly: true,
                       hintText: "1 to 500", hintFontSize: 15.sp,
                       // hint: "1 to 500",
                       // hintSize: 15.sp,
@@ -338,6 +342,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      readOnly: true,
                       hintText: "500 to 1200",
                       hintFontSize: 15.sp,
                     ),
@@ -391,6 +396,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      readOnly: true,
                       hintText: "1200 to 2500",
                       hintFontSize: 15.sp,
                     ),
@@ -444,6 +450,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      readOnly: true,
                       hintText: "2500 to 5000",
                       hintFontSize: 15.sp,
                     ),

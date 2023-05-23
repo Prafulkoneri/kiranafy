@@ -11,7 +11,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
@@ -48,13 +50,14 @@ class _SEditProfileViewState extends State<SEditProfileView> {
   Widget build(BuildContext context) {
     final read = context.read<ShopEditProfileDetailController>();
     final watch = context.watch<ShopEditProfileDetailController>();
+    final readMainScreen=context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: (){
-            Navigator.pop(context);
+            readMainScreen.onNavigation(4,SAccountScreenView(), context);
           },
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),

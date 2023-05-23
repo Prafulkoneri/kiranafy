@@ -95,12 +95,8 @@ class _ShopProfileState extends State<ShopProfile> {
                   child: const Carousel(
                     images: [
                       AssetImage(
-                        "assets/images/property1.png",
+                        "assets/images/shop_image.png",
                       ),
-                      AssetImage(
-                        "assets/images/property2.png",
-                      ),
-
                       // ExactAssetImage("images/image-carousel.jpeg"),
                     ],
                     autoplay: true,
