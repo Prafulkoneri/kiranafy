@@ -98,15 +98,14 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     width: ScreenUtil().screenWidth,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Flexible(
                           child: Text(
-                            "New Balaji Trading Company",
+                            "${watch.shopName}",
+                            // "New Balaji Trading Company",
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
                                   color: Colors.white,
-                                  // letterSpacing: .5,
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -177,23 +176,45 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     SizedBox(
                       width: 9.w,
                     ),
-                    Text(
-                      "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            // letterSpacing: .5,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${watch.address}",
+                          // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                // letterSpacing: .5,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        Text(
+                          "${watch.pincode}",
+                          // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                // letterSpacing: .5,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
                 Container(
-                  child: SvgPicture.asset(
-                    "assets/icons/shop_edit.svg",
-                    // width: 30.w,
-                    // height: 30.w,
+                  child: GestureDetector(
+                    onTap: () {
+                      read.onEditBtnClicked(context);
+                    },
+                    child: SvgPicture.asset(
+                      "assets/icons/shop_edit.svg",
+                      // width: 30.w,
+                      // height: 30.w,
+                    ),
                   ),
                 )
               ],
@@ -338,12 +359,9 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   // width: 170.w,
                   padding: EdgeInsets.only(
                       left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
-                  // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                  // height: 50.h,/
+
                   decoration: BoxDecoration(
-                      color: Custlogin,
-                      // border: Border.all(width: 1, color: Black),
-                      borderRadius: BorderRadius.circular(8)),
+                      color: Custlogin, borderRadius: BorderRadius.circular(8)),
 
                   child: Column(
                     children: [
@@ -464,7 +482,9 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     child: Column(
                       children: [
                         Text(
-                          "5",
+                          "${watch.dashBoardData?.categoriesCount}",
+                          // watch.dashBoardData.categoriesCount
+                          // "5",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
                                 color: Colors.white,
@@ -515,7 +535,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     child: Column(
                       children: [
                         Text(
-                          "285",
+                          "${watch.dashBoardData?.productsCount}",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
                                 color: Colors.white,

@@ -83,10 +83,12 @@ class _AccountsState extends State<Accounts> {
                                           fontWeight: FontWeight.w800),
                                     ),
                                   ),
-                                  SvgPicture.asset(
-                                    'assets/icons/edit.svg',
-                                    width: 14.w,
-                                    height: 14.h,
+                                  GestureDetector(
+                                    child: SvgPicture.asset(
+                                      'assets/icons/edit.svg',
+                                      width: 14.w,
+                                      height: 14.h,
+                                    ),
                                   ),
                                 ],
                               ),
