@@ -26,29 +26,17 @@ class SEditProfileView extends StatefulWidget {
 }
 
 // final TextEditingController controller = TextEditingController();
-String initialCountry = 'IN';
-PhoneNumber number = PhoneNumber(isoCode: 'IN');
-String radioButtonItem = '';
-String? dropdown;
-final maxLines = 5;
+// String initialCountry = 'IN';
+// PhoneNumber number = PhoneNumber(isoCode: 'IN');
+// String radioButtonItem = '';
+// String? dropdown;
 
 final List<String> genderItems = [
   'Male',
   'Female',
 ];
 
-String? selectedValue;
-// Group Value fo
-// r Radio Button.
-int id = 1;
-
 class _SEditProfileViewState extends State<SEditProfileView> {
-  // ImagePicker picker = ImagePicker();
-
-  // late File imageFile1 = File("");
-  // late File imageFile2 = File("");
-  // late File imageFile3 = File("");
-
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

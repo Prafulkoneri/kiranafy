@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
 import 'package:provider/provider.dart';
@@ -83,10 +84,15 @@ class _AccountsState extends State<Accounts> {
                                           fontWeight: FontWeight.w800),
                                     ),
                                   ),
-                                  SvgPicture.asset(
-                                    'assets/icons/edit.svg',
-                                    width: 14.w,
-                                    height: 14.h,
+                                  GestureDetector(
+                                    onTap: (){
+                                      Navigator.push(context,MaterialPageRoute(builder: (context)=>SEditProfileView()));
+                                    },
+                                    child: SvgPicture.asset(
+                                      'assets/icons/edit.svg',
+                                      width: 14.w,
+                                      height: 14.h,
+                                    ),
                                   ),
                                 ],
                               ),
