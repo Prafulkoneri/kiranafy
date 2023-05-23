@@ -1,17 +1,16 @@
 import 'package:carousel_nullsafety/carousel_nullsafety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/widget/radio_button.dart';
+
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import 'package:provider/provider.dart';
@@ -25,13 +24,19 @@ class ShopDashBoard extends StatefulWidget {
 
 class _ShopDashBoardState extends State<ShopDashBoard> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<SDashBoardController>().initState(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final read = context.read<SDashBoardController>();
     final watch = context.watch<SDashBoardController>();
     final watchMainScreen = context.watch<SMainScreenController>();
     final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
-
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -215,13 +220,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               ),
               Expanded(
                 child: InkWell(
-                  onTap: (){
-                    PersistentNavBarNavigator.pushNewScreen(
-                      context,
-                      screen: SSCategoryListView(),
-                      withNavBar: true,
-                      pageTransitionAnimation: PageTransitionAnimation.sizeUp
-                    );
+                  onTap: () {
+                    PersistentNavBarNavigator.pushNewScreen(context,
+                        screen: SSCategoryListView(),
+                        withNavBar: true,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.sizeUp);
                   },
                   child: Container(
                     padding: EdgeInsets.only(
@@ -437,7 +441,8 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-readMainScreen.onNavigation(0,SSCategoryListView(), context);
+                    readMainScreen.onNavigation(
+                        0, SSCategoryListView(), context);
                   },
                   child: Container(
                     padding: EdgeInsets.only(
@@ -1292,10 +1297,10 @@ readMainScreen.onNavigation(0,SSCategoryListView(), context);
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              width: ScreenUtil().screenWidth/1.13.w,
+                              width: ScreenUtil().screenWidth / 1.13.w,
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "My Subscription Plan",
@@ -1305,44 +1310,48 @@ readMainScreen.onNavigation(0,SSCategoryListView(), context);
                                         fontSize: 12.sp),
                                   ),
                                   Container(
-
                                     child: GestureDetector(
-                                      onTap: (){
+                                      onTap: () {
                                         showDialog(
                                             context: context,
-                                            builder: (BuildContext
-                                            context) {
+                                            builder: (BuildContext context) {
                                               return Dialog(
-                                                child:
-                                                SingleChildScrollView(
+                                                child: SingleChildScrollView(
                                                   child: Column(
                                                     children: [
                                                       Padding(
-                                                        padding: EdgeInsets.only(
-                                                            top: 11
-                                                                .w,
-                                                            right: 14
-                                                                .w,
-                                                            left: 25
-                                                                .w),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 11.w,
+                                                                right: 14.w,
+                                                                left: 25.w),
                                                         child: Row(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
                                                           children: [
                                                             Text(
                                                                 "Advanced Plan - ₹6000",
                                                                 style:
-                                                                GoogleFonts.dmSans(
-                                                                  textStyle: TextStyle(color: Black, fontSize: 16.sp, fontWeight: FontWeight.w700),
+                                                                    GoogleFonts
+                                                                        .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      color:
+                                                                          Black,
+                                                                      fontSize:
+                                                                          16.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700),
                                                                 )),
                                                             InkWell(
-                                                              onTap:
-                                                                  () {
-                                                                Navigator.pop(context);
+                                                              onTap: () {
+                                                                Navigator.pop(
+                                                                    context);
                                                               },
-                                                              child:
-                                                              SvgPicture.asset("assets/icons/pop_delete.svg"),
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                      "assets/icons/pop_delete.svg"),
                                                             )
                                                           ],
                                                         ),
@@ -1350,45 +1359,44 @@ readMainScreen.onNavigation(0,SSCategoryListView(), context);
                                                       Divider(),
                                                       Container(
                                                         padding:
-                                                        EdgeInsets
-                                                            .only(
-                                                          left:
-                                                          23.w,
-                                                          right:
-                                                          16.w,
+                                                            EdgeInsets.only(
+                                                          left: 23.w,
+                                                          right: 16.w,
                                                         ),
-                                                        height:
-                                                        646.h,
+                                                        height: 646.h,
                                                         // width: 362.w,
-                                                        child: ListView
-                                                            .builder(
-                                                          itemCount:
-                                                          20,
+                                                        child: ListView.builder(
+                                                          itemCount: 20,
                                                           itemBuilder:
-                                                              (context,
-                                                              index) {
+                                                              (context, index) {
                                                             return Column(
                                                               children: <
                                                                   Widget>[
                                                                 Container(
                                                                   child: Row(
-                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
                                                                     // mainAxisAlignment:
                                                                     //     MainAxisAlignment.center,
                                                                     children: [
                                                                       Icon(
-                                                                        Icons.circle_rounded,
-                                                                        size: 5.w,
+                                                                        Icons
+                                                                            .circle_rounded,
+                                                                        size:
+                                                                            5.w,
                                                                       ),
                                                                       SizedBox(
-                                                                        width: 10,
+                                                                        width:
+                                                                            10,
                                                                       ),
                                                                       Text(
                                                                         // softWrap: true,
                                                                         // maxLines: 3,//
                                                                         "Ready grocery item master",
 
-                                                                        style: GoogleFonts.dmSans(
+                                                                        style: GoogleFonts
+                                                                            .dmSans(
                                                                           textStyle: TextStyle(
                                                                               color: Black1,
                                                                               height: 1.5,
@@ -1400,14 +1408,23 @@ readMainScreen.onNavigation(0,SSCategoryListView(), context);
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: EdgeInsets.only(left: 32.w, right: 32.w),
-                                                                        child: Container(
-                                                                          width: 1.w,
-                                                                          height: 35.w,
-                                                                          color: grey11,
+                                                                        padding: EdgeInsets.only(
+                                                                            left:
+                                                                                32.w,
+                                                                            right: 32.w),
+                                                                        child:
+                                                                            Container(
+                                                                          width:
+                                                                              1.w,
+                                                                          height:
+                                                                              35.w,
+                                                                          color:
+                                                                              grey11,
                                                                         ),
                                                                       ),
-                                                                      SvgPicture.asset("assets/icons/correct.svg")
+                                                                      SvgPicture
+                                                                          .asset(
+                                                                              "assets/icons/correct.svg")
                                                                     ],
                                                                   ),
                                                                 ),
@@ -1422,11 +1439,14 @@ readMainScreen.onNavigation(0,SSCategoryListView(), context);
                                               );
                                             });
                                       },
-                                      child:  Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 11.w,vertical: 4.w),
-                                        decoration:  BoxDecoration(
-                                          borderRadius: BorderRadius.circular(7.w),
-                                          color:Color(0xff000000).withOpacity(0.35),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 11.w, vertical: 4.w),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(7.w),
+                                          color: Color(0xff000000)
+                                              .withOpacity(0.35),
                                         ),
                                         child: Row(
                                           // mainAxisAlignment:
@@ -1435,20 +1455,16 @@ readMainScreen.onNavigation(0,SSCategoryListView(), context);
                                           children: [
                                             Text(
                                               'Active',
-                                              style:
-                                              GoogleFonts.dmSans(
+                                              style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
-                                                    color:
-                                                    Colors.white,
+                                                    color: Colors.white,
                                                     // letterSpacing: .5,
                                                     fontSize: 12.sp,
                                                     fontWeight:
-                                                    FontWeight
-                                                        .w400),
+                                                        FontWeight.w400),
                                               ),
                                             ), // <-- Text
                                           ],
-
                                         ),
                                       ),
                                     ),

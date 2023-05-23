@@ -237,7 +237,7 @@ Container(),
                                             )),
                                       )),
                                   Positioned(
-                                    right:12.w,
+                                    right:25.w,
                                       top:8.w,
                                       child: InkWell(
                                         onTap: () {

@@ -11,8 +11,7 @@ class EditConfigRepo {
       return await http.post(Uri.parse(Endpoint.shopconfigurationedit),
           body: reqModel.toJson(),
           headers: {
-            "Authorization":
-                "Bearer $token",
+            "Authorization": "Bearer $token",
           });
     } catch (e) {
       throw Exception(e);

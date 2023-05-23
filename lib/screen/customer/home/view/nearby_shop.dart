@@ -56,7 +56,9 @@ class _HomeCarousalState extends State<HomeCarousal> {
                             right: index == 2 ? 19.w : 5.w),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(13.w),
-                          image:  DecorationImage(
+                          image: element?.shopBannerImagePath==""?DecorationImage(
+                              image: AssetImage("assets/images/nearshop2.png"),
+                              fit: BoxFit.fill):DecorationImage(
                               image: NetworkImage("${element?.shopBannerImagePath}"),
                               fit: BoxFit.fill),
                         ),

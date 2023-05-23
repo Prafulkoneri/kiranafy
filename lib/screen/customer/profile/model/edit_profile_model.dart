@@ -1,7 +1,17 @@
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
+
 class CustomerEditProfileDetails {
   int? status;
   String? message;
   CustomerProfileDetails? customerProfileDetails;
+  List<CountryData> ? countries;
+  List<StateData> ? state;
+  List<CityData> ? city;
+  List<AreaData> ? area;
+  List ? pincode;
 
   CustomerEditProfileDetails({
     required this.status,
@@ -16,6 +26,36 @@ class CustomerEditProfileDetails {
     customerProfileDetails = json['customer_profile_details'] != null
         ? CustomerProfileDetails.fromJson(json['customer_profile_details'])
         : null;
+    if (json["countries"] != null) {
+      countries = <CountryData>[];
+      json["countries"].forEach((v) {
+        countries!.add(CountryData.fromJson(v));
+      });
+    }
+    if (json["states"] != null) {
+      state = <StateData>[];
+      json["states"].forEach((v) {
+        state!.add(StateData.fromJson(v));
+      });
+    }
+    if (json["cities"] != null) {
+      city = <CityData>[];
+      json["cities"].forEach((v) {
+        city!.add(CityData.fromJson(v));
+      });
+    }
+    if (json["areas"] != null) {
+      area = <AreaData>[];
+      json["areas"].forEach((v) {
+        area!.add(AreaData.fromJson(v));
+      });
+    }
+    if (json["pincodes"] != null) {
+      pincode = [];
+      json["pincodes"].forEach((v) {
+        pincode!.add(v);
+      });
+    }
   }
 }
 

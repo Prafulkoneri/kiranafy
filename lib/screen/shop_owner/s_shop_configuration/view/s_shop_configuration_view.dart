@@ -34,6 +34,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: (){
+            Navigator.pop(context);
+          },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
@@ -68,16 +71,48 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset("assets/icons/upload.svg"),
-                      SizedBox(
-                        height: 6.w,
-                      ),
-                      Text(
-                        'Upload QR Code',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp,
-                            color: Color(0xffB7B7B7)),
+                      GestureDetector(
+                        onTap: () {
+                          read.openGallery1();
+                        },
+                        child: watch.networkImage1 != ""
+                            ? Container(
+                                height: 70.h,
+                                width: 84.41.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(width: 1, color: grey6)),
+                                child: Image.network(
+                                  watch.networkImage1,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : watch.fileImage1.path != ""
+                                ? Center(
+                                    child: Container(
+                                      height: 112.h,
+                                      width: 310.w,
+                                      // width: ScreenUtil().screenWidth,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                              width: 1, color: grey6)),
+                                      child: Image.file(
+                                        watch.fileImage1,
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
+                                  )
+                                : Center(
+                                    child: Text(
+                                      'Upload QR Code',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14.sp,
+                                          color: Color(0xffB7B7B7)),
+                                    ),
+                                  ),
                       ),
                       SizedBox(
                         height: 20.w,

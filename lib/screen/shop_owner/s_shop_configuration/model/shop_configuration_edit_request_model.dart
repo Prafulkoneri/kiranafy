@@ -56,6 +56,7 @@ class ShopConfigRequestModel {
         shopOwnerAmount4DeliveryCharges;
     data["shop_owner_customer_pickup"] = shopOwnerCustomerPickup;
     data["shop_owner_delivery_to_customer"] = shopOwnerDeliveryToCustomer;
+    data["shop_owner_delivery_charges_free"] = shopOwnerDeliveryChargesFree;
     data["shop_owner_slot_9_to_12"] = shopOwnerSlot9To12;
     data["shop_owner_slot_12_to_3"] = shopOwnerSlot12To3;
     data["shop_owner_slot_3_to_6"] = shopOwnerSlot3To6;

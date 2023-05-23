@@ -51,6 +51,7 @@ class UpdateProfileController extends ChangeNotifier {
   String image="";
   File fileImage=File("");
   String networkImage="";
+  bool  isLoading=true;
 
   ////
   Future<void> initState(
@@ -62,6 +63,7 @@ class UpdateProfileController extends ChangeNotifier {
   }
 
   Future<void> getCustomerProfileDetails(context) async {
+    isLoading=true;
     await getCountryList(context);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -74,30 +76,35 @@ class UpdateProfileController extends ChangeNotifier {
         jsonDecode(response.body),
       );
       if (response.statusCode == 200) {
-        final CustomerProfileDetails = result.customerProfileDetails;
+        final customerProfileDetails = result.customerProfileDetails;
         print(CustomerProfileDetails);
         log("${response.body}");
-        nameController.text = CustomerProfileDetails?.customerName ?? "";
+        nameController.text = customerProfileDetails?.customerName ?? "";
         mobilrController.text =
-            CustomerProfileDetails?.customerMobileNumber.toString() ?? "";
+            customerProfileDetails?.customerMobileNumber.toString() ?? "";
         alernetMobileController.text =
-            CustomerProfileDetails?.customerAlternateMobileNumber.toString() ??
+            customerProfileDetails?.customerAlternateMobileNumber.toString() ??
                 "";
         if(alernetMobileController.text=="null"){
           alernetMobileController.text="";
         }
-        addressController.text = CustomerProfileDetails?.customerAddress ?? "";
+        addressController.text = customerProfileDetails?.customerAddress ?? "";
         dateOfBirthController.text =
-            CustomerProfileDetails?.customerDateOfBirth ?? "";
-         emailController.text=CustomerProfileDetails?.customerEmail??"";
-         radioGroupValue=CustomerProfileDetails?.customerGender??"";
-         networkImage=CustomerProfileDetails?.customerProfileImagePath??"";
-         countryId=CustomerProfileDetails?.customerCountryId??0;
-         stateId=CustomerProfileDetails?.customerStateId??0;
-         cityId=CustomerProfileDetails?.customerCityId??0;
-         areaId=CustomerProfileDetails?.customerAreaId??0;
-         pincode=CustomerProfileDetails?.customerPincode.toString()??"";
-
+            customerProfileDetails?.customerDateOfBirth ?? "";
+         emailController.text=customerProfileDetails?.customerEmail??"";
+         radioGroupValue=customerProfileDetails?.customerGender??"";
+         networkImage=customerProfileDetails?.customerProfileImagePath??"";
+         countryId=customerProfileDetails?.customerCountryId??0;
+         stateId=customerProfileDetails?.customerStateId??0;
+         cityId=customerProfileDetails?.customerCityId??0;
+         areaId=customerProfileDetails?.customerAreaId??0;
+         pincode=customerProfileDetails?.customerPincode.toString()??"";
+         countryList=result.countries;
+         stateList=result.state;
+         cityList=result.city;
+         areaList=result.area;
+        pincodeList=result.pincode;
+        isLoading=false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

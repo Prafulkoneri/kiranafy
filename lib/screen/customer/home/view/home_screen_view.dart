@@ -1,5 +1,6 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -65,7 +66,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     final read = context.read<HomeScreenController>();
     final watch = context.watch<HomeScreenController>();
     return Scaffold(
-      body: SingleChildScrollView(
+      body:SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,7 +245,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             SizedBox(
               height: 30.h,
             ),
-            Container(
+            watch.categoryList!.isNotEmpty?  Container(
               padding: EdgeInsets.only(
                 right: 19.0.w,
                 left: 19.0.w,
@@ -259,12 +260,12 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-            ),
+            ):Container(),
 
-            SizedBox(
+            watch.categoryList!.isNotEmpty?SizedBox(
               height: 15.h,
-            ),
-            ShopCategory(),
+            ):Container(),
+            watch.categoryList!.isNotEmpty? ShopCategory():Container(),
             // SizedBox(
             //   height: 20.h,
             // ),

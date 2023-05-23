@@ -29,9 +29,9 @@ class AllCategoriesResModel {
     status = json["status"];
     message = json["message"];
 
-    if (json["data"] != null) {
+    if (json["categories"] != null) {
       categories = <Category>[];
-      json["data"].forEach((v) {
+      json["categories"].forEach((v) {
         categories!.add(Category.fromJson(v));
       });
     }
@@ -57,6 +57,6 @@ class Category {
     categoryName = json["category_name"];
     categorySequence = json["category_sequence"];
     categoryImagePath = json["category_image_path"];
-    categoryImageName = json["category_image_name"];
+    categoryImageName = json["category_image_path"];
   }
 }

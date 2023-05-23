@@ -1,7 +1,7 @@
 class CustomerProfileDetailsRes {
   int? status;
   String? message;
-  Data? data;
+  CustomerData? data;
 
   CustomerProfileDetailsRes({
     required this.status,
@@ -11,11 +11,11 @@ class CustomerProfileDetailsRes {
   CustomerProfileDetailsRes.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? CustomerData.fromJson(json['data']) : null;
   }
 }
 
-class Data {
+class CustomerData {
   int? id;
   String? customerName;
   String? customerEmail;
@@ -24,7 +24,7 @@ class Data {
   String? customerProfileImagePath;
   String? customerProfileImageName;
 
-  Data({
+  CustomerData({
     required this.id,
     required this.customerName,
     this.customerEmail,
@@ -34,7 +34,7 @@ class Data {
     this.customerProfileImageName,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CustomerData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     customerName = json["customer_name"];
     customerEmail = json["customer_email"];

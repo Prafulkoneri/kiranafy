@@ -17,17 +17,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../notifications/view/notification_view.dart';
 
 class ProfileController extends ChangeNotifier {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController mobilrController = TextEditingController();
-  TextEditingController alernetMobileController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController dateOfBirthController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  CustomerData? customerData;
 
   Future<void> initState(
     context,
   ) async {
-    await getCustoerProfileDetails(context);
+    await getCustomerProfileDetails(context);
   }
 
   CustomerProfileRepo customerProfileRepo = CustomerProfileRepo(); ////;
@@ -67,18 +62,17 @@ void onLogout(context)async{
   }
 
 ////Detail Profile
-  Future<void> getCustoerProfileDetails(context) async {
+  Future<void> getCustomerProfileDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     customerProfileRepo
-        .getCustomerProfileReo(pref.getString("successToken"))
+        .getCustomerProfile(pref.getString("successToken"))
         .then((response) {
       final result = CustomerProfileDetailsRes.fromJson(
         jsonDecode(response.body),
       );
       if (response.statusCode == 200) {
-        final data = result.data;
-        print(data);
+        customerData=result.data;
         log("${response.body}");
         notifyListeners();
       } else {

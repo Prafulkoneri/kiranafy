@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +45,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -90,7 +92,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Rachel Green",
+                                "${watch.customerData?.customerName}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black1,
@@ -99,11 +101,17 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                       fontWeight: FontWeight.w700),
                                 ),
                               ),
-                              SvgPicture.asset(
-                                'assets/icons/edit.svg',
-                                width: 14.w,
-                                height: 14.h,
+                              InkWell(
+                                onTap: (){
+                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
+                                },
+                                child:SvgPicture.asset(
+                                  'assets/icons/edit.svg',
+                                  width: 14.w,
+                                  height: 14.h,
+                                ),
                               ),
+
                             ],
                           ),
                           SizedBox(
@@ -123,7 +131,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 width: 10.w,
                               ),
                               Text(
-                                'designtest@gmail.com',
+                                '${watch.customerData?.customerEmail}',
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       // decoration:
@@ -150,7 +158,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 width: 10.w,
                               ),
                               Text(
-                                '+91 55555 55555',
+                                '${watch.customerData?.customerCountryCode} ${watch.customerData?.customerMobileNumber}',
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black,

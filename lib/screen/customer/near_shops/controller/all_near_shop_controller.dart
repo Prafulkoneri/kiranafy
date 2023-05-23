@@ -82,6 +82,7 @@ Future<void> initState(context)async{
   Future<void> updateFavList(context,id,index)async{
     shopId=id.toString();
     SharedPreferences pref=await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
     addFavShopRepo.updateAddFavShop(addFavReqModel,pref.getString("successToken")).then((response){
       log("response.body${response.body}");
       final result =

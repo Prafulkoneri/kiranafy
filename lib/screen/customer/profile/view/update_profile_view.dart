@@ -47,7 +47,9 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
           width: ScreenUtil().screenWidth,

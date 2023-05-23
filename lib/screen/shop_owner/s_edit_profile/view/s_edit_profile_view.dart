@@ -43,11 +43,11 @@ String? selectedValue;
 int id = 1;
 
 class _SEditProfileViewState extends State<SEditProfileView> {
-  ImagePicker picker = ImagePicker();
+  // ImagePicker picker = ImagePicker();
 
-  late File imageFile1 = File("");
-  late File imageFile2 = File("");
-  late File imageFile3 = File("");
+  // late File imageFile1 = File("");
+  // late File imageFile2 = File("");
+  // late File imageFile3 = File("");
 
   @override
   void initState() {
@@ -65,6 +65,9 @@ class _SEditProfileViewState extends State<SEditProfileView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: (){
+            Navigator.pop(context);
+          },
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
@@ -298,37 +301,37 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                         },
                         child: watch.networkImage4 != ""
                             ? Container(
-                          height: 70.h,
-                          width: 84.41.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(width: 1, color: grey6)),
-                          child: Image.network(
-                            watch.networkImage4,
-                            fit: BoxFit.cover,
-                          ),
-                        )
+                                height: 70.h,
+                                width: 84.41.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(width: 1, color: grey6)),
+                                child: Image.network(
+                                  watch.networkImage4,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
                             : watch.fileImage4.path != ""
-                            ? Container(
-                          height: 70.h,
-                          width: 84.41.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border:
-                              Border.all(width: 1, color: grey6)),
-                          child: Image.file(
-                            watch.fileImage4,
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                            : Container(
-                          height: 70.h,
-                          width: 84.41.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border:
-                              Border.all(width: 1, color: grey6)),
-                        ),
+                                ? Container(
+                                    height: 70.h,
+                                    width: 84.41.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border:
+                                            Border.all(width: 1, color: grey6)),
+                                    child: Image.file(
+                                      watch.fileImage4,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Container(
+                                    height: 70.h,
+                                    width: 84.41.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border:
+                                            Border.all(width: 1, color: grey6)),
+                                  ),
                       ),
                       SizedBox(
                         width: 10.w,
