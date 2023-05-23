@@ -42,6 +42,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
           height: 10.w,
         ),
         DropdownButtonFormField2(
+          value: widget.value,
           decoration: const InputDecoration(
             fillColor: Colors.white,
             filled: true,
@@ -68,9 +69,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
             }
             return null;
           },
-          onChanged: (value) {
-            //Do something when changing the item if you want.
-          },
+          onChanged:widget.onChanged,
           onSaved: (value) {
             selectedValue = value.toString();
           },
@@ -78,12 +77,15 @@ class _CDropDownFieldState extends State<CDropDownField> {
             height: 48.w,
             // padding: EdgeInsets.only(left: 20, right: 10),
           ),
-          iconStyleData: const IconStyleData(
-            icon: Icon(
-              Icons.arrow_drop_down,
-              color: Colors.black45,
+          iconStyleData:  IconStyleData(
+            icon: Padding(
+              padding: EdgeInsets.only(right: 5.w),
+              child: Icon(
+                Icons.keyboard_arrow_down_outlined,
+                color: Color(0xff3A3A3A),
+              ),
             ),
-            iconSize: 30,
+            iconSize: 20,
           ),
           dropdownStyleData: DropdownStyleData(
             decoration: BoxDecoration(

@@ -20,20 +20,27 @@ class AllNearShopsAsPerPincode extends ChangeNotifier {
   AllNearShopRepo allNearShopRepo=AllNearShopRepo();
   AddFavShopRepo addFavShopRepo=AddFavShopRepo();
   RemoveFavShopRepo removeFavShopRepo=RemoveFavShopRepo();
-  AllNearShopsReqModel get allNearShopsReqModel=>AllNearShopsReqModel(pincode:"111111");
+
 List<AllNearShops> ? nearByShopList;
 List<bool> fav=[];
 List favList=[];
 String shopId="";
+String pincode="111111";
 
 Future<void> initState(context)async{
   await getAllNearByShops(context);
 
 }
-
+  AllNearShopsReqModel get allNearShopsReqModel=>AllNearShopsReqModel(pincode:pincode);
   Future<void> getAllNearByShops(context)async{
     SharedPreferences pref=await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
+    if(pref.getString("pincode")==null){
+      pincode="111111";
+    }
+    else{
+      pincode=pref.getString("pincode").toString();
+    }
     allNearShopRepo.getAllNearShop(allNearShopsReqModel,pref.getString("successToken")).then((response){
 
       print(response.body);

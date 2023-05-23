@@ -139,6 +139,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                         children: List.generate(
                             watch.nearByShopList?.length??0,
                                 (index) {
+                              print( watch.nearByShopList?.length);
                               final element=watch.nearByShopList?[index];
                                    return GestureDetector(
                               onTap: () {
@@ -157,14 +158,19 @@ class _AllNearShopsState extends State<AllNearShops> {
                                         width: 200.w,
                                         margin: EdgeInsets.only(
                                             left: index == 0 ? 19.w : 0,
-                                            right: index == 2 ? 19.w : 5.w),
+                                            right: index == int.parse("${watch.nearByShopList?.length.toString()}")-1 ? 19.w : 5.w),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                             BorderRadius.circular(15.w),
-                                            image: DecorationImage(
+                                            image:watch.nearByShopList?[index].shopBannerImagePath==""? DecorationImage(
                                                 scale: 1.0,
                                                 image: AssetImage(
                                                     'assets/images/nearshop2.png'),
+                                                fit: BoxFit.fill):
+                                            DecorationImage(
+                                                scale: 1.0,
+                                                image: NetworkImage("${
+                                                element?.shopBannerImagePath}"),
                                                 fit: BoxFit.fill)),
                                         child:Padding(
                                           padding: EdgeInsets.all(10.h),
@@ -211,7 +217,7 @@ Container(),
                                       child: Container(
                                         margin: EdgeInsets.only(
                                             left: index == 0 ? 19.w : 0,
-                                            right: index == 2 ? 19.w : 5.w),
+                                  right: index == int.parse("${watch.nearByShopList?.length.toString()}")-1 ? 19.w : 5.w),
                                         height: 120.h,
                                         width: 200.w,
                                         decoration: BoxDecoration(

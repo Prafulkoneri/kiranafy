@@ -75,7 +75,7 @@ class PrimaryCTextFormField extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1.w,
-                  color: Color(0xffE0E0E0),
+                  color: Color(0xffEFEFEF),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
@@ -232,7 +232,7 @@ class MobileNoTextFormField extends StatelessWidget {
               color: Colors.white,
               border: Border.all(
                   color:
-                      enableOrder ?? false ? Color(0xffE0E0E0) : Colors.white)),
+                      enableOrder ?? false ? Color(0xffE0E0E0) : Color(0xffEFEFEF))),
           child: CountryCodePicker(
             enabled: readOnly == true ? false : true,
             flagWidth: 20.w,

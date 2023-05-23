@@ -1,5 +1,5 @@
 class GetAllFavShopsResModel{
-  String ? status;
+  int ? status;
   String ? message;
   List<FavouriteData> ? data;
   GetAllFavShopsResModel({
@@ -10,16 +10,21 @@ class GetAllFavShopsResModel{
   GetAllFavShopsResModel.fromJson(Map<String,dynamic>json){
     status=json["status"];
     message=json["message"];
-    data=json["data"];
+    if (json["data"] != null) {
+      data = <FavouriteData>[];
+      json["data"].forEach((v) {
+        data!.add(FavouriteData.fromJson(v));
+      });
+    }
   }
 }
 
 class FavouriteData{
-String ? favouriteId;
-String ? id;
+int ? favouriteId;
+int ? id;
 String ? shopName;
-String ? shopAreaId;
-String ? shopCityId;
+int ? shopAreaId;
+int ? shopCityId;
 String ? areaName;
 String ? cityName;
 String ? shopBannerImagePath;

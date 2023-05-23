@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -45,6 +46,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
       body: watch.isLoading?Center(
         child: CircularProgressIndicator(),
       ):SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -117,11 +119,11 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                 //     right: index == 2 ? 19.w : 5.w),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.w),
-                                    image: DecorationImage(
+                                    image:element?.shopBannerImagePath!=""?DecorationImage(
                                       // scale: 1.0,
                                         image:
                                         NetworkImage('${element?.shopBannerImagePath}'),
-                                        fit: BoxFit.fill)),
+                                        fit: BoxFit.fill):DecorationImage(image:AssetImage("assets/images/nearshop2.png"),fit: BoxFit.cover)),
                                 child: Padding(
                                   padding: EdgeInsets.all(10.h),
                                   child: Column(
@@ -131,14 +133,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          InkWell(
-                                            onTap: () {},
-                                            child: SvgPicture.asset(
-                                              "assets/images/favorite.svg",
-                                              width: 26.w,
-                                              height: 14.h,
-                                            ),
-                                          ),
+
                                         ],
                                       ),
                                       Column(
@@ -244,6 +239,28 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                         ],
                                       )),
                                 )),
+                            Positioned(
+                              right:22.w,
+                              top:11.w,
+                              child: InkWell(
+                                onTap: () {
+                                  watch.fav[index]?read.removeFavList(context,element?.id,index):read.updateFavList(context, element?.id,index);
+                                },
+                                child:
+                                watch.fav[index]?
+                                SvgPicture.asset(
+                                  "assets/icons/fav_selected.svg",
+                                  width: 26.w,
+                                  height: 14.h,
+                                )
+                                    :
+                                SvgPicture.asset(
+                                  "assets/images/favorite.svg",
+                                  width: 26.w,
+                                  height: 14.h,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       );

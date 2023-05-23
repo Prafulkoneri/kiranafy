@@ -1,16 +1,25 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:local_supper_market/screen/customer/profile/model/edit_profile_model.dart';
+import 'package:local_supper_market/screen/customer/profile/model/update_profile_model.dart';
 
 import 'package:local_supper_market/screen/customer/profile/repository/edit_profile_repo.dart';
+import 'package:local_supper_market/screen/customer/profile/repository/update_profile_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
 
 // import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../shop_owner/s_auth/model/country_model.dart';
@@ -24,25 +33,41 @@ class UpdateProfileController extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  List<StateData>? stateList;
+  List<CityData>? cityList;
+  List<AreaData>? areaList;
   int countryId = 0;
   int stateId = 0;
+  int cityId = 0;
+  int areaId = 0;
+  int shopId = 0;
+  List? pincodeList;
+  String pincode = "";
+  String radioGroupValue="male";
+  String countryCode="+91";
+  String countryAlternateCode="+91";
   List<CountryData>? countryList;
-  List<StateData>? stateList;
+  CustomerUpdateProfileRepo customerUpdateProfileRepo=CustomerUpdateProfileRepo();
+  String image="";
+  File fileImage=File("");
+  String networkImage="";
+
   ////
   Future<void> initState(
     context,
   ) async {
-    await getCustoerProfileDetails(context);
-    await getCountryList(context);
-    await getStateList(context);
+
+    await getCustomerProfileDetails(context);
+
   }
 
-  Future<void> getCustoerProfileDetails(context) async {
+  Future<void> getCustomerProfileDetails(context) async {
+    await getCountryList(context);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     editCustomerProfileRepo
         .editCustomerProfileRepo(
-            // pref.getString("successToken")
+            pref.getString("successToken")
             )
         .then((response) {
       final result = CustomerEditProfileDetails.fromJson(
@@ -58,9 +83,21 @@ class UpdateProfileController extends ChangeNotifier {
         alernetMobileController.text =
             CustomerProfileDetails?.customerAlternateMobileNumber.toString() ??
                 "";
+        if(alernetMobileController.text=="null"){
+          alernetMobileController.text="";
+        }
         addressController.text = CustomerProfileDetails?.customerAddress ?? "";
         dateOfBirthController.text =
             CustomerProfileDetails?.customerDateOfBirth ?? "";
+         emailController.text=CustomerProfileDetails?.customerEmail??"";
+         radioGroupValue=CustomerProfileDetails?.customerGender??"";
+         networkImage=CustomerProfileDetails?.customerProfileImagePath??"";
+         countryId=CustomerProfileDetails?.customerCountryId??0;
+         stateId=CustomerProfileDetails?.customerStateId??0;
+         cityId=CustomerProfileDetails?.customerCityId??0;
+         areaId=CustomerProfileDetails?.customerAreaId??0;
+         pincode=CustomerProfileDetails?.customerPincode.toString()??"";
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -79,11 +116,137 @@ class UpdateProfileController extends ChangeNotifier {
     );
   }
 
+  void onRadioButtonSelected(value){
+    radioGroupValue=value;
+    notifyListeners();
+  }
+
 ////////////Country
-  Future<void> onCountrySelected(value) async {
+  void onCountrySelected(value) async {
     countryId = int.parse(value.toString());
     print("nhjvwuriuiwbytiuywi");
     print(countryId);
+    notifyListeners();
+  }
+
+  Future<void> onStateSelected(value) async {
+    stateId = int.parse(value.toString());
+    notifyListeners();
+  }
+
+  GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
+    stateId: stateId.toString(),
+  );
+
+  Future<void> getCityList(context) async {
+    registrationDataRepo.getCityList(_cityListReqModel).then((response) {
+      final result = GetCityListResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        cityList = result.cityData;
+        if (result.cityData!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "No City Found",
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> onCitySelected(value) async {
+    cityId = int.parse(value.toString());
+    notifyListeners();
+  }
+
+  GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
+    cityId: cityId.toString(),
+  );
+
+  Future<void> onAreaSelected(value) async {
+    areaId = int.parse(value.toString());
+    notifyListeners();
+  }
+
+  Future<void> getAreaList(context) async {
+    registrationDataRepo.getAreaList(_areaListReqModel).then((response) {
+      final result = GetAreaListResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        areaList = result.areaData;
+        if (result.areaData!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "No Area Found",
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
+    areaId: areaId.toString(),
+  );
+
+  Future<void> getPinCodeList(context) async {
+    registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
+      final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        pincodeList = result.pincodeData;
+        print(pincodeList);
+        if (result.pincodeData!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "No Pincode Found",
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> onPincodeSelected(value) async {
+    pincode = value.toString();
+    print("$pincode pincode");
+    // print(object);
+    notifyListeners();
+  }
+
+  void onDateSelected(date) {
+    dateOfBirthController.text = date;
     notifyListeners();
   }
 
@@ -115,14 +278,11 @@ class UpdateProfileController extends ChangeNotifier {
 
   ///////////State
 
-  Future<void> onStateSelected(value) async {
-    stateId = int.parse(value.toString());
-    notifyListeners();
-  }
 
   GetStateListReqModel get _stateListReqModel => GetStateListReqModel(
         countryId: countryId.toString(),
       );
+
   Future<void> getStateList(context) async {
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
       final result = GetStateListResModel.fromJson(jsonDecode(response.body));
@@ -149,5 +309,58 @@ class UpdateProfileController extends ChangeNotifier {
       },
     );
   }
-  //////////City
+
+  UpdateProfileDetailReqModel get updateProfileDetailReqModel=>UpdateProfileDetailReqModel(customerName: nameController.text, customerEmail: emailController.text, customerCountryCode:countryCode, customerMobileNumber: mobilrController.text, customerAlternateCountryCode: alernetMobileController.text, customerAlternateMobileNumber: countryAlternateCode, customerGender:radioGroupValue, customerDateOfBirth: dateOfBirthController.text, customerCountryId: countryId.toString(), customerCityId:cityId.toString(), customerStateId:stateId.toString(), customerAreaId: areaId.toString(), customerPincode: pincode, customerAddress: addressController.text,);
+
+  Future<void> updateProfileDetail(context)async{
+    SharedPreferences pref=await SharedPreferences.getInstance();
+
+    customerUpdateProfileRepo.customerUpdateProfile(updateProfileDetailReqModel,pref.getString("successToken")).then((response) {
+      final result = UpdateProfileDetailResModel.fromJson(jsonDecode(response.body));
+      print(response.body);
+      if (response.statusCode == 200) {
+       pref.setString("pincode",pincode);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  void openGallery() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+
+      networkImage="";
+      fileImage=File(pickedFile.path);
+      final bytes = await compressFile(fileImage);
+
+      image= base64Encode(bytes as List<int>);
+
+      networkImage = "";
+      fileImage = File(pickedFile.path);
+
+    }
+
+    notifyListeners();
+  }
+
+
 }

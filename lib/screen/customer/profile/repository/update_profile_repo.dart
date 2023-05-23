@@ -3,7 +3,7 @@ import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/profile/model/update_profile_model.dart';
 
 class CustomerUpdateProfileRepo {
-  Future<http.Response> CustomerUpdateProfile(
+  Future<http.Response> customerUpdateProfile(
       UpdateProfileDetailReqModel reqModel, token) async {
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.customerUpdateProfile));

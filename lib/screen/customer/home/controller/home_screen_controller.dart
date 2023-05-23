@@ -43,4 +43,6 @@ class HomeScreenController extends ChangeNotifier {
       },
     );
   }
+
+  Future<void> getCategoryList(context)async{}
 }

@@ -3,7 +3,7 @@ import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/home/model/category_model.dart';
 
 class AllCategoriesRepo {
-  Future<http.Response> allNearShopRepo(
+  Future<http.Response> getCategory(
       AllCategoriesReqModel reqModel, token) async {
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.allCategories));

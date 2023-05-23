@@ -1,14 +1,14 @@
 class AllCategoriesReqModel {
-  int? customerPincode;
+  String ? pincode;
 
   AllCategoriesReqModel({
-    required this.customerPincode,
+    required this.pincode,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
 
-    data["customer_pincode"] = customerPincode;
+    data["pincode"] = pincode;
 
     return data;
   }

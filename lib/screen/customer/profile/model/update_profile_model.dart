@@ -5,16 +5,16 @@ class UpdateProfileDetailReqModel {
   String? customerEmail;
   String? customerCountryCode;
 
-  int? customerMobileNumber;
+  String? customerMobileNumber;
   String? customerAlternateCountryCode;
-  int? customerAlternateMobileNumber;
+  String? customerAlternateMobileNumber;
   String? customerGender;
   String? customerDateOfBirth;
-  int? customerCountryId;
-  int? customerStateId;
-  int? customerCityId;
-  int? customerAreaId;
-  int? customerPincode;
+  String? customerCountryId;
+  String? customerStateId;
+  String? customerCityId;
+  String? customerAreaId;
+  String? customerPincode;
   String? customerAddress;
   String? customerProfileImagePath;
 
@@ -33,7 +33,7 @@ class UpdateProfileDetailReqModel {
     required this.customerAreaId,
     required this.customerPincode,
     required this.customerAddress,
-    required this.customerProfileImagePath,
+     this.customerProfileImagePath,
   });
 
   Map<String, dynamic> toJson() {
@@ -42,7 +42,7 @@ class UpdateProfileDetailReqModel {
     data["customer_email"] = customerEmail;
     data["customer_country_code"] = customerCountryCode;
 
-    data["customer_profile_image_path"] = customerProfileImagePath;
+    // data["customer_profile_image_path"] = customerProfileImagePath;
     data["customer_address"] = customerAddress;
     data["customer_pincode"] = customerPincode;
     data["customer_area_id"] = customerAreaId;
