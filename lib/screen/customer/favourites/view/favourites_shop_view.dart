@@ -133,7 +133,7 @@ class _CFavouritesShopViewState extends State<CFavouritesShopView> {
                                               width: 4.3.w,
                                             ),
                                             Text(
-                                              "4.5",
+                                              "0.0",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     color: Black,
