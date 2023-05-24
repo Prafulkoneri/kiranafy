@@ -40,6 +40,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          isBackButtonEnabled: false,
           title: "Profile",
           onActionTap: () {},
         ),

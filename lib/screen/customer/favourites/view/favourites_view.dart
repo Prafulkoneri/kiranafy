@@ -11,7 +11,9 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/delivery_view_pending.dart';
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_products_view.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/shop_profile.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
+
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -35,6 +37,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
   Widget build(BuildContext context) {
     final read=context.read<FavouritesController>();
     final watch=context.watch<FavouritesController>();
+    final readMain=context.read<MainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -97,10 +100,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                       final element=watch.favShopList?[index];
                       return GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ShopProfile()),
-                          );
+                          readMain.onNavigation(0, ShopProfile(shopId: element?.id.toString()), context);
                         },
                         child: Stack(
                           children: [

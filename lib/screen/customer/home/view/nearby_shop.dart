@@ -5,8 +5,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/shop_profile.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:provider/provider.dart';
 class HomeCarousal extends StatefulWidget {
   const HomeCarousal({super.key});
@@ -28,6 +29,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
   Widget build(BuildContext context) {
     final watch=context.watch<AllNearShopsAsPerPincode>();
     final read=context.read<AllNearShopsAsPerPincode>();
+    final readMain=context.read<MainScreenController>();
     return SizedBox(
       height: 120.h,
       child: ListView.builder(
@@ -39,10 +41,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
             final element=watch.nearByShopList?[index];
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ShopProfile()),
-                );
+                readMain.onNavigation(0, ShopProfile(shopId: element?.id.toString()), context);
               },
               child: Stack(
                 children: [
@@ -58,9 +57,9 @@ class _HomeCarousalState extends State<HomeCarousal> {
                           borderRadius: BorderRadius.circular(13.w),
                           image: element?.shopBannerImagePath==""?DecorationImage(
                               image: AssetImage("assets/images/nearshop2.png"),
-                              fit: BoxFit.fill):DecorationImage(
+                              fit: BoxFit.cover):DecorationImage(
                               image: NetworkImage("${element?.shopBannerImagePath}"),
-                              fit: BoxFit.fill),
+                              fit: BoxFit.cover),
                         ),
                         child: Container(
                           padding: EdgeInsets.all(10.h),

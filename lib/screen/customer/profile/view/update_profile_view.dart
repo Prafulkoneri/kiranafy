@@ -94,7 +94,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                         ),):Container(
                       height: 120.w,
                       width: 120.w,
-                      child: Image.asset("assets/images/account.png"),
+                      child: ClipRRect(borderRadius: BorderRadius.circular(8.w),child: Image.asset("assets/images/profile_image.png")),
                     ),
                     Positioned(
                         bottom: -10.w,

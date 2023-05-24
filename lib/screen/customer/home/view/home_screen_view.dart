@@ -16,7 +16,8 @@ import 'package:local_supper_market/screen/customer/home/view/category.dart';
 import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
 import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
 import 'package:local_supper_market/screen/customer/home/view/offers.dart';
-import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 
 import 'package:provider/provider.dart';
 
@@ -65,6 +66,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   Widget build(BuildContext context) {
     final read = context.read<HomeScreenController>();
     final watch = context.watch<HomeScreenController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       body:SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -218,10 +220,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AllNearShops()),
-                      );
+                      readMain.onNavigation(0, AllNearShops(), context);
                     },
                     child: Text(
                       "View All",
