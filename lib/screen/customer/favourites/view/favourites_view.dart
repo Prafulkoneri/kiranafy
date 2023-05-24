@@ -40,6 +40,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: (){
+            Navigator.pop(context);
+          },
           title: "Favourites",
         ),
       ),
