@@ -17,37 +17,30 @@ class SKycVerificationController extends ChangeNotifier {
   SKycVerificationRepo sKycVerificationRepo = SKycVerificationRepo();
 
   FilePickerResult? result;
-  String? _fileNmae;
+  String? fileName;
   PlatformFile? pickedfile;
   bool isLoading = false;
   File fileToDisplay = File("");
 
-  // void pickFile() async {
-  //   try {
-  //     isLoading = true;
-  //     result = await FilePicker.platform.pickFiles(
-  //       type: FileType.any,
-  //       allowMultiple: false,
-  //     );
-  //     if (result != null) {
-  //       _fileNmae = result!.files.first.name;
-  //       pickedfile = result!.files.first;
-  //       fileToDisplay = File(pickedfile!.path.toString());
-  //       print("File name $_fileNmae");
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  //   notifyListeners();
-  // }
-  Future<File?> pickFile() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'pdf', 'doc'],
-    );
-    if (result == null) return null;
-
-    return File(result.paths.first ?? '');
+  void pickFile() async {
+    try {
+      isLoading = true;
+      result = await FilePicker.platform.pickFiles(
+        allowCompression: true,
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'pdf', 'doc'],
+        allowMultiple: false,
+      );
+      if (result != null) {
+        fileName = result!.files.first.name;
+        pickedfile = result!.files.first;
+        fileToDisplay = File(pickedfile!.path.toString());
+        print("File name $fileName");
+      }
+    } catch (e) {
+      print(e);
+    }
+    notifyListeners();
   }
 
   // void onFileAadharCardClicked() async {
