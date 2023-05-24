@@ -45,6 +45,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 
+import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
@@ -122,7 +123,7 @@ class _MyAppState extends State<MyApp> {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SplashScreen());
+              home: SKycVerificationView());
         });
   }
 }

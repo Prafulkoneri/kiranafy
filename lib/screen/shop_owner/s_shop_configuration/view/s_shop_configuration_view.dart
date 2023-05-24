@@ -31,14 +31,14 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
   Widget build(BuildContext context) {
     final watch = context.watch<SShopConfigurationController>();
     final read = context.read<SShopConfigurationController>();
-    final readMainScreen=context.read<SMainScreenController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          onBackBtnPressed: (){
-            readMainScreen.onNavigation(4,SAccountScreenView(), context);
+          onBackBtnPressed: () {
+            readMainScreen.onNavigation(4, SAccountScreenView(), context);
           },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -103,7 +103,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                               width: 1, color: grey6)),
                                       child: Image.file(
                                         watch.fileImage1,
-                                        fit: BoxFit.fitWidth,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   )
@@ -176,6 +176,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 20.w,
               ),
               PrimarySTextFormField(
+//  keyboardType: TextInputType.number,
+                textInputType: TextInputType.number,
                 controller: watch.SupportNumberController,
                 titleHeader: "Support Number",
                 hintText: "Enter Support Number",
@@ -230,18 +232,18 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 ],
               ),
               SizedBox(
-                height: 15.w,
+                height: 40.w,
               ),
               Row(
                 children: [
-                  PrimaryCheckBox(
-                    onChanged: (value) {
-                      read.onDeliveryCharge();
-                    },
-                    value: watch.isDeliveryChargesSelected,
-                  ),
+                  // PrimaryCheckBox(
+                  //   onChanged: (value) {
+                  //     read.onDeliveryCharge();
+                  //   },
+                  //   value: watch.isDeliveryChargesSelected,
+                  // ),
                   Text(
-                    'Delivery Charges Free',
+                    'Delivery Charges',
                     style: TextStyle(
                         color: Black1,
                         // letterSpacing: .5,
@@ -251,221 +253,297 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 ],
               ),
               SizedBox(
-                height: 45.w,
+                height: 10.h,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Text(
-                      "Order Amount",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Color(0xff3A3A3A)),
-                    ),
+                  PrimaryCheckBox(
+                    onChanged: (value) {
+                      read.onFreePickUpSelected();
+                    },
+                    value: watch.ifFreePickupSelected,
+                  ),
+                  Text(
+                    'Free',
+                    style: TextStyle(
+                        color: Black1,
+                        // letterSpacing: .5,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
-                    width: 12.w,
+                    width: 30.w,
                   ),
-                  Expanded(
-                    child: Text(
-                      "Delivery Charge",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Color(0xff3A3A3A)),
-                    ),
+                  Row(
+                    children: [
+                      PrimaryCheckBox(
+                        onChanged: (value) {
+                          read.onDeliveryCharge();
+                        },
+                        value: watch.isDeliveryChargesSelected,
+                      ),
+                      Text(
+                        'Delivery Charges Applicable',
+                        style: TextStyle(
+                            color: Black1,
+                            // letterSpacing: .5,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
                   ),
                 ],
               ),
               SizedBox(
-                height: 10.w,
+                height: 15.w,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      readOnly: true,
-                      hintText: "1 to 500", hintFontSize: 15.sp,
-                      // hint: "1 to 500",
-                      // hintSize: 15.sp,
+              // Row(
+              //   children: [
+
+              // PrimaryCheckBox(
+              //       onChanged: (value) {
+              //         read.onDeliveryCharge();
+              //       },
+              //       value: watch.isDeliveryChargesSelected,
+              //     ),
+              //     Text(
+              //       'Delivery Charges Free',
+              //       style: TextStyle(
+              //           color: Black1,
+              //           // letterSpacing: .5,
+              //           fontSize: 14.sp,
+              //           fontWeight: FontWeight.w400),
+              //     ),
+              //   ],
+              // ),
+              Visibility(
+                visible: watch.isDeliveryChargesSelected,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 45.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      controller: watch.FirstDeliveryController,
-                      hintText: "Delivery Charge",
-                      hintFontSize: 15.sp,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Order Amount",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "Delivery Charge",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 17.w,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Order Amount",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Color(0xff3A3A3A)),
+                    SizedBox(
+                      height: 10.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Delivery Charge",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Color(0xff3A3A3A)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            readOnly: true,
+                            hintText: "1 to 500", hintFontSize: 15.sp,
+                            // hint: "1 to 500",
+                            // hintSize: 15.sp,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            textInputType: TextInputType.number,
+                            controller: watch.FirstDeliveryController,
+                            hintText: "Delivery Charge",
+                            hintFontSize: 15.sp,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.w,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      readOnly: true,
-                      hintText: "500 to 1200",
-                      hintFontSize: 15.sp,
+                    SizedBox(
+                      height: 17.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      controller: watch.SecondDeliveryController,
-                      hintText: "Delivery Charge",
-                      hintFontSize: 15.sp,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Order Amount",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "Delivery Charge",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 17.w,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Order Amount",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Color(0xff3A3A3A)),
+                    SizedBox(
+                      height: 10.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Delivery Charge",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Color(0xff3A3A3A)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            readOnly: true,
+                            hintText: "500 to 1200",
+                            hintFontSize: 15.sp,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            controller: watch.SecondDeliveryController,
+                            textInputType: TextInputType.number,
+                            hintText: "Delivery Charge",
+                            hintFontSize: 15.sp,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.w,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      readOnly: true,
-                      hintText: "1200 to 2500",
-                      hintFontSize: 15.sp,
+                    SizedBox(
+                      height: 17.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      controller: watch.ThirdDeliveryController,
-                      hintText: "Delivery Charge",
-                      hintFontSize: 15.sp,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Order Amount",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "Delivery Charge",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 17.w,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Order Amount",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Color(0xff3A3A3A)),
+                    SizedBox(
+                      height: 10.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Delivery Charge",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Color(0xff3A3A3A)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            readOnly: true,
+                            hintText: "1200 to 2500",
+                            hintFontSize: 15.sp,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            controller: watch.ThirdDeliveryController,
+                            textInputType: TextInputType.number,
+                            hintText: "Delivery Charge",
+                            hintFontSize: 15.sp,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.w,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      readOnly: true,
-                      hintText: "2500 to 5000",
-                      hintFontSize: 15.sp,
+                    SizedBox(
+                      height: 17.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      hintText: "Delivery Charge",
-                      controller: watch.FourthDeliveryController,
-                      hintFontSize: 15.sp,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Order Amount",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "Delivery Charge",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 10.w,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            readOnly: true,
+                            hintText: "2500 to 5000",
+                            hintFontSize: 15.sp,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            hintText: "Delivery Charge",
+                            controller: watch.FourthDeliveryController,
+                            textInputType: TextInputType.number,
+                            hintFontSize: 15.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 37.w,
