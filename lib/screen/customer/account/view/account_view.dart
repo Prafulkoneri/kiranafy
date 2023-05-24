@@ -102,16 +102,19 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 ),
                               ),
                               InkWell(
-                                onTap: (){
-                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              UpdateProfileView()));
                                 },
-                                child:SvgPicture.asset(
+                                child: SvgPicture.asset(
                                   'assets/icons/edit.svg',
                                   width: 14.w,
                                   height: 14.h,
                                 ),
                               ),
-
                             ],
                           ),
                           SizedBox(
@@ -296,7 +299,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
             ////////////////////
 
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 read.onFavouritesClicked(context);
               },
               child: Container(
@@ -597,8 +600,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
             ),
             GestureDetector(
-              onTap: ()async{
-               read.onLogout(context);
+              onTap: () async {
+                read.onLogout(context);
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -636,7 +639,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ],
                 ),
               ),
-            ),SizedBox(
+            ),
+            SizedBox(
               height: 90.w,
             ),
           ],

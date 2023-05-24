@@ -95,8 +95,12 @@ class _ShopProfileState extends State<ShopProfile> {
                   child: const Carousel(
                     images: [
                       AssetImage(
-                        "assets/images/shop_image.png",
+                        "assets/images/property1.png",
                       ),
+                      AssetImage(
+                        "assets/images/property2.png",
+                      ),
+
                       // ExactAssetImage("images/image-carousel.jpeg"),
                     ],
                     autoplay: true,
@@ -161,7 +165,7 @@ class _ShopProfileState extends State<ShopProfile> {
                                 width: 4.3.w,
                               ),
                               Text(
-                                "4.5",
+                                "0.0",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black,

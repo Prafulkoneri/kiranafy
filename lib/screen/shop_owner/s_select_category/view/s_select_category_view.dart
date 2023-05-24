@@ -34,74 +34,77 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          onBackBtnPressed: (){
-            readMainScreen.onNavigation(0,SSCategoryListView(), context);
+          onBackBtnPressed: () {
+            readMainScreen.onNavigation(0, SSCategoryListView(), context);
           },
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () async{
-           await read.addCategory(context);
+          onActionTap: () async {
+            await read.addCategory(context);
           },
         ),
       ),
-      body:watch.isLoading?Center(
-        child: CircularProgressIndicator(
-        ),
-      ):
-      GridView.builder(
-          padding:
-              EdgeInsets.only(left: 50.w, right: 50.w, top: 40.w, bottom: 40.w),
-          shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 30,
-              mainAxisSpacing: 20,
-              mainAxisExtent: 120),
-          itemCount: watch.categoriesList?.length,
-          itemBuilder: (BuildContext context, int index) {
-            final element = watch.categoriesList?[index];
-            return GestureDetector(
-              onTap:(){
-                read.onCategorySelected(index,element?.id);
-              },
-              child: Container(
-                decoration: BoxDecoration(),
-                child: Column(
-                  children: [
-                    Stack(
-                      clipBehavior: Clip.none,
+      body: watch.isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : GridView.builder(
+              padding: EdgeInsets.only(
+                  left: 50.w, right: 50.w, top: 40.w, bottom: 40.w),
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 30,
+                  mainAxisSpacing: 20,
+                  mainAxisExtent: 120),
+              itemCount: watch.categoriesList?.length,
+              itemBuilder: (BuildContext context, int index) {
+                final element = watch.categoriesList?[index];
+                return GestureDetector(
+                  onTap: () {
+                    read.onCategorySelected(index, element?.id);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(),
+                    child: Column(
                       children: [
-                        Container(
-                          child: Image.network("${element?.categoryImagePath}"),
-                          height: 60.w,
-                          width: 80.w,
-                        ),
-                        Positioned(
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              child: Image.network(
+                                  "${element?.categoryImagePath}"),
+                              height: 60.w,
+                              width: 80.w,
+                            ),
+                            Positioned(
                                 right: 0.w,
                                 top: 0.w,
                                 child: GestureDetector(
-                                  child: watch.selectedCategoryList[index]?SvgPicture.asset(
-                                      "assets/icons/category_select.svg"):Container(),
+                                  child: watch.selectedCategoryList[index]
+                                      ? SvgPicture.asset(
+                                          "assets/icons/category_select.svg")
+                                      : Container(),
                                 )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.w,
+                        ),
+                        Text(
+                          "${element?.categoryName}",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12.sp,
+                              color: Black1),
+                        ),
                       ],
                     ),
-                    SizedBox(
-                      height: 5.w,
-                    ),
-                    Text(
-                      "${element?.categoryName}",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.sp,
-                          color: Black1),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
+                  ),
+                );
+              }),
     );
   }
 }

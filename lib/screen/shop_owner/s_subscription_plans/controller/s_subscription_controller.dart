@@ -15,16 +15,33 @@ class SSubscriptionController extends ChangeNotifier {
   ShopBuySubscriptionsRepo shopBuySubscriptionsRepo =
       ShopBuySubscriptionsRepo();
   List<SubscriptionData>? subscriptionData;
+  List<AddOnServicesList>? addOnServicesList;
+  List<bool> selectAddonServicesList = [];
+  List selectedAddOnServicesId = [];
+  String selectedId = "";
   List radioValue = [];
   String radioGrpValue = "0";
   String selectedPlanId = "0";
-  bool oneTimeShop=false;
-  bool productPrice=false;
-  bool shopDigital=false;
-  bool primeCatchy=false;
+  String selectedServicesId = "0";
+  bool oneTimeShop = false;
+  bool productPrice = false;
+  bool shopDigital = false;
+  bool primeCatchy = false;
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
+  }
+
+  void onAddOnServicesSelected(index, id) {
+    selectAddonServicesList[index] = !selectAddonServicesList[index];
+    if (selectAddonServicesList[index]) {
+      selectedAddOnServicesId.removeWhere((item) => item == id);
+      selectedAddOnServicesId.insert(0, id);
+    } else {
+      selectedAddOnServicesId.removeWhere((item) => item == id);
+    }
+    print(selectedAddOnServicesId);
+    notifyListeners();
   }
 
   void onMakePaymentClicked(context) {
@@ -32,23 +49,26 @@ class SSubscriptionController extends ChangeNotifier {
         context, MaterialPageRoute(builder: (context) => SMainScreenView()));
   }
 
-void  onTimeShopSetup(){
-  oneTimeShop=!oneTimeShop;
-  notifyListeners();
-}
+  void onTimeShopSetup() {
+    oneTimeShop = !oneTimeShop;
+    notifyListeners();
+  }
 
-void onProductPrice(){
-  productPrice=!productPrice;
-  notifyListeners();
-}
-  void onShopDigital(){
-    shopDigital=!shopDigital;
+  void onProductPrice() {
+    productPrice = !productPrice;
     notifyListeners();
   }
-  void onPrimeCatchy(){
-    primeCatchy=!primeCatchy;
+
+  void onShopDigital() {
+    shopDigital = !shopDigital;
     notifyListeners();
   }
+
+  void onPrimeCatchy() {
+    primeCatchy = !primeCatchy;
+    notifyListeners();
+  }
+
   Future<void> getSubscriptionPlanDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -62,6 +82,10 @@ void onProductPrice(){
       if (response.statusCode == 200) {
         print(response.body);
         subscriptionData = result.subscriptionData;
+        addOnServicesList = result.addOnServicesList;
+        selectAddonServicesList = List<bool>.filled(
+            addOnServicesList?.length ?? 0, false,
+            growable: true);
         int length = subscriptionData?.length ?? 0;
         radioValue.clear();
         for (int i = 0; i < length; i++) {
@@ -88,39 +112,48 @@ void onProductPrice(){
 
   BuySubscriptionRequestModel get buySubscriptionRequestModel =>
       BuySubscriptionRequestModel(
-        subscriptionId: selectedPlanId,
-      );
+          subscriptionId: selectedPlanId, serviceId: selectedServicesId);
 
   Future<void> buySubscriptionPlan(context) async {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => SMainScreenView()));
-    // SharedPreferences pref = await SharedPreferences.getInstance();
-    // shopBuySubscriptionsRepo
-    //     .buySubScription(
-    //         buySubscriptionRequestModel, pref.getString("successToken"))
-    //     .then((response) {
-    //   final result =
-    //       BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
-    //   print(response.statusCode);
-    //   if (response.statusCode == 200) {
-    //     Navigator.push(context,
-    //         MaterialPageRoute(builder: (context) => SMainScreenView()));
-    //     notifyListeners();
-    //   } else {
-    //     Utils.showPrimarySnackbar(context, result.message,
-    //         type: SnackType.error);
-    //   }
-    // }).onError((error, stackTrace) {
-    //   Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    // }).catchError(
-    //   (Object e) {
-    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-    //   },
-    //   test: (Object e) {
-    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-    //     return false;
-    //   },
-    // );
+    if (selectedAddOnServicesId.isNotEmpty) {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String a = '';
+      for (int i = 0; i < selectedAddOnServicesId.length; i++) {
+        a += "${selectedAddOnServicesId[i]},";
+      }
+      a = a.substring(0, a.length - 1);
+      selectedServicesId = a;
+
+      shopBuySubscriptionsRepo
+          .buySubScription(
+              buySubscriptionRequestModel, pref.getString("successToken"))
+          .then((response) {
+        final result =
+            BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
+        print(response.statusCode);
+        if (response.statusCode == 200) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SMainScreenView()));
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+        (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    } else {
+      Utils.showPrimarySnackbar(context, "Please Select Add On Services",
+          type: SnackType.error);
+    }
   }
 
   void onRadioBtnChanged(value, id) {

@@ -25,6 +25,7 @@ class SShopConfigurationController extends ChangeNotifier {
   TextEditingController ImageNameController = TextEditingController();
 
   bool isCustomerPickupSelected = false;
+  bool ifFreePickupSelected = false;
   bool isDeliveryCustomerSelected = false;
   bool isDeliveryChargesSelected = false;
   bool isNineToTwelve = false;
@@ -38,6 +39,14 @@ class SShopConfigurationController extends ChangeNotifier {
   ///Delivery Type CheckBox
   void onCustomerPickupSelected() {
     isCustomerPickupSelected = !isCustomerPickupSelected;
+    notifyListeners();
+  }
+
+  void onFreePickUpSelected() {
+    ifFreePickupSelected = !ifFreePickupSelected;
+    if (isDeliveryChargesSelected) {
+      isDeliveryChargesSelected = false;
+    }
     notifyListeners();
   }
 
