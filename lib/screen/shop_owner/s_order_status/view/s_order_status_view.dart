@@ -32,7 +32,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
-          child: PrimaryAppBar(title: "Orders"),
+          child: PrimaryAppBar(title: "Orders",isBackButtonEnabled: false,),
         ),
         body: Column(
           children: [

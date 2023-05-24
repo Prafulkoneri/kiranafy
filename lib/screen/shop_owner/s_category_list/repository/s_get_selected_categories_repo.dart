@@ -14,4 +14,5 @@ class ShopSelectedCategoriesRepo {
       throw Exception(e);
     }
   }
+
 }

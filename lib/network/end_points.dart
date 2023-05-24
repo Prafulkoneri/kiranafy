@@ -80,6 +80,8 @@ class Endpoint {
   ///Edit Custome Products
   static const String deleteAdminProduct =
       "${baseUrl}lsm-shop-owner-delete-product-of-category";
+  ///Dash Board
+  static const String ShopDashBoard = "${baseUrl}lsm-shop-owner-dashboard";
 
 ///////////////////////////////Customer Screen Apis///////////////////
 //OnBoarding Screen
@@ -106,7 +108,7 @@ class Endpoint {
   static const String allNearShopAsPerPincode =
       "${baseUrl}lsm-customer-shop-list-as-per-pincode";
   ////Custome all Categories
-  static const String allCategories =
+  static const String categoriesAsPerPincode =
       "${baseUrl}lsm-customer-category-list-as-per-pincode";
   ////Customer Add Fvrt Shops
   static const String customerAddFvrtshops =
@@ -127,8 +129,13 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-add-custom-product";
 
 //////////Banner
-  static const String BannerAds = "${baseUrl}lsm-customer-get-banner-ads";
+  static const String bannerAds = "${baseUrl}lsm-customer-get-banner-ads";
+  //////////Customer view Shop
+  static const String customerViewShop = "${baseUrl}lsm-customer-view-shop";
+  //////////Customer view All Shop
+  static const String customerViewAllShop = "${baseUrl}lsm-customer-view-all-shop-list";
 
-  ///Dash Board
-  static const String ShopDashBoard = "${baseUrl}lsm-shop-owner-dashboard";
+
+
+
 }

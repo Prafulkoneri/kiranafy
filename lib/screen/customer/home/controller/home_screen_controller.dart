@@ -12,7 +12,8 @@ class HomeScreenController extends ChangeNotifier {
   bool isLoading=true;
   AllCategoriesRepo allCategoriesRepo=AllCategoriesRepo();
   List<Data>? data;
-  List<Category> categoryList=[];
+  List<Category> categoryFirstList=[];
+  List<Category> categorySecondList=[];
   String pincode="111111";
   Future<void> initState(context) async {
     isLoading=true;
@@ -70,7 +71,8 @@ class HomeScreenController extends ChangeNotifier {
       final result = AllCategoriesResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print("${response.body}");
-        categoryList = result.categories??[];
+        categoryFirstList = result.categoriesFirstList??[];
+        categorySecondList = result.categoriesSecondList??[];
         isLoading=false;
         notifyListeners();
       } else {
