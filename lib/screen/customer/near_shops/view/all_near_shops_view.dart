@@ -29,19 +29,19 @@ class _AllNearShopsState extends State<AllNearShops> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<AllShopController>().initState(context);
     });
-    // setPagination();
+    setPagination();
   }
-  // setPagination() {
-  //   scrollController.addListener(() {
-  //     if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-  //       print("lets goo");
-  //       // SchedulerBinding.instance.addPostFrameCallback((_) {
-  //       //   context.read<AllShopController>().onScrollMaxExtent(context);
-  //       // }
-  //       // );
-  //       }
-  //   });
-  // }
+  setPagination() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        print("lets goo");
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          context.read<AllShopController>().onScrollMaxExtent(context);
+        }
+        );
+        }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -503,7 +503,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                               width: 20,
                               height: 20,
                               child: CircularProgressIndicator(
-                                color: Color(0xff8b0e1a),
+                                color:SplashText,
                               ),
                             ),
                           ),

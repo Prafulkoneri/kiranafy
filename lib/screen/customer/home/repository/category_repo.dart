@@ -6,9 +6,9 @@ class AllCategoriesRepo {
   Future<http.Response> getCategory(
       AllCategoriesReqModel reqModel, token) async {
     print(reqModel.toJson());
-    print(Uri.parse(Endpoint.allCategories));
+    print(Uri.parse(Endpoint.categoriesAsPerPincode));
     try {
-      return await http.post(Uri.parse(Endpoint.allCategories),
+      return await http.post(Uri.parse(Endpoint.categoriesAsPerPincode),
           body: reqModel.toJson(),
           headers: {
             "Authorization": "Bearer $token",

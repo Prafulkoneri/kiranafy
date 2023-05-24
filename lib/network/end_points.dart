@@ -108,7 +108,7 @@ class Endpoint {
   static const String allNearShopAsPerPincode =
       "${baseUrl}lsm-customer-shop-list-as-per-pincode";
   ////Custome all Categories
-  static const String allCategories =
+  static const String categoriesAsPerPincode =
       "${baseUrl}lsm-customer-category-list-as-per-pincode";
   ////Customer Add Fvrt Shops
   static const String customerAddFvrtshops =

@@ -31,7 +31,7 @@ class AllShopController extends ChangeNotifier {
 
   CustomerViewAllShopReqModel get customerViewAllShopReqModel =>
       CustomerViewAllShopReqModel(
-          pincode: pincode, offset: offset.toString(), limit: "1");
+          pincode: pincode, offset: offset.toString(), limit: "5");
 
 
   Future<void> initState(context)async{
@@ -75,6 +75,7 @@ class AllShopController extends ChangeNotifier {
           }
         }
         isLoading = false;
+        showPaginationLoader = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -226,12 +227,13 @@ class AllShopController extends ChangeNotifier {
     );
   }
 
-  // Future<void> onScrollMaxExtent(context) async {
-  //       print("hello");
-  //       offset = offset + 1;
-  //       await getAllShops(context);
-  //       isLoading = false;
-  //       showPaginationLoader = true;
-  //       notifyListeners();
-  // }
+  Future<void> onScrollMaxExtent(context) async {
+    showPaginationLoader = true;
+        print("hello");
+        offset = offset + 1;
+        await getAllShops(context);
+        isLoading = false;
+
+        notifyListeners();
+  }
 }

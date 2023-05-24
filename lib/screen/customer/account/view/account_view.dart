@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -36,6 +37,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
   Widget build(BuildContext context) {
     final read = context.read<ProfileController>();
     final watch = context.watch<ProfileController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -119,7 +121,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 ),
                                 InkWell(
                                   onTap: (){
-                                    Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
+                                    // Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
+                                 readMain.onNavigation(0,UpdateProfileView(), context);
                                   },
                                   child:SvgPicture.asset(
                                     'assets/icons/edit.svg',
@@ -194,7 +197,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  read.onEditProfilePressed(context);
+                  readMain.onNavigation(0,UpdateProfileView(), context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w),

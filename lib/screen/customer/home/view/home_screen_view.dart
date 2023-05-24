@@ -220,7 +220,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   ),
                   InkWell(
                     onTap: () {
-                      readMain.onNavigation(0, AllNearShops(), context);
+                      readMain.onBackPressed(0, AllNearShops());
                     },
                     child: Text(
                       "View All",
@@ -244,7 +244,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             SizedBox(
               height: 30.h,
             ),
-            watch.categoryList!.isNotEmpty?  Container(
+            watch.categoryFirstList.isNotEmpty?  Container(
               padding: EdgeInsets.only(
                 right: 19.0.w,
                 left: 19.0.w,
@@ -261,10 +261,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               ),
             ):Container(),
 
-            watch.categoryList!.isNotEmpty?SizedBox(
+            watch.categoryFirstList.isNotEmpty?SizedBox(
               height: 15.h,
             ):Container(),
-            watch.categoryList!.isNotEmpty? ShopCategory():Container(),
+            watch.categoryFirstList.isNotEmpty? ShopCategory():Container(),
             // SizedBox(
             //   height: 20.h,
             // ),

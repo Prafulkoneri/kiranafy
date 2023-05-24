@@ -123,7 +123,7 @@ class _MyAppState extends State<MyApp> {
               theme: ThemeData(
                   primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
               debugShowCheckedModeBanner: false,
-              home: SKycVerificationView());
+              home: SplashScreen());
         });
   }
 }
