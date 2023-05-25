@@ -32,18 +32,18 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   List<File> imageFileList = [];
   List<ShopBannerImageData>? bannerImageList;
 
-  File fileImage1=File("");
-  String image1="";
-  String image2="";
-  String image3="";
-  String image4="";
-  File fileImage2=File("");
-  File fileImage3=File("");
-  File fileImage4=File("");
-  String networkImage1="";
-  String networkImage2="";
-  String networkImage3="";
-  String networkImage4="";
+  File fileImage1 = File("");
+  String image1 = "";
+  String image2 = "";
+  String image3 = "";
+  String image4 = "";
+  File fileImage2 = File("");
+  File fileImage3 = File("");
+  File fileImage4 = File("");
+  String networkImage1 = "";
+  String networkImage2 = "";
+  String networkImage3 = "";
+  String networkImage4 = "";
   String countryCode = "+91";
 
   Future<void> initState(
@@ -63,16 +63,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-
-      networkImage1="";
-      fileImage1=File(pickedFile.path);
+      networkImage1 = "";
+      fileImage1 = File(pickedFile.path);
       final bytes = await compressFile(fileImage1);
 
-      image1= base64Encode(bytes as List<int>);
+      image1 = base64Encode(bytes as List<int>);
 
       networkImage1 = "";
       fileImage1 = File(pickedFile.path);
-
     }
 
     notifyListeners();
@@ -207,19 +205,15 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         shopOwnerEmail: EmailIdController.text,
         shopOwnerMobileNumber: (PhoneNumberController.text),
         shopPincode: (PinCodeController.text),
-
-        shopBannerImages:image1,
-
+        shopBannerImages: image1,
       );
-
-
 
   Future<void> UpdateProfile(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopUpdateProfileRepo.UpdateProfile(
             shopUpdateProfileReqModel, pref.getString("successToken"))
         .then((response) {
-          print(response.body);
+      print(response.body);
       final result =
           ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 

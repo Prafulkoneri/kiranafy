@@ -18,7 +18,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
-        child: PrimaryAppBar(title: "Payments"),
+        child: PrimaryAppBar(title: "Payments",isBackButtonEnabled: false,),
       ),
       body: SingleChildScrollView(
         child: Padding(

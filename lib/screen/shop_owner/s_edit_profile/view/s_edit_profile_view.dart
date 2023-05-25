@@ -50,14 +50,14 @@ class _SEditProfileViewState extends State<SEditProfileView> {
   Widget build(BuildContext context) {
     final read = context.read<ShopEditProfileDetailController>();
     final watch = context.watch<ShopEditProfileDetailController>();
-    final readMainScreen=context.read<SMainScreenController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          onBackBtnPressed: (){
-            readMainScreen.onNavigation(4,SAccountScreenView(), context);
+          onBackBtnPressed: () {
+            readMainScreen.onNavigation(4, SAccountScreenView(), context);
           },
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -507,7 +507,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
               ),
             ),
             SizedBox(
-              height: 22.w,
+              height: 90.w,
             ),
           ],
         ),

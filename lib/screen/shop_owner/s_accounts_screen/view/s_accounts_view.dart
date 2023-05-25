@@ -35,11 +35,12 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
   Widget build(BuildContext context) {
     final read = context.read<SAccountScreenController>();
     final watch = context.watch<SAccountScreenController>();
-    final readMainScreen=context.read<SMainScreenController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          isBackButtonEnabled: false,
           title: "Profile",
           onActionTap: () {},
         ),
@@ -73,17 +74,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     child: Row(
                       children: [
                         Container(
-height: 80.w,
+                          height: 80.w,
                           width: 80.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.w),
-                            border: Border.all(
-                              width: 2.w,
-                              color: Colors.white,
-                            )
-                          ),
-                          child:
-                          ClipRRect(
+                              border: Border.all(
+                                width: 2.w,
+                                color: Colors.white,
+                              )),
+                          child: ClipRRect(
                             borderRadius: BorderRadius.circular(13.w),
                             child: Image.asset(
                               'assets/images/profile_image.png',
@@ -116,7 +115,8 @@ height: 80.w,
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      readMainScreen.onNavigation(4,SEditProfileView(), context);
+                                      readMainScreen.onNavigation(
+                                          4, SEditProfileView(), context);
                                       // Navigator.push(
                                       //     context,
                                       //     MaterialPageRoute(
@@ -383,8 +383,11 @@ height: 80.w,
               ),
             ),
             GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>SSubscriptionScreenView()));
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SSubscriptionScreenView()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -683,7 +686,7 @@ height: 80.w,
               ),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 read.onLogout(context);
               },
               child: Container(

@@ -27,14 +27,19 @@ List favList=[];
 String shopId="";
 String pincode="111111";
 
+
 Future<void> initState(context)async{
   await getAllNearByShops(context);
 
 }
   AllNearShopsReqModel get allNearShopsReqModel=>AllNearShopsReqModel(pincode:pincode);
+
+
+
   Future<void> getAllNearByShops(context)async{
     SharedPreferences pref=await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
+    print(pref.getString("pincode"));
     if(pref.getString("pincode")==null){
       pincode="111111";
     }

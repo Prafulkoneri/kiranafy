@@ -85,60 +85,85 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () async {
-
+                                  read.pickFile();
                                 },
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                    top: 49.2,
-                                    bottom: 13.w,
-                                  ),
-
-                                  // You can set width of container here
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border:
-                                        Border.all(color: kgrey, width: 0.3.w),
-                                    borderRadius: BorderRadius.circular(8
-                                        // topLeft: Radius.circular(15),
-                                        // bottomLeft: Radius.circular(15),
+                                child: watch.fileToDisplay.path != ""
+                                    ? Container(
+                                        height: 160.h,
+                                        width: 160.w,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color: kgrey, width: 0.3.w),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        child: Image.asset(
-                                          "assets/images/imageupload.png",
-                                          width: 31.33.w,
-                                          height: 39.17.w,
-                                          // width: 300,
-                                          // height: 15,
-                                          // fit: BoxFit.fill
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 15.w,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Text(
-                                            "Upload\nAadhar Card",
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: kgrey,
-                                                  letterSpacing: .5,
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
+                                        child: Center(
+                                            child: Text(
+                                          watch.fileName ?? "",
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black,
+                                                letterSpacing: .5,
+                                                fontSize: 20.sp,
+                                                fontWeight: FontWeight.w400),
                                           ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
+                                        )))
+                                    : Container(
+                                        padding: EdgeInsets.only(
+                                          top: 49.2,
+                                          bottom: 13.w,
+                                        ),
+
+                                        // You can set width of container here
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color: kgrey, width: 0.3.w),
+                                          borderRadius: BorderRadius.circular(8
+                                              // topLeft: Radius.circular(15),
+                                              // bottomLeft: Radius.circular(15),
+                                              ),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              child: Image.asset(
+                                                "assets/images/imageupload.png",
+                                                width: 31.33.w,
+                                                height: 39.17.w,
+                                                // width: 300,
+                                                // height: 15,
+                                                // fit: BoxFit.fill
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15.w,
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  "Upload\nPan Card",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: kgrey,
+                                                        letterSpacing: .5,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
                               ),
                             ),
                             SizedBox(
@@ -146,9 +171,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             ),
                             Expanded(
                               child: GestureDetector(
-                                onTap: () async {
-
-                                },
+                                onTap: () async {},
                                 child: Container(
                                   padding: EdgeInsets.only(
                                     top: 49.2,
@@ -231,9 +254,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                           Row(children: [
                             Expanded(
                               child: GestureDetector(
-                                onTap: () async {
-
-                                },
+                                onTap: () async {},
                                 child: Container(
                                   padding: EdgeInsets.only(
                                     top: 49.2,
@@ -300,9 +321,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             ),
                             Expanded(
                               child: GestureDetector(
-                                onTap: () async {
-
-                                },
+                                onTap: () async {},
                                 child: Container(
                                   padding: EdgeInsets.only(
                                     top: 49.2,
