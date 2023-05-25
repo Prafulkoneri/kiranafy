@@ -53,7 +53,7 @@ class HomeScreenController extends ChangeNotifier {
     );
   }
 
-  AllCategoriesReqModel get allCategoriesReqModel=>AllCategoriesReqModel(pincode:"124587");
+  AllCategoriesReqModel get allCategoriesReqModel=>AllCategoriesReqModel(pincode:pincode);
 
   Future<void> getCategoryList(context)async{
     isLoading=true;

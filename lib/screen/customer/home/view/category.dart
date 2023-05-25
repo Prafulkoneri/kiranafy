@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:provider/provider.dart';
 import '../../near_shops/view/all_near_shops_view.dart';
 
@@ -20,6 +22,7 @@ class _ShopCategoryState extends State<ShopCategory> {
   Widget build(BuildContext context) {
    final watch=context.watch<HomeScreenController>();
     final read=context.read<HomeScreenController>();
+    final readMain=context.read<MainScreenController>();
     return SizedBox(
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -40,10 +43,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                   final element=watch.categoryFirstList[index];
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AllNearShops()));
+                      readMain.onBackPressed(1,AllNearCategoryShops(categoryId: element.id.toString(),));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

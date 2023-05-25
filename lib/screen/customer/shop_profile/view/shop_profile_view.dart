@@ -65,7 +65,9 @@ class _ShopProfileState extends State<ShopProfile> {
           return true;
         },
         child: SingleChildScrollView(
-          child: Column(children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
             Container(
               padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
               child: Row(
@@ -226,14 +228,18 @@ class _ShopProfileState extends State<ShopProfile> {
                       SizedBox(
                         width: 8.w,
                       ),
-                      Text(
-                        "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                              color: Black,
-                              // letterSpacing: .5,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400),
+                      
+                      Container(
+                        width: 200.w,
+                        child: Text(
+                          "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                          style: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                                color: Black,
+                                // letterSpacing: .5,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
                         ),
                       ),
                     ],
@@ -312,7 +318,8 @@ class _ShopProfileState extends State<ShopProfile> {
             SizedBox(
               height: 15.h,
             ),
-            const OfferProducts(),
+
+            watch.offerProduct?.isNotEmpty??false? OfferProducts():Container(),
             Padding(
               padding: EdgeInsets.only(
                 left: 19.h,
@@ -357,7 +364,7 @@ class _ShopProfileState extends State<ShopProfile> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 15.w),
-              child: const SeasonalProducts(),
+              child:  watch.seasonalProduct?.isNotEmpty??false? SeasonalProducts():Container(),
             ),
             Padding(
               padding: EdgeInsets.only(top: 30.h, left: 19.h, bottom: 15.h),
@@ -453,74 +460,74 @@ class _ShopProfileState extends State<ShopProfile> {
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: 100.h,
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        scrollDirection: Axis.horizontal,
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 8,
-                        itemBuilder: (BuildContext, index) {
-                          return GestureDetector(
-                            onTap: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Column(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          left: index == 0 ? 19.w : 0,
-                                          // top: 15.w,
-                                          right: index == 7 ? 19.w : 5.w),
-                                      // margin: EdgeInsets.only(right: 10.h),
-                                      decoration: BoxDecoration(
-                                          color: CategoryOne,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10))),
-                                      height: 50.h,
-                                      width: 70.w,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(8.w),
-                                        child: Image.asset(
-                                          'assets/images/gridone.png',
-                                          width: 68.w,
-                                          height: 49.w,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          left: index == 0 ? 19.w : 0,
-                                          // top: 15.w,
-                                          right: index == 7 ? 19.w : 5.w),
-                                      alignment: Alignment.center,
-                                      width: 70.w,
-                                      child: Text(
-                                        "Cold Drink\n & Juices",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: Black,
-                                              letterSpacing: .5,
-                                              fontSize: 11.5.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                ),
-                                // SizedBox(
-                                //   width: 10.w,
-                                // )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 100.h,
+                    //   child: ListView.builder(
+                    //     padding: EdgeInsets.zero,
+                    //     scrollDirection: Axis.horizontal,
+                    //     physics: NeverScrollableScrollPhysics(),
+                    //     shrinkWrap: true,
+                    //     itemCount: 8,
+                    //     itemBuilder: (BuildContext, index) {
+                    //       return GestureDetector(
+                    //         onTap: () {},
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.center,
+                    //           children: [
+                    //             Column(
+                    //               children: [
+                    //                 Container(
+                    //                   margin: EdgeInsets.only(
+                    //                       left: index == 0 ? 19.w : 0,
+                    //                       // top: 15.w,
+                    //                       right: index == 7 ? 19.w : 5.w),
+                    //                   // margin: EdgeInsets.only(right: 10.h),
+                    //                   decoration: BoxDecoration(
+                    //                       color: CategoryOne,
+                    //                       borderRadius: BorderRadius.all(
+                    //                           Radius.circular(10))),
+                    //                   height: 50.h,
+                    //                   width: 70.w,
+                    //                   child: Padding(
+                    //                     padding: EdgeInsets.all(8.w),
+                    //                     child: Image.asset(
+                    //                       'assets/images/gridone.png',
+                    //                       width: 68.w,
+                    //                       height: 49.w,
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Container(
+                    //                   margin: EdgeInsets.only(
+                    //                       left: index == 0 ? 19.w : 0,
+                    //                       // top: 15.w,
+                    //                       right: index == 7 ? 19.w : 5.w),
+                    //                   alignment: Alignment.center,
+                    //                   width: 70.w,
+                    //                   child: Text(
+                    //                     "Cold Drink\n & Juices",
+                    //                     textAlign: TextAlign.center,
+                    //                     style: GoogleFonts.dmSans(
+                    //                       textStyle: TextStyle(
+                    //                           color: Black,
+                    //                           letterSpacing: .5,
+                    //                           fontSize: 11.5.sp,
+                    //                           fontWeight: FontWeight.w500),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //               ],
+                    //               crossAxisAlignment: CrossAxisAlignment.center,
+                    //             ),
+                    //             // SizedBox(
+                    //             //   width: 10.w,
+                    //             // )
+                    //           ],
+                    //         ),
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -529,7 +536,10 @@ class _ShopProfileState extends State<ShopProfile> {
               padding: EdgeInsets.only(top: 17.w),
               child: const CouponsScreen(),
             ),
-            const RecommendationProducts(),
+            watch.recommandedProduct?.isNotEmpty??false? RecommendationProducts():Container(),
+                SizedBox(
+                  height: 100.w,
+                ),
           ]),
         ),
       ),
