@@ -136,15 +136,27 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               ),
                               Row(
                                 children: [
-                                  Text(
-                                    "${watch.email}",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black,
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.w400),
+                                  Flexible(
+                                    child: Text(
+                                      "${watch.email}",
+                                      // "Rachel Green",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: Black,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
                                     ),
                                   ),
+                                  // Text(
+                                  //   "${watch.email}",
+                                  // style: GoogleFonts.dmSans(
+                                  //   textStyle: TextStyle(
+                                  //       color: Black,
+                                  //       fontSize: 15.sp,
+                                  //       fontWeight: FontWeight.w400),
+                                  // ),
+                                  // ),
                                 ],
                                 // ),
                               ),
@@ -189,7 +201,9 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             GestureDetector(
               onTap: () {
-                read.onShopConfigurationClicked(context);
+                readMainScreen.onNavigation(
+                    4, SShopConfigurationView(), context);
+                // read.onShopConfigurationClicked(context);
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, top: 20, right: 28.w),
@@ -212,13 +226,25 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     SizedBox(
                       width: 18.w,
                     ),
-                    Text(
-                      'Shop Configuration Setting',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                    // Text(
+                    //   'Shop Configuration Setting',
+                    // style: GoogleFonts.dmSans(
+                    //   textStyle: TextStyle(
+                    //       color: Black,
+                    //       fontSize: 14.sp,
+                    //       fontWeight: FontWeight.w400),
+                    // ),
+                    // ),
+                    Flexible(
+                      child: Text(
+                        "Shop Configuration Setting",
+                        // "Rachel Green",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
                   ],
@@ -252,13 +278,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     SizedBox(
                       width: 18.w,
                     ),
-                    Text(
-                      'Customers List',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                    Flexible(
+                      child: Text(
+                        'Customers List',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
                   ],
@@ -292,13 +320,25 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     SizedBox(
                       width: 18.w,
                     ),
-                    Text(
-                      'Coupons & Offers',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                    // Text(
+                    //   'Coupons & Offers',
+                    //   style: GoogleFonts.dmSans(
+                    //     textStyle: TextStyle(
+                    //         color: Black,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.w400),
+                    //   ),
+                    // ),
+                    Flexible(
+                      child: Text(
+                        "Coupons & Offers",
+                        // "Rachel Green",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
                   ],
@@ -316,8 +356,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                 // color: Colors.white,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: 5,
@@ -330,15 +370,27 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   SizedBox(
                     width: 18.w,
                   ),
-                  Text(
-                    'Recommended & Seasonal Products',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                  Flexible(
+                    child: Text(
+                      "Recommended & Seasonal Products",
+                      // "Rachel Green",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
+                  // Text(
+                  //   'Recommended & Seasonal Products',
+                  //   style: GoogleFonts.dmSans(
+                  //     textStyle: TextStyle(
+                  //         color: Black,
+                  //         fontSize: 14.sp,
+                  //         fontWeight: FontWeight.w400),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -369,15 +421,27 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     SizedBox(
                       width: 18.w,
                     ),
-                    Text(
-                      'Ads & Promotions',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                    Flexible(
+                      child: Text(
+                        "Ads & Promotions",
+                        // "Rachel Green",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
+                    // Text(
+                    //   'Ads & Promotions',
+                    //   style: GoogleFonts.dmSans(
+                    //     textStyle: TextStyle(
+                    //         color: Black,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.w400),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -413,15 +477,27 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     SizedBox(
                       width: 18.w,
                     ),
-                    Text(
-                      'My Subscription',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                    Flexible(
+                      child: Text(
+                        "My Subscription",
+                        // "Rachel Green",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
+                    // Text(
+                    //   'My Subscription',
+                    //   style: GoogleFonts.dmSans(
+                    //     textStyle: TextStyle(
+                    //         color: Black,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.w400),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -450,15 +526,27 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   SizedBox(
                     width: 18.w,
                   ),
-                  Text(
-                    'Bank A/C Details',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                  Flexible(
+                    child: Text(
+                      "Bank A/C Details",
+                      // "Rachel Green",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
+                  // Text(
+                  //   'Bank A/C Details',
+                  //   style: GoogleFonts.dmSans(
+                  //     textStyle: TextStyle(
+                  //         color: Black,
+                  //         fontSize: 14.sp,
+                  //         fontWeight: FontWeight.w400),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -486,15 +574,27 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   SizedBox(
                     width: 18.w,
                   ),
-                  Text(
-                    'Payments',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                  Flexible(
+                    child: Text(
+                      "Payments",
+                      // "Rachel Green",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
+                  // Text(
+                  //   'Payments',
+                  //   style: GoogleFonts.dmSans(
+                  //     textStyle: TextStyle(
+                  //         color: Black,
+                  //         fontSize: 14.sp,
+                  //         fontWeight: FontWeight.w400),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -522,15 +622,27 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   SizedBox(
                     width: 18.w,
                   ),
-                  Text(
-                    'Reports',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                  Flexible(
+                    child: Text(
+                      "Reports",
+                      // "Rachel Green",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
+                  // Text(
+                  //   'Reports',
+                  //   style: GoogleFonts.dmSans(
+                  //     textStyle: TextStyle(
+                  //         color: Black,
+                  //         fontSize: 14.sp,
+                  //         fontWeight: FontWeight.w400),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -558,15 +670,27 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   SizedBox(
                     width: 18.w,
                   ),
-                  Text(
-                    'Help & Support',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                  Flexible(
+                    child: Text(
+                      "Help & Support",
+                      // "Rachel Green",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
+                  // Text(
+                  //   'Help & Support',
+                  //   style: GoogleFonts.dmSans(
+                  //     textStyle: TextStyle(
+                  //         color: Black,
+                  //         fontSize: 14.sp,
+                  //         fontWeight: FontWeight.w400),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -594,13 +718,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   SizedBox(
                     width: 18.w,
                   ),
-                  Text(
-                    'Notification',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                  Flexible(
+                    child: Text(
+                      'Notification',
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
                 ],
@@ -673,13 +799,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   SizedBox(
                     width: 18.w,
                   ),
-                  Text(
-                    'Settings',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                  Flexible(
+                    child: Text(
+                      'Settings',
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
                 ],
@@ -713,13 +841,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     SizedBox(
                       width: 18.w,
                     ),
-                    Text(
-                      'Sign Out',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                    Flexible(
+                      child: Text(
+                        'Sign Out',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
                   ],

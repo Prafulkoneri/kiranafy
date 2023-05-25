@@ -250,16 +250,11 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   },
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
-                    // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                    // height: 50.h,/
+                        left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                     decoration: BoxDecoration(
                         color: SplashText,
-                        // border: Border.all(width: 1, color: Black),
                         borderRadius: BorderRadius.circular(8)),
-
                     child: Column(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           "0",
@@ -293,7 +288,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
                       color: SplashText,
@@ -358,7 +353,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   // height: 55.h,
                   // width: 170.w,
                   padding: EdgeInsets.only(
-                      left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
 
                   decoration: BoxDecoration(
                       color: Custlogin, borderRadius: BorderRadius.circular(8)),
@@ -396,7 +391,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
                       color: Custlogin,
@@ -464,7 +459,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   },
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
+                        left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                     // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                     // height: 50.h,/
                     decoration: BoxDecoration(
@@ -518,7 +513,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   },
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                        left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                     // height: 50.h,/
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -577,7 +572,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -624,7 +619,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -694,7 +689,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -742,7 +737,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   decoration: BoxDecoration(
                       color: Custlogin, borderRadius: BorderRadius.circular(8)),
                   child: Column(
@@ -778,7 +773,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   decoration: BoxDecoration(
                       color: Custlogin,
                       // border: Border.all(width: 1, color: Black),
@@ -827,7 +822,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -868,7 +863,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -915,7 +910,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -984,7 +979,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 40.w, right: 40.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -1026,7 +1021,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 49.w, right: 49.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
                       color: SplashText,

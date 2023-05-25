@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/customer/order_status/order_status.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -29,17 +31,17 @@ class SSubscriptionScreenView extends StatefulWidget {
       _SSubscriptionScreenViewState();
 }
 
-String? selectedValue;
+// String? selectedValue;
 
-String radioButtonItem = '';
+// String radioButtonItem = '';
 
-bool _isChecked = true;
-String _currText = '';
+// bool _isChecked = true;
+// String _currText = '';
 
-int id = 1;
-bool _checkbox = false;
+// int id = 1;
+// bool _checkbox = false;
 
-List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
+// List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
 
 class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
   void initState() {
@@ -53,11 +55,16 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
   Widget build(BuildContext context) {
     final read = context.read<SSubscriptionController>();
     final watch = context.watch<SSubscriptionController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          title: "Subscription Plans",
+          isBackButtonEnabled: false,
+          // onBackBtnPressed: () {
+          //   readMainScreen.onBackPressed(4, SAccountScreenView());
+          // },
+          title: "Subscriptionrtiojmk,uhu Plans",
         ),
       ),
       body: Column(
