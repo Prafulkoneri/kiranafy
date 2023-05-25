@@ -22,23 +22,21 @@ class SKycVerificationController extends ChangeNotifier {
   bool isLoading = false;
   File fileToDisplay = File("");
 
-  void pickFile() async {
+  String? pdfPath;
+
+  Future<void> pickPDF() async {
     try {
-      isLoading = true;
-      result = await FilePicker.platform.pickFiles(
-        allowCompression: true,
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
-        allowedExtensions: ['jpg', 'pdf', 'doc'],
-        allowMultiple: false,
+        allowedExtensions: ['pdf', 'jpg'],
       );
       if (result != null) {
-        fileName = result!.files.first.name;
-        pickedfile = result!.files.first;
-        fileToDisplay = File(pickedfile!.path.toString());
-        print("File name $fileName");
+        // setState(() {
+        pdfPath = result.files.single.path;
+        // });
       }
     } catch (e) {
-      print(e);
+      print('Error while picking the file: $e');
     }
     notifyListeners();
   }

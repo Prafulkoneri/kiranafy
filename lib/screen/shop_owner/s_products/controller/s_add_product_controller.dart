@@ -65,7 +65,7 @@ class SAddProductsController extends ChangeNotifier {
   ////Shop owner Add Products Start
 
   ShopAddProductsListRequestModel get shopAddProductRequestModel =>
-      ShopAddProductsListRequestModel(category_id: "6");
+      ShopAddProductsListRequestModel(category_id: categoryId);
 
   Future<void> shopAddProducts(context, id) async {
     isLoading=true;
@@ -120,7 +120,7 @@ class SAddProductsController extends ChangeNotifier {
 
   UploadAddProductsRequestModel get uploadAddProductsRequestModel=>UploadAddProductsRequestModel(
     product_id: productId,
-    category_id: "6",
+    category_id: categoryId,
   );
 
   Future<void> uploadAddProducts(context)async{

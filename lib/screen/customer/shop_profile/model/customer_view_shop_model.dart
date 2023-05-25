@@ -33,14 +33,14 @@ class CustomerViewShopResModel {
 }
 
 class OfferProduct{
-  String ? id;
+  int ? id;
   String ? productName;
   String ? productImagePath;
   String ? productImageName;
   String ? weight;
   String ? offerPrice;
-  String ? productId;
-  String ? selectedProductId;
+  int ? productId;
+  int ? selectedProductId;
   String ? status;
   String ? unit;
   OfferProduct({
@@ -63,21 +63,21 @@ class OfferProduct{
     productImageName=json["product_image_name"];
     productImagePath=json["product_image_path"];
     productName=json["product_name"];
-    unit=json["unit"];
+    weight=json["weight"];
     status=json["status"];
     unit=json["unit"];
   }
 }
 
 class SeasonalProduct{
-  String ? id;
+  int ? id;
   String ? productName;
   String ? productImagePath;
   String ? productImageName;
   String ? weight;
   String ? offerPrice;
-  String ? productId;
-  String ? selectedProductId;
+  int ? productId;
+  int ? selectedProductId;
   String ? status;
   String ? unit;
   SeasonalProduct({
@@ -107,14 +107,16 @@ class SeasonalProduct{
 }
 
 class RecommandedProducts{
-  String ? id;
+  int ? id;
   String ? productName;
   String ? productImagePath;
   String ? productImageName;
   String ? weight;
   String ? offerPrice;
-  String ? productId;
-  String ? selectedProductId;
+  String? mrpPrice;
+  String? discountPercentage;
+  int ? productId;
+  int ? selectedProductId;
   String ? status;
   String ? unit;
   RecommandedProducts({
@@ -128,6 +130,7 @@ class RecommandedProducts{
     this.unit,
     this.productImageName,
     this.weight,
+    this.mrpPrice,this.discountPercentage
   });
   RecommandedProducts.fromJson(Map<String,dynamic>json){
     id=json["id"];
@@ -137,7 +140,9 @@ class RecommandedProducts{
     productImageName=json["product_image_name"];
     productImagePath=json["product_image_path"];
     productName=json["product_name"];
-    unit=json["unit"];
+    weight=json["weight"];
+    mrpPrice=json["mrp_price"];
+    discountPercentage=json["discount_percentage"];
     status=json["status"];
     unit=json["unit"];
   }

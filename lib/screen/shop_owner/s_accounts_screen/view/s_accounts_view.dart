@@ -162,7 +162,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     child: Row(
                       children: [
                         Text(
-                          'Shop KYC Approved',
+                          'Shop KYC Pending',
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
                                 color: Colors.white,

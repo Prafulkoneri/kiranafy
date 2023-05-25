@@ -288,7 +288,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                         ),
                                         GestureDetector(
                                           onTap:(){
-                                            read.deleteProduct(context, index);
+                                            read.deleteProduct(context, index,element?.id);
                                           },
                                           child: Container(
                                             padding: EdgeInsets.all(8),

@@ -31,7 +31,7 @@ class _OfferProductsState extends State<OfferProducts> {
             watch.offerProduct?.length??0,
             (index) {
               final element=watch.offerProduct?[index];
-              return Row(
+              return watch.offerProduct?[index].offerPrice!=""?Row(
                 children: [
                   SizedBox(
                     width: 10.w,
@@ -103,7 +103,7 @@ class _OfferProductsState extends State<OfferProducts> {
                             Row(
                               children: [
                                 Text(
-                                  "${element?.weight}",
+                                  "${element?.weight}${element?.unit}",
                                   style: GoogleFonts.roboto(
                                     textStyle: TextStyle(
                                         color: Black1,
@@ -143,7 +143,7 @@ class _OfferProductsState extends State<OfferProducts> {
                     ),
                   ),
                 ],
-              );
+              ):Container();
             }
           ),
         ),

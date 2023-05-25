@@ -498,10 +498,23 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SizedBox(
                     height: 22.w,
                   ),
-                  PrimarySTextFormField(
-                    controller: watch.PinCodeController,
+                  SDropDownField(
+                    onChanged: (value) async {
+                      print(value);
+                    },
+                    items: watch.pincodeList
+                        ?.map((item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ))
+                        .toList(),
+                    hint: "Pincode",
                     titleHeader: "Pincode",
-                    hintText: "Pincode",
                   ),
                 ],
               ),

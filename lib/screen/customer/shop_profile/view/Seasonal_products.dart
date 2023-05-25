@@ -29,7 +29,7 @@ class _SeasonalProductsState extends State<SeasonalProducts> {
             watch.seasonalProduct?.length??0,
             (index) {
               final element=watch.offerProduct?[index];
-           return   Row(
+           return  Row(
                 children: [
                   SizedBox(
                     width: 10.w,
@@ -79,14 +79,16 @@ class _SeasonalProductsState extends State<SeasonalProducts> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                  "${element?.productName}",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w600),
+                                Flexible(
+                                  child: Text(
+                                    "${element?.productName}",
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                          color: Black1,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
                                 ),
                               ],

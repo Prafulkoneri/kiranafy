@@ -8,7 +8,7 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 class ShopProfileController extends ChangeNotifier{
-  String shopId="3";
+  String shopId="";
   CustomerViewShopRepo customerViewShopRepo=CustomerViewShopRepo();
   ShopData ? shopData;
   ShopDetails ? shopDetails;
@@ -22,12 +22,12 @@ class ShopProfileController extends ChangeNotifier{
   }
 
   CustomerViewShopReqModel get customerViewShopReqModel=>CustomerViewShopReqModel(
-    shopId: shopId,
+    shopId: "3",
   );
 
   Future<void> getShopDetails(context,id)async{
-    // print("id$id");
-    // shopId=id;
+    print("id$id");
+    shopId=id;
     SharedPreferences pref=await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     customerViewShopRepo.getShopDetails(customerViewShopReqModel,pref.getString("successToken")).then((response){
@@ -35,12 +35,12 @@ class ShopProfileController extends ChangeNotifier{
       final result =
       CustomerViewShopResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        // shopData=result.data;
-        // shopDetails=shopData?.shopDetails;
-        // shopCategory=shopData?.shopCategories;
-        // offerProduct=shopData?.offerProduct;
-        // seasonalProduct=shopData?.seasonalProduct;
-        // recommandedProduct=shopData?.recommandedProduct;
+        shopData=result.data;
+        shopDetails=shopData?.shopDetails;
+        shopCategory=shopData?.shopCategories;
+        offerProduct=shopData?.offerProduct;
+        seasonalProduct=shopData?.seasonalProduct;
+        recommandedProduct=shopData?.recommandedProduct;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

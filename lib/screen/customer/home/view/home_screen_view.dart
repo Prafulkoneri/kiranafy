@@ -68,14 +68,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     final watch = context.watch<HomeScreenController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
-      body:SingleChildScrollView(
+      body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // SizedBox(
-            //   height: 12.h,
-            // ),
             Container(
               padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
               child: Row(
@@ -165,6 +162,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             ),
 
             ////image
+
+
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: ExpandablePageView.builder(
@@ -173,7 +172,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   padEnds: false,
                   pageSnapping: true,
                   controller: _pageController,
-                  onPageChanged: (page) {
+                  onPageChanged: (page)
+                  {
                     setState(() {
                       activePage = page;
                     });
@@ -183,18 +183,19 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       child: Image.asset(
                         images[pagePosition],
                         height: 170.w,
-                        // width: 340.w,
-                        // scale: 0.5,
+
                         fit: BoxFit.fill,
                       ),
                       margin: EdgeInsets.only(
                           left: pagePosition == 0 ? 19.w : 0,
-                          // top: 15.w,
+
                           right:
-                              pagePosition == images.length - 1 ? 19.w : 10.w),
+                          pagePosition == images.length - 1 ? 19.w : 10.w),
                     );
                   }),
             ),
+
+
             SizedBox(
               height: 5.h,
             ),
@@ -244,27 +245,31 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             SizedBox(
               height: 30.h,
             ),
-            watch.categoryFirstList.isNotEmpty?  Container(
-              padding: EdgeInsets.only(
-                right: 19.0.w,
-                left: 19.0.w,
-              ),
-              child: Text(
-                "Shop By Category",
-                style: GoogleFonts.roboto(
-                  textStyle: TextStyle(
-                      color: DarkBlack,
-                      letterSpacing: .5,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ):Container(),
+            watch.categoryFirstList.isNotEmpty
+                ? Container(
+                    padding: EdgeInsets.only(
+                      right: 19.0.w,
+                      left: 19.0.w,
+                    ),
+                    child: Text(
+                      "Shop By Category",
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                            color: DarkBlack,
+                            letterSpacing: .5,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  )
+                : Container(),
 
-            watch.categoryFirstList.isNotEmpty?SizedBox(
-              height: 15.h,
-            ):Container(),
-            watch.categoryFirstList.isNotEmpty? ShopCategory():Container(),
+            watch.categoryFirstList.isNotEmpty
+                ? SizedBox(
+                    height: 15.h,
+                  )
+                : Container(),
+            watch.categoryFirstList.isNotEmpty ? ShopCategory() : Container(),
             // SizedBox(
             //   height: 20.h,
             // ),

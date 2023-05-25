@@ -7,6 +7,7 @@ class AccountDetailsResModel {
   List<CityData>? cities;
   List<AreaData>? areas;
   List<ShopBannerImageData>? shopBannerImages;
+  List ? pincode;
 
   AccountDetailsResModel({
     required this.status,
@@ -17,6 +18,7 @@ class AccountDetailsResModel {
     required this.cities,
     required this.areas,
     required this.shopBannerImages,
+    required this.pincode,
   });
 
   AccountDetailsResModel.fromJson(Map<String, dynamic> json) {
@@ -58,6 +60,13 @@ class AccountDetailsResModel {
       areas = <AreaData>[];
       json["areas"].forEach((v) {
         areas!.add(AreaData.fromJson(v));
+      });
+    }
+
+    if (json["pincodes"] != null) {
+      pincode =[];
+      json["pincodes"].forEach((v) {
+        pincode!.add(v);
       });
     }
 

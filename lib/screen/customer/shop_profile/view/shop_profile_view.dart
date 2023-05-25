@@ -65,6 +65,7 @@ class _ShopProfileState extends State<ShopProfile> {
           return true;
         },
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
               children: [
