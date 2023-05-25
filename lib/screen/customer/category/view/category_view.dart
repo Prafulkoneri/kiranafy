@@ -274,15 +274,6 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
               ),
             ),
           ),
-          // IconButton(
-          //   icon: Icon(
-          //     Icons.settings,
-          //     color: Colors.white,
-          //   ),
-          //   onPressed: () {
-          //     // do something
-          //   },
-          // )
         ],
       ),
       body: Column(
