@@ -90,7 +90,7 @@ class SMainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onBackPressed(tabIndex,screenName){
+  Future<void> onBackPressed(tabIndex,screenName)async{
     currentTab=tabIndex;
     currentScreen=screenName;
     notifyListeners();

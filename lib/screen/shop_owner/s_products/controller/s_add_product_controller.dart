@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_add_product_model.dart';
@@ -8,6 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_se
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_add_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_add_products_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/shop_custome_products_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,6 +29,8 @@ class SAddProductsController extends ChangeNotifier {
   String productId = "";
   bool isSelectAll = false;
   String categoryName="";
+  bool uploadSuccess=false;
+  MainScreenController mainScreenController=MainScreenController();
 
 
 
@@ -124,6 +128,7 @@ class SAddProductsController extends ChangeNotifier {
   );
 
   Future<void> uploadAddProducts(context)async {
+    uploadSuccess=true;
     if (selectedProductsId.isEmpty) {
       Utils.showPrimarySnackbar(context, "Select Product",
           type: SnackType.error);
@@ -146,8 +151,10 @@ class SAddProductsController extends ChangeNotifier {
         if (response.statusCode == 200) {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
+          MainScreenController().onBackPressed(
+              0, SSelectedProductView(categoryId: categoryId));
           notifyListeners();
-          return true;
+          uploadSuccess=false;
         }
         else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -165,6 +172,10 @@ class SAddProductsController extends ChangeNotifier {
         },
       );
     }
+  }
+
+  Future<void> upload(context)async{
+    await uploadAddProducts(context);
   }
 
   void onSelecteAllProducts() {

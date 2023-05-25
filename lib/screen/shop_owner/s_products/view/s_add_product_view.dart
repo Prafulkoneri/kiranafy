@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
@@ -32,6 +35,13 @@ class _AddProductViewState extends State<AddProductView> {
           .read<SAddProductsController>()
           .initState(context, widget.categoryId);
     });
+
+  }
+  navigate(){
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<MainScreenController>().onBackPressed(0, SSelectedProductView(categoryId:widget.categoryId));
+    });
   }
 
   @override
@@ -50,14 +60,8 @@ class _AddProductViewState extends State<AddProductView> {
             title: "Add Products",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: ()async{
-             await read.uploadAddProducts(context).then((success){
-               if(watch.selectedProductsId.isEmpty){
-                 return;
-               }
-               readMainScreen.onBackPressed(0,SSelectedProductView(categoryId:watch.categoryId));
-             });
-
-
+             await read.upload(context);
+            // await readMainScreen.onBackPressed(0,SSelectedProductView(categoryId: watch.categoryId));
             },
           ),
         ),

@@ -4,6 +4,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
@@ -27,12 +33,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String selectedAreaId = "";
   int selectedPincode=0;
   List<CountryData>? countryDataList;
-  List<StatedData>? stateDataList;
+  List<StateData>? stateDataList;
   List<CityData>? cityDataList;
   List<AreaData>? areaDataList;
   List<File> imageFileList = [];
   List<ShopBannerImageData>? bannerImageList;
-
+  RegistrationDataRepo registrationDataRepo = RegistrationDataRepo();
   String image1 = "";
   String image2 = "";
   String image3 = "";
@@ -239,8 +245,184 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       },
     );
   }
+  void onCountrySelected(value) async {
+    selectedCountryId = value.toString();
+    notifyListeners();
+  }
 
-  /////End Update Profile/////////////////
+  Future<void> onStateSelected(value) async {
+    selectedStateId = value.toString();
+    notifyListeners();
+  }
 
-  //////////////////Image Picker/////////////////////////////
+  GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
+    stateId: selectedStateId.toString(),
+  );
+
+  Future<void> getCityList(context) async {
+    registrationDataRepo.getCityList(_cityListReqModel).then((response) {
+      final result = GetCityListResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        cityDataList = result.cityData;
+        if (result.cityData!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "No City Found",
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> onCitySelected(value) async {
+    selectedCityId = value.toString();
+    notifyListeners();
+  }
+
+  GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
+    cityId: selectedCityId.toString(),
+  );
+
+  Future<void> onAreaSelected(value) async {
+    selectedAreaId = value.toString();
+    notifyListeners();
+  }
+
+  Future<void> getAreaList(context) async {
+    registrationDataRepo.getAreaList(_areaListReqModel).then((response) {
+      final result = GetAreaListResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        areaDataList = result.areaData;
+        if (result.areaData!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "No Area Found",
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
+    areaId: selectedAreaId.toString(),
+  );
+
+  Future<void> getPinCodeList(context) async {
+    registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
+      final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        pincodeList = result.pincodeData;
+        print(pincodeList);
+        if (result.pincodeData!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "No Pincode Found",
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> onPincodeSelected(value) async {
+    selectedPincode = int.parse(value.toString());
+    // print(object);
+    notifyListeners();
+  }
+
+
+  Future<void> getCountryList(context) async {
+    registrationDataRepo.getCountryList(context).then((response) {
+      print(response.statusCode);
+      print(response.body);
+      final result = GetCountryListResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        print("${response.body}");
+        countryDataList= result.countryData;
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  ///////////State
+
+
+  GetStateListReqModel get _stateListReqModel => GetStateListReqModel(
+    countryId: selectedCountryId.toString(),
+  );
+
+  Future<void> getStateList(context) async {
+    registrationDataRepo.getStateList(_stateListReqModel).then((response) {
+      final result = GetStateListResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        stateDataList = result.stateData;
+        if (result.stateData!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "No State Found",
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 }

@@ -58,7 +58,7 @@ class MainScreenController extends ChangeNotifier {
   }
 
 
-  void onBackPressed(tabIndex,screenName){
+  Future<void> onBackPressed(tabIndex,screenName)async{
     currentTab=tabIndex;
     currentScreen=screenName;
     notifyListeners();

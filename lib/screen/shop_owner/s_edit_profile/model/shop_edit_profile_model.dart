@@ -1,9 +1,14 @@
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
+
 class AccountDetailsResModel {
   int? status;
   String? message;
   ShopDetailsData? shopDetails;
   List<CountryData>? countries;
-  List<StatedData>? states;
+  List<StateData>? states;
   List<CityData>? cities;
   List<AreaData>? areas;
   List<ShopBannerImageData>? shopBannerImages;
@@ -41,9 +46,9 @@ class AccountDetailsResModel {
 
 //list State
     if (json["states"] != null) {
-      states = <StatedData>[];
+      states = <StateData>[];
       json["states"].forEach((v) {
-        states!.add(StatedData.fromJson(v));
+        states!.add(StateData.fromJson(v));
       });
     }
 
@@ -81,53 +86,14 @@ class AccountDetailsResModel {
 }
 
 ////Area
-class AreaData {
-  int? id;
-  String? areaName;
 
-  AreaData({
-    required this.id,
-    required this.areaName,
-  });
-
-  AreaData.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    areaName = json["area_name"];
-  }
-}
 
 ////CityData
 
-class CityData {
-  int? id;
-  String? cityName;
 
-  CityData({
-    required this.id,
-    required this.cityName,
-  });
-
-  CityData.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    cityName = json["city_name"];
-  }
-}
 
 ////Country
-class CountryData {
-  int? id;
-  String? countryName;
 
-  CountryData({
-    required this.id,
-    required this.countryName,
-  });
-
-  CountryData.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    countryName = json["country_name"];
-  }
-}
 
 class ShopBannerImageData {
   int? id;
@@ -200,18 +166,4 @@ class ShopDetailsData {
   }
 }
 
-class StatedData {
-  int? id;
-  String? stateName;
 
-  StatedData({
-    required this.id,
-    required this.stateName,
-  });
-
-  ////maping data
-  StatedData.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    stateName = json["state_name"];
-  }
-}
