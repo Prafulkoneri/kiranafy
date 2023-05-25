@@ -25,8 +25,10 @@ class SSubscriptionController extends ChangeNotifier {
   String selectedServicesId = "0";
   bool oneTimeShop = false;
   bool productPrice = false;
+
   bool shopDigital = false;
   bool primeCatchy = false;
+  String planAmount = "";
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
@@ -156,8 +158,9 @@ class SSubscriptionController extends ChangeNotifier {
     }
   }
 
-  void onRadioBtnChanged(value, id) {
+  void onRadioBtnChanged(value, id, price) {
     radioGrpValue = value;
+    planAmount = price.toString();
     selectedPlanId = id.toString();
     notifyListeners();
   }
