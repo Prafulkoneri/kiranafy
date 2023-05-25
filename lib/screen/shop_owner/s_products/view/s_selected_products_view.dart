@@ -349,12 +349,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                               Divider(),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(10)
-                                                      // topLeft: Radius.circular(10),
-                                                      // topRight: Radius.circular(10),
-                                                      ),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10)),
                                                 ),
                                                 padding: EdgeInsets.only(
                                                     left: 11.w, right: 11.w),
@@ -412,6 +411,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 height: 5.h,
                                               ),
                                               ListView.builder(
+                                                padding: EdgeInsets.zero,
                                                 itemCount: watch
                                                         .productsFromAdmin?[
                                                             index]
@@ -448,25 +448,31 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           MainAxisAlignment
                                                               .spaceBetween,
                                                       children: [
-                                                        Text(
-                                                          "${element?.mrpPrice}",
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black1,
-                                                                fontSize: 14.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                          ),
-                                                        ),
                                                         Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
                                                           children: [
                                                             Text(
                                                               "${element?.weightAndUnit}",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle: TextStyle(
+                                                                    color:
+                                                                        Black1,
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          // mainAxisAlignment:
+                                                          //     MainAxisAlignment
+                                                          //         .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              "${element?.mrpPrice}",
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
@@ -483,7 +489,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               ),
                                                             ),
                                                             SizedBox(
-                                                              width: 18.w,
+                                                              width: 45.w,
                                                             ),
                                                             Text(
                                                               "${element?.offerPrice}",

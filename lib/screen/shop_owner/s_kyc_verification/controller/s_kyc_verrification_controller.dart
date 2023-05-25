@@ -11,10 +11,15 @@ import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/reposit
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/utils/common_functions.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SKycVerificationController extends ChangeNotifier {
   SKycVerificationRepo sKycVerificationRepo = SKycVerificationRepo();
+  TextEditingController adharCardController = TextEditingController();
+  TextEditingController panCardController = TextEditingController();
+  bool adharCardValidation = false;
+  bool panCardValidation = false;
 
   FilePickerResult? result;
   String? fileName;
@@ -34,6 +39,10 @@ class SKycVerificationController extends ChangeNotifier {
   String image4 = "";
 
   String? pdfPath;
+  void onVerifyChecked(value) {
+    adharCardValidation = value;
+    notifyListeners();
+  }
 
   // Future<void> pickPDF() async {
   //   try {
@@ -155,10 +164,34 @@ class SKycVerificationController extends ChangeNotifier {
   }
 
   void onUploadClicked(context) async {
+    if (fileImage1.path == "") {
+      Utils.showPrimarySnackbar(context, "Please Select Adhar Card Image",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+    if (fileImage2.path == "") {
+      Utils.showPrimarySnackbar(context, "Please Select Pan Card Image",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+    if (adharCardController.text.length < 11) {
+      Utils.showPrimarySnackbar(context, "Please Enter Adhar Card Number",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+
+    if (panCardController.text.length < 10) {
+      Utils.showPrimarySnackbar(context, "Please Enter Pan Card Number",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => SSubscriptionScreenView()));
   }
-
-  /////////////////////////////////
 }

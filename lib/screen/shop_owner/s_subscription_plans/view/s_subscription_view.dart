@@ -62,9 +62,9 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
         child: PrimaryAppBar(
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
-            readMainScreen.onBackPressed(4, SAccountScreenView());
+            Navigator.pop(context);
           },
-          title: "Subscriptionrtiojmk,uhu Plans",
+          title: "Subscription Plans",
         ),
       ),
       body: Column(
@@ -149,7 +149,10 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                       watch.radioGrpValue,
                                                   onChanged: (value) {
                                                     read.onRadioBtnChanged(
-                                                        value, element?.id);
+                                                        value,
+                                                        element?.id,
+                                                        element
+                                                            ?.subscriptionPrice);
                                                   },
                                                   leading: "",
                                                 ),
@@ -304,7 +307,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                                             children: [
                                                                               Flexible(
                                                                                 child: Text(
-                                                                                  "INR ${element?.planBenifits}",
+                                                                                  "${element?.planBenifits}",
                                                                                   style: GoogleFonts.dmSans(
                                                                                     textStyle: TextStyle(color: Black1, height: 1.5, fontSize: 14.sp, fontWeight: FontWeight.w400),
                                                                                   ),
@@ -482,7 +485,9 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                         // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "₹ 4,000",
+                            '\u{20B9} ${watch.planAmount}',
+                            // "₹ 4,000",
+
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
                                   color: Colors.white,

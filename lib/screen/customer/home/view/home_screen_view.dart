@@ -162,30 +162,35 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             ),
 
             ////image
-            ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: watch.data?.length ?? 0,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                final element = watch.data?[index];
-                return Container(
-                    padding: EdgeInsets.only(
-                      right: 19.0.w,
-                      left: 19.0.w,
-                    ),
-                    width: ScreenUtil().screenWidth,
-                    // height: 100.h,
-                    child: Image.network(
-                      "${element?.bannerImagePath}",
-                      fit: BoxFit.cover,
-                    )
-                    // Image(
-                    //   image: AssetImage("assets/images/banner.png"),
-                    //   height: 163.h,
-                    //   width: 352.w,
-                    // ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ExpandablePageView.builder(
+                  itemCount: images.length,
+                  physics: BouncingScrollPhysics(),
+                  padEnds: false,
+                  pageSnapping: true,
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    setState(() {
+                      activePage = page;
+                    });
+                  },
+                  itemBuilder: (context, pagePosition) {
+                    return Container(
+                      child: Image.asset(
+                        images[pagePosition],
+                        height: 170.w,
+                        // width: 340.w,
+                        // scale: 0.5,
+                        fit: BoxFit.fill,
+                      ),
+                      margin: EdgeInsets.only(
+                          left: pagePosition == 0 ? 19.w : 0,
+                          // top: 15.w,
+                          right:
+                              pagePosition == images.length - 1 ? 19.w : 10.w),
                     );
-              },
+                  }),
             ),
             // ExpandablePageView.builder(
             //     itemCount: watch.data?.length ?? 0,

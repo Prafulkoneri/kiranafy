@@ -232,6 +232,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             children: [
                               Expanded(
                                   child: PrimarySTextFormField(
+                                controller: watch.adharCardController,
                                 hintText: "Aadhar Card No.",
                                 hintFontSize: 12.sp,
                               )),
@@ -241,6 +242,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                               // SizedBox(width: 18.w),
                               Expanded(
                                   child: PrimarySTextFormField(
+                                controller: watch.panCardController,
                                 hintText: "PAN Card No",
                                 hintFontSize: 12.sp,
                               )),

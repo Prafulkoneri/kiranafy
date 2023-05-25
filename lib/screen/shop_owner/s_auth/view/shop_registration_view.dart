@@ -46,7 +46,10 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
-          child: PrimaryAppBar(title: "Shop Registration"),
+          child: PrimaryAppBar(
+            title: "Shop Registration",
+            isBackButtonEnabled: false,
+          ),
         ),
         body: Stack(
           alignment: Alignment.topCenter,
@@ -360,6 +363,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         text: "Next",
                         color: Color(0xff4689EC),
                         onTap: () {
+                          print("uicvneuiqboewybte");
                           read.onNextClicked(context);
                         },
                       ),
