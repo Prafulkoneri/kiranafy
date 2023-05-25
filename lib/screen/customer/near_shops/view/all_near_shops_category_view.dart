@@ -9,25 +9,25 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
-import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:provider/provider.dart';
 
-class AllNearShops extends StatefulWidget {
-  const AllNearShops({super.key});
+class AllNearCategoryShops extends StatefulWidget {
+  final String ? categoryId;
+  const AllNearCategoryShops({super.key,required this.categoryId});
 
   @override
-  State<AllNearShops> createState() => _AllNearShopsState();
+  State<AllNearCategoryShops> createState() => _AllNearCategoryShopsState();
 }
 
-class _AllNearShopsState extends State<AllNearShops> {
+class _AllNearCategoryShopsState extends State<AllNearCategoryShops> {
   final TextEditingController _searchController = TextEditingController();
   ScrollController scrollController=ScrollController();
 
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<AllShopController>().initState(context);
+      context.read<AllCategoryShopController>().initState(context,widget.categoryId);
     });
     setPagination();
   }
@@ -36,17 +36,17 @@ class _AllNearShopsState extends State<AllNearShops> {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         print("lets goo");
         SchedulerBinding.instance.addPostFrameCallback((_) {
-          context.read<AllShopController>().onScrollMaxExtent(context);
+          context.read<AllCategoryShopController>().onScrollMaxExtent(context);
         }
         );
-        }
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<AllShopController>();
-    final read = context.read<AllShopController>();
+    final watch = context.watch<AllCategoryShopController>();
+    final read = context.read<AllCategoryShopController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
       body: WillPopScope(
@@ -59,7 +59,7 @@ class _AllNearShopsState extends State<AllNearShops> {
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
                 child: Row(
@@ -162,7 +162,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                   child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children:
-                          List.generate(watch.nearByShop?.length ?? 0, (index) {
+                      List.generate(watch.nearByShop?.length ?? 0, (index) {
                         print(watch.nearByShop?.length);
                         final element = watch.nearByShop?[index];
                         return GestureDetector(
@@ -182,33 +182,33 @@ class _AllNearShopsState extends State<AllNearShops> {
                                     margin: EdgeInsets.only(
                                         left: index == 0 ? 19.w : 0,
                                         right: index ==
-                                                int.parse(
-                                                        "${watch.nearByShop?.length.toString()}") -
-                                                    1
+                                            int.parse(
+                                                "${watch.nearByShop?.length.toString()}") -
+                                                1
                                             ? 19.w
                                             : 5.w),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15.w),
                                         image: watch.nearByShop?[index]
-                                                    .shopBannerImagePath ==
-                                                ""
+                                            .shopBannerImagePath ==
+                                            ""
                                             ? DecorationImage(
-                                                scale: 1.0,
-                                                image: AssetImage(
-                                                    'assets/images/nearshop2.png'),
-                                                fit: BoxFit.fill)
+                                            scale: 1.0,
+                                            image: AssetImage(
+                                                'assets/images/nearshop2.png'),
+                                            fit: BoxFit.fill)
                                             : DecorationImage(
-                                                scale: 1.0,
-                                                image: NetworkImage(
-                                                    "${element?.shopBannerImagePath}"),
-                                                fit: BoxFit.fill)),
+                                            scale: 1.0,
+                                            image: NetworkImage(
+                                                "${element?.shopBannerImagePath}"),
+                                            fit: BoxFit.fill)),
                                     child: Padding(
                                       padding: EdgeInsets.all(10.h),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(),
                                           Column(
@@ -220,7 +220,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                           // letterSpacing: .5,
                                                           fontSize: 13.sp,
                                                           fontWeight:
-                                                              FontWeight.w600))),
+                                                          FontWeight.w600))),
                                               // ),
                                               Text("${element?.areaName}",
                                                   style: GoogleFonts.roboto(
@@ -230,10 +230,10 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                           fontSize: 12.sp,
                                                           // height: 10,
                                                           fontWeight:
-                                                              FontWeight.w400))),
+                                                          FontWeight.w400))),
                                             ],
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                           ),
                                         ],
                                       ),
@@ -243,31 +243,31 @@ class _AllNearShopsState extends State<AllNearShops> {
                               ),
                               Positioned(
                                   child: Container(
-                                margin: EdgeInsets.only(
-                                    left: index == 0 ? 19.w : 0,
-                                    right: index ==
+                                    margin: EdgeInsets.only(
+                                        left: index == 0 ? 19.w : 0,
+                                        right: index ==
                                             int.parse(
-                                                    "${watch.nearByShop?.length.toString()}") -
+                                                "${watch.nearByShop?.length.toString()}") -
                                                 1
-                                        ? 19.w
-                                        : 5.w),
-                                height: 120.h,
-                                width: 200.w,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(13.w),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      stops: [
-                                        0.1,
-                                        0.9,
-                                      ],
-                                      colors: [
-                                        Colors.white.withOpacity(0),
-                                        Colors.black.withOpacity(0.05),
-                                      ],
-                                    )),
-                              )),
+                                            ? 19.w
+                                            : 5.w),
+                                    height: 120.h,
+                                    width: 200.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(13.w),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          stops: [
+                                            0.1,
+                                            0.9,
+                                          ],
+                                          colors: [
+                                            Colors.white.withOpacity(0),
+                                            Colors.black.withOpacity(0.05),
+                                          ],
+                                        )),
+                                  )),
                               Positioned(
                                 right: 25.w,
                                 top: 8.w,
@@ -275,20 +275,20 @@ class _AllNearShopsState extends State<AllNearShops> {
                                   onTap: () {
                                     watch.favNearByShop[index]
                                         ? read.removeNearByFavList(
-                                            context, element?.id, index)
+                                        context, element?.id, index)
                                         : read.updateNearByFavList(
-                                            context, element?.id, index);
+                                        context, element?.id, index);
                                   },
                                   child: watch.favNearByShop[index]
                                       ? SvgPicture.asset(
-                                          "assets/icons/fav_selected.svg",
-                                          width: 26.w,
-                                          height: 14.h,
-                                        ) : SvgPicture.asset(
-                                          "assets/images/favorite.svg",
-                                          width: 26.w,
-                                          height: 14.h,
-                                        ),
+                                    "assets/icons/fav_selected.svg",
+                                    width: 26.w,
+                                    height: 14.h,
+                                  ) : SvgPicture.asset(
+                                    "assets/images/favorite.svg",
+                                    width: 26.w,
+                                    height: 14.h,
+                                  ),
                                 ),
                               ),
                             ],
@@ -301,7 +301,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                 Stack(
                   children: [
                     ListView.builder(
-                        // scrollDirection: Axis.vertical,p
+                      // scrollDirection: Axis.vertical,p
                         physics: NeverScrollableScrollPhysics(),
                         // physics: BouncingScrollPhysics(),
                         shrinkWrap: true,
@@ -328,21 +328,21 @@ class _AllNearShopsState extends State<AllNearShops> {
                                         borderRadius: BorderRadius.circular(15.w),
                                         image: element.shopBannerImagePath == ""
                                             ? DecorationImage(
-                                                // scale: 1.0,
-                                                image: AssetImage(
-                                                    'assets/images/nearshop2.png'),
-                                                fit: BoxFit.cover)
+                                          // scale: 1.0,
+                                            image: AssetImage(
+                                                'assets/images/nearshop2.png'),
+                                            fit: BoxFit.cover)
                                             : DecorationImage(
-                                                // scale: 1.0,
-                                                image: NetworkImage(
-                                                    '${element.shopBannerImagePath}'),
-                                                fit: BoxFit.cover)),
+                                          // scale: 1.0,
+                                            image: NetworkImage(
+                                                '${element.shopBannerImagePath}'),
+                                            fit: BoxFit.cover)),
                                     child: Padding(
                                       padding: EdgeInsets.all(10.h),
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.end,
@@ -359,12 +359,12 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                               // letterSpacing: .5,
                                                               fontSize: 15.sp,
                                                               fontWeight:
-                                                                  FontWeight.w600))),
+                                                              FontWeight.w600))),
                                                 ],
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Row(
                                                     children: [
@@ -380,13 +380,13 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                             style: GoogleFonts.roboto(
                                                                 textStyle: TextStyle(
                                                                     color:
-                                                                        Colors.white,
+                                                                    Colors.white,
                                                                     letterSpacing: .5,
                                                                     fontSize: 12.sp,
                                                                     // height: 10,
                                                                     fontWeight:
-                                                                        FontWeight
-                                                                            .w400))),
+                                                                    FontWeight
+                                                                        .w400))),
                                                       ),
                                                     ],
                                                   ),
@@ -400,7 +400,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                     ),
                                                     child: Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.center,
+                                                      MainAxisAlignment.center,
                                                       children: [
                                                         SvgPicture.asset(
                                                           "assets/images/star.svg",
@@ -418,7 +418,7 @@ class _AllNearShopsState extends State<AllNearShops> {
                                                                 letterSpacing: .5,
                                                                 fontSize: 12.sp,
                                                                 fontWeight:
-                                                                    FontWeight.w400),
+                                                                FontWeight.w400),
                                                           ),
                                                         ),
                                                       ],
@@ -461,24 +461,24 @@ class _AllNearShopsState extends State<AllNearShops> {
                                   right:20.w,
                                   top:10.w,
                                   child: InkWell(
-                          onTap: () {
-                          watch.favAllShop[index]
-                          ? read.removeAllShopFavList(
-                          context, element.id, index)
-                              : read.updateAllShopFavList(
-                          context, element.id, index);
-                          },
-                          child: watch.favAllShop[index]
-                          ? SvgPicture.asset(
-                          "assets/icons/fav_selected.svg",
-                          width: 26.w,
-                          height: 14.h,
-                          ) : SvgPicture.asset(
-                          "assets/images/favorite.svg",
-                          width: 26.w,
-                          height: 14.h,
-                          ),
-                                ),
+                                    onTap: () {
+                                      watch.favAllShop[index]
+                                          ? read.removeAllShopFavList(
+                                          context, element.id, index)
+                                          : read.updateAllShopFavList(
+                                          context, element.id, index);
+                                    },
+                                    child: watch.favAllShop[index]
+                                        ? SvgPicture.asset(
+                                      "assets/icons/fav_selected.svg",
+                                      width: 26.w,
+                                      height: 14.h,
+                                    ) : SvgPicture.asset(
+                                      "assets/images/favorite.svg",
+                                      width: 26.w,
+                                      height: 14.h,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -513,9 +513,9 @@ class _AllNearShopsState extends State<AllNearShops> {
                   ],
                 ),
               ),
-                  SizedBox(
-                    height: 30.w,
-                  ),
+              SizedBox(
+                height: 30.w,
+              ),
             ])),
       ),
     );

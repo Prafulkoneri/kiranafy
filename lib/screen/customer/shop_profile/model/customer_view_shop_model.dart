@@ -1,4 +1,5 @@
-import 'dart:convert';
+
+
 
 class CustomerViewShopReqModel {
   String? shopId;
@@ -31,13 +32,130 @@ class CustomerViewShopResModel {
   }
 }
 
+class OfferProduct{
+  String ? id;
+  String ? productName;
+  String ? productImagePath;
+  String ? productImageName;
+  String ? weight;
+  String ? offerPrice;
+  String ? productId;
+  String ? selectedProductId;
+  String ? status;
+  String ? unit;
+  OfferProduct({
+    this.status,
+    this.id,
+    this.productId,
+    this.selectedProductId,
+    this.offerPrice,
+    this.productImagePath,
+    this.productName,
+    this.unit,
+    this.productImageName,
+    this.weight,
+});
+  OfferProduct.fromJson(Map<String,dynamic>json){
+    id=json["id"];
+    productId=json["product_id"];
+    selectedProductId=json["selected_product_id"];
+    offerPrice=json["offer_price"];
+    productImageName=json["product_image_name"];
+    productImagePath=json["product_image_path"];
+    productName=json["product_name"];
+    unit=json["unit"];
+    status=json["status"];
+    unit=json["unit"];
+  }
+}
+
+class SeasonalProduct{
+  String ? id;
+  String ? productName;
+  String ? productImagePath;
+  String ? productImageName;
+  String ? weight;
+  String ? offerPrice;
+  String ? productId;
+  String ? selectedProductId;
+  String ? status;
+  String ? unit;
+  SeasonalProduct({
+    this.status,
+    this.id,
+    this.productId,
+    this.selectedProductId,
+    this.offerPrice,
+    this.productImagePath,
+    this.productName,
+    this.unit,
+    this.productImageName,
+    this.weight,
+  });
+  SeasonalProduct.fromJson(Map<String,dynamic>json){
+    id=json["id"];
+    productId=json["product_id"];
+    selectedProductId=json["selected_product_id"];
+    offerPrice=json["offer_price"];
+    productImageName=json["product_image_name"];
+    productImagePath=json["product_image_path"];
+    productName=json["product_name"];
+    unit=json["unit"];
+    status=json["status"];
+    unit=json["unit"];
+  }
+}
+
+class RecommandedProducts{
+  String ? id;
+  String ? productName;
+  String ? productImagePath;
+  String ? productImageName;
+  String ? weight;
+  String ? offerPrice;
+  String ? productId;
+  String ? selectedProductId;
+  String ? status;
+  String ? unit;
+  RecommandedProducts({
+    this.status,
+    this.id,
+    this.productId,
+    this.selectedProductId,
+    this.offerPrice,
+    this.productImagePath,
+    this.productName,
+    this.unit,
+    this.productImageName,
+    this.weight,
+  });
+  RecommandedProducts.fromJson(Map<String,dynamic>json){
+    id=json["id"];
+    productId=json["product_id"];
+    selectedProductId=json["selected_product_id"];
+    offerPrice=json["offer_price"];
+    productImageName=json["product_image_name"];
+    productImagePath=json["product_image_path"];
+    productName=json["product_name"];
+    unit=json["unit"];
+    status=json["status"];
+    unit=json["unit"];
+  }
+}
+
 class ShopData {
   ShopDetails? shopDetails;
   List<ShopCategory>? shopCategories;
+  List<OfferProduct>? offerProduct;
+  List<SeasonalProduct>? seasonalProduct;
+  List<RecommandedProducts>? recommandedProduct;
 
   ShopData({
     required this.shopDetails,
     required this.shopCategories,
+    required this.offerProduct,
+    required this.seasonalProduct,
+    required this.recommandedProduct,
   });
   ShopData.fromJson(Map<String,dynamic>json){
     shopDetails = json['shop_details'] != null ? ShopDetails.fromJson(json['shop_details']) : null;
@@ -45,6 +163,24 @@ class ShopData {
       shopCategories = <ShopCategory>[];
       json["shop_categories"].forEach((v) {
         shopCategories!.add(ShopCategory.fromJson(v));
+      });
+    }
+    if (json["offer_products"] != null) {
+      offerProduct = <OfferProduct>[];
+      json["offer_products"].forEach((v) {
+        offerProduct!.add(OfferProduct.fromJson(v));
+      });
+    }
+    if (json["seasonal_products"] != null) {
+      seasonalProduct = <SeasonalProduct>[];
+      json["seasonal_products"].forEach((v) {
+        seasonalProduct!.add(SeasonalProduct.fromJson(v));
+      });
+    }
+    if (json["recommanded_products"] != null) {
+      recommandedProduct = <RecommandedProducts>[];
+      json["recommanded_products"].forEach((v) {
+        recommandedProduct!.add(RecommandedProducts.fromJson(v));
       });
     }
 

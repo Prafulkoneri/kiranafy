@@ -4,16 +4,17 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
-import 'package:local_supper_market/screen/customer/near_shops/model/customer_view_all_shop_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/customer_view_all_category_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
-import 'package:local_supper_market/screen/customer/near_shops/repository/customer_view_all_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/customer_view_all_category_repo.dart';
+
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AllShopController extends ChangeNotifier {
-  CustomerViewAllShopRepo customerViewAllShopRepo = CustomerViewAllShopRepo();
+class AllCategoryShopController extends ChangeNotifier {
+  CustomerViewAllCategoryShopRepo customerViewAllCategoryShopRepo = CustomerViewAllCategoryShopRepo();
   String pincode = "111111";
   List<NearByShops>? nearByShop;
   Data? data;
@@ -27,19 +28,22 @@ class AllShopController extends ChangeNotifier {
   ScrollController scrollController = ScrollController();
   int offset = 0;
   bool showPaginationLoader = false;
+  String categoryId="";
 
 
-  CustomerViewAllShopReqModel get customerViewAllShopReqModel =>
-      CustomerViewAllShopReqModel(
-          pincode: pincode, offset: offset.toString(), limit: "10");
+  CustomerViewAllCategoryShopReqModel get customerViewAllCategoryShopReqModel =>
+      CustomerViewAllCategoryShopReqModel(
+          pincode:pincode, offset: offset.toString(), limit:"10",categoryId:categoryId);
 
 
-  Future<void> initState(context)async{
-    getAllShops(context);
+  Future<void> initState(context,id)async{
+    print(id);
+    getAllShops(context,id);
   }
 
-  Future<void> getAllShops(context) async {
+  Future<void> getAllShops(context,id) async {
     isLoading = true;
+    categoryId=id;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("kkkkkkkkkk");
     if (pref.getString("pincode") == null) {
@@ -47,13 +51,13 @@ class AllShopController extends ChangeNotifier {
     } else {
       pincode = pref.getString("pincode").toString();
     }
-    customerViewAllShopRepo
-        .getAllShopList(
-            customerViewAllShopReqModel, pref.getString("successToken"))
+    customerViewAllCategoryShopRepo
+        .getAllCategoryShopList(
+        customerViewAllCategoryShopReqModel, pref.getString("successToken"))
         .then((response) {
       log(response.body);
       final result =
-          CustomerViewAllShopResModel.fromJson(jsonDecode(response.body));
+      CustomerViewAllCategoryShopResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print("111111123e24errfsdfs");
         data = result.data;
@@ -83,7 +87,7 @@ class AllShopController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -94,8 +98,8 @@ class AllShopController extends ChangeNotifier {
   }
 
   AddFavReqModel get addFavReqModel => AddFavReqModel(
-        shopId: shopId.toString(),
-      );
+    shopId: shopId.toString(),
+  );
 
   Future<void> updateNearByFavList(context, id, index) async {
     shopId = id.toString();
@@ -119,7 +123,7 @@ class AllShopController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -150,7 +154,7 @@ class AllShopController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -161,8 +165,8 @@ class AllShopController extends ChangeNotifier {
   }
 
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
-        shopId: shopId.toString(),
-      );
+    shopId: shopId.toString(),
+  );
 
   Future<void> removeNearByFavList(context, id, index) async {
     shopId = id.toString();
@@ -185,7 +189,7 @@ class AllShopController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -216,7 +220,7 @@ class AllShopController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -228,11 +232,11 @@ class AllShopController extends ChangeNotifier {
 
   Future<void> onScrollMaxExtent(context) async {
     showPaginationLoader = true;
-        print("hello");
-        offset = offset + 1;
-        await getAllShops(context);
-        isLoading = false;
+    print("hello");
+    offset = offset + 1;
+    await getAllShops(context,categoryId);
+    isLoading = false;
 
-        notifyListeners();
+    notifyListeners();
   }
 }

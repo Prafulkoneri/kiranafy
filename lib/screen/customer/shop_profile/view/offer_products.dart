@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
+import 'package:provider/provider.dart';
 class OfferProducts extends StatefulWidget {
   const OfferProducts({super.key});
 
@@ -16,6 +18,9 @@ class OfferProducts extends StatefulWidget {
 class _OfferProductsState extends State<OfferProducts> {
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<ShopProfileController>();
+    final read = context.read<ShopProfileController>();
+    final readMain = context.read<MainScreenController>();
     return SizedBox(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -23,110 +28,123 @@ class _OfferProductsState extends State<OfferProducts> {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: List.generate(
-            5,
-            (index) => Row(
-              children: [
-                SizedBox(
-                  width: 10.w,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    // color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.03.w),
-                          blurRadius: 5,
-                          spreadRadius: 0,
-                          offset: Offset(0, 3)),
-                    ],
+            watch.offerProduct?.length??0,
+            (index) {
+              final element=watch.offerProduct?[index];
+              return Row(
+                children: [
+                  SizedBox(
+                    width: 10.w,
                   ),
-                  child: Card(
-                    // shape: ShapeBorder.
-                    elevation: 0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.w),
-                      ),
-                      width: 156.w,
-                      padding: EdgeInsets.only(
-                          left: 19.w, top: 14.w, right: 12.w, bottom: 12.w),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                child: Image.asset(
-                                  "assets/images/redlabel.png",
-                                  fit: BoxFit.fill,
+                  Container(
+                    decoration: BoxDecoration(
+                      // color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.03.w),
+                            blurRadius: 5,
+                            spreadRadius: 0,
+                            offset: Offset(0, 3)),
+                      ],
+                    ),
+                    child: Card(
+                      // shape: ShapeBorder.
+                      elevation: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.w),
+                        ),
+                        width: 156.w,
+                        padding: EdgeInsets.only(
+                            left: 19.w, top: 14.w, right: 12.w, bottom: 12.w),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                element?.productImagePath==""?
+                                Container(
+                                  height:89.w,width: 89.w,
+                                  child: Image.asset(
+                                    "assets/images/profile_image.png",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ):    Container(
+                                  height:89.w,width: 89.w,
+              child: Image.network(
+              "${element?.productImagePath}",
+              fit: BoxFit.cover,
+              ),
+              ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3.w,
+                            ),
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    "${element?.productName}",
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                          color: Black1,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3.w,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Red Label",
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
-                                      color: Black1,
-                                      // letterSpacing: .5,
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w600),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 2.w,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "${element?.weight}",
+                                  style: GoogleFonts.roboto(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        // letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 2.w,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "100g",
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
-                                      color: Black1,
-                                      // letterSpacing: .5,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 2.w,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "₹${element?.offerPrice??0}",
+                                  style: GoogleFonts.roboto(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        // letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 2.w,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "₹40",
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
-                                      color: Black1,
-                                      // letterSpacing: .5,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
+                                SvgPicture.asset(
+                                  'assets/images/add.svg',
+                                  // width: 15.w,
+                                  // height: 19.h,
                                 ),
-                              ),
-                              SvgPicture.asset(
-                                'assets/images/add.svg',
-                                // width: 15.w,
-                                // height: 19.h,
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              );
+            }
           ),
         ),
       ),

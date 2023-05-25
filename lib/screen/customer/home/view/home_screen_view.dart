@@ -221,7 +221,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   ),
                   InkWell(
                     onTap: () {
-                      readMain.onBackPressed(0, AllNearShops());
+                      readMain.onBackPressed(1, AllNearShops());
                     },
                     child: Text(
                       "View All",

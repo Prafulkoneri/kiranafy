@@ -42,7 +42,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: (){
-            readMain.onBackPressed(0,ProfileScreenView());
+            readMain.onBackPressed(4,ProfileScreenView());
           },
           title: "Update Profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -299,7 +299,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                           lastDate: DateTime(2100),
                         );
                         if (pickedDate != null) {
-                          String date = DateFormat('dd/MM/yyy')
+                          String date = DateFormat('dd-MM-yyy')
                               .format(
                               pickedDate ?? DateTime.now());
                           read.onDateSelected(date);

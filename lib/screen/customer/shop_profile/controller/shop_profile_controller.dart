@@ -13,8 +13,10 @@ class ShopProfileController extends ChangeNotifier{
   ShopData ? shopData;
   ShopDetails ? shopDetails;
   List<ShopCategory> ? shopCategory;
+  List<OfferProduct> ? offerProduct;
+  List <SeasonalProduct> ? seasonalProduct;
+  List<RecommandedProducts>? recommandedProduct;
   Future<void> initState(context,id)async{
-
     await getShopDetails(context,id);
     notifyListeners();
   }
@@ -24,6 +26,7 @@ class ShopProfileController extends ChangeNotifier{
   );
 
   Future<void> getShopDetails(context,id)async{
+    print("id$id");
     shopId=id;
     SharedPreferences pref=await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -35,6 +38,9 @@ class ShopProfileController extends ChangeNotifier{
         shopData=result.data;
         shopDetails=shopData?.shopDetails;
         shopCategory=shopData?.shopCategories;
+        offerProduct=shopData?.offerProduct;
+        seasonalProduct=shopData?.seasonalProduct;
+        recommandedProduct=shopData?.recommandedProduct;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

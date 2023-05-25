@@ -48,7 +48,7 @@ class AllCategoriesResModel {
 
 class Category {
   int? id;
-  String ? categorySelectedId;
+  int ? categorySelectedId;
   String? categoryName;
   int? categorySequence;
   String? categoryImagePath;
