@@ -52,14 +52,21 @@ class _SEditProfileViewState extends State<SEditProfileView> {
               readMainScreen.onBackPressed(0, ShopDashBoard());
             } else {
               readMainScreen.onBackPressed(
-                4, SAccountScreenView(),
+                4,
+                SAccountScreenView(),
               );
             }
           },
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () {
+          onActionTap: () async {
             read.validateField(context);
+            // await readMainScreen.onBackPressed(4, )
+            await readMainScreen.onBackPressed(
+                4,
+                SAccountScreenView(
+                    // updateMessage: 'Upadated Succefully',
+                    ));
           },
         ),
       ),
@@ -442,8 +449,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SDropDownField(
                     value: watch.selectedCityId,
                     onChanged: (value) async {
-                    read.onCitySelected(value);
-                    read.getAreaList(context);
+                      read.onCitySelected(value);
+                      read.getAreaList(context);
                     },
                     items: watch.cityDataList
                         ?.map((item) => DropdownMenuItem<String>(
@@ -499,43 +506,44 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SizedBox(
                     height: 22.w,
                   ),
-                  watch.showValuePincodeField?
-                  SDropDownField(
-                    value: watch.selectedPincode.toString(),
-                    onChanged: (value) async {
-                      read.onPincodeSelected(value);
-                    },
-                    items: watch.pincodeList
-                        ?.map((item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(
-                                item,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                    hint: "Pincode",
-                    titleHeader: "Pincode",
-                  ): SDropDownField(
-                    onChanged: (value) async {
-                      read.onPincodeSelected(value);
-                    },
-                    items: watch.pincodeList
-                        ?.map((item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        style: const TextStyle(
-                          fontSize: 14,
+                  watch.showValuePincodeField
+                      ? SDropDownField(
+                          value: watch.selectedPincode.toString(),
+                          onChanged: (value) async {
+                            read.onPincodeSelected(value);
+                          },
+                          items: watch.pincodeList
+                              ?.map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          hint: "Pincode",
+                          titleHeader: "Pincode",
+                        )
+                      : SDropDownField(
+                          onChanged: (value) async {
+                            read.onPincodeSelected(value);
+                          },
+                          items: watch.pincodeList
+                              ?.map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          hint: "Pincode",
+                          titleHeader: "Pincode",
                         ),
-                      ),
-                    ))
-                        .toList(),
-                    hint: "Pincode",
-                    titleHeader: "Pincode",
-                  ),
                 ],
               ),
             ),

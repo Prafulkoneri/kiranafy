@@ -17,7 +17,8 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class SAccountScreenView extends StatefulWidget {
-  const SAccountScreenView({super.key});
+  final String? updateMessage;
+  const SAccountScreenView({super.key, this.updateMessage});
 
   @override
   State<SAccountScreenView> createState() => _SAccountScreenViewState();
@@ -27,7 +28,9 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SAccountScreenController>().initState(context);
+      context.read<SAccountScreenController>().initState(
+            context,
+          );
     });
   }
 

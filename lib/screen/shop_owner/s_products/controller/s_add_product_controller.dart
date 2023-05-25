@@ -28,11 +28,9 @@ class SAddProductsController extends ChangeNotifier {
   String categoryId = "";
   String productId = "";
   bool isSelectAll = false;
-  String categoryName="";
-  bool uploadSuccess=false;
-  MainScreenController mainScreenController=MainScreenController();
-
-
+  String categoryName = "";
+  bool uploadSuccess = false;
+  MainScreenController mainScreenController = MainScreenController();
 
   Future<void> initState(context, id) async {
     await shopAddProducts(context, id);
@@ -43,7 +41,6 @@ class SAddProductsController extends ChangeNotifier {
   void onProductsSelected(index, id) {
     selectedProduct[index] = !selectedProduct[index];
     if (selectedProduct[index]) {
-
       selectedProductsId.removeWhere((item) => item == int.parse(id));
       selectedProductsId.insert(0, id);
     } else {
@@ -72,7 +69,7 @@ class SAddProductsController extends ChangeNotifier {
       ShopAddProductsListRequestModel(category_id: categoryId);
 
   Future<void> shopAddProducts(context, id) async {
-    isLoading=true;
+    isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     categoryId = id.toString();
     print("categoryId$categoryId");
@@ -87,7 +84,7 @@ class SAddProductsController extends ChangeNotifier {
       if (response.statusCode == 200) {
         productData = result.data;
         productDetails = result.data?.productDetails;
-        categoryName=result.data?.categoryName??"";
+        categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
 
         selectedProduct = List<bool>.filled(productDetails?.length ?? 0, false,
@@ -100,10 +97,9 @@ class SAddProductsController extends ChangeNotifier {
             selectedProductsId.add(productDetails?[i].id);
           }
         }
-        isLoading=false;
+        isLoading = false;
         notifyListeners();
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -120,20 +116,18 @@ class SAddProductsController extends ChangeNotifier {
     );
   }
 
+  UploadAddProductsRequestModel get uploadAddProductsRequestModel =>
+      UploadAddProductsRequestModel(
+        product_id: productId,
+        category_id: categoryId,
+      );
 
-
-  UploadAddProductsRequestModel get uploadAddProductsRequestModel=>UploadAddProductsRequestModel(
-    product_id: productId,
-    category_id: categoryId,
-  );
-
-  Future<void> uploadAddProducts(context)async {
-    uploadSuccess=true;
+  Future<void> uploadAddProducts(context) async {
+    uploadSuccess = true;
     if (selectedProductsId.isEmpty) {
       Utils.showPrimarySnackbar(context, "Select Product",
           type: SnackType.error);
-    }
-    else {
+    } else {
       SharedPreferences pref = await SharedPreferences.getInstance();
       String a = '';
       for (int i = 0; i < selectedProductsId.length; i++) {
@@ -141,29 +135,29 @@ class SAddProductsController extends ChangeNotifier {
       }
       a = a.substring(0, a.length - 1);
       productId = a;
-      uploadAddProductRepo.uploadAddProduct(
-          uploadAddProductsRequestModel, pref.getString("successToken")).then((
-          response) {
+      uploadAddProductRepo
+          .uploadAddProduct(
+              uploadAddProductsRequestModel, pref.getString("successToken"))
+          .then((response) {
         print(response.body);
         final result =
-        UploadAddProductResponseModel.fromJson(jsonDecode(response.body));
+            UploadAddProductResponseModel.fromJson(jsonDecode(response.body));
 
         if (response.statusCode == 200) {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
-          MainScreenController().onBackPressed(
-              0, SSelectedProductView(categoryId: categoryId));
+          MainScreenController()
+              .onBackPressed(0, SSelectedProductView(categoryId: categoryId));
           notifyListeners();
-          uploadSuccess=false;
-        }
-        else {
+          uploadSuccess = false;
+        } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
       }).onError((error, stackTrace) {
         Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
       }).catchError(
-            (Object e) {
+        (Object e) {
           Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         },
         test: (Object e) {
@@ -174,12 +168,11 @@ class SAddProductsController extends ChangeNotifier {
     }
   }
 
-  Future<void> upload(context)async{
+  Future<void> upload(context) async {
     await uploadAddProducts(context);
   }
 
   void onSelecteAllProducts() {
-
     isSelectAll = !isSelectAll;
     if (isSelectAll) {
       selectedProduct =
@@ -197,6 +190,4 @@ class SAddProductsController extends ChangeNotifier {
 
     notifyListeners();
   }
-
-
 }

@@ -12,6 +12,7 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SAccountScreenController extends ChangeNotifier {
+  String Validation = "";
   String email = "";
   String name = "";
   String number = "";
@@ -28,6 +29,9 @@ class SAccountScreenController extends ChangeNotifier {
 
   Future<void> initState(context) async {
     await getShopEditProfileDetails(context);
+    // if (widget.updateMessage != null) {
+    //   Utils.showPrimarySnackbar(context, "Updated ", type: SnackType.success);
+    // }
     notifyListeners();
   }
 
