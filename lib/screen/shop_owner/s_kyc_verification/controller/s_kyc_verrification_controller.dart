@@ -20,24 +20,101 @@ class SKycVerificationController extends ChangeNotifier {
   String? fileName;
   PlatformFile? pickedfile;
   bool isLoading = false;
-  File fileToDisplay = File("");
+  // File fileToDisplay = File("");
+  File fileImage1 = File("");
+  File fileImage2 = File("");
+  File fileImage3 = File("");
+  File fileImage4 = File("");
+
+  String networkImage1 = "";
+
+  String image1 = "";
+  String image2 = "";
+  String image3 = "";
+  String image4 = "";
 
   String? pdfPath;
 
-  Future<void> pickPDF() async {
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['pdf', 'jpg'],
-      );
-      if (result != null) {
-        // setState(() {
-        pdfPath = result.files.single.path;
-        // });
-      }
-    } catch (e) {
-      print('Error while picking the file: $e');
+  // Future<void> pickPDF() async {
+  //   try {
+  //     FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //       type: FileType.custom,
+  //       allowedExtensions: ['pdf', 'jpg'],
+  //     );
+  //     if (result != null) {
+  //       // setState(() {
+  //       pdfPath = result.files.single.path;
+  //       // });
+  //     }
+  //   } catch (e) {
+  //     print('Error while picking the file: $e');
+  //   }
+  //   notifyListeners();
+  // }
+
+  void openGallery1() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage1 = "";
+      fileImage1 = File(pickedFile.path);
+      final bytes = await compressFile(fileImage1);
+
+      image1 = base64Encode(bytes as List<int>);
+
+      networkImage1 = "";
+      fileImage1 = File(pickedFile.path);
     }
+
+    notifyListeners();
+  }
+
+  void openGallery2() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      // networkImage2 = "";
+      fileImage2 = File(pickedFile.path);
+    }
+
+    notifyListeners();
+  }
+
+  void openGallery3() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      // networkImage3 = "";
+      fileImage3 = File(pickedFile.path);
+    }
+
+    notifyListeners();
+  }
+
+  void openGallery4() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      // networkImage4 = "";
+      fileImage4 = File(pickedFile.path);
+    }
+
     notifyListeners();
   }
 

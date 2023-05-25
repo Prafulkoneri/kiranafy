@@ -163,7 +163,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                         ),
                         RichText(
                           text: TextSpan(
-                              text: "By continuing you agree to our,\n",
+                              text: "By checking this box, you agree to our,\n",
                               style: TextStyle(
                                   color: Black,
                                   fontSize: 16.sp,
@@ -172,7 +172,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                               children: [
                                 TextSpan(
                                   children: [],
-                                  text: 'Term of Condition',
+                                  text: 'Terms of Service',
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       print('Login Text Clicked');

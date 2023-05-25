@@ -80,6 +80,7 @@ class Endpoint {
   ///Edit Custome Products
   static const String deleteAdminProduct =
       "${baseUrl}lsm-shop-owner-delete-product-of-category";
+
   ///Dash Board
   static const String ShopDashBoard = "${baseUrl}lsm-shop-owner-dashboard";
 
@@ -133,11 +134,9 @@ class Endpoint {
   //////////Customer view Shop
   static const String customerViewShop = "${baseUrl}lsm-customer-view-shop";
   //////////Customer view All Shop
-  static const String customerViewAllShop = "${baseUrl}lsm-customer-view-all-shop-list";
+  static const String customerViewAllShop =
+      "${baseUrl}lsm-customer-view-all-shop-list";
   //////////Customer view All Shop
-  static const String customerViewAllCategoryShop = "${baseUrl}lsm-customer-view-all-shop-list-as-per-category";
-
-
-
-
+  static const String customerViewAllCategoryShop =
+      "${baseUrl}lsm-customer-view-all-shop-list-as-per-category";
 }

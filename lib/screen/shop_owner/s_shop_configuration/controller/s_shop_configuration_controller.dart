@@ -42,6 +42,11 @@ class SShopConfigurationController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void onDeliveryCustomerSelected() {
+    isDeliveryCustomerSelected = !isDeliveryCustomerSelected;
+    notifyListeners();
+  }
+
   void onFreePickUpSelected() {
     ifFreePickupSelected = !ifFreePickupSelected;
     if (isDeliveryChargesSelected) {
@@ -50,13 +55,11 @@ class SShopConfigurationController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onDeliveryCustomerSelected() {
-    isDeliveryCustomerSelected = !isDeliveryCustomerSelected;
-    notifyListeners();
-  }
-
   void onDeliveryCharge() {
     isDeliveryChargesSelected = !isDeliveryChargesSelected;
+    if (ifFreePickupSelected) {
+      ifFreePickupSelected = false;
+    }
     notifyListeners();
   }
   ////End

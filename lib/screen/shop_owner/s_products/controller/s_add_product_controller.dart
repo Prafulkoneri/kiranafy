@@ -123,39 +123,48 @@ class SAddProductsController extends ChangeNotifier {
     category_id: categoryId,
   );
 
-  Future<void> uploadAddProducts(context)async{
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    String a = '';
-    for (int i = 0; i < selectedProductsId.length; i++) {
-      a += "${selectedProductsId[i]},";
+  Future<void> uploadAddProducts(context)async {
+    if (selectedProductsId.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Select Product",
+          type: SnackType.error);
     }
-    a = a.substring(0, a.length - 1);
-    productId = a;
-    uploadAddProductRepo.uploadAddProduct(uploadAddProductsRequestModel,pref.getString("successToken")).then((response){
-      print(response.body);
-      final result =
-      UploadAddProductResponseModel.fromJson(jsonDecode(response.body));
+    else {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String a = '';
+      for (int i = 0; i < selectedProductsId.length; i++) {
+        a += "${selectedProductsId[i]},";
+      }
+      a = a.substring(0, a.length - 1);
+      productId = a;
+      uploadAddProductRepo.uploadAddProduct(
+          uploadAddProductsRequestModel, pref.getString("successToken")).then((
+          response) {
+        print(response.body);
+        final result =
+        UploadAddProductResponseModel.fromJson(jsonDecode(response.body));
 
-      if (response.statusCode == 200) {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
-      }
-      else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-          (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
+        if (response.statusCode == 200) {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          notifyListeners();
+          return true;
+        }
+        else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+            (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    }
   }
 
   void onSelecteAllProducts() {

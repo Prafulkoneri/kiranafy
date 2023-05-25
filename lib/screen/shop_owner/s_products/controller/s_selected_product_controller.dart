@@ -81,7 +81,7 @@ class SSelectedProductsController extends ChangeNotifier {
   }
 
   Future<void> deleteProduct(context, index,id) async {
-    productId=id;
+    productId=id.toString();
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
 
