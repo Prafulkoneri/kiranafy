@@ -9,6 +9,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -180,7 +181,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${watch.address}",
+                          "${watch.address} ",
                           // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
@@ -208,7 +209,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 Container(
                   child: GestureDetector(
                     onTap: () {
-                      read.onEditBtnClicked(context);
+                      readMainScreen.onNavigation(
+                          0,
+                          SEditProfileView(
+                            fromDashBoard: true,
+                          ),
+                          context);
                     },
                     child: SvgPicture.asset(
                       "assets/icons/shop_edit.svg",
@@ -242,11 +248,11 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    PersistentNavBarNavigator.pushNewScreen(context,
-                        screen: SSCategoryListView(),
-                        withNavBar: true,
-                        pageTransitionAnimation:
-                            PageTransitionAnimation.sizeUp);
+                    // PersistentNavBarNavigator.pushNewScreen(context,
+                    //     screen: SSCategoryListView(),
+                    //     withNavBar: true,
+                    //     pageTransitionAnimation:
+                    //         PageTransitionAnimation.sizeUp);
                   },
                   child: Container(
                     padding: EdgeInsets.only(

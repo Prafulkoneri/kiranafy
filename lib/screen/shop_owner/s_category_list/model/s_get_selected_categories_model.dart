@@ -23,6 +23,7 @@ class GetSelectedCategoryResponseModel {
 
 class SelectedCategoryData {
   int? id;
+  int ? categoryId;
   String? categoryName;
   int? categorySequence;
   String? categoryImagePath;
@@ -31,6 +32,7 @@ class SelectedCategoryData {
 
   SelectedCategoryData({
     required this.id,
+    required this.categoryId,
     required this.categoryName,
     required this.categorySequence,
     required this.categoryImagePath,
@@ -40,6 +42,7 @@ class SelectedCategoryData {
 
   SelectedCategoryData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
+    categoryId = json["category_id"];
     categoryName = json["category_name"];
     categorySequence = json["category_sequence"];
     categoryImagePath = json["category_image_path"];

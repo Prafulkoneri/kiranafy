@@ -60,10 +60,10 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          isBackButtonEnabled: false,
-          // onBackBtnPressed: () {
-          //   readMainScreen.onBackPressed(4, SAccountScreenView());
-          // },
+          // isBackButtonEnabled: false,
+          onBackBtnPressed: () {
+            readMainScreen.onBackPressed(4, SAccountScreenView());
+          },
           title: "Subscriptionrtiojmk,uhu Plans",
         ),
       ),

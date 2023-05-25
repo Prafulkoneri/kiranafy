@@ -19,6 +19,7 @@ class SSelectedProductsController extends ChangeNotifier {
   List<ProductsFromAdmin>? productsFromAdmin;
   List<UnitDetail>? unitDetails;
   int? totalSelectedAndCustomProducts;
+  String categoryName = "";
   SSelectedProductsRepo shopSelecteProductRepo = SSelectedProductsRepo();
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
   String categoryId = "";
@@ -37,9 +38,10 @@ class SSelectedProductsController extends ChangeNotifier {
       DeleteAdminProductReqModel(productId: productId);
 
   Future<void> selectedProducts(context, id) async {
+    categoryId = id;
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
-    categoryId = id;
+
     shopSelecteProductRepo
         .selectedProducts(
             selecteProductRequestModel, pref.getString("successToken"))
@@ -50,7 +52,7 @@ class SSelectedProductsController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         productsFromAdmin = result.data?.productsFromAdmin;
-
+        categoryName = result.data?.categoryName ?? "";
         totalSelectedAndCustomProducts =
             result.data?.totalSelectedAndCustomProducts ?? 0;
 
@@ -76,7 +78,7 @@ class SSelectedProductsController extends ChangeNotifier {
   }
 
   Future<void> deleteProduct(context, index, id) async {
-    productId = id;
+    productId = id.toString();
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
 

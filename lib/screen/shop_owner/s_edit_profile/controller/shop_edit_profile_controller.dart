@@ -25,6 +25,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String selectedStateId = "";
   String selectedCityId = "";
   String selectedAreaId = "";
+  int selectedPincode = 0;
   List<CountryData>? countryDataList;
   List<StatedData>? stateDataList;
   List<CityData>? cityDataList;
@@ -45,6 +46,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String networkImage3 = "";
   String networkImage4 = "";
   String countryCode = "+91";
+  List? pincodeList;
 
   Future<void> initState(
     context,
@@ -142,7 +144,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         countryCode = shopDetails?.shopOwnerCountryCode ?? "";
         EmailIdController.text = shopDetails?.shopOwnerEmail ?? "";
         ShopAddressController.text = shopDetails?.shopAddress ?? "";
-
+        selectedPincode =
+            int.parse(shopDetails?.shopPincode.toString() ?? "0") ?? 0;
         selectedCountryId = shopDetails?.selectedCountryId.toString() ?? "";
         selectedStateId = shopDetails?.selectedStateId.toString() ?? "";
         selectedCityId = shopDetails?.selectedCityId.toString() ?? "";
@@ -153,7 +156,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         cityDataList = result.cities;
         stateDataList = result.states;
         areaDataList = result.areas;
-        PinCodeController.text = shopDetails?.shopPincode.toString() ?? "";
+        pincodeList = result.pincode;
         bannerImageList = result.shopBannerImages;
         if (bannerImageList!.isNotEmpty) {
           print(bannerImageList!.asMap().containsKey(0));

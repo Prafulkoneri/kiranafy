@@ -45,13 +45,19 @@ class _AddProductViewState extends State<AddProductView> {
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
             onBackBtnPressed: (){
-              readMainScreen.onNavigation(0,SSelectedProductView(categoryId: watch.categoryId),context);
+              readMainScreen.onBackPressed(0,SSelectedProductView(categoryId: watch.categoryId));
             },
             title: "Add Products",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: ()async{
-             await read.uploadAddProducts(context);
-              readMainScreen.onNavigation(0,SSelectedProductView(categoryId:watch.categoryId),context);
+             await read.uploadAddProducts(context).then((success){
+               if(watch.selectedProductsId.isEmpty){
+                 return;
+               }
+               readMainScreen.onBackPressed(0,SSelectedProductView(categoryId:watch.categoryId));
+             });
+
+
             },
           ),
         ),
@@ -60,6 +66,7 @@ class _AddProductViewState extends State<AddProductView> {
           child: CircularProgressIndicator(),
         ):
         SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               Container(
@@ -148,12 +155,14 @@ class _AddProductViewState extends State<AddProductView> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "${element?.productName}",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 16.sp,
-                                              color: Black1),
+                                        Flexible(
+                                          child: Text(
+                                            "${element?.productName}",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 16.sp,
+                                                color: Black1),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -191,6 +200,9 @@ class _AddProductViewState extends State<AddProductView> {
                       ],
                     );
                   }),
+              SizedBox(
+                height: 85.w,
+              ),
             ],
           ),
         ));

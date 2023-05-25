@@ -28,10 +28,10 @@ class SDashBoardController extends ChangeNotifier {
         context, MaterialPageRoute(builder: (context) => SSCategoryListView()));
   }
 
-  void onEditBtnClicked(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SEditProfileView()));
-  }
+  // void onEditBtnClicked(context) {
+  //   Navigator.push(
+  //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
+  // }
 
   Future<void> initState(context) async {
     await getDashBoardData(context);

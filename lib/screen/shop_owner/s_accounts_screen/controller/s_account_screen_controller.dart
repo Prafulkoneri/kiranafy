@@ -16,10 +16,10 @@ class SAccountScreenController extends ChangeNotifier {
   String name = "";
   String number = "";
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
-  void onEditBtnClicked(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SEditProfileView()));
-  }
+  // void onEditBtnClicked(context) {
+  //   Navigator.push(
+  //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
+  // }
 
   void onShopConfigurationClicked(context) {
     Navigator.push(context,
@@ -31,10 +31,11 @@ class SAccountScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onLogout(context)async{
-    SharedPreferences pref=await SharedPreferences.getInstance();
+  void onLogout(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
     pref.clear();
-    Navigator.push(context,MaterialPageRoute(builder:(context)=>OnBoardingScreenView()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
   }
 
   Future<void> getShopEditProfileDetails(context) async {

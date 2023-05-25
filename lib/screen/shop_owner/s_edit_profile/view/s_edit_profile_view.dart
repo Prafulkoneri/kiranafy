@@ -12,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -21,22 +22,12 @@ import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SEditProfileView extends StatefulWidget {
-  const SEditProfileView({super.key});
+  final bool? fromDashBoard;
+  const SEditProfileView({super.key, required this.fromDashBoard});
 
   @override
   State<SEditProfileView> createState() => _SEditProfileViewState();
 }
-
-// final TextEditingController controller = TextEditingController();
-// String initialCountry = 'IN';
-// PhoneNumber number = PhoneNumber(isoCode: 'IN');
-// String radioButtonItem = '';
-// String? dropdown;
-
-final List<String> genderItems = [
-  'Male',
-  'Female',
-];
 
 class _SEditProfileViewState extends State<SEditProfileView> {
   @override
@@ -57,7 +48,14 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onNavigation(4, SAccountScreenView(), context);
+            if (widget.fromDashBoard ?? false) {
+              readMainScreen.onBackPressed(0, ShopDashBoard());
+            } else {
+              readMainScreen.onBackPressed(
+                4,
+                SAccountScreenView(),
+              );
+            }
           },
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -498,10 +496,23 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SizedBox(
                     height: 22.w,
                   ),
-                  PrimarySTextFormField(
-                    controller: watch.PinCodeController,
+                  SDropDownField(
+                    onChanged: (value) async {
+                      print(value);
+                    },
+                    items: watch.pincodeList
+                        ?.map((item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    hint: "Pincode",
                     titleHeader: "Pincode",
-                    hintText: "Pincode",
                   ),
                 ],
               ),

@@ -116,7 +116,11 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                   GestureDetector(
                                     onTap: () {
                                       readMainScreen.onNavigation(
-                                          4, SEditProfileView(), context);
+                                          4,
+                                          SEditProfileView(
+                                            fromDashBoard: false,
+                                          ),
+                                          context);
                                       // Navigator.push(
                                       //     context,
                                       //     MaterialPageRoute(

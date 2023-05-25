@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-
+import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
+import 'package:provider/provider.dart';
 class RecommendationProducts extends StatefulWidget {
   const RecommendationProducts({super.key});
 
@@ -16,6 +17,8 @@ class RecommendationProducts extends StatefulWidget {
 class _RecommendationProductsState extends State<RecommendationProducts> {
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<ShopProfileController>();
+    final read = context.read<ShopProfileController>();
     return Container(
       // height: 361.h,
       // color: Colors.white,
@@ -65,8 +68,9 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                   scrollDirection: Axis.vertical,
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 3,
+                  itemCount: watch.recommandedProduct?.length??0,
                   itemBuilder: (BuildContext, index) {
+                    final element= watch.recommandedProduct?[index];
                     return Container(
                       width: 322.w,
                       height: 86.h,
@@ -78,8 +82,12 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(top: 9.h, bottom: 9.h),
-                            child: Image(
+                            child:element?.productImagePath==""? Image(
                               image: AssetImage("assets/images/offerone.png"),
+                              height: 68.h,
+                              width: 68.w,
+                            ):Image(
+                              image: NetworkImage(element?.productImagePath??''),
                               height: 68.h,
                               width: 68.w,
                             ),
@@ -92,119 +100,120 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                                 indent: 5,
                                 endIndent: 5),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 9.w, top: 10.h),
-                            child: Column(
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  // mainAxisAlignment:
-                                  //     MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Nescafe Coffee",
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: Black,
-                                              letterSpacing: .5,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w700),
-                                        )),
-                                    SizedBox(
-                                      width: 50.w,
-                                    ),
-                                    Container(
-                                      width: 60.w,
-                                      height: 20.h,
-                                      decoration: BoxDecoration(
-                                          color: lightgreen,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.w))),
-                                      child: Center(
-                                        child: Text("50% off",
-                                            // textAlign: TextAlign.center,
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w500),
-                                            )),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 9.w, top: 10.h,right: 13.w),
+                              child: Column(
+                                // mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("${element?.productName}",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black,
+                                                letterSpacing: .5,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w700),
+                                          )),
+                                      Container(
+                                        width: 60.w,
+                                        height: 20.h,
+                                        decoration: BoxDecoration(
+                                            color: lightgreen,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.w))),
+                                        child: Center(
+                                          child: Text("${element?.discountPercentage} off",
+                                              // textAlign: TextAlign.center,
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    letterSpacing: .5,
+                                                    fontSize: 12.sp,
+                                                    fontWeight: FontWeight.w500),
+                                              )),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 6.h,
-                                ),
-                                Text(
-                                  "500g",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Grey,
-                                        letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w500),
+                                    ],
                                   ),
-                                ),
-                                //
-                                // SizedBox(
-                                //   height: 10.h,
-                                // ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 13.w),
-                                      child: Text(
-                                        '\u{20B9}${25.00}',
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              decoration:
-                                                  TextDecoration.lineThrough,
-                                              color: Black,
-                                              letterSpacing: .5,
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
+                                  SizedBox(
+                                    height: 6.h,
+                                  ),
+                                  Text(
+                                    "${element?.weight}${element?.unit}",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Grey,
+                                          letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500),
                                     ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 13.w, left: 5.w),
-                                      child: Text(
-                                        '\u{20B9}${25.00}',
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              // decoration:
-                                              // TextDecoration.lineThrough,
-                                              color: Black,
-                                              letterSpacing: .5,
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
+                                  ),
+                                  //
+                                  // SizedBox(
+                                  //   height: 10.h,
+                                  // ),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(top: 13.w),
+                                            child: Text(
+                                              '\u{20B9}${element?.mrpPrice}',
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    decoration:
+                                                    TextDecoration.lineThrough,
+                                                    color: Black,
+                                                    letterSpacing: .5,
+                                                    fontSize: 13.sp,
+                                                    fontWeight: FontWeight.w500),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            EdgeInsets.only(top: 13.w, left: 5.w),
+                                            child: Text(
+                                              '\u{20B9}${element?.offerPrice}',
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                  // decoration:
+                                                  // TextDecoration.lineThrough,
+                                                    color: Black,
+                                                    letterSpacing: .5,
+                                                    fontSize: 13.sp,
+                                                    fontWeight: FontWeight.w500),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 100.w),
-                                          child: SvgPicture.asset(
+
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SvgPicture.asset(
                                             'assets/images/add.svg',
                                             // width: 30.w,
                                             // height: 30.h,
                                           ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ],
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],

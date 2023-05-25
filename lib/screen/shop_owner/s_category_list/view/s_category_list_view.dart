@@ -83,11 +83,10 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    readMainScreen.onNavigation(
+                                    readMainScreen.onBackPressed(
                                         0,
                                         SSelectedProductView(
-                                            categoryId: element?.id.toString()),
-                                        context);
+                                            categoryId: element?.categoryId.toString()),);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

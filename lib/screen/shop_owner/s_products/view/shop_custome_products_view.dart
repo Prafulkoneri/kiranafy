@@ -57,7 +57,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: (){
-            readMain.onNavigation(0,SSelectedProductView(categoryId: widget.categoryId),context);
+            readMain.onBackPressed(0,SSelectedProductView(categoryId: widget.categoryId));
           },
           title: "Custom Products",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -82,8 +82,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                     onChanged: (value) {
                       read.onCategorySelected(value);
                     },
-                    items: watch.categoryData
-                        ?.map((item) => DropdownMenuItem<String>(
+                    items: watch.categoryData.map((item) => DropdownMenuItem<String>(
                               value: item.id.toString(),
                               child: Text(
                                 item.categoryName ?? "",

@@ -30,7 +30,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
     final watch=context.watch<AllNearShopsAsPerPincode>();
     final read=context.read<AllNearShopsAsPerPincode>();
     final readMain=context.read<MainScreenController>();
-    return SizedBox(
+    return watch.nearByShopList?.isNotEmpty??false?SizedBox(
       height: 120.h,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -114,6 +114,6 @@ class _HomeCarousalState extends State<HomeCarousal> {
               ),
             );
           }),
-    );
+    ):Container();
   }
 }

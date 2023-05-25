@@ -8,7 +8,6 @@ class SelecteProductsRequestModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["category_id"] = category_id;
-
     return data;
   }
 }
@@ -32,14 +31,17 @@ class GetSelectedProductsResponseModel {
 }
 
 class Data {
+  String? categoryName;
   List<ProductsFromAdmin>? productsFromAdmin;
   int? totalSelectedAndCustomProducts;
 
   Data({
+    required this.categoryName,
     required this.productsFromAdmin,
     required this.totalSelectedAndCustomProducts,
   });
   Data.fromJson(Map<String, dynamic> json) {
+    categoryName = json['category_name'];
     if (json["products_from_admin"] != null) {
       productsFromAdmin = <ProductsFromAdmin>[];
       json["products_from_admin"].forEach((v) {

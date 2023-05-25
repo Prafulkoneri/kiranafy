@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -52,7 +53,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
             onBackBtnPressed: () {
               readMainScreen.onBackPressed(0, SSCategoryListView());
             },
-            title: "Cold Drinks & Juices - 2",
+            title:
+                '${watch.categoryName}  - ${watch.totalSelectedAndCustomProducts}',
+            // "Cold Drinks & Juices - 2",
             // action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {},
           ),
@@ -62,6 +65,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Padding(
                   padding: EdgeInsets.only(
                     right: 19.0.w,
@@ -121,12 +125,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 height: 40.h,
                                 color: Custlogin,
                                 onTap: () {
-                                  readMainScreen.onNavigation(
+                                  readMainScreen.onBackPressed(
                                       0,
                                       AddProductView(
                                         categoryId: watch.categoryId,
-                                      ),
-                                      context);
+                                      ));
                                 },
                                 child: Row(
                                   mainAxisAlignment:
@@ -241,64 +244,44 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                     child: ExpansionTile(
                                       trailing: SizedBox.shrink(),
 
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Image(
-                                                image: NetworkImage(
-                                                  "${element?.productImagePath}",
+                                      title: Container(
+                                        width: ScreenUtil().screenWidth,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Image(
+                                                  image: NetworkImage(
+                                                    "${element?.productImagePath}",
+                                                  ),
+                                                  height: 61.h,
+                                                  width: 60.w,
+                                                  fit: BoxFit.fill,
                                                 ),
-                                                height: 61.h,
-                                                width: 60.w,
-                                              ),
-                                              Text(
-                                                "${element?.productName}",
-                                                // "${element?.productName}",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 16.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700),
+                                                SizedBox(
+                                                  width: 10.w,
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.all(8),
-                                                decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: grey6,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 10.0,
-                                                        spreadRadius: 2.0,
-                                                      ), //BoxShadow
-                                                    ],
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                child: SvgPicture.asset(
-                                                    'assets/icons/e1.svg'),
-                                              ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  read.deleteProduct(context,
-                                                      index, element?.id);
-                                                },
-                                                child: Container(
+                                                Container(
+                                                  width: 150.w,
+                                                  child: Text(
+                                                    "${element?.productName}",
+                                                    // "${element?.productName}",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Container(
                                                   padding: EdgeInsets.all(8),
                                                   decoration: BoxDecoration(
                                                       boxShadow: [
@@ -317,12 +300,43 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           BorderRadius.circular(
                                                               15)),
                                                   child: SvgPicture.asset(
-                                                      'assets/icons/delete2.svg'),
+                                                      'assets/icons/e1.svg'),
                                                 ),
-                                              )
-                                            ],
-                                          )
-                                        ],
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    read.deleteProduct(context,
+                                                        index, element?.id);
+                                                  },
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(8),
+                                                    decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: grey6,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 10.0,
+                                                            spreadRadius: 2.0,
+                                                          ), //BoxShadow
+                                                        ],
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15)),
+                                                    child: SvgPicture.asset(
+                                                        'assets/icons/delete2.svg'),
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                       children: [
                                         Container(
@@ -413,7 +427,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   //     .unitDetails?[int];
                                                   final element = watch
                                                       .productsFromAdmin?[index]
-                                                      .unitDetails?[index];
+                                                      .unitDetails?[int];
 
                                                   return Container(
                                                     padding: EdgeInsets.only(
