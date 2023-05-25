@@ -255,45 +255,57 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               SizedBox(
                 height: 10.h,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  PrimaryCheckBox(
-                    onChanged: (value) {
-                      read.onFreePickUpSelected();
-                    },
-                    value: watch.ifFreePickupSelected,
-                  ),
-                  Text(
-                    'Free',
-                    style: TextStyle(
-                        color: Black1,
-                        // letterSpacing: .5,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  SizedBox(
-                    width: 30.w,
-                  ),
-                  Row(
-                    children: [
-                      PrimaryCheckBox(
-                        onChanged: (value) {
-                          read.onDeliveryCharge();
-                        },
-                        value: watch.isDeliveryChargesSelected,
+              Container(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          PrimaryCheckBox(
+                            onChanged: (value) {
+                              read.onFreePickUpSelected();
+                            },
+                            value: watch.ifFreePickupSelected,
+                          ),
+                          Text(
+                            'Free',
+                            style: TextStyle(
+                                color: Black1,
+                                // letterSpacing: .5,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          SizedBox(
+                            width: 30.w,
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                PrimaryCheckBox(
+                                  onChanged: (value) {
+                                    read.onDeliveryCharge();
+                                  },
+                                  value: watch.isDeliveryChargesSelected,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    'Delivery Charges Applicable',
+                                    style: TextStyle(
+                                        color: Black1,
+                                        // letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Delivery Charges Applicable',
-                        style: TextStyle(
-                            color: Black1,
-                            // letterSpacing: .5,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 15.w,

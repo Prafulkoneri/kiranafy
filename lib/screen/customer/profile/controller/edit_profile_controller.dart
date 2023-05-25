@@ -52,6 +52,7 @@ class UpdateProfileController extends ChangeNotifier {
   File fileImage=File("");
   String networkImage="";
   bool  isLoading=true;
+  bool showPincodeValueField=false;
 
   ////
   Future<void> initState(
@@ -104,6 +105,12 @@ class UpdateProfileController extends ChangeNotifier {
          cityList=result.city;
          areaList=result.area;
         pincodeList=result.pincode;
+        if(pincodeList?.contains(pincode.toString())??false) {
+          showPincodeValueField=true;
+        }
+        else{
+          showPincodeValueField=false;
+        }
         isLoading=false;
         notifyListeners();
       } else {
@@ -317,7 +324,7 @@ class UpdateProfileController extends ChangeNotifier {
     );
   }
 
-  UpdateProfileDetailReqModel get updateProfileDetailReqModel=>UpdateProfileDetailReqModel(customerName: nameController.text, customerEmail: emailController.text, customerCountryCode:countryCode, customerMobileNumber: mobilrController.text, customerAlternateCountryCode: alernetMobileController.text, customerAlternateMobileNumber: countryAlternateCode, customerGender:radioGroupValue, customerDateOfBirth: dateOfBirthController.text, customerCountryId: countryId.toString(), customerCityId:cityId.toString(), customerStateId:stateId.toString(), customerAreaId: areaId.toString(), customerPincode: pincode, customerAddress: addressController.text,);
+  UpdateProfileDetailReqModel get updateProfileDetailReqModel=>UpdateProfileDetailReqModel(customerName: nameController.text, customerEmail: emailController.text, customerCountryCode:countryCode, customerMobileNumber: mobilrController.text, customerAlternateCountryCode:countryAlternateCode, customerAlternateMobileNumber: alernetMobileController.text, customerGender:radioGroupValue, customerDateOfBirth: dateOfBirthController.text, customerCountryId: countryId.toString(), customerCityId:cityId.toString(), customerStateId:stateId.toString(), customerAreaId: areaId.toString(), customerPincode: pincode, customerAddress: addressController.text,);
 
   Future<void> updateProfileDetail(context)async{
     SharedPreferences pref=await SharedPreferences.getInstance();
@@ -367,6 +374,57 @@ class UpdateProfileController extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  Future<void> validateField(context) async {
+    if (nameController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Name",
+          type: SnackType.error);
+      return;
+    }
+    if (mobilrController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Mobile No",
+          type: SnackType.error);
+      return;
+    }
+    if (emailController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Email Id",
+          type: SnackType.error);
+      return;
+    }
+    if (dateOfBirthController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Select Date of birth",
+          type: SnackType.error);
+      return;
+    }
+    if (countryId == 0) {
+      Utils.showPrimarySnackbar(context, "Select Country",
+          type: SnackType.error);
+      return;
+    }
+    if (stateId == 0) {
+      Utils.showPrimarySnackbar(context, "Select State", type: SnackType.error);
+      return;
+    }
+    if (cityId == 0) {
+      Utils.showPrimarySnackbar(context, "Select City", type: SnackType.error);
+      return;
+    }
+    if (areaId == 0) {
+      Utils.showPrimarySnackbar(context, "Select Area", type: SnackType.error);
+      return;
+    }
+    if (addressController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Address",
+          type: SnackType.error);
+      return;
+    }
+    if (pincode == "") {
+      Utils.showPrimarySnackbar(context, "Select Pincode",
+          type: SnackType.error);
+      return;
+    }
+    await updateProfileDetail(context);
   }
 
 

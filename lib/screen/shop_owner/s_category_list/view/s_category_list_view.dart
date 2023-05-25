@@ -46,7 +46,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           title: "Categories",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-            readMainScreen.onNavigation(0, SSelectCategoryView(), context);
+            readMainScreen.onBackPressed(0, SSelectCategoryView());
           },
         ),
       ),

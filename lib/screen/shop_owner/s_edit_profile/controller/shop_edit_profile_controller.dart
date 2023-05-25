@@ -21,17 +21,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ShopEditProfileDetailController extends ChangeNotifier {
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
   UpdateProfileRepo shopUpdateProfileRepo = UpdateProfileRepo();
-  TextEditingController ShopNameController = TextEditingController();
-  TextEditingController OwnerNameController = TextEditingController();
-  TextEditingController PhoneNumberController = TextEditingController();
-  TextEditingController EmailIdController = TextEditingController();
-  TextEditingController ShopAddressController = TextEditingController();
-  TextEditingController PinCodeController = TextEditingController();
+  TextEditingController shopNameController = TextEditingController();
+  TextEditingController ownerNameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController emailIdController = TextEditingController();
+  TextEditingController shopAddressController = TextEditingController();
+  TextEditingController pinCodeController = TextEditingController();
   String selectedCountryId = "";
   String selectedStateId = "";
   String selectedCityId = "";
   String selectedAreaId = "";
-  int selectedPincode=0;
+  int selectedPincode = 0;
   List<CountryData>? countryDataList;
   List<StateData>? stateDataList;
   List<CityData>? cityDataList;
@@ -52,7 +52,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String networkImage3 = "";
   String networkImage4 = "";
   String countryCode = "+91";
-  List ? pincodeList;
+  List? pincodeList;
+  bool showValuePincodeField=false;
 
   Future<void> initState(
     context,
@@ -142,15 +143,16 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         final shopDetails = result.shopDetails;
         print(shopDetails);
         log("${response.body}");
-        ShopNameController.text = shopDetails?.shopName ?? "";
-        print(ShopNameController.text);
-        OwnerNameController.text = shopDetails?.shopOwnerName ?? "";
-        PhoneNumberController.text =
+        shopNameController.text = shopDetails?.shopName ?? "";
+        print(shopNameController.text);
+        ownerNameController.text = shopDetails?.shopOwnerName ?? "";
+        phoneNumberController.text =
             shopDetails?.shopOwnerMobileNumber.toString() ?? "";
         countryCode = shopDetails?.shopOwnerCountryCode ?? "";
-        EmailIdController.text = shopDetails?.shopOwnerEmail ?? "";
-        ShopAddressController.text = shopDetails?.shopAddress ?? "";
-        selectedPincode=int.parse(shopDetails?.shopPincode.toString()??"0")??0;
+        emailIdController.text = shopDetails?.shopOwnerEmail ?? "";
+        shopAddressController.text = shopDetails?.shopAddress ?? "";
+        selectedPincode =
+            int.parse(shopDetails?.shopPincode.toString() ?? "0") ?? 0;
         selectedCountryId = shopDetails?.selectedCountryId.toString() ?? "";
         selectedStateId = shopDetails?.selectedStateId.toString() ?? "";
         selectedCityId = shopDetails?.selectedCityId.toString() ?? "";
@@ -161,7 +163,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         cityDataList = result.cities;
         stateDataList = result.states;
         areaDataList = result.areas;
-        pincodeList=result.pincode;
+        pincodeList = result.pincode;
+      if(pincodeList?.contains(selectedPincode.toString())??false){
+        print("8789888");
+        showValuePincodeField=true;
+      }
+      else{
+        showValuePincodeField=false;
+      }
         bannerImageList = result.shopBannerImages;
         if (bannerImageList!.isNotEmpty) {
           print(bannerImageList!.asMap().containsKey(0));
@@ -202,17 +211,17 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
   ShopUpdateProfileReqModel get shopUpdateProfileReqModel =>
       ShopUpdateProfileReqModel(
-        shopName: ShopNameController.text,
-        shopOwnerName: OwnerNameController.text,
+        shopName: shopNameController.text,
+        shopOwnerName: ownerNameController.text,
         shopOwnerCountryCode: countryCode,
         selectedAreaId: (selectedAreaId),
         selectedCityId: (selectedCityId),
         selectedCountryId: (selectedCountryId),
         selectedStateId: (selectedStateId),
-        shopAddress: ShopAddressController.text,
-        shopOwnerEmail: EmailIdController.text,
-        shopOwnerMobileNumber: (PhoneNumberController.text),
-        shopPincode: (PinCodeController.text),
+        shopAddress: shopAddressController.text,
+        shopOwnerEmail: emailIdController.text,
+        shopOwnerMobileNumber: (phoneNumberController.text),
+        shopPincode: (selectedPincode.toString()),
         shopBannerImages: image1,
       );
 
@@ -245,6 +254,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       },
     );
   }
+
   void onCountrySelected(value) async {
     selectedCountryId = value.toString();
     notifyListeners();
@@ -403,8 +413,10 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
       final result = GetStateListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+
         stateDataList = result.stateData;
         if (result.stateData!.isEmpty) {
+          stateDataList?.clear();
           Utils.showPrimarySnackbar(context, "No State Found",
               type: SnackType.error);
         }
@@ -425,4 +437,56 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       },
     );
   }
+
+  Future<void> validateField(context) async {
+    if (shopNameController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Shop Name",
+          type: SnackType.error);
+      return;
+    }
+    if (ownerNameController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Owner Name",
+          type: SnackType.error);
+      return;
+    }
+    if (phoneNumberController.text.length<10) {
+      Utils.showPrimarySnackbar(context, "Enter Mobile No",
+          type: SnackType.error);
+      return;
+    }
+    if (emailIdController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Email Id",
+          type: SnackType.error);
+      return;
+    }
+    if (selectedCountryId == "") {
+      Utils.showPrimarySnackbar(context, "Select Country",
+          type: SnackType.error);
+      return;
+    }
+    if (selectedStateId == "") {
+      Utils.showPrimarySnackbar(context, "Select State", type: SnackType.error);
+      return;
+    }
+    if (selectedCityId == "") {
+      Utils.showPrimarySnackbar(context, "Select City", type: SnackType.error);
+      return;
+    }
+    if (selectedAreaId == "") {
+      Utils.showPrimarySnackbar(context, "Select Area", type: SnackType.error);
+      return;
+    }
+    if (shopAddressController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Address",
+          type: SnackType.error);
+      return;
+    }
+    if (selectedPincode == 0) {
+      Utils.showPrimarySnackbar(context, "Select Pincode",
+          type: SnackType.error);
+      return;
+    }
+    await UpdateProfile(context);
+  }
+
 }

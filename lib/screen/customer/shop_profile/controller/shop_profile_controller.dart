@@ -22,7 +22,7 @@ class ShopProfileController extends ChangeNotifier{
   }
 
   CustomerViewShopReqModel get customerViewShopReqModel=>CustomerViewShopReqModel(
-    shopId: "3",
+    shopId: shopId,
   );
 
   Future<void> getShopDetails(context,id)async{

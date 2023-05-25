@@ -12,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -21,22 +22,12 @@ import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SEditProfileView extends StatefulWidget {
-  const SEditProfileView({super.key});
+  final bool? fromDashBoard;
+  const SEditProfileView({super.key, required this.fromDashBoard});
 
   @override
   State<SEditProfileView> createState() => _SEditProfileViewState();
 }
-
-// final TextEditingController controller = TextEditingController();
-// String initialCountry = 'IN';
-// PhoneNumber number = PhoneNumber(isoCode: 'IN');
-// String radioButtonItem = '';
-// String? dropdown;
-
-final List<String> genderItems = [
-  'Male',
-  'Female',
-];
 
 class _SEditProfileViewState extends State<SEditProfileView> {
   @override
@@ -57,12 +48,18 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onNavigation(4, SAccountScreenView(), context);
+            if (widget.fromDashBoard ?? false) {
+              readMainScreen.onBackPressed(0, ShopDashBoard());
+            } else {
+              readMainScreen.onBackPressed(
+                4, SAccountScreenView(),
+              );
+            }
           },
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.UpdateProfile(context);
+            read.validateField(context);
           },
         ),
       ),
@@ -342,7 +339,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     height: 10.5.w,
                   ),
                   PrimarySTextFormField(
-                    controller: watch.ShopNameController,
+                    controller: watch.shopNameController,
                     titleHeader: "Shop Name",
                     hintText: "Shop Name",
                   ),
@@ -350,7 +347,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     height: 20.w,
                   ),
                   PrimarySTextFormField(
-                    controller: watch.OwnerNameController,
+                    controller: watch.ownerNameController,
                     titleHeader: "Owner Name",
                     hintText: "Owner Name",
                   ),
@@ -374,7 +371,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     child: Container(
                         child: MobileNoTextFormField(
                       initialSelection: watch.countryCode,
-                      controller: watch.PhoneNumberController,
+                      controller: watch.phoneNumberController,
                       enableOrder: true,
                     )),
                   ),
@@ -382,7 +379,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     height: 20.w,
                   ),
                   PrimarySTextFormField(
-                    controller: watch.EmailIdController,
+                    controller: watch.emailIdController,
                     titleHeader: "Email ID",
                     hintText: "Email ID",
                   ),
@@ -396,7 +393,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                           child: SDropDownField(
                         value: watch.selectedCountryId,
                         onChanged: (value) async {
-                          print(value);
+                          read.onCountrySelected(value);
+                          read.getStateList(context);
                         },
                         items: watch.countryDataList
                             ?.map((item) => DropdownMenuItem<String>(
@@ -419,7 +417,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                           child: SDropDownField(
                         value: watch.selectedStateId,
                         onChanged: (value) async {
-                          print(value);
+                          read.onStateSelected(value);
+                          read.getCityList(context);
                         },
                         items: watch.stateDataList
                             ?.map((item) => DropdownMenuItem<String>(
@@ -443,7 +442,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SDropDownField(
                     value: watch.selectedCityId,
                     onChanged: (value) async {
-                      print(value);
+                    read.onCitySelected(value);
+                    read.getAreaList(context);
                     },
                     items: watch.cityDataList
                         ?.map((item) => DropdownMenuItem<String>(
@@ -468,7 +468,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SDropDownField(
                     value: watch.selectedAreaId,
                     onChanged: (value) async {
-                      print(value);
+                      read.onAreaSelected(value);
+                      read.getPinCodeList(context);
                     },
                     items: watch.areaDataList
                         ?.map((item) => DropdownMenuItem<String>(
@@ -491,16 +492,35 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     height: 22.w,
                   ),
                   PrimarySTextFormField(
-                    controller: watch.ShopAddressController,
+                    controller: watch.shopAddressController,
                     titleHeader: "Shop Address",
                     hintText: "Shop Address",
                   ),
                   SizedBox(
                     height: 22.w,
                   ),
+                  watch.showValuePincodeField?
                   SDropDownField(
+                    value: watch.selectedPincode.toString(),
                     onChanged: (value) async {
-                      print(value);
+                      read.onPincodeSelected(value);
+                    },
+                    items: watch.pincodeList
+                        ?.map((item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    hint: "Pincode",
+                    titleHeader: "Pincode",
+                  ): SDropDownField(
+                    onChanged: (value) async {
+                      read.onPincodeSelected(value);
                     },
                     items: watch.pincodeList
                         ?.map((item) => DropdownMenuItem<String>(

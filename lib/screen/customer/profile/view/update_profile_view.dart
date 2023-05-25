@@ -47,7 +47,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
           title: "Update Profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: ()async {
-           await read.updateProfileDetail(context);
+           await read.validateField(context);
           },
         ),
       ),
@@ -494,7 +494,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                 SizedBox(
                   height: 22.w,
                 ),
-                watch.pincode=="null"?
+                watch.pincode=="null"||!watch.showPincodeValueField?
                 CDropDownField(
                   onChanged: (value) async {
                     print(value);
@@ -513,8 +513,9 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       .toList(),
                   hint: "Pincode",
                   titleHeader: "Pincode",
-                ): CDropDownField(
-                  // value: watch.pincode,
+                ):
+                CDropDownField(
+                  value: watch.pincode,
                   onChanged: (value) async {
                     print(value);
                     read.onPincodeSelected(value);

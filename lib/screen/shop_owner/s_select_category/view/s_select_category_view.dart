@@ -35,12 +35,15 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onNavigation(0, SSCategoryListView(), context);
+            readMainScreen.onBackPressed(0, SSCategoryListView());
           },
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
-            await read.addCategory(context);
+            await read.addCategory(context).then((value){
+              print("hello");
+              readMainScreen.onBackPressed(0,SSCategoryListView());
+            });
           },
         ),
       ),

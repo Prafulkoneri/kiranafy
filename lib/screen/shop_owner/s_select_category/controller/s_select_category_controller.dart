@@ -102,7 +102,7 @@ class SSelectCategoryController extends ChangeNotifier {
       print(response.body);
       final result = SAddCategoriesResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
- Navigator.push(context,MaterialPageRoute(builder: (context)=>SSCategoryListView()));
+
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

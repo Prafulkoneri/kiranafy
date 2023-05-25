@@ -19,19 +19,16 @@ class SSelectedProductsController extends ChangeNotifier {
   List<ProductsFromAdmin>? productsFromAdmin;
   List<UnitDetail>? unitDetails;
   int? totalSelectedAndCustomProducts;
+  String categoryName = "";
   SSelectedProductsRepo shopSelecteProductRepo = SSelectedProductsRepo();
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
   String categoryId = "";
   String productId = "";
 
-
   Future<void> initState(context, id) async {
     await selectedProducts(context, id);
     notifyListeners();
   }
-
-
-
 
   //////////////Select product
   SelecteProductsRequestModel get selecteProductRequestModel =>
@@ -55,7 +52,7 @@ class SSelectedProductsController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         productsFromAdmin = result.data?.productsFromAdmin;
-
+        categoryName = result.data?.categoryName ?? "";
         totalSelectedAndCustomProducts =
             result.data?.totalSelectedAndCustomProducts ?? 0;
 
@@ -80,8 +77,8 @@ class SSelectedProductsController extends ChangeNotifier {
     );
   }
 
-  Future<void> deleteProduct(context, index,id) async {
-    productId=id.toString();
+  Future<void> deleteProduct(context, index, id) async {
+    productId = id.toString();
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
 
@@ -120,6 +117,4 @@ class SSelectedProductsController extends ChangeNotifier {
       },
     );
   }
-
-
 }

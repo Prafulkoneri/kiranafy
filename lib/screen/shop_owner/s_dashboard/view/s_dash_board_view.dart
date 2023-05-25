@@ -9,6 +9,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -180,7 +181,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${watch.address}",
+                          "${watch.address} ",
                           // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
@@ -208,7 +209,12 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 Container(
                   child: GestureDetector(
                     onTap: () {
-                      read.onEditBtnClicked(context);
+                      readMainScreen.onNavigation(
+                          0,
+                          SEditProfileView(
+                            fromDashBoard: true,
+                          ),
+                          context);
                     },
                     child: SvgPicture.asset(
                       "assets/icons/shop_edit.svg",
@@ -242,24 +248,19 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    PersistentNavBarNavigator.pushNewScreen(context,
-                        screen: SSCategoryListView(),
-                        withNavBar: true,
-                        pageTransitionAnimation:
-                            PageTransitionAnimation.sizeUp);
+                    // PersistentNavBarNavigator.pushNewScreen(context,
+                    //     screen: SSCategoryListView(),
+                    //     withNavBar: true,
+                    //     pageTransitionAnimation:
+                    //         PageTransitionAnimation.sizeUp);
                   },
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
-                    // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                    // height: 50.h,/
+                        left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                     decoration: BoxDecoration(
                         color: SplashText,
-                        // border: Border.all(width: 1, color: Black),
                         borderRadius: BorderRadius.circular(8)),
-
                     child: Column(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           "0",
@@ -293,7 +294,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
                       color: SplashText,
@@ -358,7 +359,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   // height: 55.h,
                   // width: 170.w,
                   padding: EdgeInsets.only(
-                      left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
 
                   decoration: BoxDecoration(
                       color: Custlogin, borderRadius: BorderRadius.circular(8)),
@@ -396,7 +397,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
                       color: Custlogin,
@@ -464,7 +465,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   },
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
+                        left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                     // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                     // height: 50.h,/
                     decoration: BoxDecoration(
@@ -518,7 +519,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   },
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                        left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                     // height: 50.h,/
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -577,7 +578,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 45.w, right: 45.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -624,7 +625,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -694,7 +695,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -742,7 +743,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   decoration: BoxDecoration(
                       color: Custlogin, borderRadius: BorderRadius.circular(8)),
                   child: Column(
@@ -778,7 +779,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   decoration: BoxDecoration(
                       color: Custlogin,
                       // border: Border.all(width: 1, color: Black),
@@ -827,7 +828,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -868,7 +869,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -915,7 +916,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 19.w, right: 19.w, top: 11.w, bottom: 11.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -984,7 +985,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 40.w, right: 40.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
@@ -1026,7 +1027,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 49.w, right: 49.w, top: 9.w, bottom: 9.w),
+                      left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
                   // height: 50.h,/
                   decoration: BoxDecoration(
                       color: SplashText,

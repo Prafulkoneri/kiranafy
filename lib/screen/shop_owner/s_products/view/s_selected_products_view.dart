@@ -20,7 +20,7 @@ import '../../../../widget/app_bar.dart';
 
 class SSelectedProductView extends StatefulWidget {
   final String? categoryId;
-  const SSelectedProductView({super.key,required this.categoryId});
+  const SSelectedProductView({super.key, required this.categoryId});
 
   @override
   State<SSelectedProductView> createState() => _SSelectedProductViewState();
@@ -31,7 +31,7 @@ final TextEditingController _searchController = TextEditingController();
 class _SSelectedProductViewState extends State<SSelectedProductView> {
   @override
   void initState() {
-     print("widget.categoryId ${widget.categoryId}");
+    print("widget.categoryId ${widget.categoryId}");
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SSelectedProductsController>()
@@ -48,542 +48,570 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
-            onBackBtnPressed: (){
-              readMainScreen.onBackPressed(0,SSCategoryListView());
+            onBackBtnPressed: () {
+              readMainScreen.onBackPressed(0, SSCategoryListView());
             },
-            title: "Cold Drinks & Juices - 2",
+            title:
+                '${watch.categoryName}  - ${watch.totalSelectedAndCustomProducts}',
+            // "Cold Drinks & Juices - 2",
             // action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {},
           ),
         ),
-        body: watch.isLoading?Center(
-          child: CircularProgressIndicator(),
-        ):SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.only(
-              right: 19.0.w,
-              left: 19.0.w,
-              top: 20.h,
-            ),
-            child: Column(
-              children: [
-                Container(
-                  // padding: EdgeInsets.only(
-                  //   right: 19.0.w,
-                  //   left: 19.0.w,
-                  //   top: 13.h,
-                  // ),
-                  child: SizedBox(
-                    width: 352.w,
-                    height: 30.h,
-                    child: TextField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        // filled: true,
-                        enabledBorder: UnderlineInputBorder(
-                          //<-- SEE HERE
-                          borderSide: BorderSide(width: 1, color: grey12),
-                        ),
-                        hintText: 'Search Products',
-                        contentPadding: EdgeInsets.only(bottom: 10.w),
-                        hintStyle: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Grey,
-                                // letterSpacing: .5,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400)),
-                        prefixIcon: IconButton(
-                          icon: SvgPicture.asset(
-                            'assets/icons/search.svg',
-                            width: 20.w,
-                            height: 20.h,
-                          ),
-                          onPressed: () {
-                            // Perform the search here
-                          },
-                        ),
-                      ),
-                    ),
+        body: watch.isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    right: 19.0.w,
+                    left: 19.0.w,
+                    top: 20.h,
                   ),
-                ),
-                SizedBox(
-                  height: 13.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: PrimaryButton(
-                          height: 40.h,
-                          color: Custlogin,
-                          onTap: () {
-                            readMainScreen.onBackPressed(0,AddProductView(categoryId:watch.categoryId,));
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 15.w,
-                                  ),
-                                  SvgPicture.asset('assets/icons/pluse.svg'),
-                                ],
+                  child: Column(
+                    children: [
+                      Container(
+                        // padding: EdgeInsets.only(
+                        //   right: 19.0.w,
+                        //   left: 19.0.w,
+                        //   top: 13.h,
+                        // ),
+                        child: SizedBox(
+                          width: 352.w,
+                          height: 30.h,
+                          child: TextField(
+                            controller: _searchController,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              // filled: true,
+                              enabledBorder: UnderlineInputBorder(
+                                //<-- SEE HERE
+                                borderSide: BorderSide(width: 1, color: grey12),
                               ),
-
-                              Row(
-                                children: [
-                                  Text(
-                                    "Add Product",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 17.w,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    Expanded(
-                      child: PrimaryButton(
-                          height: 40.h,
-                          color: Custlogin,
-                          onTap: () {
-                            // readMainScreen.onNavigation(0,ShopCustomProductView(categoryId: watch.categoryId), context);
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-
-                                  SvgPicture.asset('assets/icons/pluse.svg'),
-
-                                ],
-                              ),
-                              SizedBox(
-                                width: 11.w,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Custom Product",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 22.h,
-                ),
-                ListView.builder(
-                  itemCount: watch.productsFromAdmin?.length ?? 0,
-                  //  watch.selectedProductList?.length ?? 0,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final element = watch.productsFromAdmin?[index];
-                    return Column(
-                      children: [
-                        Container(
-                          // padding: EdgeInsets.only(
-                          //     left: 21.w, bottom: 11.w, top: 13.w, right: 21.w),
-
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black.withOpacity(0.09),
-                                    blurRadius: 5,
-                                    offset: Offset(-.0, 5.0),
-                                    spreadRadius: 0),
-                              ],
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              border: Border.all(width: 1, color: grey1)),
-                          // decoration: BoxDecoration(
-
-                          //     border: Border.all(width: 1, color: Black1)),
-                          child: Theme(
-                            data: ThemeData()
-                                .copyWith(dividerColor: Colors.transparent),
-                            child: ListTileTheme(
-                              contentPadding: EdgeInsets.all(0),
-                              dense: true,
-                              // horizontalTitleGap: 5.0,
-                              // minLeadingWidth: 6,
-                              child: ExpansionTile(
-                                trailing: SizedBox.shrink(),
-
-                                title:
-                                Container(
-                                  width:ScreenUtil().screenWidth,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Image(
-                                            image: NetworkImage(
-                                              "${element?.productImagePath}",
-                                            ),
-                                            height: 61.h,
-                                            width: 60.w,
-                                            fit: BoxFit.fill,
-                                          ),
-                                          SizedBox(
-                                            width: 10.w,
-                                          ),
-                                          Container(
-                                            width:150.w,
-                                            child: Text(
-                                              "${element?.productName}",
-                                              // "${element?.productName}",
-                                              style: GoogleFonts.dmSans(
-                                                textStyle: TextStyle(
-                                                    color: Black1,
-                                                    fontSize: 16.sp,
-                                                    fontWeight: FontWeight.w700),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: grey6,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 10.0,
-                                                    spreadRadius: 2.0,
-                                                  ), //BoxShadow
-                                                ],
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(15)),
-                                            child: SvgPicture.asset(
-                                                'assets/icons/e1.svg'),
-                                          ),
-                                          SizedBox(
-                                            width: 8.w,
-                                          ),
-                                          GestureDetector(
-                                            onTap:(){
-                                              read.deleteProduct(context, index,element?.id);
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: grey6,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 10.0,
-                                                      spreadRadius: 2.0,
-                                                    ), //BoxShadow
-                                                  ],
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(15)),
-                                              child: SvgPicture.asset(
-                                                  'assets/icons/delete2.svg'),
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                              hintText: 'Search Products',
+                              contentPadding: EdgeInsets.only(bottom: 10.w),
+                              hintStyle: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Grey,
+                                      // letterSpacing: .5,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400)),
+                              prefixIcon: IconButton(
+                                icon: SvgPicture.asset(
+                                  'assets/icons/search.svg',
+                                  width: 20.w,
+                                  height: 20.h,
                                 ),
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                        left: 11.w, bottom: 11.w, right: 11.w),
-                                    child: Column(
-                                      children: [
-                                        Divider(),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(10)
-                                                // topLeft: Radius.circular(10),
-                                                // topRight: Radius.circular(10),
-                                                ),
-                                          ),
-                                          padding: EdgeInsets.only(
-                                              left: 11.w, right: 11.w),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Product Unit",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "MRP",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black1,
-                                                          fontSize: 12.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 12.w,
-                                                  ),
-                                                  Text(
-                                                    "Offer price",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black1,
-                                                          fontSize: 12.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5.h,
-                                        ),
-                                        ListView.builder(
-                                          itemCount: watch
-                                                  .productsFromAdmin?[index]
-                                                  .unitDetails
-                                                  ?.length ??
-                                              0,
-                                          shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          itemBuilder: (context, int) {
-                                            // final unitDetail = watch
-                                            //     .productsFromAdmin?[index]
-                                            //     .unitDetails?[int];
-                                            final element = watch
-                                                .productsFromAdmin?[index]
-                                                .unitDetails?[int];
-
-                                            return Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 12.w,
-                                                  right: 20.w,
-                                                  top: 7.w,
-                                                  bottom: 8.w),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  // color: Black1,
-                                                  border: Border.all(
-                                                      width: 1, color: grey6)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "${element?.mrpPrice}",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black1,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        "${element?.weightAndUnit}",
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .lineThrough,
-                                                              color: Black1,
-                                                              fontSize: 14.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 18.w,
-                                                      ),
-                                                      Text(
-                                                        "${element?.offerPrice}",
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color: Black1,
-                                                              fontSize: 14.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                                // child:
+                                onPressed: () {
+                                  // Perform the search here
+                                },
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 18.w,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                // Container(
-                //   padding: EdgeInsets.only(
-                //       left: 21.w, bottom: 7.w, top: 6.w, right: 21.w),
-                //   decoration: BoxDecoration(
-                //       boxShadow: [
-                //         BoxShadow(
-                //             color: Colors.black.withOpacity(0.09),
-                //             blurRadius: 5,
-                //             offset: Offset(-.0, 5.0),
-                //             spreadRadius: 0),
-                //       ],
-                //       borderRadius: BorderRadius.circular(10),
-                //       color: Colors.white,
-                //       border: Border.all(width: 1, color: grey1)),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Row(
-                //         children: [
-                //           Image(
-                //             image: AssetImage("assets/images/sprite.png"),
-                //             height: 61.h,
-                //             width: 60.w,
-                //           ),
-                //           Text(
-                //             "Coca Cola",
-                //             style: GoogleFonts.dmSans(
-                //               textStyle: TextStyle(
-                //                   color: Black1,
-                //                   fontSize: 16.sp,
-                //                   fontWeight: FontWeight.w700),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       Row(
-                //         // crossAxisAlignment: CrossAxisAlignment.center,
-                //         children: [
-                //           // Text("data"),
-                //           Container(
-                //             padding: EdgeInsets.all(8),
-                //             decoration: BoxDecoration(
-                //                 boxShadow: [
-                //                   BoxShadow(
-                //                     color: grey6,
-                //                     offset: const Offset(
-                //                       5.0,
-                //                       5.0,
-                //                     ),
-                //                     blurRadius: 10.0,
-                //                     spreadRadius: 2.0,
-                //                   ), //BoxShadow
-                //                 ],
-                //                 color: Colors.white,
-                //                 borderRadius: BorderRadius.circular(15)),
-                //             child: SvgPicture.asset('assets/icons/e1.svg'),
-                //           ),
-                //           SizedBox(
-                //             width: 8.w,
-                //           ),
-                //           Container(
-                //             padding: EdgeInsets.all(8),
-                //             decoration: BoxDecoration(
-                //                 boxShadow: [
-                //                   BoxShadow(
-                //                     color: grey6,
-                //                     offset: const Offset(
-                //                       5.0,
-                //                       5.0,
-                //                     ),
-                //                     blurRadius: 10.0,
-                //                     spreadRadius: 2.0,
-                //                   ), //BoxShadow
-                //                 ],
-                //                 color: Colors.white,
-                //                 borderRadius: BorderRadius.circular(15)),
-                //             child: SvgPicture.asset('assets/icons/delete2.svg'),
-                //           )
-                //           // Text("data"),
+                      ),
+                      SizedBox(
+                        height: 13.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: PrimaryButton(
+                                height: 40.h,
+                                color: Custlogin,
+                                onTap: () {
+                                  readMainScreen.onBackPressed(
+                                      0,
+                                      AddProductView(
+                                        categoryId: watch.categoryId,
+                                      ));
+                                },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 15.w,
+                                        ),
+                                        SvgPicture.asset(
+                                            'assets/icons/pluse.svg'),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Add Product",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 17.w,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                          ),
+                          SizedBox(
+                            width: 15.w,
+                          ),
+                          Expanded(
+                            child: PrimaryButton(
+                                height: 40.h,
+                                color: Custlogin,
+                                onTap: () {
+                                  // readMainScreen.onNavigation(0,ShopCustomProductView(categoryId: watch.categoryId), context);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                            'assets/icons/pluse.svg'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 11.w,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Custom Product",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 22.h,
+                      ),
+                      ListView.builder(
+                        itemCount: watch.productsFromAdmin?.length ?? 0,
+                        //  watch.selectedProductList?.length ?? 0,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final element = watch.productsFromAdmin?[index];
+                          return Column(
+                            children: [
+                              Container(
+                                // padding: EdgeInsets.only(
+                                //     left: 21.w, bottom: 11.w, top: 13.w, right: 21.w),
 
-                //           // SvgPicture.asset(
-                //           //     'assets/icons/reddelete.svg'),
-                //         ],
-                //       )
-                //     ],
-                //   ),
-                // )
-              ],
-            ),
-          ),
-        ));
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black.withOpacity(0.09),
+                                          blurRadius: 5,
+                                          offset: Offset(-.0, 5.0),
+                                          spreadRadius: 0),
+                                    ],
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                    border: Border.all(width: 1, color: grey1)),
+                                // decoration: BoxDecoration(
+
+                                //     border: Border.all(width: 1, color: Black1)),
+                                child: Theme(
+                                  data: ThemeData().copyWith(
+                                      dividerColor: Colors.transparent),
+                                  child: ListTileTheme(
+                                    contentPadding: EdgeInsets.all(0),
+                                    dense: true,
+                                    // horizontalTitleGap: 5.0,
+                                    // minLeadingWidth: 6,
+                                    child: ExpansionTile(
+                                      trailing: SizedBox.shrink(),
+
+                                      title: Container(
+                                        width: ScreenUtil().screenWidth,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Image(
+                                                  image: NetworkImage(
+                                                    "${element?.productImagePath}",
+                                                  ),
+                                                  height: 61.h,
+                                                  width: 60.w,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                                SizedBox(
+                                                  width: 10.w,
+                                                ),
+                                                Container(
+                                                  width: 150.w,
+                                                  child: Text(
+                                                    "${element?.productName}",
+                                                    // "${element?.productName}",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.all(8),
+                                                  decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: grey6,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 10.0,
+                                                          spreadRadius: 2.0,
+                                                        ), //BoxShadow
+                                                      ],
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15)),
+                                                  child: SvgPicture.asset(
+                                                      'assets/icons/e1.svg'),
+                                                ),
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    read.deleteProduct(context,
+                                                        index, element?.id);
+                                                  },
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(8),
+                                                    decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: grey6,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 10.0,
+                                                            spreadRadius: 2.0,
+                                                          ), //BoxShadow
+                                                        ],
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15)),
+                                                    child: SvgPicture.asset(
+                                                        'assets/icons/delete2.svg'),
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: 11.w,
+                                              bottom: 11.w,
+                                              right: 11.w),
+                                          child: Column(
+                                            children: [
+                                              Divider(),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(10)
+                                                      // topLeft: Radius.circular(10),
+                                                      // topRight: Radius.circular(10),
+                                                      ),
+                                                ),
+                                                padding: EdgeInsets.only(
+                                                    left: 11.w, right: 11.w),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "Product Unit",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Black1,
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "MRP",
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle: TextStyle(
+                                                                color: Black1,
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 12.w,
+                                                        ),
+                                                        Text(
+                                                          "Offer price",
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle: TextStyle(
+                                                                color: Black1,
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5.h,
+                                              ),
+                                              ListView.builder(
+                                                itemCount: watch
+                                                        .productsFromAdmin?[
+                                                            index]
+                                                        .unitDetails
+                                                        ?.length ??
+                                                    0,
+                                                shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemBuilder: (context, int) {
+                                                  // final unitDetail = watch
+                                                  //     .productsFromAdmin?[index]
+                                                  //     .unitDetails?[int];
+                                                  final element = watch
+                                                      .productsFromAdmin?[index]
+                                                      .unitDetails?[int];
+
+                                                  return Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 12.w,
+                                                        right: 20.w,
+                                                        top: 7.w,
+                                                        bottom: 8.w),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        // color: Black1,
+                                                        border: Border.all(
+                                                            width: 1,
+                                                            color: grey6)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          "${element?.mrpPrice}",
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle: TextStyle(
+                                                                color: Black1,
+                                                                fontSize: 14.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              "${element?.weightAndUnit}",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle: TextStyle(
+                                                                    decoration:
+                                                                        TextDecoration
+                                                                            .lineThrough,
+                                                                    color:
+                                                                        Black1,
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 18.w,
+                                                            ),
+                                                            Text(
+                                                              "${element?.offerPrice}",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle: TextStyle(
+                                                                    color:
+                                                                        Black1,
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                      // child:
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 18.w,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      // Container(
+                      //   padding: EdgeInsets.only(
+                      //       left: 21.w, bottom: 7.w, top: 6.w, right: 21.w),
+                      //   decoration: BoxDecoration(
+                      //       boxShadow: [
+                      //         BoxShadow(
+                      //             color: Colors.black.withOpacity(0.09),
+                      //             blurRadius: 5,
+                      //             offset: Offset(-.0, 5.0),
+                      //             spreadRadius: 0),
+                      //       ],
+                      //       borderRadius: BorderRadius.circular(10),
+                      //       color: Colors.white,
+                      //       border: Border.all(width: 1, color: grey1)),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Row(
+                      //         children: [
+                      //           Image(
+                      //             image: AssetImage("assets/images/sprite.png"),
+                      //             height: 61.h,
+                      //             width: 60.w,
+                      //           ),
+                      //           Text(
+                      //             "Coca Cola",
+                      //             style: GoogleFonts.dmSans(
+                      //               textStyle: TextStyle(
+                      //                   color: Black1,
+                      //                   fontSize: 16.sp,
+                      //                   fontWeight: FontWeight.w700),
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //       Row(
+                      //         // crossAxisAlignment: CrossAxisAlignment.center,
+                      //         children: [
+                      //           // Text("data"),
+                      //           Container(
+                      //             padding: EdgeInsets.all(8),
+                      //             decoration: BoxDecoration(
+                      //                 boxShadow: [
+                      //                   BoxShadow(
+                      //                     color: grey6,
+                      //                     offset: const Offset(
+                      //                       5.0,
+                      //                       5.0,
+                      //                     ),
+                      //                     blurRadius: 10.0,
+                      //                     spreadRadius: 2.0,
+                      //                   ), //BoxShadow
+                      //                 ],
+                      //                 color: Colors.white,
+                      //                 borderRadius: BorderRadius.circular(15)),
+                      //             child: SvgPicture.asset('assets/icons/e1.svg'),
+                      //           ),
+                      //           SizedBox(
+                      //             width: 8.w,
+                      //           ),
+                      //           Container(
+                      //             padding: EdgeInsets.all(8),
+                      //             decoration: BoxDecoration(
+                      //                 boxShadow: [
+                      //                   BoxShadow(
+                      //                     color: grey6,
+                      //                     offset: const Offset(
+                      //                       5.0,
+                      //                       5.0,
+                      //                     ),
+                      //                     blurRadius: 10.0,
+                      //                     spreadRadius: 2.0,
+                      //                   ), //BoxShadow
+                      //                 ],
+                      //                 color: Colors.white,
+                      //                 borderRadius: BorderRadius.circular(15)),
+                      //             child: SvgPicture.asset('assets/icons/delete2.svg'),
+                      //           )
+                      //           // Text("data"),
+
+                      //           // SvgPicture.asset(
+                      //           //     'assets/icons/reddelete.svg'),
+                      //         ],
+                      //       )
+                      //     ],
+                      //   ),
+                      // )
+                    ],
+                  ),
+                ),
+              ));
   }
 }
