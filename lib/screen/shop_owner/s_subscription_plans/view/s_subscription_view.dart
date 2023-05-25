@@ -307,7 +307,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                                             children: [
                                                                               Flexible(
                                                                                 child: Text(
-                                                                                  "INR ${element?.planBenifits}",
+                                                                                  "${element?.planBenifits}",
                                                                                   style: GoogleFonts.dmSans(
                                                                                     textStyle: TextStyle(color: Black1, height: 1.5, fontSize: 14.sp, fontWeight: FontWeight.w400),
                                                                                   ),

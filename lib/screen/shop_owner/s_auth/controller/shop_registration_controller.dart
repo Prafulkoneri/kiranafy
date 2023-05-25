@@ -315,6 +315,7 @@ class ShopRegistrationController extends ChangeNotifier {
           fcmToken: fcmToken);
 
   Future<void> shopRegister(context) async {
+    print("object");
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopOwnerRegisterRepo
         .shopOwnerRegistration(shopOwnerRegisterReqModel)

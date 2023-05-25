@@ -363,6 +363,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         text: "Next",
                         color: Color(0xff4689EC),
                         onTap: () {
+                          print("uicvneuiqboewybte");
                           read.onNextClicked(context);
                         },
                       ),
