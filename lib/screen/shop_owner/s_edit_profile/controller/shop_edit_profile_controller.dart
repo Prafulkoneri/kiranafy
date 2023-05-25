@@ -53,7 +53,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String networkImage4 = "";
   String countryCode = "+91";
   List? pincodeList;
-  bool showValuePincodeField=false;
+  bool showValuePincodeField = false;
 
   Future<void> initState(
     context,
@@ -164,13 +164,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         stateDataList = result.states;
         areaDataList = result.areas;
         pincodeList = result.pincode;
-      if(pincodeList?.contains(selectedPincode.toString())??false){
-        print("8789888");
-        showValuePincodeField=true;
-      }
-      else{
-        showValuePincodeField=false;
-      }
+        if (pincodeList?.contains(selectedPincode.toString()) ?? false) {
+          print("8789888");
+          showValuePincodeField = true;
+        } else {
+          showValuePincodeField = false;
+        }
         bannerImageList = result.shopBannerImages;
         if (bannerImageList!.isNotEmpty) {
           print(bannerImageList!.asMap().containsKey(0));
@@ -266,8 +265,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
-    stateId: selectedStateId.toString(),
-  );
+        stateId: selectedStateId.toString(),
+      );
 
   Future<void> getCityList(context) async {
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
@@ -286,7 +285,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -302,8 +301,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
-    cityId: selectedCityId.toString(),
-  );
+        cityId: selectedCityId.toString(),
+      );
 
   Future<void> onAreaSelected(value) async {
     selectedAreaId = value.toString();
@@ -327,7 +326,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -338,8 +337,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
-    areaId: selectedAreaId.toString(),
-  );
+        areaId: selectedAreaId.toString(),
+      );
 
   Future<void> getPinCodeList(context) async {
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
@@ -359,7 +358,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -375,7 +374,6 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<void> getCountryList(context) async {
     registrationDataRepo.getCountryList(context).then((response) {
       print(response.statusCode);
@@ -383,7 +381,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       final result = GetCountryListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print("${response.body}");
-        countryDataList= result.countryData;
+        countryDataList = result.countryData;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -392,7 +390,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -404,16 +402,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
   ///////////State
 
-
   GetStateListReqModel get _stateListReqModel => GetStateListReqModel(
-    countryId: selectedCountryId.toString(),
-  );
+        countryId: selectedCountryId.toString(),
+      );
 
   Future<void> getStateList(context) async {
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
       final result = GetStateListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-
         stateDataList = result.stateData;
         if (result.stateData!.isEmpty) {
           stateDataList?.clear();
@@ -428,7 +424,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -449,7 +445,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    if (phoneNumberController.text.length<10) {
+    if (phoneNumberController.text.length < 10) {
       Utils.showPrimarySnackbar(context, "Enter Mobile No",
           type: SnackType.error);
       return;
@@ -488,5 +484,4 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }
     await UpdateProfile(context);
   }
-
 }

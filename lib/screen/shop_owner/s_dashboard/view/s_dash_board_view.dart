@@ -213,6 +213,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                           0,
                           SEditProfileView(
                             fromDashBoard: true,
+                            // fromAccount: false,
                           ),
                           context);
                     },
