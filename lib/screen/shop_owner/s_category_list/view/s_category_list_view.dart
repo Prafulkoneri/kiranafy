@@ -139,7 +139,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    "20 Products",
+                                                    "${element?.categoryCount} Products",
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w400,

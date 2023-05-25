@@ -27,6 +27,7 @@ class SelectedCategoryData {
   int? categorySequence;
   String? categoryImagePath;
   String? categoryImageName;
+  int? categoryCount;
 
   SelectedCategoryData({
     required this.id,
@@ -34,6 +35,7 @@ class SelectedCategoryData {
     required this.categorySequence,
     required this.categoryImagePath,
     required this.categoryImageName,
+    required this.categoryCount,
   });
 
   SelectedCategoryData.fromJson(Map<String, dynamic> json) {
@@ -42,5 +44,6 @@ class SelectedCategoryData {
     categorySequence = json["category_sequence"];
     categoryImagePath = json["category_image_path"];
     categoryImageName = json["category_image_name"];
+    categoryCount = json["products_count"];
   }
 }

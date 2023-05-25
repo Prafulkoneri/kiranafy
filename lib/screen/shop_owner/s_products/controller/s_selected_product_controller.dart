@@ -22,22 +22,19 @@ class SSelectedProductsController extends ChangeNotifier {
   SSelectedProductsRepo shopSelecteProductRepo = SSelectedProductsRepo();
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
   String categoryId = "";
-
+  String productId = "";
 
   Future<void> initState(context, id) async {
     await selectedProducts(context, id);
     notifyListeners();
   }
 
-
-
-
   //////////////Select product
   SelecteProductsRequestModel get selecteProductRequestModel =>
-      SelecteProductsRequestModel(category_id: "6");
+      SelecteProductsRequestModel(category_id: categoryId);
 
   DeleteAdminProductReqModel get deleteAdminProductReqModel =>
-      DeleteAdminProductReqModel(productId: "6");
+      DeleteAdminProductReqModel(productId: productId);
 
   Future<void> selectedProducts(context, id) async {
     isLoading = true;
@@ -78,7 +75,8 @@ class SSelectedProductsController extends ChangeNotifier {
     );
   }
 
-  Future<void> deleteProduct(context, index) async {
+  Future<void> deleteProduct(context, index, id) async {
+    productId = id;
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
 
@@ -117,6 +115,4 @@ class SSelectedProductsController extends ChangeNotifier {
       },
     );
   }
-
-
 }

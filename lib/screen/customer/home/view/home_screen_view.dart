@@ -73,6 +73,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // SizedBox(
+            //   height: 12.h,
             Container(
               padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
               child: Row(
@@ -163,12 +165,12 @@ class _HomeScreenViewState extends State<HomeScreenView> {
 
             ////image
             SizedBox(
+              height: 200.h,
               width: MediaQuery.of(context).size.width,
               child: ExpandablePageView.builder(
                   itemCount: watch.data?.length ?? 0,
                   physics: BouncingScrollPhysics(),
                   padEnds: false,
-                  scrollDirection: Axis.horizontal,
                   pageSnapping: true,
                   controller: _pageController,
                   onPageChanged: (page) {
@@ -179,18 +181,20 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   itemBuilder: (context, pagePosition) {
                     final element = watch.data?[pagePosition];
                     return Container(
-                      height: 170.w,
                       child: Image.network(
                         "${element?.bannerImagePath}",
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                       // Image.asset(
                       //   images[pagePosition],
                       //   height: 170.w,
+                      //   // width: 340.w,
+                      //   // scale: 0.5,
                       //   fit: BoxFit.fill,
                       // ),
                       margin: EdgeInsets.only(
                           left: pagePosition == 0 ? 19.w : 0,
+                          // top: 15.w,
                           right:
                               pagePosition == images.length - 1 ? 19.w : 10.w),
                     );
@@ -221,7 +225,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   ),
                   InkWell(
                     onTap: () {
-                      readMain.onBackPressed(1, AllNearShops());
+                      readMain.onBackPressed(0, AllNearShops());
                     },
                     child: Text(
                       "View All",
