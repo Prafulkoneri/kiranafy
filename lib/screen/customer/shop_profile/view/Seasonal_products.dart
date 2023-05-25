@@ -99,7 +99,7 @@ class _SeasonalProductsState extends State<SeasonalProducts> {
                             Row(
                               children: [
                                 Text(
-                                  "${element?.weight}g",
+                                  "${element?.weight}${element?.unit}",
                                   style: GoogleFonts.roboto(
                                     textStyle: TextStyle(
                                         color: Black1,

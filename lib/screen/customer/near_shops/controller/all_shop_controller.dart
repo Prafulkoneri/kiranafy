@@ -40,6 +40,7 @@ class AllShopController extends ChangeNotifier {
 
   Future<void> getAllShops(context) async {
     isLoading = true;
+    showPaginationLoader = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("kkkkkkkkkk");
     if (pref.getString("pincode") == null) {
@@ -55,7 +56,6 @@ class AllShopController extends ChangeNotifier {
       final result =
           CustomerViewAllShopResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("111111123e24errfsdfs");
         data = result.data;
         nearByShop = data?.nearByShops;
         allShops.addAll(result.data?.allShops ?? []);
@@ -227,7 +227,7 @@ class AllShopController extends ChangeNotifier {
   }
 
   Future<void> onScrollMaxExtent(context) async {
-    showPaginationLoader = true;
+
         print("hello");
         offset = offset + 1;
         await getAllShops(context);

@@ -230,7 +230,15 @@ class UpdateProfileController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pincodeList = result.pincodeData;
         print(pincodeList);
+
+        if(pincodeList?.contains(pincode)??false){
+          showPincodeValueField=true;
+        }
+        else{
+          showPincodeValueField=false;
+        }
         if (result.pincodeData!.isEmpty) {
+          pincodeList?.clear();
           Utils.showPrimarySnackbar(context, "No Pincode Found",
               type: SnackType.error);
         }

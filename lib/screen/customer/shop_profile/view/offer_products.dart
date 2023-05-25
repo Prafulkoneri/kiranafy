@@ -60,6 +60,31 @@ class _OfferProductsState extends State<OfferProducts> {
                         child: Column(
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width: 60.w,
+                                  height: 20.h,
+                                  decoration: BoxDecoration(
+                                      color: lightgreen,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.w))),
+                                  child: Center(
+                                    child: Text("${element?.discountPercentage} off",
+                                        // textAlign: TextAlign.center,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Colors.white,
+                                              letterSpacing: .5,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500),
+                                        )),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 element?.productImagePath==""?
@@ -120,16 +145,36 @@ class _OfferProductsState extends State<OfferProducts> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "₹${element?.offerPrice??0}",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '\u{20B9}${element?.mrpPrice}',
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            decoration:
+                                            TextDecoration.lineThrough,
+                                            color: Black1,
+                                            letterSpacing: .5,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
+                                    Text(
+                                      "₹${element?.offerPrice??0}",
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Black1,
+                                            // letterSpacing: .5,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ],
                                 ),
+
                                 SvgPicture.asset(
                                   'assets/images/add.svg',
                                   // width: 15.w,

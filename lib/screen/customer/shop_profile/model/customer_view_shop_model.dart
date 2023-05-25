@@ -43,6 +43,8 @@ class OfferProduct{
   int ? selectedProductId;
   String ? status;
   String ? unit;
+  String ? discountPercentage;
+  String ? mrpPrice;
   OfferProduct({
     this.status,
     this.id,
@@ -54,6 +56,8 @@ class OfferProduct{
     this.unit,
     this.productImageName,
     this.weight,
+    this.mrpPrice,
+    this.discountPercentage,
 });
   OfferProduct.fromJson(Map<String,dynamic>json){
     id=json["id"];
@@ -66,6 +70,8 @@ class OfferProduct{
     weight=json["weight"];
     status=json["status"];
     unit=json["unit"];
+    mrpPrice=json["mrp_price"];
+    discountPercentage=json["discount_percentage"];
   }
 }
 
@@ -80,6 +86,8 @@ class SeasonalProduct{
   int ? selectedProductId;
   String ? status;
   String ? unit;
+  String ? discountPercentage;
+  String ? mrpPrice;
   SeasonalProduct({
     this.status,
     this.id,
@@ -91,6 +99,8 @@ class SeasonalProduct{
     this.unit,
     this.productImageName,
     this.weight,
+    this.mrpPrice,
+    this.discountPercentage,
   });
   SeasonalProduct.fromJson(Map<String,dynamic>json){
     id=json["id"];
@@ -103,6 +113,8 @@ class SeasonalProduct{
     unit=json["unit"];
     status=json["status"];
     unit=json["unit"];
+    mrpPrice=json["mrp_price"];
+    discountPercentage=json["discount_percentage"];
   }
 }
 

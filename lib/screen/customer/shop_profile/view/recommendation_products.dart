@@ -63,7 +63,7 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
               // height: 86.h,
               // color: Colors.white,
 
-              child: ListView.builder(
+              child:ListView.builder(
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
                   physics: NeverScrollableScrollPhysics(),
@@ -72,8 +72,6 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                   itemBuilder: (BuildContext, index) {
                     final element= watch.recommandedProduct?[index];
                     return Container(
-                      width: 322.w,
-                      height: 86.h,
                       // color: Colors.white,
                       decoration: const BoxDecoration(
                           color: Colors.white,
@@ -111,15 +109,17 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("${element?.productName}",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                letterSpacing: .5,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w700),
-                                          )),
-                                      Container(
+                                      Flexible(
+                                        child: Text("${element?.productName}",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: Black,
+                                                  letterSpacing: .5,
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w700),
+                                            )),
+                                      ),
+                                      element?.discountPercentage!=""? Container(
                                         width: 60.w,
                                         height: 20.h,
                                         decoration: BoxDecoration(
@@ -137,7 +137,7 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                                                     fontWeight: FontWeight.w500),
                                               )),
                                         ),
-                                      ),
+                                      ):Container(),
                                     ],
                                   ),
                                   SizedBox(

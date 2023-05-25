@@ -319,8 +319,7 @@ class _ShopProfileState extends State<ShopProfile> {
             SizedBox(
               height: 15.h,
             ),
-
-            watch.offerProduct?.isNotEmpty??false? OfferProducts():Container(),
+                watch.offerProduct?.isNotEmpty??false? OfferProducts():Container(),
             Padding(
               padding: EdgeInsets.only(
                 left: 19.h,
