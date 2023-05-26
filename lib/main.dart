@@ -36,6 +36,7 @@ import 'package:local_supper_market/screen/shop_owner/s_select_category/controll
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 
 import 'package:local_supper_market/screen/splash/controller/splash_controller.dart';
 import 'package:local_supper_market/screen/splash/view/splash_view.dart';
@@ -47,6 +48,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 
+import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
@@ -88,6 +90,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AllShopController()),
         ChangeNotifierProvider(create: (_) => AllCategoryShopController()),
         ChangeNotifierProvider(create: (_) => ProductCategoryController()),
+        ChangeNotifierProvider(create: (_) => ShopAllSeasonalController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],

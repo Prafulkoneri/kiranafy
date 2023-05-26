@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
+import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_buy_subscription_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_subscription_plans_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/s_buy_subscription_repo.dart';
@@ -135,7 +138,7 @@ class SSubscriptionController extends ChangeNotifier {
         print(response.statusCode);
         if (response.statusCode == 200) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SMainScreenView()));
+              MaterialPageRoute(builder: (context) => KycCompletedView()));
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,

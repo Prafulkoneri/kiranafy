@@ -60,13 +60,9 @@ class _SEditProfileViewState extends State<SEditProfileView> {
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
-            read.validateField(context);
+            await read.validateField(context);
             // await readMainScreen.onBackPressed(4, )
-            await readMainScreen.onBackPressed(
-                4,
-                SAccountScreenView(
-                    // updateMessage: 'Upadated Succefully',
-                    ));
+            // await readMainScreen.onBackPressed(4, SAccountScreenView());
           },
         ),
       ),
@@ -377,6 +373,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     padding: const EdgeInsets.only(bottom: 0),
                     child: Container(
                         child: MobileNoTextFormField(
+                      readOnly: true,
                       initialSelection: watch.countryCode,
                       controller: watch.phoneNumberController,
                       enableOrder: true,

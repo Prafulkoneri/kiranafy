@@ -28,10 +28,10 @@ class SShopConfigurationController extends ChangeNotifier {
   bool ifFreePickupSelected = false;
   bool isDeliveryCustomerSelected = false;
   bool isDeliveryChargesSelected = false;
-  bool isNineToTwelve = false;
-  bool isTwelveToThree = false;
-  bool isThreeToSix = false;
-  bool isSixToNine = false;
+  bool isNineToTwelve = true;
+  bool isTwelveToThree = true;
+  bool isThreeToSix = true;
+  bool isSixToNine = true;
   File fileImage1 = File("");
   String networkImage1 = "";
   String image1 = "";

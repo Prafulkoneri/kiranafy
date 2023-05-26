@@ -308,52 +308,50 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SizedBox(
                         height: 36.w,
                       ),
-                      TextButton(
-                          child: RichText(
-                            text: TextSpan(
-                                text: "By continuing you agree to our\n",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      height: 1.3.w,
-                                      // letterSpacing: .5,
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: 'Term of Condition',
-                                    style: GoogleFonts.inter(
-                                      textStyle: TextStyle(
-                                          color: SplashText1,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' and',
-                                    style: GoogleFonts.inter(
-                                      textStyle: TextStyle(
-                                          color: Black,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' Privacy Policy',
-                                    style: GoogleFonts.inter(
-                                      textStyle: TextStyle(
-                                          color: SplashText1,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                          onPressed: () {}),
+                      // RichText(
+                      //   text: TextSpan(
+                      //       text: "By continuing you agree to our\n",
+                      //       style: GoogleFonts.dmSans(
+                      //         textStyle: TextStyle(
+                      //             color: Black,
+                      //             height: 1.3.w,
+                      //             // letterSpacing: .5,
+                      //             fontSize: 16.sp,
+                      //             fontWeight: FontWeight.w400),
+                      //       ),
+                      //       children: [
+                      //         TextSpan(
+                      //           text: 'Term of Condition',
+                      //           style: GoogleFonts.inter(
+                      //             textStyle: TextStyle(
+                      //                 color: SplashText1,
+                      //                 // letterSpacing: .5,
+                      //                 fontSize: 16.sp,
+                      //                 fontWeight: FontWeight.w400),
+                      //           ),
+                      //         ),
+                      //         TextSpan(
+                      //           text: ' and',
+                      //           style: GoogleFonts.inter(
+                      //             textStyle: TextStyle(
+                      //                 color: Black,
+                      //                 // letterSpacing: .5,
+                      //                 fontSize: 16.sp,
+                      //                 fontWeight: FontWeight.w400),
+                      //           ),
+                      //         ),
+                      //         TextSpan(
+                      //           text: ' Privacy Policy',
+                      //           style: GoogleFonts.inter(
+                      //             textStyle: TextStyle(
+                      //                 color: SplashText1,
+                      //                 // letterSpacing: .5,
+                      //                 fontSize: 16.sp,
+                      //                 fontWeight: FontWeight.w400),
+                      //           ),
+                      //         ),
+                      //       ]),
+                      // ),
                       SizedBox(
                         height: 12.w,
                       ),

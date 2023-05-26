@@ -1,48 +1,49 @@
-class CustomerViewAllCategoryShopReqModel{
-  String ? pincode;
-  String ? limit;
-  String ? offset;
-  String ? categoryId;
+class CustomerViewAllCategoryShopReqModel {
+  String? pincode;
+  String? limit;
+  String? offset;
+  String? categoryId;
   CustomerViewAllCategoryShopReqModel({
     this.pincode,
     this.limit,
     this.offset,
     this.categoryId,
   });
-  Map<String,dynamic> toJson(){
-    Map<String,dynamic> data={};
-    data["pincode"]=pincode;
-    data["limit"]=limit;
-    data["offset"]=offset;
-    data["category_id"]=categoryId;
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = {};
+    data["pincode"] = pincode;
+    data["limit"] = limit;
+    data["offset"] = offset;
+    data["category_id"] = categoryId;
     return data;
   }
 }
 
-class CustomerViewAllCategoryShopResModel{
+class CustomerViewAllCategoryShopResModel {
   int? status;
   String? message;
-  Data ? data;
+  Data? data;
 
   CustomerViewAllCategoryShopResModel({
     this.status,
     this.data,
     this.message,
   });
-  CustomerViewAllCategoryShopResModel.fromJson(Map<String,dynamic>json){
-    status=json["status"];
-    message=json["message"];
+  CustomerViewAllCategoryShopResModel.fromJson(Map<String, dynamic> json) {
+    status = json["status"];
+    message = json["message"];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 }
-class Data{
+
+class Data {
   List<NearByShops>? nearByShops;
   List<AllShops>? allShops;
   Data({
     this.allShops,
     this.nearByShops,
   });
-  Data.fromJson(Map<String,dynamic>json){
+  Data.fromJson(Map<String, dynamic> json) {
     if (json["nearby_shops_as_per_category"] != null) {
       nearByShops = <NearByShops>[];
       json["nearby_shops_as_per_category"].forEach((v) {

@@ -16,6 +16,7 @@ class SAccountScreenController extends ChangeNotifier {
   String email = "";
   String name = "";
   String number = "";
+  String shopOwnerName = "";
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
   // void onEditBtnClicked(context) {
   //   Navigator.push(
@@ -27,11 +28,11 @@ class SAccountScreenController extends ChangeNotifier {
         MaterialPageRoute(builder: (context) => SShopConfigurationView()));
   }
 
-  Future<void> initState(context) async {
+  Future<void> initState(context, updateMessage) async {
     await getShopEditProfileDetails(context);
-    // if (widget.updateMessage != null) {
-    //   Utils.showPrimarySnackbar(context, "Updated ", type: SnackType.success);
-    // }
+    if (updateMessage != null) {
+      Utils.showPrimarySnackbar(context, "Updated ", type: SnackType.success);
+    }
     notifyListeners();
   }
 
@@ -59,6 +60,7 @@ class SAccountScreenController extends ChangeNotifier {
         number = shopDetails?.shopOwnerMobileNumber.toString() ?? "";
         email = shopDetails?.shopOwnerEmail ?? "";
         name = shopDetails?.shopName ?? "";
+        shopOwnerName = shopDetails?.shopName ?? "";
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

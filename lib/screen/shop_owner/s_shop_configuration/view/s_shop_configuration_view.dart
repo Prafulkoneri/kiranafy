@@ -653,7 +653,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 ],
               ),
               SizedBox(
-                height: 50.w,
+                height: 100.w,
               ),
             ],
           ),
