@@ -110,7 +110,7 @@ class SeasonalProduct{
     productImageName=json["product_image_name"];
     productImagePath=json["product_image_path"];
     productName=json["product_name"];
-    unit=json["unit"];
+    weight=json["weight"];
     status=json["status"];
     unit=json["unit"];
     mrpPrice=json["mrp_price"];

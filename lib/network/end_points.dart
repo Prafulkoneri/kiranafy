@@ -139,4 +139,6 @@ class Endpoint {
   //////////Customer view All Shop
   static const String customerViewAllCategoryShop =
       "${baseUrl}lsm-customer-view-all-shop-list-as-per-category";
+  //////////Customer view Shop
+  static const String customerProductListAsPerCategory = "${baseUrl}lsm-customer-product-list-as-per-category";
 }

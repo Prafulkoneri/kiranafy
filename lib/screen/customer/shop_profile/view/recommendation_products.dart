@@ -165,7 +165,7 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                                         children: [
                                           Padding(
                                             padding: EdgeInsets.only(top: 13.w),
-                                            child: Text(
+                                            child:element?.mrpPrice!=""?Text(
                                               '\u{20B9}${element?.mrpPrice}',
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
@@ -176,12 +176,12 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                                                     fontSize: 13.sp,
                                                     fontWeight: FontWeight.w500),
                                               ),
-                                            ),
+                                            ):Text(""),
                                           ),
                                           Padding(
                                             padding:
                                             EdgeInsets.only(top: 13.w, left: 5.w),
-                                            child: Text(
+                                            child: element?.offerPrice!=""?Text(
                                               '\u{20B9}${element?.offerPrice}',
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
@@ -192,7 +192,7 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                                                     fontSize: 13.sp,
                                                     fontWeight: FontWeight.w500),
                                               ),
-                                            ),
+                                            ):Text(""),
                                           ),
                                         ],
                                       ),

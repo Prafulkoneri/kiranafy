@@ -122,7 +122,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 InkWell(
                                   onTap: (){
                                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
-                                 readMain.onNavigation(4,UpdateProfileView(), context);
+                                 // readMain.onNavigation(4,UpdateProfileView(), context);
+                                 readMain.onBackPressed(4,UpdateProfileView());
                                   },
                                   child:SvgPicture.asset(
                                     'assets/icons/edit.svg',
@@ -197,7 +198,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4,UpdateProfileView(), context);
+                  // readMain.onNavigation(4,UpdateProfileView(), context);
+                  readMain.onBackPressed(4,UpdateProfileView());
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w),
