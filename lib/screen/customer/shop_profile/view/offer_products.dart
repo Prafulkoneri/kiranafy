@@ -174,7 +174,6 @@ class _OfferProductsState extends State<OfferProducts> {
                                     ),
                                   ],
                                 ),
-
                                 SvgPicture.asset(
                                   'assets/images/add.svg',
                                   // width: 15.w,
