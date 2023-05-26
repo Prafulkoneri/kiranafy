@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/customer/order_status/order_status.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -513,9 +514,13 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                             color: Colors.white,
                             height: 36.h,
                             width: 160.w,
-                            onTap: () {
+                            onTap: () async {
                               print("hello");
-                              read.buySubscriptionPlan(context);
+                              await read.buySubscriptionPlan(context);
+
+                              // readMainScreen.onNavigation(
+                              //     4, SShopConfigurationView(), context);
+                              // };
                             },
                             text: 'Make Payment',
                             textColor: SplashText1,

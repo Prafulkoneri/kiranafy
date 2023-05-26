@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -26,6 +28,7 @@ class _KycApprovedViewState extends State<KycApprovedView> {
   Widget build(BuildContext context) {
     final read = context.read<ShopSignInController>();
     final watch = context.watch<ShopSignInController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -87,9 +90,12 @@ class _KycApprovedViewState extends State<KycApprovedView> {
                       height: 40.w,
                       width: 164.w,
                       fontSize: 14.sp,
-                      text: "Upload Documents",
+                      text: "Set Shop Configuration",
                       color: SplashText,
-                      onTap: () {}),
+                      onTap: () {
+                        readMainScreen.onNavigation(
+                            4, SShopConfigurationView(), context);
+                      }),
                 ],
               ),
             )

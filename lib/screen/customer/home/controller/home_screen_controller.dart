@@ -12,9 +12,9 @@ class HomeScreenController extends ChangeNotifier {
   bool isLoading = true;
   AllCategoriesRepo allCategoriesRepo = AllCategoriesRepo();
   List<Data>? data;
-  List<Category> categoryFirstList = [];
-  List<Category> categorySecondList = [];
-  String pincode = "111111";
+  List<CategoriesList> categoryFirstList = [];
+  List<CategoriesList> categorySecondList = [];
+  // String pincode = "111111";
   Future<void> initState(context) async {
     isLoading = true;
     await getCategoryList(context);
@@ -53,19 +53,19 @@ class HomeScreenController extends ChangeNotifier {
     );
   }
 
-  AllCategoriesReqModel get allCategoriesReqModel =>
-      AllCategoriesReqModel(pincode: pincode);
+  // AllCategoriesReqModel get allCategoriesReqModel =>
+  //     AllCategoriesReqModel(pincode: pincode);
 
   Future<void> getCategoryList(context) async {
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if (pref.getString("successToken") == null) {
-      pincode = "111111";
-    } else {
-      pincode = pref.getString("successToken").toString();
-    }
+    // if (pref.getString("successToken") == null) {
+    //   pincode = "111111";
+    // } else {
+    //   pincode = pref.getString("successToken").toString();
+    // }
     allCategoriesRepo
-        .getCategory(allCategoriesReqModel, pref.getString("successToken"))
+        .getCategory(pref.getString("successToken"))
         .then((response) {
       print(response.statusCode);
       print(response.body);

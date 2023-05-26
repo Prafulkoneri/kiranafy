@@ -28,9 +28,9 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SAccountScreenController>().initState(
-            context,
-          );
+      context
+          .read<SAccountScreenController>()
+          .initState(context, widget.updateMessage);
     });
   }
 

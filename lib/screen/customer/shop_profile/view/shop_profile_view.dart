@@ -67,9 +67,8 @@ class _ShopProfileState extends State<ShopProfile> {
         },
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
               padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
               child: Row(
@@ -230,7 +229,6 @@ class _ShopProfileState extends State<ShopProfile> {
                       SizedBox(
                         width: 8.w,
                       ),
-                      
                       Container(
                         width: 200.w,
                         child: Text(
@@ -300,7 +298,9 @@ class _ShopProfileState extends State<ShopProfile> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AllOfferProducts()),
+                            builder: (context) => AllOfferProducts(
+                                  shopId: widget.shopId,
+                                )),
                       );
                     },
                     child: Text(
@@ -320,7 +320,9 @@ class _ShopProfileState extends State<ShopProfile> {
             SizedBox(
               height: 15.h,
             ),
-                watch.offerProduct?.isNotEmpty??false? OfferProducts():Container(),
+            watch.offerProduct?.isNotEmpty ?? false
+                ? OfferProducts()
+                : Container(),
             Padding(
               padding: EdgeInsets.only(
                 left: 19.h,
@@ -346,7 +348,9 @@ class _ShopProfileState extends State<ShopProfile> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AllSeasonalProducts()),
+                            builder: (context) => AllSeasonalProducts(
+                                  shopId: widget.shopId,
+                                )),
                       );
                     },
                     child: Text(
@@ -365,7 +369,9 @@ class _ShopProfileState extends State<ShopProfile> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 15.w),
-              child:  watch.seasonalProduct?.isNotEmpty??false? SeasonalProducts():Container(),
+              child: watch.seasonalProduct?.isNotEmpty ?? false
+                  ? SeasonalProducts()
+                  : Container(),
             ),
             Padding(
               padding: EdgeInsets.only(top: 30.h, left: 19.h, bottom: 15.h),
@@ -404,7 +410,12 @@ class _ShopProfileState extends State<ShopProfile> {
                           final element = watch.shopCategory?[index];
                           return GestureDetector(
                             onTap: () {
-                              readMain.onBackPressed(1,CategoryScreenView(shopId: widget.shopId,categoryId: element?.id.toString(),));
+                              readMain.onBackPressed(
+                                  1,
+                                  CategoryScreenView(
+                                    shopId: widget.shopId,
+                                    categoryId: element?.id.toString(),
+                                  ));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -539,10 +550,12 @@ class _ShopProfileState extends State<ShopProfile> {
               padding: EdgeInsets.only(top: 17.w),
               child: const CouponsScreen(),
             ),
-            watch.recommandedProduct?.isNotEmpty??false? RecommendationProducts():Container(),
-                SizedBox(
-                  height: 100.w,
-                ),
+            watch.recommandedProduct?.isNotEmpty ?? false
+                ? RecommendationProducts()
+                : Container(),
+            SizedBox(
+              height: 100.w,
+            ),
           ]),
         ),
       ),

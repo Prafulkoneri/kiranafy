@@ -1,18 +1,18 @@
-class AllNearShopsReqModel {
-  String? pincode;
+// class AllNearShopsReqModel {
+//   String? pincode;
 
-  AllNearShopsReqModel({
-    required this.pincode,
-  });
+//   AllNearShopsReqModel({
+//     required this.pincode,
+//   });
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = {};
 
-    data["pincode"] = pincode;
+//     data["pincode"] = pincode;
 
-    return data;
-  }
-}
+//     return data;
+//   }
+// }
 
 ////Response Model
 class AllNearShopsResModel {
@@ -61,8 +61,8 @@ class AllNearShops {
   AllNearShops.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     shopName = json["shop_name"];
-    shopAreaId = json["shop_area_id"];
-    shopCityId = json["shop_city_id"];
+    // shopAreaId = json["shop_area_id"];
+    // shopCityId = json["shop_city_id"];
     areaName = json["area_name"];
     cityName = json["city_name"];
     shopBannerImagePath = json["shop_banner_image_path"];

@@ -200,7 +200,7 @@ class ShopSignInController extends ChangeNotifier {
     }
     if (!isLoginBtnEnabled) {
       Utils.showPrimarySnackbar(context, "Please Sign Up",
-          type: SnackType.success);
+          type: SnackType.error);
       return;
     }
     await _auth.verifyPhoneNumber(

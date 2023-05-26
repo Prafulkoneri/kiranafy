@@ -1,25 +1,28 @@
-class AllCategoriesReqModel {
-  String ? pincode;
+// class AllCategoriesReqModel {
+//   String ? pincode;
 
-  AllCategoriesReqModel({
-    required this.pincode,
-  });
+//   AllCategoriesReqModel({
+//     required this.pincode,
+//   });
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = {};
 
-    data["pincode"] = pincode;
+//     data["pincode"] = pincode;
 
-    return data;
-  }
-}
+//     return data;
+//   }
+// }
 
 /////Response Model
+
+///////////////////////////////
+
 class AllCategoriesResModel {
   int? status;
   String? message;
-  List<Category>? categoriesFirstList;
-  List<Category>? categoriesSecondList;
+  List<CategoriesList>? categoriesFirstList;
+  List<CategoriesList>? categoriesSecondList;
 
   AllCategoriesResModel({
     required this.status,
@@ -32,43 +35,39 @@ class AllCategoriesResModel {
     message = json["message"];
 
     if (json["categories_first_list"] != null) {
-      categoriesFirstList = <Category>[];
+      categoriesFirstList = <CategoriesList>[];
       json["categories_first_list"].forEach((v) {
-        categoriesFirstList!.add(Category.fromJson(v));
+        categoriesFirstList!.add(CategoriesList.fromJson(v));
       });
     }
     if (json["categories_second_list"] != null) {
-      categoriesSecondList = <Category>[];
+      categoriesSecondList = <CategoriesList>[];
       json["categories_second_list"].forEach((v) {
-        categoriesSecondList!.add(Category.fromJson(v));
+        categoriesSecondList!.add(CategoriesList.fromJson(v));
       });
     }
   }
 }
 
-class Category {
+class CategoriesList {
   int? id;
-  int ? categorySelectedId;
   String? categoryName;
   int? categorySequence;
   String? categoryImagePath;
   String? categoryImageName;
 
-  Category({
+  CategoriesList({
     required this.id,
-    required this.categorySelectedId,
     required this.categoryName,
-
     required this.categorySequence,
     required this.categoryImagePath,
     required this.categoryImageName,
   });
-  Category.fromJson(Map<String, dynamic> json) {
+  CategoriesList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    categorySelectedId = json["category_selected_id"];
     categoryName = json["category_name"];
     categorySequence = json["category_sequence"];
     categoryImagePath = json["category_image_path"];
-    categoryImageName = json["category_image_path"];
+    categoryImageName = json["category_image_name"];
   }
 }

@@ -105,12 +105,18 @@ class Endpoint {
 ////Custome Update Profile
   static const String customerUpdateProfile =
       "${baseUrl}lsm-customer-update-profile-details";
-  ////Custome Shop As Per Pin Code (All Near Shops) Profile
+  ////Custome Shop As Per Pin Code (All Near Shops) Profile//////////////////////
   static const String allNearShopAsPerPincode =
       "${baseUrl}lsm-customer-shop-list-as-per-pincode";
-  ////Custome all Categories
-  static const String categoriesAsPerPincode =
-      "${baseUrl}lsm-customer-category-list-as-per-pincode";
+  ////Custome all Categories(Dash Board)/////////////////////////////////
+  static const String categoriesListForDashBoard =
+      "${baseUrl}lsm-customer-category-list-for-dashboard";
+//////////////////Shop List As Per Category//////////////////
+  static const String shopListAsPerCategory =
+      "${baseUrl}lsm-customer-shop-list-as-per-category";
+  ///////////////////View All Offer Products//////////////////////////////
+  static const String AllOfferProducts =
+      "${baseUrl}lsm-customer-view-all-offer-products-of-shop";
   ////Customer Add Fvrt Shops
   static const String customerAddFvrtshops =
       "${baseUrl}lsm-customer-add-shop-to-favourite";
@@ -140,5 +146,9 @@ class Endpoint {
   static const String customerViewAllCategoryShop =
       "${baseUrl}lsm-customer-view-all-shop-list-as-per-category";
   //////////Customer view Shop
-  static const String customerProductListAsPerCategory = "${baseUrl}lsm-customer-product-list-as-per-category";
+  static const String customerProductListAsPerCategory =
+      "${baseUrl}lsm-customer-product-list-as-per-category";
+  //////////////Seasonal Products
+  static const String AllSeasonalProducts =
+      "${baseUrl}lsm-customer-view-all-seasonal-products-of-shop";
 }
