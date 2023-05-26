@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/category/view/category_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
@@ -402,7 +403,9 @@ class _ShopProfileState extends State<ShopProfile> {
                         itemBuilder: (BuildContext, index) {
                           final element = watch.shopCategory?[index];
                           return GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              readMain.onBackPressed(1,CategoryScreenView(shopId: widget.shopId,categoryId: element?.id.toString(),));
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

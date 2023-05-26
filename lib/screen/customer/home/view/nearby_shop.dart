@@ -41,7 +41,8 @@ class _HomeCarousalState extends State<HomeCarousal> {
             final element=watch.nearByShopList?[index];
             return GestureDetector(
               onTap: () {
-                readMain.onNavigation(0, ShopProfile(shopId: element?.id.toString()), context);
+                // readMain.onNavigation(0, ShopProfile(shopId: element?.id.toString()), context);
+               readMain.onBackPressed(0, ShopProfile(shopId: element?.id.toString()),);
               },
               child: Stack(
                 children: [

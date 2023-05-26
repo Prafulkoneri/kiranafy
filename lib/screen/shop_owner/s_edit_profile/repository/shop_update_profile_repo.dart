@@ -9,11 +9,11 @@ class UpdateProfileRepo {
       ShopUpdateProfileReqModel reqModel, token) async {
     print(reqModel.toJson());
 
-    print(Uri.parse(Endpoint.ShopUpdateAccountDetails));
+    print(Uri.parse(Endpoint.shopUpdateAccountDetails));
     log("${reqModel.toJson()}");
 
     try {
-      return await http.post(Uri.parse(Endpoint.ShopUpdateAccountDetails),
+      return await http.post(Uri.parse(Endpoint.shopUpdateAccountDetails),
           body: reqModel.toJson(),
           headers: {
             "Authorization": "Bearer $token",

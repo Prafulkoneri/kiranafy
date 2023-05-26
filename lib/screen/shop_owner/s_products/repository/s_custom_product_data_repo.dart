@@ -4,7 +4,6 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 
 class SCustomProductDataRepo {
   Future<http.Response> customProductDataModel(token) async {
-    print(Uri.parse(Endpoint.ShopUpdateAccountDetails));
     try {
       return await http.get(Uri.parse(Endpoint.createCustomProduct),
           headers: {

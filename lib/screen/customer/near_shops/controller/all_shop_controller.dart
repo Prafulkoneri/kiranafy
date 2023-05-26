@@ -31,7 +31,7 @@ class AllShopController extends ChangeNotifier {
 
   CustomerViewAllShopReqModel get customerViewAllShopReqModel =>
       CustomerViewAllShopReqModel(
-          pincode: pincode, offset: offset.toString(), limit: "10");
+          pincode: pincode, offset: offset.toString(), limit: "5");
 
 
   Future<void> initState(context)async{

@@ -28,8 +28,8 @@ class _SeasonalProductsState extends State<SeasonalProducts> {
           children: List.generate(
             watch.seasonalProduct?.length??0,
             (index) {
-              final element=watch.offerProduct?[index];
-           return  Row(
+              final element=watch.seasonalProduct?[index];
+           return  element?.discountPercentage!=""?Row(
                 children: [
                   SizedBox(
                     width: 10.w,
@@ -55,6 +55,30 @@ class _SeasonalProductsState extends State<SeasonalProducts> {
                             left: 19.w, top: 14.w, right: 12.w, bottom: 12.w),
                         child: Column(
                           children: [
+                            element?.discountPercentage!="" ?Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width: 60.w,
+                                  height: 20.h,
+                                  decoration: BoxDecoration(
+                                      color: lightgreen,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.w))),
+                                  child: Center(
+                                    child: Text("${element?.discountPercentage} off",
+                                        // textAlign: TextAlign.center,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Colors.white,
+                                              letterSpacing: .5,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500),
+                                        )),
+                                  ),
+                                ),
+                              ],
+                            ):Container(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -82,12 +106,15 @@ class _SeasonalProductsState extends State<SeasonalProducts> {
                                 Flexible(
                                   child: Text(
                                     "${element?.productName}",
+                                    maxLines: 1,
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                           color: Black1,
+                                          overflow: TextOverflow.ellipsis,
                                           // letterSpacing: .5,
                                           fontSize: 16.sp,
-                                          fontWeight: FontWeight.w600),
+
+                                          fontWeight: FontWeight.w600,),
                                     ),
                                   ),
                                 ),
@@ -116,15 +143,36 @@ class _SeasonalProductsState extends State<SeasonalProducts> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "₹${element?.offerPrice}",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
+                                Row(
+                                  children: [
+                                    element?.mrpPrice!=""?
+                                    Text(
+                                      '\u{20B9}${element?.mrpPrice}',
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            decoration:
+                                            TextDecoration.lineThrough,
+                                            color: Black1,
+                                            letterSpacing: .5,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ):Text(""),
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
+                                    element?.offerPrice!=""?
+                                    Text(
+                                      "₹${element?.offerPrice??0}",
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Black1,
+                                            // letterSpacing: .5,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ):Text(""),
+                                  ],
                                 ),
                                 SvgPicture.asset(
                                   'assets/images/add.svg',
@@ -139,7 +187,7 @@ class _SeasonalProductsState extends State<SeasonalProducts> {
                     ),
                   ),
                 ],
-              );
+              ):Container();
             }
           ),
         ),

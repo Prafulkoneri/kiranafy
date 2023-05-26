@@ -31,7 +31,7 @@ class _OfferProductsState extends State<OfferProducts> {
             watch.offerProduct?.length??0,
             (index) {
               final element=watch.offerProduct?[index];
-              return watch.offerProduct?[index].offerPrice!=""?Row(
+              return watch.offerProduct?[index].discountPercentage!=""?Row(
                 children: [
                   SizedBox(
                     width: 10.w,
@@ -62,7 +62,7 @@ class _OfferProductsState extends State<OfferProducts> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
+                                element?.discountPercentage!="" ?Container(
                                   width: 60.w,
                                   height: 20.h,
                                   decoration: BoxDecoration(
@@ -80,7 +80,7 @@ class _OfferProductsState extends State<OfferProducts> {
                                               fontWeight: FontWeight.w500),
                                         )),
                                   ),
-                                ),
+                                ):Container(),
                               ],
                             ),
 
@@ -111,12 +111,15 @@ class _OfferProductsState extends State<OfferProducts> {
                                 Flexible(
                                   child: Text(
                                     "${element?.productName}",
+                                    maxLines: 1,
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
-                                          color: Black1,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w600),
+                                        color: Black1,
+                                        overflow: TextOverflow.ellipsis,
+                                        // letterSpacing: .5,
+                                        fontSize: 16.sp,
+
+                                        fontWeight: FontWeight.w600,),
                                     ),
                                   ),
                                 ),
@@ -147,7 +150,7 @@ class _OfferProductsState extends State<OfferProducts> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(
+                                    element?.mrpPrice!=""?Text(
                                       '\u{20B9}${element?.mrpPrice}',
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
@@ -158,11 +161,11 @@ class _OfferProductsState extends State<OfferProducts> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w400),
                                       ),
-                                    ),
+                                    ):Text(""),
                                     SizedBox(
                                       width: 5.w,
                                     ),
-                                    Text(
+                                    element?.offerPrice!=""? Text(
                                       "₹${element?.offerPrice??0}",
                                       style: GoogleFonts.roboto(
                                         textStyle: TextStyle(
@@ -171,7 +174,7 @@ class _OfferProductsState extends State<OfferProducts> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w400),
                                       ),
-                                    ),
+                                    ):Text(""),
                                   ],
                                 ),
                                 SvgPicture.asset(

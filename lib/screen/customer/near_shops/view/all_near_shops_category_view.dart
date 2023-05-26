@@ -167,10 +167,13 @@ class _AllNearCategoryShopsState extends State<AllNearCategoryShops> {
                         final element = watch.nearByShop?[index];
                         return GestureDetector(
                           onTap: () {
-                            readMain.onNavigation(
+                            // readMain.onNavigation(
+                            //     0,
+                            //     ShopProfile(shopId: element?.id.toString()),
+                            //     context);
+                            readMain.onBackPressed(
                                 0,
-                                ShopProfile(shopId: element?.id.toString()),
-                                context);
+                                ShopProfile(shopId: element?.id.toString()));
                           },
                           child: Stack(
                             children: [
@@ -311,7 +314,8 @@ class _AllNearCategoryShopsState extends State<AllNearCategoryShops> {
                           final element = watch.allShops[index];
                           return GestureDetector(
                             onTap: () {
-                              readMain.onNavigation(0, ShopProfile(shopId: element.id.toString()), context);
+                              // readMain.onNavigation(0, ShopProfile(shopId: element.id.toString()), context);
+                              readMain.onBackPressed(0, ShopProfile(shopId: element.id.toString()));
                             },
                             child: Stack(
                               children: [

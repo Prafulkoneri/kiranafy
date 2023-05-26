@@ -9,9 +9,11 @@ class SKycVerificationRepo{
         "Authorization": "Bearer $token",
         'Content-Type': 'application/json',
       });
+
     }
     catch(e){
       throw Exception(e);
     }
   }
+
 }

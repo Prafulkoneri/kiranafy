@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_response_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repository/s_shop_configuration_edit_repo.dart';
@@ -10,31 +11,33 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repos
 import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:io';
 class SShopConfigurationController extends ChangeNotifier {
   ShopConfigurationRepo shopConfigRepo = ShopConfigurationRepo();
   EditConfigRepo shopEditConfigRepo = EditConfigRepo();
-  TextEditingController UpiIdController = TextEditingController();
-  TextEditingController SupportNumberController = TextEditingController();
-  TextEditingController FirstDeliveryController = TextEditingController();
-  TextEditingController SecondDeliveryController = TextEditingController();
-  TextEditingController ThirdDeliveryController = TextEditingController();
-  TextEditingController FourthDeliveryController = TextEditingController();
-  TextEditingController StartShopTimeController = TextEditingController();
-  TextEditingController EndShopTimeController = TextEditingController();
-  TextEditingController ImageNameController = TextEditingController();
+  TextEditingController upiIdController = TextEditingController();
+  TextEditingController supportNumberController = TextEditingController();
+  TextEditingController firstDeliveryController = TextEditingController();
+  TextEditingController secondDeliveryController = TextEditingController();
+  TextEditingController thirdDeliveryController = TextEditingController();
+  TextEditingController fourthDeliveryController = TextEditingController();
+  TextEditingController startShopTimeController = TextEditingController();
+  TextEditingController endShopTimeController = TextEditingController();
+  TextEditingController imageNameController = TextEditingController();
 
   bool isCustomerPickupSelected = false;
-  bool ifFreePickupSelected = false;
+  bool ifFreePickupSelected = true;
   bool isDeliveryCustomerSelected = false;
   bool isDeliveryChargesSelected = false;
   bool isNineToTwelve = false;
   bool isTwelveToThree = false;
   bool isThreeToSix = false;
   bool isSixToNine = false;
-  File fileImage1 = File("");
-  String networkImage1 = "";
-  String image1 = "";
+  File fileImage = File("");
+  String networkImage = "";
+  String image = "";
 
   ///Delivery Type CheckBox
   void onCustomerPickupSelected() {
@@ -51,6 +54,10 @@ class SShopConfigurationController extends ChangeNotifier {
     ifFreePickupSelected = !ifFreePickupSelected;
     if (isDeliveryChargesSelected) {
       isDeliveryChargesSelected = false;
+      firstDeliveryController.clear();
+      secondDeliveryController.clear();
+      thirdDeliveryController.clear();
+      fourthDeliveryController.clear();
     }
     notifyListeners();
   }
@@ -102,14 +109,14 @@ class SShopConfigurationController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      networkImage1 = "";
-      fileImage1 = File(pickedFile.path);
-      final bytes = await compressFile(fileImage1);
+      networkImage = "";
+      fileImage = File(pickedFile.path);
+      final bytes = await compressFile(fileImage);
 
-      image1 = base64Encode(bytes as List<int>);
+      image = base64Encode(bytes as List<int>);
 
-      networkImage1 = "";
-      fileImage1 = File(pickedFile.path);
+      networkImage = "";
+      fileImage = File(pickedFile.path);
     }
 
     notifyListeners();
@@ -124,56 +131,59 @@ class SShopConfigurationController extends ChangeNotifier {
     shopConfigRepo
         .shopCongurationDetails(pref.getString("successToken"))
         .then((response) {
+          print(response.body);
       final result = ShopConfigurationResponse.fromJson(
         jsonDecode(response.body),
       );
 
       if (response.statusCode == 200) {
-        final Data = result.data;
+        final data = result.data;
 
-        print(
-            "${Data}bnywhuvjicui4ywtvb8n98ymuirwmwc9033309b4mmvjmirjiytjweib");
 
-        print("${response.body}");
-
-        SupportNumberController.text = Data?.shopOwnerSupportNumber ?? "";
+        supportNumberController.text = data?.shopOwnerSupportNumber ?? "";
         // print(SupportNumberController);
-        FirstDeliveryController.text =
-            Data?.shopOwnerAmount1DeliveryCharges ?? "";
-        SecondDeliveryController.text =
-            Data?.shopOwnerAmount2DeliveryCharges ?? "";
-        ThirdDeliveryController.text =
-            Data?.shopOwnerAmount3DeliveryCharges ?? "";
-        FourthDeliveryController.text =
-            Data?.shopOwnerAmount4DeliveryCharges ?? "";
-        StartShopTimeController.text = Data?.shopOwnerShopOpeningTime ?? "";
-        EndShopTimeController.text = Data?.shopOwnerShopCloseTime ?? "";
-        UpiIdController.text = result.upiid ?? "";
+        firstDeliveryController.text =
+            data?.shopOwnerAmount1DeliveryCharges ?? "";
+        secondDeliveryController.text =
+            data?.shopOwnerAmount2DeliveryCharges ?? "";
+        thirdDeliveryController.text =
+            data?.shopOwnerAmount3DeliveryCharges ?? "";
+        fourthDeliveryController.text =
+            data?.shopOwnerAmount4DeliveryCharges ?? "";
+        startShopTimeController.text = data?.shopOwnerShopOpeningTime ?? "";
+        endShopTimeController.text = data?.shopOwnerShopCloseTime ?? "";
+        upiIdController.text = result.upiid ?? "";
+        networkImage=data?.shopOwnerPaymentQrCodeImagePath??"";
 
         ///Slot Selection
-        if (Data?.shopOwnerSlot9To12 == "active") {
+        if (data?.shopOwnerSlot9To12 == "active") {
           isNineToTwelve = true;
         }
-        if (Data?.shopOwnerSlot12To3 == "active") {
+        if (data?.shopOwnerSlot12To3 == "active") {
           isTwelveToThree = true;
         }
-        if (Data?.shopOwnerSlot3To6 == "active") {
+        if (data?.shopOwnerSlot3To6 == "active") {
           isThreeToSix = true;
         }
-        if (Data?.shopOwnerSlot6To9 == "active") {
+        if (data?.shopOwnerSlot6To9 == "active") {
           isSixToNine = true;
         }
         ////
 
         //////// Delivery type///////////
-        if (Data?.shopOwnerCustomerPickup == "active") {
+        if (data?.shopOwnerCustomerPickup == "active") {
           isCustomerPickupSelected = true;
         }
-        if (Data?.shopOwnerDeliveryToCustomer == "active") {
+        if (data?.shopOwnerDeliveryToCustomer == "active") {
           isCustomerPickupSelected = true;
         }
-        if (Data?.shopOwnerDeliveryChargesFree == "active") {
-          isCustomerPickupSelected = true;
+        if (data?.shopOwnerDeliveryChargesFree == "active") {
+          isDeliveryChargesSelected = true;
+          ifFreePickupSelected=false;
+        }
+        else{
+          isDeliveryChargesSelected = false;
+          ifFreePickupSelected=true;
         }
 
         notifyListeners();
@@ -196,36 +206,50 @@ class SShopConfigurationController extends ChangeNotifier {
   /////////////////////////
 //  Edit//////
 
-  ShopConfigRequestModel get shopConfigRequestModel => ShopConfigRequestModel(
-      shopOwnerAmount1DeliveryCharges: FirstDeliveryController.text,
-      shopOwnerAmount2DeliveryCharges: SecondDeliveryController.text,
-      shopOwnerAmount3DeliveryCharges: ThirdDeliveryController.text,
-      shopOwnerAmount4DeliveryCharges: FourthDeliveryController.text,
-      shopOwnerCustomerPickup: isCustomerPickupSelected ? "active" : "inactive",
-      shopOwnerDeliveryToCustomer:
-          isDeliveryCustomerSelected ? "active" : "inactive",
-      shopOwnerDeliveryChargesFree:
-          isDeliveryChargesSelected ? "active" : "inactive",
-      shopOwnerPaymentQrCodeImageName: '',
-      shopOwnerPaymentQrCodeImagePath: '',
-      shopOwnerShopCloseTime: EndShopTimeController.text,
-      shopOwnerShopOpeningTime: StartShopTimeController.text,
-      shopOwnerSlot12To3: isTwelveToThree ? "active" : "inactive",
-      shopOwnerSlot3To6: isThreeToSix ? "active" : "inactive",
-      shopOwnerSlot6To9: isSixToNine ? "active" : "inactive",
-      shopOwnerSlot9To12: isNineToTwelve ? "active" : "inactive",
-      shopOwnerSupportNumber: SupportNumberController.text,
-      shopOwnerUpiId: UpiIdController.text);
+  uploadShopConfiguration(context)async{
+    bool ? status;
+    if(fileImage.path==""){
+   await editShopconfig(context).then((success){
+     status=true;
 
-  Future<void> EditShopconfig(context) async {
+   });
+    }
+    else{
+      await uploadImage(context).then((success){
+        status=true;
+      });
+    }
+    return status;
+  }
+
+  ShopConfigRequestModel get shopConfigRequestModel => ShopConfigRequestModel(
+    shopOwnerAmount1DeliveryCharges: firstDeliveryController.text,
+    shopOwnerAmount2DeliveryCharges: secondDeliveryController.text,
+    shopOwnerAmount3DeliveryCharges: thirdDeliveryController.text,
+    shopOwnerAmount4DeliveryCharges: fourthDeliveryController.text,
+    shopOwnerCustomerPickup: isCustomerPickupSelected ? "active" : "inactive",
+    shopOwnerDeliveryToCustomer: isDeliveryCustomerSelected ? "active" : "inactive",
+    shopOwnerDeliveryChargesFree: isDeliveryChargesSelected ? "active" : "inactive",
+    shopOwnerPaymentQrCodeImageName:'',
+    shopOwnerPaymentQrCodeImagePath:'',
+    shopOwnerShopCloseTime: endShopTimeController.text,
+    shopOwnerShopOpeningTime: startShopTimeController.text,
+    shopOwnerSlot12To3: isTwelveToThree ? "active" : "inactive",
+    shopOwnerSlot3To6: isThreeToSix ? "active" : "inactive",
+    shopOwnerSlot6To9: isSixToNine ? "active" : "inactive",
+    shopOwnerSlot9To12: isNineToTwelve ? "active" : "inactive",
+    shopOwnerSupportNumber: supportNumberController.text,
+    shopOwnerUpiId: upiIdController.text,
+
+  );
+
+  Future<void> editShopconfig(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopEditConfigRepo.EditShopconfig(
-            shopConfigRequestModel, pref.getString("successToken"))
+        shopConfigRequestModel, pref.getString("successToken"))
         .then((response) {
-      print("uehcvcvcvcvcvcvcvcvcvcvcvcvcvcvcvcvcvcvcvqt");
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
-
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
@@ -237,7 +261,7 @@ class SShopConfigurationController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -245,5 +269,63 @@ class SShopConfigurationController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  Future uploadImage(context) async {
+
+SharedPreferences pref=await SharedPreferences.getInstance();
+String token=pref.getString("successToken").toString();
+    var uri = Uri.parse("${Endpoint.shopconfigurationedit}");
+    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    request.headers['Authorization'] ="Bearer $token";
+    request.fields['shop_owner_support_number'] = supportNumberController.text;
+    request.fields['shop_owner_shop_opening_time'] = startShopTimeController.text;
+    request.fields['shop_owner_shop_close_time'] = endShopTimeController.text;
+    request.fields['shop_owner_amount_1_delivery_charges'] = firstDeliveryController.text;
+    request.fields['shop_owner_amount_2_delivery_charges'] = secondDeliveryController.text;
+    request.fields['shop_owner_amount_3_delivery_charges'] = thirdDeliveryController.text;
+    request.fields['shop_owner_amount_4_delivery_charges'] = fourthDeliveryController.text;
+    request.fields['shop_owner_customer_pickup'] = isCustomerPickupSelected ? "active" : "inactive";
+    request.fields['shop_owner_delivery_to_customer'] = isCustomerPickupSelected ? "active" : "inactive";
+    request.fields['shop_owner_delivery_charges_free'] =  isDeliveryChargesSelected ? "inactive" : "active";
+    request.fields['shop_owner_slot_9_to_12'] =  isNineToTwelve ? "active" : "inactive";
+    request.fields['shop_owner_slot_12_to_3'] =  isTwelveToThree ? "active" : "inactive";
+    request.fields['shop_owner_slot_3_to_6'] =  isThreeToSix ? "active" : "inactive";
+    request.fields['shop_owner_slot_6_to_9'] =  isSixToNine ? "active" : "inactive";
+    request.fields['shop_owner_upi_id'] =  upiIdController.text;
+    request.fields['shop_owner_upi_id'] =  upiIdController.text;
+    //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
+    List<http.MultipartFile> newList =  <http.MultipartFile>[];
+    // for (int i = 0; i < images.length; i++) {
+    //   File imageFile = File(images[i].toString());
+    //   var stream =
+    //   new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    //   var length = await imageFile.length();
+    //   var multipartFile = new http.MultipartFile("shop_owner_payment_qr_code_image_path", stream, length,filename: basename(imageFile.path));
+    //   newList.add(multipartFile);
+    // }
+File imageFile = fileImage;
+var stream =
+new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+var length = await imageFile.length();
+var multipartFile = new http.MultipartFile("shop_owner_payment_qr_code_image_path", stream, length,filename: basename(imageFile.path));
+newList.add(multipartFile);
+
+    request.files.addAll(newList);
+     await request.send().then((response){
+
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context,"Updated Successfully",
+            type: SnackType.success);
+        print("Updated Successfully");
+      } else {
+        Utils.showPrimarySnackbar(context,"Error on uploading",
+            type: SnackType.error);
+      }
+      response.stream.transform(utf8.decoder).listen((value) {
+        print(value);
+      });
+    });
+     return true;
   }
 }

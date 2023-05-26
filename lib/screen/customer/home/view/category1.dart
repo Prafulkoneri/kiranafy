@@ -36,10 +36,10 @@ class _ShopCategoryOneState extends State<ShopCategoryOne> {
                   itemBuilder: (BuildContext, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CategoryScreenView()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => CategoryScreenView()));
                       },
                       child: Row(
                         children: [
