@@ -6,6 +6,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_
 class AllOfferProductsRepo {
   Future<http.Response> getAllOffereProducts(
       AllProductsReqModel reqModel, token) async {
+    print(reqModel.toJson());
     print(token);
     try {
       return await http.post(Uri.parse(Endpoint.AllOfferProducts),

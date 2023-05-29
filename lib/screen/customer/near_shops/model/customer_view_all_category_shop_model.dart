@@ -1,17 +1,15 @@
 class CustomerViewAllCategoryShopReqModel {
-  String? pincode;
   String? limit;
   String? offset;
   String? categoryId;
   CustomerViewAllCategoryShopReqModel({
-    this.pincode,
     this.limit,
     this.offset,
     this.categoryId,
   });
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
-    data["pincode"] = pincode;
+
     data["limit"] = limit;
     data["offset"] = offset;
     data["category_id"] = categoryId;
@@ -44,15 +42,15 @@ class Data {
     this.nearByShops,
   });
   Data.fromJson(Map<String, dynamic> json) {
-    if (json["nearby_shops_as_per_category"] != null) {
+    if (json["nearby_shops"] != null) {
       nearByShops = <NearByShops>[];
-      json["nearby_shops_as_per_category"].forEach((v) {
+      json["nearby_shops"].forEach((v) {
         nearByShops!.add(NearByShops.fromJson(v));
       });
     }
-    if (json["all_shops_as_per_category"] != null) {
+    if (json["all_shops"] != null) {
       allShops = <AllShops>[];
-      json["all_shops_as_per_category"].forEach((v) {
+      json["all_shops"].forEach((v) {
         allShops!.add(AllShops.fromJson(v));
       });
     }
