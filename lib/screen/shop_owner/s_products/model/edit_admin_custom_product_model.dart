@@ -43,7 +43,7 @@ class AdminData {
     required this.productDetails,
   });
   AdminData.fromJson(Map<String,dynamic>json){
-    productDetails = json['product_details--+'] != null
+    productDetails = json['product_details'] != null
         ? ProductDetails.fromJson(json['product_details'])
         : null;
   }
@@ -165,6 +165,6 @@ class Unit {
   });
   Unit.fromJson(Map<String,dynamic>json){
     id=json["id"];
-    id=json["unit"];
+    unit=json["unit"];
   }
 }

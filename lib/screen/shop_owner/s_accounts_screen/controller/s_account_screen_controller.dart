@@ -17,6 +17,7 @@ class SAccountScreenController extends ChangeNotifier {
   String name = "";
   String number = "";
   String shopOwnerName = "";
+  String shopImage="";
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
   // void onEditBtnClicked(context) {
   //   Navigator.push(
@@ -59,6 +60,12 @@ class SAccountScreenController extends ChangeNotifier {
         email = shopDetails?.shopOwnerEmail ?? "";
         name = shopDetails?.shopName ?? "";
         shopOwnerName = shopDetails?.shopName ?? "";
+        if(result.shopBannerImages!.isNotEmpty) {
+          shopImage = result.shopBannerImages?[0].shopBannerImagePath ?? "";
+        }
+        else{
+          shopImage="";
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

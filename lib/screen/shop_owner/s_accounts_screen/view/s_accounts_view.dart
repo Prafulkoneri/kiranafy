@@ -87,8 +87,11 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               )),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(13.w),
-                            child: Image.asset(
+                            child:watch.shopImage==""?Image.asset(
                               'assets/images/profile_image.png',
+                              fit: BoxFit.cover,
+                            ):Image.network(
+                              watch.shopImage,
                               fit: BoxFit.cover,
                             ),
                           ),
