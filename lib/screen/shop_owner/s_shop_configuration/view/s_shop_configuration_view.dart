@@ -42,10 +42,11 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
           },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () {
-            read.uploadShopConfiguration(context).then((value){
-          readMainScreen.onBackPressed(4,SAccountScreenView());
-            });
+          onActionTap: ()async {
+           var res=await read.uploadShopConfiguration(context);
+              // readMainScreen.onBackPressed(4,SAccountScreenView());
+
+
           },
         ),
       ),

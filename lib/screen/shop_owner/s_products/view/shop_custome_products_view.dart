@@ -78,6 +78,7 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                   SizedBox(
                     height: 20.w,
                   ),
+                  watch.categoryId==""?
                   SDropDownField(
                     onChanged: (value) {
                       read.onCategorySelected(value);
@@ -92,6 +93,23 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
                                 ),
                               ),
                             ))
+                        .toList(),
+                    hint: "Select Category ",
+                  ):     SDropDownField(
+                    value: watch.categoryId,
+                    onChanged: (value) {
+                      read.onCategorySelected(value);
+                    },
+                    items: watch.categoryData
+                        .map((item) => DropdownMenuItem<String>(
+                      value: item.id.toString(),
+                      child: Text(
+                        item.categoryName ?? "",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ))
                         .toList(),
                     hint: "Select Category ",
                   ),

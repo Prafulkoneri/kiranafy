@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
@@ -9,7 +10,9 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:provider/provider.dart';
 
 class SMainScreenView extends StatefulWidget {
-  const SMainScreenView({Key? key}) : super(key: key);
+  final Widget ? screenName;
+  final int ? index;
+  const SMainScreenView({Key? key,this.screenName,this.index}) : super(key: key);
 
   @override
   _SMainScreenViewState createState() => _SMainScreenViewState();
@@ -17,7 +20,12 @@ class SMainScreenView extends StatefulWidget {
 
 class _SMainScreenViewState extends State<SMainScreenView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
+ @override
+  void initState() {
+   SchedulerBinding.instance.addPostFrameCallback((_) {
+     context.read<SMainScreenController>().initState(context,widget.index,widget.screenName);
+   });
+  }
   @override
   Widget build(BuildContext context) {
     final read = context.read<SMainScreenController>();

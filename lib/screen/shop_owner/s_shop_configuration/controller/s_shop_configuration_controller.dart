@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_response_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repository/s_shop_configuration_edit_repo.dart';
@@ -206,17 +209,15 @@ class SShopConfigurationController extends ChangeNotifier {
   /////////////////////////
 //  Edit//////
 
-  uploadShopConfiguration(context)async{
+  Future uploadShopConfiguration(context)async{
     bool ? status;
     if(fileImage.path==""){
-   await editShopconfig(context).then((success){
-     status=true;
-
-   });
+   var a = await editShopconfig(context);
+   print("aa$a");
     }
     else{
       await uploadImage(context).then((success){
-        status=true;
+        status=false;
       });
     }
     return status;
@@ -243,20 +244,22 @@ class SShopConfigurationController extends ChangeNotifier {
 
   );
 
-  Future<void> editShopconfig(context) async {
+  Future editShopconfig(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    shopEditConfigRepo.EditShopconfig(
+   var a=  await shopEditConfigRepo.EditShopconfig(
         shopConfigRequestModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+         Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName: SAccountScreenView(),)));
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
+        return false;
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
@@ -315,17 +318,18 @@ newList.add(multipartFile);
      await request.send().then((response){
 
       if (response.statusCode == 200) {
+        print("sucesss");
         Utils.showPrimarySnackbar(context,"Updated Successfully",
             type: SnackType.success);
         print("Updated Successfully");
       } else {
         Utils.showPrimarySnackbar(context,"Error on uploading",
             type: SnackType.error);
+        return;
       }
       response.stream.transform(utf8.decoder).listen((value) {
         print(value);
       });
     });
-     return true;
   }
 }

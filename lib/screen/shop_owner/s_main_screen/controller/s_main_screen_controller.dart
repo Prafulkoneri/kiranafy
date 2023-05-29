@@ -25,6 +25,10 @@ class SMainScreenController extends ChangeNotifier {
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = ShopDashBoard();
 
+  void initState(context,index,currentScreen){
+    onBackPressed(index,currentScreen);
+  }
+
   void onBottomNavChanged(index) {
     currentIndex = index;
     notifyListeners();

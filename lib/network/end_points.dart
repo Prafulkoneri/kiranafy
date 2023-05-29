@@ -73,8 +73,9 @@ class Endpoint {
   static const String uploadAddProducts =
       '${baseUrl}lsm-shop-owner-add-product-of-category';
 
+
   ///Edit Custom Products
-  static const String editCustomProducts =
+  static const String editAdminProducts =
       "${baseUrl}lsm-shop-owner-edit-product-of-category";
 
   ///Edit Custome Products

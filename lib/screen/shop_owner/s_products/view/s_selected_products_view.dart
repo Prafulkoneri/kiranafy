@@ -281,26 +281,31 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                             ),
                                             Row(
                                               children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(8),
-                                                  decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: grey6,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 10.0,
-                                                          spreadRadius: 2.0,
-                                                        ), //BoxShadow
-                                                      ],
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                                  child: SvgPicture.asset(
-                                                      'assets/icons/e1.svg'),
+                                                GestureDetector(
+                                                  onTap:(){
+                                                    readMainScreen.onBackPressed(0,ShopCustomProductView(categoryId: widget.categoryId));
+                                                  },
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(8),
+                                                    decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: grey6,
+                                                            offset: const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 10.0,
+                                                            spreadRadius: 2.0,
+                                                          ), //BoxShadow
+                                                        ],
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15)),
+                                                    child: SvgPicture.asset(
+                                                        'assets/icons/e1.svg'),
+                                                  ),
                                                 ),
                                                 SizedBox(
                                                   width: 8.w,

@@ -1,6 +1,6 @@
-class EditAdminCustomProductReqModel {
+class EditAdminProductReqModel {
   String? product_id;
-  EditAdminCustomProductReqModel({this.product_id});
+  EditAdminProductReqModel({this.product_id});
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["product_id"] = product_id;
@@ -9,23 +9,23 @@ class EditAdminCustomProductReqModel {
 }
 
 
-class EditAdminCustomProductResModel {
-  String? status;
+class EditAdminProductResModel {
+  int? status;
   String? message;
-  Data? data;
+  AdminData? data;
   List<Unit>? units;
 
-  EditAdminCustomProductResModel({
+  EditAdminProductResModel({
     required this.status,
     required this.message,
     required this.data,
     required this.units,
   });
-  EditAdminCustomProductResModel.fromJson(Map<String,dynamic>json){
+  EditAdminProductResModel.fromJson(Map<String,dynamic>json){
     status=json["status"];
     message=json["message"];
     data = json['data'] != null
-        ? Data.fromJson(json['data'])
+        ? AdminData.fromJson(json['data'])
         : null;
     if (json["units"] != null) {
       units = <Unit>[];
@@ -36,14 +36,16 @@ class EditAdminCustomProductResModel {
   }
 }
 
-class Data {
+class AdminData {
   ProductDetails ? productDetails;
 
-  Data({
+  AdminData({
     required this.productDetails,
   });
-  Data.fromJson(Map<String,dynamic>json){
-    productDetails=json["product_details"];
+  AdminData.fromJson(Map<String,dynamic>json){
+    productDetails = json['product_details--+'] != null
+        ? ProductDetails.fromJson(json['product_details'])
+        : null;
   }
 }
 
