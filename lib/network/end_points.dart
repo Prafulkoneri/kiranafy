@@ -73,7 +73,6 @@ class Endpoint {
   static const String uploadAddProducts =
       '${baseUrl}lsm-shop-owner-add-product-of-category';
 
-
   ///Edit Custom Products
   static const String editAdminProducts =
       "${baseUrl}lsm-shop-owner-edit-product-of-category";
@@ -143,9 +142,9 @@ class Endpoint {
   //////////Customer view All Shop
   static const String customerViewAllShop =
       "${baseUrl}lsm-customer-view-all-shop-list";
-  //////////Customer view All Shop
+  //////////Customer view All Shop////////////////////////////////////////////////////////////////////////
   static const String customerViewAllCategoryShop =
-      "${baseUrl}lsm-customer-view-all-shop-list-as-per-category";
+      "${baseUrl}lsm-customer-shop-list-as-per-category";
   //////////Customer view Shop
   static const String customerProductListAsPerCategory =
       "${baseUrl}lsm-customer-product-list-as-per-category";
@@ -155,4 +154,6 @@ class Endpoint {
   //////////////recommandation
   static const String AllRecommandedProducts =
       "${baseUrl}lsm-customer-view-all-recommendation-products-of-shop";
+
+  //////////////////
 }

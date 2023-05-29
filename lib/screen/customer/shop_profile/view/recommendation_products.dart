@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,8 +9,11 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:provider/provider.dart';
 
+import 'view_all_recommanded_products.dart';
+
 class RecommendationProducts extends StatefulWidget {
-  const RecommendationProducts({super.key});
+  final String? shopId;
+  const RecommendationProducts({super.key, required this.shopId});
 
   @override
   State<RecommendationProducts> createState() => _RecommendationProductsState();
@@ -17,15 +21,18 @@ class RecommendationProducts extends StatefulWidget {
 
 class _RecommendationProductsState extends State<RecommendationProducts> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ShopProfileController>().initState(context, widget.shopId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final watch = context.watch<ShopProfileController>();
     final read = context.read<ShopProfileController>();
     return Container(
-      // height: 361.h,
-      // color: Colors.white,
       width: 352.w,
-      // decoration: BoxDecoration(
-      //     color: Coupons, borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -44,14 +51,25 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                         fontWeight: FontWeight.w600),
                   ),
                 ),
-                Text(
-                  "See all",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: CouponsText,
-                        letterSpacing: .5,
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.w500),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AllRecommandedProducts(
+                                shopId: widget.shopId,
+                              )),
+                    );
+                  },
+                  child: Text(
+                    "See all",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: CouponsText,
+                          letterSpacing: .5,
+                          fontSize: 11.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
               ],

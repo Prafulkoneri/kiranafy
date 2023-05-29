@@ -99,9 +99,6 @@ class _ShopCategoryState extends State<ShopCategory> {
                                 ],
                                 crossAxisAlignment: CrossAxisAlignment.center,
                               ),
-                              // SizedBox(
-                              //   width: 10.w,
-                              // )
                             ],
                           ),
                         );

@@ -13,44 +13,45 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/shop_a
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FavouritesController extends ChangeNotifier{
-  AllFvrtShopsRepo allFvrtShopsRepo=AllFvrtShopsRepo();
-  AddFavShopRepo addFavShopRepo=AddFavShopRepo();
-  bool isFavShopPressed=true;
-  List<FavouriteData> ? favShopList;
-  bool isLoading=true;
-  String shopId="";
-  RemoveFavShopRepo removeFavShopRepo=RemoveFavShopRepo();
-  List<bool> fav=[];
+class FavouritesController extends ChangeNotifier {
+  AllFvrtShopsRepo allFvrtShopsRepo = AllFvrtShopsRepo();
+  AddFavShopRepo addFavShopRepo = AddFavShopRepo();
+  bool isFavShopPressed = true;
+  List<FavouriteData>? favShopList;
+  bool isLoading = true;
+  String shopId = "";
+  RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
+  List<bool> fav = [];
   Future<void> initState(context) async {
     favShopList?.clear();
-    isLoading=true;
+    isLoading = true;
     await getAllFavouriteShop(context);
   }
 
-  onFavouriteShopTapped(){
-    isFavShopPressed=true;
+  onFavouriteShopTapped() {
+    isFavShopPressed = true;
     notifyListeners();
   }
-  onFavouriteProductTapped(){
-    isFavShopPressed=false;
+
+  onFavouriteProductTapped() {
+    isFavShopPressed = false;
     notifyListeners();
   }
 
   Future<void> getAllFavouriteShop(context) async {
-    isLoading=true;
+    isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    allFvrtShopsRepo.allfvrtShops(pref.getString("successToken"))
+    allFvrtShopsRepo
+        .allfvrtShops(pref.getString("successToken"))
         .then((response) {
       print(response.body);
-      final result =
-      GetAllFavShopsResModel.fromJson(jsonDecode(response.body));
+      final result = GetAllFavShopsResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        favShopList=result.data;
-        fav=List<bool>.filled(favShopList?.length??0,true,growable: true);
-        isLoading=false;
+        favShopList = result.data;
+        fav = List<bool>.filled(favShopList?.length ?? 0, true, growable: true);
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -59,7 +60,7 @@ class FavouritesController extends ChangeNotifier{
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -69,19 +70,20 @@ class FavouritesController extends ChangeNotifier{
     );
   }
 
-  AddFavReqModel get addFavReqModel=>AddFavReqModel(
-    shopId: shopId.toString(),
-  );
+  AddFavReqModel get addFavReqModel => AddFavReqModel(
+        shopId: shopId.toString(),
+      );
 
-  Future<void> updateFavList(context,id,index)async{
-    shopId=id.toString();
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    addFavShopRepo.updateAddFavShop(addFavReqModel,pref.getString("successToken")).then((response){
+  Future<void> updateFavList(context, id, index) async {
+    shopId = id.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    addFavShopRepo
+        .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
+        .then((response) {
       log("response.body${response.body}");
-      final result =
-      AddFavResModel.fromJson(jsonDecode(response.body));
+      final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        fav[index]=true;
+        fav[index] = true;
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -93,7 +95,7 @@ class FavouritesController extends ChangeNotifier{
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -103,20 +105,20 @@ class FavouritesController extends ChangeNotifier{
     );
   }
 
-  RemoveFavReqModel get removeFavReqModel=>RemoveFavReqModel(
-    shopId: shopId.toString(),
-  );
+  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
+        shopId: shopId.toString(),
+      );
 
-
-
-  Future<void> removeFavList(context,id,index)async{
-    shopId=id.toString();
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    removeFavShopRepo.updateRemoveFavShop(removeFavReqModel,pref.getString("successToken")).then((response){
+  Future<void> removeFavList(context, id, index) async {
+    shopId = id.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeFavShopRepo
+        .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
+        .then((response) {
       log("response.body${response.body}");
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        fav[index]=false;
+        fav[index] = false;
         favShopList?.removeAt(index);
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
@@ -129,7 +131,7 @@ class FavouritesController extends ChangeNotifier{
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -138,5 +140,4 @@ class FavouritesController extends ChangeNotifier{
       },
     );
   }
-
 }

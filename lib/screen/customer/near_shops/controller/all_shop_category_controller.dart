@@ -32,10 +32,7 @@ class AllCategoryShopController extends ChangeNotifier {
 
   CustomerViewAllCategoryShopReqModel get customerViewAllCategoryShopReqModel =>
       CustomerViewAllCategoryShopReqModel(
-          pincode: pincode,
-          offset: offset.toString(),
-          limit: "10",
-          categoryId: categoryId);
+          offset: offset.toString(), limit: "10", categoryId: categoryId);
 
   Future<void> initState(context, id) async {
     print(id);
@@ -47,11 +44,11 @@ class AllCategoryShopController extends ChangeNotifier {
     categoryId = id;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("kkkkkkkkkk");
-    if (pref.getString("pincode") == null) {
-      pincode = "111111";
-    } else {
-      pincode = pref.getString("pincode").toString();
-    }
+    // if (pref.getString("pincode") == null) {
+    //   pincode = "111111";
+    // } else {
+    //   pincode = pref.getString("pincode").toString();
+    // }
     customerViewAllCategoryShopRepo
         .getAllCategoryShopList(
             customerViewAllCategoryShopReqModel, pref.getString("successToken"))

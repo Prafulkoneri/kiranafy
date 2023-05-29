@@ -302,6 +302,7 @@ class _ShopProfileState extends State<ShopProfile> {
                                   shopId: widget.shopId,
                                 )),
                       );
+                      // readMain.onBackPressed(1, AllOfferProductsView(shopId: widget.shopId,));
                     },
                     child: Text(
                       "See all",
@@ -320,9 +321,9 @@ class _ShopProfileState extends State<ShopProfile> {
             SizedBox(
               height: 15.h,
             ),
-            watch.offerProduct?.isNotEmpty ?? false
-                ? OfferProducts()
-                : Container(),
+
+            OfferProducts(),
+            //  Container(),
             Padding(
               padding: EdgeInsets.only(
                 left: 19.h,
@@ -551,7 +552,9 @@ class _ShopProfileState extends State<ShopProfile> {
               child: const CouponsScreen(),
             ),
             watch.recommandedProduct?.isNotEmpty ?? false
-                ? RecommendationProducts()
+                ? RecommendationProducts(
+                    shopId: widget.shopId,
+                  )
                 : Container(),
             SizedBox(
               height: 100.w,

@@ -7,6 +7,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_
 class AllSeasonalProductsRepo {
   Future<http.Response> getAllSeasonalProducts(
       AllSeasonalProductsReqModel reqModel, token) async {
+    print(reqModel.toJson());
     print(token);
     try {
       return await http.post(Uri.parse(Endpoint.AllSeasonalProducts),

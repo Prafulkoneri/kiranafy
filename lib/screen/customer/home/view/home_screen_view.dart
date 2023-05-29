@@ -151,10 +151,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           // Perform the search here
                         },
                       ),
-
-                      // border: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(15.w),
-                      // ),
                     ),
                   ),
                 ),
