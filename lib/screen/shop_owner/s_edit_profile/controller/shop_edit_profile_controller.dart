@@ -3,7 +3,9 @@ import 'dart:io';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
@@ -17,7 +19,8 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:path/path.dart';
+import 'package:async/async.dart';
 class ShopEditProfileDetailController extends ChangeNotifier {
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
   UpdateProfileRepo shopUpdateProfileRepo = UpdateProfileRepo();
@@ -54,7 +57,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String countryCode = "+91";
   List? pincodeList;
   bool showValuePincodeField = false;
-
+  List images=[];
   Future<void> initState(
     context,
   ) async {
@@ -80,6 +83,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
       networkImage1 = "";
       fileImage1 = File(pickedFile.path);
+      images.add(fileImage1.path);
     }
 
     notifyListeners();
@@ -95,6 +99,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     if (pickedFile != null) {
       networkImage2 = "";
       fileImage2 = File(pickedFile.path);
+      images.add(fileImage2.path);
     }
 
     notifyListeners();
@@ -110,6 +115,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     if (pickedFile != null) {
       networkImage3 = "";
       fileImage3 = File(pickedFile.path);
+      images.add(fileImage3.path);
     }
 
     notifyListeners();
@@ -125,6 +131,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     if (pickedFile != null) {
       networkImage4 = "";
       fileImage4 = File(pickedFile.path);
+      images.add(fileImage4.path);
     }
 
     notifyListeners();
@@ -482,6 +489,60 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    await UpdateProfile(context);
+    if(fileImage1.path==""||fileImage2.path==""||fileImage3.path==""||fileImage4.path==""){
+      await UpdateProfile(context);
+    }
+   else{
+     await uploadImage(context);
+    }
   }
+
+  Future uploadImage(context) async {
+
+    print(images);
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    String token=pref.getString("successToken").toString();
+    var uri = Uri.parse("${Endpoint.shopUpdateAccountDetails}");
+    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    request.headers['Authorization'] ="Bearer $token";
+    request.fields['shop_name'] = shopNameController.text;
+    request.fields['shop_owner_name'] = ownerNameController.text;
+    request.fields['shop_owner_country_code'] = countryCode;
+    request.fields['shop_owner_mobile_number'] = phoneNumberController.text;
+    request.fields['shop_owner_email'] = emailIdController.text;
+    request.fields['shop_country_id'] = selectedCountryId;
+    request.fields['shop_state_id'] = selectedStateId;
+    request.fields['shop_area_id'] = selectedAreaId;
+    request.fields['shop_address'] = shopAddressController.text;
+    request.fields['shop_pincode'] =  selectedPincode.toString();
+    request.fields['shop_city_id'] =  selectedCityId.toString();
+    //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
+    List<http.MultipartFile> newList =  <http.MultipartFile>[];
+    for (int i = 0; i <images.length; i++) {
+      File imageFile = File(images[i].toString());
+      var stream =
+      new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      var length = await imageFile.length();
+      var multipartFile = new http.MultipartFile("shop_banner_image_path", stream, length,filename: basename(imageFile.path));
+      newList.add(multipartFile);
+    }
+    request.files.addAll(newList);
+    print(newList);
+    await request.send().then((response){
+
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context,"Updated Successfully",
+            type: SnackType.success);
+        print("Updated Successfully");
+      } else {
+        Utils.showPrimarySnackbar(context,"Error on uploading",
+            type: SnackType.error);
+      }
+      response.stream.transform(utf8.decoder).listen((value) {
+        print(value);
+      });
+    });
+    return true;
+  }
+
 }

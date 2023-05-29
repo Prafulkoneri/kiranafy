@@ -461,8 +461,8 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    readMainScreen.onNavigation(
-                        0, SSCategoryListView(), context);
+                    readMainScreen.onBackPressed(
+                        0, SSCategoryListView());
                   },
                   child: Container(
                     padding: EdgeInsets.only(

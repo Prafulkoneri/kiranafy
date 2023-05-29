@@ -168,8 +168,12 @@ class SAddProductsController extends ChangeNotifier {
     }
   }
 
-  Future<void> upload(context) async {
-    await uploadAddProducts(context);
+  upload(context) async {
+    bool ? status;
+    await uploadAddProducts(context).then((value){
+    status=true;
+    });
+    return status;
   }
 
   void onSelecteAllProducts() {

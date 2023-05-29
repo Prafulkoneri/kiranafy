@@ -16,7 +16,7 @@ class Endpoint {
   static const String getShopEditProfileDetail =
       '${baseUrl}lsm-shop-owner-get-account-details';
   ////Shop Update Profile
-  static const String ShopUpdateAccountDetails =
+  static const String shopUpdateAccountDetails =
       '${baseUrl}lsm-shop-owner-update-account-details';
 //Shop city List
   static const String getCityList = '${baseUrl}lsm-city-list';
@@ -51,7 +51,7 @@ class Endpoint {
       '${baseUrl}lsm-shop-owner-buy-subscription';
 
   ////Shop Configuration
-  static const String shopconfiguration =
+  static const String getShopConfiguration =
       '${baseUrl}lsm-shop-owner-get-configuration-details';
   ////shop Configuration Edit
   static const String shopconfigurationedit =
@@ -73,8 +73,9 @@ class Endpoint {
   static const String uploadAddProducts =
       '${baseUrl}lsm-shop-owner-add-product-of-category';
 
+
   ///Edit Custom Products
-  static const String editCustomProducts =
+  static const String editAdminProducts =
       "${baseUrl}lsm-shop-owner-edit-product-of-category";
 
   ///Edit Custome Products

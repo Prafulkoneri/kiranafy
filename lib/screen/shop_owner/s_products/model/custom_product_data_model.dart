@@ -1,7 +1,7 @@
 class CustomProductDataResModel {
   int? status;
   String? message;
-  Data? data;
+  CustomData? data;
 
   CustomProductDataResModel({
     this.status,
@@ -13,25 +13,25 @@ class CustomProductDataResModel {
     status=json["status"];
     message=json["message"];
     data = json['data'] != null
-        ? Data.fromJson(json['data'])
+        ? CustomData.fromJson(json['data'])
         : null;
   }
 }
 
-class Data {
+class CustomData {
   List<CategoryData>? categoryData;
   List<BrandData>? brandData;
   List<TaxData>? taxData;
   List<UnitData>? unitData;
 
-  Data({
+  CustomData({
     this.categoryData,
     this.brandData,
     this.taxData,
     this.unitData,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CustomData.fromJson(Map<String, dynamic> json) {
     if (json["category_data"] != null) {
       categoryData = <CategoryData>[];
       json["category_data"].forEach((v) {

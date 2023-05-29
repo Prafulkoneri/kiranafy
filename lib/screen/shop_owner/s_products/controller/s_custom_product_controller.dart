@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_admin_custom_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_custom_product_data_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/repository/edit_admin_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_custom_product_data_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_custom_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/shop_custome_products_view.dart';
@@ -13,8 +15,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomProductController extends ChangeNotifier {
   SCustomProductDataRepo customProductDataRepo = SCustomProductDataRepo();
+  EditAdminProductRepo editAdminProductRepo = EditAdminProductRepo();
   bool isLoading = true;
-  Data? data;
+  CustomData ? customdata;
+  AdminData ? adminData;
   String selectedCategory = "1";
   List<CategoryData> categoryData = [];
   List<BrandData>? brandData;
@@ -26,6 +30,7 @@ class CustomProductController extends ChangeNotifier {
   File productImage = File("");
   List<Widget> cards = [];
   String brandId="";
+  String categoryId="";
   String taxId="";
   TextEditingController productDescriptionController=TextEditingController();
   TextEditingController productNameController=TextEditingController();
@@ -44,6 +49,12 @@ class CustomProductController extends ChangeNotifier {
   List<XFile> imagefiles3 = [];
   List<String> unitList=[];
   UploadCustomProductRepo uploadCustomProductRepo=UploadCustomProductRepo();
+  String productId="";
+
+  //for adminProduct
+  bool isEditEnabled=false;
+
+
 
   Future<void> initState(context, createCard,index) async {
     imagefiles1.clear();
@@ -54,6 +65,7 @@ class CustomProductController extends ChangeNotifier {
     unitList.clear();
     await onAddWidget(createCard,index);
     switchValue = List<bool>.filled(cards.length, true,growable: true);
+    await getAdminProductData(context);
   }
 
   UploadCustomProductReqModel get uploadCustomProductReqModel =>UploadCustomProductReqModel(
@@ -208,11 +220,11 @@ notifyListeners();
       final result =
           CustomProductDataResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        data = result.data;
-        categoryData = data?.categoryData ?? [];
-        brandData = data?.brandData;
-        taxData = data?.taxData;
-        unitData = data?.unitData;
+        customdata = result.data;
+        categoryData = customdata?.categoryData ?? [];
+        brandData = customdata?.brandData;
+        taxData = customdata?.taxData;
+        unitData = customdata?.unitData;
         isLoading = false;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -337,6 +349,44 @@ notifyListeners();
   void onToggleSwitch(value, index) {
     switchValue[index] = !switchValue[index];
     notifyListeners();
+  }
+
+  EditAdminProductReqModel get editAdminProductReqModel=>EditAdminProductReqModel(
+    product_id:"382",
+  );
+
+  Future getAdminProductData(context)async{
+    isEditEnabled=false;
+    isLoading = true;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    editAdminProductRepo
+        .getAdminProductDetails(editAdminProductReqModel,pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+      EditAdminProductResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        adminData = result.data;
+        categoryId=adminData?.productDetails?.categoryId.toString()??"";
+        isLoading = false;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 
 

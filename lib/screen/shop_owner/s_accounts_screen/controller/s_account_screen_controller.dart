@@ -29,10 +29,8 @@ class SAccountScreenController extends ChangeNotifier {
   }
 
   Future<void> initState(context, updateMessage) async {
+    print("999999999999");
     await getShopEditProfileDetails(context);
-    if (updateMessage != null) {
-      Utils.showPrimarySnackbar(context, "Updated ", type: SnackType.success);
-    }
     notifyListeners();
   }
 

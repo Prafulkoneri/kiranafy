@@ -60,8 +60,12 @@ class _AddProductViewState extends State<AddProductView> {
             title: "Add Products",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () async {
-              await read.upload(context);
-              // await readMainScreen.onBackPressed(0,SSelectedProductView(categoryId: watch.categoryId));
+               read.upload(context).then((sucess){
+
+                // if(sucess)
+                //  readMainScreen.onBackPressed(0,SSelectedProductView(categoryId: watch.categoryId));
+              });
+
             },
           ),
         ),

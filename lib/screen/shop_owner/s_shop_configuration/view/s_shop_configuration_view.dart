@@ -42,14 +42,18 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
           },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () {
-            read.EditShopconfig(context);
+          onActionTap: ()async {
+           var res=await read.uploadShopConfiguration(context);
+              // readMainScreen.onBackPressed(4,SAccountScreenView());
+
+
           },
         ),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(
+
           padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,10 +69,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 10.w,
               ),
               Container(
+
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: (Color(0xffEFEFEF)))),
-                height: 142.w,
                 width: ScreenUtil().screenWidth,
                 child: Center(
                   child: Column(
@@ -78,23 +82,22 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         onTap: () {
                           read.openGallery1();
                         },
-                        child: watch.networkImage1 != ""
-                            ? Container(
-                                height: 70.h,
-                                width: 84.41.w,
+                        child: watch.networkImage != ""
+                             ? Container(
+                          width: ScreenUtil().screenWidth,
+                          height: 142.h,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
                                 child: Image.network(
-                                  watch.networkImage1,
+                                  watch.networkImage,
                                   fit: BoxFit.cover,
                                 ),
                               )
-                            : watch.fileImage1.path != ""
-                                ? Center(
-                                    child: Container(
-                                      height: 112.h,
-                                      width: 310.w,
+                             : watch.fileImage.path != ""
+                                ?  Container(
+                          width: ScreenUtil().screenWidth,
+                                      height: 142.h,
                                       // width: ScreenUtil().screenWidth,
                                       decoration: BoxDecoration(
                                           borderRadius:
@@ -102,23 +105,22 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                           border: Border.all(
                                               width: 1, color: grey6)),
                                       child: Image.file(
-                                        watch.fileImage1,
+                                        watch.fileImage,
                                         fit: BoxFit.cover,
                                       ),
+                                    )
+                                : Container(
+                          height: 142.h,
+                                  child: Center(
+                                      child: Text(
+                                        'Upload QR Code',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14.sp,
+                                            color: Color(0xffB7B7B7)),
+                                      ),
                                     ),
-                                  )
-                                : Center(
-                                    child: Text(
-                                      'Upload QR Code',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14.sp,
-                                          color: Color(0xffB7B7B7)),
-                                    ),
-                                  ),
-                      ),
-                      SizedBox(
-                        height: 20.w,
+                                ),
                       ),
                     ],
                   ),
@@ -128,7 +130,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 20.w,
               ),
               PrimarySTextFormField(
-                controller: watch.UpiIdController,
+                controller: watch.upiIdController,
                 hintText: "Type UPI ID",
                 titleHeader: "UPI ID",
                 hintFontSize: 15.sp,
@@ -155,7 +157,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   Expanded(
                     // width: 155.w,
                     child: PrimarySTextFormField(
-                      controller: watch.StartShopTimeController,
+                      controller: watch.startShopTimeController,
                       // hint: "Opening Time",
                       // hintSize: 15.sp,
                     ),
@@ -165,7 +167,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   ),
                   Expanded(
                     child: PrimarySTextFormField(
-                      controller: watch.EndShopTimeController,
+                      controller: watch.endShopTimeController,
                       // hint: "Closing Time",
                       // hintSize: 15.sp,
                     ),
@@ -178,7 +180,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               PrimarySTextFormField(
 //  keyboardType: TextInputType.number,
                 textInputType: TextInputType.number,
-                controller: watch.SupportNumberController,
+                controller: watch.supportNumberController,
                 titleHeader: "Support Number",
                 hintText: "Enter Support Number",
                 hintFontSize: 15.sp,
@@ -382,7 +384,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         Expanded(
                           child: PrimarySTextFormField(
                             textInputType: TextInputType.number,
-                            controller: watch.FirstDeliveryController,
+                            controller: watch.firstDeliveryController,
                             hintText: "Delivery Charge",
                             hintFontSize: 15.sp,
                           ),
@@ -436,7 +438,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         ),
                         Expanded(
                           child: PrimarySTextFormField(
-                            controller: watch.SecondDeliveryController,
+                            controller: watch.secondDeliveryController,
                             textInputType: TextInputType.number,
                             hintText: "Delivery Charge",
                             hintFontSize: 15.sp,
@@ -491,7 +493,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         ),
                         Expanded(
                           child: PrimarySTextFormField(
-                            controller: watch.ThirdDeliveryController,
+                            controller: watch.thirdDeliveryController,
                             textInputType: TextInputType.number,
                             hintText: "Delivery Charge",
                             hintFontSize: 15.sp,
@@ -547,7 +549,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         Expanded(
                           child: PrimarySTextFormField(
                             hintText: "Delivery Charge",
-                            controller: watch.FourthDeliveryController,
+                            controller: watch.fourthDeliveryController,
                             textInputType: TextInputType.number,
                             hintFontSize: 15.sp,
                           ),
