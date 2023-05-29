@@ -151,4 +151,7 @@ class Endpoint {
   //////////////Seasonal Products
   static const String AllSeasonalProducts =
       "${baseUrl}lsm-customer-view-all-seasonal-products-of-shop";
+  //////////////recommandation
+  static const String AllRecommandedProducts =
+      "${baseUrl}lsm-customer-view-all-recommendation-products-of-shop";
 }

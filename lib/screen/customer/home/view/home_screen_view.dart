@@ -67,301 +67,305 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     final read = context.read<HomeScreenController>();
     final watch = context.watch<HomeScreenController>();
     final readMain = context.read<MainScreenController>();
-    return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image(
-                    image: const AssetImage(
-                      "assets/images/logo.png",
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image(
+                      image: const AssetImage(
+                        "assets/images/logo.png",
+                      ),
+                      fit: BoxFit.fill,
+                      width: 150.w,
+                      height: 50.w,
                     ),
-                    fit: BoxFit.fill,
-                    width: 150.w,
-                    height: 50.w,
-                  ),
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/location1.svg',
-                        width: 15.w,
-                        height: 19.h,
-                      ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      Text(
-                        "Vishrantwadi, Pune",
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                              color: SplashText1,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/location1.svg',
+                          width: 15.w,
+                          height: 19.h,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 13.h,
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(
-                right: 19.0.w,
-                left: 19.0.w,
-              ),
-              child: SizedBox(
-                width: 351.w,
-                height: 36.h,
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: splashnone),
-                        borderRadius: BorderRadius.circular(8.w)),
-                    hintText: 'Search your shop and products..',
-                    hintStyle: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Grey,
-                            // letterSpacing: .5,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400)),
-
-                    // Add a clear button to the search bar
-
-                    // Add a search icon or button to the search bar
-                    prefixIcon: IconButton(
-                      icon: SvgPicture.asset(
-                        'assets/images/search.svg',
-                        width: 15.w,
-                        height: 15.h,
-                      ),
-                      onPressed: () {
-                        // Perform the search here
-                      },
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Text(
+                          "Vishrantwadi, Pune",
+                          style: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                                color: SplashText1,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
                     ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 13.h,
+              ),
 
-                    // border: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(15.w),
-                    // ),
+              Padding(
+                padding: EdgeInsets.only(
+                  right: 19.0.w,
+                  left: 19.0.w,
+                ),
+                child: SizedBox(
+                  width: 351.w,
+                  height: 36.h,
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 1, color: splashnone),
+                          borderRadius: BorderRadius.circular(8.w)),
+                      hintText: 'Search your shop and products..',
+                      hintStyle: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Grey,
+                              // letterSpacing: .5,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w400)),
+
+                      // Add a clear button to the search bar
+
+                      // Add a search icon or button to the search bar
+                      prefixIcon: IconButton(
+                        icon: SvgPicture.asset(
+                          'assets/images/search.svg',
+                          width: 15.w,
+                          height: 15.h,
+                        ),
+                        onPressed: () {
+                          // Perform the search here
+                        },
+                      ),
+
+                      // border: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(15.w),
+                      // ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-
-            ////image
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandablePageView.builder(
-                  itemCount: images.length,
-                  physics: BouncingScrollPhysics(),
-                  padEnds: false,
-                  pageSnapping: true,
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(() {
-                      activePage = page;
-                    });
-                  },
-                  itemBuilder: (context, pagePosition) {
-                    return Container(
-                      child: Image.asset(
-                        images[pagePosition],
-                        height: 170.w,
-                        // width: 340.w,
-                        // scale: 0.5,
-                        fit: BoxFit.fill,
-                      ),
-                      margin: EdgeInsets.only(
-                          left: pagePosition == 0 ? 19.w : 0,
-                          // top: 15.w,
-                          right:
-                              pagePosition == images.length - 1 ? 19.w : 10.w),
-                    );
-                  }),
-            ),
-            // ExpandablePageView.builder(
-            //     itemCount: watch.data?.length ?? 0,
-            //     physics: BouncingScrollPhysics(),
-            //     padEnds: false,
-            //     pageSnapping: true,
-            //     controller: _pageController,
-            //     onPageChanged: (page) {
-            //       // setState(() {
-            //       activePage = page;
-            //       // });
-            //     },
-            //     itemBuilder: (context, pagePosition) {
-            //       final element = watch.data?[pagePosition];
-            //       return Container(
-            //         child: Image.network(
-            //           "${element?.bannerImagePath}",
-            //           fit: BoxFit.fill,
-            //         ),
-            //         // Image.asset(
-            //         //   images[pagePosition],
-            //         //   height: 170.w,
-            //         //   // width: 340.w,
-            //         //   // scale: 0.5,
-            //         //   fit: BoxFit.fill,
-            //         // ),
-            //         margin: EdgeInsets.only(
-            //             left: pagePosition == 0 ? 19.w : 0,
-            //             // top: 15.w,
-            //             right: pagePosition == images.length - 1 ? 19.w : 10.w),
-            //       );
-            //     }),
-            SizedBox(
-              height: 5.h,
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: indicators(images.length, activePage)),
-            SizedBox(
-              height: 15.h,
-            ),
-            Container(
-              padding: EdgeInsets.only(right: 19.0.w, left: 19.0.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Nearby Shops",
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                          color: DarkBlack,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      readMain.onBackPressed(1, AllNearShops());
-                    },
-                    child: Text(
-                      "View All",
-                      style: GoogleFonts.roboto(
-                        textStyle: TextStyle(
-                            color: SplashText,
-                            // letterSpacing: .5,
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  )
-                ],
+              SizedBox(
+                height: 15.h,
               ),
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            //
-            HomeCarousal(),
-            SizedBox(
-              height: 30.h,
-            ),
-            watch.categoryFirstList.isNotEmpty
-                ? Container(
-                    padding: EdgeInsets.only(
-                      right: 19.0.w,
-                      left: 19.0.w,
-                    ),
-                    child: Text(
-                      "Shop By Category",
+
+              ////image
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ExpandablePageView.builder(
+                    itemCount: images.length,
+                    physics: BouncingScrollPhysics(),
+                    padEnds: false,
+                    pageSnapping: true,
+                    controller: _pageController,
+                    onPageChanged: (page) {
+                      setState(() {
+                        activePage = page;
+                      });
+                    },
+                    itemBuilder: (context, pagePosition) {
+                      return Container(
+                        child: Image.asset(
+                          images[pagePosition],
+                          height: 170.w,
+                          // width: 340.w,
+                          // scale: 0.5,
+                          fit: BoxFit.fill,
+                        ),
+                        margin: EdgeInsets.only(
+                            left: pagePosition == 0 ? 19.w : 0,
+                            // top: 15.w,
+                            right: pagePosition == images.length - 1
+                                ? 19.w
+                                : 10.w),
+                      );
+                    }),
+              ),
+              // ExpandablePageView.builder(
+              //     itemCount: watch.data?.length ?? 0,
+              //     physics: BouncingScrollPhysics(),
+              //     padEnds: false,
+              //     pageSnapping: true,
+              //     controller: _pageController,
+              //     onPageChanged: (page) {
+              //       // setState(() {
+              //       activePage = page;
+              //       // });
+              //     },
+              //     itemBuilder: (context, pagePosition) {
+              //       final element = watch.data?[pagePosition];
+              //       return Container(
+              //         child: Image.network(
+              //           "${element?.bannerImagePath}",
+              //           fit: BoxFit.fill,
+              //         ),
+              //         // Image.asset(
+              //         //   images[pagePosition],
+              //         //   height: 170.w,
+              //         //   // width: 340.w,
+              //         //   // scale: 0.5,
+              //         //   fit: BoxFit.fill,
+              //         // ),
+              //         margin: EdgeInsets.only(
+              //             left: pagePosition == 0 ? 19.w : 0,
+              //             // top: 15.w,
+              //             right: pagePosition == images.length - 1 ? 19.w : 10.w),
+              //       );
+              //     }),
+              SizedBox(
+                height: 5.h,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: indicators(images.length, activePage)),
+              SizedBox(
+                height: 15.h,
+              ),
+              Container(
+                padding: EdgeInsets.only(right: 19.0.w, left: 19.0.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Nearby Shops",
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
                             color: DarkBlack,
-                            letterSpacing: .5,
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                  )
-                : Container(),
-
-            watch.categoryFirstList.isNotEmpty
-                ? SizedBox(
-                    height: 15.h,
-                  )
-                : Container(),
-            watch.categoryFirstList.isNotEmpty ? ShopCategory() : Container(),
-            // SizedBox(
-            //   height: 20.h,
-            // ),
-            CouponsScreen(),
-
-            OfferPage(),
-            //
-            SizedBox(
-              height: 10.h,
-            ),
-            // ListView.builder(
-            //   padding: EdgeInsets.zero,
-            //   itemCount: watch.data?.length ?? 0,
-            //   shrinkWrap: true,
-            //   itemBuilder: (context, index) {
-            //     final element = watch.data?[index];
-            //     return Container(
-            //         padding: EdgeInsets.only(
-            //           right: 19.0.w,
-            //           left: 19.0.w,
-            //         ),
-            //         width: ScreenUtil().screenWidth,
-            //         // height: 100.h,
-            //         child: Image.network(
-            //           "${element?.bannerImagePath}",
-            //           fit: BoxFit.cover,
-            //         )
-            //         // Image(
-            //         //   image: AssetImage("assets/images/banner.png"),
-            //         //   height: 163.h,
-            //         //   width: 352.w,
-            //         // ),
-            //         );
-            //   },
-            // ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xff39C19D),
-                        borderRadius: BorderRadius.circular(7.w)),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 2.w),
-                    child: Center(
+                    InkWell(
+                      onTap: () {
+                        readMain.onBackPressed(1, AllNearShops());
+                      },
                       child: Text(
-                        "Place Your Ad",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500),
+                        "View All",
+                        style: GoogleFonts.roboto(
+                          textStyle: TextStyle(
+                              color: SplashText,
+                              // letterSpacing: .5,
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15.h,
+              ),
+              //
+              HomeCarousal(),
+              SizedBox(
+                height: 30.h,
+              ),
+              watch.categoryFirstList.isNotEmpty
+                  ? Container(
+                      padding: EdgeInsets.only(
+                        right: 19.0.w,
+                        left: 19.0.w,
+                      ),
+                      child: Text(
+                        "Shop By Category",
+                        style: GoogleFonts.roboto(
+                          textStyle: TextStyle(
+                              color: DarkBlack,
+                              letterSpacing: .5,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    )
+                  : Container(),
+
+              watch.categoryFirstList.isNotEmpty
+                  ? SizedBox(
+                      height: 15.h,
+                    )
+                  : Container(),
+              watch.categoryFirstList.isNotEmpty ? ShopCategory() : Container(),
+              // SizedBox(
+              //   height: 20.h,
+              // ),
+              CouponsScreen(),
+
+              OfferPage(),
+              //
+              SizedBox(
+                height: 10.h,
+              ),
+              // ListView.builder(
+              //   padding: EdgeInsets.zero,
+              //   itemCount: watch.data?.length ?? 0,
+              //   shrinkWrap: true,
+              //   itemBuilder: (context, index) {
+              //     final element = watch.data?[index];
+              //     return Container(
+              //         padding: EdgeInsets.only(
+              //           right: 19.0.w,
+              //           left: 19.0.w,
+              //         ),
+              //         width: ScreenUtil().screenWidth,
+              //         // height: 100.h,
+              //         child: Image.network(
+              //           "${element?.bannerImagePath}",
+              //           fit: BoxFit.cover,
+              //         )
+              //         // Image(
+              //         //   image: AssetImage("assets/images/banner.png"),
+              //         //   height: 163.h,
+              //         //   width: 352.w,
+              //         // ),
+              //         );
+              //   },
+              // ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xff39C19D),
+                          borderRadius: BorderRadius.circular(7.w)),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 14.w, vertical: 2.w),
+                      child: Center(
+                        child: Text(
+                          "Place Your Ad",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 100.h,
-            )
-          ],
+                ],
+              ),
+              SizedBox(
+                height: 100.h,
+              )
+            ],
+          ),
         ),
       ),
     );
