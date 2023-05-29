@@ -83,7 +83,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
               itemCount: watch.allOfferProducts?.length ?? 0,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: (1.5 / 2),
+                  childAspectRatio: (1.5 / 1.7),
                   crossAxisSpacing: 0.0,
                   mainAxisSpacing: 0.0),
               itemBuilder: (BuildContext, index) {
@@ -94,13 +94,15 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                   ),
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: 17.w, right: 12.w, top: 0, bottom: 0),
+                      left: 17.w,
+                      right: 12.w,
+                    ),
                     width: 156.w,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: EdgeInsets.only(right: 0.w, top: 5.w),
+                          padding: EdgeInsets.only(right: 0.w, top: 10.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -128,6 +130,9 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                             ],
                           ),
                         ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -150,7 +155,9 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                   ),
                           ],
                         ),
-
+                        SizedBox(
+                          height: 5.w,
+                        ),
                         Row(
                           children: [
                             Flexible(
@@ -188,11 +195,11 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                             ),
                           ],
                         ),
-                        // SizedBox(
-                        //   height: 2.w,
-                        // ),
+                        SizedBox(
+                          height: 2.w,
+                        ),
                         Container(
-                          padding: EdgeInsets.only(right: 10.w, bottom: 0.w),
+                          padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

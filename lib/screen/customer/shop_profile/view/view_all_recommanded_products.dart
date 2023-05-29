@@ -504,6 +504,7 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
               itemCount: watch.recommandedProducts?.length ?? 0,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
+                  childAspectRatio: (1.5 / 1.7),
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 4.0),
               itemBuilder: (BuildContext, index) {
@@ -514,12 +515,15 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
                   ),
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: 17.w, right: 12.w, top: 0, bottom: 0),
+                      left: 17.w,
+                      right: 12.w,
+                    ),
+                    width: 156.w,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: EdgeInsets.only(right: 0.w, top: 8.w),
+                          padding: EdgeInsets.only(right: 0.w, top: 10.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -543,12 +547,12 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
                                             )),
                                       ),
                                     )
-                                  : Container(
-                                      width: 60.w,
-                                      height: 20.h,
-                                    ),
+                                  : Container(),
                             ],
                           ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -572,7 +576,9 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
                                   ),
                           ],
                         ),
-
+                        SizedBox(
+                          height: 5.w,
+                        ),
                         Row(
                           children: [
                             Flexible(
@@ -593,9 +599,9 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
                             ),
                           ],
                         ),
-                        // SizedBox(
-                        //   height: 2.w,
-                        // ),
+                        SizedBox(
+                          height: 2.w,
+                        ),
                         Row(
                           children: [
                             Text(
@@ -610,36 +616,29 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
                             ),
                           ],
                         ),
-                        // SizedBox(
-                        //   height: 2.w,
-                        // ),
+                        SizedBox(
+                          height: 2.w,
+                        ),
                         Container(
-                          padding: EdgeInsets.only(right: 5.w, bottom: 0.w),
+                          padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
                                   element?.mrpPrice != ""
-                                      ? Text('\u{20B9}${element?.mrpPrice}',
+                                      ? Text(
+                                          '\u{20B9}${element?.mrpPrice}',
                                           style: GoogleFonts.dmSans(
-                                              textStyle: element?.offerPrice !=
-                                                      ""
-                                                  ? TextStyle(
-                                                      decoration: TextDecoration
-                                                          .lineThrough,
-                                                      color: Black1,
-                                                      letterSpacing: .5,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400)
-                                                  : TextStyle(
-                                                      color: Black1,
-                                                      letterSpacing: .5,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400)))
+                                            textStyle: TextStyle(
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                color: Black1,
+                                                letterSpacing: .5,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        )
                                       : Text(""),
                                   SizedBox(
                                     width: 5.w,
