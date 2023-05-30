@@ -159,5 +159,7 @@ class Endpoint {
   static const String AllRecommandedProducts =
       "${baseUrl}lsm-customer-view-all-recommendation-products-of-shop";
 
-  //////////////////
+  //////////////////Products View/////////////////////////
+  static const String ProductView =
+      "${baseUrl}sm-customer-shop-category-product-view";
 }

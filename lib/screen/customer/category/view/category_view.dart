@@ -443,197 +443,207 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                           itemCount: watch.productList?.length ?? 0,
                           itemBuilder: (BuildContext, index) {
                             final element = watch.productList?[index];
-                            return
-                                GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProductScreenView()));
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 18.w,
-                                              top: 8.w,
-                                              right: 17.w),
-                                          child: Container(
-                                            child: Card(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0),
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 8.w,
-                                                    ),
-                                                    element?.productImagePath ==
-                                                            ""
-                                                        ? Image.asset(
-                                                            'assets/images/sprite.png',
-                                                            width: 39.w,
-                                                            height: 92.h,
-                                                            fit: BoxFit.cover,
-                                                          )
-                                                        : Image.network(
-                                                            element?.productImagePath ??
-                                                                "",
-                                                            width: 80.w,
-                                                            height: 80.h,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 20.0.w,
-                                                                top: 12.w,
-                                                                right: 13.w),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Flexible(
-                                                                  child: Text(
-                                                                    element?.productName ??
-                                                                        "",
-                                                                    style: GoogleFonts
-                                                                        .dmSans(
-                                                                      textStyle: TextStyle(
-                                                                          color:
-                                                                              Black1,
-                                                                          letterSpacing:
-                                                                              .5,
-                                                                          fontSize: 16
-                                                                              .sp,
-                                                                          fontWeight:
-                                                                              FontWeight.w700),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                element?.discountPercentage !=
-                                                                        ""
-                                                                    ? Container(
-                                                                        width:
-                                                                            60.w,
-                                                                        height:
-                                                                            20.h,
-                                                                        decoration: BoxDecoration(
-                                                                            color:
-                                                                                lightgreen,
-                                                                            borderRadius:
-                                                                                BorderRadius.all(Radius.circular(5.w))),
-                                                                        child:
-                                                                            Center(
-                                                                          child: Text(
-                                                                              "${element?.discountPercentage} off",
-                                                                              // textAlign: TextAlign.center,
-                                                                              style: GoogleFonts.dmSans(
-                                                                                textStyle: TextStyle(color: Colors.white, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w500),
-                                                                              )),
-                                                                        ),
-                                                                      )
-                                                                    : Container(),
-                                                              ],
-                                                            ),
-                                                            SizedBox(
-                                                              height: 6.h,
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                    "${element?.weight}${element?.unit}",
-                                                                    // textAlign: TextAlign.center,
-                                                                    style: GoogleFonts
-                                                                        .dmSans(
-                                                                      textStyle: TextStyle(
-                                                                          color:
-                                                                              Grey,
-                                                                          letterSpacing:
-                                                                              .5,
-                                                                          fontSize: 14
-                                                                              .sp,
-                                                                          fontWeight:
-                                                                              FontWeight.w500),
-                                                                    )),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                Expanded(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.only(
-                                                                        top: 12
-                                                                            .w),
-                                                                    child: Row(
-                                                                      // crossAxisAlignment:
-                                                                      //     CrossAxisAlignment.start,
-                                                                      // mainAxisAlignment: MainAxisAlignment.end,
-                                                                      children: [
-                                                                        Row(
-                                                                          children: [
-                                                                            Text(
-                                                                              '\u{20B9}${element?.mrpPrice}',
-                                                                              style: GoogleFonts.dmSans(
-                                                                                textStyle: TextStyle(decoration: TextDecoration.lineThrough, color: Black, letterSpacing: .5, fontSize: 13.sp, fontWeight: FontWeight.w500),
-                                                                              ),
-                                                                            ),
-                                                                            SizedBox(
-                                                                              width: 10.w,
-                                                                            ),
-                                                                            Text(
-                                                                              '\u{20B9}${element?.offerPrice}',
-                                                                              style: GoogleFonts.dmSans(
-                                                                                textStyle: TextStyle(
-                                                                                    // decoration:
-                                                                                    // TextDecoration.lineThrough,
-                                                                                    color: Black,
-                                                                                    letterSpacing: .5,
-                                                                                    fontSize: 13.sp,
-                                                                                    fontWeight: FontWeight.w500),
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                SvgPicture
-                                                                    .asset(
-                                                                  'assets/images/add.svg',
-                                                                  // width: 30.w,
-                                                                  // height: 30.h,
-                                                                )
-                                                              ],
-                                                            ),
-                                                            SizedBox(
-                                                              height: 12.w,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                            // decoration: BoxDecoration(
-                                            //   // color: Colors.blueAccent,
-                                            //   border: Border.all(width: 1, color: grey1),
-                                            // ),
-                                            // decoration: BoxDecoration(color: Black),
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProductScreenView(
+                                              categoryId:
+                                                  element?.id.toString(),
+                                              productId:
+                                                  element?.productId.toString(),
+                                              shopId: widget.shopId,
+                                            )));
+                              },
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 18.w, top: 8.w, right: 17.w),
+                                    child: Container(
+                                      child: Card(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
                                           ),
-                                        ),
-                                      ],
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 8.w,
+                                              ),
+                                              element?.productImagePath == ""
+                                                  ? Image.asset(
+                                                      'assets/images/sprite.png',
+                                                      width: 39.w,
+                                                      height: 92.h,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Image.network(
+                                                      element?.productImagePath ??
+                                                          "",
+                                                      width: 80.w,
+                                                      height: 80.h,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 20.0.w,
+                                                      top: 12.w,
+                                                      right: 13.w),
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Flexible(
+                                                            child: Text(
+                                                              element?.productName ??
+                                                                  "",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle: TextStyle(
+                                                                    color:
+                                                                        Black1,
+                                                                    letterSpacing:
+                                                                        .5,
+                                                                    fontSize:
+                                                                        16.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          element?.discountPercentage !=
+                                                                  ""
+                                                              ? Container(
+                                                                  width: 60.w,
+                                                                  height: 20.h,
+                                                                  decoration: BoxDecoration(
+                                                                      color:
+                                                                          lightgreen,
+                                                                      borderRadius:
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(5.w))),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                        "${element?.discountPercentage} off",
+                                                                        // textAlign: TextAlign.center,
+                                                                        style: GoogleFonts
+                                                                            .dmSans(
+                                                                          textStyle: TextStyle(
+                                                                              color: Colors.white,
+                                                                              letterSpacing: .5,
+                                                                              fontSize: 12.sp,
+                                                                              fontWeight: FontWeight.w500),
+                                                                        )),
+                                                                  ),
+                                                                )
+                                                              : Container(),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 6.h,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                              "${element?.weight}${element?.unit}",
+                                                              // textAlign: TextAlign.center,
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle: TextStyle(
+                                                                    color: Grey,
+                                                                    letterSpacing:
+                                                                        .5,
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
+                                                              )),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top:
+                                                                          12.w),
+                                                              child: Row(
+                                                                // crossAxisAlignment:
+                                                                //     CrossAxisAlignment.start,
+                                                                // mainAxisAlignment: MainAxisAlignment.end,
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      Text(
+                                                                        '\u{20B9}${element?.mrpPrice}',
+                                                                        style: GoogleFonts
+                                                                            .dmSans(
+                                                                          textStyle: TextStyle(
+                                                                              decoration: TextDecoration.lineThrough,
+                                                                              color: Black,
+                                                                              letterSpacing: .5,
+                                                                              fontSize: 13.sp,
+                                                                              fontWeight: FontWeight.w500),
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            10.w,
+                                                                      ),
+                                                                      Text(
+                                                                        '\u{20B9}${element?.offerPrice}',
+                                                                        style: GoogleFonts
+                                                                            .dmSans(
+                                                                          textStyle: TextStyle(
+                                                                              // decoration:
+                                                                              // TextDecoration.lineThrough,
+                                                                              color: Black,
+                                                                              letterSpacing: .5,
+                                                                              fontSize: 13.sp,
+                                                                              fontWeight: FontWeight.w500),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SvgPicture.asset(
+                                                            'assets/images/add.svg',
+                                                            // width: 30.w,
+                                                            // height: 30.h,
+                                                          )
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 12.w,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          )),
+                                      // decoration: BoxDecoration(
+                                      //   // color: Colors.blueAccent,
+                                      //   border: Border.all(width: 1, color: grey1),
+                                      // ),
+                                      // decoration: BoxDecoration(color: Black),
                                     ),
-                                  );
+                                  ),
+                                ],
+                              ),
+                            );
                           }),
                     ),
                   ))

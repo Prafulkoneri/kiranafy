@@ -135,7 +135,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  "Upload\nAdhar Card",
+                                                  "Upload\nAadhar Card",
                                                   textAlign: TextAlign.center,
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
@@ -302,7 +302,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  "Upload\nPan Card",
+                                                  "Shop Act\n(Optional)",
                                                   textAlign: TextAlign.center,
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
@@ -373,7 +373,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  "Upload\nPan Card",
+                                                  "GST Document\n(Optional)",
                                                   textAlign: TextAlign.center,
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(

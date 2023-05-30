@@ -47,6 +47,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
+import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
@@ -93,6 +94,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ProductCategoryController()),
         ChangeNotifierProvider(create: (_) => ShopAllSeasonalController()),
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
+        ChangeNotifierProvider(create: (_) => ProductViewController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],
