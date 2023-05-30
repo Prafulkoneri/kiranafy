@@ -623,7 +623,7 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
                           height: 2.w,
                         ),
                         Container(
-                          padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
+                          // padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

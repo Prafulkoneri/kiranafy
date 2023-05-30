@@ -261,10 +261,30 @@ class _ShopProfileState extends State<ShopProfile> {
                       SizedBox(
                         width: 13.w,
                       ),
-                      SvgPicture.asset(
-                        'assets/images/fvrt.svg',
-                        // width: 15.w,
-                        // height: 19.h,
+                      GestureDetector(
+                        onTap: () {},
+                        // child: SvgPicture.asset(
+                        //   'assets/images/fvrt.svg',
+                        //   // width: 15.w,
+                        //   // height: 19.h,
+                        // )
+                        child: Container(
+                            padding: EdgeInsets.only(
+                                left: 13.w,
+                                right: 13.w,
+                                top: 14.w,
+                                bottom: 14.w),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xff4689EC),
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                "assets/images/favorite.svg",
+                                width: 26.w,
+                                height: 14.h,
+                              ),
+                            )),
                       ),
                     ],
                   ),
