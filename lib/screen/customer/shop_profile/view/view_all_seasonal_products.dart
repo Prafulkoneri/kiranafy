@@ -250,17 +250,11 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
                 itemCount: watch.seasonalProduct?.length ?? 0,
-                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                // crossAxisCount: 2,
-                // crossAxisSpacing: 4.0,
-                // mainAxisSpacing: 4.0
-
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.0,
-                  crossAxisSpacing: 5.0,
-                  mainAxisSpacing: 5.0,
-                ),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: (1.5 / 1.7),
+                    crossAxisSpacing: 4.0,
+                    mainAxisSpacing: 4.0),
                 itemBuilder: (BuildContext, index) {
                   final element = watch.seasonalProduct?[index];
                   return Card(
@@ -269,13 +263,15 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                     ),
                     child: Container(
                       padding: EdgeInsets.only(
-                          left: 17.w, right: 12.w, top: 0, bottom: 0),
+                        left: 17.w,
+                        right: 12.w,
+                      ),
                       width: 156.w,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding: EdgeInsets.only(right: 0.w, top: 8.w),
+                            padding: EdgeInsets.only(right: 0.w, top: 10.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -307,6 +303,9 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                               ],
                             ),
                           ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -329,7 +328,9 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                     ),
                             ],
                           ),
-
+                          SizedBox(
+                            height: 5.w,
+                          ),
                           Row(
                             children: [
                               Flexible(
@@ -350,9 +351,9 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                               ),
                             ],
                           ),
-                          // SizedBox(
-                          //   height: 2.w,
-                          // ),
+                          SizedBox(
+                            height: 2.w,
+                          ),
                           Row(
                             children: [
                               Text(
@@ -367,13 +368,12 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                               ),
                             ],
                           ),
-                          // SizedBox(
-                          //   height: 2.w,
-                          // ),
+                          SizedBox(
+                            height: 2.w,
+                          ),
                           Container(
-                            padding: EdgeInsets.only(right: 5.w, bottom: 0.w),
+                            // padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
                             child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
@@ -419,6 +419,8 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                 ),
                                 SvgPicture.asset(
                                   'assets/images/add.svg',
+                                  // width: 15.w,
+                                  // height: 19.h,
                                 ),
                               ],
                             ),
