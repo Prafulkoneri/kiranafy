@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/delete_admin_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/selected_products_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/delete_admin_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_add_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/shop_custome_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../repository/s_selected_products_repo.dart';
@@ -74,6 +75,14 @@ class SSelectedProductsController extends ChangeNotifier {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
+    );
+  }
+
+  void onAddProductPressed(context,id){
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:AddProductView(categoryId: id),)),
+          (Route<dynamic> route) => false,
     );
   }
 

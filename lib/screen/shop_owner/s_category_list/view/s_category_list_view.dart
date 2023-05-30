@@ -41,12 +41,20 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onBackPressed(0, ShopDashBoard());
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:ShopDashBoard())),
+                  (Route<dynamic> route) => false,
+            );
           },
           title: "Categories",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-            readMainScreen.onBackPressed(0, SSelectCategoryView());
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectCategoryView())),
+                  (Route<dynamic> route) => false,
+            );
           },
         ),
       ),
@@ -62,8 +70,9 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                 physics: BouncingScrollPhysics(),
                 child: RefreshIndicator(
                   onRefresh: () async {
-                    readMainScreen.onNavigation(
-                        0, SSCategoryListView(), context);
+
+                    // readMainScreen.onNavigation(
+                    //     0, SSCategoryListView(), context);
                   },
                   child: Column(
                     children: [
@@ -83,10 +92,12 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    readMainScreen.onBackPressed(
-                                        0,
-                                        SSelectedProductView(
-                                            categoryId: element?.categoryId.toString()),);
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(
+                                          categoryId: element?.categoryId.toString()))),
+                                          (Route<dynamic> route) => false,
+                                    );
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

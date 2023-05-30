@@ -8,6 +8,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -93,8 +94,15 @@ class _KycApprovedViewState extends State<KycApprovedView> {
                       text: "Set Shop Configuration",
                       color: SplashText,
                       onTap: () {
-                        readMainScreen.onNavigation(
-                            4, SShopConfigurationView(), context);
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SMainScreenView(
+                                  index: 0,
+                                  screenName: SShopConfigurationView()
+                              )),
+                              (Route<dynamic> route) => false,
+                        );
                       }),
                 ],
               ),

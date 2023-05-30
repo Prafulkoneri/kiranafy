@@ -13,6 +13,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_admin_product_controller.dart';
@@ -45,9 +46,6 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
       context
           .read<EditAdminProductController>()
           .initState(context, CreateWidget(0),0,widget.productId);
-      print("000000");
-      print(widget.productId);
-      print("000000");
     });
   }
 
@@ -62,7 +60,11 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: (){
-            readMain.onBackPressed(0,SSelectedProductView(categoryId: widget.categoryId));
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: widget.categoryId,))),
+                  (Route<dynamic> route) => false,
+            );
           },
           title: "Edit Admin Products",
           action: SvgPicture.asset("assets/icons/forward.svg"),

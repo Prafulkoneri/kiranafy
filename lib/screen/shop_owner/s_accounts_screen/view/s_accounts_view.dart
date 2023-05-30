@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -121,12 +122,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      readMainScreen.onNavigation(
-                                          4,
-                                          SEditProfileView(
-                                            fromDashBoard: false,
-                                          ),
-                                          context);
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName: SEditProfileView(
+                                          fromDashBoard: false,
+                                        ),)),
+                                            (Route<dynamic> route) => false,
+                                      );
                                       // Navigator.push(
                                       //     context,
                                       //     MaterialPageRoute(
@@ -211,8 +213,11 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             GestureDetector(
               onTap: () {
-                readMainScreen.onNavigation(
-                    4, SShopConfigurationView(), context);
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SShopConfigurationView())),
+                      (Route<dynamic> route) => false,
+                );
                 // read.onShopConfigurationClicked(context);
               },
               child: Container(

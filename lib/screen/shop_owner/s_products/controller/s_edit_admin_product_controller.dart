@@ -13,7 +13,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/repository/edit
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_custom_product_data_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_admin_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_custom_product_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/shop_custome_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

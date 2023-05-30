@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
@@ -49,18 +50,23 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             if (widget.fromDashBoard ?? false) {
-              readMainScreen.onBackPressed(0, ShopDashBoard());
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:ShopDashBoard())),
+                    (Route<dynamic> route) => false,
+              );
             } else {
-              readMainScreen.onBackPressed(
-                4,
-                SAccountScreenView(),
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
+                    (Route<dynamic> route) => false,
               );
             }
           },
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
-            read.uploadImage(context);
+            read.validateField(context);
             // await readMainScreen.onBackPressed(4, )
             // await readMainScreen.onBackPressed(
             //     4,

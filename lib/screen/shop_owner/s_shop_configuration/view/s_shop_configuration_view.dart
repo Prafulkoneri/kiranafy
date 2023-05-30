@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,11 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onNavigation(4, SAccountScreenView(), context);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
+                  (Route<dynamic> route) => false,
+            );
           },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),

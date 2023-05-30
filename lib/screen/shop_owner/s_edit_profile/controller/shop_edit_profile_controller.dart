@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
@@ -16,6 +17,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -236,13 +238,20 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     shopUpdateProfileRepo.UpdateProfile(
             shopUpdateProfileReqModel, pref.getString("successToken"))
         .then((response) {
+          print("oooooo");
       print(response.body);
+          print("oooooo");
       final result =
           ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
+              (Route<dynamic> route) => false,
+        );
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -489,7 +498,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    if(fileImage1.path==""||fileImage2.path==""||fileImage3.path==""||fileImage4.path==""){
+    if(fileImage1.path==""&&fileImage2.path==""&&fileImage3.path==""&&fileImage4.path==""){
       await UpdateProfile(context);
     }
    else{
@@ -532,6 +541,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context,"Updated Successfully",
             type: SnackType.success);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
+              (Route<dynamic> route) => false,
+        );
         print("Updated Successfully");
       } else {
         Utils.showPrimarySnackbar(context,"Error on uploading",

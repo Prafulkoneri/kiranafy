@@ -9,7 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_s
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../s_products/view/shop_custome_products_view.dart';
+import '../../s_products/view/s_custom_products_view.dart';
 
 class SCategoryListController extends ChangeNotifier {
   ShopSelectedCategoriesRepo SelectedCategoriesListRepo =

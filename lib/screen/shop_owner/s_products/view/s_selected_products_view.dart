@@ -9,11 +9,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/shop_custome_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +53,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMainScreen.onBackPressed(0, SSCategoryListView());
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSCategoryListView(),)),
+                    (Route<dynamic> route) => false,
+              );
             },
             title:
                 '${watch.categoryName}  - ${watch.totalSelectedAndCustomProducts}',
@@ -126,11 +131,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 height: 40.h,
                                 color: Custlogin,
                                 onTap: () {
-                                  readMainScreen.onBackPressed(
-                                      0,
-                                      AddProductView(
-                                        categoryId: watch.categoryId,
-                                      ));
+                                  read.onAddProductPressed(context,widget.categoryId);
                                 },
                                 child: Row(
                                   mainAxisAlignment:
@@ -284,7 +285,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                               children: [
                                                 GestureDetector(
                                                   onTap:(){
-                                                    readMainScreen.onBackPressed(0,SEditAdminProductView(productId:element?.id.toString(),categoryId: widget.categoryId,));
+                                                    Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SEditAdminProductView(productId:element?.id.toString(),categoryId: widget.categoryId,))),
+                                                          (Route<dynamic> route) => false,
+                                                    );
                                                   },
                                                   child: Container(
                                                     padding: EdgeInsets.all(8),
@@ -534,93 +539,6 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                           );
                         },
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 21.w, bottom: 7.w, top: 6.w, right: 21.w),
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black.withOpacity(0.09),
-                                  blurRadius: 5,
-                                  offset: Offset(-.0, 5.0),
-                                  spreadRadius: 0),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border: Border.all(width: 1, color: grey1)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Image(
-                                  image: AssetImage("assets/images/sprite.png"),
-                                  height: 61.h,
-                                  width: 60.w,
-                                ),
-                                Text(
-                                  "Coca Cola",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              // crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                // Text("data"),
-                                Container(
-                                  padding: EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: grey6,
-                                          offset: const Offset(
-                                            5.0,
-                                            5.0,
-                                          ),
-                                          blurRadius: 10.0,
-                                          spreadRadius: 2.0,
-                                        ), //BoxShadow
-                                      ],
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: SvgPicture.asset('assets/icons/e1.svg'),
-                                ),
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: grey6,
-                                          offset: const Offset(
-                                            5.0,
-                                            5.0,
-                                          ),
-                                          blurRadius: 10.0,
-                                          spreadRadius: 2.0,
-                                        ), //BoxShadow
-                                      ],
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: SvgPicture.asset('assets/icons/delete2.svg'),
-                                )
-                                // Text("data"),
-
-                                // SvgPicture.asset(
-                                //     'assets/icons/reddelete.svg'),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
                     ],
                   ),
                 ),

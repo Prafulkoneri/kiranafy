@@ -13,6 +13,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
@@ -24,17 +25,17 @@ import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
-class ShopCustomProductView extends StatefulWidget {
+class SCustomProductView extends StatefulWidget {
   final String ? categoryId;
-  const ShopCustomProductView({super.key,required this.categoryId});
+  const SCustomProductView({super.key,required this.categoryId});
 
   @override
-  State<ShopCustomProductView> createState() => _ShopCustomProductViewState();
+  State<SCustomProductView> createState() => _SCustomProductViewState();
 }
 
 
 
-class _ShopCustomProductViewState extends State<ShopCustomProductView> {
+class _SCustomProductViewState extends State<SCustomProductView> {
 
 
   @override
@@ -57,7 +58,11 @@ class _ShopCustomProductViewState extends State<ShopCustomProductView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: (){
-            readMain.onNavigation(0,SSelectedProductView(categoryId: widget.categoryId),context);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: widget.categoryId,))),
+                  (Route<dynamic> route) => false,
+            );
           },
           title: "Custom Products",
           action: SvgPicture.asset("assets/icons/forward.svg"),

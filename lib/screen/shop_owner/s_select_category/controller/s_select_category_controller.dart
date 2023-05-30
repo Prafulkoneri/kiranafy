@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -102,7 +103,13 @@ class SSelectCategoryController extends ChangeNotifier {
       print(response.body);
       final result = SAddCategoriesResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSCategoryListView())),
+              (Route<dynamic> route) => false,
+        );
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

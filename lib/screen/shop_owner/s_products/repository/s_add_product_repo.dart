@@ -6,7 +6,6 @@ class ShopAddProductRepo {
   Future<http.Response> shopAddProducts(
       ShopAddProductsListRequestModel reqModel, token) async {
     print(reqModel.toJson());
-    print(Uri.parse(Endpoint.getallselectedproductlist));
     try {
       return await http.post(Uri.parse(Endpoint.getallselectedproductlist),
           body: reqModel.toJson(),

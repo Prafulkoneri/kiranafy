@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_cat
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -209,13 +210,17 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 Container(
                   child: GestureDetector(
                     onTap: () {
-                      readMainScreen.onNavigation(
-                          0,
-                          SEditProfileView(
-                            fromDashBoard: true,
-                            // fromAccount: false,
-                          ),
-                          context);
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SMainScreenView(
+                                  index: 0,
+                                  screenName: SEditProfileView(
+                                    fromDashBoard: true,
+                                  ),
+                                )),
+                        (Route<dynamic> route) => false,
+                      );
                     },
                     child: SvgPicture.asset(
                       "assets/icons/shop_edit.svg",
@@ -461,8 +466,13 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    readMainScreen.onBackPressed(
-                        0, SSCategoryListView());
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SMainScreenView(
+                              index: 0, screenName: SSCategoryListView())),
+                      (Route<dynamic> route) => false,
+                    );
                   },
                   child: Container(
                     padding: EdgeInsets.only(

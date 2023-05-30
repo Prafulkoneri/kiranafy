@@ -9,7 +9,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -36,12 +38,7 @@ class _AddProductViewState extends State<AddProductView> {
     });
   }
 
-  navigate() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<MainScreenController>().onBackPressed(
-          0, SSelectedProductView(categoryId: widget.categoryId));
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,17 +51,16 @@ class _AddProductViewState extends State<AddProductView> {
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMainScreen.onBackPressed(
-                  0, SSelectedProductView(categoryId: watch.categoryId));
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSCategoryListView(),)),
+                    (Route<dynamic> route) => false,
+              );
             },
             title: "Add Products",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () async {
-               read.upload(context).then((sucess){
-
-                // if(sucess)
-                //  readMainScreen.onBackPressed(0,SSelectedProductView(categoryId: watch.categoryId));
-              });
+               read.uploadAddProducts(context);
 
             },
           ),

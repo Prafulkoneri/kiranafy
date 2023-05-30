@@ -210,17 +210,13 @@ class SShopConfigurationController extends ChangeNotifier {
 //  Edit//////
 
   Future uploadShopConfiguration(context)async{
-    bool ? status;
     if(fileImage.path==""){
-   var a = await editShopconfig(context);
-   print("aa$a");
+      await editShopconfig(context);
     }
     else{
-      await uploadImage(context).then((success){
-        status=false;
-      });
+      await uploadImage(context);
+
     }
-    return status;
   }
 
   ShopConfigRequestModel get shopConfigRequestModel => ShopConfigRequestModel(
@@ -252,7 +248,13 @@ class SShopConfigurationController extends ChangeNotifier {
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-         Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName: SAccountScreenView(),)));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 4,screenName:SAccountScreenView(),)),
+              (Route<dynamic> route) => false,
+        );
+        // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName:SAccountScreenView(),)));
+
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         notifyListeners();
@@ -321,7 +323,11 @@ newList.add(multipartFile);
         print("sucesss");
         Utils.showPrimarySnackbar(context,"Updated Successfully",
             type: SnackType.success);
-        print("Updated Successfully");
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 4,screenName:SAccountScreenView())),
+              (Route<dynamic> route) => false,
+        );
       } else {
         Utils.showPrimarySnackbar(context,"Error on uploading",
             type: SnackType.error);

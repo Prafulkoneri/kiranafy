@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -35,15 +36,17 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onBackPressed(0, SSCategoryListView());
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSCategoryListView())),
+                  (Route<dynamic> route) => false,
+            );
           },
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
-            await read.addCategory(context).then((value){
-              print("hello");
-              readMainScreen.onBackPressed(0,SSCategoryListView());
-            });
+        read.addCategory(context);
+
           },
         ),
       ),
