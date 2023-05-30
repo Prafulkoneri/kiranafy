@@ -119,10 +119,11 @@ class _ShopCategoryState extends State<ShopCategory> {
                         final element = watch.categorySecondList[index];
                         return GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AllNearShops()));
+                            readMain.onBackPressed(
+                                1,
+                                AllNearCategoryShops(
+                                  categoryId: element.id.toString(),
+                                ));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

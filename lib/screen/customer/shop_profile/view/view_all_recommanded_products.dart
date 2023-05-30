@@ -547,7 +547,10 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
                                             )),
                                       ),
                                     )
-                                  : Container(),
+                                  : Container(
+                                      width: 60.w,
+                                      height: 20.h,
+                                    ),
                             ],
                           ),
                         ),
@@ -620,25 +623,31 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
                           height: 2.w,
                         ),
                         Container(
-                          padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
+                          // padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
                                   element?.mrpPrice != ""
-                                      ? Text(
-                                          '\u{20B9}${element?.mrpPrice}',
+                                      ? Text('\u{20B9}${element?.mrpPrice}',
                                           style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.lineThrough,
-                                                color: Black1,
-                                                letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        )
+                                              textStyle: element?.offerPrice !=
+                                                      ""
+                                                  ? TextStyle(
+                                                      decoration: TextDecoration
+                                                          .lineThrough,
+                                                      color: Black1,
+                                                      letterSpacing: .5,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400)
+                                                  : TextStyle(
+                                                      color: Black1,
+                                                      letterSpacing: .5,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400)))
                                       : Text(""),
                                   SizedBox(
                                     width: 5.w,

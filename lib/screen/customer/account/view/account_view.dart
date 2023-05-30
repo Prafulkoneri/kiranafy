@@ -42,12 +42,13 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          isBackButtonEnabled: false,
           title: "Profile",
           onActionTap: () {},
         ),
       ),
       body: WillPopScope(
-        onWillPop: ()async{
+        onWillPop: () async {
           return false;
         },
         child: SingleChildScrollView(
@@ -84,18 +85,21 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                             border: Border.all(
                               width: 2.w,
                               color: Colors.white,
-                            )
-                        ),
-                        child:
-                        ClipRRect(
+                            )),
+                        child: ClipRRect(
                           borderRadius: BorderRadius.circular(13.w),
-                          child: watch.customerData?.customerProfileImagePath==""?Image.asset(
-                            'assets/images/profile_image.png',
-                            fit: BoxFit.cover,
-                          ):Image.network(
-                            watch.customerData?.customerProfileImagePath??"",
-                            fit: BoxFit.cover,
-                          ),
+                          child:
+                              watch.customerData?.customerProfileImagePath == ""
+                                  ? Image.asset(
+                                      'assets/images/profile_image.png',
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.network(
+                                      watch.customerData
+                                              ?.customerProfileImagePath ??
+                                          "",
+                                      fit: BoxFit.cover,
+                                    ),
                         ),
                       ),
                       SizedBox(
@@ -123,18 +127,18 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: (){
+                                  onTap: () {
                                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
-                                 // readMain.onNavigation(4,UpdateProfileView(), context);
-                                 readMain.onBackPressed(4,UpdateProfileView());
+                                    // readMain.onNavigation(4,UpdateProfileView(), context);
+                                    readMain.onBackPressed(
+                                        4, UpdateProfileView());
                                   },
-                                  child:SvgPicture.asset(
+                                  child: SvgPicture.asset(
                                     'assets/icons/edit.svg',
                                     width: 14.w,
                                     height: 14.h,
                                   ),
                                 ),
-
                               ],
                             ),
                             SizedBox(
@@ -202,7 +206,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               GestureDetector(
                 onTap: () {
                   // readMain.onNavigation(4,UpdateProfileView(), context);
-                  readMain.onBackPressed(4,UpdateProfileView());
+                  readMain.onBackPressed(4, UpdateProfileView());
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w),
@@ -320,7 +324,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ////////////////////
 
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   read.onFavouritesClicked(context);
                 },
                 child: Container(
@@ -621,8 +625,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 ),
               ),
               GestureDetector(
-                onTap: ()async{
-                 read.onLogout(context);
+                onTap: () async {
+                  read.onLogout(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -660,7 +664,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     ],
                   ),
                 ),
-              ),SizedBox(
+              ),
+              SizedBox(
                 height: 90.w,
               ),
             ],

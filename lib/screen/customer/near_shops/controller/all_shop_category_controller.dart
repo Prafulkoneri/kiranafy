@@ -144,7 +144,7 @@ class AllCategoryShopController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        favAllShop[index] = true;
+        favAllShop[index] = false;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -178,7 +178,7 @@ class AllCategoryShopController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        favNearByShop[index] = false;
+        favNearByShop[index] = true;
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -209,7 +209,7 @@ class AllCategoryShopController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        favAllShop[index] = false;
+        favAllShop[index] = true;
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

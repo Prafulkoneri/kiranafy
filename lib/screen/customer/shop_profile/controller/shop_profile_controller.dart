@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products.dart';
 
@@ -16,7 +18,6 @@ class ShopProfileController extends ChangeNotifier {
   int offset = 0;
   bool? isLoading = true;
   bool? showPaginationLoader = true;
-
   Data? allproducts;
   CustomerViewShopRepo customerViewShopRepo = CustomerViewShopRepo();
   ShopData? shopData;
@@ -26,6 +27,9 @@ class ShopProfileController extends ChangeNotifier {
   List<AllOfferProducts>? allOfferProducts;
   List<SeasonalProduct>? seasonalProduct;
   List<RecommandedProducts>? recommandedProduct;
+
+bool favAllShop = true;/////shop add fvrt
+
   Future<void> initState(context, id) async {
     await getShopDetails(context, id);
     await getAllOfferes(context, id);
@@ -160,4 +164,42 @@ class ShopProfileController extends ChangeNotifier {
   //     },
   //   );
   // }
+//////Add Shop to fvrt
+ 
+  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
+        shopId: shopId.toString(),
+      );
+      RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
+  Future<void> removeAllShopFavList(context, id, index) async {
+    shopId = id.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeFavShopRepo
+        .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        favAllShop = false;
+        print("hello");
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
 }
+
