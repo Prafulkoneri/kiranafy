@@ -89,8 +89,11 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                         child:
                         ClipRRect(
                           borderRadius: BorderRadius.circular(13.w),
-                          child: Image.asset(
+                          child: watch.customerData?.customerProfileImagePath==""?Image.asset(
                             'assets/images/profile_image.png',
+                            fit: BoxFit.cover,
+                          ):Image.network(
+                            watch.customerData?.customerProfileImagePath??"",
                             fit: BoxFit.cover,
                           ),
                         ),

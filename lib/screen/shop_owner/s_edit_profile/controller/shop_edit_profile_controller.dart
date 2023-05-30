@@ -527,7 +527,6 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       newList.add(multipartFile);
     }
     request.files.addAll(newList);
-    print(newList);
     await request.send().then((response){
 
       if (response.statusCode == 200) {

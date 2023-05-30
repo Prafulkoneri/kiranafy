@@ -30,6 +30,7 @@ import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/control
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_admin_product_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 
@@ -49,7 +50,6 @@ import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
-import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
@@ -92,7 +92,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AllCategoryShopController()),
         ChangeNotifierProvider(create: (_) => ProductCategoryController()),
         ChangeNotifierProvider(create: (_) => ShopAllSeasonalController()),
-        ChangeNotifierProvider(create: (_) => ShopAllRecommandedProducts()),
+        ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],

@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
-
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:local_supper_market/network/end_points.dart';
 
 import 'package:local_supper_market/screen/customer/profile/model/edit_profile_model.dart';
 import 'package:local_supper_market/screen/customer/profile/model/update_profile_model.dart';
@@ -432,7 +434,58 @@ class UpdateProfileController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    await updateProfileDetail(context);
+    if(fileImage.path==""){
+      await updateProfileDetail(context);
+    }
+    else{
+      uploadImage(context);
+    }
+  }
+
+  Future uploadImage(context) async {
+
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    String token=pref.getString("successToken").toString();
+    var uri = Uri.parse("${Endpoint.customerUpdateProfile}");
+    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    request.headers['Authorization'] ="Bearer $token";
+    request.fields['customer_name'] = nameController.text;
+    request.fields['customer_country_code'] = countryCode.toString();
+    request.fields['customer_mobile_number'] = mobilrController.text;
+    request.fields['customer_email'] = emailController.text;
+    request.fields['customer_gender'] = radioGroupValue;
+    request.fields['customer_date_of_birth'] = dateOfBirthController.text;
+    request.fields['customer_country_id'] = countryId.toString();
+    request.fields['customer_state_id'] = stateId.toString();
+    request.fields['customer_city_id'] = cityId.toString();
+    request.fields['customer_area_id'] =  areaId.toString();
+    request.fields['customer_pincode'] =  pincode.toString();
+    request.fields['customer_address'] =  addressController.text;
+    request.fields['customer_alternate_country_code'] =  countryAlternateCode;
+    request.fields['customer_alternate_mobile_number'] =  alernetMobileController.text;
+    List<http.MultipartFile> newList =  <http.MultipartFile>[];
+    File imageFile = fileImage;
+    var stream =
+    new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var length = await imageFile.length();
+    var multipartFile = new http.MultipartFile("customer_profile_image_path", stream, length,filename: basename(imageFile.path));
+    newList.add(multipartFile);
+    request.files.addAll(newList);
+    await request.send().then((response){
+      if (response.statusCode == 200) {
+        print("sucesss");
+        Utils.showPrimarySnackbar(context,"Updated Successfully",
+            type: SnackType.success);
+        print("Updated Successfully");
+      } else {
+        Utils.showPrimarySnackbar(context,"Error on uploading",
+            type: SnackType.error);
+        return;
+      }
+      response.stream.transform(utf8.decoder).listen((value) {
+        print(value);
+      });
+    });
   }
 
 

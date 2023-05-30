@@ -40,6 +40,10 @@ class Endpoint {
   static const String categorieslist =
       '${baseUrl}lsm-shop-owner-get-category-list';
 
+  // Upload Admin Product
+  static const String uploadAdminProduct =
+      '${baseUrl}lsm-shop-owner-update-product-of-category';
+
   ///Shop Owner get Selected Categories List
   static const String shopownerselectedcategorieslist =
       '${baseUrl}lsm-shop-owner-get-selected-categories';

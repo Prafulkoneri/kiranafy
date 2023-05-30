@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/shop_custome_products_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:provider/provider.dart';
@@ -283,7 +284,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                               children: [
                                                 GestureDetector(
                                                   onTap:(){
-                                                    readMainScreen.onBackPressed(0,ShopCustomProductView(categoryId: widget.categoryId));
+                                                    readMainScreen.onBackPressed(0,SEditAdminProductView(productId:element?.id.toString(),categoryId: widget.categoryId,));
                                                   },
                                                   child: Container(
                                                     padding: EdgeInsets.all(8),
@@ -533,93 +534,93 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                           );
                         },
                       ),
-                      // Container(
-                      //   padding: EdgeInsets.only(
-                      //       left: 21.w, bottom: 7.w, top: 6.w, right: 21.w),
-                      //   decoration: BoxDecoration(
-                      //       boxShadow: [
-                      //         BoxShadow(
-                      //             color: Colors.black.withOpacity(0.09),
-                      //             blurRadius: 5,
-                      //             offset: Offset(-.0, 5.0),
-                      //             spreadRadius: 0),
-                      //       ],
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       color: Colors.white,
-                      //       border: Border.all(width: 1, color: grey1)),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: [
-                      //       Row(
-                      //         children: [
-                      //           Image(
-                      //             image: AssetImage("assets/images/sprite.png"),
-                      //             height: 61.h,
-                      //             width: 60.w,
-                      //           ),
-                      //           Text(
-                      //             "Coca Cola",
-                      //             style: GoogleFonts.dmSans(
-                      //               textStyle: TextStyle(
-                      //                   color: Black1,
-                      //                   fontSize: 16.sp,
-                      //                   fontWeight: FontWeight.w700),
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //       Row(
-                      //         // crossAxisAlignment: CrossAxisAlignment.center,
-                      //         children: [
-                      //           // Text("data"),
-                      //           Container(
-                      //             padding: EdgeInsets.all(8),
-                      //             decoration: BoxDecoration(
-                      //                 boxShadow: [
-                      //                   BoxShadow(
-                      //                     color: grey6,
-                      //                     offset: const Offset(
-                      //                       5.0,
-                      //                       5.0,
-                      //                     ),
-                      //                     blurRadius: 10.0,
-                      //                     spreadRadius: 2.0,
-                      //                   ), //BoxShadow
-                      //                 ],
-                      //                 color: Colors.white,
-                      //                 borderRadius: BorderRadius.circular(15)),
-                      //             child: SvgPicture.asset('assets/icons/e1.svg'),
-                      //           ),
-                      //           SizedBox(
-                      //             width: 8.w,
-                      //           ),
-                      //           Container(
-                      //             padding: EdgeInsets.all(8),
-                      //             decoration: BoxDecoration(
-                      //                 boxShadow: [
-                      //                   BoxShadow(
-                      //                     color: grey6,
-                      //                     offset: const Offset(
-                      //                       5.0,
-                      //                       5.0,
-                      //                     ),
-                      //                     blurRadius: 10.0,
-                      //                     spreadRadius: 2.0,
-                      //                   ), //BoxShadow
-                      //                 ],
-                      //                 color: Colors.white,
-                      //                 borderRadius: BorderRadius.circular(15)),
-                      //             child: SvgPicture.asset('assets/icons/delete2.svg'),
-                      //           )
-                      //           // Text("data"),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: 21.w, bottom: 7.w, top: 6.w, right: 21.w),
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.09),
+                                  blurRadius: 5,
+                                  offset: Offset(-.0, 5.0),
+                                  spreadRadius: 0),
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            border: Border.all(width: 1, color: grey1)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image(
+                                  image: AssetImage("assets/images/sprite.png"),
+                                  height: 61.h,
+                                  width: 60.w,
+                                ),
+                                Text(
+                                  "Coca Cola",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              // crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                // Text("data"),
+                                Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: grey6,
+                                          offset: const Offset(
+                                            5.0,
+                                            5.0,
+                                          ),
+                                          blurRadius: 10.0,
+                                          spreadRadius: 2.0,
+                                        ), //BoxShadow
+                                      ],
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: SvgPicture.asset('assets/icons/e1.svg'),
+                                ),
+                                SizedBox(
+                                  width: 8.w,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: grey6,
+                                          offset: const Offset(
+                                            5.0,
+                                            5.0,
+                                          ),
+                                          blurRadius: 10.0,
+                                          spreadRadius: 2.0,
+                                        ), //BoxShadow
+                                      ],
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: SvgPicture.asset('assets/icons/delete2.svg'),
+                                )
+                                // Text("data"),
 
-                      //           // SvgPicture.asset(
-                      //           //     'assets/icons/reddelete.svg'),
-                      //         ],
-                      //       )
-                      //     ],
-                      //   ),
-                      // )
+                                // SvgPicture.asset(
+                                //     'assets/icons/reddelete.svg'),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),

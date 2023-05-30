@@ -443,8 +443,8 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                           itemCount: watch.productList?.length ?? 0,
                           itemBuilder: (BuildContext, index) {
                             final element = watch.productList?[index];
-                            return element?.discountPercentage != ""
-                                ? GestureDetector(
+                            return
+                                GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                           context,
@@ -633,8 +633,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                         ),
                                       ],
                                     ),
-                                  )
-                                : Container();
+                                  );
                           }),
                     ),
                   ))
