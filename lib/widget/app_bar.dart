@@ -33,13 +33,17 @@ class PrimaryAppBar extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
         statusBarBrightness: Brightness.dark, // For iOS (dark icons)
       ),
-      toolbarHeight: 65,
+      toolbarHeight: 65.w,
       // backgroundColor: kappbar,
       leading: isBackButtonEnabled ?? true
-          ? IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-              onPressed: onBackBtnPressed,
-            )
+          ? Container(
+        width: 50.w,
+            height: 65.w,
+            child: IconButton(
+                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                onPressed: onBackBtnPressed,
+      ),
+          )
           : Container(),
       title: Text(
         title ?? "",
@@ -72,11 +76,13 @@ class PrimaryAppBar extends StatelessWidget {
       actions: <Widget>[
         GestureDetector(
           onTap: onActionTap,
-          child: Padding(
+          child: Container(
+            width: 50.w,
+              height: 65.w,
               padding: EdgeInsets.only(
-                right: 20.w,
+
               ),
-              child: action),
+              child: Center(child: action)),
         ),
       ],
     );

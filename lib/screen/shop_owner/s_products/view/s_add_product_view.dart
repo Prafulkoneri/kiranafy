@@ -53,7 +53,7 @@ class _AddProductViewState extends State<AddProductView> {
             onBackBtnPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSCategoryListView(),)),
+                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: widget.categoryId),)),
                     (Route<dynamic> route) => false,
               );
             },

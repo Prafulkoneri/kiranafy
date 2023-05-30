@@ -383,6 +383,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     padding: const EdgeInsets.only(bottom: 0),
                     child: Container(
                         child: MobileNoTextFormField(
+                          readOnly: true,
                       initialSelection: watch.countryCode,
                       controller: watch.phoneNumberController,
                       enableOrder: true,

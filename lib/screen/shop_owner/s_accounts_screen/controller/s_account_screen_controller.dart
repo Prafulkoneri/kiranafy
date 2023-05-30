@@ -16,6 +16,7 @@ class SAccountScreenController extends ChangeNotifier {
   String email = "";
   String name = "";
   String number = "";
+  String shopName = "";
   String shopOwnerName = "";
   String shopImage="";
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
@@ -59,7 +60,8 @@ class SAccountScreenController extends ChangeNotifier {
         number = shopDetails?.shopOwnerMobileNumber.toString() ?? "";
         email = shopDetails?.shopOwnerEmail ?? "";
         name = shopDetails?.shopName ?? "";
-        shopOwnerName = shopDetails?.shopName ?? "";
+        shopName = shopDetails?.shopName ?? "";
+        shopOwnerName=shopDetails?.shopOwnerName??"";
         if(result.shopBannerImages!.isNotEmpty) {
           shopImage = result.shopBannerImages?[0].shopBannerImagePath ?? "";
         }

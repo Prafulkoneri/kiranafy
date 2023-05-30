@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_admin_custom_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_admin_product_model.dart';
@@ -14,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_cu
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_admin_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_custom_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,6 +54,7 @@ class EditAdminProductController extends ChangeNotifier {
   String offerCard="";
   String status="";
   String statusCard="";
+  String categoryId="";
 
   List<TextEditingController> valueController=[TextEditingController()];
   List<TextEditingController> mrpController=[TextEditingController()];
@@ -76,7 +79,7 @@ class EditAdminProductController extends ChangeNotifier {
   //for adminProduct
   bool isEditEnabled=false;
 
-  Future<void> initState(context, createCard,index,id) async {
+  Future<void> initState(context, createCard,index,id,catId) async {
     imagefiles1.clear();
     imagefiles2.clear();
     imagefiles3.clear();
@@ -84,6 +87,7 @@ class EditAdminProductController extends ChangeNotifier {
     cards.clear();
     unitList.clear();
     productId=id;
+    categoryId=catId;
     print(productId);
     // await onAddWidget(createCard,index);
 
@@ -116,9 +120,7 @@ class EditAdminProductController extends ChangeNotifier {
 
     await getMrpData();
     await getUnitData();
-
     await getOfferData();
-
     await getSwitchValue();
 
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -130,7 +132,12 @@ class EditAdminProductController extends ChangeNotifier {
       final result =
       UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        // Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopCustomProductView(categoryId: )));
+        print(categoryId);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId:categoryId),)),
+              (Route<dynamic> route) => false,
+        );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -274,7 +281,7 @@ class EditAdminProductController extends ChangeNotifier {
           a += "inactive,";
         }
       }
-      a = a.substring(0, a.length - 1);
+      // a = a.substring(0, a.length - 1);
       status = a;
       print(status);
       notifyListeners();
@@ -284,17 +291,17 @@ class EditAdminProductController extends ChangeNotifier {
   getSwitchCardValue(){
     String a = '';
     for (int i = 0; i < switchCardValue.length; i++) {
-      if (mrpCardController[i].text != "") {
-        if (switchCardValue[i] && mrpCardController[i].text == "") {
+        if (switchCardValue[i]) {
           a += "active,";
         }
         else {
           a += "inactive,";
         }
-      }
+
+      print(a);
       if(a!="") {
-        a = a.substring(0, a.length - 1);
-        statusCard = "," + a;
+        // a = a.substring(0, a.length - 1);
+        statusCard =  a;
       }
       print(statusCard);
       notifyListeners();
@@ -405,6 +412,9 @@ class EditAdminProductController extends ChangeNotifier {
 
   Future<void> onAddWidget(createdCard,index) async {
     cards.add(createdCard);
+    valueCardController.removeAt(index);
+    mrpCardController.removeAt(index);
+    offerCardController.removeAt(index);
     valueCardController.add(TextEditingController());
     mrpCardController.add(TextEditingController());
     offerCardController.add(TextEditingController());
@@ -423,6 +433,7 @@ class EditAdminProductController extends ChangeNotifier {
     switchValue[index] = !switchValue[index];
     notifyListeners();
   }
+
   void onToggleCardSwitch(value, index) {
     switchCardValue[index] = !switchCardValue[index];
     notifyListeners();

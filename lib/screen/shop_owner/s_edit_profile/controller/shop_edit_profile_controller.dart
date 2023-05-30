@@ -361,10 +361,15 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         pincodeList = result.pincodeData;
-        print(pincodeList);
         if (result.pincodeData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No Pincode Found",
               type: SnackType.error);
+        }
+        if (pincodeList?.contains(selectedPincode.toString()) ?? false) {
+          print("8789888");
+          showValuePincodeField = true;
+        } else {
+          showValuePincodeField = false;
         }
         notifyListeners();
       } else {

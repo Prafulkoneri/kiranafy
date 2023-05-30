@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -47,7 +48,7 @@ class SSelectedProductsController extends ChangeNotifier {
         .selectedProducts(
             selecteProductRequestModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result =
           GetSelectedProductsResponseModel.fromJson(jsonDecode(response.body));
 

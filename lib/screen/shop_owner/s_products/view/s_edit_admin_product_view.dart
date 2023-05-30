@@ -45,7 +45,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<EditAdminProductController>()
-          .initState(context, CreateWidget(0),0,widget.productId);
+          .initState(context, CreateWidget(0),0,widget.productId,widget.categoryId);
     });
   }
 
@@ -66,7 +66,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                   (Route<dynamic> route) => false,
             );
           },
-          title: "Edit Admin Products",
+          title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
             read.uploadAdminProduct(context);
@@ -323,7 +323,6 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          read.openProductImage();
                         },
                         child: Container(
                           height: 100.h,
@@ -997,6 +996,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
+                textInputType: TextInputType.number,
                 controller: watch.offerCardController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",

@@ -50,8 +50,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
           onActionTap: ()async {
            var res=await read.uploadShopConfiguration(context);
               // readMainScreen.onBackPressed(4,SAccountScreenView());
-
-
           },
         ),
       ),

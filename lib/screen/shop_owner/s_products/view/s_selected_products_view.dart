@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -173,6 +174,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 height: 40.h,
                                 color: Custlogin,
                                 onTap: () {
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SCustomProductView(categoryId: widget.categoryId),)),
+                                        (Route<dynamic> route) => false,
+                                  );
                                   // readMainScreen.onNavigation(0,ShopCustomProductView(categoryId: watch.categoryId), context);
                                 },
                                 child: Row(

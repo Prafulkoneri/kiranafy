@@ -63,7 +63,6 @@ class CustomProductController extends ChangeNotifier {
     unitList.clear();
     await onAddWidget(createCard,index);
     switchValue = List<bool>.filled(cards.length, true,growable: true);
-    await getAdminProductData(context);
   }
 
   UploadCustomProductReqModel get uploadCustomProductReqModel =>UploadCustomProductReqModel(
@@ -342,46 +341,5 @@ notifyListeners();
   EditAdminProductReqModel get editAdminProductReqModel=>EditAdminProductReqModel(
     product_id:"382",
   );
-
-  Future getAdminProductData(context)async{
-    isEditEnabled=false;
-    isLoading = true;
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    editAdminProductRepo
-        .getAdminProductDetails(editAdminProductReqModel,pref.getString("successToken"))
-        .then((response) {
-      print(response.body);
-      final result =
-      EditAdminProductResModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        adminData = result.data;
-        categoryId=adminData?.productDetails?.categoryId.toString()??"";
-        List weightList=adminData?.productDetails?.productUnitDetails??[];
-        int weightLength=weightList.length;
-        for(int i=0;i<weightList.length;i++){
-        // valueController.add(weightLength)
-        }
-        isLoading = false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-          (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
-
-
 
 }
