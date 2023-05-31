@@ -157,7 +157,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 SizedBox(
                                   width: 10.w,
                                 ),
-                                Text(
+                                watch.customerData?.customerEmail!=""  ? Text(
                                   '${watch.customerData?.customerEmail}',
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
@@ -169,7 +169,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                         fontSize: 15.sp,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                ),
+                                ):Container(),
                               ],
                               // ),
                             ),

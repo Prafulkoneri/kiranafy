@@ -1,12 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreenView extends StatefulWidget {
-  const ProductScreenView({Key? key}) : super(key: key);
+  final String? shopId;
+  final String? categoryId;
+  final String? productId;
+
+  const ProductScreenView(
+      {super.key, this.shopId, this.categoryId, this.productId});
 
   @override
   _ProductScreenViewState createState() => _ProductScreenViewState();
@@ -20,11 +29,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
   ];
   PageController? _pageController;
   int activePage = 0;
-
-  @override
-  void initState() {
-    _pageController = PageController(viewportFraction: 1, initialPage: 1);
-  }
 
   List<Widget> indicators(imagesLength, currentIndex) {
     return List<Widget>.generate(imagesLength, (index) {
@@ -48,7 +52,19 @@ class _ProductScreenViewState extends State<ProductScreenView> {
   }
 
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ProductViewController>().initState(
+          context, widget.shopId, widget.categoryId, widget.productId);
+    });
+    _pageController = PageController(viewportFraction: 1, initialPage: 1);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final watch = context.watch<ProductViewController>();
+    final read = context.read<ProductViewController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -148,7 +164,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                     // width: MediaQuery.of(context).size.width,
                     height: 241.w,
                     child: PageView.builder(
-                        itemCount: images.length,
+                        itemCount:
+                            watch.productViewData?.productUnitDetails?.length ??
+                                0,
                         physics: BouncingScrollPhysics(),
                         padEnds: false,
                         pageSnapping: true,

@@ -53,13 +53,14 @@ class _HomeCarousalState extends State<HomeCarousal> {
                         width: 168.w,
                         margin: EdgeInsets.only(
                             left: index == 0 ? 19.w : 0,
-                            right: index == 2 ? 19.w : 5.w),
+                            right: index== 10? 19.w : 5.w),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(13.w),
                           image: element?.shopBannerImagePath==""?DecorationImage(
                               image: AssetImage("assets/images/nearshop2.png"),
                               fit: BoxFit.cover):DecorationImage(
-                              image: NetworkImage("${element?.shopBannerImagePath}"),
+                              image: NetworkImage("${element?.shopBannerImagePath}"
+                              ),
                               fit: BoxFit.cover),
                         ),
                         child: Container(

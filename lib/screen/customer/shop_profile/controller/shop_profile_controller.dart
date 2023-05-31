@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products.dart';
@@ -28,11 +30,13 @@ class ShopProfileController extends ChangeNotifier {
   List<SeasonalProduct>? seasonalProduct;
   List<RecommandedProducts>? recommandedProduct;
 
-bool favAllShop = true;/////shop add fvrt
+  bool favAllShop = true; /////shop add fvrt
+  AddFavShopRepo addFavShopRepo = AddFavShopRepo();
 
   Future<void> initState(context, id) async {
     await getShopDetails(context, id);
     await getAllOfferes(context, id);
+
     notifyListeners();
   }
 
@@ -60,6 +64,10 @@ bool favAllShop = true;/////shop add fvrt
         offerProduct = shopData?.offerProduct;
         seasonalProduct = shopData?.seasonalProduct;
         recommandedProduct = shopData?.recommandedProduct;
+        favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
+        print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
+        print(favAllShop);
+        print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -165,12 +173,13 @@ bool favAllShop = true;/////shop add fvrt
   //   );
   // }
 //////Add Shop to fvrt
- 
+
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
       );
-      RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
-  Future<void> removeAllShopFavList(context, id, index) async {
+  RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
+
+  Future<void> removeAllShopFavList(context, id) async {
     shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     removeFavShopRepo
@@ -201,5 +210,38 @@ bool favAllShop = true;/////shop add fvrt
     );
   }
 
+///////////////////Update List
+  AddFavReqModel get addFavReqModel => AddFavReqModel(
+        shopId: shopId.toString(),
+      );
+  Future<void> updateAllShopFavList(context, id) async {
+    shopId = id.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    addFavShopRepo
+        .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = AddFavResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        favAllShop = true;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 }
-

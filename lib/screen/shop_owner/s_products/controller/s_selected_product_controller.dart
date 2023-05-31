@@ -26,6 +26,7 @@ class SSelectedProductsController extends ChangeNotifier {
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
   String categoryId = "";
   String productId = "";
+  List<CustomProduct> ? customProduct;
 
   Future<void> initState(context, id) async {
     await selectedProducts(context, id);
@@ -55,6 +56,7 @@ class SSelectedProductsController extends ChangeNotifier {
       if (response.statusCode == 200) {
         productsFromAdmin = result.data?.productsFromAdmin;
         categoryName = result.data?.categoryName ?? "";
+        customProduct=result.data?.customProduct;
         totalSelectedAndCustomProducts =
             result.data?.totalSelectedAndCustomProducts ?? 0;
 

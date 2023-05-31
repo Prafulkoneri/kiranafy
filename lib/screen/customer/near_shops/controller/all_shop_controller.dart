@@ -18,7 +18,7 @@ class AllShopController extends ChangeNotifier {
   List<NearByShops>? nearByShop;
   Data? data;
   String? shopId = "";
-  final List<AllShops> allShops = [];
+   List<AllShops> allShops = [];
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   List<bool> favNearByShop = [];
@@ -35,6 +35,8 @@ class AllShopController extends ChangeNotifier {
 
 
   Future<void> initState(context)async{
+    allShops.clear();
+    offset=0;
     getAllShops(context);
   }
 
@@ -58,6 +60,7 @@ class AllShopController extends ChangeNotifier {
       if (response.statusCode == 200) {
         data = result.data;
         nearByShop = data?.nearByShops;
+
         allShops.addAll(result.data?.allShops ?? []);
         favNearByShop = List<bool>.filled(nearByShop?.length ?? 0, false, growable: true);
         favAllShop = List<bool>.filled(allShops.length ?? 0, false, growable: true);

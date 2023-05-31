@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/home/model/banner_model.dart';
 import 'package:local_supper_market/screen/customer/home/model/category_model.dart';
@@ -72,6 +73,10 @@ class HomeScreenController extends ChangeNotifier {
       final result = AllCategoriesResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print("${response.body}");
+        print("77777777");
+
+        print(result.categoriesFirstList);
+        print("77777777");
         categoryFirstList = result.categoriesFirstList ?? [];
         categorySecondList = result.categoriesSecondList ?? [];
         isLoading = false;

@@ -2,9 +2,11 @@
 
 class SelecteProductsRequestModel {
   String? category_id;
+
   SelecteProductsRequestModel({
     this.category_id,
   });
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["category_id"] = category_id;
@@ -23,6 +25,7 @@ class GetSelectedProductsResponseModel {
     required this.message,
     required this.data,
   });
+
   GetSelectedProductsResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -33,19 +36,28 @@ class GetSelectedProductsResponseModel {
 class Data {
   String? categoryName;
   List<ProductsFromAdmin>? productsFromAdmin;
+  List<CustomProduct>? customProduct;
   int? totalSelectedAndCustomProducts;
 
   Data({
     required this.categoryName,
     required this.productsFromAdmin,
     required this.totalSelectedAndCustomProducts,
+    required this.customProduct,
   });
+
   Data.fromJson(Map<String, dynamic> json) {
     categoryName = json['category_name'];
     if (json["products_from_admin"] != null) {
       productsFromAdmin = <ProductsFromAdmin>[];
       json["products_from_admin"].forEach((v) {
         productsFromAdmin!.add(ProductsFromAdmin.fromJson(v));
+      });
+    }
+    if (json["custom_products"] != null) {
+      customProduct = <CustomProduct>[];
+      json["custom_products"].forEach((v) {
+        customProduct!.add(CustomProduct.fromJson(v));
       });
     }
     totalSelectedAndCustomProducts = json['total_selected_and_custom_products'];
@@ -66,6 +78,7 @@ class ProductsFromAdmin {
     required this.productImagePath,
     required this.unitDetails,
   });
+
   ProductsFromAdmin.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     productName = json["product_name"];
@@ -96,5 +109,25 @@ class UnitDetail {
     weightAndUnit = json["weight_and_unit"];
     offerPrice = json["offer_price"];
     mrpPrice = json["mrp_price"];
+  }
+}
+
+class CustomProduct {
+  int? id;
+  String? productName;
+  String? productType;
+  String? productImagePath;
+
+  CustomProduct({
+    this.id,
+    this.productName,
+    this.productImagePath,
+    this.productType,
+  });
+  CustomProduct.fromJson(Map<String,dynamic>json){
+    id=json["id"];
+    productName=json["product_name"];
+    productType=json["product_type"];
+    productImagePath=json["product_image_path"];
   }
 }

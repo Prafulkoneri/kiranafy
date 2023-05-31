@@ -36,6 +36,8 @@ class AllCategoryShopController extends ChangeNotifier {
 
   Future<void> initState(context, id) async {
     print(id);
+    allShops.clear();
+    offset=0;
     getAllShops(context, id);
   }
 
@@ -104,6 +106,7 @@ class AllCategoryShopController extends ChangeNotifier {
 
   Future<void> updateNearByFavList(context, id, index) async {
     shopId = id.toString();
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     addFavShopRepo

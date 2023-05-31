@@ -430,28 +430,28 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:provider/provider.dart';
 
-class AllRecommandedProducts extends StatefulWidget {
+class AllRecommandedProductsView extends StatefulWidget {
   final String? shopId;
-  const AllRecommandedProducts({super.key, required this.shopId});
+  const AllRecommandedProductsView({super.key, required this.shopId});
 
   @override
-  State<AllRecommandedProducts> createState() => _AllRecommandedProductsState();
+  State<AllRecommandedProductsView> createState() => _AllRecommandedProductsViewState();
 }
 
-class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
+class _AllRecommandedProductsViewState extends State<AllRecommandedProductsView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
-          .read<ShopAllRecommandedProducts>()
+          .read<SAllRecommandedProductsController>()
           .initState(context, widget.shopId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<ShopAllRecommandedProducts>();
-    final read = context.read<ShopAllRecommandedProducts>();
+    final watch = context.watch<SAllRecommandedProductsController>();
+    final read = context.read<SAllRecommandedProductsController>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -501,6 +501,7 @@ class _AllRecommandedProductsState extends State<AllRecommandedProducts> {
       body: Container(
           margin: EdgeInsets.only(left: 10.w, top: 20.w, right: 10.w),
           child: GridView.builder(
+            physics: BouncingScrollPhysics(),
               itemCount: watch.recommandedProducts?.length ?? 0,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

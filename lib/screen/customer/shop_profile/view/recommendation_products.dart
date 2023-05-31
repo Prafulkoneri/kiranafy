@@ -56,7 +56,7 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AllRecommandedProducts(
+                          builder: (context) => AllRecommandedProductsView(
                                 shopId: widget.shopId,
                               )),
                     );

@@ -9,7 +9,7 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ShopAllRecommandedProducts extends ChangeNotifier {
+class SAllRecommandedProductsController extends ChangeNotifier {
   String shopId = "";
   int offset = 0;
   bool? isLoading = true;

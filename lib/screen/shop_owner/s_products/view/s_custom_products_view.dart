@@ -41,9 +41,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<CustomProductController>()
-          .initState(context, CreateWidget(0),0);
+      context.read<CustomProductController>().initState(context,CreateWidget(0),0);
     });
   }
 
@@ -71,7 +69,9 @@ class _SCustomProductViewState extends State<SCustomProductView> {
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -437,12 +437,15 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                               alignment: Alignment.topRight,
                               children: [
                                 CreateWidget(index),
-                                CupertinoSwitch(
-                                  value: watch.switchValue[index],
-                                  activeColor: DarkGreen,
-                                  onChanged: (value) {
-                                    read.onToggleSwitch(value, index);
-                                  },
+                                Container(
+                                  width:30.w,
+                                  child: CupertinoSwitch(
+                                    value: watch.switchValue[index],
+                                    activeColor: DarkGreen,
+                                    onChanged: (value) {
+                                      read.onToggleSwitch(value, index);
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -687,7 +690,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                 hintFontSize: 12.sp,
               ),
             ),
-            SizedBox(width: 59.w),
+            SizedBox(width: 45.w),
           ],
         ),
         SizedBox(

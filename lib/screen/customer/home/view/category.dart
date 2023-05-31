@@ -148,6 +148,18 @@ class _ShopCategoryState extends State<ShopCategory> {
                                         element.categoryImagePath ?? "",
                                         width: 68.w,
                                         height: 49.w,
+                                        loadingBuilder: ( context, Widget child,
+                                            ImageChunkEvent? loadingProgress) {
+                                          if (loadingProgress == null) return child;
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              value: loadingProgress.expectedTotalBytes != null
+                                                  ? loadingProgress.cumulativeBytesLoaded /
+                                                  loadingProgress.expectedTotalBytes!
+                                                  : null,
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
