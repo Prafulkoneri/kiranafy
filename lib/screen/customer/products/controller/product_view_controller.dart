@@ -18,6 +18,7 @@ class ProductViewController extends ChangeNotifier {
   String? productImage = "";
   ProductViewData? productViewData;
   ProductDetails? productDetails;
+  ShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
   List<SimilarProduct>? similarProduct;
   // UnitImages? unitImages; ////
@@ -26,6 +27,7 @@ class ProductViewController extends ChangeNotifier {
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
   Future<void> initState(context, sId, cId, pId, suId) async {
     await productsView(context, sId, cId, pId);
+    unitImages.clear();
     // await productsUnitImage(context, suId);
     notifyListeners();
   }
@@ -54,6 +56,7 @@ class ProductViewController extends ChangeNotifier {
         productViewData = result.data;
         productDetails = productViewData?.productDetails;
         productImage = productDetails?.productImagePath;
+        shopDetails = productViewData?.shopDetails;
         productUnitDetail = productViewData?.productUnitDetails;
         similarProduct = productViewData?.similarProducts;
         notifyListeners();

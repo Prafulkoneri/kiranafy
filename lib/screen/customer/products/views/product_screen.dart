@@ -96,7 +96,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                         SizedBox(
                           height: 54.w,
                         ),
-                        Text("New Balaji Trading Company",
+                        Text("${watch.shopDetails?.shopName}",
                             style: GoogleFonts.roboto(
                               textStyle: TextStyle(
                                   fontSize: 18.sp,
@@ -121,7 +121,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                     width: 9.w,
                                   ),
                                   Text(
-                                    "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                    "${watch.shopDetails?.shopAddress} \n ${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                                    // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: Black,
@@ -189,8 +190,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                     child: Image.network(
                                       '${element}',
                                       height: 241.w,
-                                      width: 102.w,
-                                      fit: BoxFit.cover,
+                                      // width: 102.w,
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                   margin: EdgeInsets.only(
@@ -207,8 +208,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                 "${watch.productDetails?.productImagePath}",
                                 // images[pagePosition],
                                 height: 241.w,
-                                width: 102.w,
-                                fit: BoxFit.cover,
+                                // width: 102.w,
+                                fit: BoxFit.fill,
                               ),
                             )),
                   Row(
@@ -246,7 +247,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("${watch.productDetails?.categoryName}",
+                  Text("${watch.productDetails?.productName}",
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
                             fontWeight: FontWeight.w600,
@@ -256,13 +257,27 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                   SizedBox(
                     height: 9.w,
                   ),
-                  Text("${watch.productDetails?.brandName}",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13.sp,
-                            color: SplashText),
-                      )),
+                  Row(
+                    children: [
+                      Text("${watch.productDetails?.brandName}",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13.sp,
+                                color: SplashText),
+                          )),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Text("${watch.productDetails?.categoryName}",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13.sp,
+                                color: Black),
+                          )),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -420,29 +435,29 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffE0E0E0),
-                                            borderRadius:
-                                                BorderRadius.circular(5.w)),
-                                        height: 30.w,
-                                        width: 30.w,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsets.only(bottom: 20.w),
-                                          child: Icon(Icons.minimize_sharp),
-                                        ),
-                                      ),
+                                      // Container(
+                                      //   decoration: BoxDecoration(
+                                      //       color: Color(0xffE0E0E0),
+                                      //       borderRadius:
+                                      //           BorderRadius.circular(5.w)),
+                                      //   height: 30.w,
+                                      //   width: 30.w,
+                                      //   child: Padding(
+                                      //     padding:
+                                      //         EdgeInsets.only(bottom: 20.w),
+                                      //     child: Icon(Icons.minimize_sharp),
+                                      //   ),
+                                      // ),
                                       SizedBox(
                                         width: 12.w,
                                       ),
-                                      Text(
-                                        "1",
-                                        style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black),
-                                      ),
+                                      // Text(
+                                      //   "1",
+                                      //   style: TextStyle(
+                                      //       fontSize: 16.sp,
+                                      //       fontWeight: FontWeight.w500,
+                                      //       color: Colors.black),
+                                      // ),
                                       SizedBox(
                                         width: 12.w,
                                       ),

@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class ProductViewRequestModel {
   String? shopId;
   String? categoryId;
@@ -33,16 +35,22 @@ class ProductViewResponseModel {
 }
 
 class ProductViewData {
+  ShopDetails? shopDetails;
   ProductDetails? productDetails;
   List<ProductUnitDetail>? productUnitDetails;
   List<SimilarProduct>? similarProducts;
 
   ProductViewData({
+    required this.shopDetails,
     required this.productDetails,
     required this.productUnitDetails,
     required this.similarProducts,
   });
   ProductViewData.fromJson(Map<String, dynamic> json) {
+    shopDetails = json['shop_details'] != null
+        ? ShopDetails.fromJson(json['shop_details'])
+        : null;
+
     productDetails = json['product_details'] != null
         ? ProductDetails.fromJson(json['product_details'])
         : null;
@@ -60,6 +68,34 @@ class ProductViewData {
         similarProducts!.add(SimilarProduct.fromJson(v));
       });
     }
+  }
+}
+
+class ShopDetails {
+  String? shopName;
+  String? areaName;
+  String? cityName;
+  String? shopAddress;
+  int? shopPincode;
+  String? shopOwnerSupportNumber;
+  String? isFvrt;
+
+  ShopDetails(
+      {required this.shopName,
+      required this.areaName,
+      required this.cityName,
+      required this.shopAddress,
+      required this.shopPincode,
+      required this.shopOwnerSupportNumber,
+      required this.isFvrt});
+  ShopDetails.fromJson(Map<String, dynamic> json) {
+    shopName = json["shop_name"];
+    areaName = json["area_name"];
+    cityName = json["city_name"];
+    shopAddress = json["shop_address"];
+    shopPincode = json["shop_pincode"];
+    shopOwnerSupportNumber = json["shop_owner_support_number"];
+    isFvrt = json["is_favourite"];
   }
 }
 
