@@ -382,8 +382,10 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                         ? Text('\u{20B9}${element?.mrpPrice}',
                                             style: GoogleFonts.dmSans(
                                                 textStyle: element
-                                                            ?.offerPrice !=
-                                                        ""
+                                                                ?.offerPrice !=
+                                                            "" &&
+                                                        element?.offerPrice !=
+                                                            element?.mrpPrice
                                                     ? TextStyle(
                                                         decoration:
                                                             TextDecoration
@@ -403,15 +405,19 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                     SizedBox(
                                       width: 5.w,
                                     ),
-                                    element?.offerPrice != ""
+                                    element?.offerPrice != "" &&
+                                            element?.offerPrice !=
+                                                element?.mrpPrice
                                         ? Text(
-                                            "₹${element?.offerPrice ?? 0}",
-                                            style: GoogleFonts.roboto(
+                                            '\u{20B9}${element?.offerPrice}',
+                                            style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
-                                                  color: Black1,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w400),
+                                                  // decoration:
+                                                  // TextDecoration.lineThrough,
+                                                  color: Black,
+                                                  letterSpacing: .5,
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w500),
                                             ),
                                           )
                                         : Text(""),

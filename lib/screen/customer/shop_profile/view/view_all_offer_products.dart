@@ -206,34 +206,46 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                               Row(
                                 children: [
                                   element?.mrpPrice != ""
-                                      ? Text(
-                                          '\u{20B9}${element?.mrpPrice}',
+                                      ? Text('\u{20B9}${element?.mrpPrice}',
                                           style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.lineThrough,
-                                                color: Black1,
-                                                letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        )
+                                              textStyle: element?.offerPrice !=
+                                                          "" &&
+                                                      element?.offerPrice !=
+                                                          element?.mrpPrice
+                                                  ? TextStyle(
+                                                      decoration: TextDecoration
+                                                          .lineThrough,
+                                                      color: Black1,
+                                                      letterSpacing: .5,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400)
+                                                  : TextStyle(
+                                                      color: Black1,
+                                                      letterSpacing: .5,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400)))
                                       : Text(""),
                                   SizedBox(
                                     width: 5.w,
                                   ),
-                                  element?.offerPrice != ""
-                                      ? Text(
-                                          "₹${element?.offerPrice ?? 0}",
-                                          style: GoogleFonts.roboto(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                // letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        )
-                                      : Text(""),
+                                  element?.offerPrice != "" &&
+                                            element?.offerPrice !=
+                                                element?.mrpPrice
+                                        ? Text(
+                                            '\u{20B9}${element?.offerPrice}',
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  // decoration:
+                                                  // TextDecoration.lineThrough,
+                                                  color: Black,
+                                                  letterSpacing: .5,
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          )
+                                        : Text(""),
                                 ],
                               ),
                               SvgPicture.asset(

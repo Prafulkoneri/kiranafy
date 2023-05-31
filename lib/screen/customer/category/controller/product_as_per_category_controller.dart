@@ -7,42 +7,48 @@ import 'package:local_supper_market/screen/customer/category/repository/product_
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProductCategoryController extends ChangeNotifier{
-  ProductAsPerCategoryRepo productAsPerCategoryRepo=ProductAsPerCategoryRepo();
-  String categoryId="";
-  String shopId="";
-  CategoryProductData ? categoryProductData;
+class ProductCategoryController extends ChangeNotifier {
+  ProductAsPerCategoryRepo productAsPerCategoryRepo =
+      ProductAsPerCategoryRepo();
+  String categoryId = "";
+  String shopId = "";
+  CategoryProductData? categoryProductData;
   List<AllCategoryList>? allCategoryList;
   List<ProductList>? productList;
-  bool isLoading=true;
+  bool isLoading = true;
 
-  Future<void> initState(context,shopId,categoryId)async{
-   await getProductList(context,shopId,categoryId);
+  Future<void> initState(context, shopId, categoryId) async {
+    await getProductList(context, shopId, categoryId);
   }
 
-  ProductAsPerCategoryReqModel get productAsPerCategoryReqModel=>ProductAsPerCategoryReqModel(
-    categoryId:categoryId,shopId:shopId,
-  );
+  ProductAsPerCategoryReqModel get productAsPerCategoryReqModel =>
+      ProductAsPerCategoryReqModel(
+        categoryId: categoryId,
+        shopId: shopId,
+      );
 
-  Future<void> getProductList(context,sId,cId)async{
-    shopId=sId;
-    categoryId=cId;
-    isLoading=true;
-    SharedPreferences pref=await SharedPreferences.getInstance();
+  Future<void> getProductList(context, sId, cId) async {
+    shopId = sId;
+    categoryId = cId;
+    isLoading = true;
+    SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    productAsPerCategoryRepo.getProductDetails(productAsPerCategoryReqModel,pref.getString("successToken")).then((response){
+    productAsPerCategoryRepo
+        .getProductDetails(
+            productAsPerCategoryReqModel, pref.getString("successToken"))
+        .then((response) {
       log("response.body${response.body}");
       final result =
-      ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
+          ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        categoryProductData=result.data;
-        allCategoryList=categoryProductData?.allCategoryList;
-        productList=categoryProductData?.productList;
-        if(productList!.isEmpty){
-          Utils.showPrimarySnackbar(context,"no product found",
+        categoryProductData = result.data;
+        allCategoryList = categoryProductData?.allCategoryList;
+        productList = categoryProductData?.productList;
+        if (productList!.isEmpty) {
+          Utils.showPrimarySnackbar(context, "no product found",
               type: SnackType.error);
         }
-        isLoading=false;
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -51,7 +57,7 @@ class ProductCategoryController extends ChangeNotifier{
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -60,5 +66,4 @@ class ProductCategoryController extends ChangeNotifier{
       },
     );
   }
-
 }

@@ -161,5 +161,8 @@ class Endpoint {
 
   //////////////////Products View/////////////////////////
   static const String ProductView =
-      "${baseUrl}sm-customer-shop-category-product-view";
+      "${baseUrl}lsm-customer-shop-category-product-view";
+  //////////////Product Unit Image
+  static const String ProductUnitImage =
+      "${baseUrl}lsm-customer-get-unit-images-of-product";
 }

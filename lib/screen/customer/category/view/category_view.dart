@@ -394,6 +394,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                 ),
                               ),
                               onPressed: () {
+                                print("j");
                                 read.getProductList(context, widget.shopId,
                                     element?.id.toString());
                               },
@@ -449,10 +450,8 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ProductScreenView(
-                                              categoryId:
-                                                  element?.id.toString(),
-                                              productId:
-                                                  element?.productId.toString(),
+                                              categoryId: watch.categoryId,
+                                              productId: element?.id.toString(),
                                               shopId: widget.shopId,
                                             )));
                               },

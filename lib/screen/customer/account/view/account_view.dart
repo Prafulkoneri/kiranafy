@@ -326,6 +326,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               GestureDetector(
                 onTap: () {
                   read.onFavouritesClicked(context);
+                  // readMain.onBackPressed(4, UpdateProfileView());
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

@@ -110,11 +110,11 @@ class ProductUnitDetail {
   });
   ProductUnitDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    weight = json["product_name"];
-    offerPrice = json["product_image_path"];
-    mrpPrice = json["product_image_name"];
-    discountPercentage = json["category_name"];
-    unit = json["brand_name"];
+    weight = json["weight"];
+    offerPrice = json["offer_price"];
+    mrpPrice = json["mrp_price"];
+    discountPercentage = json["discount_percentage"];
+    unit = json["unit"];
   }
 }
 
@@ -148,11 +148,11 @@ class SimilarProduct {
     productName = json["product_name"];
     productImagePath = json["product_image_path"];
     productImageName = json["product_image_name"];
-    weight = json["category_name"];
-    offerPrice = json["brand_name"];
-    mrpPrice = json["brand_name"];
-    discountPercentage = json["brand_name"];
-    status = json["brand_name"];
-    unit = json["brand_name"];
+    weight = json["weight"];
+    offerPrice = json["offer_price"];
+    mrpPrice = json["mrp_price"];
+    discountPercentage = json["discount_percentage"];
+    status = json["status"];
+    unit = json["unit"];
   }
 }

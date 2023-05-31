@@ -90,6 +90,68 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                   itemCount: watch.recommandedProduct?.length ?? 0,
                   itemBuilder: (BuildContext, index) {
                     final element = watch.recommandedProduct?[index];
+                    var row = Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 13.w),
+                              child: element?.mrpPrice != ""
+                                  ? Text('\u{20B9}${element?.mrpPrice}',
+                                      style: GoogleFonts.dmSans(
+                                          textStyle: element?.offerPrice !=
+                                                      "" &&
+                                                  element?.offerPrice !=
+                                                      element?.mrpPrice
+                                              ? TextStyle(
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  color: Black1,
+                                                  letterSpacing: .5,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w400)
+                                              : TextStyle(
+                                                  color: Black1,
+                                                  letterSpacing: .5,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w400)))
+                                  : Text(""),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 13.w, left: 5.w),
+                              child: element?.offerPrice != "" &&
+                                      element?.offerPrice != element?.mrpPrice
+                                  ? Text(
+                                      '\u{20B9}${element?.offerPrice}',
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            // decoration:
+                                            // TextDecoration.lineThrough,
+                                            color: Black,
+                                            letterSpacing: .5,
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    )
+                                  : Text(""),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/add.svg',
+                              // width: 30.w,
+                              // height: 30.h,
+                            ),
+                          ],
+                        )
+                      ],
+                    );
                     return Container(
                       // color: Colors.white,
                       decoration: const BoxDecoration(
@@ -187,69 +249,7 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                                   // SizedBox(
                                   //   height: 10.h,
                                   // ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 13.w),
-                                            child: element?.mrpPrice != ""
-                                                ? Text(
-                                                    '\u{20B9}${element?.mrpPrice}',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough,
-                                                          color: Black,
-                                                          letterSpacing: .5,
-                                                          fontSize: 13.sp,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                  )
-                                                : Text(""),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 13.w, left: 5.w),
-                                            child: element?.offerPrice != ""
-                                                ? Text(
-                                                    '\u{20B9}${element?.offerPrice}',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          // decoration:
-                                                          // TextDecoration.lineThrough,
-                                                          color: Black,
-                                                          letterSpacing: .5,
-                                                          fontSize: 13.sp,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                  )
-                                                : Text(""),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/images/add.svg',
-                                            // width: 30.w,
-                                            // height: 30.h,
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                  row,
                                 ],
                               ),
                             ),
