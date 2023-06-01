@@ -501,7 +501,6 @@ class _AllRecommandedProductsViewState extends State<AllRecommandedProductsView>
       body: Container(
           margin: EdgeInsets.only(left: 10.w, top: 20.w, right: 10.w),
           child: GridView.builder(
-            physics: BouncingScrollPhysics(),
               itemCount: watch.recommandedProducts?.length ?? 0,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -634,7 +633,9 @@ class _AllRecommandedProductsViewState extends State<AllRecommandedProductsView>
                                       ? Text('\u{20B9}${element?.mrpPrice}',
                                           style: GoogleFonts.dmSans(
                                               textStyle: element?.offerPrice !=
-                                                      ""
+                                                          "" &&
+                                                      element?.offerPrice !=
+                                                          element?.mrpPrice
                                                   ? TextStyle(
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -653,15 +654,19 @@ class _AllRecommandedProductsViewState extends State<AllRecommandedProductsView>
                                   SizedBox(
                                     width: 5.w,
                                   ),
-                                  element?.offerPrice != ""
+                                  element?.offerPrice != "" &&
+                                          element?.offerPrice !=
+                                              element?.mrpPrice
                                       ? Text(
-                                          "₹${element?.offerPrice ?? 0}",
-                                          style: GoogleFonts.roboto(
+                                          '\u{20B9}${element?.offerPrice}',
+                                          style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
-                                                color: Black1,
-                                                // letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400),
+                                                // decoration:
+                                                // TextDecoration.lineThrough,
+                                                color: Black,
+                                                letterSpacing: .5,
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w500),
                                           ),
                                         )
                                       : Text(""),

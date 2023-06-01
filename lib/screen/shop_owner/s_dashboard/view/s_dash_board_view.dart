@@ -527,6 +527,13 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                 child: GestureDetector(
                   onTap: () {
                     // read.onProductSelect(context);
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SMainScreenView(
+                              index: 0, screenName: SSCategoryListView())),
+                      (Route<dynamic> route) => false,
+                    );
                   },
                   child: Container(
                     padding: EdgeInsets.only(
@@ -617,7 +624,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                         ),
                       ),
                       Text(
-                        "Products",
+                        "Seasonal",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Colors.white,

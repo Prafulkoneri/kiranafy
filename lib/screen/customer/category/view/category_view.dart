@@ -394,6 +394,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                 ),
                               ),
                               onPressed: () {
+                                print("j");
                                 read.getProductList(context, widget.shopId,
                                     element?.id.toString());
                               },
@@ -432,7 +433,6 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                     child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Container(
-                      padding: EdgeInsets.only(bottom: 100.w),
                       // height: 95.h,
                       // width: 352.w,
                       child: ListView.builder(
@@ -446,17 +446,14 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             final element = watch.productList?[index];
                             return GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => ProductScreenView(
-                                //               categoryId:
-                                //                   element?.id.toString(),
-                                //               productId:
-                                //                   element?.productId.toString(),
-                                //               shopId: widget.shopId,
-                                //
-                                //             )));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProductScreenView(
+                                              categoryId: watch.categoryId,
+                                              productId: element?.id.toString(),
+                                              shopId: widget.shopId,
+                                            )));
                               },
                               child: Column(
                                 children: [
@@ -648,7 +645,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             );
                           }),
                     ),
-                  )),
+                  ))
           ],
         ),
       ),

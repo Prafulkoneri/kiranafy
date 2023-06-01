@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class ProductViewRequestModel {
   String? shopId;
   String? categoryId;
@@ -33,16 +35,22 @@ class ProductViewResponseModel {
 }
 
 class ProductViewData {
+  ShopDetails? shopDetails;
   ProductDetails? productDetails;
   List<ProductUnitDetail>? productUnitDetails;
   List<SimilarProduct>? similarProducts;
 
   ProductViewData({
+    required this.shopDetails,
     required this.productDetails,
     required this.productUnitDetails,
     required this.similarProducts,
   });
   ProductViewData.fromJson(Map<String, dynamic> json) {
+    shopDetails = json['shop_details'] != null
+        ? ShopDetails.fromJson(json['shop_details'])
+        : null;
+
     productDetails = json['product_details'] != null
         ? ProductDetails.fromJson(json['product_details'])
         : null;
@@ -60,6 +68,34 @@ class ProductViewData {
         similarProducts!.add(SimilarProduct.fromJson(v));
       });
     }
+  }
+}
+
+class ShopDetails {
+  String? shopName;
+  String? areaName;
+  String? cityName;
+  String? shopAddress;
+  int? shopPincode;
+  String? shopOwnerSupportNumber;
+  String? isFvrt;
+
+  ShopDetails(
+      {required this.shopName,
+      required this.areaName,
+      required this.cityName,
+      required this.shopAddress,
+      required this.shopPincode,
+      required this.shopOwnerSupportNumber,
+      required this.isFvrt});
+  ShopDetails.fromJson(Map<String, dynamic> json) {
+    shopName = json["shop_name"];
+    areaName = json["area_name"];
+    cityName = json["city_name"];
+    shopAddress = json["shop_address"];
+    shopPincode = json["shop_pincode"];
+    shopOwnerSupportNumber = json["shop_owner_support_number"];
+    isFvrt = json["is_favourite"];
   }
 }
 
@@ -110,11 +146,11 @@ class ProductUnitDetail {
   });
   ProductUnitDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    weight = json["product_name"];
-    offerPrice = json["product_image_path"];
-    mrpPrice = json["product_image_name"];
-    discountPercentage = json["category_name"];
-    unit = json["brand_name"];
+    weight = json["weight"];
+    offerPrice = json["offer_price"];
+    mrpPrice = json["mrp_price"];
+    discountPercentage = json["discount_percentage"];
+    unit = json["unit"];
   }
 }
 
@@ -148,11 +184,11 @@ class SimilarProduct {
     productName = json["product_name"];
     productImagePath = json["product_image_path"];
     productImageName = json["product_image_name"];
-    weight = json["category_name"];
-    offerPrice = json["brand_name"];
-    mrpPrice = json["brand_name"];
-    discountPercentage = json["brand_name"];
-    status = json["brand_name"];
-    unit = json["brand_name"];
+    weight = json["weight"];
+    offerPrice = json["offer_price"];
+    mrpPrice = json["mrp_price"];
+    discountPercentage = json["discount_percentage"];
+    status = json["status"];
+    unit = json["unit"];
   }
 }
