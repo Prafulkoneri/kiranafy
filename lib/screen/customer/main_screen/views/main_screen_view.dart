@@ -19,11 +19,10 @@ class MainScreenView extends StatefulWidget {
 class _MainScreenViewState extends State<MainScreenView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
-
-    void initState() {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        context.read<ProfileController>().initState(context);
-      });
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileController>().initState(context);
+    });
   }
 
   @override
@@ -121,7 +120,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
-                                        "assets/icons/shop_selected.svg",
+                                        "assets/icons/selected_shop_new.svg",
                                         height: 20.w,
                                         width: 20.w,
                                       ),
@@ -144,7 +143,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
-                                          "assets/icons/shop.svg"),
+                                          "assets/icons/shop_new.svg"),
                                     ),
                                     SizedBox(
                                       height: 5.w,

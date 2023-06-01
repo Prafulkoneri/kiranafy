@@ -72,6 +72,7 @@ class ProductViewData {
 }
 
 class ShopDetails {
+  String? id;
   String? shopName;
   String? areaName;
   String? cityName;
@@ -81,7 +82,8 @@ class ShopDetails {
   String? isFvrt;
 
   ShopDetails(
-      {required this.shopName,
+      {required this.id,
+      required this.shopName,
       required this.areaName,
       required this.cityName,
       required this.shopAddress,
@@ -89,6 +91,7 @@ class ShopDetails {
       required this.shopOwnerSupportNumber,
       required this.isFvrt});
   ShopDetails.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
     shopName = json["shop_name"];
     areaName = json["area_name"];
     cityName = json["city_name"];

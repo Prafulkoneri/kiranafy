@@ -8,6 +8,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductScreenView extends StatefulWidget {
   final String? shopId;
@@ -135,19 +136,54 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                               ),
                               Row(
                                 children: [
-                                  SvgPicture.asset(
-                                    'assets/images/call.svg',
-                                    // width: 15.w,
-                                    // height: 19.h,
+                                  GestureDetector(
+                                    onTap: () {
+                                      read.launchPhone(
+                                          watch.shopDetails
+                                                  ?.shopOwnerSupportNumber ??
+                                              "",
+                                          context);
+                                    },
+                                    child: SvgPicture.asset(
+                                      'assets/images/call.svg',
+                                      // width: 15.w,
+                                      // height: 19.h,
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 13.w,
                                   ),
-                                  SvgPicture.asset(
-                                    'assets/images/fvrt.svg',
-                                    // width: 15.w,
-                                    // height: 19.h,
-                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      watch.favAllShop
+                                          ? read.removeAllShopFavList(
+                                              context, watch.shopDetails?.id)
+                                          : read.updateAllShopFavList(
+                                              context, watch.shopDetails?.id);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                          left: 13.w,
+                                          right: 13.w,
+                                          top: 14.w,
+                                          bottom: 14.w),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0xff4689EC),
+                                      ),
+                                      child: watch.favAllShop
+                                          ? SvgPicture.asset(
+                                              "assets/icons/fav_selected.svg",
+                                              width: 26.w,
+                                              height: 14.h,
+                                            )
+                                          : SvgPicture.asset(
+                                              "assets/images/favorite.svg",
+                                              width: 26.w,
+                                              height: 14.h,
+                                            ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ],
@@ -221,7 +257,12 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                               indicators(watch.unitImages.length, activePage)),
                       Row(
                         children: [
-                          SvgPicture.asset("assets/icons/share.svg"),
+                          GestureDetector(
+                              onTap: () {
+                                watch.onShareXFileFromAssets(context);
+                              },
+                              child:
+                                  SvgPicture.asset("assets/icons/share.svg")),
                           SizedBox(
                             width: 25.w,
                           ),

@@ -65,7 +65,7 @@ class ShopProfileController extends ChangeNotifier {
         seasonalProduct = shopData?.seasonalProduct;
         recommandedProduct = shopData?.recommandedProduct;
         favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
-        print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
+        print("bye");
         print(favAllShop);
         print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
         notifyListeners();
@@ -210,7 +210,7 @@ class ShopProfileController extends ChangeNotifier {
     );
   }
 
-///////////////////Update List
+///////////////////Update List///
   AddFavReqModel get addFavReqModel => AddFavReqModel(
         shopId: shopId.toString(),
       );
