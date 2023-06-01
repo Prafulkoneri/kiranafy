@@ -69,7 +69,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
           title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.uploadAdminProduct(context);
+            read.uploadImage(context);
           },
         ),
       ),

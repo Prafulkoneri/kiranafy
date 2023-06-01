@@ -94,7 +94,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     border: Border.all(width: 1, color: grey6)),
                                 child: Image.network(
                                   watch.networkImage,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                 ),
                               )
                              : watch.fileImage.path != ""
@@ -109,7 +109,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                               width: 1, color: grey6)),
                                       child: Image.file(
                                         watch.fileImage,
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.contain,
                                       ),
                                     )
                                 : Container(

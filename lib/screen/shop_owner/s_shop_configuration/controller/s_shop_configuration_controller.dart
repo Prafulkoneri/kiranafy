@@ -226,7 +226,7 @@ class SShopConfigurationController extends ChangeNotifier {
     shopOwnerAmount4DeliveryCharges: fourthDeliveryController.text,
     shopOwnerCustomerPickup: isCustomerPickupSelected ? "active" : "inactive",
     shopOwnerDeliveryToCustomer: isDeliveryCustomerSelected ? "active" : "inactive",
-    shopOwnerDeliveryChargesFree: isDeliveryChargesSelected ? "active" : "inactive",
+    shopOwnerDeliveryChargesFree: isDeliveryChargesSelected ? "inactive" : "active",
     shopOwnerPaymentQrCodeImageName:'',
     shopOwnerPaymentQrCodeImagePath:'',
     shopOwnerShopCloseTime: endShopTimeController.text,

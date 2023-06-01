@@ -142,8 +142,9 @@ class _AddProductViewState extends State<AddProductView> {
                                   children: [
                                     Image.network(
                                       "${element?.productImagePath}",
-                                      width: 28.w,
+                                      width: 60.w,
                                       height: 61.h,
+                                      fit: BoxFit.fill,
                                     ),
                                     SizedBox(
                                       width: 12.w,

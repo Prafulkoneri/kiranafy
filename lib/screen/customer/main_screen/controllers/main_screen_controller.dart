@@ -15,6 +15,10 @@ class MainScreenController extends ChangeNotifier {
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = HomeScreenView();
 
+  void initState(context,index,currentScreen){
+    navigation(index,currentScreen);
+  }
+
   void onBottomNavChanged(index) {
     currentIndex = index;
     notifyListeners();
@@ -59,6 +63,11 @@ class MainScreenController extends ChangeNotifier {
 
 
   Future<void> onBackPressed(tabIndex,screenName)async{
+    currentTab=tabIndex;
+    currentScreen=screenName;
+    notifyListeners();
+  }
+  Future<void> navigation(tabIndex,screenName)async{
     currentTab=tabIndex;
     currentScreen=screenName;
     notifyListeners();

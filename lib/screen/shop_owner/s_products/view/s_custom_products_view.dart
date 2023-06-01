@@ -65,7 +65,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
           title: "Custom Products",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.uploadCustomProduct(context);
+            read.validateCustomProuduct(context);
           },
         ),
       ),

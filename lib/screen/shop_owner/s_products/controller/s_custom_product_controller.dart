@@ -21,7 +21,7 @@ class CustomProductController extends ChangeNotifier {
   bool isLoading = true;
   CustomData ? customdata;
   AdminData ? adminData;
-  String selectedCategory = "1";
+  String selectedCategory = "";
   List<CategoryData> categoryData = [];
   List<BrandData>? brandData;
   List<UnitData>? unitData;
@@ -355,6 +355,55 @@ notifyListeners();
   void onToggleSwitch(value, index) {
     switchValue[index] = !switchValue[index];
     notifyListeners();
+  }
+
+  void validateCustomProuduct(context){
+    if(selectedCategory==""){
+      Utils.showPrimarySnackbar(context, "Select Category",
+          type: SnackType.error);
+      return;
+    }
+    if(productNameController.text==""){
+      Utils.showPrimarySnackbar(context, "Enter Product Name",
+          type: SnackType.error);
+      return;
+    }
+    if(brandId==""){
+      Utils.showPrimarySnackbar(context, "Select Brand",
+          type: SnackType.error);
+      return;
+    }
+    if(taxId==""){
+      Utils.showPrimarySnackbar(context, "Select Tax",
+          type: SnackType.error);
+      return;
+    }
+    if(productDescriptionController.text==""){
+      Utils.showPrimarySnackbar(context, "Enter Product Description",
+          type: SnackType.error);
+      return;
+    }
+    if(valueController[0].text==""){
+      Utils.showPrimarySnackbar(context, "Enter Weight",
+          type: SnackType.error);
+      return;
+    }
+    if(unitList[0]==""){
+      Utils.showPrimarySnackbar(context, "Select Unit",
+          type: SnackType.error);
+      return;
+    }
+    if(mrpController[0].text==""){
+      Utils.showPrimarySnackbar(context, "Enter Mrp Price",
+          type: SnackType.error);
+      return;
+    }
+    if(offerController[0].text==""){
+      Utils.showPrimarySnackbar(context, "Enter Offer Price",
+          type: SnackType.error);
+      return;
+    }
+    uploadCustomProduct(context);
   }
 
 
