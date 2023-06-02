@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:provider/provider.dart';
@@ -41,8 +42,15 @@ class _HomeCarousalState extends State<HomeCarousal> {
             final element=watch.nearByShopList?[index];
             return GestureDetector(
               onTap: () {
-                // readMain.onNavigation(0, ShopProfile(shopId: element?.id.toString()), context);
-               readMain.onBackPressed(0, ShopProfile(shopId: element?.id.toString()),);
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MainScreenView(
+                          index: 1,
+                          screenName: ShopProfileView(shopId: element?.id.toString(),routeName: "homeNearbyShop",  refreshPage: true,)
+                      )),
+                      (Route<dynamic> route) => false,
+                );
               },
               child: Stack(
                 children: [

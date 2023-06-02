@@ -31,7 +31,7 @@
 //                 onTap: () {
 //                   Navigator.push(
 //                     context,
-//                     MaterialPageRoute(builder: (context) => ShopProfile()),
+//                     MaterialPageRoute(builder: (context) => ShopProfileView()),
 //                   );
 //                 },
 //                 child: Stack(

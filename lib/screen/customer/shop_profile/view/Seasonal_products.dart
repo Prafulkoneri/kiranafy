@@ -18,8 +18,8 @@ class SeasonalProducts extends StatefulWidget {
 class _SeasonalProductsState extends State<SeasonalProducts> {
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<ShopProfileController>();
-    final read = context.read<ShopProfileController>();
+    final watch = context.watch<ShopProfileViewController>();
+    final read = context.read<ShopProfileViewController>();
     return SizedBox(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

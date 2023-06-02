@@ -576,6 +576,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
+                                      read.openGallery1(index);
                                     },
                                     child: Container(
                                       height: 100.h,
@@ -588,7 +589,9 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       ]),
                                       child: Card(
                                         elevation: 0.3,
-                                        child: element?.unitBasedProductImage1Path !=
+                                        child:
+
+                                        element?.unitBasedProductImage1Path !=
                                             ""
                                             ? Center(
                                               child: Image.network(
@@ -630,6 +633,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
+                                      // read.openGallery2(index);
                                     },
                                     child: Container(
                                       height: 100.h,
@@ -681,7 +685,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-
+                                      // read.openGallery3(index);
                                     },
                                     child: Container(
                                       height: 100.h,

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:provider/provider.dart';
 import '../../near_shops/view/all_near_shops_view.dart';
@@ -44,11 +45,11 @@ class _ShopCategoryState extends State<ShopCategory> {
                         final element = watch.categoryFirstList[index];
                         return GestureDetector(
                           onTap: () {
-                            readMain.onBackPressed(
-                                1,
-                                AllNearCategoryShops(
-                                  categoryId: element.id.toString(),
-                                ));
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => MainScreenView(index: 1,screenName:AllNearCategoryShopsView(categoryId: element.id.toString(),refresh: true,))),
+                                  (Route<dynamic> route) => false,
+                            );
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -119,11 +120,16 @@ class _ShopCategoryState extends State<ShopCategory> {
                         final element = watch.categorySecondList[index];
                         return GestureDetector(
                           onTap: () {
-                            readMain.onBackPressed(
-                                1,
-                                AllNearCategoryShops(
-                                  categoryId: element.id.toString(),
-                                ));
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => MainScreenView(index: 1,screenName:AllNearCategoryShopsView(categoryId: element.id.toString(),refresh: true,))),
+                                  (Route<dynamic> route) => false,
+                            );
+                            // readMain.onBackPressed(
+                            //     1,
+                            //     AllNearCategoryShops(
+                            //       categoryId: element.id.toString(),
+                            //     ));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

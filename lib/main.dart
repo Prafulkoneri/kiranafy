@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/customer/home/controller/home_screen_
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
@@ -89,7 +90,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => HomeScreenController()),
         ChangeNotifierProvider(create: (_) => FavouritesController()),
         ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
-        ChangeNotifierProvider(create: (_) => ShopProfileController()),
+        ChangeNotifierProvider(create: (_) => ShopProfileViewController()),
         ChangeNotifierProvider(create: (_) => AllShopController()),
         ChangeNotifierProvider(create: (_) => AllCategoryShopController()),
         ChangeNotifierProvider(create: (_) => ProductCategoryController()),

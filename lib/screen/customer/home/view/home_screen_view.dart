@@ -17,12 +17,14 @@ import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
 import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
 import 'package:local_supper_market/screen/customer/home/view/offers.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 
 import 'package:provider/provider.dart';
 
 class HomeScreenView extends StatefulWidget {
-  const HomeScreenView({super.key});
+  final bool? refreshPage;
+  const HomeScreenView({super.key,required this.refreshPage});
 
   @override
   State<HomeScreenView> createState() => _HomeScreenViewState();
@@ -57,7 +59,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<HomeScreenController>().initState(context);
+      context.read<HomeScreenController>().initState(context,widget.refreshPage);
     });
     _pageController = PageController(viewportFraction: 0.9, initialPage: 1);
   }
@@ -66,10 +68,13 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   Widget build(BuildContext context) {
     final read = context.read<HomeScreenController>();
     final watch = context.watch<HomeScreenController>();
-    final readMain = context.read<MainScreenController>();
+    // final readMain = context.read<MainScreenController>();
     return WillPopScope(
       onWillPop: () async => false,
-      child: Scaffold(
+      child: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      Scaffold(
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
@@ -163,7 +168,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: ExpandablePageView.builder(
-                    itemCount: images.length,
+                    itemCount: watch.bannerData?.length??0,
                     physics: BouncingScrollPhysics(),
                     padEnds: false,
                     pageSnapping: true,
@@ -174,13 +179,20 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       });
                     },
                     itemBuilder: (context, pagePosition) {
+                      final element=watch.bannerData?[pagePosition];
                       return Container(
-                        child: Image.asset(
-                          images[pagePosition],
+                        child: element?.bannerImagePath==""?Image.asset(
+                          "assets/images/caurosal.png",
                           height: 170.w,
                           // width: 340.w,
                           // scale: 0.5,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
+                        ):Image.network(
+                          element?.bannerImagePath??"",
+                          height: 170.w,
+                          // width: 340.w,
+                          // scale: 0.5,
+                          fit: BoxFit.cover,
                         ),
                         margin: EdgeInsets.only(
                             left: pagePosition == 0 ? 19.w : 0,
@@ -227,7 +239,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: indicators(images.length, activePage)),
+                  children: indicators(watch.bannerData?.length??0, activePage)),
               SizedBox(
                 height: 15.h,
               ),
@@ -247,7 +259,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                     ),
                     InkWell(
                       onTap: () {
-                        readMain.onBackPressed(1, AllNearShops());
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => MainScreenView(index: 1,screenName:AllNearShopsView(refreshPage: true,))),
+                              (Route<dynamic> route) => false,
+                        );
                       },
                       child: Text(
                         "View All",

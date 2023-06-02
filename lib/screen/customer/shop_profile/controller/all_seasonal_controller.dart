@@ -15,7 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ShopAllSeasonalController extends ChangeNotifier {
   String shopId = "";
   int offset = 0;
-  bool? isLoading = true;
+  bool isLoading = true;
   bool? showPaginationLoader = true;
 
   Data? data;
@@ -25,7 +25,10 @@ class ShopAllSeasonalController extends ChangeNotifier {
     await getAllSeasonalProducts(context, id);
     notifyListeners();
   }
-
+  void showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
   //////All Offer Products
 
   ///////////////Seasonal Products/////////
@@ -35,7 +38,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
   AllSeasonalProductsRepo allSeasonalProductsRepo = AllSeasonalProductsRepo();
 
   Future<void> getAllSeasonalProducts(context, id) async {
-    isLoading = true;
+    showLoader(true);
     shopId = id;
 
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -49,7 +52,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
       if (response.statusCode == 200) {
         data = result.data;
         seasonalProduct = data?.seasonalProducts;
-        isLoading = false;
+        showLoader(false);
         showPaginationLoader = false;
         notifyListeners();
       } else {

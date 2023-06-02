@@ -23,9 +23,10 @@ class AllShopController extends ChangeNotifier {
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   List<bool> favNearByShop = [];
   List<bool> favAllShop = [];
-  bool? isLoading = true;
+  bool isLoading = true;
   ScrollController scrollController = ScrollController();
   int offset = 0;
+
   bool showPaginationLoader = false;
 
 
@@ -34,14 +35,23 @@ class AllShopController extends ChangeNotifier {
           pincode: pincode, offset: offset.toString(), limit: "5");
 
 
-  Future<void> initState(context)async{
-    allShops.clear();
-    offset=0;
-    getAllShops(context);
-  }
+  Future<void> initState(context,refresh)async{
+    if(refresh) {
+      isLoading = true;
+      allShops.clear();
+      offset = 0;
+      getAllShops(context);
+    }
+    else{
+      isLoading = false;
+    }
+    notifyListeners();
+    }
 
   Future<void> getAllShops(context) async {
-    isLoading = true;
+    if(offset==0){
+      isLoading = true;
+    }
     showPaginationLoader = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("kkkkkkkkkk");

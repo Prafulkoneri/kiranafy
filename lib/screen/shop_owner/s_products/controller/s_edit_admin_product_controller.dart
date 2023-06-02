@@ -85,6 +85,15 @@ class EditAdminProductController extends ChangeNotifier {
     imagefiles1.clear();
     imagefiles2.clear();
     imagefiles3.clear();
+    valueCardController.clear();
+    mrpCardController.clear();
+    offerCardController.clear();
+    valueCardController.add(TextEditingController());
+    mrpCardController.add(TextEditingController());
+    offerCardController.add(TextEditingController());
+    imagefiles1.add(XFile(""));
+    imagefiles2.add(XFile(""));
+    imagefiles3.add(XFile(""));
     await getCustomProductData(context);
     cards.clear();
     unitList.clear();
@@ -320,7 +329,7 @@ class EditAdminProductController extends ChangeNotifier {
     final ImagePicker imgpicker = ImagePicker();
     var pickedfiles = await imgpicker.pickImage(source: ImageSource.gallery);
     if (pickedfiles != null) {
-      imagefiles1.removeAt(index);
+        imagefiles1.removeAt(index);
 
       imagefiles1.insert(index, pickedfiles);
       print(imagefiles1[index].path);
@@ -354,9 +363,9 @@ class EditAdminProductController extends ChangeNotifier {
 
   Future<void> onAddWidget(createdCard,index) async {
     cards.add(createdCard);
-    valueCardController.removeAt(index);
-    mrpCardController.removeAt(index);
-    offerCardController.removeAt(index);
+    // valueCardController.removeAt(index);
+    // mrpCardController.removeAt(index);
+    // offerCardController.removeAt(index);
     valueCardController.add(TextEditingController());
     mrpCardController.add(TextEditingController());
     offerCardController.add(TextEditingController());
@@ -442,14 +451,14 @@ class EditAdminProductController extends ChangeNotifier {
   Future<void> uploadAdminProduct(context) async {
     int count=productUnitDetail?.length??0;
     totalRows=count+cards.length;
-    await getValueData();
+
     if(cards.length!=0){
       await getValueCardData();
       await getMrpCardData();
       await getOfferCardData();
       await getSwitchCardValue();
     }
-
+    await getValueData();
     await getMrpData();
     await getUnitData();
     await getOfferData();
@@ -505,6 +514,20 @@ class EditAdminProductController extends ChangeNotifier {
 
   Future uploadImage(context) async {
     print("hellooooo");
+    int count=productUnitDetail?.length??0;
+    totalRows=count+cards.length;
+
+    if(cards.length!=0){
+      await getValueCardData();
+      await getMrpCardData();
+      await getOfferCardData();
+      await getSwitchCardValue();
+    }
+    await getValueData();
+    await getMrpData();
+    await getUnitData();
+    await getOfferData();
+    await getSwitchValue();
 
     SharedPreferences pref=await SharedPreferences.getInstance();
     String token=pref.getString("successToken").toString();
@@ -521,20 +544,54 @@ class EditAdminProductController extends ChangeNotifier {
     request.fields["offer_price_ids"]=offer+offerCard;
     request.fields["status_ids"]=status+statusCard;
     request.fields["total_rows"]=totalRows.toString();
+    print(productId);
+    print(request.fields);
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList =  <http.MultipartFile>[];
-    for (int i = 0; i <imagefiles1.length; i++) {
-      XFile imageFile = imagefiles1[i];
-      print(imageFile);
-      var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-      var length = await imageFile.length();
-      var multipartFile = new http.MultipartFile("unit_based_product_image_1_path_$i", stream, length,filename: basename(imageFile.path));
-      newList.add(multipartFile);
+    if(imagefiles1.isNotEmpty) {
+      for (int i = 0; i < imagefiles1.length; i++) {
+        XFile imageData1 = imagefiles1[i];
+        print(imageData1);
+        var stream = new http.ByteStream(
+            DelegatingStream.typed(imageData1.openRead()));
+        var length = await imageData1.length();
+        var multipartFile = new http.MultipartFile(
+            "unit_based_product_image_1_path[$i]", stream, length,
+            filename: basename(imageData1.path));
+        newList.add(multipartFile);
+      }
+    }
+    if(imagefiles2.isNotEmpty) {
+      for (int i = 0; i < imagefiles2.length; i++) {
+        XFile imageData2 = imagefiles2[i];
+        print(imageData2);
+        var stream = new http.ByteStream(
+            DelegatingStream.typed(imageData2.openRead()));
+        var length = await imageData2.length();
+        var multipartFile = new http.MultipartFile(
+            "unit_based_product_image_2_path[$i]", stream, length,
+            filename: basename(imageData2.path));
+        newList.add(multipartFile);
+      }
+    }
+    if(imagefiles3.isNotEmpty) {
+      for (int i = 0; i < imagefiles3.length; i++) {
+        XFile imageData3 = imagefiles3[i];
+        print(imageData3);
+        var stream = new http.ByteStream(
+            DelegatingStream.typed(imageData3.openRead()));
+        var length = await imageData3.length();
+        var multipartFile = new http.MultipartFile(
+            "unit_based_product_image_3_path[$i]", stream, length,
+            filename: basename(imageData3.path));
+        newList.add(multipartFile);
+      }
     }
     request.files.addAll(newList);
+    print(request.files[2].filename);
     await request.send().then((response)async{
       final respStr = await response.stream.bytesToString();
-      print(respStr);
+      print("respStr${respStr}");
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context,"Updated Successfully",
             type: SnackType.success);
@@ -549,5 +606,4 @@ class EditAdminProductController extends ChangeNotifier {
     });
     return true;
   }
-
 }
