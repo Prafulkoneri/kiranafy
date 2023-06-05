@@ -18,14 +18,15 @@ class AllShopController extends ChangeNotifier {
   List<NearByShops>? nearByShop;
   Data? data;
   String? shopId = "";
-  final List<AllShops> allShops = [];
+   List<AllShops> allShops = [];
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   List<bool> favNearByShop = [];
   List<bool> favAllShop = [];
-  bool? isLoading = true;
+  bool isLoading = true;
   ScrollController scrollController = ScrollController();
   int offset = 0;
+
   bool showPaginationLoader = false;
 
 
@@ -34,12 +35,23 @@ class AllShopController extends ChangeNotifier {
           pincode: pincode, offset: offset.toString(), limit: "5");
 
 
-  Future<void> initState(context)async{
-    getAllShops(context);
-  }
+  Future<void> initState(context,refresh)async{
+    if(refresh) {
+      isLoading = true;
+      allShops.clear();
+      offset = 0;
+      getAllShops(context);
+    }
+    else{
+      isLoading = false;
+    }
+    notifyListeners();
+    }
 
   Future<void> getAllShops(context) async {
-    isLoading = true;
+    if(offset==0){
+      isLoading = true;
+    }
     showPaginationLoader = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("kkkkkkkkkk");
@@ -58,6 +70,7 @@ class AllShopController extends ChangeNotifier {
       if (response.statusCode == 200) {
         data = result.data;
         nearByShop = data?.nearByShops;
+
         allShops.addAll(result.data?.allShops ?? []);
         favNearByShop = List<bool>.filled(nearByShop?.length ?? 0, false, growable: true);
         favAllShop = List<bool>.filled(allShops.length ?? 0, false, growable: true);

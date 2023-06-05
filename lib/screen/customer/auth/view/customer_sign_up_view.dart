@@ -247,7 +247,8 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                           if (!watch.isVerifyChecked) {
                             return;
                           }
-                          await showModalBottomSheet(
+
+                          showModalBottomSheet(
                             backgroundColor: Colors.white,
                             isScrollControlled: true,
                             shape: const RoundedRectangleBorder(

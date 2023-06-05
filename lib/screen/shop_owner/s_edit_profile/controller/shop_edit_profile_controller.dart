@@ -59,85 +59,15 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String countryCode = "+91";
   List? pincodeList;
   bool showValuePincodeField = false;
-  List images=[];
+  List<File> images=[];
   Future<void> initState(
-    context,
-  ) async {
+      context,
+      ) async {
     print(fileImage1.path);
     await getShopEditProfileDetails(context);
   }
 
   /////start edit Profile/////////////////
-
-  void openGallery1() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxHeight: double.infinity,
-      maxWidth: double.infinity,
-      imageQuality: 100,
-    );
-    if (pickedFile != null) {
-      networkImage1 = "";
-      fileImage1 = File(pickedFile.path);
-      final bytes = await compressFile(fileImage1);
-
-      image1 = base64Encode(bytes as List<int>);
-
-      networkImage1 = "";
-      fileImage1 = File(pickedFile.path);
-      images.add(fileImage1.path);
-    }
-
-    notifyListeners();
-  }
-
-  void openGallery2() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxHeight: double.infinity,
-      maxWidth: double.infinity,
-      imageQuality: 100,
-    );
-    if (pickedFile != null) {
-      networkImage2 = "";
-      fileImage2 = File(pickedFile.path);
-      images.add(fileImage2.path);
-    }
-
-    notifyListeners();
-  }
-
-  void openGallery3() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxHeight: double.infinity,
-      maxWidth: double.infinity,
-      imageQuality: 100,
-    );
-    if (pickedFile != null) {
-      networkImage3 = "";
-      fileImage3 = File(pickedFile.path);
-      images.add(fileImage3.path);
-    }
-
-    notifyListeners();
-  }
-
-  void openGallery4() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxHeight: double.infinity,
-      maxWidth: double.infinity,
-      imageQuality: 100,
-    );
-    if (pickedFile != null) {
-      networkImage4 = "";
-      fileImage4 = File(pickedFile.path);
-      images.add(fileImage4.path);
-    }
-
-    notifyListeners();
-  }
 
   Future<void> getShopEditProfileDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -203,7 +133,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -236,13 +166,13 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   Future<void> UpdateProfile(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopUpdateProfileRepo.UpdateProfile(
-            shopUpdateProfileReqModel, pref.getString("successToken"))
+        shopUpdateProfileReqModel, pref.getString("successToken"))
         .then((response) {
-          print("oooooo");
+      print("oooooo");
       print(response.body);
-          print("oooooo");
+      print("oooooo");
       final result =
-          ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
+      ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
@@ -260,7 +190,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -281,8 +211,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
-        stateId: selectedStateId.toString(),
-      );
+    stateId: selectedStateId.toString(),
+  );
 
   Future<void> getCityList(context) async {
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
@@ -301,7 +231,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -317,8 +247,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
-        cityId: selectedCityId.toString(),
-      );
+    cityId: selectedCityId.toString(),
+  );
 
   Future<void> onAreaSelected(value) async {
     selectedAreaId = value.toString();
@@ -342,7 +272,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -353,18 +283,23 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
-        areaId: selectedAreaId.toString(),
-      );
+    areaId: selectedAreaId.toString(),
+  );
 
   Future<void> getPinCodeList(context) async {
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
       final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         pincodeList = result.pincodeData;
-        print(pincodeList);
         if (result.pincodeData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No Pincode Found",
               type: SnackType.error);
+        }
+        if (pincodeList?.contains(selectedPincode.toString()) ?? false) {
+          print("8789888");
+          showValuePincodeField = true;
+        } else {
+          showValuePincodeField = false;
         }
         notifyListeners();
       } else {
@@ -374,7 +309,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -406,7 +341,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -419,8 +354,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   ///////////State
 
   GetStateListReqModel get _stateListReqModel => GetStateListReqModel(
-        countryId: selectedCountryId.toString(),
-      );
+    countryId: selectedCountryId.toString(),
+  );
 
   Future<void> getStateList(context) async {
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
@@ -440,7 +375,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -501,14 +436,80 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     if(fileImage1.path==""&&fileImage2.path==""&&fileImage3.path==""&&fileImage4.path==""){
       await UpdateProfile(context);
     }
-   else{
-     await uploadImage(context);
+    else{
+      await uploadImage(context);
     }
   }
 
-  Future uploadImage(context) async {
+  void openGallery1() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage1 = "";
+      fileImage1 = File(pickedFile.path);
+      networkImage1 = "";
+      fileImage1 = File(pickedFile.path);
+      images.add(fileImage1);
+    }
 
-    print(images);
+    notifyListeners();
+  }
+
+  void openGallery2() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage2 = "";
+      fileImage2 = File(pickedFile.path);
+      images.add(fileImage2);
+    }
+
+    notifyListeners();
+  }
+
+  void openGallery3() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage3 = "";
+      fileImage3 = File(pickedFile.path);
+      images.add(fileImage3);
+    }
+
+    notifyListeners();
+  }
+
+  void openGallery4() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage4 = "";
+      fileImage4 = File(pickedFile.path);
+      images.add(fileImage4);
+    }
+
+    notifyListeners();
+  }
+
+  Future uploadImage(context) async {
+  print("hellooooo");
+
     SharedPreferences pref=await SharedPreferences.getInstance();
     String token=pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.shopUpdateAccountDetails}");
@@ -528,32 +529,28 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList =  <http.MultipartFile>[];
     for (int i = 0; i <images.length; i++) {
-      File imageFile = File(images[i].toString());
-      var stream =
-      new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      File imageFile = images[i];
+      print(imageFile);
+      var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
-      var multipartFile = new http.MultipartFile("shop_banner_image_path", stream, length,filename: basename(imageFile.path));
+      var multipartFile = new http.MultipartFile("shop_banner_image_path[$i]", stream, length,filename: basename(imageFile.path));
       newList.add(multipartFile);
     }
-    request.files.addAll(newList);
-    await request.send().then((response){
-
+  request.files.addAll(newList);
+  await request.send().then((response)async{
+      final respStr = await response.stream.bytesToString();
+      print(respStr);
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context,"Updated Successfully",
             type: SnackType.success);
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
-              (Route<dynamic> route) => false,
-        );
         print("Updated Successfully");
       } else {
         Utils.showPrimarySnackbar(context,"Error on uploading",
             type: SnackType.error);
       }
-      response.stream.transform(utf8.decoder).listen((value) {
-        print(value);
-      });
+      // response.stream.transform(utf8.decoder).listen((value) {
+      //   print(value);
+      // });
     });
     return true;
   }

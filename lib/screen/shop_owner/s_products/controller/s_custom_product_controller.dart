@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_admin_custom_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_custom_product_data_model.dart';
@@ -10,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/repository/edit
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_custom_product_data_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_custom_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +21,7 @@ class CustomProductController extends ChangeNotifier {
   bool isLoading = true;
   CustomData ? customdata;
   AdminData ? adminData;
-  String selectedCategory = "1";
+  String selectedCategory = "";
   List<CategoryData> categoryData = [];
   List<BrandData>? brandData;
   List<UnitData>? unitData;
@@ -58,12 +60,22 @@ class CustomProductController extends ChangeNotifier {
     imagefiles1.clear();
     imagefiles2.clear();
     imagefiles3.clear();
+    productDescriptionController.clear();
+    productNameController.clear();
+    showUnderRecommendedProducts = false;
+    showUnderSeasonalProducts = false;
+    fullFillCravings = false;
     await getCustomProductData(context);
     cards.clear();
     unitList.clear();
+    valueController.clear();
+    offerController.clear();
+    mrpController.clear();
+    valueController=[TextEditingController()];
+    mrpController=[TextEditingController()];
+ offerController=[TextEditingController()];
     await onAddWidget(createCard,index);
     switchValue = List<bool>.filled(cards.length, true,growable: true);
-    await getAdminProductData(context);
   }
 
   UploadCustomProductReqModel get uploadCustomProductReqModel =>UploadCustomProductReqModel(
@@ -76,7 +88,7 @@ class CustomProductController extends ChangeNotifier {
     showUnderRecommendedProduct: showUnderRecommendedProducts?"yes":"no",
     showUnderSeasonalProduct: showUnderSeasonalProducts?"yes":"no",
     totalRows: cards.length.toString(),
-mrpPrice: mrp,
+      mrpPrice: mrp,
     offerPrice: offer,
     unitID: unit.toString(),
     weight: value,
@@ -97,7 +109,12 @@ mrpPrice: mrp,
       final result =
       UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        // Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopCustomProductView(categoryId: )));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: selectedCategory,))),
+              (Route<dynamic> route) => false,
+        );
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -203,8 +220,8 @@ notifyListeners();
   }
 
   Future<void> getCustomProductData(context) async {
-
     isLoading = true;
+    print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
     customProductDataRepo
         .customProductDataModel(pref.getString("successToken"))
@@ -306,8 +323,9 @@ notifyListeners();
 
   Future<void> onAddWidget(createdCard,index) async {
 
-    cards.add(createdCard);
-    valueController.add(TextEditingController(text: "100"));
+
+
+    valueController.add(TextEditingController());
     mrpController.add(TextEditingController());
     offerController.add(TextEditingController());
 
@@ -317,7 +335,7 @@ notifyListeners();
     imagefiles1.add(XFile(""));
     imagefiles2.add(XFile(""));
     imagefiles3.add(XFile(""));
-
+    cards.add(createdCard);
     notifyListeners();
   }
 
@@ -339,49 +357,54 @@ notifyListeners();
     notifyListeners();
   }
 
-  EditAdminProductReqModel get editAdminProductReqModel=>EditAdminProductReqModel(
-    product_id:"382",
-  );
-
-  Future getAdminProductData(context)async{
-    isEditEnabled=false;
-    isLoading = true;
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    editAdminProductRepo
-        .getAdminProductDetails(editAdminProductReqModel,pref.getString("successToken"))
-        .then((response) {
-      print(response.body);
-      final result =
-      EditAdminProductResModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        adminData = result.data;
-        categoryId=adminData?.productDetails?.categoryId.toString()??"";
-        List weightList=adminData?.productDetails?.productUnitDetails??[];
-        int weightLength=weightList.length;
-        for(int i=0;i<weightList.length;i++){
-        // valueController.add(weightLength)
-        }
-        isLoading = false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-          (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
+  void validateCustomProuduct(context){
+    if(selectedCategory==""){
+      Utils.showPrimarySnackbar(context, "Select Category",
+          type: SnackType.error);
+      return;
+    }
+    if(productNameController.text==""){
+      Utils.showPrimarySnackbar(context, "Enter Product Name",
+          type: SnackType.error);
+      return;
+    }
+    if(brandId==""){
+      Utils.showPrimarySnackbar(context, "Select Brand",
+          type: SnackType.error);
+      return;
+    }
+    if(taxId==""){
+      Utils.showPrimarySnackbar(context, "Select Tax",
+          type: SnackType.error);
+      return;
+    }
+    if(productDescriptionController.text==""){
+      Utils.showPrimarySnackbar(context, "Enter Product Description",
+          type: SnackType.error);
+      return;
+    }
+    if(valueController[0].text==""){
+      Utils.showPrimarySnackbar(context, "Enter Weight",
+          type: SnackType.error);
+      return;
+    }
+    if(unitList[0]==""){
+      Utils.showPrimarySnackbar(context, "Select Unit",
+          type: SnackType.error);
+      return;
+    }
+    if(mrpController[0].text==""){
+      Utils.showPrimarySnackbar(context, "Enter Mrp Price",
+          type: SnackType.error);
+      return;
+    }
+    if(offerController[0].text==""){
+      Utils.showPrimarySnackbar(context, "Enter Offer Price",
+          type: SnackType.error);
+      return;
+    }
+    uploadCustomProduct(context);
   }
-
 
 
 }

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,8 @@ import 'view_all_recommanded_products.dart';
 
 class RecommendationProducts extends StatefulWidget {
   final String? shopId;
-  const RecommendationProducts({super.key, required this.shopId});
+  final bool ? refreshPage;
+  const RecommendationProducts({super.key, required this.shopId,required this.refreshPage});
 
   @override
   State<RecommendationProducts> createState() => _RecommendationProductsState();
@@ -23,14 +25,14 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ShopProfileController>().initState(context, widget.shopId);
+      context.read<ShopProfileViewController>().initState(context, widget.shopId,widget.refreshPage);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<ShopProfileController>();
-    final read = context.read<ShopProfileController>();
+    final watch = context.watch<ShopProfileViewController>();
+    final read = context.read<ShopProfileViewController>();
     return Container(
       width: 352.w,
       child: Padding(
@@ -53,13 +55,24 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AllRecommandedProducts(
+                          builder: (context) => MainScreenView(
+                              index: 0,
+                              screenName: AllRecommandedProductsView(
                                 shopId: widget.shopId,
-                              )),
+                              )
+                          )),
+                          (Route<dynamic> route) => false,
                     );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => AllRecommandedProductsView(
+                    //             shopId: widget.shopId,
+                    //           )),
+                    // );
                   },
                   child: Text(
                     "See all",

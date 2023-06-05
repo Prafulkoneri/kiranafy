@@ -14,6 +14,8 @@ import 'package:local_supper_market/screen/customer/home/controller/home_screen_
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 
@@ -49,9 +51,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
-
-import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
+import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
@@ -89,14 +90,14 @@ void main() async {
         ChangeNotifierProvider(create: (_) => HomeScreenController()),
         ChangeNotifierProvider(create: (_) => FavouritesController()),
         ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
-        ChangeNotifierProvider(create: (_) => ShopProfileController()),
+        ChangeNotifierProvider(create: (_) => ShopProfileViewController()),
         ChangeNotifierProvider(create: (_) => AllShopController()),
         ChangeNotifierProvider(create: (_) => AllCategoryShopController()),
         ChangeNotifierProvider(create: (_) => ProductCategoryController()),
         ChangeNotifierProvider(create: (_) => ShopAllSeasonalController()),
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(create: (_) => ProductViewController()),
-        ChangeNotifierProvider(create: (_) => AllShopRecommandedController()),
+        ChangeNotifierProvider(create: (_) => SAllRecommandedProductsController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
       ],

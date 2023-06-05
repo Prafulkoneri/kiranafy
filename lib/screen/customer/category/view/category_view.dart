@@ -12,7 +12,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
+import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 import '../../products/views/product_screen.dart';
 
@@ -28,8 +30,6 @@ class CategoryScreenView extends StatefulWidget {
 }
 
 class _CategoryScreenViewState extends State<CategoryScreenView> {
-  final TextEditingController _searchController = TextEditingController();
-
   bool checkedValue = false;
   String? gender; //no radio button will be selected
 
@@ -55,54 +55,22 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
     final read = context.read<ProductCategoryController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          systemNavigationBarIconBrightness: Brightness.dark,
-          // Status bar color
-          statusBarColor: kstatusbar,
-          // Status bar brightness (optional)
-          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-          statusBarBrightness: Brightness.dark, // For iOS (dark icons)
-        ),
-        toolbarHeight: 65,
-        // backgroundColor: kappbar,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () {
-            readMain.onBackPressed(0, ShopProfile(shopId: widget.shopId));
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(66.w),
+        child: PrimaryAppBar(
+          onBackBtnPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainScreenView(
+                      index: 1,
+                      screenName:
+                          ShopProfileView(shopId: widget.shopId.toString(),routeName: "categoryView",  refreshPage: false,))),
+              (Route<dynamic> route) => false,
+            );
           },
-        ),
-        title: Text(
-          "Category",
-          style: GoogleFonts.dmSans(
-            textStyle: TextStyle(
-                color: Black,
-                letterSpacing: .5,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700),
-          ),
-        ),
-        centerTitle: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(40),
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            gradient: LinearGradient(
-                end: Alignment.topCenter,
-                begin: Alignment.bottomCenter,
-                colors: <Color>[
-                  kstatusbar.withOpacity(0.55),
-                  kstatusbar.withOpacity(0.98),
-                ]),
-          ),
-        ),
-        actions: <Widget>[
-          InkWell(
+          title: "Category",
+          action: InkWell(
             onTap: () {
               showModalBottomSheet(
                 isScrollControlled: true,
@@ -297,7 +265,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
               ),
             ),
           ),
-        ],
+        ),
       ),
       body: WillPopScope(
         onWillPop: () async {
@@ -315,9 +283,16 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                 height: 36.h,
                 width: 351.w,
                 child: TextField(
-                  controller: _searchController,
+                  onChanged: (value) {
+                    read.getSearchList(context, watch.shopId, watch.categoryId);
+                  },
+                  controller: watch.searchController,
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(top: 10.w),
                     enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: splashnone),
+                        borderRadius: BorderRadius.circular(8.w)),
+                    focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 1, color: splashnone),
                         borderRadius: BorderRadius.circular(8.w)),
                     hintText: 'Search your shop and products..',

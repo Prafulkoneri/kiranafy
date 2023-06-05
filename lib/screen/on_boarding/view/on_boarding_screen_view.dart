@@ -190,6 +190,12 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                           SizedBox(
                             height: 20.w,
                           ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      child: Column(
+                        children: [
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: indicators(watch.onBoardingData?.length,
@@ -231,7 +237,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                             ],
                           ),
                           SizedBox(
-                            height: 20.w,
+                            height: 35.w,
                           ),
                         ],
                       ),

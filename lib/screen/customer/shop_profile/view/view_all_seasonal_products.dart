@@ -168,8 +168,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_seasonal_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
+import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class AllSeasonalProducts extends StatefulWidget {
@@ -195,64 +198,39 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
     final watch = context.watch<ShopAllSeasonalController>();
     final read = context.read<ShopAllSeasonalController>();
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            systemNavigationBarIconBrightness: Brightness.dark,
-            // Status bar color
-            statusBarColor: kstatusbar,
-            // Status bar brightness (optional)
-            statusBarIconBrightness:
-                Brightness.dark, // For Android (dark icons)
-            statusBarBrightness: Brightness.dark, // For iOS (dark icons)
-          ),
-          toolbarHeight: 65,
-          // backgroundColor: kappbar,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: Text(
-            "Seasonal Products",
-            style: GoogleFonts.dmSans(
-              textStyle: const TextStyle(
-                  color: Black,
-                  letterSpacing: .5,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-          centerTitle: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(40),
-            ),
-          ),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
-              gradient: LinearGradient(
-                  end: Alignment.topCenter,
-                  begin: Alignment.bottomCenter,
-                  colors: <Color>[
-                    kstatusbar.withOpacity(0.55),
-                    kstatusbar.withOpacity(0.98),
-                  ]),
-            ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(66.w),
+          child: PrimaryAppBar(
+            onBackBtnPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MainScreenView(
+                        index: 1,
+                        screenName: ShopProfileView(shopId: widget.shopId.toString(),routeName: "viewAllSeasonalProduct",refreshPage: false,)
+                    )),
+                    (Route<dynamic> route) => false,
+              );
+            },
+            title: "Seasonal Products",
           ),
         ),
-        body: Container(
-          margin: EdgeInsets.only(left: 10.w, top: 20.w, right: 10.w),
+        body:watch.isLoading?Center(
+          child: CircularProgressIndicator(),
+        ):
+        Container(
+
           child: SizedBox(
             // height: 156.h,
             // width: 2.w,
             child: GridView.builder(
+              physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
-                padding: EdgeInsets.zero,
+                padding: EdgeInsets.only(left: 10.w, top: 20.w, right: 10.w,bottom: 100.w),
                 itemCount: watch.seasonalProduct?.length ?? 0,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: (1.5 / 1.7),
+                    childAspectRatio: (1.5.w / 1.8.w),
                     crossAxisSpacing: 4.0,
                     mainAxisSpacing: 4.0),
                 itemBuilder: (BuildContext, index) {
@@ -430,6 +408,9 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                 ),
                               ],
                             ),
+                          ),
+                          SizedBox(
+                            height: 5.w,
                           ),
                         ],
                       ),

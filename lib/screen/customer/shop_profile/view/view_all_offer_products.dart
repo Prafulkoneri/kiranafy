@@ -7,7 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
+import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class AllOfferProducts extends StatefulWidget {
@@ -22,68 +26,44 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ShopProfileController>().initState(context, widget.shopId);
+      context.read<AllOffersController>().initState(context, widget.shopId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<ShopProfileController>();
-    final read = context.read<ShopProfileController>();
+    final watch = context.watch<ShopProfileViewController>();
+    final read = context.read<ShopProfileViewController>();
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            systemNavigationBarIconBrightness: Brightness.dark,
-            // Status bar color
-            statusBarColor: kstatusbar,
-            // Status bar brightness (optional)
-            statusBarIconBrightness:
-                Brightness.dark, // For Android (dark icons)
-            statusBarBrightness: Brightness.dark, // For iOS (dark icons)
-          ),
-          toolbarHeight: 65,
-          // backgroundColor: kappbar,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: Text(
-            "Offer Product",
-            style: GoogleFonts.dmSans(
-              textStyle: const TextStyle(
-                  color: Black,
-                  letterSpacing: .5,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-          centerTitle: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(40),
-            ),
-          ),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
-              gradient: LinearGradient(
-                  end: Alignment.topCenter,
-                  begin: Alignment.bottomCenter,
-                  colors: <Color>[
-                    kstatusbar.withOpacity(0.55),
-                    kstatusbar.withOpacity(0.98),
-                  ]),
-            ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(66.w),
+          child: PrimaryAppBar(
+            onBackBtnPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MainScreenView(
+                        index: 1,
+                        screenName: ShopProfileView(shopId: widget.shopId.toString(),routeName: "viewAllOfferProduct",refreshPage: false,)
+                    )),
+                    (Route<dynamic> route) => false,
+              );
+            },
+            title: "Offer Product",
           ),
         ),
-        body: Container(
-          margin: EdgeInsets.only(left: 10.w, top: 20.w, right: 10.w),
+        body:watch.isLoading?Center(
+          child: CircularProgressIndicator(),
+        ):
+        Container(
+
           child: GridView.builder(
+            padding: EdgeInsets.only(left: 10.w, top: 20.w, right: 10.w,bottom: 100.w),
+            physics: BouncingScrollPhysics(),
               itemCount: watch.allOfferProducts?.length ?? 0,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: (1.5 / 1.7),
+                  childAspectRatio: (1.5.w / 1.8.w),
                   crossAxisSpacing: 0.0,
                   mainAxisSpacing: 0.0),
               itemBuilder: (BuildContext, index) {
@@ -255,6 +235,9 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                               ),
                             ],
                           ),
+                        ),
+                        SizedBox(
+                          height: 5.w,
                         ),
                       ],
                     ),

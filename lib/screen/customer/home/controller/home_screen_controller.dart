@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/home/model/banner_model.dart';
 import 'package:local_supper_market/screen/customer/home/model/category_model.dart';
@@ -11,15 +12,17 @@ class HomeScreenController extends ChangeNotifier {
   BannerRepo bannerRepo = BannerRepo();
   bool isLoading = true;
   AllCategoriesRepo allCategoriesRepo = AllCategoriesRepo();
-  List<Data>? data;
+  List<Data>? bannerData;
   List<CategoriesList> categoryFirstList = [];
   List<CategoriesList> categorySecondList = [];
   // String pincode = "111111";
-  Future<void> initState(context) async {
-    isLoading = true;
-    await getCategoryList(context);
-    await getBannerImage(context);
-
+  Future<void> initState(context,refresh) async {
+    if(refresh) {
+      await getCategoryList(context);
+      await getBannerImage(context);
+    }else{
+      isLoading=false;
+    }
     notifyListeners();
   }
 
@@ -34,7 +37,7 @@ class HomeScreenController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print("${response.body}");
 
-        data = result.data;
+        bannerData = result.data;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -72,6 +75,10 @@ class HomeScreenController extends ChangeNotifier {
       final result = AllCategoriesResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print("${response.body}");
+        print("77777777");
+
+        print(result.categoriesFirstList);
+        print("77777777");
         categoryFirstList = result.categoriesFirstList ?? [];
         categorySecondList = result.categoriesSecondList ?? [];
         isLoading = false;

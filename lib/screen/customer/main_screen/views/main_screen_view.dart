@@ -10,7 +10,10 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:provider/provider.dart';
 
 class MainScreenView extends StatefulWidget {
-  const MainScreenView({Key? key}) : super(key: key);
+  final Widget? screenName;
+  final int? index;
+  const MainScreenView({Key? key, this.screenName, this.index})
+      : super(key: key);
 
   @override
   _MainScreenViewState createState() => _MainScreenViewState();
@@ -22,6 +25,11 @@ class _MainScreenViewState extends State<MainScreenView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ProfileController>().initState(context);
+    });
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<MainScreenController>()
+          .initState(context, widget.index, widget.screenName);
     });
   }
 

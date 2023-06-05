@@ -9,10 +9,10 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AllShopRecommandedController extends ChangeNotifier {
+class SAllRecommandedProductsController extends ChangeNotifier {
   String shopId = "";
   int offset = 0;
-  bool? isLoading = true;
+  bool isLoading = true;
   bool? showPaginationLoader = true;
 
   Data? data;
@@ -21,7 +21,10 @@ class AllShopRecommandedController extends ChangeNotifier {
     await getAllRecommandedProducts(context, id);
     notifyListeners();
   }
-
+  void showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
   //////All Offer Products////////
 
   ///////////////Seasonal Products/////////
@@ -30,7 +33,7 @@ class AllShopRecommandedController extends ChangeNotifier {
   AllRecomandedRepo allRecommandedProductsRepo = AllRecomandedRepo();
 
   Future<void> getAllRecommandedProducts(context, id) async {
-    isLoading = true;
+    showLoader(true);
     shopId = id; //store id
     SharedPreferences pref = await SharedPreferences.getInstance();
     allRecommandedProductsRepo
@@ -42,7 +45,7 @@ class AllShopRecommandedController extends ChangeNotifier {
       if (response.statusCode == 200) {
         data = result.data;
         recommandedProducts = data?.recommandedProducts;
-        isLoading = false;
+        showLoader(false);
         showPaginationLoader = false;
         notifyListeners();
       } else {

@@ -126,7 +126,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                           DropdownMenuItem(
                             value: "2",
                             child: Text(
-                              "wholesaler",
+                              "Wholesaler",
                               style: TextStyle(
                                 fontSize: 14.sp,
                               ),

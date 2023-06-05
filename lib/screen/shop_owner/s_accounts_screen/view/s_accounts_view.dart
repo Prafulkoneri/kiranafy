@@ -150,7 +150,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                 children: [
                                   Flexible(
                                     child: Text(
-                                      "${watch.email}",
+                                      "${watch.shopOwnerName}",
                                       // "Rachel Green",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(

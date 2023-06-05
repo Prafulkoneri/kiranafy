@@ -38,6 +38,8 @@ class _AddProductViewState extends State<AddProductView> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<SAddProductsController>();
@@ -51,18 +53,15 @@ class _AddProductViewState extends State<AddProductView> {
             onBackBtnPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                          index: 0,
-                          screenName: SSCategoryListView(),
-                        )),
-                (Route<dynamic> route) => false,
+                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: widget.categoryId),)),
+                    (Route<dynamic> route) => false,
               );
             },
             title: "Add Products",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () async {
-              read.uploadAddProducts(context);
+               read.uploadAddProducts(context);
+
             },
           ),
         ),
@@ -143,8 +142,8 @@ class _AddProductViewState extends State<AddProductView> {
                                   children: [
                                     Image.network(
                                       "${element?.productImagePath}",
-                                      height: 61.h,
                                       width: 60.w,
+                                      height: 61.h,
                                       fit: BoxFit.fill,
                                     ),
                                     SizedBox(

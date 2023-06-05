@@ -152,6 +152,9 @@ class Endpoint {
   //////////Customer view Shop
   static const String customerProductListAsPerCategory =
       "${baseUrl}lsm-customer-product-list-as-per-category";
+  //////////Customer Product List As Per Search
+  static const String customerProductListAsPerSearch=
+      "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
   //////////////Seasonal Products
   static const String AllSeasonalProducts =
       "${baseUrl}lsm-customer-view-all-seasonal-products-of-shop";

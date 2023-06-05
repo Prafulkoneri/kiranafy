@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -131,8 +132,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                   onTap: () {
                                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
                                     // readMain.onNavigation(4,UpdateProfileView(), context);
-                                    readMain.onBackPressed(
-                                        4, UpdateProfileView());
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MainScreenView(
+                                              index: 1,
+                                              screenName: UpdateProfileView())),
+                                      (Route<dynamic> route) => false,
+                                    );
                                   },
                                   child: SvgPicture.asset(
                                     'assets/icons/edit.svg',
@@ -158,19 +165,21 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 SizedBox(
                                   width: 10.w,
                                 ),
-                                Text(
-                                  '${watch.customerData?.customerEmail}',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        // decoration:
-                                        // TextDecoration.lineThrough,
-                                        color: Black,
-                                        // letterSpacing:
-                                        //     .5,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
+                                watch.customerData?.customerEmail != ""
+                                    ? Text(
+                                        '${watch.customerData?.customerEmail}',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              // decoration:
+                                              // TextDecoration.lineThrough,
+                                              color: Black,
+                                              // letterSpacing:
+                                              //     .5,
+                                              fontSize: 15.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      )
+                                    : Container(),
                               ],
                               // ),
                             ),
@@ -204,469 +213,485 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  // readMain.onNavigation(4,UpdateProfileView(), context);
-                  readMain.onBackPressed(4, UpdateProfileView());
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 27.w, right: 28.w),
-                  padding: EdgeInsets.only(bottom: 15.w),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1, color: grey10),
-                    ),
-                    // color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 5,
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/profile.svg',
-                        // width: 14.w,
-                        // height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      Text(
-                        'Edit Profile',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
+              Column(
+                children: [
+                  Container(
+                    child: GestureDetector(
+                      onTap: () {
+                        // readMain.onNavigation(4,UpdateProfileView(), context);
+
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainScreenView(
+                                  index: 1, screenName: UpdateProfileView())),
+                          (Route<dynamic> route) => false,
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 27.w, right: 28.w),
+                        padding: EdgeInsets.only(bottom: 15.w),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(width: 1, color: grey10),
+                          ),
+                          // color: Colors.white,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/profile.svg',
+                              // width: 14.w,
+                              // height: 13.h,
+                            ),
+                            SizedBox(
+                              width: 18.w,
+                            ),
+                            Text(
+                              'Edit Profile',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  Container(
+                    margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                    padding: EdgeInsets.only(bottom: 15.w),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: grey10),
+                      ),
+                      // color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/myorders.svg',
+                          // width: 14.w,
+                          // height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'My Orders',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ///////
+                  Container(
+                    margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                    padding: EdgeInsets.only(bottom: 15.w),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: grey10),
+                      ),
+                      // color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/notification.svg',
+                          // width: 14.w,
+                          // height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'Notifications',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ////////////////////
+                  GestureDetector(
+                    onTap: () {
+                      // readMain.onNavigation(4,UpdateProfileView(), context);
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainScreenView(
+                                index: 1, screenName: CFavouritesView())),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
+                    child: Container(
+                      margin:
+                          EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                      padding: EdgeInsets.only(bottom: 15.w),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 1, color: grey10),
+                        ),
+                        // color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            width: 5,
+                          ),
+                          SvgPicture.asset(
+                            'assets/icons/favourites.svg',
+                            // width: 14.w,
+                            // height: 13.h,
+                          ),
+                          SizedBox(
+                            width: 18.w,
+                          ),
+                          Text(
+                            'Favourites',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /////////////////////
+                  GestureDetector(
+                    onTap: () {
+                      read.myDeliveryAddressPressed(context);
+                    },
+                    child: Container(
+                      margin:
+                          EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                      padding: EdgeInsets.only(bottom: 15.w),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 1, color: grey10),
+                        ),
+                        // color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            width: 5,
+                          ),
+                          SvgPicture.asset(
+                            'assets/icons/address.svg',
+                            // width: 14.w,
+                            // height: 13.h,
+                          ),
+                          SizedBox(
+                            width: 18.w,
+                          ),
+                          Text(
+                            'My Delivery Addresses',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                    padding: EdgeInsets.only(bottom: 15.w),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: grey10),
+                      ),
+                      // color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/customersupport.svg',
+                          // width: 14.w,
+                          // height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'Customer Support',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                    padding: EdgeInsets.only(bottom: 15.w),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: grey10),
+                      ),
+                      // color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/aboutus.svg',
+                          // width: 14.w,
+                          // height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'About Us',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                    padding: EdgeInsets.only(bottom: 15.w),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: grey10),
+                      ),
+                      // color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/share.svg',
+                          // width: 14.w,
+                          // height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'Share App',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                    padding: EdgeInsets.only(bottom: 15.w),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: grey10),
+                      ),
+                      // color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/policy.svg',
+                          // width: 14.w,
+                          // height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'Privacy Policy',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                    padding: EdgeInsets.only(bottom: 15.w),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: grey10),
+                      ),
+                      // color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/rateus.svg',
+                          // width: 14.w,
+                          // height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'Rate Us',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                    padding: EdgeInsets.only(bottom: 15.w),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: grey10),
+                      ),
+                      // color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/setting.svg',
+                          // width: 14.w,
+                          // height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'Settings',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      read.onLogout(context);
+                    },
+                    child: Container(
+                      margin:
+                          EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                      padding: EdgeInsets.only(bottom: 15.w),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 1, color: grey10),
+                        ),
+                        // color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            width: 5,
+                          ),
+                          SvgPicture.asset(
+                            'assets/icons/signout.svg',
+                            // width: 14.w,
+                            // height: 13.h,
+                          ),
+                          SizedBox(
+                            width: 18.w,
+                          ),
+                          Text(
+                            'Sign Out',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
 
               ////////////////////////
 
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/myorders.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'My Orders',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               ///////////////////////
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/notification.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Notifications',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ////////////////////
 
-              GestureDetector(
-                onTap: () {
-                  // readMain.onNavigation(4,UpdateProfileView(), context);
-                  readMain.onBackPressed(4, CFavouritesView());
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                  padding: EdgeInsets.only(bottom: 15.w),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1, color: grey10),
-                    ),
-                    // color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 5,
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/favourites.svg',
-                        // width: 14.w,
-                        // height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      Text(
-                        'Favourites',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              /////////////////////
-
-              GestureDetector(
-                onTap: () {
-                  read.myDeliveryAddressPressed(context);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                  padding: EdgeInsets.only(bottom: 15.w),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1, color: grey10),
-                    ),
-                    // color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 5,
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/address.svg',
-                        // width: 14.w,
-                        // height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      Text(
-                        'My Delivery Addresses',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/customersupport.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Customer Support',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/aboutus.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'About Us',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/share.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Share App',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/policy.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Privacy Policy',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/rateus.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Rate Us',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/setting.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Settings',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                  read.onLogout(context);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                  padding: EdgeInsets.only(bottom: 15.w),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1, color: grey10),
-                    ),
-                    // color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 5,
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/signout.svg',
-                        // width: 14.w,
-                        // height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      Text(
-                        'Sign Out',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               SizedBox(
                 height: 90.w,
               ),

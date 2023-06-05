@@ -88,6 +88,7 @@ class SSubscriptionController extends ChangeNotifier {
         print(response.body);
         subscriptionData = result.subscriptionData;
         addOnServicesList = result.addOnServicesList;
+        planAmount=subscriptionData?[0].subscriptionPrice.toString()??"";
         selectAddonServicesList = List<bool>.filled(
             addOnServicesList?.length ?? 0, false,
             growable: true);

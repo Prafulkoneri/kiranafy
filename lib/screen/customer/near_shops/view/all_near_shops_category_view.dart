@@ -9,25 +9,27 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:provider/provider.dart';
 
-class AllNearCategoryShops extends StatefulWidget {
+class AllNearCategoryShopsView extends StatefulWidget {
   final String ? categoryId;
-  const AllNearCategoryShops({super.key,required this.categoryId});
+  final bool ? refresh;
+  const AllNearCategoryShopsView({super.key,required this.categoryId,required this.refresh});
 
   @override
-  State<AllNearCategoryShops> createState() => _AllNearCategoryShopsState();
+  State<AllNearCategoryShopsView> createState() => _AllNearCategoryShopsViewState();
 }
 
-class _AllNearCategoryShopsState extends State<AllNearCategoryShops> {
+class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
   final TextEditingController _searchController = TextEditingController();
   ScrollController scrollController=ScrollController();
 
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<AllCategoryShopController>().initState(context,widget.categoryId);
+      context.read<AllCategoryShopController>().initState(context,widget.categoryId,widget.refresh);
     });
     setPagination();
   }
@@ -49,10 +51,21 @@ class _AllNearCategoryShopsState extends State<AllNearCategoryShops> {
     final read = context.read<AllCategoryShopController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
-      body: WillPopScope(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):WillPopScope(
         onWillPop: ()async{
-          readMain.onBackPressed(0,HomeScreenView());
-          return true;
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MainScreenView(
+                    index: 0,
+                    screenName: HomeScreenView(refreshPage: false,),
+                )),
+                (Route<dynamic> route) => false,
+          );
+
+          return false;
         },
         child: SingleChildScrollView(
             controller: scrollController,
@@ -167,13 +180,16 @@ class _AllNearCategoryShopsState extends State<AllNearCategoryShops> {
                         final element = watch.nearByShop?[index];
                         return GestureDetector(
                           onTap: () {
-                            // readMain.onNavigation(
-                            //     0,
-                            //     ShopProfile(shopId: element?.id.toString()),
-                            //     context);
-                            readMain.onBackPressed(
-                                0,
-                                ShopProfile(shopId: element?.id.toString()));
+
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainScreenView(
+                                      index: 1,
+                                      screenName: ShopProfileView(shopId: element?.id.toString(),routeName:"nearShopsCategory",categoryId: widget.categoryId,  refreshPage: true,)
+                                  )),
+                                  (Route<dynamic> route) => false,
+                            );
                           },
                           child: Stack(
                             children: [
@@ -314,8 +330,15 @@ class _AllNearCategoryShopsState extends State<AllNearCategoryShops> {
                           final element = watch.allShops[index];
                           return GestureDetector(
                             onTap: () {
-                              // readMain.onNavigation(0, ShopProfile(shopId: element.id.toString()), context);
-                              readMain.onBackPressed(0, ShopProfile(shopId: element.id.toString()));
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainScreenView(
+                                        index: 1,
+                                        screenName: ShopProfileView(shopId: element?.id.toString(),routeName:"nearShopsCategory",categoryId: widget.categoryId,  refreshPage: true,)
+                                    )),
+                                    (Route<dynamic> route) => false,
+                              );
                             },
                             child: Stack(
                               children: [

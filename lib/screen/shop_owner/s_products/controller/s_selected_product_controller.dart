@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -25,6 +26,7 @@ class SSelectedProductsController extends ChangeNotifier {
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
   String categoryId = "";
   String productId = "";
+  List<CustomProduct> ? customProduct;
 
   Future<void> initState(context, id) async {
     await selectedProducts(context, id);
@@ -47,13 +49,14 @@ class SSelectedProductsController extends ChangeNotifier {
         .selectedProducts(
             selecteProductRequestModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result =
           GetSelectedProductsResponseModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
         productsFromAdmin = result.data?.productsFromAdmin;
         categoryName = result.data?.categoryName ?? "";
+        customProduct=result.data?.customProduct;
         totalSelectedAndCustomProducts =
             result.data?.totalSelectedAndCustomProducts ?? 0;
 

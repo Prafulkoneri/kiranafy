@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/customer/delivery_view/delivery_view_
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_products_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -103,8 +104,17 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                       final element=watch.favShopList?[index];
                       return GestureDetector(
                         onTap: () {
-                          // readMain.onNavigation(0, ShopProfile(shopId: element?.id.toString()), context);
-                          readMain.onBackPressed(0, ShopProfile(shopId: element?.id.toString()));
+                          // readMain.onNavigation(0, ShopProfileView(shopId: element?.id.toString()), context);
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainScreenView(
+                                    index: 1,
+                                    screenName: ShopProfileView(shopId: element?.id.toString(),routeName: "favouriteView",  refreshPage: true,)
+                                )),
+                                (Route<dynamic> route) => false,
+                          );
+
                         },
                         child: Stack(
                           children: [

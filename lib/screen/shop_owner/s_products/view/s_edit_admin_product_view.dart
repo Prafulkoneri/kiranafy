@@ -45,7 +45,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<EditAdminProductController>()
-          .initState(context, CreateWidget(0),0,widget.productId);
+          .initState(context, CreateWidget(0),0,widget.productId,widget.categoryId);
     });
   }
 
@@ -66,10 +66,10 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                   (Route<dynamic> route) => false,
             );
           },
-          title: "Edit Admin Products",
+          title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.uploadAdminProduct(context);
+            read.uploadImage(context);
           },
         ),
       ),
@@ -323,7 +323,6 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          read.openProductImage();
                         },
                         child: Container(
                           height: 100.h,
@@ -577,6 +576,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
+                                      read.openGallery1(index);
                                     },
                                     child: Container(
                                       height: 100.h,
@@ -589,7 +589,9 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       ]),
                                       child: Card(
                                         elevation: 0.3,
-                                        child: element?.unitBasedProductImage1Path !=
+                                        child:
+
+                                        element?.unitBasedProductImage1Path !=
                                             ""
                                             ? Center(
                                               child: Image.network(
@@ -631,6 +633,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
+                                      // read.openGallery2(index);
                                     },
                                     child: Container(
                                       height: 100.h,
@@ -682,7 +685,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-
+                                      // read.openGallery3(index);
                                     },
                                     child: Container(
                                       height: 100.h,
@@ -997,6 +1000,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
+                textInputType: TextInputType.number,
                 controller: watch.offerCardController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",

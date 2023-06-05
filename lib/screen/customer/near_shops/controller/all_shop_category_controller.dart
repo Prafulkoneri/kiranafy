@@ -24,7 +24,7 @@ class AllCategoryShopController extends ChangeNotifier {
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   List<bool> favNearByShop = [];
   List<bool> favAllShop = [];
-  bool? isLoading = true;
+  bool isLoading = true;
   ScrollController scrollController = ScrollController();
   int offset = 0;
   bool showPaginationLoader = false;
@@ -34,13 +34,23 @@ class AllCategoryShopController extends ChangeNotifier {
       CustomerViewAllCategoryShopReqModel(
           offset: offset.toString(), limit: "10", categoryId: categoryId);
 
-  Future<void> initState(context, id) async {
-    print(id);
-    getAllShops(context, id);
-  }
+  Future<void> initState(context, id,refresh) async {
+    if(refresh) {
+      print(id);
+      allShops.clear();
+      offset = 0;
+      getAllShops(context, id);
+    }
+    else{
+      isLoading=false;
+    }
+    notifyListeners();
+    }
 
   Future<void> getAllShops(context, id) async {
+    if(offset==0){
     isLoading = true;
+    }
     categoryId = id;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("kkkkkkkkkk");
@@ -104,6 +114,7 @@ class AllCategoryShopController extends ChangeNotifier {
 
   Future<void> updateNearByFavList(context, id, index) async {
     shopId = id.toString();
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     addFavShopRepo

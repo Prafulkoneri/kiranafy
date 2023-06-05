@@ -1,10 +1,13 @@
 
-
+import 'package:path/path.dart';
+import 'package:async/async.dart';
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:local_supper_market/network/end_points.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_admin_custom_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_admin_product_model.dart';
@@ -14,6 +17,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_cu
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_admin_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_custom_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,6 +56,7 @@ class EditAdminProductController extends ChangeNotifier {
   String offerCard="";
   String status="";
   String statusCard="";
+  String categoryId="";
 
   List<TextEditingController> valueController=[TextEditingController()];
   List<TextEditingController> mrpController=[TextEditingController()];
@@ -76,80 +81,33 @@ class EditAdminProductController extends ChangeNotifier {
   //for adminProduct
   bool isEditEnabled=false;
 
-  Future<void> initState(context, createCard,index,id) async {
+  Future<void> initState(context, createCard,index,id,catId) async {
     imagefiles1.clear();
     imagefiles2.clear();
     imagefiles3.clear();
+    valueCardController.clear();
+    mrpCardController.clear();
+    offerCardController.clear();
+    valueCardController.add(TextEditingController());
+    mrpCardController.add(TextEditingController());
+    offerCardController.add(TextEditingController());
+    imagefiles1.add(XFile(""));
+    imagefiles2.add(XFile(""));
+    imagefiles3.add(XFile(""));
     await getCustomProductData(context);
     cards.clear();
     unitList.clear();
     productId=id;
+    categoryId=catId;
     print(productId);
     // await onAddWidget(createCard,index);
 
     await getAdminProductData(context);
   }
 
-  UploadAdminProductReqModel get uploadAdminProductReqModel =>UploadAdminProductReqModel(
-      productId: productId,
-      showUnderFullfillCravings: fullFillCravings?"yes":"no",
-      showUnderRecommendedProduct: showUnderRecommendedProducts?"yes":"no",
-      showUnderSeasonalProduct: showUnderSeasonalProducts?"yes":"no",
-     mrpPrice: mrp+mrpCard ,
-    offerPrice: offer+offerCard,
-    status: status+statusCard,
-    totalRows: totalRows.toString(),
-    unitID: unit+unitCard,
-    weight: value+valueCard,
-  );
 
-  Future<void> uploadAdminProduct(context) async {
-    int count=productUnitDetail?.length??0;
-    totalRows=count+cards.length;
-    await getValueData();
-    if(cards.length!=0){
-      await getValueCardData();
-      await getMrpCardData();
-      await getOfferCardData();
-      await getSwitchCardValue();
-    }
 
-    await getMrpData();
-    await getUnitData();
 
-    await getOfferData();
-
-    await getSwitchValue();
-
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    await
-    uploadAdminProductRepo
-        .uploadAdminProduct(uploadAdminProductReqModel,pref.getString("successToken"))
-        .then((response) {
-      print(response.body);
-      final result =
-      UploadCustomProductResModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        // Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopCustomProductView(categoryId: )));
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-          (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
 
   void onBrandSelected(value){
     brandId=value;
@@ -274,7 +232,7 @@ class EditAdminProductController extends ChangeNotifier {
           a += "inactive,";
         }
       }
-      a = a.substring(0, a.length - 1);
+      // a = a.substring(0, a.length - 1);
       status = a;
       print(status);
       notifyListeners();
@@ -284,17 +242,17 @@ class EditAdminProductController extends ChangeNotifier {
   getSwitchCardValue(){
     String a = '';
     for (int i = 0; i < switchCardValue.length; i++) {
-      if (mrpCardController[i].text != "") {
-        if (switchCardValue[i] && mrpCardController[i].text == "") {
+        if (switchCardValue[i]) {
           a += "active,";
         }
         else {
           a += "inactive,";
         }
-      }
+
+      print(a);
       if(a!="") {
-        a = a.substring(0, a.length - 1);
-        statusCard = "," + a;
+        // a = a.substring(0, a.length - 1);
+        statusCard =  a;
       }
       print(statusCard);
       notifyListeners();
@@ -371,7 +329,7 @@ class EditAdminProductController extends ChangeNotifier {
     final ImagePicker imgpicker = ImagePicker();
     var pickedfiles = await imgpicker.pickImage(source: ImageSource.gallery);
     if (pickedfiles != null) {
-      imagefiles1.removeAt(index);
+        imagefiles1.removeAt(index);
 
       imagefiles1.insert(index, pickedfiles);
       print(imagefiles1[index].path);
@@ -405,6 +363,9 @@ class EditAdminProductController extends ChangeNotifier {
 
   Future<void> onAddWidget(createdCard,index) async {
     cards.add(createdCard);
+    // valueCardController.removeAt(index);
+    // mrpCardController.removeAt(index);
+    // offerCardController.removeAt(index);
     valueCardController.add(TextEditingController());
     mrpCardController.add(TextEditingController());
     offerCardController.add(TextEditingController());
@@ -418,11 +379,11 @@ class EditAdminProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-
   void onToggleSwitch(value, index) {
     switchValue[index] = !switchValue[index];
     notifyListeners();
   }
+
   void onToggleCardSwitch(value, index) {
     switchCardValue[index] = !switchCardValue[index];
     notifyListeners();
@@ -487,4 +448,162 @@ class EditAdminProductController extends ChangeNotifier {
     );
   }
 
+  Future<void> uploadAdminProduct(context) async {
+    int count=productUnitDetail?.length??0;
+    totalRows=count+cards.length;
+
+    if(cards.length!=0){
+      await getValueCardData();
+      await getMrpCardData();
+      await getOfferCardData();
+      await getSwitchCardValue();
+    }
+    await getValueData();
+    await getMrpData();
+    await getUnitData();
+    await getOfferData();
+    await getSwitchValue();
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await
+    uploadAdminProductRepo
+        .uploadAdminProduct(uploadAdminProductReqModel,pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+      UploadCustomProductResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        print(categoryId);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId:categoryId),)),
+              (Route<dynamic> route) => false,
+        );
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  UploadAdminProductReqModel get uploadAdminProductReqModel =>UploadAdminProductReqModel(
+    productId: productId,
+    showUnderFullfillCravings: fullFillCravings?"yes":"no",
+    showUnderRecommendedProduct: showUnderRecommendedProducts?"yes":"no",
+    showUnderSeasonalProduct: showUnderSeasonalProducts?"yes":"no",
+    mrpPrice: mrp+mrpCard ,
+    offerPrice: offer+offerCard,
+    status: status+statusCard,
+    totalRows: totalRows.toString(),
+    unitID: unit+unitCard,
+    weight: value+valueCard,
+  );
+
+  Future uploadImage(context) async {
+    print("hellooooo");
+    int count=productUnitDetail?.length??0;
+    totalRows=count+cards.length;
+
+    if(cards.length!=0){
+      await getValueCardData();
+      await getMrpCardData();
+      await getOfferCardData();
+      await getSwitchCardValue();
+    }
+    await getValueData();
+    await getMrpData();
+    await getUnitData();
+    await getOfferData();
+    await getSwitchValue();
+
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    String token=pref.getString("successToken").toString();
+    var uri = Uri.parse("${Endpoint.uploadAdminProduct}");
+    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    request.headers['Authorization'] ="Bearer $token";
+    request.fields['product_id'] = productId;
+    request.fields['show_under_fullfill_your_cravings'] = fullFillCravings?"yes":"no";
+    request.fields['show_under_recommanded_products'] = showUnderRecommendedProducts?"yes":"no";
+    request.fields['show_under_seasonal_products'] = showUnderSeasonalProducts?"yes":"no";
+    request.fields["unit_ids"]=unit+unitCard;
+    request.fields["weight_ids"]=value+valueCard;
+    request.fields["mrp_price_ids"]=mrp+mrpCard;
+    request.fields["offer_price_ids"]=offer+offerCard;
+    request.fields["status_ids"]=status+statusCard;
+    request.fields["total_rows"]=totalRows.toString();
+    print(productId);
+    print(request.fields);
+    //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
+    List<http.MultipartFile> newList =  <http.MultipartFile>[];
+    if(imagefiles1.isNotEmpty) {
+      for (int i = 0; i < imagefiles1.length; i++) {
+        XFile imageData1 = imagefiles1[i];
+        print(imageData1);
+        var stream = new http.ByteStream(
+            DelegatingStream.typed(imageData1.openRead()));
+        var length = await imageData1.length();
+        var multipartFile = new http.MultipartFile(
+            "unit_based_product_image_1_path[$i]", stream, length,
+            filename: basename(imageData1.path));
+        newList.add(multipartFile);
+      }
+    }
+    if(imagefiles2.isNotEmpty) {
+      for (int i = 0; i < imagefiles2.length; i++) {
+        XFile imageData2 = imagefiles2[i];
+        print(imageData2);
+        var stream = new http.ByteStream(
+            DelegatingStream.typed(imageData2.openRead()));
+        var length = await imageData2.length();
+        var multipartFile = new http.MultipartFile(
+            "unit_based_product_image_2_path[$i]", stream, length,
+            filename: basename(imageData2.path));
+        newList.add(multipartFile);
+      }
+    }
+    if(imagefiles3.isNotEmpty) {
+      for (int i = 0; i < imagefiles3.length; i++) {
+        XFile imageData3 = imagefiles3[i];
+        print(imageData3);
+        var stream = new http.ByteStream(
+            DelegatingStream.typed(imageData3.openRead()));
+        var length = await imageData3.length();
+        var multipartFile = new http.MultipartFile(
+            "unit_based_product_image_3_path[$i]", stream, length,
+            filename: basename(imageData3.path));
+        newList.add(multipartFile);
+      }
+    }
+    request.files.addAll(newList);
+    print(request.files[2].filename);
+    await request.send().then((response)async{
+      final respStr = await response.stream.bytesToString();
+      print("respStr${respStr}");
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context,"Updated Successfully",
+            type: SnackType.success);
+        print("Updated Successfully");
+      } else {
+        Utils.showPrimarySnackbar(context,"Error on uploading",
+            type: SnackType.error);
+      }
+      // response.stream.transform(utf8.decoder).listen((value) {
+      //   print(value);
+      // });
+    });
+    return true;
+  }
 }

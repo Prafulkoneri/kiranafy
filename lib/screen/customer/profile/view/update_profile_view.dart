@@ -8,6 +8,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/account_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/profile/controller/edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -42,7 +43,15 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMain.onBackPressed(4, ProfileScreenView());
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainScreenView(
+                      index: 4,
+                      screenName: ProfileScreenView()
+                  )),
+                  (Route<dynamic> route) => false,
+            );
           },
           title: "Update Profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -57,8 +66,17 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
             )
           : WillPopScope(
               onWillPop: () async {
-                readMain.onBackPressed(0, ProfileScreenView());
-                return true;
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MainScreenView(
+                          index: 4,
+                          screenName: ProfileScreenView()
+                      )),
+                      (Route<dynamic> route) => false,
+                );
+
+                return false;
               },
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
@@ -409,6 +427,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                               ))
                                           .toList(),
                                       hint: "State",
+                                titleHeader: "State",
                                     )
                                   : CDropDownField(
                                       value: watch.stateId.toString(),

@@ -1,4 +1,7 @@
+
+
 import 'package:carousel_nullsafety/carousel_nullsafety.dart';
+import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,6 +34,8 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
       context.read<SDashBoardController>().initState(context);
     });
   }
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,41 +65,61 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 20.w),
+          SizedBox(
+            height: 20.w,
+          ),
+          Container(
+            // padding: EdgeInsets.only(top: 20.w),
             child: Stack(
               children: [
-                Align(
-                  child: SizedBox(
-                    height: 181.0.h,
-                    // width: 390.0,
-                    child: const Carousel(
-                      images: [
-                        AssetImage(
-                          "assets/images/shop_image.png",
-                        ),
-                        // AssetImage(
-                        //   "assets/images/property2.png",
-                        // ),
+                SizedBox(
+                  height: 171.0.h,
+                  child:
+                  ExpandablePageView.builder(
+                    allowImplicitScrolling: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      onPageChanged: (index) {
+                        },
+                      itemCount: 1,
+                      itemBuilder: (context, index) {
+                        // final element = watch.onBoardingData?[index];
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          height:190.w,
 
-                        // ExactAssetImage("images/image-carousel.jpeg"),
+                            child: Image.asset("assets/images/shop_image.png",height: 191.w,fit: BoxFit.fill,))
                       ],
-                      autoplay: true,
-                      animationDuration: Duration(milliseconds: 1000),
-                      dotBgColor: Colors.red,
-                      showIndicator: false,
-                      // dotSize: 6.0,
-                      // dotSpacing: 15.0,
-                      // dotColor: Colors.lightGreenAccent,
-                      // borderRadius: true,
-                    ),
-                  ),
+                    );
+                  }),
+                  // Carousel(
+                  //   images: [
+                  //     AssetImage(
+                  //       "assets/images/shop_image.png",
+                  //     ),
+                  //     // AssetImage(
+                  //     //   "assets/images/property2.png",
+                  //     // ),
+                  //
+                  //     // ExactAssetImage("images/image-carousel.jpeg"),
+                  //   ],
+                  //   autoplay: true,
+                  //   animationDuration: Duration(milliseconds: 1000),
+                  //   dotBgColor: Colors.red,
+                  //   showIndicator: false,
+                  //   // dotSize: 6.0,
+                  //   // dotSpacing: 15.0,
+                  //   // dotColor: Colors.lightGreenAccent,
+                  //   // borderRadius: true,
+                  // ),
                 ),
                 Positioned(
                   //<-- SEE HERE
                   // right: 15.w,
                   // left: 0.w,
-                  bottom: 10.w,
+                  bottom: 20.w,
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     width: ScreenUtil().screenWidth,
@@ -155,18 +180,16 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
           ),
           Container(
             padding: EdgeInsets.only(
-                left: 13.w, top: 18.w, right: 19.w, bottom: 17.w),
-            // height: 70.h,
+                left: 13.w, top: 0.w, right: 19.w, bottom: 17.w),
             decoration: BoxDecoration(
               border: Border(
                 // top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
                 bottom: BorderSide(width: 1, color: grey2),
               ),
             ),
-
-            // color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   children: [

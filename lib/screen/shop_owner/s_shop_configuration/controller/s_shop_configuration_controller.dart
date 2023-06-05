@@ -181,12 +181,12 @@ class SShopConfigurationController extends ChangeNotifier {
           isCustomerPickupSelected = true;
         }
         if (data?.shopOwnerDeliveryChargesFree == "active") {
-          isDeliveryChargesSelected = true;
-          ifFreePickupSelected=false;
-        }
-        else{
           isDeliveryChargesSelected = false;
           ifFreePickupSelected=true;
+        }
+        else{
+          isDeliveryChargesSelected = true;
+          ifFreePickupSelected=false;
         }
 
         notifyListeners();
@@ -226,7 +226,7 @@ class SShopConfigurationController extends ChangeNotifier {
     shopOwnerAmount4DeliveryCharges: fourthDeliveryController.text,
     shopOwnerCustomerPickup: isCustomerPickupSelected ? "active" : "inactive",
     shopOwnerDeliveryToCustomer: isDeliveryCustomerSelected ? "active" : "inactive",
-    shopOwnerDeliveryChargesFree: isDeliveryChargesSelected ? "active" : "inactive",
+    shopOwnerDeliveryChargesFree: isDeliveryChargesSelected ? "inactive" : "active",
     shopOwnerPaymentQrCodeImageName:'',
     shopOwnerPaymentQrCodeImagePath:'',
     shopOwnerShopCloseTime: endShopTimeController.text,

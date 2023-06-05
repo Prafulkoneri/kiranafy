@@ -485,7 +485,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
+                          watch.planAmount!=""? Text(
                             '\u{20B9} ${watch.planAmount}',
                             // "₹ 4,000",
 
@@ -496,7 +496,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                   fontSize: 23.sp,
                                   fontWeight: FontWeight.w700),
                             ),
-                          ),
+                          ):Container(),
                           Text(
                             "Extra 18% GST",
                             style: GoogleFonts.dmSans(

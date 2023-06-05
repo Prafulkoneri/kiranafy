@@ -41,23 +41,22 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
           onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 0, screenName: SAccountScreenView())),
-              (Route<dynamic> route) => false,
+              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
+                  (Route<dynamic> route) => false,
             );
           },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () async {
-            var res = await read.uploadShopConfiguration(context);
-            // readMainScreen.onBackPressed(4,SAccountScreenView());
+          onActionTap: ()async {
+           var res=await read.uploadShopConfiguration(context);
+              // readMainScreen.onBackPressed(4,SAccountScreenView());
           },
         ),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(
+
           padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,6 +72,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 height: 10.w,
               ),
               Container(
+
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: (Color(0xffEFEFEF)))),
@@ -86,36 +86,35 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                           read.openGallery1();
                         },
                         child: watch.networkImage != ""
-                            ? Container(
-                                width: ScreenUtil().screenWidth,
-                                height: 142.h,
+                             ? Container(
+                          width: ScreenUtil().screenWidth,
+                          height: 142.h,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
                                 child: Image.network(
                                   watch.networkImage,
-                                  // height: 142.w,
                                   fit: BoxFit.contain,
                                 ),
                               )
-                            : watch.fileImage.path != ""
-                                ? Container(
-                                    width: ScreenUtil().screenWidth,
-                                    height: 142.h,
-                                    // width: ScreenUtil().screenWidth,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        border:
-                                            Border.all(width: 1, color: grey6)),
-                                    child: Image.file(
-                                      watch.fileImage,
-                                      // height: 142.w,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  )
+                             : watch.fileImage.path != ""
+                                ?  Container(
+                          width: ScreenUtil().screenWidth,
+                                      height: 142.h,
+                                      // width: ScreenUtil().screenWidth,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                              width: 1, color: grey6)),
+                                      child: Image.file(
+                                        watch.fileImage,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    )
                                 : Container(
-                                    height: 142.h,
-                                    child: Center(
+                          height: 142.h,
+                                  child: Center(
                                       child: Text(
                                         'Upload QR Code',
                                         style: TextStyle(
@@ -124,7 +123,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                             color: Color(0xffB7B7B7)),
                                       ),
                                     ),
-                                  ),
+                                ),
                       ),
                     ],
                   ),

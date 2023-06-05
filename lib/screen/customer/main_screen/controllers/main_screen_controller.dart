@@ -13,7 +13,11 @@ class MainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = HomeScreenView();
+  Widget currentScreen = HomeScreenView(refreshPage: true,);
+
+  void initState(context,index,currentScreen){
+    navigation(index,currentScreen);
+  }
 
   void onBottomNavChanged(index) {
     currentIndex = index;
@@ -29,13 +33,13 @@ class MainScreenController extends ChangeNotifier {
 
   void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = HomeScreenView();
+    currentScreen = HomeScreenView(refreshPage: false,);
     notifyListeners();
   }
 
   void onShopPressed() {
     currentTab = 1;
-    currentScreen = AllNearShops();
+    currentScreen = AllNearShopsView(refreshPage:false,);
     notifyListeners();
   }
 
@@ -57,19 +61,12 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> navigation(tabIndex,screenName)async{
+    currentTab=tabIndex;
+    currentScreen=screenName;
+    notifyListeners();
+  }
 
-  Future<void> onBackPressed(tabIndex,screenName)async{
-    currentTab=tabIndex;
-    currentScreen=screenName;
-    notifyListeners();
-  }
-  void onNavigation(tabIndex,screenName,context){
-    print(screenName);
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreenView()));
-    currentTab=tabIndex;
-    currentScreen=screenName;
-    notifyListeners();
-  }
 
 
 }

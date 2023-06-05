@@ -38,8 +38,6 @@ class CustomerSignInController extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   void onCountryCodeSelected(value) {
     countryCode = value.toString();
   }
@@ -62,14 +60,13 @@ class CustomerSignInController extends ChangeNotifier {
             MobileNumberCheckResponseModel.fromJson(jsonDecode(response.body));
 
         if (response.statusCode == 200) {
-          if(result.status==404){
-            isLoginBtnEnabled=false;
-          }
-          else{
-            isLoginBtnEnabled=true;
+          if (result.status == 404) {
+            isLoginBtnEnabled = false;
+          } else {
+            isLoginBtnEnabled = true;
           }
           Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.success);
+              type: SnackType.error);
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -92,7 +89,7 @@ class CustomerSignInController extends ChangeNotifier {
 
   Future<void> onNextClick(context) async {
     if (mobileController.text.length < 10) {
-      Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
+      Utils.showPrimarySnackbar(context, "Please Enter Phone Number",
           type: SnackType.error);
       notifyListeners();
       return;
@@ -100,10 +97,9 @@ class CustomerSignInController extends ChangeNotifier {
 
     if (!isLoginBtnEnabled) {
       Utils.showPrimarySnackbar(context, "Please Sign Up",
-          type: SnackType.success);
+          type: SnackType.error);
       return;
     }
-
 
     await _auth.verifyPhoneNumber(
         phoneNumber: "$countryCode${mobileController.text}",
@@ -117,22 +113,17 @@ class CustomerSignInController extends ChangeNotifier {
           this.verificationID = verificationID;
         },
         codeAutoRetrievalTimeout: (verificationID) async {});
-
   }
 
-  CustomerSignInReqModel get customerSignInReqModel =>
-      CustomerSignInReqModel(
-          customerCountryCode: countryCode,
-          customerMobileNo: mobileController.text,
-          customerFcmToken:fcmToken);
+  CustomerSignInReqModel get customerSignInReqModel => CustomerSignInReqModel(
+      customerCountryCode: countryCode,
+      customerMobileNo: mobileController.text,
+      customerFcmToken: fcmToken);
 
   Future<void> onsignIn(context) async {
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    customerSignInRepo
-        .customerSignIn(customerSignInReqModel)
-        .then((response) {
-      final result =
-      CustomerSignInResModel.fromJson(jsonDecode(response.body));
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    customerSignInRepo.customerSignIn(customerSignInReqModel).then((response) {
+      final result = CustomerSignInResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "customerLoggedIn");
@@ -146,7 +137,7 @@ class CustomerSignInController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -174,12 +165,10 @@ class CustomerSignInController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
     }
   }
+
   Future<void> onCodeVerification(context) async {
     AuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
         verificationId: verificationID, smsCode: otpCode);
     signInWithPhoneAuthCred(phoneAuthCredential, context);
   }
-
-
-
 }

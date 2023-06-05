@@ -22,8 +22,8 @@ class OfferProducts extends StatefulWidget {
 class _OfferProductsState extends State<OfferProducts> {
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<ShopProfileController>();
-    final read = context.read<ShopProfileController>();
+    final watch = context.watch<ShopProfileViewController>();
+    final read = context.read<ShopProfileViewController>();
     final readMain = context.read<MainScreenController>();
     return SizedBox(
       child: SingleChildScrollView(
