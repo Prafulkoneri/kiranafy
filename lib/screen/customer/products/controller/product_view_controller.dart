@@ -38,8 +38,8 @@ class ProductViewController extends ChangeNotifier {
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
-
   AddAdminProductToFavRepo addAdminProductToFavRepo=AddAdminProductToFavRepo();
+
   Future<void> initState(context, sId, cId, pId, suId) async {
     await productsView(context, sId, cId, pId);
     unitImages.clear();
@@ -148,6 +148,7 @@ class ProductViewController extends ChangeNotifier {
       final result =
       AddAdminProductToFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        isFavProduct=true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {
