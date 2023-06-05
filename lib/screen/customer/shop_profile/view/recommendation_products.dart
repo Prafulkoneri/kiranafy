@@ -14,8 +14,9 @@ import 'view_all_recommanded_products.dart';
 
 class RecommendationProducts extends StatefulWidget {
   final String? shopId;
-  final bool ? refreshPage;
-  const RecommendationProducts({super.key, required this.shopId,required this.refreshPage});
+  final bool? refreshPage;
+  const RecommendationProducts(
+      {super.key, required this.shopId, required this.refreshPage});
 
   @override
   State<RecommendationProducts> createState() => _RecommendationProductsState();
@@ -25,7 +26,9 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ShopProfileViewController>().initState(context, widget.shopId,widget.refreshPage);
+      context
+          .read<ShopProfileViewController>()
+          .initState(context, widget.shopId, widget.refreshPage);
     });
   }
 
@@ -62,9 +65,8 @@ class _RecommendationProductsState extends State<RecommendationProducts> {
                               index: 0,
                               screenName: AllRecommandedProductsView(
                                 shopId: widget.shopId,
-                              )
-                          )),
-                          (Route<dynamic> route) => false,
+                              ))),
+                      (Route<dynamic> route) => false,
                     );
                     // Navigator.push(
                     //   context,

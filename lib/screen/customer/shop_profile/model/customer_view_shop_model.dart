@@ -43,7 +43,9 @@ class OfferProduct {
   String? unit;
   String? discountPercentage;
   String? mrpPrice;
+  String? categoryId;
   OfferProduct({
+    this.categoryId,
     this.status,
     this.id,
     this.productId,
@@ -58,6 +60,7 @@ class OfferProduct {
     this.discountPercentage,
   });
   OfferProduct.fromJson(Map<String, dynamic> json) {
+    categoryId = json["category_id"];
     id = json["id"];
     productId = json["product_id"];
     selectedProductId = json["selected_product_id"];
