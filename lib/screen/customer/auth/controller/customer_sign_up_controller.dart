@@ -46,13 +46,13 @@ class CustomerSignUpController extends ChangeNotifier {
   /////NewCustomer
   Future<void> onNextClick(context) async {
     if (mobileController.text.length < 10) {
-      Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
+      Utils.showPrimarySnackbar(context, "Please Enter Phone Number",
           type: SnackType.error);
       notifyListeners();
       return;
     }
     if (nameController.text == "") {
-      Utils.showPrimarySnackbar(context, "Please Enter Name No",
+      Utils.showPrimarySnackbar(context, "Please Enter Name",
           type: SnackType.error);
       notifyListeners();
       return;
@@ -172,7 +172,7 @@ class CustomerSignUpController extends ChangeNotifier {
             isNextBtnEnabled = false;
           }
           Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.success);
+              type: SnackType.error);
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
