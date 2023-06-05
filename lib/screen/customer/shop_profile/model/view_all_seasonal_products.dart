@@ -57,7 +57,7 @@ class SeasonalProduct {
   String? weight;
   String? offerPrice;
   String? mrpPrice;
-  String? categoryId;
+  int? categoryId;
   String? productType;
   String? discountPercentage;
   int? productId;
@@ -87,11 +87,11 @@ class SeasonalProduct {
     weight = json["weight"];
     offerPrice = json["offer_price"];
     mrpPrice = json["mrp_price"];
-    productId = json["product_id"];
-    discountPercentage = json["discount_percentage"];
-    status = json["status"];
-    unit = json["unit"];
     categoryId = json['category_id'];
     productType = json["product_type"];
+    discountPercentage = json["discount_percentage"];
+    productId = json["product_id"];
+    status = json["status"];
+    unit = json["unit"];
   }
 }

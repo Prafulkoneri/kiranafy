@@ -425,27 +425,27 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             final element = watch.productList?[index];
                             return GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => ProductScreenView(
-                                //               categoryId: watch.categoryId,
-                                //               productId: element?.id.toString(),
-                                //               shopId: widget.shopId,
-                                //             )));
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                            index: 2,
-                                            screenName: ProductScreenView(
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProductScreenView(
                                               categoryId: watch.categoryId,
                                               productId: element?.id.toString(),
                                               shopId: widget.shopId,
-                                            ),
-                                          )),
-                                  (Route<dynamic> route) => false,
-                                );
+                                            )));
+                                //   Navigator.pushAndRemoveUntil(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => SMainScreenView(
+                                //               index: 2,
+                                //               screenName: ProductScreenView(
+                                //                 categoryId: watch.categoryId,
+                                //                 productId: element?.id.toString(),
+                                //                 shopId: widget.shopId,
+                                //               ),
+                                //             )),
+                                //     (Route<dynamic> route) => false,
+                                //   );
                               },
                               child: Column(
                                 children: [
