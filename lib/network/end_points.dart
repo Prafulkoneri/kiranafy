@@ -155,6 +155,9 @@ class Endpoint {
   //////////Customer Product List As Per Search
   static const String customerProductListAsPerSearch=
       "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
+  //////////Customer Product List As Per Filter
+  static const String customerProductListAsPerFilter=
+      "${baseUrl}lsm-customer-product-list-as-per-category-and-filter";
   //////////Customer Add Admin Product To Fav
   static const String addAdminProductToFav=
       "${baseUrl}lsm-customer-add-admin-product-to-favourite";
