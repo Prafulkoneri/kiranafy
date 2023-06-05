@@ -210,17 +210,24 @@ class ProductViewController extends ChangeNotifier {
       },
     );
   }
+// final url = Uri.parse("myLink");
+//   final response = await http.get(url);
+//   await File('/yourPath/myItem.png').writeAsBytes(response.bodyBytes);
 
+//   await Share.shareFiles(['/yourPath/myItem.png'], text: 'Image Shared');
   void onShareXFileFromAssets(BuildContext context) async {
     final box = context.findRenderObject() as RenderBox?;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final data = await rootBundle.load('assets/images/redlabel.png');
+    // final data = '${productDetails?.productImagePath}/image1.jpg';
+
     final buffer = data.buffer;
+    // final buffer = path
     final shareResult = await Share.shareXFiles(
       [
         XFile.fromData(
           buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
-          name: 'flutter_logo.png',
+          name: 'flutter_logo',
           mimeType: 'image/png',
         ),
       ],

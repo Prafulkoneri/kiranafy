@@ -97,7 +97,7 @@ class CustomerSignInController extends ChangeNotifier {
 
     if (!isLoginBtnEnabled) {
       Utils.showPrimarySnackbar(context, "Please Sign Up",
-          type: SnackType.error);
+          type: SnackType.success);
       return;
     }
 

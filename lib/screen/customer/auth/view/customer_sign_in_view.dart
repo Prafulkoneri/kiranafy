@@ -33,29 +33,29 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
     final read = context.read<CustomerSignInController>();
     final watch = context.watch<CustomerSignInController>();
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.topCenter,
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            left: 0.w,
-            child: Image.asset(
-              "assets/images/splash1.png",
-              height: 235.w,
-              width: 361.w,
+      body: SingleChildScrollView(
+        child: Stack(
+          alignment: Alignment.topCenter,
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              left: 0.w,
+              child: Image.asset(
+                "assets/images/splash1.png",
+                height: 235.w,
+                width: 361.w,
+              ),
             ),
-          ),
-          Positioned(
-            bottom: -25.w,
-            right: 0.w,
-            child: Image.asset(
-              "assets/images/splash2.png",
-              height: 235.w,
-              width: 361.w,
+            Positioned(
+              bottom: -25.w,
+              right: 0.w,
+              child: Image.asset(
+                "assets/images/splash2.png",
+                height: 235.w,
+                width: 361.w,
+              ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Column(
+            Column(
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -115,32 +115,15 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 28.w, right: 23.w),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            bottom: 1,
-                            top: 1,
-                            left: 0,
-                            child: Container(
-                              // height: 200.h,
-                              width: 70.w,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ),
-                          MobileNoTextFormField(
-                            onChanged: (value) {
-                              read.mobileNumberCheck(context);
-                            },
-                            onCountryCodeChanged: (value) {
-                              read.onCountryCodeSelected(value);
-                            },
-                            enableOrder: false,
-                            controller: watch.mobileController,
-                          ),
-                        ],
+                      child: MobileNoTextFormField(
+                        onChanged: (value) {
+                          read.mobileNumberCheck(context);
+                        },
+                        onCountryCodeChanged: (value) {
+                          read.onCountryCodeSelected(value);
+                        },
+                        enableOrder: false,
+                        controller: watch.mobileController,
                       ),
                     ),
                     SizedBox(
@@ -166,69 +149,6 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                     SizedBox(
                       height: 34.h,
                     ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(
-                    //     left: 25.w,
-                    //   ),
-                    //   child: Row(
-                    //     crossAxisAlignment: CrossAxisAlignment.center,
-                    //     children: [
-                    //       Padding(
-                    //         padding: EdgeInsets.only(bottom: 15.w),
-                    //         child: PrimaryCheckBox(
-                    //           value: watch.isVerifyChecked,
-                    //           onChanged: (value) {
-                    //             read.onVerifyChecked(value);
-                    //           },
-                    //         ),
-                    //       ),
-                    //       RichText(
-                    //         text: TextSpan(
-                    //             text: "By continuing you agree to our,\n",
-                    //             style: TextStyle(
-                    //                 color: Black,
-                    //                 fontSize: 16.sp,
-                    //                 height: 1.3.w,
-                    //                 fontWeight: FontWeight.w400),
-                    //             children: [
-                    //               TextSpan(
-                    //                 children: [],
-                    //                 text: 'Term of Condition',
-                    //                 recognizer: TapGestureRecognizer()
-                    //                   ..onTap = () {
-                    //                     print('Login Text Clicked');
-                    //                   },
-                    //                 style: TextStyle(
-                    //                     color: SplashText1,
-                    //                     // letterSpacing: .5,
-                    //                     fontSize: 16.sp,
-                    //                     fontWeight: FontWeight.w400),
-                    //               ),
-                    //               TextSpan(
-                    //                 text: ' and',
-                    //                 style: TextStyle(
-                    //                     color: Black,
-                    //                     // letterSpacing: .5,
-                    //                     fontSize: 16.sp,
-                    //                     fontWeight: FontWeight.w400),
-                    //               ),
-                    //               TextSpan(
-                    //                 text: ' Privacy Policy',
-                    //                 recognizer: TapGestureRecognizer()
-                    //                   ..onTap = () {
-                    //                     print('Login Text Clicked');
-                    //                   },
-                    //                 style: TextStyle(
-                    //                     color: SplashText1,
-                    //                     // letterSpacing: .5,
-                    //                     fontSize: 16.sp,
-                    //                     fontWeight: FontWeight.w400),
-                    //               ),
-                    //             ]),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 26.h,
                     ),
@@ -412,7 +332,7 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account?",
+                          "Don't have an account ? ",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
                                 color: Black,
@@ -431,7 +351,7 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                             );
                           },
                           child: Text(
-                            "Sign Up",
+                            " Sign Up",
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                   color: Custlogin,
@@ -450,8 +370,8 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                 )
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

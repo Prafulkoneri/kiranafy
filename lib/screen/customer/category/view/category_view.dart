@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
+import '../../../shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import '../../products/views/product_screen.dart';
 
 class CategoryScreenView extends StatefulWidget {
@@ -64,8 +65,11 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
               MaterialPageRoute(
                   builder: (context) => MainScreenView(
                       index: 1,
-                      screenName:
-                          ShopProfileView(shopId: widget.shopId.toString(),routeName: "categoryView",  refreshPage: false,))),
+                      screenName: ShopProfileView(
+                        shopId: widget.shopId.toString(),
+                        routeName: "categoryView",
+                        refreshPage: false,
+                      ))),
               (Route<dynamic> route) => false,
             );
           },
@@ -411,7 +415,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                       // height: 95.h,
                       // width: 352.w,
                       child: ListView.builder(
-                          padding: EdgeInsets.zero,
+                          padding: EdgeInsets.only(bottom: 100.w),
                           scrollDirection: Axis.vertical,
                           physics: BouncingScrollPhysics(),
                           // physics: NeverScrollableScrollPhysics(),
@@ -421,14 +425,27 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             final element = watch.productList?[index];
                             return GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ProductScreenView(
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => ProductScreenView(
+                                //               categoryId: watch.categoryId,
+                                //               productId: element?.id.toString(),
+                                //               shopId: widget.shopId,
+                                //             )));
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SMainScreenView(
+                                            index: 2,
+                                            screenName: ProductScreenView(
                                               categoryId: watch.categoryId,
                                               productId: element?.id.toString(),
                                               shopId: widget.shopId,
-                                            )));
+                                            ),
+                                          )),
+                                  (Route<dynamic> route) => false,
+                                );
                               },
                               child: Column(
                                 children: [
@@ -551,41 +568,34 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                       top:
                                                                           12.w),
                                                               child: Row(
-                                                                // crossAxisAlignment:
-                                                                //     CrossAxisAlignment.start,
-                                                                // mainAxisAlignment: MainAxisAlignment.end,
                                                                 children: [
                                                                   Row(
                                                                     children: [
-                                                                      Text(
-                                                                        '\u{20B9}${element?.mrpPrice}',
-                                                                        style: GoogleFonts
-                                                                            .dmSans(
-                                                                          textStyle: TextStyle(
-                                                                              decoration: TextDecoration.lineThrough,
-                                                                              color: Black,
-                                                                              letterSpacing: .5,
-                                                                              fontSize: 13.sp,
-                                                                              fontWeight: FontWeight.w500),
-                                                                        ),
-                                                                      ),
+                                                                      element?.mrpPrice !=
+                                                                              ""
+                                                                          ? Text(
+                                                                              '\u{20B9}${element?.mrpPrice}',
+                                                                              style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
+                                                                          : Text(""),
                                                                       SizedBox(
                                                                         width:
                                                                             10.w,
                                                                       ),
-                                                                      Text(
-                                                                        '\u{20B9}${element?.offerPrice}',
-                                                                        style: GoogleFonts
-                                                                            .dmSans(
-                                                                          textStyle: TextStyle(
-                                                                              // decoration:
-                                                                              // TextDecoration.lineThrough,
-                                                                              color: Black,
-                                                                              letterSpacing: .5,
-                                                                              fontSize: 13.sp,
-                                                                              fontWeight: FontWeight.w500),
-                                                                        ),
-                                                                      ),
+                                                                      element?.offerPrice != "" &&
+                                                                              element?.offerPrice != element?.mrpPrice
+                                                                          ? Text(
+                                                                              '\u{20B9}${element?.offerPrice}',
+                                                                              style: GoogleFonts.dmSans(
+                                                                                textStyle: TextStyle(
+                                                                                    // decoration:
+                                                                                    // TextDecoration.lineThrough,
+                                                                                    color: Black,
+                                                                                    letterSpacing: .5,
+                                                                                    fontSize: 13.sp,
+                                                                                    fontWeight: FontWeight.w500),
+                                                                              ),
+                                                                            )
+                                                                          : Container()
                                                                     ],
                                                                   ),
                                                                 ],

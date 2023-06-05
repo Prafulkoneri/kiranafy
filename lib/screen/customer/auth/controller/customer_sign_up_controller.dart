@@ -172,7 +172,7 @@ class CustomerSignUpController extends ChangeNotifier {
             isNextBtnEnabled = false;
           }
           Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.error);
+              type: SnackType.success);
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
