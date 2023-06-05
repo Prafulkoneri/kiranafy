@@ -153,13 +153,13 @@ class Endpoint {
   static const String customerProductListAsPerCategory =
       "${baseUrl}lsm-customer-product-list-as-per-category";
   //////////Customer Product List As Per Search
-  static const String customerProductListAsPerSearch=
+  static const String customerProductListAsPerSearch =
       "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
   //////////Customer Add Admin Product To Fav
-  static const String addAdminProductToFav=
+  static const String addAdminProductToFav =
       "${baseUrl}lsm-customer-add-admin-product-to-favourite";
   //////////Customer Add Custom Product To Fav
-  static const String addCustomProductToFav=
+  static const String addCustomProductToFav =
       "${baseUrl}sm-customer-add-custom-product-to-favourite";
   //////////////Seasonal Products
   static const String AllSeasonalProducts =
@@ -174,4 +174,7 @@ class Endpoint {
   //////////////Product Unit Image
   static const String ProductUnitImage =
       "${baseUrl}lsm-customer-get-unit-images-of-product";
+  /////////////Remove Admin Product Fvrt///////
+  static const String removeAdminProduct =
+      "${baseUrl}lsm-customer-remove-admin-product-from-favourite";
 }

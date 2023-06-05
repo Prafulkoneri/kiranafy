@@ -11,10 +11,12 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/remove
 import 'package:local_supper_market/screen/customer/products/model/add_admin_product_to_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_unit_images_res_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_view_model.dart';
+import 'package:local_supper_market/screen/customer/products/model/remove_admin_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/repository/add_admin_product_to_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/add_custom_product_to_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/product_unit_image_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/product_view_repo.dart';
+import 'package:local_supper_market/screen/customer/products/repository/remove_admin_product_fav_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +29,7 @@ class ProductViewController extends ChangeNotifier {
   String? selectedUnitId = "";
   String? productImage = "";
   bool favAllShop = true; //fvrt
-  bool isFavProduct=true;
+  bool isFavProduct = true; //fvrt Product
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   ProductViewData? productViewData;
   ProductDetails? productDetails;
@@ -39,7 +41,8 @@ class ProductViewController extends ChangeNotifier {
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
 
-  AddAdminProductToFavRepo addAdminProductToFavRepo=AddAdminProductToFavRepo();
+  AddAdminProductToFavRepo addAdminProductToFavRepo =
+      AddAdminProductToFavRepo();
   Future<void> initState(context, sId, cId, pId, suId) async {
     await productsView(context, sId, cId, pId);
     unitImages.clear();
@@ -75,6 +78,7 @@ class ProductViewController extends ChangeNotifier {
         productUnitDetail = productViewData?.productUnitDetails;
         similarProduct = productViewData?.similarProducts;
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
+        isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -133,21 +137,25 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  AddAdminProductToFavReqModel get addAdminProductToFavReqModel=>AddAdminProductToFavReqModel(
-    shopId: shopId,
-    productId: productId,
-  );
+//////Add Admin Product To favrt////
+  AddAdminProductToFavReqModel get addAdminProductToFavReqModel =>
+      AddAdminProductToFavReqModel(
+        shopId: shopId,
+        productId: productId,
+      );
 
-  Future addToFavProduct(context)async{
+  Future addToFavProduct(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
 
-    addAdminProductToFavRepo.addAdminProductToFav(
-        addAdminProductToFavReqModel, pref.getString("successToken"))
+    addAdminProductToFavRepo
+        .addAdminProductToFav(
+            addAdminProductToFavReqModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
       final result =
-      AddAdminProductToFavResModel.fromJson(jsonDecode(response.body));
+          AddAdminProductToFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        isFavProduct = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {
@@ -157,7 +165,51 @@ class ProductViewController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  /////End/////
+  RemoveAdminProductReqModel get removeFavProductReqModel =>
+      RemoveAdminProductReqModel(
+          shopId: shopId.toString(), productId: productId.toString());
+  RemoveAdminFvrtProductRepo removeFavProductRepo =
+      RemoveAdminFvrtProductRepo();
+
+  Future<void> removeFavProduct(
+    context,
+  ) async {
+    print("rrrrrrrrrrrrrrrrrrrrrrrr");
+    // // print("id${id}");
+    // // shopId = id.toString();
+    // productId = productId.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeFavProductRepo
+        .removeAdminProductRepo(
+            removeFavProductReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        isFavProduct = false;
+        print("hello");
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

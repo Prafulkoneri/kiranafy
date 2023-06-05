@@ -266,7 +266,24 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                           SizedBox(
                             width: 25.w,
                           ),
-                          SvgPicture.asset("assets/icons/favourites.svg"),
+                          GestureDetector(
+                            onTap: () {
+                              watch.isFavProduct
+                                  ? read.removeFavProduct(context)
+                                  : read.addToFavProduct(context);
+                            },
+                            child: watch.isFavProduct
+                                ? SvgPicture.asset(
+                                    "assets/icons/fvrtproduct.svg",
+                                    width: 26.w,
+                                    height: 14.h,
+                                  )
+                                : SvgPicture.asset(
+                                    "assets/icons/remove_fav.svg",
+                                    width: 26.w,
+                                    height: 14.h,
+                                  ),
+                          ), /////fvrtproduct
                           SizedBox(
                             width: 25.w,
                           ),

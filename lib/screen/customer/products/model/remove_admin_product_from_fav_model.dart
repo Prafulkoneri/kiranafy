@@ -1,9 +1,9 @@
 ////Request Model
-class AddAdminProductToFavReqModel {
+class RemoveAdminProductReqModel {
   String? shopId;
   String? productId;
 
-  AddAdminProductToFavReqModel({
+  RemoveAdminProductReqModel({
     this.productId,
     this.shopId,
   });
@@ -16,14 +16,14 @@ class AddAdminProductToFavReqModel {
 }
 
 ///////Response Model////
-class AddAdminProductToFavResModel {
+class RemoveAdminProductResModel {
   int? status;
   String? message;
-  AddAdminProductToFavResModel({
+  RemoveAdminProductResModel({
     this.status,
     this.message,
   });
-  AddAdminProductToFavResModel.fromJson(Map<String, dynamic> json) {
+  RemoveAdminProductResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
   }
