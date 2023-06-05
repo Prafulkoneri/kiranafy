@@ -74,16 +74,17 @@ class PrimaryAppBar extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        GestureDetector(
-          onTap: onActionTap,
-          child: Container(
-            width: 50.w,
-              height: 65.w,
-              padding: EdgeInsets.only(
+        Container(
+          width: 50.w,
+            height: 65.w,
+            padding: EdgeInsets.only(
 
-              ),
-              child: Center(child: action)),
-        ),
+            ),
+            child: GestureDetector(
+              onTap: onActionTap,
+              child: Center(child:
+              action),
+            )),
       ],
     );
   }

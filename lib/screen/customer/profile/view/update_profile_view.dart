@@ -107,6 +107,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                         borderRadius:
                                             BorderRadius.circular(8.w),
                                         child: Image.network(
+
                                           watch.networkImage,
                                           fit: BoxFit.cover,
                                         )))
