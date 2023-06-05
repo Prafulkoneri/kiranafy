@@ -10,7 +10,7 @@ class ProductAsPerFilterRepo{
     print(reqModel.toJson());
     try {
       return await http
-          .post(Uri.parse(Endpoint.customerProductListAsPerSearch),body: reqModel.toJson(),headers: {
+          .post(Uri.parse(Endpoint.customerProductListAsPerFilter),body: reqModel.toJson(),headers: {
         "Authorization": "Bearer $token",
       });
     } catch (e) {

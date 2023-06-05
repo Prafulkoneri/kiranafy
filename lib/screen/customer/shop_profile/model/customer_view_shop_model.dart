@@ -37,14 +37,114 @@ class OfferProduct {
   String? productImageName;
   String? weight;
   String? offerPrice;
+  String? mrpPrice;
   int? productId;
+  int? categoryId;
+  String? productType;
   int? selectedProductId;
+  String? discountPercentage;
   String? status;
   String? unit;
-  String? discountPercentage;
-  String? mrpPrice;
-  String? categoryId;
+
   OfferProduct({
+    this.categoryId, //
+    this.status,
+    this.id, //
+    this.productId, //
+    this.selectedProductId, //
+    this.offerPrice, //
+    this.productImagePath, //
+    this.productName, //
+    this.unit,
+    this.productImageName, //
+    this.weight, //
+    this.mrpPrice, //
+    this.discountPercentage, //
+    this.productType, //
+  });
+  OfferProduct.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    productName = json["product_name"];
+    productImagePath = json["product_image_path"];
+    productImageName = json["product_image_name"];
+    weight = json["weight"];
+    offerPrice = json["offer_price"];
+    mrpPrice = json["mrp_price"];
+    categoryId = json["category_id"];
+    productType = json["product_type"];
+    selectedProductId = json["selected_product_id"];
+    discountPercentage = json["discount_percentage"];
+    productId = json["product_id"];
+    status = json["status"];
+    unit = json["unit"];
+  }
+}
+
+class SeasonalProduct {
+  int? id;
+  String? productName;
+  String? productImagePath;
+  String? productImageName;
+  String? weight;
+  String? offerPrice;
+  String? mrpPrice;
+  int? productId;
+  int? categoryId;
+  String? productType;
+  int? selectedProductId;
+  String? discountPercentage;
+  String? status;
+  String? unit;
+  SeasonalProduct({
+    this.categoryId, //
+    this.status,
+    this.id, //
+    this.productId, //
+    this.selectedProductId, //
+    this.offerPrice, //
+    this.productImagePath, //
+    this.productName, //
+    this.unit,
+    this.productImageName, //
+    this.weight, //
+    this.mrpPrice, //
+    this.discountPercentage, //
+    this.productType, //
+  });
+  SeasonalProduct.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    productName = json["product_name"];
+    productImagePath = json["product_image_path"];
+    productImageName = json["product_image_name"];
+    weight = json["weight"];
+    offerPrice = json["offer_price"];
+    mrpPrice = json["mrp_price"];
+    categoryId = json["category_id"];
+    productType = json["product_type"];
+    selectedProductId = json["selected_product_id"];
+    discountPercentage = json["discount_percentage"];
+    productId = json["product_id"];
+    status = json["status"];
+    unit = json["unit"];
+  }
+}
+
+class RecommandedProducts {
+  int? id;
+  String? productName;
+  String? productImagePath;
+  String? productImageName;
+  String? weight;
+  String? offerPrice;
+  String? mrpPrice;
+  int? productId;
+  int? categoryId;
+  String? productType;
+  int? selectedProductId;
+  String? discountPercentage;
+  String? status;
+  String? unit;
+  RecommandedProducts({
     this.categoryId,
     this.status,
     this.id,
@@ -57,105 +157,22 @@ class OfferProduct {
     this.productImageName,
     this.weight,
     this.mrpPrice,
+    this.productType,
     this.discountPercentage,
   });
-  OfferProduct.fromJson(Map<String, dynamic> json) {
-    categoryId = json["category_id"];
-    id = json["id"];
-    productId = json["product_id"];
-    selectedProductId = json["selected_product_id"];
-    offerPrice = json["offer_price"];
-    productImageName = json["product_image_name"];
-    productImagePath = json["product_image_path"];
-    productName = json["product_name"];
-    weight = json["weight"];
-    status = json["status"];
-    unit = json["unit"];
-    mrpPrice = json["mrp_price"];
-    discountPercentage = json["discount_percentage"];
-  }
-}
-
-class SeasonalProduct {
-  int? id;
-  String? productName;
-  String? productImagePath;
-  String? productImageName;
-  String? weight;
-  String? offerPrice;
-  int? productId;
-  int? selectedProductId;
-  String? status;
-  String? unit;
-  String? discountPercentage;
-  String? mrpPrice;
-  SeasonalProduct({
-    this.status,
-    this.id,
-    this.productId,
-    this.selectedProductId,
-    this.offerPrice,
-    this.productImagePath,
-    this.productName,
-    this.unit,
-    this.productImageName,
-    this.weight,
-    this.mrpPrice,
-    this.discountPercentage,
-  });
-  SeasonalProduct.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    productId = json["product_id"];
-    selectedProductId = json["selected_product_id"];
-    offerPrice = json["offer_price"];
-    productImageName = json["product_image_name"];
-    productImagePath = json["product_image_path"];
-    productName = json["product_name"];
-    weight = json["weight"];
-    status = json["status"];
-    unit = json["unit"];
-    mrpPrice = json["mrp_price"];
-    discountPercentage = json["discount_percentage"];
-  }
-}
-
-class RecommandedProducts {
-  int? id;
-  String? productName;
-  String? productImagePath;
-  String? productImageName;
-  String? weight;
-  String? offerPrice;
-  String? mrpPrice;
-  String? discountPercentage;
-  int? productId;
-  int? selectedProductId;
-  String? status;
-  String? unit;
-  RecommandedProducts(
-      {this.status,
-      this.id,
-      this.productId,
-      this.selectedProductId,
-      this.offerPrice,
-      this.productImagePath,
-      this.productName,
-      this.unit,
-      this.productImageName,
-      this.weight,
-      this.mrpPrice,
-      this.discountPercentage});
   RecommandedProducts.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    productId = json["product_id"];
-    selectedProductId = json["selected_product_id"];
-    offerPrice = json["offer_price"];
-    productImageName = json["product_image_name"];
-    productImagePath = json["product_image_path"];
     productName = json["product_name"];
+    productImagePath = json["product_image_path"];
+    productImageName = json["product_image_name"];
     weight = json["weight"];
+    offerPrice = json["offer_price"];
     mrpPrice = json["mrp_price"];
+    categoryId = json["category_id"];
+    productType = json["product_type"];
+    selectedProductId = json["selected_product_id"];
     discountPercentage = json["discount_percentage"];
+    productId = json["product_id"];
     status = json["status"];
     unit = json["unit"];
   }

@@ -1,30 +1,28 @@
-class AddCustomProductToFavReqModel{
-  String ? shopId;
-  String ? productId;
-  String ? productType;
+class AddCustomProductToFavReqModel {
+  String? shopId;
+  String? productId;
+
   AddCustomProductToFavReqModel({
     this.productId,
     this.shopId,
-    this.productType,
   });
-  Map<String,dynamic> toJson(){
-    Map<String,dynamic> data={};
-    data["shop_id"]=shopId;
-    data["product_id"]=productId;
-    data["product_type"]=productType;
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = {};
+    data["shop_id"] = shopId;
+    data["product_id"] = productId;
     return data;
   }
 }
 
-class AddCustomProductToFavResModel{
-  String ? status;
-  String ? message;
+class AddCustomProductToFavResModel {
+  String? status;
+  String? message;
   AddCustomProductToFavResModel({
     this.status,
     this.message,
   });
-  AddCustomProductToFavResModel.fromJson(Map<String,dynamic>json){
-    status=json["status"];
-    message=json["message"];
+  AddCustomProductToFavResModel.fromJson(Map<String, dynamic> json) {
+    status = json["status"];
+    message = json["message"];
   }
 }
