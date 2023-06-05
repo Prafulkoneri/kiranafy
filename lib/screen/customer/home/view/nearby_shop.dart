@@ -69,6 +69,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
                               fit: BoxFit.cover):DecorationImage(
                               image: NetworkImage("${element?.shopBannerImagePath}"
                               ),
+
                               fit: BoxFit.cover),
                         ),
                         child: Container(

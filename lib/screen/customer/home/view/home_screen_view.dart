@@ -20,6 +20,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 
 import 'package:provider/provider.dart';
 
@@ -36,11 +37,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   final TextEditingController _searchController = TextEditingController();
   PageController? _pageController;
 
-  List<String> images = [
-    "assets/images/caurosal.png",
-    "assets/images/caurosal.png",
-    "assets/images/caurosal.png",
-  ];
+  // List<String> images = [
+  //   "assets/images/caurosal.png",
+  //   "assets/images/caurosal.png",
+  //   "assets/images/caurosal.png",
+  // ];
 
   int activePage = 0;
   List<Widget> indicators(imagesLength, currentIndex) {
@@ -76,7 +77,9 @@ class _HomeScreenViewState extends State<HomeScreenView> {
       body: watch.isLoading?Center(
         child: CircularProgressIndicator(),
       ): WillPopScope(
-          onWillPop: () async => false,
+          onWillPop: () async{
+            return false;
+          },
           child: ListView(
               shrinkWrap: true,
               padding: EdgeInsets.zero,
@@ -170,7 +173,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                     ),
 
                     ////image
-                    SizedBox(
+                    Container(
+                      padding: EdgeInsets.only(left: 19.w),
                       width: MediaQuery.of(context).size.width,
                       child: ExpandablePageView.builder(
                           itemCount: watch.bannerData?.length??0,
@@ -185,66 +189,31 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           },
                           itemBuilder: (context, pagePosition) {
                             final element=watch.bannerData?[pagePosition];
-                            return Container(
+                            return     Container(
+                              margin: EdgeInsets.only(right: 14.w),
                               child: element?.bannerImagePath==""?Image.asset(
                                 "assets/images/caurosal.png",
                                 height: 170.w,
                                 // width: 340.w,
                                 // scale: 0.5,
                                 fit: BoxFit.cover,
-                              ):Image.network(
+                              ):AppNetworkImages(
+                                imageUrl:
                                 element?.bannerImagePath??"",
                                 height: 170.w,
                                 // width: 340.w,
                                 // scale: 0.5,
                                 fit: BoxFit.cover,
                               ),
-                              margin: EdgeInsets.only(
-                                  left: pagePosition == 0 ? 19.w : 0,
-                                  // top: 15.w,
-                                  right: pagePosition == images.length - 1
-                                      ? 19.w
-                                      : 10.w),
+                              // margin: EdgeInsets.only(
+                              //     left: pagePosition == 0 ? 19.w : 0,
+                              //     // top: 15.w,
+                              //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
+                              //         ? 19.w
+                              //         : 10.w),
                             );
                           }),
                     ),
-
-
-
-                    // ExpandablePageView.builder(
-                    //     itemCount: watch.data?.length ?? 0,
-                    //     physics: BouncingScrollPhysics(),
-                    //     padEnds: false,
-                    //     pageSnapping: true,
-                    //     controller: _pageController,
-                    //     onPageChanged: (page) {
-                    //       // setState(() {
-                    //       activePage = page;
-                    //       // });
-                    //     },
-                    //     itemBuilder: (context, pagePosition) {
-                    //       final element = watch.data?[pagePosition];
-                    //       return Container(
-                    //         child: Image.network(
-                    //           "${element?.bannerImagePath}",
-                    //           fit: BoxFit.fill,
-                    //         ),
-                    //         // Image.asset(
-                    //         //   images[pagePosition],
-                    //         //   height: 170.w,
-                    //         //   // width: 340.w,
-                    //         //   // scale: 0.5,
-                    //         //   fit: BoxFit.fill,
-                    //         // ),
-                    //         margin: EdgeInsets.only(
-                    //             left: pagePosition == 0 ? 19.w : 0,
-                    //             // top: 15.w,
-                    //             right: pagePosition == images.length - 1 ? 19.w : 10.w),
-                    //       );
-                    //     }),
-
-
-
                     SizedBox(
                       height: 5.h,
                     ),

@@ -8,8 +8,11 @@ import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_mod
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/products/model/add_admin_product_to_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_unit_images_res_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_view_model.dart';
+import 'package:local_supper_market/screen/customer/products/repository/add_admin_product_to_fav_repo.dart';
+import 'package:local_supper_market/screen/customer/products/repository/add_custom_product_to_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/product_unit_image_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/product_view_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -24,6 +27,7 @@ class ProductViewController extends ChangeNotifier {
   String? selectedUnitId = "";
   String? productImage = "";
   bool favAllShop = true; //fvrt
+  bool isFavProduct=true;
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   ProductViewData? productViewData;
   ProductDetails? productDetails;
@@ -34,6 +38,8 @@ class ProductViewController extends ChangeNotifier {
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
+
+  AddAdminProductToFavRepo addAdminProductToFavRepo=AddAdminProductToFavRepo();
   Future<void> initState(context, sId, cId, pId, suId) async {
     await productsView(context, sId, cId, pId);
     unitImages.clear();
@@ -118,6 +124,40 @@ class ProductViewController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  AddAdminProductToFavReqModel get addAdminProductToFavReqModel=>AddAdminProductToFavReqModel(
+    shopId: shopId,
+    productId: productId,
+  );
+
+  Future addToFavProduct(context)async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    addAdminProductToFavRepo.addAdminProductToFav(
+        addAdminProductToFavReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+      AddAdminProductToFavResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
