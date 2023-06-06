@@ -84,8 +84,18 @@ class _ProductScreenViewState extends State<ProductScreenView> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+          : //  onWillPop: () async {
+          //     Navigator.pushAndRemoveUntil(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => MainScreenView(
+          //               index: 1, screenName: (refreshPage: false,))),
+          //       (Route<dynamic> route) => false,
+          //     );
+          //     return false;
+          //   },
+          SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -617,7 +627,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                           SizedBox(
                             height: 17.w,
                           ),
-
                           Container(
                             height: 205.w,
                             child: ListView.builder(

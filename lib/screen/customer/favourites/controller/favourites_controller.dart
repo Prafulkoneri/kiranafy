@@ -3,7 +3,9 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/favourites/model/all_fav_product_model.dart';
 import 'package:local_supper_market/screen/customer/favourites/model/all_fvrt_shops.dart';
+import 'package:local_supper_market/screen/customer/favourites/repository/all_product_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/favourites/repository/all_shop_fvrt_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
@@ -14,18 +16,25 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavouritesController extends ChangeNotifier {
-  AllFvrtShopsRepo allFvrtShopsRepo = AllFvrtShopsRepo();
+  AllFvrtShopsRepo allFvrtShopsRepo = AllFvrtShopsRepo(); //shop
+  AllFvrtProductRepo allfavProductRepo = AllFvrtProductRepo(); //product
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   bool isFavShopPressed = true;
   List<FavouriteData>? favShopList;
+  FavProductData? favProductData; //product
+  List<AdminProduct>? adminProductList; //product
+  List<CustomeProduct>? customeProductList; //product
+
   bool isLoading = true;
   String shopId = "";
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   List<bool> fav = [];
+  List<bool> favproduct = [];
   Future<void> initState(context) async {
     favShopList?.clear();
     isLoading = true;
     await getAllFavouriteShop(context);
+    await getAllFavouriteProduct(context);
   }
 
   onFavouriteShopTapped() {
@@ -123,6 +132,44 @@ class FavouritesController extends ChangeNotifier {
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  ///////////// Fav Product List////////////
+  Future<void> getAllFavouriteProduct(context) async {
+    isLoading = true;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    allfavProductRepo
+        .allfvrtProductRepo(pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result = FavProductResModel.fromJson(jsonDecode(response.body));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        favProductData = result.data;
+        adminProductList = favProductData?.adminProducts;
+        customeProductList = favProductData?.customProducts;
+        favproduct = List<bool>.filled(adminProductList?.length ?? 0, true,
+            growable: true);
+        favproduct = List<bool>.filled(customeProductList?.length ?? 0, true,
+            growable: true);
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

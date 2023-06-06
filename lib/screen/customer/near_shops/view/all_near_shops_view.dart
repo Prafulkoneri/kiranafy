@@ -62,7 +62,10 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => MainScreenView(
-                          index: 1, screenName: HomeScreenView(refreshPage: false,))),
+                          index: 1,
+                          screenName: HomeScreenView(
+                            refreshPage: false,
+                          ))),
                   (Route<dynamic> route) => false,
                 );
                 return false;
