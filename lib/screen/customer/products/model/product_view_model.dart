@@ -170,6 +170,7 @@ class SimilarProduct {
   String? weight;
   String? offerPrice;
   String? mrpPrice;
+  int? categoryId;
   String? discountPercentage;
   String? status;
   String? unit;
@@ -183,6 +184,7 @@ class SimilarProduct {
       required this.weight,
       required this.offerPrice,
       required this.mrpPrice,
+      required this.categoryId,
       required this.discountPercentage,
       required this.status,
       required this.unit,
@@ -196,6 +198,7 @@ class SimilarProduct {
     weight = json["weight"];
     offerPrice = json["offer_price"];
     mrpPrice = json["mrp_price"];
+    categoryId = json["category_id"];
     discountPercentage = json["discount_percentage"];
     status = json["status"];
     unit = json["unit"];

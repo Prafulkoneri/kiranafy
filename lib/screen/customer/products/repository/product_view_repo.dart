@@ -5,6 +5,7 @@ import 'package:local_supper_market/screen/customer/products/model/product_view_
 class ProductViewRepo {
   Future<http.Response> showProductsViewRepo(
       ProductViewRequestModel reqModel, token) async {
+    print("qqqqqqqqqqqqqqqqqqqqqqqqqq");
     print(reqModel.toJson());
     print(token);
     try {

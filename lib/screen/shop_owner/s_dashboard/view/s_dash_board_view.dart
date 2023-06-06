@@ -75,9 +75,9 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
             child: Stack(
               children: [
                 SizedBox(
-                  height: 171.0.h,
+                  height: 180.0.h,
                   child:
-                  ExpandablePageView.builder(
+                  PageView.builder(
                     controller: watch.pageController,
                     allowImplicitScrolling: true,
                       scrollDirection: Axis.horizontal,
