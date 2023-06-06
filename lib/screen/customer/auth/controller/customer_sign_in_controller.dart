@@ -62,11 +62,14 @@ class CustomerSignInController extends ChangeNotifier {
         if (response.statusCode == 200) {
           if (result.status == 404) {
             isLoginBtnEnabled = false;
+            Utils.showPrimarySnackbar(context, result.message,
+                type: SnackType.error);
           } else {
             isLoginBtnEnabled = true;
+            Utils.showPrimarySnackbar(context, result.message,
+                type: SnackType.success);
           }
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.error);
+
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,

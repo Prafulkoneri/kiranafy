@@ -22,6 +22,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/controller/shop
 import 'package:local_supper_market/screen/customer/shop_profile/view/Seasonal_products.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_recommanded_products.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/offer_products.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/recommendation_products.dart';
@@ -126,22 +127,29 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                   child:   SizedBox(
                     height: 171.0.h,
                     child:
-                    ExpandablePageView.builder(
+                    PageView.builder(
                         allowImplicitScrolling: true,
                         physics: NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
+                        controller: watch.pageController,
                         onPageChanged: (index) {
                         },
-                        itemCount: 1,
+                        itemCount: watch.bannerImageData?.length??0,
                         itemBuilder: (context, index) {
-                          // final element = watch.onBoardingData?[index];
+                          final element = watch.bannerImageData?[index];
                           return Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              element?.imagesPath==""?
                               Container(
                                   height:190.w,
 
-                                  child: Image.asset("assets/images/shop_image.png",height: 191.w,fit: BoxFit.fill,))
+                                  child: Image.asset("assets/images/shop_image.png",height: 191.w,fit: BoxFit.fill,)):
+                              Container(
+                                height:190.w,
+                                child: AppNetworkImages(imageUrl:element?.imagesPath??"",fit: BoxFit.cover),
+                                width: ScreenUtil().screenWidth,
+                              ),
                             ],
                           );
                         }),

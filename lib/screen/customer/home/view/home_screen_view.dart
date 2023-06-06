@@ -34,8 +34,8 @@ class HomeScreenView extends StatefulWidget {
 
 class _HomeScreenViewState extends State<HomeScreenView> {
   // This controller will store the value of the search bar
-  final TextEditingController _searchController = TextEditingController();
-  PageController? _pageController;
+
+
 
   // List<String> images = [
   //   "assets/images/caurosal.png",
@@ -63,16 +63,12 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<HomeScreenController>().initState(context,widget.refreshPage);
     });
-    _pageController = PageController(viewportFraction: 0.9, initialPage: 1);
   }
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<HomeScreenController>();
     final watch = context.watch<HomeScreenController>();
     final NearByShopWatch=context.watch<AllNearShopsAsPerPincode>();
-    final NearByShopRead=context.read<AllNearShopsAsPerPincode>();
-    // final readMain = context.read<MainScreenController>();
     return   Scaffold(
       body: watch.isLoading?Center(
         child: CircularProgressIndicator(),
@@ -80,11 +76,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
           onWillPop: () async{
             return false;
           },
-          child: ListView(
-              shrinkWrap: true,
+          child: SingleChildScrollView(
               padding: EdgeInsets.zero,
               physics: BouncingScrollPhysics(),
-              children: [
+              child:
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -138,7 +133,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         width: 351.w,
                         height: 36.h,
                         child: TextField(
-                          controller: _searchController,
                           decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(width: 1, color: splashnone),
@@ -173,15 +167,16 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                     ),
 
                     ////image
-                    Container(
+                    Padding(
                       padding: EdgeInsets.only(left: 19.w),
-                      width: MediaQuery.of(context).size.width,
                       child: ExpandablePageView.builder(
-                          itemCount: watch.bannerData?.length??0,
+                          itemCount: watch.bannerData?.length??1,
                           physics: BouncingScrollPhysics(),
                           padEnds: false,
                           pageSnapping: true,
-                          controller: _pageController,
+                          scrollDirection: Axis.horizontal,
+                          allowImplicitScrolling: true,
+                          controller: watch.pageController,
                           onPageChanged: (page) {
                             setState(() {
                               activePage = page;
@@ -190,6 +185,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           itemBuilder: (context, pagePosition) {
                             final element=watch.bannerData?[pagePosition];
                             return     Container(
+                              width: MediaQuery.of(context).size.width,
                               margin: EdgeInsets.only(right: 14.w),
                               child: element?.bannerImagePath==""?Image.asset(
                                 "assets/images/caurosal.png",
@@ -372,7 +368,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                     )
                   ],
                 ),
-              ]
+
           ),
 
       )
