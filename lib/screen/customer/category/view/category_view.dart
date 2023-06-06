@@ -11,10 +11,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
+import 'package:local_supper_market/screen/customer/category/view/filter_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
 import '../../../shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import '../../products/views/product_screen.dart';
@@ -84,177 +86,9 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                         topRight: Radius.circular(30))),
                 context: context,
                 builder: (BuildContext context) {
-                  return Material(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(16.0),
-                        topRight: Radius.circular(16.0)),
-                    child: Container(
-                      // height: 326.h,
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom),
-                      width: 390.w,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: 20.h,
-                            ),
-                            child: Row(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  "Product Filter",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: const TextStyle(
-                                        color: Black,
-                                        letterSpacing: .5,
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 100.w,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: SvgPicture.asset(
-                                    'assets/images/cross1.svg',
-                                    width: 30.w,
-                                    height: 30.h,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12.h,
-                          ),
-                          Divider(
-                            // height: 20,
-                            thickness: 1,
-                            indent: 19,
-                            endIndent: 19,
-                            color: grey1,
-                          ),
-                          Column(
-                            children: [
-                              CheckboxListTile(
-                                // checkColor:
-                                //     Colors.yellowAccent, // color of tick Mark
-                                activeColor: SplashText,
-
-                                title: Text(
-                                  "Offer Products",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: const TextStyle(
-                                        color: Black,
-                                        letterSpacing: .5,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                value: checkedValue,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    checkedValue = newValue!;
-                                  });
-                                },
-                                controlAffinity: ListTileControlAffinity
-                                    .leading, //  <-- leading Checkbox
-                              ),
-
-                              // Divider(),
-                              RadioListTile(
-                                activeColor: SplashText,
-
-                                //          fillColor:
-                                // MaterialStateColor.resolveWith((states) => Button1),
-                                title: Text(
-                                  "Low to High Price",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: const TextStyle(
-                                        color: Black,
-                                        letterSpacing: .5,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                value: "Low to High Price",
-                                groupValue: gender,
-                                onChanged: (value) {
-                                  setState(() {
-                                    gender = value.toString();
-                                  });
-                                },
-                              ),
-                              RadioListTile(
-                                activeColor: SplashText,
-                                title: Text(
-                                  "High to Low Price",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: const TextStyle(
-                                        color: Black,
-                                        letterSpacing: .5,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                value: "High to Low Price",
-                                groupValue: gender,
-                                onChanged: (value) {
-                                  setState(() {
-                                    gender = value.toString();
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: 20.w,
-                                top: 24.w,
-                                bottom: 20.w,
-                                right: 19.w),
-                            child: SizedBox(
-                              width: 352.w, // <-- Your width
-                              height: 35.h,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Button,
-                                  // onPrimary: Colors.white,
-                                  // shadowColor: Colors.greenAccent,
-                                  elevation: 3,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(14.0)),
-                                  minimumSize:
-                                      const Size(100, 40), //////// HERE
-                                ),
-                                // style: style,
-                                onPressed: () {},
-                                child: Text(
-                                  'Filter',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: const TextStyle(
-                                        // color: SplashTex
-                                        letterSpacing: .5,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                  return StatefulBuilder(builder: (context, setState) {
+                    return FilterScreenView();
+                  });
                 },
               );
             },
@@ -637,3 +471,6 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
     );
   }
 }
+
+
+
