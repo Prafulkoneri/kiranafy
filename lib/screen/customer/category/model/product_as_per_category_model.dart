@@ -85,6 +85,8 @@ class ProductList {
   String? weight;
   String? offerPrice;
   String? mrpPrice;
+  int? categoryId;
+  String? productType;
   String? discountPercentage;
   int? productId;
   String? status;
@@ -102,6 +104,8 @@ class ProductList {
     required this.productId,
     required this.status,
     required this.unit,
+    required this.categoryId,
+    required this.productType,
   });
   ProductList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -115,5 +119,7 @@ class ProductList {
     productId = json["product_id"];
     status = json["status"];
     unit = json["unit"];
+    categoryId = json["category_id"];
+    productType = json["product_type"];
   }
 }
