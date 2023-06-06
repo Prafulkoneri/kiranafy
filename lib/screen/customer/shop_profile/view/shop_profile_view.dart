@@ -341,7 +341,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             height: 14.h,
                                           ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ],
