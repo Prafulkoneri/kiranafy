@@ -4,10 +4,12 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/customer/products/model/add_admin_product_to_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/add_custom_product_to_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_unit_images_res_model.dart';
@@ -20,6 +22,7 @@ import 'package:local_supper_market/screen/customer/products/repository/product_
 import 'package:local_supper_market/screen/customer/products/repository/product_view_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_admin_product_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_custom_product_fav_repo.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,15 +44,14 @@ class ProductViewController extends ChangeNotifier {
   ShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
   List<SimilarProduct>? similarProduct;
-  // UnitImages? unitImages; ////
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
+  AddAdminProductToFavRepo addAdminProductToFavRepo = AddAdminProductToFavRepo();
+  AddCustomProductToFavRepo addCustomProductFavRepo = AddCustomProductToFavRepo();
+  RemoveAdminFvrtProductRepo removeFavProductRepo = RemoveAdminFvrtProductRepo();
+  RemoveCustomFvrtProductRepo removeCustomFavProductRepo = RemoveCustomFvrtProductRepo();
 
-  AddAdminProductToFavRepo addAdminProductToFavRepo =
-      AddAdminProductToFavRepo();
-  AddCustomProductToFavRepo addCustomProductFavRepo =
-      AddCustomProductToFavRepo();
   Future<void> initState(context, sId, cId, pId, suId, pType) async {
     await productsView(context, sId, cId, pId, pType);
     unitImages.clear();
@@ -230,14 +232,12 @@ class ProductViewController extends ChangeNotifier {
   RemoveAdminProductReqModel get removeFavProductReqModel =>
       RemoveAdminProductReqModel(
           shopId: shopId.toString(), productId: productId.toString());
-  RemoveAdminFvrtProductRepo removeFavProductRepo =
-      RemoveAdminFvrtProductRepo();
 
   RemoveCustomProductReqModel get removeCustomeProductReqModel =>
       RemoveCustomProductReqModel(
           shopId: shopId.toString(), productId: productId.toString());
-  RemoveCustomFvrtProductRepo removeCustomeFavProductRepo =
-      RemoveCustomFvrtProductRepo();
+
+
   Future<void> removeFavProduct(
     context,
   ) async {
@@ -272,7 +272,7 @@ class ProductViewController extends ChangeNotifier {
       );
     } else {
       SharedPreferences pref = await SharedPreferences.getInstance();
-      removeCustomeFavProductRepo
+      removeCustomFavProductRepo
           .removeCustomProductRepo(
               removeCustomeProductReqModel, pref.getString("successToken"))
           .then((response) {
@@ -423,4 +423,52 @@ class ProductViewController extends ChangeNotifier {
       ),
     );
   }
+/////////////////////////
+  // void onBackPressed(screenName,context,cId){
+  //   print(screenName);
+  //   if(screenName=="allNearShopView"){
+  //     Navigator.pushAndRemoveUntil(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) => const MainScreenView(
+  //               index: 1,
+  //               screenName: ShopProfileView(refreshPage: false, routeName: '', shopId: ,)
+  //           )),
+  //           (Route<dynamic> route) => false,
+  //     );
+  //   }
+  //   if(screenName=="nearShopsCategory"){
+  //     Navigator.pushAndRemoveUntil(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) => MainScreenView(
+  //               index: 1,
+  //               screenName: AllNearCategoryShopsView(categoryId: cId,refresh: false,)
+  //           )),
+  //           (Route<dynamic> route) => false,
+  //     );
+  //   }
+  //   if(screenName=="homeNearbyShop"){
+  //     Navigator.pushAndRemoveUntil(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) => MainScreenView(
+  //               index: 0,
+  //               screenName: HomeScreenView(refreshPage: false,)
+  //           )),
+  //           (Route<dynamic> route) => false,
+  //     );
+  //   }
+  //   else{
+  //     Navigator.pushAndRemoveUntil(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) => MainScreenView(
+  //               index: 1,
+  //               screenName: HomeScreenView(refreshPage: false)
+  //           )),
+  //           (Route<dynamic> route) => false,
+  //     );
+  //   }
+  // }
 }

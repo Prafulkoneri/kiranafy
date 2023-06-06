@@ -231,8 +231,9 @@ class MobileNoTextFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(5.w),
               color: Colors.white,
               border: Border.all(
-                  color:
-                      enableOrder ?? false ? Color(0xffE0E0E0) : Color(0xffEFEFEF))),
+                  color: enableOrder ?? false
+                      ? Color(0xffE0E0E0)
+                      : Color(0xffEFEFEF))),
           child: CountryCodePicker(
             enabled: readOnly == true ? false : true,
             flagWidth: 20.w,
@@ -261,7 +262,7 @@ class MobileNoTextFormField extends StatelessWidget {
             lengthLimitingTextInputFormatter:
                 LengthLimitingTextInputFormatter(10),
             onChanged: onChanged,
-            hintText: "Phone Number",
+            hintText: "Mobile Number",
             textInputType: TextInputType.number,
             padding: EdgeInsets.symmetric(vertical: 14.w, horizontal: 10.w),
           ),

@@ -187,4 +187,8 @@ class Endpoint {
 ////////////////////Remove Custome Product////
   static const String removeCustomProduct =
       "${baseUrl}lsm-customer-remove-custom-product-from-favourite";
+
+  /////////All Fav Products///////
+  static const String allFavProduct =
+      "${baseUrl}lsm-customer-favourite-product-list";
 }

@@ -88,13 +88,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               )),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(13.w),
-                            child:watch.shopImage==""?Image.asset(
-                              'assets/images/profile_image.png',
-                              fit: BoxFit.cover,
-                            ):Image.network(
-                              watch.shopImage,
-                              fit: BoxFit.cover,
-                            ),
+                            child: watch.shopImage == ""
+                                ? Image.asset(
+                                    'assets/images/profile_image.png',
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.network(
+                                    watch.shopImage,
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                         ),
                         SizedBox(
@@ -124,10 +126,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                     onTap: () {
                                       Navigator.pushAndRemoveUntil(
                                         context,
-                                        MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName: SEditProfileView(
-                                          fromDashBoard: false,
-                                        ),)),
-                                            (Route<dynamic> route) => false,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SMainScreenView(
+                                                  index: 0,
+                                                  screenName: SEditProfileView(
+                                                    fromDashBoard: false,
+                                                  ),
+                                                )),
+                                        (Route<dynamic> route) => false,
                                       );
                                       // Navigator.push(
                                       //     context,
@@ -215,8 +222,10 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
               onTap: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SShopConfigurationView())),
-                      (Route<dynamic> route) => false,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 0, screenName: SShopConfigurationView())),
+                  (Route<dynamic> route) => false,
                 );
                 // read.onShopConfigurationClicked(context);
               },
@@ -268,7 +277,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             ////////////////////////
             GestureDetector(
-              onTap: () {},
+              // onTap: () {  Navigator.pushAndRemoveUntil(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => SMainScreenView(
+              //             index: 0, screenName: ())),
+              //     (Route<dynamic> route) => false,
+              //   );},
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
