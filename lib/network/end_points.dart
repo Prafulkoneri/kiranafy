@@ -156,7 +156,7 @@ class Endpoint {
   static const String customerProductListAsPerSearch =
       "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
   //////////Customer Product List As Per Filter
-  static const String customerProductListAsPerFilter=
+  static const String customerProductListAsPerFilter =
       "${baseUrl}lsm-customer-product-list-as-per-category-and-filter";
   //////////Customer Add Admin Product To Fav
   static const String addAdminProductToFav =
@@ -180,4 +180,8 @@ class Endpoint {
   /////////////Remove Admin Product Fvrt///////
   static const String removeAdminProduct =
       "${baseUrl}lsm-customer-remove-admin-product-from-favourite";
+
+////////////////////Remove Custome Product////
+  static const String removeCustomProduct =
+      "${baseUrl}lsm-customer-remove-custom-product-from-favourite";
 }

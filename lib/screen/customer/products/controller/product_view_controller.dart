@@ -9,14 +9,17 @@ import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/products/model/add_admin_product_to_fav_model.dart';
+import 'package:local_supper_market/screen/customer/products/model/add_custom_product_to_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_unit_images_res_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_view_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/remove_admin_product_from_fav_model.dart';
+import 'package:local_supper_market/screen/customer/products/model/remove_custom_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/repository/add_admin_product_to_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/add_custom_product_to_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/product_unit_image_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/product_view_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_admin_product_fav_repo.dart';
+import 'package:local_supper_market/screen/customer/products/repository/remove_custom_product_fav_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,6 +31,8 @@ class ProductViewController extends ChangeNotifier {
   String? productId = "";
   String? selectedUnitId = "";
   String? productImage = "";
+  String? productType = "";
+  bool isLoading = true;
   bool favAllShop = true; //fvrt
   bool isFavProduct = true; //fvrt Product
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
@@ -43,10 +48,18 @@ class ProductViewController extends ChangeNotifier {
 
   AddAdminProductToFavRepo addAdminProductToFavRepo =
       AddAdminProductToFavRepo();
-  Future<void> initState(context, sId, cId, pId, suId) async {
-    await productsView(context, sId, cId, pId);
+  AddCustomProductToFavRepo addCustomProductFavRepo =
+      AddCustomProductToFavRepo();
+  Future<void> initState(context, sId, cId, pId, suId, pType) async {
+    await productsView(context, sId, cId, pId, pType);
     unitImages.clear();
+    print(pType);
     // await productsUnitImage(context, suId);
+    notifyListeners();
+  }
+
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -54,13 +67,14 @@ class ProductViewController extends ChangeNotifier {
       ProductViewRequestModel(
           shopId: shopId, categoryId: categoryId, productId: productId);
 
-  Future<void> productsView(context, sId, cId, pId) async {
+  Future<void> productsView(context, sId, cId, pId, pType) async {
     // print("id$id");
     print("helohhhhhhhhooooooooooooo");
     shopId = sId;
     categoryId = cId;
     productId = pId;
-
+    productType = pType;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     productViewRepo
@@ -79,6 +93,7 @@ class ProductViewController extends ChangeNotifier {
         similarProduct = productViewData?.similarProducts;
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
         isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -137,6 +152,11 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
+  AddCustomProductToFavReqModel get addCustomProductToFavReqModel =>
+      AddCustomProductToFavReqModel(
+        shopId: shopId,
+        productId: productId,
+      );
 //////Add Admin Product To favrt////
   AddAdminProductToFavReqModel get addAdminProductToFavReqModel =>
       AddAdminProductToFavReqModel(
@@ -145,34 +165,65 @@ class ProductViewController extends ChangeNotifier {
       );
 
   Future addToFavProduct(context) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-
-    addAdminProductToFavRepo
-        .addAdminProductToFav(
-            addAdminProductToFavReqModel, pref.getString("successToken"))
-        .then((response) {
-      log("response.body${response.body}");
-      final result =
-          AddAdminProductToFavResModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        isFavProduct = true;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
+    if (productType == "admin_product") {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      addAdminProductToFavRepo
+          .addAdminProductToFav(
+              addAdminProductToFavReqModel, pref.getString("successToken"))
+          .then((response) {
+        log("response.body${response.body}");
+        final result =
+            AddAdminProductToFavResModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          isFavProduct = true;
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+        (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    } else {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      addCustomProductFavRepo
+          .addCustomeProductToFav(
+              addCustomProductToFavReqModel, pref.getString("successToken"))
+          .then((response) {
+        log("response.body${response.body}");
+        final result =
+            AddCustomProductToFavResModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          isFavProduct = true;
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+        (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    }
   }
 
   /////End/////
@@ -182,41 +233,74 @@ class ProductViewController extends ChangeNotifier {
   RemoveAdminFvrtProductRepo removeFavProductRepo =
       RemoveAdminFvrtProductRepo();
 
+  RemoveCustomProductReqModel get removeCustomeProductReqModel =>
+      RemoveCustomProductReqModel(
+          shopId: shopId.toString(), productId: productId.toString());
+  RemoveCustomFvrtProductRepo removeCustomeFavProductRepo =
+      RemoveCustomFvrtProductRepo();
   Future<void> removeFavProduct(
     context,
   ) async {
-    print("rrrrrrrrrrrrrrrrrrrrrrrr");
-    // // print("id${id}");
-    // // shopId = id.toString();
-    // productId = productId.toString();
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    removeFavProductRepo
-        .removeAdminProductRepo(
-            removeFavProductReqModel, pref.getString("successToken"))
-        .then((response) {
-      log("response.body${response.body}");
-      final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        isFavProduct = false;
-        print("hello");
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
+    if (productType == "admin_product") {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      removeFavProductRepo
+          .removeAdminProductRepo(
+              removeFavProductReqModel, pref.getString("successToken"))
+          .then((response) {
+        log("response.body${response.body}");
+        final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          isFavProduct = false;
+          print("hello");
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+        (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    } else {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      removeCustomeFavProductRepo
+          .removeCustomProductRepo(
+              removeCustomeProductReqModel, pref.getString("successToken"))
+          .then((response) {
+        log("response.body${response.body}");
+        final result =
+            RemoveCustomProductResModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          isFavProduct = false;
+          print("hello");
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+        (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    }
   }
 
   void launchPhone(String mobNumber, context) async {
@@ -302,11 +386,8 @@ class ProductViewController extends ChangeNotifier {
       },
     );
   }
-// final url = Uri.parse("myLink");
-//   final response = await http.get(url);
-//   await File('/yourPath/myItem.png').writeAsBytes(response.bodyBytes);
+  ///////////////End/////////////
 
-//   await Share.shareFiles(['/yourPath/myItem.png'], text: 'Image Shared');
   void onShareXFileFromAssets(BuildContext context) async {
     final box = context.findRenderObject() as RenderBox?;
     final scaffoldMessenger = ScaffoldMessenger.of(context);

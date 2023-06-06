@@ -7,6 +7,7 @@ class RemoveAdminFvrtProductRepo {
       RemoveAdminProductReqModel reqModel, token) async {
     print(reqModel.toJson());
     print(token);
+    print(Endpoint.removeAdminProduct);
     try {
       return await http.post(Uri.parse(Endpoint.removeAdminProduct),
           body: reqModel.toJson(),
