@@ -188,4 +188,6 @@ class Endpoint {
   /////////All Fav Products///////
   static const String allFavProduct =
       "${baseUrl}lsm-customer-favourite-product-list";
+  ///////////////Customer List///
+  static const String customerList = "${baseUrl}lsm-shop-owner-customer-list";
 }

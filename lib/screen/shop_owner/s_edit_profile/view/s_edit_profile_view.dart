@@ -46,25 +46,32 @@ class _SEditProfileViewState extends State<SEditProfileView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             if (widget.fromDashBoard ?? false) {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:ShopDashBoard())),
-                    (Route<dynamic> route) => false,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        SMainScreenView(index: 0, screenName: ShopDashBoard())),
+                (Route<dynamic> route) => false,
               );
             } else {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
-                    (Route<dynamic> route) => false,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 0, screenName: SAccountScreenView())),
+                (Route<dynamic> route) => false,
               );
             }
           },
           title: "Edit profile",
-          action: SvgPicture.asset("assets/icons/forward.svg"),
+          action: Padding(
+            padding: EdgeInsets.only(right: 20.w),
+            child: SvgPicture.asset("assets/icons/forward.svg"),
+          ),
           onActionTap: () async {
             read.uploadImage(context);
             // await readMainScreen.onBackPressed(4, )
@@ -383,7 +390,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     padding: const EdgeInsets.only(bottom: 0),
                     child: Container(
                         child: MobileNoTextFormField(
-                          readOnly: true,
+                      readOnly: true,
                       initialSelection: watch.countryCode,
                       controller: watch.phoneNumberController,
                       enableOrder: true,
