@@ -62,6 +62,7 @@ class MainScreenController extends ChangeNotifier {
   }
 
   Future<void> navigation(tabIndex,screenName)async{
+    print("${tabIndex}tabIndex");
     currentTab=tabIndex;
     currentScreen=screenName;
     notifyListeners();

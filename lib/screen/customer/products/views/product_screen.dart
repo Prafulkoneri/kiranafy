@@ -85,6 +85,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -616,8 +617,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                           SizedBox(
                             height: 17.w,
                           ),
+
                           Container(
-                            height: 200.w,
+                            height: 205.w,
                             child: ListView.builder(
                                 physics: BouncingScrollPhysics(),
                                 padding: EdgeInsets.zero,

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
@@ -26,6 +27,15 @@ class SplashController extends ChangeNotifier {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SMainScreenView()));
       }
       if(pref.getString("status")=="customerLoggedIn"){
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                  index: 0,
+                  screenName: HomeScreenView(refreshPage: true,)
+              )),
+              (Route<dynamic> route) => false,
+        );
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainScreenView()));
       }
       if(pref.getString("status")==null){

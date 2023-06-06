@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -18,11 +19,16 @@ class SDashBoardController extends ChangeNotifier {
   DashBoardRepo dashBoardRepo = DashBoardRepo();
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
   List<ShopBannerImageData>? bannerImageList;
+  bool isLoading=true;
   Data? dashBoardData;
   String address = "";
   String pincode = "";
   String shopName = "";
   int categoriesCount = 2;
+  int _currentPage=0;
+  PageController pageController=PageController();
+
+
   void onCategorySelect(context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => SSCategoryListView()));
@@ -39,8 +45,15 @@ class SDashBoardController extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
 ///////Category Count End
   Future<void> getDashBoardData(context) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     print(pref.getString("successToken"));
@@ -53,6 +66,22 @@ class SDashBoardController extends ChangeNotifier {
       print("${response.body}");
       if (response.statusCode == 200) {
         dashBoardData = result.data;
+        // int imageLength=dashBoardData?.bannerImages?.length??0;
+        // if(dashBoardData?.bannerImages!.isNotEmpty??true){
+        //   Timer.periodic(Duration(seconds: 5), (Timer timer) {
+        //       if (_currentPage < imageLength-1) {
+        //         _currentPage++;
+        //       } else {
+        //         _currentPage = 0;
+        //       }
+        //       pageController.animateToPage(
+        //         _currentPage,
+        //         duration: Duration(milliseconds: 350),
+        //         curve: Curves.easeIn,
+        //       );
+        //
+        //   });
+        // }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -91,6 +120,7 @@ class SDashBoardController extends ChangeNotifier {
         address = shopDetails?.shopAddress ?? "";
         pincode = shopDetails?.shopPincode.toString() ?? "";
         shopName = shopDetails?.shopName ?? "";
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

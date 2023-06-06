@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_d
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -45,7 +46,8 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
     final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
+      body: watch.isLoading?Center(child: CircularProgressIndicator(),):
+      SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
@@ -76,21 +78,27 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                   height: 171.0.h,
                   child:
                   ExpandablePageView.builder(
+                    controller: watch.pageController,
                     allowImplicitScrolling: true,
-                      physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       onPageChanged: (index) {
                         },
-                      itemCount: 1,
+                      itemCount: watch.dashBoardData?.bannerImages?.length??1,
                       itemBuilder: (context, index) {
+                        final element= watch.dashBoardData?.bannerImages?[index];
                         // final element = watch.onBoardingData?[index];
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
+                        element?.imagesPath==""?Container(
                           height:190.w,
 
-                            child: Image.asset("assets/images/shop_image.png",height: 191.w,fit: BoxFit.fill,))
+                            child: Image.asset("assets/images/shop_image.png",height: 191.w,fit: BoxFit.fill,)):
+                        Container(
+                          height:190.w,
+                          child: AppNetworkImages(imageUrl:element?.imagesPath??"",fit: BoxFit.cover),
+                        width: ScreenUtil().screenWidth,
+                        ),
                       ],
                     );
                   }),

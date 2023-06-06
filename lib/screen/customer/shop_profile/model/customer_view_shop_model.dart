@@ -1,3 +1,5 @@
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
+
 class CustomerViewShopReqModel {
   String? shopId;
 
@@ -184,6 +186,7 @@ class ShopData {
   List<OfferProduct>? offerProduct;
   List<SeasonalProduct>? seasonalProduct;
   List<RecommandedProducts>? recommandedProduct;
+  List<BannerImageData>? bannerImages;
 
   ShopData({
     required this.shopDetails,
@@ -191,6 +194,7 @@ class ShopData {
     required this.offerProduct,
     required this.seasonalProduct,
     required this.recommandedProduct,
+    required this.bannerImages,
   });
   ShopData.fromJson(Map<String, dynamic> json) {
     shopDetails = json['shop_details'] != null
@@ -218,6 +222,12 @@ class ShopData {
       recommandedProduct = <RecommandedProducts>[];
       json["recommanded_products"].forEach((v) {
         recommandedProduct!.add(RecommandedProducts.fromJson(v));
+      });
+    }
+    if (json["shop_banner_images"] != null) {
+      bannerImages = <BannerImageData>[];
+      json["shop_banner_images"].forEach((v) {
+        bannerImages!.add(BannerImageData.fromJson(v));
       });
     }
   }
