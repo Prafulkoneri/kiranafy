@@ -23,6 +23,7 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +70,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
           title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.uploadImage(context);
+            read.uploadAdminProduct(context);
           },
         ),
       ),
@@ -337,7 +338,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                             elevation: 0.3,
                             child: watch.productFeatureImage!=""?
                             Center(
-                              child: Image.network(
+                              child: AppNetworkImages(
+                                imageUrl:
                                 watch.productFeatureImage,
                                 fit: BoxFit.cover,
                                 height: 90.w,
@@ -594,8 +596,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                         element?.unitBasedProductImage1Path !=
                                             ""
                                             ? Center(
-                                              child: Image.network(
-                                          element?.unitBasedProductImage1Path??"",
+                                              child: AppNetworkImages(
+                                          imageUrl: element?.unitBasedProductImage1Path??"",
                                           fit: BoxFit.cover,
                                                 height: 90.w,
                                         ),
@@ -648,8 +650,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                         elevation: 0.3,
                                         child: element?.unitBasedProductImage2Path != ""
                                             ? Center(
-                                              child: Image.network(
-                                          element?.unitBasedProductImage2Path??"",
+                                              child: AppNetworkImages(
+                                         imageUrl:  element?.unitBasedProductImage2Path??"",
                                               fit: BoxFit.cover,height: 90.w,),
                                             )
                                             : Column(
@@ -701,8 +703,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                         child: element?.unitBasedProductImage3Path !=
                                             ""
                                             ? Center(
-                                              child: Image.network(
-                                              element?.unitBasedProductImage3Path??"",
+                                              child: AppNetworkImages(
+                                             imageUrl:  element?.unitBasedProductImage3Path??"",
                                               fit: BoxFit.cover,height: 90.w,),
                                             )
                                             : Column(

@@ -18,6 +18,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -187,7 +188,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
-                                child: Image.network(
+                                child: AppNetworkImages(
+                                  imageUrl:
                                   watch.networkImage1,
                                   fit: BoxFit.cover,
                                 ),
@@ -232,8 +234,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
-                                child: Image.network(
-                                  watch.networkImage2,
+                                child: AppNetworkImages(
+                                imageUrl:   watch.networkImage2,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -273,8 +275,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
-                                child: Image.network(
-                                  watch.networkImage3,
+                                child: AppNetworkImages(
+                                imageUrl:   watch.networkImage3,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -314,8 +316,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
-                                child: Image.network(
-                                  watch.networkImage4,
+                                child: AppNetworkImages(
+                                 imageUrl: watch.networkImage4,
                                   fit: BoxFit.cover,
                                 ),
                               )

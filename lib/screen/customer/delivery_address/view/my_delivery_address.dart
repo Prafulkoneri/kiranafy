@@ -53,8 +53,9 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
               scrollDirection: Axis.vertical,
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 8,
+              itemCount: watch.deliveryAddressList?.length ?? 0,
               itemBuilder: (BuildContext, index) {
+                final element = watch.deliveryAddressList?[index];
                 return Container(
                   margin: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
                   padding: EdgeInsets.only(
@@ -97,7 +98,8 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                                 width: 11.w,
                               ),
                               Text(
-                                'Rachel Green',
+                                "${element?.customerName}",
+                                // 'Rachel Green',
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black,
@@ -129,7 +131,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                               ),
                               onPressed: () {},
                               child: Text(
-                                "Home",
+                                "${element?.deliveryAddressType}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: SplashText1,
@@ -156,7 +158,8 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                           ),
                           SizedBox(width: 9.w),
                           Text(
-                            '+91 986 095 3315',
+                            "${element?.deliveryCountryCode}"
+                            "  ${element?.deliveryMobileNumber}",
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
                                   color: Black,
@@ -185,7 +188,9 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                           Expanded(
                             child: Text(
                               maxLines: 2,
-                              "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
+                              "${element?.address1}"
+                              " ${element?.address2}",
+                              // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
                               // textAlign: TextAlign.start,
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
@@ -214,7 +219,8 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    color: grey4,
+                                    // border: Border.all(width: 1),
+                                    color: Color(0xffF3F3F3),
                                     borderRadius: BorderRadius.circular(5)),
                                 height: 20.h,
                                 width: 20.w,
@@ -222,8 +228,6 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                                 child: Center(
                                   child: SvgPicture.asset(
                                     "assets/icons/check.svg",
-                                    // width: 8.w,
-                                    // height: 6.w,
                                   ),
                                 ),
                               ),

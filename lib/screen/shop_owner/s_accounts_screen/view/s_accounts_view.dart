@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 
 import 'package:provider/provider.dart';
 
@@ -94,8 +95,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                     'assets/images/profile_image.png',
                                     fit: BoxFit.cover,
                                   )
-                                : Image.network(
-                                    watch.shopImage,
+                                : AppNetworkImages(
+                                  imageUrl: watch.shopImage,
                                     fit: BoxFit.cover,
                                   ),
                           ),
@@ -225,7 +226,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SMainScreenView(
-                          index: 0, screenName: SShopConfigurationView())),
+                          index: 0, screenName: SShopConfigurationView(initialShopConfigration: false,))),
                   (Route<dynamic> route) => false,
                 );
                 // read.onShopConfigurationClicked(context);
@@ -283,7 +284,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SMainScreenView(
-                          index: 0, screenName: CustomerListView())),
+                          index: 0, screenName: CustomerListView(isRefresh: true,))),
                   (Route<dynamic> route) => false,
                 );
               },

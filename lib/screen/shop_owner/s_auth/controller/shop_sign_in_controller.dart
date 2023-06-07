@@ -281,8 +281,11 @@ class ShopSignInController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "loggedIn");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SMainScreenView()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:ShopDashBoard())),
+              (Route<dynamic> route) => false,
+        );
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

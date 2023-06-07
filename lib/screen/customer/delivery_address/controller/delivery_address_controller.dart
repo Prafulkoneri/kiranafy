@@ -19,6 +19,7 @@ class DeliveryAddressController extends ChangeNotifier {
   DeliveryAddressRepo DeliveryAddressListRepo = DeliveryAddressRepo();
   List<DeliveryAddressList>? deliveryAddressList;
   bool isLoading = true;
+  bool defaultAddress = true;
   Future<void> initState(context) async {
     await getDeliveryAddressList(context);
   }
@@ -34,6 +35,9 @@ class DeliveryAddressController extends ChangeNotifier {
       final result =
           DeliveryAddressListModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        deliveryAddressList = result.data;
+        // defaultAddress = deliveryAddressList.
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

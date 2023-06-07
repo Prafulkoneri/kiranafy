@@ -8,6 +8,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -254,8 +255,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                             watch.unitImages[pagePosition];
                                         return Container(
                                           child: Center(
-                                            child: Image.network(
-                                              '${element}',
+                                            child: AppNetworkImages(
+                                            imageUrl:  '${element}',
                                               height: 241.w,
                                               // width: 102.w,
                                               fit: BoxFit.fill,
@@ -271,9 +272,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                         );
                                       })
                                   : Container(
-                                      child: Image.network(
+                                      child: AppNetworkImages(
                                         // '${element}',
-                                        "${watch.productDetails?.productImagePath}",
+                                     imageUrl:    "${watch.productDetails?.productImagePath}",
                                         // images[pagePosition],
                                         height: 241.w,
                                         // width: 102.w,
@@ -752,8 +753,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                         : Container(
                                                             height: 89.w,
                                                             width: 89.w,
-                                                            child: Image.network(
-                                                              "${element?.productImagePath}",
+                                                            child: AppNetworkImages(
+                                                            imageUrl:   "${element?.productImagePath}",
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),

@@ -17,6 +17,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_prod
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../widget/app_bar.dart';
@@ -597,21 +598,14 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                             children: [
                                               Row(
                                                 children: [
+                                                  SizedBox(
+                                                    width: 5.w,
+                                                  ),
                                                   element?.productImagePath!=""?
-                                                  Image.network("${element?.productImagePath}", height: 61.h,
+                                                  AppNetworkImages(imageUrl: "${element?.productImagePath}", height: 61.h,
                                                     width: 60.w,
-                                                    fit: BoxFit.fill, loadingBuilder: ( context, Widget child,
-                                                        ImageChunkEvent? loadingProgress) {
-                                                      if (loadingProgress == null) return child;
-                                                      return Center(
-                                                        child: CircularProgressIndicator(
-                                                          value: loadingProgress.expectedTotalBytes != null
-                                                              ? loadingProgress.cumulativeBytesLoaded /
-                                                              loadingProgress.expectedTotalBytes!
-                                                              : null,
-                                                        ),
-                                                      );
-                                                    },)
+                                                    fit: BoxFit.fill,
+                                                  )
                                                       :
                                                   Image(
                                                     image: AssetImage(

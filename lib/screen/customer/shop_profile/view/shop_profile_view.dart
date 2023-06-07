@@ -1172,8 +1172,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 width: 70.w,
                                                 child: Padding(
                                                   padding: EdgeInsets.all(8.w),
-                                                  child: Image.network(
-                                                    "${element?.categoryImagePath}",
+                                                  child: AppNetworkImages(
+                                                    imageUrl: "${element?.categoryImagePath}",
                                                     width: 68.w,
                                                     height: 49.w,
                                                   ),

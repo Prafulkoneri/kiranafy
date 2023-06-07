@@ -3,7 +3,7 @@ import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_detail_model.dart';
 
 class ShopCustomerDetailRepo {
-  Future<http.Response> shopCustomerDetailRepo(
+  Future<http.Response> getCustomerDetails(
       ShopCustomerDetailReqModel reqModel, token) async {
     print(token);
     print(reqModel.toJson());

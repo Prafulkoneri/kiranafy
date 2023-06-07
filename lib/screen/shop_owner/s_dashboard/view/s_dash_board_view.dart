@@ -78,7 +78,13 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                         children: [
                           SizedBox(
                             height: 180.0.h,
-                            child: PageView.builder(
+                            child: watch.dashBoardData?.bannerImages!.isEmpty??true? Container(
+                                height: 180.w,
+                                child: Image.asset(
+                                  "assets/images/shop_image.png",
+                                  height: 180.w,
+                                  fit: BoxFit.fill,
+                                )):PageView.builder(
                                 controller: watch.pageController,
                                 allowImplicitScrolling: true,
                                 scrollDirection: Axis.horizontal,

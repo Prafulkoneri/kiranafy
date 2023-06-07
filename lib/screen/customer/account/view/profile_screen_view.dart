@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../products/views/product_screen.dart';
@@ -96,8 +97,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                       'assets/images/profile_image.png',
                                       fit: BoxFit.cover,
                                     )
-                                  : Image.network(
-                                      watch.customerData
+                                  : AppNetworkImages(
+                                imageUrl: watch.customerData
                                               ?.customerProfileImagePath ??
                                           "",
                                       fit: BoxFit.cover,
