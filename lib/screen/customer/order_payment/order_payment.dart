@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-
-import '../order_status/order_status.dart';
+import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 
 class OrderPayment extends StatefulWidget {
   const OrderPayment({super.key});
@@ -427,7 +424,8 @@ class _OrderPaymentState extends State<OrderPayment> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OderStatus()),
+                      MaterialPageRoute(
+                          builder: (context) => OrderStatusView()),
                     );
                   },
                   child: Text(

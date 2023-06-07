@@ -45,20 +45,22 @@ class ProfileController extends ChangeNotifier {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => MyOrderView()));
   }
-void onLogout(context)async{
-  SharedPreferences pref=await SharedPreferences.getInstance();
-  pref.clear();
-  Navigator.push(context,MaterialPageRoute(builder: (context)=>OnBoardingScreenView()));
-}
 
-  void onFavouritesClicked(context)async{
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>CFavouritesView()));
+  void onLogout(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.clear();
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
   }
 
+  void onFavouritesClicked(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => CFavouritesView()));
+  }
 
   void myDeliveryAddressPressed(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MyDeliveryAddress()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => MyDeliveryAddressView()));
   }
 
 ////Detail Profile
@@ -72,7 +74,7 @@ void onLogout(context)async{
         jsonDecode(response.body),
       );
       if (response.statusCode == 200) {
-        customerData=result.data;
+        customerData = result.data;
         log("${response.body}");
         notifyListeners();
       } else {

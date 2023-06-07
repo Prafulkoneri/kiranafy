@@ -9,19 +9,19 @@ import 'package:local_supper_market/widget/app_bar.dart';
 
 import '../../near_shops/view/all_near_shops_view.dart';
 
-class MyDeliveryAddress extends StatefulWidget {
-  const MyDeliveryAddress({super.key});
+class MyDeliveryAddressView extends StatefulWidget {
+  const MyDeliveryAddressView({super.key});
 
   @override
-  State<MyDeliveryAddress> createState() => _MyDeliveryAddressState();
+  State<MyDeliveryAddressView> createState() => _MyDeliveryAddressViewState();
 }
 
-class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
+class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "My Addresses",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),

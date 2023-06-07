@@ -22,21 +22,20 @@ class ProductCategoryController extends ChangeNotifier {
   bool isLoading = true;
   TextEditingController searchController = TextEditingController();
   String searchedProductName = "";
-  bool isOfferProductSelected=false;
-  String groupValue="1";
+  bool isOfferProductSelected = false;
+  String groupValue = "1";
 
   SearchProductAsPerCategoryRepo searchProductAsPerCategoryRepo =
       SearchProductAsPerCategoryRepo();
 
-  ProductAsPerFilterRepo productAsPerFilterRepo =ProductAsPerFilterRepo();
-
+  ProductAsPerFilterRepo productAsPerFilterRepo = ProductAsPerFilterRepo();
 
   Future<void> initState(context, shopId, categoryId) async {
     await getProductList(context, shopId, categoryId);
   }
 
-  void showLoader(value){
-    isLoading=value;
+  void showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -49,6 +48,7 @@ class ProductCategoryController extends ChangeNotifier {
   Future<void> getProductList(context, sId, cId) async {
     shopId = sId;
     categoryId = cId;
+    searchController.clear();
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -134,39 +134,41 @@ class ProductCategoryController extends ChangeNotifier {
       await getProductList(context, sId, cId);
     }
   }
-  void onOfferProductFilterSelect(value){
-    isOfferProductSelected=value;
-    notifyListeners();
-  }
-  void onRadioBtnSelected(value){
-    groupValue=value;
+
+  void onOfferProductFilterSelect(value) {
+    isOfferProductSelected = value;
     notifyListeners();
   }
 
-  ProductFilterReqModel get productFilterReqModel =>ProductFilterReqModel(
-    shopId: shopId,
-    categoryId: categoryId,
-    offerProducts: isOfferProductSelected?"yes":"no",
-    priceHighToLow: groupValue=="2"?"yes":"no",
-    priceLowToHigh: groupValue=="1"?"yes":"no",
-  );
+  void onRadioBtnSelected(value) {
+    groupValue = value;
+    notifyListeners();
+  }
 
-  Future<void> getFilterProductList(context)async{
+  ProductFilterReqModel get productFilterReqModel => ProductFilterReqModel(
+        shopId: shopId,
+        categoryId: categoryId,
+        offerProducts: isOfferProductSelected ? "yes" : "no",
+        priceHighToLow: groupValue == "2" ? "yes" : "no",
+        priceLowToHigh: groupValue == "1" ? "yes" : "no",
+      );
+
+  Future<void> getFilterProductList(context) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     productAsPerFilterRepo
         .getProductAsPerFilter(
-        productFilterReqModel, pref.getString("successToken"))
+            productFilterReqModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
       final result =
-      ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
+          ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         allCategoryList = result.data?.allCategoryList;
         productList = result.data?.productList;
         Navigator.pop(context);
-        if(productList!.isEmpty){
+        if (productList!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No Product Found",
               type: SnackType.error);
         }
@@ -179,7 +181,7 @@ class ProductCategoryController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -188,5 +190,4 @@ class ProductCategoryController extends ChangeNotifier {
       },
     );
   }
-
 }

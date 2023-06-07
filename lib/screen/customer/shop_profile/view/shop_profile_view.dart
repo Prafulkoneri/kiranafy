@@ -360,56 +360,67 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(
-                          left: 19.h,
-                          right: 19.w,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Offer Products",
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: DarkBlack,
-                                    // letterSpacing: .3,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MainScreenView(
-                                            index: 0,
-                                            screenName: AllOfferProducts(
-                                              shopId: widget.shopId,
-                                            ),
-                                          )),
-                                  (Route<dynamic> route) => false,
-                                );
-                              },
-                              child: Text(
-                                "See all",
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
-                                      color: CouponsText,
-                                      // letterSpacing: .3,
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.w500),
+                      watch.allOfferProducts?.isNotEmpty ?? false
+                          ? Column(
+                              children: [
+                                SizedBox(
+                                  height: 20.h,
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                                Container(
+                                  padding: EdgeInsets.only(
+                                    left: 19.h,
+                                    right: 19.w,
+                                  ),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Offer Products",
+                                        style: GoogleFonts.roboto(
+                                          textStyle: TextStyle(
+                                              color: DarkBlack,
+                                              // letterSpacing: .3,
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MainScreenView(
+                                                      index: 0,
+                                                      screenName:
+                                                          AllOfferProducts(
+                                                        shopId: widget.shopId,
+                                                      ),
+                                                    )),
+                                            (Route<dynamic> route) => false,
+                                          );
+                                        },
+                                        child: Text(
+                                          "See all",
+                                          style: GoogleFonts.roboto(
+                                            textStyle: TextStyle(
+                                                color: CouponsText,
+                                                // letterSpacing: .3,
+                                                fontSize: 11.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )
+                          : Container(),
+
                       SizedBox(
                         height: 15.h,
                       ),
@@ -664,53 +675,65 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         ),
                       ),
                       //  Container(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 19.h,
-                          right: 20.w,
-                          top: 15.w,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Seasonal Products",
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: DarkBlack,
-                                    // letterSpacing: .3,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MainScreenView(
-                                          index: 0,
-                                          screenName: AllSeasonalProducts(
-                                            shopId: widget.shopId,
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
-                              },
-                              child: Text(
-                                "See all",
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
-                                      color: CouponsText,
-                                      // letterSpacing: .3,
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.w500),
+
+                      watch.seasonalProduct?.isNotEmpty ?? false
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 19.h,
+                                    right: 20.w,
+                                    top: 15.w,
+                                  ),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Seasonal Products",
+                                        style: GoogleFonts.roboto(
+                                          textStyle: TextStyle(
+                                              color: DarkBlack,
+                                              // letterSpacing: .3,
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MainScreenView(
+                                                        index: 0,
+                                                        screenName:
+                                                            AllSeasonalProducts(
+                                                          shopId: widget.shopId,
+                                                        ))),
+                                            (Route<dynamic> route) => false,
+                                          );
+                                        },
+                                        child: Text(
+                                          "See all",
+                                          style: GoogleFonts.roboto(
+                                            textStyle: TextStyle(
+                                                color: CouponsText,
+                                                // letterSpacing: .3,
+                                                fontSize: 11.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                              ],
+                            )
+                          : Container(),
+
                       Padding(
                         padding: EdgeInsets.only(top: 15.w),
                         child: watch.seasonalProduct?.isNotEmpty ?? false
@@ -1068,6 +1091,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               )
                             : Container(),
                       ),
+
                       Padding(
                         padding: EdgeInsets.only(
                             top: 30.h, left: 19.h, bottom: 15.h),
@@ -1089,6 +1113,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       ),
                       SizedBox(
                         child: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.horizontal,
                           child: Column(
@@ -1131,7 +1156,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 margin: EdgeInsets.only(
                                                     left: index == 0 ? 19.w : 0,
                                                     // top: 15.w,
-                                                    right: index == 7
+                                                    right: index + 1 ==
+                                                            watch.shopCategory
+                                                                ?.length
                                                         ? 19.w
                                                         : 5.w),
                                                 // margin: EdgeInsets.only(right: 10.h),
@@ -1153,12 +1180,13 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 ),
                                               ),
                                               Container(
-                                                margin: EdgeInsets.only(
-                                                    left: index == 0 ? 19.w : 0,
-                                                    // top: 15.w,
-                                                    right: index == 7
-                                                        ? 19.w
-                                                        : 5.w),
+                                                margin: EdgeInsets.only(top: 3.w
+                                                    // left: index == 0 ? 19.w : 0,
+                                                    // // top: 15.w,
+                                                    // right: index == 7
+                                                    //     ? 19.w
+                                                    //     : 5.w
+                                                    ),
                                                 alignment: Alignment.center,
                                                 width: 70.w,
                                                 child: Text(
