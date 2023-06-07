@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_ad
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class AddProductView extends StatefulWidget {
@@ -140,7 +141,8 @@ class _AddProductViewState extends State<AddProductView> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Image.network(
+                                     AppNetworkImages(
+                                       imageUrl:
                                       "${element?.productImagePath}",
                                       width: 60.w,
                                       height: 61.h,

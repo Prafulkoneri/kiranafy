@@ -25,10 +25,7 @@ class SAccountScreenController extends ChangeNotifier {
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
   // }
 
-  void onShopConfigurationClicked(context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => SShopConfigurationView()));
-  }
+
 
   Future<void> initState(context, updateMessage) async {
     print("999999999999");

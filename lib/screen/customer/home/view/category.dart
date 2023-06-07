@@ -146,22 +146,10 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     width: 70.w,
                                     child: Padding(
                                       padding: EdgeInsets.all(8.w),
-                                      child: Image.network(
-                                        element.categoryImagePath ?? "",
+                                      child: AppNetworkImages(
+                                        imageUrl: element.categoryImagePath ?? "",
                                         width: 68.w,
                                         height: 49.w,
-                                        loadingBuilder: ( context, Widget child,
-                                            ImageChunkEvent? loadingProgress) {
-                                          if (loadingProgress == null) return child;
-                                          return Center(
-                                            child: CircularProgressIndicator(
-                                              value: loadingProgress.expectedTotalBytes != null
-                                                  ? loadingProgress.cumulativeBytesLoaded /
-                                                  loadingProgress.expectedTotalBytes!
-                                                  : null,
-                                            ),
-                                          );
-                                        },
                                       ),
                                     ),
                                   ),

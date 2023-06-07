@@ -321,7 +321,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                     //         ),
                     //         width: ScreenUtil().screenWidth,
                     //         // height: 100.h,
-                    //         child: Image.network(
+                    //         child: AppNetworkImages(
                     //           "${element?.bannerImagePath}",
                     //           fit: BoxFit.cover,
                     //         )
@@ -388,7 +388,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
 // left: 15,
 // bottom: 10,
 // right: index + 1 == widget.items?.length ? 20 : 0),
-// child: Image.network(
+// child: AppNetworkImages(
 // widget.items?[index]["image"],
 // fit: BoxFit.cover,
 // ),

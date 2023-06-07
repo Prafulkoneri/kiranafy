@@ -185,7 +185,7 @@ class SShopConfigurationController extends ChangeNotifier {
           ifFreePickupSelected=true;
         }
         else{
-          isDeliveryChargesSelected = true;
+          isDeliveryChargesSelected = false;
           ifFreePickupSelected=false;
         }
 

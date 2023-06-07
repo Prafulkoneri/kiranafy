@@ -18,6 +18,7 @@ import 'package:local_supper_market/screen/customer/near_shops/view/all_near_sho
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_detail_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_list_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
@@ -99,11 +100,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ShopAllSeasonalController()),
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(create: (_) => ProductViewController()),
-        ChangeNotifierProvider(create: (_) => SCustpmerListController()),
-        ChangeNotifierProvider(
-            create: (_) => SAllRecommandedProductsController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(create: (_) => SCustomerListController()),
+        ChangeNotifierProvider(create: (_) => SAllRecommandedProductsController()),
+        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
       ],
       child: MyApp(),
     ),

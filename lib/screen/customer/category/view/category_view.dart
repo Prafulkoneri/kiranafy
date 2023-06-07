@@ -17,6 +17,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import '../../../shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import '../../products/views/product_screen.dart';
@@ -307,7 +308,8 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                       height: 92.h,
                                                       fit: BoxFit.cover,
                                                     )
-                                                  : Image.network(
+                                                  : AppNetworkImages(
+                                                imageUrl:
                                                       element?.productImagePath ??
                                                           "",
                                                       width: 80.w,

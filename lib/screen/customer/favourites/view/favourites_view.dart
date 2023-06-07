@@ -19,6 +19,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class CFavouritesView extends StatefulWidget {
@@ -376,8 +377,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                             children: [
                                               Expanded(
                                                   child: Center(
-                                                child: Image.network(
-                                                  "${element?.productImagePath}",
+                                                child: AppNetworkImages(
+                                                 imageUrl: "${element?.productImagePath}",
                                                   fit: BoxFit.cover,
                                                 ),
                                               )),
@@ -475,8 +476,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                           children: [
                                             Expanded(
                                                 child: Center(
-                                              child: Image.network(
-                                                "${element?.productImagePath}",
+                                              child: AppNetworkImages(
+                                                imageUrl:"${element?.productImagePath}",
                                                 fit: BoxFit.cover,
                                               ),
                                             )),

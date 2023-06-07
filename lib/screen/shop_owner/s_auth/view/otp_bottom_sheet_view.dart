@@ -135,6 +135,8 @@ class _OtpBottomSheetViewState extends State<OtpBottomSheetView> {
         ),
         Positioned(
             bottom: 0,
+            left: 0,
+            right: 0,
             child: Visibility(
               visible: watch.isOtpErrorVisible,
               child: Container(

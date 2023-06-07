@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/customer/profile/controller/edit_prof
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
@@ -107,8 +108,8 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.w),
-                                        child: Image.network(
-                                          watch.networkImage,
+                                        child: AppNetworkImages(
+                                          imageUrl:watch.networkImage,
                                           fit: BoxFit.cover,
                                         )))
                                 : watch.fileImage.path != ""

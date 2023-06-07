@@ -309,7 +309,7 @@
 //                         : Container(
 //                             height: 68.w,
 //                             width: 68.w,
-//                             child: Image.network(
+//                             child: AppNetworkImages(
 //                               "${element?.productImagePath}",
 //                               fit: BoxFit.cover,
 //                             ),
@@ -432,6 +432,7 @@ import 'package:local_supper_market/screen/customer/products/views/product_scree
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class AllRecommandedProductsView extends StatefulWidget {
@@ -578,7 +579,8 @@ class _AllRecommandedProductsViewState
                                       : Container(
                                           height: 68.w,
                                           width: 68.w,
-                                          child: Image.network(
+                                          child: AppNetworkImages(
+                                            imageUrl:
                                             "${element?.productImagePath}",
                                             fit: BoxFit.cover,
                                           ),

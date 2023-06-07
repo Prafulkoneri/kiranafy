@@ -154,10 +154,7 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SMainScreenView(
-                                index: 0,
-                                screenName: SShopConfigurationView()
-                              )),
+                              builder: (context) => SShopConfigurationView(initialShopConfigration: true,)),
                               (Route<dynamic> route) => false,
                         );
                         // read.onUploadClicked(context);

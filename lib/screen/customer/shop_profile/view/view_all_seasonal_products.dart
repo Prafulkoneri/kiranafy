@@ -174,6 +174,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/controller/all_
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class AllSeasonalProducts extends StatefulWidget {
@@ -326,8 +327,8 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                           : Container(
                                               height: 68.w,
                                               width: 68.w,
-                                              child: Image.network(
-                                                "${element?.productImagePath}",
+                                              child: AppNetworkImages(
+                                              imageUrl:"${element?.productImagePath}",
                                                 fit: BoxFit.cover,
                                               ),
                                             ),

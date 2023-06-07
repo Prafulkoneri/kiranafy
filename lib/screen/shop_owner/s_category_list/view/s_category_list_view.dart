@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 import '../../s_products/view/s_selected_products_view.dart';
@@ -125,7 +126,8 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                         Container(
                                           width: 55.w,
                                           height: 40.w,
-                                          child: Image.network(
+                                          child: AppNetworkImages(
+                                            imageUrl:
                                               "${element?.categoryImagePath}"),
                                         ),
                                         SizedBox(
