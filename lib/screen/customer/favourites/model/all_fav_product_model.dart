@@ -24,15 +24,15 @@ class FavProductData {
     required this.customProducts,
   });
   FavProductData.fromJson(Map<String, dynamic> json) {
-    if (json["adminProducts"] != null) {
+    if (json["admin_products"] != null) {
       adminProducts = <AdminProduct>[];
-      json["adminProducts"].forEach((v) {
+      json["admin_products"].forEach((v) {
         adminProducts!.add(AdminProduct.fromJson(v));
       });
     }
-    if (json["customProducts"] != null) {
+    if (json["custom_products"] != null) {
       customProducts = <CustomeProduct>[];
-      json["customProducts"].forEach((v) {
+      json["custom_products"].forEach((v) {
         customProducts!.add(CustomeProduct.fromJson(v));
       });
     }

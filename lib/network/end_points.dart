@@ -1,6 +1,9 @@
 class Endpoint {
   Endpoint._();
   //testing url
+  // static const String baseUrl =
+  //     'https://newcms.m-staging.in/local-super-mart-testing/api/';
+  //live url
   static const String baseUrl =
       'https://newcms.m-staging.in/local-super-mart-admin/api/';
   // Check Mobile Number Exist

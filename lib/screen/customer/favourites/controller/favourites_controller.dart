@@ -12,6 +12,10 @@ import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/shop_as_per_pincode_all_near_shops.dart';
+import 'package:local_supper_market/screen/customer/products/model/remove_admin_product_from_fav_model.dart';
+import 'package:local_supper_market/screen/customer/products/model/remove_custom_product_from_fav_model.dart';
+import 'package:local_supper_market/screen/customer/products/repository/remove_admin_product_fav_repo.dart';
+import 'package:local_supper_market/screen/customer/products/repository/remove_custom_product_fav_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,14 +27,21 @@ class FavouritesController extends ChangeNotifier {
   List<FavouriteData>? favShopList;
   FavProductData? favProductData; //product
   List<AdminProduct>? adminProductList; //product
-  List<CustomeProduct>? customeProductList; //product
-
+  List<CustomeProduct>? customProductList; //product
   bool isLoading = true;
   String shopId = "";
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   List<bool> fav = [];
-  List<bool> favproduct = [];
+  List<bool> favAdminproduct = [];
+  List<bool> favCustomproduct = [];
+  String productId="";
+  RemoveAdminFvrtProductRepo removeFavProductRepo = RemoveAdminFvrtProductRepo();
+  RemoveCustomFvrtProductRepo removeCustomFavProductRepo = RemoveCustomFvrtProductRepo();
+
+
+
   Future<void> initState(context) async {
+    isFavShopPressed=true;
     favShopList?.clear();
     isLoading = true;
     await getAllFavouriteShop(context);
@@ -42,13 +53,20 @@ class FavouritesController extends ChangeNotifier {
     notifyListeners();
   }
 
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
+
+
   onFavouriteProductTapped() {
     isFavShopPressed = false;
     notifyListeners();
   }
 
   Future<void> getAllFavouriteShop(context) async {
-    isLoading = true;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     allFvrtShopsRepo
@@ -60,7 +78,6 @@ class FavouritesController extends ChangeNotifier {
       if (response.statusCode == 200) {
         favShopList = result.data;
         fav = List<bool>.filled(favShopList?.length ?? 0, true, growable: true);
-        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -152,7 +169,6 @@ class FavouritesController extends ChangeNotifier {
 
   ///////////// Fav Product List////////////
   Future<void> getAllFavouriteProduct(context) async {
-    isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     allfavProductRepo
@@ -164,12 +180,12 @@ class FavouritesController extends ChangeNotifier {
       if (response.statusCode == 200) {
         favProductData = result.data;
         adminProductList = favProductData?.adminProducts;
-        customeProductList = favProductData?.customProducts;
-        favproduct = List<bool>.filled(adminProductList?.length ?? 0, true,
+        customProductList = favProductData?.customProducts;
+        favAdminproduct = List<bool>.filled(adminProductList?.length ?? 0, true,
             growable: true);
-        favproduct = List<bool>.filled(customeProductList?.length ?? 0, true,
+        favCustomproduct = List<bool>.filled(customProductList?.length ?? 0, true,
             growable: true);
-        isLoading = false;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -187,4 +203,82 @@ class FavouritesController extends ChangeNotifier {
       },
     );
   }
+
+  RemoveAdminProductReqModel get removeFavProductReqModel =>
+      RemoveAdminProductReqModel(
+          shopId: shopId.toString(), productId: productId.toString());
+
+  RemoveCustomProductReqModel get removeCustomeProductReqModel =>
+      RemoveCustomProductReqModel(
+          shopId: shopId.toString(), productId: productId.toString());
+
+  Future<void> removeAdminFavProduct(context, sID, pID, index) async {
+   shopId=sID.toString();
+    productId=pID.toString();
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      removeFavProductRepo
+          .removeAdminProductRepo(
+          removeFavProductReqModel, pref.getString("successToken"))
+          .then((response) {
+        log("response.body${response.body}");
+        final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          favAdminproduct[index]=false;
+          adminProductList?.removeAt(index);
+          print("hello");
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+            (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+  }
+
+  Future<void> removeCustomFavProduct(context, sID, pID,index)async{
+    productId=pID.toString();
+    shopId=sID.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeCustomFavProductRepo
+        .removeCustomProductRepo(
+        removeCustomeProductReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+      RemoveCustomProductResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        favAdminproduct[index]=false;
+        adminProductList?.removeAt(index);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+
 }

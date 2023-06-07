@@ -44,15 +44,14 @@ class ProductViewController extends ChangeNotifier {
   ShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
   List<SimilarProduct>? similarProduct;
-  // UnitImages? unitImages; ////
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
+  AddAdminProductToFavRepo addAdminProductToFavRepo = AddAdminProductToFavRepo();
+  AddCustomProductToFavRepo addCustomProductFavRepo = AddCustomProductToFavRepo();
+  RemoveAdminFvrtProductRepo removeFavProductRepo = RemoveAdminFvrtProductRepo();
+  RemoveCustomFvrtProductRepo removeCustomFavProductRepo = RemoveCustomFvrtProductRepo();
 
-  AddAdminProductToFavRepo addAdminProductToFavRepo =
-      AddAdminProductToFavRepo();
-  AddCustomProductToFavRepo addCustomProductFavRepo =
-      AddCustomProductToFavRepo();
   Future<void> initState(context, sId, cId, pId, suId, pType) async {
     await productsView(context, sId, cId, pId, pType);
     unitImages.clear();
@@ -233,14 +232,12 @@ class ProductViewController extends ChangeNotifier {
   RemoveAdminProductReqModel get removeFavProductReqModel =>
       RemoveAdminProductReqModel(
           shopId: shopId.toString(), productId: productId.toString());
-  RemoveAdminFvrtProductRepo removeFavProductRepo =
-      RemoveAdminFvrtProductRepo();
 
   RemoveCustomProductReqModel get removeCustomeProductReqModel =>
       RemoveCustomProductReqModel(
           shopId: shopId.toString(), productId: productId.toString());
-  RemoveCustomFvrtProductRepo removeCustomeFavProductRepo =
-      RemoveCustomFvrtProductRepo();
+
+
   Future<void> removeFavProduct(
     context,
   ) async {
@@ -275,7 +272,7 @@ class ProductViewController extends ChangeNotifier {
       );
     } else {
       SharedPreferences pref = await SharedPreferences.getInstance();
-      removeCustomeFavProductRepo
+      removeCustomFavProductRepo
           .removeCustomProductRepo(
               removeCustomeProductReqModel, pref.getString("successToken"))
           .then((response) {

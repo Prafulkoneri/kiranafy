@@ -50,9 +50,9 @@ class HomeScreenController extends ChangeNotifier {
         bannerData = result.data;
         int imageLength=bannerData?.length??0;
         if(bannerData!.isNotEmpty){
-          Timer.periodic(Duration(seconds: 5), (Timer timer) {
+          Timer.periodic(Duration(seconds: 8), (Timer timer) {
             if (_currentPage < imageLength-1) {
-              _currentPage++;
+              _currentPage+1;
             } else {
               _currentPage = 0;
             }

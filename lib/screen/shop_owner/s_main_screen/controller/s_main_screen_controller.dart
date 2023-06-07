@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/customer/account/view/account_view.dart';
+import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
