@@ -98,7 +98,7 @@ class ShopProfileViewController extends ChangeNotifier {
         context,
         MaterialPageRoute(
             builder: (context) => MainScreenView(
-                index: 1,
+                index: 0,
                 screenName: HomeScreenView(refreshPage: false)
             )),
             (Route<dynamic> route) => false,

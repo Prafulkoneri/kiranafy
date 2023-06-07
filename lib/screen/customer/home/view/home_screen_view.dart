@@ -165,44 +165,49 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               ),
 
               ////image
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: ExpandablePageView.builder(
-                    itemCount: watch.bannerData?.length??0,
-                    physics: BouncingScrollPhysics(),
-                    padEnds: false,
-                    pageSnapping: true,
-                    controller: _pageController,
-                    onPageChanged: (page) {
-                      setState(() {
-                        activePage = page;
-                      });
-                    },
-                    itemBuilder: (context, pagePosition) {
-                      final element=watch.bannerData?[pagePosition];
-                      return Container(
-                        child: element?.bannerImagePath==""?Image.asset(
-                          "assets/images/caurosal.png",
-                          height: 170.w,
-                          // width: 340.w,
-                          // scale: 0.5,
-                          fit: BoxFit.cover,
-                        ):Image.network(
-                          element?.bannerImagePath??"",
-                          height: 170.w,
-                          // width: 340.w,
-                          // scale: 0.5,
-                          fit: BoxFit.cover,
-                        ),
-                        margin: EdgeInsets.only(
-                            left: pagePosition == 0 ? 19.w : 0,
-                            // top: 15.w,
-                            right: pagePosition == images.length - 1
-                                ? 19.w
-                                : 10.w),
-                      );
-                    }),
-              ),
+              // SizedBox(
+              //   width: MediaQuery.of(context).size.width,
+              //   child: ExpandablePageView.builder(
+              //       itemCount: watch.bannerData?.length??0,
+              //       physics: BouncingScrollPhysics(),
+              //       padEnds: false,
+              //       pageSnapping: true,
+              //       controller: _pageController,
+              //       onPageChanged: (page) {
+              //         setState(() {
+              //           activePage = page;
+              //         });
+              //       },
+              //       itemBuilder: (context, pagePosition) {
+              //         final element=watch.bannerData?[pagePosition];
+              //         return Container(
+              //           child: element?.bannerImagePath==""?Image.asset(
+              //             "assets/images/caurosal.png",
+              //             height: 170.w,
+              //             // width: 340.w,
+              //             // scale: 0.5,
+              //             fit: BoxFit.cover,
+              //           ):Image.network(
+              //             element?.bannerImagePath??"",
+              //             height: 170.w,
+              //             // width: 340.w,
+              //             // scale: 0.5,
+              //             fit: BoxFit.cover,
+              //           ),
+              //           margin: EdgeInsets.only(
+              //               left: pagePosition == 0 ? 19.w : 0,
+              //               // top: 15.w,
+              //               right: pagePosition == images.length - 1
+              //                   ? 19.w
+              //                   : 10.w),
+              //         );
+              //       }),
+              // ),
+
+
+
+
+
               // ExpandablePageView.builder(
               //     itemCount: watch.data?.length ?? 0,
               //     physics: BouncingScrollPhysics(),
