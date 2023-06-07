@@ -190,4 +190,7 @@ class Endpoint {
       "${baseUrl}lsm-customer-favourite-product-list";
   ///////////////Customer List///
   static const String customerList = "${baseUrl}lsm-shop-owner-customer-list";
+  ////////Shop Customer Detail View////
+  static const String shopCustomerDetailView =
+      "${baseUrl}lsm-shop-owner-customer-view";
 }

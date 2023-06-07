@@ -7,7 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_list_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/view/customerDetails.dart';
+import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
+
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
@@ -157,7 +158,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                             Row(
                               children: [
                                 Text(
-                                  '9 Orders',
+                                  '0 Orders',
                                   style: TextStyle(
                                       color: Black,
                                       letterSpacing: .5,
@@ -175,7 +176,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                                       MaterialPageRoute(
                                           builder: (context) => SMainScreenView(
                                                 index: 4,
-                                                screenName: CustomerDetails(
+                                                screenName: CustomerDetailView(
                                                     // fromDashBoard: false,
                                                     ),
                                               )),
