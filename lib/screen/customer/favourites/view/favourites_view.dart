@@ -19,7 +19,6 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
-import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class CFavouritesView extends StatefulWidget {
@@ -50,12 +49,10 @@ class _CFavouritesViewState extends State<CFavouritesView> {
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                    index: 4,
-                    screenName: ProfileScreenView(
-
-                    ),
-                  )),
-                  (Route<dynamic> route) => false,
+                        index: 4,
+                        screenName: ProfileScreenView(),
+                      )),
+              (Route<dynamic> route) => false,
             );
           },
           title: "Favourites",
@@ -310,7 +307,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                 colors: [
                                                   Colors.white.withOpacity(0),
                                                   Colors.black
-                                                      .withOpacity(0.15),
+                                                      .withOpacity(0.02),
                                                 ],
                                               )),
                                         )),
@@ -350,12 +347,12 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                           child: SizedBox(
                             // height: 156.h,
                             // width: 2.w,
-                            child:
-                            Column(
+                            child: Column(
                               children: [
                                 GridView.builder(
                                     shrinkWrap: true,
-                                    itemCount: watch.adminProductList?.length ?? 0,
+                                    itemCount:
+                                        watch.adminProductList?.length ?? 0,
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
@@ -365,119 +362,22 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                       final element =
                                           watch.adminProductList?[index];
                                       return Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.circular(15.w)
-                                          ),
-                                          padding: EdgeInsets.only(
-                                              left: 17.h, top: 13.w, bottom: 14.w),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                  child: Center(
-                                                child: AppNetworkImages(
-                                                 imageUrl: "${element?.productImagePath}",
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              )),
-                                              SizedBox(
-                                                height: 3.w,
-                                              ),
-                                              Text(
-                                                "${element?.productName}",
-                                                // "Red Label",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 16.sp,
-                                                      fontWeight: FontWeight.w600),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 2.w,
-                                              ),
-                                              Text(
-                                                // "100g",
-                                                "${element?.weight}",
-                                                style: TextStyle(
-                                                    color: Black1,
-                                                    fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w600),
-                                              ),
-                                              SizedBox(
-                                                height: 2.w,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '\u{20B9}${element?.price}',
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Black1,
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight.w600),
-                                                      ),
-                                                    ),
-                                                  ),
-
-                                                  GestureDetector(
-                                                    onTap:(){
-                                                      read.removeAdminFavProduct(context,element?.shopId,element?.id,index);
-                                                    },
-                                                    child: SvgPicture.asset(
-                                                      'assets/icons/fvrt_products.svg',
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 15.w,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 4.w,
-                                              ),
-                                              Text(
-                                                "${element?.shopName}",
-                                                // "Maharaj Kirana Store",
-                                                style: TextStyle(
-                                                    color: Black1,
-                                                    fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w600),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-
-                                    }),
-                                GridView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: watch.customProductList?.length ?? 0,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 4.0,
-                                            mainAxisSpacing: 4.0),
-                                    itemBuilder: (BuildContext, index) {
-                                      final element =
-                                          watch.customProductList?[index];
-                                      return Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15.0.w)
-                                        ),
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(15.w)),
                                         padding: EdgeInsets.only(
-                                            left: 17.h, top: 13.w, bottom: 14.w),
+                                            left: 17.h,
+                                            top: 13.w,
+                                            bottom: 14.w),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Expanded(
                                                 child: Center(
-                                              child: AppNetworkImages(
-                                                imageUrl:"${element?.productImagePath}",
+                                              child: Image.network(
+                                                "${element?.productImagePath}",
                                                 fit: BoxFit.cover,
                                               ),
                                             )),
@@ -491,7 +391,113 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                 textStyle: TextStyle(
                                                     color: Black1,
                                                     fontSize: 16.sp,
-                                                    fontWeight: FontWeight.w600),
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 2.w,
+                                            ),
+                                            Text(
+                                              // "100g",
+                                              "${element?.weight}",
+                                              style: TextStyle(
+                                                  color: Black1,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            SizedBox(
+                                              height: 2.w,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    '\u{20B9}${element?.price}',
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black1,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    read.removeAdminFavProduct(
+                                                        context,
+                                                        element?.shopId,
+                                                        element?.id,
+                                                        index);
+                                                  },
+                                                  child: SvgPicture.asset(
+                                                    'assets/icons/fvrt_products.svg',
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 15.w,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 4.w,
+                                            ),
+                                            Text(
+                                              "${element?.shopName}",
+                                              // "Maharaj Kirana Store",
+                                              style: TextStyle(
+                                                  color: Black1,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                GridView.builder(
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        watch.customProductList?.length ?? 0,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 4.0,
+                                            mainAxisSpacing: 4.0),
+                                    itemBuilder: (BuildContext, index) {
+                                      final element =
+                                          watch.customProductList?[index];
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0.w)),
+                                        padding: EdgeInsets.only(
+                                            left: 17.h,
+                                            top: 13.w,
+                                            bottom: 14.w),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: Center(
+                                              child: Image.network(
+                                                "${element?.productImagePath}",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            )),
+                                            SizedBox(
+                                              height: 3.w,
+                                            ),
+                                            Text(
+                                              "${element?.productName}",
+                                              // "Red Label",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Black1,
+                                                    fontSize: 16.sp,
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                             ),
                                             SizedBox(
@@ -527,8 +533,12 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                   ),
                                                 ),
                                                 GestureDetector(
-                                                  onTap:(){
-                                                    read.removeCustomFavProduct(context,element?.shopId,element?.id,index);
+                                                  onTap: () {
+                                                    read.removeCustomFavProduct(
+                                                        context,
+                                                        element?.shopId,
+                                                        element?.id,
+                                                        index);
                                                   },
                                                   child: Expanded(
                                                     child: SvgPicture.asset(

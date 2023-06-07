@@ -12,6 +12,7 @@ class ShopCustomerDetailReqModel {
   }
 }
 
+//////Res//
 class CustomerDetailResModel {
   int? status;
   String? message;

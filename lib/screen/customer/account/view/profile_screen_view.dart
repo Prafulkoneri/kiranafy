@@ -137,7 +137,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => MainScreenView(
-                                              index: 1,
+                                              index: 4,
                                               screenName: UpdateProfileView())),
                                       (Route<dynamic> route) => false,
                                     );
@@ -268,7 +268,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
-                            index: 1, screenName: UpdateProfileView())),
+                            index: 4, screenName: UpdateProfileView())),
                     (Route<dynamic> route) => false,
                   );
                 },
@@ -433,7 +433,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
-                            index: 1, screenName: CFavouritesView())),
+                            index: 4, screenName: CFavouritesView())),
                     (Route<dynamic> route) => true,
                   );
                 },

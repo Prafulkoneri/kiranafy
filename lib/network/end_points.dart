@@ -198,4 +198,8 @@ class Endpoint {
   ////////Shop Customer Detail View////
   static const String shopCustomerDetailView =
       "${baseUrl}lsm-shop-owner-customer-view";
+
+  ////////Deliver Address List ////
+  static const String deliveryAddress =
+      "${baseUrl}lsm-customer-delivery-address-list";
 }
