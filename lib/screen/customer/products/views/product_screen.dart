@@ -32,11 +32,7 @@ class ProductScreenView extends StatefulWidget {
 }
 
 class _ProductScreenViewState extends State<ProductScreenView> {
-  List<String> images = [
-    'assets/images/sprite.png',
-    'assets/images/sprite.png',
-    'assets/images/sprite.png',
-  ];
+
   PageController? _pageController;
   int activePage = 0;
 
@@ -266,7 +262,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                               left: pagePosition == 0 ? 19.w : 0,
                                               // top: 15.w,
                                               right: pagePosition ==
-                                                      images.length - 1
+                                                  watch.unitImages.length - 1
                                                   ? 19.w
                                                   : 10.w),
                                         );

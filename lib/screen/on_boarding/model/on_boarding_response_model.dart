@@ -1,4 +1,4 @@
-import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custome_products_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custom_products_model.dart';
 
 class OnBoardingResponseModel {
   int? status;
