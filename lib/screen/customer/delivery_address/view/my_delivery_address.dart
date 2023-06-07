@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/controller/delivery_address_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../near_shops/view/all_near_shops_view.dart';
 
@@ -18,7 +21,19 @@ class MyDeliveryAddressView extends StatefulWidget {
 
 class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<DeliveryAddressController>().initState(
+            context,
+          );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final watch = context.watch<DeliveryAddressController>();
+    final read = context.read<DeliveryAddressController>();
+    final readMain = context.read<DeliveryAddressController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),

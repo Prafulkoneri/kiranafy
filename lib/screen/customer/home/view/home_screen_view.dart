@@ -172,7 +172,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       ////image
                       Padding(
                         padding: EdgeInsets.only(left: 19.w),
-                        child: ExpandablePageView.builder(
+                        child: PageView.builder(
                             itemCount: watch.bannerData?.length ?? 0,
                             physics: BouncingScrollPhysics(),
                             padEnds: false,
@@ -226,7 +226,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 15.h,
                       ),
 
-                      NearByShopWatch.nearByShopList?.isNotEmpty ?? true
+                      NearByShopWatch.nearByShopList?.isNotEmpty ?? false
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
