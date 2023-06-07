@@ -363,16 +363,23 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                       final element =
                                           watch.adminProductList?[index];
                                       return GestureDetector(
-                                        onTap: (){
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => SMainScreenView(
-                                                  index: 1,
-                                                  screenName: ProductScreenView(),
-                                                )),
-                                                (Route<dynamic> route) => false,
-                                          );
+                                        onTap: () {
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) => MainScreenView(
+                                          //             index: 1,
+                                          //             screenName: ProductScreenView(
+                                          //                 categoryId:
+                                          //                     element?.categoryId.toString(),
+                                          //                 // categoryId: watch.categoryId,
+                                          //                 productId: element?.id.toString(),
+                                          //                 shopId: widget.shopId,
+                                          //                 productType: element?.productType
+                                          //                 ),
+                                          //           )),
+                                          //   (Route<dynamic> route) => false,
+                                          // );
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
@@ -417,7 +424,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                 style: TextStyle(
                                                     color: Black1,
                                                     fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w600),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                               SizedBox(
                                                 height: 2.w,
@@ -432,7 +440,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                             color: Black1,
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight.w600),
+                                                                FontWeight
+                                                                    .w600),
                                                       ),
                                                     ),
                                                   ),
@@ -462,7 +471,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                 style: TextStyle(
                                                     color: Black1,
                                                     fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w600),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                             ],
                                           ),

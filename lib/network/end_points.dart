@@ -197,7 +197,8 @@ class Endpoint {
   ///////////////Customer List///
   static const String customerList = "${baseUrl}lsm-shop-owner-customer-list";
   ///////////////Customer Fav List///
-  static const String customerFavList = "${baseUrl}lsm-shop-owner-customer-list-who-liked-shops";
+  static const String customerFavList =
+      "${baseUrl}lsm-shop-owner-customer-list-who-liked-shops";
   ////////Shop Customer Detail View////
   static const String shopCustomerDetailView =
       "${baseUrl}lsm-shop-owner-customer-view";
@@ -205,4 +206,10 @@ class Endpoint {
   ////////Deliver Address List ////
   static const String deliveryAddress =
       "${baseUrl}lsm-customer-delivery-address-list";
+  ////////Add Deliver Address  ////
+  static const String addDeliveryAddressList =
+      "${baseUrl}lsm-customer-add-delivery-address";
+  ////////Mark Default Address  ////
+  static const String markDefaultaddress =
+      "${baseUrl}lsm-customer-make-delivery-address-default";
 }
