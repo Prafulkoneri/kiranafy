@@ -36,7 +36,7 @@ class DeliveryAddressController extends ChangeNotifier {
           DeliveryAddressListModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         deliveryAddressList = result.data;
-        // defaultAddress = deliveryAddressList.
+
         isLoading = false;
         notifyListeners();
       } else {

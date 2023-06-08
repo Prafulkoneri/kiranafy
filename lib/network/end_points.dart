@@ -209,4 +209,15 @@ class Endpoint {
   ////////Mark Default Address  ////
   static const String markDefaultaddress =
       "${baseUrl}lsm-customer-make-delivery-address-default";
+
+  ////////Delete Delivery Address  ////
+  static const String deleteDeliveryAddress =
+      "${baseUrl}lsm-customer-delete-delivery-address";
+  ////////Delete Delivery Address  ////
+  static const String editDeliveryAddress =
+      "${baseUrl}lsm-customer-edit-delivery-address";
+
+  ////////Update Delivery Address  ////
+  static const String UpdateDeliveryAddress =
+      "${baseUrl}lsm-customer-update-delivery-address";
 }

@@ -53,12 +53,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
             );
           },
           title: "Update Profile",
-          action: Padding(
-            padding: EdgeInsets.only(
-              right: 20.w,
-            ),
-            child: SvgPicture.asset("assets/icons/forward.svg"),
-          ),
+          action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
             await read.validateField(context);
           },
@@ -109,7 +104,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                         borderRadius:
                                             BorderRadius.circular(8.w),
                                         child: AppNetworkImages(
-                                          imageUrl:watch.networkImage,
+                                          imageUrl: watch.networkImage,
                                           fit: BoxFit.cover,
                                         )))
                                 : watch.fileImage.path != ""
