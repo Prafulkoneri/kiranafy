@@ -38,7 +38,6 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
   Widget build(BuildContext context) {
     final read = context.read<UpdateProfileController>();
     final watch = context.watch<UpdateProfileController>();
-    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),

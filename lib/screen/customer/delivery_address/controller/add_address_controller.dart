@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/model/edit_address_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/repository/edit_address_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
@@ -8,9 +11,10 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AddAddressController extends ChangeNotifier{
-  String groupValue="home";
+class AddAddressController extends ChangeNotifier {
+  String groupValue = "home";
   List<CountryData>? countryList;
   List<StateData>? stateList;
   List<CityData>? cityList;
@@ -22,43 +26,52 @@ class AddAddressController extends ChangeNotifier{
   int shopId = 0;
   List? pincodeList;
   String pincode = "";
-  bool showPincodeValueField=false;
-  RegistrationDataRepo registrationDataRepo=RegistrationDataRepo();
-  TextEditingController nameController =TextEditingController();
-  TextEditingController mobNoController =TextEditingController();
-  TextEditingController apartmentNameController=TextEditingController();
-  TextEditingController houseNoController=TextEditingController();
-  TextEditingController streetController=TextEditingController();
-  TextEditingController areaController=TextEditingController();
-  TextEditingController landMarkController=TextEditingController();
-  bool isLoading=true;
+  bool showPincodeValueField = false;
+  RegistrationDataRepo registrationDataRepo = RegistrationDataRepo();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController mobNoController = TextEditingController();
+  TextEditingController apartmentNameController = TextEditingController();
+  TextEditingController houseNoController = TextEditingController();
+  TextEditingController streetController = TextEditingController();
+  TextEditingController areaController = TextEditingController();
+  TextEditingController landMarkController = TextEditingController();
+  EditAddressRepo editAddressRepo = EditAddressRepo();
+  bool isLoading = true;
+  String deliveryAddressId = "";
 
-Future<void> initState(context)async{
-  groupValue="home";
-  countryId = 0;
-   stateId = 0;
-   cityId = 0;
-   areaId = 0;
-   shopId = 0;
-   nameController.clear();
-   mobNoController.clear();
-   apartmentNameController.clear();
-   houseNoController.clear();
-   streetController.clear();
-   areaController.clear();
-   landMarkController.clear();
-  await getCountryList(context);
-}
+  Future<void> initState(context,editAddress,addressId) async {
+    groupValue = "home";
+    countryId = 0;
+    stateId = 0;
+    cityId = 0;
+    areaId = 0;
+    shopId = 0;
+    nameController.clear();
+    mobNoController.clear();
+    apartmentNameController.clear();
+    houseNoController.clear();
+    streetController.clear();
+    areaController.clear();
+    landMarkController.clear();
+    if(editAddress){
+      await getAddressDetails(context,addressId);
+    }
+    else{
+      await getCountryList(context);
+    }
 
-showLoader(value){
-  isLoading=value;
-  notifyListeners();
-}
+  }
 
-  void onRadioButtonSelected(value){
-  groupValue=value;
-  notifyListeners();
-}
+  showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
+  void onRadioButtonSelected(value) {
+    groupValue = value;
+    notifyListeners();
+  }
+
   void onCountrySelected(value) async {
     countryId = int.parse(value.toString());
     print("nhjvwuriuiwbytiuywi");
@@ -72,8 +85,8 @@ showLoader(value){
   }
 
   GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
-    stateId: stateId.toString(),
-  );
+        stateId: stateId.toString(),
+      );
 
   Future<void> getCityList(context) async {
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
@@ -92,7 +105,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -108,8 +121,8 @@ showLoader(value){
   }
 
   GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
-    cityId: cityId.toString(),
-  );
+        cityId: cityId.toString(),
+      );
 
   Future<void> onAreaSelected(value) async {
     areaId = int.parse(value.toString());
@@ -133,7 +146,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -144,8 +157,8 @@ showLoader(value){
   }
 
   GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
-    areaId: areaId.toString(),
-  );
+        areaId: areaId.toString(),
+      );
 
   Future<void> getPinCodeList(context) async {
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
@@ -154,11 +167,10 @@ showLoader(value){
         pincodeList = result.pincodeData;
         print(pincodeList);
 
-        if(pincodeList?.contains(pincode)??false){
-          showPincodeValueField=true;
-        }
-        else{
-          showPincodeValueField=false;
+        if (pincodeList?.contains(pincode) ?? false) {
+          showPincodeValueField = true;
+        } else {
+          showPincodeValueField = false;
         }
         if (result.pincodeData!.isEmpty) {
           pincodeList?.clear();
@@ -173,7 +185,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -189,8 +201,6 @@ showLoader(value){
     // print(object);
     notifyListeners();
   }
-
-
 
   Future<void> getCountryList(context) async {
     showLoader(true);
@@ -210,7 +220,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -222,10 +232,9 @@ showLoader(value){
 
   ///////////State
 
-
   GetStateListReqModel get _stateListReqModel => GetStateListReqModel(
-    countryId: countryId.toString(),
-  );
+        countryId: countryId.toString(),
+      );
 
   Future<void> getStateList(context) async {
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
@@ -244,7 +253,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -256,8 +265,7 @@ showLoader(value){
 
   Future<void> validateField(context) async {
     if (nameController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context, "Enter Name",
-          type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Name", type: SnackType.error);
       return;
     }
     if (mobNoController.text.isEmpty) {
@@ -299,8 +307,7 @@ showLoader(value){
       return;
     }
     if (streetController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context, "Enter Street",
-          type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Street", type: SnackType.error);
       return;
     }
     if (areaController.text.isEmpty) {
@@ -314,13 +321,76 @@ showLoader(value){
       return;
     }
 
-
     uploadAddressDetails(context);
-
   }
 
-  Future<void> uploadAddressDetails(context)async{
+  Future<void> uploadAddressDetails(context) async {}
 
+  EditDeliveryAddressRequestModel get editDeliveryAddressRequestModel =>
+      EditDeliveryAddressRequestModel(deliveryAddressId: deliveryAddressId);
+
+  Future<void> getAddressDetails(context,addressId) async {
+    deliveryAddressId=addressId;
+    showLoader(true);
+    await getCountryList(context);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    editAddressRepo
+        .getAddressDetails(
+        editDeliveryAddressRequestModel, pref.getString("successToken"))
+        .then((response) {
+      print("jjjjjjjjjj");
+      log(response.body);
+      print("jjjjjjjjjj");
+      final result = EditDeliveryAddressResponseModel.fromJson(
+        jsonDecode(response.body),
+      );
+
+      if (response.statusCode == 200) {
+        final  data = result.deliveryAddressDetails;
+        print(data?.customerName);
+        groupValue=data?.deliveryAddressType??"home";
+        nameController.text = data?.customerName ?? "";
+        mobNoController.text = data?.deliveryMobileNumber.toString() ?? "";
+        apartmentNameController.text =
+            data?.deliveryAppartmentName ??
+                "";
+        houseNoController.text = data?.deliveryHouseNo ?? "";
+        streetController.text =
+            data?.deliveryStreet ?? "";
+        areaController.text = data?.deliveryArea ?? "";
+        landMarkController.text = data?.deliveryLandmark ?? "";
+        countryId = data?.deliveryCountryId ?? 0;
+        stateId = data?.deliveryStateId ?? 0;
+        cityId = data?.deliveryCityId ?? 0;
+        areaId = data?.deliveryAreaId ?? 0;
+        pincode = data?.deliveryPincode.toString() ?? "";
+        countryList = result.countries;
+        stateList = result.states;
+        cityList = result.cities;
+        areaList = result.areas;
+        pincodeList = result.pincodes;
+        if (pincodeList?.contains(pincode.toString()) ?? false) {
+          showPincodeValueField = true;
+        } else {
+          showPincodeValueField = false;
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
-
 }

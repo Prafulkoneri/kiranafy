@@ -58,7 +58,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
               MaterialPageRoute(
                   builder: (context) => MainScreenView(
                       index: 4,
-                      screenName: AddAddressView())),
+                      screenName: AddAddressView(isEditAdress: false,))),
                   (Route<dynamic> route) => false,
             );
           },
@@ -241,7 +241,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                               PrimaryCheckBox(
                                 onChanged: (value) {
                                   read.markDefaultAddress(
-                                      context, element?.id.toString());
+                                      context, element?.id.toString(),index);
                                 },
                                 value: watch.defaultSelectedAddress[index],
                               ),
@@ -262,7 +262,16 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                           ),
                           Row(
                             children: [
-                              SvgPicture.asset("assets/icons/edit1.svg"),
+                              GestureDetector(onTap: (){
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainScreenView(
+                                          index: 4,
+                                          screenName: AddAddressView(isEditAdress: true,addressId: element?.id.toString(),))),
+                                      (Route<dynamic> route) => false,
+                                );
+                              },child: SvgPicture.asset("assets/icons/edit1.svg")),
                               SizedBox(
                                 width: 12.w,
                               ),

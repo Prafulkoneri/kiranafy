@@ -33,7 +33,7 @@ class DeliveryAddressController extends ChangeNotifier {
   List<DeliveryAddressList>? deliveryAddressList;
 
   List<bool> defaultSelectedAddress = [];
-  List selectedAddressId = [];
+
   bool isLoading = true;
   bool defaultAddress = true;
   Future<void> initState(
@@ -42,18 +42,7 @@ class DeliveryAddressController extends ChangeNotifier {
     await getDeliveryAddressList(context);
   }
 
-//////////
-  void selectedDefaultAddress(index, id) {
-    defaultSelectedAddress[index] = !defaultSelectedAddress[index];
-    if (defaultSelectedAddress[index]) {
-      selectedAddressId.removeWhere((item) => item == id);
-      selectedAddressId.insert(0, id);
-    } else {
-      selectedAddressId.removeWhere((item) => item == id);
-    }
-    print(selectedAddressId);
-    notifyListeners();
-  }
+
 
   //////////Start Get Address List////
   Future<void> getDeliveryAddressList(
@@ -73,10 +62,9 @@ class DeliveryAddressController extends ChangeNotifier {
             growable: true);
         int length = deliveryAddressList?.length ?? 0;
         for (int i = 0; i < length; i++) {
+          
           if (deliveryAddressList?[i].deliveryAddressIsDefault == "yes") {
-            selectedAddressId
-                .removeWhere((item) => item == deliveryAddressList?[i].id);
-            selectedAddressId.insert(0, deliveryAddressList?[i].id);
+            defaultSelectedAddress.insert(i,true);
           } else {}
         }
         isLoading = false;
@@ -100,7 +88,7 @@ class DeliveryAddressController extends ChangeNotifier {
   ////////////END////////////////
 
   ////Mark Default Address///////
-  Future<void> markDefaultAddress(context, addressId) async {
+  Future<void> markDefaultAddress(context, addressId,index) async {
     deliveryAddressId = addressId.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     DefaultAddressMarkRepo.markDefaultAddress(
@@ -113,6 +101,7 @@ class DeliveryAddressController extends ChangeNotifier {
         defaultSelectedAddress = List<bool>.filled(
             deliveryAddressList?.length ?? 0, false,
             growable: true);
+        defaultSelectedAddress.insert(index,true);
 
         isLoading = false;
         notifyListeners();

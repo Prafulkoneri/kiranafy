@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/controller/add_address_controller.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
@@ -15,7 +17,9 @@ import 'package:provider/provider.dart';
 
 
 class AddAddressView extends StatefulWidget {
-  const AddAddressView({super.key});
+  final bool ? isEditAdress;
+  final String ? addressId;
+  const AddAddressView({super.key,required this.isEditAdress,this.addressId});
 
   @override
   State<AddAddressView> createState() => _AddAddressViewState();
@@ -29,7 +33,7 @@ class _AddAddressViewState extends State<AddAddressView> {
 
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<AddAddressController>().initState(context);
+      context.read<AddAddressController>().initState(context,widget.isEditAdress,widget.addressId);
     });
   }
 
@@ -42,6 +46,16 @@ class _AddAddressViewState extends State<AddAddressView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           title: "Add Address",
+          onBackBtnPressed: (){
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainScreenView(
+                      index: 4,
+                      screenName: MyDeliveryAddressView())),
+                  (Route<dynamic> route) => false,
+            );
+          },
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {},
         ),
