@@ -578,7 +578,6 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-                                      read.openGallery1(index);
                                     },
                                     child: Container(
                                       height: 100.h,

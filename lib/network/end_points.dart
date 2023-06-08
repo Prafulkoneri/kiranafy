@@ -91,6 +91,9 @@ class Endpoint {
   ///Dash Board
   static const String ShopDashBoard = "${baseUrl}lsm-shop-owner-dashboard";
 
+  ///Edit Custom Product
+  static const String editCustomProduct = "${baseUrl}lsm-shop-owner-edit-custom-product";
+
 ///////////////////////////////Customer Screen Apis///////////////////
 //OnBoarding Screen
   static const String onBoardingScreen =

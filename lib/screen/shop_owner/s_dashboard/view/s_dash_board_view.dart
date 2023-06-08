@@ -20,7 +20,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 class ShopDashBoard extends StatefulWidget {
-  const ShopDashBoard({super.key});
+  final bool ? refresh;
+  const ShopDashBoard({super.key,this.refresh});
 
   @override
   State<ShopDashBoard> createState() => _ShopDashBoardState();
@@ -36,10 +37,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<SDashBoardController>();
     final watch = context.watch<SDashBoardController>();
-    final watchMainScreen = context.watch<SMainScreenController>();
-    final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: watch.isLoading
@@ -84,7 +82,9 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                                   "assets/images/shop_image.png",
                                   height: 180.w,
                                   fit: BoxFit.fill,
-                                )):PageView.builder(
+                                )
+                            ):
+                            PageView.builder(
                                 controller: watch.pageController,
                                 allowImplicitScrolling: true,
                                 scrollDirection: Axis.horizontal,
