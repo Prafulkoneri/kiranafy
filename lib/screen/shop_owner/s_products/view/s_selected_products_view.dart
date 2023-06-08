@@ -60,8 +60,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                     (Route<dynamic> route) => false,
               );
             },
-            title:
-                '${watch.categoryName??""}  - ${watch.totalSelectedAndCustomProducts??""}',
+            title:watch.categoryName!=""?
+                '${watch.categoryName??""} - ${watch.totalSelectedAndCustomProducts??""}':"",
             // "Cold Drinks & Juices - 2",
             // action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {},

@@ -438,7 +438,7 @@ else{
           context,
           MaterialPageRoute(
               builder: (context) => MainScreenView(
-                  index: 4, screenName: MyDeliveryAddressView(isRefresh:false))),
+                  index: 4, screenName: MyDeliveryAddressView(isRefresh:true))),
           (Route<dynamic> route) => false,
         );
         // pref.setString("pincode", pincode);
@@ -497,7 +497,7 @@ else{
           context,
           MaterialPageRoute(
               builder: (context) => MainScreenView(
-                  index: 4, screenName: MyDeliveryAddressView(isRefresh:false))),
+                  index: 4, screenName: MyDeliveryAddressView(isRefresh:true))),
               (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,

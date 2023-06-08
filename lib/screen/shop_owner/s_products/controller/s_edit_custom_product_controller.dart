@@ -356,10 +356,12 @@ class EditCustomProductController extends ChangeNotifier {
     );
   }
 
+
   void onCategorySelected(value) {
     selectedCategory = value;
     notifyListeners();
   }
+
 
   void onUnderRecommendedProductSelected(value) {
     showUnderRecommendedProducts = value;
@@ -375,6 +377,8 @@ class EditCustomProductController extends ChangeNotifier {
     fullFillCravings = value;
     notifyListeners();
   }
+
+
 
   void openProductImage() async {
     final ImagePicker imgpicker = ImagePicker();
