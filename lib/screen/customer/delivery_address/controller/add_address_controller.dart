@@ -1,6 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/model/add_delivery_address_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/model/update_address_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/repository/add_delivery_address_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
@@ -8,9 +13,10 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AddAddressController extends ChangeNotifier{
-  String groupValue="home";
+class AddAddressController extends ChangeNotifier {
+  String groupValue = "home";
   List<CountryData>? countryList;
   List<StateData>? stateList;
   List<CityData>? cityList;
@@ -22,43 +28,47 @@ class AddAddressController extends ChangeNotifier{
   int shopId = 0;
   List? pincodeList;
   String pincode = "";
-  bool showPincodeValueField=false;
-  RegistrationDataRepo registrationDataRepo=RegistrationDataRepo();
-  TextEditingController nameController =TextEditingController();
-  TextEditingController mobNoController =TextEditingController();
-  TextEditingController apartmentNameController=TextEditingController();
-  TextEditingController houseNoController=TextEditingController();
-  TextEditingController streetController=TextEditingController();
-  TextEditingController areaController=TextEditingController();
-  TextEditingController landMarkController=TextEditingController();
-  bool isLoading=true;
+  bool showPincodeValueField = false;
+  RegistrationDataRepo registrationDataRepo = RegistrationDataRepo();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController mobNoController = TextEditingController();
+  TextEditingController apartmentNameController = TextEditingController();
+  TextEditingController houseNoController = TextEditingController();
+  TextEditingController streetController = TextEditingController();
+  TextEditingController areaController = TextEditingController();
+  TextEditingController landMarkController = TextEditingController();
+  String? countryCode = "+91";
+  bool isLoading = true;
+  AddDeliverAddressRepo newAddDeliveryAddressRepo = AddDeliverAddressRepo();
 
-Future<void> initState(context)async{
-  groupValue="home";
-  countryId = 0;
-   stateId = 0;
-   cityId = 0;
-   areaId = 0;
-   shopId = 0;
-   nameController.clear();
-   mobNoController.clear();
-   apartmentNameController.clear();
-   houseNoController.clear();
-   streetController.clear();
-   areaController.clear();
-   landMarkController.clear();
-  await getCountryList(context);
-}
+  Future<void> initState(context) async {
+    groupValue = "home";
+    countryId = 0;
+    stateId = 0;
+    cityId = 0;
+    areaId = 0;
+    shopId = 0;
+    nameController.clear();
+    mobNoController.clear();
+    //  countryCode
+    apartmentNameController.clear();
+    houseNoController.clear();
+    streetController.clear();
+    areaController.clear();
+    landMarkController.clear();
+    await getCountryList(context);
+  }
 
-showLoader(value){
-  isLoading=value;
-  notifyListeners();
-}
+  showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
 
-  void onRadioButtonSelected(value){
-  groupValue=value;
-  notifyListeners();
-}
+  void onRadioButtonSelected(value) {
+    groupValue = value;
+    notifyListeners();
+  }
+
   void onCountrySelected(value) async {
     countryId = int.parse(value.toString());
     print("nhjvwuriuiwbytiuywi");
@@ -72,8 +82,8 @@ showLoader(value){
   }
 
   GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
-    stateId: stateId.toString(),
-  );
+        stateId: stateId.toString(),
+      );
 
   Future<void> getCityList(context) async {
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
@@ -92,7 +102,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -108,8 +118,8 @@ showLoader(value){
   }
 
   GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
-    cityId: cityId.toString(),
-  );
+        cityId: cityId.toString(),
+      );
 
   Future<void> onAreaSelected(value) async {
     areaId = int.parse(value.toString());
@@ -133,7 +143,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -144,8 +154,8 @@ showLoader(value){
   }
 
   GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
-    areaId: areaId.toString(),
-  );
+        areaId: areaId.toString(),
+      );
 
   Future<void> getPinCodeList(context) async {
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
@@ -154,11 +164,10 @@ showLoader(value){
         pincodeList = result.pincodeData;
         print(pincodeList);
 
-        if(pincodeList?.contains(pincode)??false){
-          showPincodeValueField=true;
-        }
-        else{
-          showPincodeValueField=false;
+        if (pincodeList?.contains(pincode) ?? false) {
+          showPincodeValueField = true;
+        } else {
+          showPincodeValueField = false;
         }
         if (result.pincodeData!.isEmpty) {
           pincodeList?.clear();
@@ -173,7 +182,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -189,8 +198,6 @@ showLoader(value){
     // print(object);
     notifyListeners();
   }
-
-
 
   Future<void> getCountryList(context) async {
     showLoader(true);
@@ -210,7 +217,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -222,10 +229,9 @@ showLoader(value){
 
   ///////////State
 
-
   GetStateListReqModel get _stateListReqModel => GetStateListReqModel(
-    countryId: countryId.toString(),
-  );
+        countryId: countryId.toString(),
+      );
 
   Future<void> getStateList(context) async {
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
@@ -244,7 +250,7 @@ showLoader(value){
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -256,8 +262,7 @@ showLoader(value){
 
   Future<void> validateField(context) async {
     if (nameController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context, "Enter Name",
-          type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Name", type: SnackType.error);
       return;
     }
     if (mobNoController.text.isEmpty) {
@@ -299,8 +304,7 @@ showLoader(value){
       return;
     }
     if (streetController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context, "Enter Street",
-          type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Street", type: SnackType.error);
       return;
     }
     if (areaController.text.isEmpty) {
@@ -314,13 +318,61 @@ showLoader(value){
       return;
     }
 
-
-    uploadAddressDetails(context);
-
+    addNewAddress(context);
   }
 
-  Future<void> uploadAddressDetails(context)async{
+  AddAddressRequestModel get newAddDeliveryAddressReqModel =>
+      AddAddressRequestModel(
+          customerName: nameController.text,
+          deliveryCountryCode: countryCode,
+          deliveryMobileNumber: mobNoController.text,
+          deliveryAppartmentName: apartmentNameController.text,
+          deliveryHouseNo: houseNoController.text,
+          deliveryStreet: streetController.text,
+          deliveryArea: areaController.text,
+          deliveryLandmark: landMarkController.text,
+          deliveryCountryId: countryId.toString(),
+          deliveryCityId: cityId.toString(),
+          deliveryStateId: stateId.toString(),
+          deliveryAreaId: areaId.toString(),
+          deliveryAddressType: groupValue.toString(),
+          deliveryPincode: pincode);
 
+  Future<void> addNewAddress(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    newAddDeliveryAddressRepo
+        .addDeliveryAdress(
+            newAddDeliveryAddressReqModel, pref.getString("successToken"))
+        .then((response) {
+      final result =
+          AddAddressResponseModel.fromJson(jsonDecode(response.body));
+      print(response.body);
+      if (response.statusCode == 200) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                  index: 4, screenName: MyDeliveryAddressView())),
+          (Route<dynamic> route) => false,
+        );
+        // pref.setString("pincode", pincode);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
-
 }

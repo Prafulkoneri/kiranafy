@@ -1,14 +1,14 @@
 ////////Request Model//////////////
 class AddAddressRequestModel {
-  String? customerName;
+  String? customerName; //
   String? deliveryCountryCode;
-  int? deliveryMobileNumber;
-  String? deliveryAddressType;
-  int? deliveryCountryId;
-  int? deliveryStateId;
-  int? deliveryCityId;
-  int? deliveryAreaId;
-  int? deliveryPincode;
+  String? deliveryMobileNumber; //
+  String? deliveryAddressType; //
+  String? deliveryCountryId;
+  String? deliveryStateId;
+  String? deliveryCityId;
+  String? deliveryAreaId;
+  String? deliveryPincode;
   String? deliveryAppartmentName;
   String? deliveryHouseNo;
   String? deliveryStreet;

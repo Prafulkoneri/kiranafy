@@ -40,14 +40,13 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
-          onBackBtnPressed: (){
+          onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                   builder: (context) => MainScreenView(
-                      index: 4,
-                      screenName: ProfileScreenView())),
-                  (Route<dynamic> route) => false,
+                      index: 4, screenName: ProfileScreenView())),
+              (Route<dynamic> route) => false,
             );
           },
           title: "My Addresses",
@@ -56,10 +55,9 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 4,
-                      screenName: AddAddressView())),
-                  (Route<dynamic> route) => false,
+                  builder: (context) =>
+                      MainScreenView(index: 4, screenName: AddAddressView())),
+              (Route<dynamic> route) => false,
             );
           },
           // action: ,
@@ -284,12 +282,15 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                             ],
                           )
                         ],
-                      )
+                      ),
                     ],
                   ),
                 );
               },
             ),
+            SizedBox(
+              height: 100.h,
+            )
           ],
         ),
       ),
