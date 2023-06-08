@@ -2,8 +2,17 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+
 import 'package:local_supper_market/screen/customer/delivery_address/model/edit_address_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/repository/edit_address_repo.dart';
+
+import 'package:local_supper_market/screen/customer/delivery_address/model/add_delivery_address_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/model/update_address_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/repository/add_delivery_address_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/repository/update_delivery_address_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
@@ -35,11 +44,16 @@ class AddAddressController extends ChangeNotifier {
   TextEditingController streetController = TextEditingController();
   TextEditingController areaController = TextEditingController();
   TextEditingController landMarkController = TextEditingController();
+
   EditAddressRepo editAddressRepo = EditAddressRepo();
   bool isLoading = true;
   String deliveryAddressId = "";
-
+  String? countryCode = "+91";
+  AddDeliverAddressRepo newAddDeliveryAddressRepo = AddDeliverAddressRepo();
+  UpdateDeliveryAddressRepo updateDeliveryAddressRepo=UpdateDeliveryAddressRepo();
+  bool isEditingAddress=false;
   Future<void> initState(context,editAddress,addressId) async {
+
     groupValue = "home";
     countryId = 0;
     stateId = 0;
@@ -48,19 +62,26 @@ class AddAddressController extends ChangeNotifier {
     shopId = 0;
     nameController.clear();
     mobNoController.clear();
+
     apartmentNameController.clear();
     houseNoController.clear();
     streetController.clear();
     areaController.clear();
     landMarkController.clear();
+
     if(editAddress){
+      isEditingAddress=true;
       await getAddressDetails(context,addressId);
     }
     else{
+      isEditingAddress=false;
       await getCountryList(context);
     }
 
   }
+
+
+
 
   showLoader(value) {
     isLoading = value;
@@ -320,17 +341,21 @@ class AddAddressController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-
-    uploadAddressDetails(context);
+   if(isEditingAddress){
+     updateEditAddress(context);
+   }
+else{
+     addNewAddress(context);
+   }
   }
 
-  Future<void> uploadAddressDetails(context) async {}
+
 
   EditDeliveryAddressRequestModel get editDeliveryAddressRequestModel =>
       EditDeliveryAddressRequestModel(deliveryAddressId: deliveryAddressId);
 
   Future<void> getAddressDetails(context,addressId) async {
-    deliveryAddressId=addressId;
+    deliveryAddressId = addressId;
     showLoader(true);
     await getCountryList(context);
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -347,9 +372,9 @@ class AddAddressController extends ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        final  data = result.deliveryAddressDetails;
+        final data = result.deliveryAddressDetails;
         print(data?.customerName);
-        groupValue=data?.deliveryAddressType??"home";
+        groupValue = data?.deliveryAddressType ?? "home";
         nameController.text = data?.customerName ?? "";
         mobNoController.text = data?.deliveryMobileNumber.toString() ?? "";
         apartmentNameController.text =
@@ -377,6 +402,49 @@ class AddAddressController extends ChangeNotifier {
         }
         isLoading = false;
         notifyListeners();
+      }
+    });
+  }
+
+  AddAddressRequestModel get newAddDeliveryAddressReqModel =>
+      AddAddressRequestModel(
+          customerName: nameController.text,
+          deliveryCountryCode: countryCode,
+          deliveryMobileNumber: mobNoController.text,
+          deliveryAppartmentName: apartmentNameController.text,
+          deliveryHouseNo: houseNoController.text,
+          deliveryStreet: streetController.text,
+          deliveryArea: areaController.text,
+          deliveryLandmark: landMarkController.text,
+          deliveryCountryId: countryId.toString(),
+          deliveryCityId: cityId.toString(),
+          deliveryStateId: stateId.toString(),
+          deliveryAreaId: areaId.toString(),
+          deliveryAddressType: groupValue.toString(),
+          deliveryPincode: pincode);
+
+  Future<void> addNewAddress(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    newAddDeliveryAddressRepo
+        .addDeliveryAdress(
+            newAddDeliveryAddressReqModel, pref.getString("successToken"))
+        .then((response) {
+      final result =
+          AddAddressResponseModel.fromJson(jsonDecode(response.body));
+      print(response.body);
+      if (response.statusCode == 200) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                  index: 4, screenName: MyDeliveryAddressView(isRefresh:false))),
+          (Route<dynamic> route) => false,
+        );
+        // pref.setString("pincode", pincode);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -393,4 +461,63 @@ class AddAddressController extends ChangeNotifier {
       },
     );
   }
+
+
+  UpdateDeliveryAddressReqModel get updateDeliveryAddressReqModel =>
+      UpdateDeliveryAddressReqModel(
+          customerName: nameController.text,
+          deliveryCountryCode: countryCode,
+          deliveryMobileNumber: mobNoController.text,
+          deliveryAppartmentName: apartmentNameController.text,
+          deliveryHouseNo: houseNoController.text,
+          deliveryStreet: streetController.text,
+          deliveryArea: areaController.text,
+          deliveryLandmark: landMarkController.text,
+          deliveryCountryId: countryId.toString(),
+          deliveryCityId: cityId.toString(),
+          deliveryStateId: stateId.toString(),
+          deliveryAreaId: areaId.toString(),
+          deliveryAddressType: groupValue.toString(),
+          deliveryPincode: pincode,
+      deliveryAddressId: deliveryAddressId,
+      );
+
+  Future<void> updateEditAddress(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    updateDeliveryAddressRepo
+        .updateDeliveryAddress(
+        updateDeliveryAddressReqModel, pref.getString("successToken"))
+        .then((response) {
+      final result =
+      UpdateDeliveryAddressResModel.fromJson(jsonDecode(response.body));
+      print(response.body);
+      if (response.statusCode == 200) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                  index: 4, screenName: MyDeliveryAddressView(isRefresh:false))),
+              (Route<dynamic> route) => false,
+        );
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
 }

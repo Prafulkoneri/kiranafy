@@ -3,18 +3,18 @@ class UpdateDeliveryAddressReqModel {
   String? customerName;
   String? deliveryCountryCode;
   String? deliveryAddressType;
-  int? deliveryMobileNumber;
-  int? deliveryCountryId;
-  int? deliveryStateId;
-  int? deliveryCityId;
-  int? deliveryAreaId;
-  int? deliveryPincode;
+  String? deliveryMobileNumber;
+  String? deliveryCountryId;
+  String? deliveryStateId;
+  String? deliveryCityId;
+  String? deliveryAreaId;
+  String? deliveryPincode;
   String? deliveryAppartmentName;
   String? deliveryHouseNo;
   String? deliveryStreet;
   String? deliveryArea;
   String? deliveryLandmark;
-  int? deliveryAddressId;
+  String? deliveryAddressId;
 
   UpdateDeliveryAddressReqModel(
       {required this.customerName,

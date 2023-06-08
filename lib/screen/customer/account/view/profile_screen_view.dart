@@ -482,7 +482,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
                             index: 4,
-                            screenName: MyDeliveryAddressView())),
+                            screenName: MyDeliveryAddressView(isRefresh:true))),
                         (Route<dynamic> route) => false,
                   );
                 },

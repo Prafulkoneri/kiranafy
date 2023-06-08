@@ -2,8 +2,8 @@ import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/model/update_address_model.dart';
 
-class DeleteDeliveryAddressRepo {
-  Future<http.Response> deleteDeliveryAddress(
+class UpdateDeliveryAddressRepo {
+  Future<http.Response> updateDeliveryAddress(
       UpdateDeliveryAddressReqModel reqModel, token) async {
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.UpdateDeliveryAddress));

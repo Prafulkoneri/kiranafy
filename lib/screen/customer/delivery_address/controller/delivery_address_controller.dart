@@ -38,16 +38,24 @@ class DeliveryAddressController extends ChangeNotifier {
   bool defaultAddress = true;
   Future<void> initState(
     context,
+      isRefresh
   ) async {
-    await getDeliveryAddressList(context);
+    if(isRefresh){
+      await getDeliveryAddressList(context);
+    }
+
   }
 
-
+showLoader(value){
+  isLoading=value;
+  notifyListeners();
+}
 
   //////////Start Get Address List////
   Future<void> getDeliveryAddressList(
     context,
   ) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     DeliveryAddressListRepo.getDeliveryAddress(pref.getString("successToken"))
         .then((response) {
@@ -67,7 +75,7 @@ class DeliveryAddressController extends ChangeNotifier {
             defaultSelectedAddress.insert(i,true);
           } else {}
         }
-        isLoading = false;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -103,7 +111,6 @@ class DeliveryAddressController extends ChangeNotifier {
             growable: true);
         defaultSelectedAddress.insert(index,true);
 
-        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -125,7 +132,7 @@ class DeliveryAddressController extends ChangeNotifier {
   /////////////Delete Address////////////
   Future<void> deleteAddress(context, index, addressId) async {
     deliveryAddressId = addressId.toString();
-    isLoading = true;
+
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     deleteAddressRepo
@@ -144,7 +151,7 @@ class DeliveryAddressController extends ChangeNotifier {
               type: SnackType.error);
         }
 
-        isLoading = false;
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

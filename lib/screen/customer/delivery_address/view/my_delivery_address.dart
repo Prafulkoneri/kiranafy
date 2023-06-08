@@ -17,7 +17,8 @@ import 'package:provider/provider.dart';
 import '../../near_shops/view/all_near_shops_view.dart';
 
 class MyDeliveryAddressView extends StatefulWidget {
-  const MyDeliveryAddressView({super.key});
+  final bool ? isRefresh;
+  const MyDeliveryAddressView({super.key,required this.isRefresh});
 
   @override
   State<MyDeliveryAddressView> createState() => _MyDeliveryAddressViewState();
@@ -27,7 +28,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<DeliveryAddressController>().initState(context);
+      context.read<DeliveryAddressController>().initState(context,widget.isRefresh);
     });
   }
 
@@ -40,14 +41,13 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
-          onBackBtnPressed: (){
+          onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                   builder: (context) => MainScreenView(
-                      index: 4,
-                      screenName: ProfileScreenView())),
-                  (Route<dynamic> route) => false,
+                      index: 4, screenName: ProfileScreenView())),
+              (Route<dynamic> route) => false,
             );
           },
           title: "My Addresses",
@@ -60,13 +60,17 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                       index: 4,
                       screenName: AddAddressView(isEditAdress: false,))),
                   (Route<dynamic> route) => false,
+
             );
           },
           // action: ,
         ),
       ),
       backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         child: Column(
           children: [
             ListView.builder(
@@ -293,12 +297,15 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                             ],
                           )
                         ],
-                      )
+                      ),
                     ],
                   ),
                 );
               },
             ),
+            SizedBox(
+              height: 100.h,
+            )
           ],
         ),
       ),

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
@@ -45,35 +47,32 @@ class UpdateProfileController extends ChangeNotifier {
   int shopId = 0;
   List? pincodeList;
   String pincode = "";
-  String radioGroupValue="male";
-  String countryCode="+91";
-  String countryAlternateCode="+91";
+  String radioGroupValue = "male";
+  String countryCode = "+91";
+  String countryAlternateCode = "+91";
   List<CountryData>? countryList;
-  CustomerUpdateProfileRepo customerUpdateProfileRepo=CustomerUpdateProfileRepo();
-  String image="";
-  File fileImage=File("");
-  String networkImage="";
-  bool  isLoading=true;
-  bool showPincodeValueField=false;
+  CustomerUpdateProfileRepo customerUpdateProfileRepo =
+      CustomerUpdateProfileRepo();
+  String image = "";
+  File fileImage = File("");
+  String networkImage = "";
+  bool isLoading = true;
+  bool showPincodeValueField = false;
 
   ////
   Future<void> initState(
     context,
   ) async {
-
     await getCustomerProfileDetails(context);
-
   }
 
   Future<void> getCustomerProfileDetails(context) async {
-    isLoading=true;
+    isLoading = true;
     await getCountryList(context);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     editCustomerProfileRepo
-        .editCustomerProfileRepo(
-            pref.getString("successToken")
-            )
+        .editCustomerProfileRepo(pref.getString("successToken"))
         .then((response) {
       final result = CustomerEditProfileDetails.fromJson(
         jsonDecode(response.body),
@@ -88,32 +87,31 @@ class UpdateProfileController extends ChangeNotifier {
         alernetMobileController.text =
             customerProfileDetails?.customerAlternateMobileNumber.toString() ??
                 "";
-        if(alernetMobileController.text=="null"){
-          alernetMobileController.text="";
+        if (alernetMobileController.text == "null") {
+          alernetMobileController.text = "";
         }
         addressController.text = customerProfileDetails?.customerAddress ?? "";
         dateOfBirthController.text =
             customerProfileDetails?.customerDateOfBirth ?? "";
-         emailController.text=customerProfileDetails?.customerEmail??"";
-         radioGroupValue=customerProfileDetails?.customerGender??"";
-         networkImage=customerProfileDetails?.customerProfileImagePath??"";
-         countryId=customerProfileDetails?.customerCountryId??0;
-         stateId=customerProfileDetails?.customerStateId??0;
-         cityId=customerProfileDetails?.customerCityId??0;
-         areaId=customerProfileDetails?.customerAreaId??0;
-         pincode=customerProfileDetails?.customerPincode.toString()??"";
-         countryList=result.countries;
-         stateList=result.state;
-         cityList=result.city;
-         areaList=result.area;
-        pincodeList=result.pincode;
-        if(pincodeList?.contains(pincode.toString())??false) {
-          showPincodeValueField=true;
+        emailController.text = customerProfileDetails?.customerEmail ?? "";
+        radioGroupValue = customerProfileDetails?.customerGender ?? "";
+        networkImage = customerProfileDetails?.customerProfileImagePath ?? "";
+        countryId = customerProfileDetails?.customerCountryId ?? 0;
+        stateId = customerProfileDetails?.customerStateId ?? 0;
+        cityId = customerProfileDetails?.customerCityId ?? 0;
+        areaId = customerProfileDetails?.customerAreaId ?? 0;
+        pincode = customerProfileDetails?.customerPincode.toString() ?? "";
+        countryList = result.countries;
+        stateList = result.state;
+        cityList = result.city;
+        areaList = result.area;
+        pincodeList = result.pincode;
+        if (pincodeList?.contains(pincode.toString()) ?? false) {
+          showPincodeValueField = true;
+        } else {
+          showPincodeValueField = false;
         }
-        else{
-          showPincodeValueField=false;
-        }
-        isLoading=false;
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -132,8 +130,8 @@ class UpdateProfileController extends ChangeNotifier {
     );
   }
 
-  void onRadioButtonSelected(value){
-    radioGroupValue=value;
+  void onRadioButtonSelected(value) {
+    radioGroupValue = value;
     notifyListeners();
   }
 
@@ -151,8 +149,8 @@ class UpdateProfileController extends ChangeNotifier {
   }
 
   GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
-    stateId: stateId.toString(),
-  );
+        stateId: stateId.toString(),
+      );
 
   Future<void> getCityList(context) async {
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
@@ -171,7 +169,7 @@ class UpdateProfileController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -187,8 +185,8 @@ class UpdateProfileController extends ChangeNotifier {
   }
 
   GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
-    cityId: cityId.toString(),
-  );
+        cityId: cityId.toString(),
+      );
 
   Future<void> onAreaSelected(value) async {
     areaId = int.parse(value.toString());
@@ -212,7 +210,7 @@ class UpdateProfileController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -223,8 +221,8 @@ class UpdateProfileController extends ChangeNotifier {
   }
 
   GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
-    areaId: areaId.toString(),
-  );
+        areaId: areaId.toString(),
+      );
 
   Future<void> getPinCodeList(context) async {
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
@@ -233,11 +231,10 @@ class UpdateProfileController extends ChangeNotifier {
         pincodeList = result.pincodeData;
         print(pincodeList);
 
-        if(pincodeList?.contains(pincode)??false){
-          showPincodeValueField=true;
-        }
-        else{
-          showPincodeValueField=false;
+        if (pincodeList?.contains(pincode) ?? false) {
+          showPincodeValueField = true;
+        } else {
+          showPincodeValueField = false;
         }
         if (result.pincodeData!.isEmpty) {
           pincodeList?.clear();
@@ -252,7 +249,7 @@ class UpdateProfileController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -302,7 +299,6 @@ class UpdateProfileController extends ChangeNotifier {
 
   ///////////State
 
-
   GetStateListReqModel get _stateListReqModel => GetStateListReqModel(
         countryId: countryId.toString(),
       );
@@ -334,16 +330,43 @@ class UpdateProfileController extends ChangeNotifier {
     );
   }
 
-  UpdateProfileDetailReqModel get updateProfileDetailReqModel=>UpdateProfileDetailReqModel(customerName: nameController.text, customerEmail: emailController.text, customerCountryCode:countryCode, customerMobileNumber: mobilrController.text, customerAlternateCountryCode:countryAlternateCode, customerAlternateMobileNumber: alernetMobileController.text, customerGender:radioGroupValue, customerDateOfBirth: dateOfBirthController.text, customerCountryId: countryId.toString(), customerCityId:cityId.toString(), customerStateId:stateId.toString(), customerAreaId: areaId.toString(), customerPincode: pincode, customerAddress: addressController.text,);
+  UpdateProfileDetailReqModel get updateProfileDetailReqModel =>
+      UpdateProfileDetailReqModel(
+        customerName: nameController.text,
+        customerEmail: emailController.text,
+        customerCountryCode: countryCode,
+        customerMobileNumber: mobilrController.text,
+        customerAlternateCountryCode: countryAlternateCode,
+        customerAlternateMobileNumber: alernetMobileController.text,
+        customerGender: radioGroupValue,
+        customerDateOfBirth: dateOfBirthController.text,
+        customerCountryId: countryId.toString(),
+        customerCityId: cityId.toString(),
+        customerStateId: stateId.toString(),
+        customerAreaId: areaId.toString(),
+        customerPincode: pincode,
+        customerAddress: addressController.text,
+      );
 
-  Future<void> updateProfileDetail(context)async{
-    SharedPreferences pref=await SharedPreferences.getInstance();
+  Future<void> updateProfileDetail(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
 
-    customerUpdateProfileRepo.customerUpdateProfile(updateProfileDetailReqModel,pref.getString("successToken")).then((response) {
-      final result = UpdateProfileDetailResModel.fromJson(jsonDecode(response.body));
+    customerUpdateProfileRepo
+        .customerUpdateProfile(
+            updateProfileDetailReqModel, pref.getString("successToken"))
+        .then((response) {
+      final result =
+          UpdateProfileDetailResModel.fromJson(jsonDecode(response.body));
       print(response.body);
       if (response.statusCode == 200) {
-       pref.setString("pincode",pincode);
+        pref.setString("pincode", pincode);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  MainScreenView(index: 4, screenName: ProfileScreenView())),
+          (Route<dynamic> route) => false,
+        );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {
@@ -353,7 +376,7 @@ class UpdateProfileController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -371,16 +394,14 @@ class UpdateProfileController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-
-      networkImage="";
-      fileImage=File(pickedFile.path);
+      networkImage = "";
+      fileImage = File(pickedFile.path);
       final bytes = await compressFile(fileImage);
 
-      image= base64Encode(bytes as List<int>);
+      image = base64Encode(bytes as List<int>);
 
       networkImage = "";
       fileImage = File(pickedFile.path);
-
     }
 
     notifyListeners();
@@ -388,8 +409,7 @@ class UpdateProfileController extends ChangeNotifier {
 
   Future<void> validateField(context) async {
     if (nameController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context, "Enter Name",
-          type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter Name", type: SnackType.error);
       return;
     }
     if (mobilrController.text.isEmpty) {
@@ -434,21 +454,19 @@ class UpdateProfileController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    if(fileImage.path==""){
+    if (fileImage.path == "") {
       await updateProfileDetail(context);
-    }
-    else{
+    } else {
       uploadImage(context);
     }
   }
 
   Future uploadImage(context) async {
-
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    String token=pref.getString("successToken").toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.customerUpdateProfile}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
-    request.headers['Authorization'] ="Bearer $token";
+    request.headers['Authorization'] = "Bearer $token";
     request.fields['customer_name'] = nameController.text;
     request.fields['customer_country_code'] = countryCode.toString();
     request.fields['customer_mobile_number'] = mobilrController.text;
@@ -458,27 +476,30 @@ class UpdateProfileController extends ChangeNotifier {
     request.fields['customer_country_id'] = countryId.toString();
     request.fields['customer_state_id'] = stateId.toString();
     request.fields['customer_city_id'] = cityId.toString();
-    request.fields['customer_area_id'] =  areaId.toString();
-    request.fields['customer_pincode'] =  pincode.toString();
-    request.fields['customer_address'] =  addressController.text;
-    request.fields['customer_alternate_country_code'] =  countryAlternateCode;
-    request.fields['customer_alternate_mobile_number'] =  alernetMobileController.text;
-    List<http.MultipartFile> newList =  <http.MultipartFile>[];
+    request.fields['customer_area_id'] = areaId.toString();
+    request.fields['customer_pincode'] = pincode.toString();
+    request.fields['customer_address'] = addressController.text;
+    request.fields['customer_alternate_country_code'] = countryAlternateCode;
+    request.fields['customer_alternate_mobile_number'] =
+        alernetMobileController.text;
+    List<http.MultipartFile> newList = <http.MultipartFile>[];
     File imageFile = fileImage;
     var stream =
-    new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var multipartFile = new http.MultipartFile("customer_profile_image_path", stream, length,filename: basename(imageFile.path));
+    var multipartFile = new http.MultipartFile(
+        "customer_profile_image_path", stream, length,
+        filename: basename(imageFile.path));
     newList.add(multipartFile);
     request.files.addAll(newList);
-    await request.send().then((response){
+    await request.send().then((response) {
       if (response.statusCode == 200) {
         print("sucesss");
-        Utils.showPrimarySnackbar(context,"Updated Successfully",
+        Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         print("Updated Successfully");
       } else {
-        Utils.showPrimarySnackbar(context,"Error on uploading",
+        Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
         return;
       }
@@ -487,6 +508,4 @@ class UpdateProfileController extends ChangeNotifier {
       });
     });
   }
-
-
 }
