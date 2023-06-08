@@ -6,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/controller/delivery_address_controller.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -38,9 +41,28 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: (){
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainScreenView(
+                      index: 4,
+                      screenName: ProfileScreenView())),
+                  (Route<dynamic> route) => false,
+            );
+          },
           title: "My Addresses",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
-          onActionTap: () {},
+          onActionTap: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainScreenView(
+                      index: 4,
+                      screenName: AddAddressView())),
+                  (Route<dynamic> route) => false,
+            );
+          },
           // action: ,
         ),
       ),

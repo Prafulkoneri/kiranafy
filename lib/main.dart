@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/customer/account/view/controller/prof
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/controller/add_address_controller.dart';
 
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
@@ -102,12 +103,11 @@ void main() async {
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(create: (_) => ProductViewController()),
         ChangeNotifierProvider(create: (_) => SCustomerListController()),
-        ChangeNotifierProvider(
-            create: (_) => SAllRecommandedProductsController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(create: (_) => SAllRecommandedProductsController()),
+        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
         ChangeNotifierProvider(create: (_) => DeliveryAddressController()),
+        ChangeNotifierProvider(create: (_) => AddAddressController()),
       ],
       child: MyApp(),
     ),
