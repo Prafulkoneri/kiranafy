@@ -8,6 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_add_coupons_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
 class ShopCouponsView extends StatefulWidget {
@@ -27,12 +30,26 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          title: "Coupon",
-          action: SvgPicture.asset("assets/icons/addressadd.svg"),
-          onActionTap: () {
-            // readMainScreen.onCategoryAddPressed();
-          },
-        ),
+            onBackBtnPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 4, screenName: SAccountScreenView())),
+                (Route<dynamic> route) => false,
+              );
+            },
+            title: "Coupon",
+            action: SvgPicture.asset("assets/icons/addressadd.svg"),
+            onActionTap: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 4, screenName: ShopAddCoupons())),
+                (Route<dynamic> route) => false,
+              );
+            }),
       ),
       body: Column(
         children: [
