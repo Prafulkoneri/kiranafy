@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/delivery_address/controller/
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
 
 import '../../near_shops/view/all_near_shops_view.dart';
@@ -26,9 +27,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<DeliveryAddressController>().initState(
-            context,
-          );
+      context.read<DeliveryAddressController>().initState(context);
     });
   }
 
@@ -239,19 +238,12 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                         children: [
                           Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    // border: Border.all(width: 1),
-                                    color: Color(0xffF3F3F3),
-                                    borderRadius: BorderRadius.circular(5)),
-                                height: 20.h,
-                                width: 20.w,
-                                // color: grey4,
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    "assets/icons/check.svg",
-                                  ),
-                                ),
+                              PrimaryCheckBox(
+                                onChanged: (value) {
+                                  read.markDefaultAddress(
+                                      context, element?.id.toString());
+                                },
+                                value: watch.defaultSelectedAddress[index],
                               ),
                               SizedBox(
                                 width: 10.w,
@@ -282,7 +274,13 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                               SizedBox(
                                 width: 12.w,
                               ),
-                              SvgPicture.asset("assets/icons/delete1.svg")
+                              InkWell(
+                                  onTap: () {
+                                    read.deleteAddress(
+                                        context, index, element?.id);
+                                  },
+                                  child: SvgPicture.asset(
+                                      "assets/icons/delete1.svg"))
                             ],
                           )
                         ],
