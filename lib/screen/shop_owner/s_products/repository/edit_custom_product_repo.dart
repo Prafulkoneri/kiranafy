@@ -7,6 +7,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_
 class EditCustomProductRepo {
   Future<http.Response> getCustomProductDetails(
       EditCustomProductsRequestModel reqModel, token) async {
+    print(token);
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.editCustomProduct));
     try {

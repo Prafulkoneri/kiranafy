@@ -100,10 +100,12 @@ class EditCustomProductController extends ChangeNotifier {
     unitList.clear();
     productId=id;
     categoryId=catId;
+    await getCustomProductData(context);
+   await getCustomProductDetails(context);
     print(productId);
     // await onAddWidget(createCard,index);
 
-    await getCustomProductData(context);
+
   }
 
 
@@ -264,12 +266,8 @@ class EditCustomProductController extends ChangeNotifier {
 
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
-    customProductDataRepo
-        .customProductDataModel(pref.getString("successToken"))
-        .then((response) {
-      print(response.body);
-      final result =
-      CustomProductDataResModel.fromJson(jsonDecode(response.body));
+    customProductDataRepo.customProductDataModel(pref.getString("successToken")).then((response) {
+      final result = CustomProductDataResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         customdata = result.data;
         categoryData = customdata?.categoryData ?? [];
@@ -308,7 +306,9 @@ class EditCustomProductController extends ChangeNotifier {
     editCustomProductRepo
         .getCustomProductDetails(editCustomProductsRequestModel,pref.getString("successToken"))
         .then((response) {
+          print("9999999999999");
       print(response.body);
+          print("9999999999999");
       final result =
       EditCustomProductsResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {

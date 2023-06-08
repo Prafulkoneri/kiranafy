@@ -37,6 +37,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/
 
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_admin_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_custom_product_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 
@@ -108,6 +109,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
         ChangeNotifierProvider(create: (_) => DeliveryAddressController()),
         ChangeNotifierProvider(create: (_) => AddAddressController()),
+        ChangeNotifierProvider(create: (_) => EditCustomProductController()),
       ],
       child: MyApp(),
     ),

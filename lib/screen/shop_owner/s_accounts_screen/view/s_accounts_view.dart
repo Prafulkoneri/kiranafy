@@ -501,7 +501,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => SSubscriptionScreenView()));
+                        builder: (context) => SSubscriptionScreenView(loggedIn:true,)));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
