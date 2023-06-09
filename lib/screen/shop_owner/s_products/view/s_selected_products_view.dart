@@ -325,7 +325,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 ),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    read.deleteProduct(context,
+                                                    read.deleteAdminProduct(context,
                                                         index, element?.id);
                                                   },
                                                   child: Container(
@@ -670,7 +670,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      read.deleteProduct(context,
+                                                      read.deleteAdminProduct(context,
                                                           index, element?.id);
                                                     },
                                                     child: Container(
@@ -702,182 +702,182 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                           ),
                                         ),
                                         children: [
-                                          // Container(
-                                          //   padding: EdgeInsets.only(
-                                          //       left: 11.w,
-                                          //       bottom: 11.w,
-                                          //       right: 11.w),
-                                          //   child: Column(
-                                          //     children: [
-                                          //       Divider(),
-                                          //       Container(
-                                          //         decoration: BoxDecoration(
-                                          //           borderRadius:
-                                          //               BorderRadius.only(
-                                          //                   topLeft:
-                                          //                       Radius.circular(
-                                          //                           10)),
-                                          //         ),
-                                          //         padding: EdgeInsets.only(
-                                          //             left: 11.w, right: 11.w),
-                                          //         child: Row(
-                                          //           mainAxisAlignment:
-                                          //               MainAxisAlignment
-                                          //                   .spaceBetween,
-                                          //           children: [
-                                          //             Text(
-                                          //               "Product Unit",
-                                          //               style: GoogleFonts.dmSans(
-                                          //                 textStyle: TextStyle(
-                                          //                     color: Black1,
-                                          //                     fontSize: 12.sp,
-                                          //                     fontWeight:
-                                          //                         FontWeight
-                                          //                             .w400),
-                                          //               ),
-                                          //             ),
-                                          //             Row(
-                                          //               children: [
-                                          //                 Text(
-                                          //                   "MRP",
-                                          //                   style: GoogleFonts
-                                          //                       .dmSans(
-                                          //                     textStyle: TextStyle(
-                                          //                         color: Black1,
-                                          //                         fontSize: 12.sp,
-                                          //                         fontWeight:
-                                          //                             FontWeight
-                                          //                                 .w400),
-                                          //                   ),
-                                          //                 ),
-                                          //                 SizedBox(
-                                          //                   width: 12.w,
-                                          //                 ),
-                                          //                 Text(
-                                          //                   "Offer price",
-                                          //                   style: GoogleFonts
-                                          //                       .dmSans(
-                                          //                     textStyle: TextStyle(
-                                          //                         color: Black1,
-                                          //                         fontSize: 12.sp,
-                                          //                         fontWeight:
-                                          //                             FontWeight
-                                          //                                 .w400),
-                                          //                   ),
-                                          //                 ),
-                                          //               ],
-                                          //             ),
-                                          //           ],
-                                          //         ),
-                                          //       ),
-                                          //       SizedBox(
-                                          //         height: 5.h,
-                                          //       ),
-                                          //       ListView.builder(
-                                          //         padding: EdgeInsets.zero,
-                                          //         itemCount: watch
-                                          //                 .productsFromAdmin?[
-                                          //                     index]
-                                          //                 .unitDetails
-                                          //                 ?.length ??
-                                          //             0,
-                                          //         shrinkWrap: true,
-                                          //         physics:
-                                          //             NeverScrollableScrollPhysics(),
-                                          //         itemBuilder: (context, int) {
-                                          //           // final unitDetail = watch
-                                          //           //     .productsFromAdmin?[index]
-                                          //           //     .unitDetails?[int];
-                                          //           final element = watch
-                                          //               .productsFromAdmin?[index]
-                                          //               .unitDetails?[int];
-                                          //
-                                          //           return Container(
-                                          //             padding: EdgeInsets.only(
-                                          //                 left: 12.w,
-                                          //                 right: 20.w,
-                                          //                 top: 7.w,
-                                          //                 bottom: 8.w),
-                                          //             decoration: BoxDecoration(
-                                          //                 borderRadius:
-                                          //                     BorderRadius
-                                          //                         .circular(5),
-                                          //                 // color: Black1,
-                                          //                 border: Border.all(
-                                          //                     width: 1,
-                                          //                     color: grey6)),
-                                          //             child: Row(
-                                          //               mainAxisAlignment:
-                                          //                   MainAxisAlignment
-                                          //                       .spaceBetween,
-                                          //               children: [
-                                          //                 Row(
-                                          //                   children: [
-                                          //                     Text(
-                                          //                       "${element?.weightAndUnit}",
-                                          //                       style: GoogleFonts
-                                          //                           .dmSans(
-                                          //                         textStyle: TextStyle(
-                                          //                             color:
-                                          //                                 Black1,
-                                          //                             fontSize:
-                                          //                                 14.sp,
-                                          //                             fontWeight:
-                                          //                                 FontWeight
-                                          //                                     .w400),
-                                          //                       ),
-                                          //                     ),
-                                          //                   ],
-                                          //                 ),
-                                          //                 Row(
-                                          //                   // mainAxisAlignment:
-                                          //                   //     MainAxisAlignment
-                                          //                   //         .spaceBetween,
-                                          //                   children: [
-                                          //                     Text(
-                                          //                       "${element?.mrpPrice}",
-                                          //                       style: GoogleFonts
-                                          //                           .dmSans(
-                                          //                         textStyle: TextStyle(
-                                          //                             decoration:
-                                          //                                 TextDecoration
-                                          //                                     .lineThrough,
-                                          //                             color:
-                                          //                                 Black1,
-                                          //                             fontSize:
-                                          //                                 14.sp,
-                                          //                             fontWeight:
-                                          //                                 FontWeight
-                                          //                                     .w400),
-                                          //                       ),
-                                          //                     ),
-                                          //                     SizedBox(
-                                          //                       width: 45.w,
-                                          //                     ),
-                                          //                     Text(
-                                          //                       "${element?.offerPrice}",
-                                          //                       style: GoogleFonts
-                                          //                           .dmSans(
-                                          //                         textStyle: TextStyle(
-                                          //                             color:
-                                          //                                 Black1,
-                                          //                             fontSize:
-                                          //                                 14.sp,
-                                          //                             fontWeight:
-                                          //                                 FontWeight
-                                          //                                     .w400),
-                                          //                       ),
-                                          //                     ),
-                                          //                   ],
-                                          //                 ),
-                                          //               ],
-                                          //             ),
-                                          //           );
-                                          //         },
-                                          //       )
-                                          //     ],
-                                          //   ),
-                                          // ),
+                                          Container(
+                                            padding: EdgeInsets.only(
+                                                left: 11.w,
+                                                bottom: 11.w,
+                                                right: 11.w),
+                                            child: Column(
+                                              children: [
+                                                Divider(),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    10)),
+                                                  ),
+                                                  padding: EdgeInsets.only(
+                                                      left: 11.w, right: 11.w),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        "Product Unit",
+                                                        style: GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Black1,
+                                                              fontSize: 12.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "MRP",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Black1,
+                                                                  fontSize: 12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 12.w,
+                                                          ),
+                                                          Text(
+                                                            "Offer price",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Black1,
+                                                                  fontSize: 12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.h,
+                                                ),
+                                                ListView.builder(
+                                                  padding: EdgeInsets.zero,
+                                                  itemCount: watch
+                                                          .customProduct?[
+                                                              index]
+                                                          .unitDetails
+                                                          ?.length ??
+                                                      0,
+                                                  shrinkWrap: true,
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemBuilder: (context, int) {
+                                                    // final unitDetail = watch
+                                                    //     .productsFromAdmin?[index]
+                                                    //     .unitDetails?[int];
+                                                    final element = watch
+                                                        .customProduct?[index]
+                                                        .unitDetails?[int];
+
+                                                    return Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 12.w,
+                                                          right: 20.w,
+                                                          top: 7.w,
+                                                          bottom: 8.w),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          // color: Black1,
+                                                          border: Border.all(
+                                                              width: 1,
+                                                              color: grey6)),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "${element?.weightAndUnit}",
+                                                                style: GoogleFonts
+                                                                    .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      color:
+                                                                          Black1,
+                                                                      fontSize:
+                                                                          14.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            // mainAxisAlignment:
+                                                            //     MainAxisAlignment
+                                                            //         .spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                "${element?.mrpPrice}",
+                                                                style: GoogleFonts
+                                                                    .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      decoration:
+                                                                          TextDecoration
+                                                                              .lineThrough,
+                                                                      color:
+                                                                          Black1,
+                                                                      fontSize:
+                                                                          14.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 60.w,
+                                                              ),
+                                                              Text(
+                                                                "${element?.offerPrice}",
+                                                                style: GoogleFonts
+                                                                    .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      color:
+                                                                          Black1,
+                                                                      fontSize:
+                                                                          14.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                         // child:
                                       ),

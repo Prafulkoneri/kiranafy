@@ -9,7 +9,7 @@ class Endpoint {
   // Check Mobile Number Exist
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';
-  // Get Country List
+  // Get Country
   static const String getCountryList = '${baseUrl}lsm-country-list';
   //Get State List
   static const String getStateList = '${baseUrl}lsm-state-list';

@@ -300,40 +300,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                           ),
                                         ],
                                       ),
-
                                       //
                                     ),
-                                    //     ElevatedButton(
-                                    // onPressed: () {
-                                    //   Clipboard.setData(ClipboardData())
-                                    //       .then((_) {
-                                    //     ScaffoldMessenger.of(context)
-                                    //         .showSnackBar(SnackBar(
-                                    //             content: Text(
-                                    //                 'Copied to your clipboard !')));
-                                    //   });
-                                    // },
-                                    //   child: Row(
-                                    //     children: [
-                                    //       SelectableText(
-                                    //         "OFF ${element?.couponCode}",
-                                    //         style: GoogleFonts.dmSans(
-                                    //           textStyle: TextStyle(
-                                    //               color: SplashText,
-                                    //               letterSpacing: .5,
-                                    //               fontSize: 12.sp,
-                                    //               fontWeight: FontWeight.w700),
-                                    //         ),
-                                    //       ), //
-
-                                    //       SvgPicture.asset(
-                                    //         'assets/images/svg2.svg',
-                                    //         width: 17.w,
-                                    //         height: 17.h,
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    // ),
                                   ),
                                 ),
                                 SizedBox(
@@ -348,6 +316,9 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                   }),
             ),
           )),
+          SizedBox(
+            height: 80.h,
+          )
         ],
       ),
     );

@@ -39,30 +39,30 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(title: "KYC Verification Details"),
         ),
-        body: Stack(
-          alignment: Alignment.topCenter,
-          clipBehavior: Clip.none,
-          children: [
-            Positioned(
-              top: -30.w,
-              left: 0.w,
-              child: Image.asset(
-                "assets/images/splash1.png",
-                height: 235.w,
-                width: 361.w,
+        body: SingleChildScrollView(
+          child: Stack(
+            alignment: Alignment.topCenter,
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                top: -30.w,
+                left: 0.w,
+                child: Image.asset(
+                  "assets/images/splash1.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            Positioned(
-              bottom: -25.w,
-              right: 0.w,
-              child: Image.asset(
-                "assets/images/splash2.png",
-                height: 235.w,
-                width: 361.w,
+              Positioned(
+                bottom: -25.w,
+                right: 0.w,
+                child: Image.asset(
+                  "assets/images/splash2.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              child: Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 20.w),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -406,21 +406,28 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             fontWeight: FontWeight.w400,
                             color: Color(0xff8C8C8C)),
                       ),
+                      SizedBox(
+                        height: 20.w,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.w),
+                        child: PrimaryButton(
+                            height: 45.w,
+                            // width: 45.w,
+                            // fontSize: 20.sp,
+                            text: "Upload Documents",
+                            color: Color(0xff4689EC),
+                            onTap: () {
+                              read.onUploadClicked(context);
+                            }),
+                      ),
                     ]),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
-              child: PrimaryButton(
-                  height: 45.w,
-                  fontSize: 20.sp,
-                  text: "Upload Documents",
-                  color: Color(0xff4689EC),
-                  onTap: () {
-                    read.onUploadClicked(context);
-                  }),
-            ),
-          ],
+              SizedBox(
+                height: 20.w,
+              ),
+            ],
+          ),
         ));
   }
 }

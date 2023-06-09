@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -120,7 +121,7 @@ class SSubscriptionController extends ChangeNotifier {
       BuySubscriptionRequestModel(
           subscriptionId: selectedPlanId, serviceId: selectedServicesId);
 
-  Future<void> buySubscriptionPlan(context) async {
+  Future<void> buySubscriptionPlan(context,loggedIn) async {
     if (selectedAddOnServicesId.isNotEmpty) {
       SharedPreferences pref = await SharedPreferences.getInstance();
       String a = '';
@@ -138,8 +139,23 @@ class SSubscriptionController extends ChangeNotifier {
             BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
         print(response.statusCode);
         if (response.statusCode == 200) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => KycCompletedView()));
+          if(loggedIn){
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SMainScreenView(
+                        index: 4,
+                        screenName:
+                        SAccountScreenView(),
+                      )),
+                  (Route<dynamic> route) => false,
+            );
+          }
+          else {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => KycCompletedView()));
+          }
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,

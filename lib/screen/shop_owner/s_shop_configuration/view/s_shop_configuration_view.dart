@@ -43,6 +43,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
+          isBackButtonEnabled: widget.initialShopConfigration==true?false:true,
           onBackBtnPressed: () {
            widget.initialShopConfigration==false?Navigator.pushAndRemoveUntil(
               context,

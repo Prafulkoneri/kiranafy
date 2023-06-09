@@ -18,7 +18,8 @@ import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:provider/provider.dart';
 
 class SSubscriptionScreenView extends StatefulWidget {
-  const SSubscriptionScreenView({Key? key}) : super(key: key);
+  final bool ? loggedIn;
+  const SSubscriptionScreenView({Key? key,required this.loggedIn}) : super(key: key);
 
   @override
   _SSubscriptionScreenViewState createState() =>
@@ -465,7 +466,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                 backgroundColor: MaterialStateProperty.all(SplashText),
               ),
               onPressed: () {
-                read.buySubscriptionPlan(context);
+                read.buySubscriptionPlan(context,widget.loggedIn);
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -511,7 +512,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                             width: 160.w,
                             onTap: () async {
                               print("hello");
-                              await read.buySubscriptionPlan(context);
+                              await read.buySubscriptionPlan(context,widget.loggedIn);
 
                               // readMainScreen.onNavigation(
                               //     4, SShopConfigurationView(), context);

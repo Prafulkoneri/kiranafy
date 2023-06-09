@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_response_model.dart';
@@ -31,7 +32,7 @@ class SShopConfigurationController extends ChangeNotifier {
   TextEditingController imageNameController = TextEditingController();
 
   bool isCustomerPickupSelected = false;
-  bool ifFreePickupSelected = true;
+  bool ifFreePickupSelected = false;
   bool isDeliveryCustomerSelected = false;
   bool isDeliveryChargesSelected = false;
   bool isNineToTwelve = false;
@@ -100,6 +101,8 @@ class SShopConfigurationController extends ChangeNotifier {
   Future<void> initState(
     context,
   ) async {
+
+
     await getShopConfiguration(context);
   }
 
@@ -130,7 +133,8 @@ class SShopConfigurationController extends ChangeNotifier {
   ////// Shop Configuration start
   Future<void> getShopConfiguration(context) async {
     print("successToken");
-    SharedPreferences pref = await SharedPreferences.getInstance();
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    supportNumberController.text=pref.getString("mobileNo").toString();
     shopConfigRepo
         .shopCongurationDetails(pref.getString("successToken"))
         .then((response) {
@@ -184,7 +188,19 @@ class SShopConfigurationController extends ChangeNotifier {
           isDeliveryChargesSelected = false;
           ifFreePickupSelected=true;
         }
-        else{
+        if (data?.shopOwnerDeliveryChargesFree =="inactive") {
+          isDeliveryChargesSelected = true;
+          ifFreePickupSelected=false;
+        }
+        if(data?.shopOwnerDeliveryChargesFree == null){
+          isDeliveryChargesSelected = false;
+          ifFreePickupSelected=false;
+        }
+        if(data?.shopOwnerDeliveryChargesFree == ""){
+          isDeliveryChargesSelected = false;
+          ifFreePickupSelected=false;
+        }
+        if(data?.shopOwnerDeliveryChargesFree == "null"){
           isDeliveryChargesSelected = false;
           ifFreePickupSelected=false;
         }
@@ -301,24 +317,13 @@ String token=pref.getString("successToken").toString();
     request.fields['shop_owner_upi_id'] =  upiIdController.text;
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList =  <http.MultipartFile>[];
-    // for (int i = 0; i < images.length; i++) {
-    //   File imageFile = File(images[i].toString());
-    //   var stream =
-    //   new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-    //   var length = await imageFile.length();
-    //   var multipartFile = new http.MultipartFile("shop_owner_payment_qr_code_image_path", stream, length,filename: basename(imageFile.path));
-    //   newList.add(multipartFile);
-    // }
-File imageFile = fileImage;
-var stream =
-new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-var length = await imageFile.length();
-var multipartFile = new http.MultipartFile("shop_owner_payment_qr_code_image_path", stream, length,filename: basename(imageFile.path));
-newList.add(multipartFile);
-
+    File imageFile = fileImage;var stream =
+    new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var length = await imageFile.length();
+    var multipartFile = new http.MultipartFile("shop_owner_payment_qr_code_image_path", stream, length,filename: basename(imageFile.path));
+    newList.add(multipartFile);
     request.files.addAll(newList);
-     await request.send().then((response){
-
+    await request.send().then((response){
       if (response.statusCode == 200) {
         print("sucesss");
         Utils.showPrimarySnackbar(context,"Updated Successfully",

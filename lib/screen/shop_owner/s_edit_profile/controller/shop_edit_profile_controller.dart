@@ -122,7 +122,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
             networkImage3 = bannerImageList?[2].shopBannerImagePath ?? "";
           }
           if (bannerImageList!.asMap().containsKey(3)) {
-            networkImage4 = bannerImageList?[2].shopBannerImagePath ?? "";
+            networkImage4 = bannerImageList?[3].shopBannerImagePath ?? "";
           }
         }
         notifyListeners();
@@ -175,13 +175,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 4,screenName:SAccountScreenView())),
               (Route<dynamic> route) => false,
         );
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -541,6 +542,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       final respStr = await response.stream.bytesToString();
       print(respStr);
       if (response.statusCode == 200) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 4,screenName:SAccountScreenView())),
+              (Route<dynamic> route) => false,
+        );
         Utils.showPrimarySnackbar(context,"Updated Successfully",
             type: SnackType.success);
         print("Updated Successfully");

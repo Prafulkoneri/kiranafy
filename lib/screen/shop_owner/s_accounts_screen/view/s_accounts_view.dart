@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/google_map.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
@@ -21,8 +23,7 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class SAccountScreenView extends StatefulWidget {
-  final String? updateMessage;
-  const SAccountScreenView({super.key, this.updateMessage});
+  const SAccountScreenView({super.key});
 
   @override
   State<SAccountScreenView> createState() => _SAccountScreenViewState();
@@ -34,7 +35,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SAccountScreenController>()
-          .initState(context, widget.updateMessage);
+          .initState(context);
     });
   }
 
@@ -501,7 +502,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => SSubscriptionScreenView()));
+                        builder: (context) => SSubscriptionScreenView(loggedIn:true,)));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -552,52 +553,64 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              padding: EdgeInsets.only(bottom: 15.w),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1, color: grey10),
+            GestureDetector(
+              onTap: (){
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => SMainScreenView(
+                //           index: 4,
+                //           screenName: Map())),
+                //       (Route<dynamic> route) => false,
+                // );
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                padding: EdgeInsets.only(bottom: 15.w),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: grey10),
+                  ),
+                  // color: Colors.white,
                 ),
-                // color: Colors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: 5,
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/bank.svg',
-                    // width: 14.w,
-                    // height: 13.h,
-                  ),
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  Flexible(
-                    child: Text(
-                      "Bank A/C Details",
-                      // "Rachel Green",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 5,
+                    ),
+                    SvgPicture.asset(
+                      'assets/icons/bank.svg',
+                      // width: 14.w,
+                      // height: 13.h,
+                    ),
+                    SizedBox(
+                      width: 18.w,
+                    ),
+                    Flexible(
+                      child: Text(
+                        "Bank A/C Details",
+                        // "Rachel Green",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
-                  ),
-                  // Text(
-                  //   'Bank A/C Details',
-                  //   style: GoogleFonts.dmSans(
-                  //     textStyle: TextStyle(
-                  //         color: Black,
-                  //         fontSize: 14.sp,
-                  //         fontWeight: FontWeight.w400),
-                  //   ),
-                  // ),
-                ],
+                    // Text(
+                    //   'Bank A/C Details',
+                    //   style: GoogleFonts.dmSans(
+                    //     textStyle: TextStyle(
+                    //         color: Black,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.w400),
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
             ),
             Container(
