@@ -611,7 +611,6 @@ class _SCustomProductViewState extends State<SCustomProductView> {
   }
 
   Widget CreateWidget(index) {
-    // final read=context.read<CustomProductController>();
     final watch=Provider.of<CustomProductController>(context, listen: false);
     final read=Provider.of<CustomProductController>(context, listen: false);
     return Column(
@@ -620,8 +619,8 @@ class _SCustomProductViewState extends State<SCustomProductView> {
           children: [
             Expanded(
               child: PrimarySTextFormField(
+                textInputType: TextInputType.number,
                 onChanged: (value){
-
                 },
                 controller: watch.valueController[index],
                 height: 35,
@@ -655,6 +654,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
+                textInputType: TextInputType.number,
                 controller: watch.mrpController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",
@@ -665,6 +665,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
+                textInputType: TextInputType.number,
                 controller: watch.offerController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",

@@ -51,7 +51,7 @@ class _AddAddressViewState extends State<AddAddressView> {
               (Route<dynamic> route) => false,
             );
           },
-          title: "Add Address",
+          title: widget.isEditAdress==false?"Add Address":"Edit Address",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
             await read.validateField(context);

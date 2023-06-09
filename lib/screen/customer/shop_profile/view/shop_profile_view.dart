@@ -48,13 +48,9 @@ class ShopProfileView extends StatefulWidget {
 }
 
 class _ShopProfileViewState extends State<ShopProfileView> {
-  PageController? _pageController;
 
-  List<String> images = [
-    "assets/images/customerBanner.png",
-    "assets/images/customerBanner.png",
-    "assets/images/customerBanner.png",
-  ];
+
+
 
   @override
   void initState() {
@@ -73,7 +69,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
     final read = context.read<ShopProfileViewController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
-      // backgroundColor: backgroundColor,
+
       body: watch.isLoading
           ? Center(
               child: CircularProgressIndicator(),
@@ -134,7 +130,14 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       Stack(
                         children: [
                           Align(
-                            child: SizedBox(
+                            child:  watch.bannerImageData!.isEmpty
+                                ? Container(
+                                height: 180.w,
+                                child: Image.asset(
+                                  "assets/images/shop_image.png",
+                                  height: 191.w,
+                                  fit: BoxFit.fill,
+                                )):SizedBox(
                               height: 180.0.h,
                               child: PageView.builder(
                                   allowImplicitScrolling: true,
