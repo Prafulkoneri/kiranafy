@@ -494,6 +494,13 @@ class UpdateProfileController extends ChangeNotifier {
     request.files.addAll(newList);
     await request.send().then((response) {
       if (response.statusCode == 200) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  MainScreenView(index: 4, screenName: ProfileScreenView())),
+          (Route<dynamic> route) => false,
+        );
         print("sucesss");
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);

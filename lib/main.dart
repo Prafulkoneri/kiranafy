@@ -58,6 +58,7 @@ import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
+import 'screen/shop_owner/s_coupons/controller/shop_coupons_list_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
@@ -103,11 +104,14 @@ void main() async {
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(create: (_) => ProductViewController()),
         ChangeNotifierProvider(create: (_) => SCustomerListController()),
-        ChangeNotifierProvider(create: (_) => SAllRecommandedProductsController()),
-        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(
+            create: (_) => SAllRecommandedProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
         ChangeNotifierProvider(create: (_) => DeliveryAddressController()),
         ChangeNotifierProvider(create: (_) => AddAddressController()),
+        ChangeNotifierProvider(create: (_) => SCouponsListController()),
       ],
       child: MyApp(),
     ),
@@ -143,7 +147,17 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp(
               title: 'Flutter Demo',
               theme: ThemeData(
-                  primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
+                primarySwatch: Colors.blue,
+                fontFamily: 'dm_sans_regular',
+              ),
+              // theme: ThemeData(
+              //   brightness: Brightness.light,
+              //   /* light theme settings */
+              // ),
+              // darkTheme: ThemeData(
+              //   brightness: Brightness.dark,
+              //   /* dark theme settings */
+              // ),
               debugShowCheckedModeBanner: false,
               home: SplashScreen());
         });

@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -9,9 +10,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_coupons/controller/shop_coupons_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_add_coupons_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
 class ShopCouponsView extends StatefulWidget {
   const ShopCouponsView({super.key});
@@ -21,11 +26,22 @@ class ShopCouponsView extends StatefulWidget {
 }
 
 class _ShopCouponsViewState extends State<ShopCouponsView> {
-  String? selectedValue;
-  final List<String> genderItems = [];
+  // String? selectedValue;
+  // final List<String> genderItems = [];
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<SCouponsListController>().initState(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final read = context.read<SCouponsListController>();
+    final watch = context.watch<SCouponsListController>();
+    final readMainScreen = context.read<SMainScreenController>();
+    final key = new GlobalKey<ScaffoldState>();
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -64,8 +80,9 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                   physics: BouncingScrollPhysics(),
                   // physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 5,
+                  itemCount: watch.couponsListData?.length ?? 0,
                   itemBuilder: (BuildContext, index) {
+                    final element = watch.couponsListData?[index];
                     return Container(
                       // decoration: BoxDecoration(color: Black),
                       padding: EdgeInsets.only(
@@ -180,7 +197,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                         left: 19.w,
                                       ),
                                       child: Text(
-                                        "Valid until 16 March 2023",
+                                        "Valid until ${element?.couponToDate}",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: Black,
@@ -200,7 +217,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.only(left: 18.0.h),
-                                      child: Text("50% OFF",
+                                      child: Text(
+                                          "${element?.couponDiscountPercentage} OFF",
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: Black,
@@ -212,7 +230,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                     SizedBox(
                                       width: 12.w,
                                     ),
-                                    Text("UPTO ₹120",
+                                    Text(
+                                        "UPTO \u{20B9} ${element?.couponDiscountMaxAmount}",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: Grey,
@@ -230,15 +249,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                     left: 18.0.h,
                                   ),
                                   child: SizedBox(
-                                    width: 115.w,
-                                    height: 30.h,
                                     child: ElevatedButton(
-                                      // style: ElevatedButton.styleFrom(
-                                      //   //<-- SEE HERE
-                                      //   side: BorderSide(
-                                      //     width: 3.0,
-                                      //   ),
-                                      // ),
                                       style: ButtonStyle(
                                         elevation: MaterialStateProperty.all(0),
 
@@ -255,12 +266,22 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                           ),
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        read.copyCode(
+                                            context, element?.couponCode ?? "");
+                                        // Clipboard.setData(ClipboardData(
+                                        //         text: "${element?.couponCode}"))
+                                        //     .then((_) {
+                                        //   Utils.showPrimarySnackbar(
+                                        //       context, "coupon code copid",
+                                        //       type: SnackType.success);
+                                        // });
+                                      },
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Text(
-                                            "OFF100",
+                                          SelectableText(
+                                            "OFF ${element?.couponCode}",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: SplashText,
@@ -282,6 +303,37 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
 
                                       //
                                     ),
+                                    //     ElevatedButton(
+                                    // onPressed: () {
+                                    //   Clipboard.setData(ClipboardData())
+                                    //       .then((_) {
+                                    //     ScaffoldMessenger.of(context)
+                                    //         .showSnackBar(SnackBar(
+                                    //             content: Text(
+                                    //                 'Copied to your clipboard !')));
+                                    //   });
+                                    // },
+                                    //   child: Row(
+                                    //     children: [
+                                    //       SelectableText(
+                                    //         "OFF ${element?.couponCode}",
+                                    //         style: GoogleFonts.dmSans(
+                                    //           textStyle: TextStyle(
+                                    //               color: SplashText,
+                                    //               letterSpacing: .5,
+                                    //               fontSize: 12.sp,
+                                    //               fontWeight: FontWeight.w700),
+                                    //         ),
+                                    //       ), //
+
+                                    //       SvgPicture.asset(
+                                    //         'assets/images/svg2.svg',
+                                    //         width: 17.w,
+                                    //         height: 17.h,
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
                                   ),
                                 ),
                                 SizedBox(

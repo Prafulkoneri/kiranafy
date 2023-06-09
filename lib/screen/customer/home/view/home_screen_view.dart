@@ -140,7 +140,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                   borderSide:
                                       BorderSide(width: 1, color: splashnone),
                                   borderRadius: BorderRadius.circular(8.w)),
-                              hintText: 'Search your shop and products..',
+                              hintText: 'Search your shops...',
                               hintStyle: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Grey,
@@ -227,7 +227,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 15.h,
                       ),
 
-                      NearByShopWatch.nearByShopList?.isNotEmpty ?? false
+                      NearByShopWatch.nearByShopList?.isNotEmpty ?? true
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

@@ -8,6 +8,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,6 +19,7 @@ class ProductScreenView extends StatefulWidget {
   final String? productId;
   final String? selectedUnitId;
   final String? productType;
+  final String? routeName;
 
   const ProductScreenView(
       {super.key,
@@ -25,14 +27,14 @@ class ProductScreenView extends StatefulWidget {
       this.selectedUnitId,
       this.shopId,
       this.categoryId,
-      this.productId});
+      this.productId,
+      this.routeName});
 
   @override
   _ProductScreenViewState createState() => _ProductScreenViewState();
 }
 
 class _ProductScreenViewState extends State<ProductScreenView> {
-
   PageController? _pageController;
   int activePage = 0;
 
@@ -61,13 +63,13 @@ class _ProductScreenViewState extends State<ProductScreenView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ProductViewController>().initState(
-          context,
-          widget.shopId,
-          widget.categoryId,
-          widget.productId,
-          widget.selectedUnitId,
-          widget.productType,
-      );
+            context,
+            widget.shopId,
+            widget.categoryId,
+            widget.productId,
+            widget.selectedUnitId,
+            widget.productType,
+          );
     });
     _pageController = PageController(viewportFraction: 1, initialPage: 1);
   }
@@ -78,25 +80,37 @@ class _ProductScreenViewState extends State<ProductScreenView> {
     final read = context.read<ProductViewController>();
     return Scaffold(
       body: watch.isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : //  onWillPop: () async {
-          //     Navigator.pushAndRemoveUntil(
-          //       context,
-          //       MaterialPageRoute(
-          //           builder: (context) => MainScreenView(
-          //               index: 1, screenName: (refreshPage: false,))),
-          //       (Route<dynamic> route) => false,
-          //     );
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => MainScreenView(
+          //           index: 1, screenName: (refreshPage: false,))),
+          //   (Route<dynamic> route) => false,
+          // );
           //     return false;
           //   },
           WillPopScope(
-            onWillPop: ()async{
-              return false;
-            },
-            child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+              onWillPop: () async {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MainScreenView(
+                          index: 1,
+                          screenName: ShopProfileView(
+                            refreshPage: false,
+                            routeName: '',
+                            shopId: '',
+                          ))),
+                  (Route<dynamic> route) => false,
+                );
+                return false;
+              },
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -194,7 +208,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                   right: 13.w,
                                                   top: 14.w,
                                                   bottom: 14.w),
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: Color(0xff4689EC),
                                               ),
@@ -224,7 +238,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                           ),
                           Divider(
                             thickness: 1.w,
-                            color: Color(0xffDADADA),
+                            color: const Color(0xffDADADA),
                           ),
                           SizedBox(
                             height: 10.w,
@@ -237,7 +251,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       itemCount: watch.unitImages.length,
                                       // watch.productViewData?.productUnitDetails?.length ??
                                       //     0,
-                                      physics: BouncingScrollPhysics(),
+                                      physics: const BouncingScrollPhysics(),
                                       padEnds: false,
                                       pageSnapping: true,
                                       // controller: _pageController,
@@ -252,17 +266,19 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                         return Container(
                                           child: Center(
                                             child: AppNetworkImages(
-                                            imageUrl:  '${element}',
+                                              imageUrl: '${element}',
                                               height: 241.w,
                                               // width: 102.w,
                                               fit: BoxFit.fill,
                                             ),
                                           ),
                                           margin: EdgeInsets.only(
-                                              left: pagePosition == 0 ? 19.w : 0,
+                                              left:
+                                                  pagePosition == 0 ? 19.w : 0,
                                               // top: 15.w,
                                               right: pagePosition ==
-                                                  watch.unitImages.length - 1
+                                                      watch.unitImages.length -
+                                                          1
                                                   ? 19.w
                                                   : 10.w),
                                         );
@@ -270,7 +286,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                   : Container(
                                       child: AppNetworkImages(
                                         // '${element}',
-                                     imageUrl:    "${watch.productDetails?.productImagePath}",
+                                        imageUrl:
+                                            "${watch.productDetails?.productImagePath}",
                                         // images[pagePosition],
                                         height: 241.w,
                                         // width: 102.w,
@@ -377,7 +394,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
                                 itemCount: watch.productViewData
@@ -394,9 +411,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                     child: Container(
                                       margin: EdgeInsets.only(bottom: 18.w),
                                       decoration: BoxDecoration(
-                                          color: Color(0xffEAFFF1),
+                                          color: const Color(0xffEAFFF1),
                                           border: Border.all(
-                                              color: Color(0xff69BB86)),
+                                              color: const Color(0xff69BB86)),
                                           borderRadius:
                                               BorderRadius.circular(10.w)),
                                       padding: EdgeInsets.symmetric(
@@ -427,7 +444,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                   color: Black1,
                                                                   letterSpacing:
                                                                       .5,
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400)
@@ -435,11 +453,12 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                   color: Black1,
                                                                   letterSpacing:
                                                                       .5,
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400)))
-                                                  : Text(""),
+                                                  : const Text(""),
                                               Row(
                                                 children: [
                                                   element?.offerPrice != "" &&
@@ -447,20 +466,24 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                               element?.mrpPrice
                                                       ? Text(
                                                           '\u{20B9}${element?.offerPrice}',
-                                                          style:
-                                                              GoogleFonts.dmSans(
-                                                            textStyle: TextStyle(
-                                                                // decoration:
-                                                                // TextDecoration.lineThrough,
-                                                                color: Black,
-                                                                letterSpacing: .5,
-                                                                fontSize: 13.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle:
+                                                                TextStyle(
+                                                                    // decoration:
+                                                                    // TextDecoration.lineThrough,
+                                                                    color:
+                                                                        Black,
+                                                                    letterSpacing:
+                                                                        .5,
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
                                                           ),
                                                         )
-                                                      : Text(""),
+                                                      : const Text(""),
                                                   // SizedBox(
                                                   //   width: 8.w,
                                                   // ),
@@ -471,16 +494,17 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                           height: 20.h,
                                                           decoration: BoxDecoration(
                                                               color: lightgreen,
-                                                              borderRadius:
-                                                                  BorderRadius.all(
-                                                                      Radius.circular(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
                                                                           5.w))),
                                                           child: Center(
                                                             child: Text(
                                                                 "${element?.discountPercentage} off",
                                                                 // textAlign: TextAlign.center,
-                                                                style: GoogleFonts
-                                                                    .dmSans(
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
                                                                   textStyle: TextStyle(
                                                                       color: Colors
                                                                           .white,
@@ -507,13 +531,15 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                       //   width: 12.w,
                                                       // ),
                                                       Text("${element?.weight}",
-                                                          style:
-                                                              GoogleFonts.dmSans(
-                                                            textStyle: TextStyle(
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle:
+                                                                TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               fontSize: 12.sp,
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff53B175),
                                                             ),
                                                           )),
@@ -521,13 +547,15 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                         width: 5.w,
                                                       ),
                                                       Text("${element?.unit}",
-                                                          style:
-                                                              GoogleFonts.dmSans(
-                                                            textStyle: TextStyle(
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle:
+                                                                TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               fontSize: 12.sp,
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff53B175),
                                                             ),
                                                           )),
@@ -567,13 +595,14 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xffFF844C),
+                                                    color:
+                                                        const Color(0xffFF844C),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5.w)),
                                                 height: 30.w,
                                                 width: 30.w,
-                                                child: Center(
+                                                child: const Center(
                                                   child: Icon(
                                                     Icons.add,
                                                     color: Colors.white,
@@ -602,7 +631,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                             ),
                             Divider(
                               thickness: 1.w,
-                              color: Color(0xffE2E2E2).withOpacity(0.7),
+                              color: const Color(0xffE2E2E2).withOpacity(0.7),
                             ),
                             SizedBox(
                               height: 4.w,
@@ -631,7 +660,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                             Container(
                               height: 205.w,
                               child: ListView.builder(
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   padding: EdgeInsets.zero,
                                   itemCount: watch.productViewData
                                           ?.similarProducts?.length ??
@@ -639,26 +668,32 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (BuildContext, index) {
-                                    final element = watch
-                                        .productViewData?.similarProducts?[index];
+                                    final element = watch.productViewData
+                                        ?.similarProducts?[index];
                                     return GestureDetector(
                                       onTap: () {
+                                        print(element?.id);
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   MainScreenView(
                                                     index: 1,
-                                                    screenName: ProductScreenView(
-                                                        categoryId: element
-                                                            ?.categoryId
-                                                            .toString(),
-                                                        // categoryId: watch.categoryId,
-                                                        productId: element?.id
-                                                            .toString(),
-                                                        shopId: widget.shopId,
-                                                        productType:
-                                                            element?.productType),
+                                                    screenName:
+                                                        ProductScreenView(
+                                                            categoryId: element
+                                                                ?.categoryId
+                                                                .toString(),
+                                                            // categoryId: watch.categoryId,
+                                                            productId: element
+                                                                ?.id
+                                                                .toString(),
+                                                            shopId: element
+                                                                ?.shopId
+                                                                .toString(),
+                                                            // widget.shopId,
+                                                            productType: element
+                                                                ?.productType),
                                                   )),
                                           (Route<dynamic> route) => false,
                                         );
@@ -672,7 +707,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                     .withOpacity(0.03.w),
                                                 blurRadius: 5,
                                                 spreadRadius: 0,
-                                                offset: Offset(0, 3)),
+                                                offset: const Offset(0, 3)),
                                           ],
                                         ),
                                         child: Card(
@@ -701,7 +736,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                             width: 60.w,
                                                             height: 20.h,
                                                             decoration: BoxDecoration(
-                                                                color: lightgreen,
+                                                                color:
+                                                                    lightgreen,
                                                                 borderRadius: BorderRadius
                                                                     .all(Radius
                                                                         .circular(
@@ -718,11 +754,10 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                             .white,
                                                                         letterSpacing:
                                                                             .5,
-                                                                        fontSize:
-                                                                            12.sp,
+                                                                        fontSize: 12
+                                                                            .sp,
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w500),
+                                                                            FontWeight.w500),
                                                                   )),
                                                             ),
                                                           )
@@ -749,8 +784,10 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                         : Container(
                                                             height: 89.w,
                                                             width: 89.w,
-                                                            child: AppNetworkImages(
-                                                            imageUrl:   "${element?.productImagePath}",
+                                                            child:
+                                                                AppNetworkImages(
+                                                              imageUrl:
+                                                                  "${element?.productImagePath}",
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
@@ -765,11 +802,13 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                       child: Text(
                                                         "${element?.productName}",
                                                         maxLines: 1,
-                                                        style: GoogleFonts.roboto(
+                                                        style:
+                                                            GoogleFonts.roboto(
                                                           textStyle: TextStyle(
                                                             color: Black1,
-                                                            overflow: TextOverflow
-                                                                .ellipsis,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
                                                             // letterSpacing: .5,
                                                             fontSize: 16.sp,
 
@@ -794,7 +833,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                             // letterSpacing: .5,
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight.w600),
+                                                                FontWeight
+                                                                    .w600),
                                                       ),
                                                     ),
                                                   ],
@@ -833,11 +873,10 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                                 Black1,
                                                                             letterSpacing:
                                                                                 .5,
-                                                                            fontSize: 12
-                                                                                .sp,
-                                                                            fontWeight:
-                                                                                FontWeight.w400)))
-                                                            : Text(""),
+                                                                            fontSize:
+                                                                                12.sp,
+                                                                            fontWeight: FontWeight.w400)))
+                                                            : const Text(""),
                                                         SizedBox(
                                                           width: 5.w,
                                                         ),
@@ -848,8 +887,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                         ?.mrpPrice
                                                             ? Text(
                                                                 '\u{20B9}${element?.offerPrice}',
-                                                                style: GoogleFonts
-                                                                    .dmSans(
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
                                                                   textStyle: TextStyle(
                                                                       // decoration:
                                                                       // TextDecoration.lineThrough,
@@ -859,7 +899,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                       fontWeight: FontWeight.w500),
                                                                 ),
                                                               )
-                                                            : Text(""),
+                                                            : const Text(""),
                                                       ],
                                                     ),
                                                     SvgPicture.asset(
@@ -885,7 +925,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 }
