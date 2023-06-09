@@ -51,31 +51,31 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
             isBackButtonEnabled: false,
           ),
         ),
-        body: Stack(
-          alignment: Alignment.topCenter,
-          clipBehavior: Clip.none,
-          children: [
-            Positioned(
-              top: -30.w,
-              left: 0.w,
-              child: Image.asset(
-                "assets/images/splash1.png",
-                height: 235.w,
-                width: 361.w,
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                top: -30.w,
+                left: 0.w,
+                child: Image.asset(
+                  "assets/images/splash1.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            Positioned(
-              bottom: -25.w,
-              right: 0.w,
-              child: Image.asset(
-                "assets/images/splash2.png",
-                height: 235.w,
-                width: 361.w,
+              Positioned(
+                bottom: -25.w,
+                right: 0.w,
+                child: Image.asset(
+                  "assets/images/splash2.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Padding(
+              Padding(
                 padding: EdgeInsets.only(
                     left: 24.w, right: 24.w, top: 20.w, bottom: 20.w),
                 child: Column(
@@ -367,8 +367,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       ),
                     ]),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }

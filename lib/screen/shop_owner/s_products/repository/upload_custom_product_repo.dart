@@ -6,6 +6,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_cu
 class UploadCustomProductRepo {
   Future<http.Response> uploadCustomProduct(
       UploadCustomProductReqModel reqModel, token) async {
+    print("kkkkkkk");
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.submitCustomProduct));
     try {

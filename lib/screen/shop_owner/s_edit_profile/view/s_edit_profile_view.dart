@@ -50,7 +50,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            if (widget.fromDashBoard ?? false) {
+            if (widget.fromDashBoard ?? true) {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
@@ -63,7 +63,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 0, screenName: SAccountScreenView())),
+                        index: 4, screenName: SAccountScreenView())),
                 (Route<dynamic> route) => false,
               );
             }

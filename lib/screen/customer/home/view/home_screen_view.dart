@@ -227,7 +227,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 15.h,
                       ),
 
-                      NearByShopWatch.nearByShopList?.isNotEmpty ?? false
+                      NearByShopWatch.nearByShopList?.isNotEmpty ?? true
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

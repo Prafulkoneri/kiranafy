@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custom_products_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/edit_custom_product_repo.dart';
 import 'package:path/path.dart';
@@ -76,7 +78,7 @@ class EditCustomProductController extends ChangeNotifier {
   int totalRows=0;
   String productFeatureImage="";
 
-
+  UploadCustomProductRepo uploadCustomProductRepo=UploadCustomProductRepo();
   String productId="";
 
   //for adminProduct
@@ -104,13 +106,7 @@ class EditCustomProductController extends ChangeNotifier {
    await getCustomProductDetails(context);
     print(productId);
     // await onAddWidget(createCard,index);
-
-
   }
-
-
-
-
 
   void onBrandSelected(value){
     brandId=value;
@@ -300,6 +296,7 @@ class EditCustomProductController extends ChangeNotifier {
   );
   
   Future getCustomProductDetails(context)async{
+    print("hello");
     isEditEnabled=false;
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -307,16 +304,24 @@ class EditCustomProductController extends ChangeNotifier {
         .getCustomProductDetails(editCustomProductsRequestModel,pref.getString("successToken"))
         .then((response) {
           print("9999999999999");
-      print(response.body);
+      log(response.body);
           print("9999999999999");
       final result =
       EditCustomProductsResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         customProductData = result.data;
-        categoryName=customProductData?.productDetails?.categoryName.toString()??"";
+        categoryData = customProductData?.categoryData??[];
+        brandData = customProductData?.brandData;
+        taxData = customProductData?.taxData;
+        unitData = customProductData?.unitData;
         productNameController.text=customProductData?.productDetails?.productName.toString()??"";
-        brandName=customProductData?.productDetails?.brandName.toString()??"";
-        taxName=customProductData?.productDetails?.igstTax.toString()??"";
+        categoryId=customProductData?.productDetails?.categoryId.toString()??"";
+        brandId=customProductData?.productDetails?.brandId.toString()??"";
+        print("fjafsdf");
+        print(brandId);
+
+        taxId=customProductData?.productDetails?.taxId.toString()??"";
+        print(taxId);
         showUnderRecommendedProducts=customProductData?.productDetails?.showUnderRecommandedProducts=="yes"?true:false;
         showUnderSeasonalProducts=customProductData?.productDetails?.showUnderSeasonalProducts=="yes"?true:false;
         fullFillCravings=customProductData?.productDetails?.showUnderFullfillYourCravings=="yes"?true:false;
@@ -333,7 +338,6 @@ class EditCustomProductController extends ChangeNotifier {
           valueController.add(TextEditingController(text: productUnitDetail?[i].weight));
           mrpController.add(TextEditingController(text: productUnitDetail?[i].mrpPrice.toString()));
           offerController.add(TextEditingController(text: productUnitDetail?[i].offerPrice.toString()));
-
         }
         switchValue = List<bool>.filled(length, true,growable: true);
         Utils.showPrimarySnackbar(context, result.message,
@@ -453,6 +457,73 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> uploadCustomProduct(context) async {
+    int count=productUnitDetail?.length??0;
+    totalRows=count+cards.length;
+
+    if(cards.length!=0){
+      await getValueCardData();
+      await getMrpCardData();
+      await getOfferCardData();
+      await getSwitchCardValue();
+    }
+    await getValueData();
+    await getMrpData();
+    await getUnitData();
+    await getOfferData();
+    await getSwitchValue();
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await
+    uploadCustomProductRepo
+        .uploadCustomProduct(uploadCustomProductReqModel,pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+      UploadCustomProductResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        print(categoryId);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId:categoryId),)),
+              (Route<dynamic> route) => false,
+        );
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  UploadCustomProductReqModel get uploadCustomProductReqModel =>UploadCustomProductReqModel(
+    showUnderFullfillCravings: fullFillCravings?"yes":"no",
+    categoryId: categoryId,
+    brandId: brandId,
+    taxId: taxId,
+    productDescription: productDescriptionController.text,
+    productName: productNameController.text,
+    showUnderRecommendedProduct: showUnderRecommendedProducts?"yes":"no",
+    showUnderSeasonalProduct: showUnderSeasonalProducts?"yes":"no",
+    mrpPrice: mrp+mrpCard ,
+    offerPrice: offer+offerCard,
+    status: status+statusCard,
+    totalRows: totalRows.toString(),
+    unitID: unit+unitCard,
+    weight: value+valueCard,
+  );
 
 
   Future uploadImage(context) async {
@@ -549,4 +620,8 @@ class EditCustomProductController extends ChangeNotifier {
     });
     return true;
   }
+
+
+
+
 }

@@ -27,7 +27,7 @@ class SAccountScreenController extends ChangeNotifier {
 
 
 
-  Future<void> initState(context, updateMessage) async {
+  Future<void> initState(context) async {
     print("999999999999");
     await getShopEditProfileDetails(context);
     notifyListeners();
