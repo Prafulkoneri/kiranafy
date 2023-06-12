@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/customer/home/controller/home_screen_
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import '../../near_shops/view/all_near_shops_view.dart';
 
@@ -70,12 +71,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     width: 70.w,
                                     child: Padding(
                                       padding: EdgeInsets.all(8.w),
-                                      child: Image.network(
-                                        // '${element.categoryImagePath}',
-                                        element.categoryImagePath ?? "",
-                                        width: 68.w,
-                                        height: 49.w,
-                                      ),
+                                      child: AppNetworkImages(imageUrl:element.categoryImagePath,)
                                     ),
                                   ),
                                   Container(
@@ -150,22 +146,10 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     width: 70.w,
                                     child: Padding(
                                       padding: EdgeInsets.all(8.w),
-                                      child: Image.network(
-                                        element.categoryImagePath ?? "",
+                                      child: AppNetworkImages(
+                                        imageUrl: element.categoryImagePath ?? "",
                                         width: 68.w,
                                         height: 49.w,
-                                        loadingBuilder: ( context, Widget child,
-                                            ImageChunkEvent? loadingProgress) {
-                                          if (loadingProgress == null) return child;
-                                          return Center(
-                                            child: CircularProgressIndicator(
-                                              value: loadingProgress.expectedTotalBytes != null
-                                                  ? loadingProgress.cumulativeBytesLoaded /
-                                                  loadingProgress.expectedTotalBytes!
-                                                  : null,
-                                            ),
-                                          );
-                                        },
                                       ),
                                     ),
                                   ),

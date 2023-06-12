@@ -1,27 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/controller/delivery_address_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../near_shops/view/all_near_shops_view.dart';
 
-class MyDeliveryAddress extends StatefulWidget {
-  const MyDeliveryAddress({super.key});
+class MyDeliveryAddressView extends StatefulWidget {
+  const MyDeliveryAddressView({super.key});
 
   @override
-  State<MyDeliveryAddress> createState() => _MyDeliveryAddressState();
+  State<MyDeliveryAddressView> createState() => _MyDeliveryAddressViewState();
 }
 
-class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
+class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<DeliveryAddressController>().initState(
+            context,
+          );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<DeliveryAddressController>();
+    final read = context.read<DeliveryAddressController>();
+    final readMain = context.read<DeliveryAddressController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "My Addresses",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
@@ -38,8 +53,9 @@ class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
               scrollDirection: Axis.vertical,
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 8,
+              itemCount: watch.deliveryAddressList?.length ?? 0,
               itemBuilder: (BuildContext, index) {
+                final element = watch.deliveryAddressList?[index];
                 return Container(
                   margin: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
                   padding: EdgeInsets.only(
@@ -82,7 +98,8 @@ class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
                                 width: 11.w,
                               ),
                               Text(
-                                'Rachel Green',
+                                "${element?.customerName}",
+                                // 'Rachel Green',
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black,
@@ -114,7 +131,7 @@ class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
                               ),
                               onPressed: () {},
                               child: Text(
-                                "Home",
+                                "${element?.deliveryAddressType}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: SplashText1,
@@ -141,7 +158,8 @@ class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
                           ),
                           SizedBox(width: 9.w),
                           Text(
-                            '+91 986 095 3315',
+                            "${element?.deliveryCountryCode}"
+                            "  ${element?.deliveryMobileNumber}",
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
                                   color: Black,
@@ -170,7 +188,9 @@ class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
                           Expanded(
                             child: Text(
                               maxLines: 2,
-                              "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
+                              "${element?.address1}"
+                              " ${element?.address2}",
+                              // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
                               // textAlign: TextAlign.start,
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
@@ -199,7 +219,8 @@ class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    color: grey4,
+                                    // border: Border.all(width: 1),
+                                    color: Color(0xffF3F3F3),
                                     borderRadius: BorderRadius.circular(5)),
                                 height: 20.h,
                                 width: 20.w,
@@ -207,8 +228,6 @@ class _MyDeliveryAddressState extends State<MyDeliveryAddress> {
                                 child: Center(
                                   child: SvgPicture.asset(
                                     "assets/icons/check.svg",
-                                    // width: 8.w,
-                                    // height: 6.w,
                                   ),
                                 ),
                               ),

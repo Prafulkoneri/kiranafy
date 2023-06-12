@@ -1,8 +1,8 @@
 ///REquest Model
 
-class EditCustomeProductsRequestModel {
+class EditCustomProductsRequestModel {
   String? product_id;
-  EditCustomeProductsRequestModel({
+  EditCustomProductsRequestModel({
     this.product_id,
   });
   Map<String, dynamic> toJson() {
@@ -13,19 +13,19 @@ class EditCustomeProductsRequestModel {
 }
 
 ///////////Reponse_model
-class EditCustomeProductsResponseModel {
+class EditCustomProductsResponseModel {
   int? status;
   String? message;
   Data? data;
   List<Unit>? units;
 
-  EditCustomeProductsResponseModel({
+  EditCustomProductsResponseModel({
     required this.status,
     required this.message,
     required this.data,
     required this.units,
   });
-  EditCustomeProductsResponseModel.fromJson(Map<String, dynamic> json) {
+  EditCustomProductsResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
 

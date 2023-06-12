@@ -8,6 +8,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class OfferProducts extends StatefulWidget {
@@ -124,7 +125,8 @@ class _OfferProductsState extends State<OfferProducts> {
                                           : Container(
                                               height: 89.w,
                                               width: 89.w,
-                                              child: Image.network(
+                                              child: AppNetworkImages(
+                                                imageUrl:
                                                 "${element?.productImagePath}",
                                                 fit: BoxFit.cover,
                                               ),

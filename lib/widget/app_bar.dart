@@ -37,21 +37,21 @@ class PrimaryAppBar extends StatelessWidget {
       // backgroundColor: kappbar,
       leading: isBackButtonEnabled ?? true
           ? Container(
-        width: 50.w,
-            height: 65.w,
-            child: IconButton(
+              // width: 50.w,
+              // height: 65.w,
+              child: IconButton(
                 icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: onBackBtnPressed,
-      ),
-          )
+              ),
+            )
           : Container(),
       title: Text(
         title ?? "",
         style: GoogleFonts.dmSans(
           textStyle: TextStyle(
-              color: DarkBlack,
-              // letterSpacing: .5,
-              fontSize: 14,
+              color: Black,
+              letterSpacing: .5,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w700),
         ),
       ),
@@ -74,16 +74,16 @@ class PrimaryAppBar extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        GestureDetector(
-          onTap: onActionTap,
-          child: Container(
-            width: 50.w,
-              height: 65.w,
-              padding: EdgeInsets.only(
-
-              ),
-              child: Center(child: action)),
-        ),
+        Container(
+            // width: 50.w,
+            // height: 65.w,
+            padding: EdgeInsets.only(
+              right: 20.w
+            ),
+            child: GestureDetector(
+              onTap: onActionTap,
+              child: Center(child: action),
+            )),
       ],
     );
   }

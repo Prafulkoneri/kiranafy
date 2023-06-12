@@ -16,7 +16,9 @@ import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_se
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../widget/app_bar.dart';
@@ -46,8 +48,6 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
   Widget build(BuildContext context) {
     final read = context.read<SSelectedProductsController>();
     final watch = context.watch<SSelectedProductsController>();
-    final watchMainScreen = context.watch<SMainScreenController>();
-    final readMainScreen = context.watch<SMainScreenController>();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
@@ -61,7 +61,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
               );
             },
             title:
-                '${watch.categoryName}  - ${watch.totalSelectedAndCustomProducts}',
+                '${watch.categoryName??""}  - ${watch.totalSelectedAndCustomProducts??""}',
             // "Cold Drinks & Juices - 2",
             // action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {},
@@ -597,21 +597,14 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                             children: [
                                               Row(
                                                 children: [
+                                                  SizedBox(
+                                                    width: 5.w,
+                                                  ),
                                                   element?.productImagePath!=""?
-                                                  Image.network("${element?.productImagePath}", height: 61.h,
+                                                  AppNetworkImages(imageUrl: "${element?.productImagePath}", height: 61.h,
                                                     width: 60.w,
-                                                    fit: BoxFit.fill, loadingBuilder: ( context, Widget child,
-                                                        ImageChunkEvent? loadingProgress) {
-                                                      if (loadingProgress == null) return child;
-                                                      return Center(
-                                                        child: CircularProgressIndicator(
-                                                          value: loadingProgress.expectedTotalBytes != null
-                                                              ? loadingProgress.cumulativeBytesLoaded /
-                                                              loadingProgress.expectedTotalBytes!
-                                                              : null,
-                                                        ),
-                                                      );
-                                                    },)
+                                                    fit: BoxFit.fill,
+                                                  )
                                                       :
                                                   Image(
                                                     image: AssetImage(
@@ -646,7 +639,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                     onTap:(){
                                                       Navigator.pushAndRemoveUntil(
                                                         context,
-                                                        MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SEditAdminProductView(productId:element?.id.toString(),categoryId: widget.categoryId,))),
+                                                        MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SEditCustomProductView(productId:element?.id.toString(),categoryId: widget.categoryId,))),
                                                             (Route<dynamic> route) => false,
                                                       );
                                                     },

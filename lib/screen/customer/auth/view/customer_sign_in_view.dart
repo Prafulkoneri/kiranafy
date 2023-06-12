@@ -33,29 +33,29 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
     final read = context.read<CustomerSignInController>();
     final watch = context.watch<CustomerSignInController>();
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.topCenter,
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            left: 0.w,
-            child: Image.asset(
-              "assets/images/splash1.png",
-              height: 235.w,
-              width: 361.w,
+      body: SingleChildScrollView(
+        child: Stack(
+          alignment: Alignment.topCenter,
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              left: 0.w,
+              child: Image.asset(
+                "assets/images/splash1.png",
+                height: 235.w,
+                width: 361.w,
+              ),
             ),
-          ),
-          Positioned(
-            bottom: -25.w,
-            right: 0.w,
-            child: Image.asset(
-              "assets/images/splash2.png",
-              height: 235.w,
-              width: 361.w,
+            Positioned(
+              bottom: -25.w,
+              right: 0.w,
+              child: Image.asset(
+                "assets/images/splash2.png",
+                height: 235.w,
+                width: 361.w,
+              ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Column(
+            Column(
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -115,32 +115,15 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 28.w, right: 23.w),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            bottom: 1,
-                            top: 1,
-                            left: 0,
-                            child: Container(
-                              // height: 200.h,
-                              width: 70.w,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ),
-                          MobileNoTextFormField(
-                            onChanged: (value) {
-                              read.mobileNumberCheck(context);
-                            },
-                            onCountryCodeChanged: (value) {
-                              read.onCountryCodeSelected(value);
-                            },
-                            enableOrder: false,
-                            controller: watch.mobileController,
-                          ),
-                        ],
+                      child: MobileNoTextFormField(
+                        onChanged: (value) {
+                          read.mobileNumberCheck(context);
+                        },
+                        onCountryCodeChanged: (value) {
+                          read.onCountryCodeSelected(value);
+                        },
+                        enableOrder: false,
+                        controller: watch.mobileController,
                       ),
                     ),
                     SizedBox(
@@ -166,69 +149,6 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                     SizedBox(
                       height: 34.h,
                     ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(
-                    //     left: 25.w,
-                    //   ),
-                    //   child: Row(
-                    //     crossAxisAlignment: CrossAxisAlignment.center,
-                    //     children: [
-                    //       Padding(
-                    //         padding: EdgeInsets.only(bottom: 15.w),
-                    //         child: PrimaryCheckBox(
-                    //           value: watch.isVerifyChecked,
-                    //           onChanged: (value) {
-                    //             read.onVerifyChecked(value);
-                    //           },
-                    //         ),
-                    //       ),
-                    //       RichText(
-                    //         text: TextSpan(
-                    //             text: "By continuing you agree to our,\n",
-                    //             style: TextStyle(
-                    //                 color: Black,
-                    //                 fontSize: 16.sp,
-                    //                 height: 1.3.w,
-                    //                 fontWeight: FontWeight.w400),
-                    //             children: [
-                    //               TextSpan(
-                    //                 children: [],
-                    //                 text: 'Term of Condition',
-                    //                 recognizer: TapGestureRecognizer()
-                    //                   ..onTap = () {
-                    //                     print('Login Text Clicked');
-                    //                   },
-                    //                 style: TextStyle(
-                    //                     color: SplashText1,
-                    //                     // letterSpacing: .5,
-                    //                     fontSize: 16.sp,
-                    //                     fontWeight: FontWeight.w400),
-                    //               ),
-                    //               TextSpan(
-                    //                 text: ' and',
-                    //                 style: TextStyle(
-                    //                     color: Black,
-                    //                     // letterSpacing: .5,
-                    //                     fontSize: 16.sp,
-                    //                     fontWeight: FontWeight.w400),
-                    //               ),
-                    //               TextSpan(
-                    //                 text: ' Privacy Policy',
-                    //                 recognizer: TapGestureRecognizer()
-                    //                   ..onTap = () {
-                    //                     print('Login Text Clicked');
-                    //                   },
-                    //                 style: TextStyle(
-                    //                     color: SplashText1,
-                    //                     // letterSpacing: .5,
-                    //                     fontSize: 16.sp,
-                    //                     fontWeight: FontWeight.w400),
-                    //               ),
-                    //             ]),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 26.h,
                     ),
@@ -247,159 +167,151 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                         // style: style,
                         onPressed: () async {
                           await read.onNextClick(context);
-                            if (watch.mobileController.text.length < 10) {
-                              return;
-                            }
-                            if (!watch.isLoginBtnEnabled) {
-                              return;
-                            }
+                          if (watch.mobileController.text.length < 10) {
+                            return;
+                          }
+                          if (!watch.isLoginBtnEnabled) {
+                            return;
+                          }
 
-                            showModalBottomSheet(
-                              backgroundColor: Colors.white,
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30))),
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Theme(
-                                  data: Theme.of(context)
-                                      .copyWith(canvasColor: Colors.white),
-                                  child: Material(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0)),
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            bottom: MediaQuery.of(context)
-                                                .viewInsets
-                                                .bottom),
-                                        // height: 335,
-                                        child: Padding(
-                                          padding: EdgeInsets.all(25.h),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            // mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Enter Verification Code",
+                          showModalBottomSheet(
+                            backgroundColor: Colors.white,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30))),
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Theme(
+                                data: Theme.of(context)
+                                    .copyWith(canvasColor: Colors.white),
+                                child: Material(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(16.0),
+                                        topRight: Radius.circular(16.0)),
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      // height: 335,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(25.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          // mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Enter Verification Code",
+                                              style: GoogleFonts.inter(
+                                                textStyle: const TextStyle(
+                                                    color: Custlogin,
+                                                    letterSpacing: .5,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 20.0.h),
+                                              child: Text(
+                                                "We have sent SMS to :\n${watch.mobileController.text.substring(0, 3)} XXX XX XX",
                                                 style: GoogleFonts.inter(
                                                   textStyle: const TextStyle(
-                                                      color: Custlogin,
-                                                      letterSpacing: .5,
-                                                      fontSize: 20,
+                                                      color: Black,
+                                                      fontSize: 18,
                                                       fontWeight:
-                                                          FontWeight.w700),
+                                                          FontWeight.w500),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 20.0.h),
+                                            ),
+                                            OtpTextField(
+                                              //  controller: otpController,
+                                              numberOfFields: 6,
+                                              borderColor: Color(0xFF512DA8),
+                                              //set to true to show as box or false to show as dash
+                                              showFieldAsBox: false,
+                                              //runs when a code is typed in
+                                              onCodeChanged: (String code) {
+                                                print(code);
+                                                //handle validation or checks here
+                                              },
+                                              //runs when every textfield is filled
+                                              onSubmit:
+                                                  (String verificationCode) {
+                                                print(verificationCode);
+                                                read.onOtpEntered(
+                                                    verificationCode);
+                                              }, // end onSubmit
+                                            ),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            SizedBox(
+                                              width: 400, // <-- Your width
+                                              height: 60,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Button,
+                                                  // onPrimary: Colors.white,
+                                                  // shadowColor: Colors.greenAccent,
+                                                  elevation: 3,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              14.0)),
+                                                  minimumSize: const Size(
+                                                      100, 40), //////// HERE
+                                                ),
+                                                // style: style,
+                                                onPressed: () {
+                                                  read.onOtpSubmitPressed(
+                                                      context);
+                                                },
                                                 child: Text(
-                                                  "We have sent SMS to :\n${watch.mobileController.text.substring(0,3)} XXX XX XX",
+                                                  'Submit',
                                                   style: GoogleFonts.inter(
                                                     textStyle: const TextStyle(
-                                                        color: Black,
-                                                        fontSize: 18,
+                                                        // color: SplashTex
+                                                        letterSpacing: .5,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Resend OTP',
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: const TextStyle(
+                                                        // color: SplashTex
+                                                        letterSpacing: .5,
+                                                        fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.w500),
                                                   ),
                                                 ),
-                                              ),
-                                              OtpTextField(
-                                                //  controller: otpController,
-                                                numberOfFields: 6,
-                                                borderColor: Color(0xFF512DA8),
-                                                //set to true to show as box or false to show as dash
-                                                showFieldAsBox: false,
-                                                //runs when a code is typed in
-                                                onCodeChanged: (String code) {
-                                                  print(code);
-                                                  //handle validation or checks here
-                                                },
-                                                //runs when every textfield is filled
-                                                onSubmit:
-                                                    (String verificationCode) {
-                                                  print(verificationCode);
-                                                  read.onOtpEntered(
-                                                      verificationCode);
-                                                }, // end onSubmit
-                                              ),
-                                              const SizedBox(
-                                                height: 20,
-                                              ),
-                                              SizedBox(
-                                                width: 400, // <-- Your width
-                                                height: 60,
-                                                child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    primary: Button,
-                                                    // onPrimary: Colors.white,
-                                                    // shadowColor: Colors.greenAccent,
-                                                    elevation: 3,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        14.0)),
-                                                    minimumSize: const Size(
-                                                        100, 40), //////// HERE
-                                                  ),
-                                                  // style: style,
-                                                  onPressed: () {
-                                                    read.onOtpSubmitPressed(
-                                                        context);
-                                                  },
-                                                  child: Text(
-                                                    'Submit',
-                                                    style: GoogleFonts.inter(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              // color: SplashTex
-                                                              letterSpacing: .5,
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 15.h,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Resend OTP',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              // color: SplashTex
-                                                              letterSpacing: .5,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                      )),
-                                );
-                              },
-                            );
-
+                                      ),
+                                    )),
+                              );
+                            },
+                          );
                         },
                         child: Text(
                           'Next',
@@ -420,7 +332,7 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account?",
+                          "Don't have an account ? ",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
                                 color: Black,
@@ -439,7 +351,7 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                             );
                           },
                           child: Text(
-                            "Sign Up",
+                            " Sign Up",
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                   color: Custlogin,
@@ -458,8 +370,8 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                 )
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -13,20 +14,29 @@ class HomeScreenController extends ChangeNotifier {
   bool isLoading = true;
   AllCategoriesRepo allCategoriesRepo = AllCategoriesRepo();
   List<Data>? bannerData;
+  PageController pageController =
+      PageController(viewportFraction: 0.9, initialPage: 0);
   List<CategoriesList> categoryFirstList = [];
   List<CategoriesList> categorySecondList = [];
+  int _currentPage = 0;
   // String pincode = "111111";
-  Future<void> initState(context,refresh) async {
-    if(refresh) {
-      await getCategoryList(context);
+  Future<void> initState(context, refresh) async {
+    if (refresh) {
       await getBannerImage(context);
-    }else{
-      isLoading=false;
+      await getCategoryList(context);
+    } else {
+      showLoader(false);
     }
     notifyListeners();
   }
 
+  showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
   Future<void> getBannerImage(context) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("bnvuuiwveuciiutwmibijmiuey");
     print(pref.getString("successToken"));
@@ -38,6 +48,21 @@ class HomeScreenController extends ChangeNotifier {
         print("${response.body}");
 
         bannerData = result.data;
+        int imageLength = bannerData?.length ?? 0;
+        if (bannerData!.isNotEmpty) {
+          Timer.periodic(Duration(seconds: 8), (Timer timer) {
+            if (_currentPage < imageLength - 1) {
+              _currentPage + 1;
+            } else {
+              _currentPage = 0;
+            }
+            pageController.animateToPage(
+              _currentPage,
+              duration: Duration(milliseconds: 350),
+              curve: Curves.easeIn,
+            );
+          });
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -60,7 +85,6 @@ class HomeScreenController extends ChangeNotifier {
   //     AllCategoriesReqModel(pincode: pincode);
 
   Future<void> getCategoryList(context) async {
-    isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     // if (pref.getString("successToken") == null) {
     //   pincode = "111111";
@@ -81,7 +105,7 @@ class HomeScreenController extends ChangeNotifier {
         print("77777777");
         categoryFirstList = result.categoriesFirstList ?? [];
         categorySecondList = result.categoriesSecondList ?? [];
-        isLoading = false;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

@@ -6,7 +6,7 @@ import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
-import '../../account/view/account_view.dart';
+import '../../account/view/profile_screen_view.dart';
 import '../../near_shops/view/all_near_shops_view.dart';
 
 class MainScreenController extends ChangeNotifier {
@@ -62,6 +62,7 @@ class MainScreenController extends ChangeNotifier {
   }
 
   Future<void> navigation(tabIndex,screenName)async{
+    print("${tabIndex}tabIndex");
     currentTab=tabIndex;
     currentScreen=screenName;
     notifyListeners();

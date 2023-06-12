@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:math';
@@ -41,6 +42,7 @@ class ShopSignInController extends ChangeNotifier {
   bool isNewShopBtnEnabled = false;
   String kycVerificationStatus = "";
   String shopRegistrationStatus = "";
+  bool isOtpErrorVisible=false;
 
   void onOtpSubmitPressed(context) async {
     await mobileRegister(context);
@@ -173,20 +175,23 @@ class ShopSignInController extends ChangeNotifier {
           mobileRegister(context);
         }
       } else {
-        Utils.showPrimarySnackbar(context,
-            "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
-            type: SnackType.error);
+        showOtpErrorMsg();
+        // Utils.showPrimarySnackbar(context,
+        //     "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
+        //     type: SnackType.error);
+        notifyListeners();
       }
     } on FirebaseAuthException catch (e) {
       print("888");
-      print(e.message);
+      showOtpErrorMsg();
       print("888");
       Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
     }
   }
 
+
   Future<void> onLoginClick(context) async {
-    if (mobController.text.length < 10) {
+    if (mobController.text.trim().length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
           type: SnackType.error);
       notifyListeners();
@@ -276,8 +281,11 @@ class ShopSignInController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "loggedIn");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SMainScreenView()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:ShopDashBoard())),
+              (Route<dynamic> route) => false,
+        );
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -293,5 +301,22 @@ class ShopSignInController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  showOtpErrorMsg(){
+    isOtpErrorVisible=true;
+    notifyListeners();
+    print(isOtpErrorVisible);
+    Timer(Duration(seconds: 3),(){
+      print("duration");
+      isOtpErrorVisible=false;
+      notifyListeners();
+    });
+
+  }
+
+  void onOtpDismiss(){
+    isOtpErrorVisible=false;
+    notifyListeners();
   }
 }

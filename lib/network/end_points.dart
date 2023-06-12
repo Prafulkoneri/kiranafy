@@ -1,6 +1,9 @@
 class Endpoint {
   Endpoint._();
   //testing url
+  // static const String baseUrl =
+  //     'https://newcms.m-staging.in/local-super-mart-testing/api/';
+  //live url
   static const String baseUrl =
       'https://newcms.m-staging.in/local-super-mart-admin/api/';
   // Check Mobile Number Exist
@@ -88,6 +91,9 @@ class Endpoint {
   ///Dash Board
   static const String ShopDashBoard = "${baseUrl}lsm-shop-owner-dashboard";
 
+  ///Edit Custom Product
+  static const String editCustomProduct = "${baseUrl}lsm-shop-owner-edit-custom-product";
+
 ///////////////////////////////Customer Screen Apis///////////////////
 //OnBoarding Screen
   static const String onBoardingScreen =
@@ -153,8 +159,17 @@ class Endpoint {
   static const String customerProductListAsPerCategory =
       "${baseUrl}lsm-customer-product-list-as-per-category";
   //////////Customer Product List As Per Search
-  static const String customerProductListAsPerSearch=
+  static const String customerProductListAsPerSearch =
       "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
+  //////////Customer Product List As Per Filter
+  static const String customerProductListAsPerFilter =
+      "${baseUrl}lsm-customer-product-list-as-per-category-and-filter";
+  //////////Customer Add Admin Product To Fav
+  static const String addAdminProductToFav =
+      "${baseUrl}lsm-customer-add-admin-product-to-favourite";
+  //////////Customer Add Custom Product To Fav
+  static const String addCustomProductToFav =
+      "${baseUrl}sm-customer-add-custom-product-to-favourite";
   //////////////Seasonal Products
   static const String AllSeasonalProducts =
       "${baseUrl}lsm-customer-view-all-seasonal-products-of-shop";
@@ -168,4 +183,33 @@ class Endpoint {
   //////////////Product Unit Image
   static const String ProductUnitImage =
       "${baseUrl}lsm-customer-get-unit-images-of-product";
+  /////////////Remove Admin Product Fvrt///////
+  static const String removeAdminProduct =
+      "${baseUrl}lsm-customer-remove-admin-product-from-favourite";
+
+////////////////////Remove Custome Product////
+  static const String removeCustomProduct =
+      "${baseUrl}lsm-customer-remove-custom-product-from-favourite";
+
+  /////////All Fav Products///////
+  static const String allFavProduct =
+      "${baseUrl}lsm-customer-favourite-product-list";
+  ///////////////Customer List///
+  static const String customerList = "${baseUrl}lsm-shop-owner-customer-list";
+  ///////////////Customer Fav List///
+  static const String customerFavList =
+      "${baseUrl}lsm-shop-owner-customer-list-who-liked-shops";
+  ////////Shop Customer Detail View////
+  static const String shopCustomerDetailView =
+      "${baseUrl}lsm-shop-owner-customer-view";
+
+  ////////Deliver Address List ////
+  static const String deliveryAddress =
+      "${baseUrl}lsm-customer-delivery-address-list";
+  ////////Add Deliver Address  ////
+  static const String addDeliveryAddressList =
+      "${baseUrl}lsm-customer-add-delivery-address";
+  ////////Mark Default Address  ////
+  static const String markDefaultaddress =
+      "${baseUrl}lsm-customer-make-delivery-address-default";
 }

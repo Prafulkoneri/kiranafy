@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
@@ -14,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 
 import 'package:provider/provider.dart';
 
@@ -88,13 +90,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               )),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(13.w),
-                            child:watch.shopImage==""?Image.asset(
-                              'assets/images/profile_image.png',
-                              fit: BoxFit.cover,
-                            ):Image.network(
-                              watch.shopImage,
-                              fit: BoxFit.cover,
-                            ),
+                            child: watch.shopImage == ""
+                                ? Image.asset(
+                                    'assets/images/profile_image.png',
+                                    fit: BoxFit.cover,
+                                  )
+                                : AppNetworkImages(
+                                  imageUrl: watch.shopImage,
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                         ),
                         SizedBox(
@@ -124,10 +128,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                     onTap: () {
                                       Navigator.pushAndRemoveUntil(
                                         context,
-                                        MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName: SEditProfileView(
-                                          fromDashBoard: false,
-                                        ),)),
-                                            (Route<dynamic> route) => false,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SMainScreenView(
+                                                  index: 0,
+                                                  screenName: SEditProfileView(
+                                                    fromDashBoard: false,
+                                                  ),
+                                                )),
+                                        (Route<dynamic> route) => false,
                                       );
                                       // Navigator.push(
                                       //     context,
@@ -215,8 +224,10 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
               onTap: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SShopConfigurationView())),
-                      (Route<dynamic> route) => false,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 0, screenName: SShopConfigurationView(initialShopConfigration: false,))),
+                  (Route<dynamic> route) => false,
                 );
                 // read.onShopConfigurationClicked(context);
               },
@@ -268,7 +279,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             ////////////////////////
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 0, screenName: CustomerListView(isRefresh: true,))),
+                  (Route<dynamic> route) => false,
+                );
+              },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),

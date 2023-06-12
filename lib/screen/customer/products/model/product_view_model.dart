@@ -72,6 +72,7 @@ class ProductViewData {
 }
 
 class ShopDetails {
+  String? id;
   String? shopName;
   String? areaName;
   String? cityName;
@@ -81,7 +82,8 @@ class ShopDetails {
   String? isFvrt;
 
   ShopDetails(
-      {required this.shopName,
+      {required this.id,
+      required this.shopName,
       required this.areaName,
       required this.cityName,
       required this.shopAddress,
@@ -89,6 +91,7 @@ class ShopDetails {
       required this.shopOwnerSupportNumber,
       required this.isFvrt});
   ShopDetails.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
     shopName = json["shop_name"];
     areaName = json["area_name"];
     cityName = json["city_name"];
@@ -107,16 +110,19 @@ class ProductDetails {
   String? categoryName;
   String? brandName;
   String? productDescription;
+  String? productType;
+  String? isProductFvrt;
 
-  ProductDetails({
-    required this.id,
-    required this.productName,
-    required this.productImagePath,
-    required this.productImageName,
-    required this.categoryName,
-    required this.brandName,
-    required this.productDescription,
-  });
+  ProductDetails(
+      {required this.id,
+      required this.productName,
+      required this.productImagePath,
+      required this.productImageName,
+      required this.categoryName,
+      required this.brandName,
+      required this.productDescription,
+      required this.productType,
+      required this.isProductFvrt});
   ProductDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     productName = json["product_name"];
@@ -125,6 +131,8 @@ class ProductDetails {
     categoryName = json["category_name"];
     brandName = json["brand_name"];
     productDescription = json["product_description"];
+    productType = json["product_type"];
+    isProductFvrt = json['is_favourite'];
   }
 }
 
@@ -162,22 +170,25 @@ class SimilarProduct {
   String? weight;
   String? offerPrice;
   String? mrpPrice;
+  int? categoryId;
   String? discountPercentage;
   String? status;
   String? unit;
+  String? productType;
 
-  SimilarProduct({
-    required this.id,
-    required this.productName,
-    required this.productImagePath,
-    required this.productImageName,
-    required this.weight,
-    required this.offerPrice,
-    required this.mrpPrice,
-    required this.discountPercentage,
-    required this.status,
-    required this.unit,
-  });
+  SimilarProduct(
+      {required this.id,
+      required this.productName,
+      required this.productImagePath,
+      required this.productImageName,
+      required this.weight,
+      required this.offerPrice,
+      required this.mrpPrice,
+      required this.categoryId,
+      required this.discountPercentage,
+      required this.status,
+      required this.unit,
+      required this.productType});
 
   SimilarProduct.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -187,8 +198,10 @@ class SimilarProduct {
     weight = json["weight"];
     offerPrice = json["offer_price"];
     mrpPrice = json["mrp_price"];
+    categoryId = json["category_id"];
     discountPercentage = json["discount_percentage"];
     status = json["status"];
     unit = json["unit"];
+    productType = json['product_type'];
   }
 }

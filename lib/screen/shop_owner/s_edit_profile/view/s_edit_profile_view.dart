@@ -18,6 +18,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -46,25 +47,32 @@ class _SEditProfileViewState extends State<SEditProfileView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             if (widget.fromDashBoard ?? false) {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:ShopDashBoard())),
-                    (Route<dynamic> route) => false,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        SMainScreenView(index: 0, screenName: ShopDashBoard())),
+                (Route<dynamic> route) => false,
               );
             } else {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
-                    (Route<dynamic> route) => false,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 0, screenName: SAccountScreenView())),
+                (Route<dynamic> route) => false,
               );
             }
           },
           title: "Edit profile",
-          action: SvgPicture.asset("assets/icons/forward.svg"),
+          action: Padding(
+            padding: EdgeInsets.only(right: 20.w),
+            child: SvgPicture.asset("assets/icons/forward.svg"),
+          ),
           onActionTap: () async {
             read.uploadImage(context);
             // await readMainScreen.onBackPressed(4, )
@@ -180,7 +188,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
-                                child: Image.network(
+                                child: AppNetworkImages(
+                                  imageUrl:
                                   watch.networkImage1,
                                   fit: BoxFit.cover,
                                 ),
@@ -225,8 +234,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
-                                child: Image.network(
-                                  watch.networkImage2,
+                                child: AppNetworkImages(
+                                imageUrl:   watch.networkImage2,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -266,8 +275,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
-                                child: Image.network(
-                                  watch.networkImage3,
+                                child: AppNetworkImages(
+                                imageUrl:   watch.networkImage3,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -307,8 +316,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
-                                child: Image.network(
-                                  watch.networkImage4,
+                                child: AppNetworkImages(
+                                 imageUrl: watch.networkImage4,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -383,7 +392,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                     padding: const EdgeInsets.only(bottom: 0),
                     child: Container(
                         child: MobileNoTextFormField(
-                          readOnly: true,
+                      readOnly: true,
                       initialSelection: watch.countryCode,
                       controller: watch.phoneNumberController,
                       enableOrder: true,

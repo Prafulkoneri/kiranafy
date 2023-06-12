@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/view/otp_bottom_sheet_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -26,6 +27,8 @@ class ShopSignInView extends StatefulWidget {
 }
 
 class _ShopSignInViewState extends State<ShopSignInView> {
+  bool isVisible = false;
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<ShopSignInController>();
@@ -230,6 +233,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                               if (!watch.isVerifyChecked) {
                                 return;
                               }
+
                               showModalBottomSheet(
                                 backgroundColor: Colors.white,
                                 isScrollControlled: true,
@@ -239,146 +243,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                         topRight: Radius.circular(30))),
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return Theme(
-                                    data: Theme.of(context)
-                                        .copyWith(canvasColor: Colors.white),
-                                    child: Material(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(16.0),
-                                            topRight: Radius.circular(16.0)),
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              bottom: MediaQuery.of(context)
-                                                  .viewInsets
-                                                  .bottom),
-                                          // height: 335,
-                                          child: Padding(
-                                            padding: EdgeInsets.all(25.h),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              // mainAxisAlignment: MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Enter Verification Code",
-                                                  style: GoogleFonts.inter(
-                                                    textStyle: const TextStyle(
-                                                        color: Custlogin,
-                                                        letterSpacing: .5,
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w700),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 20.0.h),
-                                                  child: Text(
-                                                    "We have sent SMS to :\n ${watch.mobController.text.isNotEmpty ? watch.mobController.text.substring(0, 3) : ""} XXX XX XX",
-                                                    style: GoogleFonts.inter(
-                                                      textStyle: TextStyle(
-                                                          color: Black,
-                                                          letterSpacing: .5,
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                  ),
-                                                ),
-                                                OtpTextField(
-                                                  //  controller: otpController,
-                                                  numberOfFields: 6,
-                                                  borderColor:
-                                                      Color(0xFF512DA8),
-                                                  //set to true to show as box or false to show as dash
-                                                  showFieldAsBox: false,
-                                                  //runs when a code is typed in
-                                                  onCodeChanged: (String code) {
-                                                    print(code);
-                                                    //handle validation or checks here
-                                                  },
-                                                  //runs when every textfield is filled
-                                                  onSubmit: (String
-                                                      verificationCode) {
-                                                    print(verificationCode);
-                                                    read.onOtpEntered(
-                                                        verificationCode);
-                                                  }, // end onSubmit
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 400,
-                                                  // <-- Your width
-                                                  height: 60,
-                                                  child: ElevatedButton(
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      primary: Button,
-                                                      // onPrimary: Colors.white,
-                                                      // shadowColor: Colors.greenAccent,
-                                                      elevation: 3,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          14.0)),
-                                                      minimumSize: const Size(
-                                                          100,
-                                                          40), //////// HERE
-                                                    ),
-                                                    // style: style,
-                                                    onPressed: () {
-                                                      read.onCodeVerification(
-                                                          context);
-                                                    },
-                                                    child: Text(
-                                                      'Submit',
-                                                      style: GoogleFonts.inter(
-                                                        textStyle:
-                                                            const TextStyle(
-                                                                // color: SplashTex
-                                                                letterSpacing:
-                                                                    .5,
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 15.h,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Resend OTP',
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle:
-                                                            const TextStyle(
-                                                                // color: SplashTex
-                                                                letterSpacing:
-                                                                    .5,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        )),
-                                  );
+                                 return OtpBottomSheetView();
                                 },
                               );
                             });
@@ -419,136 +284,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                       topRight: Radius.circular(30))),
                               context: context,
                               builder: (BuildContext context) {
-                                return Theme(
-                                  data: Theme.of(context)
-                                      .copyWith(canvasColor: Colors.white),
-                                  child: Material(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0)),
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            bottom: MediaQuery.of(context)
-                                                .viewInsets
-                                                .bottom),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(25.h),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(
-                                                "Enter Verification Code",
-                                                style: GoogleFonts.inter(
-                                                  textStyle: const TextStyle(
-                                                      color: Custlogin,
-                                                      letterSpacing: .5,
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.w700),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 20.0.h),
-                                                child: Text(
-                                                  "We have sent SMS to :\n ${watch.mobController.text.isNotEmpty ? watch.mobController.text.substring(0, 3) : ""} XXX XX XX",
-                                                  style: GoogleFonts.inter(
-                                                    textStyle: const TextStyle(
-                                                        color: Black,
-                                                        letterSpacing: .5,
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ),
-                                              ),
-                                              OtpTextField(
-                                                //  controller: otpController,
-                                                numberOfFields: 6,
-                                                borderColor: Color(0xFF512DA8),
-                                                //set to true to show as box or false to show as dash
-                                                showFieldAsBox: false,
-                                                //runs when a code is typed in
-                                                onCodeChanged: (String code) {
-                                                  print(code);
-                                                  //handle validation or checks here
-                                                },
-                                                //runs when every textfield is filled
-                                                onSubmit:
-                                                    (String verificationCode) {
-                                                  print(verificationCode);
-                                                  read.onOtpEntered(
-                                                      verificationCode);
-                                                }, // end onSubmit
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              SizedBox(
-                                                width: 400,
-                                                // <-- Your width
-                                                height: 60,
-                                                child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    primary: Button,
-                                                    // onPrimary: Colors.white,
-                                                    // shadowColor: Colors.greenAccent,
-                                                    elevation: 3,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        14.0)),
-                                                    minimumSize: Size(
-                                                        100, 40), //////// HERE
-                                                  ),
-                                                  // style: style,
-                                                  onPressed: () {
-                                                    read.onCodeVerification(
-                                                        context);
-                                                  },
-                                                  child: Text(
-                                                    'Submit',
-                                                    style: GoogleFonts.inter(
-                                                      textStyle: TextStyle(
-                                                          // color: SplashTex
-                                                          letterSpacing: .5,
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w700),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 15.h,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Resend OTP',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          // color: SplashTex
-                                                          letterSpacing: .5,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )),
-                                );
+                                return OtpBottomSheetView();
                               },
                             );
                           },

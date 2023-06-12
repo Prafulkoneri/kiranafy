@@ -6,13 +6,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/account/view/account_view.dart';
+import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/profile/controller/edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
@@ -40,21 +41,24 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
     final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                   builder: (context) => MainScreenView(
-                      index: 4,
-                      screenName: ProfileScreenView()
-                  )),
-                  (Route<dynamic> route) => false,
+                      index: 4, screenName: ProfileScreenView())),
+              (Route<dynamic> route) => false,
             );
           },
           title: "Update Profile",
-          action: SvgPicture.asset("assets/icons/forward.svg"),
+          action: Padding(
+            padding: EdgeInsets.only(
+              right: 20.w,
+            ),
+            child: SvgPicture.asset("assets/icons/forward.svg"),
+          ),
           onActionTap: () async {
             await read.validateField(context);
           },
@@ -70,10 +74,8 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => MainScreenView(
-                          index: 4,
-                          screenName: ProfileScreenView()
-                      )),
-                      (Route<dynamic> route) => false,
+                          index: 4, screenName: ProfileScreenView())),
+                  (Route<dynamic> route) => false,
                 );
 
                 return false;
@@ -106,8 +108,8 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.w),
-                                        child: Image.network(
-                                          watch.networkImage,
+                                        child: AppNetworkImages(
+                                          imageUrl:watch.networkImage,
                                           fit: BoxFit.cover,
                                         )))
                                 : watch.fileImage.path != ""
@@ -213,7 +215,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       PrimaryCTextFormField(
                         controller: watch.emailController,
                         titleHeader: "Email ID",
-                        hintText: "Email Id",
+                        hintText: "Email ID",
                       ),
                       SizedBox(
                         height: 20.w,
@@ -313,7 +315,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       PrimaryCTextFormField(
                         controller: watch.dateOfBirthController,
                         titleHeader: "Date of Birth",
-                        hintText: "Date of birth",
+                        hintText: "Date of Birth",
                         suffix: GestureDetector(
                           onTap: () async {
                             var pickedDate = await showDatePicker(
@@ -427,7 +429,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                               ))
                                           .toList(),
                                       hint: "State",
-                                titleHeader: "State",
+                                      titleHeader: "State",
                                     )
                                   : CDropDownField(
                                       value: watch.stateId.toString(),

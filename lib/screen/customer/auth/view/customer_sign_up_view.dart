@@ -48,7 +48,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
               ),
             ),
             Positioned(
-              bottom: 0.w,
+              bottom: -25.w,
               right: 0.w,
               child: Image.asset(
                 "assets/images/splash2.png",
@@ -117,20 +117,9 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                         left: 28.w,
                         right: 23.w,
                       ),
-                      child: SizedBox(
-                        height: 48.h,
-                        width: 334.w,
-                        child: TextField(
-                          controller: watch.nameController,
-                          decoration: InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            border:
-                                OutlineInputBorder(borderSide: BorderSide.none),
-                            // labelText: 'Name',
-                            hintText: 'Name',
-                          ),
-                        ),
+                      child: PrimaryCTextFormField(
+                        controller: watch.nameController,
+                        hintText: "Name",
                       ),
                     ),
                     Padding(

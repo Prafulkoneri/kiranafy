@@ -10,9 +10,10 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:provider/provider.dart';
 
 class MainScreenView extends StatefulWidget {
-  final Widget ? screenName;
-  final int ? index;
-  const MainScreenView({Key? key,this.screenName,this.index}) : super(key: key);
+  final Widget? screenName;
+  final int? index;
+  const MainScreenView({Key? key, this.screenName, this.index})
+      : super(key: key);
 
   @override
   _MainScreenViewState createState() => _MainScreenViewState();
@@ -21,14 +22,15 @@ class MainScreenView extends StatefulWidget {
 class _MainScreenViewState extends State<MainScreenView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
-
-    void initState() {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        context.read<ProfileController>().initState(context);
-      });
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        context.read<MainScreenController>().initState(context,widget.index,widget.screenName);
-      });
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileController>().initState(context);
+    });
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<MainScreenController>()
+          .initState(context, widget.index, widget.screenName);
+    });
   }
 
   @override
@@ -126,7 +128,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
-                                        "assets/icons/shop_selected.svg",
+                                        "assets/icons/selected_shop_new.svg",
                                         height: 20.w,
                                         width: 20.w,
                                       ),
@@ -149,7 +151,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
-                                          "assets/icons/shop.svg"),
+                                          "assets/icons/shop_new.svg"),
                                     ),
                                     SizedBox(
                                       height: 5.w,

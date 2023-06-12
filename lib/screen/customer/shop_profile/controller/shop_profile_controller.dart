@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -16,6 +17,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_
 
 import 'package:local_supper_market/screen/customer/shop_profile/repository/all_products_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/customer_view_shop_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -24,7 +26,8 @@ class ShopProfileViewController extends ChangeNotifier {
   String shopId = "";
   int offset = 0;
   bool isLoading = true;
-  Data? allproducts;
+  PageController pageController=PageController();
+  // Data? allproducts;
   CustomerViewShopRepo customerViewShopRepo = CustomerViewShopRepo();
   AllOfferProductsRepo allOfferProductsRepo = AllOfferProductsRepo();
   ShopData? shopData;
@@ -34,6 +37,8 @@ class ShopProfileViewController extends ChangeNotifier {
   List<AllOfferProducts>? allOfferProducts;
   List<SeasonalProduct>? seasonalProduct;
   List<RecommandedProducts>? recommandedProduct;
+  List<BannerImageData>? bannerImageData;
+  int _currentPage=0;
 
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
@@ -126,11 +131,29 @@ class ShopProfileViewController extends ChangeNotifier {
         offerProduct = shopData?.offerProduct;
         seasonalProduct = shopData?.seasonalProduct;
         recommandedProduct = shopData?.recommandedProduct;
+        bannerImageData=shopData?.bannerImages;
+
         favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
-        print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
+        print("bye");
         print(favAllShop);
         print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
         showLoader(false);
+        int imageLength=bannerImageData?.length??0;
+        if(bannerImageData!.isNotEmpty){
+          Timer.periodic(Duration(seconds: 5), (Timer timer) {
+              if (_currentPage < imageLength-1) {
+                _currentPage++;
+              } else {
+                _currentPage = 0;
+              }
+              pageController.animateToPage(
+                _currentPage,
+                duration: Duration(milliseconds: 350),
+                curve: Curves.easeIn,
+              );
+
+          });
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -200,7 +223,7 @@ class ShopProfileViewController extends ChangeNotifier {
     );
   }
 
-///////////////////Update List
+///////////////////Update List///
   AddFavReqModel get addFavReqModel => AddFavReqModel(
         shopId: shopId.toString(),
       );
