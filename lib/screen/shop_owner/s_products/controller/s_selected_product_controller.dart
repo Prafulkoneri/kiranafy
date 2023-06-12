@@ -89,7 +89,7 @@ class SSelectedProductsController extends ChangeNotifier {
     );
   }
 
-  Future<void> deleteProduct(context, index, id) async {
+  Future<void> deleteAdminProduct(context, index, id) async {
     productId = id.toString();
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -129,4 +129,46 @@ class SSelectedProductsController extends ChangeNotifier {
       },
     );
   }
+
+  Future<void> deleteCustomProduct(context, index, id) async {
+    productId = id.toString();
+    isLoading = true;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    deleteAdminProductRepo
+        .deleteProduct(
+        deleteAdminProductReqModel, pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+      DeleteAdminProductResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          productsFromAdmin?.removeAt(index);
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+
+        isLoading = false;
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
 }

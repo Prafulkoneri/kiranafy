@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/customer/account/view/controller/prof
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/controller/add_address_controller.dart';
 
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
@@ -36,6 +37,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/
 
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_admin_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_custom_product_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 
@@ -57,6 +59,7 @@ import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
+import 'screen/shop_owner/s_coupons/controller/shop_coupons_list_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
@@ -108,6 +111,9 @@ void main() async {
             create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
         ChangeNotifierProvider(create: (_) => DeliveryAddressController()),
+        ChangeNotifierProvider(create: (_) => AddAddressController()),
+        ChangeNotifierProvider(create: (_) => SCouponsListController()),
+        ChangeNotifierProvider(create: (_) => EditCustomProductController()),
       ],
       child: MyApp(),
     ),
@@ -143,7 +149,17 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp(
               title: 'Flutter Demo',
               theme: ThemeData(
-                  primarySwatch: Colors.blue, fontFamily: 'dm_sans_regular'),
+                primarySwatch: Colors.blue,
+                fontFamily: 'dm_sans_regular',
+              ),
+              // theme: ThemeData(
+              //   brightness: Brightness.light,
+              //   /* light theme settings */
+              // ),
+              // darkTheme: ThemeData(
+              //   brightness: Brightness.dark,
+              //   /* dark theme settings */
+              // ),
               debugShowCheckedModeBanner: false,
               home: SplashScreen());
         });

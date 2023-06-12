@@ -32,11 +32,11 @@ Map<String,dynamic> toJson(){
   data["show_under_recommanded_products"]=showUnderRecommendedProduct;
   data["show_under_fullfill_your_cravings"]=showUnderFullfillCravings;
   // data["product_image_path"]=productImagePath;
-  data["unit_id_0"]=unitID;
-  data["weight_0"]=weight;
-  data["mrp_price_0"]=mrpPrice;
-  data["offer_price_0"]=offerPrice;
-  data["status_0"]=status;
+  data["unit_ids"]=unitID;
+  data["weight_ids"]=weight;
+  data["mrp_price_ids"]=mrpPrice;
+  data["offer_price_ids"]=offerPrice;
+  data["status_ids"]=status;
   // data["unit_based_product_image_1_path_0"]=unitBasedProductImage1;
   // data["unit_based_product_image_2_path_0"]=unitBasedProductImage2;
   // data["unit_based_product_image_3_path_0"]=unitBasedProductImage3;

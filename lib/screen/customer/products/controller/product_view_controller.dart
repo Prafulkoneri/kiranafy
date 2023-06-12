@@ -47,13 +47,19 @@ class ProductViewController extends ChangeNotifier {
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
-  AddAdminProductToFavRepo addAdminProductToFavRepo = AddAdminProductToFavRepo();
-  AddCustomProductToFavRepo addCustomProductFavRepo = AddCustomProductToFavRepo();
-  RemoveAdminFvrtProductRepo removeFavProductRepo = RemoveAdminFvrtProductRepo();
-  RemoveCustomFvrtProductRepo removeCustomFavProductRepo = RemoveCustomFvrtProductRepo();
+  AddAdminProductToFavRepo addAdminProductToFavRepo =
+      AddAdminProductToFavRepo();
+  AddCustomProductToFavRepo addCustomProductFavRepo =
+      AddCustomProductToFavRepo();
+  RemoveAdminFvrtProductRepo removeFavProductRepo =
+      RemoveAdminFvrtProductRepo();
+  RemoveCustomFvrtProductRepo removeCustomFavProductRepo =
+      RemoveCustomFvrtProductRepo();
 
   Future<void> initState(context, sId, cId, pId, suId, pType) async {
     await productsView(context, sId, cId, pId, pType);
+    print("55555555555555555555555555555555555");
+    print(pId);
     unitImages.clear();
     print(pType);
     // await productsUnitImage(context, suId);
@@ -236,7 +242,6 @@ class ProductViewController extends ChangeNotifier {
   RemoveCustomProductReqModel get removeCustomeProductReqModel =>
       RemoveCustomProductReqModel(
           shopId: shopId.toString(), productId: productId.toString());
-
 
   Future<void> removeFavProduct(
     context,
@@ -424,15 +429,15 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 /////////////////////////
-  // void onBackPressed(screenName,context,cId){
+  //   void onBackPressed(screenName,context,cId){
   //   print(screenName);
   //   if(screenName=="allNearShopView"){
   //     Navigator.pushAndRemoveUntil(
   //       context,
   //       MaterialPageRoute(
-  //           builder: (context) => const MainScreenView(
+  //           builder: (context) => MainScreenView(
   //               index: 1,
-  //               screenName: ShopProfileView(refreshPage: false, routeName: '', shopId: ,)
+  //               screenName: AllNearShopsView(refreshPage: false,)
   //           )),
   //           (Route<dynamic> route) => false,
   //     );
@@ -453,7 +458,7 @@ class ProductViewController extends ChangeNotifier {
   //       context,
   //       MaterialPageRoute(
   //           builder: (context) => MainScreenView(
-  //               index: 0,
+  //               index: 1,
   //               screenName: HomeScreenView(refreshPage: false,)
   //           )),
   //           (Route<dynamic> route) => false,

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,9 @@ class _MainScreenViewState extends State<MainScreenView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ProfileController>().initState(context);
+      context.read<AllShopController>().initState(context,true);
     });
+
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<MainScreenController>()

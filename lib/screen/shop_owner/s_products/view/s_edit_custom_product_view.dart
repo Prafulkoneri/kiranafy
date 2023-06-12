@@ -70,7 +70,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
           title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            // read.uploadAdminProduct(context);
+            read.uploadCustomProduct(context);
           },
         ),
       ),
@@ -119,6 +119,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                     children: [
                       Expanded(
                         child: SDropDownField(
+                          value: watch.brandId,
                           onChanged: (value) {
                             read.onBrandSelected(value);
                           },
@@ -141,6 +142,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                       ),
                       Expanded(
                         child: SDropDownField(
+                          value: watch.taxId,
                           onChanged: (value){
                             read.onTax(value);
                           },
@@ -437,48 +439,31 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                     // width: 20, // titleHeader: "Shop Name",
                                     hintText: "value",
                                     hintFontSize: 12.sp,
-                                    readOnly: true,
                                   ),
                                 ),
                                 SizedBox(width: 3.w),
                                 Expanded(
-                                  child: Container(
-                                    height: 33.w,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Color(0xffEFEFEF)),
-                                      borderRadius:  BorderRadius.circular(6.w),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 5.w,
-                                            ),
-                                            Text(element?.unit??"",style: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: Black1,
-                                                fontWeight: FontWeight.w400),)
-                                          ],
+                                    child: SDropDownField(
+                                      iconPadding: EdgeInsets.only(right: 5.w),
+                                      onChanged: (value){
+                                        read.onUnitDataSelect(value,index);
+                                      },
+                                      items: watch.unitData
+                                          ?.map((item) => DropdownMenuItem<String>(
+                                        value: item.id.toString(),
+                                        child: Text(
+                                          item.unit ?? "",
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                          ),
                                         ),
-                                        Row(
-                                          children: [
-
-                                            Icon(
-                                              Icons.keyboard_arrow_down_outlined,
-                                              color: Color(0xffB3B3B3),
-                                            ),
-                                            SizedBox(
-                                              width: 5.w,
-                                            ),
-                                          ],
-                                        ),
-
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                      ))
+                                          .toList(),
+                                      height: 30.w,
+                                      value: element?.unitId.toString(),
+                                      hint: "Unit",
+                                      hintSize: 11.sp,
+                                    )),
                                 SizedBox(width: 3.w),
                                 Expanded(
                                   child: PrimarySTextFormField(

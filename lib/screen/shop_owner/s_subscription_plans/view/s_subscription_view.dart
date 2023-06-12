@@ -9,23 +9,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/screen/customer/order_status/order_status.dart';
-import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
-
 import 'package:local_supper_market/widget/buttons.dart';
-import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:provider/provider.dart';
 
 class SSubscriptionScreenView extends StatefulWidget {
-  const SSubscriptionScreenView({Key? key}) : super(key: key);
+  final bool ? loggedIn;
+  const SSubscriptionScreenView({Key? key,required this.loggedIn}) : super(key: key);
 
   @override
   _SSubscriptionScreenViewState createState() =>
@@ -472,7 +466,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                 backgroundColor: MaterialStateProperty.all(SplashText),
               ),
               onPressed: () {
-                read.buySubscriptionPlan(context);
+                read.buySubscriptionPlan(context,widget.loggedIn);
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -485,18 +479,20 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          watch.planAmount!=""? Text(
-                            '\u{20B9} ${watch.planAmount}',
-                            // "₹ 4,000",
+                          watch.planAmount != ""
+                              ? Text(
+                                  '\u{20B9} ${watch.planAmount}',
+                                  // "₹ 4,000",
 
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  // letterSpacing: .5,
-                                  fontSize: 23.sp,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ):Container(),
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Colors.white,
+                                        // letterSpacing: .5,
+                                        fontSize: 23.sp,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                )
+                              : Container(),
                           Text(
                             "Extra 18% GST",
                             style: GoogleFonts.dmSans(
@@ -516,7 +512,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                             width: 160.w,
                             onTap: () async {
                               print("hello");
-                              await read.buySubscriptionPlan(context);
+                              await read.buySubscriptionPlan(context,widget.loggedIn);
 
                               // readMainScreen.onNavigation(
                               //     4, SShopConfigurationView(), context);

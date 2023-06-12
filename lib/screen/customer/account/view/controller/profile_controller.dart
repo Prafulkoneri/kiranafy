@@ -58,10 +58,7 @@ class ProfileController extends ChangeNotifier {
         context, MaterialPageRoute(builder: (context) => CFavouritesView()));
   }
 
-  void myDeliveryAddressPressed(context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => MyDeliveryAddressView()));
-  }
+
 
 ////Detail Profile
   Future<void> getCustomerProfileDetails(context) async {

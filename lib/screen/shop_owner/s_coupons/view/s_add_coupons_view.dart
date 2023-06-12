@@ -49,7 +49,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                   ),
                   Expanded(
                     child: Text(
-                      "Delivery Charge",
+                      "To Date",
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 14.sp,
@@ -244,6 +244,9 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 color: Color(0xff4689EC),
                 onTap: () {},
               ),
+              SizedBox(
+                height: 90.h,
+              )
             ],
           ),
         ),

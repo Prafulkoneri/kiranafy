@@ -49,7 +49,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
+                  builder: (context) => MainScreenView(
                         index: 4,
                         screenName: ProfileScreenView(),
                       )),

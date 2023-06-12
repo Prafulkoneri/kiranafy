@@ -192,6 +192,6 @@ class SKycVerificationController extends ChangeNotifier {
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => SSubscriptionScreenView()));
+        MaterialPageRoute(builder: (context) => SSubscriptionScreenView(loggedIn: false,)));
   }
 }

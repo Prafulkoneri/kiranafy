@@ -1,3 +1,5 @@
+import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
+
 ///REquest Model
 
 class EditCustomProductsRequestModel {
@@ -42,13 +44,45 @@ class EditCustomProductsResponseModel {
 
 class Data {
   ProductDetails? productDetails;
-
+  List<CategoryData>? categoryData;
+  List<BrandData>? brandData;
+  List<TaxData>? taxData;
+  List<UnitData>? unitData;
   Data({
-    required this.productDetails,
+     this.productDetails,
+    this.unitData,
+    this.taxData,
+    this.brandData,
+    this.categoryData,
   });
   Data.fromJson(Map<String, dynamic> json) {
-    productDetails = json["product_details"];
+    productDetails = json['product_details'] != null ? ProductDetails.fromJson(json['product_details']) : null;
+    if (json["category_data"] != null) {
+      categoryData = <CategoryData>[];
+      json["category_data"].forEach((v) {
+        categoryData!.add(CategoryData.fromJson(v));
+      });
+    }
+    if (json["brand_data"] != null) {
+      brandData = <BrandData>[];
+      json["brand_data"].forEach((v) {
+        brandData!.add(BrandData.fromJson(v));
+      });
+    }
+    if (json["tax_data"] != null) {
+      taxData = <TaxData>[];
+      json["tax_data"].forEach((v) {
+        taxData!.add(TaxData.fromJson(v));
+      });
+    }
+    if (json["unit_data"] != null) {
+      unitData = <UnitData>[];
+      json["unit_data"].forEach((v) {
+        unitData!.add(UnitData.fromJson(v));
+      });
+    }
   }
+
 }
 
 class ProductDetails {
@@ -101,7 +135,6 @@ class ProductDetails {
     productDescription = json["product_description"];
     productImagePath = json["product_image_path"];
     productImageName = json["product_image_name"];
-    productUnitDetails = json["product_unit_details"];
 
     if (json["product_unit_details"] != null) {
       productUnitDetails = <ProductUnitDetail>[];

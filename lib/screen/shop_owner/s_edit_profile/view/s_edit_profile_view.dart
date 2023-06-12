@@ -50,7 +50,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            if (widget.fromDashBoard ?? false) {
+            if (widget.fromDashBoard ?? true) {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
@@ -63,16 +63,13 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 0, screenName: SAccountScreenView())),
+                        index: 4, screenName: SAccountScreenView())),
                 (Route<dynamic> route) => false,
               );
             }
           },
           title: "Edit profile",
-          action: Padding(
-            padding: EdgeInsets.only(right: 20.w),
-            child: SvgPicture.asset("assets/icons/forward.svg"),
-          ),
+          action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
             read.uploadImage(context);
             // await readMainScreen.onBackPressed(4, )
@@ -189,8 +186,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
                                 child: AppNetworkImages(
-                                  imageUrl:
-                                  watch.networkImage1,
+                                  imageUrl: watch.networkImage1,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -235,7 +231,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
                                 child: AppNetworkImages(
-                                imageUrl:   watch.networkImage2,
+                                  imageUrl: watch.networkImage2,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -276,7 +272,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
                                 child: AppNetworkImages(
-                                imageUrl:   watch.networkImage3,
+                                  imageUrl: watch.networkImage3,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -317,7 +313,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(width: 1, color: grey6)),
                                 child: AppNetworkImages(
-                                 imageUrl: watch.networkImage4,
+                                  imageUrl: watch.networkImage4,
                                   fit: BoxFit.cover,
                                 ),
                               )

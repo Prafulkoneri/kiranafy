@@ -6,14 +6,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/controller/delivery_address_controller.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
 
 import '../../near_shops/view/all_near_shops_view.dart';
 
 class MyDeliveryAddressView extends StatefulWidget {
-  const MyDeliveryAddressView({super.key});
+  final bool ? isRefresh;
+  const MyDeliveryAddressView({super.key,required this.isRefresh});
 
   @override
   State<MyDeliveryAddressView> createState() => _MyDeliveryAddressViewState();
@@ -23,9 +28,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<DeliveryAddressController>().initState(
-            context,
-          );
+      context.read<DeliveryAddressController>().initState(context,widget.isRefresh);
     });
   }
 
@@ -38,14 +41,36 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainScreenView(
+                      index: 4, screenName: ProfileScreenView())),
+              (Route<dynamic> route) => false,
+            );
+          },
           title: "My Addresses",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
-          onActionTap: () {},
+          onActionTap: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainScreenView(
+                      index: 4,
+                      screenName: AddAddressView(isEditAdress: false,))),
+                  (Route<dynamic> route) => false,
+
+            );
+          },
           // action: ,
         ),
       ),
       backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         child: Column(
           children: [
             ListView.builder(
@@ -217,19 +242,12 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                         children: [
                           Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    // border: Border.all(width: 1),
-                                    color: Color(0xffF3F3F3),
-                                    borderRadius: BorderRadius.circular(5)),
-                                height: 20.h,
-                                width: 20.w,
-                                // color: grey4,
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    "assets/icons/check.svg",
-                                  ),
-                                ),
+                              PrimaryCheckBox(
+                                onChanged: (value) {
+                                  read.markDefaultAddress(
+                                      context, element?.id.toString(),index);
+                                },
+                                value: watch.defaultSelectedAddress[index],
                               ),
                               SizedBox(
                                 width: 10.w,
@@ -248,7 +266,16 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                           ),
                           Row(
                             children: [
-                              SvgPicture.asset("assets/icons/edit1.svg"),
+                              GestureDetector(onTap: (){
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainScreenView(
+                                          index: 4,
+                                          screenName: AddAddressView(isEditAdress: true,addressId: element?.id.toString(),))),
+                                      (Route<dynamic> route) => false,
+                                );
+                              },child: SvgPicture.asset("assets/icons/edit1.svg")),
                               SizedBox(
                                 width: 12.w,
                               ),
@@ -260,16 +287,25 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                               SizedBox(
                                 width: 12.w,
                               ),
-                              SvgPicture.asset("assets/icons/delete1.svg")
+                              InkWell(
+                                  onTap: () {
+                                    read.deleteAddress(
+                                        context, index, element?.id);
+                                  },
+                                  child: SvgPicture.asset(
+                                      "assets/icons/delete1.svg"))
                             ],
                           )
                         ],
-                      )
+                      ),
                     ],
                   ),
                 );
               },
             ),
+            SizedBox(
+              height: 100.h,
+            )
           ],
         ),
       ),
