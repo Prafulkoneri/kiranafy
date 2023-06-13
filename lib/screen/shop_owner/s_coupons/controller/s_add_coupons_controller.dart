@@ -12,28 +12,27 @@ import 'package:local_supper_market/screen/shop_owner/s_select_category/reposito
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SAddCouponsController extends ChangeNotifier{
-
+class SAddCouponsController extends ChangeNotifier {
   TextEditingController fromDateController = TextEditingController();
   TextEditingController toDateController = TextEditingController();
-  bool isLoading=true;
-  String groupValue="FullOrderAmount";
-  String catergoryId="";
-  String productId="";
+  bool isLoading = true;
+  String groupValue = "FullOrderAmount";
+  String catergoryId = "";
+  String productId = "";
   List<CategoryData>? categoriesList;
   List<ProductData>? productList;
   ShopAllCategoriesRepo categoriesListRepo = ShopAllCategoriesRepo();
-  TextEditingController couponCodeController =TextEditingController();
-  TextEditingController discountPercentageController =TextEditingController();
-  TextEditingController minOrderAmountController =TextEditingController();
-  TextEditingController maxDiscountAmountController =TextEditingController();
-  TextEditingController termsAndConditionController =TextEditingController();
-  ProductListAsPerCategoryRepo productListAsPerCategoryRepo=ProductListAsPerCategoryRepo();
-  CouponCodeExistsRepo couponCodeExistsRepo=CouponCodeExistsRepo();
-  Future<void> initState(context)async{
+  TextEditingController couponCodeController = TextEditingController();
+  TextEditingController discountPercentageController = TextEditingController();
+  TextEditingController minOrderAmountController = TextEditingController();
+  TextEditingController maxDiscountAmountController = TextEditingController();
+  TextEditingController termsAndConditionController = TextEditingController();
+  ProductListAsPerCategoryRepo productListAsPerCategoryRepo =
+      ProductListAsPerCategoryRepo();
+  CouponCodeExistsRepo couponCodeExistsRepo = CouponCodeExistsRepo();
+  Future<void> initState(context) async {
     await getCategoriesList(context);
   }
-
 
   void onFromDateSelected(date) {
     print(date);
@@ -41,13 +40,14 @@ class SAddCouponsController extends ChangeNotifier{
     notifyListeners();
   }
 
-  void onCategorySelect(value,context) async{
-  catergoryId=value;
-  await getProductList(context);
+  void onCategorySelect(value, context) async {
+    catergoryId = value;
+    await getProductList(context);
     notifyListeners();
   }
-  void onProductSelect(value,context) async{
-    productId=value;
+
+  void onProductSelect(value, context) async {
+    productId = value;
     notifyListeners();
   }
 
@@ -56,19 +56,21 @@ class SAddCouponsController extends ChangeNotifier{
     notifyListeners();
   }
 
-  void onRadioBtnToggled(value){
-    groupValue=value;
+  void onRadioBtnToggled(value) {
+    groupValue = value;
     notifyListeners();
   }
 
   Future<void> getCategoriesList(context) async {
-    isLoading=true;
+    isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
-    categoriesListRepo.shopAllCategoriesList(pref.getString("successToken")).then((response) {
+    categoriesListRepo
+        .shopAllCategoriesList(pref.getString("successToken"))
+        .then((response) {
       print(response.statusCode);
       log("response.body${response.body}");
       final result =
-      AllCategoryResponseModel.fromJson(jsonDecode(response.body));
+          AllCategoryResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         categoriesList = result.data;
         // selectedCategoryList =
@@ -83,7 +85,7 @@ class SAddCouponsController extends ChangeNotifier{
         // }
         // print(selectedCategoryList);
         // print(selectedCategoryId);
-        isLoading=false;
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -92,7 +94,7 @@ class SAddCouponsController extends ChangeNotifier{
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -102,20 +104,24 @@ class SAddCouponsController extends ChangeNotifier{
     );
   }
 
-  ProductAsPerCategoryReqModel get productAsPerCategoryReqModel =>ProductAsPerCategoryReqModel(
-    categoryId: catergoryId.toString(),
-  );
+  ProductAsPerCategoryReqModel get productAsPerCategoryReqModel =>
+      ProductAsPerCategoryReqModel(
+        categoryId: catergoryId.toString(),
+      );
 
   Future<void> getProductList(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    productListAsPerCategoryRepo.getProductList(productAsPerCategoryReqModel,pref.getString("successToken")).then((response) {
+    productListAsPerCategoryRepo
+        .getProductList(
+            productAsPerCategoryReqModel, pref.getString("successToken"))
+        .then((response) {
       print(response.statusCode);
       log("response.body${response.body}");
       final result =
-      ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
+          ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        productList=result.data;
-        isLoading=false;
+        productList = result.data;
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -124,7 +130,7 @@ class SAddCouponsController extends ChangeNotifier{
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -134,18 +140,22 @@ class SAddCouponsController extends ChangeNotifier{
     );
   }
 
- CouponCodeExistsRequestModel get couponCodeExistsRequestModel=>CouponCodeExistsRequestModel(
-   couponCode: couponCodeController.text,
-   couponId: "",
- );
+  CouponCodeExistsRequestModel get couponCodeExistsRequestModel =>
+      CouponCodeExistsRequestModel(
+        couponCode: couponCodeController.text,
+        couponId: "",
+      );
 
   Future<void> checkCouponCodeExist(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    couponCodeExistsRepo.checkCouponCodeExists(couponCodeExistsRequestModel,pref.getString("successToken")).then((response) {
+    couponCodeExistsRepo
+        .checkCouponCodeExists(
+            couponCodeExistsRequestModel, pref.getString("successToken"))
+        .then((response) {
       print(response.statusCode);
       log("response.body${response.body}");
       final result =
-      CouponCodeExistsResModel.fromJson(jsonDecode(response.body));
+          CouponCodeExistsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -156,7 +166,7 @@ class SAddCouponsController extends ChangeNotifier{
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -166,16 +176,10 @@ class SAddCouponsController extends ChangeNotifier{
     );
   }
 
-  AddCouponsRequestModel get addCouponsRequestModel =>AddCouponsRequestModel(
-    couponFromDate: fromDateController.text,
-    couponToDate: toDateController.text,
-    shopOwnerCategoryId: catergoryId
-  );
+  AddCouponsRequestModel get addCouponsRequestModel => AddCouponsRequestModel(
+      couponFromDate: fromDateController.text,
+      couponToDate: toDateController.text,
+      shopOwnerCategoryId: catergoryId);
 
-  Future<void> uploadCouponDetails(context)async{
-
-  }
-
-
-
+  Future<void> uploadCouponDetails(context) async {}
 }
