@@ -55,6 +55,8 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'screen/customer/cart/controller/cart_controller.dart';
+import 'screen/customer/cart/controller/cart_detail_controller.dart';
 import 'screen/customer/delivery_address/controller/delivery_address_controller.dart';
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/products/controller/product_view_controller.dart';
@@ -117,6 +119,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SCouponsListController()),
         ChangeNotifierProvider(create: (_) => EditCustomProductController()),
         ChangeNotifierProvider(create: (_) => SAddCouponsController()),
+        ChangeNotifierProvider(create: (_) => CartListController()),
+        ChangeNotifierProvider(create: (_) => CartDetailController()),
       ],
       child: MyApp(),
     ),
