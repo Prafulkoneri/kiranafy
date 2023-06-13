@@ -183,12 +183,6 @@ class _SDropDownFieldState extends State<SDropDownField> {
                   fontWeight: FontWeight.w400),
             ),
             items: widget.items,
-            validator: (value) {
-              if (value == null) {
-                return 'Please select gender.';
-              }
-              return null;
-            },
             onChanged: widget.onChanged,
             onSaved: (value) {
               selectedValue = value.toString();

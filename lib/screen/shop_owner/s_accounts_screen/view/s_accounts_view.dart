@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -337,7 +339,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SMainScreenView(
-                          index: 4, screenName: ShopCouponsView())),
+                          index: 4, screenName: ShopCouponsView(isRefresh: true,))),
                   (Route<dynamic> route) => false,
                 );
                 // read.onShopConfigurationClicked(context);
