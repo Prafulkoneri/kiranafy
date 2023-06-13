@@ -1,8 +1,8 @@
 ////Request MOdel///////
-class CouponsForProductAndCategoryRequestModel {
+class ProductAsPerCategoryReqModel {
   String? categoryId;
 
-  CouponsForProductAndCategoryRequestModel({
+  ProductAsPerCategoryReqModel({
     this.categoryId,
   });
 
@@ -14,39 +14,39 @@ class CouponsForProductAndCategoryRequestModel {
 }
 
 ///////////ResPonse Model////////////
-class CouponsForProductAndCategoryResModel {
+class ProductAsPerCategoryResModel {
   int? status;
   String? message;
-  List<CouponsData>? data;
+  List<ProductData>? data;
 
-  CouponsForProductAndCategoryResModel({
+  ProductAsPerCategoryResModel({
     required this.status,
     required this.message,
     required this.data,
   });
-  CouponsForProductAndCategoryResModel.fromJson(Map<String, dynamic> json) {
+  ProductAsPerCategoryResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     if (json["data"] != null) {
-      data = <CouponsData>[];
+      data = <ProductData>[];
       json["data"].forEach((v) {
-        data!.add(CouponsData.fromJson(v));
+        data!.add(ProductData.fromJson(v));
       });
     }
   }
 }
 
-class CouponsData {
+class ProductData {
   int? id;
   String? productName;
   String? productType;
 
-  CouponsData({
+  ProductData({
     required this.id,
     required this.productName,
     required this.productType,
   });
-  CouponsData.fromJson(Map<String, dynamic> json) {
+  ProductData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     productName = json["product_name"];
     productType = json["product_type"];

@@ -15,10 +15,12 @@ class SCouponsListController extends ChangeNotifier {
   bool isLoading = true;
 
   Future<void> initState(
-    context,
+    context,refresh
   ) async {
-    await getCouponsList(context);
-  }
+    if(refresh) {
+      await getCouponsList(context);
+    }
+    }
 
   showLoader(value) {
     isLoading = value;

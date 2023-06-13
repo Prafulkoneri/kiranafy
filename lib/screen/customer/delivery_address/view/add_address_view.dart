@@ -17,9 +17,9 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
 class AddAddressView extends StatefulWidget {
-  final bool ? isEditAdress;
-  final String ? addressId;
-  const AddAddressView({super.key,required this.isEditAdress,this.addressId});
+  final bool? isEditAdress;
+  final String? addressId;
+  const AddAddressView({super.key, required this.isEditAdress, this.addressId});
 
   @override
   State<AddAddressView> createState() => _AddAddressViewState();
@@ -30,7 +30,9 @@ class _AddAddressViewState extends State<AddAddressView> {
 
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<AddAddressController>().initState(context,widget.isEditAdress,widget.addressId);
+      context
+          .read<AddAddressController>()
+          .initState(context, widget.isEditAdress, widget.addressId);
     });
   }
 
@@ -47,7 +49,10 @@ class _AddAddressViewState extends State<AddAddressView> {
               context,
               MaterialPageRoute(
                   builder: (context) => MainScreenView(
-                      index: 4, screenName: MyDeliveryAddressView(isRefresh: false,))),
+                      index: 4,
+                      screenName: MyDeliveryAddressView(
+                        isRefresh: false,
+                      ))),
               (Route<dynamic> route) => false,
             );
           },
@@ -96,7 +101,7 @@ class _AddAddressViewState extends State<AddAddressView> {
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
                                     color: Black,
-                                    letterSpacing: .5,
+                                    // letterSpacing: .5,
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w400),
                               ),

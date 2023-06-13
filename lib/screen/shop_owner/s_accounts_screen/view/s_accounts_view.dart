@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -134,7 +135,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                                 )),
                                         (Route<dynamic> route) => false,
                                       );
-                                      // Navigator.push(
+                                      // Navigator.push(©
                                       //     context,
                                       //     MaterialPageRoute(
                                       //         builder: (context) =>
@@ -332,13 +333,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ///////////////////////
             GestureDetector(
               onTap: () {
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => SMainScreenView(
-                //           index: 4, screenName: ShopCouponsView())),
-                //   (Route<dynamic> route) => false,
-                // );
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 4, screenName: ShopCouponsView())),
+                  (Route<dynamic> route) => false,
+                );
                 // read.onShopConfigurationClicked(context);
               },
               child: Container(

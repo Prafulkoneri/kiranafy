@@ -4,8 +4,8 @@ import 'dart:developer';
 
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/coupon_view_model.dart';
 
-class CouponsForProductAndCustomerRepo {
-  Future<http.Response> couponsForProductAndCoustomer(
+class ViewCouponsDetailsRepo {
+  Future<http.Response> viewCouponsDetail(
       ViewCouponsDetailRequestModel reqModel, token) async {
     print(reqModel.toJson());
 
