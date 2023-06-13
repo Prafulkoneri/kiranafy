@@ -29,7 +29,7 @@ class SCouponsListController extends ChangeNotifier {
       DeleteCouponsReqModel(couponId: couponId.toString());
 
   Future<void> initState(
-    context,
+    context,refresh
   ) async {
     await getCouponsList(context);
     await viewCouponsDetail(couponId, context);

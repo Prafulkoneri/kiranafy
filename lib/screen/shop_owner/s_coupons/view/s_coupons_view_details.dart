@@ -21,7 +21,7 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SCouponsListController>().initState(context);
+      context.read<SCouponsListController>().initState(context,false);
     });
   }
 

@@ -20,7 +20,8 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class ShopCouponsView extends StatefulWidget {
-  const ShopCouponsView({super.key});
+  final bool ? isRefresh;
+  const ShopCouponsView({super.key,this.isRefresh});
 
   @override
   State<ShopCouponsView> createState() => _ShopCouponsViewState();
@@ -32,7 +33,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SCouponsListController>().initState(context);
+      context.read<SCouponsListController>().initState(context,widget.isRefresh);
     });
   }
 
@@ -320,8 +321,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                               index: 4,
                                                               screenName:
                                                                   ShopAddCoupons(
-                                                                isEditCoupon:
-                                                                    false,
+                                                                isEditCoupon: false,
                                                               ))),
                                                   (Route<dynamic> route) =>
                                                       false,

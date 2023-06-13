@@ -235,9 +235,12 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-check-if-coupon-code-exists";
   ///////ADD NEW COUPONS////
   static const String addNewCoupons = "${baseUrl}lsm-shop-owner-add-coupon";
-  ///////ADD NEW COUPONS////
+  ///////Coupon Detail View////
   static const String couponViewDetail =
       "${baseUrl}lsm-shop-owner-coupon-details-view";
+  ///////ADD NEW COUPONS////
+  static const String productListAsCategory =
+      "${baseUrl}sm-shop-owner-products-list-for-coupon";
   ///////ADD NEW COUPONS////
   static const String couponsDelete = "${baseUrl}lsm-shop-owner-delete-coupon";
 }

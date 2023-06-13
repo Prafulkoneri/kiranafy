@@ -5,7 +5,7 @@ import 'dart:developer';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/coupon_code_exists_model.dart';
 
 class CouponCodeExistsRepo {
-  Future<http.Response> couponCodeExists(
+  Future<http.Response> checkCouponCodeExists(
       CouponCodeExistsRequestModel reqModel, token) async {
     print(reqModel.toJson());
 

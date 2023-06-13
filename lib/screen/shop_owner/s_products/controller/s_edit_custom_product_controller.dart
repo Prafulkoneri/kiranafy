@@ -102,7 +102,7 @@ class EditCustomProductController extends ChangeNotifier {
     unitList.clear();
     productId=id;
     categoryId=catId;
-    await getCustomProductData(context);
+    // await getCustomProductData(context);
    await getCustomProductDetails(context);
     print(productId);
     // await onAddWidget(createCard,index);

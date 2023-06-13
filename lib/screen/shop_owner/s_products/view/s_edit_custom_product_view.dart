@@ -119,7 +119,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                     children: [
                       Expanded(
                         child: SDropDownField(
-                          value: watch.brandId,
+                      value: watch.brandId,
                           onChanged: (value) {
                             read.onBrandSelected(value);
                           },
@@ -433,6 +433,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                               children: [
                                 Expanded(
                                   child: PrimarySTextFormField(
+                                    textInputType: TextInputType.number,
                                     onChanged: (value){},
                                     controller: watch.valueController[index],
                                     height: 35,
@@ -467,6 +468,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                 SizedBox(width: 3.w),
                                 Expanded(
                                   child: PrimarySTextFormField(
+                                    textInputType: TextInputType.number,
                                     controller: watch.mrpController[index],
                                     height: 35,
                                     // width: 20, // titleHeader: "Shop Name",
@@ -477,6 +479,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                 SizedBox(width: 3.w),
                                 Expanded(
                                   child: PrimarySTextFormField(
+                                    textInputType: TextInputType.number,
                                     controller: watch.offerController[index],
                                     height: 35,
                                     // width: 20, // titleHeader: "Shop Name",
@@ -883,6 +886,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
           children: [
             Expanded(
               child: PrimarySTextFormField(
+                textInputType: TextInputType.number,
                 onChanged: (value){
 
                 },
@@ -918,6 +922,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
+                textInputType: TextInputType.number,
                 controller: watch.mrpCardController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",
@@ -928,6 +933,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
+
                 textInputType: TextInputType.number,
                 controller: watch.offerCardController[index],
                 height: 35,

@@ -107,10 +107,12 @@ class SDropDownField extends StatefulWidget {
   final double? hintSize;
   final double? height;
   final EdgeInsets? iconPadding;
+  final double ? titleSize;
 
   const SDropDownField(
       {Key? key,
       this.value,
+        this.titleSize,
       this.iconPadding,
       this.height,
       this.hint,
@@ -142,7 +144,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
                 widget.titleHeader ?? "",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
+                    fontSize: widget.titleSize??14.sp,
                     color: Color(0xff3A3A3A)),
               )
             : Container(),

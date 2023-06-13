@@ -9,17 +9,17 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Map extends StatefulWidget {
-  const Map({ Key? key }) : super(key: key);
+class MapView extends StatefulWidget {
+  const MapView({ Key? key }) : super(key: key);
 
   @override
-  State<Map> createState() => _MapState();
+  State<MapView> createState() => _MapViewState();
 }
 
-class _MapState extends State<Map> {
+class _MapViewState extends State<MapView> {
 
-  //get map controller to access map
-  Completer<GoogleMapController> _googleMapController = Completer();
+  //get MapView controller to access MapView
+  Completer<GoogleMapController> _googleMapViewController = Completer();
   CameraPosition? _cameraPosition;
   late LatLng _defaultLatLng;
   late LatLng _draggedLatlng;
@@ -38,10 +38,10 @@ class _MapState extends State<Map> {
     _draggedLatlng = _defaultLatLng;
     _cameraPosition = CameraPosition(
         target: _defaultLatLng,
-        zoom: 17.5 // number of map view
+        zoom: 17.5 // number of MapView view
     );
 
-    //map will redirect to my current location when loaded
+    //MapView will redirect to my current location when loaded
     _gotoUserCurrentPosition();
   }
 
@@ -62,7 +62,7 @@ class _MapState extends State<Map> {
   Widget _buildBody() {
     return Stack(
         children : [
-          _getMap(),
+          _getMapView(),
           _getCustomPin(),
           _showSearchBox()
         ]
@@ -90,10 +90,10 @@ class _MapState extends State<Map> {
         height: 48.w,
         child: Container(
           child: GooglePlaceAutoCompleteTextField(
-            textStyle: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 14.sp
-            ),
+              textStyle: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.sp
+              ),
               textEditingController: searchController,
               googleAPIKey: "AIzaSyCm27F5Jrl8b6vXkNCOotiTdnM8QeygfOY",
               inputDecoration: InputDecoration(
@@ -105,7 +105,7 @@ class _MapState extends State<Map> {
                 ),
                 prefix: Padding(
                   padding:  EdgeInsets.only(right: 10.w),
-                  child: SvgPicture.asset("assets/icons/search_map.svg"),
+                  child: SvgPicture.asset("assets/icons/search_MapView.svg"),
                 ),
                 contentPadding: EdgeInsets.only(left: 10.w),
                 fillColor: Colors.white,
@@ -117,11 +117,11 @@ class _MapState extends State<Map> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 focusedBorder:   OutlineInputBorder(
-              borderSide: BorderSide(
-              color: Color(0xffE4E4E4),
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
+                  borderSide: BorderSide(
+                    color: Color(0xffE4E4E4),
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
               debounceTime: 800, // default 600 ms,
               countries: ["in","fr"], // optional by default null is set
@@ -143,27 +143,27 @@ class _MapState extends State<Map> {
 
   }
 
-  Widget _getMap() {
+  Widget _getMapView() {
     return GoogleMap(
-      initialCameraPosition: _cameraPosition!, //initialize camera position for map
+      initialCameraPosition: _cameraPosition!, //initialize camera position for MapView
       mapType: MapType.normal,
       onCameraIdle: () {
-        //this function will trigger when user stop dragging on map
+        //this function will trigger when user stop dragging on MapView
         //every time user drag and stop it will display address
         _getAddress(_draggedLatlng);
       },
       onCameraMove: (cameraPosition) {
-        //this function will trigger when user keep dragging on map
+        //this function will trigger when user keep dragging on MapView
         //every time user drag this will get value of latlng
         _draggedLatlng = cameraPosition.target;
         print(_draggedLatlng);
         // _getAddress(_draggedLatlng);
       },
       onMapCreated: (GoogleMapController controller) {
-        //this function will trigger when map is fully loaded
-        if (!_googleMapController.isCompleted) {
-          //set controller to google map when it is fully loaded
-          _googleMapController.complete(controller);
+        //this function will trigger when MapView is fully loaded
+        if (!_googleMapViewController.isCompleted) {
+          //set controller to google MapView when it is fully loaded
+          _googleMapViewController.complete(controller);
         }
       },
     );
@@ -174,7 +174,7 @@ class _MapState extends State<Map> {
       child: Container(
         width: 61,
         height: 61,
-        child: Image.asset("assets/images/map_icon.png"),
+        child: Image.asset("assets/images/MapView_icon.png"),
       ),
     );
   }
@@ -191,7 +191,7 @@ class _MapState extends State<Map> {
     print(_draggedAddress);
   }
 
-  //get user's current location and set the map's camera to that location
+  //get user's current location and set the MapView's camera to that location
   Future _gotoUserCurrentPosition() async {
     Position currentPosition = await _determineUserCurrentPosition();
     _gotoSpecificPosition(LatLng(currentPosition.latitude, currentPosition.longitude));
@@ -199,8 +199,9 @@ class _MapState extends State<Map> {
 
   //go to specific position by latlng
   Future _gotoSpecificPosition(LatLng position) async {
-    GoogleMapController mapController = await _googleMapController.future;
-    mapController.animateCamera(CameraUpdate.newCameraPosition(
+
+    GoogleMapController MapViewController = await _googleMapViewController.future;
+    MapViewController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
             target: position,
             zoom: 17.5
