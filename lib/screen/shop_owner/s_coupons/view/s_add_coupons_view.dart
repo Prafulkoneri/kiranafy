@@ -3,12 +3,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
+
+import '../../../../widget/radio_button.dart';
 
 class ShopAddCoupons extends StatefulWidget {
   const ShopAddCoupons({super.key});
@@ -20,6 +23,7 @@ class ShopAddCoupons extends StatefulWidget {
 class _ShopAddCouponsState extends State<ShopAddCoupons> {
   @override
   Widget build(BuildContext context) {
+    var watch;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -208,6 +212,65 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                       // hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
                     ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      SecondaryRadioButton(
+                          value: "Full Order Amount",
+                          groupValue: "",
+                          //  watch.groupValue,
+                          // groupValue: watch.radioGroupValue,
+                          onChanged: (value) {
+                            // read.onRadioButtonSelected(value);
+                          },
+                          leading: ""),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        'Full Order Amount',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              // letterSpacing: .5,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SecondaryRadioButton(
+                          value: "Category & Product",
+                          groupValue: "",
+                          //  watch.groupValue,
+                          onChanged: (value) {
+                            // read.onRadioButtonSelected(value);
+                          },
+                          leading: ""),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        'Category & Product',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              letterSpacing: .5,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

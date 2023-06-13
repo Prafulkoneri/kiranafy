@@ -238,4 +238,6 @@ class Endpoint {
   ///////ADD NEW COUPONS////
   static const String couponViewDetail =
       "${baseUrl}lsm-shop-owner-coupon-details-view";
+  ///////ADD NEW COUPONS////
+  static const String couponsDelete = "${baseUrl}lsm-shop-owner-delete-coupon";
 }
