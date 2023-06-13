@@ -1,22 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/cart/controller/cart_detail_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:provider/provider.dart';
 
-class CartDetailView extends StatelessWidget {
-  const CartDetailView({super.key});
+class CartDetailView extends StatefulWidget {
+  final String? shopId;
+  final String? cartId;
+  const CartDetailView({super.key, this.cartId, this.shopId});
+
+  @override
+  State<CartDetailView> createState() => _CartDetailViewState();
+}
+
+class _CartDetailViewState extends State<CartDetailView> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<CartDetailController>()
+          .initState(context, widget.cartId, widget.shopId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<CartDetailController>();
+    final read = context.read<CartDetailController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             title: "Cart Details",
             action: SvgPicture.asset("assets/images/delete.svg"),
@@ -30,8 +53,8 @@ class CartDetailView extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15.w, top: 20.w),
+              Container(
+                padding: EdgeInsets.only(left: 17.w, top: 20.w),
                 child: Text(
                   "New Balaji Trading Company",
                   style: GoogleFonts.dmSans(
@@ -46,47 +69,51 @@ class CartDetailView extends StatelessWidget {
               SizedBox(
                 height: 7.h,
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 12.w, bottom: 15.w),
-                    child: SvgPicture.asset(
-                      'assets/images/location2.svg',
-                      // width: 15.w,
-                      // height: 19.h,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 8.w, bottom: 10.w),
-                    child: Text(
-                      "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            letterSpacing: .5,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: 45.h, right: 11.w, bottom: 12.w),
-                    child: Row(
+              Container(
+                padding: EdgeInsets.only(
+                  left: 12.w,
+                ),
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
                         SvgPicture.asset(
-                          'assets/images/call.svg',
+                          'assets/images/location2.svg',
+                          // width: 15.w,
+                          // height: 19.h,
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8,
                         ),
-                        SvgPicture.asset(
-                          'assets/images/fvrt.svg',
+                        Text(
+                          "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                letterSpacing: .5,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        SizedBox(width: 45.w),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/call.svg',
+                            ),
+                            SizedBox(
+                              width: 12.w,
+                            ),
+                            SvgPicture.asset(
+                              'assets/images/fvrt.svg',
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Divider(thickness: 1, color: grey2),
               Container(
@@ -98,7 +125,7 @@ class CartDetailView extends StatelessWidget {
                     physics: BouncingScrollPhysics(),
                     // physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 5,
+                    itemCount: 1,
                     itemBuilder: (BuildContext, index) {
                       return GestureDetector(
                         onTap: () {
@@ -115,12 +142,6 @@ class CartDetailView extends StatelessWidget {
                                   top: index == 0 ? 14.w : 24.w,
                                   right: 17.w),
                               child: Container(
-                                // decoration: BoxDecoration(
-                                // border: Border.all(
-                                //     color: Colors.black.withOpacity(0.07),
-                                //     width: 1),
-
-                                //
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
@@ -135,39 +156,50 @@ class CartDetailView extends StatelessWidget {
                                         spreadRadius: 0),
                                   ],
                                 ),
-                                height: 95.h,
-                                width: 355.w,
-                                child: Padding(
-                                  padding: EdgeInsets.all(
-                                    12.w,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        child: Image.asset(
-                                          'assets/images/sprite.png',
-                                          width: 39.w,
-                                          height: 92.h,
+                                // height: 95.h,
+                                // width: 355.w,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.w),
+                                      child: Image.asset(
+                                        'assets/images/sprite.png',
+                                        width: 39.w,
+                                        height: 92.h,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
+                                    Container(
+                                      height: 70.h,
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                        left: BorderSide(
+                                          //                   <--- right side
+                                          color: Color(0xffE0E0E0),
+                                          // width: 1.0,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 20.w,
-                                      ),
-                                      VerticalDivider(
-                                        color: lightgrey,
-                                        thickness: 1,
-                                      ),
-                                      SizedBox(
-                                        width: 17.w,
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
+                                      )),
+                                    ),
+                                    // VerticalDivider(
+                                    //   color: lightgrey,
+                                    //   thickness: 1,
+                                    // ),
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            padding:
+                                                EdgeInsets.only(right: 5.w),
+                                            child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
@@ -215,22 +247,26 @@ class CartDetailView extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 5.w,
-                                            ),
-                                            Text("500mg",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Grey,
-                                                      // letterSpacing: .5,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                )),
-                                            SizedBox(
-                                              height: 9.48.w,
-                                            ),
-                                            Row(
+                                          ),
+                                          SizedBox(
+                                            height: 5.w,
+                                          ),
+                                          Text("500mg",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Grey,
+                                                    // letterSpacing: .5,
+                                                    fontSize: 14.sp,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              )),
+                                          SizedBox(
+                                            height: 9.48.w,
+                                          ),
+                                          Container(
+                                            padding:
+                                                EdgeInsets.only(right: 5.w),
+                                            child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
@@ -318,11 +354,11 @@ class CartDetailView extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 // decoration: BoxDecoration(
                                 //   // color: Colors.blueAccent,

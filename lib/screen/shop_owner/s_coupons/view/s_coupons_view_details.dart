@@ -21,7 +21,7 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SCouponsListController>().initState(context,false);
+      context.read<SCouponsListController>().initState(context, false);
     });
   }
 
@@ -127,7 +127,7 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                       child: Row(
                         children: [
                           SizedBox(
-                            width: 113.w,
+                            // width: 113.w,
                             height: 34.h,
                             child: ElevatedButton(
                               // style: ElevatedButton.styleFrom(
@@ -214,7 +214,7 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                           width: 6.27,
                         ),
                         Text(
-                          "Lorem ipsum dolor sit amet, consectetur",
+                          "${watch.couponViewData?.couponTermsAndConditions}",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
                                 height: 1.5,
@@ -227,130 +227,130 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: 17.75.w, top: 8.w, right: 13.w),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/checked.svg',
-                          width: 17.w,
-                          height: 17.h,
-                        ),
-                        SizedBox(
-                          width: 6.27,
-                        ),
-                        Flexible(
-                          child: Text(
-                            maxLines: 2,
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sit nunc, netus ac vulputate sed",
-                            textAlign: TextAlign.justify,
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  height: 1.5,
-                                  color: black,
-                                  letterSpacing: .05,
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: 17.75.w, top: 8.w, bottom: 8.w),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/checked.svg',
-                          width: 17.w,
-                          height: 17.h,
-                        ),
-                        SizedBox(
-                          width: 6.27,
-                        ),
-                        Text(
-                          "Lorem ipsum dolor sit amet, consectetur",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: black,
-                                height: 1.5,
-                                letterSpacing: .5,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: 17.75.w, top: 8.w, bottom: 8.w),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/checked.svg',
-                          width: 17.w,
-                          height: 17.h,
-                        ),
-                        SizedBox(
-                          width: 6.27,
-                        ),
-                        Text(
-                          "Lorem ipsum dolor sit amet, consectetur",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: black,
-                                height: 1.5,
-                                letterSpacing: .5,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: 17.75.w, top: 8.w, right: 13.w),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 10.w),
-                          child: SvgPicture.asset(
-                            'assets/images/checked.svg',
-                            width: 17.w,
-                            height: 17.h,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 6.27,
-                        ),
-                        Flexible(
-                          child: Text(
-                            softWrap: true,
-                            maxLines: 3,
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sit nunc, netus ac vulputate sed",
-                            textAlign: TextAlign.justify,
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: black,
-                                  height: 1.5,
+                  // Padding(
+                  //   padding:
+                  //       EdgeInsets.only(left: 17.75.w, top: 8.w, right: 13.w),
+                  //   child: Row(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       SvgPicture.asset(
+                  //         'assets/images/checked.svg',
+                  //         width: 17.w,
+                  //         height: 17.h,
+                  //       ),
+                  //       SizedBox(
+                  //         width: 6.27,
+                  //       ),
+                  //       Flexible(
+                  //         child: Text(
+                  //           maxLines: 2,
+                  //           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sit nunc, netus ac vulputate sed",
+                  //           textAlign: TextAlign.justify,
+                  //           style: GoogleFonts.dmSans(
+                  //             textStyle: TextStyle(
+                  //                 height: 1.5,
+                  //                 color: black,
+                  //                 letterSpacing: .05,
+                  //                 overflow: TextOverflow.ellipsis,
+                  //                 fontSize: 12.sp,
+                  //                 fontWeight: FontWeight.w400),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding:
+                  //       EdgeInsets.only(left: 17.75.w, top: 8.w, bottom: 8.w),
+                  //   child: Row(
+                  //     children: [
+                  //       SvgPicture.asset(
+                  //         'assets/images/checked.svg',
+                  //         width: 17.w,
+                  //         height: 17.h,
+                  //       ),
+                  //       SizedBox(
+                  //         width: 6.27,
+                  //       ),
+                  //       Text(
+                  //         "Lorem ipsum dolor sit amet, consectetur",
+                  //         style: GoogleFonts.dmSans(
+                  //           textStyle: TextStyle(
+                  //               color: black,
+                  //               height: 1.5,
+                  //               letterSpacing: .5,
+                  //               fontSize: 12.sp,
+                  //               fontWeight: FontWeight.w400),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding:
+                  //       EdgeInsets.only(left: 17.75.w, top: 8.w, bottom: 8.w),
+                  //   child: Row(
+                  //     children: [
+                  //       SvgPicture.asset(
+                  //         'assets/images/checked.svg',
+                  //         width: 17.w,
+                  //         height: 17.h,
+                  //       ),
+                  //       SizedBox(
+                  //         width: 6.27,
+                  //       ),
+                  //       Text(
+                  //         "Lorem ipsum dolor sit amet, consectetur",
+                  //         style: GoogleFonts.dmSans(
+                  //           textStyle: TextStyle(
+                  //               color: black,
+                  //               height: 1.5,
+                  //               letterSpacing: .5,
+                  //               fontSize: 12.sp,
+                  //               fontWeight: FontWeight.w400),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding:
+                  //       EdgeInsets.only(left: 17.75.w, top: 8.w, right: 13.w),
+                  //   child: Row(
+                  //     children: [
+                  //       Padding(
+                  //         padding: EdgeInsets.only(bottom: 10.w),
+                  //         child: SvgPicture.asset(
+                  //           'assets/images/checked.svg',
+                  //           width: 17.w,
+                  //           height: 17.h,
+                  //         ),
+                  //       ),
+                  //       SizedBox(
+                  //         width: 6.27,
+                  //       ),
+                  //       Flexible(
+                  //         child: Text(
+                  //           softWrap: true,
+                  //           maxLines: 3,
+                  //           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sit nunc, netus ac vulputate sed",
+                  //           textAlign: TextAlign.justify,
+                  //           style: GoogleFonts.dmSans(
+                  //             textStyle: TextStyle(
+                  //                 color: black,
+                  //                 height: 1.5,
 
-                                  // letterSpacing: .05,
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  //                 // letterSpacing: .05,
+                  //                 overflow: TextOverflow.ellipsis,
+                  //                 fontSize: 12.sp,
+                  //                 fontWeight: FontWeight.w400),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ],

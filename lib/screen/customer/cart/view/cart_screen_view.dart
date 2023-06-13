@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -6,6 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/cart/controller/cart_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
 import 'cart_detail_view.dart';
 import 'empty_cart_view.dart';
@@ -19,73 +25,46 @@ class CartScreenView extends StatefulWidget {
 
 class _CartScreenViewState extends State<CartScreenView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<CartListController>().initState(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final watch = context.watch<CartListController>();
+    final read = context.read<CartListController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          systemNavigationBarIconBrightness: Brightness.dark,
-          // Status bar color
-          statusBarColor: kstatusbar,
-          // Status bar brightness (optional)
-          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-          statusBarBrightness: Brightness.dark, // For iOS (dark icons)
-        ),
-        toolbarHeight: 65,
-        // backgroundColor: kappbar,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text(
-          "Shop Cart",
-          style: GoogleFonts.dmSans(
-            textStyle: TextStyle(
-                color: Black,
-                letterSpacing: .5,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.w),
+        child: PrimaryAppBar(
+          onBackBtnPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainScreenView(
+                        index: 2,
+                        // screenName: ProfileScreenView(),
+                      )),
+              (Route<dynamic> route) => false,
+            );
+          },
+          title: "Shop Cart",
+          action: SvgPicture.asset(
+            'assets/images/delete.svg',
+            width: 20.w,
+            height: 18.h,
           ),
+          onActionTap: () async {
+            // await read.validateField(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const EmptyCartView()),
+            );
+          },
         ),
-        centerTitle: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(40),
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            gradient: LinearGradient(
-                end: Alignment.topCenter,
-                begin: Alignment.bottomCenter,
-                colors: <Color>[
-                  kstatusbar.withOpacity(0.55),
-                  kstatusbar.withOpacity(0.98),
-                ]),
-          ),
-        ),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(
-              right: 20.w,
-            ),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const EmptyCartView()),
-                );
-              },
-              child: SvgPicture.asset(
-                'assets/images/delete.svg',
-                width: 20.w,
-                height: 18.h,
-              ),
-            ),
-          ),
-        ],
       ),
       backgroundColor: backgroundColor,
       body: SizedBox(
@@ -96,8 +75,9 @@ class _CartScreenViewState extends State<CartScreenView> {
                 // physics: NeverScrollableScrollPhysics(),
                 physics: AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 2,
+                itemCount: watch.cartList?.length ?? 0,
                 itemBuilder: (BuildContext, index) {
+                  final element = watch.cartList?[index];
                   return Padding(
                     padding:
                         EdgeInsets.only(left: 20.w, top: 20.w, right: 16.w),
@@ -114,7 +94,8 @@ class _CartScreenViewState extends State<CartScreenView> {
                             Padding(
                               padding: EdgeInsets.only(left: 15.w, top: 13.w),
                               child: Text(
-                                "New Balaji Trading Company",
+                                "${element?.shopName}",
+                                // "New Balaji Trading Company",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black1,
@@ -139,7 +120,8 @@ class _CartScreenViewState extends State<CartScreenView> {
                                       left: 8.w,
                                     ),
                                     child: Text(
-                                      "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                      "${element?.shopAddress}\n ${element?.cityName} ${element?.shopPincode}",
+                                      // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: Black,
@@ -160,7 +142,8 @@ class _CartScreenViewState extends State<CartScreenView> {
                             Padding(
                               padding: EdgeInsets.only(left: 14.w, top: 6.w),
                               child: Text(
-                                "4 Items",
+                                "${element?.itemCount} Items",
+                                // "4 Items",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black,
@@ -178,7 +161,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "INR  132",
+                                    "${element?.totalAmount}",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           // height: 1.5,
@@ -215,7 +198,12 @@ class _CartScreenViewState extends State<CartScreenView> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  CartDetailView()),
+                                                  CartDetailView(
+                                                    cartId:
+                                                        element?.id.toString(),
+                                                    shopId: element?.shopId
+                                                        .toString(),
+                                                  )),
                                         );
                                       },
                                       child: Text(
@@ -228,8 +216,6 @@ class _CartScreenViewState extends State<CartScreenView> {
                                               fontWeight: FontWeight.w700),
                                         ),
                                       ),
-
-                                      //
                                     ),
                                   ),
                                 ],

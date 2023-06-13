@@ -17,17 +17,17 @@ class EditCouponRequest {
 class EditCouponsResModel {
   int? status;
   String? message;
-  EditCouponsData? editCoupons;
+  EditCouponsData? editCouponsData;
 
   EditCouponsResModel({
     required this.status,
     required this.message,
-    required this.editCoupons,
+    required this.editCouponsData,
   });
   EditCouponsResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    editCoupons =
+    editCouponsData =
         json['data'] != null ? EditCouponsData.fromJson(json['data']) : null;
   }
 }
