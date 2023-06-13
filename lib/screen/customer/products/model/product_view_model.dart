@@ -175,9 +175,11 @@ class SimilarProduct {
   String? status;
   String? unit;
   String? productType;
+  String? shopId;
 
   SimilarProduct(
       {required this.id,
+      required this.shopId,
       required this.productName,
       required this.productImagePath,
       required this.productImageName,
@@ -203,5 +205,6 @@ class SimilarProduct {
     status = json["status"];
     unit = json["unit"];
     productType = json['product_type'];
+    shopId = json['shop_id'];
   }
 }

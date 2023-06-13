@@ -45,6 +45,7 @@ class AllNearShopsAsPerPincode extends ChangeNotifier {
     allNearShopRepo
         .getAllNearShop(pref.getString("successToken"))
         .then((response) {
+      print("Shop List");
       print(response.body);
       final result = AllNearShopsResModel.fromJson(jsonDecode(response.body));
       print(response.body);

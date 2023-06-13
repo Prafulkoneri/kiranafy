@@ -9,7 +9,7 @@ class Endpoint {
   // Check Mobile Number Exist
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';
-  // Get Country List
+  // Get Country
   static const String getCountryList = '${baseUrl}lsm-country-list';
   //Get State List
   static const String getStateList = '${baseUrl}lsm-state-list';
@@ -92,7 +92,8 @@ class Endpoint {
   static const String ShopDashBoard = "${baseUrl}lsm-shop-owner-dashboard";
 
   ///Edit Custom Product
-  static const String editCustomProduct = "${baseUrl}lsm-shop-owner-edit-custom-product";
+  static const String editCustomProduct =
+      "${baseUrl}lsm-shop-owner-edit-custom-product";
 
 ///////////////////////////////Customer Screen Apis///////////////////
 //OnBoarding Screen
@@ -223,4 +224,18 @@ class Endpoint {
   ////////Update Delivery Address  ////
   static const String UpdateDeliveryAddress =
       "${baseUrl}lsm-customer-update-delivery-address";
+  ////////Shop Owner Coupons for product and category////
+  static const String shopOwnerCouponsForProductlist =
+      "${baseUrl}lsm-shop-owner-products-list-for-coupon";
+  ////////Shop Owner Coupons for product and category////
+  static const String allCouponsList = "${baseUrl}lsm-shop-owner-coupon-list";
+
+////////Coupon Code Exists////
+  static const String couponCodeExists =
+      "${baseUrl}lsm-shop-owner-check-if-coupon-code-exists";
+  ///////ADD NEW COUPONS////
+  static const String addNewCoupons = "${baseUrl}lsm-shop-owner-add-coupon";
+  ///////ADD NEW COUPONS////
+  static const String couponViewDetail =
+      "${baseUrl}lsm-shop-owner-coupon-details-view";
 }

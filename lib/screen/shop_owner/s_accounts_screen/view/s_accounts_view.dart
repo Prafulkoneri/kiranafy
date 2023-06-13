@@ -338,13 +338,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ///////////////////////
             GestureDetector(
               onTap: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SMainScreenView(
-                          index: 4, screenName: ShopCouponsView())),
-                  (Route<dynamic> route) => false,
-                );
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => SMainScreenView(
+                //           index: 4, screenName: ShopCouponsView())),
+                //   (Route<dynamic> route) => false,
+                // );
                 // read.onShopConfigurationClicked(context);
               },
               child: Container(
