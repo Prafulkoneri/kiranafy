@@ -14,7 +14,8 @@ import 'package:local_supper_market/widget/textfield.dart';
 import '../../../../widget/radio_button.dart';
 
 class ShopAddCoupons extends StatefulWidget {
-  const ShopAddCoupons({super.key});
+  final bool? isEditCoupon;
+  const ShopAddCoupons({super.key, this.isEditCoupon});
 
   @override
   State<ShopAddCoupons> createState() => _ShopAddCouponsState();
@@ -27,7 +28,10 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
-        child: PrimaryAppBar(title: "Add Coupon"),
+        child: PrimaryAppBar(
+          // title: "Add Coupon"
+          title: widget.isEditCoupon == false ? "Edit Coupon" : "Add Coupons",
+        ),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
