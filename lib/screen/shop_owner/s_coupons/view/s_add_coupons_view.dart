@@ -240,6 +240,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.discountPercentageController,
                       // hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
                     ),
@@ -249,6 +250,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                   ),
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.minOrderAmountController,
                       // hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
                     ),
@@ -292,6 +294,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.maxDiscountAmountController,
                       hintFontSize: 15.sp,
                     ),
                   ),
@@ -318,7 +321,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                   Row(
                     children: [
                       SecondaryRadioButton(
-                          value: "FullOrderAmount",
+                          value: "full_order_amount",
                           groupValue:read.groupValue,
                           onChanged: (value) {
                             read.onRadioBtnToggled(value);
@@ -342,7 +345,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                   Row(
                     children: [
                       SecondaryRadioButton(
-                          value: "CategoryProduct",
+                          value: "category_and_product",
                           groupValue:watch.groupValue,
                           onChanged: (value) {
                             read.onRadioBtnToggled(value);
@@ -366,7 +369,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 ],
               ),
               Visibility(
-                visible: watch.groupValue=="FullOrderAmount"?false:true,
+                visible: watch.groupValue=="full_order_amount"?false:true,
                 child: Column(
                   children: [
                     SizedBox(
@@ -436,6 +439,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 height: 5.h,
               ),
               PrimarySTextFormField(
+                controller: watch.termsAndConditionController,
                 height: 150.w,
                 maxLines: 10,
                 // hintText: "Address",/
@@ -448,7 +452,9 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 height: 50.w,
                 text: "Submit",
                 color: Color(0xff4689EC),
-                onTap: () {},
+                onTap: () {
+                  read.uploadCouponDetails(context);
+                },
               ),
               SizedBox(
                 height: 90.h,

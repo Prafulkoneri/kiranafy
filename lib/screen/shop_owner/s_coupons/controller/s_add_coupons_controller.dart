@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/add_coupons_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/coupon_code_exists_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/product_as_per_category_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/add_coupons_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/coupon_code_exists_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/coupon_view_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/product_as_per_category_repo.dart';
@@ -17,8 +18,8 @@ class SAddCouponsController extends ChangeNotifier{
   TextEditingController fromDateController = TextEditingController();
   TextEditingController toDateController = TextEditingController();
   bool isLoading=true;
-  String groupValue="FullOrderAmount";
-  String catergoryId="";
+  String groupValue="full_order_amount";
+  String categoryId="";
   String productId="";
   List<CategoryData>? categoriesList;
   List<ProductData>? productList;
@@ -30,6 +31,9 @@ class SAddCouponsController extends ChangeNotifier{
   TextEditingController termsAndConditionController =TextEditingController();
   ProductListAsPerCategoryRepo productListAsPerCategoryRepo=ProductListAsPerCategoryRepo();
   CouponCodeExistsRepo couponCodeExistsRepo=CouponCodeExistsRepo();
+  AddCouponsRepo addCouponsRepo=AddCouponsRepo();
+  String productType="";
+
   Future<void> initState(context)async{
     await getCategoriesList(context);
   }
@@ -42,12 +46,22 @@ class SAddCouponsController extends ChangeNotifier{
   }
 
   void onCategorySelect(value,context) async{
-  catergoryId=value;
+    categoryId=value;
   await getProductList(context);
     notifyListeners();
   }
   void onProductSelect(value,context) async{
     productId=value;
+    int length=productList?.length??0;
+    print(productId);
+    for(int i=0;i<length;i++){
+      print(productList?[i].id);
+      if(productList?[i].id.toString()==value.toString()){
+        print("helloooooo");
+        productType=productList?[i].productType??"";
+      }
+    }
+    print(productType);
     notifyListeners();
   }
 
@@ -103,7 +117,7 @@ class SAddCouponsController extends ChangeNotifier{
   }
 
   ProductAsPerCategoryReqModel get productAsPerCategoryReqModel =>ProductAsPerCategoryReqModel(
-    categoryId: catergoryId.toString(),
+    categoryId: categoryId.toString(),
   );
 
   Future<void> getProductList(context) async {
@@ -144,8 +158,7 @@ class SAddCouponsController extends ChangeNotifier{
     couponCodeExistsRepo.checkCouponCodeExists(couponCodeExistsRequestModel,pref.getString("successToken")).then((response) {
       print(response.statusCode);
       log("response.body${response.body}");
-      final result =
-      CouponCodeExistsResModel.fromJson(jsonDecode(response.body));
+      final result = CouponCodeExistsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -169,11 +182,86 @@ class SAddCouponsController extends ChangeNotifier{
   AddCouponsRequestModel get addCouponsRequestModel =>AddCouponsRequestModel(
     couponFromDate: fromDateController.text,
     couponToDate: toDateController.text,
-    shopOwnerCategoryId: catergoryId
+    shopOwnerCategoryId: groupValue=="full_order_amount"?"":categoryId,
+      couponCode: couponCodeController.text,
+    couponDiscountMaxAmount: maxDiscountAmountController.text,
+    couponDiscountPercentage: discountPercentageController.text,
+    couponMinimumOrderAmount: minOrderAmountController.text,
+    couponsTermsAndCondition: termsAndConditionController.text,
+    couponType: groupValue,
+    productId: groupValue=="full_order_amount"?"":productId,
+    productType:  groupValue=="full_order_amount"?"":productType,
   );
 
   Future<void> uploadCouponDetails(context)async{
+    if(fromDateController.text==""){
+      Utils.showPrimarySnackbar(context,"Enter From Date",
+          type: SnackType.error);
+      return;
+    }
+    if(toDateController.text==""){
+      Utils.showPrimarySnackbar(context,"Enter To Date",
+          type: SnackType.error);
+      return;
+    }
+    if(discountPercentageController.text==""){
+      Utils.showPrimarySnackbar(context,"Enter Discount Percentage",
+          type: SnackType.error);
+      return;
+    }
+    if(minOrderAmountController.text==""){
+      Utils.showPrimarySnackbar(context,"Enter Minimum Order Amount",
+          type: SnackType.error);
+      return;
+    }
+    if(maxDiscountAmountController.text==""){
+      Utils.showPrimarySnackbar(context,"Enter Max Discount Amount",
+          type: SnackType.error);
+      return;
+    }
+    if(couponCodeController.text==""){
+      Utils.showPrimarySnackbar(context,"Enter Coupon Code",
+          type: SnackType.error);
+      return;
+    }
+   if(groupValue=="category_and_product"){
+     if(categoryId==""){
+       Utils.showPrimarySnackbar(context,"Enter CategoryId",
+           type: SnackType.error);
+       return;
+     }
+   }
+if(termsAndConditionController.text==""){
+    Utils.showPrimarySnackbar(context, "Enter Terms And Condition",
+        type: SnackType.error);
+    return;
 
+}
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    addCouponsRepo.addNewCoupons(addCouponsRequestModel,pref.getString("successToken")).then((response) {
+      print(response.statusCode);
+      log("response.body${response.body}");
+      final result =
+      AddCouponsResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 
 
