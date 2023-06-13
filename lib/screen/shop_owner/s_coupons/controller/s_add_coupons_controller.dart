@@ -316,7 +316,7 @@ if(termsAndConditionController.text==""){
       final result =
       EditCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        details=result.editCoupons?.couponDetails;
+        details=result.editCouponsData?.couponDetails;
         // final details=result.editCoupons?.couponDetails;
         fromDateController.text=details?.couponFromDate??"";
         toDateController.text=details?.couponToDate??"";
@@ -327,11 +327,11 @@ if(termsAndConditionController.text==""){
         termsAndConditionController.text=details?.couponTermsAndConditions.toString()??"";
         groupValue=details?.couponType??"";
 
-        categoriesList=result.editCoupons?.categoryList;
+        categoriesList=result.editCouponsData?.categoryList;
         print("99999999");
-        print(result.editCoupons?.categoryList?[0].categoryName);
+        print(result.editCouponsData?.categoryList?[0].categoryName);
         print("99999999");
-        productList=result.editCoupons?.allProductsList;
+        productList=result.editCouponsData?.allProductsList;
         categoryId=details?.shopOwnerCategoryId.toString()??"";
         productId=details?.shopOwnerProductId.toString()??"";
         showLoader(false);
