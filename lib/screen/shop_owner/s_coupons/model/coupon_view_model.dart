@@ -18,7 +18,7 @@ class ViewCouponsDetailRequestModel {
 class ViewCoupnDetailResModel {
   int? status;
   String? message;
-  Data? data;
+  CouponViewData? data;
   String? shopName;
 
   ViewCoupnDetailResModel({
@@ -30,14 +30,14 @@ class ViewCoupnDetailResModel {
   ViewCoupnDetailResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? CouponViewData.fromJson(json['data']) : null;
     shopName = json["shop_name"];
   }
 }
 
-class Data {
+class CouponViewData {
   int? id;
-  DateTime? couponFromDate;
+  String? couponFromDate;
   String? couponToDate;
   String? couponDiscountPercentage;
   int? couponMinimumOrderAmount;
@@ -47,7 +47,7 @@ class Data {
   String? couponTermsAndConditions;
   String? status;
 
-  Data({
+  CouponViewData({
     required this.id,
     required this.couponFromDate,
     required this.couponToDate,
@@ -59,7 +59,7 @@ class Data {
     required this.couponTermsAndConditions,
     required this.status,
   });
-  Data.fromJson(Map<String, dynamic> json) {
+  CouponViewData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     couponFromDate = json["coupon_from_date"];
     couponToDate = json["coupon_to_date"];

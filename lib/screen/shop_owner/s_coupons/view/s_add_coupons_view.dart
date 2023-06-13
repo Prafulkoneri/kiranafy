@@ -20,7 +20,8 @@ import 'package:provider/provider.dart';
 import '../../../../widget/radio_button.dart';
 
 class ShopAddCoupons extends StatefulWidget {
-  const ShopAddCoupons({super.key});
+  final bool ? isEditCoupon;
+  const ShopAddCoupons({super.key,this.isEditCoupon});
 
   @override
   State<ShopAddCoupons> createState() => _ShopAddCouponsState();
@@ -44,7 +45,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
-        child: PrimaryAppBar(title: "Add Coupon",onBackBtnPressed: (){
+        child: PrimaryAppBar(title: widget.isEditCoupon==false?"Add Coupon":"Edit Coupon",onBackBtnPressed: (){
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
