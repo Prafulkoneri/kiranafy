@@ -31,9 +31,10 @@ class SCouponsListController extends ChangeNotifier {
   Future<void> initState(
     context,refresh
   ) async {
-    await getCouponsList(context);
-    await viewCouponsDetail(couponId, context);
-  }
+    if(refresh) {
+      await getCouponsList(context);
+    }
+    }
 
   showLoader(value) {
     isLoading = value;

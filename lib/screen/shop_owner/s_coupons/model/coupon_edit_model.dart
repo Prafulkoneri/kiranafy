@@ -1,7 +1,16 @@
-class EditCouponRequest {
+
+
+
+
+
+
+import 'package:local_supper_market/screen/shop_owner/s_coupons/model/product_as_per_category_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_categories_list_model.dart';
+
+class EditCouponRequestModel {
   String? couponId;
 
-  EditCouponRequest({
+  EditCouponRequestModel({
     this.couponId,
   });
 
@@ -34,8 +43,8 @@ class EditCouponsResModel {
 
 class EditCouponsData {
   CouponDetails? couponDetails;
-  List<CategoryList>? categoryList;
-  List<AllProductsList>? allProductsList;
+  List<CategoryData> ? categoryList;
+  List<ProductData>? allProductsList;
 
   EditCouponsData({
     required this.couponDetails,
@@ -47,52 +56,22 @@ class EditCouponsData {
         ? CouponDetails.fromJson(json['coupon_details'])
         : null;
     if (json["category_list"] != null) {
-      categoryList = <CategoryList>[];
+      categoryList = <CategoryData>[];
       json["category_list"].forEach((v) {
-        categoryList!.add(CategoryList.fromJson(v));
+        categoryList!.add(CategoryData.fromJson(v));
       });
     }
 
     ///
     if (json["all_products_list"] != null) {
-      allProductsList = <AllProductsList>[];
+      allProductsList = <ProductData>[];
       json["all_products_list"].forEach((v) {
-        allProductsList!.add(AllProductsList.fromJson(v));
+        allProductsList!.add(ProductData.fromJson(v));
       });
     }
   }
 }
 
-class AllProductsList {
-  int? id;
-  String? productName;
-  String? productType;
-
-  AllProductsList({
-    required this.id,
-    required this.productName,
-    required this.productType,
-  });
-  AllProductsList.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    productName = json["product_name"];
-    productType = json["product_type"];
-  }
-}
-
-class CategoryList {
-  int? id;
-  String? categoryName;
-
-  CategoryList({
-    required this.id,
-    required this.categoryName,
-  });
-  CategoryList.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    categoryName = json["category_name"];
-  }
-}
 
 class CouponDetails {
   int? id;
@@ -103,9 +82,9 @@ class CouponDetails {
   int? couponDiscountMaxAmount;
   String? couponCode;
   String? couponType;
-  int? shopOwnerCategoryId;
+  String? shopOwnerCategoryId;
   String? shopOwnerProductType;
-  int? shopOwnerProductId;
+  String? shopOwnerProductId;
   String? couponTermsAndConditions;
 
   CouponDetails({
@@ -137,3 +116,5 @@ class CouponDetails {
     couponTermsAndConditions = json["coupon_terms_and_conditions"];
   }
 }
+
+

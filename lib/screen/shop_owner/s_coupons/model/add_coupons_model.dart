@@ -8,6 +8,8 @@ class AddCouponsRequestModel {
   String? couponType;
   String? shopOwnerCategoryId;
   String? couponsTermsAndCondition;
+  String ? productId;
+  String ? productType;
 
   AddCouponsRequestModel({
     this.couponFromDate,
@@ -19,6 +21,8 @@ class AddCouponsRequestModel {
     this.couponType,
     this.shopOwnerCategoryId,
     this.couponsTermsAndCondition,
+    this.productId,
+    this.productType,
   });
 
   Map<String, dynamic> toJson() {
@@ -32,6 +36,8 @@ class AddCouponsRequestModel {
     data["coupon_type"] = couponType;
     data["shop_owner_category_id"] = shopOwnerCategoryId;
     data["coupon_terms_and_conditions"] = couponsTermsAndCondition;
+    data["shop_owner_product_id"] = productId;
+    data["shop_owner_product_type"] = productType;
     return data;
   }
 }

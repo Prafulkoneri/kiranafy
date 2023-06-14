@@ -4,9 +4,9 @@ import 'dart:developer';
 
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/coupons_update_model.dart';
 
-class UpdateCouponsRepo {
-  Future<http.Response> updateCoupons(
-      UpdateCouponReqModel reqModel, token) async {
+class UpdateEditCouponsRepo {
+  Future<http.Response> updateEditedCoupons(
+      UpdateEditCouponReqModel reqModel, token) async {
     print(reqModel.toJson());
 
     print(Uri.parse(Endpoint.CouponsUpdate));

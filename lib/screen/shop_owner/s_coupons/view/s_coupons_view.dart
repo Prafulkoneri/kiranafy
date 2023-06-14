@@ -64,12 +64,15 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 4, screenName: ShopAddCoupons())),
+                        index: 4, screenName: SAddCouponsView(isEditCoupon: false,))),
                 (Route<dynamic> route) => false,
               );
             }),
       ),
-      body: Column(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      Column(
         children: [
           Expanded(
               child: SingleChildScrollView(
@@ -320,8 +323,9 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                           SMainScreenView(
                                                               index: 4,
                                                               screenName:
-                                                                  ShopAddCoupons(
-                                                                isEditCoupon: false,
+                                                              SAddCouponsView(
+                                                                isEditCoupon: true,
+                                                                couponId: element?.id.toString(),
                                                               ))),
                                                   (Route<dynamic> route) =>
                                                       false,

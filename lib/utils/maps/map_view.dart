@@ -48,7 +48,9 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildBody(),
+      body: Container(
+          margin: EdgeInsets.only(bottom: 100.w),
+          child: _buildBody()),
       //get a float button to click and go to current location
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -172,9 +174,9 @@ class _MapViewState extends State<MapView> {
   Widget _getCustomPin() {
     return Center(
       child: Container(
-        width: 61,
-        height: 61,
-        child: Image.asset("assets/images/MapView_icon.png"),
+        width: 61.w,
+        height: 61.w,
+        child: Image.asset("assets/images/map_marker.png"),
       ),
     );
   }

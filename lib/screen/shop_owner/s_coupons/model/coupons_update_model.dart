@@ -1,4 +1,4 @@
-class UpdateCouponReqModel {
+class UpdateEditCouponReqModel {
   String? couponId;
   String? couponFromDate;
   String? couponToDate;
@@ -9,8 +9,11 @@ class UpdateCouponReqModel {
   String? couponType;
   String? shopOwnerCategoryId;
   String? couponsTermsAndCondition;
+  String? productId;
+  String? productType;
 
-  UpdateCouponReqModel({
+
+  UpdateEditCouponReqModel({
     this.couponId,
     this.couponFromDate,
     this.couponToDate,
@@ -21,6 +24,8 @@ class UpdateCouponReqModel {
     this.couponType,
     this.shopOwnerCategoryId,
     this.couponsTermsAndCondition,
+    this.productId,
+    this.productType,
   });
 
   Map<String, dynamic> toJson() {
@@ -35,20 +40,22 @@ class UpdateCouponReqModel {
     data["coupon_type"] = couponType; //
     data["shop_owner_category_id"] = shopOwnerCategoryId; //
     data["coupon_terms_and_conditions"] = couponsTermsAndCondition; //
+    data["shop_owner_product_id"] = productId;
+    data["shop_owner_product_type"] = productType;
     return data;
   }
 }
 
 ////////ResPonse Model/////////////////
-class UpdateCouponsResModel {
+class UpdateEditCouponsResModel {
   int? status;
   String? message;
 
-  UpdateCouponsResModel({
+  UpdateEditCouponsResModel({
     required this.status,
     required this.message,
   });
-  UpdateCouponsResModel.fromJson(Map<String, dynamic> json) {
+  UpdateEditCouponsResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
   }

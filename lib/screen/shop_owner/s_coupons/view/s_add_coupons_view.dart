@@ -11,6 +11,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/controller/s_add_coupons_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -19,23 +20,24 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import '../../../../widget/radio_button.dart';
 
-class ShopAddCoupons extends StatefulWidget {
+class SAddCouponsView extends StatefulWidget {
   final bool ? isEditCoupon;
-  const ShopAddCoupons({super.key,this.isEditCoupon});
+  final String ? couponId;
+  const SAddCouponsView({super.key,required this.isEditCoupon,this.couponId});
 
   @override
-  State<ShopAddCoupons> createState() => _ShopAddCouponsState();
+  State<SAddCouponsView> createState() => _SAddCouponsViewState();
 }
 
 
 
 
-class _ShopAddCouponsState extends State<ShopAddCoupons> {
+class _SAddCouponsViewState extends State<SAddCouponsView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SAddCouponsController>()
-          .initState(context);
+          .initState(context,widget.isEditCoupon,widget.couponId);
     });
   }
   @override
@@ -49,16 +51,21 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) => MainScreenView(
-                    index: 4,
-                    screenName: ShopCouponsView(
-                      isRefresh: false,
-                    ))),
-                (Route<dynamic> route) => false,
+                builder: (context) =>
+                    SMainScreenView(
+                        index: 4,
+                        screenName:
+                        ShopCouponsView(
+                          isRefresh: false,
+                        ))),
+                (Route<dynamic> route) =>
+            false,
           );
         },),
       ),
-      body: SingleChildScrollView(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
@@ -240,6 +247,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.discountPercentageController,
                       // hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
                     ),
@@ -249,6 +257,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                   ),
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.minOrderAmountController,
                       // hintText: "Delivery Charge",
                       hintFontSize: 15.sp,
                     ),
@@ -292,6 +301,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      controller: watch.maxDiscountAmountController,
                       hintFontSize: 15.sp,
                     ),
                   ),
@@ -318,7 +328,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                   Row(
                     children: [
                       SecondaryRadioButton(
-                          value: "FullOrderAmount",
+                          value: "full_order_amount",
                           groupValue:read.groupValue,
                           onChanged: (value) {
                             read.onRadioBtnToggled(value);
@@ -342,7 +352,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                   Row(
                     children: [
                       SecondaryRadioButton(
-                          value: "CategoryProduct",
+                          value: "category_and_product",
                           groupValue:watch.groupValue,
                           onChanged: (value) {
                             read.onRadioBtnToggled(value);
@@ -366,13 +376,14 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 ],
               ),
               Visibility(
-                visible: watch.groupValue=="FullOrderAmount"?false:true,
+                visible: watch.groupValue=="full_order_amount"?false:true,
                 child: Column(
                   children: [
                     SizedBox(
                       height: 25.h,
                     ),
-                    SDropDownField(
+                  widget.isEditCoupon==true &&watch.details?.shopOwnerCategoryId!=""?  SDropDownField(
+                      value: watch.categoryId,
                       // hintText: "Delivery Charge",
                       hintSize: 15.sp,
                       onChanged: (value){
@@ -390,11 +401,48 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                           .toList(),
                       titleHeader: "Select Category",
                       titleSize: 12.sp,
-                    ),
+                    ):SDropDownField(
+                    // hintText: "Delivery Charge",
+                    hintSize: 15.sp,
+                    onChanged: (value){
+                      read.onCategorySelect(value,context);
+                    },
+                    items: watch.categoriesList?.map((item) => DropdownMenuItem<String>(
+                      value: item.id.toString(),
+                      child: Text(
+                        item.categoryName ?? "",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ))
+                        .toList(),
+                    titleHeader: "Select Category",
+                    titleSize: 12.sp,
+                  ),
                     SizedBox(
                       height: 20.h,
                     ),
-                    SDropDownField(
+                   widget.isEditCoupon==true&&watch.details?.shopOwnerProductId!=""?SDropDownField(
+                     value: watch.productId,
+                     // hintText: "Delivery Charge",
+                     hintSize: 15.sp,
+                     onChanged: (value){
+                       read.onProductSelect(value,context);
+                     },
+                     items: watch.productList?.map((item) => DropdownMenuItem<String>(
+                       value: item.id.toString(),
+                       child: Text(
+                         item.productName ?? "",
+                         style: TextStyle(
+                           fontSize: 14.sp,
+                         ),
+                       ),
+                     ))
+                         .toList(),
+                     titleHeader: "Select Product",
+                     titleSize: 12.sp,
+                   ):SDropDownField(
                       // hintText: "Delivery Charge",
                       hintSize: 15.sp,
                       onChanged: (value){
@@ -436,6 +484,7 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 height: 5.h,
               ),
               PrimarySTextFormField(
+                controller: watch.termsAndConditionController,
                 height: 150.w,
                 maxLines: 10,
                 // hintText: "Address",/
@@ -448,7 +497,10 @@ class _ShopAddCouponsState extends State<ShopAddCoupons> {
                 height: 50.w,
                 text: "Submit",
                 color: Color(0xff4689EC),
-                onTap: () {},
+                onTap: () {
+                  widget.isEditCoupon==true?read.uploadEditedCouponDetails(context):
+                  read.uploadCouponDetails(context);
+                },
               ),
               SizedBox(
                 height: 90.h,
