@@ -25,6 +25,7 @@ import 'package:local_supper_market/screen/customer/products/repository/product_
 import 'package:local_supper_market/screen/customer/products/repository/product_view_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_admin_product_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_custom_product_fav_repo.dart';
+import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -61,7 +62,13 @@ class ProductViewController extends ChangeNotifier {
       RemoveCustomFvrtProductRepo();
   AddProductToCartRepo addProductToCartRepo=AddProductToCartRepo();
 
+
+
+
   Future<void> initState(context, sId, cId, pId, suId, pType) async {
+    print("productId");
+    print(pId);
+    print(productId);
     await productsView(context, sId, cId, pId, pType);
     print("55555555555555555555555555555555555");
     print(pId);
@@ -76,6 +83,29 @@ class ProductViewController extends ChangeNotifier {
     notifyListeners();
   }
 
+  // void setProductIdFor(pId,sId,cId,pType,context){
+  //   productId=pId;
+  //   shopId=sId;
+  //   categoryId=cId;
+  //   productType=pType;
+  //   Navigator.pushAndRemoveUntil(
+  //     context,
+  //     MaterialPageRoute(
+  //         builder: (context) =>
+  //             MainScreenView(
+  //               index: 1,
+  //               screenName:
+  //               ProductScreenView(
+  //                   categoryId: categoryId,
+  //                   productId: productId,
+  //                   shopId:shopId,
+  //                   productType: productType,
+  //               ),
+  //             )),
+  //         (Route<dynamic> route) => false,
+  //   );
+  // }
+
   ProductViewRequestModel get productViewRequestModel =>
       ProductViewRequestModel(
           shopId: shopId, categoryId: categoryId, productId: productId);
@@ -83,10 +113,10 @@ class ProductViewController extends ChangeNotifier {
   Future<void> productsView(context, sId, cId, pId, pType) async {
     // print("id$id");
     print("helohhhhhhhhooooooooooooo");
-    shopId = sId;
-    categoryId = cId;
-    productId = pId;
-    productType = pType;
+    shopId = sId.toString();
+    categoryId = cId.toString();
+    productId = pId.toString();
+    productType = pType.toString();
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));

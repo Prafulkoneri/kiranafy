@@ -21,6 +21,7 @@ class CartListController extends ChangeNotifier {
   ShopCartListRepo cartListRepo = ShopCartListRepo();
   ShopCartDeleteRepo shopCartDeleteRepo = ShopCartDeleteRepo();
   List<CartList>? cartList;
+  bool  isLoading=true;
 
   Future<void> initState(
     context,
@@ -30,7 +31,13 @@ class CartListController extends ChangeNotifier {
     );
   }
 
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
   Future<void> getCartList(context) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     cartListRepo.cartList(pref.getString("successToken")).then((response) {
@@ -39,7 +46,7 @@ class CartListController extends ChangeNotifier {
       print(response.statusCode);
       if (response.statusCode == 200) {
         cartList = result.cartData?.cartList;
-
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
