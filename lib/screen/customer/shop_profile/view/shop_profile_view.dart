@@ -48,10 +48,6 @@ class ShopProfileView extends StatefulWidget {
 }
 
 class _ShopProfileViewState extends State<ShopProfileView> {
-
-
-
-
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -69,7 +65,6 @@ class _ShopProfileViewState extends State<ShopProfileView> {
     final read = context.read<ShopProfileViewController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
-
       body: watch.isLoading
           ? Center(
               child: CircularProgressIndicator(),
@@ -130,69 +125,72 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       Stack(
                         children: [
                           Align(
-                            child:  watch.bannerImageData!.isEmpty
+                            child: watch.bannerImageData!.isEmpty
                                 ? Container(
-                                height: 180.w,
-                                child: Image.asset(
-                                  "assets/images/shop_image.png",
-                                  height: 191.w,
-                                  fit: BoxFit.fill,
-                                )):SizedBox(
-                              height: 180.0.h,
-                              child: PageView.builder(
-                                  allowImplicitScrolling: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  controller: watch.pageController,
-                                  onPageChanged: (index) {},
-                                  itemCount: watch.bannerImageData?.length ?? 0,
-                                  itemBuilder: (context, index) {
-                                    final element =
-                                        watch.bannerImageData?[index];
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        element?.imagesPath == ""
-                                            ? Container(
-                                                height: 190.w,
-                                                child: Image.asset(
-                                                  "assets/images/shop_image.png",
-                                                  height: 191.w,
-                                                  fit: BoxFit.fill,
-                                                ))
-                                            : Container(
-                                                height: 190.w,
-                                                child: AppNetworkImages(
-                                                    imageUrl:
-                                                        element?.imagesPath ??
-                                                            "",
-                                                    fit: BoxFit.cover),
-                                                width: ScreenUtil().screenWidth,
-                                              ),
-                                      ],
-                                    );
-                                  }),
-                              // Carousel(
-                              //   images: [
-                              //     AssetImage(
-                              //       "assets/images/shop_image.png",
-                              //     ),
-                              //     // AssetImage(
-                              //     //   "assets/images/property2.png",
-                              //     // ),
-                              //
-                              //     // ExactAssetImage("images/image-carousel.jpeg"),
-                              //   ],
-                              //   autoplay: true,
-                              //   animationDuration: Duration(milliseconds: 1000),
-                              //   dotBgColor: Colors.red,
-                              //   showIndicator: false,
-                              //   // dotSize: 6.0,
-                              //   // dotSpacing: 15.0,
-                              //   // dotColor: Colors.lightGreenAccent,
-                              //   // borderRadius: true,
-                              // ),
-                            ),
+                                    height: 180.w,
+                                    child: Image.asset(
+                                      "assets/images/shop_image.png",
+                                      height: 191.w,
+                                      fit: BoxFit.fill,
+                                    ))
+                                : SizedBox(
+                                    height: 180.0.h,
+                                    child: PageView.builder(
+                                        allowImplicitScrolling: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        controller: watch.pageController,
+                                        onPageChanged: (index) {},
+                                        itemCount:
+                                            watch.bannerImageData?.length ?? 0,
+                                        itemBuilder: (context, index) {
+                                          final element =
+                                              watch.bannerImageData?[index];
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              element?.imagesPath == ""
+                                                  ? Container(
+                                                      height: 190.w,
+                                                      child: Image.asset(
+                                                        "assets/images/shop_image.png",
+                                                        height: 191.w,
+                                                        fit: BoxFit.fill,
+                                                      ))
+                                                  : Container(
+                                                      height: 190.w,
+                                                      child: AppNetworkImages(
+                                                          imageUrl: element
+                                                                  ?.imagesPath ??
+                                                              "",
+                                                          fit: BoxFit.cover),
+                                                      width: ScreenUtil()
+                                                          .screenWidth,
+                                                    ),
+                                            ],
+                                          );
+                                        }),
+                                    // Carousel(
+                                    //   images: [
+                                    //     AssetImage(
+                                    //       "assets/images/shop_image.png",
+                                    //     ),
+                                    //     // AssetImage(
+                                    //     //   "assets/images/property2.png",
+                                    //     // ),
+                                    //
+                                    //     // ExactAssetImage("images/image-carousel.jpeg"),
+                                    //   ],
+                                    //   autoplay: true,
+                                    //   animationDuration: Duration(milliseconds: 1000),
+                                    //   dotBgColor: Colors.red,
+                                    //   showIndicator: false,
+                                    //   // dotSize: 6.0,
+                                    //   // dotSpacing: 15.0,
+                                    //   // dotColor: Colors.lightGreenAccent,
+                                    //   // borderRadius: true,
+                                    // ),
+                                  ),
                           ),
                           Positioned(
                             //<-- SEE HERE
@@ -1176,7 +1174,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 child: Padding(
                                                   padding: EdgeInsets.all(8.w),
                                                   child: AppNetworkImages(
-                                                    imageUrl: "${element?.categoryImagePath}",
+                                                    imageUrl:
+                                                        "${element?.categoryImagePath}",
                                                     width: 68.w,
                                                     height: 49.w,
                                                   ),

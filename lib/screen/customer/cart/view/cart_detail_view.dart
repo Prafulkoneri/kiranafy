@@ -25,6 +25,7 @@ class CartDetailView extends StatefulWidget {
 class _CartDetailViewState extends State<CartDetailView> {
   @override
   void initState() {
+    print(widget.shopId);
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<CartDetailController>()
@@ -43,7 +44,9 @@ class _CartDetailViewState extends State<CartDetailView> {
           child: PrimaryAppBar(
             title: "Cart Details",
             action: SvgPicture.asset("assets/images/delete.svg"),
-            onActionTap: () {},
+            onActionTap: () {
+              read.deleteCartDetails(context, widget.cartId);
+            },
           ),
         ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -56,7 +59,8 @@ class _CartDetailViewState extends State<CartDetailView> {
               Container(
                 padding: EdgeInsets.only(left: 17.w, top: 20.w),
                 child: Text(
-                  "New Balaji Trading Company",
+                  "${watch.shopDetailData?.shopName}",
+                  // "New Balaji Trading Company",
                   style: GoogleFonts.dmSans(
                     textStyle: TextStyle(
                         color: Black1,
@@ -70,52 +74,99 @@ class _CartDetailViewState extends State<CartDetailView> {
                 height: 7.h,
               ),
               Container(
-                padding: EdgeInsets.only(
-                  left: 12.w,
+                padding: EdgeInsets.all(12.w),
+                // height: 70.h,
+                decoration: BoxDecoration(
+                  border: Border(
+                    // top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
+                    bottom: BorderSide(width: 1, color: grey2),
+                  ),
                 ),
+
+                // color: Colors.white,
                 child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
                         SvgPicture.asset(
                           'assets/images/location2.svg',
-                          // width: 15.w,
-                          // height: 19.h,
+                          width: 23.w,
+                          height: 28.h,
                         ),
                         SizedBox(
-                          width: 8,
+                          width: 8.w,
                         ),
-                        Text(
-                          "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black,
-                                letterSpacing: .5,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w400),
+                        Container(
+                          width: 200.w,
+                          child: Text(
+                            "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(
+                                  color: Black,
+                                  // letterSpacing: .5,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 45.w),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/call.svg',
-                            ),
-                            SizedBox(
-                              width: 12.w,
-                            ),
-                            SvgPicture.asset(
-                              'assets/images/fvrt.svg',
-                            ),
-                          ],
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            read.launchPhone(
+                                watch.shopDetailData?.shopOwnerSupportNumber ??
+                                    "",
+                                context);
+                          },
+                          child: SvgPicture.asset(
+                            'assets/images/call.svg',
+                            // width: 15.w,
+                            // height: 19.h,
+                          ),
                         ),
+                        SizedBox(
+                          width: 13.w,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            watch.favAllShop
+                                ? read.removeAllShopFavList(
+                                    context, watch.shopDetailData?.id)
+                                : read.updateAllShopFavList(
+                                    context, watch.shopDetailData?.id);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: 13.w,
+                                right: 13.w,
+                                top: 14.w,
+                                bottom: 14.w),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xff4689EC),
+                            ),
+                            child: watch.favAllShop
+                                ? SvgPicture.asset(
+                                    "assets/icons/fav_selected.svg",
+                                    width: 26.w,
+                                    height: 14.h,
+                                  )
+                                : SvgPicture.asset(
+                                    "assets/images/favorite.svg",
+                                    width: 26.w,
+                                    height: 14.h,
+                                  ),
+                          ),
+                        )
                       ],
                     ),
                   ],
                 ),
               ),
-              Divider(thickness: 1, color: grey2),
+              // Divider(thickness: 1, color: grey2),
               Container(
                 // height: 360.h,
                 // width: 352.w,
@@ -125,8 +176,10 @@ class _CartDetailViewState extends State<CartDetailView> {
                     physics: BouncingScrollPhysics(),
                     // physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 1,
+                    itemCount: watch.cartDetailData?.cartItemList?.length ?? 0,
                     itemBuilder: (BuildContext, index) {
+                      final element =
+                          watch.cartDetailData?.cartItemList?[index];
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -205,7 +258,8 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  "Ariel Washing Powder",
+                                                  "${element?.productImagePath}",
+                                                  // "Ariel Washing Powder",
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         color: Black1,
@@ -251,7 +305,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                           SizedBox(
                                             height: 5.w,
                                           ),
-                                          Text("500mg",
+                                          Text("${element?.weight}",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     color: Grey,

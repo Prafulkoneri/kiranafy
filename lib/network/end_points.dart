@@ -249,7 +249,15 @@ class Endpoint {
   static const String editCoupon = "${baseUrl}lsm-shop-owner-edit-coupon";
 
   /////Cart List////
-  static const String cartList ="${baseUrl}lsm-customer-get-cart-list";
-  ////Cart List////
-  static const String cartDetailView ="${baseUrl}lsm-customer-view-cart-details";
+  static const String cartList = "${baseUrl}lsm-customer-get-cart-list";
+  ////Cart List Details////
+  static const String cartDetailView =
+      "${baseUrl}lsm-customer-view-cart-details";
+
+  ///Cart List Detail Delete////
+  static const String cartDetailDelete = "${baseUrl}lsm-customer-delete-cart";
+
+  ///Cart Item Quantity////
+  static const String cartItemQuantity =
+      "${baseUrl}lsm-customer-update-cart-item-quantity";
 }
