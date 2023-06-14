@@ -50,13 +50,11 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      SMainScreenView(
+                  builder: (context) => SMainScreenView(
                         index: 4,
-                        screenName:
-                        CustomerListView(isRefresh: false),
+                        screenName: CustomerListView(isRefresh: false),
                       )),
-                  (Route<dynamic> route) => false,
+              (Route<dynamic> route) => false,
             );
           },
         ),
@@ -66,7 +64,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
                   Container(

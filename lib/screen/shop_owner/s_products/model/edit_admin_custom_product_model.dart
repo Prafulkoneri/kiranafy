@@ -1,13 +1,14 @@
 class EditAdminProductReqModel {
   String? product_id;
+
   EditAdminProductReqModel({this.product_id});
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["product_id"] = product_id;
     return data;
   }
 }
-
 
 class EditAdminProductResModel {
   int? status;
@@ -21,12 +22,11 @@ class EditAdminProductResModel {
     required this.data,
     required this.units,
   });
-  EditAdminProductResModel.fromJson(Map<String,dynamic>json){
-    status=json["status"];
-    message=json["message"];
-    data = json['data'] != null
-        ? AdminData.fromJson(json['data'])
-        : null;
+
+  EditAdminProductResModel.fromJson(Map<String, dynamic> json) {
+    status = json["status"];
+    message = json["message"];
+    data = json['data'] != null ? AdminData.fromJson(json['data']) : null;
     if (json["units"] != null) {
       units = <Unit>[];
       json["units"].forEach((v) {
@@ -37,12 +37,13 @@ class EditAdminProductResModel {
 }
 
 class AdminData {
-  ProductDetails ? productDetails;
+  ProductDetails? productDetails;
 
   AdminData({
     required this.productDetails,
   });
-  AdminData.fromJson(Map<String,dynamic>json){
+
+  AdminData.fromJson(Map<String, dynamic> json) {
     productDetails = json['product_details'] != null
         ? ProductDetails.fromJson(json['product_details'])
         : null;
@@ -57,9 +58,9 @@ class ProductDetails {
   int? brandId;
   String? brandName;
   int? taxId;
-  String ?igstTax;
+  String? igstTax;
   String? showUnderSeasonalProducts;
-  String ? showUnderRecommandedProducts;
+  String? showUnderRecommandedProducts;
   String? showUnderFullfillYourCravings;
   String? productDescription;
   String? productImagePath;
@@ -83,21 +84,22 @@ class ProductDetails {
     required this.productImageName,
     required this.productUnitDetails,
   });
-  ProductDetails.fromJson(Map<String,dynamic>json){
-    productId=json["product_id"];
-    categoryId=json["category_id"];
-    categoryName=json["category_name"];
-    productName=json["product_name"];
-    brandId=json["brand_id"];
-    brandName=json["brand_name"];
-    taxId=json["tax_id"];
-    igstTax=json["igst_tax"];
-    showUnderSeasonalProducts=json["show_under_seasonal_products"];
-    showUnderRecommandedProducts=json["show_under_recommanded_products"];
-    showUnderFullfillYourCravings=json["show_under_fullfill_your_cravings"];
-    productDescription=json["product_description"];
-    productImagePath=json["product_image_path"];
-    productImageName=json["product_image_name"];
+
+  ProductDetails.fromJson(Map<String, dynamic> json) {
+    productId = json["product_id"];
+    categoryId = json["category_id"];
+    categoryName = json["category_name"];
+    productName = json["product_name"];
+    brandId = json["brand_id"];
+    brandName = json["brand_name"];
+    taxId = json["tax_id"];
+    igstTax = json["igst_tax"];
+    showUnderSeasonalProducts = json["show_under_seasonal_products"];
+    showUnderRecommandedProducts = json["show_under_recommanded_products"];
+    showUnderFullfillYourCravings = json["show_under_fullfill_your_cravings"];
+    productDescription = json["product_description"];
+    productImagePath = json["product_image_path"];
+    productImageName = json["product_image_name"];
     if (json["product_unit_details"] != null) {
       productUnitDetails = <ProductUnitDetail>[];
       json["product_unit_details"].forEach((v) {
@@ -105,7 +107,6 @@ class ProductDetails {
       });
     }
   }
-
 }
 
 class ProductUnitDetail {
@@ -119,9 +120,9 @@ class ProductUnitDetail {
   String? unitBasedProductImage1Path;
   String? unitBasedProductImage1Name;
   String? unitBasedProductImage2Path;
-  String ?unitBasedProductImage2Name;
+  String? unitBasedProductImage2Name;
   String? unitBasedProductImage3Path;
-  String ?unitBasedProductImage3Name;
+  String? unitBasedProductImage3Name;
 
   ProductUnitDetail({
     required this.particularUnitId,
@@ -138,20 +139,21 @@ class ProductUnitDetail {
     required this.unitBasedProductImage3Path,
     required this.unitBasedProductImage3Name,
   });
-  ProductUnitDetail.fromJson(Map<String,dynamic>json){
-    particularUnitId=json["particular_unit_id"];
-    unitId=json["unit_id"];
-    unit=json["unit"];
-    weight=json["weight"];
-    mrpPrice=json["mrp_price"];
-    offerPrice=json["offer_price"];
-    status=json["status"];
-    unitBasedProductImage1Path=json["unit_based_product_image_1_path"];
-    unitBasedProductImage1Name=json["unit_based_product_image_1_name"];
-    unitBasedProductImage2Path=json["unit_based_product_image_2_path"];
-    unitBasedProductImage2Name=json["unit_based_product_image_2_name"];
-    unitBasedProductImage3Path=json["unit_based_product_image_3_path"];
-    unitBasedProductImage3Name=json["unit_based_product_image_3_name"];
+
+  ProductUnitDetail.fromJson(Map<String, dynamic> json) {
+    particularUnitId = json["particular_unit_id"];
+    unitId = json["unit_id"];
+    unit = json["unit"];
+    weight = json["weight"];
+    mrpPrice = json["mrp_price"];
+    offerPrice = json["offer_price"];
+    status = json["status"];
+    unitBasedProductImage1Path = json["unit_based_product_image_1_path"];
+    unitBasedProductImage1Name = json["unit_based_product_image_1_name"];
+    unitBasedProductImage2Path = json["unit_based_product_image_2_path"];
+    unitBasedProductImage2Name = json["unit_based_product_image_2_name"];
+    unitBasedProductImage3Path = json["unit_based_product_image_3_path"];
+    unitBasedProductImage3Name = json["unit_based_product_image_3_name"];
   }
 }
 
@@ -163,8 +165,9 @@ class Unit {
     required this.id,
     required this.unit,
   });
-  Unit.fromJson(Map<String,dynamic>json){
-    id=json["id"];
-    unit=json["unit"];
+
+  Unit.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    unit = json["unit"];
   }
 }

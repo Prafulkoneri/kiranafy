@@ -21,6 +21,7 @@ class CouponCodeExistsResModel {
     required this.status,
     required this.message,
   });
+
   CouponCodeExistsResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];

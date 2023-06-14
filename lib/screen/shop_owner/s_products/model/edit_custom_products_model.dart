@@ -4,9 +4,11 @@ import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_pr
 
 class EditCustomProductsRequestModel {
   String? product_id;
+
   EditCustomProductsRequestModel({
     this.product_id,
   });
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["product_id"] = product_id;
@@ -27,6 +29,7 @@ class EditCustomProductsResponseModel {
     required this.data,
     required this.units,
   });
+
   EditCustomProductsResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -48,15 +51,19 @@ class Data {
   List<BrandData>? brandData;
   List<TaxData>? taxData;
   List<UnitData>? unitData;
+
   Data({
-     this.productDetails,
+    this.productDetails,
     this.unitData,
     this.taxData,
     this.brandData,
     this.categoryData,
   });
+
   Data.fromJson(Map<String, dynamic> json) {
-    productDetails = json['product_details'] != null ? ProductDetails.fromJson(json['product_details']) : null;
+    productDetails = json['product_details'] != null
+        ? ProductDetails.fromJson(json['product_details'])
+        : null;
     if (json["category_data"] != null) {
       categoryData = <CategoryData>[];
       json["category_data"].forEach((v) {
@@ -82,7 +89,6 @@ class Data {
       });
     }
   }
-
 }
 
 class ProductDetails {
@@ -175,6 +181,7 @@ class ProductUnitDetail {
     required this.unitBasedProductImage3Path,
     required this.unitBasedProductImage3Name,
   });
+
   ProductUnitDetail.fromJson(Map<String, dynamic> json) {
     particularUnitId = json["particular_unit_id"];
     unitId = json["unit_id"];
@@ -200,6 +207,7 @@ class Unit {
     required this.id,
     required this.unit,
   });
+
   Unit.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     unit = json["units"];

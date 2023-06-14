@@ -21,18 +21,18 @@ class SCustomerListController extends ChangeNotifier {
   List<CustomerDetail>? customerDetail;
   CustomerListRepo customerListRepo = CustomerListRepo();
   CustomerFavListRepo customerFavListRepo = CustomerFavListRepo();
-  bool isFavToShopSelected=false;
-  bool isOrderedSelected=false;
-  bool isLoading=true;
+  bool isFavToShopSelected = false;
+  bool isOrderedSelected = false;
+  bool isLoading = true;
 
-  Future<void> initState(context,isRefresh) async {
-    if(isRefresh) {
+  Future<void> initState(context, isRefresh) async {
+    if (isRefresh) {
       await getCustomerList(context);
     }
-    }
+  }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -78,16 +78,17 @@ class SCustomerListController extends ChangeNotifier {
     }
   }
 
-  void onFavToShopSelected(value){
-    isFavToShopSelected=value;
-    notifyListeners();
-  }
-  void onOrderedButNotFavSelected(value){
-    isOrderedSelected=value;
+  void onFavToShopSelected(value) {
+    isFavToShopSelected = value;
     notifyListeners();
   }
 
-  Future<void> getFavShopSelected(context)async{
+  void onOrderedButNotFavSelected(value) {
+    isOrderedSelected = value;
+    notifyListeners();
+  }
+
+  Future<void> getFavShopSelected(context) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -95,7 +96,8 @@ class SCustomerListController extends ChangeNotifier {
         .getCustomerFavList(pref.getString("successToken"))
         .then((response) {
       print(response.body);
-      final result = CustomerAddedToFavResModel.fromJson(jsonDecode(response.body));
+      final result =
+          CustomerAddedToFavResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
         customerListData = result.data;
@@ -110,7 +112,7 @@ class SCustomerListController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

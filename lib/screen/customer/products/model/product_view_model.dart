@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 
 class ProductViewRequestModel {
   String? shopId;
@@ -35,10 +36,10 @@ class ProductViewResponseModel {
 }
 
 class ProductViewData {
-  ShopDetails? shopDetails;
+  ProductViewShopDetails? shopDetails;
   ProductDetails? productDetails;
   List<ProductUnitDetail>? productUnitDetails;
-  List<SimilarProduct>? similarProducts;
+  List<CustomerProductData>? similarProducts;
 
   ProductViewData({
     required this.shopDetails,
@@ -48,7 +49,7 @@ class ProductViewData {
   });
   ProductViewData.fromJson(Map<String, dynamic> json) {
     shopDetails = json['shop_details'] != null
-        ? ShopDetails.fromJson(json['shop_details'])
+        ? ProductViewShopDetails.fromJson(json['shop_details'])
         : null;
 
     productDetails = json['product_details'] != null
@@ -63,15 +64,15 @@ class ProductViewData {
     }
 
     if (json["similar_products"] != null) {
-      similarProducts = <SimilarProduct>[];
+      similarProducts = <CustomerProductData>[];
       json["similar_products"].forEach((v) {
-        similarProducts!.add(SimilarProduct.fromJson(v));
+        similarProducts!.add(CustomerProductData.fromJson(v));
       });
     }
   }
 }
 
-class ShopDetails {
+class ProductViewShopDetails {
   String? id;
   String? shopName;
   String? areaName;
@@ -81,7 +82,7 @@ class ShopDetails {
   String? shopOwnerSupportNumber;
   String? isFvrt;
 
-  ShopDetails(
+  ProductViewShopDetails(
       {required this.id,
       required this.shopName,
       required this.areaName,
@@ -90,7 +91,7 @@ class ShopDetails {
       required this.shopPincode,
       required this.shopOwnerSupportNumber,
       required this.isFvrt});
-  ShopDetails.fromJson(Map<String, dynamic> json) {
+  ProductViewShopDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     shopName = json["shop_name"];
     areaName = json["area_name"];
@@ -162,49 +163,4 @@ class ProductUnitDetail {
   }
 }
 
-class SimilarProduct {
-  int? id;
-  String? productName;
-  String? productImagePath;
-  String? productImageName;
-  String? weight;
-  String? offerPrice;
-  String? mrpPrice;
-  int? categoryId;
-  String? discountPercentage;
-  String? status;
-  String? unit;
-  String? productType;
-  String? shopId;
 
-  SimilarProduct(
-      {required this.id,
-      required this.shopId,
-      required this.productName,
-      required this.productImagePath,
-      required this.productImageName,
-      required this.weight,
-      required this.offerPrice,
-      required this.mrpPrice,
-      required this.categoryId,
-      required this.discountPercentage,
-      required this.status,
-      required this.unit,
-      required this.productType});
-
-  SimilarProduct.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    productName = json["product_name"];
-    productImagePath = json["product_image_path"];
-    productImageName = json["product_image_name"];
-    weight = json["weight"];
-    offerPrice = json["offer_price"];
-    mrpPrice = json["mrp_price"];
-    categoryId = json["category_id"];
-    discountPercentage = json["discount_percentage"];
-    status = json["status"];
-    unit = json["unit"];
-    productType = json['product_type'];
-    shopId = json['shop_id'];
-  }
-}

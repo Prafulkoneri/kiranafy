@@ -1,9 +1,11 @@
 ////Request Model
 class ShopAddProductsListRequestModel {
   String? category_id;
+
   ShopAddProductsListRequestModel({
     this.category_id,
   });
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["category_id"] = category_id;
@@ -22,6 +24,7 @@ class ShopAddProductsListResponse {
     required this.message,
     required this.data,
   });
+
   ShopAddProductsListResponse.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -31,7 +34,7 @@ class ShopAddProductsListResponse {
 }
 
 class Data {
-  String ? categoryName;
+  String? categoryName;
   int? allProductsCount;
   List<ProductDetail>? productDetails;
 
@@ -42,7 +45,7 @@ class Data {
   });
 
   Data.fromJson(Map<String, dynamic> json) {
-    categoryName=json["category_name"];
+    categoryName = json["category_name"];
     allProductsCount = json['all_products_count'];
     // productDetails = json['product_details'];
 

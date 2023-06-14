@@ -8,8 +8,8 @@ class AddCouponsRequestModel {
   String? couponType;
   String? shopOwnerCategoryId;
   String? couponsTermsAndCondition;
-  String ? productId;
-  String ? productType;
+  String? productId;
+  String? productType;
 
   AddCouponsRequestModel({
     this.couponFromDate,
@@ -51,6 +51,7 @@ class AddCouponsResModel {
     required this.status,
     required this.message,
   });
+
   AddCouponsResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];

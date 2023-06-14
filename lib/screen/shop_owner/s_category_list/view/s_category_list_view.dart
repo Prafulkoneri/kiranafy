@@ -44,8 +44,10 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:ShopDashBoard())),
-                  (Route<dynamic> route) => false,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SMainScreenView(index: 0, screenName: ShopDashBoard())),
+              (Route<dynamic> route) => false,
             );
           },
           title: "Categories",
@@ -53,8 +55,10 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           onActionTap: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectCategoryView())),
-                  (Route<dynamic> route) => false,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 0, screenName: SSelectCategoryView())),
+              (Route<dynamic> route) => false,
             );
           },
         ),
@@ -71,7 +75,6 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                 physics: BouncingScrollPhysics(),
                 child: RefreshIndicator(
                   onRefresh: () async {
-
                     // readMainScreen.onNavigation(
                     //     0, SSCategoryListView(), context);
                   },
@@ -95,9 +98,14 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                   onTap: () {
                                     Navigator.pushAndRemoveUntil(
                                       context,
-                                      MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(
-                                          categoryId: element?.categoryId.toString()))),
-                                          (Route<dynamic> route) => false,
+                                      MaterialPageRoute(
+                                          builder: (context) => SMainScreenView(
+                                              index: 0,
+                                              screenName: SSelectedProductView(
+                                                  categoryId: element
+                                                      ?.categoryId
+                                                      .toString()))),
+                                      (Route<dynamic> route) => false,
                                     );
                                   },
                                   child: Container(
@@ -127,8 +135,8 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                           width: 55.w,
                                           height: 40.w,
                                           child: AppNetworkImages(
-                                            imageUrl:
-                                              "${element?.categoryImagePath}"),
+                                              imageUrl:
+                                                  "${element?.categoryImagePath}"),
                                         ),
                                         SizedBox(
                                           width: 12.w,

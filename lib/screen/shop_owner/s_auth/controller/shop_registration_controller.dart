@@ -318,7 +318,7 @@ class ShopRegistrationController extends ChangeNotifier {
     print("object");
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopOwnerRegisterRepo
-        .shopOwnerRegistration(shopOwnerRegisterReqModel,context)
+        .shopOwnerRegistration(shopOwnerRegisterReqModel, context)
         .then((response) {
       print(response.body);
       final result =

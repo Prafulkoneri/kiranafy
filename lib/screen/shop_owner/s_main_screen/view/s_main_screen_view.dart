@@ -10,9 +10,11 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:provider/provider.dart';
 
 class SMainScreenView extends StatefulWidget {
-  final Widget ? screenName;
-  final int ? index;
-  const SMainScreenView({Key? key,this.screenName,this.index}) : super(key: key);
+  final Widget? screenName;
+  final int? index;
+
+  const SMainScreenView({Key? key, this.screenName, this.index})
+      : super(key: key);
 
   @override
   _SMainScreenViewState createState() => _SMainScreenViewState();
@@ -20,18 +22,22 @@ class SMainScreenView extends StatefulWidget {
 
 class _SMainScreenViewState extends State<SMainScreenView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
- @override
+
+  @override
   void initState() {
-   SchedulerBinding.instance.addPostFrameCallback((_) {
-     context.read<SMainScreenController>().initState(context,widget.index,widget.screenName);
-   });
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<SMainScreenController>()
+          .initState(context, widget.index, widget.screenName);
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<SMainScreenController>();
     final watch = context.watch<SMainScreenController>();
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         return false;
       },
       child: Scaffold(
@@ -69,47 +75,47 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                         },
                         child: watch.currentTab == 0
                             ? Column(
-                          children: [
-                            Container(
-                              height: 20.w,
-                              width: 21.w,
-                              child: SvgPicture.asset(
-                                "assets/icons/home_selected.svg",
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5.w,
-                            ),
-                            Text(
-                              "Dashboard",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11.sp,
-                                  color: CouponsText),
-                            )
-                          ],
-                        )
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/home_selected.svg",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Dashboard",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: CouponsText),
+                                  )
+                                ],
+                              )
                             : Column(
-                          children: [
-                            Container(
-                              height: 20.w,
-                              width: 21.w,
-                              child: SvgPicture.asset(
-                                "assets/icons/home.svg",
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/home.svg",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Dashboard",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: Black1),
+                                  )
+                                ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 5.w,
-                            ),
-                            Text(
-                              "Dashboard",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11.sp,
-                                  color: Black1),
-                            )
-                          ],
-                        ),
                       ),
                       Row(
                         children: [
@@ -119,48 +125,48 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                             },
                             child: watch.currentTab == 1
                                 ? Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/orders_selected.svg",
-                                    height: 20.w,
-                                    width: 20.w,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Orders",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp,
-                                      color: CouponsText),
-                                )
-                              ],
-                            )
+                                    children: [
+                                      Container(
+                                        height: 20.w,
+                                        width: 21.w,
+                                        child: SvgPicture.asset(
+                                          "assets/icons/orders_selected.svg",
+                                          height: 20.w,
+                                          width: 20.w,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5.w,
+                                      ),
+                                      Text(
+                                        "Orders",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 11.sp,
+                                            color: CouponsText),
+                                      )
+                                    ],
+                                  )
                                 : Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                      "assets/icons/orders.svg"),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Orders",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp,
-                                      color: Black1),
-                                )
-                              ],
-                            ),
+                                    children: [
+                                      Container(
+                                        height: 20.w,
+                                        width: 21.w,
+                                        child: SvgPicture.asset(
+                                            "assets/icons/orders.svg"),
+                                      ),
+                                      SizedBox(
+                                        height: 5.w,
+                                      ),
+                                      Text(
+                                        "Orders",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 11.sp,
+                                            color: Black1),
+                                      )
+                                    ],
+                                  ),
                           ),
                         ],
                       ),
@@ -172,47 +178,47 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                             },
                             child: watch.currentTab == 2
                                 ? Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/payment_selected.svg",
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Payment",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp,
-                                      color: CouponsText),
-                                )
-                              ],
-                            )
+                                    children: [
+                                      Container(
+                                        height: 20.w,
+                                        width: 21.w,
+                                        child: SvgPicture.asset(
+                                          "assets/icons/payment_selected.svg",
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5.w,
+                                      ),
+                                      Text(
+                                        "Payment",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 11.sp,
+                                            color: CouponsText),
+                                      )
+                                    ],
+                                  )
                                 : Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/payments.svg",
+                                    children: [
+                                      Container(
+                                        height: 20.w,
+                                        width: 21.w,
+                                        child: SvgPicture.asset(
+                                          "assets/icons/payments.svg",
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5.w,
+                                      ),
+                                      Text(
+                                        "Payment",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 11.sp,
+                                            color: Black1),
+                                      )
+                                    ],
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Payment",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp,
-                                      color: Black1),
-                                )
-                              ],
-                            ),
                           ),
                         ],
                       ),
@@ -222,45 +228,45 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                         },
                         child: watch.currentTab == 3
                             ? Column(
-                          children: [
-                            Container(
-                              height: 20.w,
-                              width: 21.w,
-                              child: SvgPicture.asset(
-                                "assets/icons/offers_selected.svg",
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5.w,
-                            ),
-                            Text(
-                              "Offers",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11.sp,
-                                  color: CouponsText),
-                            )
-                          ],
-                        )
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/offers_selected.svg",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Offers",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: CouponsText),
+                                  )
+                                ],
+                              )
                             : Column(
-                          children: [
-                            Container(
-                              height: 20.w,
-                              width: 21.w,
-                              child: SvgPicture.asset(
-                                  "assets/icons/offers.svg"),
-                            ),
-                            SizedBox(
-                              height: 5.w,
-                            ),
-                            Text(
-                              "Offers",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11.sp),
-                            )
-                          ],
-                        ),
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                        "assets/icons/offers.svg"),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Offers",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp),
+                                  )
+                                ],
+                              ),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -268,46 +274,46 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                         },
                         child: watch.currentTab == 4
                             ? Column(
-                          children: [
-                            Container(
-                              height: 20.w,
-                              width: 21.w,
-                              child: SvgPicture.asset(
-                                "assets/icons/account_selected.svg",
-                                color: CouponsText,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5.w,
-                            ),
-                            Text(
-                              "Account",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11.sp,
-                                  color: CouponsText),
-                            )
-                          ],
-                        )
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/account_selected.svg",
+                                      color: CouponsText,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Account",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: CouponsText),
+                                  )
+                                ],
+                              )
                             : Column(
-                          children: [
-                            Container(
-                              height: 20.w,
-                              width: 21.w,
-                              child: SvgPicture.asset(
-                                  "assets/icons/account.svg"),
-                            ),
-                            SizedBox(
-                              height: 5.w,
-                            ),
-                            Text(
-                              "Account",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11.sp),
-                            )
-                          ],
-                        ),
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                        "assets/icons/account.svg"),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Account",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp),
+                                  )
+                                ],
+                              ),
                       ),
                     ],
                   ),

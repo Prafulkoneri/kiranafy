@@ -1,11 +1,13 @@
-class GetCityListReqModel{
-  String ? stateId;
+class GetCityListReqModel {
+  String? stateId;
+
   GetCityListReqModel({
     this.stateId,
   });
-  Map<String,dynamic> toJson(){
+
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data["state_id"]=stateId;
+    data["state_id"] = stateId;
     return data;
   }
 }

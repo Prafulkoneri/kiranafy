@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 
 // import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_seasonal_products.dart';
@@ -17,9 +20,9 @@ class ShopAllSeasonalController extends ChangeNotifier {
   int offset = 0;
   bool isLoading = true;
   bool? showPaginationLoader = true;
-
+  AddProductToCartRepo addProductToCartRepo =AddProductToCartRepo();
   Data? data;
-  List<SeasonalProduct>? seasonalProduct;
+  List<CustomerProductData>? seasonalProduct;
   Future<void> initState(context, id) async {
     // await getShopDetails(context, id);
     await getAllSeasonalProducts(context, id);
@@ -63,6 +66,33 @@ class ShopAllSeasonalController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+  Future<void> addToCart(pType,pId,sId,context)async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    addProductToCartRepo
+        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

@@ -8,7 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/products/views/product_screen.dart';
+import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
@@ -34,8 +34,8 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<ShopProfileViewController>();
-    final read = context.read<ShopProfileViewController>();
+    final watch = context.watch<AllOffersController>();
+    final read = context.read<AllOffersController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
@@ -265,10 +265,15 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                               : Text(""),
                                         ],
                                       ),
-                                      SvgPicture.asset(
-                                        'assets/images/add.svg',
-                                        // width: 15.w,
-                                        // height: 19.h,
+                                      GestureDetector(
+                                        onTap: (){
+                                          read.addToCart(element?.productType,element?.productId,element?.shopId,context);
+                                        },
+                                        child: SvgPicture.asset(
+                                          'assets/images/add.svg',
+                                          // width: 15.w,
+                                          // height: 19.h,
+                                        ),
                                       ),
                                     ],
                                   ),

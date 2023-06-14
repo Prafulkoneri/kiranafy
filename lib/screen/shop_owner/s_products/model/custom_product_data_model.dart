@@ -9,12 +9,10 @@ class CustomProductDataResModel {
     this.data,
   });
 
-  CustomProductDataResModel.fromJson(Map<String,dynamic>json){
-    status=json["status"];
-    message=json["message"];
-    data = json['data'] != null
-        ? CustomData.fromJson(json['data'])
-        : null;
+  CustomProductDataResModel.fromJson(Map<String, dynamic> json) {
+    status = json["status"];
+    message = json["message"];
+    data = json['data'] != null ? CustomData.fromJson(json['data']) : null;
   }
 }
 

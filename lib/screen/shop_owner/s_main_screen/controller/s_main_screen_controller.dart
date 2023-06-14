@@ -9,7 +9,6 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -23,8 +22,8 @@ class SMainScreenController extends ChangeNotifier {
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = ShopDashBoard();
 
-  void initState(context,index,currentScreen){
-    onBackPressed(index,currentScreen);
+  void initState(context, index, currentScreen) {
+    onBackPressed(index, currentScreen);
   }
 
   void onBottomNavChanged(index) {
@@ -45,24 +44,23 @@ class SMainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  void onCategoryPressed(context){
-   currentIndex=0;
-   currentScreen=SSCategoryListView();
-   notifyListeners();
-  }
-
-  void onCategoryAddPressed(){
-    currentIndex=0;
-    currentScreen=SSelectCategoryView();
+  void onCategoryPressed(context) {
+    currentIndex = 0;
+    currentScreen = SSCategoryListView();
     notifyListeners();
   }
 
-  void onCategorySelectUpdatePressed(context){
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView()));
-    currentIndex=0;
-    currentScreen=SSCategoryListView();
+  void onCategoryAddPressed() {
+    currentIndex = 0;
+    currentScreen = SSelectCategoryView();
+    notifyListeners();
+  }
+
+  void onCategorySelectUpdatePressed(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+    currentIndex = 0;
+    currentScreen = SSCategoryListView();
     notifyListeners();
   }
 
@@ -92,17 +90,19 @@ class SMainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> onBackPressed(tabIndex,screenName)async{
-    currentTab=tabIndex;
-    currentScreen=screenName;
+  Future<void> onBackPressed(tabIndex, screenName) async {
+    currentTab = tabIndex;
+    currentScreen = screenName;
     notifyListeners();
   }
-  void onNavigation(tabIndex,screenName,context){
+
+  void onNavigation(tabIndex, screenName, context) {
     print("hello");
     print(screenName);
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>SMainScreenView()));
-    currentTab=tabIndex;
-    currentScreen=screenName;
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+    currentTab = tabIndex;
+    currentScreen = screenName;
     notifyListeners();
   }
 }

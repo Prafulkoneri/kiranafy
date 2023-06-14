@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -30,9 +28,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<SAccountScreenController>()
-          .initState(context);
+      context.read<SAccountScreenController>().initState(context);
     });
   }
 
@@ -339,7 +335,10 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SMainScreenView(
-                          index: 4, screenName: ShopCouponsView(isRefresh: true,))),
+                          index: 4,
+                          screenName: ShopCouponsView(
+                            isRefresh: true,
+                          ))),
                   (Route<dynamic> route) => false,
                 );
                 // read.onShopConfigurationClicked(context);
@@ -551,14 +550,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
               ),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SMainScreenView(
-                          index: 4,
-                          screenName: MapView())),
-                      (Route<dynamic> route) => false,
+                      builder: (context) =>
+                          SMainScreenView(index: 4, screenName: MapView())),
+                  (Route<dynamic> route) => false,
                 );
               },
               child: Container(

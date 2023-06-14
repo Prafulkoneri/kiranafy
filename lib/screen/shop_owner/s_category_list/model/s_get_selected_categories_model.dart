@@ -23,7 +23,7 @@ class GetSelectedCategoryResponseModel {
 
 class SelectedCategoryData {
   int? id;
-  int ? categoryId;
+  int? categoryId;
   String? categoryName;
   int? categorySequence;
   String? categoryImagePath;

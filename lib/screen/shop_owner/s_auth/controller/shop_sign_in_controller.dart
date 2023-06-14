@@ -42,7 +42,7 @@ class ShopSignInController extends ChangeNotifier {
   bool isNewShopBtnEnabled = false;
   String kycVerificationStatus = "";
   String shopRegistrationStatus = "";
-  bool isOtpErrorVisible=false;
+  bool isOtpErrorVisible = false;
 
   void onOtpSubmitPressed(context) async {
     await mobileRegister(context);
@@ -189,7 +189,6 @@ class ShopSignInController extends ChangeNotifier {
     }
   }
 
-
   Future<void> onLoginClick(context) async {
     if (mobController.text.trim().length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
@@ -283,8 +282,10 @@ class ShopSignInController extends ChangeNotifier {
         pref.setString("status", "loggedIn");
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:ShopDashBoard())),
-              (Route<dynamic> route) => false,
+          MaterialPageRoute(
+              builder: (context) =>
+                  SMainScreenView(index: 0, screenName: ShopDashBoard())),
+          (Route<dynamic> route) => false,
         );
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -303,20 +304,19 @@ class ShopSignInController extends ChangeNotifier {
     );
   }
 
-  showOtpErrorMsg(){
-    isOtpErrorVisible=true;
+  showOtpErrorMsg() {
+    isOtpErrorVisible = true;
     notifyListeners();
     print(isOtpErrorVisible);
-    Timer(Duration(seconds: 3),(){
+    Timer(Duration(seconds: 3), () {
       print("duration");
-      isOtpErrorVisible=false;
+      isOtpErrorVisible = false;
       notifyListeners();
     });
-
   }
 
-  void onOtpDismiss(){
-    isOtpErrorVisible=false;
+  void onOtpDismiss() {
+    isOtpErrorVisible = false;
     notifyListeners();
   }
 }

@@ -13,7 +13,7 @@ import 'package:local_supper_market/screen/customer/delivery_view/delivery_view_
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/products/views/product_screen.dart';
+import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 

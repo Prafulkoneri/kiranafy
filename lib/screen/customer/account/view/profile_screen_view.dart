@@ -16,7 +16,7 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../products/views/product_screen.dart';
+import '../../products/views/product_screen_view.dart';
 import 'package:provider/provider.dart';
 
 // import '../controller/profile_controller.dart';

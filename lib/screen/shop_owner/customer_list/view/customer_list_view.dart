@@ -19,8 +19,9 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class CustomerListView extends StatefulWidget {
- final bool ? isRefresh;
-  const CustomerListView({super.key,required this.isRefresh});
+  final bool? isRefresh;
+
+  const CustomerListView({super.key, required this.isRefresh});
 
   @override
   State<CustomerListView> createState() => _CustomerListViewState();
@@ -30,7 +31,9 @@ class _CustomerListViewState extends State<CustomerListView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SCustomerListController>().initState(context,widget.isRefresh);
+      context
+          .read<SCustomerListController>()
+          .initState(context, widget.isRefresh);
     });
   }
 
@@ -188,8 +191,10 @@ class _CustomerListViewState extends State<CustomerListView> {
                                           width: 10.w,
                                         ),
                                         GestureDetector(
-                                          onTap: (){
-                                            read.launchPhone(element?.mobileNumber??"",context);
+                                          onTap: () {
+                                            read.launchPhone(
+                                                element?.mobileNumber ?? "",
+                                                context);
                                           },
                                           child: Container(
                                             width: 32.w,

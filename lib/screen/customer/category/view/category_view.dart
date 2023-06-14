@@ -19,7 +19,7 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
 import '../../../shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import '../../products/views/product_screen.dart';
+import '../../products/views/product_screen_view.dart';
 
 class CategoryScreenView extends StatefulWidget {
   final String? shopId;
@@ -425,11 +425,16 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                  SvgPicture
-                                                                      .asset(
-                                                                    'assets/images/add.svg',
-                                                                    // width: 30.w,
-                                                                    // height: 30.h,
+                                                                  GestureDetector(
+                                                                    onTap: (){
+                                                                      read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
+                                                                    },
+                                                                    child: SvgPicture
+                                                                        .asset(
+                                                                      'assets/images/add.svg',
+                                                                      // width: 30.w,
+                                                                      // height: 30.h,
+                                                                    ),
                                                                   )
                                                                 ],
                                                               ),

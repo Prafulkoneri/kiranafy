@@ -23,6 +23,7 @@ import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
+
 class ShopEditProfileDetailController extends ChangeNotifier {
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
   UpdateProfileRepo shopUpdateProfileRepo = UpdateProfileRepo();
@@ -59,10 +60,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String countryCode = "+91";
   List? pincodeList;
   bool showValuePincodeField = false;
-  List<File> images=[];
+  List<File> images = [];
+
   Future<void> initState(
-      context,
-      ) async {
+    context,
+  ) async {
     print(fileImage1.path);
     await getShopEditProfileDetails(context);
   }
@@ -133,7 +135,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -166,19 +168,21 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   Future<void> UpdateProfile(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopUpdateProfileRepo.UpdateProfile(
-        shopUpdateProfileReqModel, pref.getString("successToken"))
+            shopUpdateProfileReqModel, pref.getString("successToken"))
         .then((response) {
       print("oooooo");
       print(response.body);
       print("oooooo");
       final result =
-      ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
+          ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 4,screenName:SAccountScreenView())),
-              (Route<dynamic> route) => false,
+          MaterialPageRoute(
+              builder: (context) =>
+                  SMainScreenView(index: 4, screenName: SAccountScreenView())),
+          (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -191,7 +195,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -212,8 +216,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
-    stateId: selectedStateId.toString(),
-  );
+        stateId: selectedStateId.toString(),
+      );
 
   Future<void> getCityList(context) async {
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
@@ -232,7 +236,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -248,8 +252,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetAreaListReqModel get _areaListReqModel => GetAreaListReqModel(
-    cityId: selectedCityId.toString(),
-  );
+        cityId: selectedCityId.toString(),
+      );
 
   Future<void> onAreaSelected(value) async {
     selectedAreaId = value.toString();
@@ -273,7 +277,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -284,8 +288,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   GetPincodeReqModel get _pincodeListReqModel => GetPincodeReqModel(
-    areaId: selectedAreaId.toString(),
-  );
+        areaId: selectedAreaId.toString(),
+      );
 
   Future<void> getPinCodeList(context) async {
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
@@ -310,7 +314,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -342,7 +346,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -355,8 +359,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   ///////////State
 
   GetStateListReqModel get _stateListReqModel => GetStateListReqModel(
-    countryId: selectedCountryId.toString(),
-  );
+        countryId: selectedCountryId.toString(),
+      );
 
   Future<void> getStateList(context) async {
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
@@ -376,7 +380,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -434,10 +438,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    if(fileImage1.path==""&&fileImage2.path==""&&fileImage3.path==""&&fileImage4.path==""){
+    if (fileImage1.path == "" &&
+        fileImage2.path == "" &&
+        fileImage3.path == "" &&
+        fileImage4.path == "") {
       await UpdateProfile(context);
-    }
-    else{
+    } else {
       await uploadImage(context);
     }
   }
@@ -509,13 +515,13 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   Future uploadImage(context) async {
-  print("hellooooo");
+    print("hellooooo");
 
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    String token=pref.getString("successToken").toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.shopUpdateAccountDetails}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
-    request.headers['Authorization'] ="Bearer $token";
+    request.headers['Authorization'] = "Bearer $token";
     request.fields['shop_name'] = shopNameController.text;
     request.fields['shop_owner_name'] = ownerNameController.text;
     request.fields['shop_owner_country_code'] = countryCode;
@@ -525,33 +531,38 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     request.fields['shop_state_id'] = selectedStateId;
     request.fields['shop_area_id'] = selectedAreaId;
     request.fields['shop_address'] = shopAddressController.text;
-    request.fields['shop_pincode'] =  selectedPincode.toString();
-    request.fields['shop_city_id'] =  selectedCityId.toString();
+    request.fields['shop_pincode'] = selectedPincode.toString();
+    request.fields['shop_city_id'] = selectedCityId.toString();
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
-    List<http.MultipartFile> newList =  <http.MultipartFile>[];
-    for (int i = 0; i <images.length; i++) {
+    List<http.MultipartFile> newList = <http.MultipartFile>[];
+    for (int i = 0; i < images.length; i++) {
       File imageFile = images[i];
       print(imageFile);
-      var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      var stream =
+          new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
-      var multipartFile = new http.MultipartFile("shop_banner_image_path[$i]", stream, length,filename: basename(imageFile.path));
+      var multipartFile = new http.MultipartFile(
+          "shop_banner_image_path[$i]", stream, length,
+          filename: basename(imageFile.path));
       newList.add(multipartFile);
     }
-  request.files.addAll(newList);
-  await request.send().then((response)async{
+    request.files.addAll(newList);
+    await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
       print(respStr);
       if (response.statusCode == 200) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 4,screenName:SAccountScreenView())),
-              (Route<dynamic> route) => false,
+          MaterialPageRoute(
+              builder: (context) =>
+                  SMainScreenView(index: 4, screenName: SAccountScreenView())),
+          (Route<dynamic> route) => false,
         );
-        Utils.showPrimarySnackbar(context,"Updated Successfully",
+        Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         print("Updated Successfully");
       } else {
-        Utils.showPrimarySnackbar(context,"Error on uploading",
+        Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
       }
       // response.stream.transform(utf8.decoder).listen((value) {
@@ -560,5 +571,4 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     });
     return true;
   }
-
 }

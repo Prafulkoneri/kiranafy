@@ -1,11 +1,13 @@
-class GetAreaListReqModel{
-  String ? cityId;
+class GetAreaListReqModel {
+  String? cityId;
+
   GetAreaListReqModel({
     this.cityId,
   });
-  Map<String,dynamic> toJson(){
+
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data["city_id"]=cityId;
+    data["city_id"] = cityId;
     return data;
   }
 }

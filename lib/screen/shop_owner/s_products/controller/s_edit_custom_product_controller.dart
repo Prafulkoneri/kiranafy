@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custom_products_model.dart';
@@ -26,10 +25,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class EditCustomProductController extends ChangeNotifier {
   SCustomProductDataRepo customProductDataRepo = SCustomProductDataRepo();
-  EditCustomProductRepo editCustomProductRepo=EditCustomProductRepo();
+  EditCustomProductRepo editCustomProductRepo = EditCustomProductRepo();
   bool isLoading = true;
-  CustomData ? customdata;
-  Data ? customProductData;
+  CustomData? customdata;
+  Data? customProductData;
   String selectedCategory = "1";
   List<CategoryData> categoryData = [];
   List<BrandData>? brandData;
@@ -40,51 +39,51 @@ class EditCustomProductController extends ChangeNotifier {
   bool fullFillCravings = false;
   File productImage = File("");
   List<Widget> cards = [];
-  String brandId="";
-  String categoryName="";
-  String brandName="";
-  String productName="";
-  String taxName="";
-  String taxId="";
+  String brandId = "";
+  String categoryName = "";
+  String brandName = "";
+  String productName = "";
+  String taxName = "";
+  String taxId = "";
   List<ProductUnitDetail>? productUnitDetail;
-  TextEditingController productDescriptionController=TextEditingController();
-  TextEditingController productNameController=TextEditingController();
-  String unit="";
-  String unitCard="";
-  String value="";
-  String valueCard="";
-  String mrp="";
-  String mrpCard="";
-  String offer="";
-  String offerCard="";
-  String status="";
-  String statusCard="";
-  String categoryId="";
+  TextEditingController productDescriptionController = TextEditingController();
+  TextEditingController productNameController = TextEditingController();
+  String unit = "";
+  String unitCard = "";
+  String value = "";
+  String valueCard = "";
+  String mrp = "";
+  String mrpCard = "";
+  String offer = "";
+  String offerCard = "";
+  String status = "";
+  String statusCard = "";
+  String categoryId = "";
 
-  List<TextEditingController> valueController=[TextEditingController()];
-  List<TextEditingController> mrpController=[TextEditingController()];
-  List<TextEditingController> offerController=[TextEditingController()];
+  List<TextEditingController> valueController = [TextEditingController()];
+  List<TextEditingController> mrpController = [TextEditingController()];
+  List<TextEditingController> offerController = [TextEditingController()];
 
-  List<TextEditingController> valueCardController=[TextEditingController()];
-  List<TextEditingController> mrpCardController=[TextEditingController()];
-  List<TextEditingController> offerCardController=[TextEditingController()];
+  List<TextEditingController> valueCardController = [TextEditingController()];
+  List<TextEditingController> mrpCardController = [TextEditingController()];
+  List<TextEditingController> offerCardController = [TextEditingController()];
 
   List<bool> switchValue = [];
   List<bool> switchCardValue = [];
   List<XFile> imagefiles1 = [];
   List<XFile> imagefiles2 = [];
   List<XFile> imagefiles3 = [];
-  List<String> unitList=[];
-  int totalRows=0;
-  String productFeatureImage="";
+  List<String> unitList = [];
+  int totalRows = 0;
+  String productFeatureImage = "";
 
-  UploadCustomProductRepo uploadCustomProductRepo=UploadCustomProductRepo();
-  String productId="";
+  UploadCustomProductRepo uploadCustomProductRepo = UploadCustomProductRepo();
+  String productId = "";
 
   //for adminProduct
-  bool isEditEnabled=false;
+  bool isEditEnabled = false;
 
-  Future<void> initState(context, createCard,index,id,catId) async {
+  Future<void> initState(context, createCard, index, id, catId) async {
     imagefiles1.clear();
     imagefiles2.clear();
     imagefiles3.clear();
@@ -100,45 +99,45 @@ class EditCustomProductController extends ChangeNotifier {
     await getCustomProductData(context);
     cards.clear();
     unitList.clear();
-    productId=id;
-    categoryId=catId;
+    productId = id;
+    categoryId = catId;
     // await getCustomProductData(context);
-   await getCustomProductDetails(context);
+    await getCustomProductDetails(context);
     print(productId);
     // await onAddWidget(createCard,index);
   }
 
-  void onBrandSelected(value){
-    brandId=value;
+  void onBrandSelected(value) {
+    brandId = value;
     notifyListeners();
   }
 
-  void onTax(value){
-    taxId=value;
+  void onTax(value) {
+    taxId = value;
     notifyListeners();
   }
 
-  getValueData(){
+  getValueData() {
     String a = '';
     for (int i = 0; i < valueController.length; i++) {
-      if(valueController[i].text!="") {
+      if (valueController[i].text != "") {
         a += "${valueController[i].text},";
       }
     }
     a = a.substring(0, a.length - 1);
-    value=a;
+    value = a;
     print(value);
     notifyListeners();
   }
 
-  getValueCardData(){
+  getValueCardData() {
     String a = '';
     for (int i = 0; i < valueCardController.length; i++) {
-      if(valueCardController[i].text!="") {
+      if (valueCardController[i].text != "") {
         a += ",${valueCardController[i].text},";
       }
     }
-    if(a!="") {
+    if (a != "") {
       a = a.substring(0, a.length - 1);
       valueCard = a;
       print(valueCard);
@@ -146,33 +145,33 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  onUnitDataSelect(value,index){
-    unitList.insert(index,value.toString());
+  onUnitDataSelect(value, index) {
+    unitList.insert(index, value.toString());
     print("unitList${unitList}");
     notifyListeners();
   }
 
-  getMrpData(){
+  getMrpData() {
     String a = '';
     for (int i = 0; i < mrpController.length; i++) {
-      if(mrpController[i].text!="") {
+      if (mrpController[i].text != "") {
         a += "${mrpController[i].text},";
       }
     }
     a = a.substring(0, a.length - 1);
-    mrp=a;
+    mrp = a;
     print(mrp);
     notifyListeners();
   }
 
-  getMrpCardData(){
+  getMrpCardData() {
     String a = '';
     for (int i = 0; i < mrpCardController.length; i++) {
-      if(mrpCardController[i].text!="") {
+      if (mrpCardController[i].text != "") {
         a += ",${mrpCardController[i].text},";
       }
     }
-    if(a!="") {
+    if (a != "") {
       a = a.substring(0, a.length - 1);
       mrpCard = a;
       print(mrpCard);
@@ -180,27 +179,27 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  getOfferData(){
+  getOfferData() {
     String a = '';
     for (int i = 0; i < offerController.length; i++) {
-      if(offerController[i].text!="") {
+      if (offerController[i].text != "") {
         a += "${offerController[i].text},";
       }
     }
     a = a.substring(0, a.length - 1);
-    offer=a;
+    offer = a;
     print(offer);
     notifyListeners();
   }
 
-  getOfferCardData(){
+  getOfferCardData() {
     String a = '';
     for (int i = 0; i < offerCardController.length; i++) {
-      if(offerCardController[i].text!="") {
+      if (offerCardController[i].text != "") {
         a += ",${offerCardController[i].text},";
       }
     }
-    if(a!="") {
+    if (a != "") {
       a = a.substring(0, a.length - 1);
       offerCard = a;
       print(offerCard);
@@ -208,26 +207,25 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  getUnitData(){
+  getUnitData() {
     String a = '';
     for (int i = 0; i < unitList.length; i++) {
-      if(unitList[i]!="") {
+      if (unitList[i] != "") {
         a += "${unitList[i]},";
       }
     }
     a = a.substring(0, a.length - 1);
-    unit=a;
+    unit = a;
     notifyListeners();
   }
 
-  getSwitchValue(){
+  getSwitchValue() {
     String a = '';
     for (int i = 0; i < switchValue.length; i++) {
       if (mrpController[i].text != "") {
         if (switchValue[i]) {
           a += "active,";
-        }
-        else {
+        } else {
           a += "inactive,";
         }
       }
@@ -238,20 +236,19 @@ class EditCustomProductController extends ChangeNotifier {
     }
   }
 
-  getSwitchCardValue(){
+  getSwitchCardValue() {
     String a = '';
     for (int i = 0; i < switchCardValue.length; i++) {
       if (switchCardValue[i]) {
         a += "active,";
-      }
-      else {
+      } else {
         a += "inactive,";
       }
 
       print(a);
-      if(a!="") {
+      if (a != "") {
         // a = a.substring(0, a.length - 1);
-        statusCard =  a;
+        statusCard = a;
       }
       print(statusCard);
       notifyListeners();
@@ -259,11 +256,13 @@ class EditCustomProductController extends ChangeNotifier {
   }
 
   Future<void> getCustomProductData(context) async {
-
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
-    customProductDataRepo.customProductDataModel(pref.getString("successToken")).then((response) {
-      final result = CustomProductDataResModel.fromJson(jsonDecode(response.body));
+    customProductDataRepo
+        .customProductDataModel(pref.getString("successToken"))
+        .then((response) {
+      final result =
+          CustomProductDataResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         customdata = result.data;
         categoryData = customdata?.categoryData ?? [];
@@ -281,7 +280,7 @@ class EditCustomProductController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -291,55 +290,78 @@ class EditCustomProductController extends ChangeNotifier {
     );
   }
 
-  EditCustomProductsRequestModel get editCustomProductsRequestModel=>EditCustomProductsRequestModel(
-    product_id: productId,
-  );
-  
-  Future getCustomProductDetails(context)async{
+  EditCustomProductsRequestModel get editCustomProductsRequestModel =>
+      EditCustomProductsRequestModel(
+        product_id: productId,
+      );
+
+  Future getCustomProductDetails(context) async {
     print("hello");
-    isEditEnabled=false;
+    isEditEnabled = false;
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     editCustomProductRepo
-        .getCustomProductDetails(editCustomProductsRequestModel,pref.getString("successToken"))
+        .getCustomProductDetails(
+            editCustomProductsRequestModel, pref.getString("successToken"))
         .then((response) {
-          print("9999999999999");
+      print("9999999999999");
       log(response.body);
-          print("9999999999999");
+      print("9999999999999");
       final result =
-      EditCustomProductsResponseModel.fromJson(jsonDecode(response.body));
+          EditCustomProductsResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         customProductData = result.data;
-        categoryData = customProductData?.categoryData??[];
+        categoryData = customProductData?.categoryData ?? [];
         brandData = customProductData?.brandData;
         taxData = customProductData?.taxData;
         unitData = customProductData?.unitData;
-        productNameController.text=customProductData?.productDetails?.productName.toString()??"";
-        categoryId=customProductData?.productDetails?.categoryId.toString()??"";
-        brandId=customProductData?.productDetails?.brandId.toString()??"";
+        productNameController.text =
+            customProductData?.productDetails?.productName.toString() ?? "";
+        categoryId =
+            customProductData?.productDetails?.categoryId.toString() ?? "";
+        brandId = customProductData?.productDetails?.brandId.toString() ?? "";
         print("fjafsdf");
         print(brandId);
 
-        taxId=customProductData?.productDetails?.taxId.toString()??"";
+        taxId = customProductData?.productDetails?.taxId.toString() ?? "";
         print(taxId);
-        showUnderRecommendedProducts=customProductData?.productDetails?.showUnderRecommandedProducts=="yes"?true:false;
-        showUnderSeasonalProducts=customProductData?.productDetails?.showUnderSeasonalProducts=="yes"?true:false;
-        fullFillCravings=customProductData?.productDetails?.showUnderFullfillYourCravings=="yes"?true:false;
-        productDescriptionController.text=customProductData?.productDetails?.productDescription.toString()??"";
-        productFeatureImage=customProductData?.productDetails?.productImagePath??"";
-        productUnitDetail=customProductData?.productDetails?.productUnitDetails??[];
-        int length=productUnitDetail?.length??0;
+        showUnderRecommendedProducts =
+            customProductData?.productDetails?.showUnderRecommandedProducts ==
+                    "yes"
+                ? true
+                : false;
+        showUnderSeasonalProducts =
+            customProductData?.productDetails?.showUnderSeasonalProducts ==
+                    "yes"
+                ? true
+                : false;
+        fullFillCravings =
+            customProductData?.productDetails?.showUnderFullfillYourCravings ==
+                    "yes"
+                ? true
+                : false;
+        productDescriptionController.text =
+            customProductData?.productDetails?.productDescription.toString() ??
+                "";
+        productFeatureImage =
+            customProductData?.productDetails?.productImagePath ?? "";
+        productUnitDetail =
+            customProductData?.productDetails?.productUnitDetails ?? [];
+        int length = productUnitDetail?.length ?? 0;
         valueController.clear();
         mrpController.clear();
         offerController.clear();
         unitList.clear();
-        for(int i=0;i<length;i++){
-          unitList.add(productUnitDetail?[i].unitId.toString()??"");
-          valueController.add(TextEditingController(text: productUnitDetail?[i].weight));
-          mrpController.add(TextEditingController(text: productUnitDetail?[i].mrpPrice.toString()));
-          offerController.add(TextEditingController(text: productUnitDetail?[i].offerPrice.toString()));
+        for (int i = 0; i < length; i++) {
+          unitList.add(productUnitDetail?[i].unitId.toString() ?? "");
+          valueController
+              .add(TextEditingController(text: productUnitDetail?[i].weight));
+          mrpController.add(TextEditingController(
+              text: productUnitDetail?[i].mrpPrice.toString()));
+          offerController.add(TextEditingController(
+              text: productUnitDetail?[i].offerPrice.toString()));
         }
-        switchValue = List<bool>.filled(length, true,growable: true);
+        switchValue = List<bool>.filled(length, true, growable: true);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -350,7 +372,7 @@ class EditCustomProductController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -360,12 +382,10 @@ class EditCustomProductController extends ChangeNotifier {
     );
   }
 
-
   void onCategorySelected(value) {
     selectedCategory = value;
     notifyListeners();
   }
-
 
   void onUnderRecommendedProductSelected(value) {
     showUnderRecommendedProducts = value;
@@ -381,8 +401,6 @@ class EditCustomProductController extends ChangeNotifier {
     fullFillCravings = value;
     notifyListeners();
   }
-
-
 
   void openProductImage() async {
     final ImagePicker imgpicker = ImagePicker();
@@ -401,7 +419,6 @@ class EditCustomProductController extends ChangeNotifier {
 
       imagefiles1.insert(index, pickedfiles);
       print(imagefiles1[index].path);
-
     }
     notifyListeners();
   }
@@ -411,9 +428,8 @@ class EditCustomProductController extends ChangeNotifier {
     var pickedfiles = await imgpicker.pickImage(source: ImageSource.gallery);
     if (pickedfiles != null) {
       imagefiles2.removeAt(index);
-      imagefiles2.insert(index,pickedfiles);
+      imagefiles2.insert(index, pickedfiles);
       print(imagefiles2[index].path);
-
     }
     notifyListeners();
   }
@@ -429,7 +445,7 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> onAddWidget(createdCard,index) async {
+  Future<void> onAddWidget(createdCard, index) async {
     cards.add(createdCard);
     // valueCardController.removeAt(index);
     // mrpCardController.removeAt(index);
@@ -458,10 +474,10 @@ class EditCustomProductController extends ChangeNotifier {
   }
 
   Future<void> uploadCustomProduct(context) async {
-    int count=productUnitDetail?.length??0;
-    totalRows=count+cards.length;
+    int count = productUnitDetail?.length ?? 0;
+    totalRows = count + cards.length;
 
-    if(cards.length!=0){
+    if (cards.length != 0) {
       await getValueCardData();
       await getMrpCardData();
       await getOfferCardData();
@@ -474,19 +490,23 @@ class EditCustomProductController extends ChangeNotifier {
     await getSwitchValue();
 
     SharedPreferences pref = await SharedPreferences.getInstance();
-    await
-    uploadCustomProductRepo
-        .uploadCustomProduct(uploadCustomProductReqModel,pref.getString("successToken"))
+    await uploadCustomProductRepo
+        .uploadCustomProduct(
+            uploadCustomProductReqModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result =
-      UploadCustomProductResModel.fromJson(jsonDecode(response.body));
+          UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print(categoryId);
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId:categoryId),)),
-              (Route<dynamic> route) => false,
+          MaterialPageRoute(
+              builder: (context) => SMainScreenView(
+                    index: 0,
+                    screenName: SSelectedProductView(categoryId: categoryId),
+                  )),
+          (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -498,7 +518,7 @@ class EditCustomProductController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -508,30 +528,31 @@ class EditCustomProductController extends ChangeNotifier {
     );
   }
 
-  UploadCustomProductReqModel get uploadCustomProductReqModel =>UploadCustomProductReqModel(
-    showUnderFullfillCravings: fullFillCravings?"yes":"no",
-    categoryId: categoryId,
-    brandId: brandId,
-    taxId: taxId,
-    productDescription: productDescriptionController.text,
-    productName: productNameController.text,
-    showUnderRecommendedProduct: showUnderRecommendedProducts?"yes":"no",
-    showUnderSeasonalProduct: showUnderSeasonalProducts?"yes":"no",
-    mrpPrice: mrp+mrpCard ,
-    offerPrice: offer+offerCard,
-    status: status+statusCard,
-    totalRows: totalRows.toString(),
-    unitID: unit+unitCard,
-    weight: value+valueCard,
-  );
-
+  UploadCustomProductReqModel get uploadCustomProductReqModel =>
+      UploadCustomProductReqModel(
+        showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
+        categoryId: categoryId,
+        brandId: brandId,
+        taxId: taxId,
+        productDescription: productDescriptionController.text,
+        productName: productNameController.text,
+        showUnderRecommendedProduct:
+            showUnderRecommendedProducts ? "yes" : "no",
+        showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
+        mrpPrice: mrp + mrpCard,
+        offerPrice: offer + offerCard,
+        status: status + statusCard,
+        totalRows: totalRows.toString(),
+        unitID: unit + unitCard,
+        weight: value + valueCard,
+      );
 
   Future uploadImage(context) async {
     print("hellooooo");
-    int count=productUnitDetail?.length??0;
-    totalRows=count+cards.length;
+    int count = productUnitDetail?.length ?? 0;
+    totalRows = count + cards.length;
 
-    if(cards.length!=0){
+    if (cards.length != 0) {
       await getValueCardData();
       await getMrpCardData();
       await getOfferCardData();
@@ -543,31 +564,34 @@ class EditCustomProductController extends ChangeNotifier {
     await getOfferData();
     await getSwitchValue();
 
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    String token=pref.getString("successToken").toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.uploadAdminProduct}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
-    request.headers['Authorization'] ="Bearer $token";
+    request.headers['Authorization'] = "Bearer $token";
     request.fields['product_id'] = productId;
-    request.fields['show_under_fullfill_your_cravings'] = fullFillCravings?"yes":"no";
-    request.fields['show_under_recommanded_products'] = showUnderRecommendedProducts?"yes":"no";
-    request.fields['show_under_seasonal_products'] = showUnderSeasonalProducts?"yes":"no";
-    request.fields["unit_ids"]=unit+unitCard;
-    request.fields["weight_ids"]=value+valueCard;
-    request.fields["mrp_price_ids"]=mrp+mrpCard;
-    request.fields["offer_price_ids"]=offer+offerCard;
-    request.fields["status_ids"]=status+statusCard;
-    request.fields["total_rows"]=totalRows.toString();
+    request.fields['show_under_fullfill_your_cravings'] =
+        fullFillCravings ? "yes" : "no";
+    request.fields['show_under_recommanded_products'] =
+        showUnderRecommendedProducts ? "yes" : "no";
+    request.fields['show_under_seasonal_products'] =
+        showUnderSeasonalProducts ? "yes" : "no";
+    request.fields["unit_ids"] = unit + unitCard;
+    request.fields["weight_ids"] = value + valueCard;
+    request.fields["mrp_price_ids"] = mrp + mrpCard;
+    request.fields["offer_price_ids"] = offer + offerCard;
+    request.fields["status_ids"] = status + statusCard;
+    request.fields["total_rows"] = totalRows.toString();
     print(productId);
     print(request.fields);
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
-    List<http.MultipartFile> newList =  <http.MultipartFile>[];
-    if(imagefiles1.isNotEmpty) {
+    List<http.MultipartFile> newList = <http.MultipartFile>[];
+    if (imagefiles1.isNotEmpty) {
       for (int i = 0; i < imagefiles1.length; i++) {
         XFile imageData1 = imagefiles1[i];
         print(imageData1);
-        var stream = new http.ByteStream(
-            DelegatingStream.typed(imageData1.openRead()));
+        var stream =
+            new http.ByteStream(DelegatingStream.typed(imageData1.openRead()));
         var length = await imageData1.length();
         var multipartFile = new http.MultipartFile(
             "unit_based_product_image_1_path[$i]", stream, length,
@@ -575,12 +599,12 @@ class EditCustomProductController extends ChangeNotifier {
         newList.add(multipartFile);
       }
     }
-    if(imagefiles2.isNotEmpty) {
+    if (imagefiles2.isNotEmpty) {
       for (int i = 0; i < imagefiles2.length; i++) {
         XFile imageData2 = imagefiles2[i];
         print(imageData2);
-        var stream = new http.ByteStream(
-            DelegatingStream.typed(imageData2.openRead()));
+        var stream =
+            new http.ByteStream(DelegatingStream.typed(imageData2.openRead()));
         var length = await imageData2.length();
         var multipartFile = new http.MultipartFile(
             "unit_based_product_image_2_path[$i]", stream, length,
@@ -588,12 +612,12 @@ class EditCustomProductController extends ChangeNotifier {
         newList.add(multipartFile);
       }
     }
-    if(imagefiles3.isNotEmpty) {
+    if (imagefiles3.isNotEmpty) {
       for (int i = 0; i < imagefiles3.length; i++) {
         XFile imageData3 = imagefiles3[i];
         print(imageData3);
-        var stream = new http.ByteStream(
-            DelegatingStream.typed(imageData3.openRead()));
+        var stream =
+            new http.ByteStream(DelegatingStream.typed(imageData3.openRead()));
         var length = await imageData3.length();
         var multipartFile = new http.MultipartFile(
             "unit_based_product_image_3_path[$i]", stream, length,
@@ -603,15 +627,15 @@ class EditCustomProductController extends ChangeNotifier {
     }
     request.files.addAll(newList);
     print(request.files[2].filename);
-    await request.send().then((response)async{
+    await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
       print("respStr${respStr}");
       if (response.statusCode == 200) {
-        Utils.showPrimarySnackbar(context,"Updated Successfully",
+        Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         print("Updated Successfully");
       } else {
-        Utils.showPrimarySnackbar(context,"Error on uploading",
+        Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
       }
       // response.stream.transform(utf8.decoder).listen((value) {
@@ -620,8 +644,4 @@ class EditCustomProductController extends ChangeNotifier {
     });
     return true;
   }
-
-
-
-
 }

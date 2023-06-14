@@ -12,7 +12,7 @@ class AccountDetailsResModel {
   List<CityData>? cities;
   List<AreaData>? areas;
   List<ShopBannerImageData>? shopBannerImages;
-  List ? pincode;
+  List? pincode;
 
   AccountDetailsResModel({
     required this.status,
@@ -69,7 +69,7 @@ class AccountDetailsResModel {
     }
 
     if (json["pincodes"] != null) {
-      pincode =[];
+      pincode = [];
       json["pincodes"].forEach((v) {
         pincode!.add(v);
       });
@@ -87,13 +87,9 @@ class AccountDetailsResModel {
 
 ////Area
 
-
 ////CityData
 
-
-
 ////Country
-
 
 class ShopBannerImageData {
   int? id;
@@ -105,6 +101,7 @@ class ShopBannerImageData {
     required this.shopBannerImagePath,
     required this.shopBannerImageName,
   });
+
   ShopBannerImageData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     shopBannerImagePath = json["shop_banner_image_path"];
@@ -165,5 +162,3 @@ class ShopDetailsData {
     shopPincode = json["shop_pincode"];
   }
 }
-
-

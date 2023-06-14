@@ -12,7 +12,7 @@ import 'package:local_supper_market/screen/customer/category/view/category_view.
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/products/views/product_screen.dart';
+import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/review/view/c_review_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/category.dart';
 
@@ -198,7 +198,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             //<-- SEE HERE
                             // right: 15.w,
                             // left: 0.w,
-                            bottom: 20.w,
+                            bottom: 30.w,
                             child: Container(
                               padding: EdgeInsets.only(left: 15.w, right: 15.w),
                               width: ScreenUtil().screenWidth,
@@ -363,7 +363,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ],
                         ),
                       ),
-                      watch.allOfferProducts?.isNotEmpty ?? false
+                      watch.offerProduct!.isNotEmpty
                           ? Column(
                               children: [
                                 SizedBox(
@@ -400,7 +400,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                       index: 0,
                                                       screenName:
                                                           AllOfferProducts(
-                                                        shopId: widget.shopId,
+                                                        shopId: watch.shopDetails?.id.toString(),
                                                       ),
                                                     )),
                                             (Route<dynamic> route) => false,
@@ -450,19 +450,19 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                         ),
                                         GestureDetector(
                                           onTap: () {
-                                            // Navigator.pushAndRemoveUntil(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //       builder: (context) => MainScreenView(
-                                            //           index: 1,
-                                            //           screenName: ProductScreenView(
-                                            //             categoryId: widget.categoryId,
-                                            //             productId: element?.id.toString(),
-                                            //             shopId: widget.shopId,
-                                            //           )
-                                            //       )),
-                                            //       (Route<dynamic> route) => false,
-                                            // );
+                                            Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => MainScreenView(
+                                                      index: 1,
+                                                      screenName: ProductScreenView(
+                                                        categoryId: element?.categoryId.toString(),
+                                                        productId: element?.id.toString(),
+                                                        shopId: element?.shopId,
+                                                      )
+                                                  )),
+                                                  (Route<dynamic> route) => false,
+                                            );
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -657,10 +657,15 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                 : Text(""),
                                                           ],
                                                         ),
-                                                        SvgPicture.asset(
-                                                          'assets/images/add.svg',
-                                                          // width: 15.w,
-                                                          // height: 19.h,
+                                                        GestureDetector(
+                                                          onTap:(){
+                                                            read.addToCart(element?.productType,element?.productId,element?.shopId,context);
+                                                          },
+                                                          child: SvgPicture.asset(
+                                                            'assets/images/add.svg',
+                                                            // width: 15.w,
+                                                            // height: 19.h,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -714,7 +719,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                         index: 0,
                                                         screenName:
                                                             AllSeasonalProducts(
-                                                          shopId: widget.shopId,
+                                                          shopId: watch.shopDetails?.id.toString()
                                                         ))),
                                             (Route<dynamic> route) => false,
                                           );
@@ -769,7 +774,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   ?.id
                                                                   .toString(),
                                                               shopId:
-                                                                  widget.shopId,
+                                                                  element?.shopId,
                                                               productType: element
                                                                   ?.productType),
                                                     )),
@@ -966,10 +971,15 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   : Text(""),
                                                             ],
                                                           ),
-                                                          SvgPicture.asset(
-                                                            'assets/images/add.svg',
-                                                            // width: 15.w,
-                                                            // height: 19.h,
+                                                          GestureDetector(
+                                                            onTap: (){
+                                                              read.addToCart(element?.productType,element?.productId,element?.shopId,context);
+                                                            },
+                                                            child: SvgPicture.asset(
+                                                              'assets/images/add.svg',
+                                                              // width: 15.w,
+                                                              // height: 19.h,
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -1327,7 +1337,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                           screenName:
                                                               AllRecommandedProductsView(
                                                             shopId:
-                                                                widget.shopId,
+                                                                watch.shopId,
                                                           ))),
                                               (Route<dynamic> route) => false,
                                             );
@@ -1443,10 +1453,15 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    SvgPicture.asset(
-                                                      'assets/images/add.svg',
-                                                      // width: 30.w,
-                                                      // height: 30.h,
+                                                    GestureDetector(
+                                                      onTap:(){
+                                                        read.addToCart(element?.productType,element?.productId,element?.shopId,context);
+                                                      },
+                                                      child: SvgPicture.asset(
+                                                        'assets/images/add.svg',
+                                                        // width: 30.w,
+                                                        // height: 30.h,
+                                                      ),
                                                     ),
                                                   ],
                                                 )
@@ -1470,8 +1485,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                         productId: element
                                                                             ?.id
                                                                             .toString(),
-                                                                        shopId: widget
-                                                                            .shopId,
+                                                                        shopId: element?.shopId,
                                                                         productType:
                                                                             element?.productType),
                                                               )),

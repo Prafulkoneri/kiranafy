@@ -20,6 +20,7 @@ class BuySubscriptionResponseModel {
     required this.status,
     required this.message,
   });
+
   BuySubscriptionResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];

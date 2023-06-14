@@ -119,7 +119,6 @@ class CustomProduct {
   String? productImagePath;
   List<UnitDetail>? unitDetails;
 
-
   CustomProduct({
     this.id,
     this.productName,
@@ -127,11 +126,12 @@ class CustomProduct {
     this.productType,
     this.unitDetails,
   });
-  CustomProduct.fromJson(Map<String,dynamic>json){
-    id=json["id"];
-    productName=json["product_name"];
-    productType=json["product_type"];
-    productImagePath=json["product_image_path"];
+
+  CustomProduct.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    productName = json["product_name"];
+    productType = json["product_type"];
+    productImagePath = json["product_image_path"];
     if (json["unit_details"] != null) {
       unitDetails = <UnitDetail>[];
       json["unit_details"].forEach((v) {

@@ -18,14 +18,13 @@ class SAccountScreenController extends ChangeNotifier {
   String number = "";
   String shopName = "";
   String shopOwnerName = "";
-  String shopImage="";
+  String shopImage = "";
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
+
   // void onEditBtnClicked(context) {
   //   Navigator.push(
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
   // }
-
-
 
   Future<void> initState(context) async {
     print("999999999999");
@@ -58,12 +57,11 @@ class SAccountScreenController extends ChangeNotifier {
         email = shopDetails?.shopOwnerEmail ?? "";
         name = shopDetails?.shopName ?? "";
         shopName = shopDetails?.shopName ?? "";
-        shopOwnerName=shopDetails?.shopOwnerName??"";
-        if(result.shopBannerImages!.isNotEmpty) {
+        shopOwnerName = shopDetails?.shopOwnerName ?? "";
+        if (result.shopBannerImages!.isNotEmpty) {
           shopImage = result.shopBannerImages?[0].shopBannerImagePath ?? "";
-        }
-        else{
-          shopImage="";
+        } else {
+          shopImage = "";
         }
         notifyListeners();
       } else {

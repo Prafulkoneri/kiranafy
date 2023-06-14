@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget SPendingOrdersView() {
   return ListView.builder(
-      padding: EdgeInsets.only(left: 19.w, right: 19.w,top: 20.w),
+      padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
       itemCount: 10,
       physics: BouncingScrollPhysics(),
       shrinkWrap: true,
@@ -85,18 +85,15 @@ Widget SPendingOrdersView() {
                             color: Color(0xff3A3A3A)),
                       ),
                       SizedBox(
-                        width:7.w,
+                        width: 7.w,
                       ),
                       SvgPicture.asset("assets/icons/arrow_right.svg"),
                     ],
                   ),
-
-
                 ],
               ),
             ],
           ),
         );
       });
-
 }

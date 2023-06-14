@@ -23,6 +23,7 @@ class CustomerDetailResModel {
     required this.message,
     required this.data,
   });
+
   CustomerDetailResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -51,6 +52,7 @@ class ShopCustomerDetail {
     required this.mobileNumber,
     required this.isShopFavourite,
   });
+
   ShopCustomerDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     customerName = json["customer_name"];

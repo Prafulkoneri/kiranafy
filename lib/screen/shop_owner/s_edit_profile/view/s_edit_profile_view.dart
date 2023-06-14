@@ -25,6 +25,7 @@ import 'package:image_picker/image_picker.dart';
 
 class SEditProfileView extends StatefulWidget {
   final bool? fromDashBoard;
+
   const SEditProfileView({super.key, required this.fromDashBoard});
 
   @override

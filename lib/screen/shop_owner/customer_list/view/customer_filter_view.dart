@@ -26,7 +26,7 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
       child: Container(
         // height: 326.h,
         padding:
-        EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         width: 390.w,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +49,7 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
                           fontWeight: FontWeight.w500),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pop(context);
                       },
                       child: SvgPicture.asset(
@@ -73,12 +73,15 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
               color: grey1,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20.w, top: 17.w,),
+              padding: EdgeInsets.only(
+                left: 20.w,
+                top: 17.w,
+              ),
               child: Row(
                 children: [
                   PrimaryCheckBox(
                     value: watch.isFavToShopSelected,
-                    onChanged: (value){
+                    onChanged: (value) {
                       read.onFavToShopSelected(value);
                     },
                   ),
@@ -86,7 +89,10 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
                     padding: EdgeInsets.only(right: 10),
                     child: Text(
                       "Favourite To Shop",
-                      style: TextStyle(color: Black1, fontSize: 16.sp,fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: Black1,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ],
@@ -96,18 +102,23 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
               height: 17.w,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20.w,),
+              padding: EdgeInsets.only(
+                left: 20.w,
+              ),
               child: Row(
                 children: [
                   PrimaryCheckBox(
                     value: false,
-                    onChanged: (value){
+                    onChanged: (value) {
                       read.onOrderedButNotFavSelected(value);
                     },
                   ),
                   Text(
                     "Ordered But Not Favourite",
-                    style: TextStyle(color: Black1, fontSize: 16.sp,fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        color: Black1,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -136,7 +147,7 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
                     'Filter',
                     style: GoogleFonts.dmSans(
                       textStyle: const TextStyle(
-                        // color: SplashTex
+                          // color: SplashTex
                           letterSpacing: .5,
                           fontSize: 20,
                           fontWeight: FontWeight.w700),

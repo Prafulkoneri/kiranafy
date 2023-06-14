@@ -169,7 +169,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/products/views/product_screen.dart';
+import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_seasonal_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
@@ -241,28 +241,28 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                           mainAxisSpacing: 4.0),
                       itemBuilder: (BuildContext, index) {
                         final element = watch.seasonalProduct?[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MainScreenView(
-                                        index: 1,
-                                        screenName: ProductScreenView(
-                                            categoryId:
-                                                element?.categoryId.toString(),
-                                            // categoryId: watch.categoryId,
-                                            productId: element?.id.toString(),
-                                            shopId: widget.shopId,
-                                            productType: element?.productType),
-                                      )),
-                              (Route<dynamic> route) => false,
-                            );
-                          },
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
+                        return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainScreenView(
+                                      index: 1,
+                                      screenName: ProductScreenView(
+                                          categoryId:
+                                          element?.categoryId.toString(),
+                                          // categoryId: watch.categoryId,
+                                          productId: element?.id.toString(),
+                                          shopId: element?.shopId,
+                                          productType: element?.productType),
+                                    )),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
                             child: Container(
                               padding: EdgeInsets.only(
                                 left: 17.w,
@@ -436,10 +436,15 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                 : Text(""),
                                           ],
                                         ),
-                                        SvgPicture.asset(
-                                          'assets/images/add.svg',
-                                          // width: 15.w,
-                                          // height: 19.h,
+                                        GestureDetector(
+                                          onTap: (){
+                                            read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
+                                          },
+                                          child: SvgPicture.asset(
+                                            'assets/images/add.svg',
+                                            // width: 15.w,
+                                            // height: 19.h,
+                                          ),
                                         ),
                                       ],
                                     ),

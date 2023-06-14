@@ -12,7 +12,6 @@ class UpdateEditCouponReqModel {
   String? productId;
   String? productType;
 
-
   UpdateEditCouponReqModel({
     this.couponId,
     this.couponFromDate,
@@ -55,6 +54,7 @@ class UpdateEditCouponsResModel {
     required this.status,
     required this.message,
   });
+
   UpdateEditCouponsResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];

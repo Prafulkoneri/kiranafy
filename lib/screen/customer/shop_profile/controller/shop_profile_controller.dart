@@ -4,6 +4,8 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
@@ -30,16 +32,17 @@ class ShopProfileViewController extends ChangeNotifier {
   // Data? allproducts;
   CustomerViewShopRepo customerViewShopRepo = CustomerViewShopRepo();
   AllOfferProductsRepo allOfferProductsRepo = AllOfferProductsRepo();
-  ShopData? shopData;
+  ShopViewData? shopData;
   ShopDetails? shopDetails;
   List<ShopCategory>? shopCategory;
-  List<OfferProduct>? offerProduct;
-  List<AllOfferProducts>? allOfferProducts;
-  List<SeasonalProduct>? seasonalProduct;
-  List<RecommandedProducts>? recommandedProduct;
+  List<CustomerProductData>? offerProduct;
+  List<CustomerProductData>? allOfferProducts;
+  List<CustomerProductData>? seasonalProduct;
+  List<CustomerProductData>? recommandedProduct;
   List<BannerImageData>? bannerImageData;
   int _currentPage=0;
 
+  AddProductToCartRepo addProductToCartRepo =AddProductToCartRepo();
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
 
@@ -249,6 +252,33 @@ class ShopProfileViewController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+  Future<void> addToCart(pType,pId,sId,context)async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    addProductToCartRepo
+        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

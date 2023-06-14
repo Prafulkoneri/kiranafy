@@ -1,24 +1,28 @@
-class DeleteAdminProductReqModel{
-  String ? productId;
+class DeleteAdminProductReqModel {
+  String? productId;
+
   DeleteAdminProductReqModel({
     this.productId,
-});
-  Map<String,dynamic> toJson(){
-    Map<String,dynamic> data={};
-    data["product_id"]=productId;
+  });
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = {};
+    data["product_id"] = productId;
     return data;
   }
 }
 
-class DeleteAdminProductResModel{
-  int ? status;
-  String ? message;
+class DeleteAdminProductResModel {
+  int? status;
+  String? message;
+
   DeleteAdminProductResModel({
     this.status,
     this.message,
-});
-  DeleteAdminProductResModel.fromJson(Map<String,dynamic>json){
-    status=json["status"];
-    message=json["message"];
+  });
+
+  DeleteAdminProductResModel.fromJson(Map<String, dynamic> json) {
+    status = json["status"];
+    message = json["message"];
   }
 }

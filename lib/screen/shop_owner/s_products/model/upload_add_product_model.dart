@@ -2,7 +2,9 @@
 class UploadAddProductsRequestModel {
   String? category_id;
   String? product_id;
+
   UploadAddProductsRequestModel({this.category_id, this.product_id});
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["category_id"] = category_id;
@@ -20,6 +22,7 @@ class UploadAddProductResponseModel {
     required this.status,
     required this.message,
   });
+
   UploadAddProductResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];

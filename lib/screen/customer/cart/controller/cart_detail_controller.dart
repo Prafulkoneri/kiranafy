@@ -28,7 +28,7 @@ class CartDetailController extends ChangeNotifier {
         shopId: shopId,
       );
   List<CartList>? cartList;
-  ShopData? shopDetailData;
+  ShopDetails? shopDetailData;
   List<CartItemList>? cartItemList;
   String shopId = "";
   String cartId = "";

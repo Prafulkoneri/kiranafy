@@ -31,9 +31,9 @@ class SCategoryListController extends ChangeNotifier {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => SSelectedProductView(categoryId: id.toString())));
+            builder: (context) =>
+                SSelectedProductView(categoryId: id.toString())));
   }
-
 
   ////////////////// shop owner get selected categories list/////
   Future<void> shopOwnerSelectedCategoriesList(context) async {

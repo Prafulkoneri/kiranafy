@@ -8,6 +8,7 @@ class CustomerListModel {
     required this.message,
     required this.data,
   });
+
   CustomerListModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -22,6 +23,7 @@ class CustomerListData {
   CustomerListData({
     required this.customerDetails,
   });
+
   CustomerListData.fromJson(Map<String, dynamic> json) {
     if (json["customer_details"] != null) {
       customerDetails = <CustomerDetail>[];
@@ -52,6 +54,7 @@ class CustomerDetail {
     required this.mobileNumber,
     required this.isShopFavourite,
   });
+
   CustomerDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     customerName = json["customer_name"];

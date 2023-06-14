@@ -5,7 +5,8 @@ class ShopEditProfileRepo {
   Future<http.Response> getShopEditProfileDetails(token) async {
     try {
       print(Endpoint.getShopEditProfileDetail);
-      return await http.get(Uri.parse(Endpoint.getShopEditProfileDetail), headers: {
+      return await http
+          .get(Uri.parse(Endpoint.getShopEditProfileDetail), headers: {
         "Authorization": "Bearer $token",
         'Content-Type': 'application/json',
       });

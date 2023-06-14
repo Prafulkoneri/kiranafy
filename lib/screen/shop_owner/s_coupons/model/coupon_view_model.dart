@@ -27,6 +27,7 @@ class ViewCoupnDetailResModel {
     required this.data,
     required this.shopName,
   });
+
   ViewCoupnDetailResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -59,6 +60,7 @@ class CouponViewData {
     required this.couponTermsAndConditions,
     required this.status,
   });
+
   CouponViewData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     couponFromDate = json["coupon_from_date"];

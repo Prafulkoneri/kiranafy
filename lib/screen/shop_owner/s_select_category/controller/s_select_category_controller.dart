@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_select_category/reposito
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+
 class SSelectCategoryController extends ChangeNotifier {
   ShopAllCategoriesRepo categoriesListRepo = ShopAllCategoriesRepo();
   AddCategoryRepo addCategoryRepo = AddCategoryRepo();
@@ -21,13 +22,12 @@ class SSelectCategoryController extends ChangeNotifier {
   List<bool> selectedCategoryList = [];
   List selectedCategoryId = [];
   String selectedId = "";
-  bool isLoading=true;
+  bool isLoading = true;
 
   Future<void> initState(context) async {
-
     await getCategoriesList(context);
 
-  notifyListeners();
+    notifyListeners();
   }
 
   void onCategorySelected(index, id) {
@@ -44,28 +44,31 @@ class SSelectCategoryController extends ChangeNotifier {
 
   /////////////////////////////////  Start All Categories List/////////////////////
   Future<void> getCategoriesList(context) async {
-    isLoading=true;
+    isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
-    categoriesListRepo.shopAllCategoriesList(pref.getString("successToken")).then((response) {
+    categoriesListRepo
+        .shopAllCategoriesList(pref.getString("successToken"))
+        .then((response) {
       print(response.statusCode);
-     log("response.body${response.body}");
+      log("response.body${response.body}");
       final result =
           AllCategoryResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         categoriesList = result.data;
-        selectedCategoryList =
-            List<bool>.filled(categoriesList?.length ?? 0, false,growable: true);
-        int length=categoriesList?.length??0;
+        selectedCategoryList = List<bool>.filled(
+            categoriesList?.length ?? 0, false,
+            growable: true);
+        int length = categoriesList?.length ?? 0;
         selectedCategoryId.clear();
-        for(int i=0;i<length;i++){
-         if(categoriesList?[i].selectedByShopOwner=="yes"){
-           selectedCategoryList.insert(i,true);
-           selectedCategoryId.add(categoriesList?[i].id);
-         }
+        for (int i = 0; i < length; i++) {
+          if (categoriesList?[i].selectedByShopOwner == "yes") {
+            selectedCategoryList.insert(i, true);
+            selectedCategoryId.add(categoriesList?[i].id);
+          }
         }
         print(selectedCategoryList);
         print(selectedCategoryId);
-        isLoading=false;
+        isLoading = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -105,8 +108,10 @@ class SSelectCategoryController extends ChangeNotifier {
       if (response.statusCode == 200) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSCategoryListView())),
-              (Route<dynamic> route) => false,
+          MaterialPageRoute(
+              builder: (context) =>
+                  SMainScreenView(index: 0, screenName: SSCategoryListView())),
+          (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

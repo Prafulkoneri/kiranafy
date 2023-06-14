@@ -39,15 +39,16 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
           onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSCategoryListView())),
-                  (Route<dynamic> route) => false,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 0, screenName: SSCategoryListView())),
+              (Route<dynamic> route) => false,
             );
           },
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
-        read.addCategory(context);
-
+            read.addCategory(context);
           },
         ),
       ),
@@ -81,8 +82,7 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                           children: [
                             Container(
                               child: AppNetworkImages(
-                                imageUrl:
-                                  "${element?.categoryImagePath}"),
+                                  imageUrl: "${element?.categoryImagePath}"),
                               height: 60.w,
                               width: 80.w,
                             ),

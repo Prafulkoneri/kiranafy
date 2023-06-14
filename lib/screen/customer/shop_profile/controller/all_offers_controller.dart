@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
@@ -21,10 +23,10 @@ class AllOffersController extends ChangeNotifier {
   bool isLoading = true;
   Data? allproducts;
   AllOfferProductsRepo allOfferProductsRepo = AllOfferProductsRepo();
-
+  AddProductToCartRepo addProductToCartRepo=AddProductToCartRepo();
   List<ShopCategory>? shopCategory;
-  List<OfferProduct>? offerProduct;
-  List<AllOfferProducts>? allOfferProducts;
+  List<CustomerProductData>? offerProduct;
+  List<CustomerProductData>? allOfferProducts;
 
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
@@ -42,7 +44,8 @@ class AllOffersController extends ChangeNotifier {
   AllProductsReqModel get shopAllProductsReqModel => AllProductsReqModel(
       offset: offset.toString(), limit: "10", shopId: shopId);
 
-  Future<void> getAllOfferes(context, shopId) async {
+  Future<void> getAllOfferes(context, id) async {
+    shopId=id;
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     allOfferProductsRepo
@@ -73,47 +76,6 @@ class AllOffersController extends ChangeNotifier {
       },
     );
   }
-
-
-  ///////////////Seasonal Products/////////
-  // AllSeasonalProductsReqModel get shopAllSeasonalReqModel =>
-  //     AllSeasonalProductsReqModel(
-  //         offset: offset.toString(), limit: "10", shopId: shopId);
-  // AllOfferProductsRepo allSeasonalProductsRepo = AllOfferProductsRepo();
-
-  // Future<void> getAllSeasonalProducts(context, shopId) async {
-  //   isLoading = true;
-
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   allOfferProductsRepo
-  //       .getAllOffereProducts(
-  //           shopAllProductsReqModel, pref.getString("successToken"))
-  //       .then((response) {
-  //     log(response.body);
-  //     final result = ViewAllOfferProducts.fromJson(jsonDecode(response.body));
-  //     if (response.statusCode == 200) {
-  //       allseasonalproducts = result.
-  //       allSeasonalProducts = allseasonalproducts?.seasonalProducts;
-  //       isLoading = false;
-  //       showPaginationLoader = false;
-  //       notifyListeners();
-  //     } else {
-  //       Utils.showPrimarySnackbar(context, result.message,
-  //           type: SnackType.error);
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-  //   }).catchError(
-  //     (Object e) {
-  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-  //     },
-  //     test: (Object e) {
-  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-  //       return false;
-  //     },
-  //   );
-  // }
-//////Add Shop to fvrt
 
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
     shopId: shopId.toString(),
@@ -166,6 +128,34 @@ class AllOffersController extends ChangeNotifier {
       final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         favAllShop = true;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> addToCart(pType,pId,sId,context)async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    addProductToCartRepo
+        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();

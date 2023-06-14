@@ -60,6 +60,7 @@ class ShopUpdateProfileResModel {
     required this.status,
     required this.message,
   });
+
   ShopUpdateProfileResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];

@@ -243,7 +243,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                         topRight: Radius.circular(30))),
                                 context: context,
                                 builder: (BuildContext context) {
-                                 return OtpBottomSheetView();
+                                  return OtpBottomSheetView();
                                 },
                               );
                             });

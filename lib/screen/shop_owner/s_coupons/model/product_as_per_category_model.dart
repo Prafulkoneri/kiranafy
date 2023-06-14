@@ -24,6 +24,7 @@ class ProductAsPerCategoryResModel {
     required this.message,
     required this.data,
   });
+
   ProductAsPerCategoryResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -46,6 +47,7 @@ class ProductData {
     required this.productName,
     required this.productType,
   });
+
   ProductData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     productName = json["product_name"];

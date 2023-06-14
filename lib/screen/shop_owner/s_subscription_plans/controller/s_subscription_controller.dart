@@ -89,7 +89,7 @@ class SSubscriptionController extends ChangeNotifier {
         print(response.body);
         subscriptionData = result.subscriptionData;
         addOnServicesList = result.addOnServicesList;
-        planAmount=subscriptionData?[0].subscriptionPrice.toString()??"";
+        planAmount = subscriptionData?[0].subscriptionPrice.toString() ?? "";
         selectAddonServicesList = List<bool>.filled(
             addOnServicesList?.length ?? 0, false,
             growable: true);
@@ -121,7 +121,7 @@ class SSubscriptionController extends ChangeNotifier {
       BuySubscriptionRequestModel(
           subscriptionId: selectedPlanId, serviceId: selectedServicesId);
 
-  Future<void> buySubscriptionPlan(context,loggedIn) async {
+  Future<void> buySubscriptionPlan(context, loggedIn) async {
     if (selectedAddOnServicesId.isNotEmpty) {
       SharedPreferences pref = await SharedPreferences.getInstance();
       String a = '';
@@ -139,20 +139,17 @@ class SSubscriptionController extends ChangeNotifier {
             BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
         print(response.statusCode);
         if (response.statusCode == 200) {
-          if(loggedIn){
+          if (loggedIn) {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      SMainScreenView(
+                  builder: (context) => SMainScreenView(
                         index: 4,
-                        screenName:
-                        SAccountScreenView(),
+                        screenName: SAccountScreenView(),
                       )),
-                  (Route<dynamic> route) => false,
+              (Route<dynamic> route) => false,
             );
-          }
-          else {
+          } else {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => KycCompletedView()));
           }

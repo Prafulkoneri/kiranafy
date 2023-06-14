@@ -54,6 +54,7 @@ class ShopSubscriptionPlansResModel {
     required this.subscriptionData,
     required this.addOnServicesList,
   });
+
   ShopSubscriptionPlansResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -81,6 +82,7 @@ class AddOnServicesList {
     required this.id,
     required this.addOnService,
   });
+
   AddOnServicesList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     addOnService = json["add_on_service"];
@@ -103,6 +105,7 @@ class SubscriptionData {
     required this.validityIn,
     required this.planBenifits,
   });
+
   SubscriptionData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     planName = json["plan_name"];

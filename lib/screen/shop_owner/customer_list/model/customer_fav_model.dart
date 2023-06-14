@@ -10,12 +10,11 @@ class CustomerAddedToFavResModel {
     required this.message,
     required this.data,
   });
+
   CustomerAddedToFavResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     data =
-    json['data'] != null ? CustomerListData.fromJson(json['data']) : null;
+        json['data'] != null ? CustomerListData.fromJson(json['data']) : null;
   }
 }
-
-

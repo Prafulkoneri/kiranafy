@@ -28,25 +28,22 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
 class SEditAdminProductView extends StatefulWidget {
-  final String ? categoryId;
-  final String ? productId;
-  const SEditAdminProductView({super.key,required this.productId,required this.categoryId});
+  final String? categoryId;
+  final String? productId;
+
+  const SEditAdminProductView(
+      {super.key, required this.productId, required this.categoryId});
 
   @override
   State<SEditAdminProductView> createState() => _SEditAdminProductViewState();
 }
 
-
-
 class _SEditAdminProductViewState extends State<SEditAdminProductView> {
-
-
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<EditAdminProductController>()
-          .initState(context, CreateWidget(0),0,widget.productId,widget.categoryId);
+      context.read<EditAdminProductController>().initState(
+          context, CreateWidget(0), 0, widget.productId, widget.categoryId);
     });
   }
 
@@ -60,11 +57,16 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          onBackBtnPressed: (){
+          onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: widget.categoryId,))),
-                  (Route<dynamic> route) => false,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 0,
+                      screenName: SSelectedProductView(
+                        categoryId: widget.categoryId,
+                      ))),
+              (Route<dynamic> route) => false,
             );
           },
           title: "Edit Product",
@@ -90,7 +92,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                     height: 48.w,
                     decoration: BoxDecoration(
                       border: Border.all(color: Color(0xffEFEFEF)),
-                      borderRadius:  BorderRadius.circular(6.w),
+                      borderRadius: BorderRadius.circular(6.w),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,15 +102,17 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                             SizedBox(
                               width: 12.w,
                             ),
-                            Text(watch.categoryName??"",style: TextStyle(
-                                fontSize: 16.sp,
-                                color: Black1,
-                                fontWeight: FontWeight.w400),)
+                            Text(
+                              watch.categoryName ?? "",
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: Black1,
+                                  fontWeight: FontWeight.w400),
+                            )
                           ],
                         ),
                         Row(
                           children: [
-
                             Icon(
                               Icons.keyboard_arrow_down_outlined,
                               color: Color(0xffB3B3B3),
@@ -118,7 +122,6 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                             ),
                           ],
                         ),
-
                       ],
                     ),
                   ),
@@ -141,7 +144,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                           height: 48.w,
                           decoration: BoxDecoration(
                             border: Border.all(color: Color(0xffEFEFEF)),
-                            borderRadius:  BorderRadius.circular(6.w),
+                            borderRadius: BorderRadius.circular(6.w),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,15 +154,17 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                   SizedBox(
                                     width: 12.w,
                                   ),
-                                  Text(watch.brandName??"",style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: Black1,
-                                      fontWeight: FontWeight.w400),)
+                                  Text(
+                                    watch.brandName ?? "",
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: Black1,
+                                        fontWeight: FontWeight.w400),
+                                  )
                                 ],
                               ),
                               Row(
                                 children: [
-
                                   Icon(
                                     Icons.keyboard_arrow_down_outlined,
                                     color: Color(0xffB3B3B3),
@@ -169,7 +174,6 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),
@@ -182,7 +186,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                           height: 48.w,
                           decoration: BoxDecoration(
                             border: Border.all(color: Color(0xffEFEFEF)),
-                            borderRadius:  BorderRadius.circular(6.w),
+                            borderRadius: BorderRadius.circular(6.w),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,15 +196,17 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                   SizedBox(
                                     width: 12.w,
                                   ),
-                                  Text(watch.taxName??"",style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: Black1,
-                                      fontWeight: FontWeight.w400),)
+                                  Text(
+                                    watch.taxName ?? "",
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: Black1,
+                                        fontWeight: FontWeight.w400),
+                                  )
                                 ],
                               ),
                               Row(
                                 children: [
-
                                   Icon(
                                     Icons.keyboard_arrow_down_outlined,
                                     color: Color(0xffB3B3B3),
@@ -210,7 +216,6 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),
@@ -323,8 +328,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                   Row(
                     children: [
                       GestureDetector(
-                        onTap: () {
-                        },
+                        onTap: () {},
                         child: Container(
                           height: 100.h,
                           width: 110.w,
@@ -335,41 +339,39 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                             ),
                           ]),
                           child: Card(
-                            elevation: 0.3,
-                            child: watch.productFeatureImage!=""?
-                            Center(
-                              child: AppNetworkImages(
-                                imageUrl:
-                                watch.productFeatureImage,
-                                fit: BoxFit.cover,
-                                height: 90.w,
-                              ),
-                            ):
-                            Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/icons/gallary.svg",
-                                  // height: 19.w,
-                                  // width: 21.w,
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  "Add Image",
-                                  style: TextStyle(
-                                      color: Color(0xffB3B3B3),
-                                      // letterSpacing: .5,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
-                                )
-                              ],
-                            )
-
-                          ),
+                              elevation: 0.3,
+                              child: watch.productFeatureImage != ""
+                                  ? Center(
+                                      child: AppNetworkImages(
+                                        imageUrl: watch.productFeatureImage,
+                                        fit: BoxFit.cover,
+                                        height: 90.w,
+                                      ),
+                                    )
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          "assets/icons/gallary.svg",
+                                          // height: 19.w,
+                                          // width: 21.w,
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        Text(
+                                          "Add Image",
+                                          style: TextStyle(
+                                              color: Color(0xffB3B3B3),
+                                              // letterSpacing: .5,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w400),
+                                        )
+                                      ],
+                                    )),
                         ),
                       ),
                     ],
@@ -399,7 +401,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                             onTap: () {
                               print(watch.cards.length);
                               print(watch.valueController.length);
-                              read.onAddWidget(CreateWidget(watch.cards.length),watch.cards.length);
+                              read.onAddWidget(CreateWidget(watch.cards.length),
+                                  watch.cards.length);
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
@@ -409,7 +412,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                               // width: 55.w,
                               decoration: BoxDecoration(
                                 color: SplashText,
-                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
                               ),
                               child: Row(
                                 // mainAxisAlignment: MainAxisAlignment.center,
@@ -470,19 +474,18 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                           // ),
                         ],
                       ),
-
                     ],
                   ),
                   SizedBox(
                     height: 20.h,
                   ),
                   ListView.builder(
-                    padding: EdgeInsets.zero,
+                      padding: EdgeInsets.zero,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: watch.productUnitDetail?.length??0,
+                      itemCount: watch.productUnitDetail?.length ?? 0,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext, index) {
-                      final element=watch.productUnitDetail?[index];
+                        final element = watch.productUnitDetail?[index];
                         return Column(
                           children: [
                             Row(
@@ -490,7 +493,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     textInputType: TextInputType.number,
-                                    onChanged: (value){},
+                                    onChanged: (value) {},
                                     controller: watch.valueController[index],
                                     height: 35,
                                     // width: 20, // titleHeader: "Shop Name",
@@ -501,42 +504,46 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 ),
                                 SizedBox(width: 3.w),
                                 Expanded(
-                                    child: Container(
-                                      height: 33.w,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: Color(0xffEFEFEF)),
-                                        borderRadius:  BorderRadius.circular(6.w),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 5.w,
-                                              ),
-                                              Text(element?.unit??"",style: TextStyle(
+                                  child: Container(
+                                    height: 33.w,
+                                    decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: Color(0xffEFEFEF)),
+                                      borderRadius: BorderRadius.circular(6.w),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            Text(
+                                              element?.unit ?? "",
+                                              style: TextStyle(
                                                   fontSize: 16.sp,
                                                   color: Black1,
-                                                  fontWeight: FontWeight.w400),)
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-
-                                              Icon(
-                                                Icons.keyboard_arrow_down_outlined,
-                                                color: Color(0xffB3B3B3),
-                                              ),
-                                              SizedBox(
-                                                width: 5.w,
-                                              ),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
+                                                  fontWeight: FontWeight.w400),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons
+                                                  .keyboard_arrow_down_outlined,
+                                              color: Color(0xffB3B3B3),
+                                            ),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
+                                  ),
                                 ),
                                 SizedBox(width: 3.w),
                                 Expanded(
@@ -562,7 +569,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 ),
                                 SizedBox(width: 15.w),
                                 Container(
-                                  width:30.w,
+                                  width: 30.w,
                                   child: CupertinoSwitch(
                                     value: watch.switchValue[index],
                                     activeColor: DarkGreen,
@@ -580,8 +587,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                               children: [
                                 Expanded(
                                   child: GestureDetector(
-                                    onTap: () {
-                                    },
+                                    onTap: () {},
                                     child: Container(
                                       height: 100.h,
                                       width: 110.w,
@@ -594,42 +600,46 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       child: Card(
                                         elevation: 0.3,
                                         child:
-
-                                        element?.unitBasedProductImage1Path !=
-                                            ""
-                                            ? Center(
-                                              child: AppNetworkImages(
-                                          imageUrl: element?.unitBasedProductImage1Path??"",
-                                          fit: BoxFit.cover,
-                                                height: 90.w,
-                                        ),
-                                            )
-                                            : Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              "assets/icons/gallary.svg",
-                                              // height: 19.w,
-                                              // width: 21.w,
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Text(
-                                              "Add Image",
-                                              style: TextStyle(
-                                                  color:
-                                                  Color(0xffB3B3B3),
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight:
-                                                  FontWeight.w400),
-                                            ),
-                                          ],
-                                        ),
+                                            element?.unitBasedProductImage1Path !=
+                                                    ""
+                                                ? Center(
+                                                    child: AppNetworkImages(
+                                                      imageUrl: element
+                                                              ?.unitBasedProductImage1Path ??
+                                                          "",
+                                                      fit: BoxFit.cover,
+                                                      height: 90.w,
+                                                    ),
+                                                  )
+                                                : Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                        "assets/icons/gallary.svg",
+                                                        // height: 19.w,
+                                                        // width: 21.w,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10.h,
+                                                      ),
+                                                      Text(
+                                                        "Add Image",
+                                                        style: TextStyle(
+                                                            color: Color(
+                                                                0xffB3B3B3),
+                                                            // letterSpacing: .5,
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      ),
+                                                    ],
+                                                  ),
                                       ),
                                     ),
                                   ),
@@ -650,38 +660,47 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       ]),
                                       child: Card(
                                         elevation: 0.3,
-                                        child: element?.unitBasedProductImage2Path != ""
-                                            ? Center(
-                                              child: AppNetworkImages(
-                                         imageUrl:  element?.unitBasedProductImage2Path??"",
-                                              fit: BoxFit.cover,height: 90.w,),
-                                            )
-                                            : Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              "assets/icons/gallary.svg",
-                                              // height: 19.w,
-                                              // width: 21.w,
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Text(
-                                              "Add Image",
-                                              style: TextStyle(
-                                                  color:
-                                                  Color(0xffB3B3B3),
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight:
-                                                  FontWeight.w400),
-                                            ),
-                                          ],
-                                        ),
+                                        child:
+                                            element?.unitBasedProductImage2Path !=
+                                                    ""
+                                                ? Center(
+                                                    child: AppNetworkImages(
+                                                      imageUrl: element
+                                                              ?.unitBasedProductImage2Path ??
+                                                          "",
+                                                      fit: BoxFit.cover,
+                                                      height: 90.w,
+                                                    ),
+                                                  )
+                                                : Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                        "assets/icons/gallary.svg",
+                                                        // height: 19.w,
+                                                        // width: 21.w,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10.h,
+                                                      ),
+                                                      Text(
+                                                        "Add Image",
+                                                        style: TextStyle(
+                                                            color: Color(
+                                                                0xffB3B3B3),
+                                                            // letterSpacing: .5,
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      ),
+                                                    ],
+                                                  ),
                                       ),
                                     ),
                                   ),
@@ -702,39 +721,47 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       ]),
                                       child: Card(
                                         elevation: 0.3,
-                                        child: element?.unitBasedProductImage3Path !=
-                                            ""
-                                            ? Center(
-                                              child: AppNetworkImages(
-                                             imageUrl:  element?.unitBasedProductImage3Path??"",
-                                              fit: BoxFit.cover,height: 90.w,),
-                                            )
-                                            : Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              "assets/icons/gallary.svg",
-                                              // height: 19.w,
-                                              // width: 21.w,
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Text(
-                                              "Add Image",
-                                              style: TextStyle(
-                                                  color:
-                                                  Color(0xffB3B3B3),
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight:
-                                                  FontWeight.w400),
-                                            ),
-                                          ],
-                                        ),
+                                        child:
+                                            element?.unitBasedProductImage3Path !=
+                                                    ""
+                                                ? Center(
+                                                    child: AppNetworkImages(
+                                                      imageUrl: element
+                                                              ?.unitBasedProductImage3Path ??
+                                                          "",
+                                                      fit: BoxFit.cover,
+                                                      height: 90.w,
+                                                    ),
+                                                  )
+                                                : Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                        "assets/icons/gallary.svg",
+                                                        // height: 19.w,
+                                                        // width: 21.w,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10.h,
+                                                      ),
+                                                      Text(
+                                                        "Add Image",
+                                                        style: TextStyle(
+                                                            color: Color(
+                                                                0xffB3B3B3),
+                                                            // letterSpacing: .5,
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      ),
+                                                    ],
+                                                  ),
                                       ),
                                     ),
                                   ),
@@ -759,7 +786,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                               children: [
                                 CreateWidget(index),
                                 Container(
-                                  width:30.w,
+                                  width: 30.w,
                                   child: CupertinoSwitch(
                                     value: watch.switchCardValue[index],
                                     activeColor: DarkGreen,
@@ -789,38 +816,38 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       child: Card(
                                         elevation: 0.3,
                                         child: watch.imagefiles1[index].path !=
-                                            ""
+                                                ""
                                             ? Image.file(
-                                          File(watch
-                                              .imagefiles1[index].path),
-                                          fit: BoxFit.cover,
-                                        )
+                                                File(watch
+                                                    .imagefiles1[index].path),
+                                                fit: BoxFit.cover,
+                                              )
                                             : Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              "assets/icons/gallary.svg",
-                                              // height: 19.w,
-                                              // width: 21.w,
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Text(
-                                              "Add Image",
-                                              style: TextStyle(
-                                                  color:
-                                                  Color(0xffB3B3B3),
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight:
-                                                  FontWeight.w400),
-                                            ),
-                                          ],
-                                        ),
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    "assets/icons/gallary.svg",
+                                                    // height: 19.w,
+                                                    // width: 21.w,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.h,
+                                                  ),
+                                                  Text(
+                                                    "Add Image",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xffB3B3B3),
+                                                        // letterSpacing: .5,
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ],
+                                              ),
                                       ),
                                     ),
                                   ),
@@ -842,37 +869,37 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       child: Card(
                                         elevation: 0.3,
                                         child: watch.imagefiles2[index].path !=
-                                            ""
+                                                ""
                                             ? Image.file(
-                                            File(watch
-                                                .imagefiles2[index].path),
-                                            fit: BoxFit.cover)
+                                                File(watch
+                                                    .imagefiles2[index].path),
+                                                fit: BoxFit.cover)
                                             : Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              "assets/icons/gallary.svg",
-                                              // height: 19.w,
-                                              // width: 21.w,
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Text(
-                                              "Add Image",
-                                              style: TextStyle(
-                                                  color:
-                                                  Color(0xffB3B3B3),
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight:
-                                                  FontWeight.w400),
-                                            ),
-                                          ],
-                                        ),
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    "assets/icons/gallary.svg",
+                                                    // height: 19.w,
+                                                    // width: 21.w,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.h,
+                                                  ),
+                                                  Text(
+                                                    "Add Image",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xffB3B3B3),
+                                                        // letterSpacing: .5,
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ],
+                                              ),
                                       ),
                                     ),
                                   ),
@@ -894,37 +921,37 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       child: Card(
                                         elevation: 0.3,
                                         child: watch.imagefiles3[index].path !=
-                                            ""
+                                                ""
                                             ? Image.file(
-                                            File(watch
-                                                .imagefiles3[index].path),
-                                            fit: BoxFit.cover)
+                                                File(watch
+                                                    .imagefiles3[index].path),
+                                                fit: BoxFit.cover)
                                             : Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              "assets/icons/gallary.svg",
-                                              // height: 19.w,
-                                              // width: 21.w,
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Text(
-                                              "Add Image",
-                                              style: TextStyle(
-                                                  color:
-                                                  Color(0xffB3B3B3),
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight:
-                                                  FontWeight.w400),
-                                            ),
-                                          ],
-                                        ),
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    "assets/icons/gallary.svg",
+                                                    // height: 19.w,
+                                                    // width: 21.w,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.h,
+                                                  ),
+                                                  Text(
+                                                    "Add Image",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xffB3B3B3),
+                                                        // letterSpacing: .5,
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ],
+                                              ),
                                       ),
                                     ),
                                   ),
@@ -951,8 +978,10 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
 
   Widget CreateWidget(index) {
     // final read=context.read<CustomProductController>();
-    final watch=Provider.of<EditAdminProductController>(context, listen: false);
-    final read=Provider.of<EditAdminProductController>(context, listen: false);
+    final watch =
+        Provider.of<EditAdminProductController>(context, listen: false);
+    final read =
+        Provider.of<EditAdminProductController>(context, listen: false);
     return Column(
       children: [
         Row(
@@ -960,9 +989,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
             Expanded(
               child: PrimarySTextFormField(
                 textInputType: TextInputType.number,
-                onChanged: (value){
-
-                },
+                onChanged: (value) {},
                 controller: watch.valueCardController[index],
                 height: 35,
                 // width: 20, // titleHeader: "Shop Name",
@@ -973,25 +1000,25 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
             SizedBox(width: 3.w),
             Expanded(
                 child: SDropDownField(
-                  iconPadding: EdgeInsets.only(right: 5.w),
-                  onChanged: (value){
-                    read.onUnitDataSelect(value,index);
-                  },
-                  items: watch.unitData
-                      ?.map((item) => DropdownMenuItem<String>(
-                    value: item.id.toString(),
-                    child: Text(
-                      item.unit ?? "",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                  ))
-                      .toList(),
-                  height: 30.w,
-                  hint: "Unit",
-                  hintSize: 11.sp,
-                )),
+              iconPadding: EdgeInsets.only(right: 5.w),
+              onChanged: (value) {
+                read.onUnitDataSelect(value, index);
+              },
+              items: watch.unitData
+                  ?.map((item) => DropdownMenuItem<String>(
+                        value: item.id.toString(),
+                        child: Text(
+                          item.unit ?? "",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ))
+                  .toList(),
+              height: 30.w,
+              hint: "Unit",
+              hintSize: 11.sp,
+            )),
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
@@ -1006,7 +1033,6 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
             SizedBox(width: 3.w),
             Expanded(
               child: PrimarySTextFormField(
-
                 textInputType: TextInputType.number,
                 controller: watch.offerCardController[index],
                 height: 35,
@@ -1019,7 +1045,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
           ],
         ),
         SizedBox(
-          height:9.h,
+          height: 9.h,
         ),
       ],
     );

@@ -26,7 +26,7 @@ class SSelectedProductsController extends ChangeNotifier {
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
   String categoryId = "";
   String productId = "";
-  List<CustomProduct> ? customProduct;
+  List<CustomProduct>? customProduct;
 
   Future<void> initState(context, id) async {
     await selectedProducts(context, id);
@@ -56,7 +56,7 @@ class SSelectedProductsController extends ChangeNotifier {
       if (response.statusCode == 200) {
         productsFromAdmin = result.data?.productsFromAdmin;
         categoryName = result.data?.categoryName ?? "";
-        customProduct=result.data?.customProduct;
+        customProduct = result.data?.customProduct;
         totalSelectedAndCustomProducts =
             result.data?.totalSelectedAndCustomProducts ?? 0;
 
@@ -81,11 +81,15 @@ class SSelectedProductsController extends ChangeNotifier {
     );
   }
 
-  void onAddProductPressed(context,id){
+  void onAddProductPressed(context, id) {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:AddProductView(categoryId: id),)),
-          (Route<dynamic> route) => false,
+      MaterialPageRoute(
+          builder: (context) => SMainScreenView(
+                index: 0,
+                screenName: AddProductView(categoryId: id),
+              )),
+      (Route<dynamic> route) => false,
     );
   }
 
@@ -137,11 +141,11 @@ class SSelectedProductsController extends ChangeNotifier {
 
     deleteAdminProductRepo
         .deleteProduct(
-        deleteAdminProductReqModel, pref.getString("successToken"))
+            deleteAdminProductReqModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result =
-      DeleteAdminProductResModel.fromJson(jsonDecode(response.body));
+          DeleteAdminProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
           productsFromAdmin?.removeAt(index);
@@ -161,7 +165,7 @@ class SSelectedProductsController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -170,5 +174,4 @@ class SSelectedProductsController extends ChangeNotifier {
       },
     );
   }
-
 }

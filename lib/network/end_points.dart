@@ -247,9 +247,10 @@ class Endpoint {
   static const String CouponsUpdate = "${baseUrl}lsm-shop-owner-update-coupon";
 /////Edit Coupons////
   static const String editCoupon = "${baseUrl}lsm-shop-owner-edit-coupon";
-
   /////Cart List////
   static const String cartList ="${baseUrl}lsm-customer-get-cart-list";
-  ////Cart List////
+  ////Cart Details////
   static const String cartDetailView ="${baseUrl}lsm-customer-view-cart-details";
+  ////Add Product To Cart////
+  static const String addProductToCart ="${baseUrl}lsm-customer-add-product-to-cart";
 }

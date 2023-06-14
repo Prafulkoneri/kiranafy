@@ -25,6 +25,7 @@ class SKycVerificationController extends ChangeNotifier {
   String? fileName;
   PlatformFile? pickedfile;
   bool isLoading = false;
+
   // File fileToDisplay = File("");
   File fileImage1 = File("");
   File fileImage2 = File("");
@@ -39,6 +40,7 @@ class SKycVerificationController extends ChangeNotifier {
   String image4 = "";
 
   String? pdfPath;
+
   void onVerifyChecked(value) {
     adharCardValidation = value;
     notifyListeners();
@@ -191,7 +193,11 @@ class SKycVerificationController extends ChangeNotifier {
     }
 
     SharedPreferences pref = await SharedPreferences.getInstance();
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => SSubscriptionScreenView(loggedIn: false,)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SSubscriptionScreenView(
+                  loggedIn: false,
+                )));
   }
 }

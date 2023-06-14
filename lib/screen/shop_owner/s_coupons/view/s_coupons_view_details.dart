@@ -21,7 +21,7 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SCouponsListController>().initState(context,false);
+      context.read<SCouponsListController>().initState(context, false);
     });
   }
 
@@ -189,38 +189,38 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                         // )
                       ],
                     ),
-
                     Padding(
-                      padding:
-                      EdgeInsets.only(
-                          bottom: 0.w,right: 13.w),
+                      padding: EdgeInsets.only(bottom: 0.w, right: 13.w),
                       child: Row(
                         children: [
                           GestureDetector(
-                            onTap: (){
-                                        read.copyCode(context,watch.couponViewData?.couponCode ?? "");
+                            onTap: () {
+                              read.copyCode(context,
+                                  watch.couponViewData?.couponCode ?? "");
                             },
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 11.33.w,vertical: 7.w),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 11.33.w, vertical: 7.w),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.w),
-                                  border: Border.all(color: SplashText)
-                              ),
+                                  border: Border.all(color: SplashText)),
                               child: Center(
                                 child: Row(
                                   children: [
-                                    Text("${watch.couponViewData?.couponCode}",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 16.sp,color: SplashText),),
-                                    SizedBox(
-                                      width:
-                                      19.w,
+                                    Text(
+                                      "${watch.couponViewData?.couponCode}",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 16.sp,
+                                          color: SplashText),
                                     ),
-                                    SvgPicture
-                                        .asset(
+                                    SizedBox(
+                                      width: 19.w,
+                                    ),
+                                    SvgPicture.asset(
                                       'assets/images/svg2.svg',
-                                      width:
-                                      17.w,
-                                      height:
-                                      17.h,
+                                      width: 17.w,
+                                      height: 17.h,
                                     ),
                                   ],
                                 ),

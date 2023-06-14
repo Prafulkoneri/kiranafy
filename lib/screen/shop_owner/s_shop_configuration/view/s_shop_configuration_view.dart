@@ -15,8 +15,11 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
 class SShopConfigurationView extends StatefulWidget {
-  final bool ? initialShopConfigration;
-  const SShopConfigurationView({Key? key,required this.initialShopConfigration}) : super(key: key);
+  final bool? initialShopConfigration;
+
+  const SShopConfigurationView(
+      {Key? key, required this.initialShopConfigration})
+      : super(key: key);
 
   @override
   _SShopConfigurationViewState createState() => _SShopConfigurationViewState();
@@ -29,7 +32,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
       context.read<SShopConfigurationController>().initState(context);
     });
   }
-  onBackPressed(){
+
+  onBackPressed() {
     return;
   }
 
@@ -43,30 +47,34 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
-          isBackButtonEnabled: widget.initialShopConfigration==true?false:true,
+          isBackButtonEnabled:
+              widget.initialShopConfigration == true ? false : true,
           onBackBtnPressed: () {
-           widget.initialShopConfigration==false?Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SAccountScreenView())),
-                  (Route<dynamic> route) => false,
-            ):onBackPressed();
+            widget.initialShopConfigration == false
+                ? Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SMainScreenView(
+                            index: 0, screenName: SAccountScreenView())),
+                    (Route<dynamic> route) => false,
+                  )
+                : onBackPressed();
           },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: ()async {
-           var res=await read.uploadShopConfiguration(context);
-              // readMainScreen.onBackPressed(4,SAccountScreenView());
+          onActionTap: () async {
+            var res = await read.uploadShopConfiguration(context);
+            // readMainScreen.onBackPressed(4,SAccountScreenView());
           },
         ),
       ),
       body: WillPopScope(
-        onWillPop: ()async{
+        onWillPop: () async {
           return false;
         },
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
-
             padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +90,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                   height: 10.w,
                 ),
                 Container(
-
                   decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: (Color(0xffEFEFEF)))),
@@ -96,36 +103,36 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                             read.openGallery1();
                           },
                           child: watch.networkImage != ""
-                               ? Container(
-                            width: ScreenUtil().screenWidth,
-                            height: 142.h,
+                              ? Container(
+                                  width: ScreenUtil().screenWidth,
+                                  height: 142.h,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(width: 1, color: grey6)),
+                                      border:
+                                          Border.all(width: 1, color: grey6)),
                                   child: AppNetworkImages(
-                                    imageUrl:
-                                    watch.networkImage,
+                                    imageUrl: watch.networkImage,
                                     fit: BoxFit.contain,
                                   ),
                                 )
-                               : watch.fileImage.path != ""
-                                  ?  Container(
-                            width: ScreenUtil().screenWidth,
-                                        height: 142.h,
-                                        // width: ScreenUtil().screenWidth,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border: Border.all(
-                                                width: 1, color: grey6)),
-                                        child: Image.file(
-                                          watch.fileImage,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      )
+                              : watch.fileImage.path != ""
+                                  ? Container(
+                                      width: ScreenUtil().screenWidth,
+                                      height: 142.h,
+                                      // width: ScreenUtil().screenWidth,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                              width: 1, color: grey6)),
+                                      child: Image.file(
+                                        watch.fileImage,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    )
                                   : Container(
-                            height: 142.h,
-                                    child: Center(
+                                      height: 142.h,
+                                      child: Center(
                                         child: Text(
                                           'Upload QR Code',
                                           style: TextStyle(
@@ -134,7 +141,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                               color: Color(0xffB7B7B7)),
                                         ),
                                       ),
-                                  ),
+                                    ),
                         ),
                       ],
                     ),
@@ -204,7 +211,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 ),
                 Text(
                   "Delivery Type",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
                 ),
                 SizedBox(
                   height: 13.w,

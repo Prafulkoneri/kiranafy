@@ -8,6 +8,7 @@ class UpdateCustomeProductsResponseModel {
     required this.message,
     required this.data,
   });
+
   UpdateCustomeProductsResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -30,6 +31,7 @@ class Data {
     required this.showUnderFullfillYourCravings,
     required this.totalRows,
   });
+
   Data.fromJson(Map<String, dynamic> json) {
     showUnderSeasonalProducts = json["show_under_seasonal_products"];
     showUnderRecommandedProducts = json["show_under_recommanded_products"];

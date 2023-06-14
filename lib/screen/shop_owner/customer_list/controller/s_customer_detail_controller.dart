@@ -18,24 +18,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SCustomerDetailController extends ChangeNotifier {
-  bool isLoading=true;
-  String customerId="";
-  ShopCustomerDetail ? customerDetail;
+  bool isLoading = true;
+  String customerId = "";
+  ShopCustomerDetail? customerDetail;
 
-  ShopCustomerDetailRepo shopCustomerDetailRepo=ShopCustomerDetailRepo();
+  ShopCustomerDetailRepo shopCustomerDetailRepo = ShopCustomerDetailRepo();
 
-  Future<void> initState(context,cID) async {
-    await getCustomerDetailsView(context,cID);
+  Future<void> initState(context, cID) async {
+    await getCustomerDetailsView(context, cID);
   }
 
-  showLoader(value){
-    isLoading=value;
-  notifyListeners();
+  showLoader(value) {
+    isLoading = value;
+    notifyListeners();
   }
 
-  ShopCustomerDetailReqModel get shopCustomerDetailReqModel=>ShopCustomerDetailReqModel(
-    customerId: customerId,
-  );
+  ShopCustomerDetailReqModel get shopCustomerDetailReqModel =>
+      ShopCustomerDetailReqModel(
+        customerId: customerId,
+      );
 
   void launchPhone(String mobNumber, context) async {
     var number = Uri.parse("tel:${mobNumber}");
@@ -47,14 +48,14 @@ class SCustomerDetailController extends ChangeNotifier {
     }
   }
 
-
-  Future<void> getCustomerDetailsView(context,cID) async {
-    customerId=cID;
+  Future<void> getCustomerDetailsView(context, cID) async {
+    customerId = cID;
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     shopCustomerDetailRepo
-        .getCustomerDetails(shopCustomerDetailReqModel,pref.getString("successToken"))
+        .getCustomerDetails(
+            shopCustomerDetailReqModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result = CustomerDetailResModel.fromJson(jsonDecode(response.body));
@@ -70,7 +71,7 @@ class SCustomerDetailController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -79,7 +80,4 @@ class SCustomerDetailController extends ChangeNotifier {
       },
     );
   }
-
-
-
 }

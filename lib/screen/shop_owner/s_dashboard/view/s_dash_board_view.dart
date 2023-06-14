@@ -20,8 +20,9 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 class ShopDashBoard extends StatefulWidget {
-  final bool ? refresh;
-  const ShopDashBoard({super.key,this.refresh});
+  final bool? refresh;
+
+  const ShopDashBoard({super.key, this.refresh});
 
   @override
   State<ShopDashBoard> createState() => _ShopDashBoardState();
@@ -76,48 +77,51 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                         children: [
                           SizedBox(
                             height: 180.0.h,
-                            child: watch.dashBoardData?.bannerImages!.isEmpty??true? Container(
-                                height: 180.w,
-                                child: Image.asset(
-                                  "assets/images/shop_image.png",
-                                  height: 180.w,
-                                  fit: BoxFit.fill,
-                                )
-                            ):
-                            PageView.builder(
-                                controller: watch.pageController,
-                                allowImplicitScrolling: true,
-                                scrollDirection: Axis.horizontal,
-                                onPageChanged: (index) {},
-                                itemCount:
-                                    watch.dashBoardData?.bannerImages?.length ??
+                            child: watch.dashBoardData?.bannerImages!.isEmpty ??
+                                    true
+                                ? Container(
+                                    height: 180.w,
+                                    child: Image.asset(
+                                      "assets/images/shop_image.png",
+                                      height: 180.w,
+                                      fit: BoxFit.fill,
+                                    ))
+                                : PageView.builder(
+                                    controller: watch.pageController,
+                                    allowImplicitScrolling: true,
+                                    scrollDirection: Axis.horizontal,
+                                    onPageChanged: (index) {},
+                                    itemCount: watch.dashBoardData?.bannerImages
+                                            ?.length ??
                                         1,
-                                itemBuilder: (context, index) {
-                                  final element =
-                                      watch.dashBoardData?.bannerImages?[index];
-                                  // final element = watch.onBoardingData?[index];
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      element?.imagesPath == ""
-                                          ? Container(
-                                              height: 190.w,
-                                              child: Image.asset(
-                                                "assets/images/shop_image.png",
-                                                height: 191.w,
-                                                fit: BoxFit.fill,
-                                              ))
-                                          : Container(
-                                              height: 190.w,
-                                              child: AppNetworkImages(
-                                                  imageUrl:
-                                                      element?.imagesPath ?? "",
-                                                  fit: BoxFit.cover),
-                                              width: ScreenUtil().screenWidth,
-                                            ),
-                                    ],
-                                  );
-                                }),
+                                    itemBuilder: (context, index) {
+                                      final element = watch
+                                          .dashBoardData?.bannerImages?[index];
+                                      // final element = watch.onBoardingData?[index];
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          element?.imagesPath == ""
+                                              ? Container(
+                                                  height: 190.w,
+                                                  child: Image.asset(
+                                                    "assets/images/shop_image.png",
+                                                    height: 191.w,
+                                                    fit: BoxFit.fill,
+                                                  ))
+                                              : Container(
+                                                  height: 190.w,
+                                                  child: AppNetworkImages(
+                                                      imageUrl:
+                                                          element?.imagesPath ??
+                                                              "",
+                                                      fit: BoxFit.cover),
+                                                  width:
+                                                      ScreenUtil().screenWidth,
+                                                ),
+                                        ],
+                                      );
+                                    }),
                             // Carousel(
                             //   images: [
                             //     AssetImage(

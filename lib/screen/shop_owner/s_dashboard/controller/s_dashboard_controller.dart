@@ -19,15 +19,14 @@ class SDashBoardController extends ChangeNotifier {
   DashBoardRepo dashBoardRepo = DashBoardRepo();
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
   List<ShopBannerImageData>? bannerImageList;
-  bool isLoading=true;
+  bool isLoading = true;
   Data? dashBoardData;
   String address = "";
   String pincode = "";
   String shopName = "";
   int categoriesCount = 2;
-  int _currentPage=0;
-  PageController pageController=PageController();
-
+  int _currentPage = 0;
+  PageController pageController = PageController();
 
   void onCategorySelect(context) {
     Navigator.push(
@@ -45,9 +44,8 @@ class SDashBoardController extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -99,6 +97,7 @@ class SDashBoardController extends ChangeNotifier {
       },
     );
   }
+
   //////////////////Category Count End
 
   /////////////Display Name IN Dash Board

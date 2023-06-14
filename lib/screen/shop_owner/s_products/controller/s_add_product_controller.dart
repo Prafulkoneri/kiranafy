@@ -21,6 +21,7 @@ class SAddProductsController extends ChangeNotifier {
 
   ShopAddProductRepo shopAddProductRepo = ShopAddProductRepo();
   UploadAddProductRepo uploadAddProductRepo = UploadAddProductRepo();
+
   // List<bool> selectedList = [];
   Data? productData;
   List<ProductDetail>? productDetails;
@@ -51,6 +52,7 @@ class SAddProductsController extends ChangeNotifier {
 
     notifyListeners();
   }
+
   // void onProductSelected(index, id) {
   //   selectedList[index] = !selectedList[index];
   //   if (selectedList[index]) {
@@ -150,8 +152,12 @@ class SAddProductsController extends ChangeNotifier {
               type: SnackType.success);
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: categoryId),)),
-                (Route<dynamic> route) => false,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                      index: 0,
+                      screenName: SSelectedProductView(categoryId: categoryId),
+                    )),
+            (Route<dynamic> route) => false,
           );
           notifyListeners();
           uploadSuccess = false;
@@ -174,9 +180,9 @@ class SAddProductsController extends ChangeNotifier {
   }
 
   upload(context) async {
-    bool ? status;
-    await uploadAddProducts(context).then((value){
-    status=true;
+    bool? status;
+    await uploadAddProducts(context).then((value) {
+      status = true;
     });
     return status;
   }

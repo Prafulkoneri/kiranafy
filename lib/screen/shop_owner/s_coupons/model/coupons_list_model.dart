@@ -8,6 +8,7 @@ class CouponsListModel {
     required this.message,
     required this.data,
   });
+
   CouponsListModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];

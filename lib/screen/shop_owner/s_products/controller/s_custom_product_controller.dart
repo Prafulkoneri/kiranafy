@@ -18,12 +18,13 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
+
 class CustomProductController extends ChangeNotifier {
   SCustomProductDataRepo customProductDataRepo = SCustomProductDataRepo();
   EditAdminProductRepo editAdminProductRepo = EditAdminProductRepo();
   bool isLoading = true;
-  CustomData ? customdata;
-  AdminData ? adminData;
+  CustomData? customdata;
+  AdminData? adminData;
   String selectedCategory = "";
   List<CategoryData> categoryData = [];
   List<BrandData>? brandData;
@@ -34,32 +35,32 @@ class CustomProductController extends ChangeNotifier {
   bool fullFillCravings = false;
   File productImage = File("");
   List<Widget> cards = [];
-  String brandId="";
-  String categoryId="";
-  String taxId="";
-  TextEditingController productDescriptionController=TextEditingController();
-  TextEditingController productNameController=TextEditingController();
-  String unit="";
-  String value="";
-  String mrp="";
-  String offer="";
-  String status="";
+  String brandId = "";
+  String categoryId = "";
+  String taxId = "";
+  TextEditingController productDescriptionController = TextEditingController();
+  TextEditingController productNameController = TextEditingController();
+  String unit = "";
+  String value = "";
+  String mrp = "";
+  String offer = "";
+  String status = "";
 
-  List<TextEditingController> valueController=[TextEditingController()];
-  List<TextEditingController> mrpController=[TextEditingController()];
-  List<TextEditingController> offerController=[TextEditingController()];
+  List<TextEditingController> valueController = [TextEditingController()];
+  List<TextEditingController> mrpController = [TextEditingController()];
+  List<TextEditingController> offerController = [TextEditingController()];
   List<bool> switchValue = [true];
   List<XFile> imagefiles1 = [];
   List<XFile> imagefiles2 = [];
   List<XFile> imagefiles3 = [];
-  List<String> unitList=[];
-  UploadCustomProductRepo uploadCustomProductRepo=UploadCustomProductRepo();
-  String productId="";
+  List<String> unitList = [];
+  UploadCustomProductRepo uploadCustomProductRepo = UploadCustomProductRepo();
+  String productId = "";
 
   //for adminProduct
-  bool isEditEnabled=false;
+  bool isEditEnabled = false;
 
-  Future<void> initState(context, createCard,index) async {
+  Future<void> initState(context, createCard, index) async {
     imagefiles1.clear();
     imagefiles2.clear();
     imagefiles3.clear();
@@ -70,34 +71,35 @@ class CustomProductController extends ChangeNotifier {
     fullFillCravings = false;
     await getCustomProductData(context);
     cards.clear();
-    productImage=File("");
+    productImage = File("");
     unitList.clear();
     valueController.clear();
     offerController.clear();
     mrpController.clear();
-    valueController=[TextEditingController()];
-    mrpController=[TextEditingController()];
- offerController=[TextEditingController()];
-    await onAddWidget(createCard,index);
-    switchValue = List<bool>.filled(cards.length, true,growable: true);
+    valueController = [TextEditingController()];
+    mrpController = [TextEditingController()];
+    offerController = [TextEditingController()];
+    await onAddWidget(createCard, index);
+    switchValue = List<bool>.filled(cards.length, true, growable: true);
   }
 
-  UploadCustomProductReqModel get uploadCustomProductReqModel =>UploadCustomProductReqModel(
-    categoryId: selectedCategory,
-    brandId:brandId,
-    taxId: taxId,
-    productDescription: productDescriptionController.text,
-    productName: productNameController.text,
-    showUnderFullfillCravings: fullFillCravings?"yes":"no",
-    showUnderRecommendedProduct: showUnderRecommendedProducts?"yes":"no",
-    showUnderSeasonalProduct: showUnderSeasonalProducts?"yes":"no",
-    totalRows: cards.length.toString(),
-      mrpPrice: mrp,
-    offerPrice: offer,
-    unitID: unit.toString(),
-    weight: value,
-    status:status
-  );
+  UploadCustomProductReqModel get uploadCustomProductReqModel =>
+      UploadCustomProductReqModel(
+          categoryId: selectedCategory,
+          brandId: brandId,
+          taxId: taxId,
+          productDescription: productDescriptionController.text,
+          productName: productNameController.text,
+          showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
+          showUnderRecommendedProduct:
+              showUnderRecommendedProducts ? "yes" : "no",
+          showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
+          totalRows: cards.length.toString(),
+          mrpPrice: mrp,
+          offerPrice: offer,
+          unitID: unit.toString(),
+          weight: value,
+          status: status);
 
   Future<void> uploadCustomProduct(context) async {
     await getValueData();
@@ -106,18 +108,23 @@ class CustomProductController extends ChangeNotifier {
     await getOfferData();
     await getSwitchValue();
     SharedPreferences pref = await SharedPreferences.getInstance();
-    await
-    uploadCustomProductRepo
-        .uploadCustomProduct(uploadCustomProductReqModel,pref.getString("successToken"))
+    await uploadCustomProductRepo
+        .uploadCustomProduct(
+            uploadCustomProductReqModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result =
-      UploadCustomProductResModel.fromJson(jsonDecode(response.body));
+          UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: selectedCategory,))),
-              (Route<dynamic> route) => false,
+          MaterialPageRoute(
+              builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: SSelectedProductView(
+                    categoryId: selectedCategory,
+                  ))),
+          (Route<dynamic> route) => false,
         );
 
         Utils.showPrimarySnackbar(context, result.message,
@@ -130,7 +137,7 @@ class CustomProductController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -140,86 +147,85 @@ class CustomProductController extends ChangeNotifier {
     );
   }
 
-  void onBrandSelected(value){
-    brandId=value;
+  void onBrandSelected(value) {
+    brandId = value;
     notifyListeners();
   }
 
-  void onTax(value){
-    taxId=value;
+  void onTax(value) {
+    taxId = value;
     notifyListeners();
   }
 
-  getValueData(){
+  getValueData() {
     String a = '';
     for (int i = 0; i < valueController.length; i++) {
-      if(valueController[i].text!="") {
+      if (valueController[i].text != "") {
         a += "${valueController[i].text},";
       }
-      }
+    }
     a = a.substring(0, a.length - 1);
-    value=a;
-   print(value);
-notifyListeners();
+    value = a;
+    print(value);
+    notifyListeners();
   }
 
-  onUnitDataSelect(value,index){
+  onUnitDataSelect(value, index) {
     unitList.removeAt(index);
-    unitList.insert(index,value.toString());
+    unitList.insert(index, value.toString());
     print("unitList${unitList}");
     notifyListeners();
   }
 
-  getMrpData(){
+  getMrpData() {
     String a = '';
     for (int i = 0; i < mrpController.length; i++) {
-      if(mrpController[i].text!="") {
+      if (mrpController[i].text != "") {
         a += "${mrpController[i].text},";
       }
     }
     a = a.substring(0, a.length - 1);
-    mrp=a;
+    mrp = a;
     print(mrp);
     notifyListeners();
   }
 
-  getOfferData(){
+  getOfferData() {
     String a = '';
     for (int i = 0; i < offerController.length; i++) {
-      if(offerController[i].text!="") {
+      if (offerController[i].text != "") {
         a += "${offerController[i].text},";
       }
     }
     a = a.substring(0, a.length - 1);
-    offer=a;
+    offer = a;
     print(offer);
     notifyListeners();
   }
 
-  getUnitData(){
+  getUnitData() {
     String a = '';
     for (int i = 0; i < unitList.length; i++) {
-      if(unitList[i]!="") {
+      if (unitList[i] != "") {
         a += "${unitList[i]},";
       }
     }
     a = a.substring(0, a.length - 1);
-    unit=a;
+    unit = a;
     notifyListeners();
   }
 
-  getSwitchValue(){
+  getSwitchValue() {
     String a = '';
     for (int i = 0; i < switchValue.length; i++) {
-      if(switchValue[i]) {
+      if (switchValue[i]) {
         a += "active,";
-    }
-      else{
+      } else {
         a += "inactive,";
       }
-      }
+    }
     a = a.substring(0, a.length - 1);
-    status=a;
+    status = a;
     print(status);
     notifyListeners();
   }
@@ -298,8 +304,7 @@ notifyListeners();
 
       imagefiles1.insert(index, pickedfiles);
       print(imagefiles1[index].path);
-
-      }
+    }
     notifyListeners();
   }
 
@@ -307,10 +312,9 @@ notifyListeners();
     final ImagePicker imgpicker = ImagePicker();
     var pickedfiles = await imgpicker.pickImage(source: ImageSource.gallery);
     if (pickedfiles != null) {
-        imagefiles2.removeAt(index);
-        imagefiles2.insert(index,pickedfiles);
-        print(imagefiles2[index].path);
-
+      imagefiles2.removeAt(index);
+      imagefiles2.insert(index, pickedfiles);
+      print(imagefiles2[index].path);
     }
     notifyListeners();
   }
@@ -319,17 +323,14 @@ notifyListeners();
     final ImagePicker imgpicker = ImagePicker();
     var pickedfiles = await imgpicker.pickImage(source: ImageSource.gallery);
     if (pickedfiles != null) {
-        imagefiles3.removeAt(index);
+      imagefiles3.removeAt(index);
       imagefiles3.insert(index, pickedfiles);
       print(imagefiles3);
     }
     notifyListeners();
   }
 
-  Future<void> onAddWidget(createdCard,index) async {
-
-
-
+  Future<void> onAddWidget(createdCard, index) async {
     valueController.add(TextEditingController());
     mrpController.add(TextEditingController());
     offerController.add(TextEditingController());
@@ -345,7 +346,6 @@ notifyListeners();
   }
 
   Future<void> onRemoveWidget(index) async {
-
     cards.removeAt(index);
     valueController.remove(index);
     mrpController.remove(index);
@@ -362,105 +362,110 @@ notifyListeners();
     notifyListeners();
   }
 
-  void validateCustomProuduct(context){
-    if(selectedCategory==""){
+  void validateCustomProuduct(context) {
+    if (selectedCategory == "") {
       Utils.showPrimarySnackbar(context, "Select Category",
           type: SnackType.error);
       return;
     }
-    if(productNameController.text==""){
+    if (productNameController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter Product Name",
           type: SnackType.error);
       return;
     }
-    if(brandId==""){
-      Utils.showPrimarySnackbar(context, "Select Brand",
-          type: SnackType.error);
+    if (brandId == "") {
+      Utils.showPrimarySnackbar(context, "Select Brand", type: SnackType.error);
       return;
     }
-    if(taxId==""){
-      Utils.showPrimarySnackbar(context, "Select Tax",
-          type: SnackType.error);
+    if (taxId == "") {
+      Utils.showPrimarySnackbar(context, "Select Tax", type: SnackType.error);
       return;
     }
-    if(productDescriptionController.text==""){
+    if (productDescriptionController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter Product Description",
           type: SnackType.error);
       return;
     }
-    if(valueController[0].text==""){
-      Utils.showPrimarySnackbar(context, "Enter Weight",
-          type: SnackType.error);
+    if (valueController[0].text == "") {
+      Utils.showPrimarySnackbar(context, "Enter Weight", type: SnackType.error);
       return;
     }
-    if(unitList[0]==""){
-      Utils.showPrimarySnackbar(context, "Select Unit",
-          type: SnackType.error);
+    if (unitList[0] == "") {
+      Utils.showPrimarySnackbar(context, "Select Unit", type: SnackType.error);
       return;
     }
-    if(mrpController[0].text==""){
+    if (mrpController[0].text == "") {
       Utils.showPrimarySnackbar(context, "Enter Mrp Price",
           type: SnackType.error);
       return;
     }
-    if(offerController[0].text==""){
+    if (offerController[0].text == "") {
       Utils.showPrimarySnackbar(context, "Enter Offer Price",
           type: SnackType.error);
       return;
     }
-    if(productImage.path=="") {
+    if (productImage.path == "") {
       uploadCustomProduct(context);
-    }
-    else{
+    } else {
       uploadImage(context);
     }
   }
+
   Future uploadImage(context) async {
     await getValueData();
     await getUnitData();
     await getMrpData();
     await getOfferData();
     await getSwitchValue();
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    String token=pref.getString("successToken").toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.submitCustomProduct}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
-    request.headers['Authorization'] ="Bearer $token";
+    request.headers['Authorization'] = "Bearer $token";
     request.fields['product_name'] = productNameController.text;
     request.fields['category_id'] = categoryId;
     request.fields['brand_id'] = brandId;
     request.fields['tax_id'] = taxId;
     request.fields['product_description'] = productDescriptionController.text;
-    request.fields['total_rows'] =cards.length.toString();
-    request.fields['show_under_seasonal_products'] =showUnderSeasonalProducts?"yes":"no";
-    request.fields['show_under_recommanded_products'] =showUnderRecommendedProducts?"yes":"no";
-    request.fields['show_under_fullfill_your_cravings'] =fullFillCravings?"yes":"no";
-    request.fields['unit_ids'] =unit.toString();
-    request.fields['weight_ids'] =value;
-    request.fields['mrp_price_ids'] =mrp;
-    request.fields['offer_price_ids'] =offer;
-    request.fields['status_ids'] =status;
+    request.fields['total_rows'] = cards.length.toString();
+    request.fields['show_under_seasonal_products'] =
+        showUnderSeasonalProducts ? "yes" : "no";
+    request.fields['show_under_recommanded_products'] =
+        showUnderRecommendedProducts ? "yes" : "no";
+    request.fields['show_under_fullfill_your_cravings'] =
+        fullFillCravings ? "yes" : "no";
+    request.fields['unit_ids'] = unit.toString();
+    request.fields['weight_ids'] = value;
+    request.fields['mrp_price_ids'] = mrp;
+    request.fields['offer_price_ids'] = offer;
+    request.fields['status_ids'] = status;
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
-    List<http.MultipartFile> newList =  <http.MultipartFile>[];
+    List<http.MultipartFile> newList = <http.MultipartFile>[];
     File imageFile = productImage;
-    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var stream =
+        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var multipartFile = new http.MultipartFile("product_image_path", stream, length,filename: basename(imageFile.path));
+    var multipartFile = new http.MultipartFile(
+        "product_image_path", stream, length,
+        filename: basename(imageFile.path));
     newList.add(multipartFile);
     request.files.addAll(newList);
     print(request.fields);
-    await request.send().then((response){
+    await request.send().then((response) {
       if (response.statusCode == 200) {
         print("sucesss");
-        Utils.showPrimarySnackbar(context,"Updated Successfully",
+        Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSelectedProductView(categoryId: categoryId))),
-              (Route<dynamic> route) => false,
+          MaterialPageRoute(
+              builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: SSelectedProductView(categoryId: categoryId))),
+          (Route<dynamic> route) => false,
         );
       } else {
-        Utils.showPrimarySnackbar(context,"Error on uploading",
+        Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
         return;
       }
@@ -469,8 +474,4 @@ notifyListeners();
       });
     });
   }
-
-
-
-
 }

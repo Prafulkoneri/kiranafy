@@ -18,7 +18,7 @@ class CustomerViewShopReqModel {
 class CustomerViewShopResModel {
   int? status;
   String? message;
-  ShopData? data;
+  ShopViewData? data;
 
   CustomerViewShopResModel({
     required this.status,
@@ -28,11 +28,11 @@ class CustomerViewShopResModel {
   CustomerViewShopResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    data = json['data'] != null ? ShopData.fromJson(json['data']) : null;
+    data = json['data'] != null ? ShopViewData.fromJson(json['data']) : null;
   }
 }
 
-class OfferProduct {
+class CustomerProductData {
   int? id;
   String? productName;
   String? productImagePath;
@@ -47,8 +47,10 @@ class OfferProduct {
   String? discountPercentage;
   String? status;
   String? unit;
+  String ? shopId;
+  int ? productUnitId;
 
-  OfferProduct({
+  CustomerProductData({
     this.categoryId, //
     this.status,
     this.id, //
@@ -63,8 +65,10 @@ class OfferProduct {
     this.mrpPrice, //
     this.discountPercentage, //
     this.productType, //
+    this.shopId,
+    this.productUnitId,
   });
-  OfferProduct.fromJson(Map<String, dynamic> json) {
+  CustomerProductData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     productName = json["product_name"];
     productImagePath = json["product_image_path"];
@@ -79,116 +83,22 @@ class OfferProduct {
     productId = json["product_id"];
     status = json["status"];
     unit = json["unit"];
+    shopId = json["shop_id"];
+    productUnitId = json["product_unit_id"];
   }
 }
 
-class SeasonalProduct {
-  int? id;
-  String? productName;
-  String? productImagePath;
-  String? productImageName;
-  String? weight;
-  String? offerPrice;
-  String? mrpPrice;
-  int? productId;
-  int? categoryId;
-  String? productType;
-  int? selectedProductId;
-  String? discountPercentage;
-  String? status;
-  String? unit;
-  SeasonalProduct({
-    this.categoryId, //
-    this.status,
-    this.id, //
-    this.productId, //
-    this.selectedProductId, //
-    this.offerPrice, //
-    this.productImagePath, //
-    this.productName, //
-    this.unit,
-    this.productImageName, //
-    this.weight, //
-    this.mrpPrice, //
-    this.discountPercentage, //
-    this.productType, //
-  });
-  SeasonalProduct.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    productName = json["product_name"];
-    productImagePath = json["product_image_path"];
-    productImageName = json["product_image_name"];
-    weight = json["weight"];
-    offerPrice = json["offer_price"];
-    mrpPrice = json["mrp_price"];
-    categoryId = json["category_id"];
-    productType = json["product_type"];
-    selectedProductId = json["selected_product_id"];
-    discountPercentage = json["discount_percentage"];
-    productId = json["product_id"];
-    status = json["status"];
-    unit = json["unit"];
-  }
-}
 
-class RecommandedProducts {
-  int? id;
-  String? productName;
-  String? productImagePath;
-  String? productImageName;
-  String? weight;
-  String? offerPrice;
-  String? mrpPrice;
-  int? productId;
-  int? categoryId;
-  String? productType;
-  int? selectedProductId;
-  String? discountPercentage;
-  String? status;
-  String? unit;
-  RecommandedProducts({
-    this.categoryId,
-    this.status,
-    this.id,
-    this.productId,
-    this.selectedProductId,
-    this.offerPrice,
-    this.productImagePath,
-    this.productName,
-    this.unit,
-    this.productImageName,
-    this.weight,
-    this.mrpPrice,
-    this.productType,
-    this.discountPercentage,
-  });
-  RecommandedProducts.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    productName = json["product_name"];
-    productImagePath = json["product_image_path"];
-    productImageName = json["product_image_name"];
-    weight = json["weight"];
-    offerPrice = json["offer_price"];
-    mrpPrice = json["mrp_price"];
-    categoryId = json["category_id"];
-    productType = json["product_type"];
-    selectedProductId = json["selected_product_id"];
-    discountPercentage = json["discount_percentage"];
-    productId = json["product_id"];
-    status = json["status"];
-    unit = json["unit"];
-  }
-}
 
-class ShopData {
+class ShopViewData {
   ShopDetails? shopDetails;
   List<ShopCategory>? shopCategories;
-  List<OfferProduct>? offerProduct;
-  List<SeasonalProduct>? seasonalProduct;
-  List<RecommandedProducts>? recommandedProduct;
+  List<CustomerProductData>? offerProduct;
+  List<CustomerProductData>? seasonalProduct;
+  List<CustomerProductData>? recommandedProduct;
   List<BannerImageData>? bannerImages;
 
-  ShopData({
+  ShopViewData({
     required this.shopDetails,
     required this.shopCategories,
     required this.offerProduct,
@@ -196,7 +106,7 @@ class ShopData {
     required this.recommandedProduct,
     required this.bannerImages,
   });
-  ShopData.fromJson(Map<String, dynamic> json) {
+  ShopViewData.fromJson(Map<String, dynamic> json) {
     shopDetails = json['shop_details'] != null
         ? ShopDetails.fromJson(json['shop_details'])
         : null;
@@ -207,21 +117,21 @@ class ShopData {
       });
     }
     if (json["offer_products"] != null) {
-      offerProduct = <OfferProduct>[];
+      offerProduct = <CustomerProductData>[];
       json["offer_products"].forEach((v) {
-        offerProduct!.add(OfferProduct.fromJson(v));
+        offerProduct!.add(CustomerProductData.fromJson(v));
       });
     }
     if (json["seasonal_products"] != null) {
-      seasonalProduct = <SeasonalProduct>[];
+      seasonalProduct = <CustomerProductData>[];
       json["seasonal_products"].forEach((v) {
-        seasonalProduct!.add(SeasonalProduct.fromJson(v));
+        seasonalProduct!.add(CustomerProductData.fromJson(v));
       });
     }
     if (json["recommanded_products"] != null) {
-      recommandedProduct = <RecommandedProducts>[];
+      recommandedProduct = <CustomerProductData>[];
       json["recommanded_products"].forEach((v) {
-        recommandedProduct!.add(RecommandedProducts.fromJson(v));
+        recommandedProduct!.add(CustomerProductData.fromJson(v));
       });
     }
     if (json["shop_banner_images"] != null) {

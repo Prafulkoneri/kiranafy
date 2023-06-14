@@ -1,4 +1,5 @@
 import 'package:local_supper_market/screen/customer/category/model/product_as_per_category_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 
 class ProductFilterReqModel{
   String ? shopId;
@@ -44,7 +45,7 @@ class ProductFilterResModel {
 }
 
 class FilterData {
-  List<ProductList>? productList;
+  List<CustomerProductData>? productList;
   List<AllCategoryList>? allCategoryList;
   int? totalSelectedAndCustomProducts;
 
@@ -55,9 +56,9 @@ class FilterData {
   });
   FilterData.fromJson(Map<String, dynamic> json) {
     if (json["product_list"] != null) {
-      productList = <ProductList>[];
+      productList = <CustomerProductData>[];
       json["product_list"].forEach((v) {
-        productList!.add(ProductList.fromJson(v));
+        productList!.add(CustomerProductData.fromJson(v));
       });
     }
     if (json["all_category_list"] != null) {

@@ -25,6 +25,7 @@ import '../../../../widget/app_bar.dart';
 
 class SSelectedProductView extends StatefulWidget {
   final String? categoryId;
+
   const SSelectedProductView({super.key, required this.categoryId});
 
   @override
@@ -56,12 +57,17 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
             onBackBtnPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SSCategoryListView(),)),
-                    (Route<dynamic> route) => false,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                          index: 0,
+                          screenName: SSCategoryListView(),
+                        )),
+                (Route<dynamic> route) => false,
               );
             },
-            title:watch.categoryName!=""?
-                '${watch.categoryName??""} - ${watch.totalSelectedAndCustomProducts??""}':"",
+            title: watch.categoryName != ""
+                ? '${watch.categoryName ?? ""} - ${watch.totalSelectedAndCustomProducts ?? ""}'
+                : "",
             // "Cold Drinks & Juices - 2",
             // action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {},
@@ -132,7 +138,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 height: 40.h,
                                 color: Custlogin,
                                 onTap: () {
-                                  read.onAddProductPressed(context,widget.categoryId);
+                                  read.onAddProductPressed(
+                                      context, widget.categoryId);
                                 },
                                 child: Row(
                                   mainAxisAlignment:
@@ -176,8 +183,14 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 onTap: () {
                                   Navigator.pushAndRemoveUntil(
                                     context,
-                                    MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SCustomProductView(categoryId: widget.categoryId),)),
-                                        (Route<dynamic> route) => false,
+                                    MaterialPageRoute(
+                                        builder: (context) => SMainScreenView(
+                                              index: 0,
+                                              screenName: SCustomProductView(
+                                                  categoryId:
+                                                      widget.categoryId),
+                                            )),
+                                    (Route<dynamic> route) => false,
                                   );
                                   // readMainScreen.onNavigation(0,ShopCustomProductView(categoryId: watch.categoryId), context);
                                 },
@@ -291,11 +304,26 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                             Row(
                                               children: [
                                                 GestureDetector(
-                                                  onTap:(){
-                                                    Navigator.pushAndRemoveUntil(
+                                                  onTap: () {
+                                                    Navigator
+                                                        .pushAndRemoveUntil(
                                                       context,
-                                                      MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SEditAdminProductView(productId:element?.id.toString(),categoryId: widget.categoryId,))),
-                                                          (Route<dynamic> route) => false,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              SMainScreenView(
+                                                                  index: 0,
+                                                                  screenName:
+                                                                      SEditAdminProductView(
+                                                                    productId:
+                                                                        element
+                                                                            ?.id
+                                                                            .toString(),
+                                                                    categoryId:
+                                                                        widget
+                                                                            .categoryId,
+                                                                  ))),
+                                                      (Route<dynamic> route) =>
+                                                          false,
                                                     );
                                                   },
                                                   child: Container(
@@ -304,7 +332,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                         boxShadow: [
                                                           BoxShadow(
                                                             color: grey6,
-                                                            offset: const Offset(
+                                                            offset:
+                                                                const Offset(
                                                               5.0,
                                                               5.0,
                                                             ),
@@ -314,8 +343,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                         ],
                                                         color: Colors.white,
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                15)),
+                                                            BorderRadius
+                                                                .circular(15)),
                                                     child: SvgPicture.asset(
                                                         'assets/icons/e1.svg'),
                                                   ),
@@ -325,8 +354,10 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 ),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    read.deleteAdminProduct(context,
-                                                        index, element?.id);
+                                                    read.deleteAdminProduct(
+                                                        context,
+                                                        index,
+                                                        element?.id);
                                                   },
                                                   child: Container(
                                                     padding: EdgeInsets.all(8),
@@ -557,9 +588,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                           return Column(
                             children: [
                               GestureDetector(
-                                onTap:(){
-                            print(element?.id);
-                          },
+                                onTap: () {
+                                  print(element?.id);
+                                },
                                 child: Container(
                                   // padding: EdgeInsets.only(
                                   //     left: 21.w, bottom: 11.w, top: 13.w, right: 21.w),
@@ -567,14 +598,16 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                   decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
-                                            color: Colors.black.withOpacity(0.09),
+                                            color:
+                                                Colors.black.withOpacity(0.09),
                                             blurRadius: 5,
                                             offset: Offset(-.0, 5.0),
                                             spreadRadius: 0),
                                       ],
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.white,
-                                      border: Border.all(width: 1, color: grey1)),
+                                      border:
+                                          Border.all(width: 1, color: grey1)),
                                   // decoration: BoxDecoration(
 
                                   //     border: Border.all(width: 1, color: Black1)),
@@ -600,20 +633,23 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   SizedBox(
                                                     width: 5.w,
                                                   ),
-                                                  element?.productImagePath!=""?
-                                                  AppNetworkImages(imageUrl: "${element?.productImagePath}", height: 61.h,
-                                                    width: 60.w,
-                                                    fit: BoxFit.fill,
-                                                  )
-                                                      :
-                                                  Image(
-                                                    image: AssetImage(
-                                                      "assets/images/profile_image.png",
-                                                    ),
-                                                    height: 61.h,
-                                                    width: 60.w,
-                                                    fit: BoxFit.fill,
-                                                  ),
+                                                  element?.productImagePath !=
+                                                          ""
+                                                      ? AppNetworkImages(
+                                                          imageUrl:
+                                                              "${element?.productImagePath}",
+                                                          height: 61.h,
+                                                          width: 60.w,
+                                                          fit: BoxFit.fill,
+                                                        )
+                                                      : Image(
+                                                          image: AssetImage(
+                                                            "assets/images/profile_image.png",
+                                                          ),
+                                                          height: 61.h,
+                                                          width: 60.w,
+                                                          fit: BoxFit.fill,
+                                                        ),
                                                   SizedBox(
                                                     width: 10.w,
                                                   ),
@@ -627,7 +663,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             color: Black1,
                                                             fontSize: 16.sp,
                                                             fontWeight:
-                                                                FontWeight.w700),
+                                                                FontWeight
+                                                                    .w700),
                                                       ),
                                                     ),
                                                   ),
@@ -636,7 +673,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                               Row(
                                                 children: [
                                                   GestureDetector(
-                                                    onTap:(){
+                                                    onTap: () {
                                                       // Navigator.pushAndRemoveUntil(
                                                       //   context,
                                                       //   MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SEditCustomProductView(productId:element?.id.toString(),categoryId: widget.categoryId,))),
@@ -644,37 +681,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                       // );
                                                     },
                                                     child: Container(
-                                                      padding: EdgeInsets.all(8),
-                                                      decoration: BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: grey6,
-                                                              offset: const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 10.0,
-                                                              spreadRadius: 2.0,
-                                                            ), //BoxShadow
-                                                          ],
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  15)),
-                                                      child: SvgPicture.asset(
-                                                          'assets/icons/e1.svg'),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 8.w,
-                                                  ),
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      read.deleteAdminProduct(context,
-                                                          index, element?.id);
-                                                    },
-                                                    child: Container(
-                                                      padding: EdgeInsets.all(8),
+                                                      padding:
+                                                          EdgeInsets.all(8),
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
@@ -691,7 +699,43 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           color: Colors.white,
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(15)),
+                                                                  .circular(
+                                                                      15)),
+                                                      child: SvgPicture.asset(
+                                                          'assets/icons/e1.svg'),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 8.w,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      read.deleteAdminProduct(
+                                                          context,
+                                                          index,
+                                                          element?.id);
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.all(8),
+                                                      decoration: BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: grey6,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
+                                                              ),
+                                                              blurRadius: 10.0,
+                                                              spreadRadius: 2.0,
+                                                            ), //BoxShadow
+                                                          ],
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15)),
                                                       child: SvgPicture.asset(
                                                           'assets/icons/delete2.svg'),
                                                     ),
@@ -727,7 +771,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                     children: [
                                                       Text(
                                                         "Product Unit",
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
                                                               color: Black1,
                                                               fontSize: 12.sp,
@@ -744,7 +789,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 .dmSans(
                                                               textStyle: TextStyle(
                                                                   color: Black1,
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400),
@@ -759,7 +805,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 .dmSans(
                                                               textStyle: TextStyle(
                                                                   color: Black1,
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400),
@@ -776,8 +823,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 ListView.builder(
                                                   padding: EdgeInsets.zero,
                                                   itemCount: watch
-                                                          .customProduct?[
-                                                              index]
+                                                          .customProduct?[index]
                                                           .unitDetails
                                                           ?.length ??
                                                       0,
@@ -815,8 +861,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             children: [
                                                               Text(
                                                                 "${element?.weightAndUnit}",
-                                                                style: GoogleFonts
-                                                                    .dmSans(
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
                                                                   textStyle: TextStyle(
                                                                       color:
                                                                           Black1,
@@ -836,8 +883,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             children: [
                                                               Text(
                                                                 "${element?.mrpPrice}",
-                                                                style: GoogleFonts
-                                                                    .dmSans(
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
                                                                   textStyle: TextStyle(
                                                                       decoration:
                                                                           TextDecoration
@@ -856,8 +904,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               ),
                                                               Text(
                                                                 "${element?.offerPrice}",
-                                                                style: GoogleFonts
-                                                                    .dmSans(
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
                                                                   textStyle: TextStyle(
                                                                       color:
                                                                           Black1,

@@ -150,29 +150,37 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/images/location2.svg',
-                                            width: 28.w,
-                                            height: 28.w,
-                                          ),
-                                          SizedBox(
-                                            width: 9.w,
-                                          ),
-                                          Text(
-                                            "${watch.shopDetails?.shopAddress} \n ${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
-                                            // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Black,
-                                                  letterSpacing: .5,
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w400),
+                                      Expanded(child: Container(
+                                        child:      Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/images/location2.svg',
+                                              width: 28.w,
+                                              height: 28.w,
                                             ),
-                                          ),
-                                        ],
-                                      ),
+                                            SizedBox(
+                                              width: 9.w,
+                                            ),
+                                            Flexible(
+                                              child: Text(
+                                                "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                                                // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black,
+                                                      letterSpacing: .5,
+                                                      fontSize: 13.sp,
+                                                      fontWeight: FontWeight.w400),
+                                                ),
+                                              ),
+                                            ),
+
+                                          ],
+                                        ),
+                                      )),
+
+
                                       Row(
                                         children: [
                                           GestureDetector(
@@ -484,12 +492,11 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                           ),
                                                         )
                                                       : const Text(""),
-                                                  // SizedBox(
-                                                  //   width: 8.w,
-                                                  // ),
+
                                                   element?.discountPercentage !=
                                                           ""
                                                       ? Container(
+                                                    margin: EdgeInsets.only(left: 5.w,right: 5.w),
                                                           width: 60.w,
                                                           height: 20.h,
                                                           decoration: BoxDecoration(
@@ -902,10 +909,15 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                             : const Text(""),
                                                       ],
                                                     ),
-                                                    SvgPicture.asset(
-                                                      'assets/images/add.svg',
-                                                      // width: 15.w,
-                                                      // height: 19.h,
+                                                    GestureDetector(
+                                                     onTap: (){
+                                                       read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
+                                                     },
+                                                      child: SvgPicture.asset(
+                                                        'assets/images/add.svg',
+                                                        // width: 15.w,
+                                                        // height: 19.h,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),

@@ -10,7 +10,6 @@ import 'package:local_supper_market/utils/inidcator.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
-
 class SOrderStatusView extends StatefulWidget {
   const SOrderStatusView({Key? key}) : super(key: key);
 
@@ -19,12 +18,10 @@ class SOrderStatusView extends StatefulWidget {
 }
 
 class _SOrderStatusViewState extends State<SOrderStatusView> {
-
-
   @override
   Widget build(BuildContext context) {
-    final read=context.read<SOrderStatusController>();
-    final watch=context.watch<SOrderStatusController>();
+    final read = context.read<SOrderStatusController>();
+    final watch = context.watch<SOrderStatusController>();
     return DefaultTabController(
       length: 5,
       initialIndex: 0,
@@ -32,7 +29,10 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
-          child: PrimaryAppBar(title: "Orders",isBackButtonEnabled: false,),
+          child: PrimaryAppBar(
+            title: "Orders",
+            isBackButtonEnabled: false,
+          ),
         ),
         body: Column(
           children: [
@@ -40,8 +40,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
               physics: NeverScrollableScrollPhysics(),
               indicatorSize: TabBarIndicatorSize.tab,
               splashBorderRadius: BorderRadius.circular(20),
-              indicator:
-              CustomIndicator(color: Color(0xff39C19D), radius: 5.w),
+              indicator: CustomIndicator(color: Color(0xff39C19D), radius: 5.w),
               indicatorWeight: 0.w,
               indicatorPadding: EdgeInsets.only(top: 10.w),
               padding: EdgeInsets.only(top: 16.w),
@@ -55,7 +54,9 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
                           "Pending",
                           style: TextStyle(
                               fontSize: 12.sp,
-                              fontWeight: watch.selectedIndex==0?FontWeight.w700:FontWeight.w400,
+                              fontWeight: watch.selectedIndex == 0
+                                  ? FontWeight.w700
+                                  : FontWeight.w400,
                               color: Color(0xff3A3A3A)),
                         ),
                       ],
@@ -70,8 +71,10 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
                           "Confirmed",
                           style: TextStyle(
                               fontSize: 12.sp,
-                              fontWeight: watch.selectedIndex==1?FontWeight.w700:FontWeight.w400,
-                              color:  Color(0xff3A3A3A)),
+                              fontWeight: watch.selectedIndex == 1
+                                  ? FontWeight.w700
+                                  : FontWeight.w400,
+                              color: Color(0xff3A3A3A)),
                         ),
                       ],
                     ),
@@ -85,10 +88,11 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
                           "In Process",
                           style: TextStyle(
                               fontSize: 12.sp,
-                              fontWeight: watch.selectedIndex==2?FontWeight.w700:FontWeight.w400,
+                              fontWeight: watch.selectedIndex == 2
+                                  ? FontWeight.w700
+                                  : FontWeight.w400,
                               color: Color(0xff3A3A3A)),
                         ),
-
                       ],
                     ),
                   ),
@@ -101,10 +105,11 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
                           "Delivered",
                           style: TextStyle(
                               fontSize: 12.sp,
-                              fontWeight: watch.selectedIndex==3?FontWeight.w700:FontWeight.w400,
+                              fontWeight: watch.selectedIndex == 3
+                                  ? FontWeight.w700
+                                  : FontWeight.w400,
                               color: Color(0xff3A3A3A)),
                         ),
-
                       ],
                     ),
                   ),
@@ -117,10 +122,11 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
                           "Cancelled",
                           style: TextStyle(
                               fontSize: 12.sp,
-                              fontWeight: watch.selectedIndex==4?FontWeight.w700:FontWeight.w400,
+                              fontWeight: watch.selectedIndex == 4
+                                  ? FontWeight.w700
+                                  : FontWeight.w400,
                               color: Color(0xff3A3A3A)),
                         ),
-
                       ],
                     ),
                   ),

@@ -22,19 +22,18 @@ class SCouponsListController extends ChangeNotifier {
   String couponId = "";
   DeleteCouponsRepo deleteCouponsRepo = DeleteCouponsRepo();
   ViewCouponsDetailsRepo viewCouponsDetailsRepo = ViewCouponsDetailsRepo();
+
   ViewCouponsDetailRequestModel get viewCouponsRequestModel =>
       ViewCouponsDetailRequestModel(couponId: couponId.toString());
 
   DeleteCouponsReqModel get deleteCouponsReqModel =>
       DeleteCouponsReqModel(couponId: couponId.toString());
 
-  Future<void> initState(
-    context,refresh
-  ) async {
-    if(refresh) {
+  Future<void> initState(context, refresh) async {
+    if (refresh) {
       await getCouponsList(context);
     }
-    }
+  }
 
   showLoader(value) {
     isLoading = value;

@@ -20,13 +20,14 @@ class DashBoardModel {
 class Data {
   int? categoriesCount;
   int? productsCount;
-  List<BannerImageData> ? bannerImages;
+  List<BannerImageData>? bannerImages;
 
   Data({
     required this.categoriesCount,
     required this.productsCount,
     required this.bannerImages,
   });
+
   Data.fromJson(Map<String, dynamic> json) {
     categoriesCount = json["categories_count"];
     productsCount = json["products_count"];
@@ -35,17 +36,21 @@ class Data {
       json["shop_banner_images"].forEach((v) {
         bannerImages!.add(BannerImageData.fromJson(v));
       });
-    }  }
+    }
+  }
 }
-class BannerImageData{
-String ? imagesPath;
-String ? imageName;
-BannerImageData({
-  this.imageName,
-  this.imagesPath,
-});
-BannerImageData.fromJson(Map<String,dynamic>json){
-  imagesPath=json["shop_banner_image_path"];
-  imageName=json["shop_banner_image_name"];
-}
+
+class BannerImageData {
+  String? imagesPath;
+  String? imageName;
+
+  BannerImageData({
+    this.imageName,
+    this.imagesPath,
+  });
+
+  BannerImageData.fromJson(Map<String, dynamic> json) {
+    imagesPath = json["shop_banner_image_path"];
+    imageName = json["shop_banner_image_name"];
+  }
 }

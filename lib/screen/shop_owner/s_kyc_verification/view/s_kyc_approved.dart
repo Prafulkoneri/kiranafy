@@ -97,8 +97,10 @@ class _KycApprovedViewState extends State<KycApprovedView> {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SShopConfigurationView(initialShopConfigration: true,)),
-                              (Route<dynamic> route) => false,
+                              builder: (context) => SShopConfigurationView(
+                                    initialShopConfigration: true,
+                                  )),
+                          (Route<dynamic> route) => false,
                         );
                       }),
                 ],

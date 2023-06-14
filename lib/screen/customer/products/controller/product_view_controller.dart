@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
@@ -14,6 +16,7 @@ import 'package:local_supper_market/screen/customer/products/model/add_admin_pro
 import 'package:local_supper_market/screen/customer/products/model/add_custom_product_to_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_unit_images_res_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_view_model.dart';
+
 import 'package:local_supper_market/screen/customer/products/model/remove_admin_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/remove_custom_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/repository/add_admin_product_to_fav_repo.dart';
@@ -22,6 +25,7 @@ import 'package:local_supper_market/screen/customer/products/repository/product_
 import 'package:local_supper_market/screen/customer/products/repository/product_view_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_admin_product_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_custom_product_fav_repo.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:share_plus/share_plus.dart';
@@ -41,9 +45,9 @@ class ProductViewController extends ChangeNotifier {
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   ProductViewData? productViewData;
   ProductDetails? productDetails;
-  ShopDetails? shopDetails;
+  ProductViewShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
-  List<SimilarProduct>? similarProduct;
+  List<CustomerProductData>? similarProduct;
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
@@ -55,6 +59,7 @@ class ProductViewController extends ChangeNotifier {
       RemoveAdminFvrtProductRepo();
   RemoveCustomFvrtProductRepo removeCustomFavProductRepo =
       RemoveCustomFvrtProductRepo();
+  AddProductToCartRepo addProductToCartRepo=AddProductToCartRepo();
 
   Future<void> initState(context, sId, cId, pId, suId, pType) async {
     await productsView(context, sId, cId, pId, pType);
@@ -428,6 +433,36 @@ class ProductViewController extends ChangeNotifier {
       ),
     );
   }
+
+  Future<void> addToCart(pType,pId,sId,context)async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    addProductToCartRepo
+        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+
 /////////////////////////
   //   void onBackPressed(screenName,context,cId){
   //   print(screenName);

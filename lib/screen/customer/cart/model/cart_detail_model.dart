@@ -38,7 +38,7 @@ class CartDetailResponseModel {
 }
 
 class CartDetailData {
-  ShopData? shopDetails;
+  ShopDetails? shopDetails;
   List<CartItemList>? cartItemList;
 
   CartDetailData({
@@ -47,7 +47,7 @@ class CartDetailData {
   });
   CartDetailData.fromJson(Map<String, dynamic> json) {
     shopDetails = json['shop_details'] != null
-        ? ShopData.fromJson(json['shop_details'])
+        ? ShopDetails.fromJson(json['shop_details'])
         : null;
     if (json["cart_item_list"] != null) {
       cartItemList = <CartItemList>[];

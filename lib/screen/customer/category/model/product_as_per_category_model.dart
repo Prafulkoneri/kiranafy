@@ -1,3 +1,5 @@
+import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+
 class ProductAsPerCategoryReqModel {
   String? shopId;
   String? categoryId;
@@ -35,7 +37,7 @@ class ProductAsPerCategoryResModel {
 
 class CategoryProductData {
   List<AllCategoryList>? allCategoryList;
-  List<ProductList>? productList;
+  List<CustomerProductData>? productList;
   int? totalSelectedAndCustomProducts;
 
   CategoryProductData({
@@ -45,9 +47,9 @@ class CategoryProductData {
   });
   CategoryProductData.fromJson(Map<String, dynamic> json) {
     if (json["product_list"] != null) {
-      productList = <ProductList>[];
+      productList = <CustomerProductData>[];
       json["product_list"].forEach((v) {
-        productList!.add(ProductList.fromJson(v));
+        productList!.add(CustomerProductData.fromJson(v));
       });
     }
     if (json["all_category_list"] != null) {
@@ -77,49 +79,4 @@ class AllCategoryList {
   }
 }
 
-class ProductList {
-  int? id;
-  String? productName;
-  String? productImagePath;
-  String? productImageName;
-  String? weight;
-  String? offerPrice;
-  String? mrpPrice;
-  int? categoryId;
-  String? productType;
-  String? discountPercentage;
-  int? productId;
-  String? status;
-  String? unit;
 
-  ProductList({
-    required this.id,
-    required this.productName,
-    required this.productImagePath,
-    required this.productImageName,
-    required this.weight,
-    required this.offerPrice,
-    required this.mrpPrice,
-    required this.discountPercentage,
-    required this.productId,
-    required this.status,
-    required this.unit,
-    required this.categoryId,
-    required this.productType,
-  });
-  ProductList.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    productName = json["product_name"];
-    productImagePath = json["product_image_path"];
-    productImageName = json["product_image_name"];
-    offerPrice = json["offer_price"];
-    mrpPrice = json["mrp_price"];
-    weight = json["weight"];
-    discountPercentage = json["discount_percentage"];
-    productId = json["product_id"];
-    status = json["status"];
-    unit = json["unit"];
-    categoryId = json["category_id"];
-    productType = json["product_type"];
-  }
-}

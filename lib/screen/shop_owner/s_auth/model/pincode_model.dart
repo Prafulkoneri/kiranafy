@@ -1,11 +1,13 @@
-class GetPincodeReqModel{
-  String ? areaId;
+class GetPincodeReqModel {
+  String? areaId;
+
   GetPincodeReqModel({
     this.areaId,
   });
-  Map<String,dynamic> toJson(){
+
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data["area_id"]=areaId;
+    data["area_id"] = areaId;
     return data;
   }
 }
@@ -32,4 +34,3 @@ class GetPincodeResModel {
     }
   }
 }
-

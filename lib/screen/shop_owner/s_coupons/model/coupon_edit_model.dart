@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/product_as_per_category_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_categories_list_model.dart';
 
@@ -33,6 +27,7 @@ class EditCouponsResModel {
     required this.message,
     required this.editCouponsData,
   });
+
   EditCouponsResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
@@ -43,7 +38,7 @@ class EditCouponsResModel {
 
 class EditCouponsData {
   CouponDetails? couponDetails;
-  List<CategoryData> ? categoryList;
+  List<CategoryData>? categoryList;
   List<ProductData>? allProductsList;
 
   EditCouponsData({
@@ -51,6 +46,7 @@ class EditCouponsData {
     required this.categoryList,
     required this.allProductsList,
   });
+
   EditCouponsData.fromJson(Map<String, dynamic> json) {
     couponDetails = json['coupon_details'] != null
         ? CouponDetails.fromJson(json['coupon_details'])
@@ -71,7 +67,6 @@ class EditCouponsData {
     }
   }
 }
-
 
 class CouponDetails {
   int? id;
@@ -101,6 +96,7 @@ class CouponDetails {
     required this.shopOwnerProductId,
     required this.couponTermsAndConditions,
   });
+
   CouponDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     couponFromDate = json["coupon_from_date"];
@@ -116,5 +112,3 @@ class CouponDetails {
     couponTermsAndConditions = json["coupon_terms_and_conditions"];
   }
 }
-
-
