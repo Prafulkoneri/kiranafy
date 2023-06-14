@@ -253,4 +253,16 @@ class Endpoint {
   static const String cartDetailView ="${baseUrl}lsm-customer-view-cart-details";
   ////Add Product To Cart////
   static const String addProductToCart ="${baseUrl}lsm-customer-add-product-to-cart";
+
+
+  ///Cart List Detail Delete////
+  static const String cartDetailDelete = "${baseUrl}lsm-customer-delete-cart";
+
+  ///Cart Item Quantity////
+  static const String cartItemQuantity =
+      "${baseUrl}lsm-customer-update-cart-item-quantity";
+
+  ///Shop Cart Delete ////
+  static const String shopCartDelete =
+      "${baseUrl}lsm-customer-delete-all-carts";
 }

@@ -25,7 +25,7 @@ class CouponListData {
   int? id;
   String? couponToDate;
   String? couponDiscountPercentage;
-  int? couponDiscountMaxAmount;
+  String? couponDiscountMaxAmount;
   String? couponCode;
 
   CouponListData({

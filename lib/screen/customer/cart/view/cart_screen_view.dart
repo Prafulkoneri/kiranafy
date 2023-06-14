@@ -58,22 +58,25 @@ class _CartScreenViewState extends State<CartScreenView> {
             height: 18.h,
           ),
           onActionTap: () async {
-            // await read.validateField(context);
-            Navigator.push(
+            await read.deleteShopCart(
               context,
-              MaterialPageRoute(builder: (context) => const EmptyCartView()),
             );
+            // await read.validateField(context);
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => const EmptyCartView()),
+            // );
           },
         ),
       ),
       backgroundColor: backgroundColor,
-      body: SizedBox(
-        // height: 154.h,
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             ListView.builder(
-                // physics: NeverScrollableScrollPhysics(),
-                physics: AlwaysScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
+                // physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: watch.cartList?.length ?? 0,
                 itemBuilder: (BuildContext, index) {
@@ -83,7 +86,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                         EdgeInsets.only(left: 20.w, top: 20.w, right: 16.w),
                     child: Container(
                       height: 165.h,
-                      width: 354.w,
+                      // width: 354.w,
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -229,6 +232,9 @@ class _CartScreenViewState extends State<CartScreenView> {
                 }
                 // child:
                 ),
+            SizedBox(
+              height: 100.w,
+            )
           ],
         ),
       ),

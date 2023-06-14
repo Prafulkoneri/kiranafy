@@ -41,8 +41,8 @@ class CouponViewData {
   String? couponFromDate;
   String? couponToDate;
   String? couponDiscountPercentage;
-  int? couponMinimumOrderAmount;
-  int? couponDiscountMaxAmount;
+  String? couponMinimumOrderAmount;
+  String? couponDiscountMaxAmount;
   String? couponCode;
   String? couponType;
   String? couponTermsAndConditions;

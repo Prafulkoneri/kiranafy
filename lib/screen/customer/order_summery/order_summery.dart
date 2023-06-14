@@ -619,7 +619,7 @@ class _OrderSummeryState extends State<OrderSummery> {
               padding: EdgeInsets.only(top: 30.w),
               child: Container(
                 height: 203.h,
-                width: 390.w,
+                // width: 390.w,
                 color: Coupons,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

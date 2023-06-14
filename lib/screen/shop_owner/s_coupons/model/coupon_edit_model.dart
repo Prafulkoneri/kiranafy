@@ -72,9 +72,9 @@ class CouponDetails {
   int? id;
   String? couponFromDate;
   String? couponToDate;
-  int? couponDiscountPercentage;
-  int? couponMinimumOrderAmount;
-  int? couponDiscountMaxAmount;
+  String? couponDiscountPercentage;
+  String? couponMinimumOrderAmount;
+  String? couponDiscountMaxAmount;
   String? couponCode;
   String? couponType;
   String? shopOwnerCategoryId;
