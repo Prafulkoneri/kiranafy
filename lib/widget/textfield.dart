@@ -109,10 +109,12 @@ class PrimarySTextFormField extends StatelessWidget {
   final double? hintFontSize;
   final EdgeInsetsGeometry? padding;
   final TextInputType? textInputType;
+  final void Function()? onTap;
 
   PrimarySTextFormField(
       {Key? key,
       this.color,
+        this.onTap,
       this.padding,
       this.height,
       this.width,
@@ -155,6 +157,7 @@ class PrimarySTextFormField extends StatelessWidget {
           height: height ?? 48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
+            onTap: onTap,
             maxLines: maxLines ?? 1,
             keyboardType: textInputType,
             readOnly: readOnly ?? false,

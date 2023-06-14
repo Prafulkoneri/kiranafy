@@ -246,7 +246,6 @@ class CartDetailController extends ChangeNotifier {
       if (response.statusCode == 200) {
        int value=quantityList[index];
         quantityList.removeAt(index);
-        print(quantityList);
         quantityList.insert(index, value + 1);
         notifyListeners();
       } else {
@@ -282,9 +281,8 @@ class CartDetailController extends ChangeNotifier {
       if (response.statusCode == 200) {
        int value=quantityList[index];
         quantityList.removeAt(index);
-        print(quantityList);
-          quantityList.insert(index, value - 1);
-          notifyListeners();
+        quantityList.insert(index, value - 1);
+        notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

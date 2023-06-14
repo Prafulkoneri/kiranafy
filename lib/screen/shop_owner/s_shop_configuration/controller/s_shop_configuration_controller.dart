@@ -43,6 +43,18 @@ class SShopConfigurationController extends ChangeNotifier {
   File fileImage = File("");
   String networkImage = "";
   String image = "";
+  bool isLoading=true;
+
+  Future<void> initState(
+      context,
+      ) async {
+    await getShopConfiguration(context);
+  }
+
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
 
   ///Delivery Type CheckBox
   void onCustomerPickupSelected() {
@@ -100,11 +112,7 @@ class SShopConfigurationController extends ChangeNotifier {
 
   ///////////////////
 
-  Future<void> initState(
-    context,
-  ) async {
-    await getShopConfiguration(context);
-  }
+
 
   ////Image
   void openGallery1() async {
@@ -132,6 +140,7 @@ class SShopConfigurationController extends ChangeNotifier {
 
   ////// Shop Configuration start
   Future<void> getShopConfiguration(context) async {
+    showLoader(true);
     print("successToken");
     SharedPreferences pref = await SharedPreferences.getInstance();
     supportNumberController.text = pref.getString("mobileNo").toString();
@@ -203,7 +212,7 @@ class SShopConfigurationController extends ChangeNotifier {
           isDeliveryChargesSelected = false;
           ifFreePickupSelected = false;
         }
-
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -226,6 +235,29 @@ class SShopConfigurationController extends ChangeNotifier {
 //  Edit//////
 
   Future uploadShopConfiguration(context) async {
+
+
+    if(upiIdController.text==""){
+      Utils.showPrimarySnackbar(context, "UPI ID is empty",
+          type: SnackType.error);
+      return;
+    }
+    if(startShopTimeController.text==""){
+      Utils.showPrimarySnackbar(context, "Start time is empty",
+          type: SnackType.error);
+      return;
+    }
+    if(endShopTimeController.text==""){
+      Utils.showPrimarySnackbar(context, "Stop time is empty",
+          type: SnackType.error);
+      return;
+    }
+    if(supportNumberController.text.length<10){
+      Utils.showPrimarySnackbar(context, "Support number is incorrect",
+          type: SnackType.error);
+      return;
+    }
+
     if (fileImage.path == "") {
       await editShopconfig(context);
     } else {
