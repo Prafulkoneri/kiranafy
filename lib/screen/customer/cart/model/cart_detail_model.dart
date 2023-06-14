@@ -63,7 +63,7 @@ class CartItemList {
   String? productName;
   String? productImagePath;
   String? productImageName;
-  String? quantity;
+  int? quantity;
   String? weight;
   String? offerPrice;
   String? mrpPrice;
@@ -95,7 +95,7 @@ class CartItemList {
     mrpPrice = json["mrp_price"];
     productType = json["product_type"];
     discountPercentage = json["discount_percentage"];
-    unit = json["gm"];
+    unit = json["unit"];
   }
 }
 

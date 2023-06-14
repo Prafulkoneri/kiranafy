@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/product_as_per_category_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_categories_list_model.dart';
 
@@ -43,7 +37,7 @@ class EditCouponsResModel {
 
 class EditCouponsData {
   CouponDetails? couponDetails;
-  List<CategoryData> ? categoryList;
+  List<CategoryData>? categoryList;
   List<ProductData>? allProductsList;
 
   EditCouponsData({
@@ -72,14 +66,13 @@ class EditCouponsData {
   }
 }
 
-
 class CouponDetails {
   int? id;
   String? couponFromDate;
   String? couponToDate;
-  int? couponDiscountPercentage;
-  int? couponMinimumOrderAmount;
-  int? couponDiscountMaxAmount;
+  String? couponDiscountPercentage;
+  String? couponMinimumOrderAmount;
+  String? couponDiscountMaxAmount;
   String? couponCode;
   String? couponType;
   String? shopOwnerCategoryId;
@@ -116,5 +109,3 @@ class CouponDetails {
     couponTermsAndConditions = json["coupon_terms_and_conditions"];
   }
 }
-
-

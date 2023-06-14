@@ -260,4 +260,8 @@ class Endpoint {
   ///Cart Item Quantity////
   static const String cartItemQuantity =
       "${baseUrl}lsm-customer-update-cart-item-quantity";
+
+  ///Shop Cart Delete ////
+  static const String shopCartDelete =
+      "${baseUrl}lsm-customer-delete-all-carts";
 }

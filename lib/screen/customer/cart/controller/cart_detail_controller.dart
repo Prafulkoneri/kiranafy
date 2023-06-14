@@ -82,6 +82,7 @@ class CartDetailController extends ChangeNotifier {
           CartDetailResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         shopDetailData = result.cartDetailData?.shopDetails;
+
         cartItemList = result.cartDetailData?.cartItemList;
         favAllShop = shopDetailData?.shopFavourite == "yes" ? true : false;
         print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhsssssssssssssssssssssss");
