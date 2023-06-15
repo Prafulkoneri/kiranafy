@@ -6,7 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/cart/controller/cart_detail_controller.dart';
+import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -17,6 +19,7 @@ import 'package:provider/provider.dart';
 class CartDetailView extends StatefulWidget {
   final String? shopId;
   final String? cartId;
+
   const CartDetailView({super.key, this.cartId, this.shopId});
 
   @override
@@ -48,10 +51,21 @@ class _CartDetailViewState extends State<CartDetailView> {
             onActionTap: () {
               read.deleteCartDetails(context, widget.cartId);
             },
+            onBackBtnPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        MainScreenView(index: 2, screenName: CartScreenView())),
+                (Route<dynamic> route) => false,
+              );
+            },
           ),
         ),
         body: watch.shopDetailData == null
-            ? Container()
+            ? Container():watch.isLoading?Center(
+          child: CircularProgressIndicator(),
+        )
             : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Expanded(
                     child: SingleChildScrollView(
@@ -200,6 +214,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                         top: index == 0 ? 14.w : 24.w,
                                         right: 17.w),
                                     child: Container(
+                                      padding: EdgeInsets.only(right: 5.w),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(10),
@@ -258,29 +273,39 @@ class _CartDetailViewState extends State<CartDetailView> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                  MainAxisAlignment.start,
                                               children: [
+                                                SizedBox(
+                                                  height: 5.w,
+                                                ),
                                                 Container(
                                                   padding: EdgeInsets.only(
                                                       right: 5.w),
                                                   child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        "${element?.productName}",
-                                                        // "Ariel Washing Powder",
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color: Black1,
-                                                              // letterSpacing: .5,
-                                                              fontSize: 16.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
+                                                      Flexible(
+                                                        child: Text(
+                                                          "${element?.productName}",
+                                                          // "Ariel Washing Powder",
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle:
+                                                                TextStyle(
+                                                                    color:
+                                                                        Black1,
+                                                                    // letterSpacing: .5,
+                                                                    fontSize:
+                                                                        16.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700),
+                                                          ),
                                                         ),
                                                       ),
                                                       element?.discountPercentage !=
@@ -473,16 +498,21 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                       // ),
                                                       Row(
                                                         children: [
-                                                          SvgPicture.asset(
-                                                            'assets/icons/minus.svg',
-                                                            // width: 30.w,
-                                                            // height: 30.h,
+                                                          GestureDetector(
+                                                            onTap:(){
+                                                              read.subtractItemQuantity(context,element?.cartItemId.toString(),"subtract",index);
+                                                            },
+                                                            child: SvgPicture.asset(
+                                                              'assets/icons/minus.svg',
+                                                              // width: 30.w,
+                                                              // height: 30.h,
+                                                            ),
                                                           ),
                                                           SizedBox(
                                                             width: 12.w,
                                                           ),
                                                           Text(
-                                                            "${element?.quantity}",
+                                                            "${watch.quantityList[index]}",
                                                             style: GoogleFonts
                                                                 .dmSans(
                                                               textStyle: TextStyle(
@@ -498,33 +528,36 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                           SizedBox(
                                                             width: 12.w,
                                                           ),
-                                                          SvgPicture.asset(
-                                                            'assets/images/add.svg',
-                                                            // width: 30.w,
-                                                            // height: 30.h,
+                                                          GestureDetector(
+                                                            onTap: (){
+                                                              read.addItemQuantity(context,element?.cartItemId.toString(),"add", index);
+                                                            },
+                                                            child: SvgPicture.asset(
+                                                              'assets/images/add.svg',
+                                                              // width: 30.w,
+                                                              // height: 30.h,
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
                                                     ],
                                                   ),
                                                 ),
+                                                SizedBox(
+                                                  height: 10.w,
+                                                ),
                                               ],
                                             ),
                                           )
                                         ],
                                       ),
-                                      // decoration: BoxDecoration(
-                                      //   // color: Colors.blueAccent,
-                                      //   border: Border.all(width: 1, color: grey1),
-                                      // ),
-                                      // decoration: BoxDecoration(color: Black),
                                     ),
                                   ),
-                                  index == 4
-                                      ? SizedBox(
-                                          height: 20.h,
-                                        )
-                                      : Container()
+                                  // index == 4
+                                  //     ? SizedBox(
+                                  //         height: 20.h,
+                                  //       )
+                                  //     : Container()
                                 ],
                               ),
                             );

@@ -68,7 +68,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
           },
         ),
       ),
-      body: WillPopScope(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      WillPopScope(
         onWillPop: () async {
           return false;
         },

@@ -32,6 +32,7 @@ import '../../shop_profile/model/customer_view_shop_model.dart';
 
 class CartDetailController extends ChangeNotifier {
   ShopCartListRepo cartListRepo = ShopCartListRepo();
+  List quantityList=[];
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   CartDetailRepo cartDetailRepo = CartDetailRepo();
   CartDetailDeleteRepo cartDetailDeleteRepo = CartDetailDeleteRepo();
@@ -62,15 +63,20 @@ class CartDetailController extends ChangeNotifier {
   String cartId = "";
   String cartItemId = "";
   String quantityAction = "";
-
+ bool isLoading=true;
   bool favAllShop = true;
 
   Future<void> initState(context, cId, id) async {
     await getCartDetails(context, id, cId);
   }
 
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
   Future<void> getCartDetails(context, id, cId) async {
-    print(id);
+    showLoader(true);
     shopId = id.toString();
     cartId = cId.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -84,10 +90,13 @@ class CartDetailController extends ChangeNotifier {
         shopDetailData = result.cartDetailData?.shopDetails;
 
         cartItemList = result.cartDetailData?.cartItemList;
+        int length=cartItemList?.length??0;
+        quantityList.clear();
+       for(int i=0;i<length;i++){
+         quantityList.add(cartItemList?[i].quantity);
+       }
         favAllShop = shopDetailData?.shopFavourite == "yes" ? true : false;
-        print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhsssssssssssssssssssssss");
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -223,10 +232,9 @@ class CartDetailController extends ChangeNotifier {
     );
   }
 
-  Future<void> itemQuantity(context, CIId, quantityActionId) async {
-    // print(CIId);
+  Future<void> addItemQuantity(context, CIId,action,index) async {
     cartItemId = CIId.toString();
-    quantityAction = quantityActionId.toString();
+    quantityAction = action;
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
         .cartItemQuantity(
@@ -236,8 +244,44 @@ class CartDetailController extends ChangeNotifier {
       final result =
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+       int value=quantityList[index];
+        quantityList.removeAt(index);
+        quantityList.insert(index, value + 1);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> subtractItemQuantity(context, CIId,action,index) async {
+    if(quantityList[index]==1){
+      return;
+    }
+    cartItemId = CIId.toString();
+    quantityAction = action;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+       int value=quantityList[index];
+        quantityList.removeAt(index);
+        quantityList.insert(index, value - 1);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -255,4 +299,6 @@ class CartDetailController extends ChangeNotifier {
       },
     );
   }
+
+
 }

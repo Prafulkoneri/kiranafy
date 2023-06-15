@@ -107,49 +107,49 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                       children: [
                         Expanded(
                           child: PrimarySTextFormField(
-                            controller: watch.fromDateController,
-                            suffix: GestureDetector(
-                              onTap: () async {
-                                var pickedDate = await showDatePicker(
-                                  builder: (BuildContext, child) {
-                                    return Theme(
-                                      data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
-                                          primary: Color(0xff1767B1),
-                                          // <-- SEE HERE
-                                          onPrimary: Colors.white,
-                                          // <-- SEE HERE
-                                          onSurface:
-                                              Colors.black, // <-- SEE HERE
-                                        ),
-                                        textButtonTheme: TextButtonThemeData(
-                                          style: TextButton.styleFrom(
-                                            primary: Color(
-                                                0xff1767B1), // button text color
-                                          ),
+                            readOnly: true,
+                            onTap: ()async{
+                              var pickedDate = await showDatePicker(
+
+                                builder: (BuildContext, child) {
+                                  return Theme(
+                                    data: Theme.of(context).copyWith(
+                                      colorScheme: ColorScheme.light(
+                                        primary: Color(0xff1767B1),
+                                        // <-- SEE HERE
+                                        onPrimary: Colors.white,
+                                        // <-- SEE HERE
+                                        onSurface:
+                                        Colors.black, // <-- SEE HERE
+                                      ),
+                                      textButtonTheme: TextButtonThemeData(
+                                        style: TextButton.styleFrom(
+                                          primary: Color(
+                                              0xff1767B1), // button text color
                                         ),
                                       ),
-                                      child: child!,
-                                    );
-                                  },
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1901, 1),
-                                  lastDate: DateTime(2100),
-                                );
-                                if (pickedDate != null) {
-                                  String date = DateFormat('dd-MM-yyy')
-                                      .format(pickedDate ?? DateTime.now());
-                                  read.onFromDateSelected(date);
-                                }
-                              },
-                              child: Container(
-                                width: 15.h,
-                                height: 17.w,
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    "assets/icons/shop_cal.svg",
-                                  ),
+                                    ),
+                                    child: child!,
+                                  );
+                                },
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2100),
+                              );
+                              if (pickedDate != null) {
+                                String date = DateFormat('dd-MM-yyy')
+                                    .format(pickedDate ?? DateTime.now());
+                                read.onFromDateSelected(date);
+                              }
+                            },
+                            controller: watch.fromDateController,
+                            suffix: Container(
+                              width: 15.h,
+                              height: 17.w,
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  "assets/icons/shop_cal.svg",
                                 ),
                               ),
                             ),
@@ -161,6 +161,41 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                         ),
                         Expanded(
                           child: PrimarySTextFormField(
+                            readOnly: true,
+                            onTap: ()async{
+                              var pickedDate = await showDatePicker(
+                                builder: (BuildContext, child) {
+                                  return Theme(
+                                    data: Theme.of(context).copyWith(
+                                      colorScheme: ColorScheme.light(
+                                        primary: Color(0xff1767B1),
+                                        // <-- SEE HERE
+                                        onPrimary: Colors.white,
+                                        // <-- SEE HERE
+                                        onSurface:
+                                        Colors.black, // <-- SEE HERE
+                                      ),
+                                      textButtonTheme: TextButtonThemeData(
+                                        style: TextButton.styleFrom(
+                                          primary: Color(
+                                              0xff1767B1), // button text color
+                                        ),
+                                      ),
+                                    ),
+                                    child: child!,
+                                  );
+                                },
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2100),
+                              );
+                              if (pickedDate != null) {
+                                String date = DateFormat('dd-MM-yyy')
+                                    .format(pickedDate ?? DateTime.now());
+                                read.onFromDateSelected(date);
+                              }
+                            },
                             controller: watch.toDateController,
                             suffix: GestureDetector(
                               onTap: () async {

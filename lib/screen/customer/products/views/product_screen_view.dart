@@ -686,6 +686,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                     return GestureDetector(
                                       onTap: () {
                                         print(element?.id);
+
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
