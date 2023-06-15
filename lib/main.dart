@@ -60,6 +60,7 @@ import 'screen/customer/cart/controller/cart_controller.dart';
 import 'screen/customer/cart/controller/cart_detail_controller.dart';
 import 'screen/customer/delivery_address/controller/delivery_address_controller.dart';
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
+import 'screen/customer/order_summery/controller/order_summery_controller.dart';
 import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
@@ -123,6 +124,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CartListController()),
         ChangeNotifierProvider(create: (_) => CartDetailController()),
         ChangeNotifierProvider(create: (_) => AllOffersController()),
+        ChangeNotifierProvider(create: (_) => OrderSummeryController()),
       ],
       child: MyApp(),
     ),

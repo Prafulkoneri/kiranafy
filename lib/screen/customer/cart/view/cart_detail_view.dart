@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/customer/cart/controller/cart_detail_
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/order_summery/order_summery.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -776,6 +777,17 @@ class _CartDetailViewState extends State<CartDetailView> {
                                           ElevatedButton(
                                               child: Text("Submit"),
                                               onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          OrderSummery(
+                                                            cartId: widget.cartId.toString(),
+                                                            shopId: watch.shopDetailData?.id.toString()
+
+                                                                .toString(),
+                                                          )),
+                                                );
                                                 // your code
                                               })
                                         ],

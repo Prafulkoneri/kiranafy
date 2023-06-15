@@ -22,13 +22,14 @@ class _CarvingProductsState extends State<CarvingProducts> {
           scrollDirection: Axis.horizontal,
           physics: BouncingScrollPhysics(),
           shrinkWrap: true,
-          itemCount: 3,
+          itemCount: 1,
           itemBuilder: (BuildContext, index) {
             return Row(
               children: [
                 Container(
+                  // padding: EdgeInsets.only(top: 30),
                   width: 130.w,
-                  height: 140.h,
+//                   // height: 140.h,
                   margin: EdgeInsets.only(
                       left: index == 0 ? 12.w : 0,
                       right: index == 2 ? 19.w : 5.w),

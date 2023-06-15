@@ -248,12 +248,13 @@ class Endpoint {
 /////Edit Coupons////
   static const String editCoupon = "${baseUrl}lsm-shop-owner-edit-coupon";
   /////Cart List////
-  static const String cartList ="${baseUrl}lsm-customer-get-cart-list";
+  static const String cartList = "${baseUrl}lsm-customer-get-cart-list";
   ////Cart Details////
-  static const String cartDetailView ="${baseUrl}lsm-customer-view-cart-details";
+  static const String cartDetailView =
+      "${baseUrl}lsm-customer-view-cart-details";
   ////Add Product To Cart////
-  static const String addProductToCart ="${baseUrl}lsm-customer-add-product-to-cart";
-
+  static const String addProductToCart =
+      "${baseUrl}lsm-customer-add-product-to-cart";
 
   ///Cart List Detail Delete////
   static const String cartDetailDelete = "${baseUrl}lsm-customer-delete-cart";
@@ -265,4 +266,11 @@ class Endpoint {
   ///Shop Cart Delete ////
   static const String shopCartDelete =
       "${baseUrl}lsm-customer-delete-all-carts";
+
+  ///Customer Order Summery////
+  static const String customerOrderSummery =
+      "${baseUrl}lsm-customer-order-summary-screen";
+
+  ///Customer aplly coupons////
+  static const String applyCoupons = "${baseUrl}lsm-customer-apply-coupon";
 }
