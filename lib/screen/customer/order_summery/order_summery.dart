@@ -8,9 +8,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/order_payment.dart';
 import 'package:local_supper_market/screen/customer/order_summery/controller/order_summery_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summery/cravings_products.dart';
+import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
+import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
 
 import 'order_products.dart';
@@ -35,9 +38,11 @@ class _OrderSummeryState extends State<OrderSummery> {
   void initState() {
     print(widget.shopId);
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<OrderSummeryController>()
-          .initState(context, widget.cartId, widget.shopId);
+      context.read<OrderSummeryController>().initState(
+            context,
+            widget.shopId,
+            widget.cartId,
+          );
     });
   }
 
@@ -100,7 +105,8 @@ class _OrderSummeryState extends State<OrderSummery> {
             Container(
               padding: EdgeInsets.only(left: 17.w, top: 20.w),
               child: Text(
-                "   New Balaji Trading Company",
+                "${watch.shopDetailData?.shopName}",
+
                 // "${watch.shopDetailData?.shopName}",
 
                 style: GoogleFonts.dmSans(
@@ -139,8 +145,8 @@ class _OrderSummeryState extends State<OrderSummery> {
                       Container(
                         width: 200.w,
                         child: Text(
-                          "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                          // "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                          // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                          "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
                           style: GoogleFonts.roboto(
                             textStyle: TextStyle(
                                 color: Black,
@@ -156,11 +162,10 @@ class _OrderSummeryState extends State<OrderSummery> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // read.launchPhone(
-                          //     watch.shopDetailData
-                          //             ?.shopOwnerSupportNumber ??
-                          //         "",
-                          //     context);
+                          read.launchPhone(
+                              watch.shopDetailData?.shopOwnerSupportNumber ??
+                                  "",
+                              context);
                         },
                         child: SvgPicture.asset(
                           'assets/images/call.svg',
@@ -173,13 +178,11 @@ class _OrderSummeryState extends State<OrderSummery> {
                       ),
                       InkWell(
                         onTap: () {
-                          // watch.favAllShop
-                          //     ? read.removeAllShopFavList(
-                          //         context,
-                          //         watch.shopDetailData?.id)
-                          //     : read.updateAllShopFavList(
-                          //         context,
-                          //         watch.shopDetailData?.id);
+                          watch.favAllShop
+                              ? read.removeAllShopFavList(
+                                  context, watch.shopDetailData?.id)
+                              : read.updateAllShopFavList(
+                                  context, watch.shopDetailData?.id);
                         },
                         child: Container(
                           padding: EdgeInsets.only(
@@ -188,19 +191,17 @@ class _OrderSummeryState extends State<OrderSummery> {
                             shape: BoxShape.circle,
                             color: Color(0xff4689EC),
                           ),
-                          child:
-                              // watch.favAllShop
-                              //     ?
-                              //  SvgPicture.asset(
-                              //     "assets/icons/fav_selected.svg",
-                              //     width: 26.w,
-                              //     height: 14.h,
-                              //   )
-                              SvgPicture.asset(
-                            "assets/images/favorite.svg",
-                            width: 26.w,
-                            height: 14.h,
-                          ),
+                          child: watch.favAllShop
+                              ? SvgPicture.asset(
+                                  "assets/icons/fav_selected.svg",
+                                  width: 26.w,
+                                  height: 14.h,
+                                )
+                              : SvgPicture.asset(
+                                  "assets/images/favorite.svg",
+                                  width: 26.w,
+                                  height: 14.h,
+                                ),
                         ),
                       )
                     ],
@@ -354,153 +355,179 @@ class _OrderSummeryState extends State<OrderSummery> {
             //         ),
             Padding(
               padding: EdgeInsets.only(left: 16.w, top: 20.w, right: 19.w),
-              child: Container(
-                // padding: EdgeInsets.only(bottom: 20.w),
-                height: 156.h,
-                width: double.infinity,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    // side: BorderSide(color: Colors.white70, width: 1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    children: [
-                      Padding(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: watch.customerAddress?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final element = watch.customerAddress![index];
+                  return Container(
+                    // padding: EdgeInsets.only(bottom: 20.w),
+                    // height: 156.h,
+                    width: double.infinity,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        // side: BorderSide(color: Colors.white70, width: 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Container(
                         padding: EdgeInsets.only(
-                          left: 20.w,
-                          top: 20.w,
-                        ),
-                        child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,/
+                            bottom: 20.w, left: 20.w, right: 20.w, top: 20.w),
+                        child: Column(
                           children: [
-                            SvgPicture.asset(
-                              'assets/images/person.svg',
-                              width: 11.w,
-                              height: 15.h,
-                            ),
-                            SizedBox(
-                              width: 11.w,
-                            ),
-                            Text(
-                              'Rachel Green',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    letterSpacing: .5,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ),
-                            // SizedBox(
-                            //   width: 11.w,
-                            // ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 75.w),
-                              child: SizedBox(
-                                // height: 21.h,/
-                                width: 71.w,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    elevation: MaterialStateProperty.all(0),
-                                    // backgroundColor: ,
-                                    backgroundColor:
-                                        MaterialStateProperty.all(Colors.white),
-                                    shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        side: BorderSide(
-                                          color: lighrgreen,
-                                          // width: 1,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/images/person.svg',
+                                      width: 11.w,
+                                      height: 15.h,
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Text(
+                                      "${element.customerName}",
+                                      // 'Rachel Green',
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: Black,
+                                            letterSpacing: .5,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+                                    // SizedBox(
+                                    //   width: 11.w,
+                                    // ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  // height: 21.h,/
+                                  // width: 71.w,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(0),
+                                      // backgroundColor: ,
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.white),
+                                      shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          side: BorderSide(
+                                            color: lighrgreen,
+                                            // width: 1,
+                                          ),
                                         ),
                                       ),
                                     ),
+                                    onPressed: () {},
+                                    child: Text(
+                                      "${element.deliveryAddressType}",
+                                      // "Home",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: SplashText1,
+                                            // letterSpacing: .5,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+
+                                    //
                                   ),
-                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/images/phone.svg',
+                                  width: 14.w,
+                                  height: 15.h,
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                Text(
+                                  '${element.mobileNo}',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black,
+                                        letterSpacing: .5,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10.w,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/images/location.svg',
+                                  color: SplashText1,
+                                  width: 17.w,
+                                  height: 17.h,
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                Expanded(
                                   child: Text(
-                                    "Home",
+                                    maxLines: 3,
+                                    "${element.address1} \n${element.address2} ",
+                                    // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
+                                    // textAlign: TextAlign.start,
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
-                                          color: SplashText1,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
+                                          // height: 1.5,
+                                          color: black,
+                                          // letterSpacing: .05,
+                                          // overflow: TextOverflow.ellipsis,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400),
                                     ),
                                   ),
-
-                                  //
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 19.w,
-                          top: 20.w,
-                        ),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/phone.svg',
-                              width: 14.w,
-                              height: 15.h,
+                                )
+                              ],
                             ),
                             SizedBox(
-                              width: 11.w,
+                              height: 10.w,
                             ),
-                            Text(
-                              '+91 986 095 3315',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    letterSpacing: .5,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
+                            element.deliveryAddressIsDefault == "yes"
+                                ? Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      Text(
+                                        'Default',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black,
+                                              // letterSpacing: .5,
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Container()
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 19.w,
-                          top: 19.w,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/location.svg',
-                              color: SplashText1,
-                              width: 17.w,
-                              height: 17.h,
-                            ),
-                            SizedBox(
-                              width: 11.w,
-                            ),
-                            Expanded(
-                              child: Text(
-                                maxLines: 3,
-                                "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
-                                // textAlign: TextAlign.start,
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      // height: 1.5,
-                                      color: black,
-                                      // letterSpacing: .05,
-                                      // overflow: TextOverflow.ellipsis,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
+                // child:
               ),
             ),
             Padding(
@@ -643,37 +670,19 @@ class _OrderSummeryState extends State<OrderSummery> {
                   SizedBox(
                     width: 45.w,
                   ),
-                  SizedBox(
-                    height: 30.h,
-                    width: 91.w,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        elevation: MaterialStateProperty.all(0),
-                        // backgroundColor: ,
-                        backgroundColor: MaterialStateProperty.all(lightsky),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(
-                              color: SplashText,
-                              // width: 1,
-                            ),
-                          ),
-                        ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 11.33.w,vertical: 7.w),
+                    decoration: BoxDecoration(
+                      color: lightsky,
+                        borderRadius: BorderRadius.circular(10.w),
+                        border: Border.all(color: SplashText)
+                    ),
+                    child: Center(
+                      child: Row(
+                        children: [
+                          Text("Get Code",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 16.sp,color: SplashText),),
+                        ],
                       ),
-                      onPressed: () {},
-                      child: Text(
-                        "Get Code",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: SplashText,
-                              // letterSpacing: .5,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-
-                      //
                     ),
                   ),
                 ],
@@ -811,12 +820,287 @@ class _OrderSummeryState extends State<OrderSummery> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: 19.w,
+                  Container(
+                    padding: EdgeInsets.only(top: 15.w, bottom: 15.w),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: List.generate(
+                            watch.fullFillYourCravings?.length ?? 0, (index) {
+                          final element = watch.fullFillYourCravings?[index];
+                          return watch.fullFillYourCravings?[index].mrpPrice !=
+                                      "" &&
+                                  watch.fullFillYourCravings?[index]
+                                          .offerPrice !=
+                                      "" &&
+                                  int.parse(element?.offerPrice ?? "0") <
+                                      int.parse(element?.mrpPrice ?? "0")
+                              ? Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MainScreenView(
+                                                      index: 1,
+                                                      screenName:
+                                                          ProductScreenView(
+                                                        categoryId: element
+                                                            ?.categoryId
+                                                            .toString(),
+                                                        productId: element?.id
+                                                            .toString(),
+                                                        shopId: element?.shopId,
+                                                      ))),
+                                          (Route<dynamic> route) => false,
+                                        );
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            // color: Colors.white,
+                                            // boxShadow: [
+                                            //   BoxShadow(
+                                            //       color: Colors.black
+                                            //           .withOpacity(0.03.w),
+                                            //       blurRadius: 5,
+                                            //       spreadRadius: 0,
+                                            //       offset: Offset(0, 3)),
+                                            // ],
+                                            ),
+                                        child: Card(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.w)),
+                                          elevation: 0,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.w),
+                                            ),
+                                            width: 156.w,
+                                            padding: EdgeInsets.only(
+                                                left: 19.w,
+                                                top: 14.w,
+                                                right: 12.w,
+                                                bottom: 12.w),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    element?.discountPercentage !=
+                                                            ""
+                                                        ? Container(
+                                                            width: 60.w,
+                                                            height: 20.h,
+                                                            decoration: BoxDecoration(
+                                                                color:
+                                                                    lightgreen,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            5.w))),
+                                                            child: Center(
+                                                              child: Text(
+                                                                  "${element?.discountPercentage} off",
+                                                                  // textAlign: TextAlign.center,
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .dmSans(
+                                                                    textStyle: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        letterSpacing:
+                                                                            .5,
+                                                                        fontSize: 12
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
+                                                                  )),
+                                                            ),
+                                                          )
+                                                        : Container(),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    element?.productImagePath ==
+                                                            ""
+                                                        ? Container(
+                                                            height: 89.w,
+                                                            width: 89.w,
+                                                            child: Image.asset(
+                                                              "assets/images/profile_image.png",
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          )
+                                                        : Container(
+                                                            height: 89.w,
+                                                            width: 89.w,
+                                                            child:
+                                                                Image.network(
+                                                              "${element?.productImagePath}",
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 3.w,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${element?.productName}",
+                                                        maxLines: 1,
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                          textStyle: TextStyle(
+                                                            color: Black1,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 16.sp,
+
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 2.w,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "${element?.weight}${element?.unit}",
+                                                      style: GoogleFonts.roboto(
+                                                        textStyle: TextStyle(
+                                                            color: Black1,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 2.w,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        element?.mrpPrice != ""
+                                                            ? Text(
+                                                                '\u{20B9}${element?.mrpPrice}',
+                                                                style: GoogleFonts.dmSans(
+                                                                    textStyle: element?.offerPrice != "" &&
+                                                                            element?.offerPrice !=
+                                                                                element
+                                                                                    ?.mrpPrice
+                                                                        ? TextStyle(
+                                                                            decoration: TextDecoration
+                                                                                .lineThrough,
+                                                                            color:
+                                                                                Black1,
+                                                                            letterSpacing:
+                                                                                .5,
+                                                                            fontSize: 12
+                                                                                .sp,
+                                                                            fontWeight: FontWeight
+                                                                                .w400)
+                                                                        : TextStyle(
+                                                                            color:
+                                                                                Black1,
+                                                                            letterSpacing:
+                                                                                .5,
+                                                                            fontSize:
+                                                                                12.sp,
+                                                                            fontWeight: FontWeight.w400)))
+                                                            : Text(""),
+                                                        SizedBox(
+                                                          width: 5.w,
+                                                        ),
+                                                        element?.offerPrice !=
+                                                                    "" &&
+                                                                element?.offerPrice !=
+                                                                    element
+                                                                        ?.mrpPrice
+                                                            ? Text(
+                                                                '\u{20B9}${element?.offerPrice}',
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      // decoration:
+                                                                      // TextDecoration.lineThrough,
+                                                                      color: Black,
+                                                                      letterSpacing: .5,
+                                                                      fontSize: 13.sp,
+                                                                      fontWeight: FontWeight.w500),
+                                                                ),
+                                                              )
+                                                            : Text(""),
+                                                      ],
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        read.addToCart(
+                                                            element
+                                                                ?.productType,
+                                                            element
+                                                                ?.productUnitId,
+                                                            element?.shopId,
+                                                            context);
+                                                      },
+                                                      child: SvgPicture.asset(
+                                                        'assets/images/add.svg',
+                                                        // width: 15.w,
+                                                        // height: 19.h,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Container();
+                        }),
+                      ),
                     ),
-                    child: CarvingProducts(),
-                  )
+                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(
+                  //     top: 19.w,
+                  //   ),
+                  //   child: CarvingProducts(),
+                  // )
                 ],
               ),
             ),
