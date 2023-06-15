@@ -265,6 +265,10 @@ class CartDetailController extends ChangeNotifier {
   }
 
   Future<void> subtractItemQuantity(context, CIId,action,index) async {
+    print("*********");
+    print(quantityList);
+    print(quantityList[index]);
+    print("*********");
     if(quantityList[index]==1){
       return;
     }

@@ -267,7 +267,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                       ),
                                       GestureDetector(
                                         onTap: (){
-                                          read.addToCart(element?.productType,element?.productId,element?.shopId,context);
+                                          read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
                                         },
                                         child: SvgPicture.asset(
                                           'assets/images/add.svg',

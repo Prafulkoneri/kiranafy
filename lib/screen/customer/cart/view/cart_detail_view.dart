@@ -62,11 +62,10 @@ class _CartDetailViewState extends State<CartDetailView> {
             },
           ),
         ),
-        body: watch.shopDetailData == null
-            ? Container():watch.isLoading?Center(
+        body: watch.isLoading?Center(
           child: CircularProgressIndicator(),
         )
-            : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            :watch.shopDetailData==null?Container():Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Expanded(
                     child: SingleChildScrollView(
                         child: Column(
