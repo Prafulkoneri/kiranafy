@@ -6,7 +6,7 @@ class SKycVerificationRepo {
   Future<http.Response> sendKycDetails(
       ShopKycVerificationReqModel reqModel, token) async {
     try {
-      return await http.post(Uri.parse(Endpoint.kycVerification),
+      return await http.post(Uri.parse(Endpoint.uploadKycVerification),
           body: reqModel.toJson(),
           headers: {
             "Authorization": "Bearer $token",

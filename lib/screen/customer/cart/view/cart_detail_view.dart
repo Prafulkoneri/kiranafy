@@ -784,8 +784,6 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                           OrderSummery(
                                                             cartId: widget.cartId.toString(),
                                                             shopId: watch.shopDetailData?.id.toString()
-
-                                                                .toString(),
                                                           )),
                                                 );
                                                 // your code

@@ -226,6 +226,8 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                         children: [
                           Expanded(
                               child: PrimarySTextFormField(
+                                lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(11),
+                                textInputType: TextInputType.number,
                             controller: watch.adharCardController,
                             hintText: "Aadhar Card No.",
                             hintFontSize: 12.sp,
@@ -236,6 +238,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                           // SizedBox(width: 18.w),
                           Expanded(
                               child: PrimarySTextFormField(
+                                lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(10),
                             controller: watch.panCardController,
                             hintText: "PAN Card No",
                             hintFontSize: 12.sp,
@@ -391,6 +394,8 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                         children: [
                           Expanded(
                               child: PrimarySTextFormField(
+                                lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(15),
+                                controller: watch.gstController,
                             hintFontSize: 12.sp,
                             hintText: "Enter GSTIN (Optional)",
                           )),
