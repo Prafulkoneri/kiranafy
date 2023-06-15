@@ -1171,7 +1171,7 @@ class _OrderSummeryState extends State<OrderSummery> {
                     ),
                   ),
                   Text(
-                    "Rs. 200",
+                    "Rs ${watch.orderFinalTotals?.subTotal}",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: grey5,
@@ -1224,7 +1224,7 @@ class _OrderSummeryState extends State<OrderSummery> {
                     ]),
                   ),
                   Text(
-                    " - Rs. 20",
+                    "Rs  ${watch.orderFinalTotals?.couponDiscount}",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: grey5,
@@ -1252,7 +1252,7 @@ class _OrderSummeryState extends State<OrderSummery> {
                     ),
                   ),
                   Text(
-                    "Rs. 0",
+                    "Rs. ${watch.orderFinalTotals?.deliveryCharges}",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: grey5,
@@ -1291,7 +1291,7 @@ class _OrderSummeryState extends State<OrderSummery> {
                     ),
                   ),
                   Text(
-                    "Rs. 170",
+                    "Rs. ${watch.orderFinalTotals?.total}",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: Black1,
@@ -1320,7 +1320,7 @@ class _OrderSummeryState extends State<OrderSummery> {
             Padding(
               padding: EdgeInsets.only(left: 19.w, top: 10.w, bottom: 27.w),
               child: Text(
-                "You will save Rs. 20",
+                "You will save Rs. ${watch.orderFinalTotals?.productTotalDiscount}",
                 style: GoogleFonts.dmSans(
                   textStyle: TextStyle(
                       color: SplashText,
