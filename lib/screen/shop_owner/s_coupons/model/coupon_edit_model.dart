@@ -79,7 +79,7 @@ class CouponDetails {
   String? couponType;
   String? shopOwnerCategoryId;
   String? shopOwnerProductType;
-  String? shopOwnerProductId;
+  int? shopOwnerProductId;
   String? couponTermsAndConditions;
 
   CouponDetails({

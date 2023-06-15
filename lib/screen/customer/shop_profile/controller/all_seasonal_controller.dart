@@ -7,7 +7,7 @@ import 'package:local_supper_market/screen/customer/cart/repository/add_product_
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 
 // import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_seasonal_products.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_seasonal_products_model.dart';
 
 import 'package:local_supper_market/screen/customer/shop_profile/repository/all_seasonal_repo.dart';
 
@@ -20,7 +20,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
   int offset = 0;
   bool isLoading = true;
   bool? showPaginationLoader = true;
-  AddProductToCartRepo addProductToCartRepo =AddProductToCartRepo();
+  AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   Data? data;
   List<CustomerProductData>? seasonalProduct;
   Future<void> initState(context, id) async {
@@ -28,8 +28,9 @@ class ShopAllSeasonalController extends ChangeNotifier {
     await getAllSeasonalProducts(context, id);
     notifyListeners();
   }
-  void showLoader(value){
-    isLoading=value;
+
+  void showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
   //////All Offer Products
@@ -74,13 +75,21 @@ class ShopAllSeasonalController extends ChangeNotifier {
       },
     );
   }
-  Future<void> addToCart(pType,pId,sId,context)async{
+
+  Future<void> addToCart(pType, pId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
-        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .addProductToCart(
+            AddProductToCartReqModel(
+                productType: pType,
+                productUnitId: pId.toString(),
+                shopId: sId.toString(),
+                quantity: "1"),
+            pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      final result =
+          AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -92,7 +101,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

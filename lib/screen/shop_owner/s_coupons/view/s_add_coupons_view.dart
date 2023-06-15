@@ -250,6 +250,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                       children: [
                         Expanded(
                           child: PrimarySTextFormField(
+                            textInputType: TextInputType.number,
                             controller: watch.discountPercentageController,
                             // hintText: "Delivery Charge",
                             hintFontSize: 15.sp,
@@ -260,6 +261,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                         ),
                         Expanded(
                           child: PrimarySTextFormField(
+                            textInputType: TextInputType.number,
                             controller: watch.minOrderAmountController,
                             // hintText: "Delivery Charge",
                             hintFontSize: 15.sp,
@@ -304,6 +306,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                       children: [
                         Expanded(
                           child: PrimarySTextFormField(
+                            textInputType: TextInputType.number,
                             controller: watch.maxDiscountAmountController,
                             hintFontSize: 15.sp,
                           ),
@@ -313,6 +316,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                         ),
                         Expanded(
                           child: PrimarySTextFormField(
+                            // textInputType: TextInputType.number,
                             controller: watch.couponCodeController,
                             onChanged: (value) {
                               read.checkCouponCodeExist(context);
@@ -325,57 +329,60 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                     SizedBox(
                       height: 20.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: [
-                            SecondaryRadioButton(
-                                value: "full_order_amount",
-                                groupValue: read.groupValue,
-                                onChanged: (value) {
-                                  read.onRadioBtnToggled(value);
-                                },
-                                leading: ""),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Text(
-                              'Full Order Amount',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    // letterSpacing: .5,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
+                    Container(
+                      padding: EdgeInsets.only(right: 28.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              SecondaryRadioButton(
+                                  value: "full_order_amount",
+                                  groupValue: read.groupValue,
+                                  onChanged: (value) {
+                                    read.onRadioBtnToggled(value);
+                                  },
+                                  leading: ""),
+                              SizedBox(
+                                width: 10.w,
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            SecondaryRadioButton(
-                                value: "category_and_product",
-                                groupValue: watch.groupValue,
-                                onChanged: (value) {
-                                  read.onRadioBtnToggled(value);
-                                },
-                                leading: ""),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Text(
-                              'Category & Product',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
+                              Text(
+                                'Full Order Amount',
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black,
+                                      // letterSpacing: .5,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SecondaryRadioButton(
+                                  value: "category_and_product",
+                                  groupValue: watch.groupValue,
+                                  onChanged: (value) {
+                                    read.onRadioBtnToggled(value);
+                                  },
+                                  leading: ""),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Text(
+                                'Category & Product',
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     Visibility(
                       visible: watch.groupValue == "full_order_amount"

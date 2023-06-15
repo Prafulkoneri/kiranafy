@@ -11,35 +11,41 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashController extends ChangeNotifier {
   Future<void> initState(context) async {
-    Timer(Duration(seconds: 3), () async{
-      SharedPreferences pref=await SharedPreferences.getInstance();
+    Timer(Duration(seconds: 3), () async {
+      SharedPreferences pref = await SharedPreferences.getInstance();
       print(pref.getString("status"));
-      if(pref.getString("status")=="numberRegistered"){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ShopRegistrationView()));
+      if (pref.getString("status") == "numberRegistered") {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => ShopRegistrationView()));
       }
-      if(pref.getString("status")=="shopRegistered"){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+      if (pref.getString("status") == "shopRegistered") {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => SMainScreenView()));
       }
       // if(pref.getString("status")=="kycCompleted"){
       //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SMainScreenView()));
       // }
-      if(pref.getString("status")=="loggedIn"){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+      if (pref.getString("status") == "loggedIn") {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => SMainScreenView()));
       }
-      if(pref.getString("status")=="customerLoggedIn"){
+      if (pref.getString("status") == "customerLoggedIn") {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (context) => MainScreenView(
                   index: 0,
-                  screenName: HomeScreenView(refreshPage: true,)
-              )),
-              (Route<dynamic> route) => false,
+                  screenName: HomeScreenView(
+                    refreshPage: true,
+                  ))),
+          (Route<dynamic> route) => false,
         );
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainScreenView()));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => MainScreenView()));
       }
-      if(pref.getString("status")==null){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
+      if (pref.getString("status") == null) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
       }
     });
   }

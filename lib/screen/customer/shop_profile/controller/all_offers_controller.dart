@@ -9,7 +9,7 @@ import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products_model.dart';
 
 import 'package:local_supper_market/screen/customer/shop_profile/repository/all_products_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/customer_view_shop_repo.dart';
@@ -23,7 +23,7 @@ class AllOffersController extends ChangeNotifier {
   bool isLoading = true;
   Data? allproducts;
   AllOfferProductsRepo allOfferProductsRepo = AllOfferProductsRepo();
-  AddProductToCartRepo addProductToCartRepo=AddProductToCartRepo();
+  AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   List<ShopCategory>? shopCategory;
   List<CustomerProductData>? offerProduct;
   List<CustomerProductData>? allOfferProducts;
@@ -34,23 +34,23 @@ class AllOffersController extends ChangeNotifier {
   Future<void> initState(context, id) async {
     await getAllOfferes(context, id);
   }
-  void showLoader(value){
-    isLoading=value;
+
+  void showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
-
 
   //////All Offer Products
   AllProductsReqModel get shopAllProductsReqModel => AllProductsReqModel(
       offset: offset.toString(), limit: "10", shopId: shopId);
 
   Future<void> getAllOfferes(context, id) async {
-    shopId=id;
+    shopId = id;
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     allOfferProductsRepo
         .getAllOffereProducts(
-        shopAllProductsReqModel, pref.getString("successToken"))
+            shopAllProductsReqModel, pref.getString("successToken"))
         .then((response) {
       log(response.body);
       final result = ViewAllOfferProducts.fromJson(jsonDecode(response.body));
@@ -67,7 +67,7 @@ class AllOffersController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -78,8 +78,8 @@ class AllOffersController extends ChangeNotifier {
   }
 
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
-    shopId: shopId.toString(),
-  );
+        shopId: shopId.toString(),
+      );
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
 
   Future<void> removeAllShopFavList(context, id) async {
@@ -103,7 +103,7 @@ class AllOffersController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -115,8 +115,8 @@ class AllOffersController extends ChangeNotifier {
 
 ///////////////////Update List
   AddFavReqModel get addFavReqModel => AddFavReqModel(
-    shopId: shopId.toString(),
-  );
+        shopId: shopId.toString(),
+      );
   Future<void> updateAllShopFavList(context, id) async {
     shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -138,7 +138,7 @@ class AllOffersController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -148,13 +148,20 @@ class AllOffersController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType,pId,sId,context)async{
+  Future<void> addToCart(pType, pId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
-        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .addProductToCart(
+            AddProductToCartReqModel(
+                productType: pType,
+                productUnitId: pId.toString(),
+                shopId: sId.toString(),
+                quantity: "1"),
+            pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      final result =
+          AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -166,7 +173,7 @@ class AllOffersController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

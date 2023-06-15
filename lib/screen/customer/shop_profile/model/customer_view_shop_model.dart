@@ -47,8 +47,8 @@ class CustomerProductData {
   String? discountPercentage;
   String? status;
   String? unit;
-  String ? shopId;
-  int ? productUnitId;
+  String? shopId;
+  int? productUnitId;
 
   CustomerProductData({
     this.categoryId, //
@@ -87,8 +87,6 @@ class CustomerProductData {
     productUnitId = json["product_unit_id"];
   }
 }
-
-
 
 class ShopViewData {
   ShopDetails? shopDetails;
