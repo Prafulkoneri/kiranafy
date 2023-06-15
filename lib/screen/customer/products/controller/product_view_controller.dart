@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
+import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
@@ -49,6 +50,7 @@ class ProductViewController extends ChangeNotifier {
   ProductViewShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
   List<CustomerProductData>? similarProduct;
+  String routeName="";
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
@@ -65,7 +67,7 @@ class ProductViewController extends ChangeNotifier {
 
 
 
-  Future<void> initState(context, sId, cId, pId, suId, pType) async {
+  Future<void> initState(context, sId, cId, pId, suId, pType,rName) async {
     print("productId");
     print(pId);
     print(productId);
@@ -74,6 +76,7 @@ class ProductViewController extends ChangeNotifier {
     print(pId);
     unitImages.clear();
     print(pType);
+    routeName=rName;
     // await productsUnitImage(context, suId);
     notifyListeners();
   }
@@ -83,28 +86,25 @@ class ProductViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void setProductIdFor(pId,sId,cId,pType,context){
-  //   productId=pId;
-  //   shopId=sId;
-  //   categoryId=cId;
-  //   productType=pType;
-  //   Navigator.pushAndRemoveUntil(
-  //     context,
-  //     MaterialPageRoute(
-  //         builder: (context) =>
-  //             MainScreenView(
-  //               index: 1,
-  //               screenName:
-  //               ProductScreenView(
-  //                   categoryId: categoryId,
-  //                   productId: productId,
-  //                   shopId:shopId,
-  //                   productType: productType,
-  //               ),
-  //             )),
-  //         (Route<dynamic> route) => false,
-  //   );
-  // }
+  onBackPressed(context){
+    if(routeName=="cart_details"){
+     Navigator.push(context,MaterialPageRoute(builder: (context)=>CartDetailView(isRefresh: false,)));
+    }
+    else{
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const MainScreenView(
+                index: 1,
+                screenName: ShopProfileView(
+                  refreshPage: false,
+                  routeName: '',
+                  shopId: '',
+                ))),
+            (Route<dynamic> route) => false,
+      );
+    }
+  }
 
   ProductViewRequestModel get productViewRequestModel =>
       ProductViewRequestModel(

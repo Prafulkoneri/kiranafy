@@ -75,247 +75,279 @@ class _MainScreenViewState extends State<MainScreenView> {
                         read.onHomeScreenPressed();
                       },
                       child: watch.currentTab == 0
-                          ? Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/home_selected.svg",
+                          ? Container(
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                        color: Colors.transparent,
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/home_selected.svg",
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Home",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp,
-                                      color: CouponsText),
-                                )
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/home.svg",
+                                  SizedBox(
+                                    height: 5.w,
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Home",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp,
-                                      color: Black1),
-                                )
-                              ],
-                            ),
+                                  Text(
+                                    "Home",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: CouponsText),
+                                  )
+                                ],
+                              ),
+                          )
+                          : Container(
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                        color: Colors.transparent,
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/home.svg",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Home",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: Black1),
+                                  )
+                                ],
+                              ),
+                          ),
                     ),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            read.onShopPressed();
-                          },
-                          child: watch.currentTab == 1
-                              ? Column(
-                                  children: [
-                                    Container(
+                    GestureDetector(
+                      onTap: () {
+                        read.onShopPressed();
+                      },
+                      child: watch.currentTab == 1
+                          ? Container(
+                        color: Colors.transparent,
+                            padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/selected_shop_new.svg",
                                       height: 20.w,
-                                      width: 21.w,
-                                      child: SvgPicture.asset(
-                                        "assets/icons/selected_shop_new.svg",
-                                        height: 20.w,
-                                        width: 20.w,
-                                      ),
+                                      width: 20.w,
                                     ),
-                                    SizedBox(
-                                      height: 5.w,
-                                    ),
-                                    Text(
-                                      "Shop",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 11.sp,
-                                          color: CouponsText),
-                                    )
-                                  ],
-                                )
-                              : Column(
-                                  children: [
-                                    Container(
-                                      height: 20.w,
-                                      width: 21.w,
-                                      child: SvgPicture.asset(
-                                          "assets/icons/shop_new.svg"),
-                                    ),
-                                    SizedBox(
-                                      height: 5.w,
-                                    ),
-                                    Text(
-                                      "Shop",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 11.sp,
-                                          color: Black1),
-                                    )
-                                  ],
-                                ),
-                        ),
-                      ],
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Shop",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: CouponsText),
+                                  )
+                                ],
+                              ),
+                          )
+                          : Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                        "assets/icons/shop_new.svg"),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Shop",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: Black1),
+                                  )
+                                ],
+                              ),
+                          ),
                     ),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            read.onMyCartPressed();
-                          },
-                          child: watch.currentTab == 2
-                              ? Column(
-                                  children: [
-                                    Container(
-                                      height: 20.w,
-                                      width: 21.w,
-                                      child: SvgPicture.asset(
-                                        "assets/icons/cart_selected.svg",
-                                      ),
+                    GestureDetector(
+                      onTap: () {
+                        read.onMyCartPressed();
+                      },
+                      child: watch.currentTab == 2
+                          ? Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/cart_selected.svg",
                                     ),
-                                    SizedBox(
-                                      height: 5.w,
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Cart",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: CouponsText),
+                                  )
+                                ],
+                              ),
+                          )
+                          : Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/cart.svg",
                                     ),
-                                    Text(
-                                      "Cart",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 11.sp,
-                                          color: CouponsText),
-                                    )
-                                  ],
-                                )
-                              : Column(
-                                  children: [
-                                    Container(
-                                      height: 20.w,
-                                      width: 21.w,
-                                      child: SvgPicture.asset(
-                                        "assets/icons/cart.svg",
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.w,
-                                    ),
-                                    Text(
-                                      "Cart",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 11.sp,
-                                          color: Black1),
-                                    )
-                                  ],
-                                ),
-                        ),
-                      ],
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Cart",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: Black1),
+                                  )
+                                ],
+                              ),
+                          ),
                     ),
                     GestureDetector(
                       onTap: () {
                         read.onOfferPressed();
                       },
                       child: watch.currentTab == 3
-                          ? Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/offers.svg",
-                                    color: CouponsText,
+                          ? Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/offers.svg",
+                                      color: CouponsText,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Offers",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp,
-                                      color: CouponsText),
-                                )
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                      "assets/icons/offers.svg"),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Offers",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp),
-                                )
-                              ],
-                            ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Offers",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: CouponsText),
+                                  )
+                                ],
+                              ),
+                          )
+                          : Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                        "assets/icons/offers.svg"),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Offers",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp),
+                                  )
+                                ],
+                              ),
+                          ),
                     ),
                     GestureDetector(
                       onTap: () {
                         read.onAccountPressed();
                       },
                       child: watch.currentTab == 4
-                          ? Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/account_selected.svg",
-                                    color: CouponsText,
+                          ? Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                      "assets/icons/account_selected.svg",
+                                      color: CouponsText,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Account",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp,
-                                      color: CouponsText),
-                                )
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                Container(
-                                  height: 20.w,
-                                  width: 21.w,
-                                  child: SvgPicture.asset(
-                                      "assets/icons/account.svg"),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Text(
-                                  "Account",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.sp),
-                                )
-                              ],
-                            ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Account",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp,
+                                        color: CouponsText),
+                                  )
+                                ],
+                              ),
+                          )
+                          : Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 21.w,
+                                    child: SvgPicture.asset(
+                                        "assets/icons/account.svg"),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text(
+                                    "Account",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.sp),
+                                  )
+                                ],
+                              ),
+                          ),
                     ),
                   ],
                 ),

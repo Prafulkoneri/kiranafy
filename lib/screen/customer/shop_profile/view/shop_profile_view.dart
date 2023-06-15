@@ -398,7 +398,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                       index: 0,
                                                       screenName:
                                                           AllOfferProducts(
-                                                        shopId: watch.shopDetails?.id.toString(),
+                                                        shopId: watch
+                                                            .shopDetails?.id
+                                                            .toString(),
                                                       ),
                                                     )),
                                             (Route<dynamic> route) => false,
@@ -451,15 +453,21 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) => MainScreenView(
-                                                      index: 1,
-                                                      screenName: ProductScreenView(
-                                                        categoryId: element?.categoryId.toString(),
-                                                        productId: element?.id.toString(),
-                                                        shopId: element?.shopId,
-                                                      )
-                                                  )),
-                                                  (Route<dynamic> route) => false,
+                                                  builder: (context) =>
+                                                      MainScreenView(
+                                                          index: 1,
+                                                          screenName:
+                                                              ProductScreenView(
+                                                            categoryId: element
+                                                                ?.categoryId
+                                                                .toString(),
+                                                            productId: element
+                                                                ?.id
+                                                                .toString(),
+                                                            shopId:
+                                                                element?.shopId,
+                                                          ))),
+                                              (Route<dynamic> route) => false,
                                             );
                                           },
                                           child: Container(
@@ -656,10 +664,17 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                           ],
                                                         ),
                                                         GestureDetector(
-                                                          onTap:(){
-                                                            read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
+                                                          onTap: () {
+                                                            read.addToCart(
+                                                                element
+                                                                    ?.productType,
+                                                                element
+                                                                    ?.productUnitId,
+                                                                element?.shopId,
+                                                                context);
                                                           },
-                                                          child: SvgPicture.asset(
+                                                          child:
+                                                              SvgPicture.asset(
                                                             'assets/images/add.svg',
                                                             // width: 15.w,
                                                             // height: 19.h,
@@ -717,8 +732,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                         index: 0,
                                                         screenName:
                                                             AllSeasonalProducts(
-                                                          shopId: watch.shopDetails?.id.toString()
-                                                        ))),
+                                                                shopId: watch
+                                                                    .shopDetails
+                                                                    ?.id
+                                                                    .toString()))),
                                             (Route<dynamic> route) => false,
                                           );
                                         },
@@ -771,8 +788,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                               productId: element
                                                                   ?.id
                                                                   .toString(),
-                                                              shopId:
-                                                                  element?.shopId,
+                                                              shopId: element
+                                                                  ?.shopId,
                                                               productType: element
                                                                   ?.productType),
                                                     )),
@@ -843,7 +860,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                 ),
                                                               ],
                                                             )
-                                                          : Container(),
+                                                          : Container(
+                                                              height: 20.h,
+                                                            ),
                                                       Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -864,9 +883,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                               : Container(
                                                                   height: 89.w,
                                                                   width: 89.w,
-                                                                  child: Image
-                                                                      .network(
-                                                                    "${element?.productImagePath}",
+                                                                  child:
+                                                                      AppNetworkImages(
+                                                                    imageUrl:
+                                                                        "${element?.productImagePath}",
                                                                     fit: BoxFit
                                                                         .cover,
                                                                   ),
@@ -970,10 +990,18 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                             ],
                                                           ),
                                                           GestureDetector(
-                                                            onTap: (){
-                                                              read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
+                                                            onTap: () {
+                                                              read.addToCart(
+                                                                  element
+                                                                      ?.productType,
+                                                                  element
+                                                                      ?.productUnitId,
+                                                                  element
+                                                                      ?.shopId,
+                                                                  context);
                                                             },
-                                                            child: SvgPicture.asset(
+                                                            child: SvgPicture
+                                                                .asset(
                                                               'assets/images/add.svg',
                                                               // width: 15.w,
                                                               // height: 19.h,
@@ -1453,8 +1481,14 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     GestureDetector(
-                                                      onTap:(){
-                                                        read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
+                                                      onTap: () {
+                                                        read.addToCart(
+                                                            element
+                                                                ?.productType,
+                                                            element
+                                                                ?.productUnitId,
+                                                            element?.shopId,
+                                                            context);
                                                       },
                                                       child: SvgPicture.asset(
                                                         'assets/images/add.svg',
@@ -1484,7 +1518,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                         productId: element
                                                                             ?.id
                                                                             .toString(),
-                                                                        shopId: element?.shopId,
+                                                                        shopId: element
+                                                                            ?.shopId,
                                                                         productType:
                                                                             element?.productType),
                                                               )),
@@ -1503,26 +1538,25 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 child: Row(
                                                   children: [
                                                     Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 9.h,
-                                                          bottom: 9.h),
-                                                      child:
-                                                          element?.productImagePath ==
-                                                                  ""
-                                                              ? Image(
-                                                                  image: AssetImage(
-                                                                      "assets/images/offerone.png"),
-                                                                  height: 68.h,
-                                                                  width: 68.w,
-                                                                )
-                                                              : Image(
-                                                                  image: NetworkImage(
-                                                                      element?.productImagePath ??
-                                                                          ''),
-                                                                  height: 68.h,
-                                                                  width: 68.w,
-                                                                ),
-                                                    ),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 9.h,
+                                                                bottom: 9.h),
+                                                        child: element
+                                                                    ?.productImagePath ==
+                                                                ""
+                                                            ? Image.asset(
+                                                                "assets/images/offerone.png",
+                                                                height: 68.h,
+                                                                width: 68.w,
+                                                              )
+                                                            : AppNetworkImages(
+                                                                imageUrl: element
+                                                                        ?.productImagePath ??
+                                                                    '',
+                                                                height: 68.h,
+                                                                width: 68.w,
+                                                              )),
                                                     SizedBox(
                                                       height: 70.h,
                                                       child: VerticalDivider(
