@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -6,13 +7,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/order_payment/order_payment.dart';
+import 'package:local_supper_market/screen/customer/order_summery/controller/order_summery_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summery/cravings_products.dart';
+import 'package:provider/provider.dart';
 
 import 'order_products.dart';
 
 class OrderSummery extends StatefulWidget {
-  const OrderSummery({super.key});
+  final String? shopId;
+  final String? cartId;
+  const OrderSummery({super.key, this.cartId, this.shopId});
 
   @override
   State<OrderSummery> createState() => _OrderSummeryState();
@@ -25,9 +31,21 @@ class _OrderSummeryState extends State<OrderSummery> {
 
   // Group Value for Radio Button.
   int id = 1;
+  @override
+  void initState() {
+    print(widget.shopId);
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<OrderSummeryController>()
+          .initState(context, widget.cartId, widget.shopId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<OrderSummeryController>();
+    final read = context.read<OrderSummeryController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -75,13 +93,16 @@ class _OrderSummeryState extends State<OrderSummery> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 19.w, top: 20.w),
+            Container(
+              padding: EdgeInsets.only(left: 17.w, top: 20.w),
               child: Text(
-                "New Balaji Trading Company",
+                "   New Balaji Trading Company",
+                // "${watch.shopDetailData?.shopName}",
+
                 style: GoogleFonts.dmSans(
                   textStyle: TextStyle(
                       color: Black1,
@@ -91,33 +112,129 @@ class _OrderSummeryState extends State<OrderSummery> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 16.w, top: 15.w, bottom: 17.w),
+            Container(
+              padding: EdgeInsets.all(12.w),
+              // height: 70.h,
+              // decoration: BoxDecoration(
+              //   border: Border(
+              //     // top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
+              //     bottom: BorderSide(width: 1, color: grey2),
+              //   ),
+              // ),
+
+              // color: Colors.white,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/location2.svg',
-                    width: 23.w,
-                    height: 28.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 8.w,
-                    ),
-                    child: Text(
-                      "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            letterSpacing: .5,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/location2.svg',
+                        width: 23.w,
+                        height: 28.h,
                       ),
-                    ),
+                      SizedBox(
+                        width: 8.w,
+                      ),
+                      Container(
+                        width: 200.w,
+                        child: Text(
+                          "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                          // "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                          style: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                                color: Black,
+                                // letterSpacing: .5,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          // read.launchPhone(
+                          //     watch.shopDetailData
+                          //             ?.shopOwnerSupportNumber ??
+                          //         "",
+                          //     context);
+                        },
+                        child: SvgPicture.asset(
+                          'assets/images/call.svg',
+                          // width: 15.w,
+                          // height: 19.h,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 13.w,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          // watch.favAllShop
+                          //     ? read.removeAllShopFavList(
+                          //         context,
+                          //         watch.shopDetailData?.id)
+                          //     : read.updateAllShopFavList(
+                          //         context,
+                          //         watch.shopDetailData?.id);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 13.w, right: 13.w, top: 14.w, bottom: 14.w),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xff4689EC),
+                          ),
+                          child:
+                              // watch.favAllShop
+                              //     ?
+                              //  SvgPicture.asset(
+                              //     "assets/icons/fav_selected.svg",
+                              //     width: 26.w,
+                              //     height: 14.h,
+                              //   )
+                              SvgPicture.asset(
+                            "assets/images/favorite.svg",
+                            width: 26.w,
+                            height: 14.h,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),
             ),
+            // Padding(
+            //   padding: EdgeInsets.only(left: 16.w, top: 15.w, bottom: 17.w),
+            //   child: Row(
+            //     children: [
+            //       SvgPicture.asset(
+            //         'assets/images/location2.svg',
+            //         width: 23.w,
+            //         height: 28.h,
+            //       ),
+            //       Padding(
+            //         padding: EdgeInsets.only(
+            //           left: 8.w,
+            //         ),
+            //         child: Text(
+            //           "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+            //           style: GoogleFonts.dmSans(
+            //             textStyle: TextStyle(
+            //                 color: Black,
+            //                 letterSpacing: .5,
+            //                 fontSize: 13.sp,
+            //                 fontWeight: FontWeight.w400),
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Divider(
               // height: 100,
               color: grey2,
@@ -180,9 +297,65 @@ class _OrderSummeryState extends State<OrderSummery> {
                 ],
               ),
             ),
+            //  Container(
+            //           padding: EdgeInsets.only(right: 28.w),
+            //           child: Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: <Widget>[
+            //               Row(
+            //                 children: [
+            //                   SecondaryRadioButton(
+            //                       value: "full_order_amount",
+            //                       groupValue: read.groupValue,
+            //                       onChanged: (value) {
+            //                         read.onRadioBtnToggled(value);
+            //                       },
+            //                       leading: ""),
+            //                   SizedBox(
+            //                     width: 10.w,
+            //                   ),
+            //                   Text(
+            //                     'Full Order Amount',
+            //                     style: GoogleFonts.dmSans(
+            //                       textStyle: TextStyle(
+            //                           color: Black,
+            //                           // letterSpacing: .5,
+            //                           fontSize: 12.sp,
+            //                           fontWeight: FontWeight.w400),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //               Row(
+            //                 children: [
+            //                   SecondaryRadioButton(
+            //                       value: "category_and_product",
+            //                       groupValue: watch.groupValue,
+            //                       onChanged: (value) {
+            //                         read.onRadioBtnToggled(value);
+            //                       },
+            //                       leading: ""),
+            //                   SizedBox(
+            //                     width: 10.w,
+            //                   ),
+            //                   Text(
+            //                     'Category & Product',
+            //                     style: GoogleFonts.dmSans(
+            //                       textStyle: TextStyle(
+            //                           color: Black,
+            //                           fontSize: 12.sp,
+            //                           fontWeight: FontWeight.w400),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             ],
+            //           ),
+            //         ),
             Padding(
               padding: EdgeInsets.only(left: 16.w, top: 20.w, right: 19.w),
-              child: SizedBox(
+              child: Container(
+                // padding: EdgeInsets.only(bottom: 20.w),
                 height: 156.h,
                 width: double.infinity,
                 child: Card(
@@ -224,7 +397,7 @@ class _OrderSummeryState extends State<OrderSummery> {
                             Padding(
                               padding: EdgeInsets.only(left: 75.w),
                               child: SizedBox(
-                                height: 21.h,
+                                // height: 21.h,/
                                 width: 71.w,
                                 child: ElevatedButton(
                                   style: ButtonStyle(
@@ -615,36 +788,36 @@ class _OrderSummeryState extends State<OrderSummery> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 30.w),
-              child: Container(
-                height: 203.h,
-                // width: 390.w,
-                color: Coupons,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 16.w, left: 18.w),
-                      child: Text(
-                        "Fulfil your cravings",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: SplashText,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+            SizedBox(
+              height: 30.w,
+            ),
+            Container(
+              // height: 203.h,
+              width: ScreenUtil().screenWidth,
+              color: Coupons,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 16.w, left: 18.w),
+                    child: Text(
+                      "Fulfil your cravings",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: SplashText,
+                            // letterSpacing: .5,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: 19.w,
-                      ),
-                      child: CarvingProducts(),
-                    )
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: 19.w,
+                    ),
+                    child: CarvingProducts(),
+                  )
+                ],
               ),
             ),
             Padding(
