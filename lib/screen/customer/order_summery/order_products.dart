@@ -6,6 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/order_summery/controller/order_summery_controller.dart';
+import 'package:provider/provider.dart';
 
 class OrderProducts extends StatefulWidget {
   const OrderProducts({super.key});
@@ -17,6 +20,9 @@ class OrderProducts extends StatefulWidget {
 class _OrderProductsState extends State<OrderProducts> {
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<OrderSummeryController>();
+    final read = context.read<OrderSummeryController>();
+    final readMain = context.read<MainScreenController>();
     return SizedBox(
       // height: 140.h,
       child: ListView.builder(
@@ -24,26 +30,39 @@ class _OrderProductsState extends State<OrderProducts> {
           physics: NeverScrollableScrollPhysics(),
           // physics: BouncingScrollPhysics(),
           shrinkWrap: true,
-          itemCount: 3,
+          itemCount: watch.cartItemList?.length ?? 0,
           itemBuilder: (BuildContext, index) {
+            final element = watch.cartItemList?[index];
             return Column(
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 19.w),
                   child: Row(
                     children: [
-                      Image.asset(
-                        "assets/images/pepper.png",
-                        width: 69.w,
-                        height: 60.h,
-                      ),
+                      element?.productImagePath == ""
+                          ? Container(
+                              height: 89.w,
+                              width: 89.w,
+                              child: Image.asset(
+                                "assets/images/profile_image.png",
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Container(
+                              height: 89.w,
+                              width: 89.w,
+                              child: Image.network(
+                                "${element?.productImagePath}",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                       Padding(
                         padding: EdgeInsets.only(left: 45.w, top: 13.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Bell Pepper Red",
+                              "${element?.productName}",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
                                     color: Black1,
@@ -56,7 +75,7 @@ class _OrderProductsState extends State<OrderProducts> {
                               height: 6.h,
                             ),
                             Text(
-                              "1kg",
+                              "${element?.weight}  ${element?.unit}",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
                                     color: grey5,
@@ -71,7 +90,7 @@ class _OrderProductsState extends State<OrderProducts> {
                             Row(
                               children: [
                                 Text(
-                                  "Rs. 50 x 2",
+                                  "Rs. ${element?.mrpPrice} x ${element?.quantity}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: grey5,
@@ -81,9 +100,9 @@ class _OrderProductsState extends State<OrderProducts> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 90.w),
+                                  padding: EdgeInsets.only(left: 80.w),
                                   child: Text(
-                                    "Rs.100",
+                                    "Rs ${element?.productTotalPrice}",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: grey5,
