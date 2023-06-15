@@ -100,7 +100,8 @@ class _OrderSummeryState extends State<OrderSummery> {
             Container(
               padding: EdgeInsets.only(left: 17.w, top: 20.w),
               child: Text(
-                "   New Balaji Trading Company",
+                "${watch.shopDetailData?.shopName}",
+
                 // "${watch.shopDetailData?.shopName}",
 
                 style: GoogleFonts.dmSans(
