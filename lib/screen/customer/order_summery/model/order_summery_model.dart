@@ -233,7 +233,7 @@ class OrderFinalTotals {
   int? couponDiscount;
   int? totalDiscount;
   int? productTotalDiscount;
-  String? deliveryCharges;
+  int? deliveryCharges;
   int? total;
 
   OrderFinalTotals({

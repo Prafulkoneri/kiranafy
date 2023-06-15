@@ -32,19 +32,16 @@ import '../../shop_profile/model/customer_view_shop_model.dart';
 
 class CartDetailController extends ChangeNotifier {
   ShopCartListRepo cartListRepo = ShopCartListRepo();
-  List quantityList=[];
+  List quantityList = [];
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   CartDetailRepo cartDetailRepo = CartDetailRepo();
   CartDetailDeleteRepo cartDetailDeleteRepo = CartDetailDeleteRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
-  String  itemCount="";
-  String  totalAmount="";
-  String  totalSavedAmount="";
-  bool isQuanityBtnPressed=false;
-
-
-
+  String itemCount = "";
+  String totalAmount = "";
+  String totalSavedAmount = "";
+  bool isQuanityBtnPressed = false;
 
   CartItemQuantityReqModel get cartItemQuantityRequestModel =>
       CartItemQuantityReqModel(
@@ -71,29 +68,32 @@ class CartDetailController extends ChangeNotifier {
   String cartId = "";
   String cartItemId = "";
   String quantityAction = "";
- bool isLoading=true;
+  String orderCartId = "";
+  bool isLoading = true;
   bool favAllShop = true;
 
-  Future<void> initState(context, cId, id,isRefresh) async {
-    if(isRefresh) {
+  Future<void> initState(context, cId, id, isRefresh) async {
+    if (isRefresh) {
       await getCartDetails(context, id, cId);
     }
-    }
+  }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
-  quantityBtnPressed(value){
-    isQuanityBtnPressed=value;
+  quantityBtnPressed(value) {
+    isQuanityBtnPressed = value;
     notifyListeners();
   }
 
   Future<void> getCartDetails(context, id, cId) async {
     showLoader(true);
+    // print(object)
     shopId = id.toString();
     cartId = cId.toString();
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartDetailRepo
         .cartDetailView(cartDetailReqModel, pref.getString("successToken"))
@@ -105,14 +105,16 @@ class CartDetailController extends ChangeNotifier {
         shopDetailData = result.cartDetailData?.shopDetails;
 
         cartItemList = result.cartDetailData?.cartItemList;
-        itemCount=result.cartDetailData?.itemCount.toString()??"";
-        totalAmount=result.cartDetailData?.totalAmount.toString()??"";
-        totalSavedAmount=result.cartDetailData?.totalSavedAmount.toString()??"";
-        int length=cartItemList?.length??0;
+        itemCount = result.cartDetailData?.itemCount.toString() ?? "";
+        totalAmount = result.cartDetailData?.totalAmount.toString() ?? "";
+        totalSavedAmount =
+            result.cartDetailData?.totalSavedAmount.toString() ?? "";
+        orderCartId = result.cartDetailData?.cartId.toString() ?? "";
+        int length = cartItemList?.length ?? 0;
         quantityList.clear();
-       for(int i=0;i<length;i++){
-         quantityList.add(cartItemList?[i].quantity);
-       }
+        for (int i = 0; i < length; i++) {
+          quantityList.add(cartItemList?[i].quantity);
+        }
         favAllShop = shopDetailData?.shopFavourite == "yes" ? true : false;
         showLoader(false);
         notifyListeners();
@@ -250,7 +252,7 @@ class CartDetailController extends ChangeNotifier {
     );
   }
 
-  Future<void> addItemQuantity(context, CIId,action,index) async {
+  Future<void> addItemQuantity(context, CIId, action, index) async {
     quantityBtnPressed(true);
     cartItemId = CIId.toString();
     quantityAction = action;
@@ -263,72 +265,14 @@ class CartDetailController extends ChangeNotifier {
       final result =
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-       int value=quantityList[index];
+        int value = quantityList[index];
         quantityList.removeAt(index);
         quantityList.insert(index, value + 1);
-        itemCount=result.itemQuantityData?.itemCount??"";
-        totalAmount=result.itemQuantityData?.totalAmount.toString()??"";
-        totalSavedAmount=result.itemQuantityData?.totalSavedAmount.toString()??"";
-       quantityBtnPressed(false);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,type: SnackType.error);
+        itemCount = result.itemQuantityData?.itemCount ?? "";
+        totalAmount = result.itemQuantityData?.totalAmount.toString() ?? "";
+        totalSavedAmount =
+            result.itemQuantityData?.totalSavedAmount.toString() ?? "";
         quantityBtnPressed(false);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-      quantityBtnPressed(false);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        quantityBtnPressed(false);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-
-  }
-
-  Future<void> subtractItemQuantity(context, CIId,action,index) async {
-    quantityBtnPressed(true);
-    print("*********");
-    print(quantityList);
-    print(quantityList[index]);
-    print("*********");
-    cartItemId = CIId.toString();
-    quantityAction = action;
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    cartItemQuantityRepo
-        .cartItemQuantity(
-            cartItemQuantityRequestModel, pref.getString("successToken"))
-        .then((response) {
-      log("response.body${response.body}");
-      final result =
-          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-       int value=quantityList[index];
-        quantityList.removeAt(index);
-        print("${value}valueeeeeeeee");
-          quantityList.insert(index, value - 1);
-          itemCount = result.itemQuantityData?.itemCount ?? "";
-          totalAmount = result.itemQuantityData?.totalAmount.toString() ?? "";
-          totalSavedAmount = result.itemQuantityData?.totalSavedAmount.toString() ?? "";
-       if(quantityList[index]==0){
-         quantityList.removeAt(index);
-         cartItemList?.removeAt(index);
-       }
-       if(cartItemList!.isEmpty){
-         Navigator.pushAndRemoveUntil(
-           context,
-           MaterialPageRoute(
-               builder: (context) =>
-                   MainScreenView(index: 2, screenName: CartScreenView())),
-               (Route<dynamic> route) => false,
-         );
-       }
-       quantityBtnPressed(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -350,5 +294,63 @@ class CartDetailController extends ChangeNotifier {
     );
   }
 
-
+  Future<void> subtractItemQuantity(context, CIId, action, index) async {
+    quantityBtnPressed(true);
+    print("*********");
+    print(quantityList);
+    print(quantityList[index]);
+    print("*********");
+    cartItemId = CIId.toString();
+    quantityAction = action;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        int value = quantityList[index];
+        quantityList.removeAt(index);
+        print("${value}valueeeeeeeee");
+        quantityList.insert(index, value - 1);
+        itemCount = result.itemQuantityData?.itemCount ?? "";
+        totalAmount = result.itemQuantityData?.totalAmount.toString() ?? "";
+        totalSavedAmount =
+            result.itemQuantityData?.totalSavedAmount.toString() ?? "";
+        if (quantityList[index] == 0) {
+          quantityList.removeAt(index);
+          cartItemList?.removeAt(index);
+        }
+        if (cartItemList!.isEmpty) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    MainScreenView(index: 2, screenName: CartScreenView())),
+            (Route<dynamic> route) => false,
+          );
+        }
+        quantityBtnPressed(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 }
