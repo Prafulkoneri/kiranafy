@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -19,6 +20,7 @@ class SCouponsListController extends ChangeNotifier {
   CouponViewData? couponViewData;
   String shopName = "";
   bool isLoading = true;
+  bool isOfferCopied = false;
   String couponId = "";
   DeleteCouponsRepo deleteCouponsRepo = DeleteCouponsRepo();
   ViewCouponsDetailsRepo viewCouponsDetailsRepo = ViewCouponsDetailsRepo();
@@ -73,9 +75,15 @@ class SCouponsListController extends ChangeNotifier {
 
   ///Copy Coupon Code///
   copyCode(context, offer) {
+    isOfferCopied = true;
+    notifyListeners();
     Clipboard.setData(ClipboardData(text: offer)).then((_) {
-      Utils.showPrimarySnackbar(context, "coupon code copid",
-          type: SnackType.success);
+      // Utils.showPrimarySnackbar(context, "coupon code copid",
+      //     type: SnackType.success);
+    });
+    Timer(Duration(seconds: 3), () async {
+      isOfferCopied = false;
+      notifyListeners();
     });
   }
 
@@ -160,4 +168,10 @@ class SCouponsListController extends ChangeNotifier {
       },
     );
   }
+
+  // bool isOtpErrorVisible = false;
+  // void onOtpDismiss() {
+  //   isOtpErrorVisible = false;
+  //   notifyListeners();
+  // }
 }

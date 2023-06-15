@@ -5,13 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProductScreenView extends StatefulWidget {
   final String? shopId;
@@ -150,9 +148,11 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Expanded(child: Container(
-                                        child:      Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                      Expanded(
+                                          child: Container(
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             SvgPicture.asset(
                                               'assets/images/location2.svg',
@@ -171,16 +171,14 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                       color: Black,
                                                       letterSpacing: .5,
                                                       fontSize: 13.sp,
-                                                      fontWeight: FontWeight.w400),
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
                                               ),
                                             ),
-
                                           ],
                                         ),
                                       )),
-
-
                                       Row(
                                         children: [
                                           GestureDetector(
@@ -496,7 +494,10 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                   element?.discountPercentage !=
                                                           ""
                                                       ? Container(
-                                                    margin: EdgeInsets.only(left: 5.w,right: 5.w),
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 5.w,
+                                                                  right: 5.w),
                                                           width: 60.w,
                                                           height: 20.h,
                                                           decoration: BoxDecoration(
@@ -600,19 +601,24 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                               SizedBox(
                                                 width: 12.w,
                                               ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xffFF844C),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5.w)),
-                                                height: 30.w,
-                                                width: 30.w,
-                                                child: const Center(
-                                                  child: Icon(
-                                                    Icons.add,
-                                                    color: Colors.white,
+                                              InkWell(
+                                                // onTap: (){
+                                                //      read.addToCart(watch.productDetails?.id,productType,element?.productUnitId,element?.shopId,context);
+                                                //    },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                      color: const Color(
+                                                          0xffFF844C),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.w)),
+                                                  height: 30.w,
+                                                  width: 30.w,
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -911,9 +917,15 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                       ],
                                                     ),
                                                     GestureDetector(
-                                                     onTap: (){
-                                                       read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
-                                                     },
+                                                      onTap: () {
+                                                        read.addToCart(
+                                                            element
+                                                                ?.productType,
+                                                            element
+                                                                ?.productUnitId,
+                                                            element?.shopId,
+                                                            context);
+                                                      },
                                                       child: SvgPicture.asset(
                                                         'assets/images/add.svg',
                                                         // width: 15.w,

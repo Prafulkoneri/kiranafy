@@ -15,7 +15,7 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/remove
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products_model.dart';
 
 import 'package:local_supper_market/screen/customer/shop_profile/repository/all_products_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/customer_view_shop_repo.dart';
@@ -28,7 +28,7 @@ class ShopProfileViewController extends ChangeNotifier {
   String shopId = "";
   int offset = 0;
   bool isLoading = true;
-  PageController pageController=PageController();
+  PageController pageController = PageController();
   // Data? allproducts;
   CustomerViewShopRepo customerViewShopRepo = CustomerViewShopRepo();
   AllOfferProductsRepo allOfferProductsRepo = AllOfferProductsRepo();
@@ -40,76 +40,76 @@ class ShopProfileViewController extends ChangeNotifier {
   List<CustomerProductData>? seasonalProduct;
   List<CustomerProductData>? recommandedProduct;
   List<BannerImageData>? bannerImageData;
-  int _currentPage=0;
+  int _currentPage = 0;
 
-  AddProductToCartRepo addProductToCartRepo =AddProductToCartRepo();
+  AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
 
-  Future<void> initState(context, id,refresh) async {
-    if(refresh) {
+  Future<void> initState(context, id, refresh) async {
+    if (refresh) {
       await getShopDetails(context, id);
       // await getAllOfferes(context, id);
-    }
-    else{
+    } else {
       showLoader(false);
     }
-    }
+  }
 
-    void showLoader(value){
-    isLoading=value;
+  void showLoader(value) {
+    isLoading = value;
     notifyListeners();
-    }
+  }
 
   CustomerViewShopReqModel get customerViewShopReqModel =>
       CustomerViewShopReqModel(
         shopId: shopId,
       );
 
-  void onBackPressed(screenName,context,cId){
+  void onBackPressed(screenName, context, cId) {
     print(screenName);
-    if(screenName=="allNearShopView"){
+    if (screenName == "allNearShopView") {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
             builder: (context) => MainScreenView(
                 index: 1,
-                screenName: AllNearShopsView(refreshPage: false,)
-            )),
-            (Route<dynamic> route) => false,
+                screenName: AllNearShopsView(
+                  refreshPage: false,
+                ))),
+        (Route<dynamic> route) => false,
       );
     }
-    if(screenName=="nearShopsCategory"){
+    if (screenName == "nearShopsCategory") {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
             builder: (context) => MainScreenView(
                 index: 1,
-                screenName: AllNearCategoryShopsView(categoryId: cId,refresh: false,)
-            )),
-            (Route<dynamic> route) => false,
+                screenName: AllNearCategoryShopsView(
+                  categoryId: cId,
+                  refresh: false,
+                ))),
+        (Route<dynamic> route) => false,
       );
     }
-    if(screenName=="homeNearbyShop"){
+    if (screenName == "homeNearbyShop") {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
             builder: (context) => MainScreenView(
                 index: 0,
-                screenName: HomeScreenView(refreshPage: false,)
-            )),
-            (Route<dynamic> route) => false,
+                screenName: HomeScreenView(
+                  refreshPage: false,
+                ))),
+        (Route<dynamic> route) => false,
       );
-    }
-    else{
+    } else {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
             builder: (context) => MainScreenView(
-                index: 0,
-                screenName: HomeScreenView(refreshPage: false)
-            )),
-            (Route<dynamic> route) => false,
+                index: 0, screenName: HomeScreenView(refreshPage: false))),
+        (Route<dynamic> route) => false,
       );
     }
   }
@@ -134,27 +134,26 @@ class ShopProfileViewController extends ChangeNotifier {
         offerProduct = shopData?.offerProduct;
         seasonalProduct = shopData?.seasonalProduct;
         recommandedProduct = shopData?.recommandedProduct;
-        bannerImageData=shopData?.bannerImages;
+        bannerImageData = shopData?.bannerImages;
 
         favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
         print("bye");
         print(favAllShop);
         print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
         showLoader(false);
-        int imageLength=bannerImageData?.length??0;
-        if(bannerImageData!.isNotEmpty){
+        int imageLength = bannerImageData?.length ?? 0;
+        if (bannerImageData!.isNotEmpty) {
           Timer.periodic(Duration(seconds: 5), (Timer timer) {
-              if (_currentPage < imageLength-1) {
-                _currentPage++;
-              } else {
-                _currentPage = 0;
-              }
-              pageController.animateToPage(
-                _currentPage,
-                duration: Duration(milliseconds: 350),
-                curve: Curves.easeIn,
-              );
-
+            if (_currentPage < imageLength - 1) {
+              _currentPage++;
+            } else {
+              _currentPage = 0;
+            }
+            pageController.animateToPage(
+              _currentPage,
+              duration: Duration(milliseconds: 350),
+              curve: Curves.easeIn,
+            );
           });
         }
         notifyListeners();
@@ -188,7 +187,6 @@ class ShopProfileViewController extends ChangeNotifier {
   //////All Offer Products
   AllProductsReqModel get shopAllProductsReqModel => AllProductsReqModel(
       offset: offset.toString(), limit: "10", shopId: shopId);
-
 
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
@@ -260,13 +258,21 @@ class ShopProfileViewController extends ChangeNotifier {
       },
     );
   }
-  Future<void> addToCart(pType,pId,sId,context)async{
+
+  Future<void> addToCart(pType, pId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
-        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .addProductToCart(
+            AddProductToCartReqModel(
+                productType: pType,
+                productUnitId: pId.toString(),
+                shopId: sId.toString(),
+                quantity: "1"),
+            pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      final result =
+          AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -278,7 +284,7 @@ class ShopProfileViewController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

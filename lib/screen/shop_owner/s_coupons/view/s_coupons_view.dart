@@ -158,7 +158,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                             //   // height: 15.w,
                                             // ),
                                             Text(
-                                              "Hi Choice Supermarket",
+                                              "",
+                                              // " ${element?.couponToDate}",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     color: Black,

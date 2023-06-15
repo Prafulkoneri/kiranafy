@@ -1,34 +1,34 @@
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 
-class AllProductsReqModel {
+class AllSeasonalProductsReqModel {
   String? shopId;
   String? limit;
   String? offset;
 
-  AllProductsReqModel({this.shopId, this.limit, this.offset});
+  AllSeasonalProductsReqModel({this.shopId, this.limit, this.offset});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["shop_id"] = shopId;
     data["limit"] = limit;
     data["offset"] = offset;
-
     return data;
   }
 }
 
-/////ResponseMOdel Offere Products////////////
-class ViewAllOfferProducts {
+////////////////RES
+
+class ViewAllSeasonalProducts {
   int? status;
   String? message;
   Data? data;
 
-  ViewAllOfferProducts({
+  ViewAllSeasonalProducts({
     required this.status,
     required this.message,
     required this.data,
   });
-  ViewAllOfferProducts.fromJson(Map<String, dynamic> json) {
+  ViewAllSeasonalProducts.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
@@ -36,18 +36,17 @@ class ViewAllOfferProducts {
 }
 
 class Data {
-  List<CustomerProductData>? offerProducts;
+  List<CustomerProductData>? seasonalProducts;
 
   Data({
-    required this.offerProducts,
+    required this.seasonalProducts,
   });
   Data.fromJson(Map<String, dynamic> json) {
-    if (json["offer_products"] != null) {
-      offerProducts = <CustomerProductData>[];
-      json["offer_products"].forEach((v) {
-        offerProducts!.add(CustomerProductData.fromJson(v));
+    if (json["seasonal_products"] != null) {
+      seasonalProducts = <CustomerProductData>[];
+      json["seasonal_products"].forEach((v) {
+        seasonalProducts!.add(CustomerProductData.fromJson(v));
       });
     }
   }
 }
-
