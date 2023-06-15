@@ -38,6 +38,14 @@ class CartDetailController extends ChangeNotifier {
   CartDetailDeleteRepo cartDetailDeleteRepo = CartDetailDeleteRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
+  String  itemCount="";
+  String  totalAmount="";
+  String  totalSavedAmount="";
+  bool isQuanityBtnPressed=false;
+
+
+
+
   CartItemQuantityReqModel get cartItemQuantityRequestModel =>
       CartItemQuantityReqModel(
           cartItemId: cartItemId, quantityAction: quantityAction);
@@ -66,12 +74,19 @@ class CartDetailController extends ChangeNotifier {
  bool isLoading=true;
   bool favAllShop = true;
 
-  Future<void> initState(context, cId, id) async {
-    await getCartDetails(context, id, cId);
-  }
+  Future<void> initState(context, cId, id,isRefresh) async {
+    if(isRefresh) {
+      await getCartDetails(context, id, cId);
+    }
+    }
 
   showLoader(value){
     isLoading=value;
+    notifyListeners();
+  }
+
+  quantityBtnPressed(value){
+    isQuanityBtnPressed=value;
     notifyListeners();
   }
 
@@ -90,6 +105,9 @@ class CartDetailController extends ChangeNotifier {
         shopDetailData = result.cartDetailData?.shopDetails;
 
         cartItemList = result.cartDetailData?.cartItemList;
+        itemCount=result.cartDetailData?.itemCount.toString()??"";
+        totalAmount=result.cartDetailData?.totalAmount.toString()??"";
+        totalSavedAmount=result.cartDetailData?.totalSavedAmount.toString()??"";
         int length=cartItemList?.length??0;
         quantityList.clear();
        for(int i=0;i<length;i++){
@@ -233,6 +251,7 @@ class CartDetailController extends ChangeNotifier {
   }
 
   Future<void> addItemQuantity(context, CIId,action,index) async {
+    quantityBtnPressed(true);
     cartItemId = CIId.toString();
     quantityAction = action;
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -247,31 +266,37 @@ class CartDetailController extends ChangeNotifier {
        int value=quantityList[index];
         quantityList.removeAt(index);
         quantityList.insert(index, value + 1);
+        itemCount=result.itemQuantityData?.itemCount??"";
+        totalAmount=result.itemQuantityData?.totalAmount.toString()??"";
+        totalSavedAmount=result.itemQuantityData?.totalSavedAmount.toString()??"";
+       quantityBtnPressed(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,type: SnackType.error);
+        quantityBtnPressed(false);
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
     );
+
   }
 
   Future<void> subtractItemQuantity(context, CIId,action,index) async {
+    quantityBtnPressed(true);
     print("*********");
     print(quantityList);
     print(quantityList[index]);
     print("*********");
-    if(quantityList[index]==1){
-      return;
-    }
     cartItemId = CIId.toString();
     quantityAction = action;
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -285,17 +310,38 @@ class CartDetailController extends ChangeNotifier {
       if (response.statusCode == 200) {
        int value=quantityList[index];
         quantityList.removeAt(index);
-        quantityList.insert(index, value - 1);
+        print("${value}valueeeeeeeee");
+          quantityList.insert(index, value - 1);
+          itemCount = result.itemQuantityData?.itemCount ?? "";
+          totalAmount = result.itemQuantityData?.totalAmount.toString() ?? "";
+          totalSavedAmount = result.itemQuantityData?.totalSavedAmount.toString() ?? "";
+       if(quantityList[index]==0){
+         quantityList.removeAt(index);
+         cartItemList?.removeAt(index);
+       }
+       if(cartItemList!.isEmpty){
+         Navigator.pushAndRemoveUntil(
+           context,
+           MaterialPageRoute(
+               builder: (context) =>
+                   MainScreenView(index: 2, screenName: CartScreenView())),
+               (Route<dynamic> route) => false,
+         );
+       }
+       quantityBtnPressed(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
+        quantityBtnPressed(false);
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);

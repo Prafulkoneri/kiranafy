@@ -67,6 +67,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
             widget.productId,
             widget.selectedUnitId,
             widget.productType,
+        widget.routeName
           );
     });
     _pageController = PageController(viewportFraction: 1, initialPage: 1);
@@ -93,18 +94,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
           //   },
           WillPopScope(
               onWillPop: () async {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MainScreenView(
-                          index: 1,
-                          screenName: ShopProfileView(
-                            refreshPage: false,
-                            routeName: '',
-                            shopId: '',
-                          ))),
-                  (Route<dynamic> route) => false,
-                );
+                read.onBackPressed(context);
                 return false;
               },
               child: SingleChildScrollView(

@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/cart/controller/cart_control
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -52,11 +53,6 @@ class _CartScreenViewState extends State<CartScreenView> {
             await read.deleteShopCart(
               context,
             );
-            // await read.validateField(context);
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const EmptyCartView()),
-            // );
           },
         ),
       ),
@@ -65,7 +61,127 @@ class _CartScreenViewState extends State<CartScreenView> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : WillPopScope(
+          : watch.cartList!.isEmpty?Center(
+        child: Padding(
+          padding: EdgeInsets.only(top: 120.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,/
+            children: [
+              Image.asset(
+                "assets/images/emptycart.png",
+                height: 151.h,
+                width: 151.w,
+              ),
+              Text(
+                "Your Cart is Empty",
+                style: GoogleFonts.dmSans(
+                  textStyle: TextStyle(
+                      color: Black1,
+                      letterSpacing: .5,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 20.w, right: 20.w, top: 15.w, bottom: 50.w),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Looks like you have not anything to your",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black1,
+                            letterSpacing: .5,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    Text(
+                      "cart. Go ahead explore top categories",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black1,
+                            letterSpacing: .5,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Padding(
+              //   padding: EdgeInsets.only(left: 50.w),
+              //   child: RichText(
+              //     text: TextSpan(
+              // text: 'Looks like you have not added anything to your,',
+              // style: GoogleFonts.dmSans(
+              //   textStyle: TextStyle(
+              //       color: Black1,
+              //       letterSpacing: .5,
+              //       fontSize: 14.sp,
+              //       fontWeight: FontWeight.w400),
+              // ),
+              //       children: <TextSpan>[
+              //         TextSpan(
+              //           text: 'cart. Go ahead and explore top categories',
+              //           style: GoogleFonts.dmSans(
+              //             textStyle: TextStyle(
+              //                 color: Black1,
+              //                 letterSpacing: .5,
+              //                 fontSize: 14.sp,
+              //                 fontWeight: FontWeight.w400),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              SizedBox(
+                width: 160.w, // <-- Your width
+                height: 45.h,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: SplashText,
+                    // onPrimary: Colors.white,
+                    // shadowColor: Colors.greenAccent,
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14.0)),
+                    minimumSize: const Size(100, 40), //////// HERE
+                  ),
+                  // style: style,
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MainScreenView(
+                              index: 0,
+                              screenName: AllNearShopsView(
+                                refreshPage: true,
+                              ))),
+                          (Route<dynamic> route) => false,
+                    );
+                  },
+                  child: Text(
+                    'Browse Products',
+                    style: GoogleFonts.dmSans(
+                      textStyle: const TextStyle(
+                        // color: SplashTex
+                          letterSpacing: .5,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ):
+      WillPopScope(
               onWillPop: () async {
                 Navigator.pushAndRemoveUntil(
                   context,
@@ -178,7 +294,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            " ${element?.totalAmount}",
+                                            "INR ${element?.totalAmount}",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   // height: 1.5,
@@ -196,6 +312,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         CartDetailView(
+                                                          isRefresh: true,
                                                           cartId: element?.id
                                                               .toString(),
                                                           shopId: element

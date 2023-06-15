@@ -40,10 +40,16 @@ class CartDetailResponseModel {
 class CartDetailData {
   ShopDetails? shopDetails;
   List<CartItemList>? cartItemList;
+  String ? itemCount;
+  int ? totalAmount;
+  int ? totalSavedAmount;
 
   CartDetailData({
     required this.shopDetails,
     required this.cartItemList,
+    this.itemCount,
+    this.totalAmount,
+    this.totalSavedAmount
   });
   CartDetailData.fromJson(Map<String, dynamic> json) {
     shopDetails = json['shop_details'] != null
@@ -55,6 +61,9 @@ class CartDetailData {
         cartItemList!.add(CartItemList.fromJson(v));
       });
     }
+    itemCount=json["item_count"];
+    totalAmount=json["total_amount"];
+    totalSavedAmount=json["total_saved_amount"];
   }
 }
 
@@ -68,6 +77,9 @@ class CartItemList {
   String? offerPrice;
   String? mrpPrice;
   String? productType;
+  int ? productId;
+  int ? categoryId;
+
   String? discountPercentage;
   String? unit;
 
@@ -83,6 +95,8 @@ class CartItemList {
     required this.productType,
     required this.discountPercentage,
     required this.unit,
+    this.productId,
+    this.categoryId,
   });
   CartItemList.fromJson(Map<String, dynamic> json) {
     cartItemId = json["cart_item_id"];
@@ -95,6 +109,8 @@ class CartItemList {
     mrpPrice = json["mrp_price"];
     productType = json["product_type"];
     discountPercentage = json["discount_percentage"];
+    productId = json["product_id"];
+    categoryId = json["category_id"];
     unit = json["unit"];
   }
 }
