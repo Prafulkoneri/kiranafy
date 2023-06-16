@@ -46,8 +46,8 @@ class _CartScreenViewState extends State<CartScreenView> {
           title: "Shop Cart",
           action: SvgPicture.asset(
             'assets/images/delete.svg',
-            width: 20.w,
-            height: 18.h,
+            // width: 20.w,
+            // height: 18.h,
           ),
           onActionTap: () async {
             await read.deleteShopCart(

@@ -3,21 +3,22 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
+import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
+
 import 'package:provider/provider.dart';
 
-class OtpShopBottomSheetView extends StatefulWidget {
-  const OtpShopBottomSheetView({Key? key}) : super(key: key);
+class OtpCustomerBottomSheet extends StatefulWidget {
+  const OtpCustomerBottomSheet({Key? key}) : super(key: key);
 
   @override
-  _OtpShopBottomSheetViewState createState() => _OtpShopBottomSheetViewState();
+  _OtpCustomerBottomSheetState createState() => _OtpCustomerBottomSheetState();
 }
 
-class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
+class _OtpCustomerBottomSheetState extends State<OtpCustomerBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    final read = context.read<ShopSignInController>();
-    final watch = context.watch<ShopSignInController>();
+    final read = context.read<CustomerSignInController>();
+    final watch = context.watch<CustomerSignInController>();
     return Stack(
       children: [
         Theme(
@@ -50,7 +51,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                       Padding(
                         padding: EdgeInsets.only(top: 20.0.h),
                         child: Text(
-                          "We have sent SMS to :\n ${watch.mobController.text.isNotEmpty ? watch.mobController.text.substring(0, 3) : ""} XXX XX XX",
+                          "We have sent SMS to :\n ${watch.mobileController.text.isNotEmpty ? watch.mobileController.text.substring(0, 3) : ""} XXX XX XX",
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
                                 color: Black,
@@ -118,7 +119,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                         children: [
                           GestureDetector(
                             onTap: () async {
-                              await read.onLoginClick(context);
+                              await read.onNextClick(context);
                             },
                             child: Text(
                               'Resend OTP',

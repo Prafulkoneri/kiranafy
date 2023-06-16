@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,11 +20,13 @@ class CustomerSignInController extends ChangeNotifier {
   CustomerSignInRepo customerSignInRepo = CustomerSignInRepo();
   String countryCode = "+91";
   FirebaseAuth _auth = FirebaseAuth.instance;
+  bool isOtpErrorVisible = false;
   bool isVerifyChecked = false;
   String otpCode = "";
   String verificationID = "";
   bool isLoginBtnEnabled = false;
-  bool isNextBtnEnabled = false;
+  // bool isNextBtnEnabled = false;
+
   void onOtpSubmitPressed(context) {
     onCodeVerification(context);
   }
@@ -157,13 +160,15 @@ class CustomerSignInController extends ChangeNotifier {
       if (authCred.user != null) {
         onsignIn(context);
       } else {
-        Utils.showPrimarySnackbar(context,
-            "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
-            type: SnackType.error);
+        showOtpErrorMsg();
+        notifyListeners();
+        // Utils.showPrimarySnackbar(context,
+        //     "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
+        //     type: SnackType.error);
       }
     } on FirebaseAuthException catch (e) {
       print("888");
-      print(e.message);
+      showOtpErrorMsg();
       print("888");
       Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
     }
@@ -173,5 +178,21 @@ class CustomerSignInController extends ChangeNotifier {
     AuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
         verificationId: verificationID, smsCode: otpCode);
     signInWithPhoneAuthCred(phoneAuthCredential, context);
+  }
+
+  showOtpErrorMsg() {
+    isOtpErrorVisible = true;
+    notifyListeners();
+    print(isOtpErrorVisible);
+    Timer(Duration(seconds: 3), () {
+      print("duration");
+      isOtpErrorVisible = false;
+      notifyListeners();
+    });
+  }
+
+  void onOtpDismiss() {
+    isOtpErrorVisible = false;
+    notifyListeners();
   }
 }
