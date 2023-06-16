@@ -25,8 +25,9 @@ import '../../../../widget/app_bar.dart';
 
 class SSelectedProductView extends StatefulWidget {
   final String? categoryId;
+  final bool ? isRefresh;
 
-  const SSelectedProductView({super.key, required this.categoryId});
+  const SSelectedProductView({super.key, required this.categoryId,required this.isRefresh});
 
   @override
   State<SSelectedProductView> createState() => _SSelectedProductViewState();
@@ -674,11 +675,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 children: [
                                                   GestureDetector(
                                                     onTap: () {
-                                                      // Navigator.pushAndRemoveUntil(
-                                                      //   context,
-                                                      //   MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SEditCustomProductView(productId:element?.id.toString(),categoryId: widget.categoryId,))),
-                                                      //       (Route<dynamic> route) => false,
-                                                      // );
+                                                      Navigator.pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SEditCustomProductView(productId:element?.id.toString(),categoryId: widget.categoryId,))),
+                                                            (Route<dynamic> route) => false,
+                                                      );
                                                     },
                                                     child: Container(
                                                       padding:

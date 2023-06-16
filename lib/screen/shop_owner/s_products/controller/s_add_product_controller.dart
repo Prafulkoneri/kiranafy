@@ -155,7 +155,7 @@ class SAddProductsController extends ChangeNotifier {
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                       index: 0,
-                      screenName: SSelectedProductView(categoryId: categoryId),
+                      screenName: SSelectedProductView(categoryId: categoryId,isRefresh: true),
                     )),
             (Route<dynamic> route) => false,
           );

@@ -64,6 +64,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                   builder: (context) => SMainScreenView(
                       index: 0,
                       screenName: SSelectedProductView(
+                        isRefresh: false,
                         categoryId: widget.categoryId,
                       ))),
               (Route<dynamic> route) => false,

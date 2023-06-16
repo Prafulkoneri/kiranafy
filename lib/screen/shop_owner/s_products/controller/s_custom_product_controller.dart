@@ -122,6 +122,7 @@ class CustomProductController extends ChangeNotifier {
               builder: (context) => SMainScreenView(
                   index: 0,
                   screenName: SSelectedProductView(
+                    isRefresh: true,
                     categoryId: selectedCategory,
                   ))),
           (Route<dynamic> route) => false,
@@ -461,7 +462,7 @@ class CustomProductController extends ChangeNotifier {
           MaterialPageRoute(
               builder: (context) => SMainScreenView(
                   index: 0,
-                  screenName: SSelectedProductView(categoryId: categoryId))),
+                  screenName: SSelectedProductView(categoryId: categoryId,isRefresh: true,))),
           (Route<dynamic> route) => false,
         );
       } else {

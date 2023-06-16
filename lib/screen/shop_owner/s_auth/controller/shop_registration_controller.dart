@@ -259,6 +259,13 @@ class ShopRegistrationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+    bool emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+        .hasMatch(emailIdController.text);
+    if(!emailValid){
+      Utils.showPrimarySnackbar(context, "Enter Email Id",
+          type: SnackType.error);
+      return;
+    }
     if (countryId == 0) {
       Utils.showPrimarySnackbar(context, "Select Country",
           type: SnackType.error);

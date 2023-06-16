@@ -64,6 +64,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                   builder: (context) => SMainScreenView(
                       index: 0,
                       screenName: SSelectedProductView(
+                        isRefresh: false,
                         categoryId: widget.categoryId,
                       ))),
               (Route<dynamic> route) => false,
@@ -76,7 +77,9 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ): SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [

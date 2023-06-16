@@ -32,7 +32,7 @@ class SCategoryListController extends ChangeNotifier {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                SSelectedProductView(categoryId: id.toString())));
+                SSelectedProductView(isRefresh: true,categoryId: id.toString())));
   }
 
   ////////////////// shop owner get selected categories list/////

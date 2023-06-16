@@ -6,14 +6,14 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 import 'package:provider/provider.dart';
 
-class OtpBottomSheetView extends StatefulWidget {
-  const OtpBottomSheetView({Key? key}) : super(key: key);
+class OtpShopBottomSheetView extends StatefulWidget {
+  const OtpShopBottomSheetView({Key? key}) : super(key: key);
 
   @override
-  _OtpBottomSheetViewState createState() => _OtpBottomSheetViewState();
+  _OtpShopBottomSheetViewState createState() => _OtpShopBottomSheetViewState();
 }
 
-class _OtpBottomSheetViewState extends State<OtpBottomSheetView> {
+class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
   @override
   Widget build(BuildContext context) {
     final read = context.read<ShopSignInController>();
@@ -116,14 +116,19 @@ class _OtpBottomSheetViewState extends State<OtpBottomSheetView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Resend OTP',
-                            style: GoogleFonts.dmSans(
-                              textStyle: const TextStyle(
-                                  // color: SplashTex
-                                  letterSpacing: .5,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                          GestureDetector(
+                            onTap: ()async{
+                              await read.onLoginClick(context);
+                            },
+                            child: Text(
+                              'Resend OTP',
+                              style: GoogleFonts.dmSans(
+                                textStyle: const TextStyle(
+                                    // color: SplashTex
+                                    letterSpacing: .5,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ),
                         ],

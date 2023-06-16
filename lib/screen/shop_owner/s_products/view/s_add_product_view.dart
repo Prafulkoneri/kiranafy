@@ -57,6 +57,7 @@ class _AddProductViewState extends State<AddProductView> {
                     builder: (context) => SMainScreenView(
                           index: 0,
                           screenName: SSelectedProductView(
+                            isRefresh: false,
                               categoryId: widget.categoryId),
                         )),
                 (Route<dynamic> route) => false,

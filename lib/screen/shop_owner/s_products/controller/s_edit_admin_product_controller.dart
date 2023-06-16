@@ -104,6 +104,11 @@ class EditAdminProductController extends ChangeNotifier {
     await getAdminProductData(context);
   }
 
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
   void onBrandSelected(value) {
     brandId = value;
     notifyListeners();
@@ -253,7 +258,7 @@ class EditAdminProductController extends ChangeNotifier {
   }
 
   Future<void> getCustomProductData(context) async {
-    isLoading = true;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     customProductDataRepo
         .customProductDataModel(pref.getString("successToken"))
@@ -267,9 +272,6 @@ class EditAdminProductController extends ChangeNotifier {
         brandData = customdata?.brandData;
         taxData = customdata?.taxData;
         unitData = customdata?.unitData;
-        isLoading = false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -386,7 +388,6 @@ class EditAdminProductController extends ChangeNotifier {
 
   Future getAdminProductData(context) async {
     isEditEnabled = false;
-    isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     editAdminProductRepo
         .getAdminProductDetails(
@@ -433,8 +434,7 @@ class EditAdminProductController extends ChangeNotifier {
               text: productUnitDetail?[i].offerPrice.toString()));
         }
         switchValue = List<bool>.filled(length, true, growable: true);
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -484,7 +484,7 @@ class EditAdminProductController extends ChangeNotifier {
           MaterialPageRoute(
               builder: (context) => SMainScreenView(
                     index: 0,
-                    screenName: SSelectedProductView(categoryId: categoryId),
+                    screenName: SSelectedProductView(categoryId: categoryId,isRefresh: true),
                   )),
           (Route<dynamic> route) => false,
         );

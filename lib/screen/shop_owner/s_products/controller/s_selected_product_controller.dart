@@ -44,7 +44,6 @@ class SSelectedProductsController extends ChangeNotifier {
     categoryId = id;
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
-
     shopSelecteProductRepo
         .selectedProducts(
             selecteProductRequestModel, pref.getString("successToken"))

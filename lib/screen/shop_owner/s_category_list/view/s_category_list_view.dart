@@ -102,6 +102,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                           builder: (context) => SMainScreenView(
                                               index: 0,
                                               screenName: SSelectedProductView(
+                                                isRefresh: true,
                                                   categoryId: element
                                                       ?.categoryId
                                                       .toString()))),

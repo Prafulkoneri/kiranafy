@@ -61,6 +61,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                   builder: (context) => SMainScreenView(
                       index: 0,
                       screenName: SSelectedProductView(
+                        isRefresh: false,
                         categoryId: widget.categoryId,
                       ))),
               (Route<dynamic> route) => false,
