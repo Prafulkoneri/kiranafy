@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,19 +19,14 @@ class CustomerSignUpController extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
   CustomerSignUpRepo customerSignUpRepo = CustomerSignUpRepo();
   MobileNumberCheckRepo mobileNumberCheckRepo = MobileNumberCheckRepo();
+  bool isOtpErrorVisible = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isVerifyChecked = false; //terms
   String countryCode = "+91";
-  bool isNextBtnEnabled = false;
-  // bool isLoginBtnEnabled = false;
+  // bool isNextBtnEnabled = false;
+  bool isLoginBtnEnabled = false;
   String verificationID = "";
   String otpCode = "";
-  // void onOtpSubmitPressed(context) {
-  // Navigator.push(
-  //   context,
-  //   MaterialPageRoute(builder: (context) => const MainScreenView()),
-  // );
-  // }
 
   ///Term And Condition
   void onVerifyChecked(value) {
@@ -44,7 +40,7 @@ class CustomerSignUpController extends ChangeNotifier {
   }
 
   /////NewCustomer
-  Future<void> onNextClick(context) async {
+  Future<void> onNextSignClick(context) async {
     if (mobileController.text.length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter Phone Number",
           type: SnackType.error);
@@ -63,9 +59,11 @@ class CustomerSignUpController extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    if (!isNextBtnEnabled) {
+
+    if (isLoginBtnEnabled) {
       Utils.showPrimarySnackbar(context, "The Number is Already Registered",
-          type: SnackType.success);
+          type: SnackType.error);
+      return;
     }
     await _auth.verifyPhoneNumber(
         phoneNumber: "$countryCode${mobileController.text}",
@@ -93,19 +91,25 @@ class CustomerSignUpController extends ChangeNotifier {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
 
       if (authCred.user != null) {
-        onsignUp(context);
+        if (isLoginBtnEnabled) {
+          onsignUp(context);
+          return;
+        }
 
         // onsignUp(context);
       } else {
-        Utils.showPrimarySnackbar(context,
-            "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
-            type: SnackType.error);
+        showOtpErrorMsg();
+        notifyListeners();
+        // Utils.showPrimarySnackbar(context,
+        //     "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
+        //     type: SnackType.error);
       }
     } on FirebaseAuthException catch (e) {
-      print("888");
-      print(e.message);
-      print("888");
-      Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
+      // print("888");
+      // print(e.message);
+      showOtpErrorMsg();
+      // print("888");
+      // Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
     }
   }
 
@@ -166,13 +170,17 @@ class CustomerSignUpController extends ChangeNotifier {
             MobileNumberCheckResponseModel.fromJson(jsonDecode(response.body));
 
         if (response.statusCode == 200) {
-          print(response.body);
+          if (result.status == 404) {
+            isLoginBtnEnabled = false;
+            Utils.showPrimarySnackbar(context, result.message,
+                type: SnackType.error);
+          } else {
+            isLoginBtnEnabled = true;
 
-          if (result.status == 200) {
-            isNextBtnEnabled = false;
+            Utils.showPrimarySnackbar(context, result.message,
+                type: SnackType.success);
           }
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.success);
+
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -190,5 +198,21 @@ class CustomerSignUpController extends ChangeNotifier {
         },
       );
     }
+  }
+
+  showOtpErrorMsg() {
+    isOtpErrorVisible = true;
+    notifyListeners();
+    print(isOtpErrorVisible);
+    Timer(Duration(seconds: 3), () {
+      print("duration");
+      isOtpErrorVisible = false;
+      notifyListeners();
+    });
+  }
+
+  void onOtpDismiss() {
+    isOtpErrorVisible = false;
+    notifyListeners();
   }
 }
