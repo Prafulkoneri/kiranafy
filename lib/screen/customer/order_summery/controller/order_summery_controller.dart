@@ -25,6 +25,7 @@ class OrderSummeryController extends ChangeNotifier {
       );
   String shopId = "";
   String cartId = "";
+  String groupValue = "deliveryTo";
   ShopDetails? shopDetailData;
   ShopDeliveryTypes? shopDeliveryTypes;
   ShopDeliverySlots? shopDeliverySlots;
@@ -38,11 +39,17 @@ class OrderSummeryController extends ChangeNotifier {
   List<bool> defaultSelectedAddress = [];
 
   Future<void> initState(context, cId, id) async {
+    groupValue = "deliveryTo";
     await orderSummery(context, cId, id);
   }
 
   void showLoader(value) {
     isLoading = value;
+    notifyListeners();
+  }
+
+  void onRadioButtonSelected(value) {
+    groupValue = value;
     notifyListeners();
   }
 
@@ -67,8 +74,17 @@ class OrderSummeryController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = OrderSummeryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        // shopDeliveryTypes=result.orderSummeryData?.shopDeliveryTypes ??"Delivery To";
+        if (result
+                .orderSummeryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ==
+            "active") {
+          groupValue = "selfPickup";
+        } else {
+          groupValue = "deliveryTo";
+        }
+        // groupValue = data?.deliveryAddressType ?? "home";
         shopDetailData = result.orderSummeryData?.shopDetails;
-        shopDeliveryTypes = result.orderSummeryData?.shopDeliveryTypes;
+        // shopDeliveryTypes = result.orderSummeryData?.shopDeliveryTypes;
         shopDeliverySlots = result.orderSummeryData?.shopDeliverySlots;
         orderFinalTotals = result.orderSummeryData?.orderFinalTotals;
         customerAddress = result.orderSummeryData?.customerAddresses;
