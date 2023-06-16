@@ -13,7 +13,9 @@ import 'package:local_supper_market/screen/customer/order_payment/order_payment.
 import 'package:local_supper_market/screen/customer/order_summery/controller/order_summery_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summery/cravings_products.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
+import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:provider/provider.dart';
 
 import 'order_products.dart';
@@ -243,61 +245,61 @@ class _OrderSummeryState extends State<OrderSummery> {
               indent: 5,
               endIndent: 5,
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 5.w, top: 10.w),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Radio(
-                    fillColor:
-                        MaterialStateColor.resolveWith((states) => Button1),
-                    value: 1,
-                    groupValue: id,
-                    onChanged: (val) {
-                      setState(() {
-                        radioButtonItem = 'Delivery To';
-                        id = 1;
-                      });
-                    },
-                  ),
-                  Text(
-                    'Delivery To',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          letterSpacing: .5,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 25.w),
-                    child: Radio(
-                      fillColor:
-                          MaterialStateColor.resolveWith((states) => Button1),
-                      value: 2,
-                      groupValue: id,
-                      onChanged: (val) {
-                        setState(() {
-                          radioButtonItem = 'Self Pickup';
-                          id = 2;
-                        });
-                      },
-                    ),
-                  ),
-                  Text(
-                    'Self Pickup',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          letterSpacing: .5,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.only(left: 5.w, top: 10.w),
+            //   child: Row(
+            //     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: <Widget>[
+            //       Radio(
+            //         fillColor:
+            //             MaterialStateColor.resolveWith((states) => Button1),
+            //         value: 1,
+            //         groupValue: id,
+            //         onChanged: (val) {
+            //           setState(() {
+            //             radioButtonItem = 'Delivery To';
+            //             id = 1;
+            //           });
+            //         },
+            //       ),
+            // Text(
+            //   'Delivery To',
+            //   style: GoogleFonts.dmSans(
+            //     textStyle: TextStyle(
+            //         color: Black,
+            //         letterSpacing: .5,
+            //         fontSize: 16.sp,
+            //         fontWeight: FontWeight.w700),
+            //   ),
+            // ),
+            //       Padding(
+            //         padding: EdgeInsets.only(left: 25.w),
+            //         child: Radio(
+            //           fillColor:
+            //               MaterialStateColor.resolveWith((states) => Button1),
+            //           value: 2,
+            //           groupValue: id,
+            //           onChanged: (val) {
+            //             setState(() {
+            //               radioButtonItem = 'Self Pickup';
+            //               id = 2;
+            //             });
+            //           },
+            //         ),
+            //       ),
+            // Text(
+            //   'Self Pickup',
+            //   style: GoogleFonts.dmSans(
+            //     textStyle: TextStyle(
+            //         color: Black,
+            //         letterSpacing: .5,
+            //         fontSize: 16.sp,
+            //         fontWeight: FontWeight.w700),
+            //   ),
+            // ),
+            //     ],
+            //   ),
+            // ),
             //  Container(
             //           padding: EdgeInsets.only(right: 28.w),
             //           child: Row(
@@ -353,181 +355,245 @@ class _OrderSummeryState extends State<OrderSummery> {
             //             ],
             //           ),
             //         ),
-            Padding(
-              padding: EdgeInsets.only(left: 16.w, top: 20.w, right: 19.w),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: watch.customerAddress?.length ?? 0,
-                itemBuilder: (context, index) {
-                  final element = watch.customerAddress![index];
-                  return Container(
-                    // padding: EdgeInsets.only(bottom: 20.w),
-                    // height: 156.h,
-                    width: double.infinity,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        // side: BorderSide(color: Colors.white70, width: 1),
-                        borderRadius: BorderRadius.circular(20),
+            SizedBox(
+              height: 10.w,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 19.w, right: 77.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      SecondaryRadioButton(
+                          value: "deliveryTo",
+                          groupValue: watch.groupValue,
+                          // groupValue: watch.radioGroupValue,
+                          onChanged: (value) {
+                            read.onRadioButtonSelected(value);
+                          },
+                          leading: ""),
+                      SizedBox(
+                        width: 10.w,
                       ),
-                      child: Container(
-                        padding: EdgeInsets.only(
-                            bottom: 20.w, left: 20.w, right: 20.w, top: 20.w),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/images/person.svg',
-                                      width: 11.w,
-                                      height: 15.h,
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Text(
-                                      "${element.customerName}",
-                                      // 'Rachel Green',
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black,
-                                            letterSpacing: .5,
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                    // SizedBox(
-                                    //   width: 11.w,
-                                    // ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  // height: 21.h,/
-                                  // width: 71.w,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                      elevation: MaterialStateProperty.all(0),
-                                      // backgroundColor: ,
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Colors.white),
-                                      shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          side: BorderSide(
-                                            color: lighrgreen,
-                                            // width: 1,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: Text(
-                                      "${element.deliveryAddressType}",
-                                      // "Home",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: SplashText1,
-                                            // letterSpacing: .5,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-
-                                    //
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/phone.svg',
-                                  width: 14.w,
-                                  height: 15.h,
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Text(
-                                  '${element.mobileNo}',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        letterSpacing: .5,
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.w,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/location.svg',
-                                  color: SplashText1,
-                                  width: 17.w,
-                                  height: 17.h,
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    maxLines: 3,
-                                    "${element.address1} \n${element.address2} ",
-                                    // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
-                                    // textAlign: TextAlign.start,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          // height: 1.5,
-                                          color: black,
-                                          // letterSpacing: .05,
-                                          // overflow: TextOverflow.ellipsis,
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.w,
-                            ),
-                            element.deliveryAddressIsDefault == "yes"
-                                ? Row(
+                      Text(
+                        'Delivery To',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              letterSpacing: .5,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SecondaryRadioButton(
+                          value: "selfPickup",
+                          groupValue: watch.groupValue,
+                          onChanged: (value) {
+                            read.onRadioButtonSelected(value);
+                          },
+                          leading: ""),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        'Self Pickup',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              letterSpacing: .5,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: watch.groupValue == "selfPickup" ? false : true,
+              child: Padding(
+                padding: EdgeInsets.only(left: 16.w, top: 20.w, right: 19.w),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: watch.customerAddress?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    final element = watch.customerAddress![index];
+                    return Container(
+                      // padding: EdgeInsets.only(bottom: 20.w),
+                      // height: 156.h,
+                      width: double.infinity,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          // side: BorderSide(color: Colors.white70, width: 1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              bottom: 20.w, left: 20.w, right: 20.w, top: 20.w),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
                                     children: [
+                                      SvgPicture.asset(
+                                        'assets/images/person.svg',
+                                        width: 11.w,
+                                        height: 15.h,
+                                      ),
                                       SizedBox(
                                         width: 10.w,
                                       ),
                                       Text(
-                                        'Default',
+                                        "${element.customerName}",
+                                        // 'Rachel Green',
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: Black,
-                                              // letterSpacing: .5,
+                                              letterSpacing: .5,
                                               fontSize: 16.sp,
-                                              fontWeight: FontWeight.w400),
+                                              fontWeight: FontWeight.w700),
                                         ),
                                       ),
+                                      // SizedBox(
+                                      //   width: 11.w,
+                                      // ),
                                     ],
+                                  ),
+                                  SizedBox(
+                                    // height: 21.h,/
+                                    // width: 71.w,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        elevation: MaterialStateProperty.all(0),
+                                        // backgroundColor: ,
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.white),
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: BorderSide(
+                                              color: lighrgreen,
+                                              // width: 1,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        "${element.deliveryAddressType}",
+                                        // "Home",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: SplashText1,
+                                              // letterSpacing: .5,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+
+                                      //
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/images/phone.svg',
+                                    width: 14.w,
+                                    height: 15.h,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Text(
+                                    '${element.mobileNo}',
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Black,
+                                          letterSpacing: .5,
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.w,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/images/location.svg',
+                                    color: SplashText1,
+                                    width: 17.w,
+                                    height: 17.h,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      maxLines: 3,
+                                      "${element.address1} \n${element.address2} ",
+                                      // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
+                                      // textAlign: TextAlign.start,
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            // height: 1.5,
+                                            color: black,
+                                            // letterSpacing: .05,
+                                            // overflow: TextOverflow.ellipsis,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
                                   )
-                                : Container()
-                          ],
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.w,
+                              ),
+                              element.deliveryAddressIsDefault == "yes"
+                                  ? Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        Text(
+                                          'Default',
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black,
+                                                // letterSpacing: .5,
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Container()
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-                // child:
+                    );
+                  },
+                  // child:
+                ),
               ),
             ),
             Padding(
@@ -545,81 +611,84 @@ class _OrderSummeryState extends State<OrderSummery> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 19.w, top: 10.w, right: 19.w),
+            Container(
+              margin: EdgeInsets.only(
+                  left: 10.w, right: 17.w, top: 8.w, bottom: 10.w),
+              // width: 352.w,
+              // height: 65.h,
+
               child: Container(
-                width: 352.w,
-                height: 65.h,
+                padding: EdgeInsets.only(
+                    left: 20.w, right: 17.w, top: 8.w, bottom: 10.w),
                 decoration: BoxDecoration(
                     border: Border.all(color: grey3),
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Column(
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsets.only(left: 20.w, top: 8.w, right: 92.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Date:",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  // height: 1.5,
-                                  color: black,
-                                  letterSpacing: .05,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Date:",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                // height: 1.5,
+                                color: black,
+                                letterSpacing: .05,
+                                // overflow: TextOverflow.ellipsis,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
                           ),
-                          Text(
-                            "Delivery Slot",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  // height: 1.5,
-                                  color: black,
-                                  letterSpacing: .05,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
+                        ),
+                        Text(
+                          "Delivery Slot",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                // height: 1.5,
+                                color: black,
+                                letterSpacing: .05,
+                                // overflow: TextOverflow.ellipsis,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 20.w,
-                        top: 8.w,
-                      ),
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "25 Nov 2021",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  // height: 1.5,
-                                  color: black,
-                                  letterSpacing: .05,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "25 Nov 2021",
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    // height: 1.5,
+                                    color: black,
+                                    letterSpacing: .05,
+                                    // overflow: TextOverflow.ellipsis,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          SvgPicture.asset(
-                            'assets/images/calender.svg',
-                            width: 12.w,
-                            height: 14.h,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 20.w),
-                            child: Text(
+                            SizedBox(
+                              width: 5.h,
+                            ),
+                            SvgPicture.asset(
+                              'assets/images/calender.svg',
+                              width: 12.w,
+                              height: 14.h,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
                               "9:00 am - 12:00 pm",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
@@ -631,29 +700,26 @@ class _OrderSummeryState extends State<OrderSummery> {
                                     fontWeight: FontWeight.w500),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          SvgPicture.asset(
-                            'assets/images/pencil.svg',
-                            width: 12.w,
-                            height: 14.h,
-                          ),
-                        ],
-                      ),
-                    )
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            SvgPicture.asset(
+                              'assets/images/pencil.svg',
+                              width: 12.w,
+                              height: 14.h,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 19.w,
-                top: 30.w,
-              ),
+            Container(
+              padding: EdgeInsets.only(left: 19.w, top: 30.w, right: 19.w),
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Available Coupon Code",
@@ -667,20 +733,23 @@ class _OrderSummeryState extends State<OrderSummery> {
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  SizedBox(
-                    width: 45.w,
-                  ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 11.33.w,vertical: 7.w),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 11.33.w, vertical: 7.w),
                     decoration: BoxDecoration(
-                      color: lightsky,
+                        color: lightsky,
                         borderRadius: BorderRadius.circular(10.w),
-                        border: Border.all(color: SplashText)
-                    ),
+                        border: Border.all(color: SplashText)),
                     child: Center(
                       child: Row(
                         children: [
-                          Text("Get Code",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 16.sp,color: SplashText),),
+                          Text(
+                            "Get Code",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16.sp,
+                                color: SplashText),
+                          ),
                         ],
                       ),
                     ),
@@ -688,11 +757,8 @@ class _OrderSummeryState extends State<OrderSummery> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 18.w,
-                top: 10.w,
-              ),
+            Container(
+              padding: EdgeInsets.only(left: 19.w, right: 19.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -710,6 +776,7 @@ class _OrderSummeryState extends State<OrderSummery> {
                     height: 11.h,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
                         width: 200.w,
@@ -725,29 +792,30 @@ class _OrderSummeryState extends State<OrderSummery> {
                           ),
                         ),
                       ),
+                      // SizedBox(
+                      //   width: 30.w,
+                      // ),
                       SizedBox(
-                        width: 30.w,
-                      ),
-                      SizedBox(
-                        height: 34.h,
+                        // height: 34.h,
                         width: 91.w,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            elevation: MaterialStateProperty.all(0),
-                            // backgroundColor: ,
-                            backgroundColor:
-                                MaterialStateProperty.all(SplashText),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                // side: BorderSide(
-                                //   color: SplashText,
-                                //   // width: 1,
-                                // ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
+                        child: PrimaryButton(
+                          color: SplashText,
+                          // style: ButtonStyle(
+                          //   elevation: MaterialStateProperty.all(0),
+                          //   // backgroundColor: ,
+                          //   backgroundColor:
+                          //       MaterialStateProperty.all(SplashText),
+                          //   shape: MaterialStateProperty.all(
+                          //     RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(10),
+                          //       // side: BorderSide(
+                          //       //   color: SplashText,
+                          //       //   // width: 1,
+                          //       // ),
+                          //     ),
+                          //   ),
+                          // ),
+                          onTap: () {},
                           child: Text(
                             "Remove",
                             style: GoogleFonts.dmSans(
@@ -764,35 +832,32 @@ class _OrderSummeryState extends State<OrderSummery> {
                       )
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      // left: 18.w,
-                      top: 10.w,
-                    ),
-                    child: RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                          text: 'Congratulations!!',
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: SplashText,
-                                // letterSpacing: .5,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
+                  SizedBox(
+                    height: 10.w,
+                  ),
+                  RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                        text: 'Congratulations!!',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: SplashText,
+                              // letterSpacing: .5,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w700),
                         ),
-                        TextSpan(
-                          text: '10% Discount applied successfully.',
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: SplashText,
-                                // letterSpacing: .5,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
+                      ),
+                      TextSpan(
+                        text: '10% Discount applied successfully.',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: SplashText,
+                              // letterSpacing: .5,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400),
                         ),
-                      ]),
-                    ),
+                      ),
+                    ]),
                   ),
                 ],
               ),
@@ -1104,87 +1169,38 @@ class _OrderSummeryState extends State<OrderSummery> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 30.w),
+            SizedBox(
+              height: 30.h,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 19.w, top: 10.w, right: 19.w),
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 19.w),
-                    child: Text(
-                      "Product Details",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black1,
-                            // letterSpacing: .5,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 19.w, right: 19.w),
-                    child: Divider(
-                      // height: 100,
-                      color: grey2,
-                      thickness: 1,
-                      // indent: 10,
-                      // endIndent: 5,
-                    ),
-                  ),
-                  OrderProducts()
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 19.w, top: 10.w, right: 19.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
                   Text(
-                    "Sub Total",
+                    "Product Details",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: Black1,
                           // letterSpacing: .5,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  Text(
-                    "Rs ${watch.orderFinalTotals?.subTotal}",
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: grey5,
-                          // letterSpacing: .5,
-                          fontSize: 14.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 19.w, right: 19.w, bottom: 10.w, top: 10.w),
-              child: Divider(
-                // height: 100,
-                color: grey2,
-                thickness: 1,
-                // indent: 10,
-                // endIndent: 5,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 19.w, top: 10.w, right: 19.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: 'Discount!!',
+                  Divider(
+                    // height: 100,
+                    color: grey2,
+                    thickness: 1,
+                    indent: 0,
+                    endIndent: 0,
+                  ),
+                  OrderProducts(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Sub Total",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Black1,
@@ -1193,144 +1209,183 @@ class _OrderSummeryState extends State<OrderSummery> {
                               fontWeight: FontWeight.w400),
                         ),
                       ),
-                      TextSpan(
-                        text: '  (PROMO0001AFF) ',
+                      Text(
+                        "Rs ${watch.orderFinalTotals?.subTotal}",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
-                              color: SplashText,
+                              color: grey5,
+                              // letterSpacing: .5,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.w,
+                  ),
+                  Divider(
+                    // height: 100,
+                    color: grey2,
+                    thickness: 1,
+                    indent: 0,
+                    endIndent: 0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                            text: 'Discount!!',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black1,
+                                  // letterSpacing: .5,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          TextSpan(
+                            text: '  (PROMO0001AFF) ',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: SplashText,
+                                  // letterSpacing: .5,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ]),
+                      ),
+                      Text(
+                        "Rs  ${watch.orderFinalTotals?.couponDiscount}",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: grey5,
+                              // letterSpacing: .5,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.w,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Delivery Charges",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black1,
                               // letterSpacing: .5,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
-                    ]),
+                      Text(
+                        "Rs. ${watch.orderFinalTotals?.deliveryCharges}",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: grey5,
+                              // letterSpacing: .5,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    "Rs  ${watch.orderFinalTotals?.couponDiscount}",
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: grey5,
-                          // letterSpacing: .5,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w700),
+                  SizedBox(
+                    height: 10.w,
+                  ),
+                  Divider(
+                    // height: 100,
+                    color: grey2,
+                    thickness: 1,
+                    indent: 0,
+                    endIndent: 0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Total Amount",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black1,
+                              // letterSpacing: .5,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      Text(
+                        "Rs. ${watch.orderFinalTotals?.total}",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black1,
+                              // letterSpacing: .5,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.w,
+                  ),
+                  Divider(
+                    // height: 100,
+                    color: grey2,
+                    thickness: 1,
+                    indent: 0,
+                    endIndent: 0,
+                  ),
+                  SizedBox(
+                    height: 10.w,
+                  ),
+                  Container(
+                    child: Text(
+                      "You will save Rs. ${watch.orderFinalTotals?.productTotalDiscount}",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: SplashText,
+                            // letterSpacing: .5,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ),
                 ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 19.w, top: 10.w, right: 19.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Delivery Charges",
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black1,
-                          // letterSpacing: .5,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  Text(
-                    "Rs. ${watch.orderFinalTotals?.deliveryCharges}",
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: grey5,
-                          // letterSpacing: .5,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 19.w, right: 19.w, bottom: 10.w, top: 10.w),
-              child: Divider(
-                // height: 100,
-                color: grey2,
-                thickness: 1,
-                // indent: 10,
-                // endIndent: 5,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 19.w, top: 10.w, right: 19.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Total Amount",
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black1,
-                          // letterSpacing: .5,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                  Text(
-                    "Rs. ${watch.orderFinalTotals?.total}",
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black1,
-                          // letterSpacing: .5,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 19.w,
-                right: 19.w,
-                // bottom: 10.w,
-              ),
-              child: Divider(
-                // height: 100,
-                color: grey2,
-                thickness: 1,
-                // indent: 10,
-                // endIndent: 5,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 19.w, top: 10.w, bottom: 27.w),
-              child: Text(
-                "You will save Rs. ${watch.orderFinalTotals?.productTotalDiscount}",
-                style: GoogleFonts.dmSans(
-                  textStyle: TextStyle(
-                      color: SplashText,
-                      // letterSpacing: .5,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w700),
-                ),
               ),
             ),
             SizedBox(
+              height: 10.w,
+            ),
+            SizedBox(
               height: 51.h,
-              width: 390.w,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0),
-                  // backgroundColor: ,
-                  backgroundColor: MaterialStateProperty.all(SplashText),
-                  // shape: MaterialStateProperty.all(
-                  //   RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(10),
-                  //     // side: BorderSide(
-                  //     //   color: SplashText,
-                  //     //   // width: 1,
-                  //     // ),
-                  //   ),
-                  // ),
-                ),
-                onPressed: () {
+              // width: 390.w,
+
+              child: PrimaryButton(
+                width: ScreenUtil().screenWidth,
+                color: SplashText,
+                // style: ButtonStyle(
+                //   elevation: MaterialStateProperty.all(0),
+                //   // backgroundColor: ,
+                //   backgroundColor: MaterialStateProperty.all(SplashText),
+                //   // shape: MaterialStateProperty.all(
+                //   //   RoundedRectangleBorder(
+                //   //     borderRadius: BorderRadius.circular(10),
+                //   //     // side: BorderSide(
+                //   //     //   color: SplashText,
+                //   //     //   // width: 1,
+                //   //     // ),
+                //   //   ),
+                //   // ),
+                // ),
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
