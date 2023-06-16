@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_co
 
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class OnBoardingScreenView extends StatefulWidget {
@@ -141,7 +142,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                   color: Colors.black),
                             ),
                             ExpandablePageView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              // physics: NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               controller: watch.pageController,
                               onPageChanged: (index) {
@@ -155,8 +156,12 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                     SizedBox(
                                       height: 20.w,
                                     ),
-                                    Image.network(
-                                        "${element?.splashScreenImagePath}"),
+                                    AppNetworkImages(
+                                      imageUrl:
+                                        "${element?.splashScreenImagePath}",
+                                    height: 250.w,
+                                      width: 250.w,
+                                    ),
                                     SizedBox(
                                       height: 15.w,
                                     ),
@@ -188,9 +193,6 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                 );
                               },
                             ),
-                            SizedBox(
-                              height: 20.w,
-                            ),
                           ],
                         ),
                       ),
@@ -198,6 +200,9 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                     Align(
                       child: Column(
                         children: [
+                          SizedBox(
+                            height: 20.w,
+                          ),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: indicators(watch.onBoardingData?.length,

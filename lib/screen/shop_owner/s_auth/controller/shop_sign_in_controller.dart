@@ -64,6 +64,7 @@ class ShopSignInController extends ChangeNotifier {
     if (!isNewShopBtnEnabled) {
       Utils.showPrimarySnackbar(context, "The Number is Already Registered",
           type: SnackType.success);
+      return;
     }
     await _auth.verifyPhoneNumber(
         phoneNumber: "$countryCode${mobController.text}",
@@ -95,7 +96,7 @@ class ShopSignInController extends ChangeNotifier {
       );
 
   Future<void> checkMobNoExist(context) async {
-    if (mobController.text.length == 10) {
+    if (mobController.text.trim().length == 10) {
       await checkMobileNoExistRepo
           .checkMobileNoExist(_checkMobNoExistReqModel)
           .then((response) {
@@ -190,8 +191,14 @@ class ShopSignInController extends ChangeNotifier {
   }
 
   Future<void> onLoginClick(context) async {
-    if (mobController.text.trim().length < 10) {
+    if (mobController.text.trim().isEmpty) {
       Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+    if (mobController.text.trim().length < 10) {
+      Utils.showPrimarySnackbar(context, "Please Enter 10 digits",
           type: SnackType.error);
       notifyListeners();
       return;
@@ -203,8 +210,8 @@ class ShopSignInController extends ChangeNotifier {
       return;
     }
     if (!isLoginBtnEnabled) {
-      Utils.showPrimarySnackbar(context, "Please Sign Up",
-          type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Please Register as New Shop",
+          type: SnackType.info);
       return;
     }
     await _auth.verifyPhoneNumber(

@@ -38,7 +38,7 @@ class Utils{
         textColor = Colors.white;
         break;
       case SnackType.info:
-        color = Colors.grey;
+        color = Colors.black;
         break;
       case SnackType.debug:
         if (kReleaseMode) break;

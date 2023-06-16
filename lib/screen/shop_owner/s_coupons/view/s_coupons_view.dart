@@ -301,7 +301,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                   ),
                                                 ),
                                                 onPressed: () async {
-                                                  read.copyCode(
+                                                  read.copyCodeForCoupanList(
                                                       context,
                                                       element?.couponCode ??
                                                           "");

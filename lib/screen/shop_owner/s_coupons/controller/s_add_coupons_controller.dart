@@ -26,6 +26,7 @@ class SAddCouponsController extends ChangeNotifier {
   TextEditingController fromDateController = TextEditingController();
   TextEditingController toDateController = TextEditingController();
   bool isLoading = true;
+
   String groupValue = "full_order_amount";
   String categoryId = "";
   String productId = "";

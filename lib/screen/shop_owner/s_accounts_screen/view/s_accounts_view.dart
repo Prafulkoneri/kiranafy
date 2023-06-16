@@ -126,7 +126,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 SMainScreenView(
-                                                  index: 0,
+                                                  index: 4,
                                                   screenName: SEditProfileView(
                                                     fromDashBoard: false,
                                                   ),

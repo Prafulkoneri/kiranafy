@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.d
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -61,6 +62,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   List? pincodeList;
   bool showValuePincodeField = false;
   List<File> images = [];
+  bool isLoading=true;
 
   Future<void> initState(
     context,
@@ -72,6 +74,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   /////start edit Profile/////////////////
 
   Future<void> getShopEditProfileDetails(context) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     shopEditProfileRepo
@@ -127,6 +130,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
             networkImage4 = bannerImageList?[3].shopBannerImagePath ?? "";
           }
         }
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -143,6 +147,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
   }
 
   /////End edit Profile/////////////////
@@ -401,12 +410,24 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    if (phoneNumberController.text.length < 10) {
+    if (phoneNumberController.text.isEmpty) {
       Utils.showPrimarySnackbar(context, "Enter Mobile No",
           type: SnackType.error);
       return;
     }
+    if (phoneNumberController.text.length < 10) {
+      Utils.showPrimarySnackbar(context, "Enter 10 digits",
+          type: SnackType.error);
+      return;
+    }
     if (emailIdController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Email Id",
+          type: SnackType.error);
+      return;
+    }
+    bool emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+        .hasMatch(emailIdController.text);
+    if(!emailValid){
       Utils.showPrimarySnackbar(context, "Enter Email Id",
           type: SnackType.error);
       return;

@@ -57,6 +57,7 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   ///Delivery Type CheckBox
+
   void onCustomerPickupSelected() {
     isCustomerPickupSelected = !isCustomerPickupSelected;
     notifyListeners();
@@ -189,8 +190,14 @@ class SShopConfigurationController extends ChangeNotifier {
         if (data?.shopOwnerCustomerPickup == "active") {
           isCustomerPickupSelected = true;
         }
+        else{
+          isCustomerPickupSelected = false;
+        }
         if (data?.shopOwnerDeliveryToCustomer == "active") {
-          isCustomerPickupSelected = true;
+          isDeliveryCustomerSelected = true;
+        }
+        else{
+          isDeliveryCustomerSelected=false;
         }
         if (data?.shopOwnerDeliveryChargesFree == "active") {
           isDeliveryChargesSelected = false;
@@ -252,8 +259,28 @@ class SShopConfigurationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+    if(supportNumberController.text.isEmpty){
+      Utils.showPrimarySnackbar(context, "Please Enter Support Number",
+          type: SnackType.error);
+      return;
+    }
     if(supportNumberController.text.length<10){
-      Utils.showPrimarySnackbar(context, "Support number is incorrect",
+      Utils.showPrimarySnackbar(context, "Please Enter 10 digits",
+          type: SnackType.error);
+      return;
+    }
+    if(!isCustomerPickupSelected && !isDeliveryCustomerSelected){
+      Utils.showPrimarySnackbar(context, "Select Any Delivery Type",
+          type: SnackType.error);
+      return;
+    }
+    if(!ifFreePickupSelected && !isDeliveryChargesSelected){
+      Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
+          type: SnackType.error);
+      return;
+    }
+    if(!isNineToTwelve&&!isThreeToSix&&!isTwelveToThree&&!isSixToNine){
+      Utils.showPrimarySnackbar(context, "Select Any Slot",
           type: SnackType.error);
       return;
     }

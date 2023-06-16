@@ -1340,7 +1340,7 @@ class _ShopDashBoardState extends State<ShopDashBoard> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: 19.w, top: 15.w, right: 19.w, bottom: 80.w),
+                          left: 19.w, top: 15.w, right: 12.w, bottom: 80.w),
                       child: Stack(
                         alignment: Alignment.topCenter,
                         clipBehavior: Clip.none,

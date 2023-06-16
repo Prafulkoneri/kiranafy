@@ -47,7 +47,9 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
               topRight: const Radius.circular(25.0),
             ),
           ),
-          child: Column(
+          child: watch.isInfoLoading?Center(
+            child: CircularProgressIndicator(),
+          ):Column(
             children: [
               Row(
                 children: [
@@ -124,69 +126,6 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w400),
                             )),
-                        // Padding(
-                        //   padding: EdgeInsets.only(left: 50.0.w, bottom: 0.w),
-                        //   child: Row(
-                        //     children: [
-                        //       SizedBox(
-                        //         width: 113.w,
-                        //         height: 34.h,
-                        //         child: ElevatedButton(
-                        //           // style: ElevatedButton.styleFrom(
-                        //           //   //<-- SEE HERE
-                        //           //   side: BorderSide(
-                        //           //     width: 3.0,
-                        //           //   ),
-                        //           // ),
-                        //           style: ButtonStyle(
-                        //             elevation: MaterialStateProperty.all(0),
-                        //
-                        //             // backgroundColor: ,
-                        //             backgroundColor:
-                        //                 MaterialStateProperty.all(Colors.white),
-                        //             shape: MaterialStateProperty.all(
-                        //               RoundedRectangleBorder(
-                        //                 borderRadius: BorderRadius.circular(10.0),
-                        //                 side:
-                        //                     BorderSide(width: 1, color: SplashText),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           onPressed: () async {
-                        //             read.copyCode(context,
-                        //                 watch.couponViewData?.couponCode ?? "");
-                        //           },
-                        //           child: Row(
-                        //             mainAxisSize: MainAxisSize.min,
-                        //             children: [
-                        //               Text(
-                        //                 "${watch.couponViewData?.couponCode}",
-                        //                 // "OFF100",/
-                        //                 style: GoogleFonts.dmSans(
-                        //                   textStyle: TextStyle(
-                        //                       color: SplashText,
-                        //                       letterSpacing: .5,
-                        //                       fontSize: 12.sp,
-                        //                       fontWeight: FontWeight.w700),
-                        //                 ),
-                        //               ), // <-- Text
-                        //               SizedBox(
-                        //                 width: 19.w,
-                        //               ),
-                        //               SvgPicture.asset(
-                        //                 'assets/images/svg2.svg',
-                        //                 width: 17.w,
-                        //                 height: 17.h,
-                        //               ),
-                        //             ],
-                        //           ),
-                        //
-                        //           //
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // )
                       ],
                     ),
                     Padding(
@@ -320,14 +259,16 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                   children: [
                     Expanded(
                       child: Text(
-                        "Copy",
+                        "Coupon Code Copied",
                         style: TextStyle(color: Colors.white, fontSize: 14.sp),
                       ),
                     ),
                     Row(
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            read.onDismiss();
+                          },
                           child: Text("Dismiss"),
                         ),
                         SizedBox(

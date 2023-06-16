@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/model/s_kyc_verification_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/repositrory/s_kyc_verification_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
@@ -248,11 +249,10 @@ class SKycVerificationController extends ChangeNotifier {
     request.files.addAll(newList);
     await request.send().then((response) {
       if (response.statusCode == 200) {
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => SSubscriptionScreenView(
-                  loggedIn: false,
+                builder: (context) => KycCompletedView(
                 )));
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);

@@ -68,103 +68,108 @@ class _KycCompletedViewState extends State<KycCompletedView> {
         child: PrimaryAppBar(
             title: "KYC Verification", isBackButtonEnabled: false),
       ),
-      body: Stack(
-          alignment: Alignment.topCenter,
-          clipBehavior: Clip.none,
-          children: [
-            Positioned(
-              bottom: -25.w,
-              right: 0.w,
-              child: Image.asset(
-                "assets/images/splash2.png",
-                height: 235.w,
-                width: 361.w,
+      body: WillPopScope(
+        onWillPop: ()async{
+          return false;
+        },
+        child: Stack(
+            alignment: Alignment.topCenter,
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                bottom: -25.w,
+                right: 0.w,
+                child: Image.asset(
+                  "assets/images/splash2.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/kycone.png",
-                    height: 150.h,
-                    width: 150.w,
-                  ),
-                  SizedBox(
-                    height: 58.h,
-                  ),
-                  Text(
-                    "Congratulations!",
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: Color(0xff20BF55),
-                          // height: 1.5,
-
-                          // letterSpacing: .05,
-                          // overflow: TextOverflow.ellipsis,
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.w400),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/kycone.png",
+                      height: 150.h,
+                      width: 150.w,
                     ),
-                  ),
-                  SizedBox(
-                    height: 48.h,
-                  ),
-                  Text(
-                    "Your registration has been successfully\nCompleted",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: Color(0xff181725),
-                          // height: 1.5,
-
-                          // letterSpacing: .05,
-                          // overflow: TextOverflow.ellipsis,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400),
+                    SizedBox(
+                      height: 58.h,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    "Your KYC verification is under process.\nOur executive will contact you soon!",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: Color(0xff181725),
-                          // height: 1.5,
+                    Text(
+                      "Congratulations!",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Color(0xff20BF55),
+                            // height: 1.5,
 
-                          // letterSpacing: .05,
-                          // overflow: TextOverflow.ellipsis,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400),
+                            // letterSpacing: .05,
+                            // overflow: TextOverflow.ellipsis,
+                            fontSize: 32.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 29.h,
-                  ),
-                  PrimaryButton(
-                      height: 40.w,
-                      width: 164.w,
-                      fontSize: 14.sp,
-                      text: "Set Shop Configuration",
-                      color: SplashText,
-                      onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SShopConfigurationView(
-                                    initialShopConfigration: true,
-                                  )),
-                          (Route<dynamic> route) => false,
-                        );
-                        // read.onUploadClicked(context);
-                      }),
-                ],
-              ),
-            )
-          ]),
+                    SizedBox(
+                      height: 48.h,
+                    ),
+                    Text(
+                      "Your registration has been successfully\nCompleted",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Color(0xff181725),
+                            // height: 1.5,
+
+                            // letterSpacing: .05,
+                            // overflow: TextOverflow.ellipsis,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      "Your KYC verification is under process.\nOur executive will contact you soon!",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Color(0xff181725),
+                            // height: 1.5,
+
+                            // letterSpacing: .05,
+                            // overflow: TextOverflow.ellipsis,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 29.h,
+                    ),
+                    PrimaryButton(
+                        height: 40.w,
+                        width: 164.w,
+                        fontSize: 14.sp,
+                        text: "Set Shop Configuration",
+                        color: SplashText,
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SShopConfigurationView(
+                                      initialShopConfigration: true,
+                                    )),
+                            (Route<dynamic> route) => false,
+                          );
+                          // read.onUploadClicked(context);
+                        }),
+                  ],
+                ),
+              )
+            ]),
+      ),
     );
   }
 }

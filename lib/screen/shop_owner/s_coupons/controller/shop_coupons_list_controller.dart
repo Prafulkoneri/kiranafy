@@ -21,6 +21,7 @@ class SCouponsListController extends ChangeNotifier {
   String shopName = "";
   bool isLoading = true;
   bool isOfferCopied = false;
+  bool isInfoLoading = true;
   String couponId = "";
   DeleteCouponsRepo deleteCouponsRepo = DeleteCouponsRepo();
   ViewCouponsDetailsRepo viewCouponsDetailsRepo = ViewCouponsDetailsRepo();
@@ -39,6 +40,15 @@ class SCouponsListController extends ChangeNotifier {
 
   showLoader(value) {
     isLoading = value;
+    notifyListeners();
+  }
+  showInfoLoader(value) {
+    isInfoLoading = value;
+    notifyListeners();
+  }
+
+  void onDismiss(){
+    isOfferCopied=false;
     notifyListeners();
   }
 
@@ -87,6 +97,13 @@ class SCouponsListController extends ChangeNotifier {
     });
   }
 
+  copyCodeForCoupanList(context,offerMsg){
+    Clipboard.setData(ClipboardData(text: offerMsg)).then((_) {
+      Utils.showPrimarySnackbar(context, "Coupon Code Copied",
+          type: SnackType.success);
+    });
+  }
+
   //////////////////////////End//////////////////////////
 
 ////////Start Delete Coupons Repo//////////
@@ -129,6 +146,7 @@ class SCouponsListController extends ChangeNotifier {
 
   //////////////Coupons View Detail//////////////
   Future<void> viewCouponsDetail(context, couponsId) async {
+    showInfoLoader(true);
     couponId = couponsId.toString();
 
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -145,8 +163,7 @@ class SCouponsListController extends ChangeNotifier {
           couponViewData = result.data;
           shopName = result.shopName ?? "";
 
-          // Utils.showPrimarySnackbar(context, result.message,
-          //     type: SnackType.success);
+          showInfoLoader(false);
         } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
