@@ -777,20 +777,20 @@ class _CartDetailViewState extends State<CartDetailView> {
                                     ElevatedButton(
                                         child: Text("Submit"),
                                         onPressed: () {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //       builder: (context) =>
-                                          //           OrderSummery(
-                                          //             cartId: watch
-                                          //                 .orderCartId
-                                          //                 .toString(),
-                                          //             shopId: watch
-                                          //                 .shopDetailData
-                                          //                 ?.id
-                                          //                 .toString(),
-                                          //           )),
-                                          // );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    OrderSummery(
+                                                      cartId: watch
+                                                          .orderCartId
+                                                          .toString(),
+                                                      shopId: watch
+                                                          .shopDetailData
+                                                          ?.id
+                                                          .toString(),
+                                                    )),
+                                          );
                                           // your code
                                         })
                                   ],

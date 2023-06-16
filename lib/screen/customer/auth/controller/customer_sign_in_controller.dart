@@ -92,7 +92,7 @@ class CustomerSignInController extends ChangeNotifier {
 
   Future<void> onNextClick(context) async {
     if (mobileController.text.length < 10) {
-      Utils.showPrimarySnackbar(context, "Please Enter Phone Number",
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
           type: SnackType.error);
       notifyListeners();
       return;
