@@ -5,9 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
+import 'package:local_supper_market/screen/customer/cart/controller/cart_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
-
+import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 
 class MainScreenView extends StatefulWidget {
@@ -26,7 +27,8 @@ class _MainScreenViewState extends State<MainScreenView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ProfileController>().initState(context);
-      context.read<AllShopController>().initState(context,true);
+      context.read<AllShopController>().initState(context, true);
+      context.read<CartListController>().initState(context);
     });
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -40,6 +42,7 @@ class _MainScreenViewState extends State<MainScreenView> {
   Widget build(BuildContext context) {
     final read = context.read<MainScreenController>();
     final watch = context.watch<MainScreenController>();
+    final cartWatch = context.watch<CartListController>();
 
     return Scaffold(
       extendBody: true,
@@ -76,9 +79,9 @@ class _MainScreenViewState extends State<MainScreenView> {
                       },
                       child: watch.currentTab == 0
                           ? Container(
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                        color: Colors.transparent,
-                            child: Column(
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              color: Colors.transparent,
+                              child: Column(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -99,11 +102,11 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          )
+                            )
                           : Container(
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                        color: Colors.transparent,
-                            child: Column(
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              color: Colors.transparent,
+                              child: Column(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -124,7 +127,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          ),
+                            ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -132,9 +135,9 @@ class _MainScreenViewState extends State<MainScreenView> {
                       },
                       child: watch.currentTab == 1
                           ? Container(
-                        color: Colors.transparent,
-                            padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                            child: Column(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              child: Column(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -157,11 +160,11 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          )
+                            )
                           : Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                            child: Column(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              child: Column(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -181,48 +184,77 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          ),
+                            ),
                     ),
                     GestureDetector(
                       onTap: () {
                         read.onMyCartPressed();
                       },
                       child: watch.currentTab == 2
-                          ? Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                            child: Column(
-                                children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 21.w,
-                                    child: SvgPicture.asset(
-                                      "assets/icons/cart_selected.svg",
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5.w,
-                                  ),
-                                  Text(
-                                    "Cart",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 11.sp,
-                                        color: CouponsText),
-                                  )
-                                ],
+                          ? badges.Badge(
+                              badgeContent: Text(
+                                cartWatch.cartList?.length.toString() ?? "",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.w400),
                               ),
-                          )
+                              badgeStyle: badges.BadgeStyle(
+                                  badgeColor: Color(0xffFE7062)),
+                              position: badges.BadgePosition.topEnd(
+                                  top: -10, end: -8),
+                              showBadge: true,
+                              child: Container(
+                                color: Colors.transparent,
+                                padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 20.w,
+                                      width: 21.w,
+                                      child: SvgPicture.asset(
+                                        "assets/icons/cart_selected.svg",
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    Text(
+                                      "Cart",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 11.sp,
+                                          color: CouponsText),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
                           : Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                            child: Column(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              child: Column(
                                 children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 21.w,
-                                    child: SvgPicture.asset(
-                                      "assets/icons/cart.svg",
+                                  badges.Badge(
+                                    badgeContent: Text(
+                                      cartWatch.cartList?.length.toString() ??
+                                          "",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    badgeStyle: badges.BadgeStyle(
+                                        badgeColor: Color(0xffFE7062)),
+                                    position: badges.BadgePosition.topEnd(
+                                        top: -10, end: -8),
+                                    showBadge: true,
+                                    child: Container(
+                                      height: 20.w,
+                                      width: 21.w,
+                                      child: SvgPicture.asset(
+                                        "assets/icons/cart.svg",
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
@@ -237,7 +269,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          ),
+                            ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -245,9 +277,9 @@ class _MainScreenViewState extends State<MainScreenView> {
                       },
                       child: watch.currentTab == 3
                           ? Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                            child: Column(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              child: Column(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -269,11 +301,11 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          )
+                            )
                           : Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                            child: Column(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              child: Column(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -292,7 +324,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          ),
+                            ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -300,9 +332,9 @@ class _MainScreenViewState extends State<MainScreenView> {
                       },
                       child: watch.currentTab == 4
                           ? Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                            child: Column(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              child: Column(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -324,11 +356,11 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          )
+                            )
                           : Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.only(left: 2.w,right: 2.w),
-                            child: Column(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                              child: Column(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -347,7 +379,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   )
                                 ],
                               ),
-                          ),
+                            ),
                     ),
                   ],
                 ),

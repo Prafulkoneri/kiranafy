@@ -155,7 +155,21 @@ class _CartDetailViewState extends State<CartDetailView> {
                                             ),
                                             Row(
                                               children: [
-                                                GestureDetector(
+                                                // GestureDetector(
+                                                //   onTap: () {
+                                                // read.launchPhone(
+                                                //     watch.shopDetailData
+                                                //             ?.shopOwnerSupportNumber ??
+                                                //         "",
+                                                //     context);
+                                                //   },
+                                                //   child: SvgPicture.asset(
+                                                //     'assets/images/call.svg',
+                                                //     // width: 15.w,
+                                                //     // height: 19.h,
+                                                //   ),
+                                                // ),
+                                                InkWell(
                                                   onTap: () {
                                                     read.launchPhone(
                                                         watch.shopDetailData
@@ -163,11 +177,22 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                             "",
                                                         context);
                                                   },
-                                                  child: SvgPicture.asset(
-                                                    'assets/images/call.svg',
-                                                    width: 26.w,
-                                                    height: 14.h,
-                                                  ),
+                                                  child: Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 13.w,
+                                                          right: 13.w,
+                                                          top: 14.w,
+                                                          bottom: 14.w),
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color:
+                                                            Color(0xff23AA49),
+                                                      ),
+                                                      child: SvgPicture.asset(
+                                                        "assets/icons/new_call.svg",
+                                                        width: 26.w,
+                                                        height: 14.h,
+                                                      )),
                                                 ),
                                                 SizedBox(
                                                   width: 13.w,

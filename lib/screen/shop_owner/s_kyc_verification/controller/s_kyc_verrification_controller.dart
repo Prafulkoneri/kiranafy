@@ -18,6 +18,7 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
+
 class SKycVerificationController extends ChangeNotifier {
   SKycVerificationRepo sKycVerificationRepo = SKycVerificationRepo();
   TextEditingController adharCardController = TextEditingController();
@@ -183,7 +184,7 @@ class SKycVerificationController extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    if (adharCardController.text.length < 11) {
+    if (adharCardController.text.length < 12) {
       Utils.showPrimarySnackbar(context, "Please Enter Adhar Card Number",
           type: SnackType.error);
       notifyListeners();
@@ -197,8 +198,8 @@ class SKycVerificationController extends ChangeNotifier {
       return;
     }
     uploadImage(context);
-
   }
+
   Future uploadImage(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
@@ -214,10 +215,14 @@ class SKycVerificationController extends ChangeNotifier {
     File imageFile2 = fileImage2;
     File imageFile3 = fileImage3;
     File imageFile4 = fileImage4;
-    var stream1 = new http.ByteStream(DelegatingStream.typed(imageFile1.openRead()));
-   var stream2= new http.ByteStream(DelegatingStream.typed(imageFile2.openRead()));
-   var stream3= new http.ByteStream(DelegatingStream.typed(imageFile3.openRead()));
-   var stream4= new http.ByteStream(DelegatingStream.typed(imageFile4.openRead()));
+    var stream1 =
+        new http.ByteStream(DelegatingStream.typed(imageFile1.openRead()));
+    var stream2 =
+        new http.ByteStream(DelegatingStream.typed(imageFile2.openRead()));
+    var stream3 =
+        new http.ByteStream(DelegatingStream.typed(imageFile3.openRead()));
+    var stream4 =
+        new http.ByteStream(DelegatingStream.typed(imageFile4.openRead()));
     var length1 = await imageFile1.length();
     var length2 = await imageFile2.length();
     var multipartFile1 = new http.MultipartFile(
@@ -230,7 +235,7 @@ class SKycVerificationController extends ChangeNotifier {
     newList.add(multipartFile2);
     //
     //
-    if(imageFile3.path!=""){
+    if (imageFile3.path != "") {
       var length3 = await imageFile3.length();
       var multipartFile3 = new http.MultipartFile(
           "shop_owner_shop_act_image_path", stream3, length3,
@@ -238,7 +243,7 @@ class SKycVerificationController extends ChangeNotifier {
       newList.add(multipartFile3);
     }
     //
-    if(imageFile4.path!=""){
+    if (imageFile4.path != "") {
       var length4 = await imageFile4.length();
       var multipartFile4 = new http.MultipartFile(
           "shop_owner_gst_image_path", stream4, length4,
@@ -249,14 +254,10 @@ class SKycVerificationController extends ChangeNotifier {
     request.files.addAll(newList);
     await request.send().then((response) {
       if (response.statusCode == 200) {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => KycCompletedView(
-                )));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => KycCompletedView()));
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
-
       } else {
         Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);

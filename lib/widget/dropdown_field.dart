@@ -60,7 +60,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
           isExpanded: true,
           hint: Text(
             widget.hint ?? "",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 14.sp),
           ),
           items: widget.items,
           validator: (value) {
@@ -88,6 +88,8 @@ class _CDropDownFieldState extends State<CDropDownField> {
             iconSize: 20,
           ),
           dropdownStyleData: DropdownStyleData(
+            maxHeight: 210.w,
+
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
             ),

@@ -372,10 +372,10 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                           //             index: 1,
                                           //             screenName: ProductScreenView(
                                           //                 categoryId:
-                                          //                     element?.categoryId.toString(),
+                                          //                     element?..toString(),
                                           //                 // categoryId: watch.categoryId,
                                           //                 productId: element?.id.toString(),
-                                          //                 shopId: widget.shopId,
+                                          //                 shopId: element?.shopId.toString()
                                           //                 productType: element?.productType
                                           //                 ),
                                           //           )),
@@ -389,17 +389,21 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                   BorderRadius.circular(15.w)),
                                           padding: EdgeInsets.only(
                                               left: 17.h,
+                                              // right: 15.w,
                                               top: 13.w,
                                               bottom: 14.w),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
+                                            // mainAxisAlignment:
+                                            //     MainAxisAlignment.start,
                                             children: [
                                               Expanded(
                                                   child: Center(
                                                 child: AppNetworkImages(
-                                                 imageUrl: "${element?.productImagePath}",
-                                                  fit: BoxFit.cover,
+                                                  imageUrl:
+                                                      "${element?.productImagePath}",
+                                                  fit: BoxFit.contain,
                                                 ),
                                               )),
                                               SizedBox(
@@ -421,7 +425,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                               ),
                                               Text(
                                                 // "100g",
-                                                "${element?.weight}",
+                                                "${element?.weight} ${element?.unit}",
                                                 style: TextStyle(
                                                     color: Black1,
                                                     fontSize: 12.sp,
@@ -507,7 +511,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                             Expanded(
                                                 child: Center(
                                               child: AppNetworkImages(
-                                                imageUrl:"${element?.productImagePath}",
+                                                imageUrl:
+                                                    "${element?.productImagePath}",
                                                 fit: BoxFit.cover,
                                               ),
                                             )),

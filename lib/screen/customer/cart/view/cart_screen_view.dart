@@ -91,7 +91,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Looks like you have not anything to your",
+                                "Looks like you have not added anything to your",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black1,
@@ -207,160 +207,150 @@ class _CartScreenViewState extends State<CartScreenView> {
                             itemCount: watch.cartList?.length ?? 0,
                             itemBuilder: (BuildContext, index) {
                               final element = watch.cartList?[index];
-                              return Padding(
+                              return Container(
                                 padding: EdgeInsets.only(
                                     left: 20.w, top: 20.w, right: 16.w),
-                                child: Container(
-                                  // padding: ,
-                                  // height: 165.h,
-                                  // width: 354.w,
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
+                                // padding: ,
+                                // height: 165.h,
+                                // width: 354.w,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        left: 15.w,
+                                        right: 11.w,
+                                        top: 13.w,
+                                        bottom: 14.w),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 15.w, top: 13.w),
-                                          child: Text(
-                                            "${element?.shopName}",
-                                            // "New Balaji Trading Company",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Black1,
-                                                  letterSpacing: .5,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
+                                        Text(
+                                          "${element?.shopName}",
+                                          // "New Balaji Trading Company",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black1,
+                                                letterSpacing: .5,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 12.w,
-                                              top: 13.w,
-                                              bottom: 17.w),
-                                          child: Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/images/location2.svg',
-                                                width: 23.w,
-                                                height: 28.h,
+                                        SizedBox(
+                                          height: 13.w,
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/images/location2.svg',
+                                              // width: 23.w,
+                                              // height: 28.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.52.w,
+                                            ),
+                                            Text(
+                                              "${element?.shopAddress}\n${element?.cityName} - ${element?.shopPincode}",
+                                              // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Black,
+                                                    letterSpacing: .5,
+                                                    fontSize: 13.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: 8.w,
-                                                ),
-                                                child: Text(
-                                                  "${element?.shopAddress}\n ${element?.cityName} ${element?.shopPincode}",
-                                                  // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: TextStyle(
-                                                        color: Black,
-                                                        letterSpacing: .5,
-                                                        fontSize: 13.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 17.w,
                                         ),
                                         Divider(
                                           thickness: 1,
                                           // indent: 10,
                                           // endIndent: 10,
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 14.w, top: 6.w),
-                                          child: Text(
-                                            "${element?.itemCount} Items",
-                                            // "4 Items",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Black,
-                                                  letterSpacing: .5,
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
+                                        SizedBox(
+                                          height: 6.w,
+                                        ),
+                                        Text(
+                                          "${element?.itemCount} Items",
+                                          // "4 Items",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black,
+                                                // letterSpacing: .5,
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w400),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 14.w, right: 11.w),
-                                          child: Row(
-                                            // crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "INR ${element?.totalAmount}",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      // height: 1.5,
-                                                      color: black,
-                                                      letterSpacing: .05,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontSize: 16.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700),
-                                                ),
+                                        Row(
+                                          // crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "INR ${element?.totalAmount}",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    // height: 1.5,
+                                                    color: black,
+                                                    // letterSpacing: .05,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontSize: 16.sp,
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            CartDetailView(
-                                                              isRefresh: true,
-                                                              cartId: element
-                                                                  ?.id
-                                                                  .toString(),
-                                                              shopId: element
-                                                                  ?.shopId
-                                                                  .toString(),
-                                                            )),
-                                                  );
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 11.33.w,
-                                                      vertical: 7.w),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.w),
-                                                      border: Border.all(
-                                                          color: SplashText)),
-                                                  child: Center(
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Place Order",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontSize: 16.sp,
-                                                              color:
-                                                                  SplashText),
-                                                        ),
-                                                      ],
-                                                    ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          CartDetailView(
+                                                            isRefresh: true,
+                                                            cartId: element?.id
+                                                                .toString(),
+                                                            shopId: element
+                                                                ?.shopId
+                                                                .toString(),
+                                                          )),
+                                                );
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 11.33.w,
+                                                    vertical: 7.w),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.w),
+                                                    border: Border.all(
+                                                        color: SplashText)),
+                                                child: Center(
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        "Place Order",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize: 16.sp,
+                                                            color: SplashText),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          height: 10.w,
-                                        )
                                       ],
                                     ),
                                   ),
