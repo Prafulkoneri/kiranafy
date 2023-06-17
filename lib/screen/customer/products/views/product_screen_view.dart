@@ -61,14 +61,13 @@ class _ProductScreenViewState extends State<ProductScreenView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ProductViewController>().initState(
-            context,
-            widget.shopId,
-            widget.categoryId,
-            widget.productId,
-            widget.selectedUnitId,
-            widget.productType,
-        widget.routeName
-          );
+          context,
+          widget.shopId,
+          widget.categoryId,
+          widget.productId,
+          widget.selectedUnitId,
+          widget.productType,
+          widget.routeName);
     });
     _pageController = PageController(viewportFraction: 1, initialPage: 1);
   }
@@ -171,7 +170,21 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       )),
                                       Row(
                                         children: [
-                                          GestureDetector(
+                                          // GestureDetector(
+                                          //   onTap: () {
+                                          //     read.launchPhone(
+                                          //         watch.shopDetails
+                                          //                 ?.shopOwnerSupportNumber ??
+                                          //             "",
+                                          //         context);
+                                          //   },
+                                          //   child: SvgPicture.asset(
+                                          //     'assets/images/call.svg',
+                                          //     // width: 15.w,
+                                          //     // height: 19.h,
+                                          //   ),
+                                          // ),
+                                          InkWell(
                                             onTap: () {
                                               read.launchPhone(
                                                   watch.shopDetails
@@ -179,11 +192,21 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                       "",
                                                   context);
                                             },
-                                            child: SvgPicture.asset(
-                                              'assets/images/call.svg',
-                                              // width: 15.w,
-                                              // height: 19.h,
-                                            ),
+                                            child: Container(
+                                                padding: EdgeInsets.only(
+                                                    left: 13.w,
+                                                    right: 13.w,
+                                                    top: 14.w,
+                                                    bottom: 14.w),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Color(0xff23AA49),
+                                                ),
+                                                child: SvgPicture.asset(
+                                                  "assets/icons/new_call.svg",
+                                                  width: 26.w,
+                                                  height: 14.h,
+                                                )),
                                           ),
                                           SizedBox(
                                             width: 13.w,
@@ -565,29 +588,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                           ),
                                           Row(
                                             children: [
-                                              // Container(
-                                              //   decoration: BoxDecoration(
-                                              //       color: Color(0xffE0E0E0),
-                                              //       borderRadius:
-                                              //           BorderRadius.circular(5.w)),
-                                              //   height: 30.w,
-                                              //   width: 30.w,
-                                              //   child: Padding(
-                                              //     padding:
-                                              //         EdgeInsets.only(bottom: 20.w),
-                                              //     child: Icon(Icons.minimize_sharp),
-                                              //   ),
-                                              // ),
                                               SizedBox(
                                                 width: 12.w,
                                               ),
-                                              // Text(
-                                              //   "1",
-                                              //   style: TextStyle(
-                                              //       fontSize: 16.sp,
-                                              //       fontWeight: FontWeight.w500,
-                                              //       color: Colors.black),
-                                              // ),
                                               SizedBox(
                                                 width: 12.w,
                                               ),

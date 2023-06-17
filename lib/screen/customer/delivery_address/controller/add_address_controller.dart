@@ -50,10 +50,10 @@ class AddAddressController extends ChangeNotifier {
   String deliveryAddressId = "";
   String? countryCode = "+91";
   AddDeliverAddressRepo newAddDeliveryAddressRepo = AddDeliverAddressRepo();
-  UpdateDeliveryAddressRepo updateDeliveryAddressRepo=UpdateDeliveryAddressRepo();
-  bool isEditingAddress=false;
-  Future<void> initState(context,editAddress,addressId) async {
-
+  UpdateDeliveryAddressRepo updateDeliveryAddressRepo =
+      UpdateDeliveryAddressRepo();
+  bool isEditingAddress = false;
+  Future<void> initState(context, editAddress, addressId) async {
     groupValue = "home";
     countryId = 0;
     stateId = 0;
@@ -69,19 +69,14 @@ class AddAddressController extends ChangeNotifier {
     areaController.clear();
     landMarkController.clear();
 
-    if(editAddress){
-      isEditingAddress=true;
-      await getAddressDetails(context,addressId);
-    }
-    else{
-      isEditingAddress=false;
+    if (editAddress) {
+      isEditingAddress = true;
+      await getAddressDetails(context, addressId);
+    } else {
+      isEditingAddress = false;
       await getCountryList(context);
     }
-
   }
-
-
-
 
   showLoader(value) {
     isLoading = value;
@@ -294,7 +289,11 @@ class AddAddressController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-
+    if (mobNoController.text.length < 10) {
+      Utils.showPrimarySnackbar(context, "Please Enter 10 digits",
+          type: SnackType.error);
+      return;
+    }
     if (countryId == 0) {
       Utils.showPrimarySnackbar(context, "Select Country",
           type: SnackType.error);
@@ -341,20 +340,17 @@ class AddAddressController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-   if(isEditingAddress){
-     updateEditAddress(context);
-   }
-else{
-     addNewAddress(context);
-   }
+    if (isEditingAddress) {
+      updateEditAddress(context);
+    } else {
+      addNewAddress(context);
+    }
   }
-
-
 
   EditDeliveryAddressRequestModel get editDeliveryAddressRequestModel =>
       EditDeliveryAddressRequestModel(deliveryAddressId: deliveryAddressId);
 
-  Future<void> getAddressDetails(context,addressId) async {
+  Future<void> getAddressDetails(context, addressId) async {
     deliveryAddressId = addressId;
     showLoader(true);
     await getCountryList(context);
@@ -362,7 +358,7 @@ else{
     print(pref.getString("successToken"));
     editAddressRepo
         .getAddressDetails(
-        editDeliveryAddressRequestModel, pref.getString("successToken"))
+            editDeliveryAddressRequestModel, pref.getString("successToken"))
         .then((response) {
       print("jjjjjjjjjj");
       log(response.body);
@@ -377,12 +373,9 @@ else{
         groupValue = data?.deliveryAddressType ?? "home";
         nameController.text = data?.customerName ?? "";
         mobNoController.text = data?.deliveryMobileNumber.toString() ?? "";
-        apartmentNameController.text =
-            data?.deliveryAppartmentName ??
-                "";
+        apartmentNameController.text = data?.deliveryAppartmentName ?? "";
         houseNoController.text = data?.deliveryHouseNo ?? "";
-        streetController.text =
-            data?.deliveryStreet ?? "";
+        streetController.text = data?.deliveryStreet ?? "";
         areaController.text = data?.deliveryArea ?? "";
         landMarkController.text = data?.deliveryLandmark ?? "";
         countryId = data?.deliveryCountryId ?? 0;
@@ -438,13 +431,13 @@ else{
           context,
           MaterialPageRoute(
               builder: (context) => MainScreenView(
-                  index: 4, screenName: MyDeliveryAddressView(isRefresh:true))),
+                  index: 4,
+                  screenName: MyDeliveryAddressView(isRefresh: true))),
           (Route<dynamic> route) => false,
         );
         // pref.setString("pincode", pincode);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
-
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -462,24 +455,23 @@ else{
     );
   }
 
-
   UpdateDeliveryAddressReqModel get updateDeliveryAddressReqModel =>
       UpdateDeliveryAddressReqModel(
-          customerName: nameController.text,
-          deliveryCountryCode: countryCode,
-          deliveryMobileNumber: mobNoController.text,
-          deliveryAppartmentName: apartmentNameController.text,
-          deliveryHouseNo: houseNoController.text,
-          deliveryStreet: streetController.text,
-          deliveryArea: areaController.text,
-          deliveryLandmark: landMarkController.text,
-          deliveryCountryId: countryId.toString(),
-          deliveryCityId: cityId.toString(),
-          deliveryStateId: stateId.toString(),
-          deliveryAreaId: areaId.toString(),
-          deliveryAddressType: groupValue.toString(),
-          deliveryPincode: pincode,
-      deliveryAddressId: deliveryAddressId,
+        customerName: nameController.text,
+        deliveryCountryCode: countryCode,
+        deliveryMobileNumber: mobNoController.text,
+        deliveryAppartmentName: apartmentNameController.text,
+        deliveryHouseNo: houseNoController.text,
+        deliveryStreet: streetController.text,
+        deliveryArea: areaController.text,
+        deliveryLandmark: landMarkController.text,
+        deliveryCountryId: countryId.toString(),
+        deliveryCityId: cityId.toString(),
+        deliveryStateId: stateId.toString(),
+        deliveryAreaId: areaId.toString(),
+        deliveryAddressType: groupValue.toString(),
+        deliveryPincode: pincode,
+        deliveryAddressId: deliveryAddressId,
       );
 
   Future<void> updateEditAddress(context) async {
@@ -487,22 +479,22 @@ else{
 
     updateDeliveryAddressRepo
         .updateDeliveryAddress(
-        updateDeliveryAddressReqModel, pref.getString("successToken"))
+            updateDeliveryAddressReqModel, pref.getString("successToken"))
         .then((response) {
       final result =
-      UpdateDeliveryAddressResModel.fromJson(jsonDecode(response.body));
+          UpdateDeliveryAddressResModel.fromJson(jsonDecode(response.body));
       print(response.body);
       if (response.statusCode == 200) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (context) => MainScreenView(
-                  index: 4, screenName: MyDeliveryAddressView(isRefresh:true))),
-              (Route<dynamic> route) => false,
+                  index: 4,
+                  screenName: MyDeliveryAddressView(isRefresh: true))),
+          (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
-
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -510,7 +502,7 @@ else{
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -519,5 +511,4 @@ else{
       },
     );
   }
-
 }

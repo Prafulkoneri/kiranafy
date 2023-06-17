@@ -308,7 +308,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             ),
                             Row(
                               children: [
-                                GestureDetector(
+                                InkWell(
                                   onTap: () {
                                     read.launchPhone(
                                         watch.shopDetails
@@ -316,11 +316,21 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             "",
                                         context);
                                   },
-                                  child: SvgPicture.asset(
-                                    'assets/images/call.svg',
-                                    // width: 15.w,
-                                    // height: 19.h,
-                                  ),
+                                  child: Container(
+                                      padding: EdgeInsets.only(
+                                          left: 13.w,
+                                          right: 13.w,
+                                          top: 14.w,
+                                          bottom: 14.w),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0xff23AA49),
+                                      ),
+                                      child: SvgPicture.asset(
+                                        "assets/icons/new_call.svg",
+                                        // width: 26.w,
+                                        // height: 14.h,
+                                      )),
                                 ),
                                 SizedBox(
                                   width: 13.w,
@@ -361,6 +371,91 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: 10.w,
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(
+                              left: 19.w, top: 10.w, right: 19.w),
+                          padding: EdgeInsets.only(
+                              left: 10.w, right: 20.w, top: 6.w, bottom: 6.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border:
+                                Border.all(color: Color(0xffDDDDDD), width: 1),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              watch.shopDetails?.shopOpenStatus == "close"
+                                  ? Row(children: [
+                                      SvgPicture.asset(
+                                        "assets/icons/close_s.svg",
+                                        width: 26.w,
+                                        height: 14.h,
+                                      ),
+                                      SizedBox(
+                                        width: 12.w,
+                                      ),
+                                      Text(
+                                        "Shop Closed",
+                                        style: GoogleFonts.roboto(
+                                          textStyle: TextStyle(
+                                              color: Color(0xffFE5656),
+                                              // letterSpacing: .3,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    ])
+                                  : Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          "assets/icons/ok.svg",
+                                          color: Color(0xff02BC7D),
+                                          width: 26.w,
+                                          height: 14.h,
+                                        ),
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        Text(
+                                          "Shop Open Now",
+                                          style: GoogleFonts.roboto(
+                                            textStyle: TextStyle(
+                                                color: Color(0xff02BC7D),
+                                                // letterSpacing: .3,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                              //
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    "assets/icons/clock.svg",
+                                    // width: 26.w,
+                                    // height: 14.h,
+                                  ),
+                                  SizedBox(
+                                    width: 9.w,
+                                  ),
+                                  Text(
+                                    "${watch.shopDetails?.shopOwnerShopOpeningTime} ${watch.shopDetails?.shopOwnerShopCloseTime}",
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                          color: Color(0xff3A3A3A),
+                                          // letterSpacing: .3,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          )),
                       watch.offerProduct!.isNotEmpty
                           ? Column(
                               children: [

@@ -167,7 +167,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                                                 height: 5.w,
                                               ),
                                               Text(
-                                                "${element?.areaName}${element?.cityName}",
+                                                "${element?.areaName}, ${element?.cityName}",
                                                 style: GoogleFonts.dmSans(
                                                   textStyle: TextStyle(
                                                       color: Black,
