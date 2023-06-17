@@ -193,7 +193,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                               if (pickedDate != null) {
                                 String date = DateFormat('dd-MM-yyy')
                                     .format(pickedDate ?? DateTime.now());
-                                read.onFromDateSelected(date);
+                                read.onToDateSelected(date);
                               }
                             },
                             controller: watch.toDateController,
@@ -223,7 +223,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                   },
                                   context: context,
                                   initialDate: DateTime.now(),
-                                  firstDate: DateTime(1901, 1),
+                                  firstDate: DateTime.now(),
                                   lastDate: DateTime(2100),
                                 );
                                 if (pickedDate != null) {

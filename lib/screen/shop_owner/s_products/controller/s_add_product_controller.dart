@@ -73,6 +73,7 @@ class SAddProductsController extends ChangeNotifier {
       ShopAddProductsListRequestModel(category_id: categoryId);
 
   Future<void> shopAddProducts(context, id) async {
+    isSelectAll = false;
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     categoryId = id.toString();

@@ -9,7 +9,7 @@ import 'package:local_supper_market/screen/customer/cart/controller/cart_detail_
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/order_summery/order_summery.dart';
+import 'package:local_supper_market/screen/customer/order_summery/order_summary_view.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -794,7 +794,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  OrderSummery(
+                                                                  OrderSummaryView(
                                                                     cartId: watch
                                                                         .orderCartId
                                                                         .toString(),

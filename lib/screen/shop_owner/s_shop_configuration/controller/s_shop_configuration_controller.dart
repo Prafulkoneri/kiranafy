@@ -373,10 +373,8 @@ class SShopConfigurationController extends ChangeNotifier {
         thirdDeliveryController.text;
     request.fields['shop_owner_amount_4_delivery_charges'] =
         fourthDeliveryController.text;
-    request.fields['shop_owner_customer_pickup'] =
-        isCustomerPickupSelected ? "active" : "inactive";
-    request.fields['shop_owner_delivery_to_customer'] =
-        isCustomerPickupSelected ? "active" : "inactive";
+    request.fields['shop_owner_customer_pickup'] = isCustomerPickupSelected ? "active" : "inactive";
+    request.fields['shop_owner_delivery_to_customer'] =  isDeliveryCustomerSelected ? "active" : "inactive";
     request.fields['shop_owner_delivery_charges_free'] =
         isDeliveryChargesSelected ? "inactive" : "active";
     request.fields['shop_owner_slot_9_to_12'] =
@@ -400,6 +398,7 @@ class SShopConfigurationController extends ChangeNotifier {
         filename: basename(imageFile.path));
     newList.add(multipartFile);
     request.files.addAll(newList);
+    print(request.fields);
     await request.send().then((response) {
       if (response.statusCode == 200) {
         print("sucesss");

@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/order_summery/controller/order_summery_controller.dart';
+import 'package:local_supper_market/screen/customer/order_summery/controller/order_summary_controller.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +21,8 @@ class OrderProducts extends StatefulWidget {
 class _OrderProductsState extends State<OrderProducts> {
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<OrderSummeryController>();
-    final read = context.read<OrderSummeryController>();
+    final watch = context.watch<OrderSummaryController>();
+    final read = context.read<OrderSummaryController>();
     final readMain = context.read<MainScreenController>();
     return SizedBox(
       // height: 140.h,

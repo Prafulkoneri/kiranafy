@@ -28,8 +28,15 @@ class SSelectedProductsController extends ChangeNotifier {
   String productId = "";
   List<CustomProduct>? customProduct;
 
-  Future<void> initState(context, id) async {
-    await selectedProducts(context, id);
+  Future<void> initState(context, id,refresh) async {
+    if(refresh) {
+      await selectedProducts(context, id);
+    }
+
+    notifyListeners();
+  }
+  showLoader(value){
+    isLoading=value;
     notifyListeners();
   }
 
@@ -42,7 +49,7 @@ class SSelectedProductsController extends ChangeNotifier {
 
   Future<void> selectedProducts(context, id) async {
     categoryId = id;
-    isLoading = true;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopSelecteProductRepo
         .selectedProducts(
@@ -61,7 +68,7 @@ class SSelectedProductsController extends ChangeNotifier {
 
         // Utils.showPrimarySnackbar(context, result.message,
         //     type: SnackType.success);
-        isLoading = false;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

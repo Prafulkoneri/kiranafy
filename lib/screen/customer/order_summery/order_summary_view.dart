@@ -10,7 +10,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/order_payment.dart';
-import 'package:local_supper_market/screen/customer/order_summery/controller/order_summery_controller.dart';
+import 'package:local_supper_market/screen/customer/order_summery/controller/order_summary_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summery/cravings_products.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -20,18 +20,18 @@ import 'package:provider/provider.dart';
 
 import 'order_products.dart';
 
-class OrderSummery extends StatefulWidget {
+class OrderSummaryView extends StatefulWidget {
   final String? shopId;
   final String? cartId;
-  const OrderSummery({super.key, this.cartId, this.shopId});
+  const OrderSummaryView({super.key, this.cartId, this.shopId});
 
   @override
-  State<OrderSummery> createState() => _OrderSummeryState();
+  State<OrderSummaryView> createState() => _OrderSummaryViewState();
 }
 
 // enum Fruit { apple, banana }
 
-class _OrderSummeryState extends State<OrderSummery> {
+class _OrderSummaryViewState extends State<OrderSummaryView> {
   String radioButtonItem = '';
 
   // Group Value for Radio Button.
@@ -40,7 +40,7 @@ class _OrderSummeryState extends State<OrderSummery> {
   void initState() {
     print(widget.shopId);
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<OrderSummeryController>().initState(
+      context.read<OrderSummaryController>().initState(
             context,
             widget.shopId,
             widget.cartId,
@@ -50,8 +50,8 @@ class _OrderSummeryState extends State<OrderSummery> {
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<OrderSummeryController>();
-    final read = context.read<OrderSummeryController>();
+    final watch = context.watch<OrderSummaryController>();
+    final read = context.read<OrderSummaryController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: AppBar(
@@ -211,33 +211,6 @@ class _OrderSummeryState extends State<OrderSummery> {
                 ],
               ),
             ),
-            // Padding(
-            //   padding: EdgeInsets.only(left: 16.w, top: 15.w, bottom: 17.w),
-            //   child: Row(
-            //     children: [
-            //       SvgPicture.asset(
-            //         'assets/images/location2.svg',
-            //         width: 23.w,
-            //         height: 28.h,
-            //       ),
-            //       Padding(
-            //         padding: EdgeInsets.only(
-            //           left: 8.w,
-            //         ),
-            //         child: Text(
-            //           "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-            //           style: GoogleFonts.dmSans(
-            //             textStyle: TextStyle(
-            //                 color: Black,
-            //                 letterSpacing: .5,
-            //                 fontSize: 13.sp,
-            //                 fontWeight: FontWeight.w400),
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             Divider(
               // height: 100,
               color: grey2,
@@ -245,116 +218,6 @@ class _OrderSummeryState extends State<OrderSummery> {
               indent: 5,
               endIndent: 5,
             ),
-            // Padding(
-            //   padding: EdgeInsets.only(left: 5.w, top: 10.w),
-            //   child: Row(
-            //     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //     children: <Widget>[
-            //       Radio(
-            //         fillColor:
-            //             MaterialStateColor.resolveWith((states) => Button1),
-            //         value: 1,
-            //         groupValue: id,
-            //         onChanged: (val) {
-            //           setState(() {
-            //             radioButtonItem = 'Delivery To';
-            //             id = 1;
-            //           });
-            //         },
-            //       ),
-            // Text(
-            //   'Delivery To',
-            //   style: GoogleFonts.dmSans(
-            //     textStyle: TextStyle(
-            //         color: Black,
-            //         letterSpacing: .5,
-            //         fontSize: 16.sp,
-            //         fontWeight: FontWeight.w700),
-            //   ),
-            // ),
-            //       Padding(
-            //         padding: EdgeInsets.only(left: 25.w),
-            //         child: Radio(
-            //           fillColor:
-            //               MaterialStateColor.resolveWith((states) => Button1),
-            //           value: 2,
-            //           groupValue: id,
-            //           onChanged: (val) {
-            //             setState(() {
-            //               radioButtonItem = 'Self Pickup';
-            //               id = 2;
-            //             });
-            //           },
-            //         ),
-            //       ),
-            // Text(
-            //   'Self Pickup',
-            //   style: GoogleFonts.dmSans(
-            //     textStyle: TextStyle(
-            //         color: Black,
-            //         letterSpacing: .5,
-            //         fontSize: 16.sp,
-            //         fontWeight: FontWeight.w700),
-            //   ),
-            // ),
-            //     ],
-            //   ),
-            // ),
-            //  Container(
-            //           padding: EdgeInsets.only(right: 28.w),
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //             children: <Widget>[
-            //               Row(
-            //                 children: [
-            //                   SecondaryRadioButton(
-            //                       value: "full_order_amount",
-            //                       groupValue: read.groupValue,
-            //                       onChanged: (value) {
-            //                         read.onRadioBtnToggled(value);
-            //                       },
-            //                       leading: ""),
-            //                   SizedBox(
-            //                     width: 10.w,
-            //                   ),
-            //                   Text(
-            //                     'Full Order Amount',
-            //                     style: GoogleFonts.dmSans(
-            //                       textStyle: TextStyle(
-            //                           color: Black,
-            //                           // letterSpacing: .5,
-            //                           fontSize: 12.sp,
-            //                           fontWeight: FontWeight.w400),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //               Row(
-            //                 children: [
-            //                   SecondaryRadioButton(
-            //                       value: "category_and_product",
-            //                       groupValue: watch.groupValue,
-            //                       onChanged: (value) {
-            //                         read.onRadioBtnToggled(value);
-            //                       },
-            //                       leading: ""),
-            //                   SizedBox(
-            //                     width: 10.w,
-            //                   ),
-            //                   Text(
-            //                     'Category & Product',
-            //                     style: GoogleFonts.dmSans(
-            //                       textStyle: TextStyle(
-            //                           color: Black,
-            //                           fontSize: 12.sp,
-            //                           fontWeight: FontWeight.w400),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             ],
-            //           ),
-            //         ),
             SizedBox(
               height: 10.w,
             ),

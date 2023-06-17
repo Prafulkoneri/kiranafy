@@ -74,48 +74,56 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                           read.onHomeScreenPressed();
                         },
                         child: watch.currentTab == 0
-                            ? Column(
-                                children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 21.w,
-                                    child: SvgPicture.asset(
-                                      "assets/icons/home_selected.svg",
+                            ? Container(
+                          padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                          color: Colors.transparent,
+                              child: Column(
+                                  children: [
+                                    Container(
+                                      height: 20.w,
+                                      width: 21.w,
+                                      child: SvgPicture.asset(
+                                        "assets/icons/home_selected.svg",
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 5.w,
-                                  ),
-                                  Text(
-                                    "Dashboard",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 11.sp,
-                                        color: CouponsText),
-                                  )
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 21.w,
-                                    child: SvgPicture.asset(
-                                      "assets/icons/home.svg",
+                                    SizedBox(
+                                      height: 5.w,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 5.w,
-                                  ),
-                                  Text(
-                                    "Dashboard",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 11.sp,
-                                        color: Black1),
-                                  )
-                                ],
-                              ),
+                                    Text(
+                                      "Dashboard",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 11.sp,
+                                          color: CouponsText),
+                                    )
+                                  ],
+                                ),
+                            )
+                            : Container(
+                          padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                          color: Colors.transparent,
+                              child: Column(
+                                  children: [
+                                    Container(
+                                      height: 20.w,
+                                      width: 21.w,
+                                      child: SvgPicture.asset(
+                                        "assets/icons/home.svg",
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    Text(
+                                      "Dashboard",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 11.sp,
+                                          color: Black1),
+                                    )
+                                  ],
+                                ),
+                            ),
                       ),
                       Row(
                         children: [
@@ -124,49 +132,57 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                               read.onOrdersPressed();
                             },
                             child: watch.currentTab == 1
-                                ? Column(
-                                    children: [
-                                      Container(
-                                        height: 20.w,
-                                        width: 21.w,
-                                        child: SvgPicture.asset(
-                                          "assets/icons/orders_selected.svg",
+                                ? Container(
+                              padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                              color: Colors.transparent,
+                                  child: Column(
+                                      children: [
+                                        Container(
                                           height: 20.w,
-                                          width: 20.w,
+                                          width: 21.w,
+                                          child: SvgPicture.asset(
+                                            "assets/icons/orders_selected.svg",
+                                            height: 20.w,
+                                            width: 20.w,
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      Text(
-                                        "Orders",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 11.sp,
-                                            color: CouponsText),
-                                      )
-                                    ],
-                                  )
-                                : Column(
-                                    children: [
-                                      Container(
-                                        height: 20.w,
-                                        width: 21.w,
-                                        child: SvgPicture.asset(
-                                            "assets/icons/orders.svg"),
-                                      ),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      Text(
-                                        "Orders",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 11.sp,
-                                            color: Black1),
-                                      )
-                                    ],
-                                  ),
+                                        SizedBox(
+                                          height: 5.w,
+                                        ),
+                                        Text(
+                                          "Orders",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 11.sp,
+                                              color: CouponsText),
+                                        )
+                                      ],
+                                    ),
+                                )
+                                : Container(
+                              padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                              color: Colors.transparent,
+                                  child: Column(
+                                      children: [
+                                        Container(
+                                          height: 20.w,
+                                          width: 21.w,
+                                          child: SvgPicture.asset(
+                                              "assets/icons/orders.svg"),
+                                        ),
+                                        SizedBox(
+                                          height: 5.w,
+                                        ),
+                                        Text(
+                                          "Orders",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 11.sp,
+                                              color: Black1),
+                                        )
+                                      ],
+                                    ),
+                                ),
                           ),
                         ],
                       ),
@@ -177,48 +193,56 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                               read.onPaymentPressed();
                             },
                             child: watch.currentTab == 2
-                                ? Column(
-                                    children: [
-                                      Container(
-                                        height: 20.w,
-                                        width: 21.w,
-                                        child: SvgPicture.asset(
-                                          "assets/icons/payment_selected.svg",
+                                ? Container(
+                              padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                              color: Colors.transparent,
+                                  child: Column(
+                                      children: [
+                                        Container(
+                                          height: 20.w,
+                                          width: 21.w,
+                                          child: SvgPicture.asset(
+                                            "assets/icons/payment_selected.svg",
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      Text(
-                                        "Payment",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 11.sp,
-                                            color: CouponsText),
-                                      )
-                                    ],
-                                  )
-                                : Column(
-                                    children: [
-                                      Container(
-                                        height: 20.w,
-                                        width: 21.w,
-                                        child: SvgPicture.asset(
-                                          "assets/icons/payments.svg",
+                                        SizedBox(
+                                          height: 5.w,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 5.w,
-                                      ),
-                                      Text(
-                                        "Payment",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 11.sp,
-                                            color: Black1),
-                                      )
-                                    ],
-                                  ),
+                                        Text(
+                                          "Payment",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 11.sp,
+                                              color: CouponsText),
+                                        )
+                                      ],
+                                    ),
+                                )
+                                : Container(
+                              padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                              color: Colors.transparent,
+                                  child: Column(
+                                      children: [
+                                        Container(
+                                          height: 20.w,
+                                          width: 21.w,
+                                          child: SvgPicture.asset(
+                                            "assets/icons/payments.svg",
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.w,
+                                        ),
+                                        Text(
+                                          "Payment",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 11.sp,
+                                              color: Black1),
+                                        )
+                                      ],
+                                    ),
+                                ),
                           ),
                         ],
                       ),
@@ -227,93 +251,109 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                           read.onOfferPressed();
                         },
                         child: watch.currentTab == 3
-                            ? Column(
-                                children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 21.w,
-                                    child: SvgPicture.asset(
-                                      "assets/icons/offers_selected.svg",
+                            ? Container(
+                          padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                          color: Colors.transparent,
+                              child: Column(
+                                  children: [
+                                    Container(
+                                      height: 20.w,
+                                      width: 21.w,
+                                      child: SvgPicture.asset(
+                                        "assets/icons/offers_selected.svg",
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 5.w,
-                                  ),
-                                  Text(
-                                    "Offers",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 11.sp,
-                                        color: CouponsText),
-                                  )
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 21.w,
-                                    child: SvgPicture.asset(
-                                        "assets/icons/offers.svg"),
-                                  ),
-                                  SizedBox(
-                                    height: 5.w,
-                                  ),
-                                  Text(
-                                    "Offers",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 11.sp),
-                                  )
-                                ],
-                              ),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    Text(
+                                      "Offers",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 11.sp,
+                                          color: CouponsText),
+                                    )
+                                  ],
+                                ),
+                            )
+                            : Container(
+                          padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                          color: Colors.transparent,
+                              child: Column(
+                                  children: [
+                                    Container(
+                                      height: 20.w,
+                                      width: 21.w,
+                                      child: SvgPicture.asset(
+                                          "assets/icons/offers.svg"),
+                                    ),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    Text(
+                                      "Offers",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 11.sp),
+                                    )
+                                  ],
+                                ),
+                            ),
                       ),
                       GestureDetector(
                         onTap: () {
                           read.onAccountPressed();
                         },
                         child: watch.currentTab == 4
-                            ? Column(
-                                children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 21.w,
-                                    child: SvgPicture.asset(
-                                      "assets/icons/account_selected.svg",
-                                      color: CouponsText,
+                            ? Container(
+                          padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                          color: Colors.transparent,
+                              child: Column(
+                                  children: [
+                                    Container(
+                                      height: 20.w,
+                                      width: 21.w,
+                                      child: SvgPicture.asset(
+                                        "assets/icons/account_selected.svg",
+                                        color: CouponsText,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 5.w,
-                                  ),
-                                  Text(
-                                    "Account",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 11.sp,
-                                        color: CouponsText),
-                                  )
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 21.w,
-                                    child: SvgPicture.asset(
-                                        "assets/icons/account.svg"),
-                                  ),
-                                  SizedBox(
-                                    height: 5.w,
-                                  ),
-                                  Text(
-                                    "Account",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 11.sp),
-                                  )
-                                ],
-                              ),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    Text(
+                                      "Account",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 11.sp,
+                                          color: CouponsText),
+                                    )
+                                  ],
+                                ),
+                            )
+                            : Container(
+                          padding: EdgeInsets.only(left: 2.w,right: 2.w),
+                          color: Colors.transparent,
+                              child: Column(
+                                  children: [
+                                    Container(
+                                      height: 20.w,
+                                      width: 21.w,
+                                      child: SvgPicture.asset(
+                                          "assets/icons/account.svg"),
+                                    ),
+                                    SizedBox(
+                                      height: 5.w,
+                                    ),
+                                    Text(
+                                      "Account",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 11.sp),
+                                    )
+                                  ],
+                                ),
+                            ),
                       ),
                     ],
                   ),

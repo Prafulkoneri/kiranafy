@@ -5,6 +5,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model
 class EditConfigRepo {
   Future<http.Response> EditShopconfig(
       ShopConfigRequestModel reqModel, token) async {
+    print("66666");
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.shopconfigurationedit));
     try {

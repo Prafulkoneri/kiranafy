@@ -15,7 +15,7 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OrderSummeryController extends ChangeNotifier {
+class OrderSummaryController extends ChangeNotifier {
   OrderSummeryRepo orderSummeryRepo = OrderSummeryRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();

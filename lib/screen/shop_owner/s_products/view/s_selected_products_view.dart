@@ -42,7 +42,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SSelectedProductsController>()
-          .initState(context, widget.categoryId);
+          .initState(context, widget.categoryId,widget.isRefresh);
     });
   }
 

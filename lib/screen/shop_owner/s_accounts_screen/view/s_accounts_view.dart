@@ -221,7 +221,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SMainScreenView(
-                          index: 0,
+                          index: 4,
                           screenName: SShopConfigurationView(
                             initialShopConfigration: false,
                           ))),

@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/near_shops/view/all_near_sho
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
@@ -78,9 +79,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onOfferPressed() {
     currentTab = 3;
-    currentScreen = Center(
-      child: Text("Offers"),
-    );
+    currentScreen =ShopCouponsView();
     notifyListeners();
   }
 
