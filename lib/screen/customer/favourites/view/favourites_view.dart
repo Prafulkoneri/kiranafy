@@ -365,22 +365,28 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                           watch.adminProductList?[index];
                                       return GestureDetector(
                                         onTap: () {
-                                          // Navigator.pushAndRemoveUntil(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //       builder: (context) => MainScreenView(
-                                          //             index: 1,
-                                          //             screenName: ProductScreenView(
-                                          //                 categoryId:
-                                          //                     element?..toString(),
-                                          //                 // categoryId: watch.categoryId,
-                                          //                 productId: element?.id.toString(),
-                                          //                 shopId: element?.shopId.toString()
-                                          //                 productType: element?.productType
-                                          //                 ),
-                                          //           )),
-                                          //   (Route<dynamic> route) => false,
-                                          // );
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MainScreenView(
+                                                      index: 1,
+                                                      screenName:
+                                                          ProductScreenView(
+                                                        categoryId: element
+                                                            ?.categoryId
+                                                            .toString(),
+                                                        productId: element?.id
+                                                            .toString(),
+                                                        shopId: element?.shopId
+                                                            .toString(),
+                                                        productType: element
+                                                            ?.productType
+                                                            .toString(),
+                                                      ),
+                                                    )),
+                                            (Route<dynamic> route) => false,
+                                          );
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
