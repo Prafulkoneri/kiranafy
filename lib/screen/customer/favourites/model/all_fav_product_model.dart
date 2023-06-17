@@ -41,11 +41,14 @@ class FavProductData {
 
 class AdminProduct {
   int? id;
+  int? categoryId;
   String? productName;
   String? productImagePath;
   String? productImageName;
   String? shopName;
   int? shopId;
+  String? productType;
+  int? productUnitId;
   String? status;
   String? unit;
   String? weight;
@@ -53,11 +56,14 @@ class AdminProduct {
 
   AdminProduct({
     required this.id,
+    required this.categoryId,
     required this.productName,
     required this.productImagePath,
     required this.productImageName,
     required this.shopName,
     required this.shopId,
+    required this.productType,
+    required this.productUnitId,
     required this.status,
     required this.unit,
     required this.weight,
@@ -70,6 +76,9 @@ class AdminProduct {
     productImageName = json["product_image_name"];
     shopName = json["shop_name"];
     shopId = json["shop_id"];
+    categoryId = json["category_id"];
+    productType = json["product_type"];
+    productUnitId = json["product_unit_id"];
     status = json["status"];
     unit = json["unit"];
     weight = json["weight"];
@@ -79,11 +88,14 @@ class AdminProduct {
 
 class CustomeProduct {
   int? id;
+  int? categoryId;
   String? productName;
   String? productImagePath;
   String? productImageName;
   String? shopName;
   int? shopId;
+  String? productType;
+  int? productUnitId;
   String? status;
   String? unit;
   String? weight;
@@ -91,11 +103,14 @@ class CustomeProduct {
 
   CustomeProduct({
     required this.id,
+    required this.categoryId,
     required this.productName,
     required this.productImagePath,
     required this.productImageName,
     required this.shopName,
     required this.shopId,
+    required this.productType,
+    required this.productUnitId,
     required this.status,
     required this.unit,
     required this.weight,
@@ -108,6 +123,9 @@ class CustomeProduct {
     productImageName = json["product_image_name"];
     shopName = json["shop_name"];
     shopId = json["shop_id"];
+    categoryId = json["category_id"];
+    productType = json["product_type"];
+    productUnitId = json["product_unit_id"];
     status = json["status"];
     unit = json["unit"];
     weight = json["weight"];
