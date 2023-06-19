@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/delivery_address/view/my_del
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -99,7 +100,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                       fit: BoxFit.cover,
                                     )
                                   : AppNetworkImages(
-                                imageUrl: watch.customerData
+                                      imageUrl: watch.customerData
                                               ?.customerProfileImagePath ??
                                           "",
                                       fit: BoxFit.cover,
@@ -349,13 +350,13 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 onTap: () {
                   // readMain.onNavigation(4,UpdateProfileView(), context);
 
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 1, screenName: UpdateProfileView())),
-                  //   (Route<dynamic> route) => false,
-                  // );
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                            index: 4, screenName: MyOrderView())),
+                    (Route<dynamic> route) => false,
+                  );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 20.w),
@@ -482,8 +483,9 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
                             index: 4,
-                            screenName: MyDeliveryAddressView(isRefresh:true))),
-                        (Route<dynamic> route) => false,
+                            screenName:
+                                MyDeliveryAddressView(isRefresh: true))),
+                    (Route<dynamic> route) => false,
                   );
                 },
                 child: Container(

@@ -93,15 +93,10 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                 },
               );
             },
-            child: Padding(
-              padding: EdgeInsets.only(
-                right: 20.w,
-              ),
-              child: SvgPicture.asset(
-                'assets/images/filter.svg',
-                width: 20.w,
-                height: 18.h,
-              ),
+            child: SvgPicture.asset(
+              'assets/images/filter.svg',
+              width: 20.w,
+              height: 18.h,
             ),
           ),
         ),
@@ -309,7 +304,8 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                               fit: BoxFit.cover,
                                                             )
                                                           : AppNetworkImages(
-                                                              imageUrl:element?.productImagePath ??
+                                                              imageUrl: element
+                                                                      ?.productImagePath ??
                                                                   "",
                                                               width: 80.w,
                                                               height: 80.h,
@@ -427,8 +423,15 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                     ),
                                                                   ),
                                                                   GestureDetector(
-                                                                    onTap: (){
-                                                                      read.addToCart(element?.productType,element?.productUnitId,element?.shopId,context);
+                                                                    onTap: () {
+                                                                      read.addToCart(
+                                                                          element
+                                                                              ?.productType,
+                                                                          element
+                                                                              ?.productUnitId,
+                                                                          element
+                                                                              ?.shopId,
+                                                                          context);
                                                                     },
                                                                     child: SvgPicture
                                                                         .asset(
