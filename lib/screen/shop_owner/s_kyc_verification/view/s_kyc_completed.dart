@@ -42,6 +42,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sig
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -158,8 +159,7 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SShopConfigurationView(
-                                      initialShopConfigration: true,
+                                builder: (context) => SSubscriptionScreenView(loggedIn: false,
                                     )),
                             (Route<dynamic> route) => false,
                           );

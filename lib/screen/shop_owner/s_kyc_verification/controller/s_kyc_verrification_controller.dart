@@ -172,6 +172,7 @@ class SKycVerificationController extends ChangeNotifier {
   }
 
   void onUploadClicked(context) async {
+
     if (fileImage1.path == "") {
       Utils.showPrimarySnackbar(context, "Please Select Adhar Card Image",
           type: SnackType.error);
@@ -197,10 +198,12 @@ class SKycVerificationController extends ChangeNotifier {
       notifyListeners();
       return;
     }
+    print("hellooo");
     uploadImage(context);
   }
 
   Future uploadImage(context) async {
+    print("888888");
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.uploadKycVerification}");
@@ -252,10 +255,13 @@ class SKycVerificationController extends ChangeNotifier {
     }
     // print(newList);
     request.files.addAll(newList);
-    await request.send().then((response) {
+    print(request.fields);
+    await request.send().then((response) async{
       if (response.statusCode == 200) {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => KycCompletedView()));
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        pref.setString('status', 'kycUploaded');
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
       } else {

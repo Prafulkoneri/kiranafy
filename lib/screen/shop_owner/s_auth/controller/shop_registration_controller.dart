@@ -260,7 +260,8 @@ class ShopRegistrationController extends ChangeNotifier {
       return;
     }
     bool emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-        .hasMatch(emailIdController.text);
+        .hasMatch(emailIdController.text.trim());
+    print(emailValid);
     if(!emailValid){
       Utils.showPrimarySnackbar(context, "Enter Email Id",
           type: SnackType.error);

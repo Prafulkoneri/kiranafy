@@ -17,6 +17,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
+import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
@@ -62,7 +63,6 @@ import 'screen/customer/cart/controller/cart_controller.dart';
 import 'screen/customer/cart/controller/cart_detail_controller.dart';
 import 'screen/customer/delivery_address/controller/delivery_address_controller.dart';
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
-import 'screen/customer/order_summery/controller/order_summary_controller.dart';
 import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';

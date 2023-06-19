@@ -134,25 +134,28 @@ class SSubscriptionController extends ChangeNotifier {
       shopBuySubscriptionsRepo
           .buySubScription(
               buySubscriptionRequestModel, pref.getString("successToken"))
-          .then((response) {
+          .then((response)async {
         final result =
             BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
         print(response.statusCode);
         if (response.statusCode == 200) {
-          if (loggedIn) {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                        index: 4,
-                        screenName: SAccountScreenView(),
-                      )),
-              (Route<dynamic> route) => false,
-            );
-          } else {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => KycCompletedView()));
-          }
+          // if (loggedIn) {
+          //   Navigator.pushAndRemoveUntil(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => SMainScreenView(
+          //               index: 4,
+          //               screenName: SAccountScreenView(),
+          //             )),
+          //     (Route<dynamic> route) => false,
+          //   );
+          // } else {
+          //
+          // }
+          SharedPreferences pref = await SharedPreferences.getInstance();
+          pref.setString('status', 'subscriptionCompleted');
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SShopConfigurationView(initialShopConfigration: true)));
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
