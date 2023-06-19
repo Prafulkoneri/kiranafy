@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
-import 'package:local_supper_market/screen/customer/order_summery/order_summary_view.dart';
+
 import 'package:local_supper_market/widget/app_bar.dart';
 
 class OrderStatusView extends StatelessWidget {

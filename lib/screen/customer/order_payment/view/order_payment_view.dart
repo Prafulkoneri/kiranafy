@@ -9,8 +9,9 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/controller/order_payment_controller.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
-import 'package:local_supper_market/screen/customer/order_summery/controller/order_summary_controller.dart';
-import 'package:local_supper_market/screen/customer/order_summery/order_summary_view.dart';
+import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
+import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
+
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -82,7 +83,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const OrderSummaryView()),
+                    builder: (context) => const OrderSummaryView(isRefresh: false, route:"paymentView")),
               );
             },
             title: "Order Payment",

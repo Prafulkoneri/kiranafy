@@ -9,7 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/order_payment/order_payment.dart';
+
+import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/address_list_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/coupons_list_sheet_view.dart';
@@ -1329,7 +1330,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OrderPayment()),
+                        builder: (context) => const OrderPaymentView()),
                   );
                 },
 
