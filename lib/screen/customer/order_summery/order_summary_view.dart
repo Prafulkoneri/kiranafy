@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/order_payment/order_payment.dart';
+import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 import 'package:local_supper_market/screen/customer/order_summery/controller/order_summary_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summery/cravings_products.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
@@ -32,10 +32,10 @@ class OrderSummaryView extends StatefulWidget {
 // enum Fruit { apple, banana }
 
 class _OrderSummaryViewState extends State<OrderSummaryView> {
-  String radioButtonItem = '';
+  // String radioButtonItem = '';
 
   // Group Value for Radio Button.
-  int id = 1;
+  // int id = 1;
   @override
   void initState() {
     print(widget.shopId);
@@ -1059,6 +1059,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                     endIndent: 0,
                   ),
                   OrderProducts(),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -1232,6 +1235,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
               // width: 390.w,
 
               child: PrimaryButton(
+                borderRadius: 0,
                 width: ScreenUtil().screenWidth,
                 color: SplashText,
                 // style: ButtonStyle(
@@ -1252,7 +1256,19 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OrderPayment()),
+                        builder: (context) => OrderPaymentView(
+                              cartId: "30",
+                              shopId: "3",
+                              couponId: "21",
+                              customerDeliveryAddressId: "32",
+                              customerDeliveryDate: "25-06-2023",
+                              customerDeliverySlot: "shop_owner_slot_9_to_12",
+                              customerDeliveryType:
+                                  "shop_owner_customer_pickup",
+                              finalTotalAmount: "1210",
+                              finalTotalDiscount: "10",
+                              totalItems: "2",
+                            )),
                   );
                 },
 
@@ -1269,7 +1285,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
 
                 //
               ),
-            )
+            ),
           ],
         ),
       ),

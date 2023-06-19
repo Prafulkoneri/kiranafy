@@ -176,6 +176,8 @@ class ShopDetails {
   String? shopOwnerShopCloseTime;
   String? shopOpenStatus;
   String? shopFavourite;
+  String? shopOwnerQrCodeImage;
+  String? shopOwnerUpiId;
 
   ShopDetails({
     required this.id,
@@ -189,6 +191,8 @@ class ShopDetails {
     required this.shopOwnerShopCloseTime,
     required this.shopOpenStatus,
     required this.shopFavourite,
+    required this.shopOwnerQrCodeImage,
+    required this.shopOwnerUpiId,
   });
   ShopDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -202,5 +206,7 @@ class ShopDetails {
     shopOwnerShopCloseTime = json["shop_owner_shop_close_time"];
     shopOpenStatus = json["shop_open_status"];
     shopFavourite = json["is_favourite"];
+    shopOwnerQrCodeImage = json["shop_owner_payment_qr_code_image_path"];
+    shopOwnerUpiId = json["shop_owner_upi_id"];
   }
 }

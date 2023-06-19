@@ -51,7 +51,8 @@ class Endpoint {
   static const String shopownerselectedcategorieslist =
       '${baseUrl}lsm-shop-owner-get-selected-categories';
   // Send KYC Verification Data
-  static const String uploadKycVerification = '${baseUrl}lsm-shop-owner-kyc-submit';
+  static const String uploadKycVerification =
+      '${baseUrl}lsm-shop-owner-kyc-submit';
 
   ///// shop buy subcription
   static const String shopbuyscription =
@@ -273,4 +274,7 @@ class Endpoint {
 
   ///Customer aplly coupons////
   static const String applyCoupons = "${baseUrl}lsm-customer-apply-coupon";
+  //Order PAyment////
+  static const String orderPayment =
+      "${baseUrl}lsm-customer-order-payment-screen";
 }

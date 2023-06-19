@@ -27,6 +27,7 @@ class _OrderProductsState extends State<OrderProducts> {
     return SizedBox(
       // height: 140.h,
       child: ListView.builder(
+          padding: EdgeInsets.zero,
           // scrollDirection: Axis.horizontal,
           physics: NeverScrollableScrollPhysics(),
           // physics: BouncingScrollPhysics(),

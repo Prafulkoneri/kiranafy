@@ -11,6 +11,7 @@ class PrimaryButton extends StatelessWidget {
   final double? height;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final double? borderRadius;
   final Color? borderColor;
   final Widget? child;
 
@@ -25,6 +26,7 @@ class PrimaryButton extends StatelessWidget {
       this.fontWeight,
       this.textColor,
       this.text,
+      this.borderRadius,
       required this.color,
       required this.onTap})
       : super(key: key);
@@ -38,7 +40,7 @@ class PrimaryButton extends StatelessWidget {
           height: height ?? 45.w,
           decoration: BoxDecoration(
               color: color,
-              borderRadius: BorderRadius.circular(8.w),
+              borderRadius: BorderRadius.circular(borderRadius ?? 8.w),
               border: Border.all(color: borderColor ?? Colors.transparent)),
           child: leading == null
               ? Center(
