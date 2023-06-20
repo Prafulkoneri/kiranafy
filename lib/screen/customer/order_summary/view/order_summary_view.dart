@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/customer/order_summary/view/address_l
 import 'package:local_supper_market/screen/customer/order_summary/view/coupons_list_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/expected_delivery_date_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
@@ -26,9 +27,14 @@ import '../order_products.dart';
 class OrderSummaryView extends StatefulWidget {
   final String? shopId;
   final String? cartId;
-  final bool ? isRefresh;
+  final bool? isRefresh;
   final String? route;
-  const OrderSummaryView({super.key, this.cartId, this.shopId,required this.isRefresh,required this.route});
+  const OrderSummaryView(
+      {super.key,
+      this.cartId,
+      this.shopId,
+      required this.isRefresh,
+      required this.route});
 
   @override
   State<OrderSummaryView> createState() => _OrderSummaryViewState();
@@ -38,7 +44,7 @@ class OrderSummaryView extends StatefulWidget {
 
 class _OrderSummaryViewState extends State<OrderSummaryView> {
   String radioButtonItem = '';
-  bool showAddressModalSheet=false;
+  bool showAddressModalSheet = false;
 
   // Group Value for Radio Button.
   int id = 1;
@@ -50,22 +56,16 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
             context,
             widget.shopId,
             widget.cartId,
-        widget.isRefresh,
+            widget.isRefresh,
           );
-      if(widget.route=="editAddress") {
+      if (widget.route == "editAddress") {
         showModalBottomSheet(
-            backgroundColor: Colors
-                .white,
+            backgroundColor: Colors.white,
             isScrollControlled: true,
             shape: const RoundedRectangleBorder(
-                borderRadius:
-                BorderRadius.only(
-                    topLeft: Radius
-                        .circular(
-                        30),
-                    topRight: Radius
-                        .circular(
-                        30))),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30))),
             context: context,
             builder: (context) {
               // using a scaffold helps to more easily position the FAB
@@ -73,7 +73,6 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
             });
       }
     });
-
   }
 
   @override
@@ -317,20 +316,14 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   itemBuilder: (context, index) {
                     final element = watch.customerAddress![index];
                     return GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         showModalBottomSheet(
-                            backgroundColor: Colors
-                                .white,
+                            backgroundColor: Colors.white,
                             isScrollControlled: true,
                             shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.only(
-                                    topLeft: Radius
-                                        .circular(
-                                        30),
-                                    topRight: Radius
-                                        .circular(
-                                        30))),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30))),
                             context: context,
                             builder: (context) {
                               // using a scaffold helps to more easily position the FAB
@@ -339,111 +332,120 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       },
                       child: Container(
                         width: double.infinity,
-                        child:   element.deliveryAddressIsDefault == "yes"?Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                bottom: 15.w, left: 20.w, right: 20.w, top: 15.w),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/images/person.svg',
-                                          width: 11.w,
-                                          height: 15.h,
-                                        ),
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        Text(
-                                          "${element.customerName}",
-                                          // 'Rachel Green',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                letterSpacing: .5,
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.w700),
+                        child: element.deliveryAddressIsDefault == "yes"
+                            ? Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 15.w,
+                                      left: 20.w,
+                                      right: 20.w,
+                                      top: 15.w),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/images/person.svg',
+                                                width: 11.w,
+                                                height: 15.h,
+                                              ),
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
+                                              Text(
+                                                "${element.customerName}",
+                                                // 'Rachel Green',
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black,
+                                                      letterSpacing: .5,
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ),
+                                              // SizedBox(
+                                              //   width: 11.w,
+                                              // ),
+                                            ],
                                           ),
-                                        ),
-                                        // SizedBox(
-                                        //   width: 11.w,
-                                        // ),
-                                      ],
-                                    ),
-                                    Icon(Icons.keyboard_arrow_down_outlined),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15.w,
-                                ),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/images/phone.svg',
-                                      width: 14.w,
-                                      height: 15.h,
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Text(
-                                      '${element.mobileNo}',
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black,
-                                            letterSpacing: .5,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w400),
+                                          Icon(Icons
+                                              .keyboard_arrow_down_outlined),
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15.w,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/images/location.svg',
-                                      color: SplashText1,
-                                      width: 17.w,
-                                      height: 17.h,
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        maxLines: 3,
-                                        "${element.address1} \n${element.address2} ",
-                                        // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
-                                        // textAlign: TextAlign.start,
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              // height: 1.5,
-                                              color: black,
-                                              // letterSpacing: .05,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
+                                      SizedBox(
+                                        height: 15.w,
                                       ),
-                                    )
-                                  ],
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/images/phone.svg',
+                                            width: 14.w,
+                                            height: 15.h,
+                                          ),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          Text(
+                                            '${element.mobileNo}',
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: Black,
+                                                  letterSpacing: .5,
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 15.w,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/images/location.svg',
+                                            color: SplashText1,
+                                            width: 17.w,
+                                            height: 17.h,
+                                          ),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              maxLines: 3,
+                                              "${element.address1} \n${element.address2} ",
+                                              // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
+                                              // textAlign: TextAlign.start,
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    // height: 1.5,
+                                                    color: black,
+                                                    // letterSpacing: .05,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontSize: 14.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ):Container(),
+                              )
+                            : Container(),
                       ),
                     );
                   },
@@ -466,125 +468,156 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                 ),
               ),
             ),
-           Container(
-                padding: EdgeInsets.only(
-                    left: 20.w, right: 17.w, top: 8.w, bottom: 10.w),
-                margin: EdgeInsets.only(
-                    left: 10.w, right: 17.w, top: 8.w, bottom: 10.w),
-                decoration: BoxDecoration(
-                    border: Border.all(color: grey3),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                     Expanded(child: Container(
-                       child:   Text(
-                         "Date:",
-                         style: GoogleFonts.dmSans(
-                           textStyle: TextStyle(
-                             // height: 1.5,
-                               color: black,
-                               letterSpacing: .05,
-                               // overflow: TextOverflow.ellipsis,
-                               fontSize: 14.sp,
-                               fontWeight: FontWeight.w500),
-                         ),
-                       ),
-                     )),
-                     Expanded(child: Container(
-                       child:     Text(
-                         "Delivery Slot",
-                         style: GoogleFonts.dmSans(
-                           textStyle: TextStyle(
-                             // height: 1.5,
-                               color: black,
-                               letterSpacing: .05,
-                               // overflow: TextOverflow.ellipsis,
-                               fontSize: 14.sp,
-                               fontWeight: FontWeight.w500),
-                         ),
-                       ),
-                     )),
-
-                   SizedBox(
-                     width: 20.w,
-                   ),
-                    
-
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    watch.expectedDateController.text!=""||watch.slotGroupValue!=""?Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                watch.expectedDateController.text,
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      // height: 1.5,
-                                      color: black,
-                                      letterSpacing: .05,
-                                      // overflow: TextOverflow.ellipsis,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              SvgPicture.asset(
-                                'assets/images/calender.svg',
-                                width: 12.w,
-                                height: 14.h,
-                              ),
-                            ],
+            Container(
+              padding: EdgeInsets.only(
+                  left: 20.w, right: 17.w, top: 8.w, bottom: 10.w),
+              margin: EdgeInsets.only(
+                  left: 10.w, right: 17.w, top: 8.w, bottom: 10.w),
+              decoration: BoxDecoration(
+                  border: Border.all(color: grey3),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          child: Container(
+                        child: Text(
+                          "Date:",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                // height: 1.5,
+                                color: black,
+                                letterSpacing: .05,
+                                // overflow: TextOverflow.ellipsis,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
-                        Row(
+                      )),
+                      Expanded(
+                          child: Container(
+                        child: Text(
+                          "Delivery Slot",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                // height: 1.5,
+                                color: black,
+                                letterSpacing: .05,
+                                // overflow: TextOverflow.ellipsis,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      )),
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  watch.expectedDateController.text != "" ||
+                          watch.slotGroupValue != ""
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              watch.slotGroupValue=="shop_owner_slot_9_to_12"?"9:00 AM - 12:00 PM":
-                              watch.slotGroupValue=="shop_owner_slot_12_to_3"?"12:00 PM - 3:00 PM":
-                              watch.slotGroupValue=="shop_owner_slot_3_to_6"?"3:00 PM - 6:00 PM":
-                              watch.slotGroupValue=="shop_owner_slot_6_to_9"?"6:00 PM - 9:00 PM":
-                              "",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    // height: 1.5,
-                                    color: black,
-                                    letterSpacing: .05,
-                                    // overflow: TextOverflow.ellipsis,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500),
+                            Expanded(
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    watch.expectedDateController.text,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          // height: 1.5,
+                                          color: black,
+                                          letterSpacing: .05,
+                                          // overflow: TextOverflow.ellipsis,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  SvgPicture.asset(
+                                    'assets/images/calender.svg',
+                                    width: 12.w,
+                                    height: 14.h,
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(
-                              width: 10.w,
+                            Row(
+                              children: [
+                                Text(
+                                  watch.slotGroupValue ==
+                                          "shop_owner_slot_9_to_12"
+                                      ? "9:00 AM - 12:00 PM"
+                                      : watch.slotGroupValue ==
+                                              "shop_owner_slot_12_to_3"
+                                          ? "12:00 PM - 3:00 PM"
+                                          : watch.slotGroupValue ==
+                                                  "shop_owner_slot_3_to_6"
+                                              ? "3:00 PM - 6:00 PM"
+                                              : watch.slotGroupValue ==
+                                                      "shop_owner_slot_6_to_9"
+                                                  ? "6:00 PM - 9:00 PM"
+                                                  : "",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        // height: 1.5,
+                                        color: black,
+                                        letterSpacing: .05,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        backgroundColor: Colors.white,
+                                        isScrollControlled: true,
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(30),
+                                                topRight: Radius.circular(30))),
+                                        context: context,
+                                        builder: (context) {
+                                          // using a scaffold helps to more easily position the FAB
+                                          return ExpectedDeliveryDateSheetView();
+                                        });
+                                  },
+                                  child: SvgPicture.asset(
+                                    'assets/images/pencil.svg',
+                                    width: 12.w,
+                                    height: 14.h,
+                                  ),
+                                ),
+                              ],
                             ),
+                          ],
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
                             GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 showModalBottomSheet(
-                                    backgroundColor: Colors
-                                        .white,
+                                    backgroundColor: Colors.white,
                                     isScrollControlled: true,
                                     shape: const RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.only(
-                                            topLeft: Radius
-                                                .circular(
-                                                30),
-                                            topRight: Radius
-                                                .circular(
-                                                30))),
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(30),
+                                            topRight: Radius.circular(30))),
                                     context: context,
                                     builder: (context) {
                                       // using a scaffold helps to more easily position the FAB
@@ -599,42 +632,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                             ),
                           ],
                         ),
-                      ],
-                    ):Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: (){
-                            showModalBottomSheet(
-                                backgroundColor: Colors
-                                    .white,
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.only(
-                                        topLeft: Radius
-                                            .circular(
-                                            30),
-                                        topRight: Radius
-                                            .circular(
-                                            30))),
-                                context: context,
-                                builder: (context) {
-                                  // using a scaffold helps to more easily position the FAB
-                                  return ExpectedDeliveryDateSheetView();
-                                });
-                          },
-                          child: SvgPicture.asset(
-                            'assets/images/pencil.svg',
-                            width: 12.w,
-                            height: 14.h,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                ],
               ),
+            ),
             Container(
               padding: EdgeInsets.only(left: 19.w, top: 30.w, right: 19.w),
               child: Row(
@@ -653,20 +653,19 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
+                      if (watch.finalCouponList!.isEmpty) {
+                        Utils.showPrimarySnackbar(context, "No Coupons Found",
+                            type: SnackType.error);
+                        return;
+                      }
                       showModalBottomSheet(
-                          backgroundColor: Colors
-                              .white,
+                          backgroundColor: Colors.white,
                           isScrollControlled: true,
                           shape: const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.only(
-                                  topLeft: Radius
-                                      .circular(
-                                      30),
-                                  topRight: Radius
-                                      .circular(
-                                      30))),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30))),
                           context: context,
                           builder: (context) {
                             // using a scaffold helps to more easily position the FAB
@@ -1188,16 +1187,18 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
-                          watch.couponCodeController.text==""?TextSpan(
-                            text: '(${watch.couponCodeController.text}) ',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: SplashText,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ):TextSpan(),
+                          watch.couponCodeController.text == ""
+                              ? TextSpan(
+                                  text: '(${watch.couponCodeController.text}) ',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: SplashText,
+                                        // letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                )
+                              : TextSpan(),
                         ]),
                       ),
                       Text(
@@ -1331,15 +1332,23 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>  OrderPaymentView(cartId: watch.cartId.toString(),
-                          shopId: watch.shopId.toString(),
-                          couponId: watch.offerGroupValue.toString(),
-                          customerDeliveryAddressId: watch.addressGroupValue,
-                          customerDeliveryDate: watch.expectedDateController.text,
-                          customerDeliverySlot: watch.slotGroupValue,
-                          customerDeliveryType: watch.groupValue,
-                          finalDeliveryCharges: watch.deliveryCharges,finalSubTotal: watch.subTotal,
-                          finalTotalAmount: watch.total,finalTotalDiscount: watch.totalDiscount,totalItems: watch.orderFinalTotals?.itemCount.toString(),)),
+                        builder: (context) => OrderPaymentView(
+                              cartId: watch.cartId.toString(),
+                              shopId: watch.shopId.toString(),
+                              couponId: watch.offerGroupValue.toString(),
+                              customerDeliveryAddressId:
+                                  watch.addressGroupValue,
+                              customerDeliveryDate:
+                                  watch.expectedDateController.text,
+                              customerDeliverySlot: watch.slotGroupValue,
+                              customerDeliveryType: watch.groupValue,
+                              finalDeliveryCharges: watch.deliveryCharges,
+                              finalSubTotal: watch.subTotal,
+                              finalTotalAmount: watch.total,
+                              finalTotalDiscount: watch.totalDiscount,
+                              totalItems:
+                                  watch.orderFinalTotals?.itemCount.toString(),
+                            )),
                   );
                 },
 

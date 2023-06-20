@@ -8,6 +8,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/controller/order_payment_controller.dart';
+import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
@@ -237,7 +238,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                   Row(
                     children: [
                       SecondaryRadioButton(
-                          value: "cashOnDelivery",
+                          value: "cash",
                           groupValue: watch.groupValue,
                           // groupValue: watch.radioGroupValue,
                           onChanged: (value) {
@@ -265,7 +266,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                   Row(
                     children: [
                       SecondaryRadioButton(
-                          value: "upiID9175712289@ybl",
+                          value: "upi",
                           groupValue: watch.groupValue,
                           onChanged: (value) {
                             read.onRadioButtonSelected(value);
@@ -348,7 +349,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                   Row(
                     children: [
                       SecondaryRadioButton(
-                          value: "",
+                          value: "qr_code",
                           groupValue: watch.groupValue,
                           onChanged: (value) {
                             read.onRadioButtonSelected(value);
@@ -567,10 +568,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                 color: SplashText,
 
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => OrderStatusView()),
-                  );
+                  read.placeOrder(context);
                 },
 
                 child: Text(

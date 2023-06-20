@@ -2,14 +2,19 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/order_payment/model/c_place_order_model.dart';
 import 'package:local_supper_market/screen/customer/order_payment/model/order_payment_model.dart';
+import 'package:local_supper_market/screen/customer/order_payment/repository/c_place_order_repo.dart';
 import 'package:local_supper_market/screen/customer/order_payment/repository/order_payment_repo.dart';
+import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderPaymentController extends ChangeNotifier {
   OrderPaymentViewRepo orderPaymentRepo = OrderPaymentViewRepo();
+  PlaceOrderRepo placeOrderRepo = PlaceOrderRepo();
 
   TextEditingController transactionIdController = TextEditingController();
   String? shopId = "";
@@ -25,6 +30,7 @@ class OrderPaymentController extends ChangeNotifier {
   String? groupValue = "";
   String? finalSubTotal = "";
   String? finalDeliveryCharges = "";
+  String? customerPaymentMode = "";
 
   ShopDetails? shopDetailData;
   OrderPaymentData? orderPaymentData;
@@ -53,6 +59,7 @@ class OrderPaymentController extends ChangeNotifier {
       totalItems: totalItems.toString(),
       finalSubTotal: finalSubTotal.toString(),
       finalDeliveryCharges: finalDeliveryCharges.toString());
+
   Future<void> orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot,
       cdType, ftAmount, ftDiscount, tItems, fSubTotal, fDCharges) async {
     shopId = id.toString();
@@ -78,6 +85,61 @@ class OrderPaymentController extends ChangeNotifier {
         orderPaymentData = result.orderPayment;
 
         shopDetailData = result.orderPayment?.shopDetails;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////
+  CustomerPlaceOrderReqModel get customerPlaceOrderReqModel =>
+      CustomerPlaceOrderReqModel(
+          shopId: shopId.toString(),
+          cartId: cartId.toString(),
+          couponId: couponId.toString(),
+          customerDeliveryAddressId: customerDeliveryAddressId.toString(),
+          customerDeliveryDate: customerDeliveryDate.toString(),
+          customerDeliverySlot: customerDeliverySlot.toString(),
+          customerDeliveryType: customerDeliveryType.toString(),
+          finalTotalAmount: finalTotalAmount.toString(),
+          finalTotalDiscount: finalTotalDiscount.toString(),
+          totalItems: totalItems.toString(),
+          finalSubTotal: finalSubTotal.toString(),
+          finalDeliveryCharges: finalDeliveryCharges.toString(),
+          customerPaymentMode: groupValue);
+  Future<void> placeOrder(
+    context,
+  ) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    placeOrderRepo
+        .placeOrder(customerPlaceOrderReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+          CustomerPlaceOrderResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  MainScreenView(index: 4, screenName: CheckOrderStatusView())),
+          (Route<dynamic> route) => false,
+        );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
