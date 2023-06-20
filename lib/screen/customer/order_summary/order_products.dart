@@ -91,9 +91,9 @@ class _OrderProductsState extends State<OrderProducts> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  //
-                                  children: [
+                       element?.offerPrice==element?.mrpPrice || element?.offerPrice==""?
+                       Row(
+                            children: [
                                     Text(
                                       "Rs. ${element?.mrpPrice} x ",
                                       style: GoogleFonts.dmSans(
@@ -115,7 +115,41 @@ class _OrderProductsState extends State<OrderProducts> {
                                       ),
                                     ),
                                   ],
-                                ),
+                                ):Row(
+                         children: [
+                           Text(
+                             "Rs. ${element?.mrpPrice}  ",
+                             style: GoogleFonts.dmSans(
+                               textStyle: TextStyle(
+                                 decoration: TextDecoration.lineThrough,
+                                   color: grey5,
+                                   // letterSpacing: .5,
+                                   fontSize: 14.sp,
+                                   fontWeight: FontWeight.w400),
+                             ),
+                           ),
+                           Text(
+                             "Rs. ${element?.offerPrice} x ",
+                             style: GoogleFonts.dmSans(
+                               textStyle: TextStyle(
+                                   color: grey5,
+                                   // letterSpacing: .5,
+                                   fontSize: 16.sp,
+                                   fontWeight: FontWeight.w400),
+                             ),
+                           ),
+                           Text(
+                             "${element?.quantity}",
+                             style: GoogleFonts.dmSans(
+                               textStyle: TextStyle(
+                                   color: grey5,
+                                   // letterSpacing: .5,
+                                   fontSize: 16.sp,
+                                   fontWeight: FontWeight.w400),
+                             ),
+                           ),
+                         ],
+                       ),
                                 Text(
                                   "Rs ${element?.productTotalPrice}",
                                   style: GoogleFonts.dmSans(

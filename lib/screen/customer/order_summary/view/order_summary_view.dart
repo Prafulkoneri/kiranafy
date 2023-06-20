@@ -723,6 +723,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                         width: 200.w,
                         height: 34.w,
                         child: TextField(
+                          controller: watch.couponCodeController,
                           decoration: InputDecoration(
                             fillColor: grey4,
                             filled: true,
@@ -1151,7 +1152,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                         ),
                       ),
                       Text(
-                        "Rs ${watch.orderFinalTotals?.subTotal}",
+                        "Rs ${watch.subTotal}",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: grey5,
@@ -1178,7 +1179,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       RichText(
                         text: TextSpan(children: [
                           TextSpan(
-                            text: 'Discount!!',
+                            text: 'Discount',
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
                                   color: Black1,
@@ -1187,8 +1188,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
-                          TextSpan(
-                            text: '  (PROMO0001AFF) ',
+                          watch.couponCodeController.text==""?TextSpan(
+                            text: '(${watch.couponCodeController.text}) ',
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
                                   color: SplashText,
@@ -1196,11 +1197,11 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400),
                             ),
-                          ),
+                          ):TextSpan(),
                         ]),
                       ),
                       Text(
-                        "Rs  ${watch.orderFinalTotals?.couponDiscount}",
+                        "Rs  ${watch.totalDiscount}",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: grey5,
@@ -1228,7 +1229,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                         ),
                       ),
                       Text(
-                        "Rs. ${watch.orderFinalTotals?.deliveryCharges}",
+                        "Rs. ${watch.deliveryCharges}",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: grey5,
@@ -1263,7 +1264,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                         ),
                       ),
                       Text(
-                        "Rs. ${watch.orderFinalTotals?.total}",
+                        "Rs. ${watch.total}",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Black1,
@@ -1289,7 +1290,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   ),
                   Container(
                     child: Text(
-                      "You will save Rs. ${watch.orderFinalTotals?.productTotalDiscount}",
+                      "You will save Rs. ${watch.totalDiscount}",
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
                             color: SplashText,

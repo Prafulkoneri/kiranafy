@@ -297,12 +297,14 @@ class ShopDeliveryTypes {
 class FinalCouponList {
   int? id;
   String? couponCode;
+  String ? couponTermsAndCondition;
   String? couponDiscountPercentage;
   String? couponDiscountMaxAmount;
 
   FinalCouponList({
     required this.id,
     required this.couponCode,
+    required this.couponTermsAndCondition,
     required this.couponDiscountMaxAmount,
     required this.couponDiscountPercentage,
   });
@@ -311,6 +313,7 @@ class FinalCouponList {
     couponCode = json["coupon_code"];
     couponDiscountPercentage = json["coupon_discount_percentage"];
     couponDiscountMaxAmount = json["coupon_discount_max_amount"];
+    couponTermsAndCondition = json["coupon_terms_and_conditions"];
   }
 }
 

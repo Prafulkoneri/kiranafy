@@ -26,6 +26,13 @@ class CustomerApplyCouponsRequestModel {
     Map<String, dynamic> data = {};
     data["cart_id"] = cartId;
     data["shop_id"] = shopId;
+    data["coupon_id"] = couponId;
+    data["sub_total"] = subTotal;
+    data["coupon_discount"] = couponDiscount;
+    data["total_discount"] = totalDiscount;
+    data["delivery_charges"] = deliveryCharges;
+    data["product_total_discount"] = productTotalDiscount;
+    data["total"] = total;
     return data;
   }
 }

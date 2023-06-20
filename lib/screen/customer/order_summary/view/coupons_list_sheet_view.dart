@@ -34,6 +34,7 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("Get Promo Code",style: TextStyle(
                 fontSize: 20.sp,
@@ -41,52 +42,79 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                 fontWeight: FontWeight.w700,
 
               ),),
+              SizedBox(
+                height: 11.w,
+              ),
+              Divider(),
+              SizedBox(
+                height: 15.w,
+              ),
               ListView.builder(shrinkWrap: true,itemCount: watch.finalCouponList?.length,padding: EdgeInsets.zero,itemBuilder: (BuildContext,index){
                final element=watch.finalCouponList?[index];
-                return Container(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 11.w, vertical: 8.w),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Color(0xff4689EC).withOpacity(0.55.w)),
-                    borderRadius: BorderRadius.circular(5.w),
-                  ),
-                  margin: EdgeInsets.only(bottom: 20.w),
-                  child: Row(
-                    children: [
-                      OrderSummaryRadioButton(
-                          value: watch.shopDeliverySlots?[index],
-                          groupValue: watch.slotGroupValue,
-                          onChanged: (value) {
-                            read.onDeliverySlotSelected(value);
-                          }),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      Column(
-                        children: [
-                          Text(element?.couponCode??"",
-                            style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff3A3A3A).withOpacity(0.63)),
-                          ),
-                          SizedBox(
-                            height: 5.w,
-                          ),
-                          Text("Get Up To 25% OFF | Minimum Order of Rs. 100",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14.sp,color: Color(0xff3A3A3A).withOpacity(0.63)),),
-                          SizedBox(
-                            height: 20.w,
-                          ),
-                          RichText(text: TextSpan(
+                return GestureDetector(
+                  onTap: (){
+                    read.onOfferSelected(element?.id.toString(),context,element?.couponDiscountMaxAmount);
+                  },
+                  child: Container(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 11.w, vertical: 14.w),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color(0xff4689EC).withOpacity(0.55.w)),
+                      borderRadius: BorderRadius.circular(5.w),
+                    ),
+                    margin: EdgeInsets.only(bottom: 20.w),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                OrderSummaryRadioButton(
+                                    value: element?.id.toString(),
+                                    groupValue: watch.offerGroupValue,
+                                    onChanged: (value) {
+                                      read.onOfferSelected(element?.id.toString(),context,element?.couponDiscountMaxAmount);
+                                    }),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 18.w,
+                            ),
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(element?.couponCode??"",
+                                    style: TextStyle(
+                                        fontSize: 15.43.sp,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xff3A3A3A)),
+                                  ),
+                                  SizedBox(
+                                    height: 5.w,
+                                  ),
+                                  Text("${element?.couponTermsAndCondition}",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14.sp,color: Color(0xff3A3A3A).withOpacity(0.63)),),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15.w,
+                        ),
+                        Divider(),
+                        SizedBox(
+                          height: 5.w,
+                        ),
+                        RichText(text:TextSpan(
                             children: [
-                              TextSpan(text: "Customers need to but a",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w400,color: Color(0xff3A3A3A).withOpacity(0.63))),
+                              TextSpan(text:"Customers need to but a",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w400,color: Color(0xff3A3A3A).withOpacity(0.63))),
                               TextSpan(text: " View More",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w400,color: Color(0xff006F94))),
                             ]
-                          )),
-                        ],
-                      ),
-                    ],
+                        )),
+                      ],
+                    ),
                   ),
                 );
               }),

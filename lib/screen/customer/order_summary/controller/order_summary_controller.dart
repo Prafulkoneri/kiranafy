@@ -8,7 +8,9 @@ import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_mod
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/order_summary/model/c_apply_coupon_model.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/order_summary_model.dart';
+import 'package:local_supper_market/screen/customer/order_summary/repository/apply_coupon_repo.dart';
 import 'package:local_supper_market/screen/customer/order_summary/repository/order_summary_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -20,6 +22,8 @@ class OrderSummaryController extends ChangeNotifier {
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
+  ApplyCouponRepo applyCouponRepo = ApplyCouponRepo();
+
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
       );
@@ -39,8 +43,16 @@ class OrderSummaryController extends ChangeNotifier {
   bool favAllShop = true;
   List<bool> defaultSelectedAddress = [];
   String slotGroupValue="";
+  String offerGroupValue="";
   String addressGroupValue="";
   bool isNotFilled=false;
+  String couponDiscount="";
+  String deliveryCharges="";
+  String productTotalDiscount="";
+  String subTotal="";
+  String total="";
+  String totalDiscount="";
+  TextEditingController couponCodeController=TextEditingController();
 
 
 
@@ -74,6 +86,15 @@ class OrderSummaryController extends ChangeNotifier {
     slotGroupValue=value;
     notifyListeners();
   }
+
+  void onOfferSelected(value,context,discount)async{
+    offerGroupValue=value.toString();
+    couponDiscount=discount;
+    await applyCoupon(context);
+    notifyListeners();
+  }
+
+
   void onAddressSelected(value){
     addressGroupValue=value;
     notifyListeners();
@@ -81,16 +102,10 @@ class OrderSummaryController extends ChangeNotifier {
   OrderSummaryReqModel get orderSummeryRequestModel =>
       OrderSummaryReqModel(shopId: shopId, cartId: cartId);
 
-  Future<void> getOrderSummary(
-    context,
-    id,
-    cId,
-  ) async {
+  Future<void> getOrderSummary(context, id, cId) async {
     showLoader(true);
     shopId = id.toString();
     cartId = cId.toString();
-
-
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     orderSummaryRepo
@@ -100,7 +115,6 @@ class OrderSummaryController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        // shopDeliveryTypes=result.orderSummeryData?.shopDeliveryTypes ??"Delivery To";
         if (result.orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup == "active") {
           groupValue = "selfPickup";
         } else {
@@ -109,7 +123,12 @@ class OrderSummaryController extends ChangeNotifier {
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
-        customerAddress = result.orderSummaryData?.customerAddresses;
+      deliveryCharges= orderFinalTotals?.deliveryCharges??"";
+      productTotalDiscount= orderFinalTotals?.productTotalDiscount.toString()??"";
+      subTotal= orderFinalTotals?.subTotal.toString()??"";
+      total= orderFinalTotals?.total.toString()??"";
+      totalDiscount= orderFinalTotals?.totalDiscount.toString()??"";
+      customerAddress = result.orderSummaryData?.customerAddresses;
         int addressListLength=customerAddress?.length??0;
         for(int i=0;i<addressListLength;i++){
           if(customerAddress?[i].deliveryAddressIsDefault=="yes"){
@@ -119,9 +138,7 @@ class OrderSummaryController extends ChangeNotifier {
         cartItemList = result.orderSummaryData?.cartItemList;
         finalCouponList = result.orderSummaryData?.finalCouponList;
         fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
-
         showLoader(false);
-
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -240,6 +257,54 @@ class OrderSummaryController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  CustomerApplyCouponsRequestModel get customerApplyCouponsRequestModel=>CustomerApplyCouponsRequestModel(
+    shopId: shopId,
+    couponId: offerGroupValue,
+    cartId: cartId,
+    couponDiscount: couponDiscount,
+    deliveryCharges: orderFinalTotals?.deliveryCharges,
+    productTotalDiscount: orderFinalTotals?.productTotalDiscount.toString(),
+    subTotal: orderFinalTotals?.subTotal.toString(),
+    total: orderFinalTotals?.total.toString(),
+    totalDiscount: orderFinalTotals?.totalDiscount.toString(),
+  );
+
+  Future<void> applyCoupon(context)async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    applyCouponRepo
+        .applyCoupon(customerApplyCouponsRequestModel,pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = CustomerApplyCouponsResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        final data=result.applyCouponData;
+        couponCodeController.text=data?.couponCode.toString()??"";
+        deliveryCharges=data?.deliveryCharges.toString()??"";
+        subTotal=data?.subTotal??"";
+        total=data?.total??"";
+        totalDiscount=data?.totalDiscount??"";
+
+       Navigator.pop(context);
+       Utils.showPrimarySnackbar(context, result.message,
+           type: SnackType.success);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

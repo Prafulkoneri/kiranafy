@@ -3,8 +3,8 @@ import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/c_apply_coupon_model.dart';
 
 
-class OrderSummaryRepo {
-  Future<http.Response> viewOrderSummery(
+class ApplyCouponRepo {
+  Future<http.Response> applyCoupon(
       CustomerApplyCouponsRequestModel reqModel, token) async {
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.applyCoupons));
