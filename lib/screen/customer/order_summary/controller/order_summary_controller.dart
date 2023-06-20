@@ -293,8 +293,8 @@ class OrderSummaryController extends ChangeNotifier {
         subTotal=data?.subTotal??"";
         total=data?.total??"";
         totalDiscount=data?.totalDiscount??"";
-
-       Navigator.pop(context);
+        Navigator.pop(context);
+        notifyListeners();
        Utils.showPrimarySnackbar(context, result.message,
            type: SnackType.success);
       } else {

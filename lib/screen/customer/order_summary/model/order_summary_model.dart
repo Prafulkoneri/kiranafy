@@ -237,6 +237,7 @@ class OrderFinalTotals {
   int? totalDiscount;
   int? productTotalDiscount;
   String? deliveryCharges;
+  int ? itemCount;
   int? total;
 
   OrderFinalTotals({
@@ -246,6 +247,7 @@ class OrderFinalTotals {
     required this.productTotalDiscount,
     required this.deliveryCharges,
     required this.total,
+    required this.itemCount,
   });
   OrderFinalTotals.fromJson(Map<String, dynamic> json) {
     subTotal = json["sub_total"];
@@ -254,6 +256,7 @@ class OrderFinalTotals {
     productTotalDiscount = json["product_total_discount"];
     deliveryCharges = json["delivery_charges"];
     total = json["total"];
+    itemCount = json["total_items_in_cart"];
   }
 }
 
