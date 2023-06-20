@@ -11,8 +11,7 @@ class OrderPaymentViewRepo {
       return await http.post(Uri.parse(Endpoint.orderPayment),
           body: reqModel.toJson(),
           headers: {
-            "Authorization":
-                "Bearer 490|hXQ8FaHt8jRecPyhgcuTPBylGJWLJGvuu4Nc0N2o",
+            "Authorization": "Bearer $token",
           });
     } catch (e) {
       throw Exception(e);

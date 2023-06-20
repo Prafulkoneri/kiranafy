@@ -1328,11 +1328,19 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                 //   // ),
                 // ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const OrderPaymentView()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) =>  OrderPaymentView(cartId: watch.cartId.toString(),
+                  //       shopId: watch.shopId.toString(),
+                  //       couponId: watch.offerGroupValue.toString(),
+                  //       customerDeliveryAddressId: watch.addressGroupValue,
+                  //       customerDeliveryDate: watch.expectedDateController.text,
+                  //       customerDeliverySlot: watch.slotGroupValue,
+                  //       customerDeliveryType: watch.groupValue,
+                  //       finalDeliveryCharges: watch.deliveryCharges,finalSubTotal: watch.subTotal,
+                  //       finalTotalAmount: watch.total,finalTotalDiscount: watch.totalDiscount,totalItems: watch.orderFinalTotals.tota,)),
+                  // );
                 },
 
                 child: Text(
