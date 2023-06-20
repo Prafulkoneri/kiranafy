@@ -4,10 +4,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/c_apply_coupon_model.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/order_summary_model.dart';
 import 'package:local_supper_market/screen/customer/order_summary/repository/apply_coupon_repo.dart';
@@ -30,7 +33,7 @@ class OrderSummaryController extends ChangeNotifier {
   TextEditingController expectedDateController=TextEditingController();
   String shopId = "";
   String cartId = "";
-  String groupValue = "deliveryTo";
+  String groupValue = "";
   ShopDetails? shopDetailData;
   ShopDeliveryTypes? shopDeliveryTypes;
   List? shopDeliverySlots;
@@ -60,7 +63,6 @@ class OrderSummaryController extends ChangeNotifier {
 
   Future<void> initState(context, cId, id,refresh) async {
     if(refresh) {
-      groupValue = "deliveryTo";
       await getOrderSummary(context, cId, id);
     }
     }
@@ -70,6 +72,8 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   void onExpectedDateSelected(value){
     expectedDateController.text=value;
     notifyListeners();
@@ -77,6 +81,7 @@ class OrderSummaryController extends ChangeNotifier {
 
   void onRadioButtonSelected(value) {
     groupValue = value;
+    // if(groupValue=="delivery_to")
     notifyListeners();
   }
 
@@ -116,9 +121,9 @@ class OrderSummaryController extends ChangeNotifier {
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup == "active") {
-          groupValue = "selfPickup";
+          groupValue = "self_pickup";
         } else {
-          groupValue = "deliveryTo";
+          groupValue = "delivery_to";
         }
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
@@ -139,6 +144,21 @@ class OrderSummaryController extends ChangeNotifier {
         finalCouponList = result.orderSummaryData?.finalCouponList;
         fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
         showLoader(false);
+        if(groupValue == "delivery_to"&&customerAddress!.isEmpty){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MainScreenView(
+                    index: 4,
+                    screenName: AddAddressView(
+                      shopId: shopDetailData?.id.toString(),
+                      cartId: cartId,
+                      route: "orderAddAdress",
+                      isEditAdress: false,
+                    ))),
+                (Route<dynamic> route) => false,
+          );
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -266,6 +286,8 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
+
+
   CustomerApplyCouponsRequestModel get customerApplyCouponsRequestModel=>CustomerApplyCouponsRequestModel(
     shopId: shopId,
     couponId: offerGroupValue,
@@ -311,6 +333,34 @@ class OrderSummaryController extends ChangeNotifier {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
+    );
+  }
+  void onConfirmOrder(context){
+    if(expectedDateController.text==""){
+      Utils.showPrimarySnackbar(context,"Select Expected Date", type: SnackType.error);
+      return;
+    }
+    if(slotGroupValue==""){
+      Utils.showPrimarySnackbar(context,"Select a slot", type: SnackType.error);
+      return;
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => OrderPaymentView(
+            cartId: cartId.toString(),
+            shopId: shopId.toString(),
+            couponId: offerGroupValue.toString(),
+            customerDeliveryAddressId: addressGroupValue,
+            customerDeliveryDate: expectedDateController.text,
+            customerDeliverySlot: slotGroupValue,
+            customerDeliveryType: groupValue,
+            finalDeliveryCharges: deliveryCharges,
+            finalSubTotal: subTotal,
+            finalTotalAmount: total,
+            finalTotalDiscount: totalDiscount,
+            totalItems: orderFinalTotals?.itemCount.toString(),
+          )),
     );
   }
 }

@@ -129,38 +129,43 @@ class _ExpectedDeliveryDateSheetViewState
                   shrinkWrap: true,
                   itemCount: watch.shopDeliverySlots?.length ?? 0,
                   itemBuilder: (BuildContext, index) {
-                    return Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 11.w, vertical: 8.w),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Color(0xff4689EC).withOpacity(0.55.w)),
-                        borderRadius: BorderRadius.circular(5.w),
-                      ),
-                      margin: EdgeInsets.only(bottom: 20.w),
-                      child: Row(
-                        children: [
-                          OrderSummaryRadioButton(
-                              value: watch.shopDeliverySlots?[index],
-                              groupValue: watch.slotGroupValue,
-                              onChanged: (value) {
-                                read.onDeliverySlotSelected(value);
-                              }),
-                          SizedBox(
-                            width: 18.w,
-                          ),
-                          Text(
-                            watch.shopDeliverySlots?[index]=="shop_owner_slot_9_to_12"?"9 AM to 12 PM":
-                            watch.shopDeliverySlots?[index]=="shop_owner_slot_12_to_3"?"12 PM to 3 PM":
-                            watch.shopDeliverySlots?[index]=="shop_owner_slot_3_to_6"?"3 PM to 6 PM":
-                            watch.shopDeliverySlots?[index]=="shop_owner_slot_6_to_9"?"6 PM to 9 PM":
-                            "",
-                            style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff3A3A3A).withOpacity(0.63)),
-                          ),
-                        ],
+                    return GestureDetector(
+                      onTap: (){
+                        read.onDeliverySlotSelected(watch.shopDeliverySlots?[index]);
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 11.w, vertical: 8.w),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Color(0xff4689EC).withOpacity(0.55.w)),
+                          borderRadius: BorderRadius.circular(5.w),
+                        ),
+                        margin: EdgeInsets.only(bottom: 20.w),
+                        child: Row(
+                          children: [
+                            OrderSummaryRadioButton(
+                                value: watch.shopDeliverySlots?[index],
+                                groupValue: watch.slotGroupValue,
+                                onChanged: (value) {
+                                  read.onDeliverySlotSelected(value);
+                                }),
+                            SizedBox(
+                              width: 18.w,
+                            ),
+                            Text(
+                              watch.shopDeliverySlots?[index]=="shop_owner_slot_9_to_12"?"9 AM to 12 PM":
+                              watch.shopDeliverySlots?[index]=="shop_owner_slot_12_to_3"?"12 PM to 3 PM":
+                              watch.shopDeliverySlots?[index]=="shop_owner_slot_3_to_6"?"3 PM to 6 PM":
+                              watch.shopDeliverySlots?[index]=="shop_owner_slot_6_to_9"?"6 PM to 9 PM":
+                              "",
+                              style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xff3A3A3A).withOpacity(0.63)),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }),

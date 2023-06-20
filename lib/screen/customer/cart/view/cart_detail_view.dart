@@ -815,6 +815,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                   ElevatedButton(
                                                       child: Text("Submit"),
                                                       onPressed: () {
+                                                        Navigator.pop(context);
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(

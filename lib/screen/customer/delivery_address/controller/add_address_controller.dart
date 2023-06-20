@@ -120,6 +120,9 @@ class AddAddressController extends ChangeNotifier {
     if(pageRoute=="orderAddress"){
       Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: false,route: "editAddress",cartId:cId,shopId: sId,)));
     }
+    if(pageRoute=="orderAddAdress"){
+      Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: false,route: "addAddress",cartId:cId,shopId: sId,)));
+    }
 
   }
 
@@ -459,14 +462,19 @@ class AddAddressController extends ChangeNotifier {
           AddAddressResponseModel.fromJson(jsonDecode(response.body));
       print(response.body);
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
+        if(pageRoute=="addressView") {
+          Navigator.pushAndRemoveUntil(
+            context,MaterialPageRoute(
               builder: (context) => MainScreenView(
                   index: 4,
                   screenName: MyDeliveryAddressView(isRefresh: true))),
-          (Route<dynamic> route) => false,
-        );
+                (Route<dynamic> route) => false,
+          );
+        }
+        if(pageRoute=="orderAddAdress"){
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: true, route:"addAddress",cartId: cId,shopId: sId,)));
+        }
+
         // pref.setString("pincode", pincode);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
