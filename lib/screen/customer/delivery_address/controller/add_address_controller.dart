@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/customer/delivery_address/repository/
 import 'package:local_supper_market/screen/customer/delivery_address/repository/update_delivery_address_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
@@ -53,7 +54,13 @@ class AddAddressController extends ChangeNotifier {
   UpdateDeliveryAddressRepo updateDeliveryAddressRepo =
       UpdateDeliveryAddressRepo();
   bool isEditingAddress = false;
-  Future<void> initState(context, editAddress, addressId) async {
+  String pageRoute="";
+
+
+
+  Future<void> initState(context, editAddress, addressId,route) async {
+    showLoader(true);
+    pageRoute=route;
     groupValue = "home";
     countryId = 0;
     stateId = 0;
@@ -93,6 +100,27 @@ class AddAddressController extends ChangeNotifier {
     print("nhjvwuriuiwbytiuywi");
     print(countryId);
     notifyListeners();
+  }
+
+  void onBackBtnPressed(context,cId,sId){
+    print("shopidddddddddddddd");
+    print(cId);
+    print(sId);
+    print("shopidddddddddddddd");
+    if(pageRoute=="addressView"){
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainScreenView(
+                index: 4,
+                screenName: MyDeliveryAddressView(isRefresh: false))),
+            (Route<dynamic> route) => false,
+      );
+    }
+    if(pageRoute=="orderAddress"){
+      Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: false,route: "editAddress",cartId:cId,shopId: sId,)));
+    }
+
   }
 
   Future<void> onStateSelected(value) async {
@@ -279,7 +307,7 @@ class AddAddressController extends ChangeNotifier {
     );
   }
 
-  Future<void> validateField(context) async {
+  Future<void> validateField(context,shopId,cartId) async {
     if (nameController.text.isEmpty) {
       Utils.showPrimarySnackbar(context, "Enter Name", type: SnackType.error);
       return;
@@ -341,9 +369,13 @@ class AddAddressController extends ChangeNotifier {
       return;
     }
     if (isEditingAddress) {
-      updateEditAddress(context);
+      print("shopidddddddddddddd");
+      print(shopId);
+      print(cartId);
+      print("shopidddddddddddddd");
+      updateEditAddress(context,shopId,cartId);
     } else {
-      addNewAddress(context);
+      addNewAddress(context,shopId,cartId);
     }
   }
 
@@ -416,7 +448,7 @@ class AddAddressController extends ChangeNotifier {
           deliveryAddressType: groupValue.toString(),
           deliveryPincode: pincode);
 
-  Future<void> addNewAddress(context) async {
+  Future<void> addNewAddress(context,sId,cId) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     newAddDeliveryAddressRepo
@@ -474,7 +506,9 @@ class AddAddressController extends ChangeNotifier {
         deliveryAddressId: deliveryAddressId,
       );
 
-  Future<void> updateEditAddress(context) async {
+  Future<void> updateEditAddress(context,sId,cId) async {
+    print("5353534535353454334");
+    print(pageRoute);
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     updateDeliveryAddressRepo
@@ -485,14 +519,20 @@ class AddAddressController extends ChangeNotifier {
           UpdateDeliveryAddressResModel.fromJson(jsonDecode(response.body));
       print(response.body);
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MainScreenView(
-                  index: 4,
-                  screenName: MyDeliveryAddressView(isRefresh: true))),
-          (Route<dynamic> route) => false,
-        );
+        if(pageRoute=="addressView") {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    MainScreenView(
+                        index: 4,
+                        screenName: MyDeliveryAddressView(isRefresh: true))),
+                (Route<dynamic> route) => false,
+          );
+        }
+        if(pageRoute=="orderAddress"){
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: true, route:"editAddress",cartId: cId,shopId: sId,)));
+        }
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {

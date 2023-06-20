@@ -8,27 +8,28 @@ import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_mod
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
-import 'package:local_supper_market/screen/customer/order_summery/model/order_summery_model.dart';
-import 'package:local_supper_market/screen/customer/order_summery/repository/order_summery_repo.dart';
+import 'package:local_supper_market/screen/customer/order_summary/model/order_summary_model.dart';
+import 'package:local_supper_market/screen/customer/order_summary/repository/order_summary_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OrderSummaryController extends ChangeNotifier {
-  OrderSummeryRepo orderSummeryRepo = OrderSummeryRepo();
+  OrderSummaryRepo orderSummaryRepo = OrderSummaryRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
       );
+  TextEditingController expectedDateController=TextEditingController();
   String shopId = "";
   String cartId = "";
   String groupValue = "deliveryTo";
   ShopDetails? shopDetailData;
   ShopDeliveryTypes? shopDeliveryTypes;
-  ShopDeliverySlots? shopDeliverySlots;
+  List? shopDeliverySlots;
   OrderFinalTotals? orderFinalTotals;
   List<CustomerAddress>? customerAddress;
   List<CartItemList>? cartItemList;
@@ -37,14 +38,28 @@ class OrderSummaryController extends ChangeNotifier {
   bool isLoading = true;
   bool favAllShop = true;
   List<bool> defaultSelectedAddress = [];
+  String slotGroupValue="";
+  String addressGroupValue="";
+  bool isNotFilled=false;
 
-  Future<void> initState(context, cId, id) async {
-    groupValue = "deliveryTo";
-    await orderSummery(context, cId, id);
-  }
+
+
+
+
+  Future<void> initState(context, cId, id,refresh) async {
+    if(refresh) {
+      groupValue = "deliveryTo";
+      await getOrderSummary(context, cId, id);
+    }
+    }
 
   void showLoader(value) {
     isLoading = value;
+    notifyListeners();
+  }
+
+  void onExpectedDateSelected(value){
+    expectedDateController.text=value;
     notifyListeners();
   }
 
@@ -53,48 +68,58 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  OrderSummeryReqModel get orderSummeryRequestModel =>
-      OrderSummeryReqModel(shopId: shopId, cartId: cartId);
 
-  Future<void> orderSummery(
+
+  void onDeliverySlotSelected(value){
+    slotGroupValue=value;
+    notifyListeners();
+  }
+  void onAddressSelected(value){
+    addressGroupValue=value;
+    notifyListeners();
+  }
+  OrderSummaryReqModel get orderSummeryRequestModel =>
+      OrderSummaryReqModel(shopId: shopId, cartId: cartId);
+
+  Future<void> getOrderSummary(
     context,
     id,
     cId,
   ) async {
+    showLoader(true);
     shopId = id.toString();
     cartId = cId.toString();
-    showLoader(true);
+
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    orderSummeryRepo
+    orderSummaryRepo
         .viewOrderSummery(
             orderSummeryRequestModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = OrderSummeryResModel.fromJson(jsonDecode(response.body));
+      final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         // shopDeliveryTypes=result.orderSummeryData?.shopDeliveryTypes ??"Delivery To";
-        if (result
-                .orderSummeryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ==
-            "active") {
+        if (result.orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup == "active") {
           groupValue = "selfPickup";
         } else {
           groupValue = "deliveryTo";
         }
-        // groupValue = data?.deliveryAddressType ?? "home";
-        shopDetailData = result.orderSummeryData?.shopDetails;
-        // shopDeliveryTypes = result.orderSummeryData?.shopDeliveryTypes;
-        shopDeliverySlots = result.orderSummeryData?.shopDeliverySlots;
-        orderFinalTotals = result.orderSummeryData?.orderFinalTotals;
-        customerAddress = result.orderSummeryData?.customerAddresses;
-        cartItemList = result.orderSummeryData?.cartItemList;
-        finalCouponList = result.orderSummeryData?.finalCouponList;
-        fullFillYourCravings = result.orderSummeryData?.fullFillYourCravings;
+        shopDetailData = result.orderSummaryData?.shopDetails;
+        shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
+        orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
+        customerAddress = result.orderSummaryData?.customerAddresses;
+        int addressListLength=customerAddress?.length??0;
+        for(int i=0;i<addressListLength;i++){
+          if(customerAddress?[i].deliveryAddressIsDefault=="yes"){
+            addressGroupValue=customerAddress?[i].addressId.toString()??"";
+          }
+        }
+        cartItemList = result.orderSummaryData?.cartItemList;
+        finalCouponList = result.orderSummaryData?.finalCouponList;
+        fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
 
-        print("bye");
-
-        print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
         showLoader(false);
 
         notifyListeners();

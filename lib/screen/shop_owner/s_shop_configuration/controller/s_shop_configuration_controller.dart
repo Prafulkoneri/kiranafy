@@ -44,11 +44,12 @@ class SShopConfigurationController extends ChangeNotifier {
   String networkImage = "";
   String image = "";
   bool isLoading=true;
+  bool isInitialConfiguration=true;
 
   Future<void> initState(
-      context,
+      context,initialConfiguration
       ) async {
-    await getShopConfiguration(context);
+    await getShopConfiguration(context,initialConfiguration);
   }
 
   showLoader(value){
@@ -140,8 +141,9 @@ class SShopConfigurationController extends ChangeNotifier {
   ///
 
   ////// Shop Configuration start
-  Future<void> getShopConfiguration(context) async {
+  Future<void> getShopConfiguration(context,initialConfiguration) async {
     showLoader(true);
+    isInitialConfiguration=initialConfiguration;
     print("successToken");
     SharedPreferences pref = await SharedPreferences.getInstance();
     supportNumberController.text = pref.getString("mobileNo").toString();
@@ -323,15 +325,29 @@ class SShopConfigurationController extends ChangeNotifier {
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                    index: 4,
-                    screenName: SAccountScreenView(),
-                  )),
-          (Route<dynamic> route) => false,
-        );
+        if(isInitialConfiguration){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: ShopDashBoard(),
+                )),
+                (Route<dynamic> route) => false,
+          );
+        }
+        else {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SMainScreenView(
+                      index: 4,
+                      screenName: SAccountScreenView(),
+                    )),
+                (Route<dynamic> route) => false,
+          );
+        }
         // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName:SAccountScreenView(),)));
 
         Utils.showPrimarySnackbar(context, "Updated Successfully",
@@ -404,13 +420,29 @@ class SShopConfigurationController extends ChangeNotifier {
         print("sucesss");
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView())),
-          (Route<dynamic> route) => false,
-        );
+        if(isInitialConfiguration){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: ShopDashBoard(),
+                )),
+                (Route<dynamic> route) => false,
+          );
+        }
+        else {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SMainScreenView(
+                      index: 4,
+                      screenName: SAccountScreenView(),
+                    )),
+                (Route<dynamic> route) => false,
+          );
+        }
       } else {
         Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);

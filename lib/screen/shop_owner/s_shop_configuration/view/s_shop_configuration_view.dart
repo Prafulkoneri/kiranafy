@@ -29,7 +29,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SShopConfigurationController>().initState(context);
+      context.read<SShopConfigurationController>().initState(context,widget.initialShopConfigration);
     });
   }
 

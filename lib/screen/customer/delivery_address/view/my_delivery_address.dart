@@ -61,6 +61,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                   builder: (context) => MainScreenView(
                       index: 4,
                       screenName: AddAddressView(
+                        route: "addressView",
                         isEditAdress: false,
                       ))),
               (Route<dynamic> route) => false,
@@ -283,6 +284,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                                                         index: 4,
                                                         screenName:
                                                             AddAddressView(
+                                                              route: "addressView",
                                                           isEditAdress: true,
                                                           addressId: element?.id
                                                               .toString(),

@@ -230,7 +230,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                           children: [
                             Expanded(
                                 child: PrimarySTextFormField(
-                                  lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(11),
+                                  lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(12),
                                   textInputType: TextInputType.number,
                               controller: watch.adharCardController,
                               hintText: "Aadhar Card No.",

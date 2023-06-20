@@ -1,11 +1,11 @@
 import '../../shop_profile/model/customer_view_shop_model.dart';
 
 ////////Request Model////////////////
-class OrderSummeryReqModel {
+class OrderSummaryReqModel {
   String? cartId;
   String? shopId;
 
-  OrderSummeryReqModel({
+  OrderSummaryReqModel({
     this.cartId,
     this.shopId,
   });
@@ -19,36 +19,36 @@ class OrderSummeryReqModel {
 }
 
 ///////////////////Response Model/////////////////
-class OrderSummeryResModel {
+class OrderSummaryResModel {
   int? status;
   String? message;
-  OrderSummeryData? orderSummeryData;
+  OrderSummaryData? orderSummaryData;
 
-  OrderSummeryResModel({
+  OrderSummaryResModel({
     required this.status,
     required this.message,
-    required this.orderSummeryData,
+    required this.orderSummaryData,
   });
 
-  OrderSummeryResModel.fromJson(Map<String, dynamic> json) {
+  OrderSummaryResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    orderSummeryData =
-        json['data'] != null ? OrderSummeryData.fromJson(json['data']) : null;
+    orderSummaryData =
+        json['data'] != null ? OrderSummaryData.fromJson(json['data']) : null;
   }
 }
 
-class OrderSummeryData {
+class OrderSummaryData {
   ShopDetails? shopDetails;
   ShopDeliveryTypes? shopDeliveryTypes; //
-  ShopDeliverySlots? shopDeliverySlots; //
+  List? shopDeliverySlots; //
   List<CustomerAddress>? customerAddresses; //
   List<CartItemList>? cartItemList; //
   OrderFinalTotals? orderFinalTotals; //
   List<FinalCouponList>? finalCouponList; //
   List<FullFillYourCraving>? fullFillYourCravings;
 
-  OrderSummeryData({
+  OrderSummaryData({
     required this.shopDetails,
     required this.shopDeliveryTypes,
     required this.shopDeliverySlots,
@@ -58,7 +58,7 @@ class OrderSummeryData {
     required this.finalCouponList,
     required this.fullFillYourCravings,
   });
-  OrderSummeryData.fromJson(Map<String, dynamic> json) {
+  OrderSummaryData.fromJson(Map<String, dynamic> json) {
     shopDetails = json['shop_details'] != null
         ? ShopDetails.fromJson(json['shop_details'])
         : null;
@@ -68,9 +68,12 @@ class OrderSummeryData {
         : null;
 
     ///Delivery Slot
-    shopDeliverySlots = json['shop_delivery_slots'] != null
-        ? ShopDeliverySlots.fromJson(json['shop_delivery_slots'])
-        : null;
+    if (json["shop_delivery_slots"] != null) {
+      shopDeliverySlots = [];
+      json["shop_delivery_slots"].forEach((v) {
+        shopDeliverySlots!.add(v);
+      });
+    }
 /////Customer Address//////
     if (json["customer_addresses"] != null) {
       customerAddresses = <CustomerAddress>[];

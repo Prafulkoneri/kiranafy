@@ -9,21 +9,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+
 import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
-import 'package:local_supper_market/screen/customer/order_summery/controller/order_summary_controller.dart';
-import 'package:local_supper_market/screen/customer/order_summery/cravings_products.dart';
+import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
+import 'package:local_supper_market/screen/customer/order_summary/view/address_list_sheet_view.dart';
+import 'package:local_supper_market/screen/customer/order_summary/view/coupons_list_sheet_view.dart';
+import 'package:local_supper_market/screen/customer/order_summary/view/expected_delivery_date_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:provider/provider.dart';
 
-import 'order_products.dart';
+import '../order_products.dart';
 
 class OrderSummaryView extends StatefulWidget {
   final String? shopId;
   final String? cartId;
-  const OrderSummaryView({super.key, this.cartId, this.shopId});
+  final bool ? isRefresh;
+  final String? route;
+  const OrderSummaryView({super.key, this.cartId, this.shopId,required this.isRefresh,required this.route});
 
   @override
   State<OrderSummaryView> createState() => _OrderSummaryViewState();
@@ -32,10 +37,11 @@ class OrderSummaryView extends StatefulWidget {
 // enum Fruit { apple, banana }
 
 class _OrderSummaryViewState extends State<OrderSummaryView> {
-  // String radioButtonItem = '';
+  String radioButtonItem = '';
+  bool showAddressModalSheet=false;
 
   // Group Value for Radio Button.
-  // int id = 1;
+  int id = 1;
   @override
   void initState() {
     print(widget.shopId);
@@ -44,8 +50,30 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
             context,
             widget.shopId,
             widget.cartId,
+        widget.isRefresh,
           );
+      if(widget.route=="editAddress") {
+        showModalBottomSheet(
+            backgroundColor: Colors
+                .white,
+            isScrollControlled: true,
+            shape: const RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.only(
+                    topLeft: Radius
+                        .circular(
+                        30),
+                    topRight: Radius
+                        .circular(
+                        30))),
+            context: context,
+            builder: (context) {
+              // using a scaffold helps to more easily position the FAB
+              return AddressListSheetView();
+            });
+      }
     });
+
   }
 
   @override
@@ -288,170 +316,134 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   itemCount: watch.customerAddress?.length ?? 0,
                   itemBuilder: (context, index) {
                     final element = watch.customerAddress![index];
-                    return Container(
-                      // padding: EdgeInsets.only(bottom: 20.w),
-                      // height: 156.h,
-                      width: double.infinity,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          // side: BorderSide(color: Colors.white70, width: 1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              bottom: 20.w, left: 20.w, right: 20.w, top: 20.w),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/images/person.svg',
-                                        width: 11.w,
-                                        height: 15.h,
-                                      ),
-                                      SizedBox(
-                                        width: 10.w,
-                                      ),
-                                      Text(
-                                        "${element.customerName}",
-                                        // 'Rachel Green',
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: Black,
-                                              letterSpacing: .5,
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-                                      // SizedBox(
-                                      //   width: 11.w,
-                                      // ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    // height: 21.h,/
-                                    // width: 71.w,
-                                    child: ElevatedButton(
-                                      style: ButtonStyle(
-                                        elevation: MaterialStateProperty.all(0),
-                                        // backgroundColor: ,
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.white),
-                                        shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            side: BorderSide(
-                                              color: lighrgreen,
-                                              // width: 1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {},
-                                      child: Text(
-                                        "${element.deliveryAddressType}",
-                                        // "Home",
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: SplashText1,
-                                              // letterSpacing: .5,
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-
-                                      //
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/images/phone.svg',
-                                    width: 14.w,
-                                    height: 15.h,
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Text(
-                                    '${element.mobileNo}',
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black,
-                                          letterSpacing: .5,
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10.w,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/images/location.svg',
-                                    color: SplashText1,
-                                    width: 17.w,
-                                    height: 17.h,
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      maxLines: 3,
-                                      "${element.address1} \n${element.address2} ",
-                                      // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
-                                      // textAlign: TextAlign.start,
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            // height: 1.5,
-                                            color: black,
-                                            // letterSpacing: .05,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10.w,
-                              ),
-                              element.deliveryAddressIsDefault == "yes"
-                                  ? Row(
+                    return GestureDetector(
+                      onTap: (){
+                        showModalBottomSheet(
+                            backgroundColor: Colors
+                                .white,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.only(
+                                    topLeft: Radius
+                                        .circular(
+                                        30),
+                                    topRight: Radius
+                                        .circular(
+                                        30))),
+                            context: context,
+                            builder: (context) {
+                              // using a scaffold helps to more easily position the FAB
+                              return AddressListSheetView();
+                            });
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        child:   element.deliveryAddressIsDefault == "yes"?Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                bottom: 15.w, left: 20.w, right: 20.w, top: 15.w),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
                                       children: [
+                                        SvgPicture.asset(
+                                          'assets/images/person.svg',
+                                          width: 11.w,
+                                          height: 15.h,
+                                        ),
                                         SizedBox(
                                           width: 10.w,
                                         ),
                                         Text(
-                                          'Default',
+                                          "${element.customerName}",
+                                          // 'Rachel Green',
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: Black,
-                                                // letterSpacing: .5,
+                                                letterSpacing: .5,
                                                 fontSize: 16.sp,
-                                                fontWeight: FontWeight.w400),
+                                                fontWeight: FontWeight.w700),
                                           ),
                                         ),
+                                        // SizedBox(
+                                        //   width: 11.w,
+                                        // ),
                                       ],
+                                    ),
+                                    Icon(Icons.keyboard_arrow_down_outlined),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 15.w,
+                                ),
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/images/phone.svg',
+                                      width: 14.w,
+                                      height: 15.h,
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Text(
+                                      '${element.mobileNo}',
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: Black,
+                                            letterSpacing: .5,
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 15.w,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/images/location.svg',
+                                      color: SplashText1,
+                                      width: 17.w,
+                                      height: 17.h,
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        maxLines: 3,
+                                        "${element.address1} \n${element.address2} ",
+                                        // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
+                                        // textAlign: TextAlign.start,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              // height: 1.5,
+                                              color: black,
+                                              // letterSpacing: .05,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
                                     )
-                                  : Container()
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                        ):Container(),
                       ),
                     );
                   },
@@ -474,15 +466,11 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(
-                  left: 10.w, right: 17.w, top: 8.w, bottom: 10.w),
-              // width: 352.w,
-              // height: 65.h,
-
-              child: Container(
+           Container(
                 padding: EdgeInsets.only(
                     left: 20.w, right: 17.w, top: 8.w, bottom: 10.w),
+                margin: EdgeInsets.only(
+                    left: 10.w, right: 17.w, top: 8.w, bottom: 10.w),
                 decoration: BoxDecoration(
                     border: Border.all(color: grey3),
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -492,67 +480,83 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Date:",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                // height: 1.5,
-                                color: black,
-                                letterSpacing: .05,
-                                // overflow: TextOverflow.ellipsis,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        Text(
-                          "Delivery Slot",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                // height: 1.5,
-                                color: black,
-                                letterSpacing: .05,
-                                // overflow: TextOverflow.ellipsis,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                     Expanded(child: Container(
+                       child:   Text(
+                         "Date:",
+                         style: GoogleFonts.dmSans(
+                           textStyle: TextStyle(
+                             // height: 1.5,
+                               color: black,
+                               letterSpacing: .05,
+                               // overflow: TextOverflow.ellipsis,
+                               fontSize: 14.sp,
+                               fontWeight: FontWeight.w500),
+                         ),
+                       ),
+                     )),
+                     Expanded(child: Container(
+                       child:     Text(
+                         "Delivery Slot",
+                         style: GoogleFonts.dmSans(
+                           textStyle: TextStyle(
+                             // height: 1.5,
+                               color: black,
+                               letterSpacing: .05,
+                               // overflow: TextOverflow.ellipsis,
+                               fontSize: 14.sp,
+                               fontWeight: FontWeight.w500),
+                         ),
+                       ),
+                     )),
+
+                   SizedBox(
+                     width: 20.w,
+                   ),
+                    
+
                       ],
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
-                    Row(
+                    watch.expectedDateController.text!=""||watch.slotGroupValue!=""?Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "25 Nov 2021",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    // height: 1.5,
-                                    color: black,
-                                    letterSpacing: .05,
-                                    // overflow: TextOverflow.ellipsis,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500),
+                        Expanded(
+                          child: Row(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                watch.expectedDateController.text,
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      // height: 1.5,
+                                      color: black,
+                                      letterSpacing: .05,
+                                      // overflow: TextOverflow.ellipsis,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 5.h,
-                            ),
-                            SvgPicture.asset(
-                              'assets/images/calender.svg',
-                              width: 12.w,
-                              height: 14.h,
-                            ),
-                          ],
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              SvgPicture.asset(
+                                'assets/images/calender.svg',
+                                width: 12.w,
+                                height: 14.h,
+                              ),
+                            ],
+                          ),
                         ),
                         Row(
                           children: [
                             Text(
-                              "9:00 am - 12:00 pm",
+                              watch.slotGroupValue=="shop_owner_slot_9_to_12"?"9:00 AM - 12:00 PM":
+                              watch.slotGroupValue=="shop_owner_slot_12_to_3"?"12:00 PM - 3:00 PM":
+                              watch.slotGroupValue=="shop_owner_slot_3_to_6"?"3:00 PM - 6:00 PM":
+                              watch.slotGroupValue=="shop_owner_slot_6_to_9"?"6:00 PM - 9:00 PM":
+                              "",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
                                     // height: 1.5,
@@ -566,19 +570,71 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            SvgPicture.asset(
-                              'assets/images/pencil.svg',
-                              width: 12.w,
-                              height: 14.h,
+                            GestureDetector(
+                              onTap: (){
+                                showModalBottomSheet(
+                                    backgroundColor: Colors
+                                        .white,
+                                    isScrollControlled: true,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.only(
+                                            topLeft: Radius
+                                                .circular(
+                                                30),
+                                            topRight: Radius
+                                                .circular(
+                                                30))),
+                                    context: context,
+                                    builder: (context) {
+                                      // using a scaffold helps to more easily position the FAB
+                                      return ExpectedDeliveryDateSheetView();
+                                    });
+                              },
+                              child: SvgPicture.asset(
+                                'assets/images/pencil.svg',
+                                width: 12.w,
+                                height: 14.h,
+                              ),
                             ),
                           ],
+                        ),
+                      ],
+                    ):Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: (){
+                            showModalBottomSheet(
+                                backgroundColor: Colors
+                                    .white,
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.only(
+                                        topLeft: Radius
+                                            .circular(
+                                            30),
+                                        topRight: Radius
+                                            .circular(
+                                            30))),
+                                context: context,
+                                builder: (context) {
+                                  // using a scaffold helps to more easily position the FAB
+                                  return ExpectedDeliveryDateSheetView();
+                                });
+                          },
+                          child: SvgPicture.asset(
+                            'assets/images/pencil.svg',
+                            width: 12.w,
+                            height: 14.h,
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-            ),
             Container(
               padding: EdgeInsets.only(left: 19.w, top: 30.w, right: 19.w),
               child: Row(
@@ -596,24 +652,46 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 11.33.w, vertical: 7.w),
-                    decoration: BoxDecoration(
-                        color: lightsky,
-                        borderRadius: BorderRadius.circular(10.w),
-                        border: Border.all(color: SplashText)),
-                    child: Center(
-                      child: Row(
-                        children: [
-                          Text(
-                            "Get Code",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16.sp,
-                                color: SplashText),
-                          ),
-                        ],
+                  GestureDetector(
+                    onTap: (){
+                      showModalBottomSheet(
+                          backgroundColor: Colors
+                              .white,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.only(
+                                  topLeft: Radius
+                                      .circular(
+                                      30),
+                                  topRight: Radius
+                                      .circular(
+                                      30))),
+                          context: context,
+                          builder: (context) {
+                            // using a scaffold helps to more easily position the FAB
+                            return CouponsListSheetView();
+                          });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 11.33.w, vertical: 7.w),
+                      decoration: BoxDecoration(
+                          color: lightsky,
+                          borderRadius: BorderRadius.circular(10.w),
+                          border: Border.all(color: SplashText)),
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Text(
+                              "Get Code",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16.sp,
+                                  color: SplashText),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -1059,9 +1137,6 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                     endIndent: 0,
                   ),
                   OrderProducts(),
-                  SizedBox(
-                    height: 10.h,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -1235,7 +1310,6 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
               // width: 390.w,
 
               child: PrimaryButton(
-                borderRadius: 0,
                 width: ScreenUtil().screenWidth,
                 color: SplashText,
                 // style: ButtonStyle(
@@ -1256,19 +1330,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => OrderPaymentView(
-                              cartId: "30",
-                              shopId: "3",
-                              couponId: "21",
-                              customerDeliveryAddressId: "32",
-                              customerDeliveryDate: "25-06-2023",
-                              customerDeliverySlot: "shop_owner_slot_9_to_12",
-                              customerDeliveryType:
-                                  "shop_owner_customer_pickup",
-                              finalTotalAmount: "1210",
-                              finalTotalDiscount: "10",
-                              totalItems: "2",
-                            )),
+                        builder: (context) => const OrderPaymentView()),
                   );
                 },
 
@@ -1285,7 +1347,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
 
                 //
               ),
-            ),
+            )
           ],
         ),
       ),

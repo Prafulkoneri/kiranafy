@@ -19,7 +19,10 @@ import 'package:provider/provider.dart';
 class AddAddressView extends StatefulWidget {
   final bool? isEditAdress;
   final String? addressId;
-  const AddAddressView({super.key, required this.isEditAdress, this.addressId});
+  final String ? route;
+  final String ? shopId;
+  final String ? cartId;
+  const AddAddressView({super.key,this.shopId,this.cartId,required this.isEditAdress, this.addressId,required this.route});
 
   @override
   State<AddAddressView> createState() => _AddAddressViewState();
@@ -32,7 +35,7 @@ class _AddAddressViewState extends State<AddAddressView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<AddAddressController>()
-          .initState(context, widget.isEditAdress, widget.addressId);
+          .initState(context, widget.isEditAdress, widget.addressId,widget.route);
     });
   }
 
@@ -45,21 +48,12 @@ class _AddAddressViewState extends State<AddAddressView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 4,
-                      screenName: MyDeliveryAddressView(
-                        isRefresh: false,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+        read.onBackBtnPressed(context,widget.cartId,widget.shopId);
           },
           title: widget.isEditAdress==false?"Add Address":"Edit Address",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
-            await read.validateField(context);
+            await read.validateField(context,widget.shopId,widget.cartId);
           },
         ),
       ),
