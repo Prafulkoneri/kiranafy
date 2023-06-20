@@ -79,6 +79,7 @@ dependencies:
   # Image Picker
   image_picker: ^0.8.7+4
   flutter_image_compress: ^1.1.0
+  order_tracker: ^0.0.2
 
 dev_dependencies:
   flutter_test:
