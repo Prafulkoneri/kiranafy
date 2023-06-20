@@ -22,14 +22,17 @@ class OrderPaymentController extends ChangeNotifier {
   String? finalTotalAmount = "";
   String? finalTotalDiscount = "";
   String? totalItems = "";
-  String groupValue = "";
+  String? groupValue = "";
+  String? finalSubTotal = "";
+  String? finalDeliveryCharges = "";
+
   ShopDetails? shopDetailData;
   OrderPaymentData? orderPaymentData;
   Future<void> initState(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
-      ftAmount, ftDiscount, tItems) async {
+      ftAmount, ftDiscount, tItems, fSubTotal, fDCharges) async {
     groupValue = "";
     await orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
-        ftAmount, ftDiscount, tItems);
+        ftAmount, ftDiscount, tItems, fSubTotal, fDCharges);
   }
 
   void onRadioButtonSelected(value) {
@@ -38,19 +41,20 @@ class OrderPaymentController extends ChangeNotifier {
   }
 
   OrderPaymentReqModel get orderPaymentReqModel => OrderPaymentReqModel(
-        shopId: shopId.toString(),
-        cartId: cartId.toString(),
-        couponId: couponId.toString(),
-        customerDeliveryAddressId: customerDeliveryAddressId.toString(),
-        customerDeliveryDate: customerDeliveryDate.toString(),
-        customerDeliverySlot: customerDeliverySlot.toString(),
-        customerDeliveryType: customerDeliveryType.toString(),
-        finalTotalAmount: finalTotalAmount.toString(),
-        finalTotalDiscount: finalTotalDiscount.toString(),
-        totalItems: totalItems.toString(),
-      );
+      shopId: shopId.toString(),
+      cartId: cartId.toString(),
+      couponId: couponId.toString(),
+      customerDeliveryAddressId: customerDeliveryAddressId.toString(),
+      customerDeliveryDate: customerDeliveryDate.toString(),
+      customerDeliverySlot: customerDeliverySlot.toString(),
+      customerDeliveryType: customerDeliveryType.toString(),
+      finalTotalAmount: finalTotalAmount.toString(),
+      finalTotalDiscount: finalTotalDiscount.toString(),
+      totalItems: totalItems.toString(),
+      finalSubTotal: finalSubTotal.toString(),
+      finalDeliveryCharges: finalDeliveryCharges.toString());
   Future<void> orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot,
-      cdType, ftAmount, ftDiscount, tItems) async {
+      cdType, ftAmount, ftDiscount, tItems, fSubTotal, fDCharges) async {
     shopId = id.toString();
     cartId = cId.toString();
     couponId = cuId.toString();
@@ -61,6 +65,8 @@ class OrderPaymentController extends ChangeNotifier {
     finalTotalAmount = ftAmount.toString();
     finalTotalDiscount = ftDiscount.toString();
     totalItems = tItems.toString();
+    finalSubTotal = fSubTotal.toString();
+    finalDeliveryCharges = fDCharges.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     orderPaymentRepo

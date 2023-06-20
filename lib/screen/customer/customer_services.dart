@@ -11,10 +11,6 @@ import '../../const/color.dart';
 import '../../widget/dropdown_field.dart';
 import '../../widget/textfield.dart';
 
-void main() {
-  runApp(customerSupport());
-}
-
 class customerSupport extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
   String initialCountry = 'IN';
@@ -47,37 +43,40 @@ class customerSupport extends StatelessWidget {
       // ),
       body: Column(
         children: [
-
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
                     width: ScreenUtil().screenWidth,
-                    padding: EdgeInsets.only(left: 19.w,right:19.w,top:20.w),
+                    padding:
+                        EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
                     child: Container(
                       decoration: BoxDecoration(
-                              border: Border.all(
-                                color: grey6,
-                                width: 1,
-                              ),
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.white,
-                                      blurRadius: 5,
-                                      offset: Offset(-.0, 5.0),
-                                      spreadRadius: 0),
-                                ],
-                              ),
-                              
+                        border: Border.all(
+                          color: grey6,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.white,
+                              blurRadius: 5,
+                              offset: Offset(-.0, 5.0),
+                              spreadRadius: 0),
+                        ],
+                      ),
                       child: Column(
                         children: [
                           SizedBox(
                             height: 10.w,
                           ),
                           Container(
-                            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 10.w,),
+                            padding: EdgeInsets.only(
+                              left: 20.w,
+                              right: 20.w,
+                              top: 10.w,
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -85,11 +84,11 @@ class customerSupport extends StatelessWidget {
                                   children: [
                                     Text(
                                       'Ticket Id-',
-                                      style:  TextStyle(
-                                            color: Black,
-                                            letterSpacing: .5,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                          color: Black,
+                                          letterSpacing: .5,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                     Text(
                                       'PAG122E551',
@@ -121,7 +120,8 @@ class customerSupport extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 10.w),
+                            padding: EdgeInsets.only(
+                                left: 20.w, right: 20.w, top: 10.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -163,7 +163,8 @@ class customerSupport extends StatelessWidget {
                           Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 20, right: 20),
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
                                 child: Text(
                                   'Subject',
                                   style: GoogleFonts.dmSans(
@@ -177,28 +178,27 @@ class customerSupport extends StatelessWidget {
                               ),
                             ],
                           ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing.',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        letterSpacing: .5,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing.',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
                               ),
-                            
-                          
-                           SizedBox(
+                            ),
+                          ),
+                          SizedBox(
                             height: 10.w,
                           ),
                           Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 20, right: 20),
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
                                 child: Text(
                                   'Remark',
                                   style: GoogleFonts.dmSans(
@@ -213,96 +213,8 @@ class customerSupport extends StatelessWidget {
                             ],
                           ),
                           Padding(
-                                padding: const EdgeInsets.only(left: 20,bottom: 10),
-                                child: Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        letterSpacing: .5,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ),
-                        ],
-                      ),
-              
-                    ),
-                  ),
-                  Container(
-                    width: ScreenUtil().screenWidth,
-                    padding: EdgeInsets.only(left: 19.w,right:19.w,top:30.w),
-                  
-                    child: Container(
-                      decoration: BoxDecoration(
-              gradient: LinearGradient(
-               begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xff44B8CA), Color(0xff2E2E2)],
-                ),
-                              border: Border.all(
-                                color: grey6,
-                                width: 1,
-                              ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                         
-                          Padding(
-                            padding: const EdgeInsets.only(left:20,),
-                            child: Row(
-                              
-                              children: [  
-                                      Padding(
-                                        padding: const EdgeInsets.only(top:10),
-                                        child: Image.asset('assets/images/profile.png'),  
-                                        
-                                      ),
-                                 
-                                Padding(
-                                  padding: const EdgeInsets.only(left:10),
-                                  child: Text(
-                                    'Johnson Doe',
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black,
-                                          letterSpacing: .5,
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                ),
-                                
-                              ],
-                            ),
-                            
-                          ),
-                            Padding(
-                              padding: const EdgeInsets.only(left:70,),
-                              child: Text(
-                                '12 Jan 2021',
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: Divider(
-                              color: gradient,
-                              thickness: 1,
-                            ),
-                          ),
-                          Padding(
-                          padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 10.w),
+                            padding:
+                                const EdgeInsets.only(left: 20, bottom: 10),
                             child: Text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.',
                               style: GoogleFonts.dmSans(
@@ -314,36 +226,119 @@ class customerSupport extends StatelessWidget {
                               ),
                             ),
                           ),
-                         
                         ],
                       ),
-              
                     ),
-                    
+                  ),
+                  Container(
+                    width: ScreenUtil().screenWidth,
+                    padding:
+                        EdgeInsets.only(left: 19.w, right: 19.w, top: 30.w),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Color(0xff44B8CA), Color(0xff2E2E2)],
+                        ),
+                        border: Border.all(
+                          color: grey6,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child:
+                                      Image.asset('assets/images/profile.png'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    'Johnson Doe',
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Black,
+                                          letterSpacing: .5,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 70,
+                            ),
+                            child: Text(
+                              '12 Jan 2021',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            child: Divider(
+                              color: gradient,
+                              thickness: 1,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 20.w, right: 20.w, bottom: 10.w),
+                            child: Text(
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-           TextField(
-                        decoration: InputDecoration(
-                          suffixIcon: Padding(
-                            padding:
-                                EdgeInsets.only(right: 16.w, top: 16.w, bottom: 16.w),
-                            child: SvgPicture.asset(
-                              'assets/icons/send_button.svg',
-                              width: 40.w,
-                              height: 30.h,
-                            ),
-                          ),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1, color: Grey),
-                            //<-- SEE HERE
-                          ),
-                          filled: true,
-                        ),
-                      ),
+          TextField(
+            decoration: InputDecoration(
+              suffixIcon: Padding(
+                padding: EdgeInsets.only(right: 16.w, top: 16.w, bottom: 16.w),
+                child: SvgPicture.asset(
+                  'assets/icons/send_button.svg',
+                  width: 40.w,
+                  height: 30.h,
+                ),
+              ),
+              fillColor: Colors.white,
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Grey),
+                //<-- SEE HERE
+              ),
+              filled: true,
+            ),
+          ),
         ],
       ),
     );

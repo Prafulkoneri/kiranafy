@@ -29,6 +29,8 @@ class OrderPaymentView extends StatefulWidget {
   final String? finalTotalAmount;
   final String? finalTotalDiscount;
   final String? totalItems;
+  final String? finalSubTotal;
+  final String? finalDeliveryCharges;
 
   const OrderPaymentView(
       {super.key,
@@ -41,7 +43,9 @@ class OrderPaymentView extends StatefulWidget {
       this.customerDeliveryType,
       this.finalTotalAmount,
       this.finalTotalDiscount,
-      this.totalItems});
+      this.totalItems,
+      this.finalSubTotal,
+      this.finalDeliveryCharges});
 
   @override
   State<OrderPaymentView> createState() => _OrderPaymentViewState();
@@ -66,7 +70,9 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
           widget.customerDeliveryType,
           widget.finalTotalAmount,
           widget.finalTotalDiscount,
-          widget.totalItems);
+          widget.totalItems,
+          widget.finalSubTotal,
+          widget.finalDeliveryCharges);
     });
   }
 
@@ -83,7 +89,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const OrderSummaryView(isRefresh: false, route:"paymentView")),
+                    builder: (context) => const OrderSummaryView(
+                        isRefresh: false, route: "paymentView")),
               );
             },
             title: "Order Payment",
