@@ -42,13 +42,14 @@ class SCouponsListController extends ChangeNotifier {
     isLoading = value;
     notifyListeners();
   }
+
   showInfoLoader(value) {
     isInfoLoading = value;
     notifyListeners();
   }
 
-  void onDismiss(){
-    isOfferCopied=false;
+  void onDismiss() {
+    isOfferCopied = false;
     notifyListeners();
   }
 
@@ -97,7 +98,7 @@ class SCouponsListController extends ChangeNotifier {
     });
   }
 
-  copyCodeForCoupanList(context,offerMsg){
+  copyCodeForCoupanList(context, offerMsg) {
     Clipboard.setData(ClipboardData(text: offerMsg)).then((_) {
       Utils.showPrimarySnackbar(context, "Coupon Code Copied",
           type: SnackType.success);
