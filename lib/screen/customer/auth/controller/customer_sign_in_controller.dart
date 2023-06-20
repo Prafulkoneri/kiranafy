@@ -135,7 +135,7 @@ class CustomerSignInController extends ChangeNotifier {
         pref.setString("status", "customerLoggedIn");
         print("token ${pref.getString("successToken")}");
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainScreenView()));
+            context, MaterialPageRoute(builder: (context) => MainScreenView(index: 0,)));
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

@@ -120,8 +120,8 @@ class AddAddressController extends ChangeNotifier {
     if(pageRoute=="orderAddress"){
       Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: false,route: "editAddress",cartId:cId,shopId: sId,)));
     }
-    if(pageRoute=="orderAddAdress"){
-      Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: false,route: "addAddress",cartId:cId,shopId: sId,)));
+    if(pageRoute=="orderAddAddress"){
+      Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: false, route:"addAddress",cartId: cId,shopId: sId,)));
     }
 
   }
@@ -471,7 +471,7 @@ class AddAddressController extends ChangeNotifier {
                 (Route<dynamic> route) => false,
           );
         }
-        if(pageRoute=="orderAddAdress"){
+        if(pageRoute=="orderAddAddress"){
           Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderSummaryView(isRefresh: true, route:"addAddress",cartId: cId,shopId: sId,)));
         }
 
