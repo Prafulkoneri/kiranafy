@@ -170,21 +170,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       )),
                                       Row(
                                         children: [
-                                          // GestureDetector(
-                                          //   onTap: () {
-                                          //     read.launchPhone(
-                                          //         watch.shopDetails
-                                          //                 ?.shopOwnerSupportNumber ??
-                                          //             "",
-                                          //         context);
-                                          //   },
-                                          //   child: SvgPicture.asset(
-                                          //     'assets/images/call.svg',
-                                          //     // width: 15.w,
-                                          //     // height: 19.h,
-                                          //   ),
-                                          // ),
-                                          InkWell(
+                                                                                   InkWell(
                                             onTap: () {
                                               read.launchPhone(
                                                   watch.shopDetails

@@ -11,19 +11,22 @@ class OrderPaymentReqModel {
   String? customerDeliverySlot; //
   String? customerDeliveryDate; //
   String? customerDeliveryAddressId; //
+  String? finalSubTotal;
+  String? finalDeliveryCharges;
 
-  OrderPaymentReqModel({
-    this.cartId,
-    this.shopId,
-    this.couponId,
-    this.totalItems, //
-    this.finalTotalAmount, //
-    this.finalTotalDiscount, //
-    this.customerDeliveryType, //
-    this.customerDeliverySlot, //
-    this.customerDeliveryDate, //
-    this.customerDeliveryAddressId, //
-  });
+  OrderPaymentReqModel(
+      {this.cartId,
+      this.shopId,
+      this.couponId,
+      this.totalItems, //
+      this.finalTotalAmount, //
+      this.finalTotalDiscount, //
+      this.customerDeliveryType, //
+      this.customerDeliverySlot, //
+      this.customerDeliveryDate, //
+      this.customerDeliveryAddressId, //
+      this.finalSubTotal,
+      this.finalDeliveryCharges});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
@@ -37,7 +40,8 @@ class OrderPaymentReqModel {
     data["customer_delivery_slot"] = customerDeliverySlot;
     data["customer_delivery_date"] = customerDeliveryDate;
     data["customer_delivery_address_id"] = customerDeliveryAddressId;
-
+    data["final_sub_total"] = finalSubTotal;
+    data["final_delivery_charges"] = finalDeliveryCharges;
     return data;
   }
 }

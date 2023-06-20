@@ -121,699 +121,147 @@ class MyOrderView extends StatelessWidget {
       //   ],
       // ),
       // backgroundColor: backgroundColor,
-      body: Column(
-        children: [
-          ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                    left: 20.w, right: 20.w, top: 19.w, bottom: 0.w),
-                padding: EdgeInsets.only(
-                    left: 15.w, right: 15.w, top: 10.w, bottom: 10.w),
-                // width: 352.w,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: grey6),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
+      body: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.only(
+                left: 20.w, right: 20.w, top: 19.w, bottom: 0.w),
+            padding: EdgeInsets.only(
+                left: 15.w, right: 15.w, top: 10.w, bottom: 10.w),
+            // width: 352.w,
+            decoration: BoxDecoration(
+              border: Border.all(width: 1, color: grey6),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Order ID - PAAC001",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black1,
-                                // letterSpacing: .5,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 100.w,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              elevation: MaterialStateProperty.all(0),
-                              // backgroundColor: ,
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  side: BorderSide(
-                                    color: Yellow,
-                                    // width: 1,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const OrderPendingView()),
-                              );
-                            },
-                            child: Text(
-                              "Pending",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Yellow,
-                                    // letterSpacing: .5,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ),
-
-                            //
-                          ),
-                        ),
-                      ],
-                    ),
                     Text(
-                      "Mar 10, 2023    9:15 am",
+                      "Order ID - PAAC001",
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
-                            color: lightblack,
+                            color: Black1,
                             // letterSpacing: .5,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
                     SizedBox(
-                      height: 13.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Total Amount",
+                      width: 100.w,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          // backgroundColor: ,
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(
+                                color: Yellow,
+                                // width: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const OrderPendingView()),
+                          );
+                        },
+                        child: Text(
+                          "Pending",
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
-                                color: Black,
+                                color: Yellow,
                                 // letterSpacing: .5,
-                                fontSize: 13.sp,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w700),
                           ),
                         ),
-                        Text(
-                          "Total Quantity",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ],
+
+                        //
+                      ),
                     ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Rs. 3,200",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: lightblack1,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        Text(
-                          "25",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: lightblack1,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                      ],
-                    )
                   ],
                 ),
-              );
-            },
-          ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
-          //   child: Container(
-          //     height: 119.h,
-          //     width: 352.w,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(width: 1, color: grey6),
-          //       borderRadius: BorderRadius.all(Radius.circular(20)),
-          //     ),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, right: 13.w, top: 12.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Order ID - PAAC001",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black1,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 16,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               SizedBox(
-          //                 height: 22.h,
-          //                 width: 80.w,
-          //                 child: ElevatedButton(
-          //                   style: ButtonStyle(
-          //                     elevation: MaterialStateProperty.all(0),
-          //                     // backgroundColor: ,
-          //                     backgroundColor:
-          //                         MaterialStateProperty.all(Colors.white),
-          //                     shape: MaterialStateProperty.all(
-          //                       RoundedRectangleBorder(
-          //                         borderRadius: BorderRadius.circular(10),
-          //                         side: BorderSide(
-          //                           color: Yellow,
-          //                           // width: 1,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                   onPressed: () {},
-          //                   child: Text(
-          //                     "Pending",
-          //                     style: GoogleFonts.dmSans(
-          //                       textStyle: TextStyle(
-          //                           color: Yellow,
-          //                           // letterSpacing: .5,
-          //                           fontSize: 12.sp,
-          //                           fontWeight: FontWeight.w700),
-          //                     ),
-          //                   ),
-
-          //                   //
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding: EdgeInsets.only(left: 15.w, top: 5.w),
-          //           child: Text(
-          //             "Mar 10, 2023    9:15 am",
-          //             style: GoogleFonts.dmSans(
-          //               textStyle: TextStyle(
-          //                   color: lightblack,
-          //                   // letterSpacing: .5,
-          //                   fontSize: 12.sp,
-          //                   fontWeight: FontWeight.w400),
-          //             ),
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, top: 13.w, right: 15.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Total Amount",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 "Total Amount",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, top: 6.w, right: 15.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Rs. 3,200",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: lightblack1,
-          //                       fontSize: 16.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 "25",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: lightblack1,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
-          //   child: Container(
-          //     height: 119.h,
-          //     width: 352.w,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(width: 1, color: grey6),
-          //       borderRadius: BorderRadius.all(Radius.circular(20)),
-          //     ),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, right: 13.w, top: 12.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Order ID - PAAC001",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black1,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 16,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               SizedBox(
-          //                 height: 22.h,
-          //                 width: 80.w,
-          //                 child: ElevatedButton(
-          //                   style: ButtonStyle(
-          //                     elevation: MaterialStateProperty.all(0),
-          //                     // backgroundColor: ,
-          //                     backgroundColor:
-          //                         MaterialStateProperty.all(Colors.white),
-          //                     shape: MaterialStateProperty.all(
-          //                       RoundedRectangleBorder(
-          //                         borderRadius: BorderRadius.circular(10),
-          //                         side: BorderSide(
-          //                           color: Yellow,
-          //                           // width: 1,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                   onPressed: () {},
-          //                   child: Text(
-          //                     "Pending",
-          //                     style: GoogleFonts.dmSans(
-          //                       textStyle: TextStyle(
-          //                           color: Yellow,
-          //                           // letterSpacing: .5,
-          //                           fontSize: 12.sp,
-          //                           fontWeight: FontWeight.w700),
-          //                     ),
-          //                   ),
-
-          //                   //
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding: EdgeInsets.only(left: 15.w, top: 5.w),
-          //           child: Text(
-          //             "Mar 10, 2023    9:15 am",
-          //             style: GoogleFonts.dmSans(
-          //               textStyle: TextStyle(
-          //                   color: lightblack,
-          //                   // letterSpacing: .5,
-          //                   fontSize: 12.sp,
-          //                   fontWeight: FontWeight.w400),
-          //             ),
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, top: 13.w, right: 15.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Total Amount",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 "Total Amount",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, top: 6.w, right: 15.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Rs. 3,200",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: lightblack1,
-          //                       fontSize: 16.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 "25",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: lightblack1,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
-          //   child: Container(
-          //     height: 119.h,
-          //     width: 352.w,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(width: 1, color: grey6),
-          //       borderRadius: BorderRadius.all(Radius.circular(20)),
-          //     ),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, right: 13.w, top: 12.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Order ID - PAAC001",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black1,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 16,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               SizedBox(
-          //                 height: 22.h,
-          //                 width: 80.w,
-          //                 child: ElevatedButton(
-          //                   style: ButtonStyle(
-          //                     elevation: MaterialStateProperty.all(0),
-          //                     // backgroundColor: ,
-          //                     backgroundColor:
-          //                         MaterialStateProperty.all(Colors.white),
-          //                     shape: MaterialStateProperty.all(
-          //                       RoundedRectangleBorder(
-          //                         borderRadius: BorderRadius.circular(10),
-          //                         side: BorderSide(
-          //                           color: Yellow,
-          //                           // width: 1,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                   onPressed: () {},
-          //                   child: Text(
-          //                     "Pending",
-          //                     style: GoogleFonts.dmSans(
-          //                       textStyle: TextStyle(
-          //                           color: Yellow,
-          //                           // letterSpacing: .5,
-          //                           fontSize: 12.sp,
-          //                           fontWeight: FontWeight.w700),
-          //                     ),
-          //                   ),
-
-          //                   //
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding: EdgeInsets.only(left: 15.w, top: 5.w),
-          //           child: Text(
-          //             "Mar 10, 2023    9:15 am",
-          //             style: GoogleFonts.dmSans(
-          //               textStyle: TextStyle(
-          //                   color: lightblack,
-          //                   // letterSpacing: .5,
-          //                   fontSize: 12.sp,
-          //                   fontWeight: FontWeight.w400),
-          //             ),
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, top: 13.w, right: 15.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Total Amount",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 "Total Amount",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, top: 6.w, right: 15.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Rs. 3,200",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: lightblack1,
-          //                       fontSize: 16.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 "25",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: lightblack1,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
-          //   child: Container(
-          //     height: 119.h,
-          //     width: 352.w,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(width: 1, color: grey6),
-          //       borderRadius: BorderRadius.all(Radius.circular(20)),
-          //     ),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, right: 13.w, top: 12.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Order ID - PAAC001",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black1,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 16,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               SizedBox(
-          //                 height: 22.h,
-          //                 width: 80.w,
-          //                 child: ElevatedButton(
-          //                   style: ButtonStyle(
-          //                     elevation: MaterialStateProperty.all(0),
-          //                     // backgroundColor: ,
-          //                     backgroundColor:
-          //                         MaterialStateProperty.all(Colors.white),
-          //                     shape: MaterialStateProperty.all(
-          //                       RoundedRectangleBorder(
-          //                         borderRadius: BorderRadius.circular(10),
-          //                         side: BorderSide(
-          //                           color: Yellow,
-          //                           // width: 1,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                   onPressed: () {},
-          //                   child: Text(
-          //                     "Pending",
-          //                     style: GoogleFonts.dmSans(
-          //                       textStyle: TextStyle(
-          //                           color: Yellow,
-          //                           // letterSpacing: .5,
-          //                           fontSize: 12.sp,
-          //                           fontWeight: FontWeight.w700),
-          //                     ),
-          //                   ),
-
-          //                   //
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding: EdgeInsets.only(left: 15.w, top: 5.w),
-          //           child: Text(
-          //             "Mar 10, 2023    9:15 am",
-          //             style: GoogleFonts.dmSans(
-          //               textStyle: TextStyle(
-          //                   color: lightblack,
-          //                   // letterSpacing: .5,
-          //                   fontSize: 12.sp,
-          //                   fontWeight: FontWeight.w400),
-          //             ),
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, top: 13.w, right: 15.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Total Amount",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black,
-          //                       // letterSpacing: .5,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 "Total Amount",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: Black,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w700),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Padding(
-          //           padding:
-          //               EdgeInsets.only(left: 15.w, top: 6.w, right: 15.w),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "Rs. 3,200",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: lightblack1,
-          //                       fontSize: 16.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //               Text(
-          //                 "25",
-          //                 style: GoogleFonts.dmSans(
-          //                   textStyle: TextStyle(
-          //                       color: lightblack1,
-          //                       fontSize: 13.sp,
-          //                       fontWeight: FontWeight.w400),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-        ],
+                Text(
+                  "Mar 10, 2023    9:15 am",
+                  style: GoogleFonts.dmSans(
+                    textStyle: TextStyle(
+                        color: lightblack,
+                        // letterSpacing: .5,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
+                SizedBox(
+                  height: 13.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Total Amount",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            // letterSpacing: .5,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    Text(
+                      "Total Quantity",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Rs. 3,200",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: lightblack1,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    Text(
+                      "25",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: lightblack1,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
