@@ -62,6 +62,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'screen/customer/cart/controller/cart_controller.dart';
 import 'screen/customer/cart/controller/cart_detail_controller.dart';
 import 'screen/customer/delivery_address/controller/delivery_address_controller.dart';
+import 'screen/customer/my_order/controller/my_orders_controller.dart';
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/order_payment/controller/order_payment_controller.dart';
 import 'screen/customer/products/controller/product_view_controller.dart';
@@ -129,6 +130,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AllOffersController()),
         ChangeNotifierProvider(create: (_) => OrderSummaryController()),
         ChangeNotifierProvider(create: (_) => OrderPaymentController()),
+        ChangeNotifierProvider(create: (_) => MyOrdersController()),
       ],
       child: MyApp(),
     ),

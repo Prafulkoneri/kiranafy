@@ -277,6 +277,9 @@ class Endpoint {
   //Order PAyment////
   static const String orderPayment =
       "${baseUrl}lsm-customer-order-payment-screen";
-  //Order PAyment////
+  //Order Place////
   static const String placeOrder = "${baseUrl}lsm-customer-place-order";
+/////My Orders////
+  static const String myOrders =
+      "${baseUrl}lsm-customer-order-list-with-filter";
 }

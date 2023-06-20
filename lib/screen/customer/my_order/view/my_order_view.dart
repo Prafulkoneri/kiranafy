@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
+import 'package:local_supper_market/screen/customer/category/view/filter_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/delivery_view_pending.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/my_order/view/order_filtter_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
 import '../../cart/view/empty_cart_view.dart';
@@ -32,19 +34,19 @@ class MyOrderView extends StatelessWidget {
           title: "My Orders",
           action: InkWell(
             onTap: () {
-              // showModalBottomSheet(
-              //   isScrollControlled: true,
-              //   shape: const RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.only(
-              //           topLeft: Radius.circular(30),
-              //           topRight: Radius.circular(30))),
-              //   context: context,
-              //   builder: (BuildContext context) {
-              //     return StatefulBuilder(builder: (context, setState) {
-              //       return FilterScreenView();
-              //     });
-              //   },
-              // );
+              showModalBottomSheet(
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30))),
+                context: context,
+                builder: (BuildContext context) {
+                  return StatefulBuilder(builder: (context, setState) {
+                    return MyOrderFiltterView();
+                  });
+                },
+              );
             },
             child: SvgPicture.asset(
               'assets/images/filter.svg',

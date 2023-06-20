@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/model/c_place_order_model.dart';
 import 'package:local_supper_market/screen/customer/order_payment/model/order_payment_model.dart';
@@ -17,6 +18,7 @@ class OrderPaymentController extends ChangeNotifier {
   PlaceOrderRepo placeOrderRepo = PlaceOrderRepo();
 
   TextEditingController transactionIdController = TextEditingController();
+  bool isLoading = true;
   String? shopId = "";
   String? cartId = "";
   String? couponId = "";
@@ -46,6 +48,11 @@ class OrderPaymentController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
   OrderPaymentReqModel get orderPaymentReqModel => OrderPaymentReqModel(
       shopId: shopId.toString(),
       cartId: cartId.toString(),
@@ -62,6 +69,7 @@ class OrderPaymentController extends ChangeNotifier {
 
   Future<void> orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot,
       cdType, ftAmount, ftDiscount, tItems, fSubTotal, fDCharges) async {
+    showLoader(true);
     shopId = id.toString();
     cartId = cId.toString();
     couponId = cuId.toString();
@@ -85,6 +93,7 @@ class OrderPaymentController extends ChangeNotifier {
         orderPaymentData = result.orderPayment;
 
         shopDetailData = result.orderPayment?.shopDetails;
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -124,6 +133,18 @@ class OrderPaymentController extends ChangeNotifier {
   Future<void> placeOrder(
     context,
   ) async {
+    if (groupValue == "") {
+      Utils.showPrimarySnackbar(context, "please select Payment Mode",
+          type: SnackType.error);
+      return;
+    }
+    if (groupValue == "upi" || groupValue == "qr_code") {
+      if (transactionIdController.text.isEmpty) {
+        Utils.showPrimarySnackbar(context, "Enter Payment Transaction Id",
+            type: SnackType.error);
+        return;
+      }
+    }
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     placeOrderRepo
@@ -159,4 +180,13 @@ class OrderPaymentController extends ChangeNotifier {
       },
     );
   }
+
+  copyCodeForCoupanList(context, offerMsg) {
+    Clipboard.setData(ClipboardData(text: offerMsg)).then((_) {
+      Utils.showPrimarySnackbar(context, "Upi ID copy",
+          type: SnackType.success);
+    });
+  }
+
+  Future<void> validateField(context) async {}
 }
