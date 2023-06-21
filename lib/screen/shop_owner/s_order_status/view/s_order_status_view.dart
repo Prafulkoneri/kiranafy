@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_cancelled_orders_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_confirmed_orders_view.dart';
@@ -19,9 +21,17 @@ class SOrderStatusView extends StatefulWidget {
 
 class _SOrderStatusViewState extends State<SOrderStatusView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<SOrderStatusController>().initState(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final read = context.read<SOrderStatusController>();
     final watch = context.watch<SOrderStatusController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return DefaultTabController(
       length: 5,
       initialIndex: 0,
@@ -154,7 +164,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
                         visible: watch.selectedIndex == 1,
                       ),
                       Visibility(
-                        child: SInProcessOrdersView(),
+                        child: SInProcessOrderView(),
                         maintainState: true,
                         visible: watch.selectedIndex == 2,
                       ),

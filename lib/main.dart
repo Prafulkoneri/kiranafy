@@ -71,6 +71,7 @@ import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
 import 'screen/shop_owner/s_coupons/controller/shop_coupons_list_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
+import 'screen/shop_owner/s_order_view/controller/shop_owner_order_view_model.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
@@ -131,6 +132,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => OrderSummaryController()),
         ChangeNotifierProvider(create: (_) => OrderPaymentController()),
         ChangeNotifierProvider(create: (_) => MyOrdersController()),
+        ChangeNotifierProvider(create: (_) => ShopOwnerOrderViewController()),
       ],
       child: MyApp(),
     ),
@@ -185,4 +187,4 @@ class _MyAppState extends State<MyApp> {
               home: SplashScreen());
         });
   }
-}
+}    // ShopOrderStatusView()
