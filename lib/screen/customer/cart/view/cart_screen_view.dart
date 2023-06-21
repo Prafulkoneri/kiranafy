@@ -113,33 +113,6 @@ class _CartScreenViewState extends State<CartScreenView> {
                             ],
                           ),
                         ),
-                        // Padding(
-                        //   padding: EdgeInsets.only(left: 50.w),
-                        //   child: RichText(
-                        //     text: TextSpan(
-                        // text: 'Looks like you have not added anything to your,',
-                        // style: GoogleFonts.dmSans(
-                        //   textStyle: TextStyle(
-                        //       color: Black1,
-                        //       letterSpacing: .5,
-                        //       fontSize: 14.sp,
-                        //       fontWeight: FontWeight.w400),
-                        // ),
-                        //       children: <TextSpan>[
-                        //         TextSpan(
-                        //           text: 'cart. Go ahead and explore top categories',
-                        //           style: GoogleFonts.dmSans(
-                        //             textStyle: TextStyle(
-                        //                 color: Black1,
-                        //                 letterSpacing: .5,
-                        //                 fontSize: 14.sp,
-                        //                 fontWeight: FontWeight.w400),
-                        //           ),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
                         SizedBox(
                           width: 160.w, // <-- Your width
                           height: 45.h,

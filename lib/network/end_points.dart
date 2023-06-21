@@ -282,4 +282,13 @@ class Endpoint {
 /////My Orders////
   static const String myOrders =
       "${baseUrl}lsm-customer-order-list-with-filter";
+  ////My Orders////
+  static const String shopGetOrderList =
+      "${baseUrl}lsm-shop-owner-get-orders-list";
+  ////Shop Owner View////
+  static const String shopOwneROrderView =
+      "${baseUrl}lsm-shop-owner-order-view";
+  ////Shop Owner Status Changed////
+  static const String shopOwnerOrderStatusChange =
+      "${baseUrl}lsm-shop-owner-change-order-delivery-status";
 }
