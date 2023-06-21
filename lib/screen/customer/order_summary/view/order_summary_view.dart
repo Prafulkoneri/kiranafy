@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
@@ -91,15 +92,15 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
         child: PrimaryAppBar(
           title: "Order Summary",
           onBackBtnPressed: () {
-            Navigator.pop(context);
+           Navigator.push(context,MaterialPageRoute(builder: (context)=>CartDetailView(isRefresh: false)));
           },
         ),
       ),
       body: watch.isLoading?Center(
         child: CircularProgressIndicator(),
       ):
-      StackLoader
-        (showLoader:watch.isStackLoaderVisible,
+      StackLoader(
+        showLoader:false,
         child:  SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -747,40 +748,46 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 10.w,
-                  ),
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: 'Congratulations!!',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: SplashText,
-                              // letterSpacing: .5,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+                watch.discountPercentage!=""?  Column(
+                    children: [
+                      SizedBox(
+                        height: 10.w,
                       ),
-                      TextSpan(
-                        text: '10% Discount applied successfully.',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: SplashText,
-                              // letterSpacing: .5,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                            text: 'Congratulations!!',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: SplashText,
+                                  // letterSpacing: .5,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                          TextSpan(
+                            text: '${watch.discountPercentage} Discount applied successfully.',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: SplashText,
+                                  // letterSpacing: .5,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ]),
                       ),
-                    ]),
-                  ),
+                    ],
+                  ):Container(),
+
                 ],
               ),
             ),
             SizedBox(
               height: 30.w,
             ),
-            Container(
+        watch.fullFillYourCravings!.isNotEmpty?
+        Container(
               // height: 203.h,
               width: ScreenUtil().screenWidth,
               color: Coupons,
@@ -812,10 +819,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           final element = watch.fullFillYourCravings?[index];
                           return watch.fullFillYourCravings?[index].mrpPrice !=
                               "" &&
-                              watch.fullFillYourCravings?[index]
-                                  .offerPrice !=
-                                  "" &&
-                              int.parse(element?.offerPrice ?? "0") <
+                              int.parse(element?.offerPrice==""?"0":element?.offerPrice??"0") <
                                   int.parse(element?.mrpPrice ?? "0")
                               ? Row(
                             children: [
@@ -824,7 +828,28 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                               ),
                               GestureDetector(
                                 onTap: () {
-
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MainScreenView(
+                                              index: 1,
+                                              screenName:
+                                              ProductScreenView(
+                                                  categoryId: element
+                                                      ?.categoryId
+                                                      .toString(),
+                                                  // categoryId: watch.categoryId,
+                                                  productId: element
+                                                      ?.id
+                                                      .toString(),
+                                                  shopId: element
+                                                      ?.shopId,
+                                                  productType: element
+                                                      ?.productType),
+                                            )),
+                                        (Route<dynamic> route) => false,
+                                  );
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -1067,7 +1092,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   // )
                 ],
               ),
-            ),
+            ):
+        Container(),
             SizedBox(
               height: 30.h,
             ),
@@ -1145,7 +1171,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
-                          watch.couponCodeController.text == ""
+                          watch.couponCodeController.text != ""
                               ? TextSpan(
                             text: '(${watch.couponCodeController.text}) ',
                             style: GoogleFonts.dmSans(
@@ -1156,7 +1182,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   fontWeight: FontWeight.w400),
                             ),
                           )
-                              : TextSpan(),
+                              : TextSpan(text: ""),
                         ]),
                       ),
                       Text(
@@ -1187,6 +1213,16 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                               fontWeight: FontWeight.w400),
                         ),
                       ),
+                      watch.deliveryCharges==""?  Text(
+                        "Rs. 0",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: grey5,
+                              // letterSpacing: .5,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ):
                       Text(
                         "Rs. ${watch.deliveryCharges}",
                         style: GoogleFonts.dmSans(

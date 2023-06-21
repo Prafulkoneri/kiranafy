@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/my_order/controller/my_orders_controller.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/order_filtter_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/stack_loader.dart';
 import 'package:provider/provider.dart';
 
 import '../../cart/view/empty_cart_view.dart';
@@ -35,7 +36,6 @@ class _MyOrderViewState extends State<MyOrderView> {
           .initState(context, widget.shopId, widget.orStatus);
     });
   }
-
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<MyOrdersController>();
@@ -79,216 +79,155 @@ class _MyOrderViewState extends State<MyOrderView> {
           ),
         ),
       ),
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   systemOverlayStyle: SystemUiOverlayStyle(
-      //     systemNavigationBarIconBrightness: Brightness.dark,
-      //     // Status bar color
-      //     statusBarColor: kstatusbar,
-      //     // Status bar brightness (optional)
-      //     statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-      //     statusBarBrightness: Brightness.dark, // For iOS (dark icons)
-      //   ),
-      //   toolbarHeight: 65,
-      //   // backgroundColor: kappbar,
-      //   leading: IconButton(
-      //     icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-      //     onPressed: () => Navigator.of(context).pop(),
-      //   ),
-      //   title: Text(
-      //     "My Orders",
-      //     style: GoogleFonts.dmSans(
-      //       textStyle: TextStyle(
-      //           color: Black,
-      //           letterSpacing: .5,
-      //           fontSize: 14.sp,
-      //           fontWeight: FontWeight.w700),
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   shape: const RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.vertical(
-      //       bottom: Radius.circular(40),
-      //     ),
-      //   ),
-      //   flexibleSpace: Container(
-      //     decoration: BoxDecoration(
-      //       borderRadius: BorderRadius.circular(40),
-      //       gradient: LinearGradient(
-      //           end: Alignment.topCenter,
-      //           begin: Alignment.bottomCenter,
-      //           colors: <Color>[
-      //             kstatusbar.withOpacity(0.55),
-      //             kstatusbar.withOpacity(0.98),
-      //           ]),
-      //     ),
-      //   ),
-      //   actions: <Widget>[
-      //     Padding(
-      //       padding: EdgeInsets.only(
-      //         right: 20.w,
-      //       ),
-      //       child: InkWell(
-      //         onTap: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(
-      //                 builder: (context) => const EmptyCartView()),
-      //           );
-      //         },
-      //         child: SvgPicture.asset(
-      //           'assets/images/filter.svg',
-      //           width: 20.w,
-      //           height: 18.h,
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
-      // backgroundColor: backgroundColor,
-      body: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        itemCount: watch.myOrdersData?.orderList?.length ?? 0,
-        itemBuilder: (context, index) {
-          final element = watch.orderList![index];
-          return Container(
-            margin: EdgeInsets.only(
-                left: 20.w, right: 20.w, top: 19.w, bottom: 0.w),
-            padding: EdgeInsets.only(
-                left: 15.w, right: 15.w, top: 10.w, bottom: 10.w),
-            // width: 352.w,
-            decoration: BoxDecoration(
-              border: Border.all(width: 1, color: grey6),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "${element.orderUniqueId}",
-                      // "Order ID - PAAC001",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black1,
-                            // letterSpacing: .5,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      StackLoader(
+        showLoader: watch.isStackLoaderVisible,
+        child: ListView.builder(
+          physics: BouncingScrollPhysics(),
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          itemCount: watch.myOrdersData?.orderList?.length ?? 0,
+          itemBuilder: (context, index) {
+            final element = watch.orderList?[index];
+            return Container(
+              margin: EdgeInsets.only(
+                  left: 20.w, right: 20.w, top: 19.w, bottom: 0.w),
+              padding: EdgeInsets.only(
+                  left: 15.w, right: 15.w, top: 10.w, bottom: 10.w),
+              // width: 352.w,
+              decoration: BoxDecoration(
+                border: Border.all(width: 1, color: grey6),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${element?.orderUniqueId}",
+                        // "Order ID - PAAC001",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black1,
+                              // letterSpacing: .5,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 100.w,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          // backgroundColor: ,
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(
-                                color: Yellow,
-                                // width: 1,
+                      SizedBox(
+                        width: 100.w,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            elevation: MaterialStateProperty.all(0),
+                            // backgroundColor: ,
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(
+                                  color: element?.orderStatus=="Pending"?Yellow:element?.orderStatus=="Delivered"?Color(0xff39C19D):element?.orderStatus=="Confirmed"?Color(0xff115B7A):element?.orderStatus=="Cancelled"?Color(0xffFF4A31):Colors.transparent,
+                                  // width: 1,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const OrderPendingView()),
-                          );
-                        },
-                        child: Text(
-                          "Pending",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Yellow,
-                                // letterSpacing: .5,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const OrderPendingView()),
+                            );
+                          },
+                          child:Text(
+                            element?.orderStatus??"",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Yellow,
+                                  // letterSpacing: .5,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
                           ),
-                        ),
 
-                        //
+                          //
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Text(
-                  "Mar 10, 2023    9:15 am",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: lightblack,
-                        // letterSpacing: .5,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 13.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Total Amount",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            // letterSpacing: .5,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
+                  Text(
+                    "${element?.createdAt}",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: lightblack,
+                          // letterSpacing: .5,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400),
                     ),
-                    Text(
-                      "Total Quantity",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(
+                    height: 13.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Total Amount",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              // letterSpacing: .5,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Rs. 3,200",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: lightblack1,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w400),
+                      Text(
+                        "Total Quantity",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
-                    ),
-                    Text(
-                      "25",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: lightblack1,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Rs. ${element?.totalAmount}",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: lightblack1,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
+                      Text(
+                        "${element?.totalItems}",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: lightblack1,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

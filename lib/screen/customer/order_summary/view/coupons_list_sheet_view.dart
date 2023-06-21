@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
@@ -110,14 +111,8 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                         SizedBox(
                                           height: 5.w,
                                         ),
-                                        Text(
-                                          "${element?.couponTermsAndCondition ?? ""}",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14.sp,
-                                              color: Color(0xff3A3A3A)
-                                                  .withOpacity(0.63)),
-                                        ),
+                                        Text("Get Up To ${double.parse(element?.couponDiscountPercentage.toString()??"0").round()}% OFF | Minimum Order of Rs. ${element?.minOrderAmount}"),
+
                                       ],
                                     ),
                                   ),
@@ -130,22 +125,46 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                               SizedBox(
                                 height: 5.w,
                               ),
-                              RichText(
+                              Visibility(visible: !watch.viewMore[index],child:  RichText(
                                   text: TextSpan(children: [
-                                TextSpan(
-                                    text: "Customers need to but a",
-                                    style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color:
+                                    TextSpan(
+                                        text: "Customers need to but a",
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color:
                                             Color(0xff3A3A3A).withOpacity(0.63))),
-                                TextSpan(
-                                    text: " View More",
-                                    style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xff006F94))),
-                              ])),
+                                    TextSpan(
+                                        text: " View More",
+                                        recognizer: TapGestureRecognizer()..onTap = () {
+print("hello");
+                                          read.onViewMoreClicked(index);
+                                        },
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xff006F94))),
+                                  ])),),
+                              Visibility(visible:watch.viewMore[index],child:
+
+                              Row(
+                                children: [
+                                  SecondaryRadioButton(value:false, groupValue: "", onChanged:(value){},innerColor: Colors.transparent,outerColor: Colors.transparent,backgroundColor: Colors.transparent),
+                                  SizedBox(
+                                    width: 18.w,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      "${element?.couponTermsAndCondition ?? ""}",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.sp,
+                                          color: Color(0xff3A3A3A)
+                                              .withOpacity(0.63)),
+                                    ),
+                                  ),
+                                ],
+                              ),),
                             ],
                           ),
                         ),

@@ -58,6 +58,9 @@ class _OrderProductsState extends State<OrderProducts> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

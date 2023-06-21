@@ -31,16 +31,16 @@ class _CDropDownFieldState extends State<CDropDownField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        widget.titleHeader!=null?Text(
           widget.titleHeader ?? "",
           style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14.sp,
               color: Color(0xff3A3A3A)),
-        ),
-        SizedBox(
+        ):Container(),
+        widget.titleHeader!=null? SizedBox(
           height: 10.w,
-        ),
+        ):Container(),
         DropdownButtonFormField2(
           value: widget.value,
           decoration: const InputDecoration(

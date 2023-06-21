@@ -303,6 +303,7 @@ class FinalCouponList {
   String ? couponTermsAndCondition;
   String? couponDiscountPercentage;
   String? couponDiscountMaxAmount;
+  int? minOrderAmount;
 
   FinalCouponList({
     required this.id,
@@ -310,6 +311,7 @@ class FinalCouponList {
     required this.couponTermsAndCondition,
     required this.couponDiscountMaxAmount,
     required this.couponDiscountPercentage,
+    required this.minOrderAmount,
   });
   FinalCouponList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -317,6 +319,7 @@ class FinalCouponList {
     couponDiscountPercentage = json["coupon_discount_percentage"];
     couponDiscountMaxAmount = json["coupon_discount_max_amount"];
     couponTermsAndCondition = json["coupon_terms_and_conditions"];
+    minOrderAmount = json["coupon_minimum_order_amount"];
   }
 }
 

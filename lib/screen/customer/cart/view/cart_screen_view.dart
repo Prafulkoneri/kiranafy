@@ -253,16 +253,18 @@ class _CartScreenViewState extends State<CartScreenView> {
                                             SizedBox(
                                               width: 8.52.w,
                                             ),
-                                            Text(
-                                              "${element?.shopAddress}\n${element?.cityName} - ${element?.shopPincode}",
-                                              // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                              style: GoogleFonts.dmSans(
-                                                textStyle: TextStyle(
-                                                    color: Black,
-                                                    letterSpacing: .5,
-                                                    fontSize: 13.sp,
-                                                    fontWeight:
-                                                        FontWeight.w400),
+                                            Flexible(
+                                              child: Text(
+                                                "${element?.shopAddress}\n${element?.cityName} - ${element?.shopPincode}",
+                                                // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black,
+                                                      letterSpacing: .5,
+                                                      fontSize: 13.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -360,7 +362,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                             // child:
                             ),
                         SizedBox(
-                          height: 100.w,
+                          height: 30.w,
                         )
                       ],
                     ),

@@ -30,10 +30,12 @@ class OrderSummaryController extends ChangeNotifier {
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
       );
-  TextEditingController expectedDateController=TextEditingController();
+  TextEditingController expectedDateController = TextEditingController();
   String shopId = "";
   String cartId = "";
   String groupValue = "";
+  String discountPercentage = "";
+  List<bool> viewMore=[];
   ShopDetails? shopDetailData;
   ShopDeliveryTypes? shopDeliveryTypes;
   List? shopDeliverySlots;
@@ -43,63 +45,56 @@ class OrderSummaryController extends ChangeNotifier {
   List<FinalCouponList>? finalCouponList;
   List<FullFillYourCraving>? fullFillYourCravings;
   bool isLoading = true;
-  bool isStackLoaderVisible=false;
+  bool isStackLoaderVisible = false;
   bool favAllShop = true;
-  List<bool> defaultSelectedAddress = [];
-  String slotGroupValue="";
-  String offerGroupValue="";
-  String addressGroupValue="";
-  bool isNotFilled=false;
-  String couponDiscount="";
-  String deliveryCharges="";
-  String productTotalDiscount="";
-  String subTotal="";
-  String total="";
-  String totalDiscount="";
-  String customerPickup="";
-  TextEditingController couponCodeController=TextEditingController();
+  String slotGroupValue = "";
+  String offerGroupValue = "";
+  String addressGroupValue = "";
+  bool isNotFilled = false;
+  String couponDiscount = "";
+  String deliveryCharges = "";
+  String productTotalDiscount = "";
+  String subTotal = "";
+  String total = "";
+  String totalDiscount = "";
+  String customerPickup = "";
+  TextEditingController couponCodeController = TextEditingController();
 
-
-
-
-
-  Future<void> initState(context, cId, id,refresh,route) async {
+  Future<void> initState(context, cId, id, refresh, route) async {
     // if(route=="addAddress"||route=="editAddress"){
     //    groupValue="delivery_to";
     // }
     print("fsfsdfsdfsdf");
     print(route);
-    if (customerPickup == "active"&&route=="addAddress") {
+    if (customerPickup == "active" && route == "addAddress") {
       groupValue = "self_pickup";
     } else {
       groupValue = "delivery_to";
-
     }
-    if(refresh) {
-      await getOrderSummary(context, cId, id,route);
+    if (refresh) {
+      await getOrderSummary(context, cId, id, route);
     }
     notifyListeners();
-    }
+  }
 
   void showLoader(value) {
     isLoading = value;
     notifyListeners();
   }
-  void showOnPageLoader(value){
-    isStackLoaderVisible=value;
+
+  void showOnPageLoader(value) {
+    isStackLoaderVisible = value;
     notifyListeners();
   }
 
-
-
-  void onExpectedDateSelected(value){
-    expectedDateController.text=value;
+  void onExpectedDateSelected(value) {
+    expectedDateController.text = value;
     notifyListeners();
   }
 
-  void onRadioButtonSelected(value,context) {
+  void onRadioButtonSelected(value, context) {
     groupValue = value;
-    if(groupValue == "delivery_to"&&customerAddress!.isEmpty){
+    if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -111,35 +106,39 @@ class OrderSummaryController extends ChangeNotifier {
                   route: "orderAddAddress",
                   isEditAdress: false,
                 ))),
-            (Route<dynamic> route) => false,
+        (Route<dynamic> route) => false,
       );
     }
     notifyListeners();
   }
 
-
-
-  void onDeliverySlotSelected(value){
-    slotGroupValue=value;
+  void onDeliverySlotSelected(value) {
+    slotGroupValue = value;
     notifyListeners();
   }
 
-  void onOfferSelected(value,context,discount)async{
-    offerGroupValue=value.toString();
-    couponDiscount=discount;
+  void onOfferSelected(value, context, discount) async {
+    offerGroupValue = value.toString();
+    couponDiscount = discount;
     await applyCoupon(context);
     notifyListeners();
   }
 
-
-  void onAddressSelected(value){
-    addressGroupValue=value;
+  void onAddressSelected(value) {
+    addressGroupValue = value;
     notifyListeners();
   }
+
   OrderSummaryReqModel get orderSummeryRequestModel =>
       OrderSummaryReqModel(shopId: shopId, cartId: cartId);
 
-  Future<void> getOrderSummary(context, id, cId,route) async {
+  Future<void> getOrderSummary(context, id, cId, route) async {
+    if (route == 'cartDetail') {
+      expectedDateController.clear();
+      slotGroupValue = "";
+      discountPercentage = "";
+      couponCodeController.clear();
+    }
     showLoader(true);
     shopId = id.toString();
     cartId = cId.toString();
@@ -152,32 +151,37 @@ class OrderSummaryController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        customerPickup=result.orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup??"";
+        customerPickup = result.orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ?? "";
         if (result.orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup == "active") {
           groupValue = "self_pickup";
         } else {
           groupValue = "delivery_to";
         }
+
+
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
-      deliveryCharges= orderFinalTotals?.deliveryCharges??"";
-      productTotalDiscount= orderFinalTotals?.productTotalDiscount.toString()??"";
-      subTotal= orderFinalTotals?.subTotal.toString()??"";
-      total= orderFinalTotals?.total.toString()??"";
-      totalDiscount= orderFinalTotals?.totalDiscount.toString()??"";
-      customerAddress = result.orderSummaryData?.customerAddresses;
-        int addressListLength=customerAddress?.length??0;
-        for(int i=0;i<addressListLength;i++){
-          if(customerAddress?[i].deliveryAddressIsDefault=="yes"){
-            addressGroupValue=customerAddress?[i].addressId.toString()??"";
+        deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
+        productTotalDiscount = orderFinalTotals?.productTotalDiscount.toString() ?? "";
+        subTotal = orderFinalTotals?.subTotal.toString() ?? "";
+        total = orderFinalTotals?.total.toString() ?? "";
+        totalDiscount = orderFinalTotals?.totalDiscount.toString() ?? "";
+        customerAddress = result.orderSummaryData?.customerAddresses;
+        int addressListLength = customerAddress?.length ?? 0;
+        for (int i = 0; i < addressListLength; i++) {
+          if (customerAddress?[i].deliveryAddressIsDefault == "yes") {
+            addressGroupValue = customerAddress?[i].addressId.toString() ?? "";
           }
         }
         cartItemList = result.orderSummaryData?.cartItemList;
         finalCouponList = result.orderSummaryData?.finalCouponList;
+        int couponListLength=finalCouponList?.length??0;
+          viewMore=List<bool>.filled(couponListLength,false);
+
         fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
         showLoader(false);
-        if(groupValue == "delivery_to"&&customerAddress!.isEmpty){
+        if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -189,15 +193,14 @@ class OrderSummaryController extends ChangeNotifier {
                       route: "orderAddAddress",
                       isEditAdress: false,
                     ))),
-                (Route<dynamic> route) => false,
+            (Route<dynamic> route) => false,
           );
         }
-        if(route=="addAddress"||route=="editAddress"){
+        if (route == "addAddress" || route == "editAddress") {
           print("fsfsdfsfsfsdfdsfdfsdfsdfs");
-          groupValue="delivery_to";
+          groupValue = "delivery_to";
           notifyListeners();
         }
-
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -214,6 +217,11 @@ class OrderSummaryController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  void onViewMoreClicked(index){
+    viewMore[index]=true;
+    notifyListeners();
   }
 
   void launchPhone(String mobNumber, context) async {
@@ -325,41 +333,45 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
+  CustomerApplyCouponsRequestModel get customerApplyCouponsRequestModel =>
+      CustomerApplyCouponsRequestModel(
+        shopId: shopId,
+        couponId: offerGroupValue,
+        cartId: cartId,
+        couponDiscount: couponDiscount,
+        deliveryCharges: orderFinalTotals?.deliveryCharges == ""
+            ? "0"
+            : orderFinalTotals?.deliveryCharges,
+        productTotalDiscount: orderFinalTotals?.productTotalDiscount.toString(),
+        subTotal: orderFinalTotals?.subTotal.toString(),
+        total: orderFinalTotals?.total.toString(),
+        totalDiscount: orderFinalTotals?.totalDiscount.toString(),
+      );
 
-
-  CustomerApplyCouponsRequestModel get customerApplyCouponsRequestModel=>CustomerApplyCouponsRequestModel(
-    shopId: shopId,
-    couponId: offerGroupValue,
-    cartId: cartId,
-    couponDiscount: couponDiscount,
-    deliveryCharges: orderFinalTotals?.deliveryCharges,
-    productTotalDiscount: orderFinalTotals?.productTotalDiscount.toString(),
-    subTotal: orderFinalTotals?.subTotal.toString(),
-    total: orderFinalTotals?.total.toString(),
-    totalDiscount: orderFinalTotals?.totalDiscount.toString(),
-  );
-
-  Future<void> applyCoupon(context)async{
+  Future<void> applyCoupon(context) async {
     showOnPageLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     applyCouponRepo
-        .applyCoupon(customerApplyCouponsRequestModel,pref.getString("successToken"))
+        .applyCoupon(
+            customerApplyCouponsRequestModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = CustomerApplyCouponsResModel.fromJson(jsonDecode(response.body));
+      final result =
+          CustomerApplyCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        final data=result.applyCouponData;
-        couponCodeController.text=data?.couponCode.toString()??"";
-        deliveryCharges=data?.deliveryCharges.toString()??"";
-        subTotal=data?.subTotal??"";
-        total=data?.total??"";
-        totalDiscount=data?.totalDiscount??"";
+        final data = result.applyCouponData;
+        couponCodeController.text = data?.couponCode.toString() ?? "";
+        deliveryCharges = data?.deliveryCharges.toString() ?? "";
+        subTotal = data?.subTotal ?? "";
+        total = data?.total ?? "";
+        totalDiscount = data?.totalDiscount ?? "";
+        discountPercentage = data?.discountPercentage ?? "";
         showOnPageLoader(false);
         Navigator.pop(context);
         notifyListeners();
-       Utils.showPrimarySnackbar(context, result.message,
-           type: SnackType.success);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -367,7 +379,7 @@ class OrderSummaryController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -376,17 +388,21 @@ class OrderSummaryController extends ChangeNotifier {
       },
     );
   }
-  void onConfirmOrder(context){
-    if(expectedDateController.text==""){
-      Utils.showPrimarySnackbar(context,"Select expected date", type: SnackType.error);
+
+  void onConfirmOrder(context) {
+    if (expectedDateController.text == "") {
+      Utils.showPrimarySnackbar(context, "Select expected date",
+          type: SnackType.error);
       return;
     }
-    if(slotGroupValue==""){
-      Utils.showPrimarySnackbar(context,"Select a slot", type: SnackType.error);
+    if (slotGroupValue == "") {
+      Utils.showPrimarySnackbar(context, "Select a slot",
+          type: SnackType.error);
       return;
     }
-    if(customerAddress!.isEmpty&&groupValue=="delivery_to"){
-      Utils.showPrimarySnackbar(context,"Add an address", type: SnackType.error);
+    if (customerAddress!.isEmpty && groupValue == "delivery_to") {
+      Utils.showPrimarySnackbar(context, "Add an address",
+          type: SnackType.error);
       return;
     }
     showOnPageLoader(true);
@@ -394,19 +410,19 @@ class OrderSummaryController extends ChangeNotifier {
       context,
       MaterialPageRoute(
           builder: (context) => OrderPaymentView(
-            cartId: cartId.toString(),
-            shopId: shopId.toString(),
-            couponId: offerGroupValue.toString(),
-            customerDeliveryAddressId: addressGroupValue,
-            customerDeliveryDate: expectedDateController.text,
-            customerDeliverySlot: slotGroupValue,
-            customerDeliveryType: groupValue,
-            finalDeliveryCharges: deliveryCharges,
-            finalSubTotal: subTotal,
-            finalTotalAmount: total,
-            finalTotalDiscount: totalDiscount,
-            totalItems: orderFinalTotals?.itemCount.toString(),
-          )),
+                cartId: cartId.toString(),
+                shopId: shopId.toString(),
+                couponId: offerGroupValue.toString(),
+                customerDeliveryAddressId: addressGroupValue,
+                customerDeliveryDate: expectedDateController.text,
+                customerDeliverySlot: slotGroupValue,
+                customerDeliveryType: groupValue,
+                finalDeliveryCharges: deliveryCharges==""?"0":deliveryCharges,
+                finalSubTotal: subTotal,
+                finalTotalAmount: total,
+                finalTotalDiscount: totalDiscount,
+                totalItems: orderFinalTotals?.itemCount.toString(),
+              )),
     );
     showOnPageLoader(false);
   }

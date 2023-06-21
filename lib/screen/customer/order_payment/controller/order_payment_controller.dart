@@ -19,6 +19,7 @@ class OrderPaymentController extends ChangeNotifier {
 
   TextEditingController transactionIdController = TextEditingController();
   bool isLoading = true;
+  bool isStackLoading = false;
   String? shopId = "";
   String? cartId = "";
   String? couponId = "";
@@ -50,6 +51,10 @@ class OrderPaymentController extends ChangeNotifier {
 
   void showLoader(value) {
     isLoading = value;
+    notifyListeners();
+  }
+  void showStackLoader(value) {
+    isStackLoading = value;
     notifyListeners();
   }
 
@@ -94,9 +99,6 @@ class OrderPaymentController extends ChangeNotifier {
 
         shopDetailData = result.orderPayment?.shopDetails;
         showLoader(false);
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -133,6 +135,7 @@ class OrderPaymentController extends ChangeNotifier {
   Future<void> placeOrder(
     context,
   ) async {
+    showStackLoader(true);
     if (groupValue == "") {
       Utils.showPrimarySnackbar(context, "please select Payment Mode",
           type: SnackType.error);
@@ -154,6 +157,7 @@ class OrderPaymentController extends ChangeNotifier {
       final result =
           CustomerPlaceOrderResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -161,8 +165,7 @@ class OrderPaymentController extends ChangeNotifier {
                   MainScreenView(index: 4, screenName: CheckOrderStatusView())),
           (Route<dynamic> route) => false,
         );
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        showStackLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -188,5 +191,7 @@ class OrderPaymentController extends ChangeNotifier {
     });
   }
 
-  Future<void> validateField(context) async {}
+
+
+  Future<void> removeCoupon()async{}
 }

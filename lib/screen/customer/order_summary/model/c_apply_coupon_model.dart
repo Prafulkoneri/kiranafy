@@ -63,6 +63,7 @@ class ApplyCouponData {
   String? deliveryCharges;
   String? total;
   String? totalDiscount;
+  String ? discountPercentage;
 
   ApplyCouponData({
     required this.couponCode,
@@ -71,6 +72,7 @@ class ApplyCouponData {
     required this.deliveryCharges,
     required this.total,
     required this.totalDiscount,
+    this.discountPercentage,
   });
   ApplyCouponData.fromJson(Map<String, dynamic> json) {
     couponCode = json["coupon_code"];
@@ -79,5 +81,6 @@ class ApplyCouponData {
     deliveryCharges = json["delivery_charges"];
     total = json["total"];
     totalDiscount = json["total_discount"];
+    discountPercentage = json["coupon_discount_percentage"];
   }
 }
