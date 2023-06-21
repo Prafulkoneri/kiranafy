@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -193,15 +194,18 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                         padding: EdgeInsets.only(left: 19.w, right: 19.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "You will save Rs. ${watch.finalTotalDiscount}",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: SplashText,
-                                    letterSpacing: .5,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w700),
+                            Flexible(
+                              child: Text(
+                                "You will save Rs. ${watch.finalTotalDiscount}",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: SplashText,
+                                      letterSpacing: .5,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
                             Text(
