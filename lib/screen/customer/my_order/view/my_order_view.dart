@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,16 +9,38 @@ import 'package:local_supper_market/screen/customer/account/view/profile_screen_
 import 'package:local_supper_market/screen/customer/category/view/filter_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/delivery_view_pending.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/my_order/controller/my_orders_controller.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/order_filtter_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../cart/view/empty_cart_view.dart';
+import '../../main_screen/controllers/main_screen_controller.dart';
 
-class MyOrderView extends StatelessWidget {
-  const MyOrderView({super.key});
+class MyOrderView extends StatefulWidget {
+  final String? shopId;
+  final String? orStatus;
+  const MyOrderView({super.key, this.shopId, this.orStatus});
+
+  @override
+  State<MyOrderView> createState() => _MyOrderViewState();
+}
+
+class _MyOrderViewState extends State<MyOrderView> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<MyOrdersController>()
+          .initState(context, widget.shopId, widget.orStatus);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<MyOrdersController>();
+    final read = context.read<MyOrdersController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
@@ -127,8 +150,9 @@ class MyOrderView extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.zero,
         shrinkWrap: true,
-        itemCount: 5,
+        itemCount: watch.myOrdersData?.orderList?.length ?? 0,
         itemBuilder: (context, index) {
+          final element = watch.orderList![index];
           return Container(
             margin: EdgeInsets.only(
                 left: 20.w, right: 20.w, top: 19.w, bottom: 0.w),
@@ -147,7 +171,8 @@ class MyOrderView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Order ID - PAAC001",
+                      "${element.orderUniqueId}",
+                      // "Order ID - PAAC001",
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
                             color: Black1,

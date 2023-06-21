@@ -13,10 +13,17 @@ class MyOrdersController extends ChangeNotifier {
   MyOrdersRepo myOrderRepo = MyOrdersRepo();
   String? shopId = "";
   String? orderStatus = "";
+  MyOrdersData? myOrdersData;
+  List<OrderList>? orderList;
+  List<OrderedShopsList>? orderedShopsList;
+
+  Future<void> initState(context, id, orStatus) async {
+    await myOrders(context, id, orStatus);
+  }
 
   MyOrdersRequestModel get myOrderRequestModel => MyOrdersRequestModel(
       shopId: shopId.toString(), orderStatus: orderStatus.toString());
-  Future<void> getOrderSummary(context, id, orStatus) async {
+  Future<void> myOrders(context, id, orStatus) async {
     shopId = id.toString();
     orderStatus = orStatus.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -27,6 +34,9 @@ class MyOrdersController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = MyOrdersResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        myOrdersData = result.myOrdersData;
+        orderList = myOrdersData?.orderList;
+        orderedShopsList = myOrdersData?.orderedShopsList;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

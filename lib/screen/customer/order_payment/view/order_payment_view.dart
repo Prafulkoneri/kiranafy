@@ -53,10 +53,10 @@ class OrderPaymentView extends StatefulWidget {
 }
 
 class _OrderPaymentViewState extends State<OrderPaymentView> {
-  String radioButtonItem = '';
+  // String radioButtonItem = '';
 
   // Group Value for Radio Button.
-  int id = 1;
+  // int id = 1;
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
