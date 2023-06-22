@@ -131,12 +131,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                         //
                                       ),
                                     )
-                                  : watch.orderDetails?.orderStatus ==
-                                          "Confirmed"
-                                      ?
-
-                                      ///Confirmed////////
-                                      SizedBox(
+                                  : watch.orderDetails?.orderStatus == "Confirmed" ? SizedBox(
                                           height: 22.h,
                                           // width: 90.w,
                                           child: ElevatedButton(
@@ -174,11 +169,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                             //
                                           ),
                                         )
-                                      : watch.orderDetails?.orderStatus ==
-                                              "Packing"
-                                          ?
-                                          ///////////////Deliver Order/////////////
-                                          SizedBox(
+                                      : watch.orderDetails?.orderStatus == "Packing" ? SizedBox(
                                               height: 22.h,
                                               // width: 85.w,
                                               child: ElevatedButton(
@@ -221,9 +212,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                 //
                                               ),
                                             )
-                                          : watch.orderDetails?.orderStatus ==
-                                                  "Delivered"
-                                              ? SizedBox(
+                                          : watch.orderDetails?.orderStatus == "Delivered" ? SizedBox(
                                                   height: 22.h,
                                                   // width: 85.w,
                                                   child: ElevatedButton(
@@ -269,12 +258,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                     //
                                                   ),
                                                 )
-                                              : watch.orderDetails
-                                                          ?.orderStatus ==
-                                                      "Cancelled"
-                                                  ?
-///////////////////////CANCLE//////////////////
-                                                  SizedBox(
+                                              : watch.orderDetails?.orderStatus == "Cancelled" ? SizedBox(
                                                       height: 22.h,
                                                       // width: 85.w,
                                                       child: ElevatedButton(
@@ -324,13 +308,8 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                         //
                                                       ),
                                                     )
-                                                  : watch.orderDetails
-                                                              ?.orderStatus ==
-                                                          "Pending"
-                                                      ? // : Container()
-                                                      SizedBox(
+                                                  : watch.orderDetails?.orderStatus == "Pending" ? SizedBox(
                                                           height: 22.h,
-                                                          width: 85.w,
                                                           child: ElevatedButton(
                                                             style: ButtonStyle(
                                                               elevation:
@@ -378,6 +357,55 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                             //
                                                           ),
                                                         )
+                                  : watch.orderDetails?.orderStatus == "Dispatched" ? SizedBox(
+                                height: 22.h,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    elevation:
+                                    MaterialStateProperty
+                                        .all(0),
+                                    // backgroundColor: ,
+                                    backgroundColor:
+                                    MaterialStateProperty
+                                        .all(Colors
+                                        .white),
+                                    shape:
+                                    MaterialStateProperty
+                                        .all(
+                                      RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius
+                                            .circular(
+                                            10),
+                                        side:
+                                        BorderSide(
+                                          color: Color(
+                                              0xff39C19D),
+                                          // width: 1,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: Text(
+                                    "${watch.orderDetails?.orderStatus}",
+                                    style: GoogleFonts
+                                        .dmSans(
+                                      textStyle:
+                                      TextStyle(
+                                          color: Color(
+                                              0xff39C19D),
+                                          // letterSpacing: .5,
+                                          fontSize: 12
+                                              .sp,
+                                          fontWeight:
+                                          FontWeight.w500),
+                                    ),
+                                  ),
+
+                                  //
+                                ),
+                              )
                                                       : Container()
                             ],
                           ),
@@ -578,7 +606,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   SizedBox(
-                                    width: 19.w,
+                                    width: 20.w,
                                   ),
                                   watch.orderDetails?.orderStatus == "Pending"
                                       ? Expanded(
@@ -711,131 +739,139 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                             )
                                           : watch.orderDetails?.orderStatus ==
                                                   "Packing"
-                                              ? InkWell(
-                                                  onTap: () {
-                                                    read.shopOrderStatus(
-                                                        context,
-                                                        watch.orderDetails?.id
-                                                            .toString(),
-                                                        "order_dispatched",
-                                                        "",
-                                                        "");
-                                                  },
-                                                  child: Container(
-                                                    // margin: EdgeInsets.only(
-                                                    //     left: 19.w, right: 20.w),
-                                                    padding: EdgeInsets.only(
-                                                        left: 20.w,
-                                                        top: 9.w,
-                                                        bottom: 7.w,
-                                                        right: 67.w),
-                                                    decoration: BoxDecoration(
-                                                        color: SplashText,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        SvgPicture.asset(
-                                                          'assets/icons/confirm_shop.svg',
-                                                        ),
-                                                        SizedBox(
-                                                          width: 10.w,
-                                                        ),
-                                                        Text(
-                                                          "Order Ready for Dispatch",
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle:
-                                                                TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    // letterSpacing: .5,
-                                                                    fontSize:
-                                                                        18.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
+                                              ? Expanded(
+                                                child: InkWell(
+                                                    onTap: () {
+                                                      read.shopOrderStatus(
+                                                          context,
+                                                          watch.orderDetails?.id
+                                                              .toString(),
+                                                          "order_dispatched",
+                                                          "",
+                                                          "");
+                                                    },
+                                                    child: Container(
+                                                      // margin: EdgeInsets.only(
+                                                      //     left: 19.w, right: 20.w),
+                                                      padding: EdgeInsets.only(
+                                                          // left: 20.w,
+                                                          top: 9.w,
+                                                          bottom: 7.w,),
+                                                      decoration: BoxDecoration(
+                                                          color: SplashText,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8)),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                  .center,
+                                                        children: [
+                                                          SvgPicture.asset(
+                                                            'assets/icons/confirm_shop.svg',
                                                           ),
-                                                        ),
-                                                      ],
+                                                          SizedBox(
+                                                            width: 10.w,
+                                                          ),
+                                                          Text(
+                                                            "Order Ready for Dispatch",
+                                                            textAlign:
+                                                                TextAlign.center,
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      // letterSpacing: .5,
+                                                                      fontSize:
+                                                                          18.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                )
+                                              )
                                               : watch.orderDetails
                                                           ?.orderStatus ==
                                                       "Dispatched"
-                                                  ? InkWell(
-                                                      onTap: () {
-                                                        read.shopOrderStatus(
-                                                            context,
-                                                            watch.orderDetails
-                                                                ?.id
-                                                                .toString(),
-                                                            "order_delivered",
-                                                            "",
-                                                            "");
-                                                      },
-                                                      child: Container(
-                                                        // margin: EdgeInsets.only(
-                                                        //     left: 19.w, right: 20.w),
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 20.w,
-                                                                top: 9.w,
-                                                                bottom: 7.w,
-                                                                right: 7.w),
-                                                        decoration: BoxDecoration(
-                                                            color: SplashText,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8)),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            SvgPicture.asset(
-                                                              'assets/icons/confirm_shop.svg',
-                                                            ),
-                                                            SizedBox(
-                                                              width: 10.w,
-                                                            ),
-                                                            Text(
-                                                              "Order Delivered To Customer",
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                textStyle:
-                                                                    TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        // letterSpacing: .5,
-                                                                        fontSize: 18
-                                                                            .sp,
-                                                                        fontWeight:
-                                                                            FontWeight.w500),
+                                                  ? Expanded(
+                                                    child: InkWell(
+                                                        onTap: () {
+                                                          read.shopOrderStatus(
+                                                              context,
+                                                              watch.orderDetails
+                                                                  ?.id
+                                                                  .toString(),
+                                                              "order_delivered",
+                                                              "",
+                                                              "");
+                                                        },
+                                                        child: Container(
+                                                          // margin: EdgeInsets.only(
+                                                          //     left: 19.w, right: 20.w),
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 9.w,
+                                                                  bottom: 7.w,
+                                                                 ),
+                                                          decoration: BoxDecoration(
+                                                              color: SplashText,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8)),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              SvgPicture.asset(
+                                                                'assets/icons/confirm_shop.svg',
                                                               ),
-                                                            ),
-                                                          ],
+                                                              SizedBox(
+                                                                width: 10.w,
+                                                              ),
+                                                              Text(
+                                                                "Order Delivered To Customer",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: GoogleFonts
+                                                                    .dmSans(
+                                                                  textStyle:
+                                                                      TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          // letterSpacing: .5,
+                                                                          fontSize: 18
+                                                                              .sp,
+                                                                          fontWeight:
+                                                                              FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
-                                                    )
+                                                  )
                                                   : Container(),
+                                  // watch.orderDetails?.orderStatus ==
+                                  //     "Packing"||
+                                  //     watch.orderDetails?.orderStatus ==
+                                  //         "Dispatched"?Container():
                                   SizedBox(
                                     width: 10.w,
                                   ),
                                   Visibility(
                                     visible: watch.orderDetails?.orderStatus ==
-                                            "Packing"
+                                            "Packing"||
+                                        watch.orderDetails?.orderStatus ==
+                                        "Dispatched"
                                         ? false
                                         : true,
                                     child: Expanded(
@@ -1344,8 +1380,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    watch.orderDetails?.orderStatus == "Delivered"
-                        ? Container(
+                    Container(
                             padding: EdgeInsets.only(left: 19.w, right: 19.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1360,7 +1395,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                                Container(
+                             watch.orderDetails?.orderStatus=="Delivered"?Container(
                                   padding: EdgeInsets.only(
                                       left: 20.w,
                                       right: 20.w,
@@ -1388,15 +1423,14 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                )
+                                ):Container()
                               ],
                             ),
-                          )
-                        : Container(),
-                    SizedBox(
+                          ),
+                    watch.orderDetails?.transactionId !=""? SizedBox(
                       height: 15.h,
-                    ),
-                    Container(
+                    ):Container(),
+                    watch.orderDetails?.transactionId !=""? Container(
                       padding: EdgeInsets.only(
                         left: 19.w,
                       ),
@@ -1410,7 +1444,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                               fontWeight: FontWeight.w500),
                         ),
                       ),
-                    ),
+                    ):Container(),
                     SizedBox(
                       height: 15.h,
                     ),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/model/get_order_list_model.dart';
@@ -31,24 +32,27 @@ class SOrderStatusController extends ChangeNotifier {
     notifyListeners();
   }
 
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
   Future<void> getShopOrderList(context) async {
-    isLoading = true;
+    showLoader(true);
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopGetOrderListRepo.SGetOrderListModel(pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result = SGetOrderListModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         shopOrderList = result.shopOrderList;
-        pendingOrdersList = shopOrderList?.pendingOrdersList;
-        confirmedOrdersList = shopOrderList?.confirmedOrdersList;
-        inprocessOrdersList = shopOrderList?.inprocessOrdersList;
-        deliveredOrdersList = shopOrderList?.deliveredOrdersList;
-        cancelledOrdersList = shopOrderList?.cancelledOrdersList;
-        isLoading = false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        pendingOrdersList = shopOrderList?.pendingOrdersList??[];
+        confirmedOrdersList = shopOrderList?.confirmedOrdersList??[];
+        inprocessOrdersList = shopOrderList?.inprocessOrdersList??[];
+        deliveredOrdersList = shopOrderList?.deliveredOrdersList??[];
+        cancelledOrdersList = shopOrderList?.cancelledOrdersList??[];
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

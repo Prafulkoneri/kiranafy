@@ -23,24 +23,27 @@ class _SInProcessOrderViewState extends State<SInProcessOrderView> {
     final readMainScreen = context.read<SMainScreenController>();
 
     return watch.inprocessOrdersList!.isEmpty
-        ? Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Order Is empty",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: Black1,
-                        letterSpacing: .5,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600),
+        ? Container(
+      height: MediaQuery.of(context).size.height/1.5,
+          child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Order Is empty",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black1,
+                          letterSpacing: .5,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          )
+        )
         : ListView.builder(
             padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
             itemCount: watch.inprocessOrdersList?.length ?? 0,

@@ -21,25 +21,28 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
     final read = context.read<SOrderStatusController>();
     final watch = context.watch<SOrderStatusController>();
     final readMainScreen = context.read<SMainScreenController>();
-    return watch.deliveredOrdersList!.isEmpty
-        ? Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Order Is empty",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: Black1,
-                        letterSpacing: .5,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600),
+    return watch.deliveredOrdersList?.isEmpty??false
+        ? Container(
+      height: MediaQuery.of(context).size.height/1.5,
+          child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Order Is empty",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black1,
+                          letterSpacing: .5,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          )
+        )
         : ListView.builder(
             padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
             itemCount: watch.deliveredOrdersList?.length ?? 0,

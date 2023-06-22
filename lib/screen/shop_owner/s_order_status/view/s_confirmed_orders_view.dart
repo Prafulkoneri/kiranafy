@@ -22,24 +22,27 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
     final watch = context.watch<SOrderStatusController>();
     final readMainScreen = context.read<SMainScreenController>();
     return watch.confirmedOrdersList!.isEmpty
-        ? Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Order Is empty",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: Black1,
-                        letterSpacing: .5,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600),
+        ? Container(
+      height: MediaQuery.of(context).size.height/1.5,
+          child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Order Is empty",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black1,
+                          letterSpacing: .5,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          )
+        )
         : ListView.builder(
             padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
             itemCount: watch.confirmedOrdersList?.length ?? 0,

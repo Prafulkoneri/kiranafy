@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/order_status_mode.dart';
@@ -63,7 +64,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     shopOrderViewRepo
         .shopOrderView(shopOrderViewReqModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result = ShopOrderViewResModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {

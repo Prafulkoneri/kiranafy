@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,19 +15,23 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class SOrderStatusView extends StatefulWidget {
+
   const SOrderStatusView({Key? key}) : super(key: key);
 
   @override
   _SOrderStatusViewState createState() => _SOrderStatusViewState();
 }
 
-class _SOrderStatusViewState extends State<SOrderStatusView> {
+class _SOrderStatusViewState extends State<SOrderStatusView>  with TickerProviderStateMixin{
   @override
   void initState() {
+
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<SOrderStatusController>().initState(context);
+      tabController=TabController(length: 5, vsync:this,initialIndex:context.read<SOrderStatusController>().selectedIndex);
     });
   }
+ TabController ? tabController;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +50,15 @@ class _SOrderStatusViewState extends State<SOrderStatusView> {
             isBackButtonEnabled: false,
           ),
         ),
-        body: Column(
+        body:watch.isLoading?Center(
+          child: CircularProgressIndicator(),
+        ):
+        Column(
           children: [
             TabBar(
               physics: NeverScrollableScrollPhysics(),
               indicatorSize: TabBarIndicatorSize.tab,
+              controller: tabController,
               splashBorderRadius: BorderRadius.circular(20),
               indicator: CustomIndicator(color: Color(0xff39C19D), radius: 5.w),
               indicatorWeight: 0.w,
