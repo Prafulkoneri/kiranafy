@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:provider/provider.dart';
 
 class SConfirmedOrdersView extends StatefulWidget {
@@ -113,20 +114,33 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                               fontSize: 12.sp,
                               color: Color(0xffA3A3A3)),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              "Details",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14.sp,
-                                  color: Color(0xff3A3A3A)),
-                            ),
-                            SizedBox(
-                              width: 7.w,
-                            ),
-                            SvgPicture.asset("assets/icons/arrow_right.svg"),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            // Within the `FirstRoute` widget
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShopOrderStatusView(
+                                        orderId: element?.id.toString(),
+                                      )),
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "Details",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14.sp,
+                                    color: Color(0xff3A3A3A)),
+                              ),
+                              SizedBox(
+                                width: 7.w,
+                              ),
+                              SvgPicture.asset("assets/icons/arrow_right.svg"),
+                            ],
+                          ),
                         ),
                       ],
                     ),

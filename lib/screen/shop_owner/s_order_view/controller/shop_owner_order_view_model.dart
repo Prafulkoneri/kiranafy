@@ -17,31 +17,47 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String? orderCancelledReason = "";
   String? orderCancelledReasonId = "";
   bool isLoading = true;
+  bool isStackLoading = false;
   ShopOrderViewData? shopOrderViewData;
   OrderDetails? orderDetails;
   CouponDetails? couponDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
   ShopOrderViewRepo shopOrderViewRepo = ShopOrderViewRepo();
-  ShopOwnerOrderStatusChangedRepo orderStatusChangedRepo =
-      ShopOwnerOrderStatusChangedRepo();
+
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
   //////////////
+  ShopOwnerOrderStatusChangedRepo orderStatusChangedRepo =
+      ShopOwnerOrderStatusChangedRepo();
   OrderStatusChangeRequestModel get orderStatusChangedRequestModel =>
       OrderStatusChangeRequestModel(
           orderId: orderId.toString(),
           orderStatus: orderStatus.toString(),
           orderCancelledReason: orderCancelledReason.toString(),
           orderCancelledReasonId: orderCancelledReasonId.toString());
-  Future<void> initState(context, orId) async {
+  Future<void> initState(
+    context,
+    orId,
+  ) async {
     await shopOwnerOrderView(context, orId);
+    // shopOrderStatus(context, orId, oStatus, oCReason, oCReasonId);
+    notifyListeners();
+  }
+
+  void showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
+  void showStackLoader(value) {
+    isStackLoading = value;
     notifyListeners();
   }
 
   Future<void> shopOwnerOrderView(context, orId) async {
     orderId = orId.toString();
-    isLoading = true;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     shopOrderViewRepo
@@ -56,7 +72,45 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         couponDetails = shopOrderViewData?.couponDetails;
         deliveryAddressDetails = shopOrderViewData?.deliveryAddressDetails;
         orderProductDetails = shopOrderViewData?.orderProductDetails;
-        isLoading = false;
+        showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> shopOrderStatus(
+      context, orId, oStatus, oCReason, oCReasonId) async {
+    orderId = orId.toString();
+    orderStatus = oStatus.toString();
+    orderCancelledReason = oCReason.toString();
+    orderCancelledReasonId = oCReasonId.toString();
+
+    isLoading = true;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    orderStatusChangedRepo
+        .orderStatus(
+            orderStatusChangedRequestModel, pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+          OrderStatusChangeResModel.fromJson(jsonDecode(response.body));
+
+      if (response.statusCode == 200) {
+        shopOwnerOrderView(context, orId);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

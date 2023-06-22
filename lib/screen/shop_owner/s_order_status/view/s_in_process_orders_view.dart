@@ -118,15 +118,14 @@ class _SInProcessOrderViewState extends State<SInProcessOrderView> {
                         GestureDetector(
                           onTap: () {
                             // Within the `FirstRoute` widget
-                            onPressed:
-                            () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ShopOrderStatusView()),
-                              );
-                            };
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShopOrderStatusView(
+                                        orderId: element?.id.toString(),
+                                      )),
+                            );
                           },
                           child: Row(
                             children: [
