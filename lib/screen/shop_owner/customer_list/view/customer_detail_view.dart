@@ -77,7 +77,8 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            watch.customerDetail?.customerProfileImagePath != ""
+                            watch.customerDetails?.customerProfileImagePath !=
+                                    ""
                                 ? Container(
                                     width: 80.w,
                                     height: 80.w,
@@ -91,7 +92,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                         height: 80.w,
                                         width: 80.w,
                                         imageUrl:
-                                            '${watch.customerDetail?.customerProfileImagePath}',
+                                            '${watch.customerDetails?.customerProfileImagePath}',
                                         fit: BoxFit.cover,
                                         // 'assets/images/ReviewProfile.png',
                                       ),
@@ -110,7 +111,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  watch.customerDetail?.customerName ?? "",
+                                  watch.customerDetails?.customerName ?? "",
                                   style: TextStyle(
                                       color: black,
                                       // letterSpacing: .5,
@@ -131,7 +132,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                       width: 7.w,
                                     ),
                                     Text(
-                                      '${watch.customerDetail?.areaName ?? ""}, ${watch.customerDetail?.cityName ?? ""}',
+                                      '${watch.customerDetails?.areaName ?? ""}, ${watch.customerDetails?.cityName ?? ""}',
                                       style: TextStyle(
                                           color: black,
                                           letterSpacing: .5,
@@ -154,7 +155,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                       width: 7.w,
                                     ),
                                     Text(
-                                      '${watch.customerDetail?.mobileNumber ?? ""}',
+                                      '${watch.customerDetails?.mobileNumber ?? ""}',
                                       style: TextStyle(
                                           color: black,
                                           letterSpacing: .5,
@@ -170,7 +171,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                         GestureDetector(
                           onTap: () {
                             read.launchPhone(
-                                watch.customerDetail?.mobileNumber ?? "",
+                                watch.customerDetails?.mobileNumber ?? "",
                                 context);
                           },
                           child: Container(
@@ -216,8 +217,9 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 5,
+                    itemCount: watch.customerOrderDetails?.length ?? 0,
                     itemBuilder: (context, index) {
+                      final element = watch.customerOrderDetails?[index];
                       return Container(
                         padding: const EdgeInsets.all(20),
                         margin: const EdgeInsets.only(
@@ -234,7 +236,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Order ID - PAAC001',
+                                  'Order ID - ${element?.orderUniqueId}',
                                   style: TextStyle(
                                       color: Black,
                                       letterSpacing: .5,
@@ -251,7 +253,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                         Radius.circular(10.0)),
                                   ),
                                   child: Text(
-                                    'In process',
+                                    '${element?.orderStatus}',
                                     style: TextStyle(
                                         color: Color(0xffE4C400),
                                         letterSpacing: .5,
@@ -268,7 +270,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Mar 10, 2023   9:15 am',
+                                  '${element?.createdAt}',
                                   style: TextStyle(
                                       color: const Color(0xff5B5B5B),
                                       // letterSpacing: .5,
@@ -308,7 +310,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Rs. 3,200',
+                                  'Rs. ${element?.totalAmount}',
                                   style: TextStyle(
                                       color: const Color(0xff5B5B5B),
                                       letterSpacing: .5,
@@ -316,7 +318,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                       fontWeight: FontWeight.w200),
                                 ),
                                 Text(
-                                  '25',
+                                  '${element?.totalItems}',
                                   style: TextStyle(
                                       color: const Color(0xff5B5B5B),
                                       letterSpacing: .5,

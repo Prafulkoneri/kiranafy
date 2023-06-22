@@ -18,9 +18,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SCustomerListController extends ChangeNotifier {
   CustomerListData? customerListData;
-  List<CustomerDetail>? customerDetail;
+  // List<CustomerDetail>? customerDetail;
+  // CustomerListData? customerListData;//
+  List<AllCustomerListElement>? allCustomerList; //
+  List<AllCustomerListElement>? favouriteToShopsList; //
+  List<AllCustomerListElement>? orderedButNotFavouriteList; //
   CustomerListRepo customerListRepo = CustomerListRepo();
-  CustomerFavListRepo customerFavListRepo = CustomerFavListRepo();
+  // CustomerFavListRepo customerFavListRepo = CustomerFavListRepo();
   bool isFavToShopSelected = false;
   bool isOrderedSelected = false;
   bool isLoading = true;
@@ -47,8 +51,12 @@ class SCustomerListController extends ChangeNotifier {
       final result = CustomerListModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        customerListData = result.data;
-        customerDetail = customerListData?.customerDetails;
+        customerListData = result.customerListData;
+        allCustomerList = customerListData?.allCustomerList;
+        favouriteToShopsList = customerListData?.favouriteToShopsList;
+        orderedButNotFavouriteList =
+            customerListData?.orderedButNotFavouriteList;
+
         showLoader(false);
         notifyListeners();
       } else {
@@ -88,37 +96,37 @@ class SCustomerListController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getFavShopSelected(context) async {
-    showLoader(true);
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    print(pref.getString("successToken"));
-    customerFavListRepo
-        .getCustomerFavList(pref.getString("successToken"))
-        .then((response) {
-      print(response.body);
-      final result =
-          CustomerAddedToFavResModel.fromJson(jsonDecode(response.body));
-      print(response.statusCode);
-      if (response.statusCode == 200) {
-        customerListData = result.data;
-        customerDetail = customerListData?.customerDetails;
-        showLoader(false);
-        Navigator.pop(context);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
+  // Future<void> getFavShopSelected(context) async {
+  //   showLoader(true);
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   print(pref.getString("successToken"));
+  //   customerFavListRepo
+  //       .getCustomerFavList(pref.getString("successToken"))
+  //       .then((response) {
+  //     print(response.body);
+  //     final result =
+  //         CustomerAddedToFavResModel.fromJson(jsonDecode(response.body));
+  //     print(response.statusCode);
+  //     if (response.statusCode == 200) {
+  //       customerListData = result.data;
+  //       customerDetail = customerListData?.customerDetails;
+  //       showLoader(false);
+  //       Navigator.pop(context);
+  //       notifyListeners();
+  //     } else {
+  //       Utils.showPrimarySnackbar(context, result.message,
+  //           type: SnackType.error);
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+  //   }).catchError(
+  //     (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //     },
+  //     test: (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //       return false;
+  //     },
+  //   );
+  // }
 }

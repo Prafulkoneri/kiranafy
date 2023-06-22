@@ -12,7 +12,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
-import 'package:local_supper_market/utils/maps/map_view.dart';
+import 'package:local_supper_market/utils/maps/view/map_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';

@@ -274,6 +274,7 @@ class Endpoint {
 
   ///Customer aplly coupons////
   static const String applyCoupons = "${baseUrl}lsm-customer-apply-coupon";
+
   ///Customer remove coupons////
   static const String removeCoupons = "${baseUrl}lsm-customer-remove-coupon";
   //Order PAyment////
@@ -293,4 +294,8 @@ class Endpoint {
   ////Shop Owner Status Changed////
   static const String shopOwnerOrderStatusChange =
       "${baseUrl}lsm-shop-owner-change-order-delivery-status";
+
+  ////Customer Current Location Pincode////
+  static const String currentLocationPincode =
+      "${baseUrl}lsm-customer-current-location-pincode";
 }

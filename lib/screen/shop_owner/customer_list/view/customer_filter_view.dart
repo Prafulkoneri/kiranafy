@@ -141,7 +141,7 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
                   ),
                   // style: style,
                   onPressed: () {
-                    read.getFavShopSelected(context);
+                    // read.getFavShopSelected(context);
                   },
                   child: Text(
                     'Filter',
