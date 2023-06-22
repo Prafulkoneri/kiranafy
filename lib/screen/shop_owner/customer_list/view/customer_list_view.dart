@@ -88,9 +88,9 @@ class _CustomerListViewState extends State<CustomerListView> {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: watch.allCustomerList?.length ?? 0,
+                      itemCount: watch.customerList?.length ?? 0,
                       itemBuilder: (context, index) {
-                        final element = watch.allCustomerList?[index];
+                        final element = watch.customerList?[index];
                         return Container(
                           margin: EdgeInsets.only(
                               left: 19.w,

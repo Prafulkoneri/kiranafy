@@ -20,7 +20,7 @@ class SCustomerListController extends ChangeNotifier {
   CustomerListData? customerListData;
   // List<CustomerDetail>? customerDetail;
   // CustomerListData? customerListData;//
-  List<AllCustomerListElement>? allCustomerList; //
+  List<AllCustomerListElement>? customerList; //
   List<AllCustomerListElement>? favouriteToShopsList; //
   List<AllCustomerListElement>? orderedButNotFavouriteList; //
   CustomerListRepo customerListRepo = CustomerListRepo();
@@ -30,6 +30,8 @@ class SCustomerListController extends ChangeNotifier {
   bool isLoading = true;
 
   Future<void> initState(context, isRefresh) async {
+    isFavToShopSelected=false;
+    isOrderedSelected=false;
     if (isRefresh) {
       await getCustomerList(context);
     }
@@ -41,6 +43,7 @@ class SCustomerListController extends ChangeNotifier {
   }
 
   Future<void> getCustomerList(context) async {
+
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -52,10 +55,20 @@ class SCustomerListController extends ChangeNotifier {
       print(response.statusCode);
       if (response.statusCode == 200) {
         customerListData = result.customerListData;
-        allCustomerList = customerListData?.allCustomerList;
-        favouriteToShopsList = customerListData?.favouriteToShopsList;
-        orderedButNotFavouriteList =
-            customerListData?.orderedButNotFavouriteList;
+        if(!isFavToShopSelected && !isOrderedSelected) {
+          customerList = customerListData?.allCustomerList;
+        }
+        if(isFavToShopSelected){
+          customerList=customerListData?.favouriteToShopsList;
+          Navigator.pop(context);
+        }
+        if(isOrderedSelected){
+          customerList=customerListData?.orderedButNotFavouriteList;
+          Navigator.pop(context);
+        }
+        // favouriteToShopsList =
+        // orderedButNotFavouriteList =
+        //     customerListData?.orderedButNotFavouriteList;
 
         showLoader(false);
         notifyListeners();
@@ -87,46 +100,27 @@ class SCustomerListController extends ChangeNotifier {
   }
 
   void onFavToShopSelected(value) {
-    isFavToShopSelected = value;
+    if(!isFavToShopSelected){
+      isFavToShopSelected=true;
+      isOrderedSelected=false;
+    }
+    else{
+      isFavToShopSelected=false;
+      isOrderedSelected=false;
+    }
     notifyListeners();
   }
 
   void onOrderedButNotFavSelected(value) {
-    isOrderedSelected = value;
+    if(!isOrderedSelected){
+      isOrderedSelected=true;
+      isFavToShopSelected=false;
+    }
+    else{
+      isFavToShopSelected=false;
+      isOrderedSelected=false;
+    }
     notifyListeners();
   }
 
-  // Future<void> getFavShopSelected(context) async {
-  //   showLoader(true);
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   print(pref.getString("successToken"));
-  //   customerFavListRepo
-  //       .getCustomerFavList(pref.getString("successToken"))
-  //       .then((response) {
-  //     print(response.body);
-  //     final result =
-  //         CustomerAddedToFavResModel.fromJson(jsonDecode(response.body));
-  //     print(response.statusCode);
-  //     if (response.statusCode == 200) {
-  //       customerListData = result.data;
-  //       customerDetail = customerListData?.customerDetails;
-  //       showLoader(false);
-  //       Navigator.pop(context);
-  //       notifyListeners();
-  //     } else {
-  //       Utils.showPrimarySnackbar(context, result.message,
-  //           type: SnackType.error);
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-  //   }).catchError(
-  //     (Object e) {
-  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-  //     },
-  //     test: (Object e) {
-  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-  //       return false;
-  //     },
-  //   );
-  // }
 }

@@ -108,7 +108,7 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
               child: Row(
                 children: [
                   PrimaryCheckBox(
-                    value: false,
+                    value: watch.isOrderedSelected,
                     onChanged: (value) {
                       read.onOrderedButNotFavSelected(value);
                     },
@@ -141,7 +141,7 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
                   ),
                   // style: style,
                   onPressed: () {
-                    // read.getFavShopSelected(context);
+                    read.getCustomerList(context);
                   },
                   child: Text(
                     'Filter',
