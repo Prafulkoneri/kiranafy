@@ -274,6 +274,8 @@ class Endpoint {
 
   ///Customer aplly coupons////
   static const String applyCoupons = "${baseUrl}lsm-customer-apply-coupon";
+  ///Customer remove coupons////
+  static const String removeCoupons = "${baseUrl}lsm-customer-remove-coupon";
   //Order PAyment////
   static const String orderPayment =
       "${baseUrl}lsm-customer-order-payment-screen";

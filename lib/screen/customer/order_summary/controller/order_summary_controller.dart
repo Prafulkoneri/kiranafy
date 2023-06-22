@@ -13,8 +13,10 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/remove
 import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/c_apply_coupon_model.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/order_summary_model.dart';
+import 'package:local_supper_market/screen/customer/order_summary/model/remove_coupon_model.dart';
 import 'package:local_supper_market/screen/customer/order_summary/repository/apply_coupon_repo.dart';
 import 'package:local_supper_market/screen/customer/order_summary/repository/order_summary_repo.dart';
+import 'package:local_supper_market/screen/customer/order_summary/repository/remove_coupon_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,6 +28,7 @@ class OrderSummaryController extends ChangeNotifier {
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   ApplyCouponRepo applyCouponRepo = ApplyCouponRepo();
+  RemoveCouponRepo removeCouponRepo = RemoveCouponRepo();
 
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
@@ -137,6 +140,7 @@ class OrderSummaryController extends ChangeNotifier {
       expectedDateController.clear();
       slotGroupValue = "";
       discountPercentage = "";
+      offerGroupValue="";
       couponCodeController.clear();
     }
     showLoader(true);
@@ -178,7 +182,7 @@ class OrderSummaryController extends ChangeNotifier {
         finalCouponList = result.orderSummaryData?.finalCouponList;
         int couponListLength=finalCouponList?.length??0;
           viewMore=List<bool>.filled(couponListLength,false);
-
+        couponDiscount=orderFinalTotals?.couponDiscount.toString()??"";
         fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
         showLoader(false);
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
@@ -235,6 +239,7 @@ class OrderSummaryController extends ChangeNotifier {
   }
 
   Future<void> removeAllShopFavList(context, id) async {
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     removeFavShopRepo
         .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
@@ -349,6 +354,7 @@ class OrderSummaryController extends ChangeNotifier {
       );
 
   Future<void> applyCoupon(context) async {
+    showLoader(true);
     showOnPageLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -364,10 +370,12 @@ class OrderSummaryController extends ChangeNotifier {
         couponCodeController.text = data?.couponCode.toString() ?? "";
         deliveryCharges = data?.deliveryCharges.toString() ?? "";
         subTotal = data?.subTotal ?? "";
+        couponDiscount=data?.couponDiscount.toString()??"";
         total = data?.total ?? "";
         totalDiscount = data?.totalDiscount ?? "";
         discountPercentage = data?.discountPercentage ?? "";
         showOnPageLoader(false);
+        showLoader(false);
         Navigator.pop(context);
         notifyListeners();
         Utils.showPrimarySnackbar(context, result.message,
@@ -380,6 +388,57 @@ class OrderSummaryController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  CustomerRemoveCouponsRequestModel get customerRemoveCouponsRequestModel=>CustomerRemoveCouponsRequestModel(
+    cartId: cartId,
+    shopId: shopId,
+  );
+
+  Future<void> removeCoupon(context)async{
+    if(couponCodeController.text==""){
+      Utils.showPrimarySnackbar(context, "No Coupon Added",
+          type: SnackType.error);
+      return;
+    }
+    showOnPageLoader(true);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    removeCouponRepo
+        .removeCoupon(
+        customerRemoveCouponsRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+      CustomerRemoveCouponsResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        final data = result.data;
+        couponCodeController.clear();
+        offerGroupValue="";
+        deliveryCharges = data?.removeCouponData?.deliveryCharges.toString() ?? "";
+        subTotal = data?.removeCouponData?.subTotal.toString() ?? "";
+        total = data?.removeCouponData?.total.toString()?? "";
+        totalDiscount = data?.removeCouponData?.totalDiscount.toString() ?? "";
+        discountPercentage = "";
+        showOnPageLoader(false);
+        notifyListeners();
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

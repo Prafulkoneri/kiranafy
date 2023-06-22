@@ -83,10 +83,10 @@ class _MyOrderViewState extends State<MyOrderView> {
         child: CircularProgressIndicator(),
       ):
       StackLoader(
-        showLoader: watch.isStackLoaderVisible,
+        showLoader: false,
         child: ListView.builder(
           physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.only(bottom: 100.w),
           shrinkWrap: true,
           itemCount: watch.myOrdersData?.orderList?.length ?? 0,
           itemBuilder: (context, index) {

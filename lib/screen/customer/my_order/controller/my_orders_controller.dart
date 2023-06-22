@@ -84,6 +84,7 @@ class MyOrdersController extends ChangeNotifier {
   }
 
   Future<void> applyFilter(context)async{
+    showLoader(true);
     showStackLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -97,6 +98,7 @@ class MyOrdersController extends ChangeNotifier {
         orderList = myOrdersData?.orderList;
         orderedShopsList = myOrdersData?.orderedShopsList;
         showStackLoader(false);
+        showLoader(false);
         Navigator.pop(context);
         notifyListeners();
       } else {
@@ -118,7 +120,9 @@ class MyOrdersController extends ChangeNotifier {
   Future<void> clearFilter(context)async{
     shopId="";
     orderStatus="";
+    showLoader(true);
     showStackLoader(true);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     myOrderRepo
@@ -131,6 +135,7 @@ class MyOrdersController extends ChangeNotifier {
         orderList = myOrdersData?.orderList;
         orderedShopsList = myOrdersData?.orderedShopsList;
         showStackLoader(false);
+        showLoader(false);
         Navigator.pop(context);
         notifyListeners();
       } else {

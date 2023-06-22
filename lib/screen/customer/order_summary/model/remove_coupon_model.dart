@@ -48,11 +48,11 @@ class Data{
 }
 
 class RemoveCouponData {
-  String? couponDiscount;
-  String? subTotal;
-  String? deliveryCharges;
-  String? total;
-  String? totalDiscount;
+  int? couponDiscount;
+  int? subTotal;
+  int? deliveryCharges;
+  int? total;
+  int? totalDiscount;
 
   RemoveCouponData({
     required this.couponDiscount,

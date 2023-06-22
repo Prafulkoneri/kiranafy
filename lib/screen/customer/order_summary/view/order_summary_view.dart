@@ -100,7 +100,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
         child: CircularProgressIndicator(),
       ):
       StackLoader(
-        showLoader:false,
+        showLoader:watch.isStackLoaderVisible,
         child:  SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -731,7 +731,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           //     ),
                           //   ),
                           // ),
-                          onTap: () {},
+                          onTap: () {
+                            read.removeCoupon(context);
+                          },
                           child: Text(
                             "Remove",
                             style: GoogleFonts.dmSans(
@@ -1186,7 +1188,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                         ]),
                       ),
                       Text(
-                        "Rs  ${watch.totalDiscount}",
+                        "Rs  ${watch.couponDiscount}",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: grey5,
@@ -1308,20 +1310,6 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
               child: PrimaryButton(
                 width: ScreenUtil().screenWidth,
                 color: SplashText,
-                // style: ButtonStyle(
-                //   elevation: MaterialStateProperty.all(0),
-                //   // backgroundColor: ,
-                //   backgroundColor: MaterialStateProperty.all(SplashText),
-                //   // shape: MaterialStateProperty.all(
-                //   //   RoundedRectangleBorder(
-                //   //     borderRadius: BorderRadius.circular(10),
-                //   //     // side: BorderSide(
-                //   //     //   color: SplashText,
-                //   //     //   // width: 1,
-                //   //     // ),
-                //   //   ),
-                //   // ),
-                // ),
                 onTap: () {
 
                   read.onConfirmOrder(context);
