@@ -109,8 +109,6 @@ class _SPendingOrdersViewState extends State<SPendingOrdersView> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Within the `FirstRoute` widget
-
                         Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:provider/provider.dart';
 
 class SCancelledOrdersView extends StatefulWidget {
@@ -20,26 +21,29 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
     final read = context.read<SOrderStatusController>();
     final watch = context.watch<SOrderStatusController>();
     final readMainScreen = context.read<SMainScreenController>();
-    return watch.cancelledOrdersList!.isEmpty
-        ? Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Order Is empty",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: Black1,
-                        letterSpacing: .5,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ],
-            ),
-          )
-        : ListView.builder(
+    return
+        // watch.cancelledOrdersList!.isEmpty
+        //     ?
+        //      Center(
+        //         child: Column(
+        //           crossAxisAlignment: CrossAxisAlignment.center,
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             Text(
+        //               "Order Is empty",
+        //               style: GoogleFonts.dmSans(
+        //                 textStyle: TextStyle(
+        //                     color: Black1,
+        //                     letterSpacing: .5,
+        //                     fontSize: 18.sp,
+        //                     fontWeight: FontWeight.w600),
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       )
+        //     :
+        ListView.builder(
             padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
             itemCount: watch.cancelledOrdersList?.length ?? 0,
             physics: BouncingScrollPhysics(),
@@ -113,20 +117,33 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
                               fontSize: 12.sp,
                               color: Color(0xffA3A3A3)),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              "Details",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14.sp,
-                                  color: Color(0xff3A3A3A)),
-                            ),
-                            SizedBox(
-                              width: 7.w,
-                            ),
-                            SvgPicture.asset("assets/icons/arrow_right.svg"),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            // Within the `FirstRoute` widget
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShopOrderStatusView(
+                                        orderId: element?.id.toString(),
+                                      )),
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "Details",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14.sp,
+                                    color: Color(0xff3A3A3A)),
+                              ),
+                              SizedBox(
+                                width: 7.w,
+                              ),
+                              SvgPicture.asset("assets/icons/arrow_right.svg"),
+                            ],
+                          ),
                         ),
                       ],
                     ),
