@@ -56,12 +56,7 @@ class _CustomerListViewState extends State<CustomerListView> {
             );
           },
           title: "Customers",
-          action: Padding(
-            padding: EdgeInsets.only(
-              right: 20.w,
-            ),
-            child: SvgPicture.asset("assets/images/filter.svg"),
-          ),
+          action: SvgPicture.asset("assets/images/filter.svg"),
           onActionTap: () {
             showModalBottomSheet(
               backgroundColor: Colors.white,
@@ -93,9 +88,9 @@ class _CustomerListViewState extends State<CustomerListView> {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: watch.customerDetail?.length ?? 0,
+                      itemCount: watch.allCustomerList?.length ?? 0,
                       itemBuilder: (context, index) {
-                        final element = watch.customerDetail?[index];
+                        final element = watch.allCustomerList?[index];
                         return Container(
                           margin: EdgeInsets.only(
                               left: 19.w,

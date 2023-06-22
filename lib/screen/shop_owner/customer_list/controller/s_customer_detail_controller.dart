@@ -20,7 +20,10 @@ import 'package:url_launcher/url_launcher.dart';
 class SCustomerDetailController extends ChangeNotifier {
   bool isLoading = true;
   String customerId = "";
-  ShopCustomerDetail? customerDetail;
+  // ShopCustomerDetail? customerDetail;
+  ShopCustomerDetail? shopCustomerDetailData; //
+  CustomerDetails? customerDetails; //
+  List<CustomerOrderDetail>? customerOrderDetails; //
 
   ShopCustomerDetailRepo shopCustomerDetailRepo = ShopCustomerDetailRepo();
 
@@ -61,7 +64,10 @@ class SCustomerDetailController extends ChangeNotifier {
       final result = CustomerDetailResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        customerDetail = result.data;
+        shopCustomerDetailData = result.shopCustomerDetailData;
+        customerDetails = shopCustomerDetailData?.customerDetails;
+        customerOrderDetails = shopCustomerDetailData?.customerOrderDetails;
+        // customerDetail = result.data;
         showLoader(false);
         notifyListeners();
       } else {
