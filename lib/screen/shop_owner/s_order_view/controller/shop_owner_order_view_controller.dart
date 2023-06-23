@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/cancel_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/order_status_mode.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_owner_model.dart';
@@ -22,7 +24,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String orderCancelledReasonId = "";
   String deliveryCodeError = "";
   // String? deliveryCode = "";
-
+TextEditingController reasonController=TextEditingController();
   bool isDeliveryCodeError = false;
   bool isLoading = true;
   bool isStackLoading = false;
@@ -38,6 +40,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   List<CancelReasonList>? cancelReasondata;
   String cancelOrderErrorMsg="";
   bool isCancelOrderErrorMsgVisible=false;
+  String cancellationId="";
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -55,6 +58,12 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     context,
     orId,
   ) async {
+    orderId = "";
+    orderStatus = "";
+    orderCancelledReason = "";
+    orderCancelledReasonId = "";
+    deliveryCode = "";
+    reasonController.clear();
     await shopOwnerOrderView(context, orId);
 
     getCancelOrderList(context);
@@ -72,10 +81,10 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   }
 
   Future<void> shopOwnerOrderView(context, orId) async {
-    orderId = orId.toString();
     showLoader(true);
-    SharedPreferences pref = await SharedPreferences.getInstance();
+    orderId = orId.toString();
 
+    SharedPreferences pref = await SharedPreferences.getInstance();
     shopOrderViewRepo
         .shopOrderView(shopOrderViewReqModel, pref.getString("successToken"))
         .then((response) {
@@ -115,9 +124,31 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     orderCancelledReasonId = oCReasonId.toString();
     deliveryCode = dCode.toString();
 
-    isLoading = true;
+ if(oStatus=="order_cancelled"){
+   print("7777777");
+  if(!isOtherReasonSelected&&orderCancelledReasonId==""){
+    cancelOrderErrorMsg="Please Enter reason for cancellation";
+    isCancelOrderErrorMsgVisible=true;
+    notifyListeners();
+    Timer(Duration(seconds: 3), () {
+      isCancelOrderErrorMsgVisible = false;
+      notifyListeners();
+    });
+    return;
+  }
+  if(orderCancelledReason==""){
+    cancelOrderErrorMsg="Please Enter reason for cancellation";
+    isCancelOrderErrorMsgVisible=true;
+    notifyListeners();
+    Timer(Duration(seconds: 3), () {
+      isCancelOrderErrorMsgVisible = false;
+      notifyListeners();
+    });
+    return;
+  }
+ }
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
-
     orderStatusChangedRepo
         .orderStatus(
             orderStatusChangedRequestModel, pref.getString("successToken"))
@@ -125,12 +156,21 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       print(response.body);
       final result =
           OrderStatusChangeResModel.fromJson(jsonDecode(response.body));
-
       if (response.statusCode == 200) {
-        if (result.status == 200) {
+        if(oStatus=="order_cancelled"){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                    index: 1, screenName: SOrderStatusView())),
+                (Route<dynamic> route) => false,
+          );
+        }
+        if (result.message!="Delivery code not matched. Please try again.") {
           shopOwnerOrderView(context, orId);
           isDeliveryCodeError = false;
-        } else {
+        }
+        else {
           deliveryCodeError = result.message ?? "";
           isDeliveryCodeError = true;
           notifyListeners();
@@ -139,9 +179,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
             isDeliveryCodeError = false;
             notifyListeners();
           });
-
-          showLoader(false);
         }
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -201,9 +240,10 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void onSelectReason(index,value) {
+  void onSelectReason(index,value,id) {
     if(isSelectedReason[index]){
       isSelectedReason[index]=false;
+      cancellationId="";
       notifyListeners();
       return;
     }
@@ -211,6 +251,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
 
     isSelectedReason=List<bool>.filled(cancelOrderLength,false,growable:true);
       isSelectedReason[index]=true;
+    cancellationId=id.toString();
     isOtherReasonSelected=false;
 
     // isSelectedReason[index]=true;

@@ -17,7 +17,7 @@ class OrderStatusChangeRequestModel {
     data["order_id"] = orderId;
     data["order_status"] = orderStatus;
     data["shop_owner_order_cancelled_reason"] = orderCancelledReason;
-    data["shop_owner_cancelled_reason_id"] = orderCancelledReasonId;
+    data["cancelled_reason_id"] = orderCancelledReasonId;
     data["delivery_code"] = deliveryCode;
 
     return data;

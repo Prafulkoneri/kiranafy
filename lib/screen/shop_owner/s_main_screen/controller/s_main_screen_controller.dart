@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
@@ -79,7 +81,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onOfferPressed() {
     currentTab = 3;
-    currentScreen =ShopCouponsView(isRefresh: true,);
+    currentScreen =ShopCouponsView(isRefresh: true,isNavFromDashBoard:true,);
     notifyListeners();
   }
 

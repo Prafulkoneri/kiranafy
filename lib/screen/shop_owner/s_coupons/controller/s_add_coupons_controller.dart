@@ -226,7 +226,7 @@ class SAddCouponsController extends ChangeNotifier {
         productType: groupValue == "full_order_amount" ? "" : productType,
       );
 
-  Future<void> uploadCouponDetails(context) async {
+  Future<void> uploadCouponDetails(context,isNavFromDashBoard) async {
     if (fromDateController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter From Date",
           type: SnackType.error);
@@ -278,16 +278,34 @@ class SAddCouponsController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = AddCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 4,
-                  screenName: ShopCouponsView(
-                    isRefresh: true,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
+        if(isNavFromDashBoard) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SMainScreenView(
+                        index: 4,
+                        screenName: ShopCouponsView(
+                          isRefresh: true,
+                          isNavFromDashBoard:true,
+                        ))),
+                (Route<dynamic> route) => false,
+          );
+        }
+        else{
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SMainScreenView(
+                        index: 4,
+                        screenName: ShopCouponsView(
+                          isRefresh: true,
+                          isNavFromDashBoard:false,
+                        ))),
+                (Route<dynamic> route) => false,
+          );
+        }
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {
@@ -380,7 +398,7 @@ class SAddCouponsController extends ChangeNotifier {
         couponId: couponId,
       );
 
-  Future<void> uploadEditedCouponDetails(context) async {
+  Future<void> uploadEditedCouponDetails(context,isNavFromDashBoard) async {
     if (fromDateController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter From Date",
           type: SnackType.error);
@@ -433,16 +451,33 @@ class SAddCouponsController extends ChangeNotifier {
       final result =
           UpdateEditCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 4,
-                  screenName: ShopCouponsView(
-                    isRefresh: true,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
+        if(isNavFromDashBoard){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                    index: 3,
+                    screenName: ShopCouponsView(
+                      isRefresh: true,
+                      isNavFromDashBoard:true,
+                    ))),
+                (Route<dynamic> route) => false,
+          );
+        }
+        else{
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                    index: 4,
+                    screenName: ShopCouponsView(
+                      isRefresh: true,
+                      isNavFromDashBoard:false,
+                    ))),
+                (Route<dynamic> route) => false,
+          );
+        }
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {

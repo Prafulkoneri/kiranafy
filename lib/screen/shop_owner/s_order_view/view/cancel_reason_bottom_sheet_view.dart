@@ -91,7 +91,7 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                               PrimaryCheckBox(
                                 value: watch.isSelectedReason[index],
                                 onChanged: (value) {
-                                  read.onSelectReason(index, value);
+                                  read.onSelectReason(index, value,element?.id);
                                 },
                               ),
                               Padding(
@@ -113,34 +113,13 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                     SizedBox(
                       height: 10.w,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 20.w,
-                      ),
-                      child: Row(
-                        children: [
-                          PrimaryCheckBox(
-                            value: watch.isOtherReasonSelected,
-                            onChanged: (value) {
-                              read.onOtherSelected(value);
-                            },
-                          ),
-                          Text(
-                            "Other",
-                            style: TextStyle(
-                                color: Black1,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ),
+
                     Padding(
                       padding: EdgeInsets.only(
                           left: 20.w, top: 24.w, bottom: 17.w, right: 19.w),
                       // padding: const EdgeInsets.all(8.0),
                       child: PrimarySTextFormField(
-                        // controller: watch.termsAndConditionController,/
+                        controller: watch.reasonController,
                         height: 150.w,
                         maxLines: 10,
                         // hintText: "Address",/
@@ -164,7 +143,14 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                           ),
                           // style: style,
                           onPressed: () {
-
+                            read.shopOrderStatus(
+                                context,
+                                watch.orderDetails?.id.toString(),
+                                "order_cancelled",
+                              watch.reasonController.text,
+                              watch.cancellationId,
+                                "",
+                            );
                           },
                           child: Text(
                             'Submit',
@@ -199,7 +185,7 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                   children: [
                     Expanded(
                       child: Text(
-                        "Invalid Otp",
+                        watch.cancelOrderErrorMsg,
                         style: TextStyle(color: Colors.white, fontSize: 14.sp),
                       ),
                     ),

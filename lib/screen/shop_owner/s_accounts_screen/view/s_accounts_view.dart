@@ -338,6 +338,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           index: 4,
                           screenName: ShopCouponsView(
                             isRefresh: true,
+                            isNavFromDashBoard: false,
                           ))),
                   (Route<dynamic> route) => false,
                 );

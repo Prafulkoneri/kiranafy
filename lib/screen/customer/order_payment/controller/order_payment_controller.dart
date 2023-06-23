@@ -162,7 +162,7 @@ class OrderPaymentController extends ChangeNotifier {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  MainScreenView(index: 4, screenName: CheckOrderStatusView())),
+                  MainScreenView(index: 2, screenName: CheckOrderStatusView())),
           (Route<dynamic> route) => false,
         );
         showStackLoader(false);

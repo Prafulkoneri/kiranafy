@@ -69,6 +69,7 @@ class CustomerSignUpController extends ChangeNotifier {
         phoneNumber: "$countryCode${mobileController.text}",
         verificationCompleted: (phoneAuthCredential) async {},
         verificationFailed: (verificationFailed) {
+          print("wrw453454354534");
           Utils.showPrimarySnackbar(context, verificationFailed,
               type: SnackType.error);
         },
@@ -87,22 +88,16 @@ class CustomerSignUpController extends ChangeNotifier {
 
   void signInWithPhoneAuthCred(
       AuthCredential phoneAuthCredential, context) async {
+    print("gdsgdf");
     try {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
-
+      print(authCred.user);
       if (authCred.user != null) {
-        if (isLoginBtnEnabled) {
           onsignUp(context);
-          return;
-        }
 
-        // onsignUp(context);
       } else {
         showOtpErrorMsg();
         notifyListeners();
-        // Utils.showPrimarySnackbar(context,
-        //     "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
-        //     type: SnackType.error);
       }
     } on FirebaseAuthException catch (e) {
       // print("888");

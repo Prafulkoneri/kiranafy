@@ -23,8 +23,9 @@ import '../../../../widget/radio_button.dart';
 class SAddCouponsView extends StatefulWidget {
   final bool? isEditCoupon;
   final String? couponId;
+  final bool ? isNavFromDashboard;
 
-  const SAddCouponsView({super.key, required this.isEditCoupon, this.couponId});
+  const SAddCouponsView({super.key, required this.isEditCoupon, this.couponId,required this.isNavFromDashboard});
 
   @override
   State<SAddCouponsView> createState() => _SAddCouponsViewState();
@@ -49,16 +50,33 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
         child: PrimaryAppBar(
           title: widget.isEditCoupon == false ? "Add Coupon" : "Edit Coupon",
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 4,
-                      screenName: ShopCouponsView(
-                        isRefresh: false,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+            if(widget.isNavFromDashboard==true){
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 3,
+                        screenName: ShopCouponsView(
+                          isRefresh: false,
+                          isNavFromDashBoard: true,
+                        ))),
+                    (Route<dynamic> route) => false,
+              );
+            }
+            else{
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 4,
+                        screenName: ShopCouponsView(
+                          isRefresh: false,
+                          isNavFromDashBoard: false,
+                        ))),
+                    (Route<dynamic> route) => false,
+              );
+            }
+
           },
         ),
       ),
@@ -554,8 +572,8 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                       color: Color(0xff4689EC),
                       onTap: () {
                         widget.isEditCoupon == true
-                            ? read.uploadEditedCouponDetails(context)
-                            : read.uploadCouponDetails(context);
+                            ? read.uploadEditedCouponDetails(context,widget.isNavFromDashboard)
+                            : read.uploadCouponDetails(context,widget.isNavFromDashboard);
                       },
                     ),
                     SizedBox(

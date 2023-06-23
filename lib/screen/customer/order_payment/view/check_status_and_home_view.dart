@@ -120,7 +120,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
-                            index: 4,
+                            index: 0,
                             screenName: HomeScreenView(refreshPage: true))),
                     (Route<dynamic> route) => false,
                   );

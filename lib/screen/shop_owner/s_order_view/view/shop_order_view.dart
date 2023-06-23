@@ -1259,7 +1259,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                 ),
                               ),
                               Text(
-                                "Rs ${watch.orderDetails?.totalAmount}",
+                                "Rs ${watch.orderDetails?.subTotal}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,

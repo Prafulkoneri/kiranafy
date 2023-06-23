@@ -118,6 +118,7 @@ class OrderDetails {
   String? paymentMode;
   String? transactionId;
   String? orderStatus;
+  String? subTotal;
 
   OrderDetails({
     required this.id,
@@ -131,6 +132,7 @@ class OrderDetails {
     required this.paymentMode,
     required this.transactionId,
     required this.orderStatus,
+    required this.subTotal,
   });
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -144,6 +146,7 @@ class OrderDetails {
     paymentMode = json["payment_mode"];
     transactionId = json["transaction_id"];
     orderStatus = json["order_status"];
+    subTotal = json["sub_total_amount"];
   }
 }
 
@@ -156,10 +159,12 @@ class OrderProductDetail {
   String? productImageName;
   String? productWeight;
   String? unit;
+
   String? productQuantity;
   String? productMrpPrice;
   String? productOfferPrice;
   int? productTotalPrice;
+
 
   OrderProductDetail({
     required this.id,
@@ -174,6 +179,7 @@ class OrderProductDetail {
     required this.productMrpPrice,
     required this.productOfferPrice,
     required this.productTotalPrice,
+
   });
   OrderProductDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -188,5 +194,6 @@ class OrderProductDetail {
     productMrpPrice = json["product_mrp_price"];
     productOfferPrice = json["product_offer_price"];
     productTotalPrice = json["product_total_price"];
+
   }
 }
