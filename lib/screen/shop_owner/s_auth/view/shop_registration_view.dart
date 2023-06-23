@@ -51,31 +51,30 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
             isBackButtonEnabled: false,
           ),
         ),
-        body: Stack(
-          alignment: Alignment.topCenter,
-          clipBehavior: Clip.none,
-          children: [
-            Positioned(
-              top: -30.w,
-              left: 0.w,
-              child: Image.asset(
-                "assets/images/splash1.png",
-                height: 235.w,
-                width: 361.w,
+        body: SingleChildScrollView(
+          child: Stack(
+            alignment: Alignment.topCenter,
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                top: -30.w,
+                left: 0.w,
+                child: Image.asset(
+                  "assets/images/splash1.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            Positioned(
-              bottom: -25.w,
-              right: 0.w,
-              child: Image.asset(
-                "assets/images/splash2.png",
-                height: 235.w,
-                width: 361.w,
+              Positioned(
+                bottom: -25.w,
+                right: 0.w,
+                child: Image.asset(
+                  "assets/images/splash2.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Padding(
+              Padding(
                 padding: EdgeInsets.only(
                     left: 24.w, right: 24.w, top: 20.w, bottom: 20.w),
                 child: Column(
@@ -308,50 +307,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SizedBox(
                         height: 36.w,
                       ),
-                      // RichText(
-                      //   text: TextSpan(
-                      //       text: "By continuing you agree to our\n",
-                      //       style: GoogleFonts.dmSans(
-                      //         textStyle: TextStyle(
-                      //             color: Black,
-                      //             height: 1.3.w,
-                      //             // letterSpacing: .5,
-                      //             fontSize: 16.sp,
-                      //             fontWeight: FontWeight.w400),
-                      //       ),
-                      //       children: [
-                      //         TextSpan(
-                      //           text: 'Term of Condition',
-                      //           style: GoogleFonts.inter(
-                      //             textStyle: TextStyle(
-                      //                 color: SplashText1,
-                      //                 // letterSpacing: .5,
-                      //                 fontSize: 16.sp,
-                      //                 fontWeight: FontWeight.w400),
-                      //           ),
-                      //         ),
-                      //         TextSpan(
-                      //           text: ' and',
-                      //           style: GoogleFonts.inter(
-                      //             textStyle: TextStyle(
-                      //                 color: Black,
-                      //                 // letterSpacing: .5,
-                      //                 fontSize: 16.sp,
-                      //                 fontWeight: FontWeight.w400),
-                      //           ),
-                      //         ),
-                      //         TextSpan(
-                      //           text: ' Privacy Policy',
-                      //           style: GoogleFonts.inter(
-                      //             textStyle: TextStyle(
-                      //                 color: SplashText1,
-                      //                 // letterSpacing: .5,
-                      //                 fontSize: 16.sp,
-                      //                 fontWeight: FontWeight.w400),
-                      //           ),
-                      //         ),
-                      //       ]),
-                      // ),
+
                       SizedBox(
                         height: 12.w,
                       ),
@@ -367,8 +323,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       ),
                     ]),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }

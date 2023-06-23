@@ -100,10 +100,11 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                           },
                           child: Text(
                             'Submit',
+                            textAlign: TextAlign.center,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                   // color: SplashTex
-                                  letterSpacing: .5,
+                                  // letterSpacing: .5,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -115,6 +116,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           GestureDetector(
                             onTap: () async {
@@ -125,7 +127,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                               style: GoogleFonts.dmSans(
                                 textStyle: const TextStyle(
                                     // color: SplashTex
-                                    letterSpacing: .5,
+                                    // letterSpacing: .5,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -154,7 +156,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                   children: [
                     Expanded(
                       child: Text(
-                        "Invalid Otp",
+                        "Invalid OTP",
                         style: TextStyle(color: Colors.white, fontSize: 14.sp),
                       ),
                     ),
@@ -164,7 +166,11 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                           onTap: () {
                             read.onOtpDismiss();
                           },
-                          child: Text("Dismiss"),
+                          child: Text(
+                            "Dismiss",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14.sp),
+                          ),
                         ),
                         SizedBox(
                           width: 10.w,

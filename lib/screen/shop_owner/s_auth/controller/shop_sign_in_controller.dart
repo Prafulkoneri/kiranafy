@@ -50,7 +50,7 @@ class ShopSignInController extends ChangeNotifier {
 
   Future<void> onNewShopPressed(context) async {
     if (mobController.text.length < 10) {
-      Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
           type: SnackType.error);
       notifyListeners();
       return;
@@ -186,19 +186,19 @@ class ShopSignInController extends ChangeNotifier {
       print("888");
       showOtpErrorMsg();
       print("888");
-      Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
+      // Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
     }
   }
 
   Future<void> onLoginClick(context) async {
     if (mobController.text.trim().isEmpty) {
-      Utils.showPrimarySnackbar(context, "Please Enter Mobile No",
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
           type: SnackType.error);
       notifyListeners();
       return;
     }
     if (mobController.text.trim().length < 10) {
-      Utils.showPrimarySnackbar(context, "Please Enter 10 digits",
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
           type: SnackType.error);
       notifyListeners();
       return;

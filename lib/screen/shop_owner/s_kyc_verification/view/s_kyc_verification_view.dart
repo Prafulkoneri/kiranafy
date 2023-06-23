@@ -37,10 +37,13 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
-          child: PrimaryAppBar(title: "KYC Verification Details",isBackButtonEnabled: false,),
+          child: PrimaryAppBar(
+            title: "KYC Verification Details",
+            isBackButtonEnabled: false,
+          ),
         ),
         body: WillPopScope(
-          onWillPop: ()async{
+          onWillPop: () async {
             return false;
           },
           child: SingleChildScrollView(
@@ -67,7 +70,8 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 20.w),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 25.w, vertical: 20.w),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -95,7 +99,8 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 width: 160.w,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  border: Border.all(color: kgrey, width: 0.3.w),
+                                  border:
+                                      Border.all(color: kgrey, width: 0.3.w),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: watch.fileImage1.path != ""
@@ -113,7 +118,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                   width: 1, color: grey6)),
                                           child: Image.file(
                                             watch.fileImage1,
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.contain,
                                           ),
                                         ),
                                       )
@@ -125,6 +130,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                             "assets/images/imageupload.png",
                                             width: 31.33.w,
                                             height: 39.17.w,
+                                            fit: BoxFit.contain,
                                           ),
                                           SizedBox(
                                             height: 15.w,
@@ -165,7 +171,8 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 width: 160.w,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  border: Border.all(color: kgrey, width: 0.3.w),
+                                  border:
+                                      Border.all(color: kgrey, width: 0.3.w),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: watch.fileImage2.path != ""
@@ -183,7 +190,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                   width: 1, color: grey6)),
                                           child: Image.file(
                                             watch.fileImage2,
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.contain,
                                           ),
                                         ),
                                       )
@@ -195,6 +202,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                             "assets/images/imageupload.png",
                                             width: 31.33.w,
                                             height: 39.17.w,
+                                            fit: BoxFit.contain,
                                           ),
                                           SizedBox(
                                             height: 15.w,
@@ -230,8 +238,9 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                           children: [
                             Expanded(
                                 child: PrimarySTextFormField(
-                                  lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(12),
-                                  textInputType: TextInputType.number,
+                              lengthLimitingTextInputFormatter:
+                                  LengthLimitingTextInputFormatter(12),
+                              textInputType: TextInputType.number,
                               controller: watch.adharCardController,
                               hintText: "Aadhar Card No.",
                               hintFontSize: 12.sp,
@@ -242,9 +251,10 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                             // SizedBox(width: 18.w),
                             Expanded(
                                 child: PrimarySTextFormField(
-                                  lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(10),
+                              lengthLimitingTextInputFormatter:
+                                  LengthLimitingTextInputFormatter(10),
                               controller: watch.panCardController,
-                              hintText: "PAN Card No",
+                              hintText: "PAN Card No.",
                               hintFontSize: 12.sp,
                             )),
                           ],
@@ -263,7 +273,8 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 width: 160.w,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  border: Border.all(color: kgrey, width: 0.3.w),
+                                  border:
+                                      Border.all(color: kgrey, width: 0.3.w),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: watch.fileImage3.path != ""
@@ -281,7 +292,8 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                   width: 1, color: grey6)),
                                           child: Image.file(
                                             watch.fileImage3,
-                                            fit: BoxFit.cover,
+                                            // fit: BoxFit.cover,
+                                            fit: BoxFit.contain,
                                           ),
                                         ),
                                       )
@@ -302,7 +314,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                 MainAxisAlignment.end,
                                             children: [
                                               Text(
-                                                "Shop Act\n(Optional)",
+                                                "Upload \nShop Act\n(Optional)",
                                                 textAlign: TextAlign.center,
                                                 style: GoogleFonts.dmSans(
                                                   textStyle: TextStyle(
@@ -333,7 +345,8 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 width: 160.w,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  border: Border.all(color: kgrey, width: 0.3.w),
+                                  border:
+                                      Border.all(color: kgrey, width: 0.3.w),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: watch.fileImage4.path != ""
@@ -351,7 +364,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                   width: 1, color: grey6)),
                                           child: Image.file(
                                             watch.fileImage4,
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.contain,
                                           ),
                                         ),
                                       )
@@ -372,7 +385,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                 MainAxisAlignment.end,
                                             children: [
                                               Text(
-                                                "GST Document\n(Optional)",
+                                                "Upload\n GST Document\n(Optional)",
                                                 textAlign: TextAlign.center,
                                                 style: GoogleFonts.dmSans(
                                                   textStyle: TextStyle(
@@ -398,8 +411,9 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                           children: [
                             Expanded(
                                 child: PrimarySTextFormField(
-                                  lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(15),
-                                  controller: watch.gstController,
+                              lengthLimitingTextInputFormatter:
+                                  LengthLimitingTextInputFormatter(15),
+                              controller: watch.gstController,
                               hintFontSize: 12.sp,
                               hintText: "Enter GSTIN (Optional)",
                             )),

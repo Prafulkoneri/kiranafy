@@ -19,17 +19,17 @@ class PrimaryCTextFormField extends StatelessWidget {
   final Widget? suffix;
   final Color? color;
   final bool? enableBorder;
-  final Color ? borderColor;
+  final Color? borderColor;
   final void Function()? onTap;
-  final TextStyle ? hintStyle;
-  final TextStyle ? textStyle;
+  final TextStyle? hintStyle;
+  final TextStyle? textStyle;
 
   PrimaryCTextFormField(
       {Key? key,
-        this.onTap,
-        this.textStyle,
-        this.borderColor,
-        this.hintStyle,
+      this.onTap,
+      this.textStyle,
+      this.borderColor,
+      this.hintStyle,
       this.color,
       this.enableBorder,
       this.suffix,
@@ -45,22 +45,25 @@ class PrimaryCTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        titleHeader!=null?Row(
-          children: [
-            Text(
-              titleHeader ?? "",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14.sp,
-                  color: Color(0xff3A3A3A)),
-            ),
-          ],
-        ):Container(),
-        titleHeader!=null? SizedBox(
-          height: 10.w,
-        ):Container(),
+        titleHeader != null
+            ? Row(
+                children: [
+                  Text(
+                    titleHeader ?? "",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.sp,
+                        color: Color(0xff3A3A3A)),
+                  ),
+                ],
+              )
+            : Container(),
+        titleHeader != null
+            ? SizedBox(
+                height: 10.w,
+              )
+            : Container(),
         Container(
-
           height: 48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
@@ -79,20 +82,21 @@ class PrimaryCTextFormField extends StatelessWidget {
               filled: true,
               hintText: hintText,
               contentPadding: EdgeInsets.only(left: 10.w),
-              hintStyle: hintStyle??TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xffB7B7B7)),
+              hintStyle: hintStyle ??
+                  TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xffB7B7B7)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1.w,
-                  color: borderColor??Color(0xffEFEFEF),
+                  color: borderColor ?? Color(0xffEFEFEF),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color:borderColor?? Color(0xffE0E0E0),
+                  color: borderColor ?? Color(0xffE0E0E0),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
@@ -122,11 +126,10 @@ class PrimarySTextFormField extends StatelessWidget {
   final TextInputType? textInputType;
   final void Function()? onTap;
 
-
   PrimarySTextFormField(
       {Key? key,
       this.color,
-        this.onTap,
+      this.onTap,
       this.padding,
       this.height,
       this.width,
@@ -224,6 +227,7 @@ class MobileNoTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? initialSelection;
   final bool? readOnly;
+  // final String? hint
 
   const MobileNoTextFormField({
     Key? key,

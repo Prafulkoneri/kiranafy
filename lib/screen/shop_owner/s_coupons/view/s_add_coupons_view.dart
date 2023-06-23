@@ -108,9 +108,8 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                         Expanded(
                           child: PrimarySTextFormField(
                             readOnly: true,
-                            onTap: ()async{
+                            onTap: () async {
                               var pickedDate = await showDatePicker(
-
                                 builder: (BuildContext, child) {
                                   return Theme(
                                     data: Theme.of(context).copyWith(
@@ -119,8 +118,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                         // <-- SEE HERE
                                         onPrimary: Colors.white,
                                         // <-- SEE HERE
-                                        onSurface:
-                                        Colors.black, // <-- SEE HERE
+                                        onSurface: Colors.black, // <-- SEE HERE
                                       ),
                                       textButtonTheme: TextButtonThemeData(
                                         style: TextButton.styleFrom(
@@ -162,7 +160,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                         Expanded(
                           child: PrimarySTextFormField(
                             readOnly: true,
-                            onTap: ()async{
+                            onTap: () async {
                               var pickedDate = await showDatePicker(
                                 builder: (BuildContext, child) {
                                   return Theme(
@@ -172,8 +170,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                         // <-- SEE HERE
                                         onPrimary: Colors.white,
                                         // <-- SEE HERE
-                                        onSurface:
-                                        Colors.black, // <-- SEE HERE
+                                        onSurface: Colors.black, // <-- SEE HERE
                                       ),
                                       textButtonTheme: TextButtonThemeData(
                                         style: TextButton.styleFrom(

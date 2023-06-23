@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 enum SnackType {
   error,
   success,
@@ -14,9 +15,10 @@ enum SnackType {
   debugError,
 }
 
-class Utils{
-
-  static ScaffoldFeatureController showPrimarySnackbar(BuildContext context, text, {SnackType? type}) {
+class Utils {
+  static ScaffoldFeatureController showPrimarySnackbar(
+      BuildContext context, text,
+      {SnackType? type}) {
     ScaffoldMessenger.of(context).clearSnackBars();
 
     Color? color, textColor;
@@ -38,7 +40,7 @@ class Utils{
         textColor = Colors.white;
         break;
       case SnackType.info:
-        color = Colors.black;
+        color = Colors.red;
         break;
       case SnackType.debug:
         if (kReleaseMode) break;
@@ -66,17 +68,14 @@ class Utils{
         // duration: Duration(seconds:1),
         action: SnackBarAction(
           label: 'Dismiss',
-          textColor: textColor,
+          textColor: Colors.white,
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
           },
         ),
         content: Text(
           text ?? '',
-          style: TextStyle(
-            color:textColor,
-          fontSize: 14.sp
-          ),
+          style: TextStyle(color: textColor, fontSize: 14.sp),
           maxLines: 4,
         ),
         backgroundColor: color,

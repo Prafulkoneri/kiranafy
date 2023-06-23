@@ -155,7 +155,7 @@ class _OtpCustomerBottomSheetState extends State<OtpCustomerBottomSheet> {
                   children: [
                     Expanded(
                       child: Text(
-                        "Invalid Otp",
+                        "Invalid OTP",
                         style: TextStyle(color: Colors.white, fontSize: 14.sp),
                       ),
                     ),
@@ -165,7 +165,11 @@ class _OtpCustomerBottomSheetState extends State<OtpCustomerBottomSheet> {
                           onTap: () {
                             read.onOtpDismiss();
                           },
-                          child: Text("Dismiss"),
+                          child: Text(
+                            "Dismiss",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14.sp),
+                          ),
                         ),
                         SizedBox(
                           width: 10.w,

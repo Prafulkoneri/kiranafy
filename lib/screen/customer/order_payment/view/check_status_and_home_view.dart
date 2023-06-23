@@ -23,7 +23,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: WillPopScope(
-        onWillPop: ()async{
+        onWillPop: () async {
           return false;
         },
         child: Center(
@@ -120,7 +120,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
-                            index: 4,
+                            index: 2,
                             screenName: HomeScreenView(refreshPage: true))),
                     (Route<dynamic> route) => false,
                   );

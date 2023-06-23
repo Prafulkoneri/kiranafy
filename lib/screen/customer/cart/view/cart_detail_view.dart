@@ -775,7 +775,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                               padding: EdgeInsets
                                                                   .only(
                                                                       bottom:
-                                                                          35.w),
+                                                                          55.w),
                                                               child: Icon(
                                                                 Icons
                                                                     .circle_rounded,
@@ -813,7 +813,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                 ),
                                                 actions: [
                                                   ElevatedButton(
-                                                      child: Text("Submit"),
+                                                      child: Text("Continue"),
                                                       onPressed: () {
                                                         Navigator.pop(context);
                                                         Navigator.push(
@@ -821,8 +821,10 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                           MaterialPageRoute(
                                                               builder: (context) =>
                                                                   OrderSummaryView(
-                                                                    route: "cartDetail",
-                                                                    isRefresh: true,
+                                                                    route:
+                                                                        "cartDetail",
+                                                                    isRefresh:
+                                                                        true,
                                                                     cartId: watch
                                                                         .orderCartId
                                                                         .toString(),

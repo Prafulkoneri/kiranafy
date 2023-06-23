@@ -31,16 +31,20 @@ class _CDropDownFieldState extends State<CDropDownField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.titleHeader!=null?Text(
-          widget.titleHeader ?? "",
-          style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14.sp,
-              color: Color(0xff3A3A3A)),
-        ):Container(),
-        widget.titleHeader!=null? SizedBox(
-          height: 10.w,
-        ):Container(),
+        widget.titleHeader != null
+            ? Text(
+                widget.titleHeader ?? "",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14.sp,
+                    color: Color(0xff3A3A3A)),
+              )
+            : Container(),
+        widget.titleHeader != null
+            ? SizedBox(
+                height: 10.w,
+              )
+            : Container(),
         DropdownButtonFormField2(
           value: widget.value,
           decoration: const InputDecoration(
@@ -69,7 +73,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
             }
             return null;
           },
-          onChanged:widget.onChanged,
+          onChanged: widget.onChanged,
           onSaved: (value) {
             selectedValue = value.toString();
           },
@@ -77,7 +81,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
             height: 48.w,
             // padding: EdgeInsets.only(left: 20, right: 10),
           ),
-          iconStyleData:  IconStyleData(
+          iconStyleData: IconStyleData(
             icon: Padding(
               padding: EdgeInsets.only(right: 5.w),
               child: Icon(
@@ -89,7 +93,6 @@ class _CDropDownFieldState extends State<CDropDownField> {
           ),
           dropdownStyleData: DropdownStyleData(
             maxHeight: 210.w,
-
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
             ),
@@ -109,12 +112,12 @@ class SDropDownField extends StatefulWidget {
   final double? hintSize;
   final double? height;
   final EdgeInsets? iconPadding;
-  final double ? titleSize;
+  final double? titleSize;
 
   const SDropDownField(
       {Key? key,
       this.value,
-        this.titleSize,
+      this.titleSize,
       this.iconPadding,
       this.height,
       this.hint,
@@ -146,7 +149,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
                 widget.titleHeader ?? "",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: widget.titleSize??14.sp,
+                    fontSize: widget.titleSize ?? 14.sp,
                     color: Color(0xff3A3A3A)),
               )
             : Container(),
@@ -200,11 +203,17 @@ class _SDropDownFieldState extends State<SDropDownField> {
               ),
               // iconSize: 30,
             ),
+            // dropdownStyleData: DropdownStyleData(
+            //   decoration: BoxDecoration(
+            //     color: Colors.white,
+            //     border: Border.all(color: Color(0xffE0E0E0)),
+            //     borderRadius: BorderRadius.circular(5.w),
+            //   ),
+            // ),
             dropdownStyleData: DropdownStyleData(
+              maxHeight: 210.w,
               decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Color(0xffE0E0E0)),
-                borderRadius: BorderRadius.circular(5.w),
+                borderRadius: BorderRadius.circular(15),
               ),
             ),
           ),

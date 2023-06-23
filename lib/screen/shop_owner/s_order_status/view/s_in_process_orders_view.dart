@@ -24,8 +24,8 @@ class _SInProcessOrderViewState extends State<SInProcessOrderView> {
 
     return watch.inprocessOrdersList!.isEmpty
         ? Container(
-      height: MediaQuery.of(context).size.height/1.5,
-          child: Center(
+            height: MediaQuery.of(context).size.height / 1.5,
+            child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +43,7 @@ class _SInProcessOrderViewState extends State<SInProcessOrderView> {
                 ],
               ),
             ),
-        )
+          )
         : ListView.builder(
             padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
             itemCount: watch.inprocessOrdersList?.length ?? 0,

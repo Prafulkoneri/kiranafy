@@ -25,9 +25,10 @@ import '../../../../widget/app_bar.dart';
 
 class SSelectedProductView extends StatefulWidget {
   final String? categoryId;
-  final bool ? isRefresh;
+  final bool? isRefresh;
 
-  const SSelectedProductView({super.key, required this.categoryId,required this.isRefresh});
+  const SSelectedProductView(
+      {super.key, required this.categoryId, required this.isRefresh});
 
   @override
   State<SSelectedProductView> createState() => _SSelectedProductViewState();
@@ -42,7 +43,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SSelectedProductsController>()
-          .initState(context, widget.categoryId,widget.isRefresh);
+          .initState(context, widget.categoryId, widget.isRefresh);
     });
   }
 
@@ -397,51 +398,16 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                           child: Column(
                                             children: [
                                               Divider(),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  10)),
-                                                ),
-                                                padding: EdgeInsets.only(
-                                                    left: 11.w, right: 11.w),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      "Product Unit",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Black1,
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
-                                                    ),
-                                                    Row(
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: Row(
                                                       children: [
                                                         Text(
-                                                          "MRP",
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black1,
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 12.w,
-                                                        ),
-                                                        Text(
-                                                          "Offer price",
+                                                          "Product Unit",
                                                           style: GoogleFonts
                                                               .dmSans(
                                                             textStyle: TextStyle(
@@ -454,8 +420,53 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                         ),
                                                       ],
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "MRP",
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Black1,
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 18.w,
+                                                        ),
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Offer price",
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Black1,
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                               SizedBox(
                                                 height: 5.h,
@@ -498,64 +509,79 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           MainAxisAlignment
                                                               .spaceBetween,
                                                       children: [
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              "${element?.weightAndUnit}",
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                textStyle: TextStyle(
-                                                                    color:
-                                                                        Black1,
-                                                                    fontSize:
-                                                                        14.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
+                                                        Expanded(
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                "${element?.weightAndUnit}",
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      color:
+                                                                          Black1,
+                                                                      fontSize:
+                                                                          14.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
-                                                        Row(
-                                                          // mainAxisAlignment:
-                                                          //     MainAxisAlignment
-                                                          //         .spaceBetween,
-                                                          children: [
-                                                            Text(
-                                                              "${element?.mrpPrice}",
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                textStyle: TextStyle(
-                                                                    decoration:
-                                                                        TextDecoration
-                                                                            .lineThrough,
-                                                                    color:
-                                                                        Black1,
-                                                                    fontSize:
-                                                                        14.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
+                                                        Expanded(
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  "${element?.mrpPrice}",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .end,
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .dmSans(
+                                                                    textStyle: TextStyle(
+                                                                        decoration:
+                                                                            TextDecoration
+                                                                                .lineThrough,
+                                                                        color:
+                                                                            Black1,
+                                                                        fontSize: 14
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                ),
                                                               ),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 45.w,
-                                                            ),
-                                                            Text(
-                                                              "${element?.offerPrice}",
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                textStyle: TextStyle(
-                                                                    color:
-                                                                        Black1,
-                                                                    fontSize:
-                                                                        14.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
+                                                              // SizedBox(
+                                                              //   width: 45.w,
+                                                              // ),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  "${element?.offerPrice}",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .end,
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .dmSans(
+                                                                    textStyle: TextStyle(
+                                                                        color:
+                                                                            Black1,
+                                                                        fontSize: 14
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -675,10 +701,26 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 children: [
                                                   GestureDetector(
                                                     onTap: () {
-                                                      Navigator.pushAndRemoveUntil(
+                                                      Navigator
+                                                          .pushAndRemoveUntil(
                                                         context,
-                                                        MaterialPageRoute(builder: (context) => SMainScreenView(index: 0,screenName:SEditCustomProductView(productId:element?.id.toString(),categoryId: widget.categoryId,))),
-                                                            (Route<dynamic> route) => false,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SMainScreenView(
+                                                                    index: 0,
+                                                                    screenName:
+                                                                        SEditCustomProductView(
+                                                                      productId:
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                      categoryId:
+                                                                          widget
+                                                                              .categoryId,
+                                                                    ))),
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false,
                                                       );
                                                     },
                                                     child: Container(
