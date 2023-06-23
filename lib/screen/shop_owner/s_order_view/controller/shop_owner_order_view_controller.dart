@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/model/cancel_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/order_status_mode.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_owner_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/cancel_reason_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/order_status_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/shop_owner_order_repo.dart';
 
@@ -19,12 +20,18 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String? orderCancelledReasonId = "";
   bool isLoading = true;
   bool isStackLoading = false;
+  List<bool> isSelectedReason = [];
+  bool isOtherReasonSelected = false;
   ShopOrderViewData? shopOrderViewData;
   OrderDetails? orderDetails;
   CouponDetails? couponDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
   ShopOrderViewRepo shopOrderViewRepo = ShopOrderViewRepo();
+  OrderCancelReasonRepo orderCancelReasonRepo = OrderCancelReasonRepo();
+  List<CancelReasonList>? cancelReasondata;
+  String cancelOrderErrorMsg="";
+  bool isCancelOrderErrorMsgVisible=false;
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -42,7 +49,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     orId,
   ) async {
     await shopOwnerOrderView(context, orId);
-    // shopOrderStatus(context, orId, oStatus, oCReason, oCReasonId);
+
+    getCancelOrderList(context);
     notifyListeners();
   }
 
@@ -129,4 +137,80 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       },
     );
   }
+
+  Future<void> getCancelOrderList(context) async {
+    showLoader(true);
+    print("loading");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    orderCancelReasonRepo.OrderCancelReason(pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = CancelModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        cancelReasondata = result.cancelReasondata;
+        int cancelOrderLength=cancelReasondata?.length??0;
+          isSelectedReason=List<bool>.filled(cancelOrderLength,false);
+          showLoader(false);
+         notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  // void onSelectReason(value) {
+  //   if (!isSelectedReason) {
+  //     isSelectedReason = true;
+
+  //   } else {
+  //     isSelectedReason = false;
+  //   }
+  //   notifyListeners();
+  // }
+
+  void onSelectReason(index,value) {
+    if(isSelectedReason[index]){
+      isSelectedReason[index]=false;
+      notifyListeners();
+      return;
+    }
+    int cancelOrderLength=cancelReasondata?.length??0;
+
+    isSelectedReason=List<bool>.filled(cancelOrderLength,false,growable:true);
+      isSelectedReason[index]=true;
+    isOtherReasonSelected=false;
+
+    // isSelectedReason[index]=true;
+
+    notifyListeners();
+  }
+
+  void onOtherSelected(value){
+    if(isOtherReasonSelected){
+      isOtherReasonSelected=false;
+      notifyListeners();
+      return;
+    }
+    int cancelOrderLength=cancelReasondata?.length??0;
+    isSelectedReason=List<bool>.filled(cancelOrderLength,false,growable:true);
+    isOtherReasonSelected=true;
+    notifyListeners();
+  }
+
+  void onCancelErrorMissageDismiss(){
+   isCancelOrderErrorMsgVisible=false;
+   notifyListeners();
+  }
+
 }

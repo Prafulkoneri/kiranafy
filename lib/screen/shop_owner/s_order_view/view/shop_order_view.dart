@@ -12,7 +12,8 @@ import 'package:local_supper_market/screen/customer/order_summary/order_products
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_order_view/controller/shop_owner_order_view_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/view/cancel_reason_bottom_sheet_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_products.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
               );
             },
             title: "Order",
-            onActionTap: () async {},
+            onActionTap: () {},
           ),
         ),
         body: watch.isLoading
@@ -131,7 +132,9 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                         //
                                       ),
                                     )
-                                  : watch.orderDetails?.orderStatus == "Confirmed" ? SizedBox(
+                                  : watch.orderDetails?.orderStatus ==
+                                          "Confirmed"
+                                      ? SizedBox(
                                           height: 22.h,
                                           // width: 90.w,
                                           child: ElevatedButton(
@@ -169,7 +172,9 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                             //
                                           ),
                                         )
-                                      : watch.orderDetails?.orderStatus == "Packing" ? SizedBox(
+                                      : watch.orderDetails?.orderStatus ==
+                                              "Packing"
+                                          ? SizedBox(
                                               height: 22.h,
                                               // width: 85.w,
                                               child: ElevatedButton(
@@ -212,7 +217,9 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                 //
                                               ),
                                             )
-                                          : watch.orderDetails?.orderStatus == "Delivered" ? SizedBox(
+                                          : watch.orderDetails?.orderStatus ==
+                                                  "Delivered"
+                                              ? SizedBox(
                                                   height: 22.h,
                                                   // width: 85.w,
                                                   child: ElevatedButton(
@@ -258,7 +265,10 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                     //
                                                   ),
                                                 )
-                                              : watch.orderDetails?.orderStatus == "Cancelled" ? SizedBox(
+                                              : watch.orderDetails
+                                                          ?.orderStatus ==
+                                                      "Cancelled"
+                                                  ? SizedBox(
                                                       height: 22.h,
                                                       // width: 85.w,
                                                       child: ElevatedButton(
@@ -308,7 +318,10 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                         //
                                                       ),
                                                     )
-                                                  : watch.orderDetails?.orderStatus == "Pending" ? SizedBox(
+                                                  : watch.orderDetails
+                                                              ?.orderStatus ==
+                                                          "Pending"
+                                                      ? SizedBox(
                                                           height: 22.h,
                                                           child: ElevatedButton(
                                                             style: ButtonStyle(
@@ -357,56 +370,59 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                             //
                                                           ),
                                                         )
-                                  : watch.orderDetails?.orderStatus == "Dispatched" ? SizedBox(
-                                height: 22.h,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    elevation:
-                                    MaterialStateProperty
-                                        .all(0),
-                                    // backgroundColor: ,
-                                    backgroundColor:
-                                    MaterialStateProperty
-                                        .all(Colors
-                                        .white),
-                                    shape:
-                                    MaterialStateProperty
-                                        .all(
-                                      RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius
-                                            .circular(
-                                            10),
-                                        side:
-                                        BorderSide(
-                                          color: Color(
-                                              0xff39C19D),
-                                          // width: 1,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                  child: Text(
-                                    "${watch.orderDetails?.orderStatus}",
-                                    style: GoogleFonts
-                                        .dmSans(
-                                      textStyle:
-                                      TextStyle(
-                                          color: Color(
-                                              0xff39C19D),
-                                          // letterSpacing: .5,
-                                          fontSize: 12
-                                              .sp,
-                                          fontWeight:
-                                          FontWeight.w500),
-                                    ),
-                                  ),
+                                                      : watch.orderDetails
+                                                                  ?.orderStatus ==
+                                                              "Dispatched"
+                                                          ? SizedBox(
+                                                              height: 22.h,
+                                                              child:
+                                                                  ElevatedButton(
+                                                                style:
+                                                                    ButtonStyle(
+                                                                  elevation:
+                                                                      MaterialStateProperty
+                                                                          .all(
+                                                                              0),
+                                                                  // backgroundColor: ,
+                                                                  backgroundColor:
+                                                                      MaterialStateProperty.all(
+                                                                          Colors
+                                                                              .white),
+                                                                  shape:
+                                                                      MaterialStateProperty
+                                                                          .all(
+                                                                    RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10),
+                                                                      side:
+                                                                          BorderSide(
+                                                                        color: Color(
+                                                                            0xff39C19D),
+                                                                        // width: 1,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                child: Text(
+                                                                  "${watch.orderDetails?.orderStatus}",
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .dmSans(
+                                                                    textStyle: TextStyle(
+                                                                        color: Color(0xff39C19D),
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 12.sp,
+                                                                        fontWeight: FontWeight.w500),
+                                                                  ),
+                                                                ),
 
-                                  //
-                                ),
-                              )
-                                                      : Container()
+                                                                //
+                                                              ),
+                                                            )
+                                                          : Container()
                             ],
                           ),
                           Text(
@@ -740,7 +756,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                           : watch.orderDetails?.orderStatus ==
                                                   "Packing"
                                               ? Expanded(
-                                                child: InkWell(
+                                                  child: InkWell(
                                                     onTap: () {
                                                       read.shopOrderStatus(
                                                           context,
@@ -754,9 +770,10 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                       // margin: EdgeInsets.only(
                                                       //     left: 19.w, right: 20.w),
                                                       padding: EdgeInsets.only(
-                                                          // left: 20.w,
-                                                          top: 9.w,
-                                                          bottom: 7.w,),
+                                                        // left: 20.w,
+                                                        top: 9.w,
+                                                        bottom: 7.w,
+                                                      ),
                                                       decoration: BoxDecoration(
                                                           color: SplashText,
                                                           borderRadius:
@@ -765,7 +782,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                  .center,
+                                                                .center,
                                                         children: [
                                                           SvgPicture.asset(
                                                             'assets/icons/confirm_shop.svg',
@@ -775,8 +792,8 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                           ),
                                                           Text(
                                                             "Order Ready for Dispatch",
-                                                            textAlign:
-                                                                TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: GoogleFonts
                                                                 .dmSans(
                                                               textStyle:
@@ -795,12 +812,12 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                       ),
                                                     ),
                                                   ),
-                                              )
+                                                )
                                               : watch.orderDetails
                                                           ?.orderStatus ==
                                                       "Dispatched"
                                                   ? Expanded(
-                                                    child: InkWell(
+                                                      child: InkWell(
                                                         onTap: () {
                                                           read.shopOrderStatus(
                                                               context,
@@ -816,9 +833,9 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                           //     left: 19.w, right: 20.w),
                                                           padding:
                                                               EdgeInsets.only(
-                                                                  top: 9.w,
-                                                                  bottom: 7.w,
-                                                                 ),
+                                                            top: 9.w,
+                                                            bottom: 7.w,
+                                                          ),
                                                           decoration: BoxDecoration(
                                                               color: SplashText,
                                                               borderRadius:
@@ -841,24 +858,21 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                style: GoogleFonts
-                                                                    .dmSans(
-                                                                  textStyle:
-                                                                      TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          // letterSpacing: .5,
-                                                                          fontSize: 18
-                                                                              .sp,
-                                                                          fontWeight:
-                                                                              FontWeight.w500),
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      color: Colors.white,
+                                                                      // letterSpacing: .5,
+                                                                      fontSize: 18.sp,
+                                                                      fontWeight: FontWeight.w500),
                                                                 ),
                                                               ),
                                                             ],
                                                           ),
                                                         ),
                                                       ),
-                                                  )
+                                                    )
                                                   : Container(),
                                   // watch.orderDetails?.orderStatus ==
                                   //     "Packing"||
@@ -869,42 +883,66 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                   ),
                                   Visibility(
                                     visible: watch.orderDetails?.orderStatus ==
-                                            "Packing"||
-                                        watch.orderDetails?.orderStatus ==
-                                        "Dispatched"
+                                                "Packing" ||
+                                            watch.orderDetails?.orderStatus ==
+                                                "Dispatched"
                                         ? false
                                         : true,
                                     child: Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            left: 20.w,
-                                            top: 9.w,
-                                            bottom: 7.w,
-                                            right: 34.w),
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffEC7074),
-                                            borderRadius:
-                                                BorderRadius.circular(8)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/icons/cancel_shop.svg',
-                                            ),
-                                            Text(
-                                              "Cancel",
-                                              textAlign: TextAlign.center,
-                                              style: GoogleFonts.dmSans(
-                                                textStyle: TextStyle(
-                                                    color: Colors.white,
-                                                    // letterSpacing: .5,
-                                                    fontSize: 18.sp,
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                                      child: InkWell(
+                                        onTap: () {
+                                          // read.shopOrderStatus(
+                                          //     context,
+                                          //     watch.orderDetails?.id.toString(),
+                                          //     "order_cancelled",
+                                          //     "",
+                                          //     "");
+                                          showModalBottomSheet(
+                                            backgroundColor: Colors.white,
+                                            isScrollControlled: true,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(30),
+                                                    topRight:
+                                                        Radius.circular(30))),
+                                            context: context,
+                                            builder: (context) {
+                                              return cancelOrderFiltterView();
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.only(
+                                              left: 20.w,
+                                              top: 9.w,
+                                              bottom: 7.w,
+                                              right: 34.w),
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEC7074),
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/icons/cancel_shop.svg',
                                               ),
-                                            ),
-                                          ],
+                                              Text(
+                                                "Cancel",
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Colors.white,
+                                                      // letterSpacing: .5,
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -1199,8 +1237,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                 ),
                               ),
                               Text(
-                                "Rs",
-                                //  ${watch.orderFinalTotals?.subTotal}",
+                                "Rs ${watch.orderDetails?.totalAmount}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,
@@ -1236,7 +1273,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                           fontWeight: FontWeight.w400),
                                     ),
                                   ),
-                                  watch.couponDetails?.couponCode != ""
+                                  watch.couponDetails?.couponCode != ""&& watch.couponDetails?.couponCode!=null
                                       ? TextSpan(
                                           text:
                                               '  (${watch.couponDetails?.couponCode}) ',
@@ -1248,11 +1285,22 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                 fontWeight: FontWeight.w400),
                                           ),
                                         )
-                                      : TextSpan(),
+                                      : TextSpan(
+                                    text: "",
+                                  ),
                                 ]),
                               ),
-                              Text(
+                              watch.orderDetails?.totalDiscount!="" ?Text(
                                 "Rs ${watch.orderDetails?.totalDiscount}",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: grey5,
+                                      // letterSpacing: .5,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ):Text(
+                                "Rs 0",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,
@@ -1381,21 +1429,22 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                       height: 10.h,
                     ),
                     Container(
-                            padding: EdgeInsets.only(left: 19.w, right: 19.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${watch.orderDetails?.paymentMode}",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: SplashText,
-                                        // letterSpacing: .5,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                             watch.orderDetails?.orderStatus=="Delivered"?Container(
+                      padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "${watch.orderDetails?.paymentMode}",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: SplashText,
+                                  // letterSpacing: .5,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          watch.orderDetails?.orderStatus == "Delivered"
+                              ? Container(
                                   padding: EdgeInsets.only(
                                       left: 20.w,
                                       right: 20.w,
@@ -1423,28 +1472,33 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                ):Container()
-                              ],
+                                )
+                              : Container()
+                        ],
+                      ),
+                    ),
+                    watch.orderDetails?.transactionId != ""
+                        ? SizedBox(
+                            height: 15.h,
+                          )
+                        : Container(),
+                    watch.orderDetails?.transactionId != ""
+                        ? Container(
+                            padding: EdgeInsets.only(
+                              left: 19.w,
                             ),
-                          ),
-                    watch.orderDetails?.transactionId !=""? SizedBox(
-                      height: 15.h,
-                    ):Container(),
-                    watch.orderDetails?.transactionId !=""? Container(
-                      padding: EdgeInsets.only(
-                        left: 19.w,
-                      ),
-                      child: Text(
-                        "Transaction ID : ${watch.orderDetails?.transactionId}",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              // letterSpacing: .5,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ):Container(),
+                            child: Text(
+                              "Transaction ID : ${watch.orderDetails?.transactionId}",
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    // letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          )
+                        : Container(),
                     SizedBox(
                       height: 15.h,
                     ),
