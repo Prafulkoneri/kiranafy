@@ -29,13 +29,18 @@ class SSubscriptionController extends ChangeNotifier {
   String selectedServicesId = "0";
   bool oneTimeShop = false;
   bool productPrice = false;
-
+bool isLoading=false;
   bool shopDigital = false;
   bool primeCatchy = false;
   String planAmount = "";
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
+  }
+
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
   }
 
   void onAddOnServicesSelected(index, id) {
@@ -50,10 +55,6 @@ class SSubscriptionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onMakePaymentClicked(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SMainScreenView()));
-  }
 
   void onTimeShopSetup() {
     oneTimeShop = !oneTimeShop;
@@ -76,6 +77,7 @@ class SSubscriptionController extends ChangeNotifier {
   }
 
   Future<void> getSubscriptionPlanDetails(context) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     subscriptionPlansRepo
@@ -99,6 +101,7 @@ class SSubscriptionController extends ChangeNotifier {
           radioValue.add(i.toString());
         }
         print(radioValue);
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

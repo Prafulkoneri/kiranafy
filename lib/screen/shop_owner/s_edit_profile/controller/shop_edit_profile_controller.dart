@@ -171,7 +171,6 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         shopOwnerEmail: emailIdController.text,
         shopOwnerMobileNumber: (phoneNumberController.text),
         shopPincode: (selectedPincode.toString()),
-        shopBannerImages: image1,
       );
 
   Future<void> UpdateProfile(context) async {
@@ -425,10 +424,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    bool emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+    bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(emailIdController.text);
+    print("asfsdfsfsdfsdfdfs");
+    print(emailValid);
     if(!emailValid){
-      Utils.showPrimarySnackbar(context, "Enter Email Id",
+      Utils.showPrimarySnackbar(context, "Email Id Invalid",
           type: SnackType.error);
       return;
     }

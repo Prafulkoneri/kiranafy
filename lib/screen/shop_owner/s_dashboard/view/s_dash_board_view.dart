@@ -19,16 +19,16 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import 'package:provider/provider.dart';
 
-class ShopDashBoard extends StatefulWidget {
+class ShopDashBoardView extends StatefulWidget {
   final bool? refresh;
 
-  const ShopDashBoard({super.key, this.refresh});
+  const ShopDashBoardView({super.key, this.refresh});
 
   @override
-  State<ShopDashBoard> createState() => _ShopDashBoardState();
+  State<ShopDashBoardView> createState() => _ShopDashBoardViewState();
 }
 
-class _ShopDashBoardState extends State<ShopDashBoard> {
+class _ShopDashBoardViewState extends State<ShopDashBoardView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

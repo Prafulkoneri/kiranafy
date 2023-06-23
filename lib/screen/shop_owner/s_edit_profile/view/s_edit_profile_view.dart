@@ -56,7 +56,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        SMainScreenView(index: 0, screenName: ShopDashBoard())),
+                        SMainScreenView(index: 0, screenName: ShopDashBoardView())),
                 (Route<dynamic> route) => false,
               );
             } else {
@@ -72,7 +72,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
-            read.uploadImage(context);
+            read.validateField(context);
             // await readMainScreen.onBackPressed(4, )
             // await readMainScreen.onBackPressed(
             //     4,

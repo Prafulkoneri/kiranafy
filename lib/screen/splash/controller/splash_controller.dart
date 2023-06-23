@@ -5,6 +5,7 @@ import 'package:local_supper_market/screen/customer/home/view/home_screen_view.d
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
@@ -31,8 +32,13 @@ class SplashController extends ChangeNotifier {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SShopConfigurationView(initialShopConfigration:true)));
       }
       if (pref.getString("status") == "loggedIn") {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => SMainScreenView()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SMainScreenView(index: 0,screenName: ShopDashBoardView(),
+              )),
+              (Route<dynamic> route) => false,
+        );
       }
       if (pref.getString("status") == "customerLoggedIn") {
         Navigator.pushAndRemoveUntil(

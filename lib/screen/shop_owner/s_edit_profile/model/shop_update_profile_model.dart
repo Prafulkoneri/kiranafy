@@ -16,7 +16,6 @@ class ShopUpdateProfileReqModel {
 
   String? shopAddress;
   String? shopPincode;
-  String? shopBannerImages;
 
   ShopUpdateProfileReqModel({
     this.selectedAreaId,
@@ -24,7 +23,6 @@ class ShopUpdateProfileReqModel {
     this.selectedCountryId,
     this.selectedStateId,
     this.shopAddress,
-    this.shopBannerImages,
     this.shopName,
     this.shopOwnerCountryCode,
     this.shopOwnerEmail,

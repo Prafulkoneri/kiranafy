@@ -325,13 +325,14 @@ class SShopConfigurationController extends ChangeNotifier {
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        pref.setString("status","loggedIn");
         if(isInitialConfiguration){
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                   index: 0,
-                  screenName: ShopDashBoard(),
+                  screenName: ShopDashBoardView(),
                 )),
                 (Route<dynamic> route) => false,
           );
@@ -418,6 +419,7 @@ class SShopConfigurationController extends ChangeNotifier {
     await request.send().then((response) {
       if (response.statusCode == 200) {
         print("sucesss");
+        pref.setString("status","loggedIn");
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         if(isInitialConfiguration){
@@ -426,7 +428,7 @@ class SShopConfigurationController extends ChangeNotifier {
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                   index: 0,
-                  screenName: ShopDashBoard(),
+                  screenName: ShopDashBoardView(),
                 )),
                 (Route<dynamic> route) => false,
           );

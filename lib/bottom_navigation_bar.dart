@@ -67,7 +67,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      ShopDashBoard(),
+      ShopDashBoardView(),
     ];
   }
 

@@ -59,59 +59,64 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                  SizedBox(
                    height: 13.sp,
                  ),
-                    Container(
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 11.w, vertical: 8.w),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Color(0xff4689EC).withOpacity(0.55.w)),
-                        borderRadius: BorderRadius.circular(5.w),
-                      ),
-                      margin: EdgeInsets.only(bottom: 20.w),
-                      child: Row(
-                        // crossAxisAlignment:CrossAxisAlignment.start,
-                        children: [
-                          OrderSummaryRadioButton(
-                              value: element?.addressId.toString(),
-                              groupValue: watch.addressGroupValue,
-                              onChanged: (value) {
-                                read.onAddressSelected(value);
-                              }),
-                          SizedBox(
-                            width: 18.w,
-                          ),
-                          Flexible(
-                            child: Text(
-                            element?.address1??"",
-                              style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff3A3A3A).withOpacity(0.63)),
+                    GestureDetector(
+                      onTap:(){
+                        read.onAddressSelected(element?.addressId.toString());
+                      },
+                      child: Container(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 11.w, vertical: 8.w),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Color(0xff4689EC).withOpacity(0.55.w)),
+                          borderRadius: BorderRadius.circular(5.w),
+                        ),
+                        margin: EdgeInsets.only(bottom: 20.w),
+                        child: Row(
+                          // crossAxisAlignment:CrossAxisAlignment.start,
+                          children: [
+                            OrderSummaryRadioButton(
+                                value: element?.addressId.toString(),
+                                groupValue: watch.addressGroupValue,
+                                onChanged: (value) {
+                                  read.onAddressSelected(value);
+                                }),
+                            SizedBox(
+                              width: 18.w,
                             ),
-                          ),
-                          GestureDetector(
-                            onTap:(){
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        MainScreenView(
-                                            index: 4,
-                                            screenName:
-                                            AddAddressView(
-                                              isEditAdress: true,
-                                              route:"orderAddress",
-                                              shopId: watch.shopDetailData?.id.toString(),
-                                              cartId: watch.cartId,
-                                              addressId: element?.addressId
-                                                  .toString(),
-                                            ))),
-                                    (Route<dynamic> route) => false,
-                              );
-                            },
-                            child: SvgPicture.asset("assets/icons/edit_address.svg"),
-                          ),
-                        ],
+                            Flexible(
+                              child: Text(
+                              element?.address1??"",
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff3A3A3A).withOpacity(0.63)),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap:(){
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MainScreenView(
+                                              index: 4,
+                                              screenName:
+                                              AddAddressView(
+                                                isEditAdress: true,
+                                                route:"orderAddress",
+                                                shopId: watch.shopDetailData?.id.toString(),
+                                                cartId: watch.cartId,
+                                                addressId: element?.addressId
+                                                    .toString(),
+                                              ))),
+                                      (Route<dynamic> route) => false,
+                                );
+                              },
+                              child: SvgPicture.asset("assets/icons/edit_address.svg"),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

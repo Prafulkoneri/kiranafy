@@ -307,7 +307,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       },
                       child: Container(
                         width: double.infinity,
-                        child: element.deliveryAddressIsDefault == "yes"
+                        child: element.addressId == int.parse(watch.addressGroupValue)
                             ? Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),

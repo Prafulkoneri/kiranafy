@@ -153,7 +153,7 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                         height: 40.w,
                         width: 164.w,
                         fontSize: 14.sp,
-                        text: "Set Shop Configuration",
+                        text: "Buy Subscription Plan",
                         color: SplashText,
                         onTap: () {
                           Navigator.pushAndRemoveUntil(

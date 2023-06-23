@@ -62,6 +62,7 @@ class OrderSummaryController extends ChangeNotifier {
   String totalDiscount = "";
   String customerPickup = "";
   TextEditingController couponCodeController = TextEditingController();
+  int selectedAddressId=0;
 
   Future<void> initState(context, cId, id, refresh, route) async {
     // if(route=="addAddress"||route=="editAddress"){

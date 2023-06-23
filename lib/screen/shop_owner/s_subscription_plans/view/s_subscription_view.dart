@@ -65,7 +65,10 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
           title: "Subscription Plans",
         ),
       ),
-      body: WillPopScope(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      WillPopScope(
         onWillPop: ()async{
           return false;
         },

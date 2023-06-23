@@ -21,7 +21,7 @@ class SMainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = ShopDashBoard();
+  Widget currentScreen = ShopDashBoardView();
 
   void initState(context, index, currentScreen) {
     onBackPressed(index, currentScreen);
@@ -41,7 +41,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = ShopDashBoard();
+    currentScreen = ShopDashBoardView();
     notifyListeners();
   }
 
@@ -79,7 +79,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onOfferPressed() {
     currentTab = 3;
-    currentScreen =ShopCouponsView();
+    currentScreen =ShopCouponsView(isRefresh: true,);
     notifyListeners();
   }
 
