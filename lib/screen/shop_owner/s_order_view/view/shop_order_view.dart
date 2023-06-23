@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/cancel_reason_bottom_sheet_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/view/delivery_code_bottom_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_products.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 0, screenName: SOrderStatusView())),
+                        index: 1, screenName: SOrderStatusView())),
                 (Route<dynamic> route) => false,
               );
             },
@@ -634,6 +635,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                       .toString(),
                                                   "order_confirmed",
                                                   "",
+                                                  "",
                                                   "");
                                             },
                                             child: Container(
@@ -681,6 +683,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                       watch.orderDetails?.id
                                                           .toString(),
                                                       "order_packing",
+                                                      "",
                                                       "",
                                                       "");
                                                 },
@@ -764,6 +767,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                               .toString(),
                                                           "order_dispatched",
                                                           "",
+                                                          "",
                                                           "");
                                                     },
                                                     child: Container(
@@ -819,14 +823,32 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                   ? Expanded(
                                                       child: InkWell(
                                                         onTap: () {
-                                                          read.shopOrderStatus(
-                                                              context,
-                                                              watch.orderDetails
-                                                                  ?.id
-                                                                  .toString(),
-                                                              "order_delivered",
-                                                              "",
-                                                              "");
+                                                          // read.shopOrderStatus(
+                                                          //     context,
+                                                          //     watch.orderDetails
+                                                          //         ?.id
+                                                          //         .toString(),
+                                                          //     "order_delivered",
+                                                          //     "",
+                                                          //     "");
+                                                          showModalBottomSheet(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            isScrollControlled:
+                                                                true,
+                                                            shape: const RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            30),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            30))),
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return OrderDeliveryCodeView();
+                                                            },
+                                                          );
                                                         },
                                                         child: Container(
                                                           // margin: EdgeInsets.only(

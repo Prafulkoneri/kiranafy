@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
@@ -14,10 +15,15 @@ import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopOwnerOrderViewController extends ChangeNotifier {
-  String? orderId = "";
-  String? orderStatus = "";
-  String? orderCancelledReason = "";
-  String? orderCancelledReasonId = "";
+  String orderId = "";
+  String deliveryCode = "";
+  String orderStatus = "";
+  String orderCancelledReason = "";
+  String orderCancelledReasonId = "";
+  String deliveryCodeError = "";
+  // String? deliveryCode = "";
+
+  bool isDeliveryCodeError = false;
   bool isLoading = true;
   bool isStackLoading = false;
   List<bool> isSelectedReason = [];
@@ -43,7 +49,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           orderId: orderId.toString(),
           orderStatus: orderStatus.toString(),
           orderCancelledReason: orderCancelledReason.toString(),
-          orderCancelledReasonId: orderCancelledReasonId.toString());
+          orderCancelledReasonId: orderCancelledReasonId.toString(),
+          deliveryCode: deliveryCode.toString());
   Future<void> initState(
     context,
     orId,
@@ -101,11 +108,12 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   }
 
   Future<void> shopOrderStatus(
-      context, orId, oStatus, oCReason, oCReasonId) async {
+      context, orId, oStatus, oCReason, oCReasonId, dCode) async {
     orderId = orId.toString();
     orderStatus = oStatus.toString();
     orderCancelledReason = oCReason.toString();
     orderCancelledReasonId = oCReasonId.toString();
+    deliveryCode = dCode.toString();
 
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -119,7 +127,21 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           OrderStatusChangeResModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
-        shopOwnerOrderView(context, orId);
+        if (result.status == 200) {
+          shopOwnerOrderView(context, orId);
+          isDeliveryCodeError = false;
+        } else {
+          deliveryCodeError = result.message ?? "";
+          isDeliveryCodeError = true;
+          notifyListeners();
+          Timer(Duration(seconds: 3), () {
+            print("duration");
+            isDeliveryCodeError = false;
+            notifyListeners();
+          });
+
+          showLoader(false);
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -208,9 +230,21 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onCancelErrorMissageDismiss(){
-   isCancelOrderErrorMsgVisible=false;
-   notifyListeners();
+  void onCancelErrorMissageDismiss() {
+    isCancelOrderErrorMsgVisible = false;
+    notifyListeners();
   }
 
+
+
+  Future<void> onDeliveryCode(code) async {
+    deliveryCode = code;
+    notifyListeners();
+  }
+
+  void onCodeDismiss() {
+    isDeliveryCodeError = false;
+    notifyListeners();
+  }
+  ///////////////////////////////
 }
