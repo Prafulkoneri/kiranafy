@@ -169,6 +169,7 @@ class ShopRegistrationController extends ChangeNotifier {
 
   Future<void> onShopTypeSelected(value) async {
     shopId = int.parse(value.toString());
+    print(shopId);
     notifyListeners();
   }
 
@@ -250,7 +251,7 @@ class ShopRegistrationController extends ChangeNotifier {
       return;
     }
     if (shopId == 0) {
-      Utils.showPrimarySnackbar(context, "Select shop Type",
+      Utils.showPrimarySnackbar(context, "Select Shop Type",
           type: SnackType.error);
       return;
     }
@@ -262,7 +263,7 @@ class ShopRegistrationController extends ChangeNotifier {
     bool emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
         .hasMatch(emailIdController.text.trim());
     print(emailValid);
-    if(!emailValid){
+    if (!emailValid) {
       Utils.showPrimarySnackbar(context, "Enter Email Id",
           type: SnackType.error);
       return;
@@ -295,7 +296,7 @@ class ShopRegistrationController extends ChangeNotifier {
       return;
     }
     if (upiController.text.isEmpty) {
-      Utils.showPrimarySnackbar(context, "Enter Upi", type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Enter UPI", type: SnackType.error);
       return;
     }
     await shopRegister(context);
@@ -312,7 +313,7 @@ class ShopRegistrationController extends ChangeNotifier {
           countryCode: "$countryCode",
           mobileNo: (mobController.text),
           email: emailIdController.text,
-          shopType: stateId == 1 ? "Retailer" : "Wholesaler",
+          shopType: shopId == 1 ? "Retailer" : "Wholesaler",
           countryId: countryId.toString(),
           stateId: stateId.toString(),
           cityId: cityId.toString(),
@@ -338,6 +339,8 @@ class ShopRegistrationController extends ChangeNotifier {
         print(pref.getString("successToken"));
         // pref.setString("kycStatus", result.kycStatus.toString());
         pref.setString('status', 'shopRegistered');
+        pref.setString('mobileNumber', mobController.text);
+
         notifyListeners();
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => SKycVerificationView()));

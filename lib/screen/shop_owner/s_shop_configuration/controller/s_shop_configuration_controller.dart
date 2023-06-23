@@ -31,6 +31,11 @@ class SShopConfigurationController extends ChangeNotifier {
   TextEditingController startShopTimeController = TextEditingController();
   TextEditingController endShopTimeController = TextEditingController();
   TextEditingController imageNameController = TextEditingController();
+  // TextEditingController deliveryChargesOneController = TextEditingController();
+  // TextEditingController deliveryChargesTwoController = TextEditingController();
+  // TextEditingController deliveryChargesThreeController =
+  //     TextEditingController();
+  // TextEditingController deliveryChargesFourController = TextEditingController();
 
   bool isCustomerPickupSelected = false;
   bool ifFreePickupSelected = false;
@@ -43,17 +48,25 @@ class SShopConfigurationController extends ChangeNotifier {
   File fileImage = File("");
   String networkImage = "";
   String image = "";
-  bool isLoading=true;
-  bool isInitialConfiguration=true;
+  bool isLoading = true;
+  bool isInitialConfiguration = true;
 
-  Future<void> initState(
-      context,initialConfiguration
-      ) async {
-    await getShopConfiguration(context,initialConfiguration);
+  Future<void> initState(context, initialConfiguration) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    // supportNumberController.text = pref.getString("mobileNumber").toString();
+
+    print(pref.getString("mobileNo").toString());
+    supportNumberController.text = pref.getString("mobileNo").toString();
+
+    await getShopConfiguration(
+      context,
+      initialConfiguration,
+    );
+    notifyListeners();
   }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -114,8 +127,6 @@ class SShopConfigurationController extends ChangeNotifier {
 
   ///////////////////
 
-
-
   ////Image
   void openGallery1() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -141,9 +152,9 @@ class SShopConfigurationController extends ChangeNotifier {
   ///
 
   ////// Shop Configuration start
-  Future<void> getShopConfiguration(context,initialConfiguration) async {
+  Future<void> getShopConfiguration(context, configuration) async {
     showLoader(true);
-    isInitialConfiguration=initialConfiguration;
+    isInitialConfiguration = configuration;
     print("successToken");
     SharedPreferences pref = await SharedPreferences.getInstance();
     supportNumberController.text = pref.getString("mobileNo").toString();
@@ -159,6 +170,10 @@ class SShopConfigurationController extends ChangeNotifier {
         final data = result.data;
 
         supportNumberController.text = data?.shopOwnerSupportNumber ?? "";
+        if (configuration) {
+          print(pref.getString("mobileNo").toString());
+          supportNumberController.text = pref.getString("mobileNo").toString();
+        }
         // print(SupportNumberController);
         firstDeliveryController.text =
             data?.shopOwnerAmount1DeliveryCharges ?? "";
@@ -191,15 +206,13 @@ class SShopConfigurationController extends ChangeNotifier {
         //////// Delivery type///////////
         if (data?.shopOwnerCustomerPickup == "active") {
           isCustomerPickupSelected = true;
-        }
-        else{
+        } else {
           isCustomerPickupSelected = false;
         }
         if (data?.shopOwnerDeliveryToCustomer == "active") {
           isDeliveryCustomerSelected = true;
-        }
-        else{
-          isDeliveryCustomerSelected=false;
+        } else {
+          isDeliveryCustomerSelected = false;
         }
         if (data?.shopOwnerDeliveryChargesFree == "active") {
           isDeliveryChargesSelected = false;
@@ -244,44 +257,60 @@ class SShopConfigurationController extends ChangeNotifier {
 //  Edit//////
 
   Future uploadShopConfiguration(context) async {
-
-
-    if(upiIdController.text==""){
+    if (upiIdController.text == "") {
       Utils.showPrimarySnackbar(context, "UPI ID is empty",
           type: SnackType.error);
       return;
     }
-    if(startShopTimeController.text==""){
-      Utils.showPrimarySnackbar(context, "Start time is empty",
+    if (startShopTimeController.text == "") {
+      Utils.showPrimarySnackbar(context, "Enter Shop Opening Time",
           type: SnackType.error);
       return;
     }
-    if(endShopTimeController.text==""){
-      Utils.showPrimarySnackbar(context, "Stop time is empty",
+    if (endShopTimeController.text == "") {
+      Utils.showPrimarySnackbar(context, "Enter Shop Closing Time",
           type: SnackType.error);
       return;
     }
-    if(supportNumberController.text.isEmpty){
-      Utils.showPrimarySnackbar(context, "Please Enter Support Number",
+    if (isDeliveryChargesSelected) {
+      if (firstDeliveryController.text.isEmpty) {
+        Utils.showPrimarySnackbar(context, "Please Select Delivery Charges ",
+            type: SnackType.error);
+        return;
+      }
+      if (firstDeliveryController.text == "0") {
+        Utils.showPrimarySnackbar(context, "Delivery Charges can't be Zero ",
+            type: SnackType.error);
+        notifyListeners();
+        return;
+      }
+    }
+
+    /////////////////////
+    if (endShopTimeController.text == "") {
+      Utils.showPrimarySnackbar(context, "Enter Shop Closing Time",
           type: SnackType.error);
       return;
     }
-    if(supportNumberController.text.length<10){
+
+    //////////////////
+    if (supportNumberController.text.length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter 10 digits",
           type: SnackType.error);
       return;
     }
-    if(!isCustomerPickupSelected && !isDeliveryCustomerSelected){
+    if (!isCustomerPickupSelected && !isDeliveryCustomerSelected) {
       Utils.showPrimarySnackbar(context, "Select Any Delivery Type",
           type: SnackType.error);
       return;
     }
-    if(!ifFreePickupSelected && !isDeliveryChargesSelected){
+    if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
       Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
           type: SnackType.error);
       return;
     }
-    if(!isNineToTwelve&&!isThreeToSix&&!isTwelveToThree&&!isSixToNine){
+
+    if (!isNineToTwelve && !isThreeToSix && !isTwelveToThree && !isSixToNine) {
       Utils.showPrimarySnackbar(context, "Select Any Slot",
           type: SnackType.error);
       return;
@@ -325,28 +354,26 @@ class SShopConfigurationController extends ChangeNotifier {
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        pref.setString("status","loggedIn");
-        if(isInitialConfiguration){
+        pref.setString("status", "loggedIn");
+        if (isInitialConfiguration) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: ShopDashBoardView(),
-                )),
-                (Route<dynamic> route) => false,
+                      index: 0,
+                      screenName: ShopDashBoardView(),
+                    )),
+            (Route<dynamic> route) => false,
           );
-        }
-        else {
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    SMainScreenView(
+                builder: (context) => SMainScreenView(
                       index: 4,
                       screenName: SAccountScreenView(),
                     )),
-                (Route<dynamic> route) => false,
+            (Route<dynamic> route) => false,
           );
         }
         // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName:SAccountScreenView(),)));
@@ -390,8 +417,10 @@ class SShopConfigurationController extends ChangeNotifier {
         thirdDeliveryController.text;
     request.fields['shop_owner_amount_4_delivery_charges'] =
         fourthDeliveryController.text;
-    request.fields['shop_owner_customer_pickup'] = isCustomerPickupSelected ? "active" : "inactive";
-    request.fields['shop_owner_delivery_to_customer'] =  isDeliveryCustomerSelected ? "active" : "inactive";
+    request.fields['shop_owner_customer_pickup'] =
+        isCustomerPickupSelected ? "active" : "inactive";
+    request.fields['shop_owner_delivery_to_customer'] =
+        isDeliveryCustomerSelected ? "active" : "inactive";
     request.fields['shop_owner_delivery_charges_free'] =
         isDeliveryChargesSelected ? "inactive" : "active";
     request.fields['shop_owner_slot_9_to_12'] =
@@ -419,30 +448,28 @@ class SShopConfigurationController extends ChangeNotifier {
     await request.send().then((response) {
       if (response.statusCode == 200) {
         print("sucesss");
-        pref.setString("status","loggedIn");
+        pref.setString("status", "loggedIn");
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
-        if(isInitialConfiguration){
+        if (isInitialConfiguration) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: ShopDashBoardView(),
-                )),
-                (Route<dynamic> route) => false,
+                      index: 0,
+                      screenName: ShopDashBoardView(),
+                    )),
+            (Route<dynamic> route) => false,
           );
-        }
-        else {
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    SMainScreenView(
+                builder: (context) => SMainScreenView(
                       index: 4,
                       screenName: SAccountScreenView(),
                     )),
-                (Route<dynamic> route) => false,
+            (Route<dynamic> route) => false,
           );
         }
       } else {

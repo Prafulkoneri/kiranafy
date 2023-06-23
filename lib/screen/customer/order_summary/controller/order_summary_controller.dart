@@ -38,7 +38,7 @@ class OrderSummaryController extends ChangeNotifier {
   String cartId = "";
   String groupValue = "";
   String discountPercentage = "";
-  List<bool> viewMore=[];
+  List<bool> viewMore = [];
   ShopDetails? shopDetailData;
   ShopDeliveryTypes? shopDeliveryTypes;
   List? shopDeliverySlots;
@@ -62,7 +62,7 @@ class OrderSummaryController extends ChangeNotifier {
   String totalDiscount = "";
   String customerPickup = "";
   TextEditingController couponCodeController = TextEditingController();
-  int selectedAddressId=0;
+  int selectedAddressId = 0;
 
   Future<void> initState(context, cId, id, refresh, route) async {
     // if(route=="addAddress"||route=="editAddress"){
@@ -141,7 +141,7 @@ class OrderSummaryController extends ChangeNotifier {
       expectedDateController.clear();
       slotGroupValue = "";
       discountPercentage = "";
-      offerGroupValue="";
+      offerGroupValue = "";
       couponCodeController.clear();
     }
     showLoader(true);
@@ -156,19 +156,23 @@ class OrderSummaryController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        customerPickup = result.orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ?? "";
-        if (result.orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup == "active") {
+        customerPickup = result
+                .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ??
+            "";
+        if (result
+                .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ==
+            "active") {
           groupValue = "self_pickup";
         } else {
           groupValue = "delivery_to";
         }
 
-
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
-        productTotalDiscount = orderFinalTotals?.productTotalDiscount.toString() ?? "";
+        productTotalDiscount =
+            orderFinalTotals?.productTotalDiscount.toString() ?? "";
         subTotal = orderFinalTotals?.subTotal.toString() ?? "";
         total = orderFinalTotals?.total.toString() ?? "";
         totalDiscount = orderFinalTotals?.totalDiscount.toString() ?? "";
@@ -181,9 +185,9 @@ class OrderSummaryController extends ChangeNotifier {
         }
         cartItemList = result.orderSummaryData?.cartItemList;
         finalCouponList = result.orderSummaryData?.finalCouponList;
-        int couponListLength=finalCouponList?.length??0;
-          viewMore=List<bool>.filled(couponListLength,false);
-        couponDiscount=orderFinalTotals?.couponDiscount.toString()??"";
+        int couponListLength = finalCouponList?.length ?? 0;
+        viewMore = List<bool>.filled(couponListLength, false);
+        couponDiscount = orderFinalTotals?.couponDiscount.toString() ?? "";
         fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
         showLoader(false);
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
@@ -224,8 +228,8 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
-  void onViewMoreClicked(index){
-    viewMore[index]=true;
+  void onViewMoreClicked(index) {
+    viewMore[index] = true;
     notifyListeners();
   }
 
@@ -240,7 +244,6 @@ class OrderSummaryController extends ChangeNotifier {
   }
 
   Future<void> removeAllShopFavList(context, id) async {
-
     SharedPreferences pref = await SharedPreferences.getInstance();
     removeFavShopRepo
         .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
@@ -371,7 +374,7 @@ class OrderSummaryController extends ChangeNotifier {
         couponCodeController.text = data?.couponCode.toString() ?? "";
         deliveryCharges = data?.deliveryCharges.toString() ?? "";
         subTotal = data?.subTotal ?? "";
-        couponDiscount=data?.couponDiscount.toString()??"";
+        couponDiscount = data?.couponDiscount.toString() ?? "";
         total = data?.total ?? "";
         totalDiscount = data?.totalDiscount ?? "";
         discountPercentage = data?.discountPercentage ?? "";
@@ -398,13 +401,14 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
-  CustomerRemoveCouponsRequestModel get customerRemoveCouponsRequestModel=>CustomerRemoveCouponsRequestModel(
-    cartId: cartId,
-    shopId: shopId,
-  );
+  CustomerRemoveCouponsRequestModel get customerRemoveCouponsRequestModel =>
+      CustomerRemoveCouponsRequestModel(
+        cartId: cartId,
+        shopId: shopId,
+      );
 
-  Future<void> removeCoupon(context)async{
-    if(couponCodeController.text==""){
+  Future<void> removeCoupon(context) async {
+    if (couponCodeController.text == "") {
       Utils.showPrimarySnackbar(context, "No Coupon Added",
           type: SnackType.error);
       return;
@@ -414,18 +418,19 @@ class OrderSummaryController extends ChangeNotifier {
     print(pref.getString("successToken"));
     removeCouponRepo
         .removeCoupon(
-        customerRemoveCouponsRequestModel, pref.getString("successToken"))
+            customerRemoveCouponsRequestModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
       final result =
-      CustomerRemoveCouponsResModel.fromJson(jsonDecode(response.body));
+          CustomerRemoveCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         final data = result.data;
         couponCodeController.clear();
-        offerGroupValue="";
-        deliveryCharges = data?.removeCouponData?.deliveryCharges.toString() ?? "";
+        offerGroupValue = "";
+        deliveryCharges =
+            data?.removeCouponData?.deliveryCharges.toString() ?? "";
         subTotal = data?.removeCouponData?.subTotal.toString() ?? "";
-        total = data?.removeCouponData?.total.toString()?? "";
+        total = data?.removeCouponData?.total.toString() ?? "";
         totalDiscount = data?.removeCouponData?.totalDiscount.toString() ?? "";
         discountPercentage = "";
         showOnPageLoader(false);
@@ -439,7 +444,7 @@ class OrderSummaryController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -451,13 +456,12 @@ class OrderSummaryController extends ChangeNotifier {
 
   void onConfirmOrder(context) {
     if (expectedDateController.text == "") {
-      Utils.showPrimarySnackbar(context, "Select expected date",
+      Utils.showPrimarySnackbar(context, "Select Expected Date",
           type: SnackType.error);
       return;
     }
     if (slotGroupValue == "") {
-      Utils.showPrimarySnackbar(context, "Select a slot",
-          type: SnackType.error);
+      Utils.showPrimarySnackbar(context, "Select Slot", type: SnackType.error);
       return;
     }
     if (customerAddress!.isEmpty && groupValue == "delivery_to") {
@@ -477,7 +481,8 @@ class OrderSummaryController extends ChangeNotifier {
                 customerDeliveryDate: expectedDateController.text,
                 customerDeliverySlot: slotGroupValue,
                 customerDeliveryType: groupValue,
-                finalDeliveryCharges: deliveryCharges==""?"0":deliveryCharges,
+                finalDeliveryCharges:
+                    deliveryCharges == "" ? "0" : deliveryCharges,
                 finalSubTotal: subTotal,
                 finalTotalAmount: total,
                 finalTotalDiscount: totalDiscount,

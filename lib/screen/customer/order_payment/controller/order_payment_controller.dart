@@ -20,26 +20,27 @@ class OrderPaymentController extends ChangeNotifier {
   TextEditingController transactionIdController = TextEditingController();
   bool isLoading = true;
   bool isStackLoading = false;
-  String? shopId = "";
-  String? cartId = "";
-  String? couponId = "";
-  String? customerDeliveryAddressId = "";
-  String? customerDeliveryDate = "";
-  String? customerDeliverySlot = "";
-  String? customerDeliveryType = "";
-  String? finalTotalAmount = "";
-  String? finalTotalDiscount = "";
-  String? totalItems = "";
-  String? groupValue = "";
-  String? finalSubTotal = "";
-  String? finalDeliveryCharges = "";
-  String? customerPaymentMode = "";
+  String shopId = "";
+  String cartId = "";
+  String couponId = "";
+  String customerDeliveryAddressId = "";
+  String customerDeliveryDate = "";
+  String customerDeliverySlot = "";
+  String customerDeliveryType = "";
+  String finalTotalAmount = "";
+  String finalTotalDiscount = "";
+  String totalItems = "";
+  String groupValue = "cash";
+  String finalSubTotal = "";
+  String finalDeliveryCharges = "";
+  String customerPaymentMode = "";
 
   ShopDetails? shopDetailData;
   OrderPaymentData? orderPaymentData;
   Future<void> initState(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
       ftAmount, ftDiscount, tItems, fSubTotal, fDCharges) async {
-    groupValue = "";
+    showStackLoader(false);
+    groupValue = "cash";
     await orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
         ftAmount, ftDiscount, tItems, fSubTotal, fDCharges);
   }
@@ -53,6 +54,7 @@ class OrderPaymentController extends ChangeNotifier {
     isLoading = value;
     notifyListeners();
   }
+
   void showStackLoader(value) {
     isStackLoading = value;
     notifyListeners();
@@ -135,7 +137,7 @@ class OrderPaymentController extends ChangeNotifier {
   Future<void> placeOrder(
     context,
   ) async {
-    showStackLoader(true);
+    // showStackLoader(true);
     if (groupValue == "") {
       Utils.showPrimarySnackbar(context, "please select Payment Mode",
           type: SnackType.error);
@@ -143,11 +145,12 @@ class OrderPaymentController extends ChangeNotifier {
     }
     if (groupValue == "upi" || groupValue == "qr_code") {
       if (transactionIdController.text.isEmpty) {
-        Utils.showPrimarySnackbar(context, "Enter Payment Transaction Id",
+        Utils.showPrimarySnackbar(context, "Enter Payment Transaction ID",
             type: SnackType.error);
         return;
       }
     }
+    showStackLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     placeOrderRepo
@@ -157,7 +160,6 @@ class OrderPaymentController extends ChangeNotifier {
       final result =
           CustomerPlaceOrderResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -186,12 +188,10 @@ class OrderPaymentController extends ChangeNotifier {
 
   copyCodeForCoupanList(context, offerMsg) {
     Clipboard.setData(ClipboardData(text: offerMsg)).then((_) {
-      Utils.showPrimarySnackbar(context, "Upi ID copy",
+      Utils.showPrimarySnackbar(context, "UPI ID Copied",
           type: SnackType.success);
     });
   }
 
-
-
-  Future<void> removeCoupon()async{}
+  Future<void> removeCoupon() async {}
 }

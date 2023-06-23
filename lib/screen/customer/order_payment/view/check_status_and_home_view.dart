@@ -119,8 +119,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 0,
+                        builder: (context) => MainScreenView(index: 0,
                             screenName: HomeScreenView(refreshPage: true))),
                     (Route<dynamic> route) => false,
                   );

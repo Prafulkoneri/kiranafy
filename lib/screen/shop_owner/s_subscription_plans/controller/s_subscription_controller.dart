@@ -29,7 +29,7 @@ class SSubscriptionController extends ChangeNotifier {
   String selectedServicesId = "0";
   bool oneTimeShop = false;
   bool productPrice = false;
-bool isLoading=false;
+  bool isLoading = false;
   bool shopDigital = false;
   bool primeCatchy = false;
   String planAmount = "";
@@ -38,8 +38,8 @@ bool isLoading=false;
     await getSubscriptionPlanDetails(context);
   }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -54,7 +54,6 @@ bool isLoading=false;
     print(selectedAddOnServicesId);
     notifyListeners();
   }
-
 
   void onTimeShopSetup() {
     oneTimeShop = !oneTimeShop;
@@ -125,60 +124,69 @@ bool isLoading=false;
           subscriptionId: selectedPlanId, serviceId: selectedServicesId);
 
   Future<void> buySubscriptionPlan(context, loggedIn) async {
+    // if (selectedAddOnServicesId.isNotEmpty) {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String a = '';
     if (selectedAddOnServicesId.isNotEmpty) {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      String a = '';
       for (int i = 0; i < selectedAddOnServicesId.length; i++) {
         a += "${selectedAddOnServicesId[i]},";
       }
+
       a = a.substring(0, a.length - 1);
       selectedServicesId = a;
-
-      shopBuySubscriptionsRepo
-          .buySubScription(
-              buySubscriptionRequestModel, pref.getString("successToken"))
-          .then((response)async {
-        final result =
-            BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
-        print(response.statusCode);
-        if (response.statusCode == 200) {
-          // if (loggedIn) {
-          //   Navigator.pushAndRemoveUntil(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => SMainScreenView(
-          //               index: 4,
-          //               screenName: SAccountScreenView(),
-          //             )),
-          //     (Route<dynamic> route) => false,
-          //   );
-          // } else {
-          //
-          // }
-          SharedPreferences pref = await SharedPreferences.getInstance();
-          pref.setString('status', 'subscriptionCompleted');
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SShopConfigurationView(initialShopConfigration: true)));
-          notifyListeners();
-        } else {
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.error);
-        }
-      }).onError((error, stackTrace) {
-        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-      }).catchError(
-        (Object e) {
-          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        },
-        test: (Object e) {
-          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-          return false;
-        },
-      );
-    } else {
-      Utils.showPrimarySnackbar(context, "Please Select Add On Services",
-          type: SnackType.error);
+    } //
+    else {
+      selectedServicesId = "";
     }
+
+    shopBuySubscriptionsRepo
+        .buySubScription(
+            buySubscriptionRequestModel, pref.getString("successToken"))
+        .then((response) async {
+      final result =
+          BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        // if (loggedIn) {
+        //   Navigator.pushAndRemoveUntil(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => SMainScreenView(
+        //               index: 4,
+        //               screenName: SAccountScreenView(),
+        //             )),
+        //     (Route<dynamic> route) => false,
+        //   );
+        // } else {
+        //
+        // }
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        pref.setString('status', 'subscriptionCompleted');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SShopConfigurationView(initialShopConfigration: true)));
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+    // } else {
+    //   Utils.showPrimarySnackbar(context, "Please Select Add On Services",
+    //       type: SnackType.error);
+    // }
   }
 
   void onRadioBtnChanged(value, id, price) {

@@ -145,7 +145,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                       child: Row(
                         children: [
                           Text(
-                            "We need to verify you. We will send you\n a one time verification code.",
+                            "We need to verify you. We will send you\na one time verification code.",
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
                                   color: SplashText1,
@@ -274,7 +274,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Already have an account ?",
+                            "Already have an account?",
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
                                   color: Black,

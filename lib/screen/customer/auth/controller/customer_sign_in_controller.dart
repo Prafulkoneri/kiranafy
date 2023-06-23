@@ -103,7 +103,7 @@ class CustomerSignInController extends ChangeNotifier {
 
     if (!isLoginBtnEnabled) {
       Utils.showPrimarySnackbar(context, "Please Sign Up",
-          type: SnackType.success);
+          type: SnackType.error);
       return;
     }
 
@@ -135,7 +135,11 @@ class CustomerSignInController extends ChangeNotifier {
         pref.setString("status", "customerLoggedIn");
         print("token ${pref.getString("successToken")}");
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainScreenView(index: 0,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => MainScreenView(
+                      index: 0,
+                    )));
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
