@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/model/cancel_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/order_status_mode.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_owner_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/cancel_reason_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/order_status_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/shop_owner_order_repo.dart';
 
@@ -19,12 +21,16 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String? orderCancelledReasonId = "";
   bool isLoading = true;
   bool isStackLoading = false;
+  bool isSelectedReason = false;
+  bool isOtherReasonSelected = false;
   ShopOrderViewData? shopOrderViewData;
   OrderDetails? orderDetails;
   CouponDetails? couponDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
   ShopOrderViewRepo shopOrderViewRepo = ShopOrderViewRepo();
+  OrderCancelReasonRepo orderCancelReasonRepo = OrderCancelReasonRepo();
+  List<CancelReasonList>? cancelReasondata;
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -42,7 +48,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     orId,
   ) async {
     await shopOwnerOrderView(context, orId);
-    // shopOrderStatus(context, orId, oStatus, oCReason, oCReasonId);
+
+    getCancelOrderList(context);
     notifyListeners();
   }
 
@@ -128,5 +135,66 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  Future<void> getCancelOrderList(context) async {
+    showLoader(true);
+    print("loading");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    orderCancelReasonRepo.OrderCancelReason(pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = CancelModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        cancelReasondata = result.cancelReasondata;
+        showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  // void onSelectReason(value) {
+  //   if (!isSelectedReason) {
+  //     isSelectedReason = true;
+
+  //   } else {
+  //     isSelectedReason = false;
+  //   }
+  //   notifyListeners();
+  // }
+
+  void onSelectReason(value) {
+    if (!isSelectedReason) {
+      isSelectedReason = true;
+      isOtherReasonSelected = false;
+    } else {
+      isSelectedReason = false;
+      isOtherReasonSelected = false;
+    }
+    notifyListeners();
+  }
+
+  void onOtherReasonSelected(value) {
+    if (!isOtherReasonSelected) {
+      isOtherReasonSelected = true;
+      isSelectedReason = false;
+    } else {
+      isSelectedReason = false;
+      isOtherReasonSelected = false;
+    }
+    notifyListeners();
   }
 }

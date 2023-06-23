@@ -298,4 +298,7 @@ class Endpoint {
   ////Customer Current Location Pincode////
   static const String currentLocationPincode =
       "${baseUrl}lsm-customer-current-location-pincode";
+  ////CancelReason shop////
+  static const String cancelOrderReason =
+      "${baseUrl}lsm-shop-owner-get-order-cancel-reasons";
 }
