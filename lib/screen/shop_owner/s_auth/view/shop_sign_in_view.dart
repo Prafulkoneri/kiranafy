@@ -295,11 +295,12 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 20.h,
+              ),
             ],
           ),
-          SizedBox(
-            height: 20.h,
-          ),
+
         ],
       ),
     ));
