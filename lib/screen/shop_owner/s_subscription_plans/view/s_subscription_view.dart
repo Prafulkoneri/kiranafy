@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/contr
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:provider/provider.dart';
 
@@ -100,6 +101,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                           ),
                         ),
                         SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -419,6 +421,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                 height: 17.w,
                               ),
                               ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.zero,
                                 itemCount: watch.addOnServicesList?.length ?? 0,
                                 shrinkWrap: true,
@@ -480,146 +483,175 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 19.w, right: 19.w),
-                    child: Text(
-                      "Mode of Payment",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            letterSpacing: .5,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 19.w, right: 19.w),
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: [
-                            SecondaryRadioButton(
-                                value: "cash",
-                                groupValue: " watch.groupValue",
-                                // groupValue: watch.radioGroupValue,
-                                onChanged: (value) {
-                                  // read.onRadioButtonSelected(value);
-                                },
-                                leading: ""),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Text(
-                              'Cash on Delivery',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w700),
+                              Container(
+                                padding:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
+                                child: Text(
+                                  "Mode of Payment",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black,
+                                        letterSpacing: .5,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 22.h,
-                        ),
-                        Row(
-                          children: [
-                            SecondaryRadioButton(
-                                value: "upi",
-                                groupValue: " watch.groupValue",
-                                onChanged: (value) {
-                                  // read.onRadioButtonSelected(value);
-                                },
-                                leading: ""),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Text(
-                              "UPI ID  - ",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w700),
+                              SizedBox(
+                                height: 10.h,
                               ),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            PrimaryButton(
-                              width: 58.w,
-                              height: 19.h,
-                              borderColor: SplashText,
-                              color: Colors.white,
-                              onTap: () {
-                                // read.copyCodeForCoupanList(context,
-                                //     watch.shopDetailData?.shopOwnerUpiId);
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Copy",
-                                    textAlign: TextAlign.start,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: SplashText,
-                                          // letterSpacing: .5,
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.w700),
+                              Container(
+                                padding:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
+                                child: Column(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: [
+                                        SecondaryRadioButton(
+                                            value: "cash",
+                                            groupValue: " watch.groupValue",
+                                            // groupValue: watch.radioGroupValue,
+                                            onChanged: (value) {
+                                              // read.onRadioButtonSelected(value);
+                                            },
+                                            leading: ""),
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        Text(
+                                          'Cash on Delivery',
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black,
+                                                letterSpacing: .5,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ), // <-- Text
-                                  SizedBox(
-                                    width: 5.w,
-                                  ),
-                                  SvgPicture.asset(
-                                    'assets/images/svg2.svg',
-                                    width: 12.w,
-                                    height: 12.h,
-                                  ),
+                                    SizedBox(
+                                      height: 22.h,
+                                    ),
+                                    Row(
+                                      children: [
+                                        SecondaryRadioButton(
+                                            value: "upi",
+                                            groupValue: " watch.groupValue",
+                                            onChanged: (value) {
+                                              // read.onRadioButtonSelected(value);
+                                            },
+                                            leading: ""),
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        Text(
+                                          "UPI ID  - ",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black,
+                                                letterSpacing: .5,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        PrimaryButton(
+                                          width: 58.w,
+                                          height: 19.h,
+                                          borderColor: SplashText,
+                                          color: Colors.white,
+                                          onTap: () {
+                                            // read.copyCodeForCoupanList(context,
+                                            //     watch.shopDetailData?.shopOwnerUpiId);
+                                          },
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Copy",
+                                                textAlign: TextAlign.start,
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: SplashText,
+                                                      // letterSpacing: .5,
+                                                      fontSize: 11.sp,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ), // <-- Text
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/images/svg2.svg',
+                                                width: 12.w,
+                                                height: 12.h,
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 22.h,
+                                    ),
+                                    Row(
+                                      children: [
+                                        SecondaryRadioButton(
+                                            value: "qr_code",
+                                            groupValue: "watch.groupValue,",
+                                            onChanged: (value) {
+                                              // read.onRadioButtonSelected(value);
+                                            },
+                                            leading: ""),
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        Text(
+                                          'Payment QR Code',
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black,
+                                                letterSpacing: .5,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 31.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/qrcode.png",
+                                    width: 165.w,
+                                  )
+                                  // AppNetworkImages(
+                                  //   imageUrl:
+                                  //       "${watch.shopDetailData?.shopOwnerQrCodeImage}",
+                                  //   // "assets/images/qrcode.png",
+                                  //   // height: 165.h,
+                                  //   width: 165.w,
+                                  // ),
                                 ],
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 22.h,
-                        ),
-                        Row(
-                          children: [
-                            SecondaryRadioButton(
-                                value: "qr_code",
-                                groupValue: "watch.groupValue,",
-                                onChanged: (value) {
-                                  // read.onRadioButtonSelected(value);
-                                },
-                                leading: ""),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Text(
-                              'Payment QR Code',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w700),
+                              SizedBox(
+                                height: 31.h,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
