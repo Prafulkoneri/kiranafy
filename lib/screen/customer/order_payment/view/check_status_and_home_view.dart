@@ -23,7 +23,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: WillPopScope(
-        onWillPop: ()async{
+        onWillPop: () async {
           return false;
         },
         child: Center(
@@ -92,11 +92,11 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                     ),
                     // style: style,
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => OrderStatusView()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OrderStatusView()),
+                      );
                     },
                     child: Text(
                       'Check Order Status',
@@ -119,7 +119,8 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => MainScreenView(index: 0,
+                        builder: (context) => MainScreenView(
+                            index: 0,
                             screenName: HomeScreenView(refreshPage: true))),
                     (Route<dynamic> route) => false,
                   );
