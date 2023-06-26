@@ -68,3 +68,9 @@ class Constants {
   static const kRedColor = Color(0xFFFE4067);
   static const kGreenColor = Color(0xFFADE9E3);
 }
+
+class FoodColors {
+  static const Color Yellow = Color.fromRGBO(255, 187, 70, 1);
+  static const Color Blue = Color.fromRGBO(76, 139, 245, 1);
+  static const Color Grey = Color.fromRGBO(207, 207, 207, 1);
+}

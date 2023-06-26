@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/delivery_view_pending.dart';
+
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';

@@ -16,24 +16,28 @@ import 'package:provider/provider.dart';
 
 class MapScreenView extends StatefulWidget {
   final bool isLocationEnabled;
-  final bool  initialMapView;
+  final bool initialMapView;
   final LatLng latLng;
-  const MapScreenView({ Key? key,required this.isLocationEnabled,required this.initialMapView,required this.latLng}) : super(key: key);
+  const MapScreenView(
+      {Key? key,
+      required this.isLocationEnabled,
+      required this.initialMapView,
+      required this.latLng})
+      : super(key: key);
 
   @override
   State<MapScreenView> createState() => _MapScreenViewState();
 }
 
 class _MapScreenViewState extends State<MapScreenView> {
-
   //get MapView controller to access MapView
   Completer<GoogleMapController> _googleMapViewController = Completer();
   CameraPosition? _cameraPosition;
   late LatLng _defaultLatLng;
   late LatLng _draggedLatlng;
   String _draggedAddress = "";
-  TextEditingController searchController =TextEditingController();
-  bool isLocationEnabledByUser=false;
+  TextEditingController searchController = TextEditingController();
+  bool isLocationEnabledByUser = false;
 
   @override
   void initState() {
@@ -42,23 +46,20 @@ class _MapScreenViewState extends State<MapScreenView> {
   }
 
   _init() {
-    final watch=Provider.of<MainScreenController>(context, listen: false);
+    final watch = Provider.of<MainScreenController>(context, listen: false);
     //set default latlng for camera position
     _defaultLatLng = widget.latLng;
     _draggedLatlng = _defaultLatLng;
     _cameraPosition = CameraPosition(
-        target: _defaultLatLng,
-        zoom: 17.5 // number of MapView view
-    );
+        target: _defaultLatLng, zoom: 17.5 // number of MapView view
+        );
     isLocationEnabledByUser = widget.isLocationEnabled;
     print(widget.isLocationEnabled);
     print(widget.initialMapView);
     print("00000000");
-    if(widget.isLocationEnabled&&widget.initialMapView){
+    if (widget.isLocationEnabled && widget.initialMapView) {
       _gotoUserCurrentPosition();
     }
-
-
 
     //MapView will redirect to my current location when loaded
 
@@ -68,44 +69,42 @@ class _MapScreenViewState extends State<MapScreenView> {
 
   @override
   Widget build(BuildContext context) {
-    final watch=context.watch<MainScreenController>();
-    final read=context.read<MainScreenController>();
+    final watch = context.watch<MainScreenController>();
+    final read = context.read<MainScreenController>();
     return Stack(
       clipBehavior: Clip.none,
       children: [
-
-        Container(
-            height: 400.w,
-            child: _buildBody()),
-        !isLocationEnabledByUser?Container(
-          height: 0,
-        ):Positioned(
-            top: -10.w,
-            left: 0.w,
-            right: 0.w,
-            child: InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                height: 40.w,
-                width: 40.w,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black,
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    'assets/images/Cross.svg',
-                    width: 15.w,
-                    height: 15.h,
+        Container(height: 400.w, child: _buildBody()),
+        !isLocationEnabledByUser
+            ? Container(
+                height: 0,
+              )
+            : Positioned(
+                top: -50.w,
+                left: 0.w,
+                right: 0.w,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 40.w,
+                    width: 40.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        'assets/images/Cross.svg',
+                        width: 15.w,
+                        height: 15.h,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            )),
+                )),
       ],
     );
-
 
     //   Scaffold(
     //   body:
@@ -120,62 +119,68 @@ class _MapScreenViewState extends State<MapScreenView> {
   }
 
   Widget _buildBody() {
-    return
-      Stack(
-          clipBehavior: Clip.none,
-          children : [
-            _getMapView(),
-            _getCustomPin(),
-            _showSearchBox(),
-            !isLocationEnabledByUser? Positioned(bottom: 0.w,child: _locationEnabled(),left: 0.w,right: 0.w,):Container(),
-
-          ]
-      );
-
+    return Stack(clipBehavior: Clip.none, children: [
+      _getMapView(),
+      _getCustomPin(),
+      _showSearchBox(),
+      !isLocationEnabledByUser
+          ? Positioned(
+              bottom: 0.w,
+              child: _locationEnabled(),
+              left: 0.w,
+              right: 0.w,
+            )
+          : Container(),
+    ]);
   }
-  Widget _locationEnabled(){
 
+  Widget _locationEnabled() {
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 15.w,
-              spreadRadius: 20.w,
-              color: Colors.white.withOpacity(0.9),
-              offset: Offset(0,0),
-
-            ),
-          ]
-      ),
+      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(
+          blurRadius: 15.w,
+          spreadRadius: 20.w,
+          color: Colors.white.withOpacity(0.9),
+          offset: Offset(0, 0),
+        ),
+      ]),
       child: Column(
         children: [
           SizedBox(
             height: 10.w,
           ),
-          Text("Enable your location",style: TextStyle(color: Black1,fontSize: 16.sp,),),
+          Text(
+            "Enable your location",
+            style: TextStyle(
+              color: Black1,
+              fontSize: 16.sp,
+            ),
+          ),
           SizedBox(
             height: 15.w,
           ),
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 32.w),
-
-            child: PrimaryButton(color:Color(0xff2388FF), onTap:(){
-              _defaultLatLng = LatLng(11, 104);
-              _draggedLatlng = _defaultLatLng;
-              _cameraPosition = CameraPosition(
-                  target: _defaultLatLng,
-                  zoom: 17.5 // number of MapView view
-              );
-              _gotoUserCurrentPosition();
-            },text: "Allow while using this app",fontWeight: FontWeight.w500,fontSize: 12.sp,height: 40.w),
+            padding: EdgeInsets.symmetric(horizontal: 32.w),
+            child: PrimaryButton(
+                color: Color(0xff2388FF),
+                onTap: () {
+                  _defaultLatLng = LatLng(11, 104);
+                  _draggedLatlng = _defaultLatLng;
+                  _cameraPosition = CameraPosition(
+                      target: _defaultLatLng,
+                      zoom: 17.5 // number of MapView view
+                      );
+                  _gotoUserCurrentPosition();
+                },
+                text: "Allow while using this app",
+                fontWeight: FontWeight.w500,
+                fontSize: 12.sp,
+                height: 40.w),
           ),
           SizedBox(
             height: 36.w,
           ),
         ],
-
-
       ),
     );
   }
@@ -188,7 +193,11 @@ class _MapScreenViewState extends State<MapScreenView> {
         decoration: BoxDecoration(
           color: Colors.blue,
         ),
-        child: Center(child: Text(_draggedAddress, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),)),
+        child: Center(
+            child: Text(
+          _draggedAddress,
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        )),
       ),
     );
   }
@@ -196,16 +205,13 @@ class _MapScreenViewState extends State<MapScreenView> {
   Widget _showSearchBox() {
     return SafeArea(
       child: Container(
-        margin: EdgeInsets.only(top: 19.w,left: 16.w,right: 16.w),
+        margin: EdgeInsets.only(top: 19.w, left: 16.w, right: 16.w),
         width: MediaQuery.of(context).size.width,
         height: 48.w,
         child: Container(
           child: GooglePlaceAutoCompleteTextField(
-
-              textStyle: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14.sp
-              ),
+              textStyle:
+                  TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
               textEditingController: searchController,
               googleAPIKey: "AIzaSyCm27F5Jrl8b6vXkNCOotiTdnM8QeygfOY",
               inputDecoration: InputDecoration(
@@ -218,7 +224,14 @@ class _MapScreenViewState extends State<MapScreenView> {
                 prefixIcon: Container(
                   height: 13.3.w,
                   width: 13.3.w,
-                  child: Center(child: Container(child: SvgPicture.asset("assets/icons/search_map.svg",height: 13.3.w,width: 13.3.w,fit: BoxFit.contain,))),
+                  child: Center(
+                      child: Container(
+                          child: SvgPicture.asset(
+                    "assets/icons/search_map.svg",
+                    height: 13.3.w,
+                    width: 13.3.w,
+                    fit: BoxFit.contain,
+                  ))),
                 ),
                 contentPadding: EdgeInsets.only(left: 10.w),
                 fillColor: Colors.white,
@@ -229,7 +242,7 @@ class _MapScreenViewState extends State<MapScreenView> {
                   ),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                focusedBorder:   OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xffE4E4E4),
                   ),
@@ -237,58 +250,56 @@ class _MapScreenViewState extends State<MapScreenView> {
                 ),
               ),
               debounceTime: 800, // default 600 ms,
-              countries: ["in","fr"], // optional by default null is set
-              isLatLngRequired:true,// if you required coordinates from place detail
+              countries: ["in", "fr"], // optional by default null is set
+              isLatLngRequired:
+                  true, // if you required coordinates from place detail
               getPlaceDetailWithLatLng: (prediction) {
-                _gotoSpecificPosition(LatLng(double.parse(prediction.lat.toString()), double.parse(prediction.lng.toString())));
+                _gotoSpecificPosition(LatLng(
+                    double.parse(prediction.lat.toString()),
+                    double.parse(prediction.lng.toString())));
 
                 // this method will return latlng with place detail
                 print("placeDetails" + prediction.lng.toString());
               }, // this callback is called when isLatLngRequired is true
               itmClick: (Prediction prediction) {
-                searchController.text=prediction.description.toString();
-                searchController.selection = TextSelection.fromPosition(TextPosition(offset: prediction.description!.length));
-              }
-          ),
+                searchController.text = prediction.description.toString();
+                searchController.selection = TextSelection.fromPosition(
+                    TextPosition(offset: prediction.description!.length));
+              }),
         ),
       ),
     );
-
   }
 
   Widget _getMapView() {
-    return
-      ClipRRect(
-        borderRadius:BorderRadius.only(topRight: Radius.circular(20.w),topLeft: Radius.circular(30.w)),
-        child: GoogleMap(
-
-          initialCameraPosition: _cameraPosition!, //initialize camera position for MapView
-          mapType: MapType.normal,
-          onCameraIdle: () {
-
-            //this function will trigger when user stop dragging on MapView
-            //every time user drag and stop it will display address
-            _getAddress(_draggedLatlng);
-          },
-          onCameraMove: (cameraPosition) {
-
-
-            //this function will trigger when user keep dragging on MapView
-            //every time user drag this will get value of latlng
-            _draggedLatlng = cameraPosition.target;
-            print(_draggedLatlng);
-            // _getAddress(_draggedLatlng);
-          },
-          onMapCreated: (GoogleMapController controller) {
-            //this function will trigger when MapView is fully loaded
-            if (!_googleMapViewController.isCompleted) {
-              //set controller to google MapView when it is fully loaded
-              _googleMapViewController.complete(controller);
-            }
-          },
-        ),
-      );
-
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20.w), topLeft: Radius.circular(30.w)),
+      child: GoogleMap(
+        initialCameraPosition:
+            _cameraPosition!, //initialize camera position for MapView
+        mapType: MapType.normal,
+        onCameraIdle: () {
+          //this function will trigger when user stop dragging on MapView
+          //every time user drag and stop it will display address
+          _getAddress(_draggedLatlng);
+        },
+        onCameraMove: (cameraPosition) {
+          //this function will trigger when user keep dragging on MapView
+          //every time user drag this will get value of latlng
+          _draggedLatlng = cameraPosition.target;
+          print(_draggedLatlng);
+          // _getAddress(_draggedLatlng);
+        },
+        onMapCreated: (GoogleMapController controller) {
+          //this function will trigger when MapView is fully loaded
+          if (!_googleMapViewController.isCompleted) {
+            //set controller to google MapView when it is fully loaded
+            _googleMapViewController.complete(controller);
+          }
+        },
+      ),
+    );
   }
 
   Widget _getCustomPin() {
@@ -303,12 +314,19 @@ class _MapScreenViewState extends State<MapScreenView> {
 
   //get address from dragged pin
   Future _getAddress(LatLng position) async {
-    final read=Provider.of<MainScreenController>(context, listen: false);
+    final read = Provider.of<MainScreenController>(context, listen: false);
     //this will list down all address around the position
-    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark address = placemarks[0]; // get only first and closest address
-    String addresStr = "${address.street}, ${address.locality}, ${address.postalCode}, ${address.country}";
-    await read.setPincode(context,isLocationEnabledByUser,address.postalCode,LatLng(position.latitude, position.longitude));
+    String addresStr =
+        "${address.street}, ${address.locality}, ${address.postalCode}, ${address.country}";
+    print(address.street);
+    print(address.locality);
+    print(address.subLocality);
+    print(address.subAdministrativeArea);
+    await read.setPincode(context, isLocationEnabledByUser, address.postalCode,
+        LatLng(position.latitude, position.longitude));
     setState(() {
       _draggedAddress = addresStr;
     });
@@ -318,24 +336,20 @@ class _MapScreenViewState extends State<MapScreenView> {
   //get user's current location and set the MapView's camera to that location
   Future _gotoUserCurrentPosition() async {
     Position currentPosition = await _determineUserCurrentPosition();
-    _gotoSpecificPosition(LatLng(currentPosition.latitude, currentPosition.longitude));
+    _gotoSpecificPosition(
+        LatLng(currentPosition.latitude, currentPosition.longitude));
 
-    isLocationEnabledByUser=true;
-
+    isLocationEnabledByUser = true;
   }
 
   //go to specific position by latlng
   Future _gotoSpecificPosition(LatLng position) async {
-
-    GoogleMapController MapViewController = await _googleMapViewController.future;
+    GoogleMapController MapViewController =
+        await _googleMapViewController.future;
     MapViewController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(
-            target: position,
-            zoom: 17.5
-        )
-    ));
+        CameraPosition(target: position, zoom: 17.5)));
     setState(() {
-      isLocationEnabledByUser=true;
+      isLocationEnabledByUser = true;
     });
     ;
     //every time that we dragged pin , it will list down the address here
@@ -346,26 +360,26 @@ class _MapScreenViewState extends State<MapScreenView> {
     LocationPermission locationPermission;
     bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
     //check if user enable service for location permission
-    if(!isLocationServiceEnabled) {
+    if (!isLocationServiceEnabled) {
       print("user don't enable location permission");
     }
 
     locationPermission = await Geolocator.checkPermission();
 
     //check if user denied location and retry requesting for permission
-    if(locationPermission == LocationPermission.denied) {
+    if (locationPermission == LocationPermission.denied) {
       locationPermission = await Geolocator.requestPermission();
-      if(locationPermission == LocationPermission.denied) {
+      if (locationPermission == LocationPermission.denied) {
         print("user denied location permission");
       }
     }
 
     //check if user denied permission forever
-    if(locationPermission == LocationPermission.deniedForever) {
+    if (locationPermission == LocationPermission.deniedForever) {
       print("user denied permission forever");
     }
 
-    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
   }
-
 }

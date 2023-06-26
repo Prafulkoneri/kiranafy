@@ -1,7 +1,9 @@
-class ShopOrderViewRequestModel {
+import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+
+class CustomerOrderViewRequestModel {
   String? orderId;
 
-  ShopOrderViewRequestModel({
+  CustomerOrderViewRequestModel({
     this.orderId,
   });
 
@@ -12,48 +14,54 @@ class ShopOrderViewRequestModel {
     return data;
   }
 }
-//////////////////////RESPONSEMODEL////////////////
 
-class ShopOrderViewResModel {
+////////////////////////RESPONSE MODEL///////////////////
+class CustomerOrderViewResponseModel {
   int? status;
   String? message;
-  ShopOrderViewData? shopOrderViewData;
+  OrderViewData? orderData;
 
-  ShopOrderViewResModel({
+  CustomerOrderViewResponseModel({
     required this.status,
     required this.message,
-    required this.shopOrderViewData,
+    required this.orderData,
   });
-  ShopOrderViewResModel.fromJson(Map<String, dynamic> json) {
+  CustomerOrderViewResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    shopOrderViewData =
-        json['data'] != null ? ShopOrderViewData.fromJson(json['data']) : null;
+    orderData =
+        json['data'] != null ? OrderViewData.fromJson(json['data']) : null;
   }
 }
 
-class ShopOrderViewData {
+class OrderViewData {
   OrderDetails? orderDetails;
   CouponDetails? couponDetails;
+  ShopDetails? shopDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
 
-  ShopOrderViewData({
+  OrderViewData({
     required this.orderDetails,
     required this.couponDetails,
+    required this.shopDetails,
     required this.deliveryAddressDetails,
     required this.orderProductDetails,
   });
-  ShopOrderViewData.fromJson(Map<String, dynamic> json) {
+  OrderViewData.fromJson(Map<String, dynamic> json) {
     orderDetails = json['order_details'] != null
         ? OrderDetails.fromJson(json['order_details'])
         : null;
     couponDetails = json['coupon_details'] != null
         ? CouponDetails.fromJson(json['coupon_details'])
         : null;
+    shopDetails = json['shop_details'] != null
+        ? ShopDetails.fromJson(json['shop_details'])
+        : null;
     deliveryAddressDetails = json['delivery_address_details'] != null
         ? DeliveryAddressDetails.fromJson(json['delivery_address_details'])
         : null;
+
     if (json["order_product_details"] != null) {
       orderProductDetails = <OrderProductDetail>[];
       json["order_product_details"].forEach((v) {
@@ -73,6 +81,7 @@ class CouponDetails {
     required this.couponCode,
     required this.couponDiscount,
   });
+
   CouponDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     couponCode = json["coupon_code"];
@@ -114,11 +123,13 @@ class OrderDetails {
   String? deliverySlot;
   String? totalAmount;
   String? totalDiscount;
+  String? deliveryCode;
   String? deliveryCharges;
   String? paymentMode;
   String? transactionId;
   String? orderStatus;
-  String? subTotal;
+  String? canCancelOrder;
+  String? subTotalAmount;
 
   OrderDetails({
     required this.id,
@@ -128,11 +139,13 @@ class OrderDetails {
     required this.deliverySlot,
     required this.totalAmount,
     required this.totalDiscount,
+    required this.deliveryCode,
     required this.deliveryCharges,
     required this.paymentMode,
     required this.transactionId,
     required this.orderStatus,
-    required this.subTotal,
+    required this.canCancelOrder,
+    required this.subTotalAmount,
   });
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -142,11 +155,13 @@ class OrderDetails {
     deliverySlot = json["delivery_slot"];
     totalAmount = json["total_amount"];
     totalDiscount = json["total_discount"];
+    deliveryCode = json["delivery_code"];
     deliveryCharges = json["delivery_charges"];
     paymentMode = json["payment_mode"];
     transactionId = json["transaction_id"];
     orderStatus = json["order_status"];
-    subTotal = json["sub_total_amount"];
+    canCancelOrder = json["can_cancel_order"];
+    subTotalAmount = json["sub_total_amount"];
   }
 }
 
@@ -159,7 +174,6 @@ class OrderProductDetail {
   String? productImageName;
   String? productWeight;
   String? unit;
-
   String? productQuantity;
   String? productMrpPrice;
   String? productOfferPrice;
@@ -194,3 +208,25 @@ class OrderProductDetail {
     productTotalPrice = json["product_total_price"];
   }
 }
+
+// class ShopDetails {
+//   int id;
+//   String shopName;
+//   String shopAddress;
+//   String areaName;
+//   String cityName;
+//   int shopPincode;
+//   String shopOwnerSupportNumber;
+//   String isFavourite;
+
+//   ShopDetails({
+//     required this.id,
+//     required this.shopName,
+//     required this.shopAddress,
+//     required this.areaName,
+//     required this.cityName,
+//     required this.shopPincode,
+//     required this.shopOwnerSupportNumber,
+//     required this.isFavourite,
+//   });
+// }

@@ -74,7 +74,7 @@ class OrderList {
     required this.totalItems,
   });
   OrderList.fromJson(Map<String, dynamic> json) {
-    id = json["cart_id"];
+    id = json["id"];
     orderUniqueId = json["order_unique_id"];
     orderStatus = json["order_status"];
     createdAt = json["created_at"];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -6,58 +7,44 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/controller/customer_order_view_controller.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/view/order_product_list_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/order_products.dart';
+import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
-class OrderPendingView extends StatelessWidget {
-  const OrderPendingView({super.key});
+class OrderDeliveryView extends StatefulWidget {
+  final String? orderId;
+  const OrderDeliveryView({
+    super.key,
+    this.orderId,
+  });
+
+  @override
+  State<OrderDeliveryView> createState() => _OrderDeliveryViewState();
+}
+
+class _OrderDeliveryViewState extends State<OrderDeliveryView> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<CustomerOrderViewController>().initState(
+            context,
+            widget.orderId.toString(),
+          );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<CustomerOrderViewController>();
+    final read = context.read<CustomerOrderViewController>();
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            systemNavigationBarIconBrightness: Brightness.dark,
-            // Status bar color
-            statusBarColor: kstatusbar,
-            // Status bar brightness (optional)
-            statusBarIconBrightness:
-                Brightness.dark, // For Android (dark icons)
-            statusBarBrightness: Brightness.dark, // For iOS (dark icons)
-          ),
-          toolbarHeight: 65,
-          // backgroundColor: kappbar,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: Text(
-            "Order",
-            style: GoogleFonts.dmSans(
-              textStyle: const TextStyle(
-                  color: Black,
-                  letterSpacing: .5,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-          centerTitle: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(40),
-            ),
-          ),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
-              gradient: LinearGradient(
-                  end: Alignment.topCenter,
-                  begin: Alignment.bottomCenter,
-                  colors: <Color>[
-                    kstatusbar.withOpacity(0.55),
-                    kstatusbar.withOpacity(0.98),
-                  ]),
-            ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(60.w),
+          child: PrimaryAppBar(
+            onBackBtnPressed: () {},
+            title: "Order",
           ),
         ),
         body: SingleChildScrollView(
@@ -68,11 +55,10 @@ class OrderPendingView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // SizedBox(
-                //   height: 54.w,
-                // ),
-                Text("",
-                    // "${watch.shopDetails?.shopName}",
+                SizedBox(
+                  height: 20.w,
+                ),
+                Text("${watch.shopDetails?.shopName}",
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                           fontSize: 18.sp,
@@ -101,8 +87,8 @@ class OrderPendingView extends StatelessWidget {
                             ),
                             Flexible(
                               child: Text(
-                                "",
-                                // "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                                // "",
+                                "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
                                 // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
@@ -120,11 +106,10 @@ class OrderPendingView extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () {
-                              // read.launchPhone(
-                              //     watch.shopDetails
-                              //             ?.shopOwnerSupportNumber ??
-                              //         "",
-                              //     context);
+                              read.launchPhone(
+                                  watch.shopDetails?.shopOwnerSupportNumber ??
+                                      "",
+                                  context);
                             },
                             child: Container(
                                 padding: EdgeInsets.only(
@@ -147,13 +132,11 @@ class OrderPendingView extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              // watch.favAllShop
-                              //     ? read.removeAllShopFavList(
-                              //         context,
-                              //         watch.shopDetails?.id)
-                              //     : read.updateAllShopFavList(
-                              //         context,
-                              //         watch.shopDetails?.id);
+                              watch.favAllShop
+                                  ? read.removeAllShopFavList(
+                                      context, watch.shopDetails?.id)
+                                  : read.updateAllShopFavList(
+                                      context, watch.shopDetails?.id);
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -194,7 +177,7 @@ class OrderPendingView extends StatelessWidget {
           ),
           Divider(thickness: 1, color: grey2),
           SizedBox(
-            height: 20.h,
+            height: 10.h,
           ),
           Container(
             padding: EdgeInsets.only(left: 19.w, right: 17.w),
@@ -202,7 +185,7 @@ class OrderPendingView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Order ID: LSM012334",
+                  "Order ID: ${watch.orderDetails?.orderUniqueId}",
                   style: GoogleFonts.dmSans(
                     textStyle: TextStyle(
                         color: Black,
@@ -211,42 +194,8 @@ class OrderPendingView extends StatelessWidget {
                         fontWeight: FontWeight.w700),
                   ),
                 ),
-                // SizedBox(
-                //   height: 22.h,
-                //   width: 80.w,
-                //   child: ElevatedButton(
-                //     style: ButtonStyle(
-                //       elevation: MaterialStateProperty.all(0),
-                //       // backgroundColor: ,
-                //       backgroundColor: MaterialStateProperty.all(Colors.white),
-                //       shape: MaterialStateProperty.all(
-                //         RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.circular(10),
-                //           side: BorderSide(
-                //             color: Yellow,
-                //             // width: 1,
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //     onPressed: () {},
-                //     child: Text(
-                //       "Pending",
-                //       style: GoogleFonts.dmSans(
-                //         textStyle: TextStyle(
-                //             color: Yellow,
-                //             // letterSpacing: .5,
-                //             fontSize: 12.sp,
-                //             fontWeight: FontWeight.w700),
-                //       ),
-                //     ),
-
-                //     //
-                //   ),
-                // ),
                 SizedBox(
-                  height: 22.h,
-                  width: 85.w,
+                  width: 100.w,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(0),
@@ -256,21 +205,66 @@ class OrderPendingView extends StatelessWidget {
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                           side: BorderSide(
-                            color: Red,
+                            color: watch.orderDetails?.orderStatus == "Pending"
+                                ? Yellow
+                                : watch.orderDetails?.orderStatus == "Delivered"
+                                    ? Color(0xff39C19D)
+                                    : watch.orderDetails?.orderStatus ==
+                                            "Confirmed"
+                                        ? Color(0xff115B7A)
+                                        : watch.orderDetails?.orderStatus ==
+                                                "Cancelled"
+                                            ? Colors.red
+                                            : watch.orderDetails?.orderStatus ==
+                                                    "Dispatched"
+                                                ? Colors.orange
+                                                : watch.orderDetails
+                                                            ?.orderStatus ==
+                                                        "Packing"
+                                                    ? Colors.brown
+                                                    : Colors.transparent,
                             // width: 1,
                           ),
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => OrderPendingView(
+                      //           orderId: element?.id.toString())),
+                      // );
+                    },
                     child: Text(
-                      "Cancelled",
+                      watch.orderDetails?.orderStatus ?? "",
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
-                            color: Red,
-                            // letterSpacing: .5,
+                            color: watch.orderDetails?.orderStatus == "Pending"
+                                ? Yellow
+                                ///////
+                                : watch.orderDetails?.orderStatus == "Delivered"
+                                    ? Color(0xff39C19D)
+                                    ///////
+                                    : watch.orderDetails?.orderStatus ==
+                                            "Confirmed"
+                                        ? Color(0xff115B7A)
+                                        /////////
+                                        : watch.orderDetails?.orderStatus ==
+                                                "Cancelled"
+                                            ? Colors.red
+                                            //////////////
+                                            : watch.orderDetails?.orderStatus ==
+                                                    "Dispatched"
+                                                ? Colors.orange
+                                                : watch.orderDetails
+                                                            ?.orderStatus ==
+                                                        "Packing"
+                                                    ? Colors.brown
+                                                    : Colors.transparent,
+                            // letterSpacing: .5
                             fontSize: 12.sp,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
 
@@ -280,15 +274,13 @@ class OrderPendingView extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 11.h,
-          ),
+
           Container(
             padding: EdgeInsets.only(
               left: 19.w,
             ),
             child: Text(
-              "28 March 2023    11:34 am",
+              "${watch.orderDetails?.createdAt}",
               style: GoogleFonts.dmSans(
                 textStyle: TextStyle(
                     color: Black,
@@ -298,9 +290,49 @@ class OrderPendingView extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 20.h,
-          ),
+          /////////////////////////////////////////////
+          watch.orderDetails?.orderStatus == "Dispatched" ||
+                  watch.orderDetails?.orderStatus == "Delivered"
+              ? Container(
+                  margin: EdgeInsets.only(
+                      left: 20.w, right: 19.w, top: 17.w, bottom: 19.w),
+                  padding: EdgeInsets.only(
+                      left: 13.w, right: 16.w, top: 14.w, bottom: 15.w),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(0xff39C19D),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Delivery Code",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              // letterSpacing: .5,
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Text(
+                        "${watch.orderDetails?.deliveryCode}",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Color(0xff39C19D),
+                              // letterSpacing: .5,
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(
+                  height: 20.h,
+                ),
+
           Container(
             padding: EdgeInsets.only(
               left: 20.w,
@@ -347,8 +379,8 @@ class OrderPendingView extends StatelessWidget {
                               width: 10.w,
                             ),
                             Text(
-                              "",
-                              // "${element.customerName}",
+                              // "",
+                              "${watch.deliveryAddressDetails?.customerName}",
                               // 'Rachel Green',
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
@@ -384,7 +416,7 @@ class OrderPendingView extends StatelessWidget {
                             ),
                             onPressed: () {},
                             child: Text(
-                              "",
+                              "${watch.deliveryAddressDetails?.deliveryAddressType}",
                               // "${element.deliveryAddressType}",
                               // "Home",
                               style: GoogleFonts.dmSans(
@@ -412,7 +444,7 @@ class OrderPendingView extends StatelessWidget {
                           width: 10.w,
                         ),
                         Text(
-                          "",
+                          "${watch.deliveryAddressDetails?.mobileNo}",
                           // '${element.mobileNo}',
                           style: GoogleFonts.dmSans(
                             textStyle: TextStyle(
@@ -441,7 +473,7 @@ class OrderPendingView extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            "",
+                            "${watch.deliveryAddressDetails?.address1}",
                             maxLines: 3,
                             // "${element.address1} \n${element.address2} ",
                             // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
@@ -459,28 +491,6 @@ class OrderPendingView extends StatelessWidget {
                         )
                       ],
                     ),
-                    // SizedBox(
-                    //   height: 10.w,
-                    // ),
-                    // element.deliveryAddressIsDefault == "yes"
-                    //     ?  Row(
-                    //         children: [
-                    //           SizedBox(
-                    //             width: 10.w,
-                    //           ),
-                    //           Text(
-                    //             'Default',
-                    //             style: GoogleFonts.dmSans(
-                    //               textStyle: TextStyle(
-                    //                   color: Black,
-                    //                   // letterSpacing: .5,
-                    //                   fontSize: 16.sp,
-                    //                   fontWeight: FontWeight.w400),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       )
-                    //     : Container()
                   ],
                 ),
               ),
@@ -489,8 +499,81 @@ class OrderPendingView extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
+          watch.orderDetails?.orderStatus == "Dispatched" ||
+                  watch.orderDetails?.orderStatus == "Delivered"
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 19.w,
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                          decoration: BoxDecoration(
+                              color: SplashText,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Text(
+                            "Reorder",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  // letterSpacing: .5,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                        // height: 50.h,/
+                        decoration: BoxDecoration(
+                            color: Color(0xff115B7A),
+                            // border: Border.all(width: 1, color: Black),
+                            borderRadius: BorderRadius.circular(10)),
+
+                        child: Text(
+                          "Invoice",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                  ],
+                )
+              : Container(
+                  height: 20.h,
+                ),
+          watch.orderDetails?.orderStatus == "Dispatched" ||
+                  watch.orderDetails?.orderStatus == "Delivered"
+              ? SizedBox(
+                  height: 20.h,
+                )
+              : Container(),
           Container(
-            padding: EdgeInsets.only(left: 19.w),
+            padding: EdgeInsets.only(
+              left: 19.w,
+            ),
             child: Text(
               // maxLines: 3,
               "Expected Delivery Date & Slot",
@@ -513,7 +596,7 @@ class OrderPendingView extends StatelessWidget {
             padding: EdgeInsets.only(left: 19.w),
             child: Text(
               // maxLines: 3,
-              "29 March 2023",
+              "${watch.orderDetails?.deliveryDate}",
               // textAlign: TextAlign.start,
               style: GoogleFonts.dmSans(
                 textStyle: TextStyle(
@@ -533,7 +616,18 @@ class OrderPendingView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "9:00 am - 12:00 pm",
+                  watch.orderDetails?.deliverySlot == "shop_owner_slot_9_to_12"
+                      ? "9:00 AM - 12:00 PM"
+                      : watch.orderDetails?.deliverySlot ==
+                              "shop_owner_slot_12_to_3"
+                          ? "12:00 PM - 3:00 PM"
+                          : watch.orderDetails?.deliverySlot ==
+                                  "shop_owner_slot_3_to_6"
+                              ? "3:00 PM - 6:00 PM"
+                              : watch.orderDetails?.deliverySlot ==
+                                      "shop_owner_slot_6_to_9"
+                                  ? "6:00 PM - 9:00 PM"
+                                  : "",
                   style: GoogleFonts.dmSans(
                     textStyle: TextStyle(
                         color: Black,
@@ -602,7 +696,7 @@ class OrderPendingView extends StatelessWidget {
                   indent: 0,
                   endIndent: 0,
                 ),
-                OrderProducts(),
+                OrderProductsListView(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -617,7 +711,7 @@ class OrderPendingView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Rs",
+                      "Rs ${watch.orderDetails?.subTotalAmount}",
                       //  ${watch.orderFinalTotals?.subTotal}",
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
@@ -654,29 +748,44 @@ class OrderPendingView extends StatelessWidget {
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
-                        TextSpan(
-                          text: '  (PROMO0001AFF) ',
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: SplashText,
-                                // letterSpacing: .5,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
+                        watch.couponDetails?.couponCode != "" &&
+                                watch.couponDetails?.couponCode != null
+                            ? TextSpan(
+                                text: '  (${watch.couponDetails?.couponCode}) ',
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: SplashText,
+                                      // letterSpacing: .5,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              )
+                            : TextSpan(
+                                text: "",
+                              ),
                       ]),
                     ),
-                    Text(
-                      "Rs ",
-                      //  ${watch.orderFinalTotals?.couponDiscount}",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: grey5,
-                            // letterSpacing: .5,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
+                    watch.orderDetails?.totalDiscount != ""
+                        ? Text(
+                            "Rs ${watch.orderDetails?.totalDiscount}",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: grey5,
+                                  // letterSpacing: .5,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          )
+                        : Text(
+                            "Rs 0",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: grey5,
+                                  // letterSpacing: .5,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
                   ],
                 ),
                 SizedBox(
@@ -696,8 +805,9 @@ class OrderPendingView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Rs.",
-                      //  ${watch.orderFinalTotals?.deliveryCharges}",
+                      watch.orderDetails?.deliveryCharges == ""
+                          ? "Rs. 0"
+                          : "Rs.  ${watch.orderDetails?.deliveryCharges}",
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
                             color: grey5,
@@ -732,7 +842,7 @@ class OrderPendingView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Rs. ",
+                      "Rs. ${watch.orderDetails?.totalAmount} ",
                       // ${watch.orderFinalTotals?.total}",
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
@@ -759,8 +869,8 @@ class OrderPendingView extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    "You will save Rs.",
-                    //  ${watch.orderFinalTotals?.productTotalDiscount}",
+                    "You will save Rs. ${watch.orderDetails?.totalDiscount}",
+                    //  ",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: SplashText,
@@ -800,7 +910,7 @@ class OrderPendingView extends StatelessWidget {
               left: 19.w,
             ),
             child: Text(
-              "QR Code",
+              "${watch.orderDetails?.paymentMode}",
               style: GoogleFonts.dmSans(
                 textStyle: TextStyle(
                     color: SplashText,
@@ -814,21 +924,28 @@ class OrderPendingView extends StatelessWidget {
             height: 5.h,
           ),
 
-          Container(
-            padding: EdgeInsets.only(
-              left: 19.w,
-            ),
-            child: Text(
-              "Transaction ID : 436287101123",
-              style: GoogleFonts.dmSans(
-                textStyle: TextStyle(
-                    color: Black,
-                    // letterSpacing: .5,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-          ),
+          watch.orderDetails?.transactionId != ""
+              ? SizedBox(
+                  height: 15.h,
+                )
+              : Container(),
+          watch.orderDetails?.transactionId != ""
+              ? Container(
+                  padding: EdgeInsets.only(
+                    left: 19.w,
+                  ),
+                  child: Text(
+                    "Transaction ID : ${watch.orderDetails?.transactionId}",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black,
+                          // letterSpacing: .5,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                )
+              : Container(),
           SizedBox(
             height: 26.h,
           ),
@@ -939,251 +1056,251 @@ class OrderPendingView extends StatelessWidget {
           //     ],
           //   ),
           // )
-          Container(
-            padding: EdgeInsets.only(
-                left: 19.w, right: 19.w, top: 25.w, bottom: 15.w),
-            // height: 250.h,
-            // width: 390.w,
-            width: ScreenUtil().screenWidth,
-            color: lightblue,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  "Refund Amount",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: Black,
-                        // letterSpacing: .5,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
-                // SizedBox(width: 10.w),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "INR 3000",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            // letterSpacing: .5,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 22.h,
-                      // width: 126.w,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          // backgroundColor: ,
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(
-                                color: SplashText1,
-                                // width: 1,
-                              ),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "Payment Pending",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: SplashText1,
-                                // letterSpacing: .5,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+          // Container(
+          //   padding: EdgeInsets.only(
+          //       left: 19.w, right: 19.w, top: 25.w, bottom: 15.w),
+          //   // height: 250.h,
+          //   // width: 390.w,
+          //   width: ScreenUtil().screenWidth,
+          //   color: lightblue,
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     // mainAxisAlignment: MainAxisAlignment.end,
+          //     children: [
+          //       Text(
+          //         "Refund Amount",
+          //         style: GoogleFonts.dmSans(
+          //           textStyle: TextStyle(
+          //               color: Black,
+          //               // letterSpacing: .5,
+          //               fontSize: 18.sp,
+          //               fontWeight: FontWeight.w700),
+          //         ),
+          //       ),
+          //       // SizedBox(width: 10.w),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         crossAxisAlignment: CrossAxisAlignment.end,
+          //         children: [
+          //           Text(
+          //             "INR 3000",
+          //             style: GoogleFonts.dmSans(
+          //               textStyle: TextStyle(
+          //                   color: Black,
+          //                   // letterSpacing: .5,
+          //                   fontSize: 18.sp,
+          //                   fontWeight: FontWeight.w700),
+          //             ),
+          //           ),
+          //           SizedBox(
+          //             height: 22.h,
+          //             // width: 126.w,
+          //             child: ElevatedButton(
+          //               style: ButtonStyle(
+          //                 elevation: MaterialStateProperty.all(0),
+          //                 // backgroundColor: ,
+          //                 backgroundColor:
+          //                     MaterialStateProperty.all(Colors.white),
+          //                 shape: MaterialStateProperty.all(
+          //                   RoundedRectangleBorder(
+          //                     borderRadius: BorderRadius.circular(10),
+          //                     side: BorderSide(
+          //                       color: SplashText1,
+          //                       // width: 1,
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ),
+          //               onPressed: () {},
+          //               child: Text(
+          //                 "Payment Pending",
+          //                 style: GoogleFonts.dmSans(
+          //                   textStyle: TextStyle(
+          //                       color: SplashText1,
+          //                       // letterSpacing: .5,
+          //                       fontSize: 12.sp,
+          //                       fontWeight: FontWeight.w500),
+          //                 ),
+          //               ),
 
-                        //
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      // height: 35.h,
-                      width: 155.w,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          // backgroundColor: ,
-                          backgroundColor:
-                              MaterialStateProperty.all(SplashText),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              // side: BorderSide(
-                              //   color: SplashText,
-                              //   // width: 1,
-                              // ),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "Yes Received",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                // letterSpacing: .5,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+          //               //
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       SizedBox(
+          //         height: 20.h,
+          //       ),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           SizedBox(
+          //             // height: 35.h,
+          //             width: 155.w,
+          //             child: ElevatedButton(
+          //               style: ButtonStyle(
+          //                 elevation: MaterialStateProperty.all(0),
+          //                 // backgroundColor: ,
+          //                 backgroundColor:
+          //                     MaterialStateProperty.all(SplashText),
+          //                 shape: MaterialStateProperty.all(
+          //                   RoundedRectangleBorder(
+          //                     borderRadius: BorderRadius.circular(10),
+          //                     // side: BorderSide(
+          //                     //   color: SplashText,
+          //                     //   // width: 1,
+          //                     // ),
+          //                   ),
+          //                 ),
+          //               ),
+          //               onPressed: () {},
+          //               child: Text(
+          //                 "Yes Received",
+          //                 style: GoogleFonts.dmSans(
+          //                   textStyle: TextStyle(
+          //                       color: Colors.white,
+          //                       // letterSpacing: .5,
+          //                       fontSize: 16.sp,
+          //                       fontWeight: FontWeight.w500),
+          //                 ),
+          //               ),
 
-                        //
-                      ),
-                    ),
-                    // SizedBox(
-                    //   width: 25.w,
-                    // ),
-                    SizedBox(
-                      // height: 35.h,
-                      width: 155.w,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          // backgroundColor: ,
-                          backgroundColor: MaterialStateProperty.all(Red),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              // side: BorderSide(
-                              //   color: SplashText,
-                              //   // width: 1,
-                              // ),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "Not Received",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                // letterSpacing: .5,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+          //               //
+          //             ),
+          //           ),
+          //           // SizedBox(
+          //           //   width: 25.w,
+          //           // ),
+          //           SizedBox(
+          //             // height: 35.h,
+          //             width: 155.w,
+          //             child: ElevatedButton(
+          //               style: ButtonStyle(
+          //                 elevation: MaterialStateProperty.all(0),
+          //                 // backgroundColor: ,
+          //                 backgroundColor: MaterialStateProperty.all(Red),
+          //                 shape: MaterialStateProperty.all(
+          //                   RoundedRectangleBorder(
+          //                     borderRadius: BorderRadius.circular(10),
+          //                     // side: BorderSide(
+          //                     //   color: SplashText,
+          //                     //   // width: 1,
+          //                     // ),
+          //                   ),
+          //                 ),
+          //               ),
+          //               onPressed: () {},
+          //               child: Text(
+          //                 "Not Received",
+          //                 style: GoogleFonts.dmSans(
+          //                   textStyle: TextStyle(
+          //                       color: Colors.white,
+          //                       // letterSpacing: .5,
+          //                       fontSize: 16.sp,
+          //                       fontWeight: FontWeight.w500),
+          //                 ),
+          //               ),
 
-                        //
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  "Note",
-                  style: GoogleFonts.dmSans(
-                    textStyle: const TextStyle(
-                        // color: SplashTex
-                        letterSpacing: .5,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 5.w),
-                  child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(bottom: 20.w),
-                          child: Icon(
-                            Icons.circle_rounded,
-                            size: 5.w,
-                          )),
-                      SizedBox(width: 10.w),
-                      Flexible(
-                        child: Text(
-                          // softWrap: true,
-                          // maxLines: 3,//
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sit nunc, netus ac vulputate sed",
-                          textAlign: TextAlign.justify,
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: black,
-                                // height: 1.5,
+          //               //
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       SizedBox(
+          //         height: 10.h,
+          //       ),
+          //       Text(
+          //         "Note",
+          //         style: GoogleFonts.dmSans(
+          //           textStyle: const TextStyle(
+          //               // color: SplashTex
+          //               letterSpacing: .5,
+          //               fontSize: 16,
+          //               fontWeight: FontWeight.w500),
+          //         ),
+          //       ),
+          //       Container(
+          //         padding: EdgeInsets.only(left: 5.w),
+          //         child: Row(
+          //           // crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Padding(
+          //                 padding: EdgeInsets.only(bottom: 20.w),
+          //                 child: Icon(
+          //                   Icons.circle_rounded,
+          //                   size: 5.w,
+          //                 )),
+          //             SizedBox(width: 10.w),
+          //             Flexible(
+          //               child: Text(
+          //                 // softWrap: true,
+          //                 // maxLines: 3,//
+          //                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sit nunc, netus ac vulputate sed",
+          //                 textAlign: TextAlign.justify,
+          //                 style: GoogleFonts.dmSans(
+          //                   textStyle: TextStyle(
+          //                       color: black,
+          //                       // height: 1.5,
 
-                                // letterSpacing: .05,
-                                // overflow: TextOverflow.ellipsis,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Row(
-                //   children: [
-                //     Icon(
-                //       Icons.circle_rounded,
-                //       size: 5.w,
-                //     ),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     Text(
-                //       "Lorem ipsum dolor sit amet, consectetur",
-                //       style: GoogleFonts.dmSans(
-                //         textStyle: TextStyle(
-                //             height: 1.5,
-                //             color: black,
-                //             letterSpacing: .5,
-                //             fontSize: 14.sp,
-                //             fontWeight: FontWeight.w400),
-                //       ),
-                //     )
-                //   ],
-                // ),
-                // Row(
-                //   children: [
-                //     Padding(
-                //         padding: EdgeInsets.only(bottom: 0.w),
-                //         child: Icon(
-                //           Icons.circle_rounded,
-                //           size: 5.w,
-                //         )),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     Text(
-                //       "Lorem ipsum dolor sit amet, consectetur",
-                //       style: GoogleFonts.dmSans(
-                //         textStyle: TextStyle(
-                //             height: 1.5,
-                //             color: black,
-                //             letterSpacing: .5,
-                //             fontSize: 14.sp,
-                //             fontWeight: FontWeight.w400),
-                //       ),
-                //     )
-                //   ],
-                // ),
-              ],
-            ),
-          )
+          //                       // letterSpacing: .05,
+          //                       // overflow: TextOverflow.ellipsis,
+          //                       fontSize: 14.sp,
+          //                       fontWeight: FontWeight.w400),
+          //                 ),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //       // Row(
+          //       //   children: [
+          //       //     Icon(
+          //       //       Icons.circle_rounded,
+          //       //       size: 5.w,
+          //       //     ),
+          //       //     SizedBox(
+          //       //       width: 10,
+          //       //     ),
+          //       //     Text(
+          //       //       "Lorem ipsum dolor sit amet, consectetur",
+          //       //       style: GoogleFonts.dmSans(
+          //       //         textStyle: TextStyle(
+          //       //             height: 1.5,
+          //       //             color: black,
+          //       //             letterSpacing: .5,
+          //       //             fontSize: 14.sp,
+          //       //             fontWeight: FontWeight.w400),
+          //       //       ),
+          //       //     )
+          //       //   ],
+          //       // ),
+          //       // Row(
+          //       //   children: [
+          //       //     Padding(
+          //       //         padding: EdgeInsets.only(bottom: 0.w),
+          //       //         child: Icon(
+          //       //           Icons.circle_rounded,
+          //       //           size: 5.w,
+          //       //         )),
+          //       //     SizedBox(
+          //       //       width: 10,
+          //       //     ),
+          //       //     Text(
+          //       //       "Lorem ipsum dolor sit amet, consectetur",
+          //       //       style: GoogleFonts.dmSans(
+          //       //         textStyle: TextStyle(
+          //       //             height: 1.5,
+          //       //             color: black,
+          //       //             letterSpacing: .5,
+          //       //             fontSize: 14.sp,
+          //       //             fontWeight: FontWeight.w400),
+          //       //       ),
+          //       //     )
+          //       //   ],
+          //       // ),
+          //     ],
+          //   ),
+          // )
         ])));
   }
 }

@@ -1295,7 +1295,9 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                           fontWeight: FontWeight.w400),
                                     ),
                                   ),
-                                  watch.couponDetails?.couponCode != ""&& watch.couponDetails?.couponCode!=null
+                                  watch.couponDetails?.couponCode != "" &&
+                                          watch.couponDetails?.couponCode !=
+                                              null
                                       ? TextSpan(
                                           text:
                                               '  (${watch.couponDetails?.couponCode}) ',
@@ -1308,29 +1310,31 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                           ),
                                         )
                                       : TextSpan(
-                                    text: "",
-                                  ),
+                                          text: "",
+                                        ),
                                 ]),
                               ),
-                              watch.orderDetails?.totalDiscount!="" ?Text(
-                                "Rs ${watch.orderDetails?.totalDiscount}",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: grey5,
-                                      // letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ):Text(
-                                "Rs 0",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: grey5,
-                                      // letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
+                              watch.orderDetails?.totalDiscount != ""
+                                  ? Text(
+                                      "Rs ${watch.orderDetails?.totalDiscount}",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: grey5,
+                                            // letterSpacing: .5,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    )
+                                  : Text(
+                                      "Rs 0",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: grey5,
+                                            // letterSpacing: .5,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
                             ],
                           ),
                           SizedBox(
@@ -1499,6 +1503,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                         ],
                       ),
                     ),
+
                     watch.orderDetails?.transactionId != ""
                         ? SizedBox(
                             height: 15.h,
