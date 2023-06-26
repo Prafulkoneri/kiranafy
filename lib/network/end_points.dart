@@ -285,7 +285,8 @@ class Endpoint {
 /////My Orders////
   static const String myOrders =
       "${baseUrl}lsm-customer-order-list-with-filter";
-  static const String setPincode="${baseUrl}lsm-customer-current-location-pincode";
+  static const String setPincode =
+      "${baseUrl}lsm-customer-current-location-pincode";
   ////My Orders////
   static const String shopGetOrderList =
       "${baseUrl}lsm-shop-owner-get-orders-list";
@@ -302,4 +303,9 @@ class Endpoint {
   ////CancelReason shop////
   static const String cancelOrderReason =
       "${baseUrl}lsm-shop-owner-get-order-cancel-reasons";
+  ////CancelReason shop////
+  static const String customerOrderView = "${baseUrl}lsm-customer-order-view";
+
+  ///Track Order Repo////
+  static const String trackOrderRepo = "${baseUrl}lsm-customer-track-order";
 }

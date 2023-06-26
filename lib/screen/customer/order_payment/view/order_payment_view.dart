@@ -108,18 +108,20 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                 child: CircularProgressIndicator(),
               )
             : StackLoader(
-          showLoader: watch.isStackLoading,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
+                showLoader: watch.isStackLoading,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 padding: EdgeInsets.only(
-                                    left: 20.w, top: 20.w,),
+                                  left: 20.w,
+                                  top: 20.w,
+                                ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -137,7 +139,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                       height: 7.h,
                                     ),
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         SvgPicture.asset(
                                           'assets/images/location2.svg',
@@ -166,9 +169,11 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                 height: 14.h,
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                                padding:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "${watch.totalItems} Items",
@@ -197,9 +202,11 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                 height: 8.h,
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                                padding:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Flexible(
@@ -231,7 +238,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                 height: 40.h,
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                                padding:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
                                 child: Text(
                                   "Mode of Payment",
                                   style: GoogleFonts.dmSans(
@@ -243,11 +251,13 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                   ),
                                 ),
                               ),
+
                               SizedBox(
                                 height: 22.h,
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                                padding:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
                                 child: Column(
                                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
@@ -310,12 +320,15 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                           borderColor: SplashText,
                                           color: Colors.white,
                                           onTap: () {
-                                            read.copyCodeForCoupanList(context,
-                                                watch.shopDetailData?.shopOwnerUpiId);
+                                            read.copyCodeForCoupanList(
+                                                context,
+                                                watch.shopDetailData
+                                                    ?.shopOwnerUpiId);
                                           },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             children: [
                                               Text(
                                                 "Copy",
@@ -325,7 +338,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                       color: SplashText,
                                                       // letterSpacing: .5,
                                                       fontSize: 11.sp,
-                                                      fontWeight: FontWeight.w700),
+                                                      fontWeight:
+                                                          FontWeight.w700),
                                                 ),
                                               ), // <-- Text
                                               SizedBox(
@@ -338,8 +352,6 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                               ),
                                             ],
                                           ),
-
-
                                         )
                                       ],
                                     ),
@@ -393,12 +405,14 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                 height: 19.h,
                               ),
                               Visibility(
-                                visible: watch.groupValue == "cash" ? false : true,
+                                visible:
+                                    watch.groupValue == "cash" ? false : true,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                                      padding: EdgeInsets.only(
+                                          left: 19.w, right: 19.w),
                                       child: Text(
                                         'Payment Transaction ID ',
                                         style: GoogleFonts.dmSans(
@@ -414,18 +428,21 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                       height: 10.h,
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                                      padding: EdgeInsets.only(
+                                          left: 19.w, right: 19.w),
                                       // height: 48.h,
                                       // width: 352.w,
                                       child: TextField(
-                                        controller: watch.transactionIdController,
+                                        controller:
+                                            watch.transactionIdController,
                                         decoration: InputDecoration(
                                           fillColor: Colors.white,
                                           // border: OutlineInputBorder(
                                           //   borderRadius: BorderRadius.circular(10.0),
                                           // ),
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                             borderSide: const BorderSide(
                                               width: 2,
                                               style: BorderStyle.none,
@@ -433,8 +450,10 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                           ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                                width: 1, color: grey6), //<-- SEE HERE
-                                            borderRadius: BorderRadius.circular(10.0),
+                                                width: 1,
+                                                color: grey6), //<-- SEE HERE
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
                                           ),
                                           filled: true,
                                         ),
@@ -444,7 +463,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                       height: 10.h,
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                                      padding: EdgeInsets.only(
+                                          left: 19.w, right: 19.w),
                                       child: Text(
                                         'Copy and paste your payment successful transaction details on above input box',
                                         style: GoogleFonts.dmSans(
@@ -469,35 +489,35 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                               // )
                             ]),
                       ),
-                  ),
-                  SizedBox(
-                    height: 51.h,
-                    width: ScreenUtil().screenWidth,
-                    child: PrimaryButton(
-                      borderRadius: 0,
-                      width: ScreenUtil().screenWidth,
-                      color: SplashText,
-
-                      onTap: () async {
-                        await read.placeOrder(context);
-                      },
-
-                      child: Text(
-                        "Submit Order",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-
-                      //
                     ),
-                  ),
-                ],
-              ),
-            ));
+                    SizedBox(
+                      height: 51.h,
+                      width: ScreenUtil().screenWidth,
+                      child: PrimaryButton(
+                        borderRadius: 0,
+                        width: ScreenUtil().screenWidth,
+                        color: SplashText,
+
+                        onTap: () async {
+                          await read.placeOrder(context);
+                        },
+
+                        child: Text(
+                          "Submit Order",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                // letterSpacing: .5,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+
+                        //
+                      ),
+                    ),
+                  ],
+                ),
+              ));
   }
 }

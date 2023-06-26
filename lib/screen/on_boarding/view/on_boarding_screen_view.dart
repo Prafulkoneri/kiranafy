@@ -84,26 +84,26 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                             SizedBox(
                               height: 45.w,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    read.onSkipPressed(context);
-                                  },
-                                  child: Text(
-                                    "SKIP",
-                                    style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w700,
-                                        color: SplashText1),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 25.w,
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.end,
+                            //   children: [
+                            //     GestureDetector(
+                            //       onTap: () {
+                            //         read.onSkipPressed(context);
+                            //       },
+                            //       child: Text(
+                            //         "SKIP",
+                            //         style: TextStyle(
+                            //             fontSize: 14.sp,
+                            //             fontWeight: FontWeight.w700,
+                            //             color: SplashText1),
+                            //       ),
+                            //     ),
+                            //     SizedBox(
+                            //       width: 25.w,
+                            //     ),
+                            //   ],
+                            // ),
                             SizedBox(
                               height: 7.w,
                             ),

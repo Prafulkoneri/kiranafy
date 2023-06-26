@@ -12,11 +12,37 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:order_tracker_zen/order_tracker_zen.dart';
 
-class OrderStatusView extends StatelessWidget {
+class OrderStatusView extends StatefulWidget {
   OrderStatusView({
     super.key,
   });
+
+  @override
+  State<OrderStatusView> createState() => _OrderStatusViewState();
+}
+
+class _OrderStatusViewState extends State<OrderStatusView> {
+  List<TextDto> orderList = [
+    TextDto("Your order has been placed", "Fri, 25th Mar '22 - 10:47pm"),
+    TextDto("Seller ha processed your order", "Sun, 27th Mar '22 - 10:19am"),
+    TextDto("Your item has been picked up by courier partner.",
+        "Tue, 29th Mar '22 - 5:00pm"),
+  ];
+
+  List<TextDto> shippedList = [
+    TextDto("Your order has been shipped", "Tue, 29th Mar '22 - 5:04pm"),
+    TextDto("Your item has been received in the nearest hub to you.", null),
+  ];
+
+  List<TextDto> outOfDeliveryList = [
+    TextDto("Your order is out for delivery", "Thu, 31th Mar '22 - 2:27pm"),
+  ];
+
+  List<TextDto> deliveredList = [
+    TextDto("Your order has been delivered", "Thu, 31th Mar '22 - 3:58pm"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -383,93 +409,19 @@ class OrderStatusView extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 // physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 5,
+                itemCount: 1,
                 itemBuilder: (context, index) {
-                  return Stack(
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 80.w, bottom: 32.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Order Placed",
-                                  style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        // letterSpacing: .5,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                                SizedBox(height: 6.h),
-                                Text(
-                                  "We have received your order.",
-                                  style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                                SizedBox(height: 6.h),
-                                Text(
-                                  "Sep 30 2021 20:15 AM.",
-                                  style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        // letterSpacing: .5,
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      index == 4
-                          ? Container()
-                          : Positioned(
-                              left: 42,
-                              top: 25,
-                              // bottom: 20,
-                              child: Container(
-                                height: 100,
-                                width: 1.0,
-                                color: Colors.grey.shade400,
-                              ),
-                            ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 25.0.w, bottom: 78.w
-                            // right: 30.w,
-                            ),
-                        child: Container(
-                            child: index == 0
-                                ? SvgPicture.asset(
-                                    'assets/images/check.svg',
-                                    width: 21.w,
-                                    height: 21.h,
-                                  )
-                                : Container(
-                                    height: 21.h,
-                                    width: 24.w,
-                                    // color: Grey,
-                                    decoration: new BoxDecoration(
-                                      color: grey9,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  )
-                            //
-                            ),
-                      ),
-                    ],
+                  return Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: OrderTracker(
+                      status: Status.delivered,
+                      activeColor: Colors.green,
+                      inActiveColor: Colors.grey[300],
+                      orderTitleAndDateList: orderList,
+                      shippedTitleAndDateList: shippedList,
+                      outOfDeliveryTitleAndDateList: outOfDeliveryList,
+                      deliveredTitleAndDateList: deliveredList,
+                    ),
                   );
                 }),
           ],
@@ -478,3 +430,69 @@ class OrderStatusView extends StatelessWidget {
     );
   }
 }
+
+
+
+   
+
+
+
+
+
+
+
+
+//  Column(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               // Add padding around the OrderTrackerZen widget for better presentation.
+//               Padding(
+//                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+//                 // OrderTrackerZen is the main widget of the package which displays the order tracking information.
+//                 child: OrderTrackerZen(
+//                   // Provide an array of TrackerData objects to display the order tracking information.
+//                   tracker_data: [
+//                     // TrackerData represents a single step in the order tracking process.
+//                     TrackerData(
+//                       title: "Order Placed",
+//                       date: "Sat, 8 Apr '22",
+//                       // Provide an array of TrackerDetails objects to display more details about this step.
+//                       tracker_details: [
+//                         // TrackerDetails contains detailed information about a specific event in the order tracking process.
+//                         TrackerDetails(
+//                           title: "Your order was placed on Zenzzen",
+//                           datetime: "Sat, 8 Apr '22 - 17:17",
+//                         ),
+//                         TrackerDetails(
+//                           title: "Zenzzen Arranged A Callback Request",
+//                           datetime: "Sat, 8 Apr '22 - 17:42",
+//                         ),
+//                       ],
+//                     ),
+//                     // yet another TrackerData object
+//                     TrackerData(
+//                       title: "Order Shipped",
+//                       date: "Sat, 8 Apr '22",
+//                       tracker_details: [
+//                         TrackerDetails(
+//                           title: "Your order was shipped with MailDeli",
+//                           datetime: "Sat, 8 Apr '22 - 17:50",
+//                         ),
+//                       ],
+//                     ),
+//                     // And yet another TrackerData object
+//                     TrackerData(
+//                       title: "Order Delivered",
+//                       date: "Sat,8 Apr '22",
+//                       tracker_details: [
+//                         TrackerDetails(
+//                           title: "You received your order, by MailDeli",
+//                           datetime: "Sat, 8 Apr '22 - 17:51",
+//                         ),
+//                       ],
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
