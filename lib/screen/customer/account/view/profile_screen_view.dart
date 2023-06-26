@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
+import 'package:local_supper_market/utils/maps/view/map_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -522,37 +523,48 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+              GestureDetector(
+                onTap: (){
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) =>
+                  //           MainScreenView(index: 4, screenName: MapScreenView())),
+                  //       (Route<dynamic> route) => false,
+                  // );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/customersupport.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 14.w,
-                    ),
-                    Text(
-                      'Customer Support',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/customersupport.svg',
+                        // width: 14.w,
+                        // height: 13.h,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 14.w,
+                      ),
+                      Text(
+                        'Customer Support',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Container(

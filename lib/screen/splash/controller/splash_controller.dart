@@ -51,8 +51,6 @@ class SplashController extends ChangeNotifier {
                   ))),
           (Route<dynamic> route) => false,
         );
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MainScreenView()));
       }
       if (pref.getString("status") == null) {
         Navigator.pushReplacement(context,

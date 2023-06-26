@@ -8,15 +8,23 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart';
+import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/widget/buttons.dart';
+import 'package:provider/provider.dart';
 
-class MapView extends StatefulWidget {
-  const MapView({ Key? key }) : super(key: key);
+class MapScreenView extends StatefulWidget {
+  final bool isLocationEnabled;
+  final bool  initialMapView;
+  final LatLng latLng;
+  const MapScreenView({ Key? key,required this.isLocationEnabled,required this.initialMapView,required this.latLng}) : super(key: key);
 
   @override
-  State<MapView> createState() => _MapViewState();
+  State<MapScreenView> createState() => _MapScreenViewState();
 }
 
-class _MapViewState extends State<MapView> {
+class _MapScreenViewState extends State<MapScreenView> {
 
   //get MapView controller to access MapView
   Completer<GoogleMapController> _googleMapViewController = Completer();
@@ -25,6 +33,7 @@ class _MapViewState extends State<MapView> {
   late LatLng _draggedLatlng;
   String _draggedAddress = "";
   TextEditingController searchController =TextEditingController();
+  bool isLocationEnabledByUser=false;
 
   @override
   void initState() {
@@ -33,41 +42,141 @@ class _MapViewState extends State<MapView> {
   }
 
   _init() {
+    final watch=Provider.of<MainScreenController>(context, listen: false);
     //set default latlng for camera position
-    _defaultLatLng = LatLng(11, 104);
+    _defaultLatLng = widget.latLng;
     _draggedLatlng = _defaultLatLng;
     _cameraPosition = CameraPosition(
         target: _defaultLatLng,
         zoom: 17.5 // number of MapView view
     );
+    isLocationEnabledByUser = widget.isLocationEnabled;
+    print(widget.isLocationEnabled);
+    print(widget.initialMapView);
+    print("00000000");
+    if(widget.isLocationEnabled&&widget.initialMapView){
+      _gotoUserCurrentPosition();
+    }
+
+
 
     //MapView will redirect to my current location when loaded
-    _gotoUserCurrentPosition();
+
+    print("zzzzzzz");
+    print(isLocationEnabledByUser);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          margin: EdgeInsets.only(bottom: 100.w),
-          child: _buildBody()),
-      //get a float button to click and go to current location
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _gotoUserCurrentPosition();
-        },
-        child: Icon(Icons.location_on),
-      ),
+    final watch=context.watch<MainScreenController>();
+    final read=context.read<MainScreenController>();
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+
+        Container(
+            height: 400.w,
+            child: _buildBody()),
+        !isLocationEnabledByUser?Container(
+          height: 0,
+        ):Positioned(
+            top: -10.w,
+            left: 0.w,
+            right: 0.w,
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                height: 40.w,
+                width: 40.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/images/Cross.svg',
+                    width: 15.w,
+                    height: 15.h,
+                  ),
+                ),
+              ),
+            )),
+      ],
     );
+
+
+    //   Scaffold(
+    //   body:
+    //   //get a float button to click and go to current location
+    //   floatingActionButton: FloatingActionButton(
+    //     onPressed: () {
+    //       _gotoUserCurrentPosition();
+    //     },
+    //     child: Icon(Icons.location_on),
+    //   ),
+    // );
   }
 
   Widget _buildBody() {
-    return Stack(
-        children : [
-          _getMapView(),
-          _getCustomPin(),
-          _showSearchBox()
-        ]
+    return
+      Stack(
+          clipBehavior: Clip.none,
+          children : [
+            _getMapView(),
+            _getCustomPin(),
+            _showSearchBox(),
+            !isLocationEnabledByUser? Positioned(bottom: 0.w,child: _locationEnabled(),left: 0.w,right: 0.w,):Container(),
+
+          ]
+      );
+
+  }
+  Widget _locationEnabled(){
+
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 15.w,
+              spreadRadius: 20.w,
+              color: Colors.white.withOpacity(0.9),
+              offset: Offset(0,0),
+
+            ),
+          ]
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 10.w,
+          ),
+          Text("Enable your location",style: TextStyle(color: Black1,fontSize: 16.sp,),),
+          SizedBox(
+            height: 15.w,
+          ),
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 32.w),
+
+            child: PrimaryButton(color:Color(0xff2388FF), onTap:(){
+              _defaultLatLng = LatLng(11, 104);
+              _draggedLatlng = _defaultLatLng;
+              _cameraPosition = CameraPosition(
+                  target: _defaultLatLng,
+                  zoom: 17.5 // number of MapView view
+              );
+              _gotoUserCurrentPosition();
+            },text: "Allow while using this app",fontWeight: FontWeight.w500,fontSize: 12.sp,height: 40.w),
+          ),
+          SizedBox(
+            height: 36.w,
+          ),
+        ],
+
+
+      ),
     );
   }
 
@@ -75,7 +184,7 @@ class _MapViewState extends State<MapView> {
     return SafeArea(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 60,
+        height: 60.w,
         decoration: BoxDecoration(
           color: Colors.blue,
         ),
@@ -92,6 +201,7 @@ class _MapViewState extends State<MapView> {
         height: 48.w,
         child: Container(
           child: GooglePlaceAutoCompleteTextField(
+
               textStyle: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 14.sp
@@ -105,9 +215,10 @@ class _MapViewState extends State<MapView> {
                   color: Color(0xffB7B7B7),
                   fontWeight: FontWeight.w400,
                 ),
-                prefix: Padding(
-                  padding:  EdgeInsets.only(right: 10.w),
-                  child: SvgPicture.asset("assets/icons/search_MapView.svg"),
+                prefixIcon: Container(
+                  height: 13.3.w,
+                  width: 13.3.w,
+                  child: Center(child: Container(child: SvgPicture.asset("assets/icons/search_map.svg",height: 13.3.w,width: 13.3.w,fit: BoxFit.contain,))),
                 ),
                 contentPadding: EdgeInsets.only(left: 10.w),
                 fillColor: Colors.white,
@@ -146,29 +257,38 @@ class _MapViewState extends State<MapView> {
   }
 
   Widget _getMapView() {
-    return GoogleMap(
-      initialCameraPosition: _cameraPosition!, //initialize camera position for MapView
-      mapType: MapType.normal,
-      onCameraIdle: () {
-        //this function will trigger when user stop dragging on MapView
-        //every time user drag and stop it will display address
-        _getAddress(_draggedLatlng);
-      },
-      onCameraMove: (cameraPosition) {
-        //this function will trigger when user keep dragging on MapView
-        //every time user drag this will get value of latlng
-        _draggedLatlng = cameraPosition.target;
-        print(_draggedLatlng);
-        // _getAddress(_draggedLatlng);
-      },
-      onMapCreated: (GoogleMapController controller) {
-        //this function will trigger when MapView is fully loaded
-        if (!_googleMapViewController.isCompleted) {
-          //set controller to google MapView when it is fully loaded
-          _googleMapViewController.complete(controller);
-        }
-      },
-    );
+    return
+      ClipRRect(
+        borderRadius:BorderRadius.only(topRight: Radius.circular(20.w),topLeft: Radius.circular(30.w)),
+        child: GoogleMap(
+
+          initialCameraPosition: _cameraPosition!, //initialize camera position for MapView
+          mapType: MapType.normal,
+          onCameraIdle: () {
+
+            //this function will trigger when user stop dragging on MapView
+            //every time user drag and stop it will display address
+            _getAddress(_draggedLatlng);
+          },
+          onCameraMove: (cameraPosition) {
+
+
+            //this function will trigger when user keep dragging on MapView
+            //every time user drag this will get value of latlng
+            _draggedLatlng = cameraPosition.target;
+            print(_draggedLatlng);
+            // _getAddress(_draggedLatlng);
+          },
+          onMapCreated: (GoogleMapController controller) {
+            //this function will trigger when MapView is fully loaded
+            if (!_googleMapViewController.isCompleted) {
+              //set controller to google MapView when it is fully loaded
+              _googleMapViewController.complete(controller);
+            }
+          },
+        ),
+      );
+
   }
 
   Widget _getCustomPin() {
@@ -183,10 +303,12 @@ class _MapViewState extends State<MapView> {
 
   //get address from dragged pin
   Future _getAddress(LatLng position) async {
+    final read=Provider.of<MainScreenController>(context, listen: false);
     //this will list down all address around the position
     List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark address = placemarks[0]; // get only first and closest address
     String addresStr = "${address.street}, ${address.locality}, ${address.postalCode}, ${address.country}";
+    await read.setPincode(context,isLocationEnabledByUser,address.postalCode,LatLng(position.latitude, position.longitude));
     setState(() {
       _draggedAddress = addresStr;
     });
@@ -197,6 +319,9 @@ class _MapViewState extends State<MapView> {
   Future _gotoUserCurrentPosition() async {
     Position currentPosition = await _determineUserCurrentPosition();
     _gotoSpecificPosition(LatLng(currentPosition.latitude, currentPosition.longitude));
+
+    isLocationEnabledByUser=true;
+
   }
 
   //go to specific position by latlng
@@ -209,6 +334,10 @@ class _MapViewState extends State<MapView> {
             zoom: 17.5
         )
     ));
+    setState(() {
+      isLocationEnabledByUser=true;
+    });
+    ;
     //every time that we dragged pin , it will list down the address here
     await _getAddress(position);
   }

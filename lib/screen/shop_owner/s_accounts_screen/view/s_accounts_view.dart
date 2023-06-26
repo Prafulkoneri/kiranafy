@@ -552,13 +552,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          SMainScreenView(index: 4, screenName: MapView())),
-                  (Route<dynamic> route) => false,
-                );
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) =>
+                //           SMainScreenView(index: 4, screenName: MapScreenView())),
+                //   (Route<dynamic> route) => false,
+                // );
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
