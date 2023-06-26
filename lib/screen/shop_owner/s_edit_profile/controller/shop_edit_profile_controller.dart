@@ -63,10 +63,15 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   bool showValuePincodeField = false;
   List<File> images = [];
   bool isLoading=true;
+  String shopBannerSequence="";
+  String bannerNotToBeDeletedIds="";
+  List bannerNotToBeDeletedIdsList=[];
+  List shopBannerSequenceList=["0","0","0","0"];
 
   Future<void> initState(
     context,
   ) async {
+    bannerNotToBeDeletedIdsList=["0","0","0","0"];
     print(fileImage1.path);
     await getShopEditProfileDetails(context);
   }
@@ -101,8 +106,6 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         selectedStateId = shopDetails?.selectedStateId.toString() ?? "";
         selectedCityId = shopDetails?.selectedCityId.toString() ?? "";
         selectedAreaId = shopDetails?.selectedAreaId.toString() ?? "";
-        print(selectedAreaId);
-
         countryDataList = result.countries;
         cityDataList = result.cities;
         stateDataList = result.states;
@@ -115,20 +118,30 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           showValuePincodeField = false;
         }
         bannerImageList = result.shopBannerImages;
+        bannerNotToBeDeletedIds="";
         if (bannerImageList!.isNotEmpty) {
+          bannerNotToBeDeletedIdsList.clear();
           print(bannerImageList!.asMap().containsKey(0));
           if (bannerImageList!.asMap().containsKey(0)) {
             networkImage1 = bannerImageList?[0].shopBannerImagePath ?? "";
+            bannerNotToBeDeletedIdsList.add(bannerImageList?[0].id.toString());
           }
           if (bannerImageList!.asMap().containsKey(1)) {
             networkImage2 = bannerImageList?[1].shopBannerImagePath ?? "";
+            bannerNotToBeDeletedIdsList.add(bannerImageList?[1].id.toString());
           }
           if (bannerImageList!.asMap().containsKey(2)) {
             networkImage3 = bannerImageList?[2].shopBannerImagePath ?? "";
+            bannerNotToBeDeletedIdsList.add(bannerImageList?[2].id.toString());
           }
           if (bannerImageList!.asMap().containsKey(3)) {
             networkImage4 = bannerImageList?[3].shopBannerImagePath ?? "";
+            bannerNotToBeDeletedIdsList.add(bannerImageList?[3].id.toString());
           }
+          print("dadasdsadsa");
+          print(bannerNotToBeDeletedIdsList);
+
+          print("dadasdsadsa");
         }
         showLoader(false);
         notifyListeners();
@@ -460,6 +473,27 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+
+    shopBannerSequence="";
+    for(int i=0;i<shopBannerSequenceList.length;i++){
+      if(shopBannerSequenceList[i]!="0"){
+        shopBannerSequence+=shopBannerSequenceList[i]+",";
+      }
+
+    }
+    shopBannerSequence=shopBannerSequence.substring(0,shopBannerSequence.length-1);
+    print("dfadfasdfaf");
+    print(shopBannerSequence);
+
+    bannerNotToBeDeletedIds="";
+    print(bannerNotToBeDeletedIdsList);
+    if(bannerNotToBeDeletedIdsList.isNotEmpty) {
+      for (int i = 0; i < bannerNotToBeDeletedIdsList.length; i++) {
+        bannerNotToBeDeletedIds += bannerNotToBeDeletedIdsList[i] + ",";
+      }
+      bannerNotToBeDeletedIds = bannerNotToBeDeletedIds.substring(
+          0, bannerNotToBeDeletedIds.length - 1);
+    }
     if (fileImage1.path == "" &&
         fileImage2.path == "" &&
         fileImage3.path == "" &&
@@ -481,8 +515,15 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       networkImage1 = "";
       fileImage1 = File(pickedFile.path);
       networkImage1 = "";
-      fileImage1 = File(pickedFile.path);
       images.add(fileImage1);
+      shopBannerSequenceList.removeAt(0);
+        shopBannerSequenceList.insert(0,"1");
+
+      print(shopBannerSequenceList);
+      if (bannerNotToBeDeletedIdsList.asMap().containsKey(0)) {
+        bannerNotToBeDeletedIdsList.removeAt(0);
+      }
+
     }
 
     notifyListeners();
@@ -499,6 +540,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       networkImage2 = "";
       fileImage2 = File(pickedFile.path);
       images.add(fileImage2);
+      shopBannerSequenceList.removeAt(1);
+        shopBannerSequenceList.insert(1,"2");
+      print(shopBannerSequenceList);
+      if (bannerNotToBeDeletedIdsList.asMap().containsKey(1)) {
+        bannerNotToBeDeletedIdsList.removeAt(1);
+      }
     }
 
     notifyListeners();
@@ -515,6 +562,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       networkImage3 = "";
       fileImage3 = File(pickedFile.path);
       images.add(fileImage3);
+      shopBannerSequenceList.removeAt(2);
+        shopBannerSequenceList.insert(2,"3");
+      print(shopBannerSequenceList);
+      if (bannerNotToBeDeletedIdsList.asMap().containsKey(2)) {
+        bannerNotToBeDeletedIdsList.removeAt(2);
+      }
     }
 
     notifyListeners();
@@ -531,13 +584,20 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       networkImage4 = "";
       fileImage4 = File(pickedFile.path);
       images.add(fileImage4);
-    }
+      shopBannerSequenceList.removeAt(3);
+        shopBannerSequenceList.insert(3, "4");
+  print(shopBannerSequenceList);
+        if (bannerNotToBeDeletedIdsList.asMap().containsKey(3)) {
+          bannerNotToBeDeletedIdsList.removeAt(3);
+        }
 
-    notifyListeners();
+
+      notifyListeners();
+    }
   }
 
   Future uploadImage(context) async {
-    print("hellooooo");
+
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
@@ -555,6 +615,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     request.fields['shop_address'] = shopAddressController.text;
     request.fields['shop_pincode'] = selectedPincode.toString();
     request.fields['shop_city_id'] = selectedCityId.toString();
+    request.fields['shop_banner_sequence'] = shopBannerSequence.toString();
+    request.fields['banner_not_to_be_deleted_ids'] = bannerNotToBeDeletedIds.toString();
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     for (int i = 0; i < images.length; i++) {
@@ -569,10 +631,13 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       newList.add(multipartFile);
     }
     request.files.addAll(newList);
+    print(request.fields);
     await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
       print(respStr);
+      print(response);
       if (response.statusCode == 200) {
+        bannerNotToBeDeletedIdsList=["0","0","0","0"];
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(

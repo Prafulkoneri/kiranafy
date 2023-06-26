@@ -133,6 +133,7 @@ class _MapScreenViewState extends State<MapScreenView> {
       );
 
   }
+
   Widget _locationEnabled(){
 
     return Container(
@@ -304,11 +305,10 @@ class _MapScreenViewState extends State<MapScreenView> {
   //get address from dragged pin
   Future _getAddress(LatLng position) async {
     final read=Provider.of<MainScreenController>(context, listen: false);
-    //this will list down all address around the position
     List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark address = placemarks[0]; // get only first and closest address
     String addresStr = "${address.street}, ${address.locality}, ${address.postalCode}, ${address.country}";
-    await read.setPincode(context,isLocationEnabledByUser,address.postalCode,LatLng(position.latitude, position.longitude));
+    await read.setPincode(context,isLocationEnabledByUser,position.latitude,position.longitude);
     setState(() {
       _draggedAddress = addresStr;
     });
@@ -319,14 +319,11 @@ class _MapScreenViewState extends State<MapScreenView> {
   Future _gotoUserCurrentPosition() async {
     Position currentPosition = await _determineUserCurrentPosition();
     _gotoSpecificPosition(LatLng(currentPosition.latitude, currentPosition.longitude));
-
     isLocationEnabledByUser=true;
-
   }
 
   //go to specific position by latlng
   Future _gotoSpecificPosition(LatLng position) async {
-
     GoogleMapController MapViewController = await _googleMapViewController.future;
     MapViewController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(

@@ -16,6 +16,8 @@ class ShopUpdateProfileReqModel {
 
   String? shopAddress;
   String? shopPincode;
+  String ? shopBannerSequence;
+  String ? bannerNotToBeDeletedIds;
 
   ShopUpdateProfileReqModel({
     this.selectedAreaId,
@@ -29,6 +31,8 @@ class ShopUpdateProfileReqModel {
     this.shopOwnerMobileNumber,
     this.shopOwnerName,
     this.shopPincode,
+    this.shopBannerSequence,
+    this.bannerNotToBeDeletedIds,
   });
 
   Map<String, dynamic> toJson() {
@@ -44,6 +48,8 @@ class ShopUpdateProfileReqModel {
     data["shop_area_id"] = selectedAreaId;
     data["shop_address"] = shopAddress;
     data["shop_pincode"] = shopPincode;
+    data["shop_banner_sequence"] = shopBannerSequence;
+    data["banner_not_to_be_deleted_ids"] = bannerNotToBeDeletedIds;
     return data;
   }
 }

@@ -64,7 +64,7 @@ TextEditingController reasonController=TextEditingController();
     orderCancelledReasonId = "";
     deliveryCode = "";
     reasonController.clear();
-    await shopOwnerOrderView(context, orId);
+    await shopOwnerOrderView(context, orId,true);
 
     getCancelOrderList(context);
     notifyListeners();
@@ -72,6 +72,7 @@ TextEditingController reasonController=TextEditingController();
 
   void showLoader(value) {
     isLoading = value;
+    print("loading........${isLoading}");
     notifyListeners();
   }
 
@@ -80,24 +81,29 @@ TextEditingController reasonController=TextEditingController();
     notifyListeners();
   }
 
-  Future<void> shopOwnerOrderView(context, orId) async {
-    showLoader(true);
+  Future<void> shopOwnerOrderView(context, orId,showLoading) async {
+    if(showLoading){
+      showLoader(true);
+    }
+
     orderId = orId.toString();
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopOrderViewRepo
         .shopOrderView(shopOrderViewReqModel, pref.getString("successToken"))
-        .then((response) {
+        .then((response)async {
       log(response.body);
       final result = ShopOrderViewResModel.fromJson(jsonDecode(response.body));
-
       if (response.statusCode == 200) {
         shopOrderViewData = result.shopOrderViewData;
         orderDetails = shopOrderViewData?.orderDetails;
         couponDetails = shopOrderViewData?.couponDetails;
         deliveryAddressDetails = shopOrderViewData?.deliveryAddressDetails;
         orderProductDetails = shopOrderViewData?.orderProductDetails;
-        showLoader(false);
+        await getCancelOrderList(context);
+        if(showLoading){
+          showLoader(false);
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -147,12 +153,15 @@ TextEditingController reasonController=TextEditingController();
     return;
   }
  }
+
+
+
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     orderStatusChangedRepo
         .orderStatus(
             orderStatusChangedRequestModel, pref.getString("successToken"))
-        .then((response) {
+        .then((response)async {
       print(response.body);
       final result =
           OrderStatusChangeResModel.fromJson(jsonDecode(response.body));
@@ -167,8 +176,14 @@ TextEditingController reasonController=TextEditingController();
           );
         }
         if (result.message!="Delivery code not matched. Please try again.") {
-          shopOwnerOrderView(context, orId);
+          await shopOwnerOrderView(context, orId,false);
           isDeliveryCodeError = false;
+           if(oStatus=="order_delivered"){
+             Navigator.pop(context);
+           }
+          if(oStatus=="order_cancelled"){
+            Navigator.pop(context);
+          }
         }
         else {
           deliveryCodeError = result.message ?? "";
@@ -200,7 +215,6 @@ TextEditingController reasonController=TextEditingController();
   }
 
   Future<void> getCancelOrderList(context) async {
-    showLoader(true);
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
     orderCancelReasonRepo.OrderCancelReason(pref.getString("successToken"))
@@ -211,7 +225,6 @@ TextEditingController reasonController=TextEditingController();
         cancelReasondata = result.cancelReasondata;
         int cancelOrderLength=cancelReasondata?.length??0;
           isSelectedReason=List<bool>.filled(cancelOrderLength,false);
-          showLoader(false);
          notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

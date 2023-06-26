@@ -34,7 +34,7 @@ class _SPendingOrdersViewState extends State<SPendingOrdersView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Cancel Order Is empty",
+                    "Pending Order Is empty",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: Black1,

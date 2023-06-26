@@ -29,7 +29,8 @@ class MainScreenController extends ChangeNotifier {
   Widget currentScreen = HomeScreenView(refreshPage: true,);
   bool isLocationServiceEnabled=false;
   bool isPincodeSnackBarVisible=false;
-  String currentLocationPincode="";
+  String lat="";
+  String lng="";
   String message="";
   bool isFirstLoad=true;
   LatLng defaultLatLng=LatLng(11, 104);
@@ -125,14 +126,16 @@ class MainScreenController extends ChangeNotifier {
   }
 
   SetPincodeReqModel get setPincodeReqModel=>SetPincodeReqModel(
-    currentLocationPincode: currentLocationPincode,
+    lng: lng,
+    lat: lat,
   );
 
-  Future<void> setPincode(context,locationEnabled,pincode,latLng)async{
+  Future<void> setPincode(context,locationEnabled,latitude,longitude)async{
     if(!locationEnabled){
       return;
     }
-    currentLocationPincode=pincode;
+    lat=latitude.toString();
+    lng=longitude.toString();
     showStackLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     setPincodeRepo
@@ -145,7 +148,7 @@ class MainScreenController extends ChangeNotifier {
       if (response.statusCode == 200) {
         isPincodeSnackBarVisible=true;
         message=result.message??"";
-        defaultLatLng=latLng;
+        defaultLatLng=LatLng(latitude,longitude);
         showStackLoader(false);
         notifyListeners();
       } else {

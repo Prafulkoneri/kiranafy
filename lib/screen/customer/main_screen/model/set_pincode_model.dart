@@ -1,12 +1,14 @@
 
 class SetPincodeReqModel {
-  String? currentLocationPincode;
+  String? lat;
+  String? lng;
 
-  SetPincodeReqModel({this.currentLocationPincode});
+  SetPincodeReqModel({this.lat,this.lng});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
-    data["customer_current_location_pincode"] = currentLocationPincode;
+    data["lat"] = lat;
+    data["lng"] = lng;
     return data;
   }
 }
