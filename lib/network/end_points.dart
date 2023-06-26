@@ -285,6 +285,7 @@ class Endpoint {
 /////My Orders////
   static const String myOrders =
       "${baseUrl}lsm-customer-order-list-with-filter";
+  static const String setPincode="${baseUrl}lsm-customer-current-location-pincode";
   ////My Orders////
   static const String shopGetOrderList =
       "${baseUrl}lsm-shop-owner-get-orders-list";

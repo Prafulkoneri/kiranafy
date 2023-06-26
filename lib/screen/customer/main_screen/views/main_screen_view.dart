@@ -10,6 +10,9 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+
 
 class MainScreenView extends StatefulWidget {
   final Widget? screenName;
@@ -38,11 +41,14 @@ class _MainScreenViewState extends State<MainScreenView> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainScreenController>();
     final watch = context.watch<MainScreenController>();
     final cartWatch = context.watch<CartListController>();
+
 
     return Scaffold(
       extendBody: true,

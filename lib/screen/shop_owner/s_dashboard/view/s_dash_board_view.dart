@@ -6,17 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
-
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import 'package:provider/provider.dart';
 
 class ShopDashBoardView extends StatefulWidget {

@@ -68,6 +68,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
+    final mainScreenRead = context.read<MainScreenController>();
     final NearByShopWatch = context.watch<AllNearShopsAsPerPincode>();
     return Scaffold(
         body: watch.isLoading
@@ -108,13 +109,18 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 SizedBox(
                                   width: 5.w,
                                 ),
-                                Text(
-                                  "Vishrantwadi, Pune",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                        color: SplashText1,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
+                                GestureDetector(
+                                  onTap: (){
+                                    mainScreenRead.showMap(context,false);
+                                  },
+                                  child: Text(
+                                    "Vishrantwadi, Pune",
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                          color: SplashText1,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
                                   ),
                                 ),
                               ],
