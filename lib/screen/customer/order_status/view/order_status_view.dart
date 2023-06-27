@@ -1,23 +1,26 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'package:order_tracker/order_tracker.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:order_tracker_zen/order_tracker_zen.dart';
+import 'package:provider/provider.dart';
 
 class OrderStatusView extends StatefulWidget {
-  OrderStatusView({
-    super.key,
-  });
+  final String? orderId;
+  OrderStatusView({super.key, this.orderId});
 
   @override
   State<OrderStatusView> createState() => _OrderStatusViewState();
@@ -43,11 +46,22 @@ class _OrderStatusViewState extends State<OrderStatusView> {
   List<TextDto> deliveredList = [
     TextDto("Your order has been delivered", "Thu, 31th Mar '22 - 3:58pm"),
   ];
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<TrackOrderStatusController>()
+          .initState(context, widget.orderId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     Random random = new Random();
+    final watch = context.watch<TrackOrderStatusController>();
+    final read = context.read<TrackOrderStatusController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
