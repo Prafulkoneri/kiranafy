@@ -5,7 +5,10 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_setting/controller/setting_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
 class ShopSettingView extends StatefulWidget {
   const ShopSettingView({super.key});
@@ -14,16 +17,19 @@ class ShopSettingView extends StatefulWidget {
   State<ShopSettingView> createState() => _ShopSettingViewState();
 }
 
-String? selectedValue;
+// String? selectedValue;
 // Group Value fo
 // r Radio Button.
-int id = 1;
-bool switchValue = true;
-bool switchValue1 = true;
+// int id = 1;
+// bool switchValue = true;
+// bool switchValue1 = true;
 
 class _ShopSettingViewState extends State<ShopSettingView> {
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<ShopSettingController>();
+    final read = context.read<ShopSettingController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -47,12 +53,12 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                 ),
                 CupertinoSwitch(
                   // This bool value toggles the switch.
-                  value: switchValue1,
+                  value: watch.switchValue1,
                   activeColor: DarkGreen,
                   onChanged: (bool? value) {
                     // This is called when the user toggles the switch.
                     setState(() {
-                      switchValue1 = value ?? false;
+                      value = value ?? false;
                     });
                   },
                 ),
@@ -82,12 +88,12 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                     ),
                     CupertinoSwitch(
                       // This bool value toggles the switch.
-                      value: switchValue,
+                      value: watch.switchValue,
                       activeColor: DarkGreen,
                       onChanged: (bool? value) {
                         // This is called when the user toggles the switch.
                         setState(() {
-                          switchValue = value ?? false;
+                          value = value ?? false;
                         });
                       },
                     ),
