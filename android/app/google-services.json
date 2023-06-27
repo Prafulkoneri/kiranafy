@@ -7,14 +7,51 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:110985117622:android:53640314378740e5868b17",
+        "mobilesdk_app_id": "1:110985117622:android:fe43298d2d647598868b17",
+        "android_client_info": {
+          "package_name": "com.lsm.local_supermart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110985117622-rujffgofifddckvppr5ld1omqppa54ke.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lsm.local_supermart",
+            "certificate_hash": "874244dabe5f9b38d99d020d1f983197a477f4c3"
+          }
+        },
+        {
+          "client_id": "110985117622-ggak9062387hosfmeqn556ac82n4acmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOgoRmQI28w8US0ok9Sw3qCeh5DaW8SGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110985117622-ggak9062387hosfmeqn556ac82n4acmd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110985117622:android:575f92192e5d1c2c868b17",
         "android_client_info": {
           "package_name": "com.lsm.local_supper_market"
         }
       },
       "oauth_client": [
         {
-          "client_id": "110985117622-cbng1hbvcecbm3i7aml16rqalrhn8uf7.apps.googleusercontent.com",
+          "client_id": "110985117622-ao3ggn3tlj4si9rgg9so90li0ks81rfv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.lsm.local_supper_market",

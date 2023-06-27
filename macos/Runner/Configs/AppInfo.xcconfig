@@ -8,7 +8,7 @@
 PRODUCT_NAME = local_supper_market
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.lsm.localSupperMarket
+PRODUCT_BUNDLE_IDENTIFIER = com.lsm.localSuperMart
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.lsm. All rights reserved.
