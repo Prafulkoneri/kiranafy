@@ -9,6 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/controller/customer_order_view_controller.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_product_list_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
+import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/order_products.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -654,7 +657,18 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainScreenView(
+                                index: 2,
+                                screenName: OrderStatusView(
+                                  orderId: watch.orderId,
+                                ))),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
                     child: Text(
                       "Track Order",
                       style: GoogleFonts.dmSans(

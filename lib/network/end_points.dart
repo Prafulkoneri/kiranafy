@@ -307,5 +307,7 @@ class Endpoint {
   static const String customerOrderView = "${baseUrl}lsm-customer-order-view";
 
   ///Track Order Repo////
-  static const String trackOrderRepo = "${baseUrl}lsm-customer-track-order";
+  static const String trackOrder = "${baseUrl}lsm-customer-track-order";
+  //CMS REPO////
+  static const String cmsFile = "${baseUrl}lsm-cms-data";
 }

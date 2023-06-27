@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'package:order_tracker/order_tracker.dart';
 import 'package:local_supper_market/const/color.dart';
@@ -27,25 +28,25 @@ class OrderStatusView extends StatefulWidget {
 }
 
 class _OrderStatusViewState extends State<OrderStatusView> {
-  List<TextDto> orderList = [
-    TextDto("Your order has been placed", "Fri, 25th Mar '22 - 10:47pm"),
-    TextDto("Seller ha processed your order", "Sun, 27th Mar '22 - 10:19am"),
-    TextDto("Your item has been picked up by courier partner.",
-        "Tue, 29th Mar '22 - 5:00pm"),
-  ];
+  // List<TextDto> orderList = [
+  //   TextDto("Your order has been placed", "Fri, 25th Mar '22 - 10:47pm"),
+  //   TextDto("Seller ha processed your order", "Sun, 27th Mar '22 - 10:19am"),
+  //   TextDto("Your item has been picked up by courier partner.",
+  //       "Tue, 29th Mar '22 - 5:00pm"),
+  // ];
 
-  List<TextDto> shippedList = [
-    TextDto("Your order has been shipped", "Tue, 29th Mar '22 - 5:04pm"),
-    TextDto("Your item has been received in the nearest hub to you.", null),
-  ];
+  // List<TextDto> shippedList = [
+  //   TextDto("Your order has been shipped", "Tue, 29th Mar '22 - 5:04pm"),
+  //   TextDto("Your item has been received in the nearest hub to you.", null),
+  // ];
 
-  List<TextDto> outOfDeliveryList = [
-    TextDto("Your order is out for delivery", "Thu, 31th Mar '22 - 2:27pm"),
-  ];
+  // List<TextDto> outOfDeliveryList = [
+  //   TextDto("Your order is out for delivery", "Thu, 31th Mar '22 - 2:27pm"),
+  // ];
 
-  List<TextDto> deliveredList = [
-    TextDto("Your order has been delivered", "Thu, 31th Mar '22 - 3:58pm"),
-  ];
+  // List<TextDto> deliveredList = [
+  //   TextDto("Your order has been delivered", "Thu, 31th Mar '22 - 3:58pm"),
+  // ];
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -69,7 +70,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
           onBackBtnPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const OrderPaymentView()),
+              MaterialPageRoute(builder: (context) => MyOrderView()),
             );
           },
           title: "Order Status",
@@ -85,8 +86,10 @@ class _OrderStatusViewState extends State<OrderStatusView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("",
-                      // "${watch.shopDetails?.shopName}",
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text("${watch.shopDetails?.shopName}",
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
                             fontSize: 18.sp,
@@ -115,8 +118,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                               ),
                               Flexible(
                                 child: Text(
-                                  "",
-                                  // "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                                  // "",
+                                  "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
                                   // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
@@ -175,39 +178,34 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                             ),
                             InkWell(
                               onTap: () {
-                                // watch.favAllShop
-                                //     ? read.removeAllShopFavList(
-                                //         context,
-                                //         watch.shopDetails?.id)
-                                //     : read.updateAllShopFavList(
-                                //         context,
-                                //         watch.shopDetails?.id);
+                                watch.favAllShop
+                                    ? read.removeAllShopFavList(
+                                        context, watch.shopDetails?.id)
+                                    : read.updateAllShopFavList(
+                                        context, watch.shopDetails?.id);
                               },
                               child: Container(
-                                  padding: EdgeInsets.only(
-                                      left: 13.w,
-                                      right: 13.w,
-                                      top: 14.w,
-                                      bottom: 14.w),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(0xff4689EC),
-                                  ),
-                                  child:
-                                      // watch.favAllShop
-                                      //     ?
-                                      SvgPicture.asset(
-                                    "assets/icons/fav_selected.svg",
-                                    width: 26.w,
-                                    height: 14.h,
-                                  )
-                                  // :
-                                  // SvgPicture.asset(
-                                  //     "assets/images/favorite.svg",
-                                  //     width: 26.w,
-                                  //     height: 14.h,
-                                  //   ),
-                                  ),
+                                padding: EdgeInsets.only(
+                                    left: 13.w,
+                                    right: 13.w,
+                                    top: 14.w,
+                                    bottom: 14.w),
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(0xff4689EC),
+                                ),
+                                child: watch.favAllShop
+                                    ? SvgPicture.asset(
+                                        "assets/icons/fav_selected.svg",
+                                        width: 26.w,
+                                        height: 14.h,
+                                      )
+                                    : SvgPicture.asset(
+                                        "assets/images/favorite.svg",
+                                        width: 26.w,
+                                        height: 14.h,
+                                      ),
+                              ),
                             )
                           ],
                         ),
@@ -267,8 +265,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                 width: 10.w,
                               ),
                               Text(
-                                "",
-                                // "${element.customerName}",
+                                // "",
+                                "${watch.deliveryAddressDetails?.customerName}",
                                 // 'Rachel Green',
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
@@ -304,7 +302,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                               ),
                               onPressed: () {},
                               child: Text(
-                                "",
+                                "${watch.deliveryAddressDetails?.deliveryAddressType}",
                                 // "${element.deliveryAddressType}",
                                 // "Home",
                                 style: GoogleFonts.dmSans(
@@ -332,7 +330,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                             width: 10.w,
                           ),
                           Text(
-                            "",
+                            "${watch.deliveryAddressDetails?.mobileNo}",
                             // '${element.mobileNo}',
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
@@ -361,7 +359,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           ),
                           Expanded(
                             child: Text(
-                              "",
+                              "${watch.deliveryAddressDetails?.address1}\n${watch.deliveryAddressDetails?.address2}",
                               maxLines: 3,
                               // "${element.address1} \n${element.address2} ",
                               // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
@@ -419,25 +417,100 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                 ),
               ),
             ),
-            ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                // physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: OrderTracker(
-                      status: Status.delivered,
-                      activeColor: Colors.green,
-                      inActiveColor: Colors.grey[300],
-                      orderTitleAndDateList: orderList,
-                      shippedTitleAndDateList: shippedList,
-                      outOfDeliveryTitleAndDateList: outOfDeliveryList,
-                      deliveredTitleAndDateList: deliveredList,
-                    ),
-                  );
-                }),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Add padding around the OrderTrackerZen widget for better presentation.
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  // OrderTrackerZen is the main widget of the package which displays the order tracking information.
+                  child: OrderTrackerZen(
+                    // Provide an array of TrackerData objects to display the order tracking information.
+                    tracker_data: [
+                      // TrackerData represents a single step in the order tracking process.
+                      TrackerData(
+                        title: "${watch.trackOrderDetails?.orderStatus}",
+                        date: "Sat, 8 Apr '22",
+                        // Provide an array of TrackerDetails objects to display more details about this step.
+                        tracker_details: [
+                          // TrackerDetails contains detailed information about a specific event in the order tracking process.
+                          TrackerDetails(
+                            title: "Your order was placed on Zenzzen",
+                            datetime: "Sat, 8 Apr '22 - 17:17",
+                          ),
+                          // TrackerDetails(
+                          //   title: "Zenzzen Arranged A Callback Request",
+                          //   datetime: "Sat, 8 Apr '22 - 17:42",
+                          // ),
+                        ],
+                      ),
+                      // yet another TrackerData object
+                      TrackerData(
+                        title: "Order Confirmation",
+                        date: "Sat, 8 Apr '22",
+                        tracker_details: [
+                          TrackerDetails(
+                            title: "Your order was shipped with MailDeli",
+                            datetime: "Sat, 8 Apr '22 - 17:50",
+                          ),
+                        ],
+                      ),
+                      TrackerData(
+                        title: "Order Packaging",
+                        date: "Sat,8 Apr '22",
+                        tracker_details: [
+                          TrackerDetails(
+                            title: "You received your order, by MailDeli",
+                            datetime: "Sat, 8 Apr '22 - 17:51",
+                          ),
+                        ],
+                      ),
+                      // And yet another TrackerData object
+                      TrackerData(
+                        title: "Order Packaging",
+                        date: "Sat,8 Apr '22",
+                        tracker_details: [
+                          TrackerDetails(
+                            title: "You received your order, by MailDeli",
+                            datetime: "Sat, 8 Apr '22 - 17:51",
+                          ),
+                        ],
+                      ), // yet another TrackerData object
+                      TrackerData(
+                        title: "Order Confirmation",
+                        date: "Sat, 8 Apr '22",
+                        tracker_details: [
+                          TrackerDetails(
+                            title: "Your order was shipped with MailDeli",
+                            datetime: "Sat, 8 Apr '22 - 17:50",
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 80.h)
+            // ListView.builder(
+            //     physics: NeverScrollableScrollPhysics(),
+            //     // physics: BouncingScrollPhysics(),
+            //     shrinkWrap: true,
+            //     itemCount: 1,
+            //     itemBuilder: (context, index) {
+            //       return Padding(
+            //         padding: const EdgeInsets.all(20),
+            //         child: OrderTracker(
+            //           status: Status.delivered,
+            //           activeColor: Colors.green,
+            //           inActiveColor: Colors.grey[300],
+            //           orderTitleAndDateList: orderList,
+            //           shippedTitleAndDateList: shippedList,
+            //           outOfDeliveryTitleAndDateList: outOfDeliveryList,
+            //           deliveredTitleAndDateList: deliveredList,
+            //         ),
+            //       );
+            //     }),
           ],
         ),
       ),
