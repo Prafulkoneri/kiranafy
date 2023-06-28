@@ -5,7 +5,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/controller/setting_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +28,18 @@ class _ShopSettingViewState extends State<ShopSettingView> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
-        child: PrimaryAppBar(title: "Settings"),
+        child: PrimaryAppBar(
+          title: "Settings",
+          onBackBtnPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 4, screenName: SAccountScreenView())),
+              (Route<dynamic> route) => false,
+            );
+          },
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.only(left: 19.w, top: 20.w, right: 19.w),
@@ -116,10 +129,15 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                         fontWeight: FontWeight.w400,
                         color: Black1),
                   ),
-                  SvgPicture.asset(
-                    "assets/icons/delete2.svg",
-                    height: 20.h,
-                    width: 18.w,
+                  GestureDetector(
+                    onTap: () {
+                      read.shopAccountDelete(context);
+                    },
+                    child: SvgPicture.asset(
+                      "assets/icons/delete2.svg",
+                      height: 20.h,
+                      width: 18.w,
+                    ),
                   )
                 ],
               ),

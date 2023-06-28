@@ -517,13 +517,12 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                       // mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         PrimaryCheckBox(
+                                          value: watch.isSelectedPaymentUpi,
                                           onChanged: (value) {
+                                            read.onFavToShopSelected(value);
                                             // read.onAddOnServicesSelected(
                                             //     index, element?.id);
                                           },
-                                          // value:"cash";
-                                          // watch.selectAddonServicesList[
-                                          //     index],
                                         ),
                                         Text(
                                           'UPI ID - ',
@@ -556,14 +555,16 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                       // mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         PrimaryCheckBox(
-                                          onChanged: (value) {
-                                            // read.onAddOnServicesSelected(
-                                            //     index, element?.id);
-                                          },
-                                          // value:"cash";
-                                          // watch.selectAddonServicesList[
-                                          //     index],
-                                        ),
+                                            onChanged: (value) {
+                                              read.onOrderedButNotFavSelected(
+                                                  context);
+                                              // read.onAddOnServicesSelected(
+                                              //     index, element?.id);
+                                            },
+                                            value: watch.isQrCodeSeleted
+                                            // watch.selectAddonServicesList[
+                                            //     index],
+                                            ),
                                         Text(
                                           'QR Code',
                                           style: GoogleFonts.dmSans(

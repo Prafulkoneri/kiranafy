@@ -323,4 +323,6 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-change-settings";
   ///////////////////////Sign Out/////////////
   static const String shopSignOut = "${baseUrl}lsm-shop-owner-logout";
+  //////////////////////SHOP DELETE ACCOUNT/////////////
+  static const String shopDelete = "${baseUrl}lsm-shop-owner-delete-account";
 }

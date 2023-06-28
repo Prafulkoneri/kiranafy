@@ -546,7 +546,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/promotion_request/controller/promotion_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
@@ -572,7 +574,18 @@ class _ShopPramotionRequestViewState extends State<ShopPramotionRequestView> {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
-          child: PrimaryAppBar(title: "Promotion Request form"),
+          child: PrimaryAppBar(
+            title: "Promotion Request form",
+            onBackBtnPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 4, screenName: SAccountScreenView())),
+                (Route<dynamic> route) => false,
+              );
+            },
+          ),
         ),
         backgroundColor: Colors.white,
         body: StackLoader(
