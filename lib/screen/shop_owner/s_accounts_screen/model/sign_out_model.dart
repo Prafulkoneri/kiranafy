@@ -1,12 +1,14 @@
-class SettingModel {
+class ShopLogoutResModel {
   int? status;
   String? message;
+  // String data;
 
-  SettingModel({
+  ShopLogoutResModel({
     required this.status,
     required this.message,
+    // this.data,
   });
-  SettingModel.fromJson(Map<String, dynamic> json) {
+  ShopLogoutResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
   }

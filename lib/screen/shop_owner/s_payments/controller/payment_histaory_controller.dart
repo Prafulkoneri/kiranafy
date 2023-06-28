@@ -9,7 +9,10 @@ import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentHistoryController extends ChangeNotifier {
+  //  toDateController = TextEditingController();
   String date = "";
+  bool isLoading = true;
+  bool isStackLoading = false;
   PaymentHistoryData? paymentdata;
   List<OrdersList>? ordersList;
   int? currentMonthCollection;
@@ -17,22 +20,28 @@ class PaymentHistoryController extends ChangeNotifier {
   Future<void> initState(
     context,
   ) async {
-    await paymentHistory(
-      context,
-    );
+    await paymentHistory(context, "");
 
+    notifyListeners();
+  }
+
+  void showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
+  void showStackLoader(value) {
+    isStackLoading = value;
     notifyListeners();
   }
 
   PaymentHistoryRepo paymentHistoryRepo = PaymentHistoryRepo();
   PaymentHistoaryRequestModel get paymentHistoryRequestModel =>
       PaymentHistoaryRequestModel(date: date);
-  Future<void> paymentHistory(
-    context,
-  ) async {
+  Future<void> paymentHistory(context, dates) async {
     // print(dates);
-    // date = dates;
-
+    date = dates;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     paymentHistoryRepo
         .paymentHistory(
@@ -49,6 +58,7 @@ class PaymentHistoryController extends ChangeNotifier {
         currentMonthCollection =
             result.paymentdata?.currentMonthCollection ?? 0;
         totalBusiness = result.paymentdata?.totalBusiness ?? 0;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -65,5 +75,11 @@ class PaymentHistoryController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  void onToDateSelected(context, dates) {
+    paymentHistory(context, dates);
+    date = dates;
+    notifyListeners();
   }
 }

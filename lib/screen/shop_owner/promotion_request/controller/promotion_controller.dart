@@ -7,24 +7,59 @@ import 'package:flutter/material.dart';
 
 import 'package:local_supper_market/screen/shop_owner/promotion_request/model/promotion_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/promotion_request/repository/promotion_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopPramotionController extends ChangeNotifier {
   String groupValue = "";
-  TextEditingController pramotionRequestController = TextEditingController();
-  TextEditingController planToStartController = TextEditingController();
-  TextEditingController adsContentController = TextEditingController();
+  bool isLoading = true;
+  bool isStackLoading = false;
+  TextEditingController promotionSubjectController = TextEditingController();
+  TextEditingController planToStartController = TextEditingController(); //
+  TextEditingController adsContentController = TextEditingController(); //
   PraqmotionRequestRepo pramotionRequestRepo = PraqmotionRequestRepo();
+
+  void showStackLoader(value) {
+    isStackLoading = value;
+    notifyListeners();
+  }
+
+  void showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
   PromotionRequestRequestModel get pramotionRequestRequestModel =>
       PromotionRequestRequestModel(
           adsPlan: groupValue,
           adsContent: adsContentController.text,
           planStartDateFromShopOwner: planToStartController.text,
-          promotionSubject: pramotionRequestController.text);
+          promotionSubject: promotionSubjectController.text);
 
-  Future<void> shopRegister(context) async {
-    print("object");
+  Future<void> promotionRequestForm(context) async {
+    if (promotionSubjectController.text == "") {
+      Utils.showPrimarySnackbar(context, "Please Enter Promotion Subject",
+          type: SnackType.error);
+      return;
+    }
+    if (planToStartController.text == "") {
+      Utils.showPrimarySnackbar(context, "Enter  Date", type: SnackType.error);
+      return;
+    }
+    if (adsContentController.text == "") {
+      Utils.showPrimarySnackbar(context, "Enter Ads Content",
+          type: SnackType.error);
+      return;
+    }
+
+    if (groupValue == "") {
+      Utils.showPrimarySnackbar(context, "Select Ads Plan",
+          type: SnackType.error);
+      return;
+    }
+    showStackLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     pramotionRequestRepo
         .pramotionRequest(
@@ -35,7 +70,22 @@ class ShopPramotionController extends ChangeNotifier {
           PromotionRequestResponseModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
+        groupValue = "";
+        promotionSubjectController.clear();
+        planToStartController.clear();
+        adsContentController.clear();
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  SMainScreenView(index: 4, screenName: SAccountScreenView())),
+          (Route<dynamic> route) => false,
+        );
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
         print(response.body);
+        showStackLoader(false);
+        notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -51,5 +101,15 @@ class ShopPramotionController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  void onToDateSelected(date) {
+    planToStartController.text = date;
+    notifyListeners();
+  }
+
+  void onRadioBtnToggled(value) {
+    groupValue = value;
+    notifyListeners();
   }
 }

@@ -23,9 +23,13 @@ import '../../../../widget/radio_button.dart';
 class SAddCouponsView extends StatefulWidget {
   final bool? isEditCoupon;
   final String? couponId;
-  final bool ? isNavFromDashboard;
+  final bool? isNavFromDashboard;
 
-  const SAddCouponsView({super.key, required this.isEditCoupon, this.couponId,required this.isNavFromDashboard});
+  const SAddCouponsView(
+      {super.key,
+      required this.isEditCoupon,
+      this.couponId,
+      required this.isNavFromDashboard});
 
   @override
   State<SAddCouponsView> createState() => _SAddCouponsViewState();
@@ -50,7 +54,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
         child: PrimaryAppBar(
           title: widget.isEditCoupon == false ? "Add Coupon" : "Edit Coupon",
           onBackBtnPressed: () {
-            if(widget.isNavFromDashboard==true){
+            if (widget.isNavFromDashboard == true) {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
@@ -60,10 +64,9 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                           isRefresh: false,
                           isNavFromDashBoard: true,
                         ))),
-                    (Route<dynamic> route) => false,
+                (Route<dynamic> route) => false,
               );
-            }
-            else{
+            } else {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
@@ -73,10 +76,9 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                           isRefresh: false,
                           isNavFromDashBoard: false,
                         ))),
-                    (Route<dynamic> route) => false,
+                (Route<dynamic> route) => false,
               );
             }
-
           },
         ),
       ),
@@ -569,8 +571,10 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                       color: Color(0xff4689EC),
                       onTap: () {
                         widget.isEditCoupon == true
-                            ? read.uploadEditedCouponDetails(context,widget.isNavFromDashboard)
-                            : read.uploadCouponDetails(context,widget.isNavFromDashboard);
+                            ? read.uploadEditedCouponDetails(
+                                context, widget.isNavFromDashboard)
+                            : read.uploadCouponDetails(
+                                context, widget.isNavFromDashboard);
                       },
                     ),
                     SizedBox(
