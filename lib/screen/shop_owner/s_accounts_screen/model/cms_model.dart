@@ -28,8 +28,8 @@ class CmsData {
   CmsData.fromJson(Map<String, dynamic> json) {
     aboutUs =
         json['about_us'] != null ? AboutUs.fromJson(json['about_us']) : null;
-    privacyPolicy = json['privacy_policy_lsm'] != null
-        ? AboutUs.fromJson(json['privacy_policy_lsm'])
+    privacyPolicy = json['privacy_policy'] != null
+        ? AboutUs.fromJson(json['privacy_policy'])
         : null;
     termsAndCondition = json['terms_and_condition'] != null
         ? AboutUs.fromJson(json['terms_and_condition'])

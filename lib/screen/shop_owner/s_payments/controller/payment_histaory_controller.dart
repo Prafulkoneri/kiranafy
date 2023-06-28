@@ -14,8 +14,12 @@ class PaymentHistoryController extends ChangeNotifier {
   List<OrdersList>? ordersList;
   int? currentMonthCollection;
   int? totalBusiness;
-  Future<void> initState(context, dates) async {
-    await paymentHistory(context, dates);
+  Future<void> initState(
+    context,
+  ) async {
+    await paymentHistory(
+      context,
+    );
 
     notifyListeners();
   }
@@ -23,8 +27,11 @@ class PaymentHistoryController extends ChangeNotifier {
   PaymentHistoryRepo paymentHistoryRepo = PaymentHistoryRepo();
   PaymentHistoaryRequestModel get paymentHistoryRequestModel =>
       PaymentHistoaryRequestModel(date: date);
-  Future<void> paymentHistory(context, dates) async {
-    date = dates;
+  Future<void> paymentHistory(
+    context,
+  ) async {
+    // print(dates);
+    // date = dates;
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     paymentHistoryRepo

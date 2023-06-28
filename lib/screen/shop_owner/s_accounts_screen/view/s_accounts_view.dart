@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_cms_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
@@ -802,47 +803,60 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 35.w, right: 28.w, top: 16.w),
-              padding: EdgeInsets.only(bottom: 15.w),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1, color: underline),
+            GestureDetector(
+              onTap: (){
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 4,
+                          screenName: SAccountCmsPagesView(
+                          ))),
+                      (Route<dynamic> route) => false,
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 35.w, right: 28.w, top: 16.w),
+                padding: EdgeInsets.only(bottom: 15.w),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: underline),
+                  ),
+                  // color: Colors.white,
                 ),
-                // color: Colors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/local_supermart.svg',
-                        // width: 14.w,
-                        // height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      Text(
-                        'Local Supermart',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/local_supermart.svg',
+                          // width: 14.w,
+                          // height: 13.h,
                         ),
-                      ),
-                    ],
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/forward_arrow.svg',
-                    width: 14.w,
-                    height: 14.h,
-                  ),
-                ],
+                        SizedBox(
+                          width: 18.w,
+                        ),
+                        Text(
+                          'Local Supermart',
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SvgPicture.asset(
+                      'assets/icons/forward_arrow.svg',
+                      width: 14.w,
+                      height: 14.h,
+                    ),
+                  ],
+                ),
               ),
             ),
             // ShopSettingView
