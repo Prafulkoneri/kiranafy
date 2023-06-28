@@ -10,9 +10,9 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class SPaymentsView extends StatefulWidget {
-  final String? date;
-  const SPaymentsView({Key? key, this.date})
-      : super(
+  const SPaymentsView({
+    Key? key,
+  }) : super(
           key: key,
         );
 
@@ -24,7 +24,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<PaymentHistoryController>().initState(context, widget.date);
+      context.read<PaymentHistoryController>().initState(context);
     });
   }
 
