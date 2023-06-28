@@ -34,6 +34,8 @@ class SSubscriptionController extends ChangeNotifier {
   bool shopDigital = false;
   bool primeCatchy = false;
   String planAmount = "";
+  bool isSelectedPaymentUpi = false;
+  bool isQrCodeSeleted = false;
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
@@ -200,6 +202,28 @@ class SSubscriptionController extends ChangeNotifier {
   void spaymentMode(value) {
     paymentMode = value;
 
+    notifyListeners();
+  }
+
+  void onFavToShopSelected(value) {
+    if (!isSelectedPaymentUpi) {
+      isSelectedPaymentUpi = true;
+      isQrCodeSeleted = false;
+    } else {
+      isSelectedPaymentUpi = false;
+      isQrCodeSeleted = false;
+    }
+    notifyListeners();
+  }
+
+  void onOrderedButNotFavSelected(value) {
+    if (!isQrCodeSeleted) {
+      isQrCodeSeleted = true;
+      isSelectedPaymentUpi = false;
+    } else {
+      isSelectedPaymentUpi = false;
+      isQrCodeSeleted = false;
+    }
     notifyListeners();
   }
 }
