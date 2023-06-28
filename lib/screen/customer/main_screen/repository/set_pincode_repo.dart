@@ -5,6 +5,7 @@ import 'package:local_supper_market/screen/customer/my_order/model/my_order_mode
 
 class SetPincodeRepo {
   Future<http.Response> setPincode(SetPincodeReqModel reqModel, token) async {
+    print("7777777777");
     print(reqModel.toJson());
     print(Uri.parse(Endpoint.setPincode));
     try {

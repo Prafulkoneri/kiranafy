@@ -22,6 +22,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/controller/shop
 import 'package:local_supper_market/screen/customer/shop_profile/view/Seasonal_products.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_recommanded_products.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/offer_products.dart';
@@ -63,7 +64,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
   Widget build(BuildContext context) {
     final watch = context.watch<ShopProfileViewController>();
     final read = context.read<ShopProfileViewController>();
-    final readMain = context.read<MainScreenController>();
+    final watchMain = context.watch<MainScreenController>();
     return Scaffold(
       body: watch.isLoading
           ? Center(
@@ -81,44 +82,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        padding:
-                            EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image(
-                              image: const AssetImage(
-                                "assets/images/logo.png",
-                              ),
-                              fit: BoxFit.fill,
-                              width: 150.w,
-                              height: 50.w,
-                            ),
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/location1.svg',
-                                  width: 15.w,
-                                  height: 19.h,
-                                ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Text(
-                                  "Vishrantwadi, Pune",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                        color: SplashText1,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                      HeaderView(areaName:watchMain.areaName,cityName:watchMain.cityName,),
                       SizedBox(
                         height: 10.h,
                       ),

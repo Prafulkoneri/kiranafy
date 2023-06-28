@@ -9,6 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/controller/customer_order_view_controller.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_product_list_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
+import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/order_products.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -43,11 +46,17 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
-            onBackBtnPressed: () {},
+            onBackBtnPressed: () {
+              Navigator.pop(context);
+            },
             title: "Order",
           ),
         ),
-        body: SingleChildScrollView(
+        body:watch.isLoading?Center(
+          child: CircularProgressIndicator(),
+        ):
+        SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
@@ -637,7 +646,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                 ),
                 SizedBox(
                   // height: 30.h,
-                  width: 96.w,
+                  width: 100.w,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(0),
@@ -654,7 +663,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderStatusView(orderId: watch.orderId,)));
+
+                    },
                     child: Text(
                       "Track Order",
                       style: GoogleFonts.dmSans(

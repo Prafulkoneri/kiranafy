@@ -2,13 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/screen/customer/about_us/controller/cms_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../const/color.dart';
 import '../../../../widget/app_bar.dart';
 
-class CAboutUsView extends StatelessWidget {
+class CAboutUsView extends StatefulWidget {
+  @override
+  State<CAboutUsView> createState() => _CAboutUsViewState();
+}
+
+class _CAboutUsViewState extends State<CAboutUsView> {
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<CmsController>();
+    final read = context.read<CmsController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),

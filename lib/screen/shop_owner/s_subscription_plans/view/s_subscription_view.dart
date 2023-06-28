@@ -483,23 +483,102 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                   ),
                                 ),
                               ),
-                              // Container(
-                              //   padding:
-                              //       EdgeInsets.only(left: 19.w, right: 19.w),
-                              //   child: Text(
-                              //     "Mode of Payment",
-                              //     style: GoogleFonts.dmSans(
-                              //       textStyle: TextStyle(
-                              //           color: Black,
-                              //           letterSpacing: .5,
-                              //           fontSize: 16.sp,
-                              //           fontWeight: FontWeight.w700),
-                              //     ),
-                              //   ),
-                              // ),
-                              // SizedBox(
-                              //   height: 10.h,
-                              // ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: 19.w,
+                                  // top: 30.w,
+                                ),
+                                child: Text(
+                                  'Mode of Payment:',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black,
+                                        // letterSpacing: .5,
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                  left: 19.w,
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        PrimaryCheckBox(
+                                          onChanged: (value) {
+                                            // read.onAddOnServicesSelected(
+                                            //     index, element?.id);
+                                          },
+                                          // value:"cash";
+                                          // watch.selectAddonServicesList[
+                                          //     index],
+                                        ),
+                                        Text(
+                                          'UPI ID - ',
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black1,
+                                                // letterSpacing: .5,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                        SelectableText(
+                                          'dhanashree203@oksbi ',
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black1,
+                                                // letterSpacing: .5,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        PrimaryCheckBox(
+                                          onChanged: (value) {
+                                            // read.onAddOnServicesSelected(
+                                            //     index, element?.id);
+                                          },
+                                          // value:"cash";
+                                          // watch.selectAddonServicesList[
+                                          //     index],
+                                        ),
+                                        Text(
+                                          'QR Code',
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Black1,
+                                                // letterSpacing: .5,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                               // Container(
                               //   padding:
                               //       EdgeInsets.only(left: 19.w, right: 19.w),
@@ -628,28 +707,28 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                               //     ],
                               //   ),
                               // ),
-                              // SizedBox(
-                              //   height: 31.h,
-                              // ),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     Image.asset(
-                              //       "assets/images/qrcode.png",
-                              //       width: 165.w,
-                              //     )
-                              //     // AppNetworkImages(
-                              //     //   imageUrl:
-                              //     //       "${watch.shopDetailData?.shopOwnerQrCodeImage}",
-                              //     //   // "assets/images/qrcode.png",
-                              //     //   // height: 165.h,
-                              //     //   width: 165.w,
-                              //     // ),
-                              //   ],
-                              // ),
-                              // SizedBox(
-                              //   height: 31.h,
-                              // ),
+                              SizedBox(
+                                height: 31.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/new_qrcode.jpg",
+                                    width: 200.w,
+                                  )
+                                  // AppNetworkImages(
+                                  //   imageUrl:
+                                  //       "${watch.shopDetailData?.shopOwnerQrCodeImage}",
+                                  //   // "assets/images/qrcode.png",
+                                  //   // height: 165.h,
+                                  //   width: 165.w,
+                                  // ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 31.h,
+                              ),
                             ],
                           ),
                         ),
@@ -692,16 +771,16 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                           ),
                                         )
                                       : Container(),
-                                  Text(
-                                    "Extra 18% GST",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 10.sp,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
+                                  // Text(
+                                  //   "Extra 18% GST",
+                                  //   style: GoogleFonts.dmSans(
+                                  //     textStyle: TextStyle(
+                                  //         color: Colors.white,
+                                  //         // letterSpacing: .5,
+                                  //         fontSize: 10.sp,
+                                  //         fontWeight: FontWeight.w500),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                               Container(

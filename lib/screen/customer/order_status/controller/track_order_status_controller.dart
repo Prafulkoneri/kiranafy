@@ -1,67 +1,57 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
-import 'package:local_supper_market/screen/customer/near_shops/model/all_near_shops_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
-import 'package:local_supper_market/screen/customer/near_shops/repository/shop_as_per_pincode_all_near_shops.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
-import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/screen/customer/order_status/model/track_order_status_model.dart';
+import 'package:local_supper_market/screen/customer/order_status/repository/track_order_repo.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class AllNearShopsAsPerPincode extends ChangeNotifier {
-  AllNearShopRepo allNearShopRepo = AllNearShopRepo();
-  AddFavShopRepo addFavShopRepo = AddFavShopRepo();
-  RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
-
-  List<AllNearShops>? nearByShopList;
-  List<bool> fav = [];
-  List favList = [];
+class TrackOrderStatusController extends ChangeNotifier {
+  String orderId = "";
   String shopId = "";
-  String pincode = "111111";
-
-  Future<void> initState(context) async {
-    await getAllNearByShops(context);
+  TrackData? trackData;
+  TrackOrderDetails? trackOrderDetails;
+  ShopDetails? shopDetails;
+  DeliveryAddressDetails? deliveryAddressDetails;
+  TrakOrderRepo trackOrderRepo = TrakOrderRepo();
+  AddFavShopRepo addFavShopRepo = AddFavShopRepo();
+  bool isLoading=true;
+  bool favAllShop = true; /////shop add fvrt
+  TrackOrderRequestodel get trackOrderReqModel => TrackOrderRequestodel(
+        orderId: orderId.toString(),
+      );
+  Future<void> initState(context, orId) async {
+    await trackOrderStatus(context, orId);
   }
-  // AllNearShopsReqModel get allNearShopsReqModel=>AllNearShopsReqModel(pincode:pincode);
 
-  Future<void> getAllNearByShops(context) async {
+  showLoader(value){
+    isLoading=value;
+  notifyListeners();
+  }
+
+  Future<void> trackOrderStatus(context, orId) async {
+    orderId = orId.toString();
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    print(pref.getString("pincode"));
-    // if(pref.getString("pincode")==null){
-    //   pincode="111111";
-    // }
-    // else{
-    //   pincode=pref.getString("pincode").toString();
-    // }
-    allNearShopRepo
-        .getAllNearShop(pref.getString("successToken"))
+    trackOrderRepo
+        .trackOrder(trackOrderReqModel, pref.getString("successToken"))
         .then((response) {
-      print("Shop List");
-      print(response.body);
-      final result = AllNearShopsResModel.fromJson(jsonDecode(response.body));
-      print(response.body);
+      log("response.body${response.body}");
+      final result = TrackOrderResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        nearByShopList = result.data;
-
-        fav = List<bool>.filled(nearByShopList?.length ?? 0, false,
-            growable: true);
-        int length = nearByShopList?.length ?? 0;
-        for (int i = 0; i < length; i++) {
-          if (nearByShopList?[i].isFavourite == "yes") {
-            fav.insert(i, true);
-            favList.add(nearByShopList?[i].id);
-          }
-        }
-        notifyListeners();
+        trackData = result.trackData;
+        trackOrderDetails = trackData?.trackOrderDetails;
+        shopDetails = trackData?.shopDetails;
+        deliveryAddressDetails = trackData?.deliveryAddressDetails;
+        showLoader(false);
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -79,21 +69,32 @@ class AllNearShopsAsPerPincode extends ChangeNotifier {
     );
   }
 
-  AddFavReqModel get addFavReqModel => AddFavReqModel(
+  void launchPhone(String mobNumber, context) async {
+    var number = Uri.parse("tel:${mobNumber}");
+    if (await canLaunchUrl(number)) {
+      await launchUrl(number);
+    } else {
+      Utils.showPrimarySnackbar(context, "Unable to dial at the moment",
+          type: SnackType.error);
+    }
+  }
+
+/////////////////////
+
+  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
       );
-
-  Future<void> updateFavList(context, id, index) async {
+  RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
+  Future<void> removeAllShopFavList(context, id) async {
     shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
-    print(pref.getString("successToken"));
-    addFavShopRepo
-        .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
+    removeFavShopRepo
+        .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = AddFavResModel.fromJson(jsonDecode(response.body));
+      final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        fav[index] = true;
+        favAllShop = false;
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -115,21 +116,20 @@ class AllNearShopsAsPerPincode extends ChangeNotifier {
     );
   }
 
-  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
+  AddFavReqModel get addFavReqModel => AddFavReqModel(
         shopId: shopId.toString(),
       );
-
-  Future<void> removeFavList(context, id, index) async {
+  Future<void> updateAllShopFavList(context, id) async {
     shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
-    removeFavShopRepo
-        .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
+    print(pref.getString("successToken"));
+    addFavShopRepo
+        .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
+      final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        fav[index] = false;
-        print("hello");
+        favAllShop = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();

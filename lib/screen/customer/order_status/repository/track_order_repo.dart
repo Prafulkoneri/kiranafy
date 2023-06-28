@@ -6,9 +6,9 @@ class TrakOrderRepo {
   Future<http.Response> trackOrder(
       TrackOrderRequestodel reqModel, token) async {
     print(reqModel.toJson());
-    print(Uri.parse(Endpoint.trackOrderRepo));
+    print(Uri.parse(Endpoint.trackOrder));
     try {
-      return await http.post(Uri.parse(Endpoint.trackOrderRepo),
+      return await http.post(Uri.parse(Endpoint.trackOrder),
           body: reqModel.toJson(),
           headers: {
             "Authorization": "Bearer $token",

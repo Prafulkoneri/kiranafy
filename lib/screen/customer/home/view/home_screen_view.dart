@@ -20,6 +20,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
+import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 
 import 'package:provider/provider.dart';
@@ -68,7 +69,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
-    final mainScreenRead = context.read<MainScreenController>();
+    final mainScreenWatch = context.watch<MainScreenController>();
     final NearByShopWatch = context.watch<AllNearShopsAsPerPincode>();
     return Scaffold(
         body: watch.isLoading
@@ -85,49 +86,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        padding:
-                            EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image(
-                              image: const AssetImage(
-                                "assets/images/logo.png",
-                              ),
-                              fit: BoxFit.fill,
-                              width: 150.w,
-                              height: 50.w,
-                            ),
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/location1.svg',
-                                  width: 15.w,
-                                  height: 19.h,
-                                ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                GestureDetector(
-                                  onTap: (){
-                                    mainScreenRead.showMap(context,false);
-                                  },
-                                  child: Text(
-                                    "Vishrantwadi, Pune",
-                                    style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
-                                          color: SplashText1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                      HeaderView(cityName:mainScreenWatch.cityName,areaName: mainScreenWatch.areaName,),
                       SizedBox(
                         height: 13.h,
                       ),
@@ -233,7 +192,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 15.h,
                       ),
 
-                      NearByShopWatch.nearByShopList?.isNotEmpty ?? true
+                      NearByShopWatch.nearByShopList?.isNotEmpty??true
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -292,7 +251,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 ),
                               ],
                             )
-                          : Container(),
+                          :Container(),
 
                       watch.categoryFirstList.isNotEmpty
                           ? Container(

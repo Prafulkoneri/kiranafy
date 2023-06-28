@@ -66,6 +66,7 @@ import 'screen/customer/delivery_view/controller/customer_order_view_controller.
 import 'screen/customer/my_order/controller/my_orders_controller.dart';
 import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/order_payment/controller/order_payment_controller.dart';
+import 'screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
@@ -135,6 +136,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => MyOrdersController()),
         ChangeNotifierProvider(create: (_) => ShopOwnerOrderViewController()),
         ChangeNotifierProvider(create: (_) => CustomerOrderViewController()),
+        ChangeNotifierProvider(create: (_) => TrackOrderStatusController()),
       ],
       child: MyApp(),
     ),

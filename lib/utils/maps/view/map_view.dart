@@ -48,7 +48,7 @@ class _MapScreenViewState extends State<MapScreenView> {
     _draggedLatlng = _defaultLatLng;
     _cameraPosition = CameraPosition(
         target: _defaultLatLng,
-        zoom: 17.5 // number of MapView view
+        zoom: 13.5 // number of MapView view
     );
     isLocationEnabledByUser = widget.isLocationEnabled;
     print(widget.isLocationEnabled);
@@ -79,13 +79,14 @@ class _MapScreenViewState extends State<MapScreenView> {
             child: _buildBody()),
         !isLocationEnabledByUser?Container(
           height: 0,
-        ):Positioned(
+        ):
+        Positioned(
             top: -10.w,
             left: 0.w,
             right: 0.w,
             child: InkWell(
               onTap: () {
-                Navigator.pop(context);
+                read.onMapCloseBtnPressed(context);
               },
               child: Container(
                 height: 40.w,
@@ -100,6 +101,48 @@ class _MapScreenViewState extends State<MapScreenView> {
                     width: 15.w,
                     height: 15.h,
                   ),
+                ),
+              ),
+            )),
+        Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Visibility(
+              visible: watch.locationNotFound,
+              child: Container(
+                padding: EdgeInsets.only(
+                    top: 15.w, bottom: 15.w, left: 10.w, right: 10.w),
+                margin: EdgeInsets.only(bottom: 10.w, left: 10.w, right: 10.w),
+                color: Colors.red,
+                width: ScreenUtil().screenWidth,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "${watch.locationErrorMessage}",
+                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            read.onDismissTaped();
+                          },
+                          child: Text(
+                            "Dismiss",
+                            style:
+                            TextStyle(color: Colors.white, fontSize: 14.sp),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                      ],
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             )),
@@ -166,7 +209,7 @@ class _MapScreenViewState extends State<MapScreenView> {
               _draggedLatlng = _defaultLatLng;
               _cameraPosition = CameraPosition(
                   target: _defaultLatLng,
-                  zoom: 17.5 // number of MapView view
+                  zoom: 13.5 // number of MapView view
               );
               _gotoUserCurrentPosition();
             },text: "Allow while using this app",fontWeight: FontWeight.w500,fontSize: 12.sp,height: 40.w),
@@ -278,7 +321,7 @@ class _MapScreenViewState extends State<MapScreenView> {
             //every time user drag this will get value of latlng
             _draggedLatlng = cameraPosition.target;
             print(_draggedLatlng);
-            // _getAddress(_draggedLatlng);
+
           },
           onMapCreated: (GoogleMapController controller) {
             //this function will trigger when MapView is fully loaded
@@ -304,15 +347,18 @@ class _MapScreenViewState extends State<MapScreenView> {
 
   //get address from dragged pin
   Future _getAddress(LatLng position) async {
+    print("hellooooooo");
     final read=Provider.of<MainScreenController>(context, listen: false);
     List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark address = placemarks[0]; // get only first and closest address
     String addresStr = "${address.street}, ${address.locality}, ${address.postalCode}, ${address.country}";
-    await read.setPincode(context,isLocationEnabledByUser,position.latitude,position.longitude);
-    setState(() {
-      _draggedAddress = addresStr;
-    });
-    print(_draggedAddress);
+      await read.setPincode(context, isLocationEnabledByUser, position.latitude,
+          position.longitude);
+
+    // setState(() {
+    //   _draggedAddress = addresStr;
+    // });
+    // print(_draggedAddress);
   }
 
   //get user's current location and set the MapView's camera to that location
@@ -328,13 +374,12 @@ class _MapScreenViewState extends State<MapScreenView> {
     MapViewController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
             target: position,
-            zoom: 17.5
+            zoom: 13.5
         )
     ));
     setState(() {
       isLocationEnabledByUser=true;
     });
-    ;
     //every time that we dragged pin , it will list down the address here
     await _getAddress(position);
   }
