@@ -1,8 +1,8 @@
 ///////////////REQUEST MODEL//////////////
-class RemoveProductFromOrderReqModel {
+class AddRemoveProductFromOrderReqModel {
   String? orderProductId;
 
-  RemoveProductFromOrderReqModel({
+  AddRemoveProductFromOrderReqModel({
     this.orderProductId,
   });
 
@@ -15,16 +15,37 @@ class RemoveProductFromOrderReqModel {
 }
 
 //////////////////RESPONSE MODEL///////////////////////
-class RemoveProductFromOrderResModel {
+class AddRemoveProductFromOrderResModel {
   int? status;
   String? message;
+  AddRemoveData ? data;
 
-  RemoveProductFromOrderResModel({
+  AddRemoveProductFromOrderResModel({
     required this.status,
     required this.message,
   });
-  RemoveProductFromOrderResModel.fromJson(Map<String, dynamic> json) {
+  AddRemoveProductFromOrderResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
+    data = json['data'] != null ? AddRemoveData.fromJson(json['data']) : null;
+  }
+}
+
+class AddRemoveData{
+  String ? subTotalAmount;
+  String ? totalAmount;
+  String ? totalDiscount;
+  String ? deliveryCharges;
+  AddRemoveData({
+    this.totalAmount,
+    this.totalDiscount,
+    this.deliveryCharges,
+    this.subTotalAmount,
+});
+  AddRemoveData.fromJson(Map<String,dynamic>json){
+    subTotalAmount=json["sub_total_amount"];
+    totalAmount=json["total_amount"];
+    totalDiscount=json["total_discount"];
+    deliveryCharges=json["delivery_charges"];
   }
 }

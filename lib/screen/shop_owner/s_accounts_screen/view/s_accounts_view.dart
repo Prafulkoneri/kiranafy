@@ -911,8 +911,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             GestureDetector(
               onTap: () {
-                read.shopSignOut(context);
-                // read.onLogout(context);
+                // read.shopSignOut(context);
+                read.onLogout(context);
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

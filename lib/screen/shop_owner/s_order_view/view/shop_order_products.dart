@@ -86,11 +86,10 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                 ),
                                 PrimaryCheckBox(
                                   onChanged: (value) {
-                                    // read.onAddOnServicesSelected(
-                                    //     index, element?.id);
+                                    read.selectProducts(context,index,element?.id,value);
                                   },
-                                  // value:
-                                  //     watch.selectAddonServicesList[index],
+                                  value:
+                                      watch.selectedProductList[index],
                                 ),
                               ],
                             ),

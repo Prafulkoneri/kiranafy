@@ -297,6 +297,10 @@ class Endpoint {
   static const String shopOwnerOrderStatusChange =
       "${baseUrl}lsm-shop-owner-change-order-delivery-status";
 
+  ////Shop Owner Add Remove Product////
+  static const String shopOwnerAddRemoveProduct =
+      "${baseUrl}lsm-shop-owner-remove-product-from-order";
+
   ////Customer Current Location Pincode////
   static const String currentLocationPincode =
       "${baseUrl}lsm-customer-current-location-pincode";
