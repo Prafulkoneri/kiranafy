@@ -11,11 +11,14 @@ import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_v
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_setting/view/s_setting_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/utils/maps/view/map_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
+
+import '../../promotion_request/view/promotion_request_view.dart';
 
 class SAccountScreenView extends StatefulWidget {
   const SAccountScreenView({super.key});
@@ -444,7 +447,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             /////////////////////
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 4, screenName: ShopPramotionRequestView())),
+                  (Route<dynamic> route) => false,
+                );
+              },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
@@ -834,42 +845,54 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              padding: EdgeInsets.only(bottom: 15.w),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1, color: grey10),
+            // ShopSettingView
+            GestureDetector(
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 4, screenName: ShopSettingView())),
+                  (Route<dynamic> route) => false,
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                padding: EdgeInsets.only(bottom: 15.w),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: grey10),
+                  ),
+                  // color: Colors.white,
                 ),
-                // color: Colors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: 5,
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/setting.svg',
-                    // width: 14.w,
-                    // height: 13.h,
-                  ),
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  Flexible(
-                    child: Text(
-                      'Settings',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 5,
+                    ),
+                    SvgPicture.asset(
+                      'assets/icons/setting.svg',
+                      // width: 14.w,
+                      // height: 13.h,
+                    ),
+                    SizedBox(
+                      width: 18.w,
+                    ),
+                    Flexible(
+                      child: Text(
+                        'Settings',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             GestureDetector(

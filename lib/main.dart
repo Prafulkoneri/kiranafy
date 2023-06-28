@@ -46,6 +46,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_ed
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_custom_product_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_setting/controller/setting_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 
@@ -59,6 +60,7 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'screen/customer/about_us/controller/cms_controller.dart';
 import 'screen/customer/cart/controller/cart_controller.dart';
 import 'screen/customer/cart/controller/cart_detail_controller.dart';
 import 'screen/customer/delivery_address/controller/delivery_address_controller.dart';
@@ -71,9 +73,11 @@ import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
+import 'screen/shop_owner/promotion_request/controller/promotion_controller.dart';
 import 'screen/shop_owner/s_coupons/controller/shop_coupons_list_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
+import 'screen/shop_owner/s_payments/controller/payment_histaory_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
@@ -137,6 +141,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ShopOwnerOrderViewController()),
         ChangeNotifierProvider(create: (_) => CustomerOrderViewController()),
         ChangeNotifierProvider(create: (_) => TrackOrderStatusController()),
+        ChangeNotifierProvider(create: (_) => ShopSettingController()),
+        ChangeNotifierProvider(create: (_) => CmsController()),
+        ChangeNotifierProvider(create: (_) => ShopPramotionController()),
+        ChangeNotifierProvider(create: (_) => PaymentHistoryController()),
       ],
       child: MyApp(),
     ),
