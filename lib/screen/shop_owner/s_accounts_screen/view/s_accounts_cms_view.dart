@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/cms_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/about_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/privacy_policy_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/terms_and_condition_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +40,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
             ),
             GestureDetector(
               onTap: () {
-                // read.onEditProfilePressed(context);
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>AboutScreenView()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w),
@@ -119,12 +121,14 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
             ///////////////////////
             GestureDetector(
               onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>PrivacyPolicyView(
+                )));
                 // Navigator.pushAndRemoveUntil(
                 //   context,
                 //   MaterialPageRoute(
                 //       builder: (context) => SMainScreenView(
                 //           index: 4,
-                //           screenName: CmsView(
+                //           screenName: PrivacyPolicyView(
                 //           ))),
                 //       (Route<dynamic> route) => false,
                 // );
@@ -164,38 +168,43 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              padding: EdgeInsets.only(bottom: 15.w),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1, color: underline),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>TermsAndConditionView()));
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                padding: EdgeInsets.only(bottom: 15.w),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: underline),
+                  ),
+                  // color: Colors.white,
                 ),
-                // color: Colors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: 5,
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/terms.svg',
-                  ),
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  Text(
-                    'Terms & Conditions',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 5,
                     ),
-                  ),
-                ],
+                    SvgPicture.asset(
+                      'assets/icons/terms.svg',
+                    ),
+                    SizedBox(
+                      width: 18.w,
+                    ),
+                    Text(
+                      'Terms & Conditions',
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
 
