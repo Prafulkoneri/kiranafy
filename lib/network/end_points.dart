@@ -307,5 +307,15 @@ class Endpoint {
   static const String customerOrderView = "${baseUrl}lsm-customer-order-view";
 
   ///Track Order Repo////
-  static const String trackOrderRepo = "${baseUrl}lsm-customer-track-order";
+  static const String trackOrder = "${baseUrl}lsm-customer-track-order";
+  //CMS REPO////
+  static const String cmsFile = "${baseUrl}lsm-cms-data";
+  //////Shop Setting////
+  static const String shopSetting = "${baseUrl}lsm-shop-owner-get-settings";
+  /////Shop Pramotion Request Form////
+  static const String pramotionRequest =
+      "${baseUrl}lsm-shop-owner-request-shop-promotion";
+  //////////////////////PAyment History//////////
+  static const String paymentHistory =
+      "${baseUrl}lsm-shop-owner-orders-payment-history";
 }

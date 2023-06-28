@@ -1,12 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_payments/controller/payment_histaory_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
 class SPaymentsView extends StatefulWidget {
-  const SPaymentsView({Key? key}) : super(key: key);
+  final String? date;
+  const SPaymentsView({Key? key, this.date})
+      : super(
+          key: key,
+        );
 
   @override
   _SPaymentsViewState createState() => _SPaymentsViewState();
@@ -14,7 +22,17 @@ class SPaymentsView extends StatefulWidget {
 
 class _SPaymentsViewState extends State<SPaymentsView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<PaymentHistoryController>().initState(context, widget.date);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final watch = context.watch<PaymentHistoryController>();
+    final read = context.read<PaymentHistoryController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -94,7 +112,8 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                             height: 7.w,
                           ),
                           Text(
-                            "₹12000",
+                            "${watch.currentMonthCollection}",
+                            // "₹12000",
                             style: TextStyle(
                                 fontSize: 24.sp,
                                 color: Colors.white,
@@ -133,7 +152,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                             height: 7.w,
                           ),
                           Text(
-                            "₹3,05,000",
+                            "${watch.totalBusiness}",
                             style: TextStyle(
                                 fontSize: 24.sp,
                                 color: Colors.white,
@@ -168,10 +187,11 @@ class _SPaymentsViewState extends State<SPaymentsView> {
               ),
               ListView.builder(
                   // padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
-                  itemCount: 5,
+                  itemCount: watch.ordersList?.length ?? 0,
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (BuildContext, index) {
+                    final element = watch.ordersList?[index];
                     return Container(
                       padding: EdgeInsets.all(14.w),
                       margin: EdgeInsets.only(bottom: 15.w),
@@ -187,14 +207,14 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Order ID: LSM012334",
+                                "Order ID: ${element?.orderUniqueId}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 15.sp,
                                     color: Color(0xff3A3A3A)),
                               ),
                               Text(
-                                "₹135.00",
+                                "${element?.totalAmount}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 19.sp,
@@ -209,7 +229,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "15 March 2023",
+                                "${element?.createdAt}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12.sp,
@@ -224,7 +244,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Ramesh Patil",
+                                "${element?.customerName}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12.sp,
@@ -233,7 +253,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                               Row(
                                 children: [
                                   Text(
-                                    "UPI ID",
+                                    "${element?.paymentMode}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 12.sp,

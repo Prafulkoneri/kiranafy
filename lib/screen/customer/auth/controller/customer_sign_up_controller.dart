@@ -129,8 +129,16 @@ class CustomerSignUpController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "customerLoggedIn");
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainScreenView()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                  index: 0,
+                  screenName: HomeScreenView(
+                    refreshPage: true,
+                  ))),
+              (Route<dynamic> route) => false,
+        );
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

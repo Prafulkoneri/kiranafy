@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:developer';
@@ -33,7 +34,12 @@ class MainScreenController extends ChangeNotifier {
   String lng="";
   String message="";
   bool isFirstLoad=true;
-  LatLng defaultLatLng=LatLng(11, 104);
+  LatLng defaultLatLng=LatLng(18.5679, 73.9143);
+  String cityName="";
+  String areaName="";
+  bool locationNotFound=false;
+  bool isLocationFound=false;
+  String locationErrorMessage="";
 
 
   void initState(context,index,currentScreen)async{
@@ -78,7 +84,9 @@ class MainScreenController extends ChangeNotifier {
               topRight: Radius.circular(30))),
       context: context,
       builder: (BuildContext context) {
-        return MapScreenView(isLocationEnabled: isLocationServiceEnabled,initialMapView: intialMapView,latLng: defaultLatLng,);
+        return WillPopScope(onWillPop: ()async{
+          return false;
+        },child: MapScreenView(isLocationEnabled: isLocationServiceEnabled,initialMapView: intialMapView,latLng: defaultLatLng,));
       },
     );
     if(!isLocationServiceEnabled){
@@ -136,20 +144,41 @@ class MainScreenController extends ChangeNotifier {
     }
     lat=latitude.toString();
     lng=longitude.toString();
-    showStackLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     setPincodeRepo
         .setPincode(setPincodeReqModel,pref.getString("successToken"))
         .then((response) {
+      print("99999999");
+          print(setPincodeReqModel.toJson());
+          print("99999999");
       print(response.statusCode);
       log("response.body${response.body}");
       final result =
       SetPincodeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        isPincodeSnackBarVisible=true;
-        message=result.message??"";
-        defaultLatLng=LatLng(latitude,longitude);
-        showStackLoader(false);
+        if(result.status==200){
+          isPincodeSnackBarVisible=true;
+          message=result.message??"";
+          cityName=result.data?.cityName??"";
+          areaName=result.data?.areaName??"";
+          defaultLatLng=LatLng(latitude,longitude);
+          locationNotFound=false;
+          locationErrorMessage="";
+          isLocationFound=true;
+        }
+        else{
+          isLocationFound=false;
+          locationErrorMessage=result.message??"";
+          locationNotFound=true;
+          notifyListeners();
+          Timer(Duration(seconds: 3), () {
+            print("duration");
+            locationNotFound = false;
+            notifyListeners();
+          });
+
+        }
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -168,7 +197,37 @@ class MainScreenController extends ChangeNotifier {
     );
   }
 
+void onMapCloseBtnPressed(context){
+    if(!isLocationFound){
+      locationErrorMessage="Select another location to continue";
+      locationNotFound=true;
+      notifyListeners();
+      Timer(Duration(seconds: 3), () {
+        locationNotFound = false;
+        notifyListeners();
+      });
+    }
+    else{
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainScreenView(
+                index: 0,
+                screenName: HomeScreenView(
+                  refreshPage: true,
+                ))),
+            (Route<dynamic> route) => false,
+      );
+      notifyListeners();
+    }
 
+}
+
+void onDismissTaped(){
+  locationNotFound=false;
+  locationErrorMessage="";
+  notifyListeners();
+}
 
 
 }

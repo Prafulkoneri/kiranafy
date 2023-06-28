@@ -11,7 +11,8 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 
 class CheckOrderStatusView extends StatefulWidget {
-  const CheckOrderStatusView({super.key});
+  final String? orderId;
+  const CheckOrderStatusView({super.key, this.orderId});
 
   @override
   State<CheckOrderStatusView> createState() => _CheckOrderStatusViewState();

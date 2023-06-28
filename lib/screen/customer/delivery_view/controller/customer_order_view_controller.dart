@@ -25,6 +25,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   ShopDetails? shopDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
+  bool isLoading=true;
 
   CustomerOrderViewRequestModel get customerOrderViewRequestModel =>
       CustomerOrderViewRequestModel(orderId: orderId.toString());
@@ -41,10 +42,13 @@ class CustomerOrderViewController extends ChangeNotifier {
 
     notifyListeners();
   }
-
+showLoader(value){
+    isLoading=value;
+    notifyListeners();
+}
   Future<void> shopOwnerOrderView(context, orId) async {
     orderId = orId.toString();
-
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     orderViewRepo
         .showOrderView(
@@ -61,6 +65,7 @@ class CustomerOrderViewController extends ChangeNotifier {
         shopDetails = orderData?.shopDetails;
         deliveryAddressDetails = orderData?.deliveryAddressDetails;
         orderProductDetails = orderData?.orderProductDetails;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

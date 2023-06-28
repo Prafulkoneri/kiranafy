@@ -51,6 +51,7 @@ class AllNearShopsAsPerPincode extends ChangeNotifier {
       print(response.body);
       if (response.statusCode == 200) {
         nearByShopList = result.data;
+
         fav = List<bool>.filled(nearByShopList?.length ?? 0, false,
             growable: true);
         int length = nearByShopList?.length ?? 0;

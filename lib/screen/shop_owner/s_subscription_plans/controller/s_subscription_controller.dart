@@ -25,6 +25,7 @@ class SSubscriptionController extends ChangeNotifier {
   String selectedId = "";
   List radioValue = [];
   String radioGrpValue = "0";
+  String paymentMode = "";
   String selectedPlanId = "0";
   String selectedServicesId = "0";
   bool oneTimeShop = false;
@@ -193,6 +194,12 @@ class SSubscriptionController extends ChangeNotifier {
     radioGrpValue = value;
     planAmount = price.toString();
     selectedPlanId = id.toString();
+    notifyListeners();
+  }
+
+  void spaymentMode(value) {
+    paymentMode = value;
+
     notifyListeners();
   }
 }
