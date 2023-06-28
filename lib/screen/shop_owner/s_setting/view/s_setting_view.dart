@@ -17,13 +17,6 @@ class ShopSettingView extends StatefulWidget {
   State<ShopSettingView> createState() => _ShopSettingViewState();
 }
 
-// String? selectedValue;
-// Group Value fo
-// r Radio Button.
-// int id = 1;
-// bool switchValue = true;
-// bool switchValue1 = true;
-
 class _ShopSettingViewState extends State<ShopSettingView> {
   @override
   Widget build(BuildContext context) {
@@ -53,13 +46,12 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                 ),
                 CupertinoSwitch(
                   // This bool value toggles the switch.
-                  value: watch.switchValue1,
+                  value: watch.isAppNotificationEnable,
                   activeColor: DarkGreen,
                   onChanged: (bool? value) {
+                    watch.changeSettings(context, value);
+                    //  watch.shopNotification(context,"");
                     // This is called when the user toggles the switch.
-                    setState(() {
-                      value = value ?? false;
-                    });
                   },
                 ),
               ],
@@ -69,45 +61,45 @@ class _ShopSettingViewState extends State<ShopSettingView> {
               style: TextStyle(
                   fontSize: 13.sp, fontWeight: FontWeight.w400, color: Black1),
             ),
-            SizedBox(
-              height: 40.h,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Email Notification",
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Black1),
-                    ),
-                    CupertinoSwitch(
-                      // This bool value toggles the switch.
-                      value: watch.switchValue,
-                      activeColor: DarkGreen,
-                      onChanged: (bool? value) {
-                        // This is called when the user toggles the switch.
-                        setState(() {
-                          value = value ?? false;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                Text(
-                  "Enable or disable  the  Email notifications",
-                  style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Black1),
-                ),
-              ],
-            ),
+            // SizedBox(
+            //   height: 40.h,
+            // ),
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       crossAxisAlignment: CrossAxisAlignment.center,
+            //       children: [
+            //         Text(
+            //           "Email Notification",
+            //           style: TextStyle(
+            //               fontSize: 18.sp,
+            //               fontWeight: FontWeight.w400,
+            //               color: Black1),
+            //         ),
+            //         CupertinoSwitch(
+            //           // This bool value toggles the switch.
+            //           value: watch.switchValue,
+            //           activeColor: DarkGreen,
+            //           onChanged: (bool? value) {
+            //             // This is called when the user toggles the switch.
+            //             setState(() {
+            //               value = value ?? false;
+            //             });
+            //           },
+            //         ),
+            //       ],
+            //     ),
+            //     Text(
+            //       "Enable or disable  the  Email notifications",
+            //       style: TextStyle(
+            //           fontSize: 13.sp,
+            //           fontWeight: FontWeight.w400,
+            //           color: Black1),
+            //     ),
+            //   ],
+            // ),
             SizedBox(
               height: 41.h,
             ),

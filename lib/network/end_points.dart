@@ -318,4 +318,9 @@ class Endpoint {
   //////////////////////PAyment History//////////
   static const String paymentHistory =
       "${baseUrl}lsm-shop-owner-orders-payment-history";
+  //////////////////////PAyment History//////////
+  static const String changeSetting =
+      "${baseUrl}lsm-shop-owner-change-settings";
+  ///////////////////////Sign Out/////////////
+  static const String shopSignOut = "${baseUrl}lsm-shop-owner-logout";
 }
