@@ -179,9 +179,15 @@ class _CustomerListViewState extends State<CustomerListView> {
                                     ),
                                     Row(
                                       children: [
-                                        SvgPicture.asset(
-                                          'assets/icons/s_fvrt.svg',
-                                        ),
+                                        element?.isShopFavourite == "yes"
+                                            ? Container(
+                                                width: 32.w,
+                                                height: 32.h,
+                                                child: SvgPicture.asset(
+                                                  'assets/icons/s_fvrt.svg',
+                                                ),
+                                              )
+                                            : Container(),
                                         SizedBox(
                                           width: 10.w,
                                         ),

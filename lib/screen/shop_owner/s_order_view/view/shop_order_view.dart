@@ -587,7 +587,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      "${watch.deliveryAddressDetails?.address2}\n${watch.deliveryAddressDetails?.address2}  ",
+                                      "${watch.deliveryAddressDetails?.address1} ${watch.deliveryAddressDetails?.address2}",
                                       //
 
                                       maxLines: 3,
@@ -618,361 +618,379 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                     watch.orderDetails?.orderStatus != "Delivered"
                         ? Column(
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: 20.w,
-                                  ),
-                                  watch.orderDetails?.orderStatus == "Pending"
-                                      ? Expanded(
-                                          child: InkWell(
-                                            onTap: () {
-                                              read.shopOrderStatus(
-                                                  context,
-                                                  watch.orderDetails?.id
-                                                      .toString(),
-                                                  "order_confirmed",
-                                                  "",
-                                                  "",
-                                                  "");
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 20.w,
-                                                  top: 9.w,
-                                                  bottom: 7.w,
-                                                  right: 34.w),
-                                              decoration: BoxDecoration(
-                                                  color: SplashText,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'assets/icons/confirm_shop.svg',
-                                                  ),
-                                                  Text(
-                                                    "Confirm",
-                                                    textAlign: TextAlign.center,
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Colors.white,
-                                                          // letterSpacing: .5,
-                                                          fontSize: 18.sp,
-                                                          fontWeight:
-                                                              FontWeight.w500),
+                              Container(
+                                margin: EdgeInsets.only(right: 15.w, left: 5.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: 20.w,
+                                    ),
+                                    watch.orderDetails?.orderStatus == "Pending"
+                                        ? Expanded(
+                                            child: InkWell(
+                                              onTap: () {
+                                                read.shopOrderStatus(
+                                                    context,
+                                                    watch.orderDetails?.id
+                                                        .toString(),
+                                                    "order_confirmed",
+                                                    "",
+                                                    "",
+                                                    "");
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.only(
+                                                    left: 20.w,
+                                                    top: 9.w,
+                                                    bottom: 7.w,
+                                                    right: 34.w),
+                                                decoration: BoxDecoration(
+                                                    color: SplashText,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                      'assets/icons/confirm_shop.svg',
                                                     ),
-                                                  ),
-                                                ],
+                                                    Text(
+                                                      "Confirm",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Colors.white,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 18.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ) ///////////////////////////////////////////Confirmed//////////////
-                                      : watch.orderDetails?.orderStatus ==
-                                              "Confirmed"
-                                          ? Expanded(
-                                              child: InkWell(
-                                                onTap: () {
-                                                  read.shopOrderStatus(
-                                                      context,
-                                                      watch.orderDetails?.id
-                                                          .toString(),
-                                                      "order_packing",
-                                                      "",
-                                                      "",
-                                                      "");
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 20.w,
-                                                      top: 9.w,
-                                                      bottom: 7.w,
-                                                      right: 18.w),
-                                                  decoration: BoxDecoration(
-                                                      color: SplashText,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8)),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        'assets/icons/confirm_shop.svg',
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10.w,
-                                                      ),
-                                                      Column(
-                                                        children: [
-                                                          Text(
-                                                            "In Process",
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: GoogleFonts
-                                                                .dmSans(
-                                                              textStyle:
-                                                                  TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      // letterSpacing: .5,
-                                                                      fontSize:
-                                                                          18.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500),
+                                          ) ///////////////////////////////////////////Confirmed//////////////
+                                        : watch.orderDetails?.orderStatus ==
+                                                "Confirmed"
+                                            ? Expanded(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    read.shopOrderStatus(
+                                                        context,
+                                                        watch.orderDetails?.id
+                                                            .toString(),
+                                                        "order_packing",
+                                                        "",
+                                                        "",
+                                                        "");
+                                                  },
+                                                  child: Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 20.w,
+                                                        top: 0.w,
+                                                        bottom: 5.w,
+                                                        right: 18.w),
+                                                    decoration: BoxDecoration(
+                                                        color: SplashText,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SvgPicture.asset(
+                                                          'assets/icons/confirm_shop.svg',
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10.w,
+                                                        ),
+                                                        Column(
+                                                          children: [
+                                                            Text(
+                                                              "In Process",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 18
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            "Move to Packing",
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: GoogleFonts
-                                                                .dmSans(
-                                                              textStyle:
-                                                                  TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      // letterSpacing: .5,
-                                                                      fontSize:
-                                                                          10.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500),
+                                                            Text(
+                                                              "Move to Packing",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 10
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-
-                                              ////////////////////////////
-                                            )
-                                          : watch.orderDetails?.orderStatus ==
-                                                  "Packing"
-                                              ? Expanded(
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      read.shopOrderStatus(
-                                                          context,
-                                                          watch.orderDetails?.id
-                                                              .toString(),
-                                                          "order_dispatched",
-                                                          "",
-                                                          "",
-                                                          "");
-                                                    },
-                                                    child: Container(
-                                                      // margin: EdgeInsets.only(
-                                                      //     left: 19.w, right: 20.w),
-                                                      padding: EdgeInsets.only(
-                                                        // left: 20.w,
-                                                        top: 9.w,
-                                                        bottom: 7.w,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                          color: SplashText,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8)),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          SvgPicture.asset(
-                                                            'assets/icons/confirm_shop.svg',
-                                                          ),
-                                                          SizedBox(
-                                                            width: 10.w,
-                                                          ),
-                                                          Text(
-                                                            "Order Ready for Dispatch",
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: GoogleFonts
-                                                                .dmSans(
-                                                              textStyle:
-                                                                  TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      // letterSpacing: .5,
-                                                                      fontSize:
-                                                                          18.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                )
-                                              : watch.orderDetails
-                                                          ?.orderStatus ==
-                                                      "Dispatched"
-                                                  ? Expanded(
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          // read.shopOrderStatus(
-                                                          //     context,
-                                                          //     watch.orderDetails
-                                                          //         ?.id
-                                                          //         .toString(),
-                                                          //     "order_delivered",
-                                                          //     "",
-                                                          //     "");
-                                                          showModalBottomSheet(
-                                                            backgroundColor:
-                                                                Colors.white,
-                                                            isScrollControlled:
-                                                                true,
-                                                            shape: const RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.only(
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            30),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            30))),
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return OrderDeliveryCodeView();
-                                                            },
-                                                          );
-                                                        },
-                                                        child: Container(
-                                                          // margin: EdgeInsets.only(
-                                                          //     left: 19.w, right: 20.w),
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                            top: 9.w,
-                                                            bottom: 7.w,
-                                                          ),
-                                                          decoration: BoxDecoration(
-                                                              color: SplashText,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8)),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              SvgPicture.asset(
-                                                                'assets/icons/confirm_shop.svg',
+                                                ),
+
+                                                ////////////////////////////
+                                              )
+                                            : watch.orderDetails?.orderStatus ==
+                                                    "Packing"
+                                                ? Expanded(
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        read.shopOrderStatus(
+                                                            context,
+                                                            watch.orderDetails
+                                                                ?.id
+                                                                .toString(),
+                                                            "order_dispatched",
+                                                            "",
+                                                            "",
+                                                            "");
+                                                      },
+                                                      child: Container(
+                                                        // margin: EdgeInsets.only(
+                                                        //     left: 19.w, right: 20.w),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          // left: 20.w,
+                                                          top: 9.w,
+                                                          bottom: 7.w,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                            color: SplashText,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8)),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SvgPicture.asset(
+                                                              'assets/icons/confirm_shop.svg',
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10.w,
+                                                            ),
+                                                            Text(
+                                                              "Order Ready for Dispatch",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 18
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
                                                               ),
-                                                              SizedBox(
-                                                                width: 10.w,
-                                                              ),
-                                                              Text(
-                                                                "Order Delivered To Customer",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .dmSans(
-                                                                  textStyle: TextStyle(
-                                                                      color: Colors.white,
-                                                                      // letterSpacing: .5,
-                                                                      fontSize: 18.sp,
-                                                                      fontWeight: FontWeight.w500),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    )
-                                                  : Container(),
-                                  // watch.orderDetails?.orderStatus ==
-                                  //     "Packing"||
-                                  //     watch.orderDetails?.orderStatus ==
-                                  //         "Dispatched"?Container():
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Visibility(
-                                    visible: watch.orderDetails?.orderStatus ==
-                                                "Packing" ||
-                                            watch.orderDetails?.orderStatus ==
-                                                "Dispatched"
-                                        ? false
-                                        : true,
-                                    child: Expanded(
-                                      child: InkWell(
-                                        onTap: () {
-                                          // read.shopOrderStatus(
-                                          //     context,
-                                          //     watch.orderDetails?.id.toString(),
-                                          //     "order_cancelled",
-                                          //     "",
-                                          //     "");
-                                          showModalBottomSheet(
-                                            backgroundColor: Colors.white,
-                                            isScrollControlled: true,
-                                            shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(30),
-                                                    topRight:
-                                                        Radius.circular(30))),
-                                            context: context,
-                                            builder: (context) {
-                                              return cancelOrderFiltterView();
-                                            },
-                                          );
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 20.w,
-                                              top: 9.w,
-                                              bottom: 7.w,
-                                              right: 34.w),
-                                          decoration: BoxDecoration(
-                                              color: Color(0xffEC7074),
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/icons/cancel_shop.svg',
-                                              ),
-                                              Text(
-                                                "Cancel",
-                                                textAlign: TextAlign.center,
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      // letterSpacing: .5,
-                                                      fontSize: 18.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500),
+                                                    ),
+                                                  )
+                                                : watch.orderDetails
+                                                            ?.orderStatus ==
+                                                        "Dispatched"
+                                                    ? Expanded(
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            // read.shopOrderStatus(
+                                                            //     context,
+                                                            //     watch.orderDetails
+                                                            //         ?.id
+                                                            //         .toString(),
+                                                            //     "order_delivered",
+                                                            //     "",
+                                                            //     "");
+                                                            showModalBottomSheet(
+                                                              backgroundColor:
+                                                                  Colors.white,
+                                                              isScrollControlled:
+                                                                  true,
+                                                              shape: const RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.only(
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              30),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              30))),
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return OrderDeliveryCodeView();
+                                                              },
+                                                            );
+                                                          },
+                                                          child: Container(
+                                                            // margin: EdgeInsets.only(
+                                                            //     left: 19.w, right: 20.w),
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                              top: 9.w,
+                                                              bottom: 7.w,
+                                                            ),
+                                                            decoration: BoxDecoration(
+                                                                color:
+                                                                    SplashText,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8)),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                SvgPicture
+                                                                    .asset(
+                                                                  'assets/icons/confirm_shop.svg',
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 10.w,
+                                                                ),
+                                                                Text(
+                                                                  "Order Delivered To Customer",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .dmSans(
+                                                                    textStyle: TextStyle(
+                                                                        color: Colors.white,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 18.sp,
+                                                                        fontWeight: FontWeight.w500),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Container(),
+                                    // watch.orderDetails?.orderStatus ==
+                                    //     "Packing"||
+                                    //     watch.orderDetails?.orderStatus ==
+                                    //         "Dispatched"?Container():
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Visibility(
+                                      visible: watch.orderDetails
+                                                      ?.orderStatus ==
+                                                  "Packing" ||
+                                              watch.orderDetails?.orderStatus ==
+                                                  "Dispatched"
+                                          ? false
+                                          : true,
+                                      child: Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            // read.shopOrderStatus(
+                                            //     context,
+                                            //     watch.orderDetails?.id.toString(),
+                                            //     "order_cancelled",
+                                            //     "",
+                                            //     "");
+                                            showModalBottomSheet(
+                                              backgroundColor: Colors.white,
+                                              isScrollControlled: true,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(30),
+                                                              topRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          30))),
+                                              context: context,
+                                              builder: (context) {
+                                                return cancelOrderFiltterView();
+                                              },
+                                            );
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.only(
+                                                left: 20.w,
+                                                top: 9.w,
+                                                bottom: 7.w,
+                                                right: 34.w),
+                                            decoration: BoxDecoration(
+                                                color: Color(0xffEC7074),
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/icons/cancel_shop.svg',
                                                 ),
-                                              ),
-                                            ],
+                                                Text(
+                                                  "Cancel",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        // letterSpacing: .5,
+                                                        fontSize: 18.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                  ],
+                                ),
                               ),
                               SizedBox(
                                 height: 9.h,
@@ -1042,7 +1060,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                     ),
                                     Text(
                                       // maxLines: 3,
-                                      "Delivery Slot ",
+                                      "Delivery Slot : ",
                                       // textAlign: TextAlign.start,
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
@@ -1104,10 +1122,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                       // textAlign: TextAlign.start,
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
-                                            // height: 1.5,
                                             color: SplashText,
-                                            // letterSpacing: .05,
-                                            // overflow: TextOverflow.ellipsis,
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w700),
                                       ),
@@ -1143,7 +1158,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                     ),
                                     Text(
                                       // maxLines: 3,
-                                      "Delivery Time ",
+                                      "Delivery Time :",
                                       // textAlign: TextAlign.start,
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
@@ -1259,7 +1274,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                 ),
                               ),
                               Text(
-                                "Rs ${watch.orderDetails?.subTotal}",
+                                "Rs. ${watch.orderDetails?.subTotal}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,
@@ -1286,7 +1301,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                               RichText(
                                 text: TextSpan(children: [
                                   TextSpan(
-                                    text: 'Discount!!',
+                                    text: 'Discount',
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: Black1,
@@ -1300,7 +1315,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                               null
                                       ? TextSpan(
                                           text:
-                                              '  (${watch.couponDetails?.couponCode}) ',
+                                              ' (${watch.couponDetails?.couponCode}) ',
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: SplashText,
@@ -1316,7 +1331,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                               ),
                               watch.orderDetails?.totalDiscount != ""
                                   ? Text(
-                                      "Rs ${watch.orderDetails?.totalDiscount}",
+                                      "- Rs. ${watch.orderDetails?.totalDiscount}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: grey5,

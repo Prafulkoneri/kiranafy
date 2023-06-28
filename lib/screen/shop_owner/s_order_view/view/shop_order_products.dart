@@ -184,7 +184,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                       ),
                                 Text(
                                   // "",
-                                  "Rs ${element?.productTotalPrice}",
+                                  "Rs. ${element?.productTotalPrice}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: grey5,
