@@ -5,7 +5,7 @@ class Endpoint {
   //     'https://newcms.m-staging.in/local-super-mart-testing/api/';
   //live url
   static const String baseUrl =
-      'https://newcms.m-staging.in/local-super-mart-admin/api/';
+      'https://localsupermart.com/local-super-mart-testing/api/';
   // Check Mobile Number Exist
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';
@@ -296,6 +296,10 @@ class Endpoint {
   ////Shop Owner Status Changed////
   static const String shopOwnerOrderStatusChange =
       "${baseUrl}lsm-shop-owner-change-order-delivery-status";
+
+  ////Shop Owner Add Remove Product////
+  static const String shopOwnerAddRemoveProduct =
+      "${baseUrl}lsm-shop-owner-remove-product-from-order";
 
   ////Customer Current Location Pincode////
   static const String currentLocationPincode =
