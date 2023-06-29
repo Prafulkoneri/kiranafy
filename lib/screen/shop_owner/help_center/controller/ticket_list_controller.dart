@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -14,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/help_center/model/ticket_t
 import 'package:local_supper_market/screen/shop_owner/help_center/repository/create_ticket_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/repository/get_ticket_list_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/repository/ticket_type_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
@@ -32,10 +34,11 @@ class SGetTicketListController extends ChangeNotifier {
   int ticketTypeId = 0;
   bool isLoading = true;
   String description = ""; //
+  bool isTickedError = false;
 
   List<TicketListData>? ticketList;
   Future<void> initState(context) async {
-    await getTciketList(context);
+    await getTicketList(context);
     await getTicketTypeList(context);
   }
 
@@ -49,7 +52,7 @@ class SGetTicketListController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getTciketList(context) async {
+  Future<void> getTicketList(context) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -119,10 +122,25 @@ class SGetTicketListController extends ChangeNotifier {
   Future<void> createTicket(
     context,
   ) async {
-    // ticketId = tID;
-    // ticketRemark = tRemark;
-    // ticketStatus = tStatus;
-    // showLoader(true);
+    if (descriptionController.text == "") {
+      isTickedError = true;
+      // Utils.showPrimarySnackbar(context, "Please Enter Description",
+      //     type: SnackType.error);
+      return;
+    }
+    if (subjectController.text == "") {
+      isTickedError = true;
+      // Utils.showPrimarySnackbar(context, "Please Enter Subject",
+      //     type: SnackType.error);
+      return;
+    }
+
+    if (ticketTypeId == 0) {
+      isTickedError = true;
+      // Utils.showPrimarySnackbar(context, "Please Select Type",
+      //     type: SnackType.error);
+      return;
+    }
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     createTicketRepo
@@ -132,9 +150,17 @@ class SGetTicketListController extends ChangeNotifier {
       final result = CreateTicketResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
+        getTicketList(context);
+        Navigator.pop(context);
+
+        descriptionController.clear();
+        subjectController.clear();
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+
         // ticketRepliesList?.insert(ticketRepliesList?.length??0,{"id":1,"remark":"bve","created_at":,"name":,"profile_image_path":,"profile_image_name":});
         // ticketRepliesList?.insert(ticketRepliesList?.length??0,reply);
-        // showLoader(false);
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -151,5 +177,16 @@ class SGetTicketListController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  showTicketErrorMsg() {
+    isTickedError = true;
+    notifyListeners();
+    print(isTickedError);
+  }
+
+  void onTicketDissmis() {
+    isTickedError = false;
+    notifyListeners();
   }
 }

@@ -5,7 +5,7 @@ class Endpoint {
   //     'https://newcms.m-staging.in/local-super-mart-testing/api/';
   //live url
   static const String baseUrl =
-      'https://localsupermart.com/local-super-mart-testing/api/';
+      'https://newcms.m-staging.in/local-super-mart-admin/api/';
   // Check Mobile Number Exist
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';
@@ -340,4 +340,10 @@ class Endpoint {
   static const String ticketType = "${baseUrl}lsm-shop-owner-get-ticket-types";
   //////////////////Create Ticket/////////////
   static const String createTicket = "${baseUrl}lsm-shop-owner-create-ticket";
+  //////////////////Get BankAcountDetail/////////////
+  static const String getBankAccount =
+      "${baseUrl}lsm-shop-owner-get-bank-details";
+  //////////////////Get BankAcountDetail/////////////
+  static const String updateBankDetail =
+      "${baseUrl}lsm-shop-owner-add-update-bank-details";
 }

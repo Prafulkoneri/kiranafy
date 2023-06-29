@@ -69,6 +69,8 @@ class _HelpCenterViewState extends State<HelpCenterView> {
         ),
       ),
       body: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.only(bottom: 100.w),
         itemCount: watch.ticketList?.length ?? 0,
         itemBuilder: (context, index) {
           final element = watch.ticketList?[index];
@@ -218,7 +220,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           );
         },

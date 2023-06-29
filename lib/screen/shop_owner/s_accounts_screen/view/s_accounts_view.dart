@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
@@ -565,13 +566,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
             ),
             GestureDetector(
               onTap: () {
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) =>
-                //           SMainScreenView(index: 4, screenName: MapScreenView())),
-                //   (Route<dynamic> route) => false,
-                // );
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 4, screenName: ShopBankAccountDetailsView())),
+                  (Route<dynamic> route) => false,
+                );
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
