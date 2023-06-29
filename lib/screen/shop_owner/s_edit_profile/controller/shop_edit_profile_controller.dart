@@ -21,6 +21,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/common_functions.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -184,20 +185,21 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         shopOwnerEmail: emailIdController.text,
         shopOwnerMobileNumber: (phoneNumberController.text),
         shopPincode: (selectedPincode.toString()),
+        bannerNotToBeDeletedIds: "",
+        shopBannerSequence: "",
       );
 
   Future<void> UpdateProfile(context) async {
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopUpdateProfileRepo.UpdateProfile(
             shopUpdateProfileReqModel, pref.getString("successToken"))
         .then((response) {
-      print("oooooo");
       print(response.body);
-      print("oooooo");
-      final result =
-          ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
+      final result = ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -241,14 +243,17 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       );
 
   Future<void> getCityList(context) async {
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+
         cityDataList = result.cityData;
         if (result.cityData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No City Found",
               type: SnackType.error);
         }
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -282,6 +287,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   Future<void> getAreaList(context) async {
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getAreaList(_areaListReqModel).then((response) {
       final result = GetAreaListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -290,7 +296,9 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           Utils.showPrimarySnackbar(context, "No Area Found",
               type: SnackType.error);
         }
+        LoadingOverlay.of(context).hide();
         notifyListeners();
+
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -313,6 +321,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       );
 
   Future<void> getPinCodeList(context) async {
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
       final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -327,6 +336,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         } else {
           showValuePincodeField = false;
         }
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -384,6 +394,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       );
 
   Future<void> getStateList(context) async {
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
       final result = GetStateListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -393,6 +404,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           Utils.showPrimarySnackbar(context, "No State Found",
               type: SnackType.error);
         }
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -474,32 +486,33 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       return;
     }
 
-    shopBannerSequence="";
-    for(int i=0;i<shopBannerSequenceList.length;i++){
-      if(shopBannerSequenceList[i]!="0"){
-        shopBannerSequence+=shopBannerSequenceList[i]+",";
-      }
 
-    }
-    shopBannerSequence=shopBannerSequence.substring(0,shopBannerSequence.length-1);
-    print("dfadfasdfaf");
-    print(shopBannerSequence);
-
-    bannerNotToBeDeletedIds="";
-    print(bannerNotToBeDeletedIdsList);
-    if(bannerNotToBeDeletedIdsList.isNotEmpty) {
-      for (int i = 0; i < bannerNotToBeDeletedIdsList.length; i++) {
-        bannerNotToBeDeletedIds += bannerNotToBeDeletedIdsList[i] + ",";
-      }
-      bannerNotToBeDeletedIds = bannerNotToBeDeletedIds.substring(
-          0, bannerNotToBeDeletedIds.length - 1);
-    }
     if (fileImage1.path == "" &&
         fileImage2.path == "" &&
         fileImage3.path == "" &&
         fileImage4.path == "") {
       await UpdateProfile(context);
     } else {
+      shopBannerSequence="";
+      for(int i=0;i<shopBannerSequenceList.length;i++){
+        if(shopBannerSequenceList[i]!="0"){
+          shopBannerSequence+=shopBannerSequenceList[i]+",";
+        }
+
+      }
+      shopBannerSequence=shopBannerSequence.substring(0,shopBannerSequence.length-1);
+      print("dfadfasdfaf");
+      print(shopBannerSequence);
+
+      bannerNotToBeDeletedIds="";
+      print(bannerNotToBeDeletedIdsList);
+      if(bannerNotToBeDeletedIdsList.isNotEmpty) {
+        for (int i = 0; i < bannerNotToBeDeletedIdsList.length; i++) {
+          bannerNotToBeDeletedIds += bannerNotToBeDeletedIdsList[i] + ",";
+        }
+        bannerNotToBeDeletedIds = bannerNotToBeDeletedIds.substring(
+            0, bannerNotToBeDeletedIds.length - 1);
+      }
       await uploadImage(context);
     }
   }
@@ -598,7 +611,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
   Future uploadImage(context) async {
 
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.shopUpdateAccountDetails}");
@@ -638,6 +651,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       print(response);
       if (response.statusCode == 200) {
         bannerNotToBeDeletedIdsList=["0","0","0","0"];
+        LoadingOverlay.of(context).hide();
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(

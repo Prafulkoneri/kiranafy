@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registra
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/shop_owner_register_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopRegistrationController extends ChangeNotifier {
@@ -91,6 +92,7 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> getStateList(context) async {
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
       final result = GetStateListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -99,6 +101,7 @@ class ShopRegistrationController extends ChangeNotifier {
           Utils.showPrimarySnackbar(context, "No State Found",
               type: SnackType.error);
         }
+          LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -127,6 +130,7 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> getCityList(context) async {
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -135,6 +139,7 @@ class ShopRegistrationController extends ChangeNotifier {
           Utils.showPrimarySnackbar(context, "No City Found",
               type: SnackType.error);
         }
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -174,6 +179,7 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> getAreaList(context) async {
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getAreaList(_areaListReqModel).then((response) {
       final result = GetAreaListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -182,6 +188,7 @@ class ShopRegistrationController extends ChangeNotifier {
           Utils.showPrimarySnackbar(context, "No Area Found",
               type: SnackType.error);
         }
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -205,6 +212,7 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> getPinCodeList(context) async {
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
       final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -214,6 +222,7 @@ class ShopRegistrationController extends ChangeNotifier {
           Utils.showPrimarySnackbar(context, "No Pincode Found",
               type: SnackType.error);
         }
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -299,7 +308,9 @@ class ShopRegistrationController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, "Enter UPI", type: SnackType.error);
       return;
     }
+
     await shopRegister(context);
+
   }
 
   Future<void> onNextClicked(context) async {
@@ -324,6 +335,7 @@ class ShopRegistrationController extends ChangeNotifier {
           fcmToken: fcmToken);
 
   Future<void> shopRegister(context) async {
+    LoadingOverlay.of(context).show();
     print("object");
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopOwnerRegisterRepo
@@ -340,7 +352,7 @@ class ShopRegistrationController extends ChangeNotifier {
         // pref.setString("kycStatus", result.kycStatus.toString());
         pref.setString('status', 'shopRegistered');
         pref.setString('mobileNumber', mobController.text);
-
+        LoadingOverlay.of(context).hide();
         notifyListeners();
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => SKycVerificationView()));

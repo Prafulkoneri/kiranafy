@@ -20,6 +20,7 @@ import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_
 
 import 'package:local_supper_market/screen/shop_owner/s_select_category/repository/s_categories_list_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SAddCouponsController extends ChangeNotifier {
@@ -145,6 +146,7 @@ class SAddCouponsController extends ChangeNotifier {
       );
 
   Future<void> getProductList(context) async {
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     productListAsPerCategoryRepo
         .getProductList(
@@ -156,7 +158,12 @@ class SAddCouponsController extends ChangeNotifier {
           ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         productList = result.data;
-        isLoading = false;
+        if(productList?.isEmpty??false){
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+        LoadingOverlay.of(context).hide();
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -269,7 +276,7 @@ class SAddCouponsController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-
+   LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     addCouponsRepo
         .addNewCoupons(addCouponsRequestModel, pref.getString("successToken"))
@@ -306,6 +313,7 @@ class SAddCouponsController extends ChangeNotifier {
                 (Route<dynamic> route) => false,
           );
         }
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {

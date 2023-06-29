@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/sh
 import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopOwnerOrderViewController extends ChangeNotifier {
@@ -52,6 +53,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String cancellationId = "";
   String productId = "";
   List<bool> selectedProductList = [];
+
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -90,10 +92,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void showStackLoader(value) {
-    isStackLoading = value;
-    notifyListeners();
-  }
+
 
   Future<void> shopOwnerOrderView(context, orId, showLoading) async {
     if (showLoading) {
@@ -130,12 +129,16 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
             selectedProductList.removeAt(i);
             selectedProductList.insert(i, false);
           }
-          print(selectedProductList);
+
         }
         await getCancelOrderList(context);
         if (showLoading) {
           showLoader(false);
         }
+        else{
+          showLoader(true);
+        }
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -162,8 +165,22 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     orderCancelledReasonId = oCReasonId.toString();
     deliveryCode = dCode.toString();
 
+    if(oStatus=="order_confirmed"){
+      List checkDataList=[];
+      for(int i=0;i<selectedProductList.length;i++){
+        if(selectedProductList[i]==true){
+          checkDataList.add(selectedProductList[i]);
+        }
+        if(checkDataList.isEmpty){
+          Utils.showPrimarySnackbar(context, "No product selected",
+              type: SnackType.error);
+          return;
+        }
+      }
+
+    }
+
     if (oStatus == "order_cancelled") {
-      print("7777777");
       if (!isOtherReasonSelected && orderCancelledReasonId == "") {
         cancelOrderErrorMsg = "Please Enter reason for cancellation";
         isCancelOrderErrorMsgVisible = true;
@@ -192,7 +209,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         .orderStatus(
             orderStatusChangedRequestModel, pref.getString("successToken"))
         .then((response) async {
-      print(response.body);
+
       final result =
           OrderStatusChangeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -206,7 +223,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           );
         }
         if (result.message != "Delivery code not matched. Please try again.") {
-          await shopOwnerOrderView(context, orId, false);
+          print("dafaadadasd");
+          await shopOwnerOrderView(context, orId, true);
           isDeliveryCodeError = false;
           if (oStatus == "order_delivered") {
             Navigator.pop(context);
@@ -215,16 +233,15 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
             Navigator.pop(context);
           }
         } else {
+          showLoader(false);
           deliveryCodeError = result.message ?? "";
           isDeliveryCodeError = true;
           notifyListeners();
           Timer(Duration(seconds: 3), () {
-            print("duration");
             isDeliveryCodeError = false;
             notifyListeners();
           });
         }
-        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -244,7 +261,6 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   }
 
   Future<void> getCancelOrderList(context) async {
-    print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
     orderCancelReasonRepo.OrderCancelReason(pref.getString("successToken"))
         .then((response) {
@@ -336,7 +352,9 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       );
 
   Future<void> selectProducts(context,index,id,value) async {
-    showStackLoader(true);
+
+   LoadingOverlay.of(context).show();
+
     productId=id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     addRemoveProductFromOrderRepo
@@ -356,12 +374,11 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           selectedProductList.insert(index,true);
         }
 
-        print(selectedProductList);
         totalDiscount=result.data?.totalDiscount.toString()??"";
         totalAmount=result.data?.totalAmount.toString()??"";
         subTotal=result.data?.subTotalAmount.toString()??"";
         deliveryCharges=result.data?.deliveryCharges.toString()??"";
-        showStackLoader(false);
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

@@ -60,8 +60,8 @@ class SMainScreenController extends ChangeNotifier {
   }
 
   void onCategorySelectUpdatePressed(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SMainScreenView()));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => SMainScreenView()));
     currentIndex = 0;
     currentScreen = SSCategoryListView();
     notifyListeners();

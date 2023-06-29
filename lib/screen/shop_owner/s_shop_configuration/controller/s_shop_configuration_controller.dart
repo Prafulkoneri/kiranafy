@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repos
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repository/s_shop_configuration_repo.dart';
 import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -347,6 +348,7 @@ class SShopConfigurationController extends ChangeNotifier {
       );
 
   Future editShopconfig(context) async {
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     var a = await shopEditConfigRepo.EditShopconfig(
             shopConfigRequestModel, pref.getString("successToken"))
@@ -354,6 +356,7 @@ class SShopConfigurationController extends ChangeNotifier {
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
         pref.setString("status", "loggedIn");
         if (isInitialConfiguration) {
           Navigator.pushAndRemoveUntil(
@@ -400,6 +403,7 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   Future uploadImage(context) async {
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.shopconfigurationedit}");
@@ -448,6 +452,7 @@ class SShopConfigurationController extends ChangeNotifier {
     await request.send().then((response) {
       if (response.statusCode == 200) {
         print("sucesss");
+        LoadingOverlay.of(context).hide();
         pref.setString("status", "loggedIn");
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);

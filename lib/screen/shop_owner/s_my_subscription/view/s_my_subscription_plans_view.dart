@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/benifits_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -33,11 +34,11 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
-            // mainAxisAlignment: M,
+          // mainAxisAlignment: M,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 18.w, top: 15.w, right: 19.w),
+                padding: EdgeInsets.only(left: 18.w, top: 15.w, right: 19.w,bottom: 20.w),
                 child: Stack(
                   alignment: Alignment.topCenter,
                   clipBehavior: Clip.none,
@@ -64,16 +65,22 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "My Current Subscription Plan",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w500),
+                                  SizedBox(
+                                    width: 19.w,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      "My Current Subscription Plan",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: Colors.white,
+                                            // letterSpacing: .5,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
@@ -84,12 +91,12 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                         elevation: MaterialStateProperty.all(0),
                                         // backgroundColor: ,
                                         backgroundColor:
-                                            MaterialStateProperty.all(
-                                                LightGreen1),
+                                        MaterialStateProperty.all(
+                                            LightGreen1),
                                         shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(5),
+                                            BorderRadius.circular(5),
                                             side: BorderSide(
                                               color: DarkGreen1,
                                               // width: 1,
@@ -112,10 +119,13 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                       //
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 19.w,
+                                  ),
                                 ],
                               ),
                               SizedBox(
-                                height: 22.w,
+                                height: 40.w,
                               ),
                               // SizedBox(
                               //   height: 22.w,
@@ -127,12 +137,13 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                   // width: 352.w,
                                   // height: 60.h,
                                 ),
+
                               ),
                             ],
                           ),
                         ),
                         Positioned(
-                            top: 35.w,
+                            top: 55.w,
                             left: 17.w,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -354,108 +365,111 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                 height: 19.h,
               ),
               ////////////////////////show more//////////////////
-              Container(
-                // padding: EdgeInsets.all(100),
-                child: Column(
-                  children: [
-                    ExpandedTileList.builder(
-                      itemCount: 1,
-                      maxOpened: 1,
-                      reverse: true,
-                      itemBuilder: (context, index, controller) {
-                        return ExpandedTile(
-                          // title: Container(),
-                          theme: const ExpandedTileThemeData(
-                            headerRadius: 24.0,
-                            headerPadding: EdgeInsets.all(24.0),
-                            headerSplashColor: Colors.white,
-                            contentBackgroundColor: Colors.white,
-                            contentPadding: EdgeInsets.all(24.0),
-                            contentRadius: 12.0,
-                          ),
-                          controller: index == 1
-                              ? controller.copyWith(isExpanded: true)
-                              : controller,
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Show More",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Grey,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              SvgPicture.asset("assets/icons/dropdown.svg")
-                            ],
-                          ),
-                          onTap: () {
-                            print(
-                              "heloo",
-                            );
-                          },
-                          trailing: Container(),
-                          content: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 12.w, top: 0.w, right: 18.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.circle_rounded,
-                                          size: 5.w,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          "Order management",
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            "assets/icons/correct.svg")
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              // TextButton(
-                              //   onPressed: () {
-                              //     controller.collapse();
-                              //   },
-                              //   child: Text("close it!"),
-                              // )
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
+
+
+              // Container(
+              //   // padding: EdgeInsets.all(100),
+              //   child: Column(
+              //     children: [
+              //       ExpandedTileList.builder(
+              //         itemCount: 1,
+              //         maxOpened: 1,
+              //         reverse: true,
+              //         itemBuilder: (context, index, controller) {
+              //           return ExpandedTile(
+              //             // title: Container(),
+              //             theme: const ExpandedTileThemeData(
+              //               headerColor: Colors.white,
+              //               headerRadius: 24.0,
+              //               headerPadding: EdgeInsets.all(24.0),
+              //               headerSplashColor: Colors.white,
+              //               contentBackgroundColor: Colors.white,
+              //               contentPadding: EdgeInsets.all(24.0),
+              //               contentRadius: 12.0,
+              //             ),
+              //             controller: index == 1
+              //                 ? controller.copyWith(isExpanded: true)
+              //                 : controller,
+              //             title: Row(
+              //               mainAxisAlignment: MainAxisAlignment.center,
+              //               crossAxisAlignment: CrossAxisAlignment.center,
+              //               children: [
+              //                 Text(
+              //                   "Show More",
+              //                   style: GoogleFonts.dmSans(
+              //                     textStyle: TextStyle(
+              //                         color: Grey,
+              //                         fontSize: 12.sp,
+              //                         fontWeight: FontWeight.w400),
+              //                   ),
+              //                 ),
+              //                 SizedBox(
+              //                   width: 5.w,
+              //                 ),
+              //                 SvgPicture.asset("assets/icons/dropdown.svg")
+              //               ],
+              //             ),
+              //             onTap: () {
+              //               print(
+              //                 "heloo",
+              //               );
+              //             },
+              //             trailing: Container(),
+              //             content: Column(
+              //               children: [
+              //                 Container(
+              //                   padding: EdgeInsets.only(
+              //                       left: 12.w, top: 0.w, right: 18.w),
+              //                   child: Row(
+              //                     mainAxisAlignment:
+              //                         MainAxisAlignment.spaceBetween,
+              //                     children: [
+              //                       Row(
+              //                         children: [
+              //                           Icon(
+              //                             Icons.circle_rounded,
+              //                             size: 5.w,
+              //                           ),
+              //                           SizedBox(
+              //                             width: 10,
+              //                           ),
+              //                           Text(
+              //                             "Order management",
+              //                             textAlign: TextAlign.center,
+              //                             style: GoogleFonts.dmSans(
+              //                               textStyle: TextStyle(
+              //                                   color: Black1,
+              //                                   fontSize: 14.sp,
+              //                                   fontWeight: FontWeight.w400),
+              //                             ),
+              //                           ),
+              //                         ],
+              //                       ),
+              //                       Row(
+              //                         children: [
+              //                           SvgPicture.asset(
+              //                               "assets/icons/correct.svg")
+              //                         ],
+              //                       )
+              //                     ],
+              //                   ),
+              //                 ),
+              //                 // TextButton(
+              //                 //   onPressed: () {
+              //                 //     controller.collapse();
+              //                 //   },
+              //                 //   child: Text("close it!"),
+              //                 // )
+              //               ],
+              //             ),
+              //           );
+              //         },
+              //       ),
+              //     ],
+              //   ),
+              // ),
               SizedBox(
-                height: 53.h,
+                height: 30.h,
               ),
               // BenifitsView()
 
@@ -480,10 +494,10 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                       // color: Colors.transparent,
                       color: Color(0xff4689EC),
                       onTap: () {
-                        // read.onNewShopPressed(context);
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>SSubscriptionScreenView(loggedIn:true)));
                       },
                       textColor: Colors.white,
-                      text: "New Shop",
+                      text: "New Plan",
                     ),
                   ],
                 ),
@@ -495,10 +509,10 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                   Table(
                     // defaultColumnWidth: FixedColumnWidth(120.0),
                     border: TableBorder(
-                        horizontalInside:
-                            BorderSide(color: Colors.white, width: 1)),
+                        horizontalInside: BorderSide(color: Colors.white, width: 5)),
                     children: [
-                      TableRow(children: [
+                      TableRow(
+                          children: [
                         Container(
                           padding: EdgeInsets.only(
                               left: 10.w, //
@@ -519,8 +533,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         ),
                         Container(
                           padding: EdgeInsets.only(
-                              // left: 15.w,//
-                              // right: 27.w,
+                            // left: 15.w,//
+                            // right: 27.w,
                               bottom: 10.w,
                               top: 8.w),
                           color: Color(0xff4EEFC1),
@@ -537,8 +551,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         ),
                         Container(
                           padding: EdgeInsets.only(
-                              // left: 15.w,//
-                              // right: 27.w,
+                            // left: 15.w,//
+                            // right: 27.w,
                               bottom: 10.w,
                               top: 8.w),
                           color: Color(0xff4EEFC1),
@@ -553,7 +567,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         ),
                         Container(
                             padding: EdgeInsets.only(
-                                // left: 15.w,//
+                              // left: 15.w,//
                                 right: 27.w,
                                 bottom: 10.w,
                                 top: 8.w),
@@ -570,6 +584,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                       ]),
 
                       /////////////////
+
                       TableRow(
                           decoration: BoxDecoration(
                             color: Color(0xffF2F2F2),
@@ -577,8 +592,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    // right: 27.w,
+                                  // left: 15.w,//
+                                  // right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
                                 child: Column(children: [
@@ -593,7 +608,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,
+                                  // left: 15.w,
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -609,7 +624,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -627,7 +642,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -652,7 +667,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -670,7 +685,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -688,7 +703,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -706,7 +721,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -731,7 +746,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -749,7 +764,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -767,7 +782,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -785,7 +800,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -810,7 +825,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -828,7 +843,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -846,7 +861,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -864,7 +879,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                    // left: 15.w,//
+                                  // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),

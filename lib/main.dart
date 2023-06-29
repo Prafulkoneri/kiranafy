@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
@@ -56,6 +56,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/
 import 'package:local_supper_market/screen/splash/controller/splash_controller.dart';
 import 'package:local_supper_market/screen/splash/view/splash_view.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -181,22 +182,34 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return MaterialApp(
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-                fontFamily: 'dm_sans_regular',
-              ),
-              // theme: ThemeData(
-              //   brightness: Brightness.light,
-              //   /* light theme settings */
-              // ),
-              // darkTheme: ThemeData(
-              //   brightness: Brightness.dark,
-              //   /* dark theme settings */
-              // ),
-              debugShowCheckedModeBanner: false,
-              home: SplashScreen());
+          return Container(
+            alignment: Alignment.center,
+            child:
+            Directionality(
+                textDirection: TextDirection.ltr,
+                child: LoadingOverlay(
+                  child:MaterialApp(
+
+                      title: 'Flutter Demo',
+                      theme: ThemeData(
+                        primarySwatch: Colors.blue,
+                        fontFamily: 'dm_sans_regular',
+                      ),
+                      // theme: ThemeData(
+                      //   brightness: Brightness.light,
+                      //   /* light theme settings */
+                      // ),
+                      // darkTheme: ThemeData(
+                      //   brightness: Brightness.dark,
+                      //   /* dark theme settings */
+                      // ),
+                      debugShowCheckedModeBanner: false,
+                      home: SplashScreen()),
+                ),
+            )
+
+          );
+
         });
   }
 }    // ShopOrderStatusView()

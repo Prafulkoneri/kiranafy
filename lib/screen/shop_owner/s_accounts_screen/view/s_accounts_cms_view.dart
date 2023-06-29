@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/about_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/privacy_policy_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/terms_and_condition_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -29,7 +30,15 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           title: "Accounts",
-          onActionTap: () {},
+          onBackBtnPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 4, screenName: SAccountScreenView())),
+                  (Route<dynamic> route) => false,
+            );
+          },
         ),
       ),
       body: SingleChildScrollView(

@@ -58,7 +58,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          isBackButtonEnabled: false,
+          isBackButtonEnabled: widget.loggedIn==true?true:false,
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
             Navigator.pop(context);

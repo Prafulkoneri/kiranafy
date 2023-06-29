@@ -1,14 +1,18 @@
 class Endpoint {
   Endpoint._();
+
   //testing url
   // static const String baseUrl =
   //     'https://newcms.m-staging.in/local-super-mart-testing/api/';
+
   //live url
   static const String baseUrl =
-      'https://localsupermart.com/local-super-mart-testing/api/';
+      'https://newcms.m-staging.in/local-super-mart-admin/api/';
+
   // Check Mobile Number Exist
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';
+
   // Get Country
   static const String getCountryList = '${baseUrl}lsm-country-list';
   //Get State List
