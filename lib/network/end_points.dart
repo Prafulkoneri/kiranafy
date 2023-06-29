@@ -325,4 +325,15 @@ class Endpoint {
   static const String shopSignOut = "${baseUrl}lsm-shop-owner-logout";
   //////////////////////SHOP DELETE ACCOUNT/////////////
   static const String shopDelete = "${baseUrl}lsm-shop-owner-delete-account";
+  //////////////////////Get TicketList/////////////
+  static const String ticketList = "${baseUrl}lsm-shop-owner-get-tickets";
+  //////////////////////View Ticket/////////////
+  static const String viewTicket = "${baseUrl}lsm-shop-owner-view-ticket";
+  /////////////////////Relpy Ticket/////////////
+  static const String ticketReply = "${baseUrl}lsm-shop-owner-ticket-reply";
+
+  ////////////////////Type Ticket/////////////
+  static const String ticketType = "${baseUrl}lsm-shop-owner-get-ticket-types";
+  //////////////////Create Ticket/////////////
+  static const String createTicket = "${baseUrl}lsm-shop-owner-create-ticket";
 }
