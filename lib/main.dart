@@ -74,6 +74,9 @@ import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
+import 'screen/shop_owner/bank_account_details/controller/get_bank_account_controll.dart';
+import 'screen/shop_owner/help_center/controller/ticket_list_controller.dart';
+import 'screen/shop_owner/help_center/controller/view_ticket_controller.dart';
 import 'screen/shop_owner/promotion_request/controller/promotion_controller.dart';
 import 'screen/shop_owner/s_coupons/controller/shop_coupons_list_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
@@ -146,6 +149,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CmsController()),
         ChangeNotifierProvider(create: (_) => ShopPramotionController()),
         ChangeNotifierProvider(create: (_) => PaymentHistoryController()),
+        ChangeNotifierProvider(create: (_) => SGetTicketListController()),
+        ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
+        ChangeNotifierProvider(create: (_) => SBankAccountController()),
       ],
       child: MyApp(),
     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,9 +7,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/bank_account_details/controller/get_bank_account_controll.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
+import 'package:provider/provider.dart';
 
 class ShopBankAccountDetailsView extends StatefulWidget {
   const ShopBankAccountDetailsView({super.key});
@@ -18,26 +22,22 @@ class ShopBankAccountDetailsView extends StatefulWidget {
       _ShopBankAccountDetailsViewState();
 }
 
-final TextEditingController controller = TextEditingController();
-String initialCountry = 'IN';
-PhoneNumber number = PhoneNumber(isoCode: 'IN');
-String radioButtonItem = '';
-String? dropdown;
-final maxLines = 5;
-final List<String> genderItems = [
-  'Male',
-  'Female',
-];
-
-String? selectedValue;
-// Group Value fo
-// r Radio Button.
-int id = 1;
-
 class _ShopBankAccountDetailsViewState
     extends State<ShopBankAccountDetailsView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<SBankAccountController>().initState(
+            context,
+          );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final watch = context.watch<SBankAccountController>();
+    final read = context.read<SBankAccountController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -45,10 +45,13 @@ class _ShopBankAccountDetailsViewState
         child: PrimaryAppBar(
           title: "Bank A/C Details",
           action: SvgPicture.asset("assets/icons/forward.svg"),
-          onActionTap: () {},
+          onActionTap: () async {
+            await read.updateAccountDetails(context);
+          },
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -60,6 +63,7 @@ class _ShopBankAccountDetailsViewState
                     height: 20.w,
                   ),
                   PrimarySTextFormField(
+                    controller: watch.bankNameController,
                     titleHeader: "Name of the Bank",
                     hintText: "Enter Name of the Bank",
                   ),
@@ -67,6 +71,7 @@ class _ShopBankAccountDetailsViewState
                     height: 20.w,
                   ),
                   PrimarySTextFormField(
+                    controller: watch.accountHolderNameController,
                     titleHeader: "Account Holder Name",
                     hintText: "Enter Account Name",
                   ),
@@ -74,20 +79,78 @@ class _ShopBankAccountDetailsViewState
                     height: 20.w,
                   ),
                   PrimarySTextFormField(
+                    controller: watch.accountNumberController,
                     titleHeader: "Account Number",
                     hintText: "Enter Account Number",
                   ),
                   SizedBox(
                     height: 20.w,
                   ),
-                  SDropDownField(
-                    hint: "Select Type of Account",
-                    titleHeader: "Type of Account",
-                  ),
+                  // SDropDownField(
+                  //   hint: "Select Type of Account",
+                  //   titleHeader: "Type of Account",
+                  // ),
+                  watch.accountType == ""
+                      ? SDropDownField(
+                          titleHeader: "Type of Account",
+                          onChanged: (value) {
+                            read.onSelectAccountType(value);
+                          },
+                          hint: "Select Type of Account",
+                          items: [
+                            DropdownMenuItem(
+                              value: "current",
+                              child: Text(
+                                "current",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: "saving",
+                              child: Text(
+                                "saving",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      : SDropDownField(
+                          value: watch.accountType,
+                          titleHeader: "Type of Account",
+                          onChanged: (value) {
+                            read.onSelectAccountType(value);
+                          },
+                          hint: "Select Type of Account",
+                          items: [
+                            DropdownMenuItem(
+                              value: "current",
+                              child: Text(
+                                "current",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: "saving",
+                              child: Text(
+                                "saving",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                   SizedBox(
                     height: 20.w,
                   ),
                   PrimarySTextFormField(
+                    controller: watch.iFSCCodeController,
                     titleHeader: "IFSC Code",
                     hintText: "Enter IFSC Code",
                   ),
@@ -95,6 +158,7 @@ class _ShopBankAccountDetailsViewState
                     height: 20.w,
                   ),
                   PrimarySTextFormField(
+                    controller: watch.bankBranchController,
                     titleHeader: "Bank Branch",
                     hintText: "Enter Bank Branch",
                   ),
@@ -102,7 +166,7 @@ class _ShopBankAccountDetailsViewState
               ),
             ),
             SizedBox(
-              height: 22.w,
+              height: 100.h,
             ),
           ],
         ),
