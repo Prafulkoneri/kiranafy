@@ -74,6 +74,7 @@ import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
+import 'screen/shop_owner/Offer_seasonal_recommanded/controller/offer_seasonal_recommanded_controller.dart';
 import 'screen/shop_owner/bank_account_details/controller/get_bank_account_controll.dart';
 import 'screen/shop_owner/help_center/controller/ticket_list_controller.dart';
 import 'screen/shop_owner/help_center/controller/view_ticket_controller.dart';
@@ -151,7 +152,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => PaymentHistoryController()),
         ChangeNotifierProvider(create: (_) => SGetTicketListController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
-        ChangeNotifierProvider(create: (_) => SBankAccountController()),
+        ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
       ],
       child: MyApp(),
     ),
@@ -189,13 +192,11 @@ class _MyAppState extends State<MyApp> {
         splitScreenMode: true,
         builder: (context, child) {
           return Container(
-            alignment: Alignment.center,
-            child:
-            Directionality(
+              alignment: Alignment.center,
+              child: Directionality(
                 textDirection: TextDirection.ltr,
                 child: LoadingOverlay(
-                  child:MaterialApp(
-
+                  child: MaterialApp(
                       title: 'Flutter Demo',
                       theme: ThemeData(
                         primarySwatch: Colors.blue,
@@ -212,10 +213,7 @@ class _MyAppState extends State<MyApp> {
                       debugShowCheckedModeBanner: false,
                       home: SplashScreen()),
                 ),
-            )
-
-          );
-
+              ));
         });
   }
 }    // ShopOrderStatusView()

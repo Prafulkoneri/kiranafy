@@ -234,10 +234,10 @@ class _CustomerListViewState extends State<CustomerListView> {
                                     Row(
                                       children: [
                                         Text(
-                                          '0 Orders',
+                                          '${element?.orderCount} Orders',
                                           style: TextStyle(
                                               color: Black,
-                                              letterSpacing: .5,
+                                              // letterSpacing: .5,
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w400),
                                         ),
