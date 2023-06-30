@@ -1,13 +1,21 @@
 class BuySubscriptionRequestModel {
   String? subscriptionId;
   String? serviceId;
+  String? paymentMode;
+  String? transactionId;
 
-  BuySubscriptionRequestModel({this.subscriptionId, this.serviceId});
+  BuySubscriptionRequestModel(
+      {this.subscriptionId,
+      this.serviceId,
+      this.paymentMode,
+      this.transactionId});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["subscription_id"] = subscriptionId;
     data["service_id"] = subscriptionId;
+    data["service_id"] = paymentMode;
+    data["service_id"] = transactionId;
     return data;
   }
 }

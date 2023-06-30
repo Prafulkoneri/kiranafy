@@ -28,6 +28,8 @@ class SSubscriptionController extends ChangeNotifier {
   String paymentMode = "";
   String selectedPlanId = "0";
   String selectedServicesId = "0";
+  String selectPaymentMode = "0";
+  String selectTransactionID = "0";
   bool oneTimeShop = false;
   bool productPrice = false;
   bool isLoading = false;
@@ -124,7 +126,10 @@ class SSubscriptionController extends ChangeNotifier {
 
   BuySubscriptionRequestModel get buySubscriptionRequestModel =>
       BuySubscriptionRequestModel(
-          subscriptionId: selectedPlanId, serviceId: selectedServicesId);
+          subscriptionId: selectedPlanId,
+          serviceId: selectedServicesId,
+          paymentMode: selectPaymentMode,
+          transactionId: selectTransactionID);
 
   Future<void> buySubscriptionPlan(context, loggedIn) async {
     // if (selectedAddOnServicesId.isNotEmpty) {
