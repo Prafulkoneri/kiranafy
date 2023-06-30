@@ -53,18 +53,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
           title: "Customer Support",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-            showModalBottomSheet(
-                backgroundColor: Colors.white,
-                isScrollControlled: true,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30))),
-                context: context,
-                builder: (context) {
-                  // using a scaffold helps to more easily position the FAB
-                  return RaiseTicketView();
-                });
+         read.onOpenBottomSheet(context);
           },
         ),
       ),

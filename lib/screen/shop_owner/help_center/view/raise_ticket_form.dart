@@ -142,6 +142,9 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                         read.createTicket(context);
                       },
                     ),
+                    SizedBox(
+                      height: 37.h,
+                    ),
                     // SizedBox(
                     //   height: 500.h,
                     // )
@@ -193,7 +196,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                     children: [
                       Expanded(
                         child: Text(
-                          "Invalid OTP",
+                          "${watch.errorMsgForRaiseTicket}",
                           style:
                               TextStyle(color: Colors.white, fontSize: 14.sp),
                         ),

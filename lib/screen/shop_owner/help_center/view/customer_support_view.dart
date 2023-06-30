@@ -59,7 +59,10 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
             title: "Customer Support",
           ),
         ),
-        body: Column(
+        body:watch.isLoading?Center(
+          child: CircularProgressIndicator(),
+        ):
+        Column(
           children: [
             Expanded(
               child: SingleChildScrollView(
@@ -196,6 +199,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                         height: 20.h,
                       ),
                       ListView.builder(
+                        reverse: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: watch.ticketRepliesList?.length ?? 0,
                         shrinkWrap: true,
@@ -298,6 +302,9 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                             ),
                           );
                         },
+                      ),
+                      SizedBox(
+                        height: 10.w,
                       ),
                     ],
                   ),
