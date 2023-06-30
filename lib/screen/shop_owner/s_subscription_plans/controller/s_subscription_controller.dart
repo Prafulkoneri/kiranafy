@@ -16,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SSubscriptionController extends ChangeNotifier {
   SubscriptionPlansRepo subscriptionPlansRepo = SubscriptionPlansRepo();
+  TextEditingController transactionIdController = TextEditingController();
   ShopBuySubscriptionsRepo shopBuySubscriptionsRepo =
       ShopBuySubscriptionsRepo();
   List<SubscriptionData>? subscriptionData;
@@ -128,11 +129,20 @@ class SSubscriptionController extends ChangeNotifier {
       BuySubscriptionRequestModel(
           subscriptionId: selectedPlanId,
           serviceId: selectedServicesId,
-          paymentMode: selectPaymentMode,
-          transactionId: selectTransactionID);
+          paymentMode: isQrCodeSeleted ? "qr_code" : "upi",
+          transactionId: transactionIdController.text);
 
   Future<void> buySubscriptionPlan(context, loggedIn) async {
-    // if (selectedAddOnServicesId.isNotEmpty) {
+    if (!isQrCodeSeleted & !isSelectedPaymentUpi) {
+      Utils.showPrimarySnackbar(context, "Please Select Mode Of Payment",
+          type: SnackType.error);
+      return;
+    }
+    if (transactionIdController.text.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Enter Transaction ID",
+          type: SnackType.error);
+      return;
+    }
     SharedPreferences pref = await SharedPreferences.getInstance();
     String a = '';
     if (selectedAddOnServicesId.isNotEmpty) {

@@ -14,8 +14,8 @@ class BuySubscriptionRequestModel {
     final Map<String, dynamic> data = {};
     data["subscription_id"] = subscriptionId;
     data["service_id"] = subscriptionId;
-    data["service_id"] = paymentMode;
-    data["service_id"] = transactionId;
+    data["payment_mode"] = paymentMode;
+    data["transaction_id"] = transactionId;
     return data;
   }
 }

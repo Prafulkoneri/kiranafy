@@ -16,6 +16,7 @@ import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
+import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
 class SSubscriptionScreenView extends StatefulWidget {
@@ -58,7 +59,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          isBackButtonEnabled: widget.loggedIn==true?true:false,
+          isBackButtonEnabled: widget.loggedIn == true ? true : false,
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
             Navigator.pop(context);
@@ -520,8 +521,6 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                           value: watch.isSelectedPaymentUpi,
                                           onChanged: (value) {
                                             read.onFavToShopSelected(value);
-                                            // read.onAddOnServicesSelected(
-                                            //     index, element?.id);
                                           },
                                         ),
                                         Text(
@@ -558,8 +557,6 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                             onChanged: (value) {
                                               read.onOrderedButNotFavSelected(
                                                   context);
-                                              // read.onAddOnServicesSelected(
-                                              //     index, element?.id);
                                             },
                                             value: watch.isQrCodeSeleted
                                             // watch.selectAddonServicesList[
@@ -725,6 +722,58 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                   //   // height: 165.h,
                                   //   width: 165.w,
                                   // ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 19.w, right: 19.w),
+                                    child: Text(
+                                      'Payment Transaction ID ',
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: Black,
+                                            letterSpacing: .5,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 19.w, right: 19.w),
+                                    // height: 48.h,
+                                    // width: 352.w,
+                                    child: PrimarySTextFormField(
+                                      controller: watch.transactionIdController,
+                                      hintText: "Enter Transaction ID",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 19.w, right: 19.w),
+                                    child: Text(
+                                      'Copy and paste your payment successful transaction details on above input box',
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: grey8,
+                                            letterSpacing: .5,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                               SizedBox(
