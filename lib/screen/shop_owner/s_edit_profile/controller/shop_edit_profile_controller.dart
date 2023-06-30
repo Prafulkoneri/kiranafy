@@ -59,21 +59,33 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String networkImage2 = "";
   String networkImage3 = "";
   String networkImage4 = "";
+  String imageId1 = "";
+  String imageId2 = "";
+  String imageId3 = "";
+  String imageId4 = "";
   String countryCode = "+91";
   List? pincodeList;
   bool showValuePincodeField = false;
   List<File> images = [];
   bool isLoading=true;
   String shopBannerSequence="";
-  String bannerNotToBeDeletedIds="";
-  List bannerNotToBeDeletedIdsList=[];
   List shopBannerSequenceList=["0","0","0","0"];
+  List deletedIdList=["0","0","0","0"];
+  String deletedIds="";
 
   Future<void> initState(
     context,
   ) async {
-    bannerNotToBeDeletedIdsList=["0","0","0","0"];
-    print(fileImage1.path);
+    networkImage1="";
+    networkImage2="";
+    networkImage3="";
+    networkImage4="";
+    shopBannerSequenceList=["0","0","0","0"];
+    deletedIdList=["0","0","0","0"];
+    fileImage1=File("");
+    fileImage2=File("");
+    fileImage3=File("");
+    fileImage4=File("");
     await getShopEditProfileDetails(context);
   }
 
@@ -119,28 +131,100 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           showValuePincodeField = false;
         }
         bannerImageList = result.shopBannerImages;
-        bannerNotToBeDeletedIds="";
         if (bannerImageList!.isNotEmpty) {
-          bannerNotToBeDeletedIdsList.clear();
           print(bannerImageList!.asMap().containsKey(0));
+
           if (bannerImageList!.asMap().containsKey(0)) {
-            networkImage1 = bannerImageList?[0].shopBannerImagePath ?? "";
-            bannerNotToBeDeletedIdsList.add(bannerImageList?[0].id.toString());
+            if(bannerImageList?[0].shopBannerSequence==1){
+              networkImage1 = bannerImageList?[0].shopBannerImagePath ?? "";
+              imageId1=bannerImageList?[0].id.toString()??"";
+            }
+            if(bannerImageList?[0].shopBannerSequence==2){
+              networkImage2 = bannerImageList?[0].shopBannerImagePath ?? "";
+              imageId2=bannerImageList?[0].id.toString()??"";
+            }
+            if(bannerImageList?[0].shopBannerSequence==3){
+              networkImage3 = bannerImageList?[0].shopBannerImagePath ?? "";
+              imageId3=bannerImageList?[0].id.toString()??"";
+            }
+            if(bannerImageList?[0].shopBannerSequence==4){
+              networkImage4 = bannerImageList?[0].shopBannerImagePath ?? "";
+              imageId4=bannerImageList?[0].id.toString()??"";
+
+            }
+
           }
+
           if (bannerImageList!.asMap().containsKey(1)) {
-            networkImage2 = bannerImageList?[1].shopBannerImagePath ?? "";
-            bannerNotToBeDeletedIdsList.add(bannerImageList?[1].id.toString());
+            print("hello");
+            if(bannerImageList?[1].shopBannerSequence==1){
+              print("sequence 1");
+              networkImage1 = bannerImageList?[1].shopBannerImagePath ?? "";
+              imageId1=bannerImageList?[1].id.toString()??"";
+
+            }
+            if(bannerImageList?[1].shopBannerSequence==2){
+              print("sequence 2");
+              networkImage2 = bannerImageList?[1].shopBannerImagePath ?? "";
+              imageId2=bannerImageList?[1].id.toString()??"";
+            }
+            if(bannerImageList?[1].shopBannerSequence==3){
+              print("sequence 3");
+              networkImage3 = bannerImageList?[1].shopBannerImagePath ?? "";
+              imageId3=bannerImageList?[1].id.toString()??"";
+
+            }
+            if(bannerImageList?[1].shopBannerSequence==4){
+              print("sequence 4");
+              networkImage4 = bannerImageList?[1].shopBannerImagePath ?? "";
+              imageId4=bannerImageList?[1].id.toString()??"";
+            }
+            // bannerNotToBeDeletedIdsList.removeAt(1);
+            // bannerNotToBeDeletedIdsList.insert(1,bannerImageList?[1].id.toString());
           }
+
           if (bannerImageList!.asMap().containsKey(2)) {
-            networkImage3 = bannerImageList?[2].shopBannerImagePath ?? "";
-            bannerNotToBeDeletedIdsList.add(bannerImageList?[2].id.toString());
+            if(bannerImageList?[2].shopBannerSequence==1){
+              networkImage1 = bannerImageList?[2].shopBannerImagePath ?? "";
+              imageId1=bannerImageList?[2].id.toString()??"";
+            }
+            if(bannerImageList?[2].shopBannerSequence==2){
+              networkImage2 = bannerImageList?[2].shopBannerImagePath ?? "";
+              imageId2=bannerImageList?[2].id.toString()??"";
+            }
+            if(bannerImageList?[2].shopBannerSequence==3){
+              networkImage3 = bannerImageList?[2].shopBannerImagePath ?? "";
+              imageId3=bannerImageList?[2].id.toString()??"";
+            }
+            if(bannerImageList?[2].shopBannerSequence==4){
+              networkImage4 = bannerImageList?[2].shopBannerImagePath ?? "";
+              imageId4=bannerImageList?[2].id.toString()??"";
+            }
+            // bannerNotToBeDeletedIdsList.removeAt(2);
+            // bannerNotToBeDeletedIdsList.insert(2,bannerImageList?[2].id.toString());
           }
+
           if (bannerImageList!.asMap().containsKey(3)) {
-            networkImage4 = bannerImageList?[3].shopBannerImagePath ?? "";
-            bannerNotToBeDeletedIdsList.add(bannerImageList?[3].id.toString());
+            if(bannerImageList?[3].shopBannerSequence==1){
+              networkImage1 = bannerImageList?[3].shopBannerImagePath ?? "";
+              imageId1=bannerImageList?[3].id.toString()??"";
+            }
+            if(bannerImageList?[3].shopBannerSequence==2){
+              networkImage2 = bannerImageList?[3].shopBannerImagePath ?? "";
+              imageId2=bannerImageList?[3].id.toString()??"";
+            }
+            if(bannerImageList?[3].shopBannerSequence==3){
+              networkImage3 = bannerImageList?[3].shopBannerImagePath ?? "";
+              imageId3=bannerImageList?[3].id.toString()??"";
+            }
+            if(bannerImageList?[3].shopBannerSequence==4){
+              networkImage4 = bannerImageList?[3].shopBannerImagePath ?? "";
+              imageId4=bannerImageList?[3].id.toString()??"";
+            }
+            // bannerNotToBeDeletedIdsList.removeAt(3);
+            // bannerNotToBeDeletedIdsList.insert(3,bannerImageList?[3].id.toString());
           }
           print("dadasdsadsa");
-          print(bannerNotToBeDeletedIdsList);
 
           print("dadasdsadsa");
         }
@@ -503,19 +587,26 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       shopBannerSequence=shopBannerSequence.substring(0,shopBannerSequence.length-1);
       print("dfadfasdfaf");
       print(shopBannerSequence);
-
-      bannerNotToBeDeletedIds="";
-      print(bannerNotToBeDeletedIdsList);
-      if(bannerNotToBeDeletedIdsList.isNotEmpty) {
-        for (int i = 0; i < bannerNotToBeDeletedIdsList.length; i++) {
-          bannerNotToBeDeletedIds += bannerNotToBeDeletedIdsList[i] + ",";
+      print(deletedIdList);
+      deletedIds="";
+      bool isDeletedIdAllZero=false;
+      for(int i=0;i<deletedIdList.length;i++){
+        if(deletedIdList[i]!="0"){
+          deletedIds+=deletedIdList[i]+",";
         }
-        bannerNotToBeDeletedIds = bannerNotToBeDeletedIds.substring(
-            0, bannerNotToBeDeletedIds.length - 1);
       }
+      print("dadasdasdsad");
+      print(deletedIds);
+      if(deletedIds!=""){
+        deletedIds=deletedIds.substring(0,deletedIds.length-1);
+      }
+      print(deletedIds);
+
       await uploadImage(context);
     }
-  }
+
+
+    }
 
   void openGallery1() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -525,20 +616,19 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      networkImage1 = "";
+      if(networkImage1!="") {
+        deletedIdList.removeAt(0);
+        deletedIdList.insert(0, imageId1);
+      }
+      networkImage1="";
       fileImage1 = File(pickedFile.path);
-      networkImage1 = "";
       images.add(fileImage1);
       shopBannerSequenceList.removeAt(0);
         shopBannerSequenceList.insert(0,"1");
 
-      print(shopBannerSequenceList);
-      if (bannerNotToBeDeletedIdsList.asMap().containsKey(0)) {
-        bannerNotToBeDeletedIdsList.removeAt(0);
-      }
 
-    }
-
+        }
+    print(deletedIdList);
     notifyListeners();
   }
 
@@ -550,17 +640,17 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
+      if(networkImage2!="") {
+        deletedIdList.removeAt(1);
+        deletedIdList.insert(1,imageId2);
+      }
       networkImage2 = "";
       fileImage2 = File(pickedFile.path);
       images.add(fileImage2);
       shopBannerSequenceList.removeAt(1);
         shopBannerSequenceList.insert(1,"2");
-      print(shopBannerSequenceList);
-      if (bannerNotToBeDeletedIdsList.asMap().containsKey(1)) {
-        bannerNotToBeDeletedIdsList.removeAt(1);
-      }
     }
-
+    print(deletedIdList);
     notifyListeners();
   }
 
@@ -572,17 +662,18 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
+      if(networkImage3!="") {
+        deletedIdList.removeAt(2);
+        deletedIdList.insert(2,imageId3);
+      }
       networkImage3 = "";
       fileImage3 = File(pickedFile.path);
       images.add(fileImage3);
       shopBannerSequenceList.removeAt(2);
         shopBannerSequenceList.insert(2,"3");
-      print(shopBannerSequenceList);
-      if (bannerNotToBeDeletedIdsList.asMap().containsKey(2)) {
-        bannerNotToBeDeletedIdsList.removeAt(2);
-      }
-    }
 
+    }
+    print(deletedIdList);
     notifyListeners();
   }
 
@@ -594,19 +685,18 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
+      if(networkImage4!="") {
+        deletedIdList.removeAt(3);
+        deletedIdList.insert(3,imageId4);
+      }
       networkImage4 = "";
       fileImage4 = File(pickedFile.path);
       images.add(fileImage4);
       shopBannerSequenceList.removeAt(3);
         shopBannerSequenceList.insert(3, "4");
-  print(shopBannerSequenceList);
-        if (bannerNotToBeDeletedIdsList.asMap().containsKey(3)) {
-          bannerNotToBeDeletedIdsList.removeAt(3);
-        }
-
-
-      notifyListeners();
     }
+
+    notifyListeners();
   }
 
   Future uploadImage(context) async {
@@ -629,7 +719,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     request.fields['shop_pincode'] = selectedPincode.toString();
     request.fields['shop_city_id'] = selectedCityId.toString();
     request.fields['shop_banner_sequence'] = shopBannerSequence.toString();
-    request.fields['banner_not_to_be_deleted_ids'] = bannerNotToBeDeletedIds.toString();
+    request.fields['delete_banners_ids'] = deletedIds;
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     for (int i = 0; i < images.length; i++) {
@@ -650,8 +740,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       print(respStr);
       print(response);
       if (response.statusCode == 200) {
-        bannerNotToBeDeletedIdsList=["0","0","0","0"];
+        shopBannerSequenceList=["0","0","0","0"];
         LoadingOverlay.of(context).hide();
+        fileImage1=File("");
+        fileImage2=File("");
+        fileImage3=File("");
+        fileImage4=File("");
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -663,6 +757,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
             type: SnackType.success);
         print("Updated Successfully");
       } else {
+        LoadingOverlay.of(context).hide();
+        fileImage1=File("");
+        fileImage2=File("");
+        fileImage3=File("");
+        fileImage4=File("");
         Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
       }

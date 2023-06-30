@@ -100,15 +100,11 @@ class ShopViewTicketController extends ChangeNotifier {
     ticketReplyRepo
         .replyTicket(ticketReplyRequestModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
       final result = TicketReplyResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        reply = result.reply;
-
-        // ticketRepliesList?.insert(ticketRepliesList?.length??0,{"id":1,"remark":"bve","created_at":,"name":,"profile_image_path":,"profile_image_name":});
-        // ticketRepliesList?.insert(ticketRepliesList?.length??0,reply);
-        // showLoader(false);
+        viewTicketList(context,ticketId);
+        remarkController.clear();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

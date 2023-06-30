@@ -95,17 +95,20 @@ class ShopBannerImageData {
   int? id;
   String? shopBannerImagePath;
   String? shopBannerImageName;
+  int ? shopBannerSequence;
 
   ShopBannerImageData({
     required this.id,
     required this.shopBannerImagePath,
     required this.shopBannerImageName,
+    required this.shopBannerSequence,
   });
 
   ShopBannerImageData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     shopBannerImagePath = json["shop_banner_image_path"];
     shopBannerImageName = json["shop_banner_image_name"];
+    shopBannerSequence = json["shop_banner_sequence"];
   }
 }
 
