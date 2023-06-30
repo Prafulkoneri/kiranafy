@@ -24,7 +24,7 @@ class SDashBoardController extends ChangeNotifier {
   String address = "";
   String pincode = "";
   String shopName = "";
-  int categoriesCount = 2;
+  // int categoriesCount = 2;
   int _currentPage = 0;
   PageController pageController = PageController();
 

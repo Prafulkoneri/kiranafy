@@ -99,7 +99,10 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                           width: 352.w,
                           height: 30.h,
                           child: TextField(
-                            controller: _searchController,
+                            onChanged: (value) {
+                              read.searchProductList(context, watch.categoryId);
+                            },
+                            controller: watch.searchController,
                             decoration: InputDecoration(
                               fillColor: Colors.white,
                               // filled: true,

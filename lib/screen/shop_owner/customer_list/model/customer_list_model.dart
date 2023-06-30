@@ -127,6 +127,7 @@ class AllCustomerListElement {
   String? mobileNumber;
   String? createdAt;
   String? isShopFavourite;
+  String? orderCount;
 
   AllCustomerListElement({
     required this.id,
@@ -138,6 +139,7 @@ class AllCustomerListElement {
     required this.mobileNumber,
     required this.createdAt,
     required this.isShopFavourite,
+    required this.orderCount,
   });
   AllCustomerListElement.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -149,5 +151,6 @@ class AllCustomerListElement {
     mobileNumber = json["mobile_number"];
     createdAt = json["created_at"];
     isShopFavourite = json["is_shop_favourite"];
+    orderCount = json["orders_count"];
   }
 }

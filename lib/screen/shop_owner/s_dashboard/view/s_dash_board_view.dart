@@ -323,7 +323,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               child: Column(
                                 children: [
                                   Text(
-                                    "0",
+                                    "${watch.dashBoardData?.totalCustomersOrderedCount}",
+                                    // "0",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: Colors.white,
@@ -364,7 +365,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.customersLinkedToShops}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -429,7 +431,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.shopOwnerActiveProductsCouponsCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -469,7 +472,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.shopOwnerActiveCouponsCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -679,7 +683,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.seasonalProductsCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -725,7 +730,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.fullfillYourCravingsProductsCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -797,7 +803,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.totalOrdersCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -834,7 +841,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.pendingOrdersCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -872,7 +880,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.confirmedOrdersCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -924,7 +933,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.inprocessOrdersCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -972,7 +982,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.deliveredOrdersCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -1019,7 +1030,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "0",
+                                  "${watch.dashBoardData?.cancelledOrdersCount}",
+                                  // "0",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -1208,7 +1220,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   ),
                                 ),
                                 Text(
-                                  "INR 0",
+                                  "INR ${watch.dashBoardData?.totalBusiness}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -1304,7 +1316,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "INR 0",
+                                  "INR ${watch.dashBoardData?.cancelledAmount}",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(

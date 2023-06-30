@@ -346,4 +346,13 @@ class Endpoint {
   //////////////////Get BankAcountDetail/////////////
   static const String updateBankDetail =
       "${baseUrl}lsm-shop-owner-add-update-bank-details";
+  //////////////////Get BankAcountDetail/////////////
+  static const String sRFProductsList =
+      "${baseUrl}lsm-shop-owner-get-recommended-seasonal-and-fullfill-your-cravings-products";
+  //////////////////Get BankAcountDetail/////////////
+  static const String removeSRFProducts =
+      "${baseUrl}lsm-shop-owner-remove-product-from-special-category";
+  //////////////////Get BankAcountDetail/////////////
+  static const String searchProduct =
+      "${baseUrl}lsm-shop-owner-selected-product-search";
 }

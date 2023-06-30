@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
@@ -402,52 +403,65 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
               ),
             ),
             ////////////////////
-            Container(
-              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              padding: EdgeInsets.only(bottom: 15.w),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1, color: grey10),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 4,
+                          screenName:
+                              ShopSeasonalRecommandedOfferProductsView())),
+                  (Route<dynamic> route) => false,
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                padding: EdgeInsets.only(bottom: 15.w),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: grey10),
+                  ),
+                  // color: Colors.white,
                 ),
-                // color: Colors.white,
-              ),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 5,
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/star.svg',
-                    // width: 14.w,
-                    // height: 13.h,
-                  ),
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  Flexible(
-                    child: Text(
-                      "Recommended & Seasonal Products",
-                      // "Rachel Green",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 5,
+                    ),
+                    SvgPicture.asset(
+                      'assets/icons/star.svg',
+                      // width: 14.w,
+                      // height: 13.h,
+                    ),
+                    SizedBox(
+                      width: 18.w,
+                    ),
+                    Flexible(
+                      child: Text(
+                        "Recommended & Seasonal Products",
+                        // "Rachel Green",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
-                  ),
-                  // Text(
-                  //   'Recommended & Seasonal Products',
-                  //   style: GoogleFonts.dmSans(
-                  //     textStyle: TextStyle(
-                  //         color: Black,
-                  //         fontSize: 14.sp,
-                  //         fontWeight: FontWeight.w400),
-                  //   ),
-                  // ),
-                ],
+                    // Text(
+                    //   'Recommended & Seasonal Products',
+                    //   style: GoogleFonts.dmSans(
+                    //     textStyle: TextStyle(
+                    //         color: Black,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.w400),
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
             ),
             /////////////////////
@@ -517,7 +531,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   MaterialPageRoute(
                       builder: (context) => SMainScreenView(
                           index: 4, screenName: SMySubscriptionView())),
-                      (Route<dynamic> route) => false,
+                  (Route<dynamic> route) => false,
                 );
               },
               child: Container(
@@ -629,15 +643,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
               ),
             ),
             GestureDetector(
-             onTap: (){
-               Navigator.pushAndRemoveUntil(
-                 context,
-                 MaterialPageRoute(
-                     builder: (context) => SMainScreenView(
-                         index: 2, screenName: SPaymentsView())),
-                     (Route<dynamic> route) => false,
-               );
-             },
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 2, screenName: SPaymentsView())),
+                  (Route<dynamic> route) => false,
+                );
+              },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
