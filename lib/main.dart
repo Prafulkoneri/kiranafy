@@ -81,6 +81,7 @@ import 'screen/shop_owner/help_center/controller/view_ticket_controller.dart';
 import 'screen/shop_owner/promotion_request/controller/promotion_controller.dart';
 import 'screen/shop_owner/s_coupons/controller/shop_coupons_list_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
+import 'screen/shop_owner/s_my_subscription/controller/subscription_history_controller.dart';
 import 'screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
 import 'screen/shop_owner/s_payments/controller/payment_histaory_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
@@ -153,6 +154,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SGetTicketListController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
+        ChangeNotifierProvider(create: (_) => SubscriptionHistoryController()),
         ChangeNotifierProvider(
             create: (_) => ShopSeasonalRecommandedOfferProductsController()),
       ],

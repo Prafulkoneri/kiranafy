@@ -355,4 +355,9 @@ class Endpoint {
   //////////////////Get BankAcountDetail/////////////
   static const String searchProduct =
       "${baseUrl}lsm-shop-owner-selected-product-search";
+//////////////////Get BankAcountDetail/////////////
+  static const String subscriptionHistory =
+      "${baseUrl}lsm-shop-owner-subscription-history";
+  /////////////////FAQ DATA/////////////
+  static const String faqData = "${baseUrl}lsm-shop-owner-get-faqs";
 }

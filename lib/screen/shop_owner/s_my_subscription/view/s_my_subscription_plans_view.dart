@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
@@ -6,12 +7,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/controller/subscription_history_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/benifits_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
+import 'package:provider/provider.dart';
 
 class SMySubscriptionView extends StatefulWidget {
   const SMySubscriptionView({super.key});
@@ -21,8 +25,18 @@ class SMySubscriptionView extends StatefulWidget {
 }
 
 class _SMySubscriptionViewState extends State<SMySubscriptionView> {
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<SubscriptionHistoryController>().initState(context);
+    });
+    // print(context.read<SubscriptionHistoryController>().currentSubscriptionPlan);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final read = context.read<SubscriptionHistoryController>();
+    final watch = context.watch<SubscriptionHistoryController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -34,11 +48,12 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
-          // mainAxisAlignment: M,
+            // mainAxisAlignment: M,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 18.w, top: 15.w, right: 19.w,bottom: 20.w),
+                padding: EdgeInsets.only(
+                    left: 18.w, top: 15.w, right: 19.w, bottom: 20.w),
                 child: Stack(
                   alignment: Alignment.topCenter,
                   clipBehavior: Clip.none,
@@ -65,7 +80,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
@@ -91,12 +106,12 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                         elevation: MaterialStateProperty.all(0),
                                         // backgroundColor: ,
                                         backgroundColor:
-                                        MaterialStateProperty.all(
-                                            LightGreen1),
+                                            MaterialStateProperty.all(
+                                                LightGreen1),
                                         shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
                                             borderRadius:
-                                            BorderRadius.circular(5),
+                                                BorderRadius.circular(5),
                                             side: BorderSide(
                                               color: DarkGreen1,
                                               // width: 1,
@@ -137,7 +152,6 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                   // width: 352.w,
                                   // height: 60.h,
                                 ),
-
                               ),
                             ],
                           ),
@@ -149,7 +163,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Advanced Plan ",
+                                  "${watch.currentSubscriptionPlan?.planName}",
+                                  // "Advanced Plan ",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white,
@@ -161,7 +176,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 Container(
                                   // width: ScreenUtil().screenWidth / 1.23.w,
                                   child: Text(
-                                    "Expiry Date : 1st January 2024",
+                                    "Expiry Date : ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
                                     style: TextStyle(
                                         fontSize: 14.sp,
                                         fontWeight: FontWeight.w400,
@@ -172,7 +187,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                   height: 6.w,
                                 ),
                                 Text(
-                                  "₹ 6000",
+                                  "₹ ${watch.currentSubscriptionPlan?.paidAmount}",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white,
@@ -366,7 +381,6 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
               ),
               ////////////////////////show more//////////////////
 
-
               // Container(
               //   // padding: EdgeInsets.all(100),
               //   child: Column(
@@ -494,7 +508,11 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                       // color: Colors.transparent,
                       color: Color(0xff4689EC),
                       onTap: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context)=>SSubscriptionScreenView(loggedIn:true)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    SSubscriptionScreenView(loggedIn: true)));
                       },
                       textColor: Colors.white,
                       text: "New Plan",
@@ -509,10 +527,10 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                   Table(
                     // defaultColumnWidth: FixedColumnWidth(120.0),
                     border: TableBorder(
-                        horizontalInside: BorderSide(color: Colors.white, width: 5)),
+                        horizontalInside:
+                            BorderSide(color: Colors.white, width: 5)),
                     children: [
-                      TableRow(
-                          children: [
+                      TableRow(children: [
                         Container(
                           padding: EdgeInsets.only(
                               left: 10.w, //
@@ -533,8 +551,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         ),
                         Container(
                           padding: EdgeInsets.only(
-                            // left: 15.w,//
-                            // right: 27.w,
+                              // left: 15.w,//
+                              // right: 27.w,
                               bottom: 10.w,
                               top: 8.w),
                           color: Color(0xff4EEFC1),
@@ -551,8 +569,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         ),
                         Container(
                           padding: EdgeInsets.only(
-                            // left: 15.w,//
-                            // right: 27.w,
+                              // left: 15.w,//
+                              // right: 27.w,
                               bottom: 10.w,
                               top: 8.w),
                           color: Color(0xff4EEFC1),
@@ -567,7 +585,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         ),
                         Container(
                             padding: EdgeInsets.only(
-                              // left: 15.w,//
+                                // left: 15.w,//
                                 right: 27.w,
                                 bottom: 10.w,
                                 top: 8.w),
@@ -592,8 +610,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
-                                  // right: 27.w,
+                                    // left: 15.w,//
+                                    // right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
                                 child: Column(children: [
@@ -608,7 +626,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,
+                                    // left: 15.w,
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -624,7 +642,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -642,7 +660,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -667,7 +685,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -685,7 +703,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -703,7 +721,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -721,7 +739,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -746,7 +764,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -764,7 +782,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -782,7 +800,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -800,7 +818,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -825,7 +843,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -843,7 +861,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -861,7 +879,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),
@@ -879,7 +897,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                 ])),
                             Container(
                                 padding: EdgeInsets.only(
-                                  // left: 15.w,//
+                                    // left: 15.w,//
                                     right: 27.w,
                                     bottom: 10.w,
                                     top: 8.w),

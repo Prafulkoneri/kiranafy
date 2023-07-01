@@ -39,7 +39,7 @@ class _TermsAndConditionViewState extends State<TermsAndConditionView> {
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
                       index: 4, screenName: SAccountCmsPagesView())),
-                  (Route<dynamic> route) => false,
+              (Route<dynamic> route) => false,
             );
           },
         ),
