@@ -67,7 +67,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String countryCode = "+91";
   List? pincodeList;
   bool showValuePincodeField = false;
-  List<File> images = [];
+  List<File> images = [File(""),File(""),File(""),File("")];
   bool isLoading = true;
   String shopBannerSequence = "";
   List shopBannerSequenceList = ["0", "0", "0", "0"];
@@ -77,6 +77,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   Future<void> initState(
     context,
   ) async {
+    images=[File(""),File(""),File(""),File("")];
     networkImage1 = "";
     networkImage2 = "";
     networkImage3 = "";
@@ -125,6 +126,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         stateDataList = result.states;
         areaDataList = result.areas;
         pincodeList = result.pincode;
+        if (stateDataList?.contains(selectedPincode.toString()) ?? false) {
+          print("8789888");
+          showValuePincodeField = true;
+        } else {
+          showValuePincodeField = false;
+        }
         if (pincodeList?.contains(selectedPincode.toString()) ?? false) {
           print("8789888");
           showValuePincodeField = true;
@@ -328,6 +335,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     LoadingOverlay.of(context).show();
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
+     print("cityResponse${response.body}");
       if (response.statusCode == 200) {
         cityDataList = result.cityData;
         if (result.cityData!.isEmpty) {
@@ -616,6 +624,13 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       }
       networkImage1 = "";
       fileImage1 = File(pickedFile.path);
+      if(images.asMap().containsKey(0)){
+        images.removeAt(0);
+        images.insert(0,fileImage1);
+      }
+      else{
+        images.insert(0,fileImage1);
+      }
       images.add(fileImage1);
       shopBannerSequenceList.removeAt(0);
       shopBannerSequenceList.insert(0, "1");
@@ -638,7 +653,13 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       }
       networkImage2 = "";
       fileImage2 = File(pickedFile.path);
-      images.add(fileImage2);
+      if(images.asMap().containsKey(1)){
+        images.removeAt(1);
+        images.insert(1,fileImage2);
+      }
+      else{
+        images.insert(1,fileImage2);
+      }
       shopBannerSequenceList.removeAt(1);
       shopBannerSequenceList.insert(1, "2");
     }
@@ -660,7 +681,13 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       }
       networkImage3 = "";
       fileImage3 = File(pickedFile.path);
-      images.add(fileImage3);
+      if(images.asMap().containsKey(2)){
+        images.removeAt(2);
+        images.insert(2,fileImage3);
+      }
+      else{
+        images.insert(2,fileImage3);
+      }
       shopBannerSequenceList.removeAt(2);
       shopBannerSequenceList.insert(2, "3");
     }
@@ -682,7 +709,13 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       }
       networkImage4 = "";
       fileImage4 = File(pickedFile.path);
-      images.add(fileImage4);
+      if(images.asMap().containsKey(3)){
+        images.removeAt(3);
+        images.insert(3,fileImage4);
+      }
+      else{
+        images.insert(3,fileImage4);
+      }
       shopBannerSequenceList.removeAt(3);
       shopBannerSequenceList.insert(3, "4");
     }
@@ -691,7 +724,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   Future uploadImage(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.shopUpdateAccountDetails}");
@@ -712,7 +745,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     request.fields['delete_banners_ids'] = deletedIds;
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
+    newList.clear();
+    print("444444");
+    print(images);
+    print("444444");
     for (int i = 0; i < images.length; i++) {
+      if(images[i].path!=""){
+
+
       File imageFile = images[i];
       print(imageFile);
       var stream =
@@ -722,13 +762,20 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           "shop_banner_image_path[$i]", stream, length,
           filename: basename(imageFile.path));
       newList.add(multipartFile);
+      }
     }
+
     request.files.addAll(newList);
+    print("4234324324");
     print(request.fields);
+    print(request.files);
+    print("4234324324");
     await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
+      print("fsfdsfsfdsfsf");
       print(respStr);
       print(response);
+      print("fsfdsfsfdsfsf");
       if (response.statusCode == 200) {
         shopBannerSequenceList = ["0", "0", "0", "0"];
         LoadingOverlay.of(context).hide();

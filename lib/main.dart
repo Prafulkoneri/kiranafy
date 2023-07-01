@@ -157,6 +157,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SubscriptionHistoryController()),
         ChangeNotifierProvider(
             create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(create: (_) => SBankAccountController()),
       ],
       child: MyApp(),
     ),
