@@ -101,7 +101,7 @@ class ShopRegistrationController extends ChangeNotifier {
           Utils.showPrimarySnackbar(context, "No State Found",
               type: SnackType.error);
         }
-          LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -310,7 +310,6 @@ class ShopRegistrationController extends ChangeNotifier {
     }
 
     await shopRegister(context);
-
   }
 
   Future<void> onNextClicked(context) async {
@@ -347,15 +346,25 @@ class ShopRegistrationController extends ChangeNotifier {
       print(response.statusCode);
       if (response.statusCode == 200) {
         print(response.body);
-        pref.setString("successToken", result.successToken?.token ?? "");
-        print(pref.getString("successToken"));
-        // pref.setString("kycStatus", result.kycStatus.toString());
-        pref.setString('status', 'shopRegistered');
-        pref.setString('mobileNumber', mobController.text);
-        LoadingOverlay.of(context).hide();
-        notifyListeners();
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SKycVerificationView()));
+        if (result.status == 200) {
+          pref.setString("successToken", result.successToken?.token ?? "");
+          print("4444444444444444444444444444444444444444");
+          print(pref.getString("successToken"));
+          print("4444444444444444444444444444444444444444");
+          // return;
+          // pref.setString("kycStatus", result.kycStatus.toString());
+          pref.setString('status', 'shopRegistered');
+          pref.setString('mobileNumber', mobController.text);
+          // return;
+          LoadingOverlay.of(context).hide();
+          notifyListeners();
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SKycVerificationView()));
+        } else {
+          LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

@@ -29,10 +29,10 @@ class SKycVerificationController extends ChangeNotifier {
   bool panCardValidation = false;
 
   FilePickerResult? result;
-  String fileName1="";
-  String fileName2="";
-  String fileName3="";
-  String fileName4="";
+  String fileName1 = "";
+  String fileName2 = "";
+  String fileName3 = "";
+  String fileName4 = "";
   PlatformFile? pickedfile;
   bool isLoading = false;
 
@@ -51,86 +51,78 @@ class SKycVerificationController extends ChangeNotifier {
 
   String? pdfPath;
 
-  void onChooseFile1()async{
+  void onChooseFile1() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'jpg'],
     );
     if (result != null) {
       networkImage1 = "";
-      fileName1=result.files.first.name;
+      fileName1 = result.files.first.name;
       print(result.files.single.extension);
-      fileImage1 = File(result.files.single.path??"");
-      if(result.files.single.extension=="pdf"){
-        image1Type="pdf";
+      fileImage1 = File(result.files.single.path ?? "");
+      if (result.files.single.extension == "pdf") {
+        image1Type = "pdf";
+      } else {
+        image1Type = "jpg";
       }
-      else{
-        image1Type="jpg";
-      }
-
     }
     notifyListeners();
   }
-  void onChooseFile2()async{
+
+  void onChooseFile2() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'jpg'],
     );
     if (result != null) {
-      fileName2=result.files.first.name;
+      fileName2 = result.files.first.name;
       print(result.files.single.extension);
-      fileImage2 = File(result.files.single.path??"");
-      if(result.files.single.extension=="pdf"){
-        image2Type="pdf";
+      fileImage2 = File(result.files.single.path ?? "");
+      if (result.files.single.extension == "pdf") {
+        image2Type = "pdf";
+      } else {
+        image2Type = "jpg";
       }
-      else{
-        image2Type="jpg";
-      }
-
     }
     notifyListeners();
   }
-  void onChooseFile3()async{
+
+  void onChooseFile3() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'jpg'],
     );
     if (result != null) {
-      fileName3=result.files.first.name;
+      fileName3 = result.files.first.name;
       print(result.files.single.extension);
-      fileImage3 = File(result.files.single.path??"");
-      if(result.files.single.extension=="pdf"){
-        image3Type="pdf";
+      fileImage3 = File(result.files.single.path ?? "");
+      if (result.files.single.extension == "pdf") {
+        image3Type = "pdf";
+      } else {
+        image3Type = "jpg";
       }
-      else{
-        image3Type="jpg";
-      }
-
     }
     notifyListeners();
   }
-  void onChooseFile4()async{
+
+  void onChooseFile4() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'jpg'],
     );
     if (result != null) {
-      fileName4=result.files.first.name;
+      fileName4 = result.files.first.name;
       print(result.files.single.extension);
-      fileImage4 = File(result.files.single.path??"");
-      if(result.files.single.extension=="pdf"){
-        image4Type="pdf";
+      fileImage4 = File(result.files.single.path ?? "");
+      if (result.files.single.extension == "pdf") {
+        image4Type = "pdf";
+      } else {
+        image4Type = "jpg";
       }
-      else{
-        image4Type="jpg";
-      }
-
     }
     notifyListeners();
   }
-
-
-
 
   void onVerifyChecked(value) {
     adharCardValidation = value;
@@ -251,7 +243,11 @@ class SKycVerificationController extends ChangeNotifier {
   }
 
   void onUploadClicked(context) async {
-
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("successToken").toString();
+    print("hujikkkk");
+    print(token);
+    print("hujikkkk");
     if (fileImage1.path == "") {
       Utils.showPrimarySnackbar(context, "Please Select Adhar Card Image",
           type: SnackType.error);
@@ -278,6 +274,7 @@ class SKycVerificationController extends ChangeNotifier {
       return;
     }
     print("hellooo");
+
     uploadImage(context);
   }
 
@@ -286,6 +283,7 @@ class SKycVerificationController extends ChangeNotifier {
     print("888888");
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
+    print(token);
     var uri = Uri.parse("${Endpoint.uploadKycVerification}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
@@ -336,7 +334,7 @@ class SKycVerificationController extends ChangeNotifier {
     // print(newList);
     request.files.addAll(newList);
     print(request.fields);
-    await request.send().then((response) async{
+    await request.send().then((response) async {
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         Navigator.pushReplacement(context,

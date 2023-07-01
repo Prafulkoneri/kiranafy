@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
@@ -220,6 +221,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         height: 20.w,
                       ),
                       PrimarySTextFormField(
+                        lengthLimitingTextInputFormatter:
+                            LengthLimitingTextInputFormatter(10),
 //  keyboardType: TextInputType.number,
                         textInputType: TextInputType.number,
                         controller: watch.supportNumberController,

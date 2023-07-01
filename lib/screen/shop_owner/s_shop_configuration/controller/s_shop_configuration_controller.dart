@@ -295,9 +295,15 @@ class SShopConfigurationController extends ChangeNotifier {
     }
 
     //////////////////
+    // if (supportNumberController.text.length < 10) {
+    //   Utils.showPrimarySnackbar(context, "Please Enter 10 digits",
+    //       type: SnackType.error);
+    //   return;
+    // }
     if (supportNumberController.text.length < 10) {
-      Utils.showPrimarySnackbar(context, "Please Enter 10 digits",
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
           type: SnackType.error);
+      notifyListeners();
       return;
     }
     if (!isCustomerPickupSelected && !isDeliveryCustomerSelected) {

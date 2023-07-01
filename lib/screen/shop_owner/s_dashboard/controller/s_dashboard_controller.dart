@@ -10,8 +10,11 @@ import 'package:local_supper_market/screen/shop_owner/s_dashboard/repository/das
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/model/get_subscription_history_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/repository/get_subscription_history_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/subscription_plan_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +30,9 @@ class SDashBoardController extends ChangeNotifier {
   // int categoriesCount = 2;
   int _currentPage = 0;
   PageController pageController = PageController();
+  SubcriptionData? subscriptiondata;
+  CurrentSubscriptionPlan? currentSubscriptionPlan;
+  List<SubscriptionHistory>? subscriptionHistory;
 
   void onCategorySelect(context) {
     Navigator.push(
@@ -41,6 +47,9 @@ class SDashBoardController extends ChangeNotifier {
   Future<void> initState(context) async {
     await getDashBoardData(context);
     await getShopEditProfileDetails(context);
+    await getSubscriptionPaymentHistory(
+      context,
+    );
     notifyListeners();
   }
 
@@ -119,6 +128,41 @@ class SDashBoardController extends ChangeNotifier {
         address = shopDetails?.shopAddress ?? "";
         pincode = shopDetails?.shopPincode.toString() ?? "";
         shopName = shopDetails?.shopName ?? "";
+        showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  /////////////////////////////////SubScription in Dash BOard/////////////////////
+  SubscriptionHistoryRepo subscriptionHistoryRepo = SubscriptionHistoryRepo();
+  Future<void> getSubscriptionPaymentHistory(context) async {
+    showLoader(true);
+    print("loading");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    subscriptionHistoryRepo
+        .subscriptionHistory(pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result =
+          GetSubscriptionHistoryModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        subscriptiondata = result.subscriptiondata;
+        currentSubscriptionPlan = subscriptiondata?.currentSubscriptionPlan;
+        subscriptionHistory = subscriptiondata?.subscriptionHistory;
         showLoader(false);
         notifyListeners();
       } else {

@@ -5,6 +5,7 @@ import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/model/s
 class SKycVerificationRepo {
   Future<http.Response> sendKycDetails(
       ShopKycVerificationReqModel reqModel, token) async {
+    print(token);
     try {
       return await http.post(Uri.parse(Endpoint.uploadKycVerification),
           body: reqModel.toJson(),
