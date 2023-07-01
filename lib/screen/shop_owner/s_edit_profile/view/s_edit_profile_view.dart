@@ -436,7 +436,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                         width: 30.w,
                       ),
                       Expanded(
-                          child: SDropDownField(
+                          child: watch.showValueStateField?
+                          SDropDownField(
                         value: watch.selectedStateId,
                         onChanged: (value) async {
                           read.onStateSelected(value);
@@ -455,12 +456,31 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                             .toList(),
                         hint: "State",
                         titleHeader: "State",
-                      )),
+                      ):SDropDownField(
+                            onChanged: (value) async {
+                              read.onStateSelected(value);
+                              read.getCityList(context);
+                            },
+                            items: watch.stateDataList
+                                ?.map((item) => DropdownMenuItem<String>(
+                              value: item.id.toString(),
+                              child: Text(
+                                item.stateName ?? "",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList(),
+                            hint: "State",
+                            titleHeader: "State",
+                          )),
                     ],
                   ),
                   SizedBox(
                     height: 22.w,
                   ),
+                  watch.showValueCityField?
                   SDropDownField(
                     value: watch.selectedCityId,
                     onChanged: (value) async {
@@ -480,6 +500,24 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                         .toList(),
                     hint: "City",
                     titleHeader: "City",
+                  ):  SDropDownField(
+                    onChanged: (value) async {
+                      read.onCitySelected(value);
+                      read.getAreaList(context);
+                    },
+                    items: watch.cityDataList
+                        ?.map((item) => DropdownMenuItem<String>(
+                      value: item.id.toString(),
+                      child: Text(
+                        item.cityName ?? "",
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ))
+                        .toList(),
+                    hint: "City",
+                    titleHeader: "City",
                   ),
                   SizedBox(
                     width: 30.w,
@@ -487,7 +525,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                   SizedBox(
                     height: 22.w,
                   ),
-                  SDropDownField(
+                watch.showValueAreaField ? SDropDownField(
                     value: watch.selectedAreaId,
                     onChanged: (value) async {
                       read.onAreaSelected(value);
@@ -506,7 +544,25 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                         .toList(),
                     hint: "Area",
                     titleHeader: "Area",
-                  ),
+                  ):SDropDownField(
+                  onChanged: (value) async {
+                    read.onAreaSelected(value);
+                    read.getPinCodeList(context);
+                  },
+                  items: watch.areaDataList
+                      ?.map((item) => DropdownMenuItem<String>(
+                    value: item.id.toString(),
+                    child: Text(
+                      item.areaName ?? "",
+                      style: const TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ))
+                      .toList(),
+                  hint: "Area",
+                  titleHeader: "Area",
+                ),
                   SizedBox(
                     width: 30.w,
                   ),

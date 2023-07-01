@@ -38,10 +38,10 @@ class OnBoardingController extends ChangeNotifier {
   }
 
   void onCustomerBtnPressed(context) {
-    // Navigator.push(
-    //     context, MaterialPageRoute(builder: (context) => CustomerSignInView()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => CustomerSignInView()));
 
-    Utils.showPrimarySnackbar(context,"This is a pre-launch for shop owner, app for customers will be launched soon!", type: SnackType.success);
+    // Utils.showPrimarySnackbar(context,"This is a pre-launch for shop owner, app for customers will be launched soon!", type: SnackType.success);
     return;
   }
 

@@ -134,7 +134,12 @@ class ShopRegistrationController extends ChangeNotifier {
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        // cityList=[];
+        // if(cityList?.isEmpty??true){
+        //   print("hello");
+        // }
         cityList = result.cityData;
+        print(response.body);
         if (result.cityData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No City Found",
               type: SnackType.error);

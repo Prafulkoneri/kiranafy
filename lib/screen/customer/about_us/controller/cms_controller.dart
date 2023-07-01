@@ -14,7 +14,7 @@ class CmsController extends ChangeNotifier {
   AboutUs? aboutUs;
   AboutUs? privacyPolicy;
   AboutUs? termsAndCondition;
-  String privacyPolicyHtml="";
+  String privacyPolicyHtml = "";
   String raw = "";
   Future<void> initState(context) async {
     await getCmsPages(context);
@@ -33,9 +33,12 @@ class CmsController extends ChangeNotifier {
         cmsdata = result.cmsdata;
         aboutUs = cmsdata?.aboutUs;
         privacyPolicy = cmsdata?.privacyPolicy;
-        privacyPolicyHtml=privacyPolicy?.description??"";
-        raw=privacyPolicyHtml.replaceAll('\n', r'\n');
-     
+        privacyPolicyHtml = privacyPolicy?.description ?? "";
+        termsAndCondition = cmsdata?.termsAndCondition;
+        print("yrvuyuiweuiytuiwuivbyhiuyeruiyvuiweryiuy");
+        print(termsAndCondition);
+        raw = privacyPolicyHtml.replaceAll('\n', r'\n');
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

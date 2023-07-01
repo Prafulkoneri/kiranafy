@@ -211,7 +211,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                           await read.onCitySelected(value);
                           await read.getAreaList(context);
                         },
-                        items: watch.cityList
+                        items: watch.cityList?.isEmpty??true?[]:
+                        watch.cityList
                             ?.map((item) => DropdownMenuItem<String>(
                                   value: item.id.toString(),
                                   child: Text(
