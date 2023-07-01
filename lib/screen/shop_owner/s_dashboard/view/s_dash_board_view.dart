@@ -1346,258 +1346,305 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 19.w, top: 15.w, right: 12.w, bottom: 80.w),
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        clipBehavior: Clip.none,
-                        children: <Widget>[
-                          Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Custlogin,
-                                    gradient: LinearGradient(
-                                        end: Alignment.topCenter,
-                                        begin: Alignment.bottomCenter,
-                                        colors: <Color>[
-                                          yellow1.withOpacity(1),
-                                          yellow2.withOpacity(1),
-                                        ]),
+                    ////////////////////////////////////////
 
-                                    // border: Border.all(width: 1, color: Black),
-                                    borderRadius: BorderRadius.circular(10.w)),
-                                child: Column(
+                    watch.currentSubscriptionPlan?.planName == "Standard Plan"
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                left: 19.w,
+                                top: 15.w,
+                                right: 12.w,
+                                bottom: 80.w),
+                            child: Stack(
+                              alignment: Alignment.topCenter,
+                              clipBehavior: Clip.none,
+                              children: <Widget>[
+                                Stack(
                                   children: [
-                                    SizedBox(
-                                      height: 30.w,
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10.w),
-                                      child: Image.asset(
-                                        'assets/images/subscription4.png',
-                                        // width: 352.w,
-                                        // height: 60.h,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Custlogin,
+                                          gradient: LinearGradient(
+                                              end: Alignment.topCenter,
+                                              begin: Alignment.bottomCenter,
+                                              colors: <Color>[
+                                                yellow1.withOpacity(1),
+                                                yellow2.withOpacity(1),
+                                              ]),
+
+                                          // border: Border.all(width: 1, color: Black),
+                                          borderRadius:
+                                              BorderRadius.circular(10.w)),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 30.w,
+                                          ),
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.w),
+                                            child: Image.asset(
+                                              'assets/images/subscription4.png',
+                                              // width: 352.w,
+                                              // height: 60.h,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                  top: 14.w,
-                                  left: 15.w,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width:
-                                            ScreenUtil().screenWidth / 1.13.w,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                    Positioned(
+                                        top: 14.w,
+                                        left: 15.w,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              "My Subscription Plan",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.white,
-                                                  fontSize: 12.sp),
-                                            ),
                                             Container(
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return Dialog(
-                                                          child:
-                                                              SingleChildScrollView(
-                                                            child: Column(
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsets.only(
-                                                                      top: 11.w,
-                                                                      right:
-                                                                          14.w,
-                                                                      left:
-                                                                          25.w),
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    children: [
-                                                                      Text(
-                                                                          "Advanced Plan - ₹6000",
-                                                                          style:
-                                                                              GoogleFonts.dmSans(
-                                                                            textStyle: TextStyle(
-                                                                                color: Black,
-                                                                                fontSize: 16.sp,
-                                                                                fontWeight: FontWeight.w700),
-                                                                          )),
-                                                                      InkWell(
-                                                                        onTap:
-                                                                            () {
-                                                                          Navigator.pop(
-                                                                              context);
-                                                                        },
-                                                                        child: SvgPicture.asset(
-                                                                            "assets/icons/pop_delete.svg"),
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Divider(),
-                                                                Container(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .only(
-                                                                    left: 23.w,
-                                                                    right: 16.w,
-                                                                  ),
-                                                                  height: 646.h,
-                                                                  // width: 362.w,
-                                                                  child: ListView
-                                                                      .builder(
-                                                                    itemCount:
-                                                                        20,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            index) {
-                                                                      return Column(
-                                                                        children: <
-                                                                            Widget>[
-                                                                          Container(
-                                                                            child:
-                                                                                Row(
-                                                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                                                              // mainAxisAlignment:
-                                                                              //     MainAxisAlignment.center,
-                                                                              children: [
-                                                                                Icon(
-                                                                                  Icons.circle_rounded,
-                                                                                  size: 5.w,
-                                                                                ),
-                                                                                SizedBox(
-                                                                                  width: 10,
-                                                                                ),
-                                                                                Text(
-                                                                                  // softWrap: true,
-                                                                                  // maxLines: 3,//
-                                                                                  "Ready grocery item master",
-
-                                                                                  style: GoogleFonts.dmSans(
-                                                                                    textStyle: TextStyle(
-                                                                                        color: Black1,
-                                                                                        height: 1.5,
-
-                                                                                        // letterSpacing: .05,
-                                                                                        // overflow: TextOverflow.ellipsis,
-                                                                                        fontSize: 14.sp,
-                                                                                        fontWeight: FontWeight.w400),
-                                                                                  ),
-                                                                                ),
-                                                                                Padding(
-                                                                                  padding: EdgeInsets.only(left: 32.w, right: 32.w),
-                                                                                  child: Container(
-                                                                                    width: 1.w,
-                                                                                    height: 35.w,
-                                                                                    color: grey11,
-                                                                                  ),
-                                                                                ),
-                                                                                SvgPicture.asset("assets/icons/correct.svg")
-                                                                              ],
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ],
+                                              width: ScreenUtil().screenWidth /
+                                                  1.13.w,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "My Subscription Plan",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Colors.white,
+                                                        fontSize: 12.sp),
+                                                  ),
+                                                  Container(
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 11.w,
+                                                              vertical: 4.w),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(7.w),
+                                                        color: Color(0xff000000)
+                                                            .withOpacity(0.35),
+                                                      ),
+                                                      child: Row(
+                                                        // mainAxisAlignment:
+                                                        //     MainAxisAlignment.start,
+                                                        // mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          Text(
+                                                            'Active',
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      // letterSpacing: .5,
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
                                                             ),
-                                                          ),
-                                                        );
-                                                      });
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 11.w,
-                                                      vertical: 4.w),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            7.w),
-                                                    color: Color(0xff000000)
-                                                        .withOpacity(0.35),
+                                                          ), // <-- Text
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
-                                                  child: Row(
-                                                    // mainAxisAlignment:
-                                                    //     MainAxisAlignment.start,
-                                                    // mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      Text(
-                                                        'Active',
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              // letterSpacing: .5,
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ), // <-- Text
-                                                    ],
-                                                  ),
-                                                ),
+                                                ],
                                               ),
                                             ),
+                                            SizedBox(
+                                              height: 7.w,
+                                            ),
+                                            Container(
+                                              width: ScreenUtil().screenWidth /
+                                                  1.13.w,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "${watch.currentSubscriptionPlan?.planName}",
+                                                    style: TextStyle(
+                                                        fontSize: 18.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: Colors.white),
+                                                  ),
+                                                  Text(
+                                                    "Exp Date - ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 22.w,
+                                            ),
                                           ],
-                                        ),
+                                        )),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.only(
+                                left: 19.w,
+                                top: 15.w,
+                                right: 12.w,
+                                bottom: 80.w),
+                            child: Stack(
+                              alignment: Alignment.topCenter,
+                              clipBehavior: Clip.none,
+                              children: <Widget>[
+                                Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Custlogin,
+                                          gradient: LinearGradient(
+                                              end: Alignment.topCenter,
+                                              begin: Alignment.bottomCenter,
+                                              colors: <Color>[
+                                                Color(0xff4EC0FA)
+                                                    .withOpacity(1),
+                                                Color(0xff32DFAC)
+                                                    .withOpacity(1),
+                                              ]),
+
+                                          // border: Border.all(width: 1, color: Black),
+                                          borderRadius:
+                                              BorderRadius.circular(10.w)),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 30.w,
+                                          ),
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.w),
+                                            child: Image.asset(
+                                              'assets/images/my_subscription_home.png',
+                                              // width: 352.w,
+                                              // height: 60.h,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        height: 7.w,
-                                      ),
-                                      Container(
-                                        width:
-                                            ScreenUtil().screenWidth / 1.13.w,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                    ),
+                                    Positioned(
+                                        top: 14.w,
+                                        left: 15.w,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              "Standard Plan",
-                                              style: TextStyle(
-                                                  fontSize: 18.sp,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.white),
+                                            Container(
+                                              width: ScreenUtil().screenWidth /
+                                                  1.13.w,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "My Subscription Plan",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Colors.white,
+                                                        fontSize: 12.sp),
+                                                  ),
+                                                  Container(
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 11.w,
+                                                              vertical: 4.w),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(7.w),
+                                                        color: Color(0xff000000)
+                                                            .withOpacity(0.35),
+                                                      ),
+                                                      child: Row(
+                                                        // mainAxisAlignment:
+                                                        //     MainAxisAlignment.start,
+                                                        // mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          Text(
+                                                            'Active',
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      // letterSpacing: .5,
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                            ),
+                                                          ), // <-- Text
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                            Text(
-                                              "Exp Date - 25 Dec 2023",
-                                              style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.white),
+                                            SizedBox(
+                                              height: 7.w,
+                                            ),
+                                            Container(
+                                              width: ScreenUtil().screenWidth /
+                                                  1.13.w,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "${watch.currentSubscriptionPlan?.planName}",
+                                                    style: TextStyle(
+                                                        fontSize: 18.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: Colors.white),
+                                                  ),
+                                                  Text(
+                                                    "Exp Date - ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 22.w,
                                             ),
                                           ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 22.w,
-                                      ),
-                                    ],
-                                  )),
-                            ],
+                                        )),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
 
                     SizedBox(
                       height: 16.w,

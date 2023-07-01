@@ -271,7 +271,143 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                     child: ExpansionTile(
                                       trailing: SizedBox.shrink(),
 
-                                      title: Container(
+                                      title:
+                                          // Container(
+                                          //   padding: EdgeInsets.only(),
+                                          //   width: ScreenUtil().screenWidth,
+                                          //   child: Row(
+                                          //     mainAxisAlignment:
+                                          //         MainAxisAlignment.spaceBetween,
+                                          //     children: [
+                                          //       Row(
+                                          //         children: [
+                                          //           // Image(
+                                          //           //   image: NetworkImage(
+                                          //           //     "${element?.productImagePath}",
+                                          //           //   ),
+                                          //           // height: 61.h,
+                                          //           // width: 60.w,
+                                          //           // fit: BoxFit.fill,
+                                          //           // ),
+                                          //           Container(
+                                          //             height: 61.h,
+                                          //             width: 60.w,
+                                          //             // width: 55.w,
+                                          //             // height: 40.h,
+                                          //             child: AppNetworkImages(
+                                          //               imageUrl:
+                                          //                   "${element?.productImagePath}",
+                                          //               // height: 61.h,
+                                          //               // width: 60.w,
+                                          //               // fit: BoxFit.fill,
+                                          //             ),
+                                          //           ),
+                                          //           SizedBox(
+                                          //             width: 10.w,
+                                          //           ),
+                                          //           Container(
+                                          //             width: 150.w,
+                                          //             child: Text(
+                                          //               "${element?.productName}",
+                                          //               // "${element?.productName}",
+                                          //               style: GoogleFonts.dmSans(
+                                          //                 textStyle: TextStyle(
+                                          //                     color: Black1,
+                                          //                     fontSize: 16.sp,
+                                          //                     fontWeight:
+                                          //                         FontWeight.w700),
+                                          //               ),
+                                          //             ),
+                                          //           ),
+                                          //         ],
+                                          //       ),
+                                          //       Row(
+                                          //         children: [
+                                          //           GestureDetector(
+                                          //             onTap: () {
+                                          //               Navigator
+                                          //                   .pushAndRemoveUntil(
+                                          //                 context,
+                                          //                 MaterialPageRoute(
+                                          //                     builder: (context) =>
+                                          //                         SMainScreenView(
+                                          //                             index: 0,
+                                          //                             screenName:
+                                          //                                 SEditAdminProductView(
+                                          //                               productId:
+                                          //                                   element
+                                          //                                       ?.id
+                                          //                                       .toString(),
+                                          //                               categoryId:
+                                          //                                   widget
+                                          //                                       .categoryId,
+                                          //                             ))),
+                                          //                 (Route<dynamic> route) =>
+                                          //                     false,
+                                          //               );
+                                          //             },
+                                          //             child: Container(
+                                          //               padding: EdgeInsets.all(8),
+                                          //               decoration: BoxDecoration(
+                                          //                   boxShadow: [
+                                          //                     BoxShadow(
+                                          //                       color: grey6,
+                                          //                       offset:
+                                          //                           const Offset(
+                                          //                         5.0,
+                                          //                         5.0,
+                                          //                       ),
+                                          //                       blurRadius: 10.0,
+                                          //                       spreadRadius: 2.0,
+                                          //                     ), //BoxShadow
+                                          //                   ],
+                                          //                   color: Colors.white,
+                                          //                   borderRadius:
+                                          //                       BorderRadius
+                                          //                           .circular(15)),
+                                          //               child: SvgPicture.asset(
+                                          //                   'assets/icons/e1.svg'),
+                                          //             ),
+                                          //           ),
+                                          //           SizedBox(
+                                          //             width: 8.w,
+                                          //           ),
+                                          //           GestureDetector(
+                                          //             onTap: () {
+                                          //               read.deleteAdminProduct(
+                                          //                   context,
+                                          //                   index,
+                                          //                   element?.id);
+                                          //             },
+                                          //             child: Container(
+                                          //               padding: EdgeInsets.all(8),
+                                          //               decoration: BoxDecoration(
+                                          //                   boxShadow: [
+                                          //                     BoxShadow(
+                                          //                       color: grey6,
+                                          //                       offset:
+                                          //                           const Offset(
+                                          //                         5.0,
+                                          //                         5.0,
+                                          //                       ),
+                                          //                       blurRadius: 10.0,
+                                          //                       spreadRadius: 2.0,
+                                          //                     ), //BoxShadow
+                                          //                   ],
+                                          //                   color: Colors.white,
+                                          //                   borderRadius:
+                                          //                       BorderRadius
+                                          //                           .circular(15)),
+                                          //               child: SvgPicture.asset(
+                                          //                   'assets/icons/delete2.svg'),
+                                          //             ),
+                                          //           )
+                                          //         ],
+                                          //       )
+                                          //     ],
+                                          //   ),
+                                          // ),
+                                          Container(
                                         width: ScreenUtil().screenWidth,
                                         child: Row(
                                           mainAxisAlignment:
@@ -279,14 +415,25 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                           children: [
                                             Row(
                                               children: [
-                                                Image(
-                                                  image: NetworkImage(
-                                                    "${element?.productImagePath}",
-                                                  ),
-                                                  height: 61.h,
-                                                  width: 60.w,
-                                                  fit: BoxFit.fill,
+                                                SizedBox(
+                                                  width: 5.w,
                                                 ),
+                                                element?.productImagePath != ""
+                                                    ? AppNetworkImages(
+                                                        imageUrl:
+                                                            "${element?.productImagePath}",
+                                                        height: 61.h,
+                                                        width: 60.w,
+                                                        fit: BoxFit.fill,
+                                                      )
+                                                    : Image(
+                                                        image: AssetImage(
+                                                          "assets/images/profile_image.png",
+                                                        ),
+                                                        height: 61.h,
+                                                        width: 60.w,
+                                                        fit: BoxFit.fill,
+                                                      ),
                                                 SizedBox(
                                                   width: 10.w,
                                                 ),
@@ -318,7 +465,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               SMainScreenView(
                                                                   index: 0,
                                                                   screenName:
-                                                                      SEditAdminProductView(
+                                                                      SEditCustomProductView(
                                                                     productId:
                                                                         element
                                                                             ?.id

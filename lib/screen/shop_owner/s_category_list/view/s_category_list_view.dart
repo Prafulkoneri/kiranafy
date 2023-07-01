@@ -45,8 +45,8 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      SMainScreenView(index: 0, screenName: ShopDashBoardView())),
+                  builder: (context) => SMainScreenView(
+                      index: 0, screenName: ShopDashBoardView())),
               (Route<dynamic> route) => false,
             );
           },
@@ -102,7 +102,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                           builder: (context) => SMainScreenView(
                                               index: 0,
                                               screenName: SSelectedProductView(
-                                                isRefresh: true,
+                                                  isRefresh: true,
                                                   categoryId: element
                                                       ?.categoryId
                                                       .toString()))),
@@ -126,15 +126,17 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                       borderRadius: BorderRadius.circular(7.w),
                                     ),
                                     padding: EdgeInsets.only(
-                                        top: 16.w,
-                                        bottom: 16.w,
+                                        top: 15.w,
+                                        bottom: 13.w,
                                         right: 20.w,
-                                        left: 11.w),
+                                        left: 13.w),
                                     child: Row(
                                       children: [
                                         Container(
-                                          width: 55.w,
-                                          height: 40.w,
+                                          width: 46.w,
+                                          height: 46.w,
+                                          // width: 55.w,
+                                          // height: 40.h,
                                           child: AppNetworkImages(
                                               imageUrl:
                                                   "${element?.categoryImagePath}"),

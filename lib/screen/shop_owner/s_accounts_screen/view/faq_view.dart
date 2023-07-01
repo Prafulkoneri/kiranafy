@@ -111,7 +111,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                         // :
                                         TextStyle(
                                             fontSize: 18,
-                                            fontFamily: 'whitneymedium',
+                                            // fontFamily: 'whitneymedium',
                                             color: Colors.black),
                                   ),
                                 ],
@@ -133,9 +133,11 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
                                         "${element?.answer}",
+                                        textAlign: TextAlign.start,
                                         // "Order is placed for products which are in stock and readily available with us. Stock accuracy is upto 90% at Manek Ratna, we cannot commit 100% since there are multiple B2B customers placing orders at the same time on our portal for the same product which you desire to order.",
                                         style: TextStyle(
                                             fontSize: 16,
