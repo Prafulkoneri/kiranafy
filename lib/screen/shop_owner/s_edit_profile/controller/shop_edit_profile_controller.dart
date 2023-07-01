@@ -126,11 +126,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         stateDataList = result.states;
         areaDataList = result.areas;
         pincodeList = result.pincode;
-        if (stateDataList?.contains(selectedPincode.toString()) ?? false) {
+        if (cityDataList?.contains(selectedCityId.toString()) ?? false) {
           print("8789888");
-          showValuePincodeField = true;
+          // showValuePincodeField = true;
         } else {
-          showValuePincodeField = false;
+          // showValuePincodeField = false;
         }
         if (pincodeList?.contains(selectedPincode.toString()) ?? false) {
           print("8789888");
