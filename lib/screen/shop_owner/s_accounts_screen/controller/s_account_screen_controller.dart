@@ -20,6 +20,7 @@ class SAccountScreenController extends ChangeNotifier {
   String shopName = "";
   String shopOwnerName = "";
   String shopImage = "";
+  String kycStatus = "";
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
   ShopSignOutRepo shopSignOutRepo = ShopSignOutRepo();
 
@@ -60,6 +61,8 @@ class SAccountScreenController extends ChangeNotifier {
         name = shopDetails?.shopName ?? "";
         shopName = shopDetails?.shopName ?? "";
         shopOwnerName = shopDetails?.shopOwnerName ?? "";
+        kycStatus = result.kycStatus ?? "";
+        print(kycStatus);
         if (result.shopBannerImages!.isNotEmpty) {
           shopImage = result.shopBannerImages?[0].shopBannerImagePath ?? "";
         } else {

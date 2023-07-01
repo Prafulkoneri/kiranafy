@@ -39,6 +39,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String selectedStateId = "";
   String selectedCityId = "";
   String selectedAreaId = "";
+
   int selectedPincode = 0;
   List<CountryData>? countryDataList;
   List<StateData>? stateDataList;
@@ -66,26 +67,27 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String countryCode = "+91";
   List? pincodeList;
   bool showValuePincodeField = false;
-  List<File> images = [];
-  bool isLoading=true;
-  String shopBannerSequence="";
-  List shopBannerSequenceList=["0","0","0","0"];
-  List deletedIdList=["0","0","0","0"];
-  String deletedIds="";
+  List<File> images = [File(""),File(""),File(""),File("")];
+  bool isLoading = true;
+  String shopBannerSequence = "";
+  List shopBannerSequenceList = ["0", "0", "0", "0"];
+  List deletedIdList = ["0", "0", "0", "0"];
+  String deletedIds = "";
 
   Future<void> initState(
     context,
   ) async {
-    networkImage1="";
-    networkImage2="";
-    networkImage3="";
-    networkImage4="";
-    shopBannerSequenceList=["0","0","0","0"];
-    deletedIdList=["0","0","0","0"];
-    fileImage1=File("");
-    fileImage2=File("");
-    fileImage3=File("");
-    fileImage4=File("");
+    images=[File(""),File(""),File(""),File("")];
+    networkImage1 = "";
+    networkImage2 = "";
+    networkImage3 = "";
+    networkImage4 = "";
+    shopBannerSequenceList = ["0", "0", "0", "0"];
+    deletedIdList = ["0", "0", "0", "0"];
+    fileImage1 = File("");
+    fileImage2 = File("");
+    fileImage3 = File("");
+    fileImage4 = File("");
     await getShopEditProfileDetails(context);
   }
 
@@ -124,6 +126,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         stateDataList = result.states;
         areaDataList = result.areas;
         pincodeList = result.pincode;
+        if (stateDataList?.contains(selectedPincode.toString()) ?? false) {
+          print("8789888");
+          showValuePincodeField = true;
+        } else {
+          showValuePincodeField = false;
+        }
         if (pincodeList?.contains(selectedPincode.toString()) ?? false) {
           print("8789888");
           showValuePincodeField = true;
@@ -135,91 +143,87 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           print(bannerImageList!.asMap().containsKey(0));
 
           if (bannerImageList!.asMap().containsKey(0)) {
-            if(bannerImageList?[0].shopBannerSequence==1){
+            if (bannerImageList?[0].shopBannerSequence == 1) {
               networkImage1 = bannerImageList?[0].shopBannerImagePath ?? "";
-              imageId1=bannerImageList?[0].id.toString()??"";
+              imageId1 = bannerImageList?[0].id.toString() ?? "";
             }
-            if(bannerImageList?[0].shopBannerSequence==2){
+            if (bannerImageList?[0].shopBannerSequence == 2) {
               networkImage2 = bannerImageList?[0].shopBannerImagePath ?? "";
-              imageId2=bannerImageList?[0].id.toString()??"";
+              imageId2 = bannerImageList?[0].id.toString() ?? "";
             }
-            if(bannerImageList?[0].shopBannerSequence==3){
+            if (bannerImageList?[0].shopBannerSequence == 3) {
               networkImage3 = bannerImageList?[0].shopBannerImagePath ?? "";
-              imageId3=bannerImageList?[0].id.toString()??"";
+              imageId3 = bannerImageList?[0].id.toString() ?? "";
             }
-            if(bannerImageList?[0].shopBannerSequence==4){
+            if (bannerImageList?[0].shopBannerSequence == 4) {
               networkImage4 = bannerImageList?[0].shopBannerImagePath ?? "";
-              imageId4=bannerImageList?[0].id.toString()??"";
-
+              imageId4 = bannerImageList?[0].id.toString() ?? "";
             }
-
           }
 
           if (bannerImageList!.asMap().containsKey(1)) {
             print("hello");
-            if(bannerImageList?[1].shopBannerSequence==1){
+            if (bannerImageList?[1].shopBannerSequence == 1) {
               print("sequence 1");
               networkImage1 = bannerImageList?[1].shopBannerImagePath ?? "";
-              imageId1=bannerImageList?[1].id.toString()??"";
-
+              imageId1 = bannerImageList?[1].id.toString() ?? "";
             }
-            if(bannerImageList?[1].shopBannerSequence==2){
+            if (bannerImageList?[1].shopBannerSequence == 2) {
               print("sequence 2");
               networkImage2 = bannerImageList?[1].shopBannerImagePath ?? "";
-              imageId2=bannerImageList?[1].id.toString()??"";
+              imageId2 = bannerImageList?[1].id.toString() ?? "";
             }
-            if(bannerImageList?[1].shopBannerSequence==3){
+            if (bannerImageList?[1].shopBannerSequence == 3) {
               print("sequence 3");
               networkImage3 = bannerImageList?[1].shopBannerImagePath ?? "";
-              imageId3=bannerImageList?[1].id.toString()??"";
-
+              imageId3 = bannerImageList?[1].id.toString() ?? "";
             }
-            if(bannerImageList?[1].shopBannerSequence==4){
+            if (bannerImageList?[1].shopBannerSequence == 4) {
               print("sequence 4");
               networkImage4 = bannerImageList?[1].shopBannerImagePath ?? "";
-              imageId4=bannerImageList?[1].id.toString()??"";
+              imageId4 = bannerImageList?[1].id.toString() ?? "";
             }
             // bannerNotToBeDeletedIdsList.removeAt(1);
             // bannerNotToBeDeletedIdsList.insert(1,bannerImageList?[1].id.toString());
           }
 
           if (bannerImageList!.asMap().containsKey(2)) {
-            if(bannerImageList?[2].shopBannerSequence==1){
+            if (bannerImageList?[2].shopBannerSequence == 1) {
               networkImage1 = bannerImageList?[2].shopBannerImagePath ?? "";
-              imageId1=bannerImageList?[2].id.toString()??"";
+              imageId1 = bannerImageList?[2].id.toString() ?? "";
             }
-            if(bannerImageList?[2].shopBannerSequence==2){
+            if (bannerImageList?[2].shopBannerSequence == 2) {
               networkImage2 = bannerImageList?[2].shopBannerImagePath ?? "";
-              imageId2=bannerImageList?[2].id.toString()??"";
+              imageId2 = bannerImageList?[2].id.toString() ?? "";
             }
-            if(bannerImageList?[2].shopBannerSequence==3){
+            if (bannerImageList?[2].shopBannerSequence == 3) {
               networkImage3 = bannerImageList?[2].shopBannerImagePath ?? "";
-              imageId3=bannerImageList?[2].id.toString()??"";
+              imageId3 = bannerImageList?[2].id.toString() ?? "";
             }
-            if(bannerImageList?[2].shopBannerSequence==4){
+            if (bannerImageList?[2].shopBannerSequence == 4) {
               networkImage4 = bannerImageList?[2].shopBannerImagePath ?? "";
-              imageId4=bannerImageList?[2].id.toString()??"";
+              imageId4 = bannerImageList?[2].id.toString() ?? "";
             }
             // bannerNotToBeDeletedIdsList.removeAt(2);
             // bannerNotToBeDeletedIdsList.insert(2,bannerImageList?[2].id.toString());
           }
 
           if (bannerImageList!.asMap().containsKey(3)) {
-            if(bannerImageList?[3].shopBannerSequence==1){
+            if (bannerImageList?[3].shopBannerSequence == 1) {
               networkImage1 = bannerImageList?[3].shopBannerImagePath ?? "";
-              imageId1=bannerImageList?[3].id.toString()??"";
+              imageId1 = bannerImageList?[3].id.toString() ?? "";
             }
-            if(bannerImageList?[3].shopBannerSequence==2){
+            if (bannerImageList?[3].shopBannerSequence == 2) {
               networkImage2 = bannerImageList?[3].shopBannerImagePath ?? "";
-              imageId2=bannerImageList?[3].id.toString()??"";
+              imageId2 = bannerImageList?[3].id.toString() ?? "";
             }
-            if(bannerImageList?[3].shopBannerSequence==3){
+            if (bannerImageList?[3].shopBannerSequence == 3) {
               networkImage3 = bannerImageList?[3].shopBannerImagePath ?? "";
-              imageId3=bannerImageList?[3].id.toString()??"";
+              imageId3 = bannerImageList?[3].id.toString() ?? "";
             }
-            if(bannerImageList?[3].shopBannerSequence==4){
+            if (bannerImageList?[3].shopBannerSequence == 4) {
               networkImage4 = bannerImageList?[3].shopBannerImagePath ?? "";
-              imageId4=bannerImageList?[3].id.toString()??"";
+              imageId4 = bannerImageList?[3].id.toString() ?? "";
             }
             // bannerNotToBeDeletedIdsList.removeAt(3);
             // bannerNotToBeDeletedIdsList.insert(3,bannerImageList?[3].id.toString());
@@ -247,8 +251,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     );
   }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -280,7 +284,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
             shopUpdateProfileReqModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
-      final result = ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
+      final result =
+          ShopUpdateProfileResModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
@@ -330,8 +335,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     LoadingOverlay.of(context).show();
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
+     print("cityResponse${response.body}");
       if (response.statusCode == 200) {
-
         cityDataList = result.cityData;
         if (result.cityData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No City Found",
@@ -382,7 +387,6 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         }
         LoadingOverlay.of(context).hide();
         notifyListeners();
-
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -533,11 +537,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(emailIdController.text);
     print("asfsdfsfsdfsdfdfs");
     print(emailValid);
-    if(!emailValid){
+    if (!emailValid) {
       Utils.showPrimarySnackbar(context, "Email Id Invalid",
           type: SnackType.error);
       return;
@@ -570,43 +575,40 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       return;
     }
 
-
     if (fileImage1.path == "" &&
         fileImage2.path == "" &&
         fileImage3.path == "" &&
         fileImage4.path == "") {
       await UpdateProfile(context);
     } else {
-      shopBannerSequence="";
-      for(int i=0;i<shopBannerSequenceList.length;i++){
-        if(shopBannerSequenceList[i]!="0"){
-          shopBannerSequence+=shopBannerSequenceList[i]+",";
+      shopBannerSequence = "";
+      for (int i = 0; i < shopBannerSequenceList.length; i++) {
+        if (shopBannerSequenceList[i] != "0") {
+          shopBannerSequence += shopBannerSequenceList[i] + ",";
         }
-
       }
-      shopBannerSequence=shopBannerSequence.substring(0,shopBannerSequence.length-1);
+      shopBannerSequence =
+          shopBannerSequence.substring(0, shopBannerSequence.length - 1);
       print("dfadfasdfaf");
       print(shopBannerSequence);
       print(deletedIdList);
-      deletedIds="";
-      bool isDeletedIdAllZero=false;
-      for(int i=0;i<deletedIdList.length;i++){
-        if(deletedIdList[i]!="0"){
-          deletedIds+=deletedIdList[i]+",";
+      deletedIds = "";
+      bool isDeletedIdAllZero = false;
+      for (int i = 0; i < deletedIdList.length; i++) {
+        if (deletedIdList[i] != "0") {
+          deletedIds += deletedIdList[i] + ",";
         }
       }
       print("dadasdasdsad");
       print(deletedIds);
-      if(deletedIds!=""){
-        deletedIds=deletedIds.substring(0,deletedIds.length-1);
+      if (deletedIds != "") {
+        deletedIds = deletedIds.substring(0, deletedIds.length - 1);
       }
       print(deletedIds);
 
       await uploadImage(context);
     }
-
-
-    }
+  }
 
   void openGallery1() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -616,18 +618,23 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      if(networkImage1!="") {
+      if (networkImage1 != "") {
         deletedIdList.removeAt(0);
         deletedIdList.insert(0, imageId1);
       }
-      networkImage1="";
+      networkImage1 = "";
       fileImage1 = File(pickedFile.path);
+      if(images.asMap().containsKey(0)){
+        images.removeAt(0);
+        images.insert(0,fileImage1);
+      }
+      else{
+        images.insert(0,fileImage1);
+      }
       images.add(fileImage1);
       shopBannerSequenceList.removeAt(0);
-        shopBannerSequenceList.insert(0,"1");
-
-
-        }
+      shopBannerSequenceList.insert(0, "1");
+    }
     print(deletedIdList);
     notifyListeners();
   }
@@ -640,15 +647,21 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      if(networkImage2!="") {
+      if (networkImage2 != "") {
         deletedIdList.removeAt(1);
-        deletedIdList.insert(1,imageId2);
+        deletedIdList.insert(1, imageId2);
       }
       networkImage2 = "";
       fileImage2 = File(pickedFile.path);
-      images.add(fileImage2);
+      if(images.asMap().containsKey(1)){
+        images.removeAt(1);
+        images.insert(1,fileImage2);
+      }
+      else{
+        images.insert(1,fileImage2);
+      }
       shopBannerSequenceList.removeAt(1);
-        shopBannerSequenceList.insert(1,"2");
+      shopBannerSequenceList.insert(1, "2");
     }
     print(deletedIdList);
     notifyListeners();
@@ -662,16 +675,21 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      if(networkImage3!="") {
+      if (networkImage3 != "") {
         deletedIdList.removeAt(2);
-        deletedIdList.insert(2,imageId3);
+        deletedIdList.insert(2, imageId3);
       }
       networkImage3 = "";
       fileImage3 = File(pickedFile.path);
-      images.add(fileImage3);
+      if(images.asMap().containsKey(2)){
+        images.removeAt(2);
+        images.insert(2,fileImage3);
+      }
+      else{
+        images.insert(2,fileImage3);
+      }
       shopBannerSequenceList.removeAt(2);
-        shopBannerSequenceList.insert(2,"3");
-
+      shopBannerSequenceList.insert(2, "3");
     }
     print(deletedIdList);
     notifyListeners();
@@ -685,23 +703,28 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       imageQuality: 100,
     );
     if (pickedFile != null) {
-      if(networkImage4!="") {
+      if (networkImage4 != "") {
         deletedIdList.removeAt(3);
-        deletedIdList.insert(3,imageId4);
+        deletedIdList.insert(3, imageId4);
       }
       networkImage4 = "";
       fileImage4 = File(pickedFile.path);
-      images.add(fileImage4);
+      if(images.asMap().containsKey(3)){
+        images.removeAt(3);
+        images.insert(3,fileImage4);
+      }
+      else{
+        images.insert(3,fileImage4);
+      }
       shopBannerSequenceList.removeAt(3);
-        shopBannerSequenceList.insert(3, "4");
+      shopBannerSequenceList.insert(3, "4");
     }
 
     notifyListeners();
   }
 
   Future uploadImage(context) async {
-
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.shopUpdateAccountDetails}");
@@ -722,7 +745,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     request.fields['delete_banners_ids'] = deletedIds;
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
+    newList.clear();
+    print("444444");
+    print(images);
+    print("444444");
     for (int i = 0; i < images.length; i++) {
+      if(images[i].path!=""){
+
+
       File imageFile = images[i];
       print(imageFile);
       var stream =
@@ -732,20 +762,27 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           "shop_banner_image_path[$i]", stream, length,
           filename: basename(imageFile.path));
       newList.add(multipartFile);
+      }
     }
+
     request.files.addAll(newList);
+    print("4234324324");
     print(request.fields);
+    print(request.files);
+    print("4234324324");
     await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
+      print("fsfdsfsfdsfsf");
       print(respStr);
       print(response);
+      print("fsfdsfsfdsfsf");
       if (response.statusCode == 200) {
-        shopBannerSequenceList=["0","0","0","0"];
+        shopBannerSequenceList = ["0", "0", "0", "0"];
         LoadingOverlay.of(context).hide();
-        fileImage1=File("");
-        fileImage2=File("");
-        fileImage3=File("");
-        fileImage4=File("");
+        fileImage1 = File("");
+        fileImage2 = File("");
+        fileImage3 = File("");
+        fileImage4 = File("");
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -758,10 +795,10 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         print("Updated Successfully");
       } else {
         LoadingOverlay.of(context).hide();
-        fileImage1=File("");
-        fileImage2=File("");
-        fileImage3=File("");
-        fileImage4=File("");
+        fileImage1 = File("");
+        fileImage2 = File("");
+        fileImage3 = File("");
+        fileImage4 = File("");
         Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
       }

@@ -153,8 +153,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SGetTicketListController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(create: (_) => SBankAccountController()),
       ],
       child: MyApp(),
     ),

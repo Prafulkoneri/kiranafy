@@ -195,29 +195,50 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10.w, bottom: 3, top: 3.w),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Shop KYC Pending',
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 6.w,
-                        ),
-                        SvgPicture.asset(
-                          'assets/icons/ok.svg',
-                          width: 14.w,
-                          height: 14.h,
-                        ),
-                      ],
-                    ),
-                  ),
+                      padding: EdgeInsets.only(left: 10.w, bottom: 3, top: 3.w),
+                      child: watch.kycStatus == "Pending"
+                          ? Row(
+                              children: [
+                                Text(
+                                  'Shop KYC Pending',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                SvgPicture.asset(
+                                  'assets/icons/approve.svg',
+                                  width: 14.w,
+                                  height: 14.h,
+                                ),
+                              ],
+                            )
+                          : Row(
+                              children: [
+                                Text(
+                                  'Shop KYC Approved',
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                SvgPicture.asset(
+                                  'assets/icons/ok.svg',
+                                  width: 14.w,
+                                  height: 14.h,
+                                ),
+                              ],
+                            )),
                   SizedBox(
                     height: 3.h,
                   ),

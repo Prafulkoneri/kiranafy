@@ -6,6 +6,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.d
 class AccountDetailsResModel {
   int? status;
   String? message;
+  String? kycStatus;
   ShopDetailsData? shopDetails;
   List<CountryData>? countries;
   List<StateData>? states;
@@ -24,11 +25,13 @@ class AccountDetailsResModel {
     required this.areas,
     required this.shopBannerImages,
     required this.pincode,
+    required this.kycStatus,
   });
 
   AccountDetailsResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
+    kycStatus = json["shop_owner_kyc_status"];
 
     //array Shop Details
 
@@ -82,6 +85,7 @@ class AccountDetailsResModel {
         shopBannerImages!.add(ShopBannerImageData.fromJson(v));
       });
     }
+    ///////
   }
 }
 
@@ -95,7 +99,7 @@ class ShopBannerImageData {
   int? id;
   String? shopBannerImagePath;
   String? shopBannerImageName;
-  int ? shopBannerSequence;
+  int? shopBannerSequence;
 
   ShopBannerImageData({
     required this.id,
