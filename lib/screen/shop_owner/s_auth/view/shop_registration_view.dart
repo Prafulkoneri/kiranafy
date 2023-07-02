@@ -184,6 +184,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                           ),
                           Expanded(
                               child: SDropDownField(
+
                             onChanged: (value) async {
                               await read.onStateSelected(value);
                               await read.getCityList(context);
@@ -207,12 +208,12 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       SDropDownField(
+                        value: watch.cityId==0?null:watch.cityId,
                         onChanged: (value) async {
                           await read.onCitySelected(value);
                           await read.getAreaList(context);
                         },
-                        items: watch.cityList?.isEmpty??true?[]:
-                        watch.cityList
+                        items: watch.cityList
                             ?.map((item) => DropdownMenuItem<String>(
                                   value: item.id.toString(),
                                   child: Text(

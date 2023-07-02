@@ -446,8 +446,7 @@ class SShopConfigurationController extends ChangeNotifier {
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     File imageFile = fileImage;
-    var stream =
-        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
     var multipartFile = new http.MultipartFile(
         "shop_owner_payment_qr_code_image_path", stream, length,
