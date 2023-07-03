@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_v
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
@@ -895,8 +896,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                      index: 0,
-                                      screenName: SOrderStatusView(selectedIndex: 0),
+                                      index: 1,
+                                      screenName: SOrderStatusView(selectedIndex: 0,isFromOrderView: false),
                                     )),
                                     (Route<dynamic> route) => false,
                               );
@@ -940,38 +941,51 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            decoration: BoxDecoration(
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.confirmedOrdersCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                      index: 1,
+                                      screenName: SOrderStatusView(selectedIndex: 1,isFromOrderView: false),
+                                    )),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              decoration: BoxDecoration(
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.confirmedOrdersCount}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Confirmed",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Confirmed",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 11.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -990,41 +1004,54 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(8)),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                      index: 1,
+                                      screenName: SOrderStatusView(selectedIndex: 2,isFromOrderView: false),
+                                    )),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(8)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.inprocessOrdersCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.inprocessOrdersCount}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "In process",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "In process",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -1032,47 +1059,60 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                // gradient: LinearGradient(
-                                //     end: Alignment.topCenter,
-                                //     begin: Alignment.bottomCenter,
-                                //     colors: <Color>[
-                                //       green.withOpacity(0.55),
-                                //       green1.withOpacity(0.98),
-                                //     ]),
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(8)),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                      index: 1,
+                                      screenName: SOrderStatusView(selectedIndex: 3,isFromOrderView: false),
+                                    )),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  // gradient: LinearGradient(
+                                  //     end: Alignment.topCenter,
+                                  //     begin: Alignment.bottomCenter,
+                                  //     colors: <Color>[
+                                  //       green.withOpacity(0.55),
+                                  //       green1.withOpacity(0.98),
+                                  //     ]),
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(8)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.deliveredOrdersCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.deliveredOrdersCount}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Delivered",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Delivered",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -1080,47 +1120,60 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                // gradient: LinearGradient(
-                                //     end: Alignment.topCenter,
-                                //     begin: Alignment.bottomCenter,
-                                //     colors: <Color>[
-                                //       green.withOpacity(0.55),
-                                //       green1.withOpacity(0.98),
-                                //     ]),
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(8)),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                      index: 1,
+                                      screenName: SOrderStatusView(selectedIndex:4,isFromOrderView: false),
+                                    )),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  // gradient: LinearGradient(
+                                  //     end: Alignment.topCenter,
+                                  //     begin: Alignment.bottomCenter,
+                                  //     colors: <Color>[
+                                  //       green.withOpacity(0.55),
+                                  //       green1.withOpacity(0.98),
+                                  //     ]),
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(8)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.cancelledOrdersCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.cancelledOrdersCount}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Cancelled",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Cancelled",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -1425,145 +1478,156 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 top: 15.w,
                                 right: 12.w,
                                 bottom: 80.w),
-                            child: Stack(
-                              alignment: Alignment.topCenter,
-                              clipBehavior: Clip.none,
-                              children: <Widget>[
-                                Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Custlogin,
-                                          gradient: LinearGradient(
-                                              end: Alignment.topCenter,
-                                              begin: Alignment.bottomCenter,
-                                              colors: <Color>[
-                                                yellow1.withOpacity(1),
-                                                yellow2.withOpacity(1),
-                                              ]),
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SMainScreenView(
+                                          index: 4, screenName: SMySubscriptionView(screenName: "dashboard",))),
+                                      (Route<dynamic> route) => false,
+                                );
+                              },
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                clipBehavior: Clip.none,
+                                children: <Widget>[
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: Custlogin,
+                                            gradient: LinearGradient(
+                                                end: Alignment.topCenter,
+                                                begin: Alignment.bottomCenter,
+                                                colors: <Color>[
+                                                  yellow1.withOpacity(1),
+                                                  yellow2.withOpacity(1),
+                                                ]),
 
-                                          // border: Border.all(width: 1, color: Black),
-                                          borderRadius:
-                                              BorderRadius.circular(10.w)),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 30.w,
-                                          ),
-                                          ClipRRect(
+                                            // border: Border.all(width: 1, color: Black),
                                             borderRadius:
-                                                BorderRadius.circular(10.w),
-                                            child: Image.asset(
-                                              'assets/images/subscription4.png',
-                                              // width: 352.w,
-                                              // height: 60.h,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Positioned(
-                                        top: 14.w,
-                                        left: 15.w,
+                                                BorderRadius.circular(10.w)),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
                                           children: [
-                                            Container(
-                                              width: ScreenUtil().screenWidth /
-                                                  1.13.w,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "My Subscription Plan",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white,
-                                                        fontSize: 12.sp),
-                                                  ),
-                                                  Container(
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 11.w,
-                                                              vertical: 4.w),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(7.w),
-                                                        color: Color(0xff000000)
-                                                            .withOpacity(0.35),
-                                                      ),
-                                                      child: Row(
-                                                        // mainAxisAlignment:
-                                                        //     MainAxisAlignment.start,
-                                                        // mainAxisSize: MainAxisSize.min,
-                                                        children: [
-                                                          Text(
-                                                            'Active',
-                                                            style: GoogleFonts
-                                                                .dmSans(
-                                                              textStyle:
-                                                                  TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      // letterSpacing: .5,
-                                                                      fontSize:
-                                                                          12.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w400),
-                                                            ),
-                                                          ), // <-- Text
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
                                             SizedBox(
-                                              height: 7.w,
+                                              height: 30.w,
                                             ),
-                                            Container(
-                                              width: ScreenUtil().screenWidth /
-                                                  1.13.w,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "${watch.currentSubscriptionPlan?.planName}",
-                                                    style: TextStyle(
-                                                        fontSize: 18.sp,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        color: Colors.white),
-                                                  ),
-                                                  Text(
-                                                    "Exp Date - ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
-                                                    style: TextStyle(
-                                                        fontSize: 12.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.w),
+                                              child: Image.asset(
+                                                'assets/images/subscription4.png',
+                                                // width: 352.w,
+                                                // height: 60.h,
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 22.w,
                                             ),
                                           ],
-                                        )),
-                                  ],
-                                ),
-                              ],
+                                        ),
+                                      ),
+                                      Positioned(
+                                          top: 14.w,
+                                          left: 15.w,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: ScreenUtil().screenWidth /
+                                                    1.13.w,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "My Subscription Plan",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Colors.white,
+                                                          fontSize: 12.sp),
+                                                    ),
+                                                    Container(
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.symmetric(
+                                                                horizontal: 11.w,
+                                                                vertical: 4.w),
+                                                        decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(7.w),
+                                                          color: Color(0xff000000)
+                                                              .withOpacity(0.35),
+                                                        ),
+                                                        child: Row(
+                                                          // mainAxisAlignment:
+                                                          //     MainAxisAlignment.start,
+                                                          // mainAxisSize: MainAxisSize.min,
+                                                          children: [
+                                                            Text(
+                                                              'Active',
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize:
+                                                                            12.sp,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400),
+                                                              ),
+                                                            ), // <-- Text
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 7.w,
+                                              ),
+                                              Container(
+                                                width: ScreenUtil().screenWidth /
+                                                    1.13.w,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "${watch.currentSubscriptionPlan?.planName}",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white),
+                                                    ),
+                                                    Text(
+                                                      "Exp Date - ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
+                                                      style: TextStyle(
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 22.w,
+                                              ),
+                                            ],
+                                          )),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           )
                         : Padding(

@@ -16,7 +16,8 @@ import 'package:provider/provider.dart';
 
 class SOrderStatusView extends StatefulWidget {
 final int ? selectedIndex;
-  const SOrderStatusView({Key? key,required this.selectedIndex}) : super(key: key);
+final bool ? isFromOrderView;
+  const SOrderStatusView({Key? key, this.selectedIndex,this.isFromOrderView}) : super(key: key);
 
   @override
   _SOrderStatusViewState createState() => _SOrderStatusViewState();
@@ -27,8 +28,12 @@ class _SOrderStatusViewState extends State<SOrderStatusView>  with TickerProvide
   void initState() {
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
+      print("9999");
       context.read<SOrderStatusController>().initState(context,widget.selectedIndex);
-      tabController=TabController(length: 5, vsync:this,initialIndex:context.read<SOrderStatusController>().selectedIndex);
+      setState(() {
+        tabController=TabController(length: 5,vsync:this,initialIndex:widget.selectedIndex??0);
+      });
+
     });
   }
  TabController ? tabController;

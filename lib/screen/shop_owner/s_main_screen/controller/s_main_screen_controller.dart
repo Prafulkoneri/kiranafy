@@ -1,16 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
-
-import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
-import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
-import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
@@ -43,7 +33,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = ShopDashBoardView(refresh: false,);
+    currentScreen = ShopDashBoardView(refresh: true,);
     notifyListeners();
   }
 
@@ -69,7 +59,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onOrdersPressed() {
     currentTab = 1;
-    currentScreen = SOrderStatusView(selectedIndex: 0,);
+    currentScreen = SOrderStatusView(selectedIndex: 0,isFromOrderView: false,);
     notifyListeners();
   }
 

@@ -9,6 +9,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -22,7 +23,8 @@ import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:provider/provider.dart';
 
 class SMySubscriptionView extends StatefulWidget {
-  const SMySubscriptionView({super.key});
+  final String ? screenName;
+  const SMySubscriptionView({super.key,required this.screenName});
 
   @override
   State<SMySubscriptionView> createState() => _SMySubscriptionViewState();
@@ -48,12 +50,23 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
         child: PrimaryAppBar(
           title: "My Subscription",
           onBackBtnPressed: (){
+            widget.screenName=="accounts"?
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
                     index: 4,
                     screenName: SAccountScreenView(
+                      refresh: false,
+                    ),
+                  )),
+                  (Route<dynamic> route) => false,
+            ):Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                    index: 0,
+                    screenName: ShopDashBoardView(
                       refresh: false,
                     ),
                   )),

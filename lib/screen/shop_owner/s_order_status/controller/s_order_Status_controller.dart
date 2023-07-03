@@ -23,14 +23,8 @@ class SOrderStatusController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> initState(
-    context,
-      index
-  ) async {
-
-    await getShopOrderList(
-      context,index
-    );
+  Future<void> initState(context, index) async {
+    await getShopOrderList(context,index);
     notifyListeners();
   }
 

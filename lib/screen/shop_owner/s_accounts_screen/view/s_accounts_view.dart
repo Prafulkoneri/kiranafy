@@ -557,7 +557,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SMainScreenView(
-                          index: 4, screenName: SMySubscriptionView())),
+                          index: 4, screenName: SMySubscriptionView(screenName: "accounts",))),
                   (Route<dynamic> route) => false,
                 );
               },

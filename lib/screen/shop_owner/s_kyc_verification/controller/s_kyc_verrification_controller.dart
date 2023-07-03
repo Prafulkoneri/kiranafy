@@ -334,7 +334,9 @@ class SKycVerificationController extends ChangeNotifier {
     // print(newList);
     request.files.addAll(newList);
     print(request.fields);
-    await request.send().then((response) async {
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+      print(response.body);
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         Navigator.pushReplacement(context,
@@ -349,9 +351,7 @@ class SKycVerificationController extends ChangeNotifier {
             type: SnackType.error);
         return;
       }
-      response.stream.transform(utf8.decoder).listen((value) {
-        print(value);
-      });
-    });
+
+
   }
 }

@@ -103,9 +103,11 @@ class SSubscriptionController extends ChangeNotifier {
         int length = subscriptionData?.length ?? 0;
         radioValue.clear();
         for (int i = 0; i < length; i++) {
-          radioValue.add(i.toString());
+          radioValue.add(subscriptionData?[i].id.toString());
         }
+        print("sfsfsdfsfsdf");
         print(radioValue);
+        print("sfsfsdfsfsdf");
         showLoader(false);
         notifyListeners();
       } else {
@@ -180,6 +182,9 @@ class SSubscriptionController extends ChangeNotifier {
         // }
         SharedPreferences pref = await SharedPreferences.getInstance();
         pref.setString('status', 'subscriptionCompleted');
+        if(loggedIn){
+
+        }
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -208,7 +213,9 @@ class SSubscriptionController extends ChangeNotifier {
   }
 
   void onRadioBtnChanged(value, id, price) {
-    radioGrpValue = value;
+    print(value);
+    radioGrpValue = value.toString();
+    print(radioGrpValue);
     planAmount = price.toString();
     selectedPlanId = id.toString();
     notifyListeners();

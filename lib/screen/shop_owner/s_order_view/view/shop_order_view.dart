@@ -22,12 +22,12 @@ import 'package:provider/provider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 class ShopOrderStatusView extends StatefulWidget {
   final String? orderId;
-  final int ? selectedIndex;
+
 
   const ShopOrderStatusView({
     super.key,
     this.orderId,
-    required this.selectedIndex,
+
   });
 
   @override
@@ -55,12 +55,11 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 1, screenName: SOrderStatusView(selectedIndex:widget.selectedIndex,))),
+                        index: 1, screenName: SOrderStatusView(selectedIndex: 0,))),
                 (Route<dynamic> route) => false,
               );
             },
@@ -622,7 +621,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
               SizedBox(
                 height: 20.h,
               ),
-              watch.orderDetails?.orderStatus != "Delivered"
+              watch.orderDetails?.orderStatus == "Cancelled"?Container(): watch.orderDetails?.orderStatus != "Delivered"
                   ? Column(
                 children: [
                   Row(
@@ -914,7 +913,9 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                         visible: watch.orderDetails?.orderStatus ==
                             "Packing" ||
                             watch.orderDetails?.orderStatus ==
-                                "Dispatched"
+                                "Dispatched"||
+                            watch.orderDetails?.orderStatus ==
+                                "Cancelled"
                             ? false
                             : true,
                         child: Expanded(

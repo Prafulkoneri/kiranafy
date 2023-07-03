@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/shop_owner/s_setting/repository/chang
 import 'package:local_supper_market/screen/shop_owner/s_setting/repository/delete_account_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/repository/setting_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopSettingController extends ChangeNotifier {
@@ -34,7 +35,7 @@ class ShopSettingController extends ChangeNotifier {
   }
 
   Future<void> shopNotification(context, status) async {
-    showStackLoader(true);
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     settingRepo.shopSetting(pref.getString("successToken")).then((response) {
@@ -46,9 +47,10 @@ class ShopSettingController extends ChangeNotifier {
             result.settingData?.appNotification == "on" ? true : false;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
-        showStackLoader(false);
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -72,6 +74,7 @@ class ShopSettingController extends ChangeNotifier {
           appNotification: isAppNotificationEnable ? "on" : "off");
 
   Future<void> changeSettings(context, value) async {
+    LoadingOverlay.of(context).show();
     isAppNotificationEnable = value;
     SharedPreferences pref = await SharedPreferences.getInstance();
     changeSettingRepo
@@ -83,10 +86,12 @@ class ShopSettingController extends ChangeNotifier {
           ChangeSettingsResponseModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -105,6 +110,7 @@ class ShopSettingController extends ChangeNotifier {
 
   /////////////////////////SHOP DELETE///////////////////
   Future<void> shopAccountDelete(context) async {
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     deleteAccountRepo
@@ -119,6 +125,7 @@ class ShopSettingController extends ChangeNotifier {
           context,
           MaterialPageRoute(builder: (context) => const OnBoardingScreenView()),
         );
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
