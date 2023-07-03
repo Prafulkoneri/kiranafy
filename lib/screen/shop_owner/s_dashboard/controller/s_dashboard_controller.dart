@@ -44,12 +44,13 @@ class SDashBoardController extends ChangeNotifier {
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
   // }
 
-  Future<void> initState(context) async {
-    await getDashBoardData(context);
-    await getShopEditProfileDetails(context);
-    await getSubscriptionPaymentHistory(
-      context,
-    );
+  Future<void> initState(context,refresh) async {
+    if(refresh){
+      await getDashBoardData(context);
+      await getShopEditProfileDetails(context);
+      await getSubscriptionPaymentHistory(context);
+    }
+
     notifyListeners();
   }
 

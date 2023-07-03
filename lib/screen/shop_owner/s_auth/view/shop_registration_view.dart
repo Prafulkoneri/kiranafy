@@ -208,7 +208,6 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       SDropDownField(
-                        value: watch.cityId==0?null:watch.cityId,
                         onChanged: (value) async {
                           await read.onCitySelected(value);
                           await read.getAreaList(context);

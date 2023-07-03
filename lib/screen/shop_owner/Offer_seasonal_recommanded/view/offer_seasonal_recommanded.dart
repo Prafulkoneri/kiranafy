@@ -61,7 +61,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
                           index: 4,
-                          screenName: SAccountScreenView(),
+                          screenName: SAccountScreenView(refresh: false,),
                         )),
                 (Route<dynamic> route) => false,
               );

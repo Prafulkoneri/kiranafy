@@ -1,3 +1,4 @@
+import 'package:launch_review/launch_review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -13,6 +14,9 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/ter
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class SAccountCmsPagesView extends StatefulWidget {
   const SAccountCmsPagesView({super.key});
@@ -36,7 +40,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                      index: 4, screenName: SAccountScreenView())),
+                      index: 4, screenName: SAccountScreenView(refresh: false,))),
               (Route<dynamic> route) => false,
             );
           },
@@ -234,7 +238,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
 
             GestureDetector(
               onTap: () {
-                // read.myDeliveryAddressPressed(context);
+                Share.share('hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
               },
               child: Container(
                 margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -271,36 +275,52 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              padding: EdgeInsets.only(bottom: 15.w),
-              decoration: BoxDecoration(
+            GestureDetector(
+              onTap: ()async{
+                if (await canLaunch("https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
+                await launch("https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+                }
+                else {
+                throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
+                }
+                LaunchReview.launch(androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                    iOSAppId: "585027354");
+                // StoreRedirect.redirect(
+                //   androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                //   iOSAppId: "585027354",
+                // );
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                padding: EdgeInsets.only(bottom: 15.w),
+                decoration: BoxDecoration(
 
-                  // color: Colors.white,
-                  ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: 5,
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/star.svg',
-                  ),
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  Text(
-                    'Rate Us',
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                    // color: Colors.white,
                     ),
-                  ),
-                ],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 5,
+                    ),
+                    SvgPicture.asset(
+                      'assets/icons/star.svg',
+                    ),
+                    SizedBox(
+                      width: 18.w,
+                    ),
+                    Text(
+                      'Rate Us',
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

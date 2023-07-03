@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/promotion_request/reposito
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopPramotionController extends ChangeNotifier {
@@ -59,7 +60,7 @@ class ShopPramotionController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    showStackLoader(true);
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     pramotionRequestRepo
         .pramotionRequest(
@@ -78,15 +79,16 @@ class ShopPramotionController extends ChangeNotifier {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView())),
+                  SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: true,))),
           (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         print(response.body);
-        showStackLoader(false);
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

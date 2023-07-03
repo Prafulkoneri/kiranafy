@@ -21,7 +21,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SAccountScreenController>().initState(context);
+      context.read<SAccountScreenController>().initState(context,false);
     });
   }
 
@@ -40,12 +40,15 @@ class _ShopFAQViewState extends State<ShopFAQView> {
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
                       index: 4, screenName: SAccountCmsPagesView())),
-              (Route<dynamic> route) => false,
+                  (Route<dynamic> route) => false,
             );
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(left: 20, right: 20),
           child: Column(
@@ -81,12 +84,12 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                             ),
                             child: ExpansionTile(
                               trailing:
-                                  //  Icon(
-                                  //     Icons.keyboard_arrow_up_rounded,
-                                  //     color: Color(0xff8b0e1a),
-                                  //   )
-                                  // :
-                                  Icon(
+                              //  Icon(
+                              //     Icons.keyboard_arrow_up_rounded,
+                              //     color: Color(0xff8b0e1a),
+                              //   )
+                              // :
+                              Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color: Color(0xff8b0e1a),
                               ),
@@ -103,16 +106,16 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                     "${element?.question}",
                                     // "What is order ?",
                                     style:
-                                        // tileOneOpen
-                                        //     ? TextStyle(
-                                        //         fontSize: 16,
-                                        //         fontFamily: 'whitneysemibold',
-                                        //         color: Colors.black)
-                                        // :
-                                        TextStyle(
-                                            fontSize: 18,
-                                            // fontFamily: 'whitneymedium',
-                                            color: Colors.black),
+                                    // tileOneOpen
+                                    //     ? TextStyle(
+                                    //         fontSize: 16,
+                                    //         fontFamily: 'whitneysemibold',
+                                    //         color: Colors.black)
+                                    // :
+                                    TextStyle(
+                                        fontSize: 18,
+                                        // fontFamily: 'whitneymedium',
+                                        color: Colors.black),
                                   ),
                                 ],
                               ),
@@ -132,7 +135,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                       top: 10, bottom: 10, left: 10, right: 10),
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(

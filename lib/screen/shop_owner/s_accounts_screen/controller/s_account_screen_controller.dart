@@ -27,15 +27,23 @@ class SAccountScreenController extends ChangeNotifier {
   ShopSignOutRepo shopSignOutRepo = ShopSignOutRepo();
   List<FaqData>? faqdata;
   FAQDataRepo faqData = FAQDataRepo(); //
+  bool isLoading=true;
   // void onEditBtnClicked(context) {
   //   Navigator.push(
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
   // }
 
-  Future<void> initState(context) async {
+  Future<void> initState(context,refresh) async {
     print("999999999999");
-    await getShopEditProfileDetails(context);
-    await getFAQData(context);
+    if(refresh) {
+      await getShopEditProfileDetails(context);
+      await getFAQData(context);
+    }
+    notifyListeners();
+  }
+
+  showLoader(value){
+    isLoading=value;
     notifyListeners();
   }
 
@@ -129,6 +137,7 @@ class SAccountScreenController extends ChangeNotifier {
 
   ///////////////////////
   Future<void> getFAQData(context) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     faqData.faqData(pref.getString("successToken")).then((response) {
@@ -146,11 +155,13 @@ class SAccountScreenController extends ChangeNotifier {
         // print(privacyPolicy?.description);
         // print("3q2423424");
         // termsAndCondition = cmsdata?.termsAndCondition;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
+
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(

@@ -29,11 +29,11 @@ class SCustomerListController extends ChangeNotifier {
   bool isOrderedSelected = false;
   bool isLoading = true;
 
-  Future<void> initState(context, isRefresh) async {
+  Future<void> initState(context, isRefresh,pageName) async {
     isFavToShopSelected=false;
     isOrderedSelected=false;
     if (isRefresh) {
-      await getCustomerList(context);
+      await getCustomerList(context,pageName);
     }
   }
 
@@ -42,8 +42,17 @@ class SCustomerListController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getCustomerList(context) async {
-
+  Future<void> getCustomerList(context,pageName) async {
+    if(pageName=="dashboardProduct"){
+      isOrderedSelected=true;
+    }
+    if(pageName=="dashboardFavCustomer"){
+      isFavToShopSelected=true;
+    }
+    if(pageName=="account"){
+      isFavToShopSelected=false;
+      isOrderedSelected=false;
+    }
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -60,11 +69,16 @@ class SCustomerListController extends ChangeNotifier {
         }
         if(isFavToShopSelected){
           customerList=customerListData?.favouriteToShopsList;
-          Navigator.pop(context);
+          if(pageName=="filter"){
+            Navigator.pop(context);
+          }
+
         }
         if(isOrderedSelected){
           customerList=customerListData?.orderedButNotFavouriteList;
-          Navigator.pop(context);
+          if(pageName=="filter"){
+            Navigator.pop(context);
+          }
         }
         // favouriteToShopsList =
         // orderedButNotFavouriteList =

@@ -370,7 +370,7 @@ class SShopConfigurationController extends ChangeNotifier {
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                       index: 0,
-                      screenName: ShopDashBoardView(),
+                      screenName: ShopDashBoardView(refresh: true,),
                     )),
             (Route<dynamic> route) => false,
           );
@@ -380,7 +380,7 @@ class SShopConfigurationController extends ChangeNotifier {
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                       index: 4,
-                      screenName: SAccountScreenView(),
+                      screenName: SAccountScreenView(refresh: true,),
                     )),
             (Route<dynamic> route) => false,
           );
@@ -467,7 +467,7 @@ class SShopConfigurationController extends ChangeNotifier {
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                       index: 0,
-                      screenName: ShopDashBoardView(),
+                      screenName: ShopDashBoardView(refresh: true,),
                     )),
             (Route<dynamic> route) => false,
           );
@@ -477,7 +477,7 @@ class SShopConfigurationController extends ChangeNotifier {
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                       index: 4,
-                      screenName: SAccountScreenView(),
+                      screenName: SAccountScreenView(refresh: true),
                     )),
             (Route<dynamic> route) => false,
           );
