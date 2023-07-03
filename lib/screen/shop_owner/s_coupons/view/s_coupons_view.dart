@@ -57,7 +57,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 4, screenName: SAccountScreenView())),
+                        index: 4, screenName: SAccountScreenView(refresh: false,))),
                 (Route<dynamic> route) => false,
               );
             },

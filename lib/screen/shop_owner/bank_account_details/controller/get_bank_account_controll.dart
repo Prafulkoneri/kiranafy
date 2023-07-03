@@ -19,6 +19,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -133,7 +134,7 @@ class SBankAccountController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     upadteAddBankAccountDetailRepo
         .upadteAccount(
@@ -148,11 +149,12 @@ class SBankAccountController extends ChangeNotifier {
         // promotionSubjectController.clear();
         // planToStartController.clear();
         // adsContentController.clear();
+        LoadingOverlay.of(context).hide();
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView())),
+                  SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: true,))),
           (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
@@ -161,6 +163,7 @@ class SBankAccountController extends ChangeNotifier {
 
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

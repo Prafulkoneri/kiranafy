@@ -56,7 +56,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        SMainScreenView(index: 0, screenName: ShopDashBoardView())),
+                        SMainScreenView(index: 0, screenName: ShopDashBoardView(refresh: false,))),
                 (Route<dynamic> route) => false,
               );
             } else {
@@ -64,7 +64,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 4, screenName: SAccountScreenView())),
+                        index: 4, screenName: SAccountScreenView(refresh: false,))),
                 (Route<dynamic> route) => false,
               );
             }

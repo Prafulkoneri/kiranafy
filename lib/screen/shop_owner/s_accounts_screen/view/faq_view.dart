@@ -22,7 +22,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SAccountScreenController>().initState(context);
+      context.read<SAccountScreenController>().initState(context, true);
     });
   }
 

@@ -27,7 +27,8 @@ import 'package:provider/provider.dart';
 import '../../promotion_request/view/promotion_request_view.dart';
 
 class SAccountScreenView extends StatefulWidget {
-  const SAccountScreenView({super.key});
+  final bool ? refresh;
+  const SAccountScreenView({super.key,required this.refresh});
 
   @override
   State<SAccountScreenView> createState() => _SAccountScreenViewState();
@@ -37,7 +38,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SAccountScreenController>().initState(context);
+      context.read<SAccountScreenController>().initState(context,widget.refresh);
     });
   }
 
@@ -315,6 +316,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           index: 4,
                           screenName: CustomerListView(
                             isRefresh: true,
+                            fromPage: "account",
                           ))),
                   (Route<dynamic> route) => false,
                 );

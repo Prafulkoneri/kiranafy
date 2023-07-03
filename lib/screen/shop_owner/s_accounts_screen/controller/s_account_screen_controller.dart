@@ -30,15 +30,24 @@ class SAccountScreenController extends ChangeNotifier {
   List<bool> isFaqExpanded = [];
 
   // bool expantionChange
+
+  bool isLoading = true;
   // void onEditBtnClicked(context) {
   //   Navigator.push(
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
   // }
 
-  Future<void> initState(context) async {
+  Future<void> initState(context, refresh) async {
     print("999999999999");
-    await getShopEditProfileDetails(context);
-    await getFAQData(context);
+    if (refresh) {
+      await getShopEditProfileDetails(context);
+      await getFAQData(context);
+    }
+    notifyListeners();
+  }
+
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -132,6 +141,7 @@ class SAccountScreenController extends ChangeNotifier {
 
   ///////////////////////
   Future<void> getFAQData(context) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     faqData.faqData(pref.getString("successToken")).then((response) {
@@ -149,10 +159,14 @@ class SAccountScreenController extends ChangeNotifier {
         // print(privacyPolicy?.description);
         // print("3q2423424");
         // termsAndCondition = cmsdata?.termsAndCondition;
+
         int length = faqdata?.length ?? 0;
         for (int i = 0; i < length; i++) {
-          isFaqExpanded = List.filled(5, false, growable: true);
+          isFaqExpanded = List.filled(length, false, growable: true);
         }
+
+        showLoader(false);
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

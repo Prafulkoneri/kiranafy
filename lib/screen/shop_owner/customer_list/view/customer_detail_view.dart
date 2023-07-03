@@ -52,7 +52,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
                         index: 4,
-                        screenName: CustomerListView(isRefresh: false),
+                        screenName: CustomerListView(isRefresh: false,fromPage: "account"),
                       )),
               (Route<dynamic> route) => false,
             );

@@ -8,7 +8,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/controller/subscription_history_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/benifits_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
@@ -44,9 +47,25 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           title: "My Subscription",
+          onBackBtnPressed: (){
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                    index: 4,
+                    screenName: SAccountScreenView(
+                      refresh: false,
+                    ),
+                  )),
+                  (Route<dynamic> route) => false,
+            );
+          },
         ),
       ),
-      body: SingleChildScrollView(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
             // mainAxisAlignment: M,
@@ -148,7 +167,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 40.w,
+                                      height: 60.w,
                                     ),
                                     // SizedBox(
                                     //   height: 22.w,
@@ -203,7 +222,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                             fontSize: 28.sp),
                                       ),
                                       SizedBox(
-                                        height: 50.w,
+                                        height: 40.w,
                                       ),
                                     ],
                                   )),
@@ -307,7 +326,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 40.w,
+                                      height: 50.w,
                                     ),
                                     // SizedBox(
                                     //   height: 22.w,
@@ -362,7 +381,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                             fontSize: 28.sp),
                                       ),
                                       SizedBox(
-                                        height: 6.w,
+                                        height: 20.w,
                                       ),
                                     ],
                                   )),
@@ -398,7 +417,6 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                     textStyle: TextStyle(
                         color: Black1,
                         // height: 1.5,
-
                         // letterSpacing: .05,
                         // overflow: TextOverflow.ellipsis,
                         fontSize: 14.sp,
@@ -714,7 +732,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         horizontalInside:
                             BorderSide(color: Colors.white, width: 5)),
                     children: [
-                      TableRow(children: [
+                      TableRow(
+                          children: [
                         Container(
                           padding: EdgeInsets.only(
                               left: 10.w, //
@@ -769,8 +788,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         ),
                         Container(
                             padding: EdgeInsets.only(
-                                // left: 15.w,//
-                                right: 27.w,
+                                left: 0.w,//
+                                right: 0.w,
                                 bottom: 10.w,
                                 top: 8.w),
                             color: Color(0xff4EEFC1),
@@ -784,327 +803,112 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               ),
                             )),
                       ]),
-
                       /////////////////
 
-                      TableRow(
-                          decoration: BoxDecoration(
-                            color: Color(0xffF2F2F2),
-                          ),
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    // right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    'Standard',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: SplashText1,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    '1 Year',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: SplashText1,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    '12 Jan 2023',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                color: Color(0xffF2F2F2),
-                                child: Column(children: [
-                                  Text(
-                                    '₹ 3500',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                          ]),
-                      TableRow(
-                          decoration: BoxDecoration(
-                            color: Color(0xffF2F2F2),
-                          ),
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    'Standard',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    '1 Year',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    '12 Jan 2023',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                color: Color(0xffF2F2F2),
-                                child: Column(children: [
-                                  Text(
-                                    '₹ 3500',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                          ]),
-                      TableRow(
-                          decoration: BoxDecoration(
-                            color: Color(0xffF2F2F2),
-                          ),
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    'Standard',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    '1 Year',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    '12 Jan 2023',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                color: Color(0xffF2F2F2),
-                                child: Column(children: [
-                                  Text(
-                                    '₹ 3500',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                          ]),
-                      TableRow(
-                          decoration: BoxDecoration(
-                            color: Color(0xffF2F2F2),
-                          ),
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    'Standard',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    '1 Year',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                child: Column(children: [
-                                  Text(
-                                    '12 Jan 2023',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                            Container(
-                                padding: EdgeInsets.only(
-                                    // left: 15.w,//
-                                    right: 27.w,
-                                    bottom: 10.w,
-                                    top: 8.w),
-                                color: Color(0xffF2F2F2),
-                                child: Column(children: [
-                                  Text(
-                                    '₹ 3500',
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  )
-                                ])),
-                          ]),
                     ],
                   ),
                 ]),
-              )
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 19.w, right: 19.w,top: 2.w),
+                // margin: EdgeInsets.only(left: 15.w, right: 15.w,b top: 4.w),
+                child: Column(children: <Widget>[
+                  createTable(),
+                ]),
+              ),
+
+              SizedBox(
+                height: 100.w,
+              ),
             ]),
       ),
     );
+  }
+  Widget createTable(){
+    final watch = context.watch<SubscriptionHistoryController>();
+    List<TableRow> rows=[];
+    int length=watch.subscriptionHistory?.length??0;
+    for(int i=0;i<length;i++){
+      rows.add(  TableRow(
+          decoration: BoxDecoration(
+            color: Color(0xffF2F2F2),
+          ),
+          children: [
+            Container(
+                padding: EdgeInsets.only(
+                  left: 9.w,//
+                    right: 10.w,
+                    bottom: 10.w,
+                    top: 8.w),
+                child: Column(children: [
+                  Text(
+                    watch.subscriptionHistory?[i].planName??"",
+                    // overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black1,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  )
+                ])),
+            Container(
+                padding: EdgeInsets.only(
+                  // left: 15.w,//
+                    right: 27.w,
+                    bottom: 10.w,
+                    top: 8.w),
+                child: Column(children: [
+                  Text(
+    watch.subscriptionHistory?[i].validity??"",
+                    // overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black1,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  )
+                ])),
+            Container(
+                padding: EdgeInsets.only(
+                  // left: 15.w,//
+                    right: 27.w,
+                    bottom: 10.w,
+                    top: 8.w),
+                child: Column(children: [
+                  Text(
+                    watch.subscriptionHistory?[i].subscriptionActiveTill??"",
+                    // overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black1,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  )
+                ])),
+            Container(
+                padding: EdgeInsets.only(
+                  left: 0.w,//
+                    // right: 27.w,
+                    bottom: 10.w,
+                    top: 8.w),
+                color: Color(0xffF2F2F2),
+                child: Column(children: [
+                  Text(
+                    '₹ ${ watch.subscriptionHistory?[i].paidAmount??""}',
+                    // overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Black1,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  )
+                ])),
+          ]));
+    }
+    return Table(children: rows,);
   }
 }

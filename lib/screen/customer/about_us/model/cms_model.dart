@@ -26,8 +26,7 @@ class CmsData {
     required this.termsAndCondition,
   });
   CmsData.fromJson(Map<String, dynamic> json) {
-    aboutUs =
-        json['about_us'] != null ? AboutUs.fromJson(json['about_us']) : null;
+    aboutUs = json['about_us'] != null ? AboutUs.fromJson(json['about_us']) : null;
     privacyPolicy = json['privacy_policy_lsm'] != null
         ? AboutUs.fromJson(json['privacy_policy_lsm'])
         : null;

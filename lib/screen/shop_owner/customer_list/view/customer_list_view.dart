@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_filter_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -20,8 +21,9 @@ import 'package:provider/provider.dart';
 
 class CustomerListView extends StatefulWidget {
   final bool? isRefresh;
+  final String ?fromPage;
 
-  const CustomerListView({super.key, required this.isRefresh});
+  const CustomerListView({super.key, required this.isRefresh,required this.fromPage});
 
   @override
   State<CustomerListView> createState() => _CustomerListViewState();
@@ -33,7 +35,7 @@ class _CustomerListViewState extends State<CustomerListView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SCustomerListController>()
-          .initState(context, widget.isRefresh);
+          .initState(context, widget.isRefresh,widget.fromPage);
     });
   }
 
@@ -47,12 +49,19 @@ class _CustomerListViewState extends State<CustomerListView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
+            widget.fromPage=="account"?
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                      index: 4, screenName: SAccountScreenView())),
+                      index: 4, screenName: SAccountScreenView(refresh: false,))),
               (Route<dynamic> route) => false,
+            ): Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 0, screenName: ShopDashBoardView(refresh: false,))),
+                  (Route<dynamic> route) => false,
             );
           },
           title: "Customers",

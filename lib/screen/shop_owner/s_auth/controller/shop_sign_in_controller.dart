@@ -291,7 +291,7 @@ class ShopSignInController extends ChangeNotifier {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  SMainScreenView(index: 0, screenName: ShopDashBoardView())),
+                  SMainScreenView(index: 0, screenName: ShopDashBoardView(refresh: true,))),
           (Route<dynamic> route) => false,
         );
       } else {

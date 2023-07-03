@@ -47,6 +47,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
         showLoader(false);
         notifyListeners();
       } else {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

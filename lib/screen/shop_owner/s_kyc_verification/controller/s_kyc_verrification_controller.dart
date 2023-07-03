@@ -54,7 +54,7 @@ class SKycVerificationController extends ChangeNotifier {
   void onChooseFile1() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg'],
+      allowedExtensions: ['pdf', 'jpg','png'],
     );
     if (result != null) {
       networkImage1 = "";
@@ -73,7 +73,7 @@ class SKycVerificationController extends ChangeNotifier {
   void onChooseFile2() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg'],
+      allowedExtensions: ['pdf', 'jpg','png'],
     );
     if (result != null) {
       fileName2 = result.files.first.name;
@@ -91,7 +91,7 @@ class SKycVerificationController extends ChangeNotifier {
   void onChooseFile3() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg'],
+      allowedExtensions: ['pdf', 'jpg','png'],
     );
     if (result != null) {
       fileName3 = result.files.first.name;
@@ -109,7 +109,7 @@ class SKycVerificationController extends ChangeNotifier {
   void onChooseFile4() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg'],
+      allowedExtensions: ['pdf', 'jpg','png'],
     );
     if (result != null) {
       fileName4 = result.files.first.name;
@@ -344,6 +344,7 @@ class SKycVerificationController extends ChangeNotifier {
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
         return;
