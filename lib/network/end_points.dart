@@ -4,8 +4,10 @@ class Endpoint {
   // static const String baseUrl =
   //     'https://localsupermart.com/live/api';
   // live url
-  static const String baseUrl =
-      'https://newcms.m-staging.in/local-super-mart-admin/api/';
+  // static const String baseUrl =
+  //     'https://newcms.m-staging.in/local-super-mart-admin/api/';
+  static const String baseUrl = 'https://localsupermart.com/live/api/';
+
   // Check Mobile Number Exist
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';

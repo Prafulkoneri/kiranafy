@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
@@ -12,6 +13,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repos
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/subscription_plan_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SSubscriptionController extends ChangeNotifier {
@@ -89,6 +91,7 @@ class SSubscriptionController extends ChangeNotifier {
         .getSubscriptionPlans(pref.getString("successToken"))
         .then((response) {
       print("successToken");
+      log(response.body);
       final result =
           ShopSubscriptionPlansResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
@@ -143,6 +146,7 @@ class SSubscriptionController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     String a = '';
     if (selectedAddOnServicesId.isNotEmpty) {
@@ -156,7 +160,7 @@ class SSubscriptionController extends ChangeNotifier {
     else {
       selectedServicesId = "";
     }
-
+    LoadingOverlay.of(context).show();
     shopBuySubscriptionsRepo
         .buySubScription(
             buySubscriptionRequestModel, pref.getString("successToken"))
@@ -164,6 +168,7 @@ class SSubscriptionController extends ChangeNotifier {
       final result =
           BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
+      log(response.body);
       if (response.statusCode == 200) {
         // if (loggedIn) {
         //   Navigator.pushAndRemoveUntil(
@@ -180,13 +185,17 @@ class SSubscriptionController extends ChangeNotifier {
         // }
         SharedPreferences pref = await SharedPreferences.getInstance();
         pref.setString('status', 'subscriptionCompleted');
+        LoadingOverlay.of(context).hide();
+        // return;
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) =>
                     SShopConfigurationView(initialShopConfigration: true)));
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

@@ -14,7 +14,7 @@ import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class shopPromotionController extends ChangeNotifier {
-  String groupValue = "";
+  String groupValue = "7";
   bool isLoading = true;
   bool isStackLoading = false;
   TextEditingController promotionSubjectController = TextEditingController();
@@ -78,8 +78,11 @@ class shopPromotionController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: true,))),
+              builder: (context) => SMainScreenView(
+                  index: 4,
+                  screenName: SAccountScreenView(
+                    refresh: true,
+                  ))),
           (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,

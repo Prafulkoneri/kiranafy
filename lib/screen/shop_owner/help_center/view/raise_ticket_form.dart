@@ -92,7 +92,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                                 ),
                               ))
                           .toList(),
-                      hint: "Shop Type",
+                      // hint: "Shop Type",
                     ),
 
                     SizedBox(

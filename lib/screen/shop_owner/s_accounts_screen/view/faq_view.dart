@@ -61,10 +61,17 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                   itemBuilder: (context, index) {
                     final element = watch.faqdata?[index];
                     return Container(
+                      // height: MediaQuery.of(context).size.height * 0.13,
+
                       // margin: EdgeInsets.only(bottom: 20.w),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(width: 2, color: Colors.white),
+                        borderRadius: BorderRadius.circular(22),
+                        // border: Border.all(width: 0, color: Colors.white),
+                        // borderRadius: BorderRadius.only(
+                        //   bottomLeft: Radius.circular(25),
+                        //   bottomRight: Radius.circular(25),
+                        // ),
+
                         color: watch.isFaqExpanded[index]
                             ? Color(0xff44B8CA)
                             : Colors.white,
@@ -75,9 +82,10 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                         children: [
                           Theme(
                             data: ThemeData(
-                              dividerColor: Colors.transparent,
+                              dividerColor: Colors.white,
                             ),
                             child: ExpansionTile(
+                              backgroundColor: Colors.transparent,
                               onExpansionChanged: (value) {
                                 read.onChangeExpansion(value, index);
                                 print(value);
@@ -88,7 +96,8 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                     ? Colors.white
                                     : Colors.black,
                               ),
-                              tilePadding: EdgeInsets.only(left: 10, right: 10),
+                              tilePadding: EdgeInsets.only(
+                                  left: 10, right: 10, bottom: 0),
                               title: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
@@ -111,12 +120,15 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                   decoration: BoxDecoration(
                                     color: Color.fromARGB(255, 214, 251, 255),
                                     borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(20),
+                                      bottomRight: Radius.circular(20),
                                     ),
                                   ),
                                   padding: EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 13, right: 13),
+                                      top: 10.w,
+                                      bottom: 20.w,
+                                      left: 13,
+                                      right: 13),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
