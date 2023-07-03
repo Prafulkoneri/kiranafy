@@ -557,19 +557,19 @@ import 'package:local_supper_market/widget/stack_loader.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
-class ShopPramotionRequestView extends StatefulWidget {
-  const ShopPramotionRequestView({super.key});
+class shopPromotionRequestView extends StatefulWidget {
+  const shopPromotionRequestView({super.key});
 
   @override
-  State<ShopPramotionRequestView> createState() =>
-      _ShopPramotionRequestViewState();
+  State<shopPromotionRequestView> createState() =>
+      _shopPromotionRequestViewState();
 }
 
-class _ShopPramotionRequestViewState extends State<ShopPramotionRequestView> {
+class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<ShopPramotionController>();
-    final read = context.read<ShopPramotionController>();
+    final watch = context.watch<shopPromotionController>();
+    final read = context.read<shopPromotionController>();
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
@@ -581,7 +581,7 @@ class _ShopPramotionRequestViewState extends State<ShopPramotionRequestView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 4, screenName: SAccountScreenView())),
+                        index: 4, screenName: SAccountScreenView(refresh: false,))),
                 (Route<dynamic> route) => false,
               );
             },

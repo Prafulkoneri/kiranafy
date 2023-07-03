@@ -52,12 +52,13 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          isBackButtonEnabled: widget.isNavFromDashBoard==true?false:true,
             onBackBtnPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 4, screenName: SAccountScreenView())),
+                        index: 4, screenName: SAccountScreenView(refresh: false,))),
                 (Route<dynamic> route) => false,
               );
             },

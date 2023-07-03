@@ -25,9 +25,11 @@ class SOrderStatusController extends ChangeNotifier {
 
   Future<void> initState(
     context,
+      index
   ) async {
+
     await getShopOrderList(
-      context,
+      context,index
     );
     notifyListeners();
   }
@@ -37,7 +39,7 @@ class SOrderStatusController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getShopOrderList(context) async {
+  Future<void> getShopOrderList(context,index) async {
     showLoader(true);
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -52,6 +54,7 @@ class SOrderStatusController extends ChangeNotifier {
         inprocessOrdersList = shopOrderList?.inprocessOrdersList??[];
         deliveredOrdersList = shopOrderList?.deliveredOrdersList??[];
         cancelledOrdersList = shopOrderList?.cancelledOrdersList??[];
+        selectedIndex=index;
         showLoader(false);
         notifyListeners();
       } else {

@@ -149,7 +149,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => TrackOrderStatusController()),
         ChangeNotifierProvider(create: (_) => ShopSettingController()),
         ChangeNotifierProvider(create: (_) => CmsController()),
-        ChangeNotifierProvider(create: (_) => ShopPramotionController()),
+        ChangeNotifierProvider(create: (_) => shopPromotionController()),
         ChangeNotifierProvider(create: (_) => PaymentHistoryController()),
         ChangeNotifierProvider(create: (_) => SGetTicketListController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),

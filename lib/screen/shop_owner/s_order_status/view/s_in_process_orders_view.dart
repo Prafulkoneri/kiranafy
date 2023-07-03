@@ -127,6 +127,7 @@ class _SInProcessOrderViewState extends State<SInProcessOrderView> {
                               MaterialPageRoute(
                                   builder: (context) => ShopOrderStatusView(
                                         orderId: element?.id.toString(),
+                                    selectedIndex: 2,
                                       )),
                             );
                           },

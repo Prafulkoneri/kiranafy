@@ -126,6 +126,7 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
                               MaterialPageRoute(
                                   builder: (context) => ShopOrderStatusView(
                                         orderId: element?.id.toString(),
+                                    selectedIndex: 3,
                                       )),
                             );
                           },

@@ -17,6 +17,7 @@ import 'package:local_supper_market/screen/customer/products/views/product_scree
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/controller/offer_seasonal_recommanded_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
@@ -28,7 +29,8 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class ShopSeasonalRecommandedOfferProductsView extends StatefulWidget {
-  const ShopSeasonalRecommandedOfferProductsView({super.key});
+  final String ? selectedProduct;
+  const ShopSeasonalRecommandedOfferProductsView({super.key,required this.selectedProduct});
 
   @override
   State<ShopSeasonalRecommandedOfferProductsView> createState() =>
@@ -41,7 +43,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<ShopSeasonalRecommandedOfferProductsController>()
-          .initState(context);
+          .initState(context,widget.selectedProduct);
     });
   }
 
@@ -56,15 +58,23 @@ class _ShopSeasonalRecommandedOfferProductsViewState
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
+             widget.selectedProduct=="recommended"? Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
                           index: 4,
-                          screenName: SAccountScreenView(),
+                          screenName: SAccountScreenView(refresh: false,),
                         )),
                 (Route<dynamic> route) => false,
-              );
+              ): Navigator.pushAndRemoveUntil(
+               context,
+               MaterialPageRoute(
+                   builder: (context) => SMainScreenView(
+                     index: 0,
+                     screenName: ShopDashBoardView(refresh: false,),
+                   )),
+                   (Route<dynamic> route) => false,
+             );
             },
             title: watch.isRecommadedPressed
                 ? "Recommended Products"

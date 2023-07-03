@@ -126,6 +126,7 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
                               MaterialPageRoute(
                                   builder: (context) => ShopOrderStatusView(
                                         orderId: element?.id.toString(),
+                                    selectedIndex: 4,
                                       )),
                             );
                           },

@@ -46,7 +46,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                      index: 0, screenName: ShopDashBoardView())),
+                      index: 0, screenName: ShopDashBoardView(refresh: true,))),
               (Route<dynamic> route) => false,
             );
           },

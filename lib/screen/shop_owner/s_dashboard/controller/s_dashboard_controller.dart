@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/repository/dashboard_repo.dart';
@@ -21,6 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SDashBoardController extends ChangeNotifier {
   DashBoardRepo dashBoardRepo = DashBoardRepo();
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
+  SAccountScreenController sAccountScreenController = SAccountScreenController();
   List<ShopBannerImageData>? bannerImageList;
   bool isLoading = true;
   Data? dashBoardData;
@@ -44,12 +46,12 @@ class SDashBoardController extends ChangeNotifier {
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
   // }
 
-  Future<void> initState(context) async {
-    await getDashBoardData(context);
-    await getShopEditProfileDetails(context);
-    await getSubscriptionPaymentHistory(
-      context,
-    );
+  Future<void> initState(context,refresh) async {
+    if(refresh){
+      await getDashBoardData(context);
+      await getShopEditProfileDetails(context);
+      await getSubscriptionPaymentHistory(context);
+    }
     notifyListeners();
   }
 
@@ -68,7 +70,7 @@ class SDashBoardController extends ChangeNotifier {
         .getDashboardData(pref.getString("successToken"))
         .then((response) {
       print(response.statusCode);
-      print(response.body);
+      log(response.body);
       final result = DashBoardModel.fromJson(jsonDecode(response.body));
       print("${response.body}");
       if (response.statusCode == 200) {

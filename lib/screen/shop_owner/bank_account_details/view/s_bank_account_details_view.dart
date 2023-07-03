@@ -8,7 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/controller/get_bank_account_controll.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
@@ -43,6 +45,15 @@ class _ShopBankAccountDetailsViewState
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: (){
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: false,))),
+                  (Route<dynamic> route) => false,
+            );
+          },
           title: "Bank A/C Details",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
@@ -50,7 +61,10 @@ class _ShopBankAccountDetailsViewState
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [

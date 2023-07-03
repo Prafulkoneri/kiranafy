@@ -218,7 +218,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    SMainScreenView(index: 1, screenName: SOrderStatusView())),
+                    SMainScreenView(index: 1, screenName: SOrderStatusView(selectedIndex: 4,))),
             (Route<dynamic> route) => false,
           );
         }

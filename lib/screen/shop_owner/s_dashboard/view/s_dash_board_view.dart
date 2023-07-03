@@ -6,17 +6,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
+import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
+import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
+import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class ShopDashBoardView extends StatefulWidget {
   final bool? refresh;
 
-  const ShopDashBoardView({super.key, this.refresh});
+  const ShopDashBoardView({super.key, required this.refresh});
 
   @override
   State<ShopDashBoardView> createState() => _ShopDashBoardViewState();
@@ -26,7 +32,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SDashBoardController>().initState(context);
+      context.read<SDashBoardController>().initState(context,widget.refresh);
     });
   }
 
@@ -305,11 +311,14 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              // PersistentNavBarNavigator.pushNewScreen(context,
-                              //     screen: SSCategoryListView(),
-                              //     withNavBar: true,
-                              //     pageTransitionAnimation:
-                              //         PageTransitionAnimation.sizeUp);
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                        index: 4,
+                                        screenName: CustomerListView(isRefresh: true,fromPage: "dashboardProduct",))),
+                                    (Route<dynamic> route) => false,
+                              );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -353,40 +362,52 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 10.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                color: SplashText,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(10)),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                        index: 4,
+                                        screenName: CustomerListView(isRefresh: true,fromPage: "dashboardFavCustomer",))),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  color: SplashText,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(10)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.customersLinkedToShops}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.customersLinkedToShops}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Customer Linked to Shop",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Customer Linked to Shop",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -460,40 +481,52 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 10.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(10)),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                        index: 3,
+                                        screenName:ShopCouponsView(isNavFromDashBoard: true,isRefresh: true,))),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(10)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.shopOwnerActiveCouponsCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.shopOwnerActiveCouponsCount}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Coupons",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Coupons",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -663,47 +696,59 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    end: Alignment.topCenter,
-                                    begin: Alignment.bottomCenter,
-                                    colors: <Color>[
-                                      green.withOpacity(0.55),
-                                      green1.withOpacity(0.98),
-                                    ]),
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(8)),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                        index: 0,
+                                        screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"seasonal",))),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      end: Alignment.topCenter,
+                                      begin: Alignment.bottomCenter,
+                                      colors: <Color>[
+                                        green.withOpacity(0.55),
+                                        green1.withOpacity(0.98),
+                                      ]),
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(8)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.seasonalProductsCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.seasonalProductsCount}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Seasonal",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Seasonal",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -711,47 +756,59 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 10.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    end: Alignment.topCenter,
-                                    begin: Alignment.bottomCenter,
-                                    colors: <Color>[
-                                      green.withOpacity(0.55),
-                                      green1.withOpacity(0.98),
-                                    ]),
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(10)),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                        index: 0,
+                                        screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"fullFill",))),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      end: Alignment.topCenter,
+                                      begin: Alignment.bottomCenter,
+                                      colors: <Color>[
+                                        green.withOpacity(0.55),
+                                        green1.withOpacity(0.98),
+                                      ]),
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(10)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.fullfillYourCravingsProductsCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.fullfillYourCravingsProductsCount}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Fulfil your cravings",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Fulfil your cravings",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -832,37 +889,50 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            decoration: BoxDecoration(
-                                color: Custlogin,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "${watch.dashBoardData?.pendingOrdersCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                      index: 0,
+                                      screenName: SOrderStatusView(selectedIndex: 0),
+                                    )),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              decoration: BoxDecoration(
+                                  color: Custlogin,
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${watch.dashBoardData?.pendingOrdersCount}",
+                                    // "0",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Pending",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Pending",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

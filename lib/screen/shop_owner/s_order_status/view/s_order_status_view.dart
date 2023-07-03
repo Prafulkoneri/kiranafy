@@ -15,8 +15,8 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class SOrderStatusView extends StatefulWidget {
-
-  const SOrderStatusView({Key? key}) : super(key: key);
+final int ? selectedIndex;
+  const SOrderStatusView({Key? key,required this.selectedIndex}) : super(key: key);
 
   @override
   _SOrderStatusViewState createState() => _SOrderStatusViewState();
@@ -27,7 +27,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>  with TickerProvide
   void initState() {
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SOrderStatusController>().initState(context);
+      context.read<SOrderStatusController>().initState(context,widget.selectedIndex);
       tabController=TabController(length: 5, vsync:this,initialIndex:context.read<SOrderStatusController>().selectedIndex);
     });
   }

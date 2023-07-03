@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
+import 'package:local_supper_market/screen/shop_owner/promotion_request/controller/promotion_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_cms_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
@@ -27,7 +28,8 @@ import 'package:provider/provider.dart';
 import '../../promotion_request/view/promotion_request_view.dart';
 
 class SAccountScreenView extends StatefulWidget {
-  const SAccountScreenView({super.key});
+  final bool ? refresh;
+  const SAccountScreenView({super.key,required this.refresh});
 
   @override
   State<SAccountScreenView> createState() => _SAccountScreenViewState();
@@ -37,7 +39,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SAccountScreenController>().initState(context);
+      context.read<SAccountScreenController>().initState(context,widget.refresh);
     });
   }
 
@@ -55,7 +57,10 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
           onActionTap: () {},
         ),
       ),
-      body: SingleChildScrollView(
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -315,6 +320,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           index: 4,
                           screenName: CustomerListView(
                             isRefresh: true,
+                            fromPage: "account",
                           ))),
                   (Route<dynamic> route) => false,
                 );
@@ -432,7 +438,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       builder: (context) => SMainScreenView(
                           index: 4,
                           screenName:
-                              ShopSeasonalRecommandedOfferProductsView())),
+                              ShopSeasonalRecommandedOfferProductsView(selectedProduct: "recommended",))),
                   (Route<dynamic> route) => false,
                 );
               },
@@ -492,7 +498,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SMainScreenView(
-                          index: 4, screenName: ShopPramotionRequestView())),
+                          index: 4, screenName: shopPromotionRequestView())),
                   (Route<dynamic> route) => false,
                 );
               },

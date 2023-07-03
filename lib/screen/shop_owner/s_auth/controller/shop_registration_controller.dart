@@ -33,7 +33,7 @@ class ShopRegistrationController extends ChangeNotifier {
   String message = "";
   int countryId = 0;
   int stateId = 0;
-  int cityId = 0;
+  int  cityId=0;
   int areaId = 0;
   int shopId = 0;
   String countryCode = "+91";
@@ -121,6 +121,7 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> onStateSelected(value) async {
+    cityId=0;
     stateId = int.parse(value.toString());
     notifyListeners();
   }
@@ -130,23 +131,20 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> getCityList(context) async {
+    cityList?.clear();
     LoadingOverlay.of(context).show();
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        // cityList=[];
-        // if(cityList?.isEmpty??true){
-        //   print("hello");
-        // }
         cityList = result.cityData;
-        print(response.body);
         if (result.cityData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No City Found",
               type: SnackType.error);
         }
         LoadingOverlay.of(context).hide();
         notifyListeners();
-      } else {
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

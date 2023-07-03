@@ -312,7 +312,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView())),
+                  SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: true,))),
           (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
@@ -814,7 +814,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView())),
+                  SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: true,))),
           (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, "Updated Successfully",

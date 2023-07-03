@@ -29,10 +29,23 @@ class ShopSeasonalRecommandedOfferProductsController extends ChangeNotifier {
   String productId = "";
   String productsType = "";
   String removeFrom = "";
-  Future<void> initState(context) async {
-    isRecommadedPressed = true;
-    isSeasonalPressed = false;
-    isFulFilPressed = false;
+  Future<void> initState(context,selectedProduct) async {
+    if(selectedProduct=="recommended"){
+      isRecommadedPressed = true;
+      isSeasonalPressed = false;
+      isFulFilPressed = false;
+    }
+    if(selectedProduct=="seasonal"){
+      isSeasonalPressed = true;
+      isRecommadedPressed = false;
+      isFulFilPressed = false;
+    }
+    if(selectedProduct=="fullFill"){
+      isSeasonalPressed = false;
+      isRecommadedPressed = false;
+      isFulFilPressed = true;
+    }
+
     await getAllProductsList(context);
   }
 

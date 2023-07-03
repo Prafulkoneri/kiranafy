@@ -58,7 +58,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SMainScreenView(
-                            index: 0, screenName: SAccountScreenView())),
+                            index: 0, screenName: SAccountScreenView(refresh: false,))),
                     (Route<dynamic> route) => false,
                   )
                 : onBackPressed();
