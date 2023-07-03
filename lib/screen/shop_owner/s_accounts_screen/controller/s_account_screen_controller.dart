@@ -27,6 +27,9 @@ class SAccountScreenController extends ChangeNotifier {
   ShopSignOutRepo shopSignOutRepo = ShopSignOutRepo();
   List<FaqData>? faqdata;
   FAQDataRepo faqData = FAQDataRepo(); //
+  List<bool> isFaqExpanded = [];
+
+  // bool expantionChange
   // void onEditBtnClicked(context) {
   //   Navigator.push(
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
@@ -146,6 +149,10 @@ class SAccountScreenController extends ChangeNotifier {
         // print(privacyPolicy?.description);
         // print("3q2423424");
         // termsAndCondition = cmsdata?.termsAndCondition;
+        int length = faqdata?.length ?? 0;
+        for (int i = 0; i < length; i++) {
+          isFaqExpanded = List.filled(5, false, growable: true);
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -162,5 +169,10 @@ class SAccountScreenController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  void onChangeExpansion(value, index) {
+    isFaqExpanded[index] = value;
+    notifyListeners();
   }
 }
