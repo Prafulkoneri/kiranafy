@@ -46,14 +46,17 @@ class _HelpCenterViewState extends State<HelpCenterView> {
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                      index: 0, screenName: SAccountScreenView(refresh: false,))),
+                      index: 4,
+                      screenName: SAccountScreenView(
+                        refresh: false,
+                      ))),
               (Route<dynamic> route) => false,
             );
           },
-          title: "Customer Support",
+          title: "Help & Support",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-         read.onOpenBottomSheet(context);
+            read.onOpenBottomSheet(context);
           },
         ),
       ),
@@ -152,7 +155,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
                                         : element?.ticketStatus == "Ongoing"
                                             ? Color(0xffFF961C)
                                             ///////
-                                            : element?.ticketStatus == "Close"
+                                            : element?.ticketStatus == "Closed"
                                                 ? Colors.green
                                                 /////////
 

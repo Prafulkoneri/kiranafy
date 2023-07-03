@@ -581,7 +581,10 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 4, screenName: SAccountScreenView(refresh: false,))),
+                        index: 4,
+                        screenName: SAccountScreenView(
+                          refresh: false,
+                        ))),
                 (Route<dynamic> route) => false,
               );
             },
@@ -895,6 +898,45 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                 ),
                               ),
                             ),
+                            // For advertisement advance payment is required.
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 6.w),
+                        child: Row(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 0.w),
+                                child: Icon(
+                                  Icons.circle_rounded,
+                                  size: 5.w,
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Flexible(
+                              child: Text(
+                                "For advertisement advance payment is required.",
+                                // softWrap: true,
+                                // maxLines: 3,//
+                                textAlign: TextAlign.justify,
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black1,
+
+                                      // letterSpacing: .05,
+                                      // overflow: TextOverflow.ellipsis,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            ),
+                            // For advertisement advance payment is required.
                           ],
                         ),
                       ),

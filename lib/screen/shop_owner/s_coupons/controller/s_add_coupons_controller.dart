@@ -158,7 +158,7 @@ class SAddCouponsController extends ChangeNotifier {
           ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         productList = result.data;
-        if(productList?.isEmpty??false){
+        if (productList?.isEmpty ?? false) {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
@@ -199,8 +199,13 @@ class SAddCouponsController extends ChangeNotifier {
       final result =
           CouponCodeExistsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        if (result.status == 200) {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -233,7 +238,7 @@ class SAddCouponsController extends ChangeNotifier {
         productType: groupValue == "full_order_amount" ? "" : productType,
       );
 
-  Future<void> uploadCouponDetails(context,isNavFromDashBoard) async {
+  Future<void> uploadCouponDetails(context, isNavFromDashBoard) async {
     if (fromDateController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter From Date",
           type: SnackType.error);
@@ -276,7 +281,7 @@ class SAddCouponsController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-   LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     addCouponsRepo
         .addNewCoupons(addCouponsRequestModel, pref.getString("successToken"))
@@ -285,32 +290,29 @@ class SAddCouponsController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = AddCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(isNavFromDashBoard) {
+        if (isNavFromDashBoard) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    SMainScreenView(
-                        index: 4,
-                        screenName: ShopCouponsView(
-                          isRefresh: true,
-                          isNavFromDashBoard:true,
-                        ))),
-                (Route<dynamic> route) => false,
+                builder: (context) => SMainScreenView(
+                    index: 4,
+                    screenName: ShopCouponsView(
+                      isRefresh: true,
+                      isNavFromDashBoard: true,
+                    ))),
+            (Route<dynamic> route) => false,
           );
-        }
-        else{
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    SMainScreenView(
-                        index: 4,
-                        screenName: ShopCouponsView(
-                          isRefresh: true,
-                          isNavFromDashBoard:false,
-                        ))),
-                (Route<dynamic> route) => false,
+                builder: (context) => SMainScreenView(
+                    index: 4,
+                    screenName: ShopCouponsView(
+                      isRefresh: true,
+                      isNavFromDashBoard: false,
+                    ))),
+            (Route<dynamic> route) => false,
           );
         }
         LoadingOverlay.of(context).hide();
@@ -406,7 +408,7 @@ class SAddCouponsController extends ChangeNotifier {
         couponId: couponId,
       );
 
-  Future<void> uploadEditedCouponDetails(context,isNavFromDashBoard) async {
+  Future<void> uploadEditedCouponDetails(context, isNavFromDashBoard) async {
     if (fromDateController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter From Date",
           type: SnackType.error);
@@ -459,7 +461,7 @@ class SAddCouponsController extends ChangeNotifier {
       final result =
           UpdateEditCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(isNavFromDashBoard){
+        if (isNavFromDashBoard) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -467,12 +469,11 @@ class SAddCouponsController extends ChangeNotifier {
                     index: 3,
                     screenName: ShopCouponsView(
                       isRefresh: true,
-                      isNavFromDashBoard:true,
+                      isNavFromDashBoard: true,
                     ))),
-                (Route<dynamic> route) => false,
+            (Route<dynamic> route) => false,
           );
-        }
-        else{
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -480,9 +481,9 @@ class SAddCouponsController extends ChangeNotifier {
                     index: 4,
                     screenName: ShopCouponsView(
                       isRefresh: true,
-                      isNavFromDashBoard:false,
+                      isNavFromDashBoard: false,
                     ))),
-                (Route<dynamic> route) => false,
+            (Route<dynamic> route) => false,
           );
         }
 

@@ -52,284 +52,296 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 0, screenName: HelpCenterView())),
+                        index: 4, screenName: HelpCenterView())),
                 (Route<dynamic> route) => false,
               );
             },
-            title: "Customer Support",
+            title: "Help & Support",
           ),
         ),
-        body:watch.isLoading?Center(
-          child: CircularProgressIndicator(),
-        ):
-        Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Container(
-                  margin: EdgeInsets.only(left: 19.w, top: 20.h, right: 19.w),
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(
-                            bottom: 17.w, left: 17.w, right: 17.w, top: 14.w),
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: grey),
-                            borderRadius: BorderRadius.circular(10)),
+        body: watch.isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      child: Container(
+                        margin:
+                            EdgeInsets.only(left: 19.w, top: 20.h, right: 19.w),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                RichText(
-                                  text: TextSpan(
-                                      text: "Ticket Id -",
-                                      style: TextStyle(
-                                          color: Black,
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w700),
-                                      children: [
-                                        TextSpan(
-                                          text:
-                                              ' ${watch.ticketDetails?.ticketUniqueId}',
-                                          style: TextStyle(
-                                              color: Black,
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ]),
-                                ),
-                                Text(
-                                  "Status",
-                                  style: TextStyle(
-                                      color: Black,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w700),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${watch.ticketDetails?.createdAt}",
-                                  style: TextStyle(
-                                      color: Black,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  watch.ticketDetails?.ticketStatus ?? "",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: watch.ticketDetails
-                                                    ?.ticketStatus ==
-                                                "Pending"
-                                            ? Red
-                                            ///////
-                                            : watch.ticketDetails
-                                                        ?.ticketStatus ==
-                                                    "Ongoing"
-                                                ? Color(0xffFF961C)
-                                                ///////
-                                                : watch.ticketDetails
-                                                            ?.ticketStatus ==
-                                                        "Close"
-                                                    ? Colors.green
-                                                    /////////
-
-                                                    : Colors.transparent,
-                                        // letterSpacing: .5
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 9.h,
-                            ),
-                            Divider(),
-                            SizedBox(
-                              height: 13.h,
-                            ),
-                            Text(
-                              "Subject",
-                              style: TextStyle(
-                                  color: Black,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                            SizedBox(
-                              height: 6.h,
-                            ),
-                            Text(
-                              "${watch.ticketDetails?.subject}",
-                              style: TextStyle(
-                                  color: Black,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(
-                              height: 13.h,
-                            ),
-                            Text(
-                              "Remark",
-                              style: TextStyle(
-                                  color: Black,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                            Text(
-                              "${watch.ticketDetails?.description}",
-                              style: TextStyle(
-                                  color: Black,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      ListView.builder(
-                        reverse: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: watch.ticketRepliesList?.length ?? 0,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          final element = watch.ticketRepliesList?[index];
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xff44B8CA),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Container(
+                            Container(
                               padding: EdgeInsets.only(
-                                  left: 19.w,
-                                  bottom: 11.w,
-                                  right: 13.w,
-                                  top: 10.w),
+                                  bottom: 17.w,
+                                  left: 17.w,
+                                  right: 17.w,
+                                  top: 14.w),
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: grey6,
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                                  border: Border.all(width: 1, color: grey),
+                                  borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      element?.profileImagePath == ""
-                                          ? Container(
-                                              height: 37.w,
-                                              width: 37.w,
-                                              child: Image.asset(
-                                                "assets/images/profile_image.png",
-                                                fit: BoxFit.cover,
+                                      RichText(
+                                        text: TextSpan(
+                                            text: "Ticket Id -",
+                                            style: TextStyle(
+                                                color: Black,
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w700),
+                                            children: [
+                                              TextSpan(
+                                                text:
+                                                    ' ${watch.ticketDetails?.ticketUniqueId}',
+                                                style: TextStyle(
+                                                    color: Black,
+                                                    fontSize: 13.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
-                                            )
-                                          : Container(
-                                              height: 37.w,
-                                              width: 37.w,
-                                              child: AppNetworkImages(
-                                                imageUrl:
-                                                    "${element?.profileImagePath}",
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                      SizedBox(
-                                        width: 6,
+                                            ]),
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // SizedBox(
-                                          //   height: 6.h,
-                                          // ),
-                                          Text(
-                                            "${element?.name}",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            "${element?.createdAt}",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                        ],
+                                      Text(
+                                        "Status",
+                                        style: TextStyle(
+                                            color: Black,
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w700),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${watch.ticketDetails?.createdAt}",
+                                        style: TextStyle(
+                                            color: Black,
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Text(
+                                        watch.ticketDetails?.ticketStatus ?? "",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: watch.ticketDetails
+                                                          ?.ticketStatus ==
+                                                      "Pending"
+                                                  ? Red
+                                                  ///////
+                                                  : watch.ticketDetails
+                                                              ?.ticketStatus ==
+                                                          "Ongoing"
+                                                      ? Color(0xffFF961C)
+                                                      ///////
+                                                      : watch.ticketDetails
+                                                                  ?.ticketStatus ==
+                                                              "Closed"
+                                                          ? Colors.green
+                                                          /////////
+
+                                                          : Colors.transparent,
+                                              // letterSpacing: .5
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w700),
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  Divider(
-                                    color: Color(0xff319FB0),
-                                    thickness: 1,
+                                  SizedBox(
+                                    height: 9.h,
+                                  ),
+                                  Divider(),
+                                  SizedBox(
+                                    height: 13.h,
                                   ),
                                   Text(
-                                    "${element?.remark}",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
+                                    "Subject",
+                                    style: TextStyle(
+                                        color: Black,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  SizedBox(
+                                    height: 6.h,
+                                  ),
+                                  Text(
+                                    "${watch.ticketDetails?.subject}",
+                                    style: TextStyle(
+                                        color: Black,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  SizedBox(
+                                    height: 13.h,
+                                  ),
+                                  Text(
+                                    "Remark",
+                                    style: TextStyle(
+                                        color: Black,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  Text(
+                                    "${watch.ticketDetails?.description}",
+                                    style: TextStyle(
+                                        color: Black,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                 ],
                               ),
                             ),
-                          );
-                        },
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            ListView.builder(
+                              reverse: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: watch.ticketRepliesList?.length ?? 0,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                final element = watch.ticketRepliesList?[index];
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff44B8CA),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        left: 19.w,
+                                        bottom: 11.w,
+                                        right: 13.w,
+                                        top: 10.w),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: grey6,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            element?.profileImagePath == ""
+                                                ? Container(
+                                                    height: 37.w,
+                                                    width: 37.w,
+                                                    child: Image.asset(
+                                                      "assets/images/profile_image.png",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )
+                                                : Container(
+                                                    height: 37.w,
+                                                    width: 37.w,
+                                                    child: AppNetworkImages(
+                                                      imageUrl:
+                                                          "${element?.profileImagePath}",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                            SizedBox(
+                                              width: 6,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                // SizedBox(
+                                                //   height: 6.h,
+                                                // ),
+                                                Text(
+                                                  "${element?.name}",
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 13.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  "${element?.createdAt}",
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 13.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: Color(0xff319FB0),
+                                          thickness: 1,
+                                        ),
+                                        Text(
+                                          "${element?.remark}",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              height: 10.w,
+                            ),
+                          ],
+                        ),
                       ),
-                      SizedBox(
-                        height: 10.w,
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ),
-            Container(
-              child: PrimarySTextFormField(
-                controller: watch.remarkController,
-                height: 65.h,
-                maxLines: 5,
-                hintText: "Please text a message..",
-                hintFontSize: 13,
-                suffix: Padding(
-                  padding: EdgeInsets.only(right: 14.w),
-                  child: GestureDetector(
-                      onTap: () {
-                        read.ticketReply(context);
-                      },
-                      child: SvgPicture.asset("assets/icons/send.svg")),
-                ),
-                enableBorder: false,
-              ),
-            ),
-          ],
-        ));
+                  Container(
+                    child: PrimarySTextFormField(
+                      controller: watch.remarkController,
+                      height: 65.h,
+                      maxLines: 5,
+                      hintText: "Please text a message..",
+                      hintFontSize: 13,
+                      suffix: Padding(
+                        padding: EdgeInsets.only(right: 14.w),
+                        child: GestureDetector(
+                            onTap: () {
+                              read.ticketReply(context);
+                            },
+                            child: SvgPicture.asset("assets/icons/send.svg")),
+                      ),
+                      enableBorder: false,
+                    ),
+                  ),
+                ],
+              ));
   }
 }

@@ -27,148 +27,147 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
     return Stack(
       children: [
         SingleChildScrollView(
-              child: Container(
-                // height: 326.h,
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                width: 390.w,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
+          child: Container(
+            // height: 326.h,
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            width: 390.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 20.h,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Reason",
+                          style: TextStyle(
+                              color: Black1,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: SvgPicture.asset(
+                            "assets/icons/nav_close.svg",
+                            // width: 5.h,
+                            // height: 5.w,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Divider(
+                  // height: 20,
+                  thickness: 1,
+                  indent: 19,
+                  endIndent: 19,
+                  color: grey1,
+                ),
+                ListView.builder(
+                  itemCount: watch.cancelReasondata?.length ?? 0,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final element = watch.cancelReasondata?[index];
+                    return Padding(
                       padding: EdgeInsets.only(
-                        top: 20.h,
+                        left: 20.w,
+                        top: 17.w,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Reason",
+                      child: Row(
+                        children: [
+                          PrimaryCheckBox(
+                            value: watch.isSelectedReason[index],
+                            onChanged: (value) {
+                              read.onSelectReason(index, value, element?.id);
+                            },
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Text(
+                              "${element?.reason}",
+                              // "Product Not Available",
                               style: TextStyle(
                                   color: Black1,
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w500),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: SvgPicture.asset(
-                                "assets/icons/nav_close.svg",
-                                // width: 5.h,
-                                // height: 5.w,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 12.h,
-                    ),
-                    Divider(
-                      // height: 20,
-                      thickness: 1,
-                      indent: 19,
-                      endIndent: 19,
-                      color: grey1,
-                    ),
-                    ListView.builder(
-                      itemCount: watch.cancelReasondata?.length ?? 0,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final element = watch.cancelReasondata?[index];
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            left: 20.w,
-                            top: 17.w,
-                          ),
-                          child: Row(
-                            children: [
-                              PrimaryCheckBox(
-                                value: watch.isSelectedReason[index],
-                                onChanged: (value) {
-                                  read.onSelectReason(index, value,element?.id);
-                                },
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(right: 10),
-                                child: Text(
-                                  "${element?.reason}",
-                                  // "Product Not Available",
-                                  style: TextStyle(
-                                      color: Black1,
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ],
-                          ),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 10.w,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: 20.w, top: 24.w, bottom: 17.w, right: 19.w),
+                  // padding: const EdgeInsets.all(8.0),
+                  child: PrimarySTextFormField(
+                    controller: watch.reasonController,
+                    height: 150.w,
+                    maxLines: 10,
+                    // hintText: "Address",/
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: 20.w, top: 24.w, bottom: 20.w, right: 19.w),
+                  child: SizedBox(
+                    width: 352.w, // <-- Your width
+                    height: 35.h,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff39C19D),
+                        // onPrimary: Colors.white,
+                        // shadowColor: Colors.greenAccent,
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14.0)),
+                        minimumSize: const Size(100, 40), //////// HERE
+                      ),
+                      // style: style,
+                      onPressed: () {
+                        read.shopOrderStatus(
+                          context,
+                          watch.orderDetails?.id.toString(),
+                          "order_cancelled",
+                          watch.reasonController.text,
+                          watch.cancellationId,
+                          "",
                         );
                       },
-                    ),
-                    SizedBox(
-                      height: 10.w,
-                    ),
-
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 20.w, top: 24.w, bottom: 17.w, right: 19.w),
-                      // padding: const EdgeInsets.all(8.0),
-                      child: PrimarySTextFormField(
-                        controller: watch.reasonController,
-                        height: 150.w,
-                        maxLines: 10,
-                        // hintText: "Address",/
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 20.w, top: 24.w, bottom: 20.w, right: 19.w),
-                      child: SizedBox(
-                        width: 352.w, // <-- Your width
-                        height: 35.h,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xff39C19D),
-                            // onPrimary: Colors.white,
-                            // shadowColor: Colors.greenAccent,
-                            elevation: 3,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14.0)),
-                            minimumSize: const Size(100, 40), //////// HERE
-                          ),
-                          // style: style,
-                          onPressed: () {
-                            read.shopOrderStatus(
-                                context,
-                                watch.orderDetails?.id.toString(),
-                                "order_cancelled",
-                              watch.reasonController.text,
-                              watch.cancellationId,
-                                "",
-                            );
-                          },
-                          child: Text(
-                            'Submit',
-                            style: GoogleFonts.dmSans(
-                              textStyle: const TextStyle(
-                                  // color: SplashTex
-                                  letterSpacing: .5,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ),
+                      child: Text(
+                        'Submit',
+                        style: GoogleFonts.dmSans(
+                          textStyle: const TextStyle(
+                              // color: SplashTex
+                              letterSpacing: .5,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
+          ),
+        ),
         Positioned(
             bottom: 0,
             left: 0,
@@ -195,7 +194,11 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                           onTap: () {
                             read.onCancelErrorMissageDismiss();
                           },
-                          child: Text("Dismiss"),
+                          child: Text(
+                            "Dismiss",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14.sp),
+                          ),
                         ),
                         SizedBox(
                           width: 10.w,
@@ -209,6 +212,5 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
             )),
       ],
     );
-
   }
 }
