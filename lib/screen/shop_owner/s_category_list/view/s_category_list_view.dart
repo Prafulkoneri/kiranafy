@@ -138,8 +138,10 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                           // width: 55.w,
                                           // height: 40.h,
                                           child: AppNetworkImages(
-                                              imageUrl:
-                                                  "${element?.categoryImagePath}"),
+                                            imageUrl:
+                                                "${element?.categoryImagePath}",
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                         SizedBox(
                                           width: 12.w,

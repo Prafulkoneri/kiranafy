@@ -27,23 +27,27 @@ class SAccountScreenController extends ChangeNotifier {
   ShopSignOutRepo shopSignOutRepo = ShopSignOutRepo();
   List<FaqData>? faqdata;
   FAQDataRepo faqData = FAQDataRepo(); //
-  bool isLoading=true;
+  List<bool> isFaqExpanded = [];
+
+  // bool expantionChange
+
+  bool isLoading = true;
   // void onEditBtnClicked(context) {
   //   Navigator.push(
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
   // }
 
-  Future<void> initState(context,refresh) async {
+  Future<void> initState(context, refresh) async {
     print("999999999999");
-    if(refresh) {
+    if (refresh) {
       await getShopEditProfileDetails(context);
       await getFAQData(context);
     }
     notifyListeners();
   }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -158,13 +162,19 @@ class SAccountScreenController extends ChangeNotifier {
         // print(privacyPolicy?.description);
         // print("3q2423424");
         // termsAndCondition = cmsdata?.termsAndCondition;
+
+        int length = faqdata?.length ?? 0;
+        for (int i = 0; i < length; i++) {
+          isFaqExpanded = List.filled(length, false, growable: true);
+        }
+
         showLoader(false);
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
-
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
@@ -176,5 +186,10 @@ class SAccountScreenController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  void onChangeExpansion(value, index) {
+    isFaqExpanded[index] = value;
+    notifyListeners();
   }
 }

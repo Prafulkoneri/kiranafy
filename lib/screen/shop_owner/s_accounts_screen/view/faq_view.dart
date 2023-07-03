@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/cms_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_cms_view.dart';
@@ -21,7 +22,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SAccountScreenController>().initState(context,false);
+      context.read<SAccountScreenController>().initState(context, true);
     });
   }
 
@@ -40,17 +41,14 @@ class _ShopFAQViewState extends State<ShopFAQView> {
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
                       index: 4, screenName: SAccountCmsPagesView())),
-                  (Route<dynamic> route) => false,
+              (Route<dynamic> route) => false,
             );
           },
         ),
       ),
-      body:watch.isLoading?Center(
-        child: CircularProgressIndicator(),
-      ):
-      SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: EdgeInsets.only(left: 20, right: 20, top: 10.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -63,17 +61,14 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                   itemBuilder: (context, index) {
                     final element = watch.faqdata?[index];
                     return Container(
+                      // margin: EdgeInsets.only(bottom: 20.w),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              blurRadius: 2,
-                              spreadRadius: 1,
-                              offset: Offset(0.0, 0.0),
-                            )
-                          ]),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(width: 2, color: Colors.white),
+                        color: watch.isFaqExpanded[index]
+                            ? Color(0xff44B8CA)
+                            : Colors.white,
+                      ),
                       width: MediaQuery.of(context).size.width,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,71 +78,58 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                               dividerColor: Colors.transparent,
                             ),
                             child: ExpansionTile(
-                              trailing:
-                              //  Icon(
-                              //     Icons.keyboard_arrow_up_rounded,
-                              //     color: Color(0xff8b0e1a),
-                              //   )
-                              // :
-                              Icon(
+                              onExpansionChanged: (value) {
+                                read.onChangeExpansion(value, index);
+                                print(value);
+                              },
+                              trailing: Icon(
                                 Icons.keyboard_arrow_down_rounded,
-                                color: Color(0xff8b0e1a),
+                                color: watch.isFaqExpanded[index]
+                                    ? Colors.white
+                                    : Colors.black,
                               ),
                               tilePadding: EdgeInsets.only(left: 10, right: 10),
-                              // onExpansionChanged: (value) {
-                              //   // setState(() {
-                              //   //   tileOneOpen = value;
-                              //   // });
-                              // },
                               title: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
+                                    // "erwffrgew",
                                     "${element?.question}",
-                                    // "What is order ?",
-                                    style:
-                                    // tileOneOpen
-                                    //     ? TextStyle(
-                                    //         fontSize: 16,
-                                    //         fontFamily: 'whitneysemibold',
-                                    //         color: Colors.black)
-                                    // :
-                                    TextStyle(
-                                        fontSize: 18,
-                                        // fontFamily: 'whitneymedium',
-                                        color: Colors.black),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13,
+                                      color: watch.isFaqExpanded[index]
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
                                   ),
                                 ],
                               ),
                               children: <Widget>[
                                 Container(
-                                  // decoration: BoxDecoration(border: Border.all(color: Colors.white)),
-                                  height: 1,
-                                  margin: EdgeInsets.only(top: 0, bottom: 0),
-                                  width: MediaQuery.of(context).size.width,
-                                  color: Color(0xffeeeeee),
-                                ),
-                                Container(
+                                  width: ScreenUtil().screenWidth,
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10)),
+                                    color: Color.fromARGB(255, 214, 251, 255),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    ),
+                                  ),
                                   padding: EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 10, right: 10),
+                                      top: 10, bottom: 10, left: 13, right: 13),
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
+                                        // "gfgheryhjyurt",
                                         "${element?.answer}",
                                         textAlign: TextAlign.start,
-                                        // "Order is placed for products which are in stock and readily available with us. Stock accuracy is upto 90% at Manek Ratna, we cannot commit 100% since there are multiple B2B customers placing orders at the same time on our portal for the same product which you desire to order.",
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 13,
                                             color: Colors.black,
-                                            // height: 1.2,
-                                            // fontFamily: 'whitneymedium',
-                                            fontWeight: FontWeight.w300),
+                                            fontWeight: FontWeight.w400),
                                       )
                                     ],
                                   ),
@@ -160,7 +142,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                     );
                   }),
               SizedBox(
-                height: 20,
+                height: 100,
               ),
             ],
           ),

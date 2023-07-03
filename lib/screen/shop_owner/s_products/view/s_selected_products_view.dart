@@ -424,7 +424,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             "${element?.productImagePath}",
                                                         height: 61.h,
                                                         width: 60.w,
-                                                        fit: BoxFit.fill,
+                                                        fit: BoxFit.cover,
                                                       )
                                                     : Image(
                                                         image: AssetImage(

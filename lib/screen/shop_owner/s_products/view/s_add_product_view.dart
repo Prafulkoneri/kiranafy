@@ -125,7 +125,7 @@ class _AddProductViewState extends State<AddProductView> {
                             children: [
                               Container(
                                 padding: EdgeInsets.only(
-                                    left: 21.w, top: 6, bottom: 7, right: 9.w),
+                                    left: 4.w, top: 4, bottom: 4, right: 9.w),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   boxShadow: [
@@ -144,12 +144,28 @@ class _AddProductViewState extends State<AddProductView> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    AppNetworkImages(
-                                      imageUrl: "${element?.productImagePath}",
-                                      width: 60.w,
-                                      height: 61.h,
-                                      fit: BoxFit.fill,
-                                    ),
+                                    // AppNetworkImages(
+                                    //   imageUrl: "${element?.productImagePath}",
+                                    //   width: 60.w,
+                                    //   height: 61.h,
+                                    //   fit: BoxFit.fill,
+                                    // ),
+                                    element?.productImagePath != ""
+                                        ? AppNetworkImages(
+                                            imageUrl:
+                                                "${element?.productImagePath}",
+                                            height: 60.h,
+                                            width: 60.w,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image(
+                                            image: AssetImage(
+                                              "assets/images/profile_image.png",
+                                            ),
+                                            height: 60.h,
+                                            width: 60.w,
+                                            fit: BoxFit.fill,
+                                          ),
                                     SizedBox(
                                       width: 12.w,
                                     ),
