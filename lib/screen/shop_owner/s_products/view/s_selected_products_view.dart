@@ -318,9 +318,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 ),
                                               ],
                                             ),
-                                            Row(
+                                            Column(
                                               children: [
-                                                ///////////
+                                                SizedBox(
+                                                  height: 7.w,
+                                                ),
                                                 GestureDetector(
                                                   onTap: () {
                                                     Navigator
@@ -331,13 +333,13 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               SMainScreenView(
                                                                   index: 0,
                                                                   screenName:
-                                                                      UnitDetailView(
+                                                                  UnitDetailView(
                                                                     categoryId:
-                                                                        widget
-                                                                            .categoryId,
+                                                                    widget
+                                                                        .categoryId,
                                                                   ))),
-                                                      (Route<dynamic> route) =>
-                                                          false,
+                                                          (Route<dynamic> route) =>
+                                                      false,
                                                     );
                                                   },
                                                   child: Container(
@@ -349,8 +351,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                     decoration: BoxDecoration(
                                                       color: Color(0xff39C19D),
                                                       borderRadius:
-                                                          BorderRadius.circular(
-                                                              50),
+                                                      BorderRadius.circular(
+                                                          50),
                                                     ),
                                                     child: Text(
                                                       "3 Unit",
@@ -359,98 +361,105 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             color: Colors.white,
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .w400),
+                                                            FontWeight
+                                                                .w400),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  width: 10.w,
+                                                  height: 14.w,
                                                 ),
-                                                ////////////////
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    Navigator
-                                                        .pushAndRemoveUntil(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              SMainScreenView(
-                                                                  index: 0,
-                                                                  screenName:
+                                                Row(
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator
+                                                            .pushAndRemoveUntil(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  SMainScreenView(
+                                                                      index: 0,
+                                                                      screenName:
                                                                       SEditAdminProductView(
-                                                                    productId:
+                                                                        productId:
                                                                         element
                                                                             ?.id
                                                                             .toString(),
-                                                                    categoryId:
+                                                                        categoryId:
                                                                         widget
                                                                             .categoryId,
-                                                                  ))),
-                                                      (Route<dynamic> route) =>
+                                                                      ))),
+                                                              (Route<dynamic> route) =>
                                                           false,
-                                                    );
-                                                  },
-                                                  child: Container(
-                                                    padding: EdgeInsets.all(8),
-                                                    decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: grey6,
-                                                            offset:
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        padding: EdgeInsets.all(8),
+                                                        decoration: BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: grey6,
+                                                                offset:
                                                                 const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 10.0,
-                                                            spreadRadius: 2.0,
-                                                          ), //BoxShadow
-                                                        ],
-                                                        color: Colors.white,
-                                                        borderRadius:
+                                                                  5.0,
+                                                                  5.0,
+                                                                ),
+                                                                blurRadius: 10.0,
+                                                                spreadRadius: 2.0,
+                                                              ), //BoxShadow
+                                                            ],
+                                                            color: Colors.white,
+                                                            borderRadius:
                                                             BorderRadius
                                                                 .circular(15)),
-                                                    child: SvgPicture.asset(
-                                                        'assets/icons/e1.svg'),
-                                                  ),
+                                                        child: SvgPicture.asset(
+                                                            'assets/icons/e1.svg'),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 8.w,
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        read.deleteAdminProduct(
+                                                            context,
+                                                            index,
+                                                            element?.id);
+                                                      },
+                                                      child: Container(
+                                                        padding: EdgeInsets.all(8),
+                                                        decoration: BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: grey6,
+                                                                offset:
+                                                                const Offset(
+                                                                  5.0,
+                                                                  5.0,
+                                                                ),
+                                                                blurRadius: 10.0,
+                                                                spreadRadius: 2.0,
+                                                              ), //BoxShadow
+                                                            ],
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(15)),
+                                                        child: SvgPicture.asset(
+                                                            'assets/icons/delete2.svg'),
+                                                      ),
+                                                    )
+                                                    /////////////////
+                                                  ],
                                                 ),
                                                 SizedBox(
-                                                  width: 8.w,
+                                                  height: 16.w,
                                                 ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    read.deleteAdminProduct(
-                                                        context,
-                                                        index,
-                                                        element?.id);
-                                                  },
-                                                  child: Container(
-                                                    padding: EdgeInsets.all(8),
-                                                    decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: grey6,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 10.0,
-                                                            spreadRadius: 2.0,
-                                                          ), //BoxShadow
-                                                        ],
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15)),
-                                                    child: SvgPicture.asset(
-                                                        'assets/icons/delete2.svg'),
-                                                  ),
-                                                )
-                                                /////////////////
                                               ],
-                                            )
+                                            ),
+
                                           ],
                                         ),
                                       ),
@@ -657,6 +666,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                           ),
                                         ),
                                       ],
+                                      tilePadding: EdgeInsets.zero,
                                       // child:
                                     ),
                                   ),
