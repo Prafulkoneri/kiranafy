@@ -17,6 +17,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_prod
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/unit_detail_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
@@ -271,143 +272,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                     child: ExpansionTile(
                                       trailing: SizedBox.shrink(),
 
-                                      title:
-                                          // Container(
-                                          //   padding: EdgeInsets.only(),
-                                          //   width: ScreenUtil().screenWidth,
-                                          //   child: Row(
-                                          //     mainAxisAlignment:
-                                          //         MainAxisAlignment.spaceBetween,
-                                          //     children: [
-                                          //       Row(
-                                          //         children: [
-                                          //           // Image(
-                                          //           //   image: NetworkImage(
-                                          //           //     "${element?.productImagePath}",
-                                          //           //   ),
-                                          //           // height: 61.h,
-                                          //           // width: 60.w,
-                                          //           // fit: BoxFit.fill,
-                                          //           // ),
-                                          //           Container(
-                                          //             height: 61.h,
-                                          //             width: 60.w,
-                                          //             // width: 55.w,
-                                          //             // height: 40.h,
-                                          //             child: AppNetworkImages(
-                                          //               imageUrl:
-                                          //                   "${element?.productImagePath}",
-                                          //               // height: 61.h,
-                                          //               // width: 60.w,
-                                          //               // fit: BoxFit.fill,
-                                          //             ),
-                                          //           ),
-                                          //           SizedBox(
-                                          //             width: 10.w,
-                                          //           ),
-                                          //           Container(
-                                          //             width: 150.w,
-                                          //             child: Text(
-                                          //               "${element?.productName}",
-                                          //               // "${element?.productName}",
-                                          //               style: GoogleFonts.dmSans(
-                                          //                 textStyle: TextStyle(
-                                          //                     color: Black1,
-                                          //                     fontSize: 16.sp,
-                                          //                     fontWeight:
-                                          //                         FontWeight.w700),
-                                          //               ),
-                                          //             ),
-                                          //           ),
-                                          //         ],
-                                          //       ),
-                                          //       Row(
-                                          //         children: [
-                                          //           GestureDetector(
-                                          //             onTap: () {
-                                          //               Navigator
-                                          //                   .pushAndRemoveUntil(
-                                          //                 context,
-                                          //                 MaterialPageRoute(
-                                          //                     builder: (context) =>
-                                          //                         SMainScreenView(
-                                          //                             index: 0,
-                                          //                             screenName:
-                                          //                                 SEditAdminProductView(
-                                          //                               productId:
-                                          //                                   element
-                                          //                                       ?.id
-                                          //                                       .toString(),
-                                          //                               categoryId:
-                                          //                                   widget
-                                          //                                       .categoryId,
-                                          //                             ))),
-                                          //                 (Route<dynamic> route) =>
-                                          //                     false,
-                                          //               );
-                                          //             },
-                                          //             child: Container(
-                                          //               padding: EdgeInsets.all(8),
-                                          //               decoration: BoxDecoration(
-                                          //                   boxShadow: [
-                                          //                     BoxShadow(
-                                          //                       color: grey6,
-                                          //                       offset:
-                                          //                           const Offset(
-                                          //                         5.0,
-                                          //                         5.0,
-                                          //                       ),
-                                          //                       blurRadius: 10.0,
-                                          //                       spreadRadius: 2.0,
-                                          //                     ), //BoxShadow
-                                          //                   ],
-                                          //                   color: Colors.white,
-                                          //                   borderRadius:
-                                          //                       BorderRadius
-                                          //                           .circular(15)),
-                                          //               child: SvgPicture.asset(
-                                          //                   'assets/icons/e1.svg'),
-                                          //             ),
-                                          //           ),
-                                          //           SizedBox(
-                                          //             width: 8.w,
-                                          //           ),
-                                          //           GestureDetector(
-                                          //             onTap: () {
-                                          //               read.deleteAdminProduct(
-                                          //                   context,
-                                          //                   index,
-                                          //                   element?.id);
-                                          //             },
-                                          //             child: Container(
-                                          //               padding: EdgeInsets.all(8),
-                                          //               decoration: BoxDecoration(
-                                          //                   boxShadow: [
-                                          //                     BoxShadow(
-                                          //                       color: grey6,
-                                          //                       offset:
-                                          //                           const Offset(
-                                          //                         5.0,
-                                          //                         5.0,
-                                          //                       ),
-                                          //                       blurRadius: 10.0,
-                                          //                       spreadRadius: 2.0,
-                                          //                     ), //BoxShadow
-                                          //                   ],
-                                          //                   color: Colors.white,
-                                          //                   borderRadius:
-                                          //                       BorderRadius
-                                          //                           .circular(15)),
-                                          //               child: SvgPicture.asset(
-                                          //                   'assets/icons/delete2.svg'),
-                                          //             ),
-                                          //           )
-                                          //         ],
-                                          //       )
-                                          //     ],
-                                          //   ),
-                                          // ),
-                                          Container(
+                                      title: Container(
                                         width: ScreenUtil().screenWidth,
                                         child: Row(
                                           mainAxisAlignment:
@@ -435,10 +300,10 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                         fit: BoxFit.fill,
                                                       ),
                                                 SizedBox(
-                                                  width: 10.w,
+                                                  width: 8.w,
                                                 ),
                                                 Container(
-                                                  width: 150.w,
+                                                  width: 80.w,
                                                   child: Text(
                                                     "${element?.productName}",
                                                     // "${element?.productName}",
@@ -455,6 +320,55 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                             ),
                                             Row(
                                               children: [
+                                                ///////////
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator
+                                                        .pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              SMainScreenView(
+                                                                  index: 0,
+                                                                  screenName:
+                                                                      UnitDetailView(
+                                                                    categoryId:
+                                                                        widget
+                                                                            .categoryId,
+                                                                  ))),
+                                                      (Route<dynamic> route) =>
+                                                          false,
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 17.w,
+                                                        right: 15.w,
+                                                        top: 4.w,
+                                                        bottom: 5.w),
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xff39C19D),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50),
+                                                    ),
+                                                    child: Text(
+                                                      "3 Unit",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 10.w,
+                                                ),
+                                                ////////////////
                                                 GestureDetector(
                                                   onTap: () {
                                                     Navigator
@@ -534,6 +448,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                         'assets/icons/delete2.svg'),
                                                   ),
                                                 )
+                                                /////////////////
                                               ],
                                             )
                                           ],
