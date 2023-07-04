@@ -1,3 +1,4 @@
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'dart:convert';
@@ -454,21 +455,7 @@ class EditAdminProductController extends ChangeNotifier {
   }
 
   Future<void> uploadAdminProduct(context) async {
-    int count = productUnitDetail?.length ?? 0;
-    totalRows = count + cards.length;
-
-    if (cards.length != 0) {
-      await getValueCardData();
-      await getMrpCardData();
-      await getOfferCardData();
-      await getSwitchCardValue();
-    }
-    await getValueData();
-    await getMrpData();
-    await getUnitData();
-    await getOfferData();
-    await getSwitchValue();
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadAdminProductRepo
         .uploadAdminProduct(
@@ -478,7 +465,7 @@ class EditAdminProductController extends ChangeNotifier {
       final result =
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print(categoryId);
+        LoadingOverlay.of(context).hide();
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -488,10 +475,12 @@ class EditAdminProductController extends ChangeNotifier {
                   )),
           (Route<dynamic> route) => false,
         );
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -512,112 +501,105 @@ class EditAdminProductController extends ChangeNotifier {
       UploadAdminProductReqModel(
         productId: productId,
         showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
-        showUnderRecommendedProduct:
-            showUnderRecommendedProducts ? "yes" : "no",
+        showUnderRecommendedProduct: showUnderRecommendedProducts ? "yes" : "no",
         showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
-        mrpPrice: mrp + mrpCard,
-        offerPrice: offer + offerCard,
-        status: status + statusCard,
-        totalRows: totalRows.toString(),
-        unitID: unit + unitCard,
-        weight: value + valueCard,
       );
 
-  Future uploadImage(context) async {
-    print("hellooooo");
-    int count = productUnitDetail?.length ?? 0;
-    totalRows = count + cards.length;
-
-    if (cards.length != 0) {
-      await getValueCardData();
-      await getMrpCardData();
-      await getOfferCardData();
-      await getSwitchCardValue();
-    }
-    await getValueData();
-    await getMrpData();
-    await getUnitData();
-    await getOfferData();
-    await getSwitchValue();
-
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.uploadAdminProduct}");
-    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
-    request.headers['Authorization'] = "Bearer $token";
-    request.fields['product_id'] = productId;
-    request.fields['show_under_fullfill_your_cravings'] =
-        fullFillCravings ? "yes" : "no";
-    request.fields['show_under_recommanded_products'] =
-        showUnderRecommendedProducts ? "yes" : "no";
-    request.fields['show_under_seasonal_products'] =
-        showUnderSeasonalProducts ? "yes" : "no";
-    request.fields["unit_ids"] = unit + unitCard;
-    request.fields["weight_ids"] = value + valueCard;
-    request.fields["mrp_price_ids"] = mrp + mrpCard;
-    request.fields["offer_price_ids"] = offer + offerCard;
-    request.fields["status_ids"] = status + statusCard;
-    request.fields["total_rows"] = totalRows.toString();
-    print(productId);
-    print(request.fields);
-    //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
-    List<http.MultipartFile> newList = <http.MultipartFile>[];
-    if (imagefiles1.isNotEmpty) {
-      for (int i = 0; i < imagefiles1.length; i++) {
-        XFile imageData1 = imagefiles1[i];
-        print(imageData1);
-        var stream =
-            new http.ByteStream(DelegatingStream.typed(imageData1.openRead()));
-        var length = await imageData1.length();
-        var multipartFile = new http.MultipartFile(
-            "unit_based_product_image_1_path[$i]", stream, length,
-            filename: basename(imageData1.path));
-        newList.add(multipartFile);
-      }
-    }
-    if (imagefiles2.isNotEmpty) {
-      for (int i = 0; i < imagefiles2.length; i++) {
-        XFile imageData2 = imagefiles2[i];
-        print(imageData2);
-        var stream =
-            new http.ByteStream(DelegatingStream.typed(imageData2.openRead()));
-        var length = await imageData2.length();
-        var multipartFile = new http.MultipartFile(
-            "unit_based_product_image_2_path[$i]", stream, length,
-            filename: basename(imageData2.path));
-        newList.add(multipartFile);
-      }
-    }
-    if (imagefiles3.isNotEmpty) {
-      for (int i = 0; i < imagefiles3.length; i++) {
-        XFile imageData3 = imagefiles3[i];
-        print(imageData3);
-        var stream =
-            new http.ByteStream(DelegatingStream.typed(imageData3.openRead()));
-        var length = await imageData3.length();
-        var multipartFile = new http.MultipartFile(
-            "unit_based_product_image_3_path[$i]", stream, length,
-            filename: basename(imageData3.path));
-        newList.add(multipartFile);
-      }
-    }
-    request.files.addAll(newList);
-    print(request.files[2].filename);
-    await request.send().then((response) async {
-      final respStr = await response.stream.bytesToString();
-      print("respStr${respStr}");
-      if (response.statusCode == 200) {
-        Utils.showPrimarySnackbar(context, "Updated Successfully",
-            type: SnackType.success);
-        print("Updated Successfully");
-      } else {
-        Utils.showPrimarySnackbar(context, "Error on uploading",
-            type: SnackType.error);
-      }
-      // response.stream.transform(utf8.decoder).listen((value) {
-      //   print(value);
-      // });
-    });
-    return true;
-  }
+  // Future uploadImage(context) async {
+  //   print("hellooooo");
+  //   int count = productUnitDetail?.length ?? 0;
+  //   totalRows = count + cards.length;
+  //
+  //   if (cards.length != 0) {
+  //     await getValueCardData();
+  //     await getMrpCardData();
+  //     await getOfferCardData();
+  //     await getSwitchCardValue();
+  //   }
+  //   await getValueData();
+  //   await getMrpData();
+  //   await getUnitData();
+  //   await getOfferData();
+  //   await getSwitchValue();
+  //
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   String token = pref.getString("successToken").toString();
+  //   var uri = Uri.parse("${Endpoint.uploadAdminProduct}");
+  //   http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+  //   request.headers['Authorization'] = "Bearer $token";
+  //   request.fields['product_id'] = productId;
+  //   request.fields['show_under_fullfill_your_cravings'] =
+  //       fullFillCravings ? "yes" : "no";
+  //   request.fields['show_under_recommanded_products'] =
+  //       showUnderRecommendedProducts ? "yes" : "no";
+  //   request.fields['show_under_seasonal_products'] =
+  //       showUnderSeasonalProducts ? "yes" : "no";
+  //   request.fields["unit_ids"] = unit + unitCard;
+  //   request.fields["weight_ids"] = value + valueCard;
+  //   request.fields["mrp_price_ids"] = mrp + mrpCard;
+  //   request.fields["offer_price_ids"] = offer + offerCard;
+  //   request.fields["status_ids"] = status + statusCard;
+  //   request.fields["total_rows"] = totalRows.toString();
+  //   print(productId);
+  //   print(request.fields);
+  //   //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
+  //   List<http.MultipartFile> newList = <http.MultipartFile>[];
+  //   if (imagefiles1.isNotEmpty) {
+  //     for (int i = 0; i < imagefiles1.length; i++) {
+  //       XFile imageData1 = imagefiles1[i];
+  //       print(imageData1);
+  //       var stream =
+  //           new http.ByteStream(DelegatingStream.typed(imageData1.openRead()));
+  //       var length = await imageData1.length();
+  //       var multipartFile = new http.MultipartFile(
+  //           "unit_based_product_image_1_path[$i]", stream, length,
+  //           filename: basename(imageData1.path));
+  //       newList.add(multipartFile);
+  //     }
+  //   }
+  //   if (imagefiles2.isNotEmpty) {
+  //     for (int i = 0; i < imagefiles2.length; i++) {
+  //       XFile imageData2 = imagefiles2[i];
+  //       print(imageData2);
+  //       var stream =
+  //           new http.ByteStream(DelegatingStream.typed(imageData2.openRead()));
+  //       var length = await imageData2.length();
+  //       var multipartFile = new http.MultipartFile(
+  //           "unit_based_product_image_2_path[$i]", stream, length,
+  //           filename: basename(imageData2.path));
+  //       newList.add(multipartFile);
+  //     }
+  //   }
+  //   if (imagefiles3.isNotEmpty) {
+  //     for (int i = 0; i < imagefiles3.length; i++) {
+  //       XFile imageData3 = imagefiles3[i];
+  //       print(imageData3);
+  //       var stream =
+  //           new http.ByteStream(DelegatingStream.typed(imageData3.openRead()));
+  //       var length = await imageData3.length();
+  //       var multipartFile = new http.MultipartFile(
+  //           "unit_based_product_image_3_path[$i]", stream, length,
+  //           filename: basename(imageData3.path));
+  //       newList.add(multipartFile);
+  //     }
+  //   }
+  //   request.files.addAll(newList);
+  //   print(request.files[2].filename);
+  //   await request.send().then((response) async {
+  //     final respStr = await response.stream.bytesToString();
+  //     print("respStr${respStr}");
+  //     if (response.statusCode == 200) {
+  //       Utils.showPrimarySnackbar(context, "Updated Successfully",
+  //           type: SnackType.success);
+  //       print("Updated Successfully");
+  //     } else {
+  //       Utils.showPrimarySnackbar(context, "Error on uploading",
+  //           type: SnackType.error);
+  //     }
+  //     // response.stream.transform(utf8.decoder).listen((value) {
+  //     //   print(value);
+  //     // });
+  //   });
+  //   return true;
+  // }
 }

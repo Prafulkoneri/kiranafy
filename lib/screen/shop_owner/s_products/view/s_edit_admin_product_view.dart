@@ -387,586 +387,586 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                     color: Color(0xffDDDDDD),
                   ),
                   SizedBox(height: 15.w),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Add Unit",
-                        style: TextStyle(
-                            color: Black,
-                            // letterSpacing: .5,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              print(watch.cards.length);
-                              print(watch.valueController.length);
-                              read.onAddWidget(CreateWidget(watch.cards.length),
-                                  watch.cards.length);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 6.w, vertical: 2.w),
-                              // margin: EdgeInsets.only(right: 15.w),
-                              // height: 24.h,
-                              // width: 55.w,
-                              decoration: BoxDecoration(
-                                color: SplashText,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                              ),
-                              child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Add",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  SizedBox(
-                                    width: 7.w,
-                                  ),
-                                  SvgPicture.asset(
-                                    'assets/icons/pluse.svg',
-                                    height: 7.h,
-                                    width: 7.w,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     read.onRemoveWidget(watch.cards.length-1);
-                          //   },
-                          //   child: Container(
-                          //     padding: EdgeInsets.symmetric(
-                          //         horizontal: 6.w, vertical: 2.w),
-                          //     // margin: EdgeInsets.only(right: 15.w),
-                          //     // height: 24.h,
-                          //     // width: 55.w,
-                          //     decoration: BoxDecoration(
-                          //       color: Colors.red,
-                          //       borderRadius: BorderRadius.all(Radius.circular(5)),
-                          //     ),
-                          //     child: Row(
-                          //       // mainAxisAlignment: MainAxisAlignment.center,
-                          //       children: [
-                          //         Text(
-                          //           "Delete",
-                          //           style: TextStyle(
-                          //               color: Colors.white,
-                          //               // letterSpacing: .5,
-                          //               fontSize: 12.sp,
-                          //               fontWeight: FontWeight.w400),
-                          //         ),
-                          //         SizedBox(
-                          //           width: 7.w,
-                          //         ),
-                          //        Icon(Icons.clear,color: Colors.white,size: 14.w,)
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  ListView.builder(
-                      padding: EdgeInsets.zero,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: watch.productUnitDetail?.length ?? 0,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext, index) {
-                        final element = watch.productUnitDetail?[index];
-                        return Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: PrimarySTextFormField(
-                                    textInputType: TextInputType.number,
-                                    onChanged: (value) {},
-                                    controller: watch.valueController[index],
-                                    height: 35,
-                                    // width: 20, // titleHeader: "Shop Name",
-                                    hintText: "value",
-                                    hintFontSize: 12.sp,
-                                    readOnly: true,
-                                  ),
-                                ),
-                                SizedBox(width: 3.w),
-                                Expanded(
-                                  child: Container(
-                                    height: 33.w,
-                                    decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: Color(0xffEFEFEF)),
-                                      borderRadius: BorderRadius.circular(6.w),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 5.w,
-                                            ),
-                                            Text(
-                                              element?.unit ?? "",
-                                              style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  color: Black1,
-                                                  fontWeight: FontWeight.w400),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons
-                                                  .keyboard_arrow_down_outlined,
-                                              color: Color(0xffB3B3B3),
-                                            ),
-                                            SizedBox(
-                                              width: 5.w,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 3.w),
-                                Expanded(
-                                  child: PrimarySTextFormField(
-                                    textInputType: TextInputType.number,
-                                    controller: watch.mrpController[index],
-                                    height: 35,
-                                    // width: 20, // titleHeader: "Shop Name",
-                                    hintText: "MRP",
-                                    hintFontSize: 12.sp,
-                                  ),
-                                ),
-                                SizedBox(width: 3.w),
-                                Expanded(
-                                  child: PrimarySTextFormField(
-                                    textInputType: TextInputType.number,
-                                    controller: watch.offerController[index],
-                                    height: 35,
-                                    // width: 20, // titleHeader: "Shop Name",
-                                    hintText: "Offer Price",
-                                    hintFontSize: 12.sp,
-                                  ),
-                                ),
-                                SizedBox(width: 15.w),
-                                Container(
-                                  width: 30.w,
-                                  child: CupertinoSwitch(
-                                    value: watch.switchValue[index],
-                                    activeColor: DarkGreen,
-                                    onChanged: (value) {
-                                      read.onToggleSwitch(value, index);
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 7.w,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      height: 100.h,
-                                      width: 110.w,
-                                      decoration: BoxDecoration(boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.05),
-                                          blurRadius: 10.0,
-                                        ),
-                                      ]),
-                                      child: Card(
-                                        elevation: 0.3,
-                                        child:
-                                            element?.unitBasedProductImage1Path !=
-                                                    ""
-                                                ? Center(
-                                                    child: AppNetworkImages(
-                                                      imageUrl: element
-                                                              ?.unitBasedProductImage1Path ??
-                                                          "",
-                                                      fit: BoxFit.cover,
-                                                      height: 90.w,
-                                                    ),
-                                                  )
-                                                : Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/gallary.svg",
-                                                        // height: 19.w,
-                                                        // width: 21.w,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10.h,
-                                                      ),
-                                                      Text(
-                                                        "Add Image",
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xffB3B3B3),
-                                                            // letterSpacing: .5,
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
-                                                    ],
-                                                  ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      // read.openGallery2(index);
-                                    },
-                                    child: Container(
-                                      height: 100.h,
-                                      width: 110.w,
-                                      decoration: BoxDecoration(boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.05),
-                                          blurRadius: 10.0,
-                                        ),
-                                      ]),
-                                      child: Card(
-                                        elevation: 0.3,
-                                        child:
-                                            element?.unitBasedProductImage2Path !=
-                                                    ""
-                                                ? Center(
-                                                    child: AppNetworkImages(
-                                                      imageUrl: element
-                                                              ?.unitBasedProductImage2Path ??
-                                                          "",
-                                                      fit: BoxFit.cover,
-                                                      height: 90.w,
-                                                    ),
-                                                  )
-                                                : Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/gallary.svg",
-                                                        // height: 19.w,
-                                                        // width: 21.w,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10.h,
-                                                      ),
-                                                      Text(
-                                                        "Add Image",
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xffB3B3B3),
-                                                            // letterSpacing: .5,
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
-                                                    ],
-                                                  ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      // read.openGallery3(index);
-                                    },
-                                    child: Container(
-                                      height: 100.h,
-                                      width: 110.w,
-                                      decoration: BoxDecoration(boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.05),
-                                          blurRadius: 10.0,
-                                        ),
-                                      ]),
-                                      child: Card(
-                                        elevation: 0.3,
-                                        child:
-                                            element?.unitBasedProductImage3Path !=
-                                                    ""
-                                                ? Center(
-                                                    child: AppNetworkImages(
-                                                      imageUrl: element
-                                                              ?.unitBasedProductImage3Path ??
-                                                          "",
-                                                      fit: BoxFit.cover,
-                                                      height: 90.w,
-                                                    ),
-                                                  )
-                                                : Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        "assets/icons/gallary.svg",
-                                                        // height: 19.w,
-                                                        // width: 21.w,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10.h,
-                                                      ),
-                                                      Text(
-                                                        "Add Image",
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xffB3B3B3),
-                                                            // letterSpacing: .5,
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
-                                                    ],
-                                                  ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20.w,
-                            ),
-                          ],
-                        );
-                      }),
-                  ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: watch.cards.length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext, index) {
-                        return Column(
-                          children: [
-                            Stack(
-                              alignment: Alignment.topRight,
-                              children: [
-                                CreateWidget(index),
-                                Container(
-                                  width: 30.w,
-                                  child: CupertinoSwitch(
-                                    value: watch.switchCardValue[index],
-                                    activeColor: DarkGreen,
-                                    onChanged: (value) {
-                                      read.onToggleCardSwitch(value, index);
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      read.openGallery1(index);
-                                    },
-                                    child: Container(
-                                      height: 100.h,
-                                      width: 110.w,
-                                      decoration: BoxDecoration(boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.05),
-                                          blurRadius: 10.0,
-                                        ),
-                                      ]),
-                                      child: Card(
-                                        elevation: 0.3,
-                                        child: watch.imagefiles1[index].path !=
-                                                ""
-                                            ? Image.file(
-                                                File(watch
-                                                    .imagefiles1[index].path),
-                                                fit: BoxFit.cover,
-                                              )
-                                            : Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    "assets/icons/gallary.svg",
-                                                    // height: 19.w,
-                                                    // width: 21.w,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10.h,
-                                                  ),
-                                                  Text(
-                                                    "Add Image",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xffB3B3B3),
-                                                        // letterSpacing: .5,
-                                                        fontSize: 12.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
-                                                ],
-                                              ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      read.openGallery2(index);
-                                    },
-                                    child: Container(
-                                      height: 100.h,
-                                      width: 110.w,
-                                      decoration: BoxDecoration(boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.05),
-                                          blurRadius: 10.0,
-                                        ),
-                                      ]),
-                                      child: Card(
-                                        elevation: 0.3,
-                                        child: watch.imagefiles2[index].path !=
-                                                ""
-                                            ? Image.file(
-                                                File(watch
-                                                    .imagefiles2[index].path),
-                                                fit: BoxFit.cover)
-                                            : Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    "assets/icons/gallary.svg",
-                                                    // height: 19.w,
-                                                    // width: 21.w,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10.h,
-                                                  ),
-                                                  Text(
-                                                    "Add Image",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xffB3B3B3),
-                                                        // letterSpacing: .5,
-                                                        fontSize: 12.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
-                                                ],
-                                              ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      read.openGallery3(index);
-                                    },
-                                    child: Container(
-                                      height: 100.h,
-                                      width: 110.w,
-                                      decoration: BoxDecoration(boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.05),
-                                          blurRadius: 10.0,
-                                        ),
-                                      ]),
-                                      child: Card(
-                                        elevation: 0.3,
-                                        child: watch.imagefiles3[index].path !=
-                                                ""
-                                            ? Image.file(
-                                                File(watch
-                                                    .imagefiles3[index].path),
-                                                fit: BoxFit.cover)
-                                            : Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    "assets/icons/gallary.svg",
-                                                    // height: 19.w,
-                                                    // width: 21.w,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10.h,
-                                                  ),
-                                                  Text(
-                                                    "Add Image",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xffB3B3B3),
-                                                        // letterSpacing: .5,
-                                                        fontSize: 12.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
-                                                ],
-                                              ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 22.w,
-                            ),
-                          ],
-                        );
-                      }),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       "Add Unit",
+                  //       style: TextStyle(
+                  //           color: Black,
+                  //           // letterSpacing: .5,
+                  //           fontSize: 16.sp,
+                  //           fontWeight: FontWeight.w700),
+                  //     ),
+                  //     Row(
+                  //       children: [
+                  //         GestureDetector(
+                  //           onTap: () {
+                  //             print(watch.cards.length);
+                  //             print(watch.valueController.length);
+                  //             read.onAddWidget(CreateWidget(watch.cards.length),
+                  //                 watch.cards.length);
+                  //           },
+                  //           child: Container(
+                  //             padding: EdgeInsets.symmetric(
+                  //                 horizontal: 6.w, vertical: 2.w),
+                  //             // margin: EdgeInsets.only(right: 15.w),
+                  //             // height: 24.h,
+                  //             // width: 55.w,
+                  //             decoration: BoxDecoration(
+                  //               color: SplashText,
+                  //               borderRadius:
+                  //                   BorderRadius.all(Radius.circular(5)),
+                  //             ),
+                  //             child: Row(
+                  //               // mainAxisAlignment: MainAxisAlignment.center,
+                  //               children: [
+                  //                 Text(
+                  //                   "Add",
+                  //                   style: TextStyle(
+                  //                       color: Colors.white,
+                  //                       // letterSpacing: .5,
+                  //                       fontSize: 12.sp,
+                  //                       fontWeight: FontWeight.w400),
+                  //                 ),
+                  //                 SizedBox(
+                  //                   width: 7.w,
+                  //                 ),
+                  //                 SvgPicture.asset(
+                  //                   'assets/icons/pluse.svg',
+                  //                   height: 7.h,
+                  //                   width: 7.w,
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //
+                  //         // GestureDetector(
+                  //         //   onTap: () {
+                  //         //     read.onRemoveWidget(watch.cards.length-1);
+                  //         //   },
+                  //         //   child: Container(
+                  //         //     padding: EdgeInsets.symmetric(
+                  //         //         horizontal: 6.w, vertical: 2.w),
+                  //         //     // margin: EdgeInsets.only(right: 15.w),
+                  //         //     // height: 24.h,
+                  //         //     // width: 55.w,
+                  //         //     decoration: BoxDecoration(
+                  //         //       color: Colors.red,
+                  //         //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //         //     ),
+                  //         //     child: Row(
+                  //         //       // mainAxisAlignment: MainAxisAlignment.center,
+                  //         //       children: [
+                  //         //         Text(
+                  //         //           "Delete",
+                  //         //           style: TextStyle(
+                  //         //               color: Colors.white,
+                  //         //               // letterSpacing: .5,
+                  //         //               fontSize: 12.sp,
+                  //         //               fontWeight: FontWeight.w400),
+                  //         //         ),
+                  //         //         SizedBox(
+                  //         //           width: 7.w,
+                  //         //         ),
+                  //         //        Icon(Icons.clear,color: Colors.white,size: 14.w,)
+                  //         //       ],
+                  //         //     ),
+                  //         //   ),
+                  //         // ),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 20.h,
+                  // ),
+                  // ListView.builder(
+                  //     padding: EdgeInsets.zero,
+                  //     physics: NeverScrollableScrollPhysics(),
+                  //     itemCount: watch.productUnitDetail?.length ?? 0,
+                  //     shrinkWrap: true,
+                  //     itemBuilder: (BuildContext, index) {
+                  //       final element = watch.productUnitDetail?[index];
+                  //       return Column(
+                  //         children: [
+                  //           Row(
+                  //             children: [
+                  //               Expanded(
+                  //                 child: PrimarySTextFormField(
+                  //                   textInputType: TextInputType.number,
+                  //                   onChanged: (value) {},
+                  //                   controller: watch.valueController[index],
+                  //                   height: 35,
+                  //                   // width: 20, // titleHeader: "Shop Name",
+                  //                   hintText: "value",
+                  //                   hintFontSize: 12.sp,
+                  //                   readOnly: true,
+                  //                 ),
+                  //               ),
+                  //               SizedBox(width: 3.w),
+                  //               Expanded(
+                  //                 child: Container(
+                  //                   height: 33.w,
+                  //                   decoration: BoxDecoration(
+                  //                     border:
+                  //                         Border.all(color: Color(0xffEFEFEF)),
+                  //                     borderRadius: BorderRadius.circular(6.w),
+                  //                   ),
+                  //                   child: Row(
+                  //                     mainAxisAlignment:
+                  //                         MainAxisAlignment.spaceBetween,
+                  //                     children: [
+                  //                       Row(
+                  //                         children: [
+                  //                           SizedBox(
+                  //                             width: 5.w,
+                  //                           ),
+                  //                           Text(
+                  //                             element?.unit ?? "",
+                  //                             style: TextStyle(
+                  //                                 fontSize: 16.sp,
+                  //                                 color: Black1,
+                  //                                 fontWeight: FontWeight.w400),
+                  //                           )
+                  //                         ],
+                  //                       ),
+                  //                       Row(
+                  //                         children: [
+                  //                           Icon(
+                  //                             Icons
+                  //                                 .keyboard_arrow_down_outlined,
+                  //                             color: Color(0xffB3B3B3),
+                  //                           ),
+                  //                           SizedBox(
+                  //                             width: 5.w,
+                  //                           ),
+                  //                         ],
+                  //                       ),
+                  //                     ],
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //               SizedBox(width: 3.w),
+                  //               Expanded(
+                  //                 child: PrimarySTextFormField(
+                  //                   textInputType: TextInputType.number,
+                  //                   controller: watch.mrpController[index],
+                  //                   height: 35,
+                  //                   // width: 20, // titleHeader: "Shop Name",
+                  //                   hintText: "MRP",
+                  //                   hintFontSize: 12.sp,
+                  //                 ),
+                  //               ),
+                  //               SizedBox(width: 3.w),
+                  //               Expanded(
+                  //                 child: PrimarySTextFormField(
+                  //                   textInputType: TextInputType.number,
+                  //                   controller: watch.offerController[index],
+                  //                   height: 35,
+                  //                   // width: 20, // titleHeader: "Shop Name",
+                  //                   hintText: "Offer Price",
+                  //                   hintFontSize: 12.sp,
+                  //                 ),
+                  //               ),
+                  //               SizedBox(width: 15.w),
+                  //               Container(
+                  //                 width: 30.w,
+                  //                 child: CupertinoSwitch(
+                  //                   value: watch.switchValue[index],
+                  //                   activeColor: DarkGreen,
+                  //                   onChanged: (value) {
+                  //                     read.onToggleSwitch(value, index);
+                  //                   },
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 7.w,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Expanded(
+                  //                 child: GestureDetector(
+                  //                   onTap: () {},
+                  //                   child: Container(
+                  //                     height: 100.h,
+                  //                     width: 110.w,
+                  //                     decoration: BoxDecoration(boxShadow: [
+                  //                       BoxShadow(
+                  //                         color: Colors.black.withOpacity(0.05),
+                  //                         blurRadius: 10.0,
+                  //                       ),
+                  //                     ]),
+                  //                     child: Card(
+                  //                       elevation: 0.3,
+                  //                       child:
+                  //                           element?.unitBasedProductImage1Path !=
+                  //                                   ""
+                  //                               ? Center(
+                  //                                   child: AppNetworkImages(
+                  //                                     imageUrl: element
+                  //                                             ?.unitBasedProductImage1Path ??
+                  //                                         "",
+                  //                                     fit: BoxFit.cover,
+                  //                                     height: 90.w,
+                  //                                   ),
+                  //                                 )
+                  //                               : Column(
+                  //                                   crossAxisAlignment:
+                  //                                       CrossAxisAlignment
+                  //                                           .center,
+                  //                                   mainAxisAlignment:
+                  //                                       MainAxisAlignment
+                  //                                           .center,
+                  //                                   children: [
+                  //                                     SvgPicture.asset(
+                  //                                       "assets/icons/gallary.svg",
+                  //                                       // height: 19.w,
+                  //                                       // width: 21.w,
+                  //                                     ),
+                  //                                     SizedBox(
+                  //                                       height: 10.h,
+                  //                                     ),
+                  //                                     Text(
+                  //                                       "Add Image",
+                  //                                       style: TextStyle(
+                  //                                           color: Color(
+                  //                                               0xffB3B3B3),
+                  //                                           // letterSpacing: .5,
+                  //                                           fontSize: 12.sp,
+                  //                                           fontWeight:
+                  //                                               FontWeight
+                  //                                                   .w400),
+                  //                                     ),
+                  //                                   ],
+                  //                                 ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //               Expanded(
+                  //                 child: GestureDetector(
+                  //                   onTap: () {
+                  //                     // read.openGallery2(index);
+                  //                   },
+                  //                   child: Container(
+                  //                     height: 100.h,
+                  //                     width: 110.w,
+                  //                     decoration: BoxDecoration(boxShadow: [
+                  //                       BoxShadow(
+                  //                         color: Colors.black.withOpacity(0.05),
+                  //                         blurRadius: 10.0,
+                  //                       ),
+                  //                     ]),
+                  //                     child: Card(
+                  //                       elevation: 0.3,
+                  //                       child:
+                  //                           element?.unitBasedProductImage2Path !=
+                  //                                   ""
+                  //                               ? Center(
+                  //                                   child: AppNetworkImages(
+                  //                                     imageUrl: element
+                  //                                             ?.unitBasedProductImage2Path ??
+                  //                                         "",
+                  //                                     fit: BoxFit.cover,
+                  //                                     height: 90.w,
+                  //                                   ),
+                  //                                 )
+                  //                               : Column(
+                  //                                   crossAxisAlignment:
+                  //                                       CrossAxisAlignment
+                  //                                           .center,
+                  //                                   mainAxisAlignment:
+                  //                                       MainAxisAlignment
+                  //                                           .center,
+                  //                                   children: [
+                  //                                     SvgPicture.asset(
+                  //                                       "assets/icons/gallary.svg",
+                  //                                       // height: 19.w,
+                  //                                       // width: 21.w,
+                  //                                     ),
+                  //                                     SizedBox(
+                  //                                       height: 10.h,
+                  //                                     ),
+                  //                                     Text(
+                  //                                       "Add Image",
+                  //                                       style: TextStyle(
+                  //                                           color: Color(
+                  //                                               0xffB3B3B3),
+                  //                                           // letterSpacing: .5,
+                  //                                           fontSize: 12.sp,
+                  //                                           fontWeight:
+                  //                                               FontWeight
+                  //                                                   .w400),
+                  //                                     ),
+                  //                                   ],
+                  //                                 ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //               Expanded(
+                  //                 child: GestureDetector(
+                  //                   onTap: () {
+                  //                     // read.openGallery3(index);
+                  //                   },
+                  //                   child: Container(
+                  //                     height: 100.h,
+                  //                     width: 110.w,
+                  //                     decoration: BoxDecoration(boxShadow: [
+                  //                       BoxShadow(
+                  //                         color: Colors.black.withOpacity(0.05),
+                  //                         blurRadius: 10.0,
+                  //                       ),
+                  //                     ]),
+                  //                     child: Card(
+                  //                       elevation: 0.3,
+                  //                       child:
+                  //                           element?.unitBasedProductImage3Path !=
+                  //                                   ""
+                  //                               ? Center(
+                  //                                   child: AppNetworkImages(
+                  //                                     imageUrl: element
+                  //                                             ?.unitBasedProductImage3Path ??
+                  //                                         "",
+                  //                                     fit: BoxFit.cover,
+                  //                                     height: 90.w,
+                  //                                   ),
+                  //                                 )
+                  //                               : Column(
+                  //                                   crossAxisAlignment:
+                  //                                       CrossAxisAlignment
+                  //                                           .center,
+                  //                                   mainAxisAlignment:
+                  //                                       MainAxisAlignment
+                  //                                           .center,
+                  //                                   children: [
+                  //                                     SvgPicture.asset(
+                  //                                       "assets/icons/gallary.svg",
+                  //                                       // height: 19.w,
+                  //                                       // width: 21.w,
+                  //                                     ),
+                  //                                     SizedBox(
+                  //                                       height: 10.h,
+                  //                                     ),
+                  //                                     Text(
+                  //                                       "Add Image",
+                  //                                       style: TextStyle(
+                  //                                           color: Color(
+                  //                                               0xffB3B3B3),
+                  //                                           // letterSpacing: .5,
+                  //                                           fontSize: 12.sp,
+                  //                                           fontWeight:
+                  //                                               FontWeight
+                  //                                                   .w400),
+                  //                                     ),
+                  //                                   ],
+                  //                                 ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20.w,
+                  //           ),
+                  //         ],
+                  //       );
+                  //     }),
+                  // ListView.builder(
+                  //     physics: NeverScrollableScrollPhysics(),
+                  //     itemCount: watch.cards.length,
+                  //     shrinkWrap: true,
+                  //     itemBuilder: (BuildContext, index) {
+                  //       return Column(
+                  //         children: [
+                  //           Stack(
+                  //             alignment: Alignment.topRight,
+                  //             children: [
+                  //               CreateWidget(index),
+                  //               Container(
+                  //                 width: 30.w,
+                  //                 child: CupertinoSwitch(
+                  //                   value: watch.switchCardValue[index],
+                  //                   activeColor: DarkGreen,
+                  //                   onChanged: (value) {
+                  //                     read.onToggleCardSwitch(value, index);
+                  //                   },
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Expanded(
+                  //                 child: GestureDetector(
+                  //                   onTap: () {
+                  //                     read.openGallery1(index);
+                  //                   },
+                  //                   child: Container(
+                  //                     height: 100.h,
+                  //                     width: 110.w,
+                  //                     decoration: BoxDecoration(boxShadow: [
+                  //                       BoxShadow(
+                  //                         color: Colors.black.withOpacity(0.05),
+                  //                         blurRadius: 10.0,
+                  //                       ),
+                  //                     ]),
+                  //                     child: Card(
+                  //                       elevation: 0.3,
+                  //                       child: watch.imagefiles1[index].path !=
+                  //                               ""
+                  //                           ? Image.file(
+                  //                               File(watch
+                  //                                   .imagefiles1[index].path),
+                  //                               fit: BoxFit.cover,
+                  //                             )
+                  //                           : Column(
+                  //                               crossAxisAlignment:
+                  //                                   CrossAxisAlignment.center,
+                  //                               mainAxisAlignment:
+                  //                                   MainAxisAlignment.center,
+                  //                               children: [
+                  //                                 SvgPicture.asset(
+                  //                                   "assets/icons/gallary.svg",
+                  //                                   // height: 19.w,
+                  //                                   // width: 21.w,
+                  //                                 ),
+                  //                                 SizedBox(
+                  //                                   height: 10.h,
+                  //                                 ),
+                  //                                 Text(
+                  //                                   "Add Image",
+                  //                                   style: TextStyle(
+                  //                                       color:
+                  //                                           Color(0xffB3B3B3),
+                  //                                       // letterSpacing: .5,
+                  //                                       fontSize: 12.sp,
+                  //                                       fontWeight:
+                  //                                           FontWeight.w400),
+                  //                                 ),
+                  //                               ],
+                  //                             ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //               Expanded(
+                  //                 child: GestureDetector(
+                  //                   onTap: () {
+                  //                     read.openGallery2(index);
+                  //                   },
+                  //                   child: Container(
+                  //                     height: 100.h,
+                  //                     width: 110.w,
+                  //                     decoration: BoxDecoration(boxShadow: [
+                  //                       BoxShadow(
+                  //                         color: Colors.black.withOpacity(0.05),
+                  //                         blurRadius: 10.0,
+                  //                       ),
+                  //                     ]),
+                  //                     child: Card(
+                  //                       elevation: 0.3,
+                  //                       child: watch.imagefiles2[index].path !=
+                  //                               ""
+                  //                           ? Image.file(
+                  //                               File(watch
+                  //                                   .imagefiles2[index].path),
+                  //                               fit: BoxFit.cover)
+                  //                           : Column(
+                  //                               crossAxisAlignment:
+                  //                                   CrossAxisAlignment.center,
+                  //                               mainAxisAlignment:
+                  //                                   MainAxisAlignment.center,
+                  //                               children: [
+                  //                                 SvgPicture.asset(
+                  //                                   "assets/icons/gallary.svg",
+                  //                                   // height: 19.w,
+                  //                                   // width: 21.w,
+                  //                                 ),
+                  //                                 SizedBox(
+                  //                                   height: 10.h,
+                  //                                 ),
+                  //                                 Text(
+                  //                                   "Add Image",
+                  //                                   style: TextStyle(
+                  //                                       color:
+                  //                                           Color(0xffB3B3B3),
+                  //                                       // letterSpacing: .5,
+                  //                                       fontSize: 12.sp,
+                  //                                       fontWeight:
+                  //                                           FontWeight.w400),
+                  //                                 ),
+                  //                               ],
+                  //                             ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //               Expanded(
+                  //                 child: GestureDetector(
+                  //                   onTap: () {
+                  //                     read.openGallery3(index);
+                  //                   },
+                  //                   child: Container(
+                  //                     height: 100.h,
+                  //                     width: 110.w,
+                  //                     decoration: BoxDecoration(boxShadow: [
+                  //                       BoxShadow(
+                  //                         color: Colors.black.withOpacity(0.05),
+                  //                         blurRadius: 10.0,
+                  //                       ),
+                  //                     ]),
+                  //                     child: Card(
+                  //                       elevation: 0.3,
+                  //                       child: watch.imagefiles3[index].path !=
+                  //                               ""
+                  //                           ? Image.file(
+                  //                               File(watch
+                  //                                   .imagefiles3[index].path),
+                  //                               fit: BoxFit.cover)
+                  //                           : Column(
+                  //                               crossAxisAlignment:
+                  //                                   CrossAxisAlignment.center,
+                  //                               mainAxisAlignment:
+                  //                                   MainAxisAlignment.center,
+                  //                               children: [
+                  //                                 SvgPicture.asset(
+                  //                                   "assets/icons/gallary.svg",
+                  //                                   // height: 19.w,
+                  //                                   // width: 21.w,
+                  //                                 ),
+                  //                                 SizedBox(
+                  //                                   height: 10.h,
+                  //                                 ),
+                  //                                 Text(
+                  //                                   "Add Image",
+                  //                                   style: TextStyle(
+                  //                                       color:
+                  //                                           Color(0xffB3B3B3),
+                  //                                       // letterSpacing: .5,
+                  //                                       fontSize: 12.sp,
+                  //                                       fontWeight:
+                  //                                           FontWeight.w400),
+                  //                                 ),
+                  //                               ],
+                  //                             ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 22.w,
+                  //           ),
+                  //         ],
+                  //       );
+                  //     }),
                 ],
               ),
             ),

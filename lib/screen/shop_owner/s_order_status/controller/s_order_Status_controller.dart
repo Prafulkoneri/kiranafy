@@ -34,6 +34,7 @@ class SOrderStatusController extends ChangeNotifier {
   }
 
   Future<void> getShopOrderList(context,index) async {
+    selectedIndex=index;
     showLoader(true);
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();

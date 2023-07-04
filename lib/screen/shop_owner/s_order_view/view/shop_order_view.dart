@@ -22,11 +22,13 @@ import 'package:provider/provider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 class ShopOrderStatusView extends StatefulWidget {
   final String? orderId;
+  final int ? selectedIndex;
 
 
   const ShopOrderStatusView({
     super.key,
     this.orderId,
+  required this.selectedIndex,
 
   });
 
@@ -59,7 +61,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 1, screenName: SOrderStatusView(selectedIndex: 0,))),
+                        index: 1, screenName: SOrderStatusView(selectedIndex: widget.selectedIndex,))),
                 (Route<dynamic> route) => false,
               );
             },

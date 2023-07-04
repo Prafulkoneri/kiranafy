@@ -118,6 +118,7 @@ class _SPendingOrdersViewState extends State<SPendingOrdersView> {
                           MaterialPageRoute(
                               builder: (context) => ShopOrderStatusView(
                                     orderId: element?.id.toString(),
+                                selectedIndex: watch.selectedIndex,
                                   )),
                         );
                       },

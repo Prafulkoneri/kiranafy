@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_prod
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SAddProductsController extends ChangeNotifier {
@@ -37,6 +38,11 @@ class SAddProductsController extends ChangeNotifier {
 
   Future<void> initState(context, id) async {
     await shopAddProducts(context, id);
+    notifyListeners();
+  }
+
+  showLoader(value){
+    isLoading=value;
     notifyListeners();
   }
 
@@ -74,7 +80,7 @@ class SAddProductsController extends ChangeNotifier {
 
   Future<void> shopAddProducts(context, id) async {
     isSelectAll = false;
-    isLoading = true;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     categoryId = id.toString();
     print("categoryId$categoryId");
@@ -102,9 +108,10 @@ class SAddProductsController extends ChangeNotifier {
             selectedProductsId.add(productDetails?[i].id);
           }
         }
-        isLoading = false;
+        showLoader(false);
         notifyListeners();
       } else {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -129,6 +136,7 @@ class SAddProductsController extends ChangeNotifier {
 
   Future<void> uploadAddProducts(context) async {
     uploadSuccess = true;
+    LoadingOverlay.of(context).show();
     if (selectedProductsId.isEmpty) {
       Utils.showPrimarySnackbar(context, "Select Product",
           type: SnackType.error);
@@ -160,8 +168,10 @@ class SAddProductsController extends ChangeNotifier {
                     )),
             (Route<dynamic> route) => false,
           );
+
           notifyListeners();
           uploadSuccess = false;
+          LoadingOverlay.of(context).hide();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
