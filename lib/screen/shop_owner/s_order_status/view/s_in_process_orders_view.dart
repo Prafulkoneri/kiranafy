@@ -30,8 +30,16 @@ class _SInProcessOrderViewState extends State<SInProcessOrderView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Image.asset(
+                    "assets/images/empty_order.png",
+                    width: 150.w,
+                    height: 150.h,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Text(
-                    "Order Is empty",
+                    "No Record Found",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: Black1,

@@ -46,7 +46,10 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                      index: 0, screenName: ShopDashBoardView(refresh: true,))),
+                      index: 0,
+                      screenName: ShopDashBoardView(
+                        refresh: true,
+                      ))),
               (Route<dynamic> route) => false,
             );
           },
@@ -140,7 +143,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                           child: AppNetworkImages(
                                             imageUrl:
                                                 "${element?.categoryImagePath}",
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.contain,
                                           ),
                                         ),
                                         SizedBox(

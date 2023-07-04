@@ -52,7 +52,8 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
                         index: 4,
-                        screenName: CustomerListView(isRefresh: false,fromPage: "account"),
+                        screenName: CustomerListView(
+                            isRefresh: false, fromPage: "account"),
                       )),
               (Route<dynamic> route) => false,
             );
@@ -99,7 +100,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                     ),
                                   )
                                 : Image.asset(
-                                    'assets/images/ReviewProfile.png',
+                                    'assets/images/profile_last.png',
                                     width: 80.w,
                                     height: 80.h,
                                   ),

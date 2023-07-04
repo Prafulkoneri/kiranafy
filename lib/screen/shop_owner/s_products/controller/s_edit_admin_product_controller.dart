@@ -104,8 +104,8 @@ class EditAdminProductController extends ChangeNotifier {
     await getAdminProductData(context);
   }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -484,7 +484,8 @@ class EditAdminProductController extends ChangeNotifier {
           MaterialPageRoute(
               builder: (context) => SMainScreenView(
                     index: 0,
-                    screenName: SSelectedProductView(categoryId: categoryId,isRefresh: true),
+                    screenName: SSelectedProductView(
+                        categoryId: categoryId, isRefresh: true),
                   )),
           (Route<dynamic> route) => false,
         );

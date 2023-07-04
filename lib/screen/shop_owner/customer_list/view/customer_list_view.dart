@@ -21,9 +21,10 @@ import 'package:provider/provider.dart';
 
 class CustomerListView extends StatefulWidget {
   final bool? isRefresh;
-  final String ?fromPage;
+  final String? fromPage;
 
-  const CustomerListView({super.key, required this.isRefresh,required this.fromPage});
+  const CustomerListView(
+      {super.key, required this.isRefresh, required this.fromPage});
 
   @override
   State<CustomerListView> createState() => _CustomerListViewState();
@@ -35,7 +36,7 @@ class _CustomerListViewState extends State<CustomerListView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SCustomerListController>()
-          .initState(context, widget.isRefresh,widget.fromPage);
+          .initState(context, widget.isRefresh, widget.fromPage);
     });
   }
 
@@ -49,20 +50,27 @@ class _CustomerListViewState extends State<CustomerListView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            widget.fromPage=="account"?
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 4, screenName: SAccountScreenView(refresh: false,))),
-              (Route<dynamic> route) => false,
-            ): Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 0, screenName: ShopDashBoardView(refresh: false,))),
-                  (Route<dynamic> route) => false,
-            );
+            widget.fromPage == "account"
+                ? Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SMainScreenView(
+                            index: 4,
+                            screenName: SAccountScreenView(
+                              refresh: false,
+                            ))),
+                    (Route<dynamic> route) => false,
+                  )
+                : Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SMainScreenView(
+                            index: 0,
+                            screenName: ShopDashBoardView(
+                              refresh: false,
+                            ))),
+                    (Route<dynamic> route) => false,
+                  );
           },
           title: "Customers",
           action: SvgPicture.asset("assets/images/filter.svg"),
@@ -143,7 +151,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                                                 ),
                                               )
                                             : Image.asset(
-                                                'assets/images/ReviewProfile.png',
+                                                'assets/images/profile_last.png',
                                                 width: 60.w,
                                                 height: 60.h,
                                               ),

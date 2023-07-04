@@ -58,7 +58,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SMainScreenView(
-                            index: 0, screenName: SAccountScreenView(refresh: false,))),
+                            index: 0,
+                            screenName: SAccountScreenView(
+                              refresh: false,
+                            ))),
                     (Route<dynamic> route) => false,
                   )
                 : onBackPressed();
@@ -476,7 +479,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     readOnly: true,
-                                    hintText: "500 to 1200",
+                                    hintText: "501 to 1200",
                                     hintFontSize: 15.sp,
                                   ),
                                 ),
@@ -531,7 +534,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     readOnly: true,
-                                    hintText: "1200 to 2500",
+                                    hintText: "1201 to 2500",
                                     hintFontSize: 15.sp,
                                   ),
                                 ),
@@ -586,7 +589,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     readOnly: true,
-                                    hintText: "2500 to 5000",
+                                    hintText: "2501 to 5000",
                                     hintFontSize: 15.sp,
                                   ),
                                 ),

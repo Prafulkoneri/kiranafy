@@ -21,16 +21,24 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
     final read = context.read<SOrderStatusController>();
     final watch = context.watch<SOrderStatusController>();
     final readMainScreen = context.read<SMainScreenController>();
-    return watch.deliveredOrdersList?.isEmpty??false
+    return watch.deliveredOrdersList?.isEmpty ?? false
         ? Container(
-      height: MediaQuery.of(context).size.height/1.5,
-          child: Center(
+            height: MediaQuery.of(context).size.height / 1.5,
+            child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Image.asset(
+                    "assets/images/empty_order.png",
+                    width: 150.w,
+                    height: 150.h,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Text(
-                    "Order Is empty",
+                    "No Record Found",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
                           color: Black1,
@@ -42,7 +50,7 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
                 ],
               ),
             ),
-        )
+          )
         : ListView.builder(
             padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
             itemCount: watch.deliveredOrdersList?.length ?? 0,
