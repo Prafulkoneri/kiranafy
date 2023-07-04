@@ -1,7 +1,7 @@
-class EditProductUnitCategoryRequestModel {
+class DeleteProductUnitCategoryRequestModel {
   String? productUnitId;
   String? productType;
-  EditProductUnitCategoryRequestModel({
+  DeleteProductUnitCategoryRequestModel({
     this.productUnitId,
     this.productType,
   });
