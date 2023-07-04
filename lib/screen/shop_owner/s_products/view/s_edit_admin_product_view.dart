@@ -79,7 +79,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
       ),
       body:watch.isLoading?Center(
         child: CircularProgressIndicator(),
-      ): SingleChildScrollView(
+      ):
+      SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -328,56 +329,53 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                   SizedBox(
                     height: 11.h,
                   ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: 100.h,
-                          width: 110.w,
-                          decoration: BoxDecoration(boxShadow: [
-                            BoxShadow(
-                              color: Colors.red.withOpacity(0.05),
-                              blurRadius: 10.0,
-                            ),
-                          ]),
-                          child: Card(
-                              elevation: 0.3,
-                              child: watch.productFeatureImage != ""
-                                  ? Center(
-                                      child: AppNetworkImages(
-                                        imageUrl: watch.productFeatureImage,
-                                        fit: BoxFit.cover,
-                                        height: 90.w,
-                                      ),
-                                    )
-                                  : Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          "assets/icons/gallary.svg",
-                                          // height: 19.w,
-                                          // width: 21.w,
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Text(
-                                          "Add Image",
-                                          style: TextStyle(
-                                              color: Color(0xffB3B3B3),
-                                              // letterSpacing: .5,
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w400),
-                                        )
-                                      ],
-                                    )),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 185.w,
+                      width: ScreenUtil().screenWidth,
+                      decoration: BoxDecoration(boxShadow: [
+                        BoxShadow(
+                          color: Colors.red.withOpacity(0.05),
+                          blurRadius: 10.0,
                         ),
-                      ),
-                    ],
+                      ]),
+                      child: Card(
+                          elevation: 0.3,
+                          child:
+                          // watch.productFeatureImage != ""
+                          //     ? Center(
+                          //   child: AppNetworkImages(
+                          //     imageUrl: watch.productFeatureImage,
+                          //     fit: BoxFit.cover,
+                          //   ),
+                          // )
+                          //     :
+                          Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.center,
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/gallary.svg",
+                                // height: 19.w,
+                                // width: 21.w,
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Text(
+                                "Add Image",
+                                style: TextStyle(
+                                    color: Color(0xffB3B3B3),
+                                    // letterSpacing: .5,
+                                    fontSize: 22.sp,
+                                    fontWeight: FontWeight.w400),
+                              )
+                            ],
+                          )),
+                    ),
                   ),
                   SizedBox(
                     height: 22.h,

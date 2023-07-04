@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custom_products_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/edit_custom_product_repo.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'dart:convert';
@@ -45,7 +46,6 @@ class EditCustomProductController extends ChangeNotifier {
   String productName = "";
   String taxName = "";
   String taxId = "";
-  List<ProductUnitDetail>? productUnitDetail;
   TextEditingController productDescriptionController = TextEditingController();
   TextEditingController productNameController = TextEditingController();
   String unit = "";
@@ -255,8 +255,13 @@ class EditCustomProductController extends ChangeNotifier {
     }
   }
 
+  showLoader(value){
+    isLoading = value;
+    notifyListeners();
+  }
+
   Future<void> getCustomProductData(context) async {
-    isLoading = true;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     customProductDataRepo
         .customProductDataModel(pref.getString("successToken"))
@@ -269,11 +274,12 @@ class EditCustomProductController extends ChangeNotifier {
         brandData = customdata?.brandData;
         taxData = customdata?.taxData;
         unitData = customdata?.unitData;
-        isLoading = false;
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
       } else {
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -314,7 +320,6 @@ class EditCustomProductController extends ChangeNotifier {
         categoryData = customProductData?.categoryData ?? [];
         brandData = customProductData?.brandData;
         taxData = customProductData?.taxData;
-        unitData = customProductData?.unitData;
         productNameController.text =
             customProductData?.productDetails?.productName.toString() ?? "";
         categoryId =
@@ -345,23 +350,8 @@ class EditCustomProductController extends ChangeNotifier {
                 "";
         productFeatureImage =
             customProductData?.productDetails?.productImagePath ?? "";
-        productUnitDetail =
-            customProductData?.productDetails?.productUnitDetails ?? [];
-        int length = productUnitDetail?.length ?? 0;
-        valueController.clear();
-        mrpController.clear();
-        offerController.clear();
-        unitList.clear();
-        for (int i = 0; i < length; i++) {
-          unitList.add(productUnitDetail?[i].unitId.toString() ?? "");
-          valueController
-              .add(TextEditingController(text: productUnitDetail?[i].weight));
-          mrpController.add(TextEditingController(
-              text: productUnitDetail?[i].mrpPrice.toString()));
-          offerController.add(TextEditingController(
-              text: productUnitDetail?[i].offerPrice.toString()));
-        }
-        switchValue = List<bool>.filled(length, true, growable: true);
+        showLoader(false);
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -408,60 +398,13 @@ class EditCustomProductController extends ChangeNotifier {
     if (pickedfiles != null) {
       productImage = File(pickedfiles.path);
     }
+    print(productImage.path);
     notifyListeners();
   }
 
-  void openGallery1(index) async {
-    final ImagePicker imgpicker = ImagePicker();
-    var pickedfiles = await imgpicker.pickImage(source: ImageSource.gallery);
-    if (pickedfiles != null) {
-      imagefiles1.removeAt(index);
 
-      imagefiles1.insert(index, pickedfiles);
-      print(imagefiles1[index].path);
-    }
-    notifyListeners();
-  }
 
-  void openGallery2(index) async {
-    final ImagePicker imgpicker = ImagePicker();
-    var pickedfiles = await imgpicker.pickImage(source: ImageSource.gallery);
-    if (pickedfiles != null) {
-      imagefiles2.removeAt(index);
-      imagefiles2.insert(index, pickedfiles);
-      print(imagefiles2[index].path);
-    }
-    notifyListeners();
-  }
 
-  void openGallery3(index) async {
-    final ImagePicker imgpicker = ImagePicker();
-    var pickedfiles = await imgpicker.pickImage(source: ImageSource.gallery);
-    if (pickedfiles != null) {
-      imagefiles3.removeAt(index);
-      imagefiles3.insert(index, pickedfiles);
-      print(imagefiles3);
-    }
-    notifyListeners();
-  }
-
-  Future<void> onAddWidget(createdCard, index) async {
-    cards.add(createdCard);
-    // valueCardController.removeAt(index);
-    // mrpCardController.removeAt(index);
-    // offerCardController.removeAt(index);
-    valueCardController.add(TextEditingController());
-    mrpCardController.add(TextEditingController());
-    offerCardController.add(TextEditingController());
-    unitList.add("");
-    print("unitList${unitList}");
-    switchCardValue.add(true);
-    imagefiles1.add(XFile(""));
-    imagefiles2.add(XFile(""));
-    imagefiles3.add(XFile(""));
-
-    notifyListeners();
-  }
 
   void onToggleSwitch(value, index) {
     switchValue[index] = !switchValue[index];
@@ -474,21 +417,7 @@ class EditCustomProductController extends ChangeNotifier {
   }
 
   Future<void> uploadCustomProduct(context) async {
-    int count = productUnitDetail?.length ?? 0;
-    totalRows = count + cards.length;
-
-    if (cards.length != 0) {
-      await getValueCardData();
-      await getMrpCardData();
-      await getOfferCardData();
-      await getSwitchCardValue();
-    }
-    await getValueData();
-    await getMrpData();
-    await getUnitData();
-    await getOfferData();
-    await getSwitchValue();
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadCustomProductRepo
         .uploadCustomProduct(
@@ -510,8 +439,10 @@ class EditCustomProductController extends ChangeNotifier {
         );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -539,30 +470,10 @@ class EditCustomProductController extends ChangeNotifier {
         showUnderRecommendedProduct:
             showUnderRecommendedProducts ? "yes" : "no",
         showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
-        mrpPrice: mrp + mrpCard,
-        offerPrice: offer + offerCard,
-        status: status + statusCard,
-        totalRows: totalRows.toString(),
-        unitID: unit + unitCard,
-        weight: value + valueCard,
       );
 
   Future uploadImage(context) async {
-    print("hellooooo");
-    int count = productUnitDetail?.length ?? 0;
-    totalRows = count + cards.length;
 
-    if (cards.length != 0) {
-      await getValueCardData();
-      await getMrpCardData();
-      await getOfferCardData();
-      await getSwitchCardValue();
-    }
-    await getValueData();
-    await getMrpData();
-    await getUnitData();
-    await getOfferData();
-    await getSwitchValue();
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
@@ -576,57 +487,23 @@ class EditCustomProductController extends ChangeNotifier {
         showUnderRecommendedProducts ? "yes" : "no";
     request.fields['show_under_seasonal_products'] =
         showUnderSeasonalProducts ? "yes" : "no";
-    request.fields["unit_ids"] = unit + unitCard;
-    request.fields["weight_ids"] = value + valueCard;
-    request.fields["mrp_price_ids"] = mrp + mrpCard;
-    request.fields["offer_price_ids"] = offer + offerCard;
-    request.fields["status_ids"] = status + statusCard;
-    request.fields["total_rows"] = totalRows.toString();
-    print(productId);
+    request.fields["product_name"] =productNameController.text;
+    request.fields["category_id"] = categoryId;
+    request.fields["brand_id"] = brandId;
+    request.fields["tax_id"] = taxId;
+    request.fields["product_description"] =productDescriptionController.text;
     print(request.fields);
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
-    if (imagefiles1.isNotEmpty) {
-      for (int i = 0; i < imagefiles1.length; i++) {
-        XFile imageData1 = imagefiles1[i];
-        print(imageData1);
-        var stream =
-            new http.ByteStream(DelegatingStream.typed(imageData1.openRead()));
-        var length = await imageData1.length();
-        var multipartFile = new http.MultipartFile(
-            "unit_based_product_image_1_path[$i]", stream, length,
-            filename: basename(imageData1.path));
-        newList.add(multipartFile);
-      }
-    }
-    if (imagefiles2.isNotEmpty) {
-      for (int i = 0; i < imagefiles2.length; i++) {
-        XFile imageData2 = imagefiles2[i];
-        print(imageData2);
-        var stream =
-            new http.ByteStream(DelegatingStream.typed(imageData2.openRead()));
-        var length = await imageData2.length();
-        var multipartFile = new http.MultipartFile(
-            "unit_based_product_image_2_path[$i]", stream, length,
-            filename: basename(imageData2.path));
-        newList.add(multipartFile);
-      }
-    }
-    if (imagefiles3.isNotEmpty) {
-      for (int i = 0; i < imagefiles3.length; i++) {
-        XFile imageData3 = imagefiles3[i];
-        print(imageData3);
-        var stream =
-            new http.ByteStream(DelegatingStream.typed(imageData3.openRead()));
-        var length = await imageData3.length();
-        var multipartFile = new http.MultipartFile(
-            "unit_based_product_image_3_path[$i]", stream, length,
-            filename: basename(imageData3.path));
-        newList.add(multipartFile);
-      }
-    }
+
+    File imageFile = productImage;
+    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var length = await imageFile.length();
+    var multipartFile = new http.MultipartFile(
+        "product_image_path", stream, length,
+        filename: basename(imageFile.path));
+    newList.add(multipartFile);
     request.files.addAll(newList);
-    print(request.files[2].filename);
     await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
       print("respStr${respStr}");
