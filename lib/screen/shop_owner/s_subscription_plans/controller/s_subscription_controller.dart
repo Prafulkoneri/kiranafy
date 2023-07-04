@@ -5,6 +5,8 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/model/get_subscription_history_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_buy_subscription_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_subscription_plans_model.dart';
@@ -12,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repos
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/subscription_plan_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SSubscriptionController extends ChangeNotifier {
@@ -158,7 +161,7 @@ class SSubscriptionController extends ChangeNotifier {
     else {
       selectedServicesId = "";
     }
-
+    LoadingOverlay.of(context).show();
     shopBuySubscriptionsRepo
         .buySubScription(
             buySubscriptionRequestModel, pref.getString("successToken"))
@@ -167,30 +170,26 @@ class SSubscriptionController extends ChangeNotifier {
           BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        // if (loggedIn) {
-        //   Navigator.pushAndRemoveUntil(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => SMainScreenView(
-        //               index: 4,
-        //               screenName: SAccountScreenView(),
-        //             )),
-        //     (Route<dynamic> route) => false,
-        //   );
-        // } else {
-        //
-        // }
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        pref.setString('status', 'subscriptionCompleted');
-        if(loggedIn){
-
-        }
-        Navigator.push(
+        LoadingOverlay.of(context).hide();
+        if (loggedIn) {
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    SShopConfigurationView(initialShopConfigration: true)));
-        notifyListeners();
+                builder: (context) => SMainScreenView(
+                      index: 4,
+                      screenName: SMySubscriptionView(screenName:"accounts"))),
+            (Route<dynamic> route) => false,
+          );
+        } else {
+          SharedPreferences pref = await SharedPreferences.getInstance();
+          pref.setString('status', 'subscriptionCompleted');
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SShopConfigurationView(initialShopConfigration: true)));
+          notifyListeners();
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

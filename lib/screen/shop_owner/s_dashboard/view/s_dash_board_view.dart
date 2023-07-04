@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_d
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
@@ -33,13 +34,14 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SDashBoardController>().initState(context,widget.refresh);
+      context.read<SDashBoardController>().initState(context, widget.refresh);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<SDashBoardController>();
+    final readOrderStatus = context.watch<SOrderStatusController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: watch.isLoading
@@ -77,11 +79,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                       child: Stack(
                         children: [
                           SizedBox(
-                            height: 180.0.h,
+                            height: 190.0.h,
                             child: watch.dashBoardData?.bannerImages!.isEmpty ??
                                     true
                                 ? Container(
-                                    height: 180.w,
+                                    height: 190.w,
                                     child: Image.asset(
                                       "assets/images/shop_image.png",
                                       height: 180.w,
@@ -317,8 +319,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
                                         index: 4,
-                                        screenName: CustomerListView(isRefresh: true,fromPage: "dashboardProduct",))),
-                                    (Route<dynamic> route) => false,
+                                        screenName: CustomerListView(
+                                          isRefresh: true,
+                                          fromPage: "dashboardProduct",
+                                        ))),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
@@ -364,19 +369,25 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
                                         index: 4,
-                                        screenName: CustomerListView(isRefresh: true,fromPage: "dashboardFavCustomer",))),
-                                    (Route<dynamic> route) => false,
+                                        screenName: CustomerListView(
+                                          isRefresh: true,
+                                          fromPage: "dashboardFavCustomer",
+                                        ))),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               // height: 50.h,/
                               decoration: BoxDecoration(
                                   color: SplashText,
@@ -483,19 +494,25 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
                                         index: 3,
-                                        screenName:ShopCouponsView(isNavFromDashBoard: true,isRefresh: true,))),
-                                    (Route<dynamic> route) => false,
+                                        screenName: ShopCouponsView(
+                                          isNavFromDashBoard: true,
+                                          isRefresh: true,
+                                        ))),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               // height: 50.h,/
                               decoration: BoxDecoration(
                                   color: Custlogin,
@@ -698,19 +715,25 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
                                         index: 0,
-                                        screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"seasonal",))),
-                                    (Route<dynamic> route) => false,
+                                        screenName:
+                                            ShopSeasonalRecommandedOfferProductsView(
+                                          selectedProduct: "seasonal",
+                                        ))),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                               // height: 50.h,/
                               decoration: BoxDecoration(
@@ -758,19 +781,25 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
                                         index: 0,
-                                        screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"fullFill",))),
-                                    (Route<dynamic> route) => false,
+                                        screenName:
+                                            ShopSeasonalRecommandedOfferProductsView(
+                                          selectedProduct: "fullFill",
+                                        ))),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               // height: 50.h,/
                               decoration: BoxDecoration(
                                   gradient: LinearGradient(
@@ -891,20 +920,26 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
+                              readOrderStatus.onTabClicked(0);
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                      index: 1,
-                                      screenName: SOrderStatusView(selectedIndex: 0,isFromOrderView: false),
-                                    )),
-                                    (Route<dynamic> route) => false,
+                                          index: 1,
+                                          screenName: SOrderStatusView(
+                                              selectedIndex: 0,
+                                              isFromOrderView: false),
+                                        )),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               decoration: BoxDecoration(
                                   color: Custlogin,
                                   borderRadius: BorderRadius.circular(8)),
@@ -942,20 +977,26 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
+                              readOrderStatus.onTabClicked(1);
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                      index: 1,
-                                      screenName: SOrderStatusView(selectedIndex: 1,isFromOrderView: false),
-                                    )),
-                                    (Route<dynamic> route) => false,
+                                          index: 1,
+                                          screenName: SOrderStatusView(
+                                              selectedIndex: 1,
+                                              isFromOrderView: false),
+                                        )),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               decoration: BoxDecoration(
                                   color: Custlogin,
                                   // border: Border.all(width: 1, color: Black),
@@ -1005,20 +1046,26 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
+                              readOrderStatus.onTabClicked(2);
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                      index: 1,
-                                      screenName: SOrderStatusView(selectedIndex: 2,isFromOrderView: false),
-                                    )),
-                                    (Route<dynamic> route) => false,
+                                          index: 1,
+                                          screenName: SOrderStatusView(
+                                              selectedIndex: 2,
+                                              isFromOrderView: false),
+                                        )),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                               // height: 50.h,/
                               decoration: BoxDecoration(
@@ -1060,20 +1107,26 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
+                              readOrderStatus.onTabClicked(3);
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                      index: 1,
-                                      screenName: SOrderStatusView(selectedIndex: 3,isFromOrderView: false),
-                                    )),
-                                    (Route<dynamic> route) => false,
+                                          index: 1,
+                                          screenName: SOrderStatusView(
+                                              selectedIndex: 3,
+                                              isFromOrderView: false),
+                                        )),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                               // height: 50.h,/
                               decoration: BoxDecoration(
@@ -1121,20 +1174,26 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
+                              readOrderStatus.onTabClicked(4);
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                      index: 1,
-                                      screenName: SOrderStatusView(selectedIndex:4,isFromOrderView: false),
-                                    )),
-                                    (Route<dynamic> route) => false,
+                                          index: 1,
+                                          screenName: SOrderStatusView(
+                                              selectedIndex: 4,
+                                              isFromOrderView: false),
+                                        )),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
                               // height: 50.h,/
                               decoration: BoxDecoration(
@@ -1479,13 +1538,16 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 right: 12.w,
                                 bottom: 80.w),
                             child: GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => SMainScreenView(
-                                          index: 4, screenName: SMySubscriptionView(screenName: "dashboard",))),
-                                      (Route<dynamic> route) => false,
+                                          index: 4,
+                                          screenName: SMySubscriptionView(
+                                            screenName: "dashboard",
+                                          ))),
+                                  (Route<dynamic> route) => false,
                                 );
                               },
                               child: Stack(
@@ -1533,8 +1595,9 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                                width: ScreenUtil().screenWidth /
-                                                    1.13.w,
+                                                width:
+                                                    ScreenUtil().screenWidth /
+                                                        1.13.w,
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
@@ -1550,16 +1613,21 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                     ),
                                                     Container(
                                                       child: Container(
-                                                        padding:
-                                                            EdgeInsets.symmetric(
-                                                                horizontal: 11.w,
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    11.w,
                                                                 vertical: 4.w),
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(7.w),
-                                                          color: Color(0xff000000)
-                                                              .withOpacity(0.35),
+                                                                  .circular(
+                                                                      7.w),
+                                                          color:
+                                                              Color(0xff000000)
+                                                                  .withOpacity(
+                                                                      0.35),
                                                         ),
                                                         child: Row(
                                                           // mainAxisAlignment:
@@ -1575,11 +1643,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                                         color: Colors
                                                                             .white,
                                                                         // letterSpacing: .5,
-                                                                        fontSize:
-                                                                            12.sp,
+                                                                        fontSize: 12
+                                                                            .sp,
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w400),
+                                                                            FontWeight.w400),
                                                               ),
                                                             ), // <-- Text
                                                           ],
@@ -1593,8 +1660,9 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                 height: 7.w,
                                               ),
                                               Container(
-                                                width: ScreenUtil().screenWidth /
-                                                    1.13.w,
+                                                width:
+                                                    ScreenUtil().screenWidth /
+                                                        1.13.w,
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
@@ -1636,147 +1704,167 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 top: 15.w,
                                 right: 12.w,
                                 bottom: 80.w),
-                            child: Stack(
-                              alignment: Alignment.topCenter,
-                              clipBehavior: Clip.none,
-                              children: <Widget>[
-                                Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Custlogin,
-                                          gradient: LinearGradient(
-                                              end: Alignment.topCenter,
-                                              begin: Alignment.bottomCenter,
-                                              colors: <Color>[
-                                                Color(0xff4EC0FA)
-                                                    .withOpacity(1),
-                                                Color(0xff32DFAC)
-                                                    .withOpacity(1),
-                                              ]),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SMainScreenView(
+                                          index: 4,
+                                          screenName: SMySubscriptionView(
+                                            screenName: "dashboard",
+                                          ))),
+                                  (Route<dynamic> route) => false,
+                                );
+                              },
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                clipBehavior: Clip.none,
+                                children: <Widget>[
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: Custlogin,
+                                            gradient: LinearGradient(
+                                                end: Alignment.topCenter,
+                                                begin: Alignment.bottomCenter,
+                                                colors: <Color>[
+                                                  Color(0xff4EC0FA)
+                                                      .withOpacity(1),
+                                                  Color(0xff32DFAC)
+                                                      .withOpacity(1),
+                                                ]),
 
-                                          // border: Border.all(width: 1, color: Black),
-                                          borderRadius:
-                                              BorderRadius.circular(10.w)),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 30.w,
-                                          ),
-                                          ClipRRect(
+                                            // border: Border.all(width: 1, color: Black),
                                             borderRadius:
-                                                BorderRadius.circular(10.w),
-                                            child: Image.asset(
-                                              'assets/images/my_subscription_home.png',
-                                              // width: 352.w,
-                                              // height: 60.h,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Positioned(
-                                        top: 14.w,
-                                        left: 15.w,
+                                                BorderRadius.circular(10.w)),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
                                           children: [
-                                            Container(
-                                              width: ScreenUtil().screenWidth /
-                                                  1.13.w,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "My Subscription Plan",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white,
-                                                        fontSize: 12.sp),
-                                                  ),
-                                                  Container(
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 11.w,
-                                                              vertical: 4.w),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(7.w),
-                                                        color: Color(0xff000000)
-                                                            .withOpacity(0.35),
-                                                      ),
-                                                      child: Row(
-                                                        // mainAxisAlignment:
-                                                        //     MainAxisAlignment.start,
-                                                        // mainAxisSize: MainAxisSize.min,
-                                                        children: [
-                                                          Text(
-                                                            'Active',
-                                                            style: GoogleFonts
-                                                                .dmSans(
-                                                              textStyle:
-                                                                  TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      // letterSpacing: .5,
-                                                                      fontSize:
-                                                                          12.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w400),
-                                                            ),
-                                                          ), // <-- Text
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
                                             SizedBox(
-                                              height: 7.w,
+                                              height: 30.w,
                                             ),
-                                            Container(
-                                              width: ScreenUtil().screenWidth /
-                                                  1.13.w,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "${watch.currentSubscriptionPlan?.planName}",
-                                                    style: TextStyle(
-                                                        fontSize: 18.sp,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        color: Colors.white),
-                                                  ),
-                                                  Text(
-                                                    "Exp Date - ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
-                                                    style: TextStyle(
-                                                        fontSize: 12.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.w),
+                                              child: Image.asset(
+                                                'assets/images/my_subscription_home.png',
+                                                // width: 352.w,
+                                                // height: 60.h,
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 22.w,
                                             ),
                                           ],
-                                        )),
-                                  ],
-                                ),
-                              ],
+                                        ),
+                                      ),
+                                      Positioned(
+                                          top: 14.w,
+                                          left: 15.w,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width:
+                                                    ScreenUtil().screenWidth /
+                                                        1.13.w,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "My Subscription Plan",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Colors.white,
+                                                          fontSize: 12.sp),
+                                                    ),
+                                                    Container(
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    11.w,
+                                                                vertical: 4.w),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.w),
+                                                          color:
+                                                              Color(0xff000000)
+                                                                  .withOpacity(
+                                                                      0.35),
+                                                        ),
+                                                        child: Row(
+                                                          // mainAxisAlignment:
+                                                          //     MainAxisAlignment.start,
+                                                          // mainAxisSize: MainAxisSize.min,
+                                                          children: [
+                                                            Text(
+                                                              'Active',
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 12
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                              ),
+                                                            ), // <-- Text
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 7.w,
+                                              ),
+                                              Container(
+                                                width:
+                                                    ScreenUtil().screenWidth /
+                                                        1.13.w,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "${watch.currentSubscriptionPlan?.planName}",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white),
+                                                    ),
+                                                    Text(
+                                                      "Exp Date - ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
+                                                      style: TextStyle(
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 22.w,
+                                              ),
+                                            ],
+                                          )),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
 

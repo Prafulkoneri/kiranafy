@@ -17,14 +17,20 @@ class SOrderStatusController extends ChangeNotifier {
   List<ShopOrderList>? deliveredOrdersList;
   List<ShopOrderList>? cancelledOrdersList;
   int selectedIndex = 0;
+  bool isTabChanged=false;
 
   void onTabClicked(index) {
     selectedIndex = index;
     notifyListeners();
   }
 
+  // void onViewDetailPressed(){
+  //   isTabChanged=true;
+  //   notifyListeners();
+  // }
+
   Future<void> initState(context, index) async {
-    await getShopOrderList(context,index);
+    await getShopOrderList(context);
     notifyListeners();
   }
 
@@ -33,8 +39,7 @@ class SOrderStatusController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getShopOrderList(context,index) async {
-    selectedIndex=index;
+  Future<void> getShopOrderList(context) async {
     showLoader(true);
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -49,7 +54,6 @@ class SOrderStatusController extends ChangeNotifier {
         inprocessOrdersList = shopOrderList?.inprocessOrdersList??[];
         deliveredOrdersList = shopOrderList?.deliveredOrdersList??[];
         cancelledOrdersList = shopOrderList?.cancelledOrdersList??[];
-        selectedIndex=index;
         showLoader(false);
         notifyListeners();
       } else {

@@ -45,6 +45,8 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
             widget.orderId.toString(),
           );
     });
+    print("gudiyaaaaa");
+    print(widget.selectedIndex);
   }
 
   @override
@@ -57,13 +59,17 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 1, screenName: SOrderStatusView(selectedIndex: widget.selectedIndex,))),
-                (Route<dynamic> route) => false,
-              );
+              print(widget.selectedIndex);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 1, screenName: SOrderStatusView(selectedIndex: widget.selectedIndex,))),
+              //   (Route<dynamic> route) => false,
+              // );
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>SMainScreenView(
+                            index: 1, screenName: SOrderStatusView(selectedIndex: widget.selectedIndex))));
+
             },
             title: "Order",
             onActionTap: () {},

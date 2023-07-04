@@ -243,7 +243,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                       Container(
                                                         width: ScreenUtil()
                                                                 .screenWidth /
-                                                            1.23.w,
+                                                            1.29.w,
                                                         child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment

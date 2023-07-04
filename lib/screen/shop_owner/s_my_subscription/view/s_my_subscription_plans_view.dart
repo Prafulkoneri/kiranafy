@@ -922,6 +922,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                 ])),
           ]));
     }
-    return Table(children: rows,);
+    return Table(border:TableBorder(
+    horizontalInside:
+    BorderSide(color: Colors.white, width: 2.w)),children: rows,);
   }
 }

@@ -220,6 +220,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                 child: PrimaryButton(
                                   color: Color(0xff4EEFC1),
                                   onTap: () {
+                                    // read.onCustomerBtnPressed(context);
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
@@ -237,50 +238,37 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                                   right: 18.w,
                                                   top: 16.w,
                                                   bottom: 0.w),
-
                                               height: 127.h,
                                               width: 173.w,
-                                              // decoration: BoxDecoration(
-                                              //   color: Color(0xffD9D9D9),
-                                              //   borderRadius: BorderRadius.all(
-                                              //     Radius.circular(40),
-                                              //   ),
-                                              // ),
                                               child: Column(
                                                 // crossAxisAlignment:
                                                 //     CrossAxisAlignment.center,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: <Widget>[
-                                                  Center(
-                                                    child: Flexible(
-                                                      child: Text(
-                                                        "This is pre - launch for \nshop towner, app\nfor customers will be\nlaunched soon !",
+                                                  Flexible(
+                                                    child: Text(
+                                                      "This is pre - launch for \nshop towner, app\nfor customers will be\nlaunched soon !",
 
-                                                        // softWrap: true,
-                                                        // maxLines: 3,//
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color: Black1,
+                                                      // softWrap: true,
+                                                      // maxLines: 3,//
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Black1,
 
-                                                              // letterSpacing: .05,
-                                                              // overflow:
-                                                              //     TextOverflow
-                                                              //         .ellipsis,
-                                                              fontSize: 13.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
+                                                            // letterSpacing: .05,
+                                                            // overflow:
+                                                            //     TextOverflow
+                                                            //         .ellipsis,
+                                                            fontSize: 13.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
                                                       ),
                                                     ),
                                                   ),
-                                                  // SizedBox(
-                                                  //   height: 5.w,
-                                                  // ),
                                                   TextButton(
                                                       onPressed: () {
                                                         Navigator.pop(context);
