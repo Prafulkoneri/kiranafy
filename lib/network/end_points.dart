@@ -1,11 +1,10 @@
 class Endpoint {
   Endpoint._();
-  // testing url
-  static const String baseUrl =
-      'https://localsupermart.com/live/api/';
+  //testing url
+  // static const String baseUrl = 'https://localsupermart.com/live/api/';
   // live url
-  // static const String baseUrl =
-  //     'https://newcms.m-staging.in/local-super-mart-admin/api/';
+  static const String baseUrl =
+      'https://newcms.m-staging.in/local-super-mart-admin/api/';
   // Check Mobile Number Exist
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';
@@ -360,4 +359,13 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-subscription-history";
   /////////////////FAQ DATA/////////////
   static const String faqData = "${baseUrl}lsm-shop-owner-get-faqs";
+  ////////////////unit to create Product /////////////
+  static const String unitListToCreateProduct =
+      "${baseUrl}lsm-shop-owner-units-list";
+  ////////////////////////////////////EDIT UNIT PRODUCT CATEGORY//////////
+  static const String editUnitProductCategory =
+      "${baseUrl}lsm-shop-owner-edit-product-units-of-category";
+  ////////////////////////////////////DELETE UNIT PRODUCT CATEGORY//////////
+  static const String deleteUnitProductCategory =
+      "${baseUrl}lsm-shop-owner-delete-product-units-of-category";
 }
