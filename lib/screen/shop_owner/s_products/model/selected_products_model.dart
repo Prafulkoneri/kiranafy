@@ -69,6 +69,7 @@ class ProductsFromAdmin {
   String? productName;
   String? productType;
   String? productImagePath;
+  int ? unitCount;
   List<UnitDetail>? unitDetails;
 
   ProductsFromAdmin({
@@ -76,6 +77,7 @@ class ProductsFromAdmin {
     required this.productName,
     required this.productType,
     required this.productImagePath,
+    required this.unitCount,
     required this.unitDetails,
   });
 
@@ -84,6 +86,7 @@ class ProductsFromAdmin {
     productName = json["product_name"];
     productType = json["product_type"];
     productImagePath = json['product_image_path'];
+    unitCount = json['units_count'];
 
     if (json["unit_details"] != null) {
       unitDetails = <UnitDetail>[];
@@ -117,6 +120,7 @@ class CustomProduct {
   String? productName;
   String? productType;
   String? productImagePath;
+  int? unitCount;
   List<UnitDetail>? unitDetails;
 
   CustomProduct({
@@ -125,6 +129,7 @@ class CustomProduct {
     this.productImagePath,
     this.productType,
     this.unitDetails,
+    this.unitCount,
   });
 
   CustomProduct.fromJson(Map<String, dynamic> json) {
@@ -132,6 +137,7 @@ class CustomProduct {
     productName = json["product_name"];
     productType = json["product_type"];
     productImagePath = json["product_image_path"];
+    unitCount = json['units_count'];
     if (json["unit_details"] != null) {
       unitDetails = <UnitDetail>[];
       json["unit_details"].forEach((v) {
