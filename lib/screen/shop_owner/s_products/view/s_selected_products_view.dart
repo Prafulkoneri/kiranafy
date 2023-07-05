@@ -588,9 +588,6 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
                                                   itemBuilder: (context, int) {
-                                                    // final unitDetail = watch
-                                                    //     .productsFromAdmin?[index]
-                                                    //     .unitDetails?[int];
                                                     final element = watch
                                                         .productsFromAdmin?[
                                                             index]
@@ -816,6 +813,13 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                     index: 0,
                                                                     screenName:
                                                                         UnitDetailView(
+                                                                      productId:
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                      productType:
+                                                                          element
+                                                                              ?.productType,
                                                                       categoryId:
                                                                           widget
                                                                               .categoryId,

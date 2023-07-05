@@ -39,6 +39,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
     final read = context.read<PaymentHistoryController>();
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
+        backgroundColor: Color(0xffFFFFFF),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(

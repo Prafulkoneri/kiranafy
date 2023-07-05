@@ -144,12 +144,6 @@ class _AddProductViewState extends State<AddProductView> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // AppNetworkImages(
-                                    //   imageUrl: "${element?.productImagePath}",
-                                    //   width: 60.w,
-                                    //   height: 61.h,
-                                    //   fit: BoxFit.fill,
-                                    // ),
                                     element?.productImagePath != ""
                                         ? AppNetworkImages(
                                             imageUrl:

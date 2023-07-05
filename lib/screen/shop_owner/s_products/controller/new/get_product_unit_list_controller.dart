@@ -8,7 +8,9 @@ import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/model/get_subscription_history_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/delete_product_unit_category_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/s_get_product_unit_list_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/delete_unit_product_category_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/get_product_unit_list_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_buy_subscription_model.dart';
@@ -23,6 +25,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SGetProductUnitListController extends ChangeNotifier {
   bool isLoading = false;
   String productId = "";
+  String productUnitId = "";
   String producttype = "";
   bool isInfoLoading = true;
   GetProductUnitListData? getproductunitlistdata;
@@ -30,6 +33,8 @@ class SGetProductUnitListController extends ChangeNotifier {
   ProductDetails? productDetails;
 
   GetUnitProductListRepo getUnitProductListRepo = GetUnitProductListRepo();
+  DeleteUnitProductCategoryRepo deleteUnitProductCategoryRepo =
+      DeleteUnitProductCategoryRepo();
 
   Future<void> initState(context, pId, pType) async {
     await getUnitProductList(context, pId, pType);
@@ -88,9 +93,54 @@ class SGetProductUnitListController extends ChangeNotifier {
         return false;
       },
     );
-    // } else {
-    //   Utils.showPrimarySnackbar(context, "Please Select Add On Services",
-    //       type: SnackType.error);
-    // }
+  }
+  /////////////////////////////////DELETE///////////////////////
+
+  DeleteProductUnitCategoryRequestModel
+      get deleteProductUnitCategoryListRequestModel =>
+          DeleteProductUnitCategoryRequestModel(
+              productType: producttype, productUnitId: productUnitId);
+
+  Future<void> deleteProductUnitOfCategory(context, index, pUnitId) async {
+    productUnitId = pUnitId;
+    // producttype = pType;
+    // couponId = couponsId.toString();
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    showInfoLoader(true);
+    deleteUnitProductCategoryRepo
+        .deleteUnitProductCategory(deleteProductUnitCategoryListRequestModel,
+            pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+          DeleteProductUnitCategoryResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          unitDetails?.removeAt(index);
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          showInfoLoader(false);
+        } else {
+          showInfoLoader(false);
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 }

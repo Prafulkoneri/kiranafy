@@ -17,8 +17,8 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 
 class AddUnitView extends StatefulWidget {
-  final String? categoryId;
-  const AddUnitView({super.key, required this.categoryId});
+  final String? productId;
+  const AddUnitView({super.key, required this.productId});
 
   @override
   State<AddUnitView> createState() => _AddUnitViewState();
@@ -40,7 +40,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                         index: 0,
                         screenName: UnitDetailView(
                             // isRefresh: false, //
-                            categoryId: widget.categoryId))),
+                            categoryId: widget.productId))),
                 (Route<dynamic> route) => false,
               );
             },

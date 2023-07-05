@@ -245,14 +245,16 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                               builder: (context) =>
                                                                   SMainScreenView(
                                                                       index: 0,
-                                                                      screenName:
-                                                                          AddUnitView(
-                                                                        categoryId:
-                                                                            widget.categoryId,
-                                                                        // productId: "",
-                                                                        // categoryId: widget
-                                                                        //     .categoryId,
-                                                                      ))),
+                                                                      screenName: AddUnitView(
+                                                                          productId: element
+                                                                              ?.id
+                                                                              .toString()
+
+                                                                          // widget.categoryId,
+                                                                          // productId: "",
+                                                                          // categoryId: widget
+                                                                          //     .categoryId,
+                                                                          ))),
                                                           (Route<dynamic>
                                                                   route) =>
                                                               false,
@@ -290,10 +292,11 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
-                                                        // read.deleteAdminProduct(
-                                                        //     context,
-                                                        //     index,
-                                                        //     element?.id);
+                                                        read.deleteProductUnitOfCategory(
+                                                            context,
+                                                            index,
+                                                            element?.id
+                                                                .toString());
                                                       },
                                                       child: Container(
                                                         padding:
