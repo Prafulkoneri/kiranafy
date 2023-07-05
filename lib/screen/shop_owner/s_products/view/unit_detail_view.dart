@@ -83,7 +83,9 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "${watch.getproductunitlistdata?.productDetails?.productName}",
+                              watch.getproductunitlistdata?.productDetails
+                                      ?.productName ??
+                                  "",
                               // "Product Name",
                               // "${watch.categoryName} -  ${watch.allProductsCount}",
                               style: GoogleFonts.dmSans(
@@ -106,14 +108,14 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                           shrinkWrap: true,
                           physics: BouncingScrollPhysics(),
                           itemBuilder: (BuildContext, index) {
-                            // final element = watch.productDetails?[index];
+                            final element = watch.unitDetails?[index];
                             return Column(
                               children: [
                                 Container(
                                   padding: EdgeInsets.only(
-                                      left: 4.96.w,
-                                      top: 4,
-                                      bottom: 9,
+                                      left: 8.w,
+                                      top: 8,
+                                      bottom: 4,
                                       right: 13.w),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -135,29 +137,22 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      // AppNetworkImages(
-                                      //   imageUrl: "${element?.productImagePath}",
-                                      //   width: 60.w,
-                                      //   height: 61.h,
-                                      //   fit: BoxFit.fill,
-                                      // ),
-                                      // element?.productImagePath != ""
-                                      //     ? AppNetworkImages(
-                                      //         imageUrl:
-                                      //             "${element?.productImagePath}",
-                                      //         height: 60.h,
-                                      //         width: 60.w,
-                                      //         fit: BoxFit.cover,
-                                      //       )
-                                      //     :
-                                      Image(
-                                        image: AssetImage(
-                                          "assets/images/profile_image.png",
-                                        ),
-                                        height: 60.h,
-                                        width: 60.w,
-                                        fit: BoxFit.fill,
-                                      ),
+                                      element?.unitBasedProductImage1Path != ""
+                                          ? AppNetworkImages(
+                                              imageUrl:
+                                                  "${element?.unitBasedProductImage1Path}",
+                                              height: 60.h,
+                                              width: 60.w,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image(
+                                              image: AssetImage(
+                                                "assets/images/profile_image.png",
+                                              ),
+                                              height: 60.h,
+                                              width: 60.w,
+                                              fit: BoxFit.fill,
+                                            ),
                                       SizedBox(
                                         width: 12.w,
                                       ),
@@ -178,8 +173,8 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                 children: [
                                                   Flexible(
                                                     child: Text(
-                                                      "200 ml",
-                                                      // "${element?.productName}",
+                                                      // "200 ml",
+                                                      "${element?.weightAndUnit}",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -189,8 +184,8 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                   ),
                                                   Flexible(
                                                     child: Text(
-                                                      "Active",
-                                                      // "${element?.productName}",
+                                                      // "Active",
+                                                      "${element?.status}",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -213,9 +208,9 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      "Rs. 60",
+                                                      // "Rs. 60",
 
-                                                      // "${element?.unitWithWeight}",//
+                                                      "Rs. ${element?.offerPrice}", //
                                                       style: TextStyle(
                                                           decoration:
                                                               TextDecoration
@@ -229,8 +224,8 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                       width: 33.w,
                                                     ),
                                                     Text(
-                                                      "Rs. 24",
-                                                      // "${element?.unitWithWeight}",//
+                                                      // "Rs. 24",
+                                                      " Rs. ${element?.mrpPrice}",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,
