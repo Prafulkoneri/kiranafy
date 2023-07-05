@@ -83,8 +83,8 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              // "${watch.getproductunitlistdata.unitDetails.}"
-                              "Product Name",
+                              "${watch.getproductunitlistdata?.productDetails?.productName}",
+                              // "Product Name",
                               // "${watch.categoryName} -  ${watch.allProductsCount}",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
@@ -101,7 +101,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                             left: 19.w,
                             right: 19.w,
                           ),
-                          itemCount: 8,
+                          itemCount: watch.unitDetails?.length ?? 0,
                           //  watch.productDetails?.length ?? 0,
                           shrinkWrap: true,
                           physics: BouncingScrollPhysics(),

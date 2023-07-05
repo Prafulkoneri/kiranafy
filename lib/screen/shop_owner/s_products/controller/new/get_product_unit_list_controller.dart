@@ -26,7 +26,7 @@ class SGetProductUnitListController extends ChangeNotifier {
   bool isInfoLoading = true;
   GetProductUnitListData? getproductunitlistdata;
   List<UnitDetail>? unitDetails;
-  List<UnitList>? unitList;
+  ProductDetails? productDetails;
 
   GetUnitProductListRepo getUnitProductListRepo = GetUnitProductListRepo();
 
@@ -65,6 +65,8 @@ class SGetProductUnitListController extends ChangeNotifier {
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         getproductunitlistdata = result.getproductunitlistdata;
+        productDetails = getproductunitlistdata?.productDetails;
+
         unitDetails = getproductunitlistdata?.unitDetails;
         // unitList =unitDetails?.unitList;
 
