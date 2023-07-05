@@ -15,6 +15,7 @@ class GetProductUitListRequestModel {
 }
 
 ///////////////////////////////////////////RESPONSE MODEL////////////////////////////////////
+
 class GetProductUitListResponseModel {
   int? status;
   String? message;
@@ -36,9 +37,11 @@ class GetProductUitListResponseModel {
 
 class GetProductUnitListData {
   List<UnitDetail>? unitDetails;
+  ProductDetails? productDetails;
 
   GetProductUnitListData({
     required this.unitDetails,
+    required this.productDetails,
   });
   GetProductUnitListData.fromJson(Map<String, dynamic> json) {
     if (json["unit_details"] != null) {
@@ -47,35 +50,30 @@ class GetProductUnitListData {
         unitDetails!.add(UnitDetail.fromJson(v));
       });
     }
+    productDetails = json['product_details'] != null
+        ? ProductDetails.fromJson(json['product_details'])
+        : null;
+  }
+}
+
+class ProductDetails {
+  int? productId;
+  String? productName;
+  String? productType;
+
+  ProductDetails({
+    required this.productId,
+    required this.productName,
+    required this.productType,
+  });
+  ProductDetails.fromJson(Map<String, dynamic> json) {
+    productId = json["product_id"];
+    productName = json["product_name"];
+    productType = json["product_type"];
   }
 }
 
 class UnitDetail {
-  int? productId;
-  String? productName;
-  String? productType;
-  List<UnitList>? unitList;
-
-  UnitDetail({
-    required this.productId,
-    required this.productName,
-    required this.productType,
-    required this.unitList,
-  });
-  UnitDetail.fromJson(Map<String, dynamic> json) {
-    productId = json["product_id"];
-    productName = json["product_name"];
-    productType = json["product_type"];
-    if (json["unit_list"] != null) {
-      unitList = <UnitList>[];
-      json["unit_list"].forEach((v) {
-        unitList!.add(UnitList.fromJson(v));
-      });
-    }
-  }
-}
-
-class UnitList {
   int? id;
   String? weightAndUnit;
   int? offerPrice;
@@ -84,7 +82,7 @@ class UnitList {
   String? unitBasedProductImage1Path;
   String? unitBasedProductImage1Name;
 
-  UnitList({
+  UnitDetail({
     required this.id,
     required this.weightAndUnit,
     required this.offerPrice,
@@ -93,7 +91,7 @@ class UnitList {
     required this.unitBasedProductImage1Path,
     required this.unitBasedProductImage1Name,
   });
-  UnitList.fromJson(Map<String, dynamic> json) {
+  UnitDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     weightAndUnit = json["weight_and_unit"];
     offerPrice = json["offer_price"];

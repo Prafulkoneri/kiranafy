@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
@@ -26,7 +27,7 @@ class SGetProductUnitListController extends ChangeNotifier {
   bool isInfoLoading = true;
   GetProductUnitListData? getproductunitlistdata;
   List<UnitDetail>? unitDetails;
-  List<UnitList>? unitList;
+  ProductDetails? productDetails;
 
   GetUnitProductListRepo getUnitProductListRepo = GetUnitProductListRepo();
 
@@ -49,24 +50,24 @@ class SGetProductUnitListController extends ChangeNotifier {
           productId: productId, productType: producttype);
 
   Future<void> getUnitProductList(context, pId, pType) async {
-    showLoader(true);
-    productId = pId.toString();
+    productId = pId;
     producttype = pType;
     SharedPreferences pref = await SharedPreferences.getInstance();
-
-    LoadingOverlay.of(context).show();
+    showLoader(true);
     getUnitProductListRepo
         .getUnitProductList(
             getProductUnitListRequestModel, pref.getString("successToken"))
         .then((response) async {
       final result =
           GetProductUitListResponseModel.fromJson(jsonDecode(response.body));
-      print(response.statusCode);
+      print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
+      log(response.body);
+      print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
       if (response.statusCode == 200) {
-        LoadingOverlay.of(context).hide();
         getproductunitlistdata = result.getproductunitlistdata;
+        productDetails = getproductunitlistdata?.productDetails;
+
         unitDetails = getproductunitlistdata?.unitDetails;
-        // unitList =unitDetails?.unitList;
 
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

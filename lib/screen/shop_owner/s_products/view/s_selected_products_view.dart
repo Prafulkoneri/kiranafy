@@ -340,6 +340,13 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                       categoryId:
                                                                       widget
                                                                           .categoryId,
+                                                                      productId:
+                                                                      element
+                                                                          ?.id
+                                                                          .toString(),
+                                                                      productType:
+                                                                      element
+                                                                          ?.productType,
                                                                     ))),
                                                             (Route<dynamic> route) =>
                                                         false,
