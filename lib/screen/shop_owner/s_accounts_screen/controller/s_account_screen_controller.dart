@@ -155,18 +155,15 @@ class SAccountScreenController extends ChangeNotifier {
         faqdata = result.faqdata;
         print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         print(faqdata);
-        // cmsdata = result.cmsdata;
-        // aboutUs = cmsdata?.aboutUs;
-        // privacyPolicy = cmsdata?.privacyPolicy;
-        // print("3q2423424");
-        // print(privacyPolicy?.description);
-        // print("3q2423424");
-        // termsAndCondition = cmsdata?.termsAndCondition;
 
         int length = faqdata?.length ?? 0;
-        for (int i = 0; i < length; i++) {
-          isFaqExpanded = List.filled(length, false, growable: true);
-        }
+
+        // for (int i = 0; i < length; i++) {/
+        isFaqExpanded = List.filled(length, false, growable: true);
+
+        isFaqExpanded.removeAt(0);
+        isFaqExpanded.insert(0, true);
+        // }/
 
         showLoader(false);
 

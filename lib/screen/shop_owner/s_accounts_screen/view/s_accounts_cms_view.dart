@@ -40,7 +40,10 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                      index: 4, screenName: SAccountScreenView(refresh: false,))),
+                      index: 4,
+                      screenName: SAccountScreenView(
+                        refresh: false,
+                      ))),
               (Route<dynamic> route) => false,
             );
           },
@@ -157,7 +160,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                 // );
               },
               child: Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 26.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
                   border: Border(
@@ -199,7 +202,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                         builder: (context) => TermsAndConditionView()));
               },
               child: Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 26.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
                   border: Border(
@@ -238,10 +241,11 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
 
             GestureDetector(
               onTap: () {
-                Share.share('hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                Share.share(
+                    'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
               },
               child: Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 26.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
                   border: Border(
@@ -276,14 +280,16 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               ),
             ),
             GestureDetector(
-              onTap: ()async{
-                if (await canLaunch("https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
-                await launch("https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+              onTap: () async {
+                if (await canLaunch(
+                    "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
+                  await launch(
+                      "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+                } else {
+                  throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
                 }
-                else {
-                throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
-                }
-                LaunchReview.launch(androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                LaunchReview.launch(
+                    androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
                     iOSAppId: "585027354");
                 // StoreRedirect.redirect(
                 //   androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
@@ -291,7 +297,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                 // );
               },
               child: Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 26.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
 

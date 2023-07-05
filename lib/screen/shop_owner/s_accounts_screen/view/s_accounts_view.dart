@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
+import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/promotion_request/controller/promotion_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_cms_view.dart';
@@ -693,7 +694,10 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => SMainScreenView(
-                                index: 2, screenName: SPaymentsView())),
+                                index: 2,
+                                screenName: SPaymentsView(
+                                  isNavFromAccounts: true,
+                                ))),
                         (Route<dynamic> route) => false,
                       );
                     },
@@ -861,7 +865,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => SMainScreenView(
-                                index: 4, screenName: ShopSettingView())),
+                                index: 4,
+                                screenName: NotificationsScreenView())),
                         (Route<dynamic> route) => false,
                       );
                     },
