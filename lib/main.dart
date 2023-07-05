@@ -84,6 +84,7 @@ import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'screen/shop_owner/s_my_subscription/controller/subscription_history_controller.dart';
 import 'screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
 import 'screen/shop_owner/s_payments/controller/payment_histaory_controller.dart';
+import 'screen/shop_owner/s_products/controller/new/get_product_unit_list_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
@@ -160,6 +161,7 @@ void main() async {
         ChangeNotifierProvider(
             create: (_) => ShopSeasonalRecommandedOfferProductsController()),
         ChangeNotifierProvider(create: (_) => SBankAccountController()),
+        ChangeNotifierProvider(create: (_) => SGetProductUnitListController()),
       ],
       child: MyApp(),
     ),

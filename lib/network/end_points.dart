@@ -1,6 +1,6 @@
 class Endpoint {
   Endpoint._();
-  //testing url
+  // testing url
   static const String baseUrl = 'https://localsupermart.com/live/api/';
   // live url
   // static const String baseUrl =
@@ -368,11 +368,10 @@ class Endpoint {
   ////////////////////////////////////DELETE UNIT PRODUCT CATEGORY//////////
   static const String deleteUnitProductCategory =
       "${baseUrl}lsm-shop-owner-delete-product-units-of-category";
-
-  static const String getProductUnitList =
-      "${baseUrl}lsm-shop-owner-get-product-unit-list";
-
-
+  ////////////////////////////////////Add Upadte UNIT PRODUCT CATEGORY//////////
   static const String addUpadteUnitProductCategory =
       "${baseUrl}lsm-shop-owner-update-product-units-of-category";
+  ////////////////////////////////////get  UNIT PRODUCT //////////
+  static const String getProductUnitList =
+      "${baseUrl}lsm-shop-owner-get-product-unit-list";
 }
