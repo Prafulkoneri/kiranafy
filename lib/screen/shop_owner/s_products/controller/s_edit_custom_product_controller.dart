@@ -60,9 +60,6 @@ class EditCustomProductController extends ChangeNotifier {
   String statusCard = "";
   String categoryId = "";
 
-
-
-
   String productFeatureImage = "";
 
   UploadCustomProductRepo uploadCustomProductRepo = UploadCustomProductRepo();
@@ -72,7 +69,6 @@ class EditCustomProductController extends ChangeNotifier {
   bool isEditEnabled = false;
 
   Future<void> initState(context, createCard, index, id, catId) async {
-
     await getCustomProductData(context);
     productId = id;
     categoryId = catId;
@@ -90,9 +86,7 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  showLoader(value){
+  showLoader(value) {
     isLoading = value;
     notifyListeners();
   }
@@ -101,7 +95,8 @@ class EditCustomProductController extends ChangeNotifier {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     editCustomProductRepo
-        .getCustomProductDetails(editCustomProductsRequestModel,pref.getString("successToken"))
+        .getCustomProductDetails(
+            editCustomProductsRequestModel, pref.getString("successToken"))
         .then((response) {
       final result =
           CustomProductDataResModel.fromJson(jsonDecode(response.body));
@@ -116,7 +111,6 @@ class EditCustomProductController extends ChangeNotifier {
             type: SnackType.success);
         notifyListeners();
       } else {
-
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -239,13 +233,9 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-
-
-
-
-  Future<void> uploadCustomProduct(context) async {
+  Future<void> uploadCustomProduct(
+    context,
+  ) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadCustomProductRepo
@@ -257,12 +247,14 @@ class EditCustomProductController extends ChangeNotifier {
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print(categoryId);
+
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (context) => SMainScreenView(
                     index: 0,
-                    screenName: SSelectedProductView(categoryId: categoryId,isRefresh: true),
+                    screenName: SSelectedProductView(
+                        categoryId: categoryId, isRefresh: true),
                   )),
           (Route<dynamic> route) => false,
         );
@@ -303,8 +295,6 @@ class EditCustomProductController extends ChangeNotifier {
       );
 
   Future uploadImage(context) async {
-
-
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.uploadCustomProduct}");
@@ -317,18 +307,23 @@ class EditCustomProductController extends ChangeNotifier {
         showUnderRecommendedProducts ? "yes" : "no";
     request.fields['show_under_seasonal_products'] =
         showUnderSeasonalProducts ? "yes" : "no";
-    request.fields["product_name"] =productNameController.text;
+    request.fields["product_name"] = productNameController.text;
     request.fields["category_id"] = categoryId;
     request.fields["brand_id"] = brandId;
     request.fields["tax_id"] = taxId;
-    request.fields["product_description"] =productDescriptionController.text;
-    request.fields["product_id"] =productId;
+
+    request.fields["product_description"] = productDescriptionController.text;
+
+    request.fields["product_description"] = productDescriptionController.text;
+    request.fields["product_id"] = productId;
+
     print(request.fields);
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
 
     File imageFile = productImage;
-    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var stream =
+        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
     var multipartFile = new http.MultipartFile(
         "product_image_path", stream, length,

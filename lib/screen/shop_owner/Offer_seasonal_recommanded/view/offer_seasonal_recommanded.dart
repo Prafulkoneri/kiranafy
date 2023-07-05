@@ -29,8 +29,9 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class ShopSeasonalRecommandedOfferProductsView extends StatefulWidget {
-  final String ? selectedProduct;
-  const ShopSeasonalRecommandedOfferProductsView({super.key,required this.selectedProduct});
+  final String? selectedProduct;
+  const ShopSeasonalRecommandedOfferProductsView(
+      {super.key, required this.selectedProduct});
 
   @override
   State<ShopSeasonalRecommandedOfferProductsView> createState() =>
@@ -43,7 +44,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<ShopSeasonalRecommandedOfferProductsController>()
-          .initState(context,widget.selectedProduct);
+          .initState(context, widget.selectedProduct);
     });
   }
 
@@ -58,23 +59,29 @@ class _ShopSeasonalRecommandedOfferProductsViewState
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
             onBackBtnPressed: () {
-             widget.selectedProduct=="recommended"? Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                          index: 4,
-                          screenName: SAccountScreenView(refresh: false,),
-                        )),
-                (Route<dynamic> route) => false,
-              ): Navigator.pushAndRemoveUntil(
-               context,
-               MaterialPageRoute(
-                   builder: (context) => SMainScreenView(
-                     index: 0,
-                     screenName: ShopDashBoardView(refresh: false,),
-                   )),
-                   (Route<dynamic> route) => false,
-             );
+              widget.selectedProduct == "recommended"
+                  ? Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SMainScreenView(
+                                index: 4,
+                                screenName: SAccountScreenView(
+                                  refresh: false,
+                                ),
+                              )),
+                      (Route<dynamic> route) => false,
+                    )
+                  : Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SMainScreenView(
+                                index: 0,
+                                screenName: ShopDashBoardView(
+                                  refresh: false,
+                                ),
+                              )),
+                      (Route<dynamic> route) => false,
+                    );
             },
             title: watch.isRecommadedPressed
                 ? "Recommended Products"
@@ -175,7 +182,6 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                           itemCount:
                               watch.allproducts?.recommendedProducts?.length ??
                                   0,
-                          //  watch.selectedProductList?.length ?? 0,
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
@@ -184,9 +190,6 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                             return Column(
                               children: [
                                 Container(
-                                  // padding: EdgeInsets.only(
-                                  //     left: 21.w, bottom: 11.w, top: 13.w, right: 21.w),
-
                                   decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -200,7 +203,6 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                       color: Colors.white,
                                       border:
                                           Border.all(width: 1, color: grey1)),
-
                                   child: Theme(
                                     data: ThemeData().copyWith(
                                         dividerColor: Colors.transparent),
@@ -218,43 +220,50 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Row(
-                                                children: [
-                                                  AppNetworkImages(
-                                                    imageUrl:
-                                                        "${element?.productImagePath}",
-                                                    height: 61.h,
-                                                    width: 60.w,
-                                                  ),
-                                                  // Image(
-                                                  //   image: NetworkImage(
-                                                  //     // "assets/images/gridfour.png"
-                                                  //     "${element?.productImagePath}",
-                                                  //   ),
-                                                  //   height: 61.h,
-                                                  //   width: 60.w,
-                                                  //   // fit: BoxFit.fill,
-                                                  // ),
-                                                  SizedBox(
-                                                    width: 10.w,
-                                                  ),
-                                                  Container(
-                                                    width: 150.w,
-                                                    child: Text(
-                                                      "${element?.productName}",
-                                                      // "${element?.productName}",
-                                                      // "${element?.productName}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Black1,
-                                                            fontSize: 16.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w700),
+                                              Container(
+                                                padding:
+                                                    EdgeInsets.only(left: 5.w),
+                                                child: Row(
+                                                  children: [
+                                                    element?.productImagePath !=
+                                                            ""
+                                                        ? AppNetworkImages(
+                                                            imageUrl:
+                                                                "${element?.productImagePath}",
+                                                            height: 60.h,
+                                                            width: 60.w,
+                                                            fit: BoxFit.cover,
+                                                          )
+                                                        : Image(
+                                                            image: AssetImage(
+                                                              "assets/images/profile_image.png",
+                                                            ),
+                                                            height: 60.h,
+                                                            width: 60.w,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                    SizedBox(
+                                                      width: 8.w,
+                                                    ),
+                                                    Container(
+                                                      width: 150.w,
+                                                      child: Text(
+                                                        "${element?.productName}",
+                                                        // "${element?.productName}",
+                                                        // "${element?.productName}",
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Black1,
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                               Row(
                                                 children: [
@@ -280,7 +289,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     },
                                                     child: Container(
                                                       padding:
-                                                          EdgeInsets.all(8),
+                                                          EdgeInsets.all(6),
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
@@ -317,7 +326,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     },
                                                     child: Container(
                                                       padding:
-                                                          EdgeInsets.all(8),
+                                                          EdgeInsets.all(6),
                                                       decoration: BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
@@ -616,44 +625,54 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      AppNetworkImages(
-                                                        imageUrl:
-                                                            "${element?.productImagePath}",
-                                                        height: 61.h,
-                                                        width: 60.w,
-                                                      ),
-                                                      // Image(
-                                                      //   image: NetworkImage(
-                                                      //     // "assets/images/gridfour.png"
-                                                      //     "${element?.productImagePath}",
-                                                      //   ),
-                                                      //   height: 61.h,
-                                                      //   width: 60.w,
-                                                      //   // fit: BoxFit.fill,
-                                                      // ),
-                                                      SizedBox(
-                                                        width: 10.w,
-                                                      ),
-                                                      Container(
-                                                        width: 150.w,
-                                                        child: Text(
-                                                          "${element?.productName}",
-                                                          // "${element?.productName}",
-                                                          // "${element?.productName}",
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black1,
-                                                                fontSize: 16.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 5.w),
+                                                    child: Row(
+                                                      children: [
+                                                        element?.productImagePath !=
+                                                                ""
+                                                            ? AppNetworkImages(
+                                                                imageUrl:
+                                                                    "${element?.productImagePath}",
+                                                                height: 60.h,
+                                                                width: 60.w,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              )
+                                                            : Image(
+                                                                image:
+                                                                    AssetImage(
+                                                                  "assets/images/profile_image.png",
+                                                                ),
+                                                                height: 60.h,
+                                                                width: 60.w,
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                              ),
+                                                        SizedBox(
+                                                          width: 10.w,
+                                                        ),
+                                                        Container(
+                                                          width: 150.w,
+                                                          child: Text(
+                                                            "${element?.productName}",
+                                                            // "${element?.productName}",
+                                                            // "${element?.productName}",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Black1,
+                                                                  fontSize:
+                                                                      16.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                   Row(
                                                     children: [
@@ -678,7 +697,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         },
                                                         child: Container(
                                                           padding:
-                                                              EdgeInsets.all(8),
+                                                              EdgeInsets.all(6),
                                                           decoration: BoxDecoration(
                                                               boxShadow: [
                                                                 BoxShadow(
@@ -719,7 +738,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         },
                                                         child: Container(
                                                           padding:
-                                                              EdgeInsets.all(8),
+                                                              EdgeInsets.all(6),
                                                           decoration: BoxDecoration(
                                                               boxShadow: [
                                                                 BoxShadow(
@@ -1022,53 +1041,61 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      element?.productImagePath !=
-                                                              ""
-                                                          ? AppNetworkImages(
-                                                              imageUrl:
-                                                                  "${element?.productImagePath}",
-                                                              height: 61.h,
-                                                              width: 60.w,
-                                                              fit: BoxFit.fill,
-                                                            )
-                                                          : Image(
-                                                              image: AssetImage(
-                                                                "assets/images/profile_image.png",
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 5.w),
+                                                    child: Row(
+                                                      children: [
+                                                        element?.productImagePath !=
+                                                                ""
+                                                            ? AppNetworkImages(
+                                                                imageUrl:
+                                                                    "${element?.productImagePath}",
+                                                                height: 60.h,
+                                                                width: 60.w,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              )
+                                                            : Image(
+                                                                image:
+                                                                    AssetImage(
+                                                                  "assets/images/profile_image.png",
+                                                                ),
+                                                                height: 60.h,
+                                                                width: 60.w,
+                                                                fit:
+                                                                    BoxFit.fill,
                                                               ),
-                                                              height: 61.h,
-                                                              width: 60.w,
-                                                              fit: BoxFit.fill,
-                                                            ),
-                                                      // AppNetworkImages(
-                                                      //   imageUrl:
-                                                      //       "${element?.productImagePath}",
-                                                      //   height: 61.h,
-                                                      //   width: 60.w,
-                                                      // ),
+                                                        // AppNetworkImages(
+                                                        //   imageUrl:
+                                                        //       "${element?.productImagePath}",
+                                                        //   height: 61.h,
+                                                        //   width: 60.w,
+                                                        // ),
 
-                                                      SizedBox(
-                                                        width: 10.w,
-                                                      ),
-                                                      Container(
-                                                        width: 150.w,
-                                                        child: Text(
-                                                          "${element?.productName}",
-                                                          // "${element?.productName}",
-                                                          // "${element?.productName}",
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black1,
-                                                                fontSize: 16.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
+                                                        SizedBox(
+                                                          width: 10.w,
+                                                        ),
+                                                        Container(
+                                                          width: 150.w,
+                                                          child: Text(
+                                                            "${element?.productName}",
+                                                            // "${element?.productName}",
+                                                            // "${element?.productName}",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Black1,
+                                                                  fontSize:
+                                                                      16.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                   Row(
                                                     children: [
@@ -1093,7 +1120,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         },
                                                         child: Container(
                                                           padding:
-                                                              EdgeInsets.all(8),
+                                                              EdgeInsets.all(6),
                                                           decoration: BoxDecoration(
                                                               boxShadow: [
                                                                 BoxShadow(
@@ -1134,7 +1161,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         },
                                                         child: Container(
                                                           padding:
-                                                              EdgeInsets.all(8),
+                                                              EdgeInsets.all(6),
                                                           decoration: BoxDecoration(
                                                               boxShadow: [
                                                                 BoxShadow(

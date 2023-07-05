@@ -309,10 +309,11 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
-                                                        // read.deleteAdminProduct(
-                                                        //     context,
-                                                        //     index,
-                                                        //     element?.id);
+                                                        read.deleteProductUnitOfCategory(
+                                                            context,
+                                                            index,
+                                                            element?.id
+                                                                .toString());
                                                       },
                                                       child: Container(
                                                         padding:
