@@ -40,7 +40,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<CustomProductController>()
-          .initState(context, CreateWidget(0), 0);
+          .initState(context);
     });
   }
 
@@ -266,370 +266,53 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                         SizedBox(
                           height: 11.h,
                         ),
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                read.openProductImage();
-                              },
-                              child: Container(
-                                height: 100.h,
-                                width: 110.w,
-                                decoration: BoxDecoration(boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.red.withOpacity(0.05),
-                                    blurRadius: 10.0,
-                                  ),
-                                ]),
-                                child: Card(
-                                  elevation: 0.3,
-                                  child: watch.productImage.path == ""
-                                      ? Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              "assets/icons/gallary.svg",
-                                              // height: 19.w,
-                                              // width: 21.w,
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Text(
-                                              "Add Image",
-                                              style: TextStyle(
-                                                  color: Color(0xffB3B3B3),
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            )
-                                          ],
-                                        )
-                                      : Image.file(
-                                          watch.productImage,
-                                          fit: BoxFit.cover,
-                                        ),
-                                ),
+                        GestureDetector(
+                          onTap: () {
+                            read.openProductImage();
+                          },
+                          child: Container(
+                            height: 185.h,
+                            width:ScreenUtil().screenWidth,
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                color: Colors.red.withOpacity(0.05),
+                                blurRadius: 10.0,
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 22.h,
-                        ),
-                        Divider(
-                          thickness: 1,
-                          color: Color(0xffDDDDDD),
-                        ),
-                        SizedBox(height: 15.w),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Add Unit",
-                              style: TextStyle(
-                                  color: Black,
-                                  // letterSpacing: .5,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    read.onAddWidget(
-                                        CreateWidget(watch.cards.length),
-                                        watch.cards.length);
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 6.w, vertical: 2.w),
-                                    // margin: EdgeInsets.only(right: 15.w),
-                                    // height: 24.h,
-                                    // width: 55.w,
-                                    decoration: BoxDecoration(
-                                      color: SplashText,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5)),
-                                    ),
-                                    child: Row(
-                                      // mainAxisAlignment: MainAxisAlignment.center,
+                            ]),
+                            child: Card(
+                              elevation: 0.3,
+                              child: watch.productImage.path == ""
+                                  ? Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          "Add",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              // letterSpacing: .5,
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w400),
+                                        SvgPicture.asset(
+                                          "assets/icons/picked_product_image.svg",
+                                          // height: 19.w,
+                                          // width: 21.w,
                                         ),
                                         SizedBox(
-                                          width: 7.w,
+                                          height: 10.h,
                                         ),
-                                        SvgPicture.asset(
-                                          'assets/icons/pluse.svg',
-                                          height: 7.h,
-                                          width: 7.w,
-                                        ),
+                                        Text(
+                                          "Add Image",
+                                          style: TextStyle(
+                                              color: Color(0xffB3B3B3),
+                                              // letterSpacing: .5,
+                                              fontSize: 22.sp,
+                                              fontWeight: FontWeight.w400),
+                                        )
                                       ],
+                                    )
+                                  : Image.file(
+                                      watch.productImage,
+                                      fit: BoxFit.cover,
                                     ),
-                                  ),
-                                ),
-
-                                // GestureDetector(
-                                //   onTap: () {
-                                //     read.onRemoveWidget(watch.cards.length-1);
-                                //   },
-                                //   child: Container(
-                                //     padding: EdgeInsets.symmetric(
-                                //         horizontal: 6.w, vertical: 2.w),
-                                //     // margin: EdgeInsets.only(right: 15.w),
-                                //     // height: 24.h,
-                                //     // width: 55.w,
-                                //     decoration: BoxDecoration(
-                                //       color: Colors.red,
-                                //       borderRadius: BorderRadius.all(Radius.circular(5)),
-                                //     ),
-                                //     child: Row(
-                                //       // mainAxisAlignment: MainAxisAlignment.center,
-                                //       children: [
-                                //         Text(
-                                //           "Delete",
-                                //           style: TextStyle(
-                                //               color: Colors.white,
-                                //               // letterSpacing: .5,
-                                //               fontSize: 12.sp,
-                                //               fontWeight: FontWeight.w400),
-                                //         ),
-                                //         SizedBox(
-                                //           width: 7.w,
-                                //         ),
-                                //        Icon(Icons.clear,color: Colors.white,size: 14.w,)
-                                //       ],
-                                //     ),
-                                //   ),
-                                // ),
-                              ],
                             ),
-                          ],
+                          ),
                         ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: watch.cards.length,
-                            shrinkWrap: true,
-                            itemBuilder: (BuildContext, index) {
-                              return Column(
-                                children: [
-                                  Stack(
-                                    alignment: Alignment.topRight,
-                                    children: [
-                                      CreateWidget(index),
-                                      Container(
-                                        width: 30.w,
-                                        child: CupertinoSwitch(
-                                          value: watch.switchValue[index],
-                                          activeColor: DarkGreen,
-                                          onChanged: (value) {
-                                            read.onToggleSwitch(value, index);
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            read.openGallery1(index);
-                                          },
-                                          child: Container(
-                                            height: 100.h,
-                                            width: 110.w,
-                                            decoration:
-                                                BoxDecoration(boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.05),
-                                                blurRadius: 10.0,
-                                              ),
-                                            ]),
-                                            child: Card(
-                                              elevation: 0.3,
-                                              child: watch.imagefiles1[index]
-                                                          .path !=
-                                                      ""
-                                                  ? Image.file(
-                                                      File(watch
-                                                          .imagefiles1[index]
-                                                          .path),
-                                                      fit: BoxFit.cover,
-                                                    )
-                                                  : Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SvgPicture.asset(
-                                                          "assets/icons/gallary.svg",
-                                                          // height: 19.w,
-                                                          // width: 21.w,
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10.h,
-                                                        ),
-                                                        Text(
-                                                          "Add Image",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xffB3B3B3),
-                                                              // letterSpacing: .5,
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ],
-                                                    ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            read.openGallery2(index);
-                                          },
-                                          child: Container(
-                                            height: 100.h,
-                                            width: 110.w,
-                                            decoration:
-                                                BoxDecoration(boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.05),
-                                                blurRadius: 10.0,
-                                              ),
-                                            ]),
-                                            child: Card(
-                                              elevation: 0.3,
-                                              child: watch.imagefiles2[index]
-                                                          .path !=
-                                                      ""
-                                                  ? Image.file(
-                                                      File(watch
-                                                          .imagefiles2[index]
-                                                          .path),
-                                                      fit: BoxFit.cover)
-                                                  : Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SvgPicture.asset(
-                                                          "assets/icons/gallary.svg",
-                                                          // height: 19.w,
-                                                          // width: 21.w,
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10.h,
-                                                        ),
-                                                        Text(
-                                                          "Add Image",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xffB3B3B3),
-                                                              // letterSpacing: .5,
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ],
-                                                    ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            read.openGallery3(index);
-                                          },
-                                          child: Container(
-                                            height: 100.h,
-                                            width: 110.w,
-                                            decoration:
-                                                BoxDecoration(boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.05),
-                                                blurRadius: 10.0,
-                                              ),
-                                            ]),
-                                            child: Card(
-                                              elevation: 0.3,
-                                              child: watch.imagefiles3[index]
-                                                          .path !=
-                                                      ""
-                                                  ? Image.file(
-                                                      File(watch
-                                                          .imagefiles3[index]
-                                                          .path),
-                                                      fit: BoxFit.cover)
-                                                  : Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SvgPicture.asset(
-                                                          "assets/icons/gallary.svg",
-                                                          // height: 19.w,
-                                                          // width: 21.w,
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10.h,
-                                                        ),
-                                                        Text(
-                                                          "Add Image",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xffB3B3B3),
-                                                              // letterSpacing: .5,
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ],
-                                                    ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20.w,
-                                  ),
-                                ],
-                              );
-                            }),
                       ],
                     ),
                   ),
@@ -642,75 +325,4 @@ class _SCustomProductViewState extends State<SCustomProductView> {
     );
   }
 
-  Widget CreateWidget(index) {
-    final watch = Provider.of<CustomProductController>(context, listen: false);
-    final read = Provider.of<CustomProductController>(context, listen: false);
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: PrimarySTextFormField(
-                textInputType: TextInputType.number,
-                onChanged: (value) {},
-                controller: watch.valueController[index],
-                height: 35,
-                // width: 20, // titleHeader: "Shop Name",
-                hintText: "value",
-                hintFontSize: 12.sp,
-              ),
-            ),
-            SizedBox(width: 3.w),
-            Expanded(
-                child: SDropDownField(
-              iconPadding: EdgeInsets.only(right: 5.w),
-              onChanged: (value) {
-                read.onUnitDataSelect(value, index);
-              },
-              items: watch.unitData
-                  ?.map((item) => DropdownMenuItem<String>(
-                        value: item.id.toString(),
-                        child: Text(
-                          item.unit ?? "",
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      ))
-                  .toList(),
-              height: 30.w,
-              hint: "Unit",
-              hintSize: 11.sp,
-            )),
-            SizedBox(width: 3.w),
-            Expanded(
-              child: PrimarySTextFormField(
-                textInputType: TextInputType.number,
-                controller: watch.mrpController[index],
-                height: 35,
-                // width: 20, // titleHeader: "Shop Name",
-                hintText: "MRP",
-                hintFontSize: 12.sp,
-              ),
-            ),
-            SizedBox(width: 3.w),
-            Expanded(
-              child: PrimarySTextFormField(
-                textInputType: TextInputType.number,
-                controller: watch.offerController[index],
-                height: 35,
-                // width: 20, // titleHeader: "Shop Name",
-                hintText: "Offer Price",
-                hintFontSize: 12.sp,
-              ),
-            ),
-            SizedBox(width: 45.w),
-          ],
-        ),
-        SizedBox(
-          height: 20.h,
-        ),
-      ],
-    );
-  }
 }

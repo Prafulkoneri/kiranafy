@@ -60,21 +60,9 @@ class EditCustomProductController extends ChangeNotifier {
   String statusCard = "";
   String categoryId = "";
 
-  List<TextEditingController> valueController = [TextEditingController()];
-  List<TextEditingController> mrpController = [TextEditingController()];
-  List<TextEditingController> offerController = [TextEditingController()];
 
-  List<TextEditingController> valueCardController = [TextEditingController()];
-  List<TextEditingController> mrpCardController = [TextEditingController()];
-  List<TextEditingController> offerCardController = [TextEditingController()];
 
-  List<bool> switchValue = [];
-  List<bool> switchCardValue = [];
-  List<XFile> imagefiles1 = [];
-  List<XFile> imagefiles2 = [];
-  List<XFile> imagefiles3 = [];
-  List<String> unitList = [];
-  int totalRows = 0;
+
   String productFeatureImage = "";
 
   UploadCustomProductRepo uploadCustomProductRepo = UploadCustomProductRepo();
@@ -84,27 +72,12 @@ class EditCustomProductController extends ChangeNotifier {
   bool isEditEnabled = false;
 
   Future<void> initState(context, createCard, index, id, catId) async {
-    imagefiles1.clear();
-    imagefiles2.clear();
-    imagefiles3.clear();
-    valueCardController.clear();
-    mrpCardController.clear();
-    offerCardController.clear();
-    valueCardController.add(TextEditingController());
-    mrpCardController.add(TextEditingController());
-    offerCardController.add(TextEditingController());
-    imagefiles1.add(XFile(""));
-    imagefiles2.add(XFile(""));
-    imagefiles3.add(XFile(""));
+
     await getCustomProductData(context);
-    cards.clear();
-    unitList.clear();
     productId = id;
     categoryId = catId;
-    // await getCustomProductData(context);
     await getCustomProductDetails(context);
     print(productId);
-    // await onAddWidget(createCard,index);
   }
 
   void onBrandSelected(value) {
@@ -117,143 +90,7 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  getValueData() {
-    String a = '';
-    for (int i = 0; i < valueController.length; i++) {
-      if (valueController[i].text != "") {
-        a += "${valueController[i].text},";
-      }
-    }
-    a = a.substring(0, a.length - 1);
-    value = a;
-    print(value);
-    notifyListeners();
-  }
 
-  getValueCardData() {
-    String a = '';
-    for (int i = 0; i < valueCardController.length; i++) {
-      if (valueCardController[i].text != "") {
-        a += ",${valueCardController[i].text},";
-      }
-    }
-    if (a != "") {
-      a = a.substring(0, a.length - 1);
-      valueCard = a;
-      print(valueCard);
-    }
-    notifyListeners();
-  }
-
-  onUnitDataSelect(value, index) {
-    unitList.insert(index, value.toString());
-    print("unitList${unitList}");
-    notifyListeners();
-  }
-
-  getMrpData() {
-    String a = '';
-    for (int i = 0; i < mrpController.length; i++) {
-      if (mrpController[i].text != "") {
-        a += "${mrpController[i].text},";
-      }
-    }
-    a = a.substring(0, a.length - 1);
-    mrp = a;
-    print(mrp);
-    notifyListeners();
-  }
-
-  getMrpCardData() {
-    String a = '';
-    for (int i = 0; i < mrpCardController.length; i++) {
-      if (mrpCardController[i].text != "") {
-        a += ",${mrpCardController[i].text},";
-      }
-    }
-    if (a != "") {
-      a = a.substring(0, a.length - 1);
-      mrpCard = a;
-      print(mrpCard);
-    }
-    notifyListeners();
-  }
-
-  getOfferData() {
-    String a = '';
-    for (int i = 0; i < offerController.length; i++) {
-      if (offerController[i].text != "") {
-        a += "${offerController[i].text},";
-      }
-    }
-    a = a.substring(0, a.length - 1);
-    offer = a;
-    print(offer);
-    notifyListeners();
-  }
-
-  getOfferCardData() {
-    String a = '';
-    for (int i = 0; i < offerCardController.length; i++) {
-      if (offerCardController[i].text != "") {
-        a += ",${offerCardController[i].text},";
-      }
-    }
-    if (a != "") {
-      a = a.substring(0, a.length - 1);
-      offerCard = a;
-      print(offerCard);
-    }
-    notifyListeners();
-  }
-
-  getUnitData() {
-    String a = '';
-    for (int i = 0; i < unitList.length; i++) {
-      if (unitList[i] != "") {
-        a += "${unitList[i]},";
-      }
-    }
-    a = a.substring(0, a.length - 1);
-    unit = a;
-    notifyListeners();
-  }
-
-  getSwitchValue() {
-    String a = '';
-    for (int i = 0; i < switchValue.length; i++) {
-      if (mrpController[i].text != "") {
-        if (switchValue[i]) {
-          a += "active,";
-        } else {
-          a += "inactive,";
-        }
-      }
-      // a = a.substring(0, a.length - 1);
-      status = a;
-      print(status);
-      notifyListeners();
-    }
-  }
-
-  getSwitchCardValue() {
-    String a = '';
-    for (int i = 0; i < switchCardValue.length; i++) {
-      if (switchCardValue[i]) {
-        a += "active,";
-      } else {
-        a += "inactive,";
-      }
-
-      print(a);
-      if (a != "") {
-        // a = a.substring(0, a.length - 1);
-        statusCard = a;
-      }
-      print(statusCard);
-      notifyListeners();
-    }
-  }
 
   showLoader(value){
     isLoading = value;
@@ -263,8 +100,8 @@ class EditCustomProductController extends ChangeNotifier {
   Future<void> getCustomProductData(context) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
-    customProductDataRepo
-        .customProductDataModel(pref.getString("successToken"))
+    editCustomProductRepo
+        .getCustomProductDetails(editCustomProductsRequestModel,pref.getString("successToken"))
         .then((response) {
       final result =
           CustomProductDataResModel.fromJson(jsonDecode(response.body));
@@ -406,15 +243,7 @@ class EditCustomProductController extends ChangeNotifier {
 
 
 
-  void onToggleSwitch(value, index) {
-    switchValue[index] = !switchValue[index];
-    notifyListeners();
-  }
 
-  void onToggleCardSwitch(value, index) {
-    switchCardValue[index] = !switchCardValue[index];
-    notifyListeners();
-  }
 
   Future<void> uploadCustomProduct(context) async {
     LoadingOverlay.of(context).show();

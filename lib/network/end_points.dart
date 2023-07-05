@@ -368,4 +368,11 @@ class Endpoint {
   ////////////////////////////////////DELETE UNIT PRODUCT CATEGORY//////////
   static const String deleteUnitProductCategory =
       "${baseUrl}lsm-shop-owner-delete-product-units-of-category";
+
+  static const String getProductUnitList =
+      "${baseUrl}lsm-shop-owner-get-product-unit-list";
+
+
+  static const String addUpadteUnitProductCategory =
+      "${baseUrl}lsm-shop-owner-update-product-units-of-category";
 }

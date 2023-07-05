@@ -343,14 +343,14 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                       child: Card(
                           elevation: 0.3,
                           child:
-                          // watch.productFeatureImage != ""
-                          //     ? Center(
-                          //   child: AppNetworkImages(
-                          //     imageUrl: watch.productFeatureImage,
-                          //     fit: BoxFit.cover,
-                          //   ),
-                          // )
-                          //     :
+                          watch.productFeatureImage != ""
+                              ? Center(
+                            child: AppNetworkImages(
+                              imageUrl: watch.productFeatureImage,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                              :
                           Column(
                             crossAxisAlignment:
                             CrossAxisAlignment.center,
@@ -377,14 +377,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                           )),
                     ),
                   ),
-                  SizedBox(
-                    height: 22.h,
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: Color(0xffDDDDDD),
-                  ),
-                  SizedBox(height: 15.w),
+
+
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //   children: [
@@ -969,7 +963,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
               ),
             ),
             SizedBox(
-              height: 50.h,
+              height: 100.h,
             )
           ],
         ),
