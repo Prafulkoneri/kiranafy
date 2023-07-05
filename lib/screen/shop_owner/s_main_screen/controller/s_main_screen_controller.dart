@@ -13,7 +13,9 @@ class SMainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = ShopDashBoardView(refresh: true,);
+  Widget currentScreen = ShopDashBoardView(
+    refresh: true,
+  );
 
   void initState(context, index, currentScreen) {
     onBackPressed(index, currentScreen);
@@ -33,7 +35,9 @@ class SMainScreenController extends ChangeNotifier {
 
   void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = ShopDashBoardView(refresh: true,);
+    currentScreen = ShopDashBoardView(
+      refresh: true,
+    );
     notifyListeners();
   }
 
@@ -59,25 +63,35 @@ class SMainScreenController extends ChangeNotifier {
 
   void onOrdersPressed() {
     currentTab = 1;
-    currentScreen = SOrderStatusView(selectedIndex: 0,isFromOrderView: false,);
+    currentScreen = SOrderStatusView(
+      selectedIndex: 0,
+      isFromOrderView: false,
+    );
     notifyListeners();
   }
 
   void onPaymentPressed() {
     currentTab = 2;
-    currentScreen = SPaymentsView();
+    currentScreen = SPaymentsView(
+      isNavFromAccounts: false,
+    );
     notifyListeners();
   }
 
   void onOfferPressed() {
     currentTab = 3;
-    currentScreen =ShopCouponsView(isRefresh: true,isNavFromDashBoard:true,);
+    currentScreen = ShopCouponsView(
+      isRefresh: true,
+      isNavFromDashBoard: true,
+    );
     notifyListeners();
   }
 
   void onAccountPressed() {
     currentTab = 4;
-    currentScreen = SAccountScreenView(refresh: true,);
+    currentScreen = SAccountScreenView(
+      refresh: true,
+    );
     notifyListeners();
   }
 

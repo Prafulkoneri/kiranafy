@@ -6,16 +6,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_payments/controller/payment_histaory_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/stack_loader.dart';
 import 'package:provider/provider.dart';
 
 class SPaymentsView extends StatefulWidget {
-  const SPaymentsView({
-    Key? key,
-  }) : super(
+  final bool? isNavFromAccounts;
+  const SPaymentsView({Key? key, required this.isNavFromAccounts})
+      : super(
           key: key,
         );
 
@@ -38,10 +40,23 @@ class _SPaymentsViewState extends State<SPaymentsView> {
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
+            isBackButtonEnabled:
+                widget.isNavFromAccounts == true ? true : false,
+            onBackBtnPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                          index: 4,
+                          screenName: SAccountScreenView(refresh: true),
+                        )),
+                (Route<dynamic> route) => false,
+              );
+            },
             title: "Payments",
-            isBackButtonEnabled: false,
+            // isBackButtonEnabled: false,
           ),
         ),
         body: watch.isLoading

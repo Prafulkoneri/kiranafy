@@ -47,8 +47,13 @@ class _ShopFAQViewState extends State<ShopFAQView> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 10.w),
+          padding: EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 10.w,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,22 +61,15 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                 height: 15,
               ),
               ListView.builder(
+                  padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   itemCount: watch.faqdata?.length ?? 0,
                   itemBuilder: (context, index) {
                     final element = watch.faqdata?[index];
                     return Container(
-                      // height: MediaQuery.of(context).size.height * 0.13,
-
-                      // margin: EdgeInsets.only(bottom: 20.w),
+                      margin: EdgeInsets.only(bottom: 10.w),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(22),
-                        // border: Border.all(width: 0, color: Colors.white),
-                        // borderRadius: BorderRadius.only(
-                        //   bottomLeft: Radius.circular(25),
-                        //   bottomRight: Radius.circular(25),
-                        // ),
-
                         color: watch.isFaqExpanded[index]
                             ? Color(0xff44B8CA)
                             : Colors.white,
@@ -85,6 +83,8 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                               dividerColor: Colors.white,
                             ),
                             child: ExpansionTile(
+                              initiallyExpanded:
+                                  watch.isFaqExpanded[index] ? true : false,
                               backgroundColor: Colors.transparent,
                               onExpansionChanged: (value) {
                                 read.onChangeExpansion(value, index);
@@ -101,15 +101,18 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                               title: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    // "erwffrgew",
-                                    "${element?.question}",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 13,
-                                      color: watch.isFaqExpanded[index]
-                                          ? Colors.white
-                                          : Colors.black,
+                                  Flexible(
+                                    child: Text(
+                                      // "erwffrgew",
+                                      "${element?.question}",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 1,
+                                        fontSize: 13,
+                                        color: watch.isFaqExpanded[index]
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -120,8 +123,8 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                   decoration: BoxDecoration(
                                     color: Color.fromARGB(255, 214, 251, 255),
                                     borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(20),
-                                      bottomRight: Radius.circular(20),
+                                      bottomLeft: Radius.circular(18),
+                                      bottomRight: Radius.circular(18),
                                     ),
                                   ),
                                   padding: EdgeInsets.only(
@@ -142,7 +145,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                             fontSize: 13,
                                             color: Colors.black,
                                             fontWeight: FontWeight.w400),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -153,9 +156,6 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                       ),
                     );
                   }),
-              SizedBox(
-                height: 100,
-              ),
             ],
           ),
         ),
