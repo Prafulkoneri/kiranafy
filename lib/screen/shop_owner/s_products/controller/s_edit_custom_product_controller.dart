@@ -294,6 +294,7 @@ class EditCustomProductController extends ChangeNotifier {
         categoryId: categoryId,
         brandId: brandId,
         taxId: taxId,
+        productId: productId,
         productDescription: productDescriptionController.text,
         productName: productNameController.text,
         showUnderRecommendedProduct:
@@ -306,7 +307,7 @@ class EditCustomProductController extends ChangeNotifier {
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.uploadAdminProduct}");
+    var uri = Uri.parse("${Endpoint.uploadCustomProduct}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['product_id'] = productId;
@@ -321,6 +322,7 @@ class EditCustomProductController extends ChangeNotifier {
     request.fields["brand_id"] = brandId;
     request.fields["tax_id"] = taxId;
     request.fields["product_description"] =productDescriptionController.text;
+    request.fields["product_id"] =productId;
     print(request.fields);
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];

@@ -8,9 +8,9 @@ class UploadCustomProductRepo {
       UploadCustomProductReqModel reqModel, token) async {
     print("kkkkkkk");
     print(reqModel.toJson());
-    print(Uri.parse(Endpoint.submitCustomProduct));
+    print(Uri.parse(Endpoint.uploadCustomProduct));
     try {
-      return await http.post(Uri.parse(Endpoint.submitCustomProduct),
+      return await http.post(Uri.parse(Endpoint.uploadCustomProduct),
           body: reqModel.toJson(),
           headers: {
             "Authorization": "Bearer $token",

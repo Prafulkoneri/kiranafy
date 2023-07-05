@@ -835,7 +835,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                     SMainScreenView(
                                                                         index: 0,
                                                                         screenName:
-                                                                        SEditAdminProductView(
+                                                                        SEditCustomProductView(
                                                                           productId:
                                                                           element
                                                                               ?.id
