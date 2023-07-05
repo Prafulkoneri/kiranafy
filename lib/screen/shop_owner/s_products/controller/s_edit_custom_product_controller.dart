@@ -233,7 +233,9 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> uploadCustomProduct(context, isNavFromRecommanded) async {
+  Future<void> uploadCustomProduct(
+    context,
+  ) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadCustomProductRepo
@@ -284,6 +286,7 @@ class EditCustomProductController extends ChangeNotifier {
         categoryId: categoryId,
         brandId: brandId,
         taxId: taxId,
+        productId: productId,
         productDescription: productDescriptionController.text,
         productName: productNameController.text,
         showUnderRecommendedProduct:
@@ -294,7 +297,7 @@ class EditCustomProductController extends ChangeNotifier {
   Future uploadImage(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.uploadAdminProduct}");
+    var uri = Uri.parse("${Endpoint.uploadCustomProduct}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['product_id'] = productId;
@@ -308,7 +311,12 @@ class EditCustomProductController extends ChangeNotifier {
     request.fields["category_id"] = categoryId;
     request.fields["brand_id"] = brandId;
     request.fields["tax_id"] = taxId;
+
     request.fields["product_description"] = productDescriptionController.text;
+
+    request.fields["product_description"] = productDescriptionController.text;
+    request.fields["product_id"] = productId;
+
     print(request.fields);
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];

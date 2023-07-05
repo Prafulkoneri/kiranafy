@@ -31,12 +31,13 @@ import 'package:provider/provider.dart';
 class SEditCustomProductView extends StatefulWidget {
   final String? categoryId;
   final String? productId;
-  final bool? isNavFromRecommanded;
-  const SEditCustomProductView(
-      {super.key,
-      required this.productId,
-      required this.categoryId,
-      required this.isNavFromRecommanded});
+  // final bool? isNavFromRecommanded;
+  const SEditCustomProductView({
+    super.key,
+    required this.productId,
+    required this.categoryId,
+    // required this.isNavFromRecommanded
+  });
 
   @override
   State<SEditCustomProductView> createState() => _SEditCustomProductViewState();
@@ -76,7 +77,9 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
           title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.uploadCustomProduct(context, widget.isNavFromRecommanded);
+            read.uploadCustomProduct(
+              context,
+            );
           },
         ),
       ),

@@ -1,6 +1,7 @@
 class UploadCustomProductReqModel {
   String? productName;
   String? categoryId;
+  String? productId;
   String? brandId;
   String? taxId;
   String? productDescription;
@@ -15,7 +16,7 @@ class UploadCustomProductReqModel {
       {
       this.categoryId,
       this.brandId,
-
+     this.productId,
       this.productDescription,
       this.productImagePath,
       this.productName,
@@ -28,6 +29,7 @@ class UploadCustomProductReqModel {
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
     data["product_name"] = productName;
+    data["product_id"] = productId;
     data["category_id"] = categoryId;
     data["brand_id"] = brandId;
     data["tax_id"] = taxId;
