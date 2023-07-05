@@ -50,8 +50,12 @@ class SGetProductUnitListController extends ChangeNotifier {
           productId: productId, productType: producttype);
 
   Future<void> getUnitProductList(context, pId, pType) async {
+    print("unitReqData");
     productId = pId;
     producttype = pType;
+    print(pId);
+    print(pType);
+    print("unitReqData");
     SharedPreferences pref = await SharedPreferences.getInstance();
     showLoader(true);
     getUnitProductListRepo

@@ -261,7 +261,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 // decoration: BoxDecoration(
 
                                 //     border: Border.all(width: 1, color: Black1)),
-                                child:  ListTileTheme(
+                                child: ListTileTheme(
                                   contentPadding: EdgeInsets.all(0),
                                   dense: true,
                                   horizontalTitleGap: -8,
@@ -276,45 +276,49 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                           width: ScreenUtil().screenWidth,
                                           child: Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-
                                               Expanded(
                                                 child: Row(
                                                   children: [
                                                     SizedBox(
                                                       width: 5.w,
                                                     ),
-                                                    element?.productImagePath != ""
+                                                    element?.productImagePath !=
+                                                            ""
                                                         ? AppNetworkImages(
-                                                      imageUrl:
-                                                      "${element?.productImagePath}",
-                                                      height: 61.h,
-                                                      width: 60.w,
-                                                      fit: BoxFit.cover,
-                                                    )
+                                                            imageUrl:
+                                                                "${element?.productImagePath}",
+                                                            height: 61.h,
+                                                            width: 60.w,
+                                                            fit: BoxFit.cover,
+                                                          )
                                                         : Image(
-                                                      image: AssetImage(
-                                                        "assets/images/profile_image.png",
-                                                      ),
-                                                      height: 61.h,
-                                                      width: 60.w,
-                                                      fit: BoxFit.fill,
-                                                    ),
+                                                            image: AssetImage(
+                                                              "assets/images/profile_image.png",
+                                                            ),
+                                                            height: 61.h,
+                                                            width: 60.w,
+                                                            fit: BoxFit.fill,
+                                                          ),
                                                     SizedBox(
                                                       width: 8.w,
                                                     ),
-                                                    Flexible(child: Text(
-                                                      "${element?.productName}",
-                                                      // "${element?.productName}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Black1,
-                                                            fontSize: 16.sp,
-                                                            fontWeight:
-                                                            FontWeight.w700),
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${element?.productName}",
+                                                        // "${element?.productName}",
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Black1,
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
+                                                        ),
                                                       ),
-                                                    ),),
+                                                    ),
                                                     SizedBox(
                                                       width: 5.w,
                                                     ),
@@ -336,20 +340,21 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 SMainScreenView(
                                                                     index: 0,
                                                                     screenName:
-                                                                    UnitDetailView(
+                                                                        UnitDetailView(
                                                                       categoryId:
-                                                                      widget
-                                                                          .categoryId,
+                                                                          widget
+                                                                              .categoryId,
                                                                       productId:
-                                                                      element
-                                                                          ?.id
-                                                                          .toString(),
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
                                                                       productType:
-                                                                      element
-                                                                          ?.productType,
+                                                                          element
+                                                                              ?.productType,
                                                                     ))),
-                                                            (Route<dynamic> route) =>
-                                                        false,
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false,
                                                       );
                                                     },
                                                     child: Container(
@@ -359,20 +364,23 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           top: 4.w,
                                                           bottom: 5.w),
                                                       decoration: BoxDecoration(
-                                                        color: Color(0xff39C19D),
+                                                        color:
+                                                            Color(0xff39C19D),
                                                         borderRadius:
-                                                        BorderRadius.circular(
-                                                            50),
+                                                            BorderRadius
+                                                                .circular(50),
                                                       ),
                                                       child: Text(
                                                         "${element?.unitCount} Unit",
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               fontSize: 12.sp,
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .w400),
+                                                                  FontWeight
+                                                                      .w400),
                                                         ),
                                                       ),
                                                     ),
@@ -390,40 +398,45 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             MaterialPageRoute(
                                                                 builder: (context) =>
                                                                     SMainScreenView(
-                                                                        index: 0,
+                                                                        index:
+                                                                            0,
                                                                         screenName:
-                                                                        SEditAdminProductView(
-                                                                          productId:
-                                                                          element
+                                                                            SEditAdminProductView(
+                                                                          productId: element
                                                                               ?.id
                                                                               .toString(),
                                                                           categoryId:
-                                                                          widget
-                                                                              .categoryId,
+                                                                              widget.categoryId,
                                                                         ))),
-                                                                (Route<dynamic> route) =>
-                                                            false,
+                                                            (Route<dynamic>
+                                                                    route) =>
+                                                                false,
                                                           );
                                                         },
                                                         child: Container(
-                                                          padding: EdgeInsets.all(8),
+                                                          padding:
+                                                              EdgeInsets.all(8),
                                                           decoration: BoxDecoration(
                                                               boxShadow: [
                                                                 BoxShadow(
                                                                   color: grey6,
                                                                   offset:
-                                                                  const Offset(
+                                                                      const Offset(
                                                                     5.0,
                                                                     5.0,
                                                                   ),
-                                                                  blurRadius: 10.0,
-                                                                  spreadRadius: 2.0,
+                                                                  blurRadius:
+                                                                      10.0,
+                                                                  spreadRadius:
+                                                                      2.0,
                                                                 ), //BoxShadow
                                                               ],
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15)),
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)),
                                                           child: SvgPicture.asset(
                                                               'assets/icons/e1.svg'),
                                                         ),
@@ -439,24 +452,29 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               element?.id);
                                                         },
                                                         child: Container(
-                                                          padding: EdgeInsets.all(8),
+                                                          padding:
+                                                              EdgeInsets.all(8),
                                                           decoration: BoxDecoration(
                                                               boxShadow: [
                                                                 BoxShadow(
                                                                   color: grey6,
                                                                   offset:
-                                                                  const Offset(
+                                                                      const Offset(
                                                                     5.0,
                                                                     5.0,
                                                                   ),
-                                                                  blurRadius: 10.0,
-                                                                  spreadRadius: 2.0,
+                                                                  blurRadius:
+                                                                      10.0,
+                                                                  spreadRadius:
+                                                                      2.0,
                                                                 ), //BoxShadow
                                                               ],
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15)),
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)),
                                                           child: SvgPicture.asset(
                                                               'assets/icons/delete2.svg'),
                                                         ),
@@ -469,7 +487,6 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   ),
                                                 ],
                                               ),
-
                                             ],
                                           ),
                                         ),
@@ -484,8 +501,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 Divider(),
                                                 Row(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Expanded(
                                                       child: Row(
@@ -496,10 +513,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 .dmSans(
                                                               textStyle: TextStyle(
                                                                   color: Black1,
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
+                                                                      FontWeight
+                                                                          .w400),
                                                             ),
                                                           ),
                                                         ],
@@ -508,22 +526,24 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                     Expanded(
                                                       child: Row(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment.end,
+                                                            MainAxisAlignment
+                                                                .end,
                                                         children: [
                                                           Expanded(
                                                             child: Text(
                                                               "MRP",
                                                               textAlign:
-                                                              TextAlign.end,
+                                                                  TextAlign.end,
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
-                                                                    color: Black1,
+                                                                    color:
+                                                                        Black1,
                                                                     fontSize:
-                                                                    12.sp,
+                                                                        12.sp,
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
+                                                                        FontWeight
+                                                                            .w400),
                                                               ),
                                                             ),
                                                           ),
@@ -534,16 +554,17 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             child: Text(
                                                               "Offer price",
                                                               textAlign:
-                                                              TextAlign.end,
+                                                                  TextAlign.end,
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
-                                                                    color: Black1,
+                                                                    color:
+                                                                        Black1,
                                                                     fontSize:
-                                                                    12.sp,
+                                                                        12.sp,
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
+                                                                        FontWeight
+                                                                            .w400),
                                                               ),
                                                             ),
                                                           ),
@@ -558,20 +579,21 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 ListView.builder(
                                                   padding: EdgeInsets.zero,
                                                   itemCount: watch
-                                                      .productsFromAdmin?[
-                                                  index]
-                                                      .unitDetails
-                                                      ?.length ??
+                                                          .productsFromAdmin?[
+                                                              index]
+                                                          .unitDetails
+                                                          ?.length ??
                                                       0,
                                                   shrinkWrap: true,
                                                   physics:
-                                                  NeverScrollableScrollPhysics(),
+                                                      NeverScrollableScrollPhysics(),
                                                   itemBuilder: (context, int) {
                                                     // final unitDetail = watch
                                                     //     .productsFromAdmin?[index]
                                                     //     .unitDetails?[int];
                                                     final element = watch
-                                                        .productsFromAdmin?[index]
+                                                        .productsFromAdmin?[
+                                                            index]
                                                         .unitDetails?[int];
 
                                                     return Container(
@@ -582,16 +604,16 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           bottom: 8.w),
                                                       decoration: BoxDecoration(
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(5),
+                                                              BorderRadius
+                                                                  .circular(5),
                                                           // color: Black1,
                                                           border: Border.all(
                                                               width: 1,
                                                               color: grey6)),
                                                       child: Row(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
                                                           Expanded(
                                                             child: Row(
@@ -599,16 +621,15 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 Text(
                                                                   "${element?.weightAndUnit}",
                                                                   style:
-                                                                  GoogleFonts
-                                                                      .dmSans(
+                                                                      GoogleFonts
+                                                                          .dmSans(
                                                                     textStyle: TextStyle(
                                                                         color:
-                                                                        Black1,
-                                                                        fontSize:
-                                                                        14.sp,
+                                                                            Black1,
+                                                                        fontSize: 14
+                                                                            .sp,
                                                                         fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
+                                                                            FontWeight.w400),
                                                                   ),
                                                                 ),
                                                               ],
@@ -617,28 +638,26 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           Expanded(
                                                             child: Row(
                                                               mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
+                                                                  MainAxisAlignment
+                                                                      .end,
                                                               children: [
                                                                 Expanded(
                                                                   child: Text(
                                                                     "${element?.mrpPrice}",
                                                                     textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                    style:
-                                                                    GoogleFonts
+                                                                        TextAlign
+                                                                            .end,
+                                                                    style: GoogleFonts
                                                                         .dmSans(
                                                                       textStyle: TextStyle(
-                                                                          decoration:
-                                                                          TextDecoration
+                                                                          decoration: TextDecoration
                                                                               .lineThrough,
                                                                           color:
-                                                                          Black1,
+                                                                              Black1,
                                                                           fontSize: 14
                                                                               .sp,
                                                                           fontWeight:
-                                                                          FontWeight.w400),
+                                                                              FontWeight.w400),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -649,18 +668,17 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                   child: Text(
                                                                     "${element?.offerPrice}",
                                                                     textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                    style:
-                                                                    GoogleFonts
+                                                                        TextAlign
+                                                                            .end,
+                                                                    style: GoogleFonts
                                                                         .dmSans(
                                                                       textStyle: TextStyle(
                                                                           color:
-                                                                          Black1,
+                                                                              Black1,
                                                                           fontSize: 14
                                                                               .sp,
                                                                           fontWeight:
-                                                                          FontWeight.w400),
+                                                                              FontWeight.w400),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -718,7 +736,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 // decoration: BoxDecoration(
 
                                 //     border: Border.all(width: 1, color: Black1)),
-                                child:  ListTileTheme(
+                                child: ListTileTheme(
                                   contentPadding: EdgeInsets.all(0),
                                   dense: true,
                                   horizontalTitleGap: -8,
@@ -733,45 +751,49 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                           width: ScreenUtil().screenWidth,
                                           child: Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-
                                               Expanded(
                                                 child: Row(
                                                   children: [
                                                     SizedBox(
                                                       width: 5.w,
                                                     ),
-                                                    element?.productImagePath != ""
+                                                    element?.productImagePath !=
+                                                            ""
                                                         ? AppNetworkImages(
-                                                      imageUrl:
-                                                      "${element?.productImagePath}",
-                                                      height: 61.h,
-                                                      width: 60.w,
-                                                      fit: BoxFit.cover,
-                                                    )
+                                                            imageUrl:
+                                                                "${element?.productImagePath}",
+                                                            height: 61.h,
+                                                            width: 60.w,
+                                                            fit: BoxFit.cover,
+                                                          )
                                                         : Image(
-                                                      image: AssetImage(
-                                                        "assets/images/profile_image.png",
-                                                      ),
-                                                      height: 61.h,
-                                                      width: 60.w,
-                                                      fit: BoxFit.fill,
-                                                    ),
+                                                            image: AssetImage(
+                                                              "assets/images/profile_image.png",
+                                                            ),
+                                                            height: 61.h,
+                                                            width: 60.w,
+                                                            fit: BoxFit.fill,
+                                                          ),
                                                     SizedBox(
                                                       width: 8.w,
                                                     ),
-                                                    Flexible(child: Text(
-                                                      "${element?.productName}",
-                                                      // "${element?.productName}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Black1,
-                                                            fontSize: 16.sp,
-                                                            fontWeight:
-                                                            FontWeight.w700),
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${element?.productName}",
+                                                        // "${element?.productName}",
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Black1,
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
+                                                        ),
                                                       ),
-                                                    ),),
+                                                    ),
                                                     SizedBox(
                                                       width: 5.w,
                                                     ),
@@ -793,13 +815,14 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 SMainScreenView(
                                                                     index: 0,
                                                                     screenName:
-                                                                    UnitDetailView(
-                                                                      categoryId:
-                                                                      widget
-                                                                          .categoryId,
+                                                                        UnitDetailView(
+                                                                      categoryId: widget.categoryId,
+                                                                          productId: element?.id.toString(),
+                                                                          productType: element?.productType,
                                                                     ))),
-                                                            (Route<dynamic> route) =>
-                                                        false,
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false,
                                                       );
                                                     },
                                                     child: Container(
@@ -809,20 +832,23 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           top: 4.w,
                                                           bottom: 5.w),
                                                       decoration: BoxDecoration(
-                                                        color: Color(0xff39C19D),
+                                                        color:
+                                                            Color(0xff39C19D),
                                                         borderRadius:
-                                                        BorderRadius.circular(
-                                                            50),
+                                                            BorderRadius
+                                                                .circular(50),
                                                       ),
                                                       child: Text(
                                                         "${element?.unitCount} Unit",
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               fontSize: 12.sp,
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .w400),
+                                                                  FontWeight
+                                                                      .w400),
                                                         ),
                                                       ),
                                                     ),
@@ -840,40 +866,45 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             MaterialPageRoute(
                                                                 builder: (context) =>
                                                                     SMainScreenView(
-                                                                        index: 0,
+                                                                        index:
+                                                                            0,
                                                                         screenName:
-                                                                        SEditCustomProductView(
-                                                                          productId:
-                                                                          element
+                                                                            SEditCustomProductView(
+                                                                          productId: element
                                                                               ?.id
                                                                               .toString(),
                                                                           categoryId:
-                                                                          widget
-                                                                              .categoryId,
+                                                                              widget.categoryId,
                                                                         ))),
-                                                                (Route<dynamic> route) =>
-                                                            false,
+                                                            (Route<dynamic>
+                                                                    route) =>
+                                                                false,
                                                           );
                                                         },
                                                         child: Container(
-                                                          padding: EdgeInsets.all(8),
+                                                          padding:
+                                                              EdgeInsets.all(8),
                                                           decoration: BoxDecoration(
                                                               boxShadow: [
                                                                 BoxShadow(
                                                                   color: grey6,
                                                                   offset:
-                                                                  const Offset(
+                                                                      const Offset(
                                                                     5.0,
                                                                     5.0,
                                                                   ),
-                                                                  blurRadius: 10.0,
-                                                                  spreadRadius: 2.0,
+                                                                  blurRadius:
+                                                                      10.0,
+                                                                  spreadRadius:
+                                                                      2.0,
                                                                 ), //BoxShadow
                                                               ],
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15)),
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)),
                                                           child: SvgPicture.asset(
                                                               'assets/icons/e1.svg'),
                                                         ),
@@ -889,24 +920,29 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               element?.id);
                                                         },
                                                         child: Container(
-                                                          padding: EdgeInsets.all(8),
+                                                          padding:
+                                                              EdgeInsets.all(8),
                                                           decoration: BoxDecoration(
                                                               boxShadow: [
                                                                 BoxShadow(
                                                                   color: grey6,
                                                                   offset:
-                                                                  const Offset(
+                                                                      const Offset(
                                                                     5.0,
                                                                     5.0,
                                                                   ),
-                                                                  blurRadius: 10.0,
-                                                                  spreadRadius: 2.0,
+                                                                  blurRadius:
+                                                                      10.0,
+                                                                  spreadRadius:
+                                                                      2.0,
                                                                 ), //BoxShadow
                                                               ],
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15)),
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)),
                                                           child: SvgPicture.asset(
                                                               'assets/icons/delete2.svg'),
                                                         ),
@@ -919,7 +955,6 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   ),
                                                 ],
                                               ),
-
                                             ],
                                           ),
                                         ),
@@ -934,8 +969,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 Divider(),
                                                 Row(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Expanded(
                                                       child: Row(
@@ -946,10 +981,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 .dmSans(
                                                               textStyle: TextStyle(
                                                                   color: Black1,
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
+                                                                      FontWeight
+                                                                          .w400),
                                                             ),
                                                           ),
                                                         ],
@@ -958,22 +994,24 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                     Expanded(
                                                       child: Row(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment.end,
+                                                            MainAxisAlignment
+                                                                .end,
                                                         children: [
                                                           Expanded(
                                                             child: Text(
                                                               "MRP",
                                                               textAlign:
-                                                              TextAlign.end,
+                                                                  TextAlign.end,
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
-                                                                    color: Black1,
+                                                                    color:
+                                                                        Black1,
                                                                     fontSize:
-                                                                    12.sp,
+                                                                        12.sp,
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
+                                                                        FontWeight
+                                                                            .w400),
                                                               ),
                                                             ),
                                                           ),
@@ -984,16 +1022,17 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             child: Text(
                                                               "Offer price",
                                                               textAlign:
-                                                              TextAlign.end,
+                                                                  TextAlign.end,
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
-                                                                    color: Black1,
+                                                                    color:
+                                                                        Black1,
                                                                     fontSize:
-                                                                    12.sp,
+                                                                        12.sp,
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
+                                                                        FontWeight
+                                                                            .w400),
                                                               ),
                                                             ),
                                                           ),
@@ -1008,20 +1047,20 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                 ListView.builder(
                                                   padding: EdgeInsets.zero,
                                                   itemCount: watch
-                                                      .customProduct?[
-                                                  index]
-                                                      .unitDetails
-                                                      ?.length ??
+                                                          .customProduct?[index]
+                                                          .unitDetails
+                                                          ?.length ??
                                                       0,
                                                   shrinkWrap: true,
                                                   physics:
-                                                  NeverScrollableScrollPhysics(),
+                                                      NeverScrollableScrollPhysics(),
                                                   itemBuilder: (context, int) {
                                                     // final unitDetail = watch
                                                     //     .productsFromAdmin?[index]
                                                     //     .unitDetails?[int];
                                                     final element = watch
-                                                        .productsFromAdmin?[index]
+                                                        .productsFromAdmin?[
+                                                            index]
                                                         .unitDetails?[int];
 
                                                     return Container(
@@ -1032,16 +1071,16 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           bottom: 8.w),
                                                       decoration: BoxDecoration(
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(5),
+                                                              BorderRadius
+                                                                  .circular(5),
                                                           // color: Black1,
                                                           border: Border.all(
                                                               width: 1,
                                                               color: grey6)),
                                                       child: Row(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
                                                           Expanded(
                                                             child: Row(
@@ -1049,16 +1088,15 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 Text(
                                                                   "${element?.weightAndUnit}",
                                                                   style:
-                                                                  GoogleFonts
-                                                                      .dmSans(
+                                                                      GoogleFonts
+                                                                          .dmSans(
                                                                     textStyle: TextStyle(
                                                                         color:
-                                                                        Black1,
-                                                                        fontSize:
-                                                                        14.sp,
+                                                                            Black1,
+                                                                        fontSize: 14
+                                                                            .sp,
                                                                         fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
+                                                                            FontWeight.w400),
                                                                   ),
                                                                 ),
                                                               ],
@@ -1067,28 +1105,26 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                           Expanded(
                                                             child: Row(
                                                               mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
+                                                                  MainAxisAlignment
+                                                                      .end,
                                                               children: [
                                                                 Expanded(
                                                                   child: Text(
                                                                     "${element?.mrpPrice}",
                                                                     textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                    style:
-                                                                    GoogleFonts
+                                                                        TextAlign
+                                                                            .end,
+                                                                    style: GoogleFonts
                                                                         .dmSans(
                                                                       textStyle: TextStyle(
-                                                                          decoration:
-                                                                          TextDecoration
+                                                                          decoration: TextDecoration
                                                                               .lineThrough,
                                                                           color:
-                                                                          Black1,
+                                                                              Black1,
                                                                           fontSize: 14
                                                                               .sp,
                                                                           fontWeight:
-                                                                          FontWeight.w400),
+                                                                              FontWeight.w400),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -1099,18 +1135,17 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                   child: Text(
                                                                     "${element?.offerPrice}",
                                                                     textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                    style:
-                                                                    GoogleFonts
+                                                                        TextAlign
+                                                                            .end,
+                                                                    style: GoogleFonts
                                                                         .dmSans(
                                                                       textStyle: TextStyle(
                                                                           color:
-                                                                          Black1,
+                                                                              Black1,
                                                                           fontSize: 14
                                                                               .sp,
                                                                           fontWeight:
-                                                                          FontWeight.w400),
+                                                                              FontWeight.w400),
                                                                     ),
                                                                   ),
                                                                 ),

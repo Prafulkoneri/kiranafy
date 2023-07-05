@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 
 class UnitListToCreateProductRepo {
-  Future<http.Response> unitListProductRepo(token) async {
+  Future<http.Response> getUnitList(token) async {
     print(token);
     try {
       return await http

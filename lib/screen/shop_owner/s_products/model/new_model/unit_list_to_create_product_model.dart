@@ -1,14 +1,14 @@
-class UnitListtoCreateProductModel {
+class UnitListtoCreateProductResModel {
   int? status;
   String? message;
   UnitListCreateproductData? unitlistproductdata;
 
-  UnitListtoCreateProductModel({
+  UnitListtoCreateProductResModel({
     required this.status,
     required this.message,
     required this.unitlistproductdata,
   });
-  UnitListtoCreateProductModel.fromJson(Map<String, dynamic> json) {
+  UnitListtoCreateProductResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     unitlistproductdata = json['data'] != null

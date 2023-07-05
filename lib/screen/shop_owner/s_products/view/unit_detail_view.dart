@@ -61,7 +61,27 @@ class _UnitDetailViewState extends State<UnitDetailView> {
               },
               title: "Unit Details",
               action: SvgPicture.asset("assets/icons/addressadd.svg"),
-              onActionTap: () {}),
+              onActionTap: () {
+                Navigator
+                    .pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          SMainScreenView(
+                              index: 0,
+                              screenName:
+                              AddUnitView(
+                                categoryId: widget.categoryId,
+                                productId:widget.productId,
+                                productType:widget.productType,
+                                productName: watch.getproductunitlistdata?.productDetails?.productName.toString(),
+                                productUnitId: "",
+                              ))),
+                      (Route<dynamic>
+                  route) =>
+                  false,
+                );
+              }),
         ),
         body: watch.isLoading
             ? Center(
@@ -190,8 +210,8 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           fontSize: 11.43.sp,
-                                                          color: Color(
-                                                              0xff39C19D)),
+                                                          color:element?.status=="active"? Color(
+                                                              0xff39C19D):Color(0xffF26674)),
                                                     ),
                                                   ),
                                                 ],
@@ -247,11 +267,10 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                                       index: 0,
                                                                       screenName:
                                                                           AddUnitView(
-                                                                        categoryId:
-                                                                            widget.categoryId,
-                                                                        // productId: "",
-                                                                        // categoryId: widget
-                                                                        //     .categoryId,
+                                                                            categoryId: widget.categoryId,
+                                                                        productType: watch.getproductunitlistdata?.productDetails?.productType ?? "", productId: watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
+                                                                        productName: watch.getproductunitlistdata?.productDetails?.productName.toString(),
+                                                                        productUnitId: element?.id.toString(),
                                                                       ))),
                                                           (Route<dynamic>
                                                                   route) =>

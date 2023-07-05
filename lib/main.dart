@@ -42,6 +42,7 @@ import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/new/s_add_edit_unit_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_admin_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_custom_product_controller.dart';
 
@@ -162,6 +163,7 @@ void main() async {
             create: (_) => ShopSeasonalRecommandedOfferProductsController()),
         ChangeNotifierProvider(create: (_) => SBankAccountController()),
         ChangeNotifierProvider(create: (_) => SGetProductUnitListController()),
+        ChangeNotifierProvider(create: (_) => AddEditUnitController()),
       ],
       child: MyApp(),
     ),

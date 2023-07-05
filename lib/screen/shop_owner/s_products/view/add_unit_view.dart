@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_add_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/new/s_add_edit_unit_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/unit_detail_view.dart';
@@ -15,18 +17,32 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
+import 'package:provider/provider.dart';
 
 class AddUnitView extends StatefulWidget {
   final String? categoryId;
-  const AddUnitView({super.key, required this.categoryId});
+  final String? productId;
+  final String? productType;
+  final String ? productName;
+  final String ? productUnitId;
+  const AddUnitView({super.key, required this.categoryId,required this.productType,required this.productId,required this.productName,required this.productUnitId});
 
   @override
   State<AddUnitView> createState() => _AddUnitViewState();
 }
 
 class _AddUnitViewState extends State<AddUnitView> {
+
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<AddEditUnitController>().initState(context,widget.productId,widget.productUnitId,widget.categoryId,widget.productType);
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    final watch=context.watch<AddEditUnitController>();
+    final read=context.read<AddEditUnitController>();
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: PreferredSize(
@@ -40,15 +56,19 @@ class _AddUnitViewState extends State<AddUnitView> {
                         index: 0,
                         screenName: UnitDetailView(
                             // isRefresh: false, //
-                            categoryId: widget.categoryId))),
+                            categoryId: widget.categoryId,productType: widget.productType,productId: widget.productId,))),
                 (Route<dynamic> route) => false,
               );
             },
             title: "Add Unit",
             action: SvgPicture.asset("assets/icons/forward.svg"),
-            onActionTap: () {}),
+            onActionTap: () {
+              read.addUnit(context);
+            }),
       ),
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Container(
           padding: EdgeInsets.only(
             left: 20.w,
@@ -63,7 +83,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Product Name",
+                    widget.productName??"",
                     // "${watch.categoryName} -  ${watch.allProductsCount}",
                     style: GoogleFonts.dmSans(
                       textStyle: TextStyle(
@@ -75,10 +95,10 @@ class _AddUnitViewState extends State<AddUnitView> {
                   Container(
                     width: 26.w,
                     child: CupertinoSwitch(
-                      value: true,
+                      value: watch.switchValue,
                       activeColor: DarkGreen,
                       onChanged: (value) {
-                        // read.onToggleSwitch(value, index);
+                        read.onToggleSwitch(value);
                       },
                     ),
                   ),
@@ -92,9 +112,11 @@ class _AddUnitViewState extends State<AddUnitView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      textInputType: TextInputType.number,
+                      controller: watch.valueController,
                       titleHeader: "Value",
                       // controller: watch.emailIdController,
-                      hintText: "200",
+                      hintText: "Value",
                     ),
                   ),
                   SizedBox(
@@ -102,12 +124,22 @@ class _AddUnitViewState extends State<AddUnitView> {
                   ),
                   Expanded(
                       child: SDropDownField(
+                        items: watch.unitList
+                            ?.map((item) => DropdownMenuItem<String>(
+                          value: item.id.toString(),
+                          child: Text(
+                            item.unit ?? "",
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
+                            .toList(),
                     titleHeader: "Unit",
                     onChanged: (value) async {
-                      // await read.onStateSelected(value);
-                      // await read.getCityList(context);
+                      read.onUnitSelect(value);
                     },
-                    hint: "Gms",
+                    hint: "Select Unit",
                   )),
                 ],
               ),
@@ -119,9 +151,11 @@ class _AddUnitViewState extends State<AddUnitView> {
                 children: [
                   Expanded(
                     child: PrimarySTextFormField(
+                      textInputType: TextInputType.number,
+                      controller: watch.mrpController,
                       titleHeader: "MRP",
                       // controller: watch.emailIdController,
-                      hintText: "200",
+                      hintText: "MRP",
                     ),
                   ),
                   SizedBox(
@@ -129,9 +163,11 @@ class _AddUnitViewState extends State<AddUnitView> {
                   ),
                   Expanded(
                     child: PrimarySTextFormField(
+                      textInputType: TextInputType.number,
+                      controller: watch.offerPriceController,
                       titleHeader: "Offer Price",
                       // controller: watch.emailIdController,
-                      hintText: "175",
+                      hintText: "Offer Price",
                     ),
                   ),
                 ],
@@ -155,61 +191,34 @@ class _AddUnitViewState extends State<AddUnitView> {
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 100.h,
-                        width: 110.w,
-                        decoration: BoxDecoration(boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 10.0,
-                          ),
-                        ]),
-                        child: Card(
-                          elevation: 0.3,
-                          child:
-                              // element?.unitBasedProductImage1Path !=
-                              //         ""
-                              //     ? Center(
-                              //         child: AppNetworkImages(
-                              //           imageUrl: element
-                              //                   ?.unitBasedProductImage1Path ??
-                              //               "",
-                              //           fit: BoxFit.cover,
-                              //           height: 90.w,
-                              //         ),
-                              //       )
-                              //     :
-                              Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/gallary.svg",
-                                // height: 19.w,
-                                // width: 21.w,
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "Add Image",
-                                style: TextStyle(
-                                    color: Color(0xffB3B3B3),
-                                    // letterSpacing: .5,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: GestureDetector(
                       onTap: () {
-                        // read.openGallery2(index);
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    read.openCamera1();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Camera"),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    read.openGallery1();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("gallery "),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                       child: Container(
                         height: 100.h,
@@ -223,41 +232,40 @@ class _AddUnitViewState extends State<AddUnitView> {
                         child: Card(
                           elevation: 0.3,
                           child:
-                              // element?.unitBasedProductImage2Path !=
-                              //         ""
-                              //     ?
-                              //     Center(
-                              //         child: AppNetworkImages(
-                              //           imageUrl: element
-                              //                   ?.unitBasedProductImage2Path ??
-                              //               "",
-                              //           fit: BoxFit.cover,
-                              //           height: 90.w,
-                              //         ),
-                              //       )
-                              //     :
+                              watch.fileImage1.path== "" && watch.networkImage1==""
+                                  ?
                               Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/gallary.svg",
-                                // height: 19.w,
-                                // width: 21.w,
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "Add Image",
-                                style: TextStyle(
-                                    color: Color(0xffB3B3B3),
-                                    // letterSpacing: .5,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    "assets/icons/gallary.svg",
+                                    // height: 19.w,
+                                    // width: 21.w,
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Text(
+                                    "Add Image",
+                                    style: TextStyle(
+                                        color: Color(0xffB3B3B3),
+                                        // letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ):
+                              watch.networkImage1!=""?
+                              Center(
+                                      child: AppNetworkImages(
+                                        imageUrl: watch.networkImage1,
+                                        fit: BoxFit.cover,
+                                        height: 90.w,
+                                      ),
+                                    ):Image.file(watch.fileImage1),
+
+
                         ),
                       ),
                     ),
@@ -265,7 +273,33 @@ class _AddUnitViewState extends State<AddUnitView> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        // read.openGallery3(index);
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    read.openCamera2();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Camera"),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    read.openGallery2();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("gallery "),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                       child: Container(
                         height: 100.h,
@@ -279,20 +313,9 @@ class _AddUnitViewState extends State<AddUnitView> {
                         child: Card(
                           elevation: 0.3,
                           child:
-                              // element?.unitBasedProductImage3Path !=
-                              //         ""
-                              //     ?
-                              //      Center(
-                              //         child: AppNetworkImages(
-                              //           imageUrl: element
-                              //                   ?.unitBasedProductImage3Path ??
-                              //               "",
-                              //           fit: BoxFit.cover,
-                              //           height: 90.w,
-                              //         ),
-                              //       )
-                              //     :
-                              Column(
+                          watch.fileImage2.path== "" && watch.networkImage2==""
+                              ?
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -313,7 +336,98 @@ class _AddUnitViewState extends State<AddUnitView> {
                                     fontWeight: FontWeight.w400),
                               ),
                             ],
+                          ):
+                          watch.networkImage2!=""?
+                          Center(
+                            child: AppNetworkImages(
+                              imageUrl: watch.networkImage1,
+                              fit: BoxFit.cover,
+                              height: 90.w,
+                            ),
+                          ):Image.file(watch.fileImage2),
+
+
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    read.openCamera3();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Camera"),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    read.openGallery3();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("gallery "),
+                                ),
+                              ],
+                            ),
                           ),
+                        );
+                      },
+                      child: Container(
+                        height: 100.h,
+                        width: 110.w,
+                        decoration: BoxDecoration(boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 10.0,
+                          ),
+                        ]),
+                        child: Card(
+                          elevation: 0.3,
+                          child:
+                          watch.fileImage3.path== "" && watch.networkImage3==""
+                              ?
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/gallary.svg",
+                                // height: 19.w,
+                                // width: 21.w,
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Text(
+                                "Add Image",
+                                style: TextStyle(
+                                    color: Color(0xffB3B3B3),
+                                    // letterSpacing: .5,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ):
+                          watch.networkImage3!=""?
+                          Center(
+                            child: AppNetworkImages(
+                              imageUrl: watch.networkImage3,
+                              fit: BoxFit.cover,
+                              height: 90.w,
+                            ),
+                          ):Image.file(watch.fileImage3),
+
+
                         ),
                       ),
                     ),
@@ -326,4 +440,5 @@ class _AddUnitViewState extends State<AddUnitView> {
       ),
     );
   }
+
 }
