@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/repository/sear
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../repository/s_selected_products_repo.dart';
 
@@ -109,6 +110,7 @@ class SSelectedProductsController extends ChangeNotifier {
   Future<void> deleteAdminProduct(context, index, id) async {
     productId = id.toString();
     isLoading = true;
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     deleteAdminProductRepo
@@ -121,6 +123,7 @@ class SSelectedProductsController extends ChangeNotifier {
       if (response.statusCode == 200) {
         if (result.status == 200) {
           productsFromAdmin?.removeAt(index);
+          LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
         } else {

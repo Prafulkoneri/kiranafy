@@ -136,7 +136,7 @@ class SAddProductsController extends ChangeNotifier {
 
   Future<void> uploadAddProducts(context) async {
     uploadSuccess = true;
-    LoadingOverlay.of(context).show();
+
     if (selectedProductsId.isEmpty) {
       Utils.showPrimarySnackbar(context, "Select Product",
           type: SnackType.error);
@@ -148,6 +148,7 @@ class SAddProductsController extends ChangeNotifier {
       }
       a = a.substring(0, a.length - 1);
       productId = a;
+      LoadingOverlay.of(context).show();
       uploadAddProductRepo
           .uploadAddProduct(
               uploadAddProductsRequestModel, pref.getString("successToken"))
