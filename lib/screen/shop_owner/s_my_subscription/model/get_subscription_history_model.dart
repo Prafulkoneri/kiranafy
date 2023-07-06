@@ -135,7 +135,7 @@ class CurrentSubscriptionPlan {
   String? subscriptionActiveTill;
   String? paidAmount;
   String? planBenifits;
-  String? subscriptionSpecialBenifits;
+  List? subscriptionSpecialBenifits;
 
   CurrentSubscriptionPlan({
     required this.id,
@@ -151,7 +151,14 @@ class CurrentSubscriptionPlan {
     subscriptionActiveTill = json["subscription_active_till"];
     paidAmount = json["paid_amount"];
     planBenifits = json["plan_benifits"];
-    subscriptionSpecialBenifits = json["subscription_special_benifits"];
+    // subscriptionSpecialBenifits = json["subscription_special_benifits"];
+    //////////////
+    if (json["subscription_special_benifits"] != null) {
+      subscriptionSpecialBenifits = [];
+      json["subscription_special_benifits"].forEach((v) {
+        subscriptionSpecialBenifits!.add((v));
+      });
+    }
   }
 }
 

@@ -516,7 +516,8 @@ class EditAdminProductController extends ChangeNotifier {
       UploadAdminProductReqModel(
         productId: productId,
         showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
-        showUnderRecommendedProduct: showUnderRecommendedProducts ? "yes" : "no",
+        showUnderRecommendedProduct:
+            showUnderRecommendedProducts ? "yes" : "no",
         showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
       );
 
