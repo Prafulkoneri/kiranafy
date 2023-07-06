@@ -22,7 +22,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SDashBoardController extends ChangeNotifier {
   DashBoardRepo dashBoardRepo = DashBoardRepo();
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
-  SAccountScreenController sAccountScreenController = SAccountScreenController();
+  SAccountScreenController sAccountScreenController =
+      SAccountScreenController();
   List<ShopBannerImageData>? bannerImageList;
   bool isLoading = true;
   Data? dashBoardData;
@@ -35,6 +36,7 @@ class SDashBoardController extends ChangeNotifier {
   SubcriptionData? subscriptiondata;
   CurrentSubscriptionPlan? currentSubscriptionPlan;
   List<SubscriptionHistory>? subscriptionHistory;
+  List specialBenifitlist = [];
 
   void onCategorySelect(context) {
     Navigator.push(
@@ -46,8 +48,8 @@ class SDashBoardController extends ChangeNotifier {
   //       context, MaterialPageRoute(builder: (context) => SEditProfileView()));
   // }
 
-  Future<void> initState(context,refresh) async {
-    if(refresh){
+  Future<void> initState(context, refresh) async {
+    if (refresh) {
       await getDashBoardData(context);
       await getShopEditProfileDetails(context);
       await getSubscriptionPaymentHistory(context);
@@ -165,6 +167,8 @@ class SDashBoardController extends ChangeNotifier {
         subscriptiondata = result.subscriptiondata;
         currentSubscriptionPlan = subscriptiondata?.currentSubscriptionPlan;
         subscriptionHistory = subscriptiondata?.subscriptionHistory;
+        specialBenifitlist
+            .add(currentSubscriptionPlan?.subscriptionSpecialBenifits);
         showLoader(false);
         notifyListeners();
       } else {

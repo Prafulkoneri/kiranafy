@@ -61,7 +61,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     MaterialPageRoute(builder: (context) => AboutScreenView()));
               },
               child: Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w),
+                margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
                   border: Border(
@@ -106,7 +106,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     MaterialPageRoute(builder: (context) => ShopFAQView()));
               },
               child: Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
                   border: Border(
@@ -149,18 +149,9 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => PrivacyPolicyView()));
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => SMainScreenView(
-                //           index: 4,
-                //           screenName: PrivacyPolicyView(
-                //           ))),
-                //       (Route<dynamic> route) => false,
-                // );
               },
               child: Container(
-                margin: EdgeInsets.only(left: 26.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 20.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
                   border: Border(
@@ -202,7 +193,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                         builder: (context) => TermsAndConditionView()));
               },
               child: Container(
-                margin: EdgeInsets.only(left: 26.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 20.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
                   border: Border(
@@ -245,7 +236,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
               },
               child: Container(
-                margin: EdgeInsets.only(left: 26.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
                   border: Border(
@@ -297,7 +288,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                 // );
               },
               child: Container(
-                margin: EdgeInsets.only(left: 26.w, right: 28.w, top: 16.w),
+                margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
                 padding: EdgeInsets.only(bottom: 15.w),
                 decoration: BoxDecoration(
 

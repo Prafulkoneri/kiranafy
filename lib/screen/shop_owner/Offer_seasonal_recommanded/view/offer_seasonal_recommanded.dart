@@ -651,7 +651,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     BoxFit.fill,
                                                               ),
                                                         SizedBox(
-                                                          width: 10.w,
+                                                          width: 8.w,
                                                         ),
                                                         Container(
                                                           width: 150.w,
@@ -1074,7 +1074,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         // ),
 
                                                         SizedBox(
-                                                          width: 10.w,
+                                                          width: 8.w,
                                                         ),
                                                         Container(
                                                           width: 150.w,

@@ -266,9 +266,6 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                // SizedBox(
-                                                //   height: 6.h,
-                                                // ),
                                                 Text(
                                                   "${element?.name}",
                                                   style: GoogleFonts.dmSans(

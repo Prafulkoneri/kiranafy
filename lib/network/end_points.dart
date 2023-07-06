@@ -90,6 +90,9 @@ class Endpoint {
   ///Edit Custome Products
   static const String deleteAdminProduct =
       "${baseUrl}lsm-shop-owner-delete-product-of-category";
+  //Edit Custome Products
+  static const String deleteCustomeProduct =
+      "${baseUrl}lsm-shop-owner-delete-custom-product";
 
   ///Dash Board
   static const String ShopDashBoard = "${baseUrl}lsm-shop-owner-dashboard";

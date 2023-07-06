@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/model/search_pr
 import 'package:local_supper_market/screen/shop_owner/s_products/model/selected_products_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/delete_admin_product_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/repository/delete_custome_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_add_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/search_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
@@ -29,6 +30,8 @@ class SSelectedProductsController extends ChangeNotifier {
   SearchProductRepo searchProductRepo = SearchProductRepo();
   TextEditingController searchController = TextEditingController();
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
+  DeleteCustomeProductRepo deleteCustomeProductRepo =
+      DeleteCustomeProductRepo();
   String categoryId = "";
   String productId = "";
   String productName = "";
@@ -155,8 +158,8 @@ class SSelectedProductsController extends ChangeNotifier {
     isLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
 
-    deleteAdminProductRepo
-        .deleteProduct(
+    deleteCustomeProductRepo
+        .deleteCustomeProduct(
             deleteAdminProductReqModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
@@ -164,7 +167,7 @@ class SSelectedProductsController extends ChangeNotifier {
           DeleteAdminProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          productsFromAdmin?.removeAt(index);
+          customProduct?.removeAt(index);
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
         } else {
