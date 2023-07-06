@@ -816,9 +816,16 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                     index: 0,
                                                                     screenName:
                                                                         UnitDetailView(
-                                                                      categoryId: widget.categoryId,
-                                                                          productId: element?.id.toString(),
-                                                                          productType: element?.productType,
+                                                                      categoryId:
+                                                                          widget
+                                                                              .categoryId,
+                                                                      productId:
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                      productType:
+                                                                          element
+                                                                              ?.productType,
                                                                     ))),
                                                         (Route<dynamic>
                                                                 route) =>
@@ -914,7 +921,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                       ),
                                                       GestureDetector(
                                                         onTap: () {
-                                                          read.deleteAdminProduct(
+                                                          read.deleteCustomProduct(
                                                               context,
                                                               index,
                                                               element?.id);

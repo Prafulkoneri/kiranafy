@@ -158,12 +158,10 @@ class SAccountScreenController extends ChangeNotifier {
 
         int length = faqdata?.length ?? 0;
 
-        // for (int i = 0; i < length; i++) {/
         isFaqExpanded = List.filled(length, false, growable: true);
 
         isFaqExpanded.removeAt(0);
         isFaqExpanded.insert(0, true);
-        // }/
 
         showLoader(false);
 
@@ -186,7 +184,9 @@ class SAccountScreenController extends ChangeNotifier {
   }
 
   void onChangeExpansion(value, index) {
+    isFaqExpanded = List.filled(faqdata?.length ?? 0, false, growable: true);
     isFaqExpanded[index] = value;
+
     notifyListeners();
   }
 }

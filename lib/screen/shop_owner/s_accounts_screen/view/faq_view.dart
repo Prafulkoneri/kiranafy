@@ -83,6 +83,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                               dividerColor: Colors.white,
                             ),
                             child: ExpansionTile(
+                              // key: Key(index.),
                               initiallyExpanded:
                                   watch.isFaqExpanded[index] ? true : false,
                               backgroundColor: Colors.transparent,

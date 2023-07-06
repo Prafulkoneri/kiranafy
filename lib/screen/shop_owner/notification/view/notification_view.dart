@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
 class NotificationsScreenView extends StatefulWidget {
@@ -19,6 +21,18 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
+              onBackBtnPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SMainScreenView(
+                          index: 4,
+                          screenName: SAccountScreenView(
+                            refresh: false,
+                          ))),
+                  (Route<dynamic> route) => false,
+                );
+              },
               title: "Notifications",
               action: SvgPicture.asset("assets/icons/delete.svg")),
         ),
