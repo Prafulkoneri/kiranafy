@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/model/s_kyc_verification_model.dart';
@@ -54,7 +55,7 @@ class SKycVerificationController extends ChangeNotifier {
   void onChooseFile1() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg','png'],
+      allowedExtensions: ['pdf', 'jpg', 'png'],
     );
     if (result != null) {
       networkImage1 = "";
@@ -73,7 +74,7 @@ class SKycVerificationController extends ChangeNotifier {
   void onChooseFile2() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg','png'],
+      allowedExtensions: ['pdf', 'jpg', 'png'],
     );
     if (result != null) {
       fileName2 = result.files.first.name;
@@ -91,7 +92,7 @@ class SKycVerificationController extends ChangeNotifier {
   void onChooseFile3() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg','png'],
+      allowedExtensions: ['pdf', 'jpg', 'png'],
     );
     if (result != null) {
       fileName3 = result.files.first.name;
@@ -109,7 +110,7 @@ class SKycVerificationController extends ChangeNotifier {
   void onChooseFile4() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg','png'],
+      allowedExtensions: ['pdf', 'jpg', 'png'],
     );
     if (result != null) {
       fileName4 = result.files.first.name;
@@ -191,20 +192,21 @@ class SKycVerificationController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void openGallery4() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxHeight: double.infinity,
-      maxWidth: double.infinity,
-      imageQuality: 100,
-    );
-    if (pickedFile != null) {
-      // networkImage4 = "";
-      fileImage4 = File(pickedFile.path);
-    }
+  // void openGallery4() async {
+  //   PickedFile? pickedFile = await ImagePicker().getImage(
+  //     source: ImageSource.gallery,
+  //     maxHeight: double.infinity,
+  //     maxWidth: double.infinity,
+  //     imageQuality: 100,
+  //   );
+  //   if (pickedFile != null) {
+  //     // networkImage4 = "";
+  // cropImage(pickedFile);
+  // fileImage4 = File(pickedFile.path);
+  //   }
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 
   // void onFileAadharCardClicked() async {
   //   FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -336,22 +338,50 @@ class SKycVerificationController extends ChangeNotifier {
     print(request.fields);
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
-      print(response.body);
-      if (response.statusCode == 200) {
-        LoadingOverlay.of(context).hide();
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => KycCompletedView()));
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        pref.setString('status', 'kycUploaded');
-        Utils.showPrimarySnackbar(context, "Updated Successfully",
-            type: SnackType.success);
-      } else {
-        LoadingOverlay.of(context).hide();
-        Utils.showPrimarySnackbar(context, "Error on uploading",
-            type: SnackType.error);
-        return;
-      }
-
-
+    print(response.body);
+    if (response.statusCode == 200) {
+      LoadingOverlay.of(context).hide();
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => KycCompletedView()));
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setString('status', 'kycUploaded');
+      Utils.showPrimarySnackbar(context, "Updated Successfully",
+          type: SnackType.success);
+    } else {
+      LoadingOverlay.of(context).hide();
+      Utils.showPrimarySnackbar(context, "Error on uploading",
+          type: SnackType.error);
+      return;
+    }
   }
+
+// Future cropImage(pickedFile) async {
+//     if (pickedFile != null) {
+//       CroppedFile? cropped = await ImageCropper().cropImage(
+//           sourcePath: pickedFile.path,
+//           aspectRatioPresets:
+//                [
+//                   CropAspectRatioPreset.square,
+//                   CropAspectRatioPreset.ratio3x2,
+//                   CropAspectRatioPreset.original,
+//                   CropAspectRatioPreset.ratio4x3,
+//                   CropAspectRatioPreset.ratio16x9
+//                 ],
+
+//           uiSettings: [
+//             AndroidUiSettings(
+//                 toolbarTitle: 'Crop',
+//                 cropGridColor: Colors.black,
+//                 initAspectRatio: CropAspectRatioPreset.original,
+//                 lockAspectRatio: false),
+//             IOSUiSettings(title: 'Crop')
+//           ]);
+
+//       if (cropped != null) {
+
+//           fileImage4 = File(cropped.path);
+
+//       }
+//     }
+//   }
 }
