@@ -36,8 +36,11 @@ class SAddProductsController extends ChangeNotifier {
   bool uploadSuccess = false;
   MainScreenController mainScreenController = MainScreenController();
 
-  Future<void> initState(context, id) async {
-    await shopAddProducts(context, id);
+  Future<void> initState(context, id,refresh) async {
+    if(refresh){
+      await shopAddProducts(context, id);
+    }
+
     notifyListeners();
   }
 

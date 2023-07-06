@@ -21,8 +21,9 @@ import 'package:provider/provider.dart';
 
 class AddProductView extends StatefulWidget {
   final String? categoryId;
+  final bool ? refresh;
 
-  const AddProductView({super.key, required this.categoryId});
+  const AddProductView({super.key, required this.categoryId,required this.refresh});
 
   @override
   State<AddProductView> createState() => _AddProductViewState();
@@ -36,7 +37,7 @@ class _AddProductViewState extends State<AddProductView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SAddProductsController>()
-          .initState(context, widget.categoryId);
+          .initState(context, widget.categoryId,widget.refresh);
     });
   }
 

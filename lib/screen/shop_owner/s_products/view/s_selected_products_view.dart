@@ -351,6 +351,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                       productType:
                                                                           element
                                                                               ?.productType,
+                                                                          refresh: true,
                                                                     ))),
                                                         (Route<dynamic>
                                                                 route) =>
@@ -819,6 +820,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                       categoryId: widget.categoryId,
                                                                           productId: element?.id.toString(),
                                                                           productType: element?.productType,
+                                                                          refresh: true,
                                                                     ))),
                                                         (Route<dynamic>
                                                                 route) =>

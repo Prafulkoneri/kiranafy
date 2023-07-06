@@ -1,3 +1,5 @@
+import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/unit_list_to_create_product_model.dart';
+
 class EditProductUnitCategoryRequestModel {
   String? productUnitId;
   String? productType;
@@ -19,38 +21,39 @@ class EditProductUnitCategoryResModel {
   int? status;
   String? message;
   EditUnitData? editunitdata;
-  List<Unit>? units;
+
 
   EditProductUnitCategoryResModel({
     required this.status,
     required this.message,
     required this.editunitdata,
-    required this.units,
+
   });
   EditProductUnitCategoryResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    editunitdata =
-        json['data'] != null ? EditUnitData.fromJson(json['data']) : null;
-    if (json["units"] != null) {
-      units = <Unit>[];
-      json["units"].forEach((v) {
-        units!.add(Unit.fromJson(v));
-      });
-    }
+    editunitdata = json['data'] != null ? EditUnitData.fromJson(json['data']) : null;
   }
 }
 
 class EditUnitData {
   ProductUnitDetails? productUnitDetails;
+  List<UnitListData>? units;
 
   EditUnitData({
     required this.productUnitDetails,
+    required this.units,
   });
   EditUnitData.fromJson(Map<String, dynamic> json) {
     productUnitDetails = json['product_unit_details'] != null
         ? ProductUnitDetails.fromJson(json['product_unit_details'])
         : null;
+    if (json["unit_data"] != null) {
+      units = <UnitListData>[];
+      json["unit_data"].forEach((v) {
+        units!.add(UnitListData.fromJson(v));
+      });
+    }
   }
 }
 
@@ -102,16 +105,4 @@ class ProductUnitDetails {
 }
 
 ////////////////
-class Unit {
-  int? id;
-  String? unit;
 
-  Unit({
-    required this.id,
-    required this.unit,
-  });
-  Unit.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    unit = json["unit"];
-  }
-}

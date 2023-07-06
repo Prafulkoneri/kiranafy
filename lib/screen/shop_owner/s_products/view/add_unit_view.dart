@@ -25,7 +25,8 @@ class AddUnitView extends StatefulWidget {
   final String? productType;
   final String ? productName;
   final String ? productUnitId;
-  const AddUnitView({super.key, required this.categoryId,required this.productType,required this.productId,required this.productName,required this.productUnitId});
+  final bool ? isEdit;
+  const AddUnitView({super.key, required this.categoryId,required this.productType,required this.productId,required this.productName,required this.productUnitId,required this.isEdit});
 
   @override
   State<AddUnitView> createState() => _AddUnitViewState();
@@ -36,7 +37,7 @@ class _AddUnitViewState extends State<AddUnitView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<AddEditUnitController>().initState(context,widget.productId,widget.productUnitId,widget.categoryId,widget.productType);
+      context.read<AddEditUnitController>().initState(context,widget.productId,widget.productUnitId,widget.categoryId,widget.productType,widget.isEdit);
     });
   }
   @override
@@ -55,7 +56,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                     builder: (context) => SMainScreenView(
                         index: 0,
                         screenName: UnitDetailView(
-                            // isRefresh: false, //
+                            refresh: false, //
                             categoryId: widget.categoryId,productType: widget.productType,productId: widget.productId,))),
                 (Route<dynamic> route) => false,
               );
@@ -63,10 +64,24 @@ class _AddUnitViewState extends State<AddUnitView> {
             title: "Add Unit",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {
-              read.addUnit(context);
+              if(widget.isEdit==true){
+                if(watch.fileImage1.path==""&&watch.fileImage2.path==""&&watch.fileImage3.path==""){
+                  read.updateEditUnitDetails(context);
+                }
+                else{
+                  read.addUnit(context,"edit");
+                }
+              }
+              else{
+                read.addUnit(context,"add");
+              }
+
+
             }),
       ),
-      body:
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
       SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
@@ -123,7 +138,8 @@ class _AddUnitViewState extends State<AddUnitView> {
                     width: 15.w,
                   ),
                   Expanded(
-                      child: SDropDownField(
+                      child:watch.unitId==""?
+                      SDropDownField(
                         items: watch.unitList
                             ?.map((item) => DropdownMenuItem<String>(
                           value: item.id.toString(),
@@ -140,7 +156,27 @@ class _AddUnitViewState extends State<AddUnitView> {
                       read.onUnitSelect(value);
                     },
                     hint: "Select Unit",
-                  )),
+                  ):
+                      SDropDownField(
+                        value: watch.unitId,
+                        items: watch.unitList
+                            ?.map((item) => DropdownMenuItem<String>(
+                          value: item.id.toString(),
+                          child: Text(
+                            item.unit ?? "",
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
+                            .toList(),
+                        titleHeader: "Unit",
+                        onChanged: (value) async {
+                          read.onUnitSelect(value);
+                        },
+                        hint: "Select Unit",
+                      )
+                  ),
                 ],
               ),
               SizedBox(

@@ -2,28 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
-import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_my_subscription/model/get_subscription_history_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/delete_product_unit_category_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/s_get_product_unit_list_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/delete_unit_product_category_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/get_product_unit_list_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_buy_subscription_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_subscription_plans_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/s_buy_subscription_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/subscription_plan_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SGetProductUnitListController extends ChangeNotifier {
-  bool isLoading = false;
+  bool isLoading = true;
   String productId = "";
   String productUnitId = "";
   String producttype = "";
@@ -36,8 +24,11 @@ class SGetProductUnitListController extends ChangeNotifier {
   DeleteUnitProductCategoryRepo deleteUnitProductCategoryRepo =
       DeleteUnitProductCategoryRepo();
 
-  Future<void> initState(context, pId, pType) async {
-    await getUnitProductList(context, pId, pType);
+  Future<void> initState(context, pId, pType,refresh) async {
+    if(refresh){
+      await getUnitProductList(context, pId, pType);
+    }
+
   }
 
   showLoader(value) {
@@ -109,9 +100,8 @@ class SGetProductUnitListController extends ChangeNotifier {
     productUnitId = pUnitId;
     // producttype = pType;
     // couponId = couponsId.toString();
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
-    showInfoLoader(true);
     deleteUnitProductCategoryRepo
         .deleteUnitProductCategory(deleteProductUnitCategoryListRequestModel,
             pref.getString("successToken"))
@@ -124,9 +114,9 @@ class SGetProductUnitListController extends ChangeNotifier {
           unitDetails?.removeAt(index);
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
-          showInfoLoader(false);
+          LoadingOverlay.of(context).hide();
         } else {
-          showInfoLoader(false);
+          LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }

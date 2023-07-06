@@ -21,9 +21,10 @@ class UnitDetailView extends StatefulWidget {
   final String? categoryId;
   final String? productId;
   final String? productType;
+  final bool ? refresh;
 
   const UnitDetailView(
-      {super.key, required this.categoryId, this.productId, this.productType});
+      {super.key, required this.categoryId, this.productId, this.productType,required this.refresh});
 
   @override
   State<UnitDetailView> createState() => _UnitDetailViewState();
@@ -34,7 +35,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SGetProductUnitListController>()
-          .initState(context, widget.productId, widget.productType);
+          .initState(context, widget.productId, widget.productType,widget.refresh);
     });
   }
 
@@ -71,6 +72,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                               index: 0,
                               screenName:
                               AddUnitView(
+                                isEdit: false,
                                 categoryId: widget.categoryId,
                                 productId:widget.productId,
                                 productType:widget.productType,
@@ -271,6 +273,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                                         productType: watch.getproductunitlistdata?.productDetails?.productType ?? "", productId: watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
                                                                         productName: watch.getproductunitlistdata?.productDetails?.productName.toString(),
                                                                         productUnitId: element?.id.toString(),
+                                                                            isEdit: true,
                                                                       ))),
                                                           (Route<dynamic>
                                                                   route) =>
