@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
@@ -30,11 +31,13 @@ import 'package:provider/provider.dart';
 class SEditAdminProductView extends StatefulWidget {
   final String? categoryId;
   final String? productId;
+  final bool ? isFromAccountScreen;
 
   const SEditAdminProductView({
     super.key,
     required this.productId,
     required this.categoryId,
+  required this.isFromAccountScreen,
   });
 
   @override
@@ -61,6 +64,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
+widget.isFromAccountScreen==false?
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -71,12 +75,20 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                         categoryId: widget.categoryId,
                       ))),
               (Route<dynamic> route) => false,
+            ):
+Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+            builder: (context) => SMainScreenView(
+            index: 4,
+            screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"recommended",isRefresh: false,))),
+            (Route<dynamic> route) => false,
             );
           },
           title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.uploadAdminProduct(context);
+            read.uploadAdminProduct(context,widget.isFromAccountScreen);
           },
         ),
       ),

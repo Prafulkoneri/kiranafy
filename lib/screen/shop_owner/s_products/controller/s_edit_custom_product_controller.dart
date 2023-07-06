@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custom_products_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/edit_custom_product_repo.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
@@ -232,9 +233,21 @@ class EditCustomProductController extends ChangeNotifier {
     print(productImage.path);
     notifyListeners();
   }
-
+  UploadCustomProductReqModel get uploadCustomProductReqModel =>
+      UploadCustomProductReqModel(
+        showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
+        categoryId: categoryId,
+        brandId: brandId,
+        taxId: taxId,
+        productId: productId,
+        productDescription: productDescriptionController.text,
+        productName: productNameController.text,
+        showUnderRecommendedProduct:
+        showUnderRecommendedProducts ? "yes" : "no",
+        showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
+      );
   Future<void> uploadCustomProduct(
-    context,
+    context,isNavFromAccount
   ) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -246,18 +259,28 @@ class EditCustomProductController extends ChangeNotifier {
       final result =
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print(categoryId);
-
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                    index: 0,
-                    screenName: SSelectedProductView(
-                        categoryId: categoryId, isRefresh: true),
-                  )),
-          (Route<dynamic> route) => false,
-        );
+        if(isNavFromAccount){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                    index: 4,
+                    screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"recommended",isRefresh: true,))),
+                (Route<dynamic> route) => false,
+          );
+        }
+        else{
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: SSelectedProductView(
+                      categoryId: categoryId, isRefresh: true),
+                )),
+                (Route<dynamic> route) => false,
+          );
+        }
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         LoadingOverlay.of(context).hide();
@@ -280,21 +303,38 @@ class EditCustomProductController extends ChangeNotifier {
     );
   }
 
-  UploadCustomProductReqModel get uploadCustomProductReqModel =>
-      UploadCustomProductReqModel(
-        showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
-        categoryId: categoryId,
-        brandId: brandId,
-        taxId: taxId,
-        productId: productId,
-        productDescription: productDescriptionController.text,
-        productName: productNameController.text,
-        showUnderRecommendedProduct:
-            showUnderRecommendedProducts ? "yes" : "no",
-        showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
-      );
+  void validateCustomProuduct(context,isNavFromAccount) {
+    if (selectedCategory == "") {
+      Utils.showPrimarySnackbar(context, "Select Category",
+          type: SnackType.error);
+      return;
+    }
+    if (productNameController.text == "") {
+      Utils.showPrimarySnackbar(context, "Enter Product Name",
+          type: SnackType.error);
+      return;
+    }
+    if (brandId == "") {
+      Utils.showPrimarySnackbar(context, "Select Brand", type: SnackType.error);
+      return;
+    }
+    if (taxId == "") {
+      Utils.showPrimarySnackbar(context, "Select Tax", type: SnackType.error);
+      return;
+    }
+    if (productDescriptionController.text == "") {
+      Utils.showPrimarySnackbar(context, "Enter Product Description",
+          type: SnackType.error);
+      return;
+    }
+    if (productImage.path == "") {
+      uploadCustomProduct(context,isNavFromAccount);
+    } else {
+      uploadImage(context,isNavFromAccount);
+    }
+  }
 
-  Future uploadImage(context) async {
+  Future uploadImage(context,isNavFromAccount) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.uploadCustomProduct}");
@@ -334,6 +374,28 @@ class EditCustomProductController extends ChangeNotifier {
       final respStr = await response.stream.bytesToString();
       print("respStr${respStr}");
       if (response.statusCode == 200) {
+        if(isNavFromAccount){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                    index: 4,
+                    screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"recommended",isRefresh: true,))),
+                (Route<dynamic> route) => false,
+          );
+        }
+        else{
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: SSelectedProductView(
+                      categoryId: categoryId, isRefresh: true),
+                )),
+                (Route<dynamic> route) => false,
+          );
+        }
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         print("Updated Successfully");

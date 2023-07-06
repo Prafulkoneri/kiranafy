@@ -69,7 +69,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                   read.updateEditUnitDetails(context);
                 }
                 else{
-                  read.addUnit(context,"edit");
+                  read.addUnit(context,"update");
                 }
               }
               else{

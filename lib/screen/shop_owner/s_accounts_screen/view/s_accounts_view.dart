@@ -448,6 +448,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                 screenName:
                                     ShopSeasonalRecommandedOfferProductsView(
                                   selectedProduct: "recommended",
+                                      isRefresh:true,
                                 ))),
                         (Route<dynamic> route) => false,
                       );

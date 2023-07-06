@@ -39,6 +39,7 @@ class AddEditUnitController extends ChangeNotifier{
   String productUnitId="";
   String unitId="";
   String categoryId="";
+  ProductUnitDetails ? data;
 
 
   UnitListToCreateProductRepo unitListToCreateProductRepo=UnitListToCreateProductRepo();
@@ -121,7 +122,7 @@ class AddEditUnitController extends ChangeNotifier{
       log(response.body);
       print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
       if (response.statusCode == 200) {
-        final data=result.editunitdata?.productUnitDetails;
+         data=result.editunitdata?.productUnitDetails;
         valueController.text=data?.weight??"";
         mrpController.text=data?.mrpPrice.toString()??"";
         offerPriceController.text=data?.offerPrice.toString()??"";
@@ -247,13 +248,13 @@ class AddEditUnitController extends ChangeNotifier{
 
   AddUpdateUnitProductCategoryRequestModel get addUpdateUnitProductCategoryRequestModel=>AddUpdateUnitProductCategoryRequestModel(
     productType: producttype,
-    productUnitId: productUnitId,
+    productUnitId: data?.particularUnitId.toString(),
     productId: productId,
     weight: valueController.text,
     status: switchValue?"active":"inactive",
     offerPrice: offerPriceController.text,
     mrpPrice: mrpController.text,
-    actionType: "edit",
+    actionType: "update",
     unitId: unitId,
     unitBasedProductImage1Path: "",unitBasedProductImage2Path: "",unitBasedProductImage3Path: "",
   );
@@ -367,20 +368,20 @@ class AddEditUnitController extends ChangeNotifier{
         return;
       }
     }
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.addUpadteUnitProductCategory}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
-    request.fields['action_type'] ="add";
+    request.fields['action_type'] =actionType.toString();
     request.fields['product_id'] =productId;
     request.fields['unit_id'] = unitId;
     request.fields['weight'] = valueController.text;
     request.fields['mrp_price'] = mrpController.text;
     request.fields['offer_price'] = offerPriceController.text;
     request.fields['status'] =switchValue?"active":"inactive";
-    request.fields['product_unit_id'] =productUnitId;
+    request.fields['product_unit_id'] = data?.particularUnitId.toString()??"";
     request.fields['product_type'] =producttype;
 
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
@@ -416,6 +417,7 @@ class AddEditUnitController extends ChangeNotifier{
     print(request.fields);
     await request.send().then((response) {
       if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -427,6 +429,7 @@ class AddEditUnitController extends ChangeNotifier{
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
         return;

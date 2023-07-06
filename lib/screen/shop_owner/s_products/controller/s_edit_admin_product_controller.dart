@@ -1,3 +1,4 @@
+import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -454,7 +455,7 @@ class EditAdminProductController extends ChangeNotifier {
     );
   }
 
-  Future<void> uploadAdminProduct(context) async {
+  Future<void> uploadAdminProduct(context,isNavFromAccount) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadAdminProductRepo
@@ -466,16 +467,29 @@ class EditAdminProductController extends ChangeNotifier {
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                    index: 0,
-                    screenName: SSelectedProductView(
-                        categoryId: categoryId, isRefresh: true),
-                  )),
-          (Route<dynamic> route) => false,
-        );
+        if(isNavFromAccount){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                    index: 4,
+                    screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"recommended",isRefresh: true,))),
+                (Route<dynamic> route) => false,
+          );
+        }
+        else{
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: SSelectedProductView(
+                      categoryId: categoryId, isRefresh: true),
+                )),
+                (Route<dynamic> route) => false,
+          );
+        }
+
 
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

@@ -2579,6 +2579,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                         screenName:
                                             ShopSeasonalRecommandedOfferProductsView(
                                           selectedProduct: "seasonal",
+                                              isRefresh: true,
                                         ))),
                                 (Route<dynamic> route) => false,
                               );
@@ -2645,6 +2646,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                         screenName:
                                             ShopSeasonalRecommandedOfferProductsView(
                                           selectedProduct: "fullFill",
+                                              isRefresh: true,
                                         ))),
                                 (Route<dynamic> route) => false,
                               );

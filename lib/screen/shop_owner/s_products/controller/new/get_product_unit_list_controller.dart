@@ -25,9 +25,13 @@ class SGetProductUnitListController extends ChangeNotifier {
       DeleteUnitProductCategoryRepo();
 
   Future<void> initState(context, pId, pType,refresh) async {
-    if(refresh){
-      await getUnitProductList(context, pId, pType);
-    }
+    showLoader(false);
+if(refresh){
+  await getUnitProductList(context, pId, pType);
+}
+
+
+
 
   }
 

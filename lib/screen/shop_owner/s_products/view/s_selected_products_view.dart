@@ -408,6 +408,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                               .toString(),
                                                                           categoryId:
                                                                               widget.categoryId,
+                                                                              isFromAccountScreen: false,
                                                                         ))),
                                                             (Route<dynamic>
                                                                     route) =>
@@ -877,6 +878,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                               .toString(),
                                                                           categoryId:
                                                                               widget.categoryId,
+                                                                              isFromAccountScreen: true,
                                                                         ))),
                                                             (Route<dynamic>
                                                                     route) =>

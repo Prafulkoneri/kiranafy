@@ -167,8 +167,11 @@ class SDashBoardController extends ChangeNotifier {
         subscriptiondata = result.subscriptiondata;
         currentSubscriptionPlan = subscriptiondata?.currentSubscriptionPlan;
         subscriptionHistory = subscriptiondata?.subscriptionHistory;
-        specialBenifitlist
-            .add(currentSubscriptionPlan?.subscriptionSpecialBenifits);
+        specialBenifitlist.clear();
+        specialBenifitlist.add(currentSubscriptionPlan?.subscriptionSpecialBenifits);
+        print("77777777");
+        print(specialBenifitlist);
+        // print(specialBenifitlist[1]);
         showLoader(false);
         notifyListeners();
       } else {
