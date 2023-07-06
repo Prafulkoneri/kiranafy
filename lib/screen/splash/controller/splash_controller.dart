@@ -25,19 +25,31 @@ class SplashController extends ChangeNotifier {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => SKycVerificationView()));
       }
-      if(pref.getString("status")=="kycUploaded"){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SSubscriptionScreenView(loggedIn: false)));
+      if (pref.getString("status") == "kycUploaded") {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SSubscriptionScreenView(loggedIn: false)));
       }
-      if(pref.getString("status")=="subscriptionCompleted"){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SShopConfigurationView(initialShopConfigration:true)));
+      if (pref.getString("status") == "subscriptionCompleted") {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SShopConfigurationView(initialShopConfigration: true)));
       }
       if (pref.getString("status") == "loggedIn") {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => SMainScreenView(index: 0,screenName: ShopDashBoardView(refresh: true,),
-              )),
-              (Route<dynamic> route) => false,
+              builder: (context) => SMainScreenView(
+                    index: 0,
+                    screenName: ShopDashBoardView(
+                      refresh: true,
+                    ),
+                  )),
+          (Route<dynamic> route) => false,
         );
       }
       if (pref.getString("status") == "customerLoggedIn") {
