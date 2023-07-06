@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
@@ -317,25 +318,23 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                                                 Divider(),
                                                                                 Container(
                                                                                   padding: EdgeInsets.only(
-                                                                                    left: 23.w,
+                                                                                    // left: 23.w,
                                                                                     bottom: 11.6.w,
-                                                                                    right: 16.w,
+                                                                                    // right: 16.w,
                                                                                   ),
                                                                                   // height:
                                                                                   //     646.h,
                                                                                   // width: 362.w,
-                                                                                  child: Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      Flexible(
-                                                                                        child: Text(
-                                                                                          "${element?.planBenifits}",
-                                                                                          style: GoogleFonts.dmSans(
-                                                                                            textStyle: TextStyle(color: Black1, height: 1.5, fontSize: 14.sp, fontWeight: FontWeight.w400),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                    ],
+                                                                                  child: HtmlWidget(
+                                                                                    element?.planBenifits ?? "",
+                                                                                    textStyle: TextStyle(
+                                                                                        color: Black1,
+                                                                                        // height: 1.5,
+                                                                                        // letterSpacing: .05,
+                                                                                        // overflow: TextOverflow.ellipsis,
+                                                                                        fontSize: 14.sp,
+                                                                                        fontWeight: FontWeight.w400),
+                                                                                    // watch.?.description ?? "",
                                                                                   ),
                                                                                 )
                                                                               ],

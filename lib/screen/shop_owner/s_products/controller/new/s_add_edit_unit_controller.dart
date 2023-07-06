@@ -220,6 +220,7 @@ class AddEditUnitController extends ChangeNotifier {
 
     notifyListeners();
   }
+  ///////////////////
 
   void openCamera2() async {
     PickedFile? pickedFile = await ImagePicker().getImage(

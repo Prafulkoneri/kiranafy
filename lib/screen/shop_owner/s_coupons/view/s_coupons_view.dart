@@ -424,8 +424,11 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                           );
                                                         }
                                                       } else {
-                                                        Utils.showPrimarySnackbar(context,"Subscribe to Advanced Plan to use this feature!",
-                                                            type: SnackType.error);
+                                                        Utils.showPrimarySnackbar(
+                                                            context,
+                                                            "Subscribe to Advanced Plan to use this feature!",
+                                                            type: SnackType
+                                                                .error);
                                                         return;
                                                       }
                                                     },
