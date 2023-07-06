@@ -17,11 +17,13 @@ import 'package:local_supper_market/screen/customer/products/views/product_scree
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/controller/offer_seasonal_recommanded_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
+import 'package:local_supper_market/utils/utils.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -31,9 +33,9 @@ import 'package:provider/provider.dart';
 
 class ShopSeasonalRecommandedOfferProductsView extends StatefulWidget {
   final String? selectedProduct;
-  final bool ? isRefresh;
+  final bool? isRefresh;
   const ShopSeasonalRecommandedOfferProductsView(
-      {super.key, required this.selectedProduct,required this.isRefresh});
+      {super.key, required this.selectedProduct, required this.isRefresh});
 
   @override
   State<ShopSeasonalRecommandedOfferProductsView> createState() =>
@@ -46,7 +48,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<ShopSeasonalRecommandedOfferProductsController>()
-          .initState(context, widget.selectedProduct,widget.isRefresh);
+          .initState(context, widget.selectedProduct, widget.isRefresh);
     });
   }
 
@@ -55,6 +57,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
     final watch =
         context.watch<ShopSeasonalRecommandedOfferProductsController>();
     final read = context.read<ShopSeasonalRecommandedOfferProductsController>();
+    final watchDashBoardScreen = context.read<SDashBoardController>();
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
@@ -132,7 +135,15 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                             left: 9.w, right: 9.w, bottom: 6.w, top: 6.w),
                         child: PrimaryButton(
                             onTap: () {
-                              read.onSeasonalProductTapped();
+                              if (watchDashBoardScreen.specialBenifitlist
+                                  .contains("seasonal_products")) {
+                                read.onSeasonalProductTapped();
+                              } else {
+                                Utils.showPrimarySnackbar(context,
+                                    "Subscribe to Advanced Plan to use this feature!",
+                                    type: SnackType.error);
+                                return;
+                              }
                             },
                             child: Text(
                               "Seasonal",
@@ -154,7 +165,16 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                             left: 7.w, right: 7.w, bottom: 6.w, top: 6.w),
                         child: PrimaryButton(
                             onTap: () {
-                              read.onFullFilProductTapped();
+                              // read.onFullFilProductTapped();
+                              if (watchDashBoardScreen.specialBenifitlist
+                                  .contains("fullfill_craving_products")) {
+                                read.onFullFilProductTapped();
+                              } else {
+                                Utils.showPrimarySnackbar(context,
+                                    "Subscribe to Advanced Plan to use this feature!",
+                                    type: SnackType.error);
+                                return;
+                              }
                             },
                             child: Text(
                               "Fulfil cravings",
@@ -271,7 +291,9 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                 children: [
                                                   GestureDetector(
                                                     onTap: () {
-                                                      if(element?.productType=="admin_product"){
+                                                      if (element
+                                                              ?.productType ==
+                                                          "admin_product") {
                                                         Navigator
                                                             .pushAndRemoveUntil(
                                                           context,
@@ -280,18 +302,18 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   index: 0,
                                                                   screenName: SEditAdminProductView(
                                                                       productId:
-                                                                      element
-                                                                          ?.id
-                                                                          .toString(),
-                                                                      isFromAccountScreen: true,
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                      isFromAccountScreen:
+                                                                          true,
                                                                       categoryId:
-                                                                      ""))),
-                                                              (Route<dynamic>
-                                                          route) =>
-                                                          false,
+                                                                          ""))),
+                                                          (Route<dynamic>
+                                                                  route) =>
+                                                              false,
                                                         );
-                                                      }
-                                                else{
+                                                      } else {
                                                         Navigator
                                                             .pushAndRemoveUntil(
                                                           context,
@@ -300,15 +322,16 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   index: 0,
                                                                   screenName: SEditCustomProductView(
                                                                       productId:
-                                                                      element
-                                                                          ?.id
-                                                                          .toString(),
-                                                                      isFromAccountScreen: true,
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                      isFromAccountScreen:
+                                                                          true,
                                                                       categoryId:
-                                                                      ""))),
-                                                              (Route<dynamic>
-                                                          route) =>
-                                                          false,
+                                                                          ""))),
+                                                          (Route<dynamic>
+                                                                  route) =>
+                                                              false,
                                                         );
                                                       }
                                                     },
@@ -703,38 +726,51 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     children: [
                                                       GestureDetector(
                                                         onTap: () {
-                                                          if(element?.productType=="admin_product"){
+                                                          if (element
+                                                                  ?.productType ==
+                                                              "admin_product") {
                                                             Navigator
                                                                 .pushAndRemoveUntil(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: (context) => SMainScreenView(
-                                                                      index: 0,
-                                                                      screenName: SEditAdminProductView(
-                                                                          productId: element
-                                                                              ?.id
-                                                                              .toString(),
-                                                                          categoryId: "",isFromAccountScreen: true,))),
-                                                                  (Route<dynamic>
-                                                              route) =>
-                                                              false,
+                                                                  builder: (context) =>
+                                                                      SMainScreenView(
+                                                                          index:
+                                                                              0,
+                                                                          screenName:
+                                                                              SEditAdminProductView(
+                                                                            productId:
+                                                                                element?.id.toString(),
+                                                                            categoryId:
+                                                                                "",
+                                                                            isFromAccountScreen:
+                                                                                true,
+                                                                          ))),
+                                                              (Route<dynamic>
+                                                                      route) =>
+                                                                  false,
                                                             );
-                                                          }
-                                                         else{
+                                                          } else {
                                                             Navigator
                                                                 .pushAndRemoveUntil(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: (context) => SMainScreenView(
-                                                                      index: 0,
-                                                                      screenName: SEditCustomProductView(
-                                                                        productId: element
-                                                                            ?.id
-                                                                            .toString(),
-                                                                        categoryId: "",isFromAccountScreen: true,))),
-                                                                  (Route<dynamic>
-                                                              route) =>
-                                                              false,
+                                                                  builder: (context) =>
+                                                                      SMainScreenView(
+                                                                          index:
+                                                                              0,
+                                                                          screenName:
+                                                                              SEditCustomProductView(
+                                                                            productId:
+                                                                                element?.id.toString(),
+                                                                            categoryId:
+                                                                                "",
+                                                                            isFromAccountScreen:
+                                                                                true,
+                                                                          ))),
+                                                              (Route<dynamic>
+                                                                      route) =>
+                                                                  false,
                                                             );
                                                           }
                                                         },
@@ -1144,44 +1180,51 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     children: [
                                                       GestureDetector(
                                                         onTap: () {
-                                                          if(element?.productType=="admin_product"){
+                                                          if (element
+                                                                  ?.productType ==
+                                                              "admin_product") {
                                                             Navigator
                                                                 .pushAndRemoveUntil(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: (context) => SMainScreenView(
-                                                                      index: 0,
-                                                                      screenName: SEditAdminProductView(
-                                                                          productId: element
-                                                                              ?.id
-                                                                              .toString(),
-                                                                          categoryId:
-                                                                          "",
-                                                                      isFromAccountScreen: true,
-                                                                      ))),
-                                                                  (Route<dynamic>
-                                                              route) =>
-                                                              false,
+                                                                  builder: (context) =>
+                                                                      SMainScreenView(
+                                                                          index:
+                                                                              0,
+                                                                          screenName:
+                                                                              SEditAdminProductView(
+                                                                            productId:
+                                                                                element?.id.toString(),
+                                                                            categoryId:
+                                                                                "",
+                                                                            isFromAccountScreen:
+                                                                                true,
+                                                                          ))),
+                                                              (Route<dynamic>
+                                                                      route) =>
+                                                                  false,
                                                             );
-                                                          }
-                                                   else{
+                                                          } else {
                                                             Navigator
                                                                 .pushAndRemoveUntil(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: (context) => SMainScreenView(
-                                                                      index: 0,
-                                                                      screenName: SEditCustomProductView(
-                                                                        productId: element
-                                                                            ?.id
-                                                                            .toString(),
-                                                                        categoryId:
-                                                                        "",
-                                                                        isFromAccountScreen: true,
-                                                                      ))),
-                                                                  (Route<dynamic>
-                                                              route) =>
-                                                              false,
+                                                                  builder: (context) =>
+                                                                      SMainScreenView(
+                                                                          index:
+                                                                              0,
+                                                                          screenName:
+                                                                              SEditCustomProductView(
+                                                                            productId:
+                                                                                element?.id.toString(),
+                                                                            categoryId:
+                                                                                "",
+                                                                            isFromAccountScreen:
+                                                                                true,
+                                                                          ))),
+                                                              (Route<dynamic>
+                                                                      route) =>
+                                                                  false,
                                                             );
                                                           }
                                                         },

@@ -12,12 +12,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -38,9 +40,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<CustomProductController>()
-          .initState(context);
+      context.read<CustomProductController>().initState(context);
     });
   }
 
@@ -49,6 +49,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
     final watch = context.watch<CustomProductController>();
     final read = context.read<CustomProductController>();
     final readMain = context.read<SMainScreenController>();
+    final watchDashBoardScreen = context.read<SDashBoardController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -196,7 +197,17 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                               children: [
                                 PrimaryCheckBox(
                                   onChanged: (value) {
-                                    read.onUnderSeasonalProductSelected(value);
+                                    // read.onUnderSeasonalProductSelected(value);
+                                    if (watchDashBoardScreen.specialBenifitlist
+                                        .contains("seasonal_products")) {
+                                      read.onUnderSeasonalProductSelected(
+                                          value);
+                                    } else {
+                                      Utils.showPrimarySnackbar(context,
+                                          "Subscribe to Advanced Plan to use this feature!",
+                                          type: SnackType.error);
+                                      return;
+                                    }
                                   },
                                   value: watch.showUnderSeasonalProducts,
                                 ),
@@ -218,7 +229,17 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                               children: [
                                 PrimaryCheckBox(
                                   onChanged: (value) {
-                                    read.onFullFillCraving(value);
+                                    // read.onFullFillCraving(value);
+                                    if (watchDashBoardScreen.specialBenifitlist
+                                        .contains(
+                                            "fullfill_craving_products")) {
+                                      read.onFullFillCraving(value);
+                                    } else {
+                                      Utils.showPrimarySnackbar(context,
+                                          "Subscribe to Advanced Plan to use this feature!",
+                                          type: SnackType.error);
+                                      return;
+                                    }
                                   },
                                   value: watch.fullFillCravings,
                                 ),
@@ -272,7 +293,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                           },
                           child: Container(
                             height: 185.h,
-                            width:ScreenUtil().screenWidth,
+                            width: ScreenUtil().screenWidth,
                             decoration: BoxDecoration(boxShadow: [
                               BoxShadow(
                                 color: Colors.red.withOpacity(0.05),
@@ -324,5 +345,4 @@ class _SCustomProductViewState extends State<SCustomProductView> {
             ),
     );
   }
-
 }
