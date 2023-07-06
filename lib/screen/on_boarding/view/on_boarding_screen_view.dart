@@ -248,7 +248,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                                 children: <Widget>[
                                                   Flexible(
                                                     child: Text(
-                                                      "This is pre - launch for \nshop towner, app\nfor customers will be\nlaunched soon !",
+                                                      "This is pre - launch for \nShop Owner, app\nfor customers will be\nlaunched soon !",
 
                                                       // softWrap: true,
                                                       // maxLines: 3,//
@@ -274,7 +274,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                                         Navigator.pop(context);
                                                       },
                                                       child: Text(
-                                                        "Dismmis",
+                                                        "Dismiss",
                                                         style:
                                                             GoogleFonts.dmSans(
                                                           textStyle: TextStyle(

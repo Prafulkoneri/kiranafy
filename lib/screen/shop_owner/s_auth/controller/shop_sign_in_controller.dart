@@ -24,6 +24,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShopSignInController extends ChangeNotifier {
   CheckMobileNoExistRepo checkMobileNoExistRepo = CheckMobileNoExistRepo();
@@ -46,6 +47,20 @@ class ShopSignInController extends ChangeNotifier {
 
   void onOtpSubmitPressed(context) async {
     await mobileRegister(context);
+  }
+
+  launchTermsAndConditionURL() async {
+    final Uri url = Uri.parse('https://localsupermart.com/terms-condition.php');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  launchPrivacyPolicyURL() async {
+    final Uri url = Uri.parse('https://localsupermart.com/privacy-policy.php');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   Future<void> onNewShopPressed(context) async {

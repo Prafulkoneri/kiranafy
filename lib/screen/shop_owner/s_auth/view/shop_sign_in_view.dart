@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET } //otp
 
@@ -176,7 +177,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                               text: 'Terms of Service',
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  print('Login Text Clicked');
+                                read.launchTermsAndConditionURL();
                                 },
                               style: TextStyle(
                                   color: SplashText1,
@@ -196,7 +197,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                               text: ' Privacy Policy',
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  print('Login Text Clicked');
+                                  read.launchPrivacyPolicyURL();
                                 },
                               style: TextStyle(
                                   color: SplashText1,

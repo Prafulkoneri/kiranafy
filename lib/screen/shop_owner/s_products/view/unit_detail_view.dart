@@ -207,7 +207,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                   Flexible(
                                                     child: Text(
                                                       // "Active",
-                                                      "${element?.status}",
+                                                      element?.status=="active"?"Active":"InActive",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -237,7 +237,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     Text(
                                                       // "Rs. 60",
 
-                                                      "Rs. ${element?.offerPrice}", //
+                                                      "Rs. ${element?.mrpPrice}", //
                                                       style: TextStyle(
                                                           decoration:
                                                               TextDecoration
@@ -252,7 +252,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     ),
                                                     Text(
                                                       // "Rs. 24",
-                                                      " Rs. ${element?.mrpPrice}",
+                                                      " Rs. ${element?.offerPrice}",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,
