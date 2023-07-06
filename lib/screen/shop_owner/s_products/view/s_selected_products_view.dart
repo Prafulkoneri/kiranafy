@@ -351,7 +351,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                       productType:
                                                                           element
                                                                               ?.productType,
-                                                                          refresh: true,
+                                                                      refresh:
+                                                                          true,
                                                                     ))),
                                                         (Route<dynamic>
                                                                 route) =>
@@ -817,10 +818,18 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                     index: 0,
                                                                     screenName:
                                                                         UnitDetailView(
-                                                                      categoryId: widget.categoryId,
-                                                                          productId: element?.id.toString(),
-                                                                          productType: element?.productType,
-                                                                          refresh: true,
+                                                                      categoryId:
+                                                                          widget
+                                                                              .categoryId,
+                                                                      productId:
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                      productType:
+                                                                          element
+                                                                              ?.productType,
+                                                                      refresh:
+                                                                          true,
                                                                     ))),
                                                         (Route<dynamic>
                                                                 route) =>
@@ -916,7 +925,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                       ),
                                                       GestureDetector(
                                                         onTap: () {
-                                                          read.deleteAdminProduct(
+                                                          read.deleteCustomProduct(
                                                               context,
                                                               index,
                                                               element?.id);
