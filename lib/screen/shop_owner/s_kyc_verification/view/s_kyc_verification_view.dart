@@ -19,6 +19,7 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class SKycVerificationView extends StatefulWidget {
   SKycVerificationView({super.key});

@@ -67,6 +67,7 @@ dependencies:
   wakelock: ^0.6.2
   wakelock_windows: ^0.2.1
   launch_review: ^3.0.1
+  image_cropper:
 
   # country_picker: ^2.0.20
   # country_code_picker: ^3.0.0

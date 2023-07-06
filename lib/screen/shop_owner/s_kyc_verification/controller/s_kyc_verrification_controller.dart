@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/model/s_kyc_verification_model.dart';
@@ -69,6 +70,7 @@ class SKycVerificationController extends ChangeNotifier {
     }
     notifyListeners();
   }
+
 
   void onChooseFile2() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
