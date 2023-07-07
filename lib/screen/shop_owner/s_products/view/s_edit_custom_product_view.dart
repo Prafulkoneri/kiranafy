@@ -35,13 +35,13 @@ class SEditCustomProductView extends StatefulWidget {
   final String? categoryId;
   final String? productId;
   final bool? isFromAccountScreen;
-  const SEditCustomProductView({
-    super.key,
-    required this.productId,
-    required this.categoryId,
-    required this.isFromAccountScreen,
-    // required this.isNavFromRecommanded
-  });
+  final int? selectedIndex;
+  const SEditCustomProductView(
+      {super.key,
+      required this.productId,
+      required this.categoryId,
+      required this.isFromAccountScreen,
+      this.selectedIndex});
 
   @override
   State<SEditCustomProductView> createState() => _SEditCustomProductViewState();
@@ -86,7 +86,11 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                             index: 4,
                             screenName:
                                 ShopSeasonalRecommandedOfferProductsView(
-                              selectedProduct: "recommended",
+                              selectedProduct: widget.selectedIndex == 0
+                                  ? "recommended"
+                                  : widget.selectedIndex == 1
+                                      ? "seasonal"
+                                      : "fullFill",
                               isRefresh: false,
                             ))),
                     (Route<dynamic> route) => false,
@@ -95,7 +99,8 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
           title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.validateCustomProuduct(context, widget.isFromAccountScreen);
+            read.validateCustomProuduct(
+                context, widget.isFromAccountScreen, widget.selectedIndex);
           },
         ),
       ),
@@ -225,7 +230,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                 PrimaryCheckBox(
                                   onChanged: (value) {
                                     // read.onUnderSeasonalProductSelected(value);
-                                    if (!watchDashBoardScreen.specialBenifitlist
+                                    if (watchDashBoardScreen.specialBenifitlist
                                         .contains("seasonal_products")) {
                                       read.onUnderSeasonalProductSelected(
                                           value);
@@ -260,8 +265,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                     if (watchDashBoardScreen.specialBenifitlist
                                         .contains(
                                             "fullfill_craving_products")) {
-                                      read.onUnderSeasonalProductSelected(
-                                          value);
+                                      read.onFullFillCraving(value);
                                     } else {
                                       Utils.showPrimarySnackbar(context,
                                           "Subscribe to Advanced Plan to use this feature!",

@@ -455,7 +455,8 @@ class EditAdminProductController extends ChangeNotifier {
     );
   }
 
-  Future<void> uploadAdminProduct(context,isNavFromAccount) async {
+  Future<void> uploadAdminProduct(
+      context, isNavFromAccount, selectedIndex) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadAdminProductRepo
@@ -467,29 +468,34 @@ class EditAdminProductController extends ChangeNotifier {
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        if(isNavFromAccount){
+        if (isNavFromAccount) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                     index: 4,
-                    screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"recommended",isRefresh: true,))),
-                (Route<dynamic> route) => false,
+                    screenName: ShopSeasonalRecommandedOfferProductsView(
+                      selectedProduct: selectedIndex == 0
+                          ? "recommended"
+                          : selectedIndex == 1
+                              ? "seasonal"
+                              : "fullFill",
+                      isRefresh: true,
+                    ))),
+            (Route<dynamic> route) => false,
           );
-        }
-        else{
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: SSelectedProductView(
-                      categoryId: categoryId, isRefresh: true),
-                )),
-                (Route<dynamic> route) => false,
+                      index: 0,
+                      screenName: SSelectedProductView(
+                          categoryId: categoryId, isRefresh: true),
+                    )),
+            (Route<dynamic> route) => false,
           );
         }
-
 
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

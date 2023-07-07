@@ -63,6 +63,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'screen/customer/about_us/controller/cms_controller.dart';
+import 'screen/customer/c_setting/controller/c_setting_controller.dart';
 import 'screen/customer/cart/controller/cart_controller.dart';
 import 'screen/customer/cart/controller/cart_detail_controller.dart';
 import 'screen/customer/delivery_address/controller/delivery_address_controller.dart';
@@ -163,6 +164,7 @@ void main() async {
             create: (_) => ShopSeasonalRecommandedOfferProductsController()),
         ChangeNotifierProvider(create: (_) => SBankAccountController()),
         ChangeNotifierProvider(create: (_) => SGetProductUnitListController()),
+        ChangeNotifierProvider(create: (_) => CustomerSettingController()),
         ChangeNotifierProvider(create: (_) => AddEditUnitController()),
       ],
       child: MyApp(),
