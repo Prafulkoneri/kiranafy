@@ -236,8 +236,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    read.openCamera1();
-                                    Navigator.pop(context);
+                                    read.openCamera1(context);
                                   },
                                   child: Text("Camera"),
                                 ),
@@ -246,7 +245,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    read.openGallery1();
+                                    read.openGallery1(context);
                                     Navigator.pop(context);
                                   },
                                   child: Text("gallery "),
@@ -317,7 +316,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    read.openCamera2();
+                                    read.openCamera2(context);
                                     Navigator.pop(context);
                                   },
                                   child: Text("Camera"),
@@ -327,7 +326,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    read.openGallery2();
+                                    read.openGallery2(context);
                                     Navigator.pop(context);
                                   },
                                   child: Text("gallery "),
@@ -398,7 +397,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    read.openCamera3();
+                                    read.openCamera3(context);
                                     Navigator.pop(context);
                                   },
                                   child: Text("Camera"),
@@ -408,7 +407,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    read.openGallery3();
+                                    read.openGallery3(context);
                                     Navigator.pop(context);
                                   },
                                   child: Text("gallery "),

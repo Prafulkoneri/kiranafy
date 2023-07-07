@@ -1,10 +1,13 @@
+
+import 'package:provider/provider.dart';
 class Endpoint {
+
   Endpoint._();
-  // testing url
-  // static const String baseUrl = 'https://localsupermart.com/live/api/';
-  // live url
+  // Get Base Url
+  // static const String getBaseUrl = 'https://newcms.m-staging.in/local-super-mart-admin/api/app-base-url';
+  // Base Url
   static const String baseUrl =
-      'https://newcms.m-staging.in/local-super-mart-admin/api/';
+      'https://localsupermart.com/live/api/';
   // Check Mobile Number Exist
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/add_update_unit_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/edit_unit_product_category_model.dart';
@@ -157,7 +158,7 @@ class AddEditUnitController extends ChangeNotifier{
     notifyListeners();
   }
 
-  void openGallery1() async {
+  void openGallery1(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxHeight: double.infinity,
@@ -166,12 +167,34 @@ class AddEditUnitController extends ChangeNotifier{
     );
     if (pickedFile != null) {
       networkImage1 = "";
-      fileImage1 = File(pickedFile.path);
+      final CroppedFile=await ImageCropper().cropImage(sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+        ? [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+        ]
+        : [
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio5x3,
+        CropAspectRatioPreset.ratio5x4,
+        CropAspectRatioPreset.ratio7x5,
+        CropAspectRatioPreset.ratio16x9
+        ],
+
+      );
+      fileImage1 = File(CroppedFile!.path);
     }
+    Navigator.pop(context);
 
     notifyListeners();
   }
-  void openGallery2() async {
+  void openGallery2(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxHeight: double.infinity,
@@ -180,12 +203,34 @@ class AddEditUnitController extends ChangeNotifier{
     );
     if (pickedFile != null) {
       networkImage2 = "";
-      fileImage2 = File(pickedFile.path);
+      final CroppedFile=await ImageCropper().cropImage(sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+        ? [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+        ]
+        : [
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio5x3,
+        CropAspectRatioPreset.ratio5x4,
+        CropAspectRatioPreset.ratio7x5,
+        CropAspectRatioPreset.ratio16x9
+        ],
+
+      );
+      fileImage2 = File(CroppedFile!.path);
     }
+    Navigator.pop(context);
 
     notifyListeners();
   }
-  void openGallery3() async {
+  void openGallery3(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxHeight: double.infinity,
@@ -194,12 +239,34 @@ class AddEditUnitController extends ChangeNotifier{
     );
     if (pickedFile != null) {
       networkImage3 = "";
-      fileImage3 = File(pickedFile.path);
+      final CroppedFile=await ImageCropper().cropImage(sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+        ? [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+        ]
+        : [
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio5x3,
+        CropAspectRatioPreset.ratio5x4,
+        CropAspectRatioPreset.ratio7x5,
+        CropAspectRatioPreset.ratio16x9
+        ],
+
+      );
+      fileImage3 = File(CroppedFile!.path);
     }
+    Navigator.pop(context);
 
     notifyListeners();
   }
-  void openCamera1() async {
+  void openCamera1(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
       maxHeight: double.infinity,
@@ -208,12 +275,34 @@ class AddEditUnitController extends ChangeNotifier{
     );
     if (pickedFile != null) {
       networkImage1 = "";
-      fileImage1 = File(pickedFile.path);
+       final CroppedFile=await ImageCropper().cropImage(sourcePath: pickedFile.path,
+         aspectRatioPresets: Platform.isAndroid
+         ? [
+         CropAspectRatioPreset.square,
+         CropAspectRatioPreset.ratio3x2,
+         CropAspectRatioPreset.original,
+         CropAspectRatioPreset.ratio4x3,
+         CropAspectRatioPreset.ratio16x9
+         ]
+         : [
+         CropAspectRatioPreset.original,
+         CropAspectRatioPreset.square,
+         CropAspectRatioPreset.ratio3x2,
+         CropAspectRatioPreset.ratio4x3,
+         CropAspectRatioPreset.ratio5x3,
+         CropAspectRatioPreset.ratio5x4,
+         CropAspectRatioPreset.ratio7x5,
+         CropAspectRatioPreset.ratio16x9
+         ],
+
+      );
+      fileImage1 = File(CroppedFile!.path);
     }
+    Navigator.pop(context);
 
     notifyListeners();
   }
-  void openCamera2() async {
+  void openCamera2(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
       maxHeight: double.infinity,
@@ -222,12 +311,33 @@ class AddEditUnitController extends ChangeNotifier{
     );
     if (pickedFile != null) {
       networkImage2 = "";
-      fileImage2 = File(pickedFile.path);
-    }
+      final CroppedFile=await ImageCropper().cropImage(sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+        ? [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+        ]
+        : [
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio5x3,
+        CropAspectRatioPreset.ratio5x4,
+        CropAspectRatioPreset.ratio7x5,
+        CropAspectRatioPreset.ratio16x9
+        ],
 
+      );
+      fileImage2 = File(CroppedFile!.path);
+    }
+    Navigator.pop(context);
     notifyListeners();
   }
-  void openCamera3() async {
+  void openCamera3(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
       maxHeight: double.infinity,
@@ -236,8 +346,30 @@ class AddEditUnitController extends ChangeNotifier{
     );
     if (pickedFile != null) {
       networkImage3 = "";
-      fileImage3 = File(pickedFile.path);
+      final CroppedFile=await ImageCropper().cropImage(sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+        ? [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+        ]
+        : [
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio5x3,
+        CropAspectRatioPreset.ratio5x4,
+        CropAspectRatioPreset.ratio7x5,
+        CropAspectRatioPreset.ratio16x9
+        ],
+
+      );
+      fileImage3 = File(CroppedFile!.path);
     }
+    Navigator.pop(context);
 
     notifyListeners();
   }
