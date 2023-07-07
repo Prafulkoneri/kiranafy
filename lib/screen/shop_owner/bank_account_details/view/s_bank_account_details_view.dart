@@ -45,13 +45,16 @@ class _ShopBankAccountDetailsViewState
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
-          onBackBtnPressed: (){
+          onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: false,))),
-                  (Route<dynamic> route) => false,
+                  builder: (context) => SMainScreenView(
+                      index: 4,
+                      screenName: SAccountScreenView(
+                        refresh: false,
+                      ))),
+              (Route<dynamic> route) => false,
             );
           },
           title: "Bank A/C Details",
@@ -61,130 +64,131 @@ class _ShopBankAccountDetailsViewState
           },
         ),
       ),
-      body:watch.isLoading?Center(
-        child: CircularProgressIndicator(),
-      ):
-      SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            Container(
-              width: ScreenUtil().screenWidth,
-              padding: EdgeInsets.symmetric(horizontal: 19.w),
+      body: watch.isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 20.w,
-                  ),
-                  PrimarySTextFormField(
-                    controller: watch.bankNameController,
-                    titleHeader: "Name of the Bank",
-                    hintText: "Enter Name of the Bank",
-                  ),
-                  SizedBox(
-                    height: 20.w,
-                  ),
-                  PrimarySTextFormField(
-                    controller: watch.accountHolderNameController,
-                    titleHeader: "Account Holder Name",
-                    hintText: "Enter Account Name",
-                  ),
-                  SizedBox(
-                    height: 20.w,
-                  ),
-                  PrimarySTextFormField(
-                    controller: watch.accountNumberController,
-                    titleHeader: "Account Number",
-                    hintText: "Enter Account Number",
-                  ),
-                  SizedBox(
-                    height: 20.w,
-                  ),
-                  // SDropDownField(
-                  //   hint: "Select Type of Account",
-                  //   titleHeader: "Type of Account",
-                  // ),
-                  watch.accountType == ""
-                      ? SDropDownField(
-                          titleHeader: "Type of Account",
-                          onChanged: (value) {
-                            read.onSelectAccountType(value);
-                          },
-                          hint: "Select Type of Account",
-                          items: [
-                            DropdownMenuItem(
-                              value: "current",
-                              child: Text(
-                                "current",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            ),
-                            DropdownMenuItem(
-                              value: "saving",
-                              child: Text(
-                                "saving",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            )
-                          ],
-                        )
-                      : SDropDownField(
-                          value: watch.accountType,
-                          titleHeader: "Type of Account",
-                          onChanged: (value) {
-                            read.onSelectAccountType(value);
-                          },
-                          hint: "Select Type of Account",
-                          items: [
-                            DropdownMenuItem(
-                              value: "current",
-                              child: Text(
-                                "current",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            ),
-                            DropdownMenuItem(
-                              value: "saving",
-                              child: Text(
-                                "saving",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            )
-                          ],
+                  Container(
+                    width: ScreenUtil().screenWidth,
+                    padding: EdgeInsets.symmetric(horizontal: 19.w),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20.w,
                         ),
+                        PrimarySTextFormField(
+                          controller: watch.bankNameController,
+                          titleHeader: "Name of the Bank",
+                          hintText: "Enter Name of the Bank",
+                        ),
+                        SizedBox(
+                          height: 20.w,
+                        ),
+                        PrimarySTextFormField(
+                          controller: watch.accountHolderNameController,
+                          titleHeader: "Account Holder Name",
+                          hintText: "Enter Account Name",
+                        ),
+                        SizedBox(
+                          height: 20.w,
+                        ),
+                        PrimarySTextFormField(
+                          controller: watch.accountNumberController,
+                          titleHeader: "Account Number",
+                          hintText: "Enter Account Number",
+                        ),
+                        SizedBox(
+                          height: 20.w,
+                        ),
+                        // SDropDownField(
+                        //   hint: "Select Type of Account",
+                        //   titleHeader: "Type of Account",
+                        // ),
+                        watch.accountType == ""
+                            ? SDropDownField(
+                                titleHeader: "Type of Account",
+                                onChanged: (value) {
+                                  read.onSelectAccountType(value);
+                                },
+                                hint: "Select Type of Account",
+                                items: [
+                                  DropdownMenuItem(
+                                    value: "current",
+                                    child: Text(
+                                      "Current",
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: "saving",
+                                    child: Text(
+                                      "Saving",
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : SDropDownField(
+                                value: watch.accountType,
+                                titleHeader: "Type of Account",
+                                onChanged: (value) {
+                                  read.onSelectAccountType(value);
+                                },
+                                hint: "Select Type of Account",
+                                items: [
+                                  DropdownMenuItem(
+                                    value: "current",
+                                    child: Text(
+                                      "current",
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: "saving",
+                                    child: Text(
+                                      "saving",
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                        SizedBox(
+                          height: 20.w,
+                        ),
+                        PrimarySTextFormField(
+                          controller: watch.iFSCCodeController,
+                          titleHeader: "IFSC Code",
+                          hintText: "Enter IFSC Code",
+                        ),
+                        SizedBox(
+                          height: 20.w,
+                        ),
+                        PrimarySTextFormField(
+                          controller: watch.bankBranchController,
+                          titleHeader: "Bank Branch",
+                          hintText: "Enter Bank Branch",
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
-                    height: 20.w,
-                  ),
-                  PrimarySTextFormField(
-                    controller: watch.iFSCCodeController,
-                    titleHeader: "IFSC Code",
-                    hintText: "Enter IFSC Code",
-                  ),
-                  SizedBox(
-                    height: 20.w,
-                  ),
-                  PrimarySTextFormField(
-                    controller: watch.bankBranchController,
-                    titleHeader: "Bank Branch",
-                    hintText: "Enter Bank Branch",
+                    height: 100.h,
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 100.h,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

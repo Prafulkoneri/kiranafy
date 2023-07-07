@@ -233,6 +233,7 @@ class EditCustomProductController extends ChangeNotifier {
     print(productImage.path);
     notifyListeners();
   }
+
   UploadCustomProductReqModel get uploadCustomProductReqModel =>
       UploadCustomProductReqModel(
         showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
@@ -243,12 +244,11 @@ class EditCustomProductController extends ChangeNotifier {
         productDescription: productDescriptionController.text,
         productName: productNameController.text,
         showUnderRecommendedProduct:
-        showUnderRecommendedProducts ? "yes" : "no",
+            showUnderRecommendedProducts ? "yes" : "no",
         showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
       );
   Future<void> uploadCustomProduct(
-    context,isNavFromAccount
-  ) async {
+      context, isNavFromAccount, selectedIndex) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadCustomProductRepo
@@ -259,26 +259,32 @@ class EditCustomProductController extends ChangeNotifier {
       final result =
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(isNavFromAccount){
+        if (isNavFromAccount) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                     index: 4,
-                    screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"recommended",isRefresh: true,))),
-                (Route<dynamic> route) => false,
+                    screenName: ShopSeasonalRecommandedOfferProductsView(
+                      selectedProduct: selectedIndex == 0
+                          ? "recommended"
+                          : selectedIndex == 1
+                              ? "seasonal"
+                              : "fullFill",
+                      isRefresh: true,
+                    ))),
+            (Route<dynamic> route) => false,
           );
-        }
-        else{
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: SSelectedProductView(
-                      categoryId: categoryId, isRefresh: true),
-                )),
-                (Route<dynamic> route) => false,
+                      index: 0,
+                      screenName: SSelectedProductView(
+                          categoryId: categoryId, isRefresh: true),
+                    )),
+            (Route<dynamic> route) => false,
           );
         }
         Utils.showPrimarySnackbar(context, result.message,
@@ -303,7 +309,7 @@ class EditCustomProductController extends ChangeNotifier {
     );
   }
 
-  void validateCustomProuduct(context,isNavFromAccount) {
+  void validateCustomProuduct(context, isNavFromAccount, selectedIndex) {
     if (selectedCategory == "") {
       Utils.showPrimarySnackbar(context, "Select Category",
           type: SnackType.error);
@@ -328,13 +334,13 @@ class EditCustomProductController extends ChangeNotifier {
       return;
     }
     if (productImage.path == "") {
-      uploadCustomProduct(context,isNavFromAccount);
+      uploadCustomProduct(context, isNavFromAccount, selectedIndex);
     } else {
-      uploadImage(context,isNavFromAccount);
+      uploadImage(context, isNavFromAccount);
     }
   }
 
-  Future uploadImage(context,isNavFromAccount) async {
+  Future uploadImage(context, isNavFromAccount) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.uploadCustomProduct}");
@@ -374,26 +380,28 @@ class EditCustomProductController extends ChangeNotifier {
       final respStr = await response.stream.bytesToString();
       print("respStr${respStr}");
       if (response.statusCode == 200) {
-        if(isNavFromAccount){
+        if (isNavFromAccount) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                     index: 4,
-                    screenName: ShopSeasonalRecommandedOfferProductsView(selectedProduct:"recommended",isRefresh: true,))),
-                (Route<dynamic> route) => false,
+                    screenName: ShopSeasonalRecommandedOfferProductsView(
+                      selectedProduct: "recommended",
+                      isRefresh: true,
+                    ))),
+            (Route<dynamic> route) => false,
           );
-        }
-        else{
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: SSelectedProductView(
-                      categoryId: categoryId, isRefresh: true),
-                )),
-                (Route<dynamic> route) => false,
+                      index: 0,
+                      screenName: SSelectedProductView(
+                          categoryId: categoryId, isRefresh: true),
+                    )),
+            (Route<dynamic> route) => false,
           );
         }
         Utils.showPrimarySnackbar(context, "Updated Successfully",

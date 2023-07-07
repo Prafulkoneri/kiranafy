@@ -34,12 +34,14 @@ class SEditAdminProductView extends StatefulWidget {
   final String? categoryId;
   final String? productId;
   final bool? isFromAccountScreen;
+  final int? selectedIndex;
 
   const SEditAdminProductView({
     super.key,
     required this.productId,
     required this.categoryId,
     required this.isFromAccountScreen,
+    this.selectedIndex,
   });
 
   @override
@@ -86,7 +88,11 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                             index: 4,
                             screenName:
                                 ShopSeasonalRecommandedOfferProductsView(
-                              selectedProduct: "recommended",
+                              selectedProduct: widget.selectedIndex == 0
+                                  ? "recommended"
+                                  : widget.selectedIndex == 1
+                                      ? "seasonal"
+                                      : "fullFill",
                               isRefresh: false,
                             ))),
                     (Route<dynamic> route) => false,
@@ -95,7 +101,8 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
           title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () {
-            read.uploadAdminProduct(context, widget.isFromAccountScreen);
+            read.uploadAdminProduct(
+                context, widget.isFromAccountScreen, widget.selectedIndex);
           },
         ),
       ),

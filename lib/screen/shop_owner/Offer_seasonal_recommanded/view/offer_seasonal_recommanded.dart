@@ -301,6 +301,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                               builder: (context) => SMainScreenView(
                                                                   index: 0,
                                                                   screenName: SEditAdminProductView(
+                                                                      selectedIndex:
+                                                                          0,
                                                                       productId:
                                                                           element
                                                                               ?.id
@@ -321,6 +323,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                               builder: (context) => SMainScreenView(
                                                                   index: 0,
                                                                   screenName: SEditCustomProductView(
+                                                                      selectedIndex:
+                                                                          0,
                                                                       productId:
                                                                           element
                                                                               ?.id
@@ -739,6 +743,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                               0,
                                                                           screenName:
                                                                               SEditAdminProductView(
+                                                                            selectedIndex:
+                                                                                1,
                                                                             productId:
                                                                                 element?.id.toString(),
                                                                             categoryId:
@@ -761,6 +767,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                               0,
                                                                           screenName:
                                                                               SEditCustomProductView(
+                                                                            selectedIndex:
+                                                                                1,
                                                                             productId:
                                                                                 element?.id.toString(),
                                                                             categoryId:
@@ -1193,6 +1201,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                               0,
                                                                           screenName:
                                                                               SEditAdminProductView(
+                                                                            selectedIndex:
+                                                                                2,
                                                                             productId:
                                                                                 element?.id.toString(),
                                                                             categoryId:
@@ -1215,6 +1225,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                               0,
                                                                           screenName:
                                                                               SEditCustomProductView(
+                                                                            selectedIndex:
+                                                                                2,
                                                                             productId:
                                                                                 element?.id.toString(),
                                                                             categoryId:

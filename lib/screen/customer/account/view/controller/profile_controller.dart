@@ -58,8 +58,6 @@ class ProfileController extends ChangeNotifier {
         context, MaterialPageRoute(builder: (context) => CFavouritesView()));
   }
 
-
-
 ////Detail Profile
   Future<void> getCustomerProfileDetails(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();

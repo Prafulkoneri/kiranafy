@@ -6,6 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/about_us/view/c_about_us_view.dart';
+import 'package:local_supper_market/screen/customer/about_us/view/c_privacy_policy.dart';
+import 'package:local_supper_market/screen/customer/c_setting/view/c_setting_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
@@ -16,6 +19,7 @@ import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_v
 import 'package:local_supper_market/utils/maps/view/map_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../products/views/product_screen_view.dart';
@@ -217,52 +221,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ),
                 ),
               ),
-              // GestureDetector(
-              //   onTap: () {
-              //     // readMain.onNavigation(4,UpdateProfileView(), context);
 
-              //     Navigator.pushAndRemoveUntil(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) => MainScreenView(
-              //               index: 1, screenName: UpdateProfileView())),
-              //       (Route<dynamic> route) => false,
-              //     );
-              //   },
-              //   child: Container(
-              //     margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 24.w),
-              //     padding: EdgeInsets.only(bottom: 15.w),
-              //     decoration: BoxDecoration(
-              //       border: Border(
-              //         bottom: BorderSide(width: 1, color: grey10),
-              //       ),
-              //       // color: Colors.white,
-              //     ),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.start,
-              //       // crossAxisAlignment: CrossAxisAlignment.end,
-              //       children: [
-              //         SvgPicture.asset(
-              //           'assets/icons/profile.svg',
-              //           // width: 14.w,
-              //           // height: 13.h,
-              //         ),
-              //         SizedBox(
-              //           width: 18.w,
-              //         ),
-              // Text(
-              //   'Edit Profile',
-              //   style: GoogleFonts.dmSans(
-              //     textStyle: TextStyle(
-              //         color: Black,
-              //         fontSize: 14.sp,
-              //         fontWeight: FontWeight.w400),
-              //   ),
-              // ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               GestureDetector(
                 onTap: () {
                   // readMain.onNavigation(4,UpdateProfileView(), context);
@@ -312,41 +271,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ),
                 ),
               ),
-              ////////////////////////
-
-              // Container(
-              //   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              //   padding: EdgeInsets.only(bottom: 15.w),
-              //   decoration: BoxDecoration(
-              //     border: Border(
-              //       bottom: BorderSide(width: 1, color: grey10),
-              //     ),
-              //     // color: Colors.white,
-              //   ),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.start,
-              //     crossAxisAlignment: CrossAxisAlignment.end,
-              //     children: [
-              // SvgPicture.asset(
-              //   'assets/icons/myorders.svg',
-              //   // width: 14.w,
-              //   // height: 13.h,
-              // ),
-              //       SizedBox(
-              //         width: 18.w,
-              //       ),
-              // Text(
-              //   'My Orders',
-              //   style: GoogleFonts.dmSans(
-              //     textStyle: TextStyle(
-              //         color: Black,
-              //         fontSize: 14.sp,
-              //         fontWeight: FontWeight.w400),
-              //   ),
-              // ),
-              //     ],
-              //   ),
-              // ),
+              /////////////
               GestureDetector(
                 onTap: () {
                   // readMain.onNavigation(4,UpdateProfileView(), context);
@@ -524,7 +449,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -567,103 +492,131 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                            index: 4, screenName: CAboutUsView())),
+                    (Route<dynamic> route) => false,
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/aboutus.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'About Us',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/aboutus.svg',
+                        // width: 14.w,
+                        // height: 13.h,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'About Us',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+              GestureDetector(
+                onTap: () {
+                  Share.share(
+                      'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/share.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Share App',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/share.svg',
+                        // width: 14.w,
+                        // height: 13.h,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Share App',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                            index: 4, screenName: CustomerPrivacyPolicy())),
+                    (Route<dynamic> route) => false,
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/policy.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Privacy Policy',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/policy.svg',
+                        // width: 14.w,
+                        // height: 13.h,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Privacy Policy',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -699,37 +652,48 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+              GestureDetector(
+                onTap: () async {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                            index: 4, screenName: CustomerSetting())),
+                    (Route<dynamic> route) => false,
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/setting.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Settings',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/setting.svg',
+                        // width: 14.w,
+                        // height: 13.h,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Settings',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(
