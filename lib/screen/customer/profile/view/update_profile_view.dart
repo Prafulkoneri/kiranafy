@@ -548,7 +548,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       SizedBox(
                         height: 22.w,
                       ),
-                      watch.pincode == "null" || !watch.showPincodeValueField
+                      watch.pincode == ""
                           ? CDropDownField(
                               onChanged: (value) async {
                                 print(value);

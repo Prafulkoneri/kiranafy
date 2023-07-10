@@ -687,43 +687,6 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                     )),
                                                 content: Column(
                                                   children: <Widget>[
-                                                    // Padding(
-                                                    //   padding: EdgeInsets.only(left: 6.w),
-                                                    //   child: Row(
-                                                    //     // crossAxisAlignment: CrossAxisAlignment.start,
-                                                    //     children: [
-                                                    //       Padding(
-                                                    //           padding:
-                                                    //               EdgeInsets.only(bottom: 35.w),
-                                                    //           child: Icon(
-                                                    //             Icons.circle_rounded,
-                                                    //             size: 5.w,
-                                                    //           )),
-                                                    //       SizedBox(
-                                                    //         width: 10,
-                                                    //       ),
-                                                    //       Flexible(
-                                                    //         child: Text(
-                                                    //           // softWrap: true,
-                                                    //           // maxLines: 3,//
-                                                    //           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sit nunc, netus ac vulputate sed",
-                                                    //           textAlign: TextAlign.justify,
-                                                    //           style: GoogleFonts.dmSans(
-                                                    //             textStyle: TextStyle(
-                                                    //                 color: Black1,
-                                                    //                 height: 1.5,
-
-                                                    //                 // letterSpacing: .05,
-                                                    //                 // overflow: TextOverflow.ellipsis,
-                                                    //                 fontSize: 14.sp,
-                                                    //                 fontWeight:
-                                                    //                     FontWeight.w400),
-                                                    //           ),
-                                                    //         ),
-                                                    //       ),
-                                                    //     ],
-                                                    //   ),
-                                                    // ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
                                                           left: 6.w, top: 5.w),
@@ -775,7 +738,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                               padding: EdgeInsets
                                                                   .only(
                                                                       bottom:
-                                                                          55.w),
+                                                                          60.w),
                                                               child: Icon(
                                                                 Icons
                                                                     .circle_rounded,
@@ -786,9 +749,6 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                           ),
                                                           Flexible(
                                                             child: Text(
-                                                              // softWrap: true,
-                                                              // maxLines: 3,//
-
                                                               "You are directly transferring payment to shop owner, any issue related to payment transfer please contact to shop owner.",
                                                               textAlign:
                                                                   TextAlign

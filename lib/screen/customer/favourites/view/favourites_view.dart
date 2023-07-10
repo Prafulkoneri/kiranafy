@@ -225,7 +225,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                         left: 8
                                                                             .w),
                                                                 child: Text(
-                                                                    "${element?.shopName}",
+                                                                    "${element?.areaName} ${element?.cityName}",
                                                                     style: GoogleFonts.roboto(
                                                                         textStyle: TextStyle(
                                                                             color: Colors.white,

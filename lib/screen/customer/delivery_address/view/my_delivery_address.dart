@@ -55,16 +55,24 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
           title: "My Addresses",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-            Navigator.pushAndRemoveUntil(
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //           index: 4,
+            //           screenName: AddAddressView(
+            //             route: "addressView",
+            //             isEditAdress: false,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
+            Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 4,
-                      screenName: AddAddressView(
+                  builder: (context) => const AddAddressView(
                         route: "addressView",
                         isEditAdress: false,
-                      ))),
-              (Route<dynamic> route) => false,
+                      )),
             );
           },
           // action: ,
@@ -284,7 +292,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                                                         index: 4,
                                                         screenName:
                                                             AddAddressView(
-                                                              route: "addressView",
+                                                          route: "addressView",
                                                           isEditAdress: true,
                                                           addressId: element?.id
                                                               .toString(),
