@@ -160,6 +160,7 @@ class OrderPaymentController extends ChangeNotifier {
       final result =
           CustomerPlaceOrderResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        transactionIdController.clear();
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(

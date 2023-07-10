@@ -82,7 +82,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HeaderView(areaName:watchMain.areaName,cityName:watchMain.cityName,),
+                      HeaderView(
+                        areaName: watchMain.areaName,
+                        cityName: watchMain.cityName,
+                      ),
                       SizedBox(
                         height: 10.h,
                       ),
@@ -1234,7 +1237,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   MainScreenView(
-                                                      index: 0,
+                                                      index: 1,
                                                       screenName:
                                                           CategoryScreenView(
                                                         shopId: widget.shopId,

@@ -110,15 +110,15 @@ class _MyOrderViewState extends State<MyOrderView> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "${element?.orderUniqueId}",
-                              // "Order ID - PAAC001",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black1,
-                                    // letterSpacing: .5,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700),
+                            Flexible(
+                              child: Text(
+                                " Order ID - ${element?.orderUniqueId}",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black1,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
                             SizedBox(

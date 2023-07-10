@@ -145,6 +145,7 @@ class UpdateProfileController extends ChangeNotifier {
 
   Future<void> onStateSelected(value) async {
     stateId = int.parse(value.toString());
+    cityId = 0;
     notifyListeners();
   }
 
@@ -181,6 +182,7 @@ class UpdateProfileController extends ChangeNotifier {
 
   Future<void> onCitySelected(value) async {
     cityId = int.parse(value.toString());
+    areaId = 0;
     notifyListeners();
   }
 
@@ -190,6 +192,7 @@ class UpdateProfileController extends ChangeNotifier {
 
   Future<void> onAreaSelected(value) async {
     areaId = int.parse(value.toString());
+    pincode = "";
     notifyListeners();
   }
 
@@ -225,6 +228,7 @@ class UpdateProfileController extends ChangeNotifier {
       );
 
   Future<void> getPinCodeList(context) async {
+    pincode = "";
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
       final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {

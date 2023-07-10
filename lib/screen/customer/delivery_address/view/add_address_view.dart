@@ -19,10 +19,16 @@ import 'package:provider/provider.dart';
 class AddAddressView extends StatefulWidget {
   final bool? isEditAdress;
   final String? addressId;
-  final String ? route;
-  final String ? shopId;
-  final String ? cartId;
-  const AddAddressView({super.key,this.shopId,this.cartId,required this.isEditAdress, this.addressId,required this.route});
+  final String? route;
+  final String? shopId;
+  final String? cartId;
+  const AddAddressView(
+      {super.key,
+      this.shopId,
+      this.cartId,
+      required this.isEditAdress,
+      this.addressId,
+      required this.route});
 
   @override
   State<AddAddressView> createState() => _AddAddressViewState();
@@ -33,9 +39,8 @@ class _AddAddressViewState extends State<AddAddressView> {
 
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<AddAddressController>()
-          .initState(context, widget.isEditAdress, widget.addressId,widget.route);
+      context.read<AddAddressController>().initState(
+          context, widget.isEditAdress, widget.addressId, widget.route);
     });
   }
 
@@ -48,12 +53,12 @@ class _AddAddressViewState extends State<AddAddressView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-        read.onBackBtnPressed(context,widget.cartId,widget.shopId);
+            read.onBackBtnPressed(context, widget.cartId, widget.shopId);
           },
-          title: widget.isEditAdress==false?"Add Address":"Edit Address",
+          title: widget.isEditAdress == false ? "Add Address" : "Edit Address",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {
-            await read.validateField(context,widget.shopId,widget.cartId);
+            await read.validateField(context, widget.shopId, widget.cartId);
           },
         ),
       ),
@@ -491,7 +496,7 @@ class _AddAddressViewState extends State<AddAddressView> {
                       titleHeader: "Landmark",
                     ),
                     SizedBox(
-                      height: 100.w,
+                      height: 300.w,
                     ),
                   ],
                 ),

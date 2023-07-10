@@ -186,6 +186,13 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 width: 13.w,
                               ),
                               InkWell(
+                                // onTap: () {
+                                //   watch.favAllShop
+                                //       ? read.removeAllShopFavList(
+                                //           context, watch.shopDetailData?.id)
+                                //       : read.updateAllShopFavList(
+                                //           context, watch.shopDetailData?.id);
+                                // },
                                 onTap: () {
                                   watch.favAllShop
                                       ? read.removeAllShopFavList(
@@ -744,21 +751,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 width: 91.w,
                                 child: PrimaryButton(
                                   color: SplashText,
-                                  // style: ButtonStyle(
-                                  //   elevation: MaterialStateProperty.all(0),
-                                  //   // backgroundColor: ,
-                                  //   backgroundColor:
-                                  //       MaterialStateProperty.all(SplashText),
-                                  //   shape: MaterialStateProperty.all(
-                                  //     RoundedRectangleBorder(
-                                  //       borderRadius: BorderRadius.circular(10),
-                                  //       // side: BorderSide(
-                                  //       //   color: SplashText,
-                                  //       //   // width: 1,
-                                  //       // ),
-                                  //     ),
-                                  //   ),
-                                  // ),
+
                                   onTap: () {
                                     read.removeCoupon(context);
                                   },
@@ -787,7 +780,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                     RichText(
                                       text: TextSpan(children: [
                                         TextSpan(
-                                          text: 'Congratulations!!',
+                                          text: 'Congratulations!! ',
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: SplashText,
@@ -798,7 +791,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         ),
                                         TextSpan(
                                           text:
-                                              '${watch.discountPercentage} Discount applied successfully.',
+                                              '  ${watch.discountPercentage} Discount applied successfully.',
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: SplashText,

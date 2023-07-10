@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
@@ -30,6 +31,9 @@ class OrderSummaryController extends ChangeNotifier {
   ApplyCouponRepo applyCouponRepo = ApplyCouponRepo();
   RemoveCouponRepo removeCouponRepo = RemoveCouponRepo();
 
+  AddFavReqModel get addFavReqModel => AddFavReqModel(
+        shopId: shopId.toString(),
+      );
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
       );
@@ -169,8 +173,11 @@ class OrderSummaryController extends ChangeNotifier {
 
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
+        slotGroupValue = shopDeliverySlots?[0];
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
+        expectedDateController.text =
+            DateFormat('dd-MM-yyy').format(DateTime.now());
         productTotalDiscount =
             orderFinalTotals?.productTotalDiscount.toString() ?? "";
         subTotal = orderFinalTotals?.subTotal.toString() ?? "";
@@ -273,10 +280,7 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
-  AddFavReqModel get addFavReqModel => AddFavReqModel(
-        shopId: shopId.toString(),
-      );
-
+//
   Future<void> updateAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));

@@ -392,13 +392,29 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  AppNetworkImages(
-                                    imageUrl:
-                                        "${watch.shopDetailData?.shopOwnerQrCodeImage}",
-                                    // "assets/images/qrcode.png",
-                                    // height: 165.h,
-                                    width: 165.w,
-                                  ),
+                                  watch.shopDetailData?.shopOwnerQrCodeImage ==
+                                          ""
+                                      ? Image.asset(
+                                          "assets/images/shop_image.png",
+                                          width: 165.w,
+                                          height: 150.h,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : AppNetworkImages(
+                                          width: 165.w,
+                                          height: 150.h,
+                                          fit: BoxFit.cover,
+                                          imageUrl: watch.shopDetailData
+                                                  ?.shopOwnerQrCodeImage ??
+                                              "",
+                                        ),
+                                  // AppNetworkImages(
+                                  //   imageUrl:
+                                  //       "${watch.shopDetailData?.shopOwnerQrCodeImage}",
+                                  //   // "assets/images/qrcode.png",
+                                  //   // height: 165.h,
+                                  //   width: 165.w,
+                                  // ),
                                 ],
                               ),
                               SizedBox(
