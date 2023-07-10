@@ -3,16 +3,19 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/shop_owner_re
 class LoginReqModel {
   String? countryCode;
   String? mobileNo;
+  String ? fcmToken;
 
   LoginReqModel({
     this.countryCode,
     this.mobileNo,
+   required this.fcmToken,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["shop_owner_mobile_number"] = mobileNo;
     data["shop_owner_country_code"] = countryCode;
+    data["shop_owner_fcm_token"] = fcmToken;
     return data;
   }
 }

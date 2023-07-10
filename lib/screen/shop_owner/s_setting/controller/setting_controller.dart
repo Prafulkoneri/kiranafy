@@ -39,7 +39,9 @@ class ShopSettingController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     settingRepo.shopSetting(pref.getString("successToken")).then((response) {
+    print("444444444");
       print(response.body);
+    print("444444444");
       final result = SettingsModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {

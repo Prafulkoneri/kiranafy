@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:local_supper_market/network/services/firebase_api.dart';
 import 'package:local_supper_market/screen/customer/account/view/controller/profile_controller.dart';
 
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
@@ -90,10 +91,15 @@ import 'screen/shop_owner/s_products/controller/new/get_product_unit_list_contro
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async{
 
+
+  print("handled background message");
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FireBaseApi().initNotification();
   runApp(
     MultiProvider(
       providers: [
@@ -158,10 +164,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => SubscriptionHistoryController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
         ChangeNotifierProvider(create: (_) => SBankAccountController()),
         ChangeNotifierProvider(create: (_) => SGetProductUnitListController()),
         ChangeNotifierProvider(create: (_) => CustomerSettingController()),
@@ -180,13 +184,32 @@ class MyApp extends StatefulWidget {
 }
 
 var fcmToken;
+final firebaseMessaging=FirebaseMessaging.instance;
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    FirebaseMessaging.instance.getToken().then((newToken) {
-      fcmToken = newToken;
-      print("fcmToken${fcmToken}");
+
+
+
+  // void initState() {
+  //   FirebaseMessaging.instance.getToken().then((newToken) {
+  //     fcmToken = newToken;
+  //     print("fcmToken${fcmToken}");
+  //   });
+  //   // fireBaseApi();
+  //
+  //
+  // }
+
+  void fireBaseApi()async{
+    await firebaseMessaging.requestPermission();
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      print("onMessageOpenedApp: $message");
+
+    });
+    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      print("onBackgroundMessage: $message");
     });
   }
 
