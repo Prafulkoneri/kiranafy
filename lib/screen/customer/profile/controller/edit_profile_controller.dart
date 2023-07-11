@@ -421,6 +421,12 @@ class UpdateProfileController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+    if (alernetMobileController.text.length < 10) {
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
     if (emailController.text.isEmpty) {
       Utils.showPrimarySnackbar(context, "Enter Email Id",
           type: SnackType.error);

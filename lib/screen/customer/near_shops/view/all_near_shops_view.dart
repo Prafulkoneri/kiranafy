@@ -78,7 +78,10 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        HeaderView(areaName:watchMain.areaName,cityName:watchMain.cityName,),
+                        HeaderView(
+                          areaName: watchMain.areaName,
+                          cityName: watchMain.cityName,
+                        ),
                         Padding(
                           padding: EdgeInsets.only(
                             right: 19.0.w,

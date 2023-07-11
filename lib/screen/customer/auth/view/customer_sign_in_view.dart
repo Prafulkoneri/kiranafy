@@ -132,7 +132,7 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                   child: Row(
                     children: [
                       Text(
-                        "We need to verify you. We will send you\na one time verification code.",
+                        "  We need to verify you. We will send you\n  a one time verification code.",
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: SplashText1,

@@ -137,26 +137,6 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             ],
                                           );
                                         }),
-                                    // Carousel(
-                                    //   images: [
-                                    //     AssetImage(
-                                    //       "assets/images/shop_image.png",
-                                    //     ),
-                                    //     // AssetImage(
-                                    //     //   "assets/images/property2.png",
-                                    //     // ),
-                                    //
-                                    //     // ExactAssetImage("images/image-carousel.jpeg"),
-                                    //   ],
-                                    //   autoplay: true,
-                                    //   animationDuration: Duration(milliseconds: 1000),
-                                    //   dotBgColor: Colors.red,
-                                    //   showIndicator: false,
-                                    //   // dotSize: 6.0,
-                                    //   // dotSpacing: 15.0,
-                                    //   // dotColor: Colors.lightGreenAccent,
-                                    //   // borderRadius: true,
-                                    // ),
                                   ),
                           ),
                           Positioned(
