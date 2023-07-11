@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:local_supper_market/main.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/check_mob_no_exist_model.dart';
@@ -293,6 +294,7 @@ class ShopSignInController extends ChangeNotifier {
   LoginReqModel get loginReqModel => LoginReqModel(
         countryCode: countryCode,
         mobileNo: mobController.text,
+    fcmToken: fcmToken,
       );
 
   Future<void> onLogin(context) async {
