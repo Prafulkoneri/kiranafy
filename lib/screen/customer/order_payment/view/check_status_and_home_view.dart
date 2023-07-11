@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -8,7 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
+import 'package:provider/provider.dart';
 
 class CheckOrderStatusView extends StatefulWidget {
   final String? orderId;
@@ -20,7 +23,18 @@ class CheckOrderStatusView extends StatefulWidget {
 
 class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<TrackOrderStatusController>()
+          .initState(context, widget.orderId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final watch = context.watch<TrackOrderStatusController>();
+    final read = context.read<TrackOrderStatusController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: WillPopScope(
@@ -92,12 +106,20 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                       minimumSize: const Size(100, 40), //////// HERE
                     ),
                     // style: style,
+                    // onPressed: () {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => OrderStatusView()),
+                    //   );
+                    // },
                     onPressed: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OrderStatusView()),
-                      );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrderStatusView(
+                                    orderId: watch.orderId,
+                                  )));
                     },
                     child: Text(
                       'Check Order Status',
