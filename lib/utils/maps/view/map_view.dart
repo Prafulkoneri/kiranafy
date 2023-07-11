@@ -80,30 +80,30 @@ class _MapScreenViewState extends State<MapScreenView> {
         !isLocationEnabledByUser?Container(
           height: 0,
         ):
-        Positioned(
-            top: -10.w,
-            left: 0.w,
-            right: 0.w,
-            child: InkWell(
-              onTap: () {
-                read.onMapCloseBtnPressed(context);
-              },
-              child: Container(
-                height: 40.w,
-                width: 40.w,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black,
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    'assets/images/Cross.svg',
-                    width: 15.w,
-                    height: 15.h,
-                  ),
-                ),
-              ),
-            )),
+        // Positioned(
+        //     top: -10.w,
+        //     left: 0.w,
+        //     right: 0.w,
+        //     child: InkWell(
+        //       onTap: () {
+        //         read.onMapCloseBtnPressed(context);
+        //       },
+        //       child: Container(
+        //         height: 40.w,
+        //         width: 40.w,
+        //         decoration: BoxDecoration(
+        //           shape: BoxShape.circle,
+        //           color: Colors.black,
+        //         ),
+        //         child: Center(
+        //           child: SvgPicture.asset(
+        //             'assets/images/Cross.svg',
+        //             width: 15.w,
+        //             height: 15.h,
+        //           ),
+        //         ),
+        //       ),
+        //     )),
         Positioned(
             bottom: 0,
             left: 0,
@@ -238,63 +238,112 @@ class _MapScreenViewState extends State<MapScreenView> {
   }
 
   Widget _showSearchBox() {
+    final read=Provider.of<MainScreenController>(context,listen: false);
     return SafeArea(
-      child: Container(
-        margin: EdgeInsets.only(top: 19.w,left: 16.w,right: 16.w),
-        width: MediaQuery.of(context).size.width,
-        height: 48.w,
-        child: Container(
-          child: GooglePlaceAutoCompleteTextField(
-
-              textStyle: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14.sp
-              ),
-              textEditingController: searchController,
-              googleAPIKey: "AIzaSyCm27F5Jrl8b6vXkNCOotiTdnM8QeygfOY",
-              inputDecoration: InputDecoration(
-                hintText: "Search location",
-                hintStyle: TextStyle(
-                  fontSize: 14.sp,
-                  color: Color(0xffB7B7B7),
-                  fontWeight: FontWeight.w400,
-                ),
-                prefixIcon: Container(
-                  height: 13.3.w,
-                  width: 13.3.w,
-                  child: Center(child: Container(child: SvgPicture.asset("assets/icons/search_map.svg",height: 13.3.w,width: 13.3.w,fit: BoxFit.contain,))),
-                ),
-                contentPadding: EdgeInsets.only(left: 10.w),
-                fillColor: Colors.white,
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color(0xffE4E4E4),
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                focusedBorder:   OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color(0xffE4E4E4),
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              debounceTime: 800, // default 600 ms,
-              countries: ["in","fr"], // optional by default null is set
-              isLatLngRequired:true,// if you required coordinates from place detail
-              getPlaceDetailWithLatLng: (prediction) {
-                _gotoSpecificPosition(LatLng(double.parse(prediction.lat.toString()), double.parse(prediction.lng.toString())));
-
-                // this method will return latlng with place detail
-                print("placeDetails" + prediction.lng.toString());
-              }, // this callback is called when isLatLngRequired is true
-              itmClick: (Prediction prediction) {
-                searchController.text=prediction.description.toString();
-                searchController.selection = TextSelection.fromPosition(TextPosition(offset: prediction.description!.length));
-              }
+      child: Column(
+        children: [
+          SizedBox(
+            height: 5.w,
           ),
-        ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+          
+              SizedBox(
+                width: 16.w,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(top: 5.w,left: 16.w,right: 0.w),
+                  width: MediaQuery.of(context).size.width,
+                  height: 48.w,
+                  child: Container(
+                    child: GooglePlaceAutoCompleteTextField(
+
+                        textStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14.sp
+                        ),
+                        textEditingController: searchController,
+                        googleAPIKey: "AIzaSyCm27F5Jrl8b6vXkNCOotiTdnM8QeygfOY",
+                        inputDecoration: InputDecoration(
+                          hintText: "Search location",
+                          hintStyle: TextStyle(
+                            fontSize: 14.sp,
+                            color: Color(0xffB7B7B7),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          prefixIcon: Container(
+                            height: 13.3.w,
+                            width: 13.3.w,
+                            child: Center(child: Container(child: SvgPicture.asset("assets/icons/search_map.svg",height: 13.3.w,width: 13.3.w,fit: BoxFit.contain,))),
+                          ),
+                          contentPadding: EdgeInsets.only(left: 10.w),
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xffE4E4E4),
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder:   OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xffE4E4E4),
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        debounceTime: 800, // default 600 ms,
+                        countries: ["in","fr"], // optional by default null is set
+                        isLatLngRequired:true,// if you required coordinates from place detail
+                        getPlaceDetailWithLatLng: (prediction) {
+                          _gotoSpecificPosition(LatLng(double.parse(prediction.lat.toString()), double.parse(prediction.lng.toString())));
+
+                          // this method will return latlng with place detail
+                          print("placeDetails" + prediction.lng.toString());
+                        }, // this callback is called when isLatLngRequired is true
+                        itmClick: (Prediction prediction) {
+                          searchController.text=prediction.description.toString();
+                          searchController.selection = TextSelection.fromPosition(TextPosition(offset: prediction.description!.length));
+                        }
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 5.w,
+              ),
+              InkWell(
+                onTap: () {
+                  read.onMapCloseBtnPressed(context);
+                },
+                child: Container(
+                  height: 30.w,
+                  width: 30.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black,
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/images/Cross.svg',
+                      width: 10.w,
+                      height: 10.h,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10.w,
+              ),
+            ],
+          ),
+        ],
       ),
     );
 
