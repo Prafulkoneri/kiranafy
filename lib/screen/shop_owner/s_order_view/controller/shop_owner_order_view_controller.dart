@@ -26,10 +26,10 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String orderCancelledReason = "";
   String orderCancelledReasonId = "";
   String deliveryCodeError = "";
-  String subTotal="0";
-  String totalDiscount="0";
-  String deliveryCharges="0";
-  String totalAmount="0";
+  String subTotal = "0";
+  String totalDiscount = "0";
+  String deliveryCharges = "0";
+  String totalAmount = "0";
 
   // String? deliveryCode = "";
   TextEditingController reasonController = TextEditingController();
@@ -53,7 +53,6 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String cancellationId = "";
   String productId = "";
   List<bool> selectedProductList = [];
-
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -92,8 +91,6 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   Future<void> shopOwnerOrderView(context, orId, showLoading) async {
     if (showLoading) {
       showLoader(true);
@@ -112,10 +109,10 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         couponDetails = shopOrderViewData?.couponDetails;
         deliveryAddressDetails = shopOrderViewData?.deliveryAddressDetails;
         orderProductDetails = shopOrderViewData?.orderProductDetails;
-        subTotal=orderDetails?.subTotal??"";
-        totalAmount=orderDetails?.totalAmount??"";
-        deliveryCharges=orderDetails?.deliveryCharges??"";
-        totalDiscount=orderDetails?.totalDiscount??"";
+        subTotal = orderDetails?.subTotal ?? "";
+        totalAmount = orderDetails?.totalAmount ?? "";
+        deliveryCharges = orderDetails?.deliveryCharges ?? "";
+        totalDiscount = orderDetails?.totalDiscount ?? "";
         selectedProductList = List<bool>.filled(
             orderProductDetails?.length ?? 0, false,
             growable: true);
@@ -124,18 +121,15 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           if (orderProductDetails?[i].status == "active") {
             selectedProductList.removeAt(i);
             selectedProductList.insert(i, true);
-          }
-          else {
+          } else {
             selectedProductList.removeAt(i);
             selectedProductList.insert(i, false);
           }
-
         }
         await getCancelOrderList(context);
         if (showLoading) {
           showLoader(false);
-        }
-        else{
+        } else {
           showLoader(true);
         }
 
@@ -165,19 +159,18 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     orderCancelledReasonId = oCReasonId.toString();
     deliveryCode = dCode.toString();
 
-    if(oStatus=="order_confirmed"){
-      List checkDataList=[];
-      for(int i=0;i<selectedProductList.length;i++){
-        if(selectedProductList[i]==true){
+    if (oStatus == "order_confirmed") {
+      List checkDataList = [];
+      for (int i = 0; i < selectedProductList.length; i++) {
+        if (selectedProductList[i] == true) {
           checkDataList.add(selectedProductList[i]);
         }
-        if(checkDataList.isEmpty){
+        if (checkDataList.isEmpty) {
           Utils.showPrimarySnackbar(context, "No product selected",
               type: SnackType.error);
           return;
         }
       }
-
     }
 
     if (oStatus == "order_cancelled") {
@@ -209,7 +202,6 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         .orderStatus(
             orderStatusChangedRequestModel, pref.getString("successToken"))
         .then((response) async {
-
       final result =
           OrderStatusChangeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -217,8 +209,12 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    SMainScreenView(index: 1, screenName: SOrderStatusView(selectedIndex: 4,isFromOrderView:true,))),
+                builder: (context) => SMainScreenView(
+                    index: 1,
+                    screenName: SOrderStatusView(
+                      selectedIndex: 4,
+                      isFromOrderView: true,
+                    ))),
             (Route<dynamic> route) => false,
           );
         }
@@ -351,11 +347,10 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         orderProductId: productId,
       );
 
-  Future<void> selectProducts(context,index,id,value) async {
+  Future<void> selectProducts(context, index, id, value) async {
+    LoadingOverlay.of(context).show();
 
-   LoadingOverlay.of(context).show();
-
-    productId=id.toString();
+    productId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     addRemoveProductFromOrderRepo
         .addremoveProductFromOrder(
@@ -365,19 +360,18 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       final result =
           AddRemoveProductFromOrderResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(selectedProductList[index]){
+        if (selectedProductList[index]) {
           selectedProductList.removeAt(index);
-          selectedProductList.insert(index,false);
-        }
-        else{
+          selectedProductList.insert(index, false);
+        } else {
           selectedProductList.removeAt(index);
-          selectedProductList.insert(index,true);
+          selectedProductList.insert(index, true);
         }
 
-        totalDiscount=result.data?.totalDiscount.toString()??"";
-        totalAmount=result.data?.totalAmount.toString()??"";
-        subTotal=result.data?.subTotalAmount.toString()??"";
-        deliveryCharges=result.data?.deliveryCharges.toString()??"";
+        totalDiscount = result.data?.totalDiscount.toString() ?? "";
+        totalAmount = result.data?.totalAmount.toString() ?? "";
+        subTotal = result.data?.subTotalAmount.toString() ?? "";
+        deliveryCharges = result.data?.deliveryCharges.toString() ?? "";
         LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {

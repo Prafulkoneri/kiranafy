@@ -237,7 +237,6 @@ class _CartDetailViewState extends State<CartDetailView> {
                                           ],
                                         ),
                                       ),
-                                      // Divider(thickness: 1, color: grey2),
                                       Container(
                                         // height: 360.h,
                                         // width: 352.w,

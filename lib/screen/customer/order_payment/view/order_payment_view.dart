@@ -513,11 +513,9 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                         borderRadius: 0,
                         width: ScreenUtil().screenWidth,
                         color: SplashText,
-
                         onTap: () async {
                           await read.placeOrder(context);
                         },
-
                         child: Text(
                           "Submit Order",
                           style: GoogleFonts.dmSans(
@@ -528,8 +526,6 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-
-                        //
                       ),
                     ),
                   ],

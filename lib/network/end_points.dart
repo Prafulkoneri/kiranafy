@@ -382,4 +382,10 @@ class Endpoint {
   ////////////////////////////////////get  UNIT PRODUCT //////////
   static const String getProductUnitList =
       "${baseUrl}lsm-shop-owner-get-product-unit-list";
+  ////////////////////////////////////Customer Cancel Order//////////
+  static const String getCustomerCancelOrder =
+      "${baseUrl}lsm-customer-get-cancel-order-reasons";
+  ////////////////////////////////////Customer Cancel Order//////////
+  static const String customerCancelOrder =
+      "${baseUrl}lsm-customer-cancel-order";
 }

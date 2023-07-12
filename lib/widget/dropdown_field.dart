@@ -108,7 +108,7 @@ class SDropDownField extends StatefulWidget {
   final Function(dynamic)? onChanged;
   final List<DropdownMenuItem>? items;
   final String? titleHeader;
-  final  value;
+  final value;
   final double? hintSize;
   final double? height;
   final EdgeInsets? iconPadding;
@@ -132,11 +132,6 @@ class SDropDownField extends StatefulWidget {
 }
 
 class _SDropDownFieldState extends State<SDropDownField> {
-  // final List<String> genderItems = [
-  //   'Male',
-  //   'Female',
-  // ];
-
   String? selectedValue;
 
   @override
@@ -161,7 +156,6 @@ class _SDropDownFieldState extends State<SDropDownField> {
         Container(
           // height: 45.w,
           child: DropdownButtonFormField2(
-
             value: widget.value,
             isDense: true,
             decoration: InputDecoration(

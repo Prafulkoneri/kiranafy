@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/get_cancel_order_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
@@ -25,12 +27,14 @@ class CustomerOrderViewController extends ChangeNotifier {
   ShopDetails? shopDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
-  bool isLoading=true;
-
+  bool isLoading = true;
+  List<CustomerCancelReasonList>? cancelReasondata;
   CustomerOrderViewRequestModel get customerOrderViewRequestModel =>
       CustomerOrderViewRequestModel(orderId: orderId.toString());
   //////////////
   OrderViewRepo orderViewRepo = OrderViewRepo();
+  GetCustomerCancelOrderRepo customerCancelOrderRepo =
+      GetCustomerCancelOrderRepo();
 
   Future<void> initState(
     context,
@@ -39,13 +43,15 @@ class CustomerOrderViewController extends ChangeNotifier {
     print("rvmjioureicvnwcy");
     print(orId);
     await shopOwnerOrderView(context, orId);
-
+    getCancelOrderList(context);
     notifyListeners();
   }
-showLoader(value){
-    isLoading=value;
+
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
-}
+  }
+
   Future<void> shopOwnerOrderView(context, orId) async {
     orderId = orId.toString();
     showLoader(true);
@@ -163,5 +169,56 @@ showLoader(value){
         return false;
       },
     );
+  }
+
+  List<bool> isSelectedReason = [];
+  Future<void> getCancelOrderList(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    customerCancelOrderRepo
+        .cOrderCancelReason(pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result =
+          CustomerCancelOrderModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        cancelReasondata = result.cancelReasondata;
+        int cancelOrderLength = cancelReasondata?.length ?? 0;
+        isSelectedReason = List<bool>.filled(cancelOrderLength, false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  void onSelectReason(index, value, id) {
+    if (isSelectedReason[index]) {
+      isSelectedReason[index] = false;
+      // cancellationId = "";
+      notifyListeners();
+      return;
+    }
+    int cancelOrderLength = cancelReasondata?.length ?? 0;
+
+    isSelectedReason =
+        List<bool>.filled(cancelOrderLength, false, growable: true);
+    isSelectedReason[index] = true;
+    // cancellationId = id.toString();
+    // isOtherReasonSelected = false;
+
+    // isSelectedReason[index]=true;
+
+    notifyListeners();
   }
 }
