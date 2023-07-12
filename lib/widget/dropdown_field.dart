@@ -159,6 +159,8 @@ class _SDropDownFieldState extends State<SDropDownField> {
             value: widget.value,
             isDense: true,
             decoration: InputDecoration(
+              //Add isDense true and zero Padding.
+              //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
               isDense: true,
               fillColor: Colors.white,
               filled: true,

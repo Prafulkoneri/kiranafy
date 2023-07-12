@@ -52,13 +52,13 @@ class CustomerPlaceOrderReqModel {
 class CustomerPlaceOrderResponseModel {
   int? status;
   String? message;
+  int? orderId;
 
-  CustomerPlaceOrderResponseModel({
-    required this.status,
-    required this.message,
-  });
+  CustomerPlaceOrderResponseModel(
+      {required this.status, required this.message, required this.orderId});
   CustomerPlaceOrderResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
+    orderId = json["order_id"];
   }
 }

@@ -22,18 +22,21 @@ class TrackOrderStatusController extends ChangeNotifier {
   DeliveryAddressDetails? deliveryAddressDetails;
   TrakOrderRepo trackOrderRepo = TrakOrderRepo();
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
-  bool isLoading=true;
+  bool isLoading = true;
   bool favAllShop = true; /////shop add fvrt
   TrackOrderRequestodel get trackOrderReqModel => TrackOrderRequestodel(
         orderId: orderId.toString(),
       );
   Future<void> initState(context, orId) async {
     await trackOrderStatus(context, orId);
+    print("object");
+    print(orId);
+    print("object");
   }
 
-  showLoader(value){
-    isLoading=value;
-  notifyListeners();
+  showLoader(value) {
+    isLoading = value;
+    notifyListeners();
   }
 
   Future<void> trackOrderStatus(context, orId) async {
