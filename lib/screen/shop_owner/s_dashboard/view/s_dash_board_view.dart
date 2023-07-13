@@ -1975,7 +1975,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                       imageUrl:
                                                           element?.imagesPath ??
                                                               "",
-                                                      fit: BoxFit.cover),
+                                                      height: 191.w,
+                                                      fit: BoxFit.fill),
                                                   width:
                                                       ScreenUtil().screenWidth,
                                                 ),

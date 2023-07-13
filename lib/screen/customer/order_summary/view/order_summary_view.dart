@@ -791,7 +791,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         ),
                                         TextSpan(
                                           text:
-                                              '  ${watch.discountPercentage} Discount applied successfully.',
+                                              ' ${watch.discountPercentage} Discount applied successfully.',
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: SplashText,
@@ -952,7 +952,12 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 )),
                                                                           ),
                                                                         )
-                                                                      : Container(),
+                                                                      : Container(
+                                                                          width:
+                                                                              60.w,
+                                                                          height:
+                                                                              20.h,
+                                                                        ),
                                                                 ],
                                                               ),
                                                               Row(
@@ -1197,7 +1202,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   watch.couponCodeController.text != ""
                                       ? TextSpan(
                                           text:
-                                              '(${watch.couponCodeController.text}) ',
+                                              ' (${watch.couponCodeController.text}) ',
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: SplashText,

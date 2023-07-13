@@ -83,10 +83,8 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                   itemBuilder: (context, index) {
                     final element = watch.cancelReasondata?[index];
                     return Padding(
-                      padding: EdgeInsets.only(
-                        left: 20.w,
-                        top: 17.w,
-                      ),
+                      padding:
+                          EdgeInsets.only(left: 20.w, top: 17.w, bottom: 10),
                       child: Row(
                         children: [
                           PrimaryCheckBox(
@@ -148,14 +146,6 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                           watch.orderCancelledReason,
                           watch.orderCancelledReasonId,
                         );
-                        //   read.shopOrderStatus(
-                        //     context,
-                        //     watch.orderDetails?.id.toString(),
-                        //     "order_cancelled",
-                        //     watch.reasonController.text,
-                        //     watch.cancellationId,
-                        //     "",
-                        //   );
                       },
                       child: Text(
                         'Submit',

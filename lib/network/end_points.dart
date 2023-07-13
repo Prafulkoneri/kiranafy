@@ -388,4 +388,8 @@ class Endpoint {
   ////////////////////////////////////Customer Cancel Order//////////
   static const String customerCancelOrder =
       "${baseUrl}lsm-customer-cancel-order";
+  ////////////////////////////////////Shop Notification List//////////
+  static const String shopNotificationList =
+      "${baseUrl}lsm-shop-owner-get-notifications-list";
+  static const String checkAppversion = "${baseUrl}lsm-app-version";
 }

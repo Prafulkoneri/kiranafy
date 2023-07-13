@@ -12,6 +12,9 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 class PrimaryCTextFormField extends StatelessWidget {
   final String? titleHeader;
   final bool? readOnly;
+  final double? height;
+  final double? width;
+  final int? maxLines;
   void Function(String)? onChanged;
   final LengthLimitingTextInputFormatter? lengthLimitingTextInputFormatter;
   final TextEditingController? controller;
@@ -29,6 +32,9 @@ class PrimaryCTextFormField extends StatelessWidget {
       this.onTap,
       this.textStyle,
       this.borderColor,
+      this.maxLines,
+      this.height,
+      this.width,
       this.hintStyle,
       this.color,
       this.enableBorder,
@@ -64,11 +70,12 @@ class PrimaryCTextFormField extends StatelessWidget {
               )
             : Container(),
         Container(
-          height: 48.w,
+          height: height ?? 48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
             style: textStyle,
             onTap: onTap,
+            maxLines: maxLines ?? 1,
             readOnly: readOnly ?? false,
             onChanged: onChanged,
             inputFormatters: [

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_setting/model/app_version_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/change_setting_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/delete_account_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/get_setting_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_setting/repository/app_version_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/repository/change_setting_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/repository/delete_account_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/repository/setting_repo.dart';
@@ -18,14 +20,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ShopSettingController extends ChangeNotifier {
   SeetingRepo settingRepo = SeetingRepo();
   DeleteAccountRepo deleteAccountRepo = DeleteAccountRepo();
+  AppVersionRepo appVersionRepo = AppVersionRepo();
+  AppVersionData? appversiondata;
   bool isAppNotificationEnable = true;
   bool isStackLoading = false;
+
   // String? selectedValue;
 // Group Value fo
 // r Radio Button.
 
   Future<void> initState(context) async {
+    await appVersionCheck(context);
     await shopNotification(context, "");
+
     notifyListeners();
   }
 
@@ -39,9 +46,9 @@ class ShopSettingController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     settingRepo.shopSetting(pref.getString("successToken")).then((response) {
-    print("444444444");
+      print("444444444");
       print(response.body);
-    print("444444444");
+      print("444444444");
       final result = SettingsModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -132,6 +139,40 @@ class ShopSettingController extends ChangeNotifier {
             type: SnackType.success);
         notifyListeners();
       } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+////////////////////////////////////////////////////////////////
+  Future<void> appVersionCheck(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    appVersionRepo.appVersion(pref.getString("successToken")).then((response) {
+      print(response.body);
+      final result = AppVersionModel.fromJson(jsonDecode(response.body));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        appversiondata = result.appversiondata;
+
+        // isAppNotificationEnable =
+        //     result.settingData?.appNotification == "on" ? true : false;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
