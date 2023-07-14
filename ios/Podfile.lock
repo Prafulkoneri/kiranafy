@@ -175,12 +175,12 @@ PODS:
   - PhoneNumberKit/UIKit (3.6.6):
     - PhoneNumberKit/PhoneNumberKitCore
   - PromisesObjC (2.2.0)
-  - SDWebImage (5.16.0):
-    - SDWebImage/Core (= 5.16.0)
-  - SDWebImage/Core (5.16.0)
-  - SDWebImageWebPCoder (0.12.0):
+  - SDWebImage (5.17.0):
+    - SDWebImage/Core (= 5.17.0)
+  - SDWebImage/Core (5.17.0)
+  - SDWebImageWebPCoder (0.13.0):
     - libwebp (~> 1.0)
-    - SDWebImage/Core (~> 5.16)
+    - SDWebImage/Core (~> 5.17)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -221,10 +221,10 @@ DEPENDENCIES:
   - libphonenumber_plugin (from `.symlinks/plugins/libphonenumber_plugin/ios`)
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
@@ -299,13 +299,13 @@ EXTERNAL SOURCES:
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
   permission_handler:
     :path: ".symlinks/plugins/permission_handler/ios"
   share_plus:
     :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
@@ -359,8 +359,8 @@ SPEC CHECKSUMS:
   permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   PhoneNumberKit: 5b1be7ee4955dfeeb855f51eecdd829ab24b3484
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
-  SDWebImage: 2aea163b50bfcb569a2726b6a754c54a4506fcf6
-  SDWebImageWebPCoder: f0f287cee4cd96a59937fbf3c77a8cfda9ba67b0
+  SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
+  SDWebImageWebPCoder: af09429398d99d524cae2fe00f6f0f6e491ed102
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
@@ -373,4 +373,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b17e1ecfe97aba85f3997d462fe23d9e4313a8d8
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.11.3
