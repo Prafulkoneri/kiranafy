@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>110985117622-oo8ui77dnosg88f0guaid2t2bukjeh0n.apps.googleusercontent.com</string>
+	<string>110985117622-umafaa30f62v4mmk7dg90snu1b4jjf0m.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.110985117622-oo8ui77dnosg88f0guaid2t2bukjeh0n</string>
+	<string>com.googleusercontent.apps.110985117622-umafaa30f62v4mmk7dg90snu1b4jjf0m</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>110985117622-6284a65sj75ql8gnhgqt5a7jo7b9r0m9.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.lsm.localSuperMart</string>
+	<string>com.localsupermart.lsm</string>
 	<key>PROJECT_ID</key>
 	<string>lsm-0001</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:110985117622:ios:6459750937b8c393868b17</string>
+	<string>1:110985117622:ios:1a970d32e1e8e861868b17</string>
 </dict>
 </plist>

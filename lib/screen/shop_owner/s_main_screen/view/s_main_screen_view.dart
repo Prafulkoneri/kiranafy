@@ -43,7 +43,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
       child: Scaffold(
         extendBody: true,
         bottomNavigationBar: Container(
-            height: 81.w,
+            height: 87.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30.w),

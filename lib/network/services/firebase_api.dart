@@ -30,6 +30,12 @@ class FireBaseApi {
 
   Future<void> initNotification() async {
     await firebasemessaging.requestPermission();
+    Stream<String> fcmStream = firebaseMessaging.onTokenRefresh;
+    // fcmStream.listen((token) {
+    //   // saveToken(token);
+    //   print("fcm token is: $token");
+    //   fcmToken = token;
+    // });
     fcmToken=await firebasemessaging.getToken();
     print("Token : ${fcmToken}");
     initPushNotification();

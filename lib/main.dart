@@ -1,3 +1,6 @@
+
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -99,7 +102,16 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  if (Platform.isIOS) {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyBaOZbarFqV16r_fceIjrSAlNtgvddAFgg",
+          appId: "1:110985117622:ios:1a970d32e1e8e861868b17",
+          messagingSenderId: "110985117622",
+          projectId: "lsm-0001"));
+  } else {
+    await Firebase.initializeApp();
+  }
   await FireBaseApi().initNotification();
   runApp(
     MultiProvider(
