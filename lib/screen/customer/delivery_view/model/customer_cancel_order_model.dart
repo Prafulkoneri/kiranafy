@@ -1,5 +1,5 @@
 class CustomerCancelOrderRequestModel {
-  int? orderId;
+  String? orderId;
   String? orderCancelledReason;
   String? orderCancelledReasonId;
 
@@ -16,4 +16,18 @@ class CustomerCancelOrderRequestModel {
     return data;
   }
 }
+
 ////////////////////////////////Response Model////////////////////////////
+class CustomerCancelOrderResModel {
+  int? status;
+  String? message;
+
+  CustomerCancelOrderResModel({
+    required this.status,
+    required this.message,
+  });
+  CustomerCancelOrderResModel.fromJson(Map<String, dynamic> json) {
+    status = json["status"];
+    message = json["message"];
+  }
+}

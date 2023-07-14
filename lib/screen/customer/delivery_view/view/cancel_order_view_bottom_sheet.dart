@@ -83,10 +83,8 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                   itemBuilder: (context, index) {
                     final element = watch.cancelReasondata?[index];
                     return Padding(
-                      padding: EdgeInsets.only(
-                        left: 20.w,
-                        top: 17.w,
-                      ),
+                      padding:
+                          EdgeInsets.only(left: 20.w, top: 17.w, bottom: 10),
                       child: Row(
                         children: [
                           PrimaryCheckBox(
@@ -118,7 +116,7 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                       left: 20.w, top: 24.w, bottom: 17.w, right: 19.w),
                   // padding: const EdgeInsets.all(8.0),
                   child: PrimarySTextFormField(
-                    // controller: watch.reasonController,
+                    controller: watch.reasonController,
                     height: 150.w,
                     maxLines: 10,
                     // hintText: "Address",/
@@ -142,14 +140,12 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                       ),
                       // style: style,
                       onPressed: () {
-                        // read.shopOrderStatus(
-                        //   context,
-                        //   watch.orderDetails?.id.toString(),
-                        //   "order_cancelled",
-                        //   watch.reasonController.text,
-                        //   watch.cancellationId,
-                        //   "",
-                        // );
+                        read.CustomerOrderCancel(
+                          context,
+                          watch.orderId,
+                          watch.orderCancelledReason,
+                          watch.orderCancelledReasonId,
+                        );
                       },
                       child: Text(
                         'Submit',
@@ -168,49 +164,49 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
             ),
           ),
         ),
-        // Positioned(
-        //     bottom: 0,
-        //     left: 0,
-        //     right: 0,
-        //     child: Visibility(
-        //       // visible: watch.isCancelOrderErrorMsgVisible,
-        //       child: Container(
-        //         padding: EdgeInsets.only(
-        //             top: 15.w, bottom: 15.w, left: 10.w, right: 10.w),
-        //         margin: EdgeInsets.only(bottom: 10.w, left: 10.w, right: 10.w),
-        //         color: Colors.red,
-        //         width: ScreenUtil().screenWidth,
-        //         child: Row(
-        //           children: [
-        //             Expanded(
-        //               child: Text(
-        //                 "bhrytnbterbhytgrwfefgwer",
-        //                 // watch.cancelOrderErrorMsg,
-        //                 style: TextStyle(color: Colors.white, fontSize: 14.sp),
-        //               ),
-        //             ),
-        //             Row(
-        //               children: [
-        //                 InkWell(
-        //                   onTap: () {
-        //                     // read.onCancelErrorMissageDismiss();
-        //                   },
-        //                   child: Text(
-        //                     "Dismiss",
-        //                     style:
-        //                         TextStyle(color: Colors.white, fontSize: 14.sp),
-        //                   ),
-        //                 ),
-        //                 SizedBox(
-        //                   width: 10.w,
-        //                 ),
-        //               ],
-        //             ),
-        //           ],
-        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //         ),
-        //       ),
-        //     )),
+        Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Visibility(
+              visible: watch.isCancelOrderErrorMsgVisible,
+              child: Container(
+                padding: EdgeInsets.only(
+                    top: 15.w, bottom: 15.w, left: 10.w, right: 10.w),
+                margin: EdgeInsets.only(bottom: 10.w, left: 10.w, right: 10.w),
+                color: Colors.red,
+                width: ScreenUtil().screenWidth,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        // "bhrytnbterbhytgrwfefgwer",
+                        watch.cancelOrderErrorMsg,
+                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            read.onCancelErrorMissageDismiss();
+                          },
+                          child: Text(
+                            "Dismiss",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14.sp),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                      ],
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+              ),
+            )),
       ],
     );
   }

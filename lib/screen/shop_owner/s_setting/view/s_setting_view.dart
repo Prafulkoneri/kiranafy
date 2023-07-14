@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,6 +22,12 @@ class ShopSettingView extends StatefulWidget {
 }
 
 class _ShopSettingViewState extends State<ShopSettingView> {
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ShopSettingController>().initState(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<ShopSettingController>();
@@ -293,7 +300,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
               height: 15.h,
             ),
             Text(
-              "App Version - 1.0.12",
+              "App Version - ${watch.appversiondata?.appVersion}",
               style: TextStyle(
                   fontSize: 18.sp, fontWeight: FontWeight.w400, color: Black1),
             ),

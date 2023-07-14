@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 class CheckOrderStatusView extends StatefulWidget {
   final String? orderId;
-  const CheckOrderStatusView({super.key, this.orderId});
+  const CheckOrderStatusView({super.key, required this.orderId});
 
   @override
   State<CheckOrderStatusView> createState() => _CheckOrderStatusViewState();
@@ -118,7 +118,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => OrderStatusView(
-                                    orderId: watch.orderId,
+                                    orderId: widget.orderId,
                                   )));
                     },
                     child: Text(

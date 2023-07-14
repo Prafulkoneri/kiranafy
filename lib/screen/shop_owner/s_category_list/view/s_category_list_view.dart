@@ -195,9 +195,9 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                               ],
                             );
                           }),
-                      SizedBox(
-                        height: 65.w,
-                      ),
+                      // SizedBox(
+                      //   height: 65.w,
+                      // ),
                     ],
                   ),
                 ),

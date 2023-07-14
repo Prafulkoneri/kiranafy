@@ -164,8 +164,11 @@ class OrderPaymentController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  MainScreenView(index: 2, screenName: CheckOrderStatusView())),
+              builder: (context) => MainScreenView(
+                  index: 2,
+                  screenName: CheckOrderStatusView(
+                    orderId: result.orderId.toString(),
+                  ))),
           (Route<dynamic> route) => false,
         );
         showStackLoader(false);

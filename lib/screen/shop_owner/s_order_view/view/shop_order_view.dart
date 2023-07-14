@@ -707,8 +707,8 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                                   child: Container(
                                                     padding: EdgeInsets.only(
                                                         left: 20.w,
-                                                        top: 9.w,
-                                                        bottom: 7.w,
+                                                        top: 2.w,
+                                                        bottom: 2.w,
                                                         right: 18.w),
                                                     decoration: BoxDecoration(
                                                         color: SplashText,
@@ -968,7 +968,7 @@ class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
                                             padding: EdgeInsets.only(
                                                 left: 20.w,
                                                 top: 9.w,
-                                                bottom: 7.w,
+                                                bottom: 9.w,
                                                 right: 34.w),
                                             decoration: BoxDecoration(
                                                 color: Color(0xffEC7074),

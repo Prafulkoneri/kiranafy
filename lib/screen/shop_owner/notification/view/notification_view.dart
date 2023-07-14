@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/notification/controller/notification_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:provider/provider.dart';
 
 class NotificationsScreenView extends StatefulWidget {
   const NotificationsScreenView({Key? key}) : super(key: key);
@@ -16,32 +20,43 @@ class NotificationsScreenView extends StatefulWidget {
 
 class _NotificationsScreenViewState extends State<NotificationsScreenView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ShopNoticationController>().initState(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final read = context.read<ShopNoticationController>();
+    final watch = context.watch<ShopNoticationController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
-              onBackBtnPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SMainScreenView(
-                          index: 4,
-                          screenName: SAccountScreenView(
-                            refresh: false,
-                          ))),
-                  (Route<dynamic> route) => false,
-                );
-              },
-              title: "Notifications",
-              action: SvgPicture.asset("assets/icons/delete.svg")),
+            onBackBtnPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 4,
+                        screenName: SAccountScreenView(
+                          refresh: false,
+                        ))),
+                (Route<dynamic> route) => false,
+              );
+            },
+            title: "Notifications",
+          ),
         ),
         body: ListView.builder(
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(vertical: 19.w, horizontal: 19.w),
             shrinkWrap: true,
-            itemCount: 8,
+            itemCount: watch.notificationList?.length ?? 0,
             itemBuilder: (BuildContext, index) {
+              final element = watch.notificationList?[index];
               return Container(
                 padding: EdgeInsets.only(
                     right: 16.w, left: 16.w, top: 19.w, bottom: 15.w),
@@ -77,7 +92,8 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                         child: Column(
                           children: [
                             Text(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi semper egestas at cursus maecenas",
+                              "${element?.notificationDescription}",
+                              // "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi semper egestas at cursus maecenas",
                               style: TextStyle(
                                   fontSize: 11.5.sp,
                                   fontWeight: FontWeight.w400,
@@ -93,7 +109,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                                   width: 8.87.w,
                                 ),
                                 Text(
-                                  "12 march 2023",
+                                  "${element?.createdAt}",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 11.sp,

@@ -36,6 +36,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
     final watch = context.watch<ShopSignInController>();
     return Scaffold(
         body: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
       child: Stack(
         alignment: Alignment.topCenter,
         clipBehavior: Clip.none,
@@ -61,7 +62,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
             // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: 150.w,
+                height: 130.w,
               ),
               Image.asset(
                 "assets/images/splash4.png",
@@ -98,7 +99,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                     color: Colors.black),
               ),
               SizedBox(
-                height: 50.h,
+                height: 40.h,
               ),
               Text(
                 "Shop Sign In",
@@ -111,7 +112,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                 ),
               ),
               SizedBox(
-                height: 120.h,
+                height: 80.h,
               ),
               Padding(
                 padding: EdgeInsets.only(left: 28.w, right: 23.w, top: 0.h),
