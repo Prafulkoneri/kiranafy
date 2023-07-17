@@ -554,7 +554,15 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 ),
                                 Expanded(
                                   child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => OrderDeliveryView(
+                                                // orderId: element?.id.toString()
+                                                )),
+                                      );
+                                    },
                                     child: Container(
                                       padding: EdgeInsets.only(
                                           left: 12.w,

@@ -30,19 +30,19 @@ class SplashController extends ChangeNotifier {
   );
   AppVersionRepo appVersionRepo = AppVersionRepo();
   String appVersion = "";
-bool isUpdateRequired=false;
+  bool isUpdateRequired = false;
   AppVersionData? appversiondata;
   Future<void> initState(context) async {
     initPackageInfo();
     await appVersionCheck(context);
     Timer(Duration(seconds: 3), () async {
-   if(isUpdateRequired){
-     Navigator.pushReplacement(
-       context,
-       MaterialPageRoute(builder: (context) => const UpadteView()),
-     );
-     return;
-   }
+      if (isUpdateRequired) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const UpadteView()),
+        );
+        return;
+      }
       SharedPreferences pref = await SharedPreferences.getInstance();
       print(pref.getString("status"));
       if (pref.getString("status") == "numberRegistered") {
@@ -122,14 +122,14 @@ bool isUpdateRequired=false;
         print(appversiondata?.appVersion);
         if (packageInfo.version == appversiondata?.appVersion) {
           print("true");
-          isUpdateRequired=true;
+          isUpdateRequired = true;
           notifyListeners();
         }
 
         // isAppNotificationEnable =
         //     result.settingData?.appNotification == "on" ? true : false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        // Utils.showPrimarySnackbar(context, result.message,
+        //     type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
