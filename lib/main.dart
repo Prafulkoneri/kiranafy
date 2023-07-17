@@ -1,8 +1,10 @@
 
 import 'dart:io';
 
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,6 +23,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
+import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
@@ -42,6 +45,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 
@@ -205,15 +209,48 @@ final firebaseMessaging = FirebaseMessaging.instance;
 class _MyAppState extends State<MyApp> {
   @override
 
-  // void initState() {
-  //   FirebaseMessaging.instance.getToken().then((newToken) {
-  //     fcmToken = newToken;
-  //     print("fcmToken${fcmToken}");
-  //   });
-  //   // fireBaseApi();
-  //
-  //
-  // }
+  void initState() {
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      print(message.data);
+      print("onMessageOpenedApp: $message");
+      print("okkkkk");
+      print(message.data["notification_type"]);
+      if(message.data["notification_type"]=="custom"){
+
+          context.read<SMainScreenController>().onCustomTypeNotification(context);
+
+        
+        
+        // onTypeCustom();
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //         index: 0,
+        //         screenName: NotificationsScreenView(
+        //
+        //         ),
+        //       )),
+        //       (Route<dynamic> route) => false,
+        // );
+      }
+
+    });
+
+
+    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      print("onBackgroundMessage: $message");
+    });
+
+    // fireBaseApi();
+
+
+  }
+
+
+  void onTypeCustom(){
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationsScreenView()));
+  }
 
   void fireBaseApi() async {
     await firebaseMessaging.requestPermission();
@@ -229,6 +266,7 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

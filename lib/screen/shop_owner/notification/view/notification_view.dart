@@ -42,7 +42,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                     builder: (context) => SMainScreenView(
                         index: 4,
                         screenName: SAccountScreenView(
-                          refresh: false,
+                          refresh: true,
                         ))),
                 (Route<dynamic> route) => false,
               );
