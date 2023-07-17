@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
@@ -20,17 +21,11 @@ class HomeCarousal extends StatefulWidget {
 
 class _HomeCarousalState extends State<HomeCarousal> {
   @override
-  void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<AllNearShopsAsPerPincode>().initState(context);
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<AllNearShopsAsPerPincode>();
-    final read = context.read<AllNearShopsAsPerPincode>();
-    final readMain = context.read<MainScreenController>();
+    final watch = context.watch<HomeScreenController>();
     return watch.nearByShopList?.isNotEmpty ?? false
         ? SizedBox(
             height: 120.h,

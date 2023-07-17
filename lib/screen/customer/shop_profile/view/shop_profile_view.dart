@@ -94,14 +94,14 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           Align(
                             child: watch.bannerImageData!.isEmpty
                                 ? Container(
-                                    height: 180.w,
+                                    height: 188.w,
                                     child: Image.asset(
                                       "assets/images/shop_image.png",
                                       height: 191.w,
                                       fit: BoxFit.fill,
                                     ))
                                 : SizedBox(
-                                    height: 180.0.h,
+                                    height: 188.0.h,
                                     child: PageView.builder(
                                         allowImplicitScrolling: true,
                                         physics: NeverScrollableScrollPhysics(),
@@ -143,7 +143,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             //<-- SEE HERE
                             // right: 15.w,
                             // left: 0.w,
-                            bottom: 30.w,
+                            bottom: 23.w,
                             child: Container(
                               padding: EdgeInsets.only(left: 15.w, right: 15.w),
                               width: ScreenUtil().screenWidth,

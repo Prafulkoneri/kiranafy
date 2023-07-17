@@ -28,7 +28,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                   topRight: Radius.circular(16.0)),
               child: Container(
                 padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                    bottom: 200.w),
                 // height: 335,
                 child: Padding(
                   padding: EdgeInsets.all(25.h),
@@ -63,6 +63,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                       OtpTextField(
                         //  controller: otpController,
                         numberOfFields: 6,
+                        autoFocus: true,
                         borderColor: Color(0xFF512DA8),
                         //set to true to show as box or false to show as dash
                         showFieldAsBox: false,

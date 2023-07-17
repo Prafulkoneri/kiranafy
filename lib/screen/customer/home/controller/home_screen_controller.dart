@@ -6,6 +6,8 @@ import 'package:local_supper_market/screen/customer/home/model/banner_model.dart
 import 'package:local_supper_market/screen/customer/home/model/category_model.dart';
 import 'package:local_supper_market/screen/customer/home/repository/banner_repo.dart';
 import 'package:local_supper_market/screen/customer/home/repository/category_repo.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/all_near_shops_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/shop_as_per_pincode_all_near_shops.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,11 +21,16 @@ class HomeScreenController extends ChangeNotifier {
   List<CategoriesList> categoryFirstList = [];
   List<CategoriesList> categorySecondList = [];
   int _currentPage = 0;
+  AllNearShopRepo allNearShopRepo = AllNearShopRepo();
+  List<AllNearShops>? nearByShopList;
   // String pincode = "111111";
   Future<void> initState(context, refresh) async {
     if (refresh) {
+
       await getBannerImage(context);
       await getCategoryList(context);
+      await getAllNearByShops(context);
+
     } else {
       showLoader(false);
     }
@@ -36,7 +43,7 @@ class HomeScreenController extends ChangeNotifier {
   }
 
   Future<void> getBannerImage(context) async {
-    showLoader(true);
+  showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("bnvuuiwveuciiutwmibijmiuey");
     print(pref.getString("successToken"));
@@ -105,7 +112,7 @@ class HomeScreenController extends ChangeNotifier {
         print("77777777");
         categoryFirstList = result.categoriesFirstList ?? [];
         categorySecondList = result.categoriesSecondList ?? [];
-        showLoader(false);
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -115,6 +122,45 @@ class HomeScreenController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> getAllNearByShops(context) async {
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    print(pref.getString("pincode"));
+    // if(pref.getString("pincode")==null){
+    //   pincode="111111";
+    // }
+    // else{
+    //   pincode=pref.getString("pincode").toString();
+    // }
+    allNearShopRepo
+        .getAllNearShop(pref.getString("successToken"))
+        .then((response) {
+      print("Shop List");
+      print(response.body);
+      final result = AllNearShopsResModel.fromJson(jsonDecode(response.body));
+      print(response.body);
+      if (response.statusCode == 200) {
+        nearByShopList = result.data;
+        showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

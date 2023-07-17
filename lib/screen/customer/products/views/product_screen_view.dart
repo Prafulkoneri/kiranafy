@@ -639,17 +639,18 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                             SizedBox(
                               height: 30.w,
                             ),
-                            Text("Similar Products",
+                            watch.productViewData?.similarProducts?.isNotEmpty??false?Text("Similar Products",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16.sp,
                                       color: Black1),
-                                )),
-                            SizedBox(
+                                )):Container(),
+                            watch.productViewData?.similarProducts?.isNotEmpty??false? SizedBox(
                               height: 17.w,
-                            ),
-                            Container(
+                            ):Container(),
+                            watch.productViewData
+                                ?.similarProducts?.isNotEmpty??false?Container(
                               height: 205.w,
                               child: ListView.builder(
                                   physics: const BouncingScrollPhysics(),
@@ -920,7 +921,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       ),
                                     );
                                   }),
-                            ),
+                            ):Container(),
                             SizedBox(
                               height: 100.w,
                             ),
