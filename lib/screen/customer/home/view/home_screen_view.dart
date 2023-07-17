@@ -70,7 +70,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
     final mainScreenWatch = context.watch<MainScreenController>();
-    final NearByShopWatch = context.watch<AllNearShopsAsPerPincode>();
     return Scaffold(
         body: watch.isLoading
             ? Center(
@@ -90,7 +89,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       SizedBox(
                         height: 13.h,
                       ),
-
                       Padding(
                         padding: EdgeInsets.only(
                           right: 19.0.w,
@@ -133,13 +131,12 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       SizedBox(
                         height: 15.h,
                       ),
-
                       ////image
-                      Container(
+                      watch.bannerData!.isNotEmpty?Container(
                         height: 160.h,
                         padding: EdgeInsets.only(left: 19.w),
                         child: PageView.builder(
-                            itemCount: watch.bannerData?.length ?? 1,
+                            itemCount: watch.bannerData?.length ?? 0,
                             physics: BouncingScrollPhysics(),
                             padEnds: false,
                             pageSnapping: true,
@@ -180,7 +177,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 //         : 10.w),
                               );
                             }),
-                      ),
+                      ):Container(),
                       SizedBox(
                         height: 5.h,
                       ),
@@ -191,8 +188,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       SizedBox(
                         height: 15.h,
                       ),
-
-                      NearByShopWatch.nearByShopList?.isNotEmpty??true
+                      watch.nearByShopList?.isNotEmpty??false
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -252,7 +248,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               ],
                             )
                           :Container(),
-
                       watch.categoryFirstList.isNotEmpty
                           ? Container(
                               padding: EdgeInsets.only(
@@ -271,15 +266,13 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               ),
                             )
                           : Container(),
-
                       watch.categoryFirstList.isNotEmpty
                           ? SizedBox(
                               height: 15.h,
                             )
                           : Container(),
                       watch.categoryFirstList.isNotEmpty
-                          ? ShopCategory()
-                          : Container(),
+                          ? ShopCategory() : Container(),
                       // SizedBox(
                       //   height: 20.h,
                       // ),
