@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class UpadteView extends StatefulWidget {
-  const UpadteView({super.key});
+class UpdateView extends StatefulWidget {
+  const UpdateView({super.key});
 
   @override
-  State<UpadteView> createState() => _UpadteViewState();
+  State<UpdateView> createState() => _UpdateViewState();
 }
 
-class _UpadteViewState extends State<UpadteView> {
+class _UpdateViewState extends State<UpdateView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +97,18 @@ class _UpadteViewState extends State<UpadteView> {
                       width: 164.w,
                       borderRadius: 15,
                       color: Color(0xff4689EC),
-                      onTap: () {},
+                      onTap: () async{
+                        if (await canLaunch(
+                        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
+                        await launch(
+                        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+                        } else {
+                        throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
+                        }
+                        LaunchReview.launch(
+                        androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                        iOSAppId: "585027354");
+                      },
                       textColor: Colors.white,
                       text: "UPDATE",
                     ),
