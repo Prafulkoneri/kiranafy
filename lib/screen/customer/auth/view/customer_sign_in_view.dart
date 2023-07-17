@@ -34,216 +34,221 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
     final read = context.read<CustomerSignInController>();
     final watch = context.watch<CustomerSignInController>();
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          alignment: Alignment.topCenter,
-          clipBehavior: Clip.none,
-          children: [
-            Positioned(
-              left: 0.w,
-              child: Image.asset(
-                "assets/images/splash1.png",
-                height: 235.w,
-                width: 361.w,
+      body: GestureDetector(
+        onTap: (){
+          FocusScope.of(context).unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Stack(
+            alignment: Alignment.topCenter,
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                left: 0.w,
+                child: Image.asset(
+                  "assets/images/splash1.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            Positioned(
-              bottom: -25.w,
-              right: 0.w,
-              child: Image.asset(
-                "assets/images/splash2.png",
-                height: 235.w,
-                width: 361.w,
+              Positioned(
+                bottom: -25.w,
+                right: 0.w,
+                child: Image.asset(
+                  "assets/images/splash2.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            Column(
-              children: [
-                SizedBox(
-                  height: 140.w,
-                ),
-                Image.asset(
-                  "assets/images/splash4.png",
-                  height: 112.w,
-                  width: 60.w,
-                ),
-                SizedBox(
-                  height: 5.w,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "LOCAL",
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          color: SplashText),
-                    ),
-                    Text(
-                      " SUPERMART",
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          color: SplashText1),
-                    ),
-                  ],
-                ),
-                Text(
-                  "Hameshase aapke sath....",
-                  style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black),
-                ),
-                SizedBox(
-                  height: 50.h,
-                ),
-                Text(
-                  "Customer Sign In",
-                  style: GoogleFonts.dmSans(
-                    textStyle: TextStyle(
-                        color: Custlogin,
-                        letterSpacing: .5,
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w700),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 140.w,
                   ),
-                ),
-                SizedBox(
-                  height: 120.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 28.w, right: 23.w),
-                  child: MobileNoTextFormField(
-                    onChanged: (value) {
-                      read.mobileNumberCheck(context);
-                    },
-                    onCountryCodeChanged: (value) {
-                      read.onCountryCodeSelected(value);
-                    },
-                    enableOrder: false,
-                    controller: watch.mobileController,
+                  Image.asset(
+                    "assets/images/splash4.png",
+                    height: 112.w,
+                    width: 60.w,
                   ),
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 25.w),
-                  child: Row(
+                  SizedBox(
+                    height: 5.w,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "  We need to verify you. We will send you\n  a one time verification code.",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: SplashText1,
-                              // letterSpacing: .5,/
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
+                        "LOCAL",
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: SplashText),
+                      ),
+                      Text(
+                        " SUPERMART",
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: SplashText1),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: 34.h,
-                ),
-                SizedBox(
-                  height: 26.h,
-                ),
-                SizedBox(
-                  width: 300.w, // <-- Your width
-                  height: 45.h,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Button,
-
-                      // elevation: 3,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0)),
-                      minimumSize: const Size(100, 40), //////// HERE
-                    ),
-                    // style: style,
-                    onPressed: () async {
-                      await read.onNextClick(context);
-                      if (watch.mobileController.text.length < 10) {
-                        return;
-                      }
-                      if (!watch.isLoginBtnEnabled) {
-                        return;
-                      }
-                      // if (!watch.isVerifyChecked) {
-                      //   return;
-                      // }
-
-                      showModalBottomSheet(
-                        backgroundColor: Colors.white,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30),
-                                topRight: Radius.circular(30))),
-                        context: context,
-                        builder: (BuildContext context) {
-                          return OtpCustomerBottomSheet();
-                        },
-                      );
-                    },
-                    child: Text(
-                      'Next',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            // color: SplashTex
-                            letterSpacing: .5,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
+                  Text(
+                    "Hameshase aapke sath....",
+                    style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 50.h,
+                  ),
+                  Text(
+                    "Customer Sign In",
+                    style: GoogleFonts.dmSans(
+                      textStyle: TextStyle(
+                          color: Custlogin,
+                          letterSpacing: .5,
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            letterSpacing: .5,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
+                  SizedBox(
+                    height: 120.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 28.w, right: 23.w),
+                    child: MobileNoTextFormField(
+                      onChanged: (value) {
+                        read.mobileNumberCheck(context);
+                      },
+                      onCountryCodeChanged: (value) {
+                        read.onCountryCodeSelected(value);
+                      },
+                      enableOrder: false,
+                      controller: watch.mobileController,
                     ),
-                    // Text("data")
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CustomerSignUp()),
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 25.w),
+                    child: Row(
+                      children: [
+                        Text(
+                          "  We need to verify you. We will send you\n  a one time verification code.",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: SplashText1,
+                                // letterSpacing: .5,/
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 34.h,
+                  ),
+                  SizedBox(
+                    height: 26.h,
+                  ),
+                  SizedBox(
+                    width: 300.w, // <-- Your width
+                    height: 45.h,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Button,
+
+                        // elevation: 3,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                        minimumSize: const Size(100, 40), //////// HERE
+                      ),
+                      // style: style,
+                      onPressed: () async {
+                        await read.onNextClick(context);
+                        if (watch.mobileController.text.length < 10) {
+                          return;
+                        }
+                        if (!watch.isLoginBtnEnabled) {
+                          return;
+                        }
+                        // if (!watch.isVerifyChecked) {
+                        //   return;
+                        // }
+
+                        showModalBottomSheet(
+                          backgroundColor: Colors.white,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30))),
+                          context: context,
+                          builder: (BuildContext context) {
+                            return OtpCustomerBottomSheet();
+                          },
                         );
                       },
                       child: Text(
-                        " Sign Up",
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                              color: Custlogin,
+                        'Next',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              // color: SplashTex
                               letterSpacing: .5,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                )
-              ],
-            ),
-          ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account?",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              letterSpacing: .5,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                      // Text("data")
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CustomerSignUp()),
+                          );
+                        },
+                        child: Text(
+                          " Sign Up",
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                                color: Custlogin,
+                                letterSpacing: .5,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

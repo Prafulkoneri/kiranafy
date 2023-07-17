@@ -28,7 +28,7 @@ class _CustomerSignUpOtpState extends State<CustomerSignUpOtp> {
                   topRight: Radius.circular(16.0)),
               child: Container(
                 padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                    bottom:200.w),
                 // height: 335,
                 child: Padding(
                   padding: EdgeInsets.all(25.h),
@@ -61,6 +61,7 @@ class _CustomerSignUpOtpState extends State<CustomerSignUpOtp> {
                         ),
                       ),
                       OtpTextField(
+                        autoFocus: true,
                         //  controller: otpController,
                         numberOfFields: 6,
                         borderColor: Color(0xFF512DA8),
