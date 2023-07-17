@@ -5,8 +5,7 @@ class Endpoint {
   // Get Base Url
   // static const String getBaseUrl = 'https://newcms.m-staging.in/local-super-mart-admin/api/app-base-url';
   // Base Url
-  static const String baseUrl =
-      'https://localsupermart.com/testing/api/';
+  static const String baseUrl = 'https://localsupermart.com/testing/api/';
   // 'https://localsupermart.com/live/api/';
   // Check Mobile Number Exist
   static const String checkMobNoExist =
@@ -393,4 +392,7 @@ class Endpoint {
   static const String shopNotificationList =
       "${baseUrl}lsm-shop-owner-get-notifications-list";
   static const String checkAppversion = "${baseUrl}lsm-app-version";
+  static const String shopNotificationList =
+      "${baseUrl}lsm-shop-owner-get-notifications-list";
+  static const String reorderDelivery = "${baseUrl}lsm-app-version";
 }

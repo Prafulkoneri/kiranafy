@@ -39,7 +39,7 @@ class SplashController extends ChangeNotifier {
       if (isUpdateRequired) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const UpadteView()),
+          MaterialPageRoute(builder: (context) => UpdateView()),
         );
         return;
       }
@@ -96,6 +96,68 @@ class SplashController extends ChangeNotifier {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
       }
+
+      if (isUpdateRequired) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const UpdateView()),
+        );
+        return;
+      } else {
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        print(pref.getString("status"));
+        if (pref.getString("status") == "numberRegistered") {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => ShopRegistrationView()));
+        }
+        if (pref.getString("status") == "shopRegistered") {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => SKycVerificationView()));
+        }
+        if (pref.getString("status") == "kycUploaded") {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SSubscriptionScreenView(loggedIn: false)));
+        }
+        if (pref.getString("status") == "subscriptionCompleted") {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SShopConfigurationView(initialShopConfigration: true)));
+        }
+        if (pref.getString("status") == "loggedIn") {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                      index: 0,
+                      screenName: ShopDashBoardView(
+                        refresh: true,
+                      ),
+                    )),
+            (Route<dynamic> route) => false,
+          );
+        }
+        if (pref.getString("status") == "customerLoggedIn") {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MainScreenView(
+                    index: 0,
+                    screenName: HomeScreenView(
+                      refreshPage: true,
+                    ))),
+            (Route<dynamic> route) => false,
+          );
+        }
+        if (pref.getString("status") == null) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
+        }
+      }
     });
   }
 
@@ -106,8 +168,6 @@ class SplashController extends ChangeNotifier {
 
   Future<void> appVersionCheck(context) async {
     initPackageInfo();
-    // appVersion=packageinfo
-
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     appVersionRepo.appVersion(pref.getString("successToken")).then((response) {
@@ -117,10 +177,8 @@ class SplashController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print(packageInfo.version);
         print("jjjjjjjjjjjjjjjjjjjjjjjj");
-
         appversiondata = result.appversiondata;
-        print(appversiondata?.appVersion);
-        if (packageInfo.version == appversiondata?.appVersion) {
+        if (packageInfo.version != appversiondata?.appVersion) {
           print("true");
           isUpdateRequired = true;
           notifyListeners();
@@ -130,6 +188,11 @@ class SplashController extends ChangeNotifier {
         //     result.settingData?.appNotification == "on" ? true : false;
         // Utils.showPrimarySnackbar(context, result.message,
         //     type: SnackType.success);
+
+        else {
+          isUpdateRequired = false;
+        }
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
