@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:math';
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -185,7 +185,9 @@ class ShopSignInController extends ChangeNotifier {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
 
       if (authCred.user != null) {
+        print("fsss");
         if (isLoginBtnEnabled) {
+          print("hello");
           onLogin(context);
           return;
         } else {
@@ -294,12 +296,15 @@ class ShopSignInController extends ChangeNotifier {
   LoginReqModel get loginReqModel => LoginReqModel(
         countryCode: countryCode,
         mobileNo: mobController.text,
-    fcmToken: fcmToken,
+        fcmToken: fcmToken,
       );
 
   Future<void> onLogin(context) async {
+    print("fcmtoken");
+    print("fcmToken${fcmToken}");
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopLoginRepo.shopLogin(loginReqModel).then((response) {
+      log(response.body);
       final result = LoginResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
