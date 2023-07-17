@@ -2,13 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/customer_cancel_order_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/get_cancel_order_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/reorder_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_cancel_order_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/reorder_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
@@ -18,6 +21,7 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/add_fa
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,6 +35,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   bool isOtherReasonSelected = false;
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
+  ReorderRepo reOrderRepo = ReorderRepo();
   OrderViewData? orderData;
   OrderDetails? orderDetails;
   CouponDetails? couponDetails;
@@ -319,6 +324,54 @@ class CustomerOrderViewController extends ChangeNotifier {
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  /////////////////////////////////Reorder/////////////////////////
+  ///
+  CustomerReorderRequestModel get customerReOrderReqModel =>
+      CustomerReorderRequestModel(
+        orderId: orderId.toString(),
+      );
+  Future<void> CustomerReorder(context, oId) async {
+    LoadingOverlay.of(context).show();
+    orderId = oId.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    reOrderRepo
+        .reorder(customerReOrderReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+          CustomerReorderResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  MainScreenView(index: 2, screenName: CartScreenView())),
+          (Route<dynamic> route) => false,
+        );
+
+        print("hello");
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        LoadingOverlay.of(context).hide();
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

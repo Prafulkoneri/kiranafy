@@ -555,13 +555,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 Expanded(
                                   child: InkWell(
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => OrderDeliveryView(
-                                                // orderId: element?.id.toString()
-                                                )),
-                                      );
+                                      read.CustomerReorder(context,
+                                          watch.orderDetails?.id.toString());
                                     },
                                     child: Container(
                                       padding: EdgeInsets.only(
