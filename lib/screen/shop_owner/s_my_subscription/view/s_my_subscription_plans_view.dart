@@ -782,18 +782,34 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                     bottom: 10.w,
                     top: 8.w),
                 color: Color(0xffF2F2F2),
-                child: Column(children: [
-                  Text(
-                    '₹ ${watch.subscriptionHistory?[i].paidAmount ?? ""}',
-                    // overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black1,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  )
-                ])),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '₹ ${watch.subscriptionHistory?[i].paidAmount ?? ""}',
+                            // overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black1,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          SvgPicture.asset(
+                            'assets/icons/download.svg',
+                            height: 18,
+                            // overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      )
+                    ])),
           ]));
     }
     return Table(

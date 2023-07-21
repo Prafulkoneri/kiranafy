@@ -521,14 +521,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         "${watch.deliveryAddressDetails?.address1}",
                                         maxLines: 3,
                                         // "${element.address1} \n${element.address2} ",
-                                        // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
                                         // textAlign: TextAlign.start,
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               // height: 1.5,
                                               color: black,
-                                              // letterSpacing: .05,
-                                              // overflow: TextOverflow.ellipsis,
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w400),
                                         ),
@@ -544,8 +541,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      watch.orderDetails?.orderStatus == "Dispatched" ||
-                              watch.orderDetails?.orderStatus == "Delivered"
+                      watch.orderDetails?.orderStatus == "Delivered"
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

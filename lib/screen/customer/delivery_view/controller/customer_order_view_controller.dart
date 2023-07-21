@@ -5,13 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/customer_cancel_order_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/get_cancel_order_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/get_shop_review_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/reorder_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/submit_review_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_cancel_order_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/get_shop_review_list_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/reorder_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/submit_review_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
@@ -28,6 +32,8 @@ import 'package:url_launcher/url_launcher.dart';
 class CustomerOrderViewController extends ChangeNotifier {
   String orderId = "";
   String shopId = "";
+  String review = "";
+  int? rating;
   String orderCancelledReason = "";
   String orderCancelledReasonId = "";
   String cancellationId = "";
@@ -51,6 +57,8 @@ class CustomerOrderViewController extends ChangeNotifier {
       CustomerOrderViewRequestModel(orderId: orderId.toString());
   //////////////
   OrderViewRepo orderViewRepo = OrderViewRepo();
+  SubmitReviewRepo submitReviewRepo = SubmitReviewRepo();
+  ShopReviewListRepo shopReviewListRepo = ShopReviewListRepo();
   GetCustomerCancelOrderRepo getcustomerCancelOrderRepo =
       GetCustomerCancelOrderRepo();
   CustomerCancelOrderRepo customerCancelOrderRepo = CustomerCancelOrderRepo();
@@ -367,6 +375,88 @@ class CustomerOrderViewController extends ChangeNotifier {
           (Route<dynamic> route) => false,
         );
 
+        print("hello");
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        LoadingOverlay.of(context).hide();
+
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+  CustomerShopReviewListRequestModel get customerShopReviewListRequestModel =>
+      CustomerShopReviewListRequestModel(
+        shopId: orderId.toString(),
+      );
+  Future<void> ShopReviewList(context, oId) async {
+    LoadingOverlay.of(context).show();
+    orderId = oId.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopReviewListRepo
+        .shopReviewList(
+            customerShopReviewListRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = CustomerGetShopReviewListResponseModel.fromJson(
+          jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        print("hello");
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        LoadingOverlay.of(context).hide();
+
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+///////////////////////////////////////////////////////////////////////////////////
+  SubmitReviewRequestModel get submitReviewRequestModel =>
+      SubmitReviewRequestModel(
+          shopId: orderId.toString(),
+          orderId: orderId.toString(),
+          review: review,
+          rating: rating.toString());
+  Future<void> ShopSubmitreview(context, oId) async {
+    LoadingOverlay.of(context).show();
+    orderId = oId.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    submitReviewRepo
+        .submitReview(submitReviewRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+          SubmitReviewResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
