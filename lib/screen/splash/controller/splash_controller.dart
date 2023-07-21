@@ -32,10 +32,12 @@ class SplashController extends ChangeNotifier {
   String appVersion = "";
   bool isUpdateRequired = false;
   AppVersionData? appversiondata;
+
   Future<void> initState(context) async {
     initPackageInfo();
     await appVersionCheck(context);
     Timer(Duration(seconds: 3), () async {
+
       if (isUpdateRequired) {
         Navigator.pushReplacement(
           context,
@@ -183,16 +185,13 @@ class SplashController extends ChangeNotifier {
           isUpdateRequired = true;
           notifyListeners();
         }
-
         // isAppNotificationEnable =
         //     result.settingData?.appNotification == "on" ? true : false;
         // Utils.showPrimarySnackbar(context, result.message,
         //     type: SnackType.success);
-
         else {
           isUpdateRequired = false;
         }
-
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

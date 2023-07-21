@@ -21,21 +21,21 @@ import 'package:local_supper_market/widget/stack_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class ShopOrderStatusView extends StatefulWidget {
+class ShopOrderView extends StatefulWidget {
   final String? orderId;
   final int? selectedIndex;
 
-  const ShopOrderStatusView({
+  const ShopOrderView({
     super.key,
     this.orderId,
     required this.selectedIndex,
   });
 
   @override
-  State<ShopOrderStatusView> createState() => _ShopOrderStatusViewState();
+  State<ShopOrderView> createState() => _ShopOrderViewState();
 }
 
-class _ShopOrderStatusViewState extends State<ShopOrderStatusView> {
+class _ShopOrderViewState extends State<ShopOrderView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

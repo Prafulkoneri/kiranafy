@@ -150,7 +150,7 @@ class OrderPaymentController extends ChangeNotifier {
         return;
       }
     }
-    showStackLoader(true);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     placeOrderRepo

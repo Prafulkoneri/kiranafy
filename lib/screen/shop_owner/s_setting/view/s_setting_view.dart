@@ -52,7 +52,10 @@ class _ShopSettingViewState extends State<ShopSettingView> {
           },
         ),
       ),
-      body: Padding(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      Padding(
         padding: EdgeInsets.only(left: 19.w, top: 20.w, right: 19.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,7 +303,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
               height: 15.h,
             ),
             Text(
-              "App Version - ${watch.appversiondata?.appVersion}",
+              "App Version - ${watch.appVersion}",
               style: TextStyle(
                   fontSize: 18.sp, fontWeight: FontWeight.w400, color: Black1),
             ),

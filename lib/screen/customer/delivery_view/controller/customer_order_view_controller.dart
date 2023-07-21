@@ -58,7 +58,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   //////////////
   OrderViewRepo orderViewRepo = OrderViewRepo();
   SubmitReviewRepo submitReviewRepo = SubmitReviewRepo();
-  ShopReviewListRepo shopReviewListRepo = ShopReviewListRepo();
+  // ShopReviewListRepo shopReviewListRepo = ShopReviewListRepo();
   GetCustomerCancelOrderRepo getcustomerCancelOrderRepo =
       GetCustomerCancelOrderRepo();
   CustomerCancelOrderRepo customerCancelOrderRepo = CustomerCancelOrderRepo();
@@ -400,44 +400,44 @@ class CustomerOrderViewController extends ChangeNotifier {
 
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  CustomerShopReviewListRequestModel get customerShopReviewListRequestModel =>
-      CustomerShopReviewListRequestModel(
-        shopId: orderId.toString(),
-      );
-  Future<void> ShopReviewList(context, oId) async {
-    LoadingOverlay.of(context).show();
-    orderId = oId.toString();
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    shopReviewListRepo
-        .shopReviewList(
-            customerShopReviewListRequestModel, pref.getString("successToken"))
-        .then((response) {
-      log("response.body${response.body}");
-      final result = CustomerGetShopReviewListResponseModel.fromJson(
-          jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        print("hello");
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        LoadingOverlay.of(context).hide();
+  // CustomerShopReviewListRequestModel get customerShopReviewListRequestModel =>
+  //     CustomerShopReviewListRequestModel(
+  //       shopId: orderId.toString(),
+  //     );
+  // Future<void> ShopReviewList(context, oId) async {
+  //   LoadingOverlay.of(context).show();
+  //   orderId = oId.toString();
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   shopReviewListRepo
+  //       .shopReviewList(
+  //           customerShopReviewListRequestModel, pref.getString("successToken"))
+  //       .then((response) {
+  //     log("response.body${response.body}");
+  //     final result = CustomerGetShopReviewListResponseModel.fromJson(
+  //         jsonDecode(response.body));
+  //     if (response.statusCode == 200) {
+  //       print("hello");
+  //       Utils.showPrimarySnackbar(context, result.message,
+  //           type: SnackType.success);
+  //       LoadingOverlay.of(context).hide();
 
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
+  //       notifyListeners();
+  //     } else {
+  //       Utils.showPrimarySnackbar(context, result.message,
+  //           type: SnackType.error);
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+  //   }).catchError(
+  //     (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //     },
+  //     test: (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //       return false;
+  //     },
+  //   );
+  // }
 
 ///////////////////////////////////////////////////////////////////////////////////
   SubmitReviewRequestModel get submitReviewRequestModel =>

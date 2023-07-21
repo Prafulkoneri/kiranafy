@@ -6,6 +6,7 @@ import 'package:local_supper_market/screen/customer/auth/model/customer_sign_up_
 class CustomerSignInRepo {
   Future<http.Response> customerSignIn(
       CustomerSignInReqModel requestModel) async {
+    print(requestModel.toJson());
     try {
       return await http.post(Uri.parse(Endpoint.customerSignIn),
           body: requestModel.toJson(),

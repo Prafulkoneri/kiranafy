@@ -26,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
           padding: EdgeInsets.only(right: 45.w),
@@ -34,10 +33,21 @@ class _SplashScreenState extends State<SplashScreen> {
             image: AssetImage("assets/images/splash1.png"),
           ),
         ),
-        Image.asset(
-          "assets/images/splash_logo.png",
-          height: 297.36.w,
-          width: 228.81.w,
+        Expanded(
+          child: SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  "assets/images/splash_logo.png",
+                  height: 227.36.w,
+                  width: 180.81.w,
+                  fit: BoxFit.fill,
+                ),
+              ],
+            ),
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(

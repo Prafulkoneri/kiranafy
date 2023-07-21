@@ -28,7 +28,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                   topRight: Radius.circular(16.0)),
               child: Container(
                 padding: EdgeInsets.only(
-                    bottom: 200.w),
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 // height: 335,
                 child: Padding(
                   padding: EdgeInsets.all(25.h),

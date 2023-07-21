@@ -495,9 +495,9 @@ class _AddAddressViewState extends State<AddAddressView> {
                       controller: watch.landMarkController,
                       titleHeader: "Landmark",
                     ),
-                    SizedBox(
-                      height: 300.w,
-                    ),
+SizedBox(
+  height: 100.w,
+),
                   ],
                 ),
               ),

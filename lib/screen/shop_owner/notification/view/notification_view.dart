@@ -32,6 +32,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
     final watch = context.watch<ShopNoticationController>();
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
@@ -42,7 +43,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                     builder: (context) => SMainScreenView(
                         index: 4,
                         screenName: SAccountScreenView(
-                          refresh: false,
+                          refresh: true,
                         ))),
                 (Route<dynamic> route) => false,
               );

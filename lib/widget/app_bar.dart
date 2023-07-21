@@ -25,14 +25,7 @@ class PrimaryAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        systemNavigationBarIconBrightness: Brightness.dark,
-        // Status bar color
-        statusBarColor: kstatusbar,
-        // Status bar brightness (optional)
-        statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-        statusBarBrightness: Brightness.dark, // For iOS (dark icons)
-      ),
+      systemOverlayStyle:SystemUiOverlayStyle.dark,
       toolbarHeight: 65.w,
       // backgroundColor: kappbar,
       leading: isBackButtonEnabled ?? true
@@ -58,12 +51,13 @@ class PrimaryAppBar extends StatelessWidget {
       centerTitle: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
+          top: Radius.circular(0),
           bottom: Radius.circular(40),
         ),
       ),
       flexibleSpace: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
           gradient: LinearGradient(
               end: Alignment.topCenter,
               begin: Alignment.bottomCenter,
