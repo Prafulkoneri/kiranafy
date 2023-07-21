@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/about_us/view/c_privacy_poli
 import 'package:local_supper_market/screen/customer/c_setting/view/c_setting_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
+import 'package:local_supper_market/screen/customer/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
@@ -157,10 +158,10 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            watch.customerData?.customerEmail!=null? SizedBox(
                               height: 7.2.h,
-                            ),
-                            Row(
+                            ):Container(),
+                            watch.customerData?.customerEmail!=null?   Row(
                               // crossAxisAlignment:
                               //     CrossAxisAlignment.start,
                               // mainAxisAlignment: MainAxisAlignment.end,
@@ -175,7 +176,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 ),
                                 watch.customerData?.customerEmail != ""
                                     ? Text(
-                                        '${watch.customerData?.customerEmail}',
+                                        watch.customerData?.customerEmail??"",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               // decoration:
@@ -190,7 +191,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                     : Container(),
                               ],
                               // ),
-                            ),
+                            ):Container(),
                             SizedBox(
                               height: 11.h,
                             ),
@@ -450,13 +451,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) =>
-                  //           MainScreenView(index: 4, screenName: MapScreenView())),
-                  //       (Route<dynamic> route) => false,
-                  // );
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                            index: 4,
+                            screenName: HelpCenterView())),
+                        (Route<dynamic> route) => false,
+                  );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

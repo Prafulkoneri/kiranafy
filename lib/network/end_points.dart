@@ -6,6 +6,7 @@ class Endpoint {
   // static const String getBaseUrl = 'https://newcms.m-staging.in/local-super-mart-admin/api/app-base-url';
   // Base Url
   static const String baseUrl =
+      // 'https://projects.m-staging.in/local-super-mart/api/';
       'https://localsupermart.com/testing/api/';
   // 'https://localsupermart.com/live/api/';
   // Check Mobile Number Exist
@@ -48,6 +49,7 @@ class Endpoint {
   // Upload Admin Product
   static const String uploadAdminProduct =
       '${baseUrl}lsm-shop-owner-update-product-of-category';
+
   // Upload Custom Product
   static const String uploadCustomProduct =
       '${baseUrl}lsm-shop-owner-update-custom-product';
@@ -67,11 +69,14 @@ class Endpoint {
   static const String getShopConfiguration =
       '${baseUrl}lsm-shop-owner-get-configuration-details';
   ////shop Configuration Edit
+
   static const String shopconfigurationedit =
       '${baseUrl}lsm-shop-owner-update-configuration-details';
+
   ////add category
   static const String addCategory = '${baseUrl}lsm-shop-owner-add-category';
   //// shop owner get selected Products
+
   static const String selectedProducts =
       "${baseUrl}lsm-shop-owner-get-selected-products";
 
@@ -290,107 +295,105 @@ class Endpoint {
       "${baseUrl}lsm-customer-order-payment-screen";
   //Order Place////
   static const String placeOrder = "${baseUrl}lsm-customer-place-order";
-/////My Orders////
+
   static const String myOrders =
       "${baseUrl}lsm-customer-order-list-with-filter";
   static const String setPincode =
       "${baseUrl}lsm-customer-current-location-pincode";
-  ////My Orders////
+
   static const String shopGetOrderList =
       "${baseUrl}lsm-shop-owner-get-orders-list";
-  ////Shop Owner View////
+
   static const String shopOwneROrderView =
       "${baseUrl}lsm-shop-owner-order-view";
-  ////Shop Owner Status Changed////
+
   static const String shopOwnerOrderStatusChange =
       "${baseUrl}lsm-shop-owner-change-order-delivery-status";
 
-  ////Shop Owner Add Remove Product////
   static const String shopOwnerAddRemoveProduct =
       "${baseUrl}lsm-shop-owner-remove-product-from-order";
 
-  ////Customer Current Location Pincode////
   static const String currentLocationPincode =
       "${baseUrl}lsm-customer-current-location-pincode";
-  ////CancelReason shop////
+
   static const String cancelOrderReason =
       "${baseUrl}lsm-shop-owner-get-order-cancel-reasons";
-  ////CancelReason shop////
+
   static const String customerOrderView = "${baseUrl}lsm-customer-order-view";
 
-  ///Track Order Repo////
   static const String trackOrder = "${baseUrl}lsm-customer-track-order";
-  //CMS REPO////
+
   static const String cmsFile = "${baseUrl}lsm-cms-data";
-  //////Shop Setting////
+
   static const String shopSetting = "${baseUrl}lsm-shop-owner-get-settings";
-  /////Shop Pramotion Request Form////
+
   static const String pramotionRequest =
       "${baseUrl}lsm-shop-owner-request-shop-promotion";
-  //////////////////////PAyment History//////////
+
   static const String paymentHistory =
       "${baseUrl}lsm-shop-owner-orders-payment-history";
-  //////////////////////PAyment History//////////
+
   static const String changeSetting =
       "${baseUrl}lsm-shop-owner-change-settings";
-  ///////////////////////Sign Out/////////////
+
   static const String shopSignOut = "${baseUrl}lsm-shop-owner-logout";
-  //////////////////////SHOP DELETE ACCOUNT/////////////
+
   static const String shopDelete = "${baseUrl}lsm-shop-owner-delete-account";
-  //////////////////////Get TicketList/////////////
+
   static const String ticketList = "${baseUrl}lsm-shop-owner-get-tickets";
-  //////////////////////View Ticket/////////////
+
   static const String viewTicket = "${baseUrl}lsm-shop-owner-view-ticket";
-  /////////////////////Relpy Ticket/////////////
+
   static const String ticketReply = "${baseUrl}lsm-shop-owner-ticket-reply";
 
-  ////////////////////Type Ticket/////////////
   static const String ticketType = "${baseUrl}lsm-shop-owner-get-ticket-types";
-  //////////////////Create Ticket/////////////
+
   static const String createTicket = "${baseUrl}lsm-shop-owner-create-ticket";
-  //////////////////Get BankAcountDetail/////////////
+
   static const String getBankAccount =
       "${baseUrl}lsm-shop-owner-get-bank-details";
-  //////////////////Get BankAcountDetail/////////////
+
   static const String updateBankDetail =
       "${baseUrl}lsm-shop-owner-add-update-bank-details";
-  //////////////////Get BankAcountDetail/////////////
+
   static const String sRFProductsList =
       "${baseUrl}lsm-shop-owner-get-recommended-seasonal-and-fullfill-your-cravings-products";
-  //////////////////Get BankAcountDetail/////////////
+
   static const String removeSRFProducts =
       "${baseUrl}lsm-shop-owner-remove-product-from-special-category";
-  //////////////////Get BankAcountDetail/////////////
+
   static const String searchProduct =
       "${baseUrl}lsm-shop-owner-selected-product-search";
-//////////////////Get BankAcountDetail/////////////
+
   static const String subscriptionHistory =
       "${baseUrl}lsm-shop-owner-subscription-history";
-  /////////////////FAQ DATA/////////////
+
   static const String faqData = "${baseUrl}lsm-shop-owner-get-faqs";
-  ////////////////unit to create Product /////////////
+
   static const String unitListToCreateProduct =
       "${baseUrl}lsm-shop-owner-units-list";
-  ////////////////////////////////////EDIT UNIT PRODUCT CATEGORY//////////
+
   static const String editUnitProductCategory =
       "${baseUrl}lsm-shop-owner-edit-product-units-of-category";
-  ////////////////////////////////////DELETE UNIT PRODUCT CATEGORY//////////
+
   static const String deleteUnitProductCategory =
       "${baseUrl}lsm-shop-owner-delete-product-units-of-category";
-  ////////////////////////////////////Add Upadte UNIT PRODUCT CATEGORY//////////
+
   static const String addUpadteUnitProductCategory =
       "${baseUrl}lsm-shop-owner-update-product-units-of-category";
-  ////////////////////////////////////get  UNIT PRODUCT //////////
+
   static const String getProductUnitList =
       "${baseUrl}lsm-shop-owner-get-product-unit-list";
-  ////////////////////////////////////Customer Cancel Order//////////
+
   static const String getCustomerCancelOrder =
       "${baseUrl}lsm-customer-get-cancel-order-reasons";
-  ////////////////////////////////////Customer Cancel Order//////////
+
   static const String customerCancelOrder =
       "${baseUrl}lsm-customer-cancel-order";
-  ////////////////////////////////////Shop Notification List//////////
+
   static const String shopNotificationList =
       "${baseUrl}lsm-shop-owner-get-notifications-list";
   static const String checkAppversion = "${baseUrl}lsm-app-version";
+
+  static const String reOrder = "${baseUrl}lsm-customer-reorder";
 }

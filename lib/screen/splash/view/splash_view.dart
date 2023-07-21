@@ -25,31 +25,39 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-          Padding(
-            padding: EdgeInsets.only(right: 45.w),
-            child: Image(
-              image: AssetImage("assets/images/splash1.png"),
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(right: 45.w),
+              child: Image(
+                image: AssetImage("assets/images/splash1.png"),
+              ),
             ),
-          ),
-          Image.asset(
-            "assets/images/splash_logo.png",
-            height: 297.36.w,
-            width: 228.81.w,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 45.w,
+            Expanded(child: SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  Image.asset(
+                    "assets/images/splash_logo.png",
+                    height: 257.36.w,
+                    width: 228.81.w,
+                    fit: BoxFit.contain,
+                  ),
+                ],
+              ),
+            ),),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 45.w,
+              ),
+              child: Image(
+                image: AssetImage("assets/images/splash2.png"),
+              ),
             ),
-            child: Image(
-              image: AssetImage("assets/images/splash2.png"),
-            ),
-          ),
-      ],
-    ),
+
+          ],
         ));
   }
 }

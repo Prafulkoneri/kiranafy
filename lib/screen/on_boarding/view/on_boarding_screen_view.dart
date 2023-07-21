@@ -230,7 +230,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                     //         shape: RoundedRectangleBorder(
                                     //             borderRadius: BorderRadius.all(
                                     //                 Radius.circular(10))),
-                                    //
+
                                     //         // scrollable: true,
                                     //         child: Container(
                                     //           padding: EdgeInsets.only(
@@ -249,7 +249,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                     //               Flexible(
                                     //                 child: Text(
                                     //                   "This is pre - launch for \nShop Owner, app\nfor customers will be\nlaunched soon !",
-                                    //
+
                                     //                   // softWrap: true,
                                     //                   // maxLines: 3,//
                                     //                   textAlign:
@@ -257,7 +257,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                     //                   style: GoogleFonts.dmSans(
                                     //                     textStyle: TextStyle(
                                     //                         color: Black1,
-                                    //
+
                                     //                         // letterSpacing: .05,
                                     //                         // overflow:
                                     //                         //     TextOverflow
@@ -279,7 +279,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                     //                         GoogleFonts.dmSans(
                                     //                       textStyle: TextStyle(
                                     //                           color: Black1,
-                                    //
+
                                     //                           // letterSpacing: .05,
                                     //                           // overflow:
                                     //                           //     TextOverflow

@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
+import 'package:local_supper_market/screen/customer/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
@@ -16,23 +18,23 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
-class SCustomerSupportView extends StatefulWidget {
+class CustomerSupportView extends StatefulWidget {
   final String? ticketId;
 
-  const SCustomerSupportView({
+  const CustomerSupportView({
     super.key,
     this.ticketId,
   });
 
   @override
-  State<SCustomerSupportView> createState() => _SCustomerSupportViewState();
+  State<CustomerSupportView> createState() => _CustomerSupportViewState();
 }
 
-class _SCustomerSupportViewState extends State<SCustomerSupportView> {
+class _CustomerSupportViewState extends State<CustomerSupportView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ShopViewTicketController>().initState(
+      context.read<TicketController>().initState(
             context,
             widget.ticketId,
           );
@@ -41,8 +43,8 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<ShopViewTicketController>();
-    final read = context.read<ShopViewTicketController>();
+    final watch = context.watch<TicketController>();
+    final read = context.read<TicketController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
@@ -52,7 +54,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SMainScreenView(
-                        index: 4, screenName: SHelpCenterView())),
+                        index: 4, screenName: HelpCenterView())),
                 (Route<dynamic> route) => false,
               );
             },

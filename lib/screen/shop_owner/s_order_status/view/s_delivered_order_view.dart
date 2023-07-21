@@ -132,7 +132,7 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ShopOrderStatusView(
+                                  builder: (context) => ShopOrderView(
                                         orderId: element?.id.toString(),
                                     selectedIndex: watch.selectedIndex,
                                       )),

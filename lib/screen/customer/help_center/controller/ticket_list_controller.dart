@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/help_center/view/raise_ticket_form.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_fav_model.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_list_model.dart';
@@ -26,7 +27,7 @@ import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SGetTicketListController extends ChangeNotifier {
+class GetTicketListController extends ChangeNotifier {
   TicketListRepo ticketListRepo = TicketListRepo();
   TicketTypeRepo ticketTypeRepo = TicketTypeRepo();
   CreateTicketRepo createTicketRepo = CreateTicketRepo();
@@ -64,7 +65,7 @@ class SGetTicketListController extends ChangeNotifier {
         context: context,
         builder: (context) {
           // using a scaffold helps to more easily position the FAB
-          return SRaiseTicketView();
+          return RaiseTicketView();
         });
  notifyListeners();
 

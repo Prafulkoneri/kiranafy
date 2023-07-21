@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -130,6 +131,9 @@ class CustomerSignInController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     customerSignInRepo.customerSignIn(customerSignInReqModel).then((response) {
       final result = CustomerSignInResModel.fromJson(jsonDecode(response.body));
+      print("888888");
+      log(response.body);
+      print("888888");
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "customerLoggedIn");

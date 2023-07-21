@@ -97,17 +97,18 @@ class _UpdateViewState extends State<UpdateView> {
                       width: 164.w,
                       borderRadius: 15,
                       color: Color(0xff4689EC),
-                      onTap: () async{
+                      onTap: () async {
                         if (await canLaunch(
-                        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
-                        await launch(
-                        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+                            "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
+                          await launch(
+                              "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
                         } else {
-                        throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
+                          throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
                         }
                         LaunchReview.launch(
-                        androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
-                        iOSAppId: "585027354");
+                            androidAppId:
+                                "com.lsm.local_supper_market&hl=en&gl=US",
+                            iOSAppId: "585027354");
                       },
                       textColor: Colors.white,
                       text: "UPDATE",

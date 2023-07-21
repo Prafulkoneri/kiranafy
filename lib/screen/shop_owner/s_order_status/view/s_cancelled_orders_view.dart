@@ -132,7 +132,7 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ShopOrderStatusView(
+                                  builder: (context) => ShopOrderView(
                                         orderId: element?.id.toString(),
                                     selectedIndex: watch.selectedIndex,
                                       )),

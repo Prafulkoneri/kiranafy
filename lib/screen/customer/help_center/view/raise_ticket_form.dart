@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -12,19 +13,18 @@ import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
-class SRaiseTicketView extends StatefulWidget {
-  const SRaiseTicketView({super.key});
+class RaiseTicketView extends StatefulWidget {
+  const RaiseTicketView({super.key});
 
   @override
-  State<SRaiseTicketView> createState() => _SRaiseTicketViewState();
+  State<RaiseTicketView> createState() => _RaiseTicketViewState();
 }
 
-class _SRaiseTicketViewState extends State<SRaiseTicketView> {
+class _RaiseTicketViewState extends State<RaiseTicketView> {
   @override
   Widget build(BuildContext context) {
-    final read = context.read<SGetTicketListController>();
-    final watch = context.watch<SGetTicketListController>();
-    final readMainScreen = context.read<SMainScreenController>();
+    final read = context.read<GetTicketListController>();
+    final watch = context.watch<GetTicketListController>();
     return SingleChildScrollView(
       child: Stack(
         clipBehavior: Clip.none,

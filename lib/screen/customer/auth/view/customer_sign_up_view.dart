@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_otp_sheet.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
-import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up.dart';
+import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_otp_sheet.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 
 import 'package:local_supper_market/widget/buttons.dart';
@@ -36,282 +36,287 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
     final read = context.read<CustomerSignUpController>();
     final watch = context.watch<CustomerSignUpController>();
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          alignment: Alignment.topCenter,
-          clipBehavior: Clip.none,
-          children: [
-            Positioned(
-              left: 0.w,
-              child: Image.asset(
-                "assets/images/splash1.png",
-                height: 235.w,
-                width: 361.w,
+      body: GestureDetector(
+        onTap: (){
+          FocusScope.of(context).unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Stack(
+            alignment: Alignment.topCenter,
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                left: 0.w,
+                child: Image.asset(
+                  "assets/images/splash1.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            Positioned(
-              bottom: -25.w,
-              right: 0.w,
-              child: Image.asset(
-                "assets/images/splash2.png",
-                height: 235.w,
-                width: 361.w,
+              Positioned(
+                bottom: -25.w,
+                right: 0.w,
+                child: Image.asset(
+                  "assets/images/splash2.png",
+                  height: 235.w,
+                  width: 361.w,
+                ),
               ),
-            ),
-            Column(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 150.w,
-                    ),
-                    Image.asset(
-                      "assets/images/splash4.png",
-                      height: 112.w,
-                      width: 60.w,
-                    ),
-                    SizedBox(
-                      height: 5.w,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "LOCAL",
-                          style: TextStyle(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w600,
-                              color: SplashText),
-                        ),
-                        Text(
-                          " SUPERMART",
-                          style: TextStyle(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w600,
-                              color: SplashText1),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Hameshase aapke sath....",
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 50.h,
-                    ),
-                    Text(
-                      "Customer Sign Up",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Custlogin,
-                            letterSpacing: .5,
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.w700),
+              Column(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 150.w,
                       ),
-                    ),
-                    SizedBox(height: 53.h),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 28.w,
-                        right: 23.w,
+                      Image.asset(
+                        "assets/images/splash4.png",
+                        height: 112.w,
+                        width: 60.w,
                       ),
-                      child: PrimaryCTextFormField(
-                        controller: watch.nameController,
-                        hintText: "Name",
+                      SizedBox(
+                        height: 5.w,
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
-                      child: MobileNoTextFormField(
-                        onChanged: (value) {
-                          read.mobileNumberCheck(context);
-                        },
-                        onCountryCodeChanged: (value) {
-                          read.onCountryCodeSelected(value);
-                        },
-                        enableOrder: true,
-                        controller: watch.mobileController,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 25.w,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            "We need to verify you. We will send you\na one time verification code.",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: SplashText1,
-                                  // letterSpacing: .5,/
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 34.h,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 25.w),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 15.w),
-                            child: SeconderyCheckBox(
-                              value: watch.isVerifyChecked,
-                              onChanged: (value) {
-                                read.onVerifyChecked(value);
-                              },
-                            ),
-                          ),
-                          RichText(
-                            text: TextSpan(
-                                text:
-                                    "By checking this box, you are agreeing to \n",
-                                style: TextStyle(
-                                    color: Black,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(
-                                    children: [],
-                                    text: 'our Terms of Service',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        print('Login Text Clicked');
-                                      },
-                                    style: TextStyle(
-                                        color: SplashText1,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  TextSpan(
-                                    text: ' and',
-                                    style: TextStyle(
-                                        color: Black,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  TextSpan(
-                                    text: ' Privacy Policy',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        print('Login Text Clicked');
-                                      },
-                                    style: TextStyle(
-                                        color: SplashText1,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ]),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 26.h,
-                    ),
-                    SizedBox(
-                      width: 300.w, // <-- Your width
-                      height: 45.h,
-                      child: PrimaryButton(
-                        color: Button,
-                        // style: style,
-                        onTap: () async {
-                          await read
-                              .onNextSignClick(context)
-                              .then((value) async {
-                            if (watch.mobileController.text.length < 10) {
-                              return;
-                            }
-                            if (watch.isLoginBtnEnabled) {
-                              return;
-                            }
-                            if (watch.nameController.text == "") {
-                              return;
-                            }
-                            if (!watch.isVerifyChecked) {
-                              return;
-                            }
-                            await showModalBottomSheet(
-                              backgroundColor: Colors.white,
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30))),
-                              context: context,
-                              builder: (BuildContext context) {
-                                return CustomerSignUpOtp();
-                              },
-                            );
-                          });
-                        },
-                        child: Text(
-                          'Next',
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.w),
-                      child: Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Already have an account?",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
+                            "LOCAL",
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600,
+                                color: SplashText),
                           ),
-                          // Text("data")
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CustomerSignInView()),
-                              );
-                            },
-                            child: Text(
-                              " Sign In",
-                              style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
-                                    color: Custlogin,
-                                    fontSize: 16,
+                          Text(
+                            " SUPERMART",
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600,
+                                color: SplashText1),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "Hameshase aapke sath....",
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: 50.h,
+                      ),
+                      Text(
+                        "Customer Sign Up",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Custlogin,
+                              letterSpacing: .5,
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      SizedBox(height: 53.h),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 28.w,
+                          right: 23.w,
+                        ),
+                        child: PrimaryCTextFormField(
+                          controller: watch.nameController,
+                          hintText: "Name",
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 28.w, top: 16.w, bottom: 16.w, right: 23.w),
+                        child: MobileNoTextFormField(
+                          onChanged: (value) {
+                            read.mobileNumberCheck(context);
+                          },
+                          onCountryCodeChanged: (value) {
+                            read.onCountryCodeSelected(value);
+                          },
+                          enableOrder: true,
+                          controller: watch.mobileController,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 25.w,
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              "We need to verify you. We will send you\na one time verification code.",
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: SplashText1,
+                                    // letterSpacing: .5,/
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w500),
                               ),
                             ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                )
-              ],
-            ),
-          ],
+                      SizedBox(
+                        height: 34.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 25.w),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 15.w),
+                              child: SeconderyCheckBox(
+                                value: watch.isVerifyChecked,
+                                onChanged: (value) {
+                                  read.onVerifyChecked(value);
+                                },
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  text:
+                                      "By checking this box, you are agreeing to \n",
+                                  style: TextStyle(
+                                      color: Black,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w400),
+                                  children: [
+                                    TextSpan(
+                                      children: [],
+                                      text: 'our Terms of Service',
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          print('Login Text Clicked');
+                                        },
+                                      style: TextStyle(
+                                          color: SplashText1,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    TextSpan(
+                                      text: ' and',
+                                      style: TextStyle(
+                                          color: Black,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    TextSpan(
+                                      text: ' Privacy Policy',
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          print('Login Text Clicked');
+                                        },
+                                      style: TextStyle(
+                                          color: SplashText1,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ]),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 26.h,
+                      ),
+                      SizedBox(
+                        width: 300.w, // <-- Your width
+                        height: 45.h,
+                        child: PrimaryButton(
+                          color: Button,
+                          // style: style,
+                          onTap: () async {
+                            await read
+                                .onNextSignClick(context)
+                                .then((value) async {
+                              if (watch.mobileController.text.length < 10) {
+                                return;
+                              }
+                              if (watch.isLoginBtnEnabled) {
+                                return;
+                              }
+                              if (watch.nameController.text == "") {
+                                return;
+                              }
+                              if (!watch.isVerifyChecked) {
+                                return;
+                              }
+                              await showModalBottomSheet(
+                                backgroundColor: Colors.white,
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30))),
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CustomerSignUpOtp();
+                                },
+                              );
+                            });
+                          },
+                          child: Text(
+                            'Next',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Already have an account?",
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            // Text("data")
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CustomerSignInView()),
+                                );
+                              },
+                              child: Text(
+                                " Sign In",
+                                style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                      color: Custlogin,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

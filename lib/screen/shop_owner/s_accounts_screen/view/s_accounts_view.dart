@@ -806,7 +806,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => SMainScreenView(
-                                index: 4, screenName: HelpCenterView())),
+                                index: 4, screenName: SHelpCenterView())),
                         (Route<dynamic> route) => false,
                       );
                     },

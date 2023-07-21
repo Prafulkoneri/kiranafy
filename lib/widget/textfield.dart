@@ -179,6 +179,7 @@ class PrimarySTextFormField extends StatelessWidget {
           height: height ?? 48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
+
             onTap: onTap,
             maxLines: maxLines ?? 1,
             keyboardType: textInputType,

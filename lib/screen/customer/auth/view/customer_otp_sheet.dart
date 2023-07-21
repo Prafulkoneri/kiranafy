@@ -62,6 +62,7 @@ class _OtpCustomerBottomSheetState extends State<OtpCustomerBottomSheet> {
                         ),
                       ),
                       OtpTextField(
+                        autoFocus: true,
                         //  controller: otpController,
                         numberOfFields: 6,
                         borderColor: Color(0xFF512DA8),
