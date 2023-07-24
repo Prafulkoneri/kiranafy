@@ -410,4 +410,6 @@ class Endpoint {
   static const String customerViewticket = "${baseUrl}lsm-customer-view-ticket";
   static const String customerViewticketReply =
       "${baseUrl}lsm-customer-ticket-reply";
+  static const String clogOut = "${baseUrl}lsm-customer-logout";
+  static const String cdeleteAccount = "${baseUrl}lsm-customer-delete-account";
 }

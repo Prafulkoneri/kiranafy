@@ -140,7 +140,8 @@ class _CustomerSettingState extends State<CustomerSetting> {
                                         Expanded(
                                           child: GestureDetector(
                                             onTap: () {
-                                              // read.shopAccountDelete(context);
+                                              read.CustomerAccountDelete(
+                                                  context);
                                             },
                                             child: Container(
                                               padding: EdgeInsets.only(

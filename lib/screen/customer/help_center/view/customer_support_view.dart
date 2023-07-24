@@ -216,119 +216,103 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 final element = watch.ticketRepliesList?[index];
-                                return element?.type == "customer"
-                                    ? Container(
-                                        decoration: BoxDecoration(
-                                          color: Color(0xff44B8CA),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 19.w,
-                                              bottom: 11.w,
-                                              right: 13.w,
-                                              top: 10.w),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: grey6,
-                                              width: 1,
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff44B8CA),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        left: 19.w,
+                                        bottom: 11.w,
+                                        right: 13.w,
+                                        top: 10.w),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: grey6,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            element?.profileImagePath == ""
+                                                ? Container(
+                                                    height: 37.w,
+                                                    width: 37.w,
+                                                    child: Image.asset(
+                                                      "assets/images/profile_image.png",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )
+                                                : Container(
+                                                    height: 37.w,
+                                                    width: 37.w,
+                                                    child: AppNetworkImages(
+                                                      imageUrl:
+                                                          "${element?.profileImagePath}",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                            SizedBox(
+                                              width: 6,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  element?.profileImagePath ==
-                                                          ""
-                                                      ? Container(
-                                                          height: 37.w,
-                                                          width: 37.w,
-                                                          child: Image.asset(
-                                                            "assets/images/profile_image.png",
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        )
-                                                      : Container(
-                                                          height: 37.w,
-                                                          width: 37.w,
-                                                          child:
-                                                              AppNetworkImages(
-                                                            imageUrl:
-                                                                "${element?.profileImagePath}",
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                  SizedBox(
-                                                    width: 6,
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${element?.name}",
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 13.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700),
                                                   ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        "${element?.name}",
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 13.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 5,
-                                                      ),
-                                                      Text(
-                                                        "${element?.createdAt}",
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 13.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Divider(
-                                                color: Color(0xff319FB0),
-                                                thickness: 1,
-                                              ),
-                                              Text(
-                                                "${element?.remark}",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
                                                 ),
-                                              ),
-                                            ],
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  "${element?.createdAt}",
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 13.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: Color(0xff319FB0),
+                                          thickness: 1,
+                                        ),
+                                        Text(
+                                          "${element?.remark}",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400),
                                           ),
                                         ),
-                                      )
-                                    : Container(
-                                        color: Colors.red,
-                                      );
+                                      ],
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                             SizedBox(
