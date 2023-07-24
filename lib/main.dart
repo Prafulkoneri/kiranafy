@@ -1,6 +1,4 @@
-
 import 'dart:io';
-
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +82,7 @@ import 'screen/customer/order_payment/controller/order_payment_controller.dart';
 import 'screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'screen/customer/products/controller/product_view_controller.dart';
 import 'screen/customer/profile/controller/edit_profile_controller.dart';
+import 'screen/customer/review/controller/customer_review_list_shop_controller.dart';
 import 'screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
 import 'screen/shop_owner/Offer_seasonal_recommanded/controller/offer_seasonal_recommanded_controller.dart';
@@ -110,11 +109,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isIOS) {
     await Firebase.initializeApp(
-      options: FirebaseOptions(
-          apiKey: "AIzaSyBaOZbarFqV16r_fceIjrSAlNtgvddAFgg",
-          appId: "1:110985117622:ios:1a970d32e1e8e861868b17",
-          messagingSenderId: "110985117622",
-          projectId: "lsm-0001"));
+        options: FirebaseOptions(
+            apiKey: "AIzaSyBaOZbarFqV16r_fceIjrSAlNtgvddAFgg",
+            appId: "1:110985117622:ios:1a970d32e1e8e861868b17",
+            messagingSenderId: "110985117622",
+            projectId: "lsm-0001"));
   } else {
     await Firebase.initializeApp();
   }
@@ -194,6 +193,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ShopNoticationController()),
         ChangeNotifierProvider(create: (_) => TicketController()),
         ChangeNotifierProvider(create: (_) => GetTicketListController()),
+        ChangeNotifierProvider(create: (_) => CustomerReviewListControler()),
       ],
       child: MyApp(),
     ),
@@ -212,35 +212,32 @@ final firebaseMessaging = FirebaseMessaging.instance;
 
 class _MyAppState extends State<MyApp> {
   @override
-
   void initState() {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print(message.data);
       print("onMessageOpenedApp: $message");
       print("okkkkk");
       print(message.data["notification_type"]);
-      if(message.data["notification_type"]=="custom"){
+      if (message.data["notification_type"] == "custom") {
         context.read<SMainScreenController>().onCustomTypeNotification(context);
       }
-        if(message.data["notification_type"]=="order"){
-          context.read<SMainScreenController>().onOrderTypeNotification(context,message.data["redirect_id"]);
-        }
-
+      if (message.data["notification_type"] == "order") {
+        context
+            .read<SMainScreenController>()
+            .onOrderTypeNotification(context, message.data["redirect_id"]);
+      }
     });
-
 
     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
       print("onBackgroundMessage: $message");
     });
 
     // fireBaseApi();
-
-
   }
 
-
-  void onTypeCustom(){
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationsScreenView()));
+  void onTypeCustom() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => NotificationsScreenView()));
   }
 
   void fireBaseApi() async {
@@ -257,12 +254,15 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.transparent,
+    ));
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
     return ScreenUtilInit(
+        useInheritedMediaQuery: true,
         designSize: const Size(360, 690),
         minTextAdapt: true,
         splitScreenMode: true,

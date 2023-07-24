@@ -521,14 +521,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         "${watch.deliveryAddressDetails?.address1}",
                                         maxLines: 3,
                                         // "${element.address1} \n${element.address2} ",
-                                        // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
                                         // textAlign: TextAlign.start,
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               // height: 1.5,
                                               color: black,
-                                              // letterSpacing: .05,
-                                              // overflow: TextOverflow.ellipsis,
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w400),
                                         ),
@@ -544,8 +541,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      watch.orderDetails?.orderStatus == "Dispatched" ||
-                              watch.orderDetails?.orderStatus == "Delivered"
+                      watch.orderDetails?.orderStatus == "Delivered"
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -1048,9 +1044,303 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                               ),
                             )
                           : Container(),
-                      SizedBox(
-                        height: 50.h,
-                      )
+                      // SizedBox(
+                      //   height: 50.h,
+                      // ),
+                      watch.orderDetails?.orderStatus == "Delivered"
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(left: 19.w),
+                                  child: Text(
+                                    'Your Ratings',
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                          // color: SplashTex
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 19.w),
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                          onTap: () {
+                                            read.onRatingSelect(1);
+                                          },
+                                          child: SvgPicture.asset(
+                                            "assets/icons/order_rating.svg",
+                                            color: watch.ratingValue == null
+                                                ? Color(0xffDBDBDB)
+                                                : Colors.yellow,
+                                          )),
+                                      SizedBox(
+                                        width: 9.77.w,
+                                      ),
+                                      GestureDetector(
+                                          onTap: () {
+                                            read.onRatingSelect(2);
+                                          },
+                                          child: SvgPicture.asset(
+                                            "assets/icons/order_rating.svg",
+                                            color: watch.ratingValue == 2 ||
+                                                    watch.ratingValue == 3 ||
+                                                    watch.ratingValue == 4 ||
+                                                    watch.ratingValue == 5
+                                                ? Colors.yellow
+                                                : Color(0xffDBDBDB),
+                                          )),
+                                      SizedBox(
+                                        width: 9.77.w,
+                                      ),
+                                      GestureDetector(
+                                          onTap: () {
+                                            read.onRatingSelect(3);
+                                          },
+                                          child: SvgPicture.asset(
+                                              "assets/icons/order_rating.svg")),
+                                      SizedBox(
+                                        width: 9.77.w,
+                                      ),
+                                      GestureDetector(
+                                          onTap: () {
+                                            read.onRatingSelect(4);
+                                          },
+                                          child: SvgPicture.asset(
+                                              "assets/icons/order_rating.svg")),
+                                      SizedBox(
+                                        width: 9.77.w,
+                                      ),
+                                      GestureDetector(
+                                          onTap: () {
+                                            read.onRatingSelect(5);
+                                          },
+                                          child: SvgPicture.asset(
+                                              "assets/icons/order_rating.svg"))
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 19.w),
+                                  child: Text(
+                                    'Your Feedback',
+                                    style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                          // color: SplashTex
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Container(
+                                  padding:
+                                      EdgeInsets.only(left: 19.w, right: 19.w),
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xffE8E8E8)),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+
+                                        //<-- SEE HERE
+                                      ),
+
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 80.w), // <-- SEE HERE
+
+                                      fillColor: Colors.white,
+                                      // border: OutlineInputBorder(
+                                      //   borderRadius: BorderRadius.circular(10.0),
+                                      //   borderSide: BorderSide(width: 100, color: grey6
+                                      //       // style: BorderStyle.none,
+                                      //       ),
+                                      // ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: const BorderSide(
+                                          width: 0,
+                                          style: BorderStyle.none,
+                                        ),
+                                      ),
+                                      // enabledBorder: OutlineInputBorder(
+                                      //   borderSide:
+                                      //       BorderSide(width: 1, color: grey6), //<-- SEE HERE
+                                      //   borderRadius: BorderRadius.circular(10.0),
+                                      // ),
+                                      filled: true,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 19.w,
+                                ),
+                                Container(
+                                  padding:
+                                      EdgeInsets.only(left: 19.w, right: 19.w),
+                                  child: SizedBox(
+                                    width: 343.w, // <-- Your width
+                                    height: 45.h,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color(0xff39C19D),
+                                        // onPrimary: Colors.white,
+                                        // shadowColor: Colors.greenAccent,
+                                        elevation: 3,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(14.0)),
+                                        minimumSize:
+                                            const Size(100, 40), //////// HERE
+                                      ),
+                                      // style: style,
+                                      onPressed: () {},
+                                      child: Text(
+                                        'Submit',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Colors.white,
+                                              // letterSpacing: .5,
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 19.h,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(
+                                      left: 19.w,
+                                      bottom: 11.w,
+                                      right: 13.w,
+                                      top: 10.w),
+                                  margin: EdgeInsets.only(
+                                    left: 19.w,
+                                    bottom: 11.w,
+                                    right: 19.w,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: grey6,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/ReviewProfile.png',
+                                            height: 55.h,
+                                            width: 55.w,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'Johnson Doe',
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '12 Jan 2021',
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black,
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 8.h,
+                                              ),
+                                              Container(
+                                                padding:
+                                                    EdgeInsets.only(left: 10.w),
+                                                child: Row(
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                        "assets/icons/yellow_stars.svg"),
+                                                    SizedBox(
+                                                      width: 6.w,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                        "assets/icons/yellow_stars.svg"),
+                                                    SizedBox(
+                                                      width: 6.w,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                        "assets/icons/yellow_stars.svg"),
+                                                    SizedBox(
+                                                      width: 6.w,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                        "assets/icons/yellow_stars.svg"),
+                                                    SizedBox(
+                                                      width: 6.w,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                        "assets/icons/yellow_stars.svg"),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Divider(
+                                        color: gradient,
+                                        thickness: 1,
+                                      ),
+                                      Text(
+                                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Container()
                       // Container(
                       //   padding: EdgeInsets.only(
                       //       left: 19.w, right: 19.w, top: 15.w, bottom: 15.w),

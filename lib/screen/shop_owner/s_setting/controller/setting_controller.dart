@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_setting/repository/delet
 import 'package:local_supper_market/screen/shop_owner/s_setting/repository/setting_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopSettingController extends ChangeNotifier {
@@ -22,8 +23,10 @@ class ShopSettingController extends ChangeNotifier {
   DeleteAccountRepo deleteAccountRepo = DeleteAccountRepo();
   AppVersionRepo appVersionRepo = AppVersionRepo();
   AppVersionData? appversiondata;
+  String appVersion="";
   bool isAppNotificationEnable = true;
   bool isStackLoading = false;
+  bool isLoading=true;
 
   // String? selectedValue;
 // Group Value fo
@@ -36,13 +39,13 @@ class ShopSettingController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void showStackLoader(value) {
-    isStackLoading = value;
+ showLoader(value){
+    isLoading=value;
     notifyListeners();
-  }
+ }
 
   Future<void> shopNotification(context, status) async {
-    LoadingOverlay.of(context).show();
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     settingRepo.shopSetting(pref.getString("successToken")).then((response) {
@@ -54,9 +57,7 @@ class ShopSettingController extends ChangeNotifier {
       if (response.statusCode == 200) {
         isAppNotificationEnable =
             result.settingData?.appNotification == "on" ? true : false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        LoadingOverlay.of(context).hide();
+        showLoader(false);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();
@@ -157,35 +158,51 @@ class ShopSettingController extends ChangeNotifier {
 
 ////////////////////////////////////////////////////////////////
   Future<void> appVersionCheck(context) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    print(pref.getString("successToken"));
-    appVersionRepo.appVersion(pref.getString("successToken")).then((response) {
-      print(response.body);
-      final result = AppVersionModel.fromJson(jsonDecode(response.body));
-      print(response.statusCode);
-      if (response.statusCode == 200) {
-        appversiondata = result.appversiondata;
 
-        // isAppNotificationEnable =
-        //     result.settingData?.appNotification == "on" ? true : false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
-      } else {
-        LoadingOverlay.of(context).hide();
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
+
+    PackageInfo packageInfo = PackageInfo(
+      appName: 'Unknown',
+      packageName: 'Unknown',
+      version: 'Unknown',
+      buildNumber: 'Unknown',
+      buildSignature: 'Unknown',
+      installerStore: 'Unknown',
     );
+    final info = await PackageInfo.fromPlatform();
+    packageInfo = info;
+    appVersion=packageInfo.version;
+    notifyListeners();
+
+
+    // SharedPreferences pref = await SharedPreferences.getInstance();
+    // print(pref.getString("successToken"));
+    // appVersionRepo.appVersion(pref.getString("successToken")).then((response) {
+    //   print(response.body);
+    //   final result = AppVersionModel.fromJson(jsonDecode(response.body));
+    //   print(response.statusCode);
+    //   if (response.statusCode == 200) {
+    //     appversiondata = result.appversiondata;
+    //
+    //     // isAppNotificationEnable =
+    //     //     result.settingData?.appNotification == "on" ? true : false;
+    //     Utils.showPrimarySnackbar(context, result.message,
+    //         type: SnackType.success);
+    //     notifyListeners();
+    //   } else {
+    //     LoadingOverlay.of(context).hide();
+    //     Utils.showPrimarySnackbar(context, result.message,
+    //         type: SnackType.error);
+    //   }
+    // }).onError((error, stackTrace) {
+    //   Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    // }).catchError(
+    //   (Object e) {
+    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+    //   },
+    //   test: (Object e) {
+    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+    //     return false;
+    //   },
+    // );
   }
 }

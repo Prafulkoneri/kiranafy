@@ -400,4 +400,8 @@ class Endpoint {
   static const String checkAppversion = "${baseUrl}lsm-app-version";
 
   static const String reOrder = "${baseUrl}lsm-customer-reorder";
+  static const String reviewshoplist =
+      "${baseUrl}lsm-customer-review-list-of-shop";
+  static const String submitRevieqw =
+      "${baseUrl}lsm-customer-submit-review-for-shop";
 }

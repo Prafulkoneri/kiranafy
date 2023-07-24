@@ -26,38 +26,38 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(right: 45.w),
-              child: Image(
-                image: AssetImage("assets/images/splash1.png"),
-              ),
+      children: [
+        Padding(
+          padding: EdgeInsets.only(right: 45.w),
+          child: Image(
+            image: AssetImage("assets/images/splash1.png"),
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  "assets/images/splash_logo.png",
+                  height: 227.36.w,
+                  width: 180.81.w,
+                  fit: BoxFit.fill,
+                ),
+              ],
             ),
-            Expanded(child: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-
-                  Image.asset(
-                    "assets/images/splash_logo.png",
-                    height: 257.36.w,
-                    width: 228.81.w,
-                    fit: BoxFit.contain,
-                  ),
-                ],
-              ),
-            ),),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 45.w,
-              ),
-              child: Image(
-                image: AssetImage("assets/images/splash2.png"),
-              ),
-            ),
-
-          ],
-        ));
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            left: 45.w,
+          ),
+          child: Image(
+            image: AssetImage("assets/images/splash2.png"),
+          ),
+        ),
+      ],
+    ));
   }
 }
