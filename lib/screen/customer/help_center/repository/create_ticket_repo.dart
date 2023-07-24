@@ -7,9 +7,9 @@ class CreateTicketRepo {
       CreateTicketRequestModel reqModel, token) async {
     print(token);
     print(reqModel.toJson());
-    print(Uri.parse(Endpoint.createTicket));
+    print(Uri.parse(Endpoint.customerCreateTicket));
     try {
-      return await http.post(Uri.parse(Endpoint.createTicket),
+      return await http.post(Uri.parse(Endpoint.customerCreateTicket),
           body: reqModel.toJson(),
           headers: {
             "Authorization": "Bearer $token",

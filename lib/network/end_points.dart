@@ -156,6 +156,10 @@ class Endpoint {
   static const String removeFrvtShops =
       "${baseUrl}lsm-customer-remove-shop-from-favourite";
 
+  ///Remove Fvrt Shops
+  static const String customerCreateTicket =
+      "${baseUrl}lsm-customer-create-ticket";
+
   /////
   static const String submitCustomProduct =
       "${baseUrl}lsm-shop-owner-add-custom-product";
