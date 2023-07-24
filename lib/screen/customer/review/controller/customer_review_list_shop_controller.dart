@@ -16,6 +16,10 @@ import 'package:local_supper_market/screen/customer/delivery_view/repository/get
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/reorder_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/submit_review_repo.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/review/model/customer_review_list_shop_model.dart';
 import 'package:local_supper_market/screen/customer/review/repository/customer_review_list_shop_repository.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
@@ -23,6 +27,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/model/customer_
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomerReviewListControler extends ChangeNotifier {
   String shopId = "";
@@ -30,7 +35,12 @@ class CustomerReviewListControler extends ChangeNotifier {
   List<ReviewList>? reviewList;
   ShopDetails? shopDetails;
   ShopReviewListRepo shopReviewListRepo = ShopReviewListRepo();
-
+  RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
+  AddFavShopRepo addFavShopRepo = AddFavShopRepo();
+  AddFavReqModel get addFavReqModel => AddFavReqModel(
+        shopId: shopId.toString(),
+      );
+  bool favAllShop = true;
   //////////////
 
   Future<void> initState(context, sId) async {
@@ -87,4 +97,76 @@ class CustomerReviewListControler extends ChangeNotifier {
   }
 
 ///////////////////////////////////////////////////////////////////////////////////
+  void launchPhone(String mobNumber, context) async {
+    var number = Uri.parse("tel:${mobNumber}");
+    if (await canLaunchUrl(number)) {
+      await launchUrl(number);
+    } else {
+      Utils.showPrimarySnackbar(context, "Unable to dial at the moment",
+          type: SnackType.error);
+    }
+  }
+
+  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
+        shopId: shopId.toString(),
+      );
+  Future<void> removeAllShopFavList(context, id) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeFavShopRepo
+        .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        favAllShop = false;
+        print("hello");
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> updateAllShopFavList(context, id) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    addFavShopRepo
+        .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = AddFavResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        favAllShop = true;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 }

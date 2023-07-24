@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/help_center/repository/get_ticket_list_repo.dart';
 import 'package:local_supper_market/screen/customer/help_center/view/raise_ticket_form.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_fav_model.dart';
@@ -28,7 +29,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GetTicketListController extends ChangeNotifier {
-  TicketListRepo ticketListRepo = TicketListRepo();
+  CTicketListRepo cticketListRepo = CTicketListRepo();
   TicketTypeRepo ticketTypeRepo = TicketTypeRepo();
   CreateTicketRepo createTicketRepo = CreateTicketRepo();
   TextEditingController subjectController = TextEditingController();
@@ -38,7 +39,7 @@ class GetTicketListController extends ChangeNotifier {
   bool isLoading = true;
   String description = ""; //
   bool isTickedError = false;
-  String errorMsgForRaiseTicket="";
+  String errorMsgForRaiseTicket = "";
 
   List<TicketListData>? ticketList;
   Future<void> initState(context) async {
@@ -51,24 +52,22 @@ class GetTicketListController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onOpenBottomSheet(context){
-    ticketTypeId=0;
-     subjectController.clear();
- descriptionController.clear();
+  void onOpenBottomSheet(context) {
+    ticketTypeId = 0;
+    subjectController.clear();
+    descriptionController.clear();
     showModalBottomSheet(
         backgroundColor: Colors.white,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30))),
+                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         context: context,
         builder: (context) {
           // using a scaffold helps to more easily position the FAB
           return RaiseTicketView();
         });
- notifyListeners();
-
+    notifyListeners();
   }
 
   Future<void> onTicketTypeSelected(value) async {
@@ -80,8 +79,12 @@ class GetTicketListController extends ChangeNotifier {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    ticketListRepo.ticketList(pref.getString("successToken")).then((response) {
+    cticketListRepo
+        .cticketList(pref.getString("successToken"))
+        .then((response) {
+      print("5555555555555555555555555555555555555");
       print(response.body);
+      print("5555555555555555555555555555555555555");
       final result = GetTicketListModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -148,7 +151,7 @@ class GetTicketListController extends ChangeNotifier {
   ) async {
     if (ticketTypeId == 0) {
       isTickedError = true;
-      errorMsgForRaiseTicket="Select Ticket Type";
+      errorMsgForRaiseTicket = "Select Ticket Type";
       notifyListeners();
       Timer(Duration(seconds: 3), () async {
         isTickedError = false;
@@ -159,7 +162,7 @@ class GetTicketListController extends ChangeNotifier {
     }
     if (subjectController.text == "") {
       isTickedError = true;
-      errorMsgForRaiseTicket="Enter Subject";
+      errorMsgForRaiseTicket = "Enter Subject";
       notifyListeners();
       Timer(Duration(seconds: 3), () async {
         isTickedError = false;
@@ -169,7 +172,7 @@ class GetTicketListController extends ChangeNotifier {
     }
     if (descriptionController.text == "") {
       isTickedError = true;
-      errorMsgForRaiseTicket="Enter Description";
+      errorMsgForRaiseTicket = "Enter Description";
       notifyListeners();
       Timer(Duration(seconds: 3), () async {
         isTickedError = false;
@@ -187,11 +190,10 @@ class GetTicketListController extends ChangeNotifier {
       final result = CreateTicketResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-
         getTicketList(context);
         LoadingOverlay.of(context).hide();
         Navigator.pop(context);
-        ticketTypeId=0;
+        ticketTypeId = 0;
         descriptionController.clear();
         subjectController.clear();
         Utils.showPrimarySnackbar(context, result.message,

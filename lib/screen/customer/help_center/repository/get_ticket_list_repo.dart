@@ -1,10 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 
-class TicketListRepo {
-  Future<http.Response> ticketList(token) async {
+class CTicketListRepo {
+  Future<http.Response> cticketList(token) async {
     try {
-      return await http.get(Uri.parse(Endpoint.ticketList), headers: {
+      return await http.get(Uri.parse(Endpoint.customerTicketList), headers: {
         "Authorization": "Bearer $token",
       });
     } catch (e) {

@@ -404,4 +404,10 @@ class Endpoint {
       "${baseUrl}lsm-customer-review-list-of-shop";
   static const String submitRevieqw =
       "${baseUrl}lsm-customer-submit-review-for-shop";
+  //////////////////////////
+  static const String customerTicketList = "${baseUrl}lsm-customer-get-tickets";
+  ////////////////////
+  static const String customerViewticket = "${baseUrl}lsm-customer-view-ticket";
+  static const String customerViewticketReply =
+      "${baseUrl}lsm-customer-ticket-reply";
 }

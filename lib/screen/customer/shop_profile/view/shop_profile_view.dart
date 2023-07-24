@@ -39,10 +39,10 @@ class ShopProfileView extends StatefulWidget {
 
   const ShopProfileView(
       {super.key,
-      required this.shopId,
-      required this.routeName,
+      this.shopId,
+      this.routeName,
       this.categoryId,
-      required this.refreshPage});
+      this.refreshPage});
 
   @override
   State<ShopProfileView> createState() => _ShopProfileViewState();
@@ -184,6 +184,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                     shopId: watch
                                                         .shopDetails?.id
                                                         .toString(),
+                                                    fromDashBoard: true,
                                                   ),
                                                 )),
                                         (Route<dynamic> route) => false,

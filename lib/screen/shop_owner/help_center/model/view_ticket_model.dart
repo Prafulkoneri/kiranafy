@@ -81,6 +81,7 @@ class TicketDetails {
 class TicketRepliesList {
   int? id;
   String? remark;
+  String? type;
   String? createdAt;
   String? name;
   String? profileImagePath;
@@ -89,6 +90,7 @@ class TicketRepliesList {
   TicketRepliesList({
     required this.id,
     required this.remark,
+    required this.type,
     required this.createdAt,
     required this.name,
     required this.profileImagePath,
@@ -97,6 +99,7 @@ class TicketRepliesList {
   TicketRepliesList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     remark = json["remark"];
+    type = json["type"];
     createdAt = json["created_at"];
     name = json["name"];
     profileImagePath = json["profile_image_path"];
