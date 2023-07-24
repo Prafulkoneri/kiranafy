@@ -55,7 +55,9 @@ class ShopViewTicketController extends ChangeNotifier {
     viewTicketRepo
         .viewTicket(viewTicketRequestModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+          print("66666");
+      log(response.body);
+          print("66666");
       final result = ViewTicketResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {

@@ -216,10 +216,11 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 final element = watch.ticketRepliesList?[index];
-                                return element?.type == "customer"
-                                    ? Container(
+                                return
+                                     Container(
+                                       margin: EdgeInsets.only(bottom: 5.w),
                                         decoration: BoxDecoration(
-                                          color: Color(0xff44B8CA),
+                                          color:element?.type=="customer"?Color(0xff44B8CA):Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
@@ -281,7 +282,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                                             GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
                                                               color:
-                                                                  Colors.white,
+                                                              element?.type=="customer"? Colors.white:Colors.black,
                                                               fontSize: 13.sp,
                                                               fontWeight:
                                                                   FontWeight
@@ -297,7 +298,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                                             GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
                                                               color:
-                                                                  Colors.white,
+                                                              element?.type=="customer"?Colors.white:Colors.black,
                                                               fontSize: 13.sp,
                                                               fontWeight:
                                                                   FontWeight
@@ -316,7 +317,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                                 "${element?.remark}",
                                                 style: GoogleFonts.dmSans(
                                                   textStyle: TextStyle(
-                                                      color: Colors.white,
+                                                      color: element?.type=="customer"?Colors.white:Colors.black,
                                                       fontSize: 14.sp,
                                                       fontWeight:
                                                           FontWeight.w400),
@@ -325,9 +326,6 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                             ],
                                           ),
                                         ),
-                                      )
-                                    : Container(
-                                        color: Colors.red,
                                       );
                               },
                             ),

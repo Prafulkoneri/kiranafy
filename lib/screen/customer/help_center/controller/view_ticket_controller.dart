@@ -57,7 +57,7 @@ class TicketController extends ChangeNotifier {
     cviewTicketRepo
         .cviewTicket(viewTicketRequestModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result = ViewTicketResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -88,7 +88,9 @@ class TicketController extends ChangeNotifier {
       TicketReplyRequestModel(
           ticketId: ticketDetails?.id.toString(),
           ticketRemark: remarkController.text,
-          ticketStatus: ticketDetails?.ticketStatus);
+          ticketStatus: ticketDetails?.ticketStatus,
+        type: "customer",
+      );
 
   Future<void> ticketReply(
     context,

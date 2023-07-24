@@ -2,11 +2,13 @@ class TicketReplyRequestModel {
   String? ticketId;
   String? ticketRemark;
   String? ticketStatus;
+  String ? type;
 
   TicketReplyRequestModel({
     this.ticketId,
     this.ticketRemark,
     this.ticketStatus,
+    this.type,
   });
 
   Map<String, dynamic> toJson() {
@@ -14,6 +16,7 @@ class TicketReplyRequestModel {
     data["ticket_id"] = ticketId;
     data["remark"] = ticketRemark;
     data["ticket_status"] = ticketStatus;
+    data["type"] = type;
     return data;
   }
 }
