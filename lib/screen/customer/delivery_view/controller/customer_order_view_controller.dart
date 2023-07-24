@@ -30,9 +30,8 @@ import 'package:url_launcher/url_launcher.dart';
 class CustomerOrderViewController extends ChangeNotifier {
   String orderId = "";
   String shopId = "";
-  String review = "";
-  int? ratings;
-  int? ratingValue;
+  TextEditingController reviewController =TextEditingController();
+  double? ratingValue;
   // int? ratingValueTwo;
   // int? ratingValueThree;
   // int? ratingValueFour;
@@ -56,6 +55,8 @@ class CustomerOrderViewController extends ChangeNotifier {
   List<bool> isSelectedReason = [];
   List<CustomerCancelReasonList>? cancelReasondata;
   TextEditingController reasonController = TextEditingController();
+
+
   CustomerOrderViewRequestModel get customerOrderViewRequestModel =>
       CustomerOrderViewRequestModel(orderId: orderId.toString());
   //////////////
@@ -408,18 +409,15 @@ class CustomerOrderViewController extends ChangeNotifier {
       SubmitReviewRequestModel(
           shopId: orderId.toString(),
           orderId: orderId.toString(),
-          review: review,
-          rating: ratings.toString());
-  Future<void> ShopSubmitreview(context, oId, sId) async {
-    orderId = oId.toString();
-    shopId = sId.toString();
+          review: reviewController.text,
+          rating: ratingValue.toString());
+  Future<void> shopSubmitreview(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     submitReviewRepo
         .submitReview(submitReviewRequestModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result =
-          SubmitReviewResponseModel.fromJson(jsonDecode(response.body));
+      final result = SubmitReviewResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Navigator.pushAndRemoveUntil(
           context,
@@ -428,7 +426,6 @@ class CustomerOrderViewController extends ChangeNotifier {
                   MainScreenView(index: 4, screenName: MyOrderView())),
           (Route<dynamic> route) => false,
         );
-        print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         LoadingOverlay.of(context).hide();

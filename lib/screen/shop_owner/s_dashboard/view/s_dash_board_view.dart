@@ -231,44 +231,48 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/location2.svg',
-                                width: 23.w,
-                                height: 28.h,
-                              ),
-                              SizedBox(
-                                width: 9.w,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${watch.address} ",
-                                    // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black,
-                                          // letterSpacing: .5,
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/images/location2.svg',
+                                  width: 23.w,
+                                  height: 28.h,
+                                ),
+                                SizedBox(
+                                  width: 9.w,
+                                ),
+                                Flexible(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${watch.address} ",
+                                        // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black,
+                                              // letterSpacing: .5,
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                      Text(
+                                        "${watch.pincode}",
+                                        // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black,
+                                              // letterSpacing: .5,
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    "${watch.pincode}",
-                                    // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black,
-                                          // letterSpacing: .5,
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
                           Container(
                             child: GestureDetector(
