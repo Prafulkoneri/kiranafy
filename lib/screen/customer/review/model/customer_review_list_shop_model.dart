@@ -19,37 +19,39 @@ class CustomerShopReviewListRequestModel {
 class CustomerGetShopReviewListResponseModel {
   int? status;
   String? message;
-  ShopReviewlistrData? reviewlisteData;
+  ShopReviewlistData? reviewlistData;
 
   CustomerGetShopReviewListResponseModel({
     required this.status,
     required this.message,
-    required this.reviewlisteData,
+    required this.reviewlistData,
   });
   CustomerGetShopReviewListResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    reviewlisteData = json['data'] != null
-        ? ShopReviewlistrData.fromJson(json['data'])
-        : null;
+    reviewlistData =
+        json['data'] != null ? ShopReviewlistData.fromJson(json['data']) : null;
   }
 }
 
-class ShopReviewlistrData {
+class ShopReviewlistData {
   List<ReviewList>? reviewList;
   ShopDetails? shopDetails;
 
-  ShopReviewlistrData({
+  ShopReviewlistData({
     required this.reviewList,
     required this.shopDetails,
   });
-  ShopReviewlistrData.fromJson(Map<String, dynamic> json) {
+  ShopReviewlistData.fromJson(Map<String, dynamic> json) {
     if (json["review_list"] != null) {
       reviewList = <ReviewList>[];
       json["review_list"].forEach((v) {
         reviewList!.add(ReviewList.fromJson(v));
       });
     }
+    shopDetails = json['shop_details'] != null
+        ? ShopDetails.fromJson(json['shop_details'])
+        : null;
   }
 }
 

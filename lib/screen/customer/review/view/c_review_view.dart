@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/review/controller/customer_review_list_shop_controller.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 
 import 'package:provider/provider.dart';
 
 class CReviewScreenView extends StatefulWidget {
-  const CReviewScreenView({super.key});
+  final String? shopId;
+  const CReviewScreenView({super.key, this.shopId});
 
   @override
   State<CReviewScreenView> createState() => _CReviewScreenViewState();
@@ -18,7 +23,20 @@ class CReviewScreenView extends StatefulWidget {
 
 class _CReviewScreenViewState extends State<CReviewScreenView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<CustomerReviewListControler>().initState(
+            context,
+            widget.shopId,
+          );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final watch = context.watch<CustomerReviewListControler>();
+    final read = context.read<CustomerReviewListControler>();
+    final watchMain = context.watch<MainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -38,7 +56,8 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                 top: 15.w,
               ),
               child: Text(
-                "New Balaji Trading Company",
+                "${watch.shopDetails?.shopName}",
+                // "New Balaji Trading Company",
                 style: GoogleFonts.roboto(
                   textStyle: TextStyle(
                       color: Black,
@@ -71,7 +90,9 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                         width: 8.w,
                       ),
                       Text(
-                        "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                        "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+
+                        // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                         style: GoogleFonts.roboto(
                           textStyle: TextStyle(
                               color: Black,
@@ -117,8 +138,9 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 3,
+                    itemCount: watch.reviewList?.length ?? 0,
                     itemBuilder: (context, index) {
+                      final element = watch.reviewList?[index];
                       return Column(
                         children: [
                           Container(
@@ -139,7 +161,8 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                 Row(
                                   children: [
                                     Image.asset(
-                                      'assets/images/ReviewProfile.png',
+                                      "${element?.customerProfileImagePath}",
+                                      // 'assets/images/ReviewProfile.png',
                                       width: 60.w,
                                       height: 60.w,
                                     ),
@@ -156,7 +179,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Rahul Singh',
+                                                  "${element?.customerName}",
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         color: Black,
@@ -176,7 +199,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                                       width: 7.w,
                                                     ),
                                                     Text(
-                                                      '4.1',
+                                                      "${element?.ratings}",
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(
                                                             color: Black,
@@ -194,7 +217,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                               height: 4.h,
                                             ),
                                             Text(
-                                              'Pune, Maharashtra',
+                                              "${element?.cityName} ${element?.stateName}",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     color: Color(0xff7C7C7C),
@@ -204,7 +227,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                               ),
                                             ),
                                             Text(
-                                              '30/11/2021',
+                                              "${element?.createdAt}",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     color: Color(0xff7C7C7C),
@@ -230,7 +253,8 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                   height: 10.h,
                                 ),
                                 Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
+                                  "${element?.review}",
+                                  // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Color(0xff7C7C7C),

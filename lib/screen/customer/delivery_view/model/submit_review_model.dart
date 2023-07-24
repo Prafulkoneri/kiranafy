@@ -30,7 +30,5 @@ class SubmitReviewResponseModel {
   SubmitReviewResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    // orderData =
-    //     json['data'] != null ? OrderViewData.fromJson(json['data']) : null;
   }
 }

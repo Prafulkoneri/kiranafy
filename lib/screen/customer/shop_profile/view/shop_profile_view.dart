@@ -166,11 +166,27 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
+                                      print(
+                                          "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           CReviewScreenView()),
+                                      // );
+                                      Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                CReviewScreenView()),
+                                                MainScreenView(
+                                                  index: 0,
+                                                  screenName: CReviewScreenView(
+                                                    shopId: watch
+                                                        .shopDetails?.id
+                                                        .toString(),
+                                                  ),
+                                                )),
+                                        (Route<dynamic> route) => false,
                                       );
                                     },
                                     child: Container(

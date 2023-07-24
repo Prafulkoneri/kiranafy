@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/customer_cancel_order_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/get_cancel_order_model.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/model/get_shop_review_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/reorder_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/submit_review_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_cancel_order_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/repository/get_shop_review_list_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/reorder_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/submit_review_repo.dart';
@@ -33,7 +31,12 @@ class CustomerOrderViewController extends ChangeNotifier {
   String orderId = "";
   String shopId = "";
   String review = "";
-  int? rating;
+  int? ratings;
+  int? ratingValue;
+  // int? ratingValueTwo;
+  // int? ratingValueThree;
+  // int? ratingValueFour;
+  // int? ratingValueFive;
   String orderCancelledReason = "";
   String orderCancelledReasonId = "";
   String cancellationId = "";
@@ -400,55 +403,16 @@ class CustomerOrderViewController extends ChangeNotifier {
 
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  // CustomerShopReviewListRequestModel get customerShopReviewListRequestModel =>
-  //     CustomerShopReviewListRequestModel(
-  //       shopId: orderId.toString(),
-  //     );
-  // Future<void> ShopReviewList(context, oId) async {
-  //   LoadingOverlay.of(context).show();
-  //   orderId = oId.toString();
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   shopReviewListRepo
-  //       .shopReviewList(
-  //           customerShopReviewListRequestModel, pref.getString("successToken"))
-  //       .then((response) {
-  //     log("response.body${response.body}");
-  //     final result = CustomerGetShopReviewListResponseModel.fromJson(
-  //         jsonDecode(response.body));
-  //     if (response.statusCode == 200) {
-  //       print("hello");
-  //       Utils.showPrimarySnackbar(context, result.message,
-  //           type: SnackType.success);
-  //       LoadingOverlay.of(context).hide();
-
-  //       notifyListeners();
-  //     } else {
-  //       Utils.showPrimarySnackbar(context, result.message,
-  //           type: SnackType.error);
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-  //   }).catchError(
-  //     (Object e) {
-  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-  //     },
-  //     test: (Object e) {
-  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-  //       return false;
-  //     },
-  //   );
-  // }
-
 ///////////////////////////////////////////////////////////////////////////////////
   SubmitReviewRequestModel get submitReviewRequestModel =>
       SubmitReviewRequestModel(
           shopId: orderId.toString(),
           orderId: orderId.toString(),
           review: review,
-          rating: rating.toString());
-  Future<void> ShopSubmitreview(context, oId) async {
-    LoadingOverlay.of(context).show();
+          rating: ratings.toString());
+  Future<void> ShopSubmitreview(context, oId, sId) async {
     orderId = oId.toString();
+    shopId = sId.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     submitReviewRepo
         .submitReview(submitReviewRequestModel, pref.getString("successToken"))
@@ -457,6 +421,13 @@ class CustomerOrderViewController extends ChangeNotifier {
       final result =
           SubmitReviewResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  MainScreenView(index: 4, screenName: MyOrderView())),
+          (Route<dynamic> route) => false,
+        );
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -478,5 +449,10 @@ class CustomerOrderViewController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  void onRatingSelect(value) {
+    ratingValue = value;
+    notifyListeners();
   }
 }
