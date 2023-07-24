@@ -448,7 +448,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                 screenName:
                                     ShopSeasonalRecommandedOfferProductsView(
                                   selectedProduct: "recommended",
-                                      isRefresh:true,
+                                  isRefresh: true,
                                 ))),
                         (Route<dynamic> route) => false,
                       );
@@ -1019,8 +1019,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // read.shopSignOut(context);
-                      read.onLogout(context);
+                      read.shopSignOut(context);
+                      // read.onLogout(context);
                     },
                     child: Container(
                       margin:

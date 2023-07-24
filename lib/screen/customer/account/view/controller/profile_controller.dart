@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 
 import 'package:local_supper_market/screen/customer/account/model/profile_detail_cmodel.dart';
 import 'package:local_supper_market/screen/customer/account/repository/c_profile_repo.dart';
+import 'package:local_supper_market/screen/customer/account/repository/sign_out_repo.dart';
 
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/model/sign_out_model.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +20,7 @@ import '../../../notifications/view/notification_view.dart';
 
 class ProfileController extends ChangeNotifier {
   CustomerData? customerData;
-
+  CustomerSignOutRepo customerSignOutRepo = CustomerSignOutRepo();
   Future<void> initState(
     context,
   ) async {
@@ -88,5 +90,44 @@ class ProfileController extends ChangeNotifier {
       },
     );
   }
+
   /////End Detail Profile
+
+  Future<void> customerSignOut(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    customerSignOutRepo
+        .customerSignOut(pref.getString("successToken"))
+        .then((response) {
+      final result = ShopLogoutResModel.fromJson(
+        jsonDecode(response.body),
+      );
+      if (response.statusCode == 200) {
+        print("result.message");
+
+        pref.clear();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const OnBoardingScreenView()),
+        );
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 }

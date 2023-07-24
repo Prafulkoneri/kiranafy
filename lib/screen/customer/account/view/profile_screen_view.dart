@@ -158,40 +158,47 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 ),
                               ],
                             ),
-                            watch.customerData?.customerEmail!=null? SizedBox(
-                              height: 7.2.h,
-                            ):Container(),
-                            watch.customerData?.customerEmail!=null?   Row(
-                              // crossAxisAlignment:
-                              //     CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/icons/email.svg',
-                                  width: 17.w,
-                                  height: 13.h,
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                watch.customerData?.customerEmail != ""
-                                    ? Text(
-                                        watch.customerData?.customerEmail??"",
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              // decoration:
-                                              // TextDecoration.lineThrough,
-                                              color: Black,
-                                              // letterSpacing:
-                                              //     .5,
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      )
-                                    : Container(),
-                              ],
-                              // ),
-                            ):Container(),
+                            watch.customerData?.customerEmail != null
+                                ? SizedBox(
+                                    height: 7.2.h,
+                                  )
+                                : Container(),
+                            watch.customerData?.customerEmail != null
+                                ? Row(
+                                    // crossAxisAlignment:
+                                    //     CrossAxisAlignment.start,
+                                    // mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/icons/email.svg',
+                                        width: 17.w,
+                                        height: 13.h,
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      watch.customerData?.customerEmail != ""
+                                          ? Text(
+                                              watch.customerData
+                                                      ?.customerEmail ??
+                                                  "",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    // decoration:
+                                                    // TextDecoration.lineThrough,
+                                                    color: Black,
+                                                    // letterSpacing:
+                                                    //     .5,
+                                                    fontSize: 15.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ],
+                                    // ),
+                                  )
+                                : Container(),
                             SizedBox(
                               height: 11.h,
                             ),
@@ -455,9 +462,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
-                            index: 4,
-                            screenName: HelpCenterView())),
-                        (Route<dynamic> route) => false,
+                            index: 4, screenName: HelpCenterView())),
+                    (Route<dynamic> route) => false,
                   );
                 },
                 child: Container(
@@ -700,7 +706,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  read.onLogout(context);
+                  read.customerSignOut(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
