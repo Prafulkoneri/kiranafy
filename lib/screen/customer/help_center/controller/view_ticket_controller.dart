@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/account/model/profile_detail_cmodel.dart';
+import 'package:local_supper_market/screen/customer/help_center/repository/ticket_reply_repo.dart';
+import 'package:local_supper_market/screen/customer/help_center/repository/view_ticket_repo.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_detail_model.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_list_model.dart';
@@ -32,8 +34,8 @@ class TicketController extends ChangeNotifier {
   ViewTicketData? viewTicketData;
   ReplyData? reply;
 
-  ViewTicketRepo viewTicketRepo = ViewTicketRepo();
-  TicketReplyRepo ticketReplyRepo = TicketReplyRepo();
+  CViewTicketRepo cviewTicketRepo = CViewTicketRepo();
+  CTicketReplyRepo cticketReplyRepo = CTicketReplyRepo();
 
   Future<void> initState(context, tID) async {
     await viewTicketList(context, tID);
@@ -52,8 +54,8 @@ class TicketController extends ChangeNotifier {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    viewTicketRepo
-        .viewTicket(viewTicketRequestModel, pref.getString("successToken"))
+    cviewTicketRepo
+        .cviewTicket(viewTicketRequestModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result = ViewTicketResModel.fromJson(jsonDecode(response.body));
@@ -97,13 +99,13 @@ class TicketController extends ChangeNotifier {
     // showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    ticketReplyRepo
-        .replyTicket(ticketReplyRequestModel, pref.getString("successToken"))
+    cticketReplyRepo
+        .creplyTicket(ticketReplyRequestModel, pref.getString("successToken"))
         .then((response) {
       final result = TicketReplyResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        viewTicketList(context,ticketId);
+        viewTicketList(context, ticketId);
         remarkController.clear();
         notifyListeners();
       } else {

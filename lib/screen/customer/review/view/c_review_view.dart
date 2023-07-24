@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -6,16 +7,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/review/controller/customer_review_list_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 
 import 'package:provider/provider.dart';
 
 class CReviewScreenView extends StatefulWidget {
   final String? shopId;
-  const CReviewScreenView({super.key, this.shopId});
+  final bool? fromDashBoard;
+  const CReviewScreenView(
+      {super.key, this.shopId, required this.fromDashBoard});
 
   @override
   State<CReviewScreenView> createState() => _CReviewScreenViewState();
@@ -42,6 +49,15 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
+          onBackBtnPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      MainScreenView(index: 1, screenName: ShopProfileView())),
+              (Route<dynamic> route) => false,
+            );
+          },
           title: "Reviews",
           onActionTap: () {},
         ),
@@ -89,31 +105,78 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                       SizedBox(
                         width: 8.w,
                       ),
-                      Text(
-                        "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                      Container(
+                        width: 200.w,
+                        child: Text(
+                          "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
 
-                        // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                              color: Black,
-                              // letterSpacing: .5,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400),
+                          // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                          style: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                                color: Black,
+                                // letterSpacing: .5,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
                         ),
                       ),
                     ],
                   ),
                   Row(
                     children: [
-                      SvgPicture.asset(
-                        'assets/images/call.svg',
+                      InkWell(
+                        onTap: () {
+                          read.launchPhone(
+                              watch.shopDetails?.shopOwnerSupportNumber ?? "",
+                              context);
+                        },
+                        child: Container(
+                            padding: EdgeInsets.only(
+                                left: 13.w,
+                                right: 13.w,
+                                top: 14.w,
+                                bottom: 14.w),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xff23AA49),
+                            ),
+                            child: SvgPicture.asset(
+                              "assets/icons/new_call.svg",
+                              width: 26.w,
+                              height: 14.h,
+                            )),
                       ),
                       SizedBox(
                         width: 13.w,
                       ),
-                      SvgPicture.asset(
-                        'assets/images/fvrt.svg',
-                      ),
+                      InkWell(
+                        onTap: () {
+                          watch.favAllShop
+                              ? read.removeAllShopFavList(
+                                  context, watch.shopDetails?.id)
+                              : read.updateAllShopFavList(
+                                  context, watch.shopDetails?.id);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 13.w, right: 13.w, top: 14.w, bottom: 14.w),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xff4689EC),
+                          ),
+                          child: watch.favAllShop
+                              ? SvgPicture.asset(
+                                  "assets/icons/fav_selected.svg",
+                                  width: 26.w,
+                                  height: 14.h,
+                                )
+                              : SvgPicture.asset(
+                                  "assets/images/favorite.svg",
+                                  width: 26.w,
+                                  height: 14.h,
+                                ),
+                        ),
+                      )
                     ],
                   ),
                 ],
@@ -157,15 +220,35 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                               // color: Colors.red,
                             ),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   children: [
-                                    Image.asset(
-                                      "${element?.customerProfileImagePath}",
-                                      // 'assets/images/ReviewProfile.png',
-                                      width: 60.w,
-                                      height: 60.w,
-                                    ),
+                                    element?.customerProfileImagePath == ""
+                                        ? Container(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                    'assets/images/shop_image.png'),
+                                              ),
+                                            ),
+                                          )
+                                        : Container(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: CachedNetworkImageProvider(
+                                                      element?.customerProfileImagePath ??
+                                                          "")),
+                                            ),
+                                          ),
                                     Expanded(
                                       child: Padding(
                                         padding: EdgeInsets.only(left: 5.w),

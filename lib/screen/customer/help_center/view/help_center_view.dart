@@ -7,9 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/view/customer_support_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/customer_support_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/raise_ticket_form.dart';
@@ -47,11 +49,11 @@ class _HelpCenterViewState extends State<HelpCenterView> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
+                  builder: (context) => MainScreenView(
                       index: 4,
-                      screenName: SAccountScreenView(
-                        refresh: false,
-                      ))),
+                      screenName: ProfileScreenView(
+                          // refresh: false,
+                          ))),
               (Route<dynamic> route) => false,
             );
           },

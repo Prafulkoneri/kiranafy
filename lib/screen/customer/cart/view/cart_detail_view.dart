@@ -155,20 +155,6 @@ class _CartDetailViewState extends State<CartDetailView> {
                                             ),
                                             Row(
                                               children: [
-                                                // GestureDetector(
-                                                //   onTap: () {
-                                                // read.launchPhone(
-                                                //     watch.shopDetailData
-                                                //             ?.shopOwnerSupportNumber ??
-                                                //         "",
-                                                //     context);
-                                                //   },
-                                                //   child: SvgPicture.asset(
-                                                //     'assets/images/call.svg',
-                                                //     // width: 15.w,
-                                                //     // height: 19.h,
-                                                //   ),
-                                                // ),
                                                 InkWell(
                                                   onTap: () {
                                                     read.launchPhone(
