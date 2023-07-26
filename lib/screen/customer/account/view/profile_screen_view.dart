@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/about_us/view/c_about_us_view.dart';
 import 'package:local_supper_market/screen/customer/about_us/view/c_privacy_policy.dart';
+import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/c_setting/view/c_setting_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
@@ -15,7 +16,8 @@ import 'package:local_supper_market/screen/customer/help_center/view/help_center
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
-import 'package:local_supper_market/screen/customer/profile/view/update_profile_view.dart';
+import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
+import 'package:local_supper_market/screen/customer/update_profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/utils/maps/view/map_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -27,7 +29,7 @@ import '../../products/views/product_screen_view.dart';
 import 'package:provider/provider.dart';
 
 // import '../controller/profile_controller.dart';
-import 'controller/profile_controller.dart';
+
 
 class ProfileScreenView extends StatefulWidget {
   const ProfileScreenView({super.key});
@@ -327,37 +329,48 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 ),
               ),
               ///////////////////////
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                            index: 4, screenName: CustomerNotificationsScreenView())),
+                        (Route<dynamic> route) => false,
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/notification.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Notifications',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/notification.svg',
+                        // width: 14.w,
+                        // height: 13.h,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Notifications',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               ////////////////////

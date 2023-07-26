@@ -331,6 +331,12 @@ class Endpoint {
 
   static const String shopSetting = "${baseUrl}lsm-shop-owner-get-settings";
 
+  static const String customerShopSetting = "${baseUrl}lsm-customer-get-settings";
+
+  static const String customerChangeSetting = "${baseUrl}lsm-customer-change-settings";
+
+  static const String getCustomerNotificationList = "${baseUrl}lsm-customer-get-notifications-list";
+
   static const String pramotionRequest =
       "${baseUrl}lsm-shop-owner-request-shop-promotion";
 
