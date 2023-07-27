@@ -189,10 +189,11 @@ class AddEditUnitController extends ChangeNotifier{
 
       );
       fileImage1 = File(CroppedFile!.path);
+      // notifyListeners();
     }
-    Navigator.pop(context);
 
     notifyListeners();
+    // Navigator.pop(context);
   }
   void openGallery2(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -226,9 +227,9 @@ class AddEditUnitController extends ChangeNotifier{
       );
       fileImage2 = File(CroppedFile!.path);
     }
-    Navigator.pop(context);
-
     notifyListeners();
+
+    // Navigator.pop(context);
   }
   void openGallery3(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -262,9 +263,9 @@ class AddEditUnitController extends ChangeNotifier{
       );
       fileImage3 = File(CroppedFile!.path);
     }
-    Navigator.pop(context);
 
     notifyListeners();
+    // Navigator.pop(context);
   }
   void openCamera1(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -298,9 +299,9 @@ class AddEditUnitController extends ChangeNotifier{
       );
       fileImage1 = File(CroppedFile!.path);
     }
-    Navigator.pop(context);
 
     notifyListeners();
+    Navigator.of(context,rootNavigator: true).pop();
   }
   void openCamera2(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -334,8 +335,9 @@ class AddEditUnitController extends ChangeNotifier{
       );
       fileImage2 = File(CroppedFile!.path);
     }
-    Navigator.pop(context);
+
     notifyListeners();
+    Navigator.of(context,rootNavigator: true).pop();
   }
   void openCamera3(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -369,9 +371,9 @@ class AddEditUnitController extends ChangeNotifier{
       );
       fileImage3 = File(CroppedFile!.path);
     }
-    Navigator.pop(context);
-
     notifyListeners();
+
+    Navigator.of(context,rootNavigator: true).pop();
   }
   void onToggleSwitch(value){
     switchValue=value;
