@@ -1,4 +1,7 @@
 {
   "java.configuration.updateBuildConfiguration": "interactive",
-  "dart.flutterSdkPath": "G:\\Backup\\flutter_windows_3.10.5-stable\\flutter"
+  "dart.flutterSdkPath": "G:\\Backup\\flutter_windows_3.10.5-stable\\flutter",
+  "dart.flutterTestAdditionalArgs": ["--no-sound-null-safety"],
+  "dart.flutterAdditionalArgs": ["--no-sound-null-safety"],
+  "dart.vmAdditionalArgs": ["--no-sound-null-safety"]
 }

@@ -9,13 +9,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:local_supper_market/network/services/firebase_api.dart';
 import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
-
-
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/controller/add_address_controller.dart';
-
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
@@ -34,37 +31,28 @@ import 'package:local_supper_market/screen/customer/update_profile/controller/ed
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_detail_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_list_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_registration_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/controller/s_add_coupons_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/controller/s_kyc_verrification_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_approved.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/new/s_add_edit_unit_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_admin_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_edit_custom_product_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/controller/setting_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
-
 import 'package:local_supper_market/screen/splash/controller/splash_controller.dart';
 import 'package:local_supper_market/screen/splash/view/splash_view.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -74,6 +62,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'screen/customer/about_us/controller/cms_controller.dart';
+import 'screen/customer/advertisement_form/controller/ads_controller.dart';
 import 'screen/customer/c_setting/controller/c_setting_controller.dart';
 import 'screen/customer/cart/controller/cart_controller.dart';
 import 'screen/customer/cart/controller/cart_detail_controller.dart';
@@ -198,6 +187,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => GetTicketListController()),
         ChangeNotifierProvider(create: (_) => CustomerReviewListControler()),
         ChangeNotifierProvider(create: (_) => CustomerNoticationController()),
+        ChangeNotifierProvider(create: (_) => customerAdscontroller()),
       ],
       child: MyApp(),
     ),
@@ -238,8 +228,6 @@ class _MyAppState extends State<MyApp> {
 
     // fireBaseApi();
   }
-
-
 
   void fireBaseApi() async {
     await firebaseMessaging.requestPermission();

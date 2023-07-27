@@ -1,0 +1,8 @@
+{
+    "configurations": [
+       { "args": [
+            "--no-sound-null-safety"
+        ]}
+
+    ]
+}

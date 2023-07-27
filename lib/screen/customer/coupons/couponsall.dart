@@ -33,12 +33,12 @@ class _AllCouponsState extends State<AllCoupons> {
           statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
           statusBarBrightness: Brightness.dark, // For iOS (dark icons)
         ),
-        toolbarHeight: 65,
+        toolbarHeight: 60,
         // backgroundColor: kappbar,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+        //   onPressed: () => Navigator.of(context).pop(),
+        // ),
         title: Text(
           "Offers & Coupons",
           style: GoogleFonts.dmSans(
