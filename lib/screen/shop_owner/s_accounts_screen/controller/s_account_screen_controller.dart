@@ -38,8 +38,11 @@ class SAccountScreenController extends ChangeNotifier {
   // }
 
   Future<void> initState(context, refresh) async {
-    print("999999999999");
+   if(!refresh){
+     return;
+   }
     if (refresh) {
+      print("isRefreshedfdsfsfsfgsfsfsf");
       await getShopEditProfileDetails(context);
       await getFAQData(context);
     }

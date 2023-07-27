@@ -51,23 +51,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            if (widget.fromDashBoard ?? true) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        SMainScreenView(index: 0, screenName: ShopDashBoardView(refresh: false,))),
-                (Route<dynamic> route) => false,
-              );
-            } else {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 4, screenName: SAccountScreenView(refresh: false,))),
-                (Route<dynamic> route) => false,
-              );
-            }
+           read.onBackPressed(context,widget.fromDashBoard);
           },
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),

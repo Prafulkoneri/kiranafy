@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopNoticationController extends ChangeNotifier {
   bool isLoading = true;
-  NotificationData? notificationdata;
+  NotificationData ?notificationdata;
   List<NotificationList>? notificationList;
 
   NOtificationRepo ticketReplyRepo = NOtificationRepo();

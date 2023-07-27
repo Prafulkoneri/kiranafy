@@ -34,8 +34,8 @@ class TicketController extends ChangeNotifier {
   ViewTicketData? viewTicketData;
   ReplyData? reply;
 
-  CViewTicketRepo cviewTicketRepo = CViewTicketRepo();
-  CTicketReplyRepo cticketReplyRepo = CTicketReplyRepo();
+  CustomerViewTicketRepo customerviewTicketRepo = CustomerViewTicketRepo();
+  CustomerTicketReplyRepo cticketReplyRepo = CustomerTicketReplyRepo();
 
   Future<void> initState(context, tID) async {
     await viewTicketList(context, tID);
@@ -54,7 +54,7 @@ class TicketController extends ChangeNotifier {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    cviewTicketRepo
+    customerviewTicketRepo
         .cviewTicket(viewTicketRequestModel, pref.getString("successToken"))
         .then((response) {
       log(response.body);
