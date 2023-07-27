@@ -8,11 +8,13 @@ import 'package:local_supper_market/screen/customer/delivery_view/model/get_canc
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/reorder_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/review_list_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/submit_review_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_cancel_order_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/reorder_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/review_list_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/submit_review_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
@@ -44,6 +46,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   ReorderRepo reOrderRepo = ReorderRepo();
+  OReviewListRepo oReviewListrepo = OReviewListRepo();
   OrderViewData? orderData;
   OrderDetails? orderDetails;
   CouponDetails? couponDetails;
@@ -55,7 +58,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   List<bool> isSelectedReason = [];
   List<CustomerCancelReasonList>? cancelReasondata;
   TextEditingController reasonController = TextEditingController();
-
+  List<ReviewlistData>? reviewlistdata;
 
   CustomerOrderViewRequestModel get customerOrderViewRequestModel =>
       CustomerOrderViewRequestModel(orderId: orderId.toString());
@@ -79,6 +82,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     print(orId);
     await shopOwnerOrderView(context, orId);
     getCancelOrderList(context);
+    OReviewList(context);
     notifyListeners();
   }
 
@@ -415,17 +419,18 @@ class CustomerOrderViewController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     submitReviewRepo
         .submitReview(submitReviewRequestModel, pref.getString("successToken"))
-        .then((response) {
+        .then((response) async {
       log("response.body${response.body}");
       final result = SubmitReviewResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  MainScreenView(index: 4, screenName: MyOrderView())),
-          (Route<dynamic> route) => false,
-        );
+       await OReviewList(context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) =>
+        //           MainScreenView(index: 4, screenName: MyOrderView())),
+        //   (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         LoadingOverlay.of(context).hide();
@@ -451,5 +456,52 @@ class CustomerOrderViewController extends ChangeNotifier {
   void onRatingSelect(value) {
     ratingValue = value;
     notifyListeners();
+  }
+
+  ReviewListRequestModel get reviewListRequestModel =>
+      ReviewListRequestModel(
+        orderId: orderId.toString(),
+      );
+  Future<void> OReviewList(context) async { showLoader(true);
+    // LoadingOverlay.of(context).show();
+    // orderId = oId.toString();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    oReviewListrepo.oreviewList
+        (reviewListRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+      ReviewListReponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        reviewlistdata = result.reviewlistdata;
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) =>
+        //           MainScreenView(index: 2, screenName: CartScreenView())),
+        //       (Route<dynamic> route) => false,
+        // );
+
+        print("hello");
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        // LoadingOverlay.of(context).hide();
+        showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 }

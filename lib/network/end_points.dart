@@ -418,4 +418,6 @@ class Endpoint {
       "${baseUrl}lsm-customer-ticket-reply";
   static const String clogOut = "${baseUrl}lsm-customer-logout";
   static const String cdeleteAccount = "${baseUrl}lsm-customer-delete-account";
+  static const String cdReviewlist = "${baseUrl}lsm-review-list";
+  static const String customerAds = "${baseUrl}lsm-customer-request-shop-promotion";
 }

@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/advertisement_form/view/ads_view.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 
 import 'package:local_supper_market/screen/customer/home/view/category.dart';
@@ -318,6 +319,20 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
+                            onTap: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MainScreenView(
+                                            index: 0,
+                                            screenName:
+                                            CustomerAdsView(
+
+                                            ))),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                   color: Color(0xff39C19D),

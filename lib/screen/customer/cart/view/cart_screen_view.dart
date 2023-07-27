@@ -132,7 +132,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MainScreenView(
-                                        index: 0,
+                                        index: 2,
                                         screenName: AllNearShopsView(
                                           refreshPage: true,
                                         ))),
