@@ -110,7 +110,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final shopDetails = result.shopDetails;
         print(shopDetails);
-        log("${response.body}");
+        log("abcd${response.body}");
         shopNameController.text = shopDetails?.shopName ?? "";
         print(shopNameController.text);
         ownerNameController.text = shopDetails?.shopOwnerName ?? "";

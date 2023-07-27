@@ -259,7 +259,7 @@ class OrderSummaryController extends ChangeNotifier {
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         favAllShop = false;
-        print("heyyyyyyyyyyyyyllo");
+        print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();

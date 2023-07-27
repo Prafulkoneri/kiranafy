@@ -39,6 +39,11 @@ class _SEditProfileViewState extends State<SEditProfileView> {
       context.read<ShopEditProfileDetailController>().initState(context);
     });
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +56,10 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-           read.onBackPressed(context,widget.fromDashBoard);
+           // read.onBackPressed(context,widget.fromDashBoard);
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName: SAccountScreenView(refresh: false),)));
           },
+
           title: "Edit profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
           onActionTap: () async {

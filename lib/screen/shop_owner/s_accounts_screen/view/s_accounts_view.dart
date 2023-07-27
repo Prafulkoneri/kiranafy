@@ -24,6 +24,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../promotion_request/view/promotion_request_view.dart';
@@ -258,16 +259,24 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName: SShopConfigurationView(
-                                  initialShopConfigration: false,
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
+
+                      PersistentNavBarNavigator.pushNewScreen(context,
+                          screen: SShopConfigurationView(initialShopConfigration: false,),
+                          withNavBar: true,
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.slideUp);
+
+
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4,
+                      //           screenName: SShopConfigurationView(
+                      //             initialShopConfigration: false,
+                      //           ))),
+                      //   (Route<dynamic> route) => false,
+                      // );
                       // read.onShopConfigurationClicked(context);
                     },
                     child: Container(
