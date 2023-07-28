@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -1225,12 +1226,13 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 ),
 
                                 ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount:
-                                        watch.reviewlistdata?.length ?? 0,
+                                        watch.reviewList?.length ?? 0,
                                     itemBuilder: (context, index) {
                                       final element =
-                                          watch.reviewlistdata?[index];
+                                          watch.reviewList?[index];
                                       return Container(
                                         padding: EdgeInsets.only(
                                             left: 19.w,
@@ -1250,87 +1252,174 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
-                                        child: Column(
+                                        child:
+                                        Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
-                                                Image.network(
-                                                  "${element?.customerProfileImagePath}",
-                                                  // 'assets/images/ReviewProfile.png',
-                                                  height: 55.h,
-                                                  width: 55.w,
+                                             
+
+                                                element?.customerProfileImagePath == ""
+                                                    ? Container(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: AssetImage(
+                                                          'assets/images/shop_image.png'),
+                                                    ),
+                                                  ),
+                                                )
+                                                    : Container(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: CachedNetworkImageProvider(
+                                                            element?.customerProfileImagePath ??
+                                                                "")),
+                                                  ),
                                                 ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          "${element?.customerName}",
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black,
-                                                                fontSize: 14.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "${element?.createdAt}",
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black,
-                                                                fontSize: 14.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 8.h,
-                                                    ),
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 10.w),
-                                                      child: Row(
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
-                                                          SvgPicture.asset(
-                                                              "assets/icons/yellow_stars.svg"),
-                                                          SizedBox(
-                                                            width: 6.w,
+                                                          Container(
+                                                            margin:EdgeInsets.only(left:10),
+                                                            child: Text(
+                                                              "${element?.customerName}",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle: TextStyle(
+                                                                    color: Black,
+                                                                    fontSize: 14.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                            ),
                                                           ),
-                                                          SvgPicture.asset(
-                                                              "assets/icons/yellow_stars.svg"),
-                                                          SizedBox(
-                                                            width: 6.w,
+                                                          Text(
+                                                            "${element?.createdAt}",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Black,
+                                                                  fontSize: 14.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
                                                           ),
-                                                          SvgPicture.asset(
-                                                              "assets/icons/yellow_stars.svg"),
-                                                          SizedBox(
-                                                            width: 6.w,
-                                                          ),
-                                                          SvgPicture.asset(
-                                                              "assets/icons/yellow_stars.svg"),
-                                                          SizedBox(
-                                                            width: 6.w,
-                                                          ),
-                                                          SvgPicture.asset(
-                                                              "assets/icons/yellow_stars.svg"),
                                                         ],
                                                       ),
-                                                    ),
-                                                  ],
+                                                      SizedBox(
+                                                        height: 8.h,
+                                                      ),
+
+                                                      Container(
+                                                        padding: EdgeInsets.only(
+                                                            left: 10.w),
+                                                        child:
+                                      element?.ratings==5?
+                                                        Row(
+                                                          children: [
+                                                            SvgPicture.asset(
+                                                                "assets/icons/yellow_stars.svg"),
+                                                            SizedBox(
+                                                              width: 6.w,
+                                                            ),
+                                                            SvgPicture.asset(
+                                                                "assets/icons/yellow_stars.svg"),
+                                                            SizedBox(
+                                                              width: 6.w,
+                                                            ),
+                                                            SvgPicture.asset(
+                                                                "assets/icons/yellow_stars.svg"),
+                                                            SizedBox(
+                                                              width: 6.w,
+                                                            ),
+                                                            SvgPicture.asset(
+                                                                "assets/icons/yellow_stars.svg"),
+                                                            SizedBox(
+                                                              width: 6.w,
+                                                            ),
+                                                            SvgPicture.asset(
+                                                                "assets/icons/yellow_stars.svg"),
+                                                          ],
+                                                        ):
+                                      element?.ratings==4?
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                          SizedBox(
+                                            width: 6.w,
+                                          ),
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                          SizedBox(
+                                            width: 6.w,
+                                          ),
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                          SizedBox(
+                                            width: 6.w,
+                                          ),
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+
+                                        ],
+                                      ):  element?.ratings==3?
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                          SizedBox(
+                                            width: 6.w,
+                                          ),
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                          SizedBox(
+                                            width: 6.w,
+                                          ),
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                        ],
+                                      ):element?.ratings==2?
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                          SizedBox(
+                                            width: 6.w,
+                                          ),
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                        ],
+                                      ):  element?.ratings==1?
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              "assets/icons/yellow_stars.svg"),
+                                        ],
+                                      ):Container()
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
