@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +23,12 @@ class CustomerSetting extends StatefulWidget {
 }
 
 class _CustomerSettingState extends State<CustomerSetting> {
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<CustomerSettingController>().initState(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<CustomerSettingController>();

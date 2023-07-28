@@ -991,8 +991,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
 
                       watch.orderDetails?.transactionId != ""
                           ? SizedBox(
-
-
                               height: 15.h,
                             )
                           : Container(),
@@ -1072,85 +1070,87 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   height: 10.h,
                                 ),
                                 Padding(
-                                  padding:EdgeInsets.only(left:19.w),
-                                  child: StarRating(rating: watch.ratingValue??0,onRatingChanged: (rating){
-                                    read.onRatingSelect(rating);
-                                    print(rating);
-                                  }),
+                                  padding: EdgeInsets.only(left: 19.w),
+                                  child: StarRating(
+                                      rating: watch.ratingValue ?? 0,
+                                      onRatingChanged: (rating) {
+                                        read.onRatingSelect(rating);
+                                        print(rating);
+                                      }),
                                 ),
 
-    //                                                             Container(
-    //                               padding: EdgeInsets.only(left: 19.w),
-    //                               child: Row(
-    //                                 children: [
-    //                                   GestureDetector(
-    //                                       onTap: () {
-    //                                         read.onRatingSelect(1);
-    //                                       },
-    //                                       child: SvgPicture.asset(
-    //                                         "assets/icons/order_rating.svg",
-    //                                         color: watch.ratingValue == null
-    //                                             ? Color(0xffDBDBDB)
-    //                                             : Colors.yellow,
-    //                                       )),
-    //                                   SizedBox(
-    //                                     width: 9.77.w,
-    //                                   ),
-    //                                   GestureDetector(
-    //                                       onTap: () {
-    //                                         read.onRatingSelect(2);
-    //                                       },
-    //                                       child: SvgPicture.asset(
-    //                                         "assets/icons/order_rating.svg",
-    //                                         color: watch.ratingValue == 2 &&
-    //                                                 watch.ratingValue == 3 &&
-    //                                                 watch.ratingValue == 4 &&
-    //                                                 watch.ratingValue == 5
-    //                                             ? Colors.yellow
-    //                                             : Color(0xffDBDBDB),
-    //                                       )),
-    //                                   SizedBox(
-    //                                     width: 9.77.w,
-    //                                   ),
-    //                                   GestureDetector(
-    //                                       onTap: () {
-    //                                         read.onRatingSelect(3);
-    //                                       },
-    //                                       child: SvgPicture.asset(
-    //                                           "assets/icons/order_rating.svg", color:
-    //                                           watch.ratingValue == 3 &&
-    //                                           watch.ratingValue == 4 &&
-    //                                           watch.ratingValue == 5
-    //                                           ? Colors.yellow
-    //                                           : Color(0xffDBDBDB),)),
-    //                                   SizedBox(
-    //                                     width: 9.77.w,
-    //                                   ),
-    //                                   GestureDetector(
-    //                                       onTap: () {
-    //                                         read.onRatingSelect(4);
-    //                                       },
-    //                                       child: SvgPicture.asset(
-    //                                           "assets/icons/order_rating.svg", color:
-    // watch.ratingValue == 4 &&
-    // watch.ratingValue == 5
-    // ? Colors.yellow
-    //     : Color(0xffDBDBDB),)),
-    //                                   SizedBox(
-    //                                     width: 9.77.w,
-    //                                   ),
-    //                                   GestureDetector(
-    //                                       onTap: () {
-    //                                         read.onRatingSelect(5);
-    //                                       },
-    //                                       child: SvgPicture.asset(
-    //                                           "assets/icons/order_rating.svg", color:
-    //                                           watch.ratingValue == 5
-    //                                           ? Colors.yellow
-    //                                           : Color(0xffDBDBDB),))
-    //                                 ],
-    //                               ),
-    //                             ),
+                                //                                                             Container(
+                                //                               padding: EdgeInsets.only(left: 19.w),
+                                //                               child: Row(
+                                //                                 children: [
+                                //                                   GestureDetector(
+                                //                                       onTap: () {
+                                //                                         read.onRatingSelect(1);
+                                //                                       },
+                                //                                       child: SvgPicture.asset(
+                                //                                         "assets/icons/order_rating.svg",
+                                //                                         color: watch.ratingValue == null
+                                //                                             ? Color(0xffDBDBDB)
+                                //                                             : Colors.yellow,
+                                //                                       )),
+                                //                                   SizedBox(
+                                //                                     width: 9.77.w,
+                                //                                   ),
+                                //                                   GestureDetector(
+                                //                                       onTap: () {
+                                //                                         read.onRatingSelect(2);
+                                //                                       },
+                                //                                       child: SvgPicture.asset(
+                                //                                         "assets/icons/order_rating.svg",
+                                //                                         color: watch.ratingValue == 2 &&
+                                //                                                 watch.ratingValue == 3 &&
+                                //                                                 watch.ratingValue == 4 &&
+                                //                                                 watch.ratingValue == 5
+                                //                                             ? Colors.yellow
+                                //                                             : Color(0xffDBDBDB),
+                                //                                       )),
+                                //                                   SizedBox(
+                                //                                     width: 9.77.w,
+                                //                                   ),
+                                //                                   GestureDetector(
+                                //                                       onTap: () {
+                                //                                         read.onRatingSelect(3);
+                                //                                       },
+                                //                                       child: SvgPicture.asset(
+                                //                                           "assets/icons/order_rating.svg", color:
+                                //                                           watch.ratingValue == 3 &&
+                                //                                           watch.ratingValue == 4 &&
+                                //                                           watch.ratingValue == 5
+                                //                                           ? Colors.yellow
+                                //                                           : Color(0xffDBDBDB),)),
+                                //                                   SizedBox(
+                                //                                     width: 9.77.w,
+                                //                                   ),
+                                //                                   GestureDetector(
+                                //                                       onTap: () {
+                                //                                         read.onRatingSelect(4);
+                                //                                       },
+                                //                                       child: SvgPicture.asset(
+                                //                                           "assets/icons/order_rating.svg", color:
+                                // watch.ratingValue == 4 &&
+                                // watch.ratingValue == 5
+                                // ? Colors.yellow
+                                //     : Color(0xffDBDBDB),)),
+                                //                                   SizedBox(
+                                //                                     width: 9.77.w,
+                                //                                   ),
+                                //                                   GestureDetector(
+                                //                                       onTap: () {
+                                //                                         read.onRatingSelect(5);
+                                //                                       },
+                                //                                       child: SvgPicture.asset(
+                                //                                           "assets/icons/order_rating.svg", color:
+                                //                                           watch.ratingValue == 5
+                                //                                           ? Colors.yellow
+                                //                                           : Color(0xffDBDBDB),))
+                                //                                 ],
+                                //                               ),
+                                //                             ),
                                 SizedBox(
                                   height: 10.h,
                                 ),
@@ -1171,7 +1171,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   height: 10.h,
                                 ),
                                 Container(
-                                  padding: EdgeInsets.only(left: 19.w,right: 19.w),
+                                  padding:
+                                      EdgeInsets.only(left: 19.w, right: 19.w),
                                   child: PrimarySTextFormField(
                                     controller: watch.reviewController,
                                     height: 108.w,
@@ -1202,7 +1203,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       ),
                                       // style: style,
                                       onPressed: () {
-                                        read.shopSubmitreview(context);
+                                        read.shopSubmitreview(
+                                          context,
+                                        );
                                       },
                                       child: Text(
                                         'Submit',
@@ -1220,122 +1223,139 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 SizedBox(
                                   height: 19.h,
                                 ),
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      left: 19.w,
-                                      bottom: 11.w,
-                                      right: 13.w,
-                                      top: 10.w),
-                                  margin: EdgeInsets.only(
-                                    left: 19.w,
-                                    bottom: 11.w,
-                                    right: 19.w,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: grey6,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Image.asset(
-                                            'assets/images/ReviewProfile.png',
-                                            height: 55.h,
-                                            width: 55.w,
+
+                                ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        watch.reviewlistdata?.length ?? 0,
+                                    itemBuilder: (context, index) {
+                                      final element =
+                                          watch.reviewlistdata?[index];
+                                      return Container(
+                                        padding: EdgeInsets.only(
+                                            left: 19.w,
+                                            bottom: 11.w,
+                                            right: 13.w,
+                                            top: 10.w),
+                                        margin: EdgeInsets.only(
+                                          left: 19.w,
+                                          bottom: 11.w,
+                                          right: 19.w,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: grey6,
+                                            width: 1,
                                           ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    'Johnson Doe',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '12 Jan 2021',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black,
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 8.h,
-                                              ),
-                                              Container(
-                                                padding:
-                                                    EdgeInsets.only(left: 10.w),
-                                                child: Row(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Image.network(
+                                                  "${element?.customerProfileImagePath}",
+                                                  // 'assets/images/ReviewProfile.png',
+                                                  height: 55.h,
+                                                  width: 55.w,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    SvgPicture.asset(
-                                                        "assets/icons/yellow_stars.svg"),
-                                                    SizedBox(
-                                                      width: 6.w,
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          "${element?.customerName}",
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle: TextStyle(
+                                                                color: Black,
+                                                                fontSize: 14.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "${element?.createdAt}",
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle: TextStyle(
+                                                                color: Black,
+                                                                fontSize: 14.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    SvgPicture.asset(
-                                                        "assets/icons/yellow_stars.svg"),
                                                     SizedBox(
-                                                      width: 6.w,
+                                                      height: 8.h,
                                                     ),
-                                                    SvgPicture.asset(
-                                                        "assets/icons/yellow_stars.svg"),
-                                                    SizedBox(
-                                                      width: 6.w,
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 10.w),
+                                                      child: Row(
+                                                        children: [
+                                                          SvgPicture.asset(
+                                                              "assets/icons/yellow_stars.svg"),
+                                                          SizedBox(
+                                                            width: 6.w,
+                                                          ),
+                                                          SvgPicture.asset(
+                                                              "assets/icons/yellow_stars.svg"),
+                                                          SizedBox(
+                                                            width: 6.w,
+                                                          ),
+                                                          SvgPicture.asset(
+                                                              "assets/icons/yellow_stars.svg"),
+                                                          SizedBox(
+                                                            width: 6.w,
+                                                          ),
+                                                          SvgPicture.asset(
+                                                              "assets/icons/yellow_stars.svg"),
+                                                          SizedBox(
+                                                            width: 6.w,
+                                                          ),
+                                                          SvgPicture.asset(
+                                                              "assets/icons/yellow_stars.svg"),
+                                                        ],
+                                                      ),
                                                     ),
-                                                    SvgPicture.asset(
-                                                        "assets/icons/yellow_stars.svg"),
-                                                    SizedBox(
-                                                      width: 6.w,
-                                                    ),
-                                                    SvgPicture.asset(
-                                                        "assets/icons/yellow_stars.svg"),
                                                   ],
                                                 ),
+                                              ],
+                                            ),
+                                            Divider(
+                                              color: gradient,
+                                              thickness: 1,
+                                            ),
+                                            Text(
+                                              "${element?.review}",
+                                              // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.',
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Black,
+                                                    fontSize: 14.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Divider(
-                                        color: gradient,
-                                        thickness: 1,
-                                      ),
-                                      Text(
-                                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.',
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: Black,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                      );
+                                    }),
                               ],
                             )
-                          : Container()
+                          : Container(),
                       // Container(
                       //   padding: EdgeInsets.only(
                       //       left: 19.w, right: 19.w, top: 15.w, bottom: 15.w),

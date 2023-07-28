@@ -30,8 +30,7 @@ class SSelectedProductsController extends ChangeNotifier {
   SearchProductRepo searchProductRepo = SearchProductRepo();
   TextEditingController searchController = TextEditingController();
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
-  DeleteCustomeProductRepo deleteCustomeProductRepo =
-      DeleteCustomeProductRepo();
+  DeleteCustomeProductRepo deleteCustomeProductRepo = DeleteCustomeProductRepo();
   String categoryId = "";
   String productId = "";
   String productName = "";

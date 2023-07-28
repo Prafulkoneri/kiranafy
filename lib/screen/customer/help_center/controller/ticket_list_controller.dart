@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/help_center/repository/create_ticket_repo.dart';
 import 'package:local_supper_market/screen/customer/help_center/repository/get_ticket_list_repo.dart';
 import 'package:local_supper_market/screen/customer/help_center/view/raise_ticket_form.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
@@ -29,9 +30,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GetTicketListController extends ChangeNotifier {
-  CTicketListRepo cticketListRepo = CTicketListRepo();
+  CustomerTicketListRepo cticketListRepo = CustomerTicketListRepo();
   TicketTypeRepo ticketTypeRepo = TicketTypeRepo();
-  CreateTicketRepo createTicketRepo = CreateTicketRepo();
+  CustomerCreateTicketRepo createTicketRepo = CustomerCreateTicketRepo();
   TextEditingController subjectController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   List<TicketTypeData>? ticketTypeData;

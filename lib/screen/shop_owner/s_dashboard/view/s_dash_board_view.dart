@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/order_status/view/order_stat
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
+import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
@@ -62,15 +63,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image(
-                            image: const AssetImage(
-                              "assets/images/logo.png",
+                          GestureDetector(
+                           onTap: (){
+
+                           },
+                            child: Image(
+                              image: const AssetImage(
+                                "assets/images/logo.png",
+                              ),
+                              fit: BoxFit.fill,
+                              width: 150.w,
+                              height: 50.w,
                             ),
-                            fit: BoxFit.fill,
-                            width: 150.w,
-                            height: 50.w,
                           ),
-                          SvgPicture.asset("assets/icons/notification_shop.svg")
+                          GestureDetector(onTap: (){
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationsScreenView()));
+                          },child: SvgPicture.asset("assets/icons/notification_shop.svg"))
                         ],
                       ),
                     ),

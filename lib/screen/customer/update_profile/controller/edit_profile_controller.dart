@@ -4,17 +4,15 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/update_profile/model/edit_profile_model.dart';
+import 'package:local_supper_market/screen/customer/update_profile/model/update_profile_model.dart';
+import 'package:local_supper_market/screen/customer/update_profile/repository/edit_profile_repo.dart';
+import 'package:local_supper_market/screen/customer/update_profile/repository/update_profile_repo.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
-
-import 'package:local_supper_market/screen/customer/profile/model/edit_profile_model.dart';
-import 'package:local_supper_market/screen/customer/profile/model/update_profile_model.dart';
-
-import 'package:local_supper_market/screen/customer/profile/repository/edit_profile_repo.dart';
-import 'package:local_supper_market/screen/customer/profile/repository/update_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model.dart';

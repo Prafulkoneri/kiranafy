@@ -47,6 +47,8 @@
 	<string>This app requires read and write access to the photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Needs camera access</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>Program requires location to get near by shops</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

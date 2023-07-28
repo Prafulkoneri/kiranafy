@@ -135,6 +135,7 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
                                   builder: (context) => ShopOrderView(
                                         orderId: element?.id.toString(),
                                     selectedIndex: watch.selectedIndex,
+
                                       )),
                             );
                           },

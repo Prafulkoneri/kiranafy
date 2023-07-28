@@ -4,24 +4,23 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:local_supper_market/screen/customer/c_setting/repository/change_setting_repo.dart';
 import 'package:local_supper_market/screen/customer/c_setting/repository/delete_account_repo.dart';
+import 'package:local_supper_market/screen/customer/c_setting/repository/setting_repo.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/change_setting_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/delete_account_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/get_setting_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_setting/repository/change_setting_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_setting/repository/delete_account_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_setting/repository/setting_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerSettingController extends ChangeNotifier {
-  SeetingRepo settingRepo = SeetingRepo();
-  DeleteAccountRepo deleteAccountRepo = DeleteAccountRepo();
+  CustomerSetingRepo settingRepo = CustomerSetingRepo();
   CDeleteAccountRepo cdeleteAccountRepo = CDeleteAccountRepo();
   bool isAppNotificationEnable = true;
   bool isStackLoading = false;
+  bool isLoading = true;
   // String? selectedValue;
 // Group Value fo
 // r Radio Button.
@@ -36,8 +35,13 @@ class CustomerSettingController extends ChangeNotifier {
     notifyListeners();
   }
 
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
   Future<void> shopNotification(context, status) async {
-    LoadingOverlay.of(context).show();
+   showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     settingRepo.shopSetting(pref.getString("successToken")).then((response) {
@@ -47,9 +51,7 @@ class CustomerSettingController extends ChangeNotifier {
       if (response.statusCode == 200) {
         isAppNotificationEnable =
             result.settingData?.appNotification == "on" ? true : false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        LoadingOverlay.of(context).hide();
+        showLoader(false);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();
@@ -70,14 +72,18 @@ class CustomerSettingController extends ChangeNotifier {
   }
 
   ////////////////////////////
-  ChangeSettingRepo changeSettingRepo = ChangeSettingRepo();
+  CustomerChangeSettingRepo changeSettingRepo = CustomerChangeSettingRepo();
   ChangeSettingsRequestModel get changeSettingRequestModel =>
       ChangeSettingsRequestModel(
           appNotification: isAppNotificationEnable ? "on" : "off");
 
   Future<void> changeSettings(context, value) async {
+    print(value);
+    print("hello");
+    isAppNotificationEnable=!isAppNotificationEnable;
     LoadingOverlay.of(context).show();
-    isAppNotificationEnable = value;
+
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     changeSettingRepo
         .changeSetting(
@@ -89,8 +95,6 @@ class CustomerSettingController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();

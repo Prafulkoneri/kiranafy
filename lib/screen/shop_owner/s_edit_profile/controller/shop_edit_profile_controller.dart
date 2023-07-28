@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
@@ -109,7 +110,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final shopDetails = result.shopDetails;
         print(shopDetails);
-        log("${response.body}");
+        log("abcd${response.body}");
         shopNameController.text = shopDetails?.shopName ?? "";
         print(shopNameController.text);
         ownerNameController.text = shopDetails?.shopOwnerName ?? "";
@@ -273,6 +274,28 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   showLoader(value) {
     isLoading = value;
     notifyListeners();
+  }
+
+  void onBackPressed(context,fromDashBoard){
+    if (fromDashBoard ?? true) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                SMainScreenView(index: 0, screenName: ShopDashBoardView(refresh: false,))),
+            (Route<dynamic> route) => false,
+      );
+      return;
+    } else {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SMainScreenView(
+                index: 4, screenName: SAccountScreenView(refresh: false,))),
+            (Route<dynamic> route) => false,
+      );
+      return;
+    }
   }
 
   /////End edit Profile/////////////////

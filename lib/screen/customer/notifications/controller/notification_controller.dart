@@ -2,17 +2,18 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/notifications/repository/get_notification_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/model/get_notification_model.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/repository/get_notification_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ShopNoticationController extends ChangeNotifier {
+class CustomerNoticationController extends ChangeNotifier {
   bool isLoading = true;
-  NotificationData ?notificationdata;
+  NotificationData? notificationdata;
   List<NotificationList>? notificationList;
 
-  NOtificationRepo ticketReplyRepo = NOtificationRepo();
+  CustomerNotificationRepo customerNotificationRepo = CustomerNotificationRepo();
   Future<void> initState(context) async {
     await getNotificationList(context);
   }
@@ -27,7 +28,7 @@ class ShopNoticationController extends ChangeNotifier {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    ticketReplyRepo
+    customerNotificationRepo
         .notificationList(pref.getString("successToken"))
         .then((response) {
       print(response.body);

@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
-import 'package:local_supper_market/screen/customer/profile/model/update_profile_model.dart';
+
+import 'package:local_supper_market/screen/customer/update_profile/model/update_profile_model.dart';
 
 class CustomerUpdateProfileRepo {
   Future<http.Response> customerUpdateProfile(
