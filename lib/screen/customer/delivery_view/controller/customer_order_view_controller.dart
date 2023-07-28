@@ -58,7 +58,8 @@ class CustomerOrderViewController extends ChangeNotifier {
   List<bool> isSelectedReason = [];
   List<CustomerCancelReasonList>? cancelReasondata;
   TextEditingController reasonController = TextEditingController();
-  List<ReviewlistData>? reviewlistdata;
+  List<ReviewList>? reviewList;
+  OReviewlistData? oreviewlistdata;
 
   CustomerOrderViewRequestModel get customerOrderViewRequestModel =>
       CustomerOrderViewRequestModel(orderId: orderId.toString());
@@ -423,6 +424,8 @@ class CustomerOrderViewController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = SubmitReviewResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        ratingValue=null;
+        reviewController.clear();
        await OReviewList(context);
         // Navigator.pushAndRemoveUntil(
         //   context,
@@ -473,7 +476,8 @@ class CustomerOrderViewController extends ChangeNotifier {
       final result =
       ReviewListReponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        reviewlistdata = result.reviewlistdata;
+        oreviewlistdata = result.oreviewlistdata;
+        reviewList=oreviewlistdata?.reviewList;
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
