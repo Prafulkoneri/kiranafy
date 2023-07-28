@@ -41,7 +41,7 @@ class PersistentTabScaffold extends StatefulWidget {
     required this.tabBuilder,
     final Key? key,
     this.controller,
-    this.backgroundColor =Colors.transparent,
+    this.backgroundColor,
     this.resizeToAvoidBottomInset = true,
     this.bottomScreenMargin,
     this.stateManagement,
@@ -147,7 +147,7 @@ class _PersistentTabScaffoldState extends State<PersistentTabScaffold> {
       tabBuilder: widget.tabBuilder,
       stateManagement: widget.stateManagement,
       screenTransitionAnimation: widget.screenTransitionAnimation,
-      backgroundColor: Colors.transparent,
+      backgroundColor: widget.tabBar.navBarEssentials!.backgroundColor,
     );
     double contentPadding = 0;
 
@@ -203,7 +203,7 @@ class _PersistentTabScaffoldState extends State<PersistentTabScaffold> {
                       : 0),
           curve:
               widget.tabBar.hideNavigationBar! ? Curves.linear : Curves.easeIn,
-          color: Colors.transparent,
+          color: widget.tabBar.navBarDecoration!.colorBehindNavBar,
           padding: EdgeInsets.only(bottom: contentPadding),
           child: content,
         ),
@@ -212,24 +212,21 @@ class _PersistentTabScaffoldState extends State<PersistentTabScaffold> {
       content = MediaQuery(
         data: newMediaQuery,
         child: Container(
-
-         decoration: BoxDecoration(
-           color: Colors.transparent,
-           borderRadius: BorderRadius.circular(20),
-         ),
+          color: widget.tabBar.navBarDecoration!.colorBehindNavBar,
           padding: EdgeInsets.only(bottom: contentPadding),
           child: content,
         ),
       );
     }
 
-    return Container(
-      // decoration:
-      //     widget.tabBar.navBarDecoration!.borderRadius != BorderRadius.zero
-      //         ? BoxDecoration(
-      //             color: Colors.black.withOpacity(0.01),
-      //           )
-      //         : BoxDecoration(color: Colors.black.withOpacity(0.01)),
+    return DecoratedBox(
+      decoration:
+          widget.tabBar.navBarDecoration!.borderRadius != BorderRadius.zero
+              ? BoxDecoration(
+                  color: CupertinoColors.black.withOpacity(0),
+                  borderRadius: widget.tabBar.navBarDecoration!.borderRadius,
+                )
+              : BoxDecoration(color: CupertinoColors.black.withOpacity(1)),
       child: Stack(
         children: <Widget>[
           content,
@@ -237,35 +234,19 @@ class _PersistentTabScaffoldState extends State<PersistentTabScaffold> {
             data: existingMediaQuery.copyWith(textScaleFactor: 1),
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
-            
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(30),
-                      topLeft: Radius.circular(30)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        spreadRadius: 0,
-                        blurRadius: 2),
-                  ],
-                ),
-                child:   widget.tabBar.copyWith(
-                  selectedIndex: _controller!.index,
-                  onItemSelected: (final newIndex) {
-                    _controller!.index = newIndex;
-                    if (widget.tabBar.navBarEssentials!.onItemSelected != null) {
-                      setState(() {
-                        _selectedIndex = newIndex;
-                        _isTapAction = true;
-                        widget.tabBar.navBarEssentials!.onItemSelected!(newIndex);
-                      });
-                    }
-                  },
-                ),
+              child: widget.tabBar.copyWith(
+                selectedIndex: _controller!.index,
+                onItemSelected: (final newIndex) {
+                  _controller!.index = newIndex;
+                  if (widget.tabBar.navBarEssentials!.onItemSelected != null) {
+                    setState(() {
+                      _selectedIndex = newIndex;
+                      _isTapAction = true;
+                      widget.tabBar.navBarEssentials!.onItemSelected!(newIndex);
+                    });
+                  }
+                },
               ),
-
             ),
           ),
         ],
@@ -437,7 +418,7 @@ class _TabSwitchingViewState extends State<_TabSwitchingView>
   }
 
   DecoratedBox _buildScreens() => DecoratedBox(
-        decoration: const BoxDecoration(color: Colors.transparent),
+        decoration: const BoxDecoration(color: CupertinoColors.black),
         child: Stack(
           fit: StackFit.expand,
           children: List<Widget>.generate(widget.tabCount!, (final index) {
@@ -452,10 +433,20 @@ class _TabSwitchingViewState extends State<_TabSwitchingView>
                 enabled: active,
                 child: FocusScope(
                   node: tabFocusNodes[index],
-                  // child: Container(),
                   child: Builder(
                       builder: (final context) => shouldBuildTab[index]
-                          ?  widget.tabBuilder(context, index)
+                          ? (widget.screenTransitionAnimation!
+                                  .animateTabTransition
+                              ? AnimatedBuilder(
+                                  animation: _animations[index]!,
+                                  builder: (final context, final child) =>
+                                      Transform.translate(
+                                    offset:
+                                        Offset(_animations[index]!.value, 0),
+                                    child: widget.tabBuilder(context, index),
+                                  ),
+                                )
+                              : widget.tabBuilder(context, index))
                           : Container()),
                 ),
               ),
@@ -517,7 +508,7 @@ class _TabSwitchingViewState extends State<_TabSwitchingView>
       key = UniqueKey();
     }
     return Container(
-      color: Colors.transparent,
+      color: widget.backgroundColor,
       child: widget.stateManagement!
           ? _buildScreens()
           : KeyedSubtree(

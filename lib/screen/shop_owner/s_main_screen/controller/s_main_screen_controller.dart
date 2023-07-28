@@ -29,6 +29,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onBottomNavChanged(index) {
     currentIndex = index;
+    print(currentIndex);
     notifyListeners();
   }
 
