@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/bottom_navigation/bottom_navigation_bar.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
@@ -21,6 +22,7 @@ import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_m
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -77,7 +79,14 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             ),
                           ),
                           GestureDetector(onTap: (){
-                            Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationsScreenView()));
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              withNavBar: false,
+                              screen: NotificationsScreenView(
+
+                              ),
+                            );
+                            // Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationsScreenView()));
                           },child: SvgPicture.asset("assets/icons/notification_shop.svg"))
                         ],
                       ),
@@ -285,17 +294,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           Container(
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                            index: 0,
-                                            screenName: SEditProfileView(
-                                              fromDashBoard: true,
-                                            ),
-                                          )),
-                                  (Route<dynamic> route) => false,
-                                );
+                                PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:SEditProfileView(
+                                  fromDashBoard: true,
+                                ),);
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //             index: 0,
+                                //             screenName: SEditProfileView(
+                                //               fromDashBoard: true,
+                                //             ),
+                                //           )),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               },
                               child: SvgPicture.asset(
                                 "assets/icons/shop_edit.svg",
@@ -331,17 +345,23 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 4,
-                                        screenName: CustomerListView(
-                                          isRefresh: true,
-                                          fromPage: "dashboardProduct",
-                                        ))),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                screen:CustomerListView(
+                                  isRefresh: true,
+                                  fromPage: "dashboardProduct",
+                                ));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 4,
+                              //           screenName: CustomerListView(
+                              //             isRefresh: true,
+                              //             fromPage: "dashboardProduct",
+                              //           ))),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -387,17 +407,23 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 4,
-                                        screenName: CustomerListView(
-                                          isRefresh: true,
-                                          fromPage: "dashboardFavCustomer",
-                                        ))),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:CustomerListView(
+                                    isRefresh: true,
+                                    fromPage: "dashboardFavCustomer",
+                                  ));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 4,
+                              //           screenName: CustomerListView(
+                              //             isRefresh: true,
+                              //             fromPage: "dashboardFavCustomer",
+                              //           ))),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -512,17 +538,23 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 3,
-                                        screenName: ShopCouponsView(
-                                          isNavFromDashBoard: true,
-                                          isRefresh: true,
-                                        ))),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:ShopCouponsView(
+                                    isNavFromDashBoard: true,
+                                    isRefresh: true,
+                                  ));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 3,
+                              //           screenName: ShopCouponsView(
+                              //             isNavFromDashBoard: true,
+                              //             isRefresh: true,
+                              //           ))),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -595,14 +627,19 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 0,
-                                        screenName: SSCategoryListView())),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:SSCategoryListView(
+
+                                  ));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 0,
+                              //           screenName: SSCategoryListView())),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -660,14 +697,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               // read.onProductSelect(context);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 0,
-                                        screenName: SSCategoryListView())),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:SSCategoryListView(
+
+                                  ));
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -735,18 +769,24 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               if (watchDashBoardScreen.specialBenifitlist
                                   .contains("seasonal_products")) {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                          index: 0,
-                                          screenName:
-                                              ShopSeasonalRecommandedOfferProductsView(
-                                            selectedProduct: "seasonal",
-                                            isRefresh: true,
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                    pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                    screen: ShopSeasonalRecommandedOfferProductsView(
+                                      selectedProduct: "seasonal",
+                                      isRefresh: true,
+                                    ));
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //           index: 0,
+                                //           screenName:
+                                //               ShopSeasonalRecommandedOfferProductsView(
+                                //             selectedProduct: "seasonal",
+                                //             isRefresh: true,
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               } else {
                                 Utils.showPrimarySnackbar(context,
                                     "Subscribe to Advanced Plan to use this feature!",
@@ -822,18 +862,24 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               // );
                               if (watchDashBoardScreen.specialBenifitlist
                                   .contains("fullfill_craving_products")) {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                          index: 0,
-                                          screenName:
-                                              ShopSeasonalRecommandedOfferProductsView(
-                                            selectedProduct: "fullFill",
-                                            isRefresh: true,
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                    pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                    screen: ShopSeasonalRecommandedOfferProductsView(
+                                      selectedProduct: "fullFill",
+                                      isRefresh: true,
+                                    ));
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //           index: 0,
+                                //           screenName:
+                                //               ShopSeasonalRecommandedOfferProductsView(
+                                //             selectedProduct: "fullFill",
+                                //             isRefresh: true,
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               } else {
                                 Utils.showPrimarySnackbar(context,
                                     "Subscribe to Advanced Plan to use this feature!",
@@ -969,17 +1015,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(0);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 0,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:SOrderStatusView(
+                                      selectedIndex: 0,
+                                      isFromOrderView: false));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 0,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1026,17 +1077,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(1);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 1,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:SOrderStatusView(
+                                      selectedIndex: 1,
+                                      isFromOrderView: false));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 1,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1095,17 +1151,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(2);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 2,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:SOrderStatusView(
+                                      selectedIndex: 2,
+                                      isFromOrderView: false));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 2,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1156,17 +1217,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(3);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 3,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:SOrderStatusView(
+                                      selectedIndex: 3,
+                                      isFromOrderView: false));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 3,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1223,17 +1289,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(4);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 4,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                  screen:SOrderStatusView(
+                                      selectedIndex: 4,
+                                      isFromOrderView: false));
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 4,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1586,16 +1657,21 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 bottom: 80.w),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                          index: 4,
-                                          screenName: SMySubscriptionView(
-                                            screenName: "dashboard",
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                    pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                    screen:SMySubscriptionView(
+                                      screenName: "dashboard",
+                                    ));
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //           index: 4,
+                                //           screenName: SMySubscriptionView(
+                                //             screenName: "dashboard",
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               },
                               child: Stack(
                                 alignment: Alignment.topCenter,
@@ -1753,16 +1829,21 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 bottom: 80.w),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                          index: 4,
-                                          screenName: SMySubscriptionView(
-                                            screenName: "dashboard",
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                    pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                    screen:SMySubscriptionView(
+                                      screenName: "dashboard",
+                                    ));
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //           index: 4,
+                                //           screenName: SMySubscriptionView(
+                                //             screenName: "dashboard",
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               },
                               child: Stack(
                                 alignment: Alignment.topCenter,

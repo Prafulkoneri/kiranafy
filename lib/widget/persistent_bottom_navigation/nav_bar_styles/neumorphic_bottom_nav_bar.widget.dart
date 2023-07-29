@@ -32,24 +32,23 @@ class NeumorphicBottomNavBar extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 15),
                   child: Material(
                     type: MaterialType.transparency,
-                    child: FittedBox(
-                        child: Text(
+                    child: Text(
                       item.title!,
                       style: item.textStyle != null
                           ? (item.textStyle!.apply(
-                              color: isSelected
-                                  ? (item.activeColorSecondary ??
-                                      item.activeColorPrimary)
-                                  : item.inactiveColorPrimary))
+                          color: isSelected
+                              ? (item.activeColorSecondary ??
+                              item.activeColorPrimary)
+                              : item.inactiveColorPrimary))
                           : TextStyle(
-                              color: isSelected
-                                  ? (item.activeColorSecondary ??
-                                      item.activeColorPrimary)
-                                  : item.inactiveColorPrimary ??
-                                      item.activeColorPrimary,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12),
-                    )),
+                          color: isSelected
+                              ? (item.activeColorSecondary ??
+                              item.activeColorPrimary)
+                              : item.inactiveColorPrimary ??
+                              item.activeColorPrimary,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12),
+                    )
                   ),
                 )
               ],

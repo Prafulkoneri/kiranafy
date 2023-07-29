@@ -135,7 +135,7 @@ class PersistentBottomNavBar extends StatelessWidget {
                             .getNavBarDecoration(
                           decoration: navBarDecoration,
                           showBorder: false,
-                          color: navBarEssentials!.backgroundColor,
+                          color: Colors.white,
                           opacity: navBarEssentials!
                               .items![navBarEssentials!.selectedIndex!].opacity,
                         ),
@@ -290,11 +290,11 @@ class PersistentBottomNavBar extends StatelessWidget {
           return BottomNavStyle14(
             navBarEssentials: navBarEssentials,
           );
-        case NavBarStyle.style15:
-          return BottomNavStyle15(
-            navBarEssentials: navBarEssentials,
-            navBarDecoration: navBarDecoration,
-          );
+        // case NavBarStyle.style15:
+        //   return BottomNavStyle15(
+        //     navBarEssentials: navBarEssentials,
+        //     navBarDecoration: navBarDecoration,
+        //   );
         case NavBarStyle.style16:
           return BottomNavStyle16(
             navBarEssentials: navBarEssentials,

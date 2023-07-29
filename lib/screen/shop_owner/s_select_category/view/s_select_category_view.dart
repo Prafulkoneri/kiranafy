@@ -37,13 +37,14 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 0, screenName: SSCategoryListView())),
-              (Route<dynamic> route) => false,
-            );
+            Navigator.pop(context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 0, screenName: SSCategoryListView())),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),

@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/edit_unit_product_category_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/add_unit_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/unit_detail_view.dart';
+import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'package:flutter/cupertino.dart';
@@ -432,14 +433,18 @@ class AddEditUnitController extends ChangeNotifier{
       log(response.body);
       print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
-              (Route<dynamic> route) => false,
+        PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+            pageTransitionAnimation: PageTransitionAnimation.slideUp,
+            screen:  UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,)
         );
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 0,
+        //           screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
+        //       (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         showLoader(false);
@@ -552,14 +557,18 @@ class AddEditUnitController extends ChangeNotifier{
     await request.send().then((response) {
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
-              (Route<dynamic> route) => false,
+        PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+            pageTransitionAnimation: PageTransitionAnimation.slideUp,
+            screen:  UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,)
         );
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 0,
+        //           screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
+        //       (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
       } else {

@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/repository/uplo
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
@@ -80,18 +81,24 @@ class CustomProductController extends ChangeNotifier {
       final result =
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: SSelectedProductView(
-                    isRefresh: true,
-                    categoryId: selectedCategory,
-                  ))),
-          (Route<dynamic> route) => false,
+        PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+            pageTransitionAnimation: PageTransitionAnimation.slideUp,
+            screen: SSelectedProductView(
+              isRefresh: true,
+              categoryId: selectedCategory,
+            )
         );
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 0,
+        //           screenName: SSelectedProductView(
+        //             isRefresh: true,
+        //             categoryId: selectedCategory,
+        //           ))),
+        //   (Route<dynamic> route) => false,
+        // );
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -270,17 +277,12 @@ LoadingOverlay.of(context).show();
         print("sucesss");
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: SSelectedProductView(
-                    isRefresh: true,
-                    categoryId: selectedCategory,
-                  ))),
-              (Route<dynamic> route) => false,
-        );
+        PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+            pageTransitionAnimation: PageTransitionAnimation.slideUp,
+            screen: SSelectedProductView(
+              isRefresh: true,
+              categoryId: selectedCategory,
+            ));
         LoadingOverlay.of(context).hide();
       } else {
         LoadingOverlay.of(context).hide();

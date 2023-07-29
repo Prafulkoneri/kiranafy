@@ -61,16 +61,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                             ))),
                     (Route<dynamic> route) => false,
                   )
-                : Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 0,
-                            screenName: ShopDashBoardView(
-                              refresh: false,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  );
+                : Navigator.pop(context);
           },
           title: "Customers",
           action: SvgPicture.asset("assets/images/filter.svg"),

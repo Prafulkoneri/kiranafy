@@ -68,17 +68,18 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             widget.isFromAccountScreen == false
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 0,
-                            screenName: SSelectedProductView(
-                              isRefresh: false,
-                              categoryId: widget.categoryId,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  )
+                ? Navigator.pop(context)
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => SMainScreenView(
+            //                 index: 0,
+            //                 screenName: SSelectedProductView(
+            //                   isRefresh: false,
+            //                   categoryId: widget.categoryId,
+            //                 ))),
+            //         (Route<dynamic> route) => false,
+            //       )
                 : Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(

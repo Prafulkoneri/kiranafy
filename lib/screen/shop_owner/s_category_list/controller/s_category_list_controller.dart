@@ -18,6 +18,11 @@ class SCategoryListController extends ChangeNotifier {
   List<SelectedCategoryData>? selectedCategoriesList;
   bool isLoading = true;
 
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
   Future<void> initState(context) async {
     await shopOwnerSelectedCategoriesList(context);
   }
@@ -37,7 +42,7 @@ class SCategoryListController extends ChangeNotifier {
 
   ////////////////// shop owner get selected categories list/////
   Future<void> shopOwnerSelectedCategoriesList(context) async {
-    isLoading = true;
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     SelectedCategoriesListRepo.shopSelectedCategoriesList(
             pref.getString("successToken"))
@@ -48,7 +53,7 @@ class SCategoryListController extends ChangeNotifier {
           GetSelectedCategoryResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         selectedCategoriesList = result.data;
-        isLoading = false;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

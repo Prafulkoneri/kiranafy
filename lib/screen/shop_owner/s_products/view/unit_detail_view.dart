@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/view/add_unit_v
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -52,37 +53,51 @@ class _UnitDetailViewState extends State<UnitDetailView> {
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
               onBackBtnPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SMainScreenView(
-                          index: 0,
-                          screenName: SSelectedProductView(
-                              isRefresh: true, //
-                              categoryId: widget.categoryId))),
-                  (Route<dynamic> route) => false,
-                );
+                Navigator.pop(context);
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => SMainScreenView(
+                //           index: 0,
+                //           screenName: SSelectedProductView(
+                //               isRefresh: true, //
+                //               categoryId: widget.categoryId))),
+                //   (Route<dynamic> route) => false,
+                // );
               },
               title: "Unit Details",
               action: SvgPicture.asset("assets/icons/addressadd.svg"),
               onActionTap: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SMainScreenView(
-                          index: 0,
-                          screenName: AddUnitView(
-                            isEdit: false,
-                            categoryId: widget.categoryId,
-                            productId: widget.productId,
-                            productType: widget.productType,
-                            productName: watch.getproductunitlistdata
-                                ?.productDetails?.productName
-                                .toString(),
-                            productUnitId: "",
-                          ))),
-                  (Route<dynamic> route) => false,
+                PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                    screen: AddUnitView(
+                      isEdit: false,
+                      categoryId: widget.categoryId,
+                      productId: widget.productId,
+                      productType: widget.productType,
+                      productName: watch.getproductunitlistdata
+                          ?.productDetails?.productName
+                          .toString(),
+                      productUnitId: "",
+                    )
                 );
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => SMainScreenView(
+                //           index: 0,
+                //           screenName: AddUnitView(
+                //             isEdit: false,
+                //             categoryId: widget.categoryId,
+                //             productId: widget.productId,
+                //             productType: widget.productType,
+                //             productName: watch.getproductunitlistdata
+                //                 ?.productDetails?.productName
+                //                 .toString(),
+                //             productUnitId: "",
+                //           ))),
+                //   (Route<dynamic> route) => false,
+                // );
               }),
         ),
         body: watch.isLoading
@@ -265,38 +280,61 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                   children: [
                                                     InkWell(
                                                       onTap: () {
-                                                        Navigator
-                                                            .pushAndRemoveUntil(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  SMainScreenView(
-                                                                      index: 0,
-                                                                      screenName:
-                                                                          AddUnitView(
-                                                                        categoryId:
-                                                                            widget.categoryId,
-                                                                        productType:
-                                                                            watch.getproductunitlistdata?.productDetails?.productType ??
-                                                                                "",
-                                                                        productId:
-                                                                            watch.getproductunitlistdata?.productDetails?.productId.toString() ??
-                                                                                "",
-                                                                        productName: watch
-                                                                            .getproductunitlistdata
-                                                                            ?.productDetails
-                                                                            ?.productName
-                                                                            .toString(),
-                                                                        productUnitId: element
-                                                                            ?.id
-                                                                            .toString(),
-                                                                        isEdit:
-                                                                            true,
-                                                                      ))),
-                                                          (Route<dynamic>
-                                                                  route) =>
-                                                              false,
+                                                        PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
+                                                            pageTransitionAnimation: PageTransitionAnimation.slideUp,
+                                                            screen:     AddUnitView(
+                                                              categoryId:
+                                                              widget.categoryId,
+                                                              productType:
+                                                              watch.getproductunitlistdata?.productDetails?.productType ??
+                                                                  "",
+                                                              productId:
+                                                              watch.getproductunitlistdata?.productDetails?.productId.toString() ??
+                                                                  "",
+                                                              productName: watch
+                                                                  .getproductunitlistdata
+                                                                  ?.productDetails
+                                                                  ?.productName
+                                                                  .toString(),
+                                                              productUnitId: element
+                                                                  ?.id
+                                                                  .toString(),
+                                                              isEdit:
+                                                              true,
+                                                            )
                                                         );
+                                                        // Navigator
+                                                        //     .pushAndRemoveUntil(
+                                                        //   context,
+                                                        //   MaterialPageRoute(
+                                                        //       builder: (context) =>
+                                                        //           SMainScreenView(
+                                                        //               index: 0,
+                                                        //               screenName:
+                                                        //                   AddUnitView(
+                                                        //                 categoryId:
+                                                        //                     widget.categoryId,
+                                                        //                 productType:
+                                                        //                     watch.getproductunitlistdata?.productDetails?.productType ??
+                                                        //                         "",
+                                                        //                 productId:
+                                                        //                     watch.getproductunitlistdata?.productDetails?.productId.toString() ??
+                                                        //                         "",
+                                                        //                 productName: watch
+                                                        //                     .getproductunitlistdata
+                                                        //                     ?.productDetails
+                                                        //                     ?.productName
+                                                        //                     .toString(),
+                                                        //                 productUnitId: element
+                                                        //                     ?.id
+                                                        //                     .toString(),
+                                                        //                 isEdit:
+                                                        //                     true,
+                                                        //               ))),
+                                                        //   (Route<dynamic>
+                                                        //           route) =>
+                                                        //       false,
+                                                        // );
                                                       },
                                                       child: Container(
                                                         padding:
