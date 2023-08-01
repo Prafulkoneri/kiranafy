@@ -192,6 +192,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                                       text: 'our Terms of Service',
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
+                                          read.launchTermsAndConditionURL();
                                           print('Login Text Clicked');
                                         },
                                       style: TextStyle(
@@ -210,6 +211,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                                       text: ' Privacy Policy',
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
+                                          read.launchPrivacyPolicyURL();
                                           print('Login Text Clicked');
                                         },
                                       style: TextStyle(

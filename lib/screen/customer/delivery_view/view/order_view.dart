@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/order_products.dart';
+import 'package:local_supper_market/screen/customer/return/view/return_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/rating.dart';
@@ -1015,6 +1016,46 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                       SizedBox(
                         height: 26.h,
                       ),
+                      /////Product Return Request start////
+                      watch.orderDetails?.orderStatus == "Delivered"
+                          ?
+                      Container(
+                        padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                        child: SizedBox(
+                          // padding: EdgeInsets.only(
+                          //     left: 91.w, right: 91.w, top: 10.w, bottom: 10.w),
+                          width: 354.w,
+                          // <-- Your width
+                          height: 38.h,
+                          child: PrimaryButton(
+                            color:  Color(0xffD1D1D1),
+                            onTap:(){
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  CustomerProductReturnView( orderId:watch.orderId.toString())),
+                                );
+                            },
+
+                            // style: style,
+
+                            child: Text(
+                              'Product Return Request',
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                  // letterSpacing: .5,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ):Container(),
+                      SizedBox(
+                        height: 26.h,
+                      ),
+                      /////Product Return Request////
                       watch.orderDetails?.orderStatus == "Pending"
                           ? Container(
                               padding: EdgeInsets.only(left: 19.w, right: 19.w),
@@ -1047,6 +1088,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                               ),
                             )
                           : Container(),
+
                       // SizedBox(
                       //   height: 50.h,
                       // ),

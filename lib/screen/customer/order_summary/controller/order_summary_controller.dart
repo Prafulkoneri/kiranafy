@@ -431,6 +431,7 @@ class OrderSummaryController extends ChangeNotifier {
         final data = result.data;
         couponCodeController.clear();
         offerGroupValue = "";
+        couponDiscount= data?.removeCouponData?.couponDiscount.toString()??"0";
         deliveryCharges =
             data?.removeCouponData?.deliveryCharges.toString() ?? "";
         subTotal = data?.removeCouponData?.subTotal.toString() ?? "";

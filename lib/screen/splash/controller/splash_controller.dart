@@ -119,7 +119,17 @@ class SplashController extends ChangeNotifier {
                       SShopConfigurationView(initialShopConfigration: true)));
         }
         if (pref.getString("status") == "loggedIn") {
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavigationBarScreen()));
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                    index: 0,
+                    screenName: ShopDashBoardView(
+                    refresh: true,
+                    ))),
+                (Route<dynamic> route) => false,
+          );
+          // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavigationBarScreen()));
         }
         if (pref.getString("status") == "customerLoggedIn") {
           Navigator.pushAndRemoveUntil(

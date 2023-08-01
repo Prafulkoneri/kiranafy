@@ -747,7 +747,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                               //   width: 30.w,
                               // ),
                               SizedBox(
-                                // height: 34.h,
+                                height: 32.h,
                                 width: 91.w,
                                 child: PrimaryButton(
                                   color: SplashText,

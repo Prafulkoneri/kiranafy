@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/customer/home/view/home_screen_view.d
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomerSignUpController extends ChangeNotifier {
   TextEditingController mobileController = TextEditingController();
@@ -217,5 +218,18 @@ class CustomerSignUpController extends ChangeNotifier {
   void onOtpDismiss() {
     isOtpErrorVisible = false;
     notifyListeners();
+  }
+  launchTermsAndConditionURL() async {
+    final Uri url = Uri.parse('https://localsupermart.com/terms-condition.php');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  launchPrivacyPolicyURL() async {
+    final Uri url = Uri.parse('https://localsupermart.com/privacy-policy.php');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

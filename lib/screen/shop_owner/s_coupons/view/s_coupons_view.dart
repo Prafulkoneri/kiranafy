@@ -52,7 +52,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
             isBackButtonEnabled:
                 widget.isNavFromDashBoard == true ? false : true,

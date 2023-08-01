@@ -58,7 +58,7 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
             )
           : GridView.builder(
               padding: EdgeInsets.only(
-                  left: 50.w, right: 50.w, top: 40.w, bottom: 40.w),
+                  left: 50.w, right: 50.w, top: 40.w, bottom: 90.w),
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

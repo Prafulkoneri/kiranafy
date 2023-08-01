@@ -465,7 +465,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             ),
                           )
                         : Container(
-                            child: Center(child: Text("Products not found")),
+                            child: Center(child: Text("No Products found")),
                           ))
           ],
         ),
