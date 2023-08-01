@@ -69,7 +69,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                       builder: (context) => MainScreenView(
                             index: 0,
                             screenName: HomeScreenView(
-                              refreshPage: false,
+                              refreshPage: true,
                             ),
                           )),
                   (Route<dynamic> route) => false,

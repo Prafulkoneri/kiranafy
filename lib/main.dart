@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:local_supper_market/bottom_navigation/controller/bottom_nav_controller.dart';
 import 'package:local_supper_market/network/services/firebase_api.dart';
 import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
@@ -24,7 +25,6 @@ import 'package:local_supper_market/screen/customer/near_shops/view/all_near_sho
 import 'package:local_supper_market/screen/customer/notifications/controller/notification_controller.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
-import 'package:local_supper_market/screen/customer/return/controller/return_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
@@ -189,7 +189,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CustomerReviewListControler()),
         ChangeNotifierProvider(create: (_) => CustomerNoticationController()),
         ChangeNotifierProvider(create: (_) => customerAdscontroller()),
-        ChangeNotifierProvider(create: (_) => ReturnOrderController()),
+        ChangeNotifierProvider(create: (_) => BottomNavigationController()),
       ],
       child: MyApp(),
     ),
