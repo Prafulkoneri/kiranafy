@@ -25,6 +25,7 @@ import 'package:local_supper_market/screen/customer/near_shops/view/all_near_sho
 import 'package:local_supper_market/screen/customer/notifications/controller/notification_controller.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
+import 'package:local_supper_market/screen/customer/return/controller/return_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
@@ -190,6 +191,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CustomerNoticationController()),
         ChangeNotifierProvider(create: (_) => customerAdscontroller()),
         ChangeNotifierProvider(create: (_) => BottomNavigationController()),
+        ChangeNotifierProvider(create: (_) => ReturnOrderController()),
       ],
       child: MyApp(),
     ),

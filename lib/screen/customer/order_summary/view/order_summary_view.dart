@@ -95,7 +95,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => CartDetailView(isRefresh: false)));
+                    builder: (context) => CartDetailView(isRefresh: true,shopId: widget.shopId,cartId: widget.cartId,)));
           },
         ),
       ),
@@ -477,24 +477,24 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       child: Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                  child: Container(
+                              Container(
                                 child: Text(
-                                  "Date:",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        // height: 1.5,
-                                        color: black,
-                                        letterSpacing: .05,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
+                              "Date:",
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    // height: 1.5,
+                                    color: black,
+                                    letterSpacing: .05,
+                                    // overflow: TextOverflow.ellipsis,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500),
+                              ),
                                 ),
-                              )),
+                                width: ScreenUtil().screenWidth/2.5.w,
+                              ),
                               Expanded(
                                   child: Container(
                                 padding: EdgeInsets.only(left: 12.w),
@@ -525,7 +525,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Expanded(
+                                    Container(
+                                      width: ScreenUtil().screenWidth/2.5.w,
                                       child: Row(
                                         // mainAxisAlignment: MainAxisAlignment.center,
                                         children: [

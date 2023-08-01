@@ -5,12 +5,17 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/view/delivery_view_second.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/return/model/check_product_model.dart';
 import 'package:local_supper_market/screen/customer/return/model/return_model.dart';
+import 'package:local_supper_market/screen/customer/return/model/sumbit_return_order_model.dart';
 import 'package:local_supper_market/screen/customer/return/repository/check_product_return_repo.dart';
 import 'package:local_supper_market/screen/customer/return/repository/return_repo.dart';
+import 'package:local_supper_market/screen/customer/return/repository/submit_return_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -35,8 +40,13 @@ class ReturnOrderController extends ChangeNotifier {
   CheckProductListData? checkproductlistdata;
   List selectedProductIdList=[];
   List<bool> isReturnProductSelected = [];
-
+  String productCount="";
   int refundTotal=0;
+  String productId="";
+  SubmitReturnRepo submitReturnRepo=SubmitReturnRepo();
+
+
+
   Future<void> initState(context,oId) async {
     selectedProductIdList.clear();
     isReturnProductSelected.clear();
@@ -104,6 +114,7 @@ class ReturnOrderController extends ChangeNotifier {
     isOtherReasonSelected = true;
     notifyListeners();
   }
+
   void onSelectReason(index, value, id) {
     print("lllllllllllllllllllllllllll");
     print(id);
@@ -125,7 +136,7 @@ class ReturnOrderController extends ChangeNotifier {
     print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
     isOtherReasonSelected = false;
 
-    // isSelectedReason[index] = true;
+
 
     notifyListeners();
   }
@@ -135,39 +146,63 @@ class ReturnOrderController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> onSelectingProduct(index,value,productId,productAmount)async{
+    print(value);
+    isReturnProductSelected[index]=!isReturnProductSelected[index];
+    if(isReturnProductSelected[index]){
+      selectedProductIdList.insert(index,productId);
+      refundTotal=int.parse(refundTotal.toString())+int.parse(productAmount);
+    }
+    else{
+      selectedProductIdList.removeAt(index);
+      refundTotal=int.parse(refundTotal.toString())-int.parse(productAmount);
+    }
 
+    print(selectedProductIdList);
+    notifyListeners();
+  }
 
-  ///////////////////////////////////////////////////
-  CheckProductReturnRepo checkproductreturnrepo = CheckProductReturnRepo();
-  CheckProductRequestModel get checkProductrequestModel =>
-      CheckProductRequestModel(productAmount: productAmount,productTotalAmount: refundTotal.toString(),
-        checkStatus: checkStatus,);
-  Future<void> checkProductReturn(context,index,pAmount,pTotalAmount,cStatus,pId,) async {
-    productAmount = pAmount;
-    refundTotal = pTotalAmount;
-    checkStatus = cStatus;
+  SubmitReturnOrderReqModel get submitReturnOrderReqModel =>SubmitReturnOrderReqModel(
+  productId: productId,customRefundReason:descriptionController.text,orderId: orderId,reasonId: cancellationId
+);
+
+  Future<void> submitRefundProduct(context)async{
+    if(selectedProductIdList.isEmpty){
+      Utils.showPrimarySnackbar(context,"Select atleast one product",
+          type: SnackType.error);
+      return;
+    }
+    if(cancellationId==""){
+      Utils.showPrimarySnackbar(context,"Select any reason",
+          type: SnackType.error);
+      return;
+  }
+    if(descriptionController.text==""){
+      Utils.showPrimarySnackbar(context,"Enter reason for return",
+          type: SnackType.error);
+      return;
+    }
+    LoadingOverlay.of(context).show();
+    for(int i=0;i<selectedProductIdList.length;i++){
+      productId+=selectedProductIdList[i] + ",";
+    }
+    productId=productId.substring(0,productId.length-1);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    checkproductreturnrepo.checkProductReturn(
-        checkProductrequestModel, pref.getString("successToken"))
+    submitReturnRepo.submitReturn(
+        submitReturnOrderReqModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
       final result =
-      CheckProductResponseModel.fromJson(jsonDecode(response.body));
+      SubmitReturnOrderResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        checkproductlistdata =result.checkproductlistdata;
-        refundTotal=checkproductlistdata?.refundTotal??0;
-        if(checkStatus=="checked") {
-          isReturnProductSelected[index]=true;
-          selectedProductIdList.insert(index,pId);
-        }
-        else{
-          isReturnProductSelected[index]=false;
-          selectedProductIdList
-              .removeAt(index);
-        }
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderDeliveryView()));
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -182,18 +217,5 @@ class ReturnOrderController extends ChangeNotifier {
         return false;
       },
     );
-  }
-
-
-  // void onSelectedProductReturnList(index, id) {
-  //   selectedReturnProductList[index] = !selectedReturnProductList[index];
-  //   if (selectedReturnProductList[index]) {
-  //     pId.removeWhere((item) => item == id);
-  //     pId?.insert(0, id);
-  //   } else {
-  //     selectedAddOnServicesId.removeWhere((item) => item == id);
-  //   }
-  //   print(selectedAddOnServicesId);
-  //   notifyListeners();
-  // }
+    }
 }

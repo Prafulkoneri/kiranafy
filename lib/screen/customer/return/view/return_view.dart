@@ -79,14 +79,14 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                 children: [
                   Row(
                     children: [
-                      Text("Order Amount -",
+                      Text("Order Amount - ",
                           style: GoogleFonts.roboto(
                             textStyle: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
                                 color: Black1),
                           )),
-                      Text("${watch.orderDetails?.totalAmount}",
+                      Text("INR ${watch.orderDetails?.totalAmount}",
                           style: GoogleFonts.roboto(
                             textStyle: TextStyle(
                                 fontSize: 14.sp,
@@ -140,10 +140,8 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                             children: [
                               PrimaryCheckBox(
                                 value: watch.isReturnProductSelected[index],
-                                onChanged: (value) {print(value);
-                                  read.checkProductReturn(context,index,element?.productMrpPrice,
-                                      watch.refundTotal,value==true?"checked":"unchecked",
-                                      element?.id.toString());
+                                onChanged: (value) {
+                                 read.onSelectingProduct(index, value,element?.id.toString(),element?.productMrpPrice);
                                 },
                               ),
                               AppNetworkImages(
@@ -323,12 +321,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                   ),
                   PrimaryButton(
                     onTap: () {
-                      // read.CustomerOrderCancel(
-                      //   context,
-                      //   watch.orderId,
-                      //   watch.orderCancelledReason,
-                      //   watch.orderCancelledReasonId,
-                      // );
+                    read.submitRefundProduct(context);
                     },
                     color: Color(0xff39C19D),
                     child: Text(
