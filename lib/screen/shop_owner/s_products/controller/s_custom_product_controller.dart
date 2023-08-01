@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -61,6 +62,7 @@ class CustomProductController extends ChangeNotifier {
           categoryId: selectedCategory,
           brandId: brandId,
           taxId: taxId,
+          productId: productId,
           productDescription: productDescriptionController.text,
           productName: productNameController.text,
           showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
@@ -70,7 +72,7 @@ class CustomProductController extends ChangeNotifier {
       );
 
   Future<void> uploadCustomProduct(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadCustomProductRepo
         .uploadCustomProduct(
@@ -229,10 +231,16 @@ showLoader(value){
       return;
     }
     if (productImage.path == "") {
-      uploadCustomProduct(context);
-    } else {
-      uploadImage(context);
+      Utils.showPrimarySnackbar(context, "Please select Product Feature Image",
+          type: SnackType.error);
+      return;
     }
+    // if (productImage.path == "") {
+    //   uploadCustomProduct(context);
+    // } else {
+      uploadImage(context);
+    // }
+
   }
 
   Future uploadImage(context) async {
@@ -292,5 +300,83 @@ LoadingOverlay.of(context).show();
         print(value);
       });
     });
+  }
+  String networkImage1="";
+  File fileImage1=File("");
+  void openCameras(context) async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage1 = "";
+      // final CroppedFile=await ImageCropper().cropImage(sourcePath: pickedFile.path,
+      //   aspectRatioPresets: Platform.isAndroid
+      //       ? [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ]
+      //       : [
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio5x3,
+      //     CropAspectRatioPreset.ratio5x4,
+      //     CropAspectRatioPreset.ratio7x5,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      //
+      // );
+      productImage = File(pickedFile.path);
+    }
+
+    notifyListeners();
+    Navigator.of(context,rootNavigator: true).pop();
+  }
+
+  /////////////////////////////////
+  void openGallery1(context) async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      networkImage1 = "";
+      // final CroppedFile = await ImageCropper().cropImage(
+      //   sourcePath: pickedFile.path,
+      //   aspectRatioPresets: Platform.isAndroid
+      //       ? [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ]
+      //       : [
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio5x3,
+      //     CropAspectRatioPreset.ratio5x4,
+      //     CropAspectRatioPreset.ratio7x5,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      //
+      // );
+      productImage = File(pickedFile.path);
+      // notifyListeners();
+    }
+
+    notifyListeners();
+    // Navigator.pop(context);
   }
 }

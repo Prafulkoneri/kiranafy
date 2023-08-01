@@ -335,7 +335,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                        index: 4,
+                                        index: 0,
                                         screenName: CustomerListView(
                                           isRefresh: true,
                                           fromPage: "dashboardProduct",
@@ -391,7 +391,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                        index: 4,
+                                        index: 0,
                                         screenName: CustomerListView(
                                           isRefresh: true,
                                           fromPage: "dashboardFavCustomer",

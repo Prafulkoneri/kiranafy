@@ -141,7 +141,7 @@ class _OrderDeliveryCodeViewState extends State<OrderDeliveryCodeView> {
                           onTap: () {
                             read.onCodeDismiss();
                           },
-                          child: Text("Dismiss"),
+                          child: Text("Dismiss", style: TextStyle(color: Colors.white, fontSize: 14.sp),),
                         ),
                         SizedBox(
                           width: 10.w,

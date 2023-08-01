@@ -201,16 +201,18 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                               SizedBox(
                                 width: 6.27,
                               ),
-                              Text(
-                                "${watch.couponViewData?.couponTermsAndConditions}",
-                                // "Lorem ipsum dolor sit amet, consectetur",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      height: 1.5,
-                                      color: black,
-                                      letterSpacing: .5,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
+                              Flexible(
+                                child: Text(
+                                  "${watch.couponViewData?.couponTermsAndConditions}",
+                                  // "Lorem ipsum dolor sit amet, consectetur",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        height: 1.5,
+                                        color: black,
+                                        letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                                 ),
                               )
                             ],
