@@ -232,6 +232,8 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
 
             GestureDetector(
               onTap: () {
+                // Share.shareFiles(['assets/icons/share.svg'], text: 'Great picture');
+
                 Share.share(
                     'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
               },
@@ -270,6 +272,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                 ),
               ),
             ),
+            /////Rate Us////
             GestureDetector(
               onTap: () async {
                 if (await canLaunch(

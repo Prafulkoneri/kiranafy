@@ -104,17 +104,19 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              watch.getproductunitlistdata?.productDetails
-                                      ?.productName ??
-                                  "",
-                              // "Product Name",
-                              // "${watch.categoryName} -  ${watch.allProductsCount}",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black1,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500),
+                            Flexible(
+                              child: Text(
+                                watch.getproductunitlistdata?.productDetails
+                                        ?.productName ??
+                                    "",
+                                // "Product Name",
+                                // "${watch.categoryName} -  ${watch.allProductsCount}",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black1,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ),
                           ],

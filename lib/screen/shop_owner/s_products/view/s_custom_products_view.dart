@@ -288,8 +288,36 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                           height: 11.h,
                         ),
                         GestureDetector(
+                          // onTap: () {
+                          //   read.openProductImage();
+                          // },
                           onTap: () {
-                            read.openProductImage();
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        read.openCameras(context);
+                                      },
+                                      child: Text("Camera"),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        read.openGallery1(context);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("gallery "),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
                           },
                           child: Container(
                             height: 185.h,

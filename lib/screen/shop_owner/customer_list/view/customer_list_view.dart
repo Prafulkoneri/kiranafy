@@ -33,6 +33,9 @@ class CustomerListView extends StatefulWidget {
 class _CustomerListViewState extends State<CustomerListView> {
   @override
   void initState() {
+    print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+    print(widget.fromPage);
+    print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SCustomerListController>()

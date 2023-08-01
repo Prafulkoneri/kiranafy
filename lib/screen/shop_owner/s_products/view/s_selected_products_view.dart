@@ -68,7 +68,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                 (Route<dynamic> route) => false,
               );
             },
-            title: watch.categoryName != ""
+            title:
+            watch.categoryName != ""
                 ? '${watch.categoryName ?? ""} - ${watch.totalSelectedAndCustomProducts ?? ""}'
                 : "",
             // "Cold Drinks & Juices - 2",
@@ -149,21 +150,22 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 },
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.center,
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(
-                                          width: 15.w,
-                                        ),
+
                                         SvgPicture.asset(
                                             'assets/icons/pluse.svg'),
                                       ],
                                     ),
+                                    SizedBox(
+                                      width: 11.w,
+                                    ),
                                     Row(
                                       children: [
                                         Text(
-                                          "Add Product",
+                                          " Add Product",
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: Colors.white,

@@ -96,17 +96,24 @@ class _AddUnitViewState extends State<AddUnitView> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.productName??"",
-                    // "${watch.categoryName} -  ${watch.allProductsCount}",
-                    style: GoogleFonts.dmSans(
-                      textStyle: TextStyle(
-                          color: Black1,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500),
+                    Flexible(
+                      child: Text(
+
+                        widget.productName??"",
+                        // "${watch.categoryName} -  ${watch.allProductsCount}",
+                        style: GoogleFonts.dmSans(
+
+                          textStyle: TextStyle(
+
+                              color: Black1,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
                     ),
-                  ),
+                  SizedBox(width: 25,),
                   Container(
                     width: 26.w,
                     child: CupertinoSwitch(
@@ -226,7 +233,8 @@ class _AddUnitViewState extends State<AddUnitView> {
               Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
+                    child:
+                    GestureDetector(
                       onTap: () {
                         showDialog(
                           context: context,

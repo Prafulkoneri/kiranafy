@@ -443,11 +443,11 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                       ],
                     ),
                   ),
-
+                  watch.orderDetails?.deliveryType == "delivery_to"?
                   SizedBox(
                     height: 23.h,
-                  ),
-                  watch.deliveryAddressDetails != null
+                  ):Container(),
+                  watch.orderDetails?.deliveryType == "delivery_to"
                       ? Container(
                           padding: EdgeInsets.only(
                             left: 20.w,
@@ -467,7 +467,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  watch.deliveryAddressDetails != null
+                  watch.orderDetails?.deliveryType == "delivery_to"
                       ? Container(
                           margin: EdgeInsets.only(left: 19.w, right: 19.w),
                           // height: 156.h,
@@ -1320,7 +1320,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             RichText(
                               text: TextSpan(children: [
                                 TextSpan(
-                                  text: 'Discount!!',
+                                  text: 'Discount',
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Black1,
@@ -1349,7 +1349,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             ),
                             watch.orderDetails?.totalDiscount != ""
                                 ? Text(
-                                    "Rs ${watch.orderDetails?.totalDiscount}",
+                                    " - Rs ${watch.orderDetails?.totalDiscount}",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: grey5,
