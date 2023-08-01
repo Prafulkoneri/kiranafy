@@ -37,14 +37,13 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pop(context);
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => SMainScreenView(
-            //           index: 0, screenName: SSCategoryListView())),
-            //   (Route<dynamic> route) => false,
-            // );
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 0, screenName: SSCategoryListView())),
+              (Route<dynamic> route) => false,
+            );
           },
           title: "Select Categories",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -59,7 +58,7 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
             )
           : GridView.builder(
               padding: EdgeInsets.only(
-                  left: 50.w, right: 50.w, top: 40.w, bottom: 40.w),
+                  left: 50.w, right: 50.w, top: 40.w, bottom: 90.w),
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

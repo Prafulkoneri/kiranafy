@@ -57,8 +57,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
         child: PrimaryAppBar(
           onBackBtnPressed: () {
            // read.onBackPressed(context,widget.fromDashBoard);
-          // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName: SAccountScreenView(refresh: false),)));
-            Navigator.pop(context);
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName: SAccountScreenView(refresh: false),)));
           },
 
           title: "Edit profile",

@@ -58,10 +58,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
             title: "Orders",
-            isBackButtonEnabled: widget.isFromOrderView==true?false:true,
-            onBackBtnPressed: (){
-              Navigator.pop(context);
-            },
+            isBackButtonEnabled: false,
           ),
         ),
         body: watch.isLoading

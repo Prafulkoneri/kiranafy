@@ -11,7 +11,6 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
-import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -43,37 +42,27 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
         preferredSize: Size.fromHeight(66.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                screen:ShopDashBoardView(
-refresh: true,
-                ));
-            // Navigator.pop(context);
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => SMainScreenView(
-            //           index: 0,
-            //           screenName: ShopDashBoardView(
-            //             refresh: true,
-            //           ))),
-            //   (Route<dynamic> route) => false,
-            // );
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 0,
+                      screenName: ShopDashBoardView(
+                        refresh: true,
+                      ))),
+              (Route<dynamic> route) => false,
+            );
           },
           title: "Categories",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-            PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                screen:SSelectCategoryView(
-                ));
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => SMainScreenView(
-            //           index: 0, screenName: SSelectCategoryView())),
-            //   (Route<dynamic> route) => false,
-            // );
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 0, screenName: SSelectCategoryView())),
+              (Route<dynamic> route) => false,
+            );
           },
         ),
       ),
@@ -110,26 +99,18 @@ refresh: true,
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                                        pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                                        screen:SSelectedProductView(
-                                            isRefresh: true,
-                                            categoryId: element
-                                                ?.categoryId
-                                                .toString()));
-
-                                    // Navigator.pushAndRemoveUntil(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) => SMainScreenView(
-                                    //           index: 0,
-                                    //           screenName: SSelectedProductView(
-                                    //               isRefresh: true,
-                                    //               categoryId: element
-                                    //                   ?.categoryId
-                                    //                   .toString()))),
-                                    //   (Route<dynamic> route) => false,
-                                    // );
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SMainScreenView(
+                                              index: 0,
+                                              screenName: SSelectedProductView(
+                                                  isRefresh: true,
+                                                  categoryId: element
+                                                      ?.categoryId
+                                                      .toString()))),
+                                      (Route<dynamic> route) => false,
+                                    );
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

@@ -52,17 +52,16 @@ class _AddProductViewState extends State<AddProductView> {
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pop(context);
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => SMainScreenView(
-              //             index: 0,
-              //             screenName: SSelectedProductView(
-              //                 isRefresh: false, categoryId: widget.categoryId),
-              //           )),
-              //   (Route<dynamic> route) => false,
-              // );
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                          index: 0,
+                          screenName: SSelectedProductView(
+                              isRefresh: false, categoryId: widget.categoryId),
+                        )),
+                (Route<dynamic> route) => false,
+              );
             },
             title: "Add Products",
             action: SvgPicture.asset("assets/icons/forward.svg"),

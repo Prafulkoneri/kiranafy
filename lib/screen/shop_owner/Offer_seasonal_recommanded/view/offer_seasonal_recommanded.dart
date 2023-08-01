@@ -76,18 +76,17 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                               )),
                       (Route<dynamic> route) => false,
                     )
-                  : Navigator.pop(context);
-              // Navigator.pushAndRemoveUntil(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => SMainScreenView(
-              //                   index: 0,
-              //                   screenName: ShopDashBoardView(
-              //                     refresh: false,
-              //                   ),
-              //                 )),
-              //         (Route<dynamic> route) => false,
-              //       );
+                  : Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SMainScreenView(
+                                index: 0,
+                                screenName: ShopDashBoardView(
+                                  refresh: false,
+                                ),
+                              )),
+                      (Route<dynamic> route) => false,
+                    );
             },
             title: watch.isRecommadedPressed
                 ? "Recommended Products"

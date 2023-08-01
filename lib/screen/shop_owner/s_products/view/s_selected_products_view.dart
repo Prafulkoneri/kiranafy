@@ -18,7 +18,6 @@ import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_adm
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/unit_detail_view.dart';
-import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
@@ -59,18 +58,15 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                  pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                  screen:SSCategoryListView());
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => SMainScreenView(
-              //             index: 0,
-              //             screenName: SSCategoryListView(),
-              //           )),
-              //   (Route<dynamic> route) => false,
-              // );
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                          index: 0,
+                          screenName: SSCategoryListView(),
+                        )),
+                (Route<dynamic> route) => false,
+              );
             },
             title: watch.categoryName != ""
                 ? '${watch.categoryName ?? ""} - ${watch.totalSelectedAndCustomProducts ?? ""}'
@@ -148,11 +144,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 height: 40.h,
                                 color: Custlogin,
                                 onTap: () {
-                                  PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                                    pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                                    screen:AddProductView(categoryId: widget.categoryId,refresh: true,),);
-                                  // read.onAddProductPressed(
-                                  //     context, widget.categoryId);
+                                  read.onAddProductPressed(
+                                      context, widget.categoryId);
                                 },
                                 child: Row(
                                   mainAxisAlignment:
@@ -194,22 +187,17 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 height: 40.h,
                                 color: Custlogin,
                                 onTap: () {
-                                  PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                                      pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                                      screen:SCustomProductView(
-                                          categoryId:
-                                          widget.categoryId),);
-                                  // Navigator.pushAndRemoveUntil(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) => SMainScreenView(
-                                  //             index: 0,
-                                  //             screenName: SCustomProductView(
-                                  //                 categoryId:
-                                  //                     widget.categoryId),
-                                  //           )),
-                                  //   (Route<dynamic> route) => false,
-                                  // );
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SMainScreenView(
+                                              index: 0,
+                                              screenName: SCustomProductView(
+                                                  categoryId:
+                                                      widget.categoryId),
+                                            )),
+                                    (Route<dynamic> route) => false,
+                                  );
                                   // readMainScreen.onNavigation(0,ShopCustomProductView(categoryId: watch.categoryId), context);
                                 },
                                 child: Row(
@@ -344,48 +332,32 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                                                        pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                                                        screen:UnitDetailView(
-                                                          categoryId:
-                                                          widget
-                                                              .categoryId,
-                                                          productId:
-                                                          element
-                                                              ?.id
-                                                              .toString(),
-                                                          productType:
-                                                          element
-                                                              ?.productType,
-                                                          refresh:
-                                                          true,
-                                                        ));
-                                                      // Navigator
-                                                      //     .pushAndRemoveUntil(
-                                                      //   context,
-                                                      //   MaterialPageRoute(
-                                                      //       builder: (context) =>
-                                                      //           SMainScreenView(
-                                                      //               index: 0,
-                                                      //               screenName:
-                                                      //                   UnitDetailView(
-                                                      //                 categoryId:
-                                                      //                     widget
-                                                      //                         .categoryId,
-                                                      //                 productId:
-                                                      //                     element
-                                                      //                         ?.id
-                                                      //                         .toString(),
-                                                      //                 productType:
-                                                      //                     element
-                                                      //                         ?.productType,
-                                                      //                 refresh:
-                                                      //                     true,
-                                                      //               ))),
-                                                      //   (Route<dynamic>
-                                                      //           route) =>
-                                                      //       false,
-                                                      // );
+                                                      Navigator
+                                                          .pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SMainScreenView(
+                                                                    index: 0,
+                                                                    screenName:
+                                                                        UnitDetailView(
+                                                                      categoryId:
+                                                                          widget
+                                                                              .categoryId,
+                                                                      productId:
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                      productType:
+                                                                          element
+                                                                              ?.productType,
+                                                                      refresh:
+                                                                          true,
+                                                                    ))),
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false,
+                                                      );
                                                     },
                                                     child: Container(
                                                       padding: EdgeInsets.only(
@@ -422,41 +394,28 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                     children: [
                                                       GestureDetector(
                                                         onTap: () {
-
-                                                          PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                                                              pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                                                              screen:SEditAdminProductView(
-                                                                productId: element
-                                                                    ?.id
-                                                                    .toString(),
-                                                                categoryId:
-                                                                widget.categoryId,
-                                                                isFromAccountScreen:
+                                                          Navigator
+                                                              .pushAndRemoveUntil(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    SMainScreenView(
+                                                                        index:
+                                                                            0,
+                                                                        screenName:
+                                                                            SEditAdminProductView(
+                                                                          productId: element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                          categoryId:
+                                                                              widget.categoryId,
+                                                                          isFromAccountScreen:
+                                                                              false,
+                                                                        ))),
+                                                            (Route<dynamic>
+                                                                    route) =>
                                                                 false,
-                                                              ));
-
-                                                          // Navigator
-                                                          //     .pushAndRemoveUntil(
-                                                          //   context,
-                                                          //   MaterialPageRoute(
-                                                          //       builder: (context) =>
-                                                          //           SMainScreenView(
-                                                          //               index:
-                                                          //                   0,
-                                                          //               screenName:
-                                                          //                   SEditAdminProductView(
-                                                          //                 productId: element
-                                                          //                     ?.id
-                                                          //                     .toString(),
-                                                          //                 categoryId:
-                                                          //                     widget.categoryId,
-                                                          //                 isFromAccountScreen:
-                                                          //                     false,
-                                                          //               ))),
-                                                          //   (Route<dynamic>
-                                                          //           route) =>
-                                                          //       false,
-                                                          // );
+                                                          );
                                                         },
                                                         child: Container(
                                                           padding:
@@ -852,48 +811,32 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                                                          pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                                                          screen:    UnitDetailView(
-                                                            categoryId:
-                                                            widget
-                                                                .categoryId,
-                                                            productId:
-                                                            element
-                                                                ?.id
-                                                                .toString(),
-                                                            productType:
-                                                            element
-                                                                ?.productType,
-                                                            refresh:
-                                                            true,
-                                                          ));
-                                                      // Navigator
-                                                      //     .pushAndRemoveUntil(
-                                                      //   context,
-                                                      //   MaterialPageRoute(
-                                                      //       builder: (context) =>
-                                                      //           SMainScreenView(
-                                                      //               index: 0,
-                                                      //               screenName:
-                                                      //                   UnitDetailView(
-                                                      //                 categoryId:
-                                                      //                     widget
-                                                      //                         .categoryId,
-                                                      //                 productId:
-                                                      //                     element
-                                                      //                         ?.id
-                                                      //                         .toString(),
-                                                      //                 productType:
-                                                      //                     element
-                                                      //                         ?.productType,
-                                                      //                 refresh:
-                                                      //                     true,
-                                                      //               ))),
-                                                      //   (Route<dynamic>
-                                                      //           route) =>
-                                                      //       false,
-                                                      // );
+                                                      Navigator
+                                                          .pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SMainScreenView(
+                                                                    index: 0,
+                                                                    screenName:
+                                                                        UnitDetailView(
+                                                                      categoryId:
+                                                                          widget
+                                                                              .categoryId,
+                                                                      productId:
+                                                                          element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                      productType:
+                                                                          element
+                                                                              ?.productType,
+                                                                      refresh:
+                                                                          true,
+                                                                    ))),
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false,
+                                                      );
                                                     },
                                                     child: Container(
                                                       padding: EdgeInsets.only(
@@ -930,39 +873,28 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                     children: [
                                                       GestureDetector(
                                                         onTap: () {
-                                                          PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-                                                              pageTransitionAnimation: PageTransitionAnimation.slideUp,
-                                                              screen:    SEditCustomProductView(
-                                                                productId: element
-                                                                    ?.id
-                                                                    .toString(),
-                                                                categoryId:
-                                                                widget.categoryId,
-                                                                isFromAccountScreen:
+                                                          Navigator
+                                                              .pushAndRemoveUntil(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    SMainScreenView(
+                                                                        index:
+                                                                            0,
+                                                                        screenName:
+                                                                            SEditCustomProductView(
+                                                                          productId: element
+                                                                              ?.id
+                                                                              .toString(),
+                                                                          categoryId:
+                                                                              widget.categoryId,
+                                                                          isFromAccountScreen:
+                                                                              false,
+                                                                        ))),
+                                                            (Route<dynamic>
+                                                                    route) =>
                                                                 false,
-                                                              ));
-                                                          // Navigator
-                                                          //     .pushAndRemoveUntil(
-                                                          //   context,
-                                                          //   MaterialPageRoute(
-                                                          //       builder: (context) =>
-                                                          //           SMainScreenView(
-                                                          //               index:
-                                                          //                   0,
-                                                          //               screenName:
-                                                          //                   SEditCustomProductView(
-                                                          //                 productId: element
-                                                          //                     ?.id
-                                                          //                     .toString(),
-                                                          //                 categoryId:
-                                                          //                     widget.categoryId,
-                                                          //                 isFromAccountScreen:
-                                                          //                     false,
-                                                          //               ))),
-                                                          //   (Route<dynamic>
-                                                          //           route) =>
-                                                          //       false,
-                                                          // );
+                                                          );
                                                         },
                                                         child: Container(
                                                           padding:

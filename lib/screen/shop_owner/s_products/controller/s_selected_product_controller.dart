@@ -97,20 +97,21 @@ class SSelectedProductsController extends ChangeNotifier {
     );
   }
 
-  // void onAddProductPressed(context, id) {
-  //   Navigator.pushAndRemoveUntil(
-  //     context,
-  //     MaterialPageRoute(
-  //         builder: (context) => SMainScreenView(
-  //               index: 0,
-  //               screenName: AddProductView(categoryId: id,refresh: true,),
-  //             )),
-  //     (Route<dynamic> route) => false,
-  //   );
-  // }
+  void onAddProductPressed(context, id) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+          builder: (context) => SMainScreenView(
+                index: 0,
+                screenName: AddProductView(categoryId: id,refresh: true,),
+              )),
+      (Route<dynamic> route) => false,
+    );
+  }
 
   Future<void> deleteAdminProduct(context, index, id) async {
     productId = id.toString();
+    isLoading = true;
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
 

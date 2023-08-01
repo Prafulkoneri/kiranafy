@@ -14,7 +14,6 @@ import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_prod
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
-import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -164,12 +163,15 @@ class SAddProductsController extends ChangeNotifier {
         if (response.statusCode == 200) {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
-
-          PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-            pageTransitionAnimation: PageTransitionAnimation.slideUp,
-            screen: SSelectedProductView(categoryId: categoryId,isRefresh: true)
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                      index: 0,
+                      screenName: SSelectedProductView(categoryId: categoryId,isRefresh: true),
+                    )),
+            (Route<dynamic> route) => false,
           );
-
 
           notifyListeners();
           uploadSuccess = false;

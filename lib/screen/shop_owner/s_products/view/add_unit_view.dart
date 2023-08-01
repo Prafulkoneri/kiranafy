@@ -50,17 +50,16 @@ class _AddUnitViewState extends State<AddUnitView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pop(context);
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => SMainScreenView(
-              //           index: 0,
-              //           screenName: UnitDetailView(
-              //               refresh: false, //
-              //               categoryId: widget.categoryId,productType: widget.productType,productId: widget.productId,))),
-              //   (Route<dynamic> route) => false,
-              // );
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SMainScreenView(
+                        index: 0,
+                        screenName: UnitDetailView(
+                            refresh: false, //
+                            categoryId: widget.categoryId,productType: widget.productType,productId: widget.productId,))),
+                (Route<dynamic> route) => false,
+              );
             },
             title: "Add Unit",
             action: SvgPicture.asset("assets/icons/forward.svg"),

@@ -1,5 +1,4 @@
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
-import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -486,22 +485,16 @@ class EditAdminProductController extends ChangeNotifier {
             (Route<dynamic> route) => false,
           );
         } else {
-          PersistentNavBarNavigator.pushNewScreen(context, withNavBar: true,
-              pageTransitionAnimation: PageTransitionAnimation.slideUp,
-              screen: SSelectedProductView(
-                isRefresh: true,
-                categoryId: selectedCategory,
-              ));
-          // Navigator.pushAndRemoveUntil(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => SMainScreenView(
-          //             index: 0,
-          //             screenName: SSelectedProductView(
-          //                 categoryId: categoryId, isRefresh: true),
-          //           )),
-          //   (Route<dynamic> route) => false,
-          // );
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                      index: 0,
+                      screenName: SSelectedProductView(
+                          categoryId: categoryId, isRefresh: true),
+                    )),
+            (Route<dynamic> route) => false,
+          );
         }
 
         Utils.showPrimarySnackbar(context, result.message,

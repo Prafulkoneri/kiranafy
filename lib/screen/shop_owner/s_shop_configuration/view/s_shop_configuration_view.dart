@@ -53,19 +53,18 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
           isBackButtonEnabled:
               widget.initialShopConfigration == true ? false : true,
           onBackBtnPressed: () {
-            Navigator.pop(context);
-            // widget.initialShopConfigration == false
-            //     ? Navigator.pushAndRemoveUntil(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => SMainScreenView(
-            //                 index: 0,
-            //                 screenName: SAccountScreenView(
-            //                   refresh: false,
-            //                 ))),
-            //         (Route<dynamic> route) => false,
-            //       )
-            //     : onBackPressed();
+            widget.initialShopConfigration == false
+                ? Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SMainScreenView(
+                            index: 0,
+                            screenName: SAccountScreenView(
+                              refresh: false,
+                            ))),
+                    (Route<dynamic> route) => false,
+                  )
+                : onBackPressed();
           },
           title: "Shop Configuration",
           action: SvgPicture.asset("assets/icons/forward.svg"),

@@ -14,7 +14,6 @@ import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_ord
 import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
-import 'package:local_supper_market/widget/bottom_bar/persistent_tab_view.dart';
 
 class SMainScreenController extends ChangeNotifier {
   int currentIndex = 0;
@@ -28,16 +27,8 @@ class SMainScreenController extends ChangeNotifier {
     onBackPressed(index, currentScreen);
   }
 
-  void onBottomNavChanged(index,context) {
-    // if(index==0){
-    //   PersistentNavBarNavigator.pushNewScreen(
-    //     context,
-    //     withNavBar: true,
-    //     screen: ShopDashBoardView(refresh: true)
-    //   );
-    // }
+  void onBottomNavChanged(index) {
     currentIndex = index;
-    print(currentIndex);
     notifyListeners();
   }
 

@@ -65,6 +65,7 @@ class Utils {
       SnackBar(
         // margin: isOverSheet ? EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 1.6) : null,
         behavior: SnackBarBehavior.floating,
+        // margin: EdgeInsets.only(bottom: 83.w),
         // duration: Duration(seconds:1),
         action: SnackBarAction(
           label: 'Dismiss',

@@ -24,7 +24,6 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../promotion_request/view/promotion_request_view.dart';
@@ -54,7 +53,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           isBackButtonEnabled: false,
           title: "Profile",
@@ -259,24 +258,16 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-
-                      PersistentNavBarNavigator.pushNewScreen(context,
-                          screen: SShopConfigurationView(initialShopConfigration: false,),
-                          withNavBar: true,
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.slideUp);
-
-
-                      // Navigator.pushAndRemoveUntil(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => SMainScreenView(
-                      //           index: 4,
-                      //           screenName: SShopConfigurationView(
-                      //             initialShopConfigration: false,
-                      //           ))),
-                      //   (Route<dynamic> route) => false,
-                      // );
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SMainScreenView(
+                                index: 4,
+                                screenName: SShopConfigurationView(
+                                  initialShopConfigration: false,
+                                ))),
+                        (Route<dynamic> route) => false,
+                      );
                       // read.onShopConfigurationClicked(context);
                     },
                     child: Container(
