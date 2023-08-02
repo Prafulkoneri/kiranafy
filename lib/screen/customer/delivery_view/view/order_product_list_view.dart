@@ -66,15 +66,23 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "${element?.productName}",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black1,
-                                    // letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "${element?.productName}",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        // letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+element?.returnStatus=="YES"?
+
+                                Text("Return",style: TextStyle(color: Color(0xffFF0000),fontSize: 13.sp,fontWeight: FontWeight.w700),)
+                              :Container()],
                             ),
                             SizedBox(
                               height: 6.h,

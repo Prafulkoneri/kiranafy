@@ -3,11 +3,15 @@ class SubmitReturnOrderReqModel{
   String ? reasonId;
   String ? productId;
   String ? customRefundReason;
+  String ? customerRefundAmount;
+  String ? totalProducts;
   SubmitReturnOrderReqModel({
     this.orderId,
     this.productId,
     this.customRefundReason,
-    this.reasonId
+    this.reasonId,
+    this.customerRefundAmount,
+    this.totalProducts,
 });
  Map<String,dynamic> toJson(){
    Map<String,dynamic> data={};
@@ -15,6 +19,8 @@ class SubmitReturnOrderReqModel{
    data["reason_id"]=reasonId;
    data["product_id"]=productId;
    data["custom_refund_reason"]=customRefundReason;
+   data["customer_refund_amount"]=customerRefundAmount;
+   data["refund_product_count"]=totalProducts;
    return data;
  }
 }
