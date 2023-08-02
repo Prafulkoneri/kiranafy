@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.d
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -44,6 +45,7 @@ class _CartDetailViewState extends State<CartDetailView> {
   Widget build(BuildContext context) {
     final watch = context.watch<CartDetailController>();
     final read = context.read<CartDetailController>();
+    final readProductViewController = context.read<ProductViewController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
@@ -240,6 +242,10 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                   watch.cartItemList?[index];
                                               return GestureDetector(
                                                 onTap: () {
+                                                  readProductViewController.updateProductId(element
+                                                      ?.productId
+                                                      .toString(),);
+                                                  print("anobot");
                                                   Navigator.pushAndRemoveUntil(
                                                     context,
                                                     MaterialPageRoute(

@@ -67,6 +67,7 @@ import 'screen/customer/advertisement_form/controller/ads_controller.dart';
 import 'screen/customer/c_setting/controller/c_setting_controller.dart';
 import 'screen/customer/cart/controller/cart_controller.dart';
 import 'screen/customer/cart/controller/cart_detail_controller.dart';
+import 'screen/customer/coupons/controller/coupon_all_controler.dart';
 import 'screen/customer/delivery_address/controller/delivery_address_controller.dart';
 import 'screen/customer/delivery_view/controller/customer_order_view_controller.dart';
 import 'screen/customer/my_order/controller/my_orders_controller.dart';
@@ -190,6 +191,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CustomerNoticationController()),
         ChangeNotifierProvider(create: (_) => customerAdscontroller()),
         ChangeNotifierProvider(create: (_) => BottomNavigationController()),
+        ChangeNotifierProvider(create: (_) => CAllCouponController()),
       ],
       child: MyApp(),
     ),

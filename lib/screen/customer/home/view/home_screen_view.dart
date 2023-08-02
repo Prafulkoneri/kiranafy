@@ -282,37 +282,29 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       OfferPage(),
                       //
                       SizedBox(
-                        height: 10.h,
+                        height: 20.h,
                       ),
 
-                      // ListView.builder(
-                      //   padding: EdgeInsets.zero,
-                      //   itemCount: watch.data?.length ?? 0,
-                      //   shrinkWrap: true,
-                      //   itemBuilder: (context, index) {
-                      //     final element = watch.data?[index];
-                      //     return Container(
-                      //         padding: EdgeInsets.only(
-                      //           right: 19.0.w,
-                      //           left: 19.0.w,
-                      //         ),
-                      //         width: ScreenUtil().screenWidth,
-                      //         // height: 100.h,
-                      //         child: AppNetworkImages(
-                      //           "${element?.bannerImagePath}",
-                      //           fit: BoxFit.cover,
-                      //         )
-                      //         // Image(
-                      //         //   image: AssetImage("assets/images/banner.png"),
-                      //         //   height: 163.h,
-                      //         //   width: 352.w,
-                      //         // ),
-                      //         );
-                      //   },
-                      // ),
+
+                            Container(
+                              padding: EdgeInsets.only(
+                                right: 19.0.w,
+                                left: 19.0.w,
+                              ),
+                              width: ScreenUtil().screenWidth,
+                              // height: 100.h,
+                              child:
+                              AppNetworkImages(
+                                imageUrl:
+                                  (watch.placeAd.toList()..shuffle()).first,
+                                height: 163.h,
+                                width: 352.w,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
 
                       SizedBox(
-                        height: 10.h,
+                        height: 20.h,
                       ),
 
                       Row(

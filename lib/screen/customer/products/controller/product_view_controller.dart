@@ -492,7 +492,10 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-
+  void updateProductId(value){
+productId=value;
+notifyListeners();
+  }
 /////////////////////////
   //   void onBackPressed(screenName,context,cId){
   //   print(screenName);

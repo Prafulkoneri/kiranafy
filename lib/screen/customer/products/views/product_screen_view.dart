@@ -59,12 +59,13 @@ class _ProductScreenViewState extends State<ProductScreenView> {
 
   @override
   void initState() {
+final watch=Provider.of<ProductViewController>(context, listen: false);
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ProductViewController>().initState(
           context,
           widget.shopId,
           widget.categoryId,
-          widget.productId,
+          watch.productId,
           widget.selectedUnitId,
           widget.productType,
           widget.routeName);
@@ -666,7 +667,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                     return GestureDetector(
                                       onTap: () {
                                         print(element?.id);
-
+watch.updateProductId(  element
+    ?.id
+    .toString(),);
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(

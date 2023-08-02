@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/customer/category/controller/product_
 import 'package:local_supper_market/screen/customer/category/view/filter_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -58,6 +59,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
     final watch = context.watch<ProductCategoryController>();
     final read = context.read<ProductCategoryController>();
     final readMain = context.read<MainScreenController>();
+    final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
@@ -106,6 +108,8 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
           return false;
         },
         child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: EdgeInsets.only(
@@ -256,6 +260,9 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                     final element = watch.productList?[index];
                                     return GestureDetector(
                                       onTap: () {
+                                        readProductViewController.updateProductId(element
+                                            ?.id
+                                            .toString(),);
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
@@ -464,9 +471,39 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                   }),
                             ),
                           )
-                        : Container(
-                            child: Center(child: Text("No Products found")),
-                          ))
+                        :
+                    // Container(
+                    //         child: Center(child: Text("No Products found")),
+                    //       )
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(right: 20.w),
+                          child: Image.asset(
+                            "assets/images/emptycart.png",
+                            height: 151.h,
+                            width: 151.w,
+                          ),
+                        ),
+                        Text(
+
+                          "No Products Found",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+
+                                color: Black1,
+                                letterSpacing: .5,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+
+
+                      ],
+                    )
+            )
           ],
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
@@ -36,6 +37,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
   Widget build(BuildContext context) {
     final watch = context.watch<AllOffersController>();
     final read = context.read<AllOffersController>();
+    final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
@@ -76,6 +78,9 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                       final element = watch.allOfferProducts?[index];
                       return GestureDetector(
                         onTap: () {
+                          readProductViewController.updateProductId(element
+                              ?.id
+                              .toString(),);
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
@@ -40,6 +41,7 @@ class _AllRecommandedProductsViewState
   Widget build(BuildContext context) {
     final watch = context.watch<SAllRecommandedProductsController>();
     final read = context.read<SAllRecommandedProductsController>();
+    final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -80,6 +82,9 @@ class _AllRecommandedProductsViewState
                     final element = watch.recommandedProducts?[index];
                     return GestureDetector(
                       onTap: () {
+                        readProductViewController.updateProductId(element
+                            ?.id
+                            .toString(),);
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(

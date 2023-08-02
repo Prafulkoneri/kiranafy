@@ -56,7 +56,8 @@ class _MyOrderViewState extends State<MyOrderView> {
             );
           },
           title: "My Orders",
-          action: InkWell(
+          action:
+          InkWell(
             onTap: () {
               showModalBottomSheet(
                 isScrollControlled: true,

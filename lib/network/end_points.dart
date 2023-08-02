@@ -422,4 +422,8 @@ class Endpoint {
   static const String customerAds = "${baseUrl}lsm-customer-request-shop-promotion";
   static const String returnList = "${baseUrl}lsm-customer-order-return-list";
   static const String checkReturnProduct = "${baseUrl}customer_order_refund_submit";
+  static const String customerAllCouponList = "${baseUrl}lsm-shop-owner-coupons-list";
+  static const String customerPlaceAd = "${baseUrl}lsm-shop-owner-banner";
+
+
 }
