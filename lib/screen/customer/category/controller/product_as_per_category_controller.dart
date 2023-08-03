@@ -67,7 +67,7 @@ class ProductCategoryController extends ChangeNotifier {
         allCategoryList = categoryProductData?.allCategoryList;
         productList = categoryProductData?.productList;
         if (productList!.isEmpty) {
-          Utils.showPrimarySnackbar(context, "no product found",
+          Utils.showPrimarySnackbar(context, "No Product Found",
               type: SnackType.error);
         }
         showLoader(false);

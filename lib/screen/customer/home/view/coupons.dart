@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
+import 'package:local_supper_market/screen/customer/coupons/view/coupon_all_view.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/utils/coupans_info.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -183,7 +184,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                                     Radius.circular(30))),
                                             context: context,
                                             builder: (context) {
-                                              return CouponsBottomSheet(context);
+                                              return CCouponsDetailView(shopName: element?.shopName, CounponCode: element?.couponCode, discountmaxAmount: element?.couponDiscountMaxAmount, disscountPerscentage: element?.couponDiscountPercentage, startDate: element?.couponToDate, termCondition: element?.couponTermsAndCondition);
                                             },
                                           );
                                         },

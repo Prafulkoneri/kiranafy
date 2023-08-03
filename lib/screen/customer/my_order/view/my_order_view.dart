@@ -55,8 +55,9 @@ class _MyOrderViewState extends State<MyOrderView> {
               (Route<dynamic> route) => false,
             );
           },
-          title: "My Order",
-          action: InkWell(
+          title: "My Orders",
+          action:
+          InkWell(
             onTap: () {
               showModalBottomSheet(
                 isScrollControlled: true,

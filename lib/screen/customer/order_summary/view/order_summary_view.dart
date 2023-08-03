@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/customer/order_summary/controller/ord
 import 'package:local_supper_market/screen/customer/order_summary/view/address_list_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/coupons_list_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/expected_delivery_date_sheet_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -86,6 +87,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
     final watch = context.watch<OrderSummaryController>();
     final read = context.read<OrderSummaryController>();
     final readMain = context.read<MainScreenController>();
+    final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -867,6 +869,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
+                                                      readProductViewController.updateProductId(element
+                                                          ?.id
+                                                          .toString(),);
                                                       Navigator
                                                           .pushAndRemoveUntil(
                                                         context,
@@ -1080,8 +1085,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                     ],
                                                                   ),
                                                                   GestureDetector(
-                                                                    onTap: () {
-                                                                      read.addToCart(
+                                                                    onTap: ()async {
+
+                                                                      await read.addToCart(
                                                                           element
                                                                               ?.productType,
                                                                           element
@@ -1089,6 +1095,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                           element
                                                                               ?.shopId,
                                                                           context);
+                                                                      await  read.initState(context,element?.shopId,watch.cartId,true,"cartDetail",
+                                                                      );
                                                                     },
                                                                     child: SvgPicture
                                                                         .asset(

@@ -30,7 +30,6 @@ import 'package:provider/provider.dart';
 
 // import '../controller/profile_controller.dart';
 
-
 class ProfileScreenView extends StatefulWidget {
   const ProfileScreenView({super.key});
 
@@ -330,13 +329,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               ///////////////////////
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
-                            index: 4, screenName: CustomerNotificationsScreenView())),
-                        (Route<dynamic> route) => false,
+                            index: 4,
+                            screenName: CustomerNotificationsScreenView())),
+                    (Route<dynamic> route) => false,
                   );
                 },
                 child: Container(
@@ -546,6 +546,50 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       ),
                       Text(
                         'About Us',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                            index: 4, screenName: CAboutUsView())),
+                    (Route<dynamic> route) => false,
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/faq.svg',
+                        // width: 14.w,
+                        // height: 13.h,
+                      ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'FAQ',
                         style: GoogleFonts.dmSans(
                           textStyle: TextStyle(
                               color: Black,

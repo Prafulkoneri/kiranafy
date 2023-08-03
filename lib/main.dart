@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/customer/account/controller/profile_c
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
 import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
+import 'package:local_supper_market/screen/customer/coupons/controller/coupon_all_controler.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/controller/add_address_controller.dart';
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/ticket_list_controller.dart';
@@ -191,6 +192,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CustomerNoticationController()),
         ChangeNotifierProvider(create: (_) => customerAdscontroller()),
         ChangeNotifierProvider(create: (_) => BottomNavigationController()),
+        ChangeNotifierProvider(create: (_) => CAllCouponController()),
         ChangeNotifierProvider(create: (_) => ReturnOrderController()),
       ],
       child: MyApp(),

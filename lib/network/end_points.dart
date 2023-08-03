@@ -8,6 +8,7 @@ class Endpoint {
   static const String baseUrl =
       // 'https://projects.m-staging.in/local-super-mart/api/';
       // 'https://localsupermart.com/testing/api/';
+      // 'https://localsupermart.com/testing/api/';
       'http://lsm.mplussoft.org/api/';
   // 'https://localsupermart.com/live/api/';
   // Check Mobile Number Exist
@@ -332,11 +333,14 @@ class Endpoint {
 
   static const String shopSetting = "${baseUrl}lsm-shop-owner-get-settings";
 
-  static const String customerShopSetting = "${baseUrl}lsm-customer-get-settings";
+  static const String customerShopSetting =
+      "${baseUrl}lsm-customer-get-settings";
 
-  static const String customerChangeSetting = "${baseUrl}lsm-customer-change-settings";
+  static const String customerChangeSetting =
+      "${baseUrl}lsm-customer-change-settings";
 
-  static const String getCustomerNotificationList = "${baseUrl}lsm-customer-get-notifications-list";
+  static const String getCustomerNotificationList =
+      "${baseUrl}lsm-customer-get-notifications-list";
 
   static const String pramotionRequest =
       "${baseUrl}lsm-shop-owner-request-shop-promotion";
@@ -422,8 +426,14 @@ class Endpoint {
   static const String clogOut = "${baseUrl}lsm-customer-logout";
   static const String cdeleteAccount = "${baseUrl}lsm-customer-delete-account";
   static const String cdReviewlist = "${baseUrl}lsm-review-list";
-  static const String customerAds = "${baseUrl}lsm-customer-request-shop-promotion";
+  static const String customerAds =
+      "${baseUrl}lsm-customer-request-shop-promotion";
   static const String returnList = "${baseUrl}lsm-customer-order-return-list";
-  static const String checkReturnProduct = "${baseUrl}customer_order_refund_submit";
+  static const String checkReturnProduct =
+      "${baseUrl}customer_order_refund_submit";
+  static const String customerAllCouponList =
+      "${baseUrl}lsm-shop-owner-coupons-list";
+  static const String customerPlaceAd = "${baseUrl}lsm-shop-owner-banner";
   static const String submitReturn = "${baseUrl}customer_order_refund_submit";
+  static const String searchShop = "${baseUrl}lsm-shop-owner-filter-list";
 }

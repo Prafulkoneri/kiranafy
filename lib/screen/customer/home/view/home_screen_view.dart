@@ -86,7 +86,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HeaderView(cityName:mainScreenWatch.cityName,areaName: mainScreenWatch.areaName,),
+                      HeaderView(
+                        cityName: mainScreenWatch.cityName,
+                        areaName: mainScreenWatch.areaName,
+                      ),
                       SizedBox(
                         height: 13.h,
                       ),
@@ -99,6 +102,19 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           width: 351.w,
                           height: 36.h,
                           child: TextField(
+                            onTap: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainScreenView(
+                                        index: 1,
+                                        screenName: AllNearShopsView(
+                                          refreshPage: true,
+                                        ))),
+                                (Route<dynamic> route) => false,
+                              );
+                            },
+                            readOnly: true,
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide:
@@ -189,7 +205,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      watch.nearByShopList?.isNotEmpty??false
+                      watch.nearByShopList?.isNotEmpty ?? false
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -248,7 +264,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 ),
                               ],
                             )
-                          :Container(),
+                          : Container(),
                       watch.categoryFirstList.isNotEmpty
                           ? Container(
                               padding: EdgeInsets.only(
@@ -273,7 +289,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                             )
                           : Container(),
                       watch.categoryFirstList.isNotEmpty
-                          ? ShopCategory() : Container(),
+                          ? ShopCategory()
+                          : Container(),
                       // SizedBox(
                       //   height: 20.h,
                       // ),
@@ -282,37 +299,29 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       OfferPage(),
                       //
                       SizedBox(
-                        height: 10.h,
+                        height: 20.h,
                       ),
 
-                      // ListView.builder(
-                      //   padding: EdgeInsets.zero,
-                      //   itemCount: watch.data?.length ?? 0,
-                      //   shrinkWrap: true,
-                      //   itemBuilder: (context, index) {
-                      //     final element = watch.data?[index];
-                      //     return Container(
-                      //         padding: EdgeInsets.only(
-                      //           right: 19.0.w,
-                      //           left: 19.0.w,
-                      //         ),
-                      //         width: ScreenUtil().screenWidth,
-                      //         // height: 100.h,
-                      //         child: AppNetworkImages(
-                      //           "${element?.bannerImagePath}",
-                      //           fit: BoxFit.cover,
-                      //         )
-                      //         // Image(
-                      //         //   image: AssetImage("assets/images/banner.png"),
-                      //         //   height: 163.h,
-                      //         //   width: 352.w,
-                      //         // ),
-                      //         );
-                      //   },
-                      // ),
+                      Container(
+                        padding: EdgeInsets.only(
+                          right: 19.0.w,
+                          left: 19.0.w,
+                        ),
+                        width: ScreenUtil().screenWidth,
+                        // height: 100.h,
+                        child: watch.placeAd.isNotEmpty
+                            ? AppNetworkImages(
+                                imageUrl:
+                                    (watch.placeAd.toList()..shuffle()).first,
+                                height: 163.h,
+                                width: 352.w,
+                                fit: BoxFit.cover,
+                              )
+                            : Container(),
+                      ),
 
                       SizedBox(
-                        height: 10.h,
+                        height: 20.h,
                       ),
 
                       Row(
@@ -323,14 +332,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        MainScreenView(
-                                            index: 0,
-                                            screenName:
-                                            CustomerAdsView(
-
-                                            ))),
-                                    (Route<dynamic> route) => false,
+                                    builder: (context) => MainScreenView(
+                                        index: 0,
+                                        screenName: CustomerAdsView())),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(

@@ -322,22 +322,24 @@ class _MapScreenViewState extends State<MapScreenView> {
                 onTap: () {
                   read.onMapCloseBtnPressed(context);
                 },
-                child: Container(
-                  height: 30.w,
-                  width: 30.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                  child: Center(
+                // child:
+                // Container(
+                //   height: 30.w,
+                //   width: 30.w,
+                //   decoration: BoxDecoration(
+                //     shape: BoxShape.circle,
+                //     color: Colors.black,
+                //   ),
+                  child:
+                  Center(
                     child: SvgPicture.asset(
-                      'assets/images/Cross.svg',
-                      width: 10.w,
-                      height: 10.h,
+                      'assets/images/map_c.svg',
+                      height: 30.w,
+                      width: 30.w,
                     ),
                   ),
                 ),
-              ),
+
               SizedBox(
                 width: 10.w,
               ),

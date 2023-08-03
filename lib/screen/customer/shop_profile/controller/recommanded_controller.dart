@@ -16,12 +16,16 @@ class SAllRecommandedProductsController extends ChangeNotifier {
   String shopId = "";
   int offset = 0;
   bool isLoading = true;
-  bool? showPaginationLoader = true;
+  // bool? showPaginationLoader = true;
+  bool showPaginationLoader = false;
   AddProductToCartRepo addProductToCartRepo=AddProductToCartRepo();
 
   Data? data;
-  List<CustomerProductData>? recommandedProducts;
+  // List<CustomerProductData>? recommandedProducts;
+  List<CustomerProductData> recommandedProducts = [];
   Future<void> initState(context, id) async {
+    recommandedProducts.clear();
+    offset=0;
     await getAllRecommandedProducts(context, id);
     notifyListeners();
   }
@@ -37,6 +41,10 @@ class SAllRecommandedProductsController extends ChangeNotifier {
   AllRecomandedRepo allRecommandedProductsRepo = AllRecomandedRepo();
 
   Future<void> getAllRecommandedProducts(context, id) async {
+    if(offset==0){
+      isLoading = true;
+    }
+    showPaginationLoader = true;
     showLoader(true);
     shopId = id; //store id
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -48,8 +56,10 @@ class SAllRecommandedProductsController extends ChangeNotifier {
       final result = RecommandedResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         data = result.data;
-        recommandedProducts = data?.recommandedProducts;
+        // recommandedProducts = data?.recommandedProducts;
+        recommandedProducts.addAll(result.data?.recommandedProducts ?? []);
         showLoader(false);
+
         showPaginationLoader = false;
         notifyListeners();
       } else {
@@ -94,5 +104,16 @@ class SAllRecommandedProductsController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  //////////
+  Future<void> onScrollMaxExtent(context,id) async {
+
+    print("hello");
+    offset = offset + 1;
+    await getAllRecommandedProducts(context,id);
+    isLoading = false;
+
+    notifyListeners();
   }
 }

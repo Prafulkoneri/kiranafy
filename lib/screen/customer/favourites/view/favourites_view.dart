@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/customer/account/view/profile_screen_
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -42,6 +43,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
     final read = context.read<FavouritesController>();
     final watch = context.watch<FavouritesController>();
     final readMain = context.read<MainScreenController>();
+    final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -364,6 +366,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                           watch.adminProductList?[index];
                                       return GestureDetector(
                                         onTap: () {
+                                          readProductViewController.updateProductId(element
+                                              ?.id
+                                              .toString(),);
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(

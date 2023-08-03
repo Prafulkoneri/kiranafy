@@ -36,6 +36,7 @@ class SplashController extends ChangeNotifier {
 
   Future<void> initState(context) async {
     initPackageInfo();
+
     await appVersionCheck(context);
     Timer(Duration(seconds: 3), () async {
 
@@ -47,6 +48,7 @@ class SplashController extends ChangeNotifier {
         return;
       }
       SharedPreferences pref = await SharedPreferences.getInstance();
+      print("BearerToken${pref.getString("token")}");
       print(pref.getString("status"));
       if (pref.getString("status") == "numberRegistered") {
         Navigator.pushReplacement(context,

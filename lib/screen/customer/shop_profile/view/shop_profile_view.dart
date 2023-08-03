@@ -8,10 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/advertisement_form/view/ads_view.dart';
 import 'package:local_supper_market/screen/customer/category/view/category_view.dart';
+import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/review/view/c_review_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/category.dart';
@@ -64,7 +67,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
   Widget build(BuildContext context) {
     final watch = context.watch<ShopProfileViewController>();
     final read = context.read<ShopProfileViewController>();
+    final watchHome = context.watch<HomeScreenController>();
     final watchMain = context.watch<MainScreenController>();
+    final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       body: watch.isLoading
           ? Center(
@@ -509,6 +514,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                         ),
                                         GestureDetector(
                                           onTap: () {
+                                            readProductViewController.updateProductId(element
+                                                ?.id
+                                                .toString(),);
                                             Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
@@ -832,6 +840,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                           watch.seasonalProduct?[index];
                                       return GestureDetector(
                                         onTap: () {
+                                          readProductViewController.updateProductId(element
+                                              ?.id
+                                              .toString(),);
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
@@ -1561,6 +1572,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             );
                                             return GestureDetector(
                                               onTap: () {
+                                                readProductViewController.updateProductId(element
+                                                    ?.id
+                                                    .toString(),);
                                                 Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
@@ -1726,6 +1740,64 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               ),
                             )
                           : Container(),
+                      Container(
+                        padding: EdgeInsets.only(
+                          right: 19.0.w,
+                          left: 19.0.w,
+                        ),
+                        width: ScreenUtil().screenWidth,
+                        // height: 100.h,
+                        child:
+                        AppNetworkImages(
+                          imageUrl:
+                          (watchHome.placeAd.toList()..shuffle()).first,
+                          height: 163.h,
+                          width: 352.w,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 20.h,
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MainScreenView(
+                                            index: 0,
+                                            screenName:
+                                            CustomerAdsView(
+
+                                            ))),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Color(0xff39C19D),
+                                  borderRadius: BorderRadius.circular(7.w)),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 14.w, vertical: 2.w),
+                              child: Center(
+                                child: Text(
+                                  "Place Your Ad",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 100.w,
                       ),

@@ -610,7 +610,29 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         ),
                       ),
                       SizedBox(
-                        height: 37.w,
+                        height: 30.w,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Delivery Areas (Pune)",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15.sp,
+                                color: Color(0xff3A3A3A)),
+                          ),
+                          SvgPicture.asset("assets/icons/add_area.svg"),
+                        ],
+                      ),
+                      SizedBox(height: 10.h),
+                      PrimarySTextFormField(
+                        // readOnly: true,
+                        hintText: "Vishrantwadi, Viman Nagar, Kharadi",
+                        hintFontSize: 15.sp,
+                      ),
+                      SizedBox(
+                        height: 30.w,
                       ),
                       Text(
                         "Slot Selection",

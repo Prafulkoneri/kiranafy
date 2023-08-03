@@ -26,13 +26,17 @@ class AllOffersController extends ChangeNotifier {
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   List<ShopCategory>? shopCategory;
   List<CustomerProductData>? offerProduct;
-  List<CustomerProductData>? allOfferProducts;
+  List<CustomerProductData> allOfferProducts = [];
+  bool showPaginationLoader = false;
 
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
 
   Future<void> initState(context, id) async {
+    allOfferProducts.clear();
+    offset=0;
     await getAllOfferes(context, id);
+    notifyListeners();
   }
 
   void showLoader(value) {
@@ -45,6 +49,10 @@ class AllOffersController extends ChangeNotifier {
       offset: offset.toString(), limit: "10", shopId: shopId);
 
   Future<void> getAllOfferes(context, id) async {
+    if(offset==0){
+      isLoading = true;
+    }
+    showPaginationLoader = true;
     shopId = id;
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -56,9 +64,10 @@ class AllOffersController extends ChangeNotifier {
       final result = ViewAllOfferProducts.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         allproducts = result.data;
-        allOfferProducts = allproducts?.offerProducts;
-
+        // allOfferProducts = allproducts?.offerProducts;
+        allOfferProducts.addAll(result.data?.offerProducts ?? []);
         showLoader(false);
+        showPaginationLoader = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -77,11 +86,11 @@ class AllOffersController extends ChangeNotifier {
     );
   }
 
+
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
       );
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
-
   Future<void> removeAllShopFavList(context, id) async {
     shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -112,7 +121,6 @@ class AllOffersController extends ChangeNotifier {
       },
     );
   }
-
 ///////////////////Update List
   AddFavReqModel get addFavReqModel => AddFavReqModel(
         shopId: shopId.toString(),
@@ -181,5 +189,15 @@ class AllOffersController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  Future<void> onScrollMaxExtent(context,id) async {
+
+    print("hello");
+    offset = offset + 1;
+    await getAllOfferes(context,id);
+    isLoading = false;
+
+    notifyListeners();
   }
 }

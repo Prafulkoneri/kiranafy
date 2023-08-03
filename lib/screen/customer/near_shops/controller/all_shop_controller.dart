@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/customer_view_all_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/search_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/customer_view_all_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/search_shop_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,9 +19,12 @@ class AllShopController extends ChangeNotifier {
   List<NearByShops>? nearByShop;
   Data? data;
   String? shopId = "";
-   List<AllShops> allShops = [];
+  String shopName = "";
+  TextEditingController searchController = TextEditingController();
+  List<AllShops> allShops = [];
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
+  SearchShopRepo searchShopRepo = SearchShopRepo();
   List<bool> favNearByShop = [];
   List<bool> favAllShop = [];
   bool isLoading = true;
@@ -28,28 +32,32 @@ class AllShopController extends ChangeNotifier {
   int offset = 0;
 
   bool showPaginationLoader = false;
-
+  SearchShopData? searchshopData;
+  List<NearByShops>? nearByShops;
+  // List<AllShops>? allShops;
+  void showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
 
   CustomerViewAllShopReqModel get customerViewAllShopReqModel =>
       CustomerViewAllShopReqModel(
           pincode: pincode, offset: offset.toString(), limit: "5");
 
-
-  Future<void> initState(context,refresh)async{
-    if(refresh) {
+  Future<void> initState(context, refresh) async {
+    if (refresh) {
       isLoading = true;
       allShops.clear();
       offset = 0;
       getAllShops(context);
-    }
-    else{
+    } else {
       isLoading = false;
     }
     notifyListeners();
-    }
+  }
 
   Future<void> getAllShops(context) async {
-    if(offset==0){
+    if (offset == 0) {
       isLoading = true;
     }
     showPaginationLoader = true;
@@ -72,8 +80,10 @@ class AllShopController extends ChangeNotifier {
         nearByShop = data?.nearByShops;
 
         allShops.addAll(result.data?.allShops ?? []);
-        favNearByShop = List<bool>.filled(nearByShop?.length ?? 0, false, growable: true);
-        favAllShop = List<bool>.filled(allShops.length ?? 0, false, growable: true);
+        favNearByShop =
+            List<bool>.filled(nearByShop?.length ?? 0, false, growable: true);
+        favAllShop =
+            List<bool>.filled(allShops.length ?? 0, false, growable: true);
         int length1 = nearByShop?.length ?? 0;
         int length2 = allShops.length ?? 0;
         for (int i = 0; i < length1; i++) {
@@ -240,12 +250,57 @@ class AllShopController extends ChangeNotifier {
   }
 
   Future<void> onScrollMaxExtent(context) async {
+    print("hello");
+    offset = offset + 1;
+    await getAllShops(context);
+    isLoading = false;
 
-        print("hello");
-        offset = offset + 1;
-        await getAllShops(context);
-        isLoading = false;
+    notifyListeners();
+  }
+/////////////////////////Searchy///////////////////////////
 
-        notifyListeners();
+  SearchShopRequestModel get searchShopReqModel => SearchShopRequestModel(
+        shopName: searchController.text,
+      );
+
+  Future<void> shopSearchList(context) async {
+    print(searchController);
+    if (searchController.text.isNotEmpty) {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      print(pref.getString("successToken"));
+      searchShopRepo
+          .searchShop(searchShopReqModel, pref.getString("successToken"))
+          .then((response) {
+        log("response.body${response.body}");
+        final result =
+            SearchShopResponseModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          searchshopData = result.searchshopData;
+          nearByShops = searchshopData?.nearByShops;
+          allShops = searchshopData?.allShops ?? [];
+          // if (productList!.isEmpty) {
+          //   Utils.showPrimarySnackbar(context, "no product found",
+          //       type: SnackType.error);
+          // }
+          // showLoader(false);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+        (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    } else {
+      await getAllShops(context);
+    }
   }
 }

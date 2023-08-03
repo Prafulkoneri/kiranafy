@@ -752,54 +752,54 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 29.w, right: 28.w, top: 16.w),
-                    padding: EdgeInsets.only(bottom: 15.w),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(width: 1, color: grey10),
-                      ),
-                      // color: Colors.white,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          width: 5,
-                        ),
-                        SvgPicture.asset(
-                          'assets/icons/support.svg',
-                          // width: 14.w,
-                          // height: 13.h,
-                        ),
-                        SizedBox(
-                          width: 18.w,
-                        ),
-                        Flexible(
-                          child: Text(
-                            "Reports",
-                            // "Rachel Green",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ),
-                        // Text(
-                        //   'Reports',
-                        //   style: GoogleFonts.dmSans(
-                        //     textStyle: TextStyle(
-                        //         color: Black,
-                        //         fontSize: 14.sp,
-                        //         fontWeight: FontWeight.w400),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.only(left: 29.w, right: 28.w, top: 16.w),
+                  //   padding: EdgeInsets.only(bottom: 15.w),
+                  //   decoration: BoxDecoration(
+                  //     border: Border(
+                  //       bottom: BorderSide(width: 1, color: grey10),
+                  //     ),
+                  //     // color: Colors.white,
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     crossAxisAlignment: CrossAxisAlignment.end,
+                  //     children: [
+                  //       SizedBox(
+                  //         width: 5,
+                  //       ),
+                  //       SvgPicture.asset(
+                  //         'assets/icons/support.svg',
+                  //         // width: 14.w,
+                  //         // height: 13.h,
+                  //       ),
+                  //       SizedBox(
+                  //         width: 18.w,
+                  //       ),
+                  //       Flexible(
+                  //         child: Text(
+                  //           "Reports",
+                  //           // "Rachel Green",
+                  //           style: GoogleFonts.dmSans(
+                  //             textStyle: TextStyle(
+                  //                 color: Black,
+                  //                 fontSize: 14.sp,
+                  //                 fontWeight: FontWeight.w400),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       // Text(
+                  //       //   'Reports',
+                  //       //   style: GoogleFonts.dmSans(
+                  //       //     textStyle: TextStyle(
+                  //       //         color: Black,
+                  //       //         fontSize: 14.sp,
+                  //       //         fontWeight: FontWeight.w400),
+                  //       //   ),
+                  //       // ),
+                  //     ],
+                  //   ),
+                  // ),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushAndRemoveUntil(
@@ -862,7 +862,10 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationsScreenView()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationsScreenView()));
                       // Navigator.pushAndRemoveUntil(
                       //   context,
                       //   MaterialPageRoute(
