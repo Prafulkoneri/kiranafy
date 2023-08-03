@@ -133,7 +133,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 15.h,
                       ),
                       ////image
-                      watch.bannerData!.isNotEmpty?Container(
+                      watch.bannerData?.isNotEmpty==true?Container(
                         height: 160.h,
                         padding: EdgeInsets.only(left: 19.w),
                         child: PageView.builder(

@@ -55,12 +55,20 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MainScreenView(
+                        index: 4, screenName: MyOrderView())),
+                    (Route<dynamic> route) => false,
+              );
+
               // Navigator.pushAndRemoveUntil(
               //   context,
               //   MaterialPageRoute(builder: (context) => MyOrderView()),
               //   (Route<dynamic> route) => false,
               // );
-            Navigator.pop(context);
+            // Navigator.pop(context);
             },
             title: "Order",
           ),
@@ -1571,7 +1579,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             horizontal: 12.w),
                                         child: Center(
                                             child: Text(
-                                         watch.orderDetails?.refundOrderStatus=="pending"?"Payment Pending":watch.orderDetails?.refundOrderStatus=="accept"?"Shop Refunded":"",
+                                         watch.orderDetails?.refundOrderStatus=="pending"?"Payment Pending":watch.orderDetails?.refundOrderStatus=="accept" && watch.orderDetails?.refundPaymentStatus=="not_received"?"Shop Refunded":"Payment Received",
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500,
@@ -1583,18 +1591,40 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   SizedBox(
                                     height: 13.w,
                                   ),
-                                  Text(
-                                    "${watch.orderDetails?.refundProductCount} Products",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 18.sp),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "${watch.orderDetails?.refundProductCount} Products",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 18.sp),
+                                          ),
+                                          SizedBox(
+                                            height: 19.w,
+                                          ),
+                                          Text(watch.orderDetails?.refundOrderStatus=="pending"?"INR ${watch.orderDetails?.customerRefundAmount}":watch.orderDetails?.refundOrderStatus=="accept"?"INR ${watch.orderDetails?.shopOwnerRefundPayableAmount}":"",style:TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 18.sp),),
+                                        ],
+                                      ),
+                                      watch.orderDetails?.refundOrderStatus=="accept" && watch.orderDetails?.refundPaymentStatus=="received"?
+                                          Column(
+                                              children: [
+                                                Text(watch.orderDetails?.refundDatetime??""),
+                                                SizedBox(
+                                                  height: 8.w,
+                                                ),
+                                                Text("Transaction ID : ${watch.orderDetails?.shopOwnerRefundTransactionId}",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w400,color:Black1),)
+                                              ],
+                                          ):Container(),
+                                    ],
                                   ),
-                                  SizedBox(
-                                    height: 19.w,
-                                  ),
-                                  Text(watch.orderDetails?.refundOrderStatus=="pending"?"INR ${watch.orderDetails?.customerRefundAmount}":watch.orderDetails?.refundOrderStatus=="accept"?"INR ${watch.orderDetails?.shopOwnerRefundPayableAmount}":"",style:TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 18.sp),),
+
                                   SizedBox(
                                     height: 35.w,
                                   ),
@@ -1606,7 +1636,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   SizedBox(
                                     height: 31.w,
                                   ),
-                                  watch.orderDetails?.refundOrderStatus=="accept"? Row(
+                                  watch.orderDetails?.refundPaymentStatus=="not_received" && watch.orderDetails?.refundOrderStatus=="accept" ?
+                                  Row(
                                       children: [
                                         Expanded(
                                             child:PrimaryButton(color:Color(0xff39C19D), onTap:(){
@@ -1623,7 +1654,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         ),
                                       ],
                                   ):Container(),
-                                  watch.orderDetails?.refundOrderStatus=="accept"?  SizedBox(
+                                  watch.orderDetails?.refundPaymentStatus=="not_received" && watch.orderDetails?.refundOrderStatus=="accept"?  SizedBox(
                                     height: 31.w,
                                   ):Container(),
                                   Text("Note",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w500),),

@@ -284,15 +284,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               /////////////
               GestureDetector(
                 onTap: () {
-                  // readMain.onNavigation(4,UpdateProfileView(), context);
+                  readMain.onNavigation(4,MyOrderView(), context);
 
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: MyOrderView())),
-                    (Route<dynamic> route) => false,
-                  );
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4, screenName: MyOrderView())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 20.w),
@@ -719,7 +719,13 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  read.customerSignOut(context);
+                  SharedPreferences pref=await SharedPreferences.getInstance();
+                  pref.clear();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const OnBoardingScreenView()),
+                  );
+                  // read.customerSignOut(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

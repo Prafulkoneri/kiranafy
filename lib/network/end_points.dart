@@ -412,7 +412,7 @@ class Endpoint {
   static const String submitRevieqw =
       "${baseUrl}lsm-customer-submit-review-for-shop";
   static const String updateRefundStatus =
-      "${baseUrl}lsm-shop-owner-update-refund-status";
+      "${baseUrl}customer-update-refund-payment-status";
 
   static const String customerTicketList = "${baseUrl}lsm-customer-get-tickets";
 

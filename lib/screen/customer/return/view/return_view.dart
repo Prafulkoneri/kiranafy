@@ -67,7 +67,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
               SizedBox(
                 height: 10.h,
               ),
-              Text("${watch.shopDetails?.shopName}",
+              Text("${watch.orderDetails?.shopName}",
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
                         fontSize: 14.sp,

@@ -140,16 +140,18 @@ class CustomerOrderViewController extends ChangeNotifier {
 
   Future<void> updateRefundStatus(value,context)async{
     selectedRefundStatus=value;
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     updateRefundStatusRepo
         .updateRefundStatus(
         updateRefundStatusReqModel, pref.getString("successToken"))
-        .then((response) {
+        .then((response) async{
       log(response.body);
       final result = UpdateRefundStatusResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        customerOrderView(context,orderId);
+
+        await customerOrderView(context,orderId);
+        LoadingOverlay.of(context).hide();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

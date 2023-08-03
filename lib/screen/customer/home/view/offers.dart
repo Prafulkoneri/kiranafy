@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-
+import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:provider/provider.dart';
 class OfferPage extends StatefulWidget {
+
   const OfferPage({super.key});
 
   @override
@@ -16,6 +18,7 @@ class OfferPage extends StatefulWidget {
 class _OfferPageState extends State<OfferPage> {
   @override
   Widget build(BuildContext context) {
+    final watch=context.watch<HomeScreenController>();
     return Padding(
         padding: EdgeInsets.only(
           top: 20.h,

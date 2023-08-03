@@ -137,7 +137,7 @@ class OrderDetails {
   String ? refundProductCount;
   String ? refundPaymentStatus;
   String ? shopOwnerRefundRejectReason;
-  int ? shopOwnerRefundPayableAmount;
+  String ? shopOwnerRefundPayableAmount;
   String ? shopOwnerRefundPaymentType;
   String ? shopOwnerRefundTransactionId;
   String ? refundDatetime;
