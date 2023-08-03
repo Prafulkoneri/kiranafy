@@ -68,7 +68,7 @@ class OrderSummaryController extends ChangeNotifier {
   TextEditingController couponCodeController = TextEditingController();
   int selectedAddressId = 0;
 
-  Future<void> initState(context, cId, id, refresh, route) async {
+  Future<void> initState(context, cId, id, refresh, route,) async {
     // if(route=="addAddress"||route=="editAddress"){
     //    groupValue="delivery_to";
     // }
@@ -82,6 +82,7 @@ class OrderSummaryController extends ChangeNotifier {
     if (refresh) {
       await getOrderSummary(context, cId, id, route);
     }
+
     notifyListeners();
   }
 
@@ -495,5 +496,11 @@ class OrderSummaryController extends ChangeNotifier {
               )),
     );
     showOnPageLoader(false);
+  }
+
+
+  void updateCartId(value){
+    cartId=value;
+    notifyListeners();
   }
 }

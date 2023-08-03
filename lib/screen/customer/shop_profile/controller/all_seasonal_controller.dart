@@ -19,11 +19,14 @@ class ShopAllSeasonalController extends ChangeNotifier {
   String shopId = "";
   int offset = 0;
   bool isLoading = true;
-  bool? showPaginationLoader = true;
+  bool showPaginationLoader = false;
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   Data? data;
-  List<CustomerProductData>? seasonalProduct;
+  // List<CustomerProductData>? seasonalProduct;
+  List<CustomerProductData> seasonalProduct = [];
   Future<void> initState(context, id) async {
+    seasonalProduct.clear();
+    offset=0;
     // await getShopDetails(context, id);
     await getAllSeasonalProducts(context, id);
     notifyListeners();
@@ -42,6 +45,10 @@ class ShopAllSeasonalController extends ChangeNotifier {
   AllSeasonalProductsRepo allSeasonalProductsRepo = AllSeasonalProductsRepo();
 
   Future<void> getAllSeasonalProducts(context, id) async {
+    if(offset==0){
+      isLoading = true;
+    }
+    showPaginationLoader = true;
     showLoader(true);
     shopId = id;
 
@@ -55,8 +62,10 @@ class ShopAllSeasonalController extends ChangeNotifier {
           ViewAllSeasonalProducts.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         data = result.data;
-        seasonalProduct = data?.seasonalProducts;
+        // seasonalProduct = data?.seasonalProducts;
+        seasonalProduct.addAll(result.data?.seasonalProducts ?? []);
         showLoader(false);
+
         showPaginationLoader = false;
         notifyListeners();
       } else {
@@ -109,5 +118,14 @@ class ShopAllSeasonalController extends ChangeNotifier {
         return false;
       },
     );
+  }
+  Future<void> onScrollMaxExtent(context,id) async {
+
+    print("hello");
+    offset = offset + 1;
+    await getAllSeasonalProducts(context,id);
+    isLoading = false;
+
+    notifyListeners();
   }
 }

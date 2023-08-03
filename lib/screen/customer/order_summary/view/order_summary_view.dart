@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/customer/order_summary/controller/ord
 import 'package:local_supper_market/screen/customer/order_summary/view/address_list_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/coupons_list_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/expected_delivery_date_sheet_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -86,6 +87,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
     final watch = context.watch<OrderSummaryController>();
     final read = context.read<OrderSummaryController>();
     final readMain = context.read<MainScreenController>();
+    final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -95,7 +97,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => CartDetailView(isRefresh: false)));
+                    builder: (context) => CartDetailView(isRefresh: true,shopId: widget.shopId,cartId: widget.cartId,)));
           },
         ),
       ),
@@ -477,24 +479,24 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       child: Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                  child: Container(
+                              Container(
                                 child: Text(
-                                  "Date:",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        // height: 1.5,
-                                        color: black,
-                                        letterSpacing: .05,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
+                              "Date:",
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    // height: 1.5,
+                                    color: black,
+                                    letterSpacing: .05,
+                                    // overflow: TextOverflow.ellipsis,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500),
+                              ),
                                 ),
-                              )),
+                                width: ScreenUtil().screenWidth/2.5.w,
+                              ),
                               Expanded(
                                   child: Container(
                                 padding: EdgeInsets.only(left: 12.w),
@@ -525,7 +527,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Expanded(
+                                    Container(
+                                      width: ScreenUtil().screenWidth/2.5.w,
                                       child: Row(
                                         // mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
@@ -866,6 +869,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
+                                                      readProductViewController.updateProductId(element
+                                                          ?.id
+                                                          .toString(),);
                                                       Navigator
                                                           .pushAndRemoveUntil(
                                                         context,
@@ -1079,8 +1085,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                     ],
                                                                   ),
                                                                   GestureDetector(
-                                                                    onTap: () {
-                                                                      read.addToCart(
+                                                                    onTap: ()async {
+
+                                                                      await read.addToCart(
                                                                           element
                                                                               ?.productType,
                                                                           element
@@ -1088,6 +1095,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                           element
                                                                               ?.shopId,
                                                                           context);
+                                                                      await  read.initState(context,element?.shopId,watch.cartId,true,"cartDetail",
+                                                                      );
                                                                     },
                                                                     child: SvgPicture
                                                                         .asset(

@@ -86,7 +86,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HeaderView(cityName:mainScreenWatch.cityName,areaName: mainScreenWatch.areaName,),
+                      HeaderView(
+                        cityName: mainScreenWatch.cityName,
+                        areaName: mainScreenWatch.areaName,
+                      ),
                       SizedBox(
                         height: 13.h,
                       ),
@@ -99,10 +102,23 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           width: 351.w,
                           height: 36.h,
                           child: TextField(
+                            onTap: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainScreenView(
+                                        index: 1,
+                                        screenName: AllNearShopsView(
+                                          refreshPage: true,
+                                        ))),
+                                (Route<dynamic> route) => false,
+                              );
+                            },
+                            readOnly: true,
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide:
-                                      BorderSide(width: 1, color: splashnone),
+                                      BorderSide(width: 1, color: SplashText),
                                   borderRadius: BorderRadius.circular(8.w)),
                               hintText: 'Search your shops...',
                               hintStyle: GoogleFonts.dmSans(
@@ -133,52 +149,56 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 15.h,
                       ),
                       ////image
-                      watch.bannerData!.isNotEmpty?Container(
-                        height: 160.h,
-                        padding: EdgeInsets.only(left: 19.w),
-                        child: PageView.builder(
-                            itemCount: watch.bannerData?.length ?? 0,
-                            physics: BouncingScrollPhysics(),
-                            padEnds: false,
-                            pageSnapping: true,
-                            scrollDirection: Axis.horizontal,
-                            allowImplicitScrolling: true,
-                            controller: watch.pageController,
-                            onPageChanged: (page) {
-                              setState(() {
-                                activePage = page;
-                              });
-                            },
-                            itemBuilder: (context, pagePosition) {
-                              final element = watch.bannerData?[pagePosition];
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin: EdgeInsets.only(right: 14.w),
-                                child: element?.bannerImagePath == ""
-                                    ? Image.asset(
-                                        "assets/images/caurosal.png",
-                                        height: 170.w,
-                                        // width: 340.w,
-                                        // scale: 0.5,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : AppNetworkImages(
-                                        imageUrl:
-                                            element?.bannerImagePath ?? "",
-                                        height: 170.w,
-                                        // width: 340.w,
-                                        // scale: 0.5,
-                                        fit: BoxFit.cover,
-                                      ),
-                                // margin: EdgeInsets.only(
-                                //     left: pagePosition == 0 ? 19.w : 0,
-                                //     // top: 15.w,
-                                //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
-                                //         ? 19.w
-                                //         : 10.w),
-                              );
-                            }),
-                      ):Container(),
+                      watch.bannerData?.isNotEmpty == true
+                          ? Container(
+                              height: 160.h,
+                              padding: EdgeInsets.only(left: 19.w),
+                              child: PageView.builder(
+                                  itemCount: watch.bannerData?.length ?? 0,
+                                  physics: BouncingScrollPhysics(),
+                                  padEnds: false,
+                                  pageSnapping: true,
+                                  scrollDirection: Axis.horizontal,
+                                  allowImplicitScrolling: true,
+                                  controller: watch.pageController,
+                                  onPageChanged: (page) {
+                                    setState(() {
+                                      activePage = page;
+                                    });
+                                  },
+                                  itemBuilder: (context, pagePosition) {
+                                    final element =
+                                        watch.bannerData?[pagePosition];
+                                    return Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      margin: EdgeInsets.only(right: 14.w),
+                                      child: element?.bannerImagePath == ""
+                                          ? Image.asset(
+                                              "assets/images/caurosal.png",
+                                              height: 170.w,
+                                              // width: 340.w,
+                                              // scale: 0.5,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : AppNetworkImages(
+                                              imageUrl:
+                                                  element?.bannerImagePath ??
+                                                      "",
+                                              height: 170.w,
+                                              // width: 340.w,
+                                              // scale: 0.5,
+                                              fit: BoxFit.cover,
+                                            ),
+                                      // margin: EdgeInsets.only(
+                                      //     left: pagePosition == 0 ? 19.w : 0,
+                                      //     // top: 15.w,
+                                      //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
+                                      //         ? 19.w
+                                      //         : 10.w),
+                                    );
+                                  }),
+                            )
+                          : Container(),
                       SizedBox(
                         height: 5.h,
                       ),
@@ -189,7 +209,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      watch.nearByShopList?.isNotEmpty??false
+                      watch.nearByShopList?.isNotEmpty ?? false
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -248,7 +268,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 ),
                               ],
                             )
-                          :Container(),
+                          : Container(),
                       watch.categoryFirstList.isNotEmpty
                           ? Container(
                               padding: EdgeInsets.only(
@@ -273,7 +293,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                             )
                           : Container(),
                       watch.categoryFirstList.isNotEmpty
-                          ? ShopCategory() : Container(),
+                          ? ShopCategory()
+                          : Container(),
                       // SizedBox(
                       //   height: 20.h,
                       // ),
@@ -285,23 +306,23 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 20.h,
                       ),
 
-
-                            Container(
-                              padding: EdgeInsets.only(
-                                right: 19.0.w,
-                                left: 19.0.w,
-                              ),
-                              width: ScreenUtil().screenWidth,
-                              // height: 100.h,
-                              child:
-                              AppNetworkImages(
+                      Container(
+                        padding: EdgeInsets.only(
+                          right: 19.0.w,
+                          left: 19.0.w,
+                        ),
+                        width: ScreenUtil().screenWidth,
+                        // height: 100.h,
+                        child: watch.placeAd.isNotEmpty
+                            ? AppNetworkImages(
                                 imageUrl:
-                                  (watch.placeAd.toList()..shuffle()).first,
+                                    (watch.placeAd.toList()..shuffle()).first,
                                 height: 163.h,
                                 width: 352.w,
                                 fit: BoxFit.cover,
-                              ),
-                            ),
+                              )
+                            : Container(),
+                      ),
 
                       SizedBox(
                         height: 20.h,
@@ -315,14 +336,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        MainScreenView(
-                                            index: 0,
-                                            screenName:
-                                            CustomerAdsView(
-
-                                            ))),
-                                    (Route<dynamic> route) => false,
+                                    builder: (context) => MainScreenView(
+                                        index: 0,
+                                        screenName: CustomerAdsView())),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
