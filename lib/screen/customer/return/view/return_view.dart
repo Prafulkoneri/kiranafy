@@ -46,7 +46,10 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
           title: "Product Return Request",
         ),
       ),
-      body: SingleChildScrollView(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
           padding:
@@ -311,7 +314,8 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                   SizedBox(
                     height: 10.w,
                   ),
-                  PrimaryCTextFormField(
+                  PrimarySTextFormField(
+
                     controller: watch.descriptionController,
                     height: 150.w,
                     maxLines: 10,

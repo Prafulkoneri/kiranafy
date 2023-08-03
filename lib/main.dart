@@ -273,14 +273,7 @@ class _MyAppState extends State<MyApp> {
                         primarySwatch: Colors.blue,
                         fontFamily: 'dm_sans_regular',
                       ),
-                      // theme: ThemeData(
-                      //   brightness: Brightness.light,
-                      //   /* light theme settings */
-                      // ),
-                      // darkTheme: ThemeData(
-                      //   brightness: Brightness.dark,
-                      //   /* dark theme settings */
-                      // ),
+
                       debugShowCheckedModeBanner: false,
                       home: SplashScreen()),
                 ),

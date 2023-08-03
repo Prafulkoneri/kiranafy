@@ -5,7 +5,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/view/delivery_view_second.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/return/model/check_product_model.dart';
 import 'package:local_supper_market/screen/customer/return/model/return_model.dart';
@@ -43,6 +43,7 @@ class ReturnOrderController extends ChangeNotifier {
   String productCount="";
   int refundTotal=0;
   String productId="";
+  bool isLoading=true;
   SubmitReturnRepo submitReturnRepo=SubmitReturnRepo();
 
 
@@ -53,12 +54,19 @@ class ReturnOrderController extends ChangeNotifier {
   await  returnOrder(context,oId);
     notifyListeners();
   }
+
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
+
   OrderReturnRepo orderreturnrepo = OrderReturnRepo();
 
   COrderReturnListRequestModel get corderReturnListRequestModel =>
       COrderReturnListRequestModel(
           orderId: orderId,);
   Future<void> returnOrder(context,oId) async {
+    showLoader(true);
     orderId = oId.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -82,6 +90,7 @@ class ReturnOrderController extends ChangeNotifier {
         shopDetails=returnproductlistdata?.shopDetails;
         int cancelOrderLength = refundReasonDetails?.length ?? 0;
         isSelectedReason = List<bool>.filled(cancelOrderLength, false);
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -163,7 +172,7 @@ class ReturnOrderController extends ChangeNotifier {
   }
 
   SubmitReturnOrderReqModel get submitReturnOrderReqModel =>SubmitReturnOrderReqModel(
-  productId: productId,customRefundReason:descriptionController.text,orderId: orderId,reasonId: cancellationId
+  productId: productId,customRefundReason:descriptionController.text,orderId: orderId,reasonId: cancellationId,customerRefundAmount: refundTotal.toString(),totalProducts: selectedProductIdList.length.toString()
 );
 
   Future<void> submitRefundProduct(context)async{
@@ -196,7 +205,7 @@ class ReturnOrderController extends ChangeNotifier {
       final result =
       SubmitReturnOrderResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderDeliveryView()));
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderDeliveryView(orderId: orderId,)));
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         LoadingOverlay.of(context).hide();

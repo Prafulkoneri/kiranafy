@@ -10,12 +10,14 @@ import 'package:local_supper_market/screen/customer/delivery_view/model/order_vi
 import 'package:local_supper_market/screen/customer/delivery_view/model/reorder_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/review_list_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/submit_review_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/update_refund_status_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_cancel_order_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/reorder_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/review_list_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/submit_review_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/update_refund_status_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
@@ -60,6 +62,8 @@ class CustomerOrderViewController extends ChangeNotifier {
   TextEditingController reasonController = TextEditingController();
   List<ReviewList>? reviewList;
   OReviewlistData? oreviewlistdata;
+  String ? selectedRefundStatus;
+  UpdateRefundStatusRepo updateRefundStatusRepo=UpdateRefundStatusRepo();
 
   CustomerOrderViewRequestModel get customerOrderViewRequestModel =>
       CustomerOrderViewRequestModel(orderId: orderId.toString());
@@ -81,7 +85,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     reasonController.clear();
     print("rvmjioureicvnwcy");
     print(orId);
-    await shopOwnerOrderView(context, orId);
+    await customerOrderView(context, orId);
     getCancelOrderList(context);
     OReviewList(context);
     notifyListeners();
@@ -92,7 +96,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> shopOwnerOrderView(context, orId) async {
+  Future<void> customerOrderView(context, orId) async {
     orderId = orId.toString();
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -111,7 +115,6 @@ class CustomerOrderViewController extends ChangeNotifier {
         shopDetails = orderData?.shopDetails;
         deliveryAddressDetails = orderData?.deliveryAddressDetails;
         orderProductDetails = orderData?.orderProductDetails;
-        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -121,6 +124,40 @@ class CustomerOrderViewController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  UpdateRefundStatusReqModel get updateRefundStatusReqModel=>UpdateRefundStatusReqModel(
+      orderId: orderId,
+  paymentStatus:selectedRefundStatus,
+      );
+
+  Future<void> updateRefundStatus(value,context)async{
+    selectedRefundStatus=value;
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    updateRefundStatusRepo
+        .updateRefundStatus(
+        updateRefundStatusReqModel, pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = UpdateRefundStatusResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        customerOrderView(context,orderId);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
