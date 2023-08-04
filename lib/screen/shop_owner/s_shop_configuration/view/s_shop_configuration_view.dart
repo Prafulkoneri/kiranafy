@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
@@ -622,7 +623,33 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 fontSize: 15.sp,
                                 color: Color(0xff3A3A3A)),
                           ),
-                          SvgPicture.asset("assets/icons/add_area.svg"),
+                          GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor: Color(0xffFFFFFF),
+                                        // shape: ,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+
+                                        // scrollable: true,
+                                        child: Container(
+                                          height: 205.h,
+                                          // width: 400.w,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[],
+                                          ),
+                                        ),
+                                      );
+                                    });
+                              },
+                              child: SvgPicture.asset(
+                                  "assets/icons/add_area.svg")),
                         ],
                       ),
                       SizedBox(height: 10.h),
