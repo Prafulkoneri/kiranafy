@@ -20,8 +20,10 @@ import 'package:provider/provider.dart';
 
 class CustomerDetailView extends StatefulWidget {
   final String? customerId;
+  final String? screenName;
 
-  const CustomerDetailView({super.key, required this.customerId});
+  const CustomerDetailView(
+      {super.key, required this.customerId, required this.screenName});
 
   @override
   State<CustomerDetailView> createState() => _CustomerDetailViewState();
@@ -53,7 +55,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                   builder: (context) => SMainScreenView(
                         index: 4,
                         screenName: CustomerListView(
-                            isRefresh: false, fromPage: "account"),
+                            isRefresh: false, fromPage: widget.screenName),
                       )),
               (Route<dynamic> route) => false,
             );
