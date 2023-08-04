@@ -7,9 +7,9 @@ class Endpoint {
   // Base Url
   static const String baseUrl =
       // 'https://projects.m-staging.in/local-super-mart/api/';
-      'https://localsupermart.com/testing/api/';
       // 'https://localsupermart.com/testing/api/';
-      // 'http://lsm.mplussoft.org/api/';
+      // 'https://localsupermart.com/testing/api/';
+      'http://lsm.mplussoft.org/api/';
   // 'https://localsupermart.com/live/api/';
   // Check Mobile Number Exist
   static const String checkMobNoExist =
@@ -416,7 +416,7 @@ class Endpoint {
   static const String submitRevieqw =
       "${baseUrl}lsm-customer-submit-review-for-shop";
   static const String updateRefundStatus =
-      "${baseUrl}lsm-shop-owner-update-refund-status";
+      "${baseUrl}customer-update-refund-payment-status";
 
   static const String customerTicketList = "${baseUrl}lsm-customer-get-tickets";
 

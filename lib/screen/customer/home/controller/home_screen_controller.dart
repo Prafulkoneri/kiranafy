@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/home/model/banner_model.dart';
 import 'package:local_supper_market/screen/customer/home/model/category_model.dart';
@@ -26,6 +26,7 @@ class HomeScreenController extends ChangeNotifier {
   int _currentPage = 0;
   AllNearShopRepo allNearShopRepo = AllNearShopRepo();
   List<AllNearShops>? nearByShopList;
+  List <HomeScreenCouponData> ? couponData;
   CPlaceAd? cplacead;
   List<CustomerPlaceAd>? customerplacead;
   List placeAd=[];
@@ -153,11 +154,12 @@ class HomeScreenController extends ChangeNotifier {
         .getAllNearShop(pref.getString("successToken"))
         .then((response) {
       print("Shop List");
-      print(response.body);
+      log("Shop_list${response.body}");
       final result = AllNearShopsResModel.fromJson(jsonDecode(response.body));
-      print(response.body);
+      log(response.body);
       if (response.statusCode == 200) {
         nearByShopList = result.data;
+        couponData=result.couponData;
         showLoader(false);
         notifyListeners();
       } else {

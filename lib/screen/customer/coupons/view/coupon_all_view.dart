@@ -114,7 +114,7 @@ class _CCouponsDetailViewState extends State<CCouponsDetailView> {
                   children: [
                     Row(
                       children: [
-                        Text("${widget.disscountPerscentage}"
+                        Text("${widget.disscountPerscentage}%"
                             // "${watch.couponViewData?.couponDiscountPercentage} "
                                 " OFF",
                             style: GoogleFonts.dmSans(

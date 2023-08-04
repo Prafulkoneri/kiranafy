@@ -51,6 +51,12 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
+  onNavigation(index,screen,context){
+    currentIndex=index;
+    currentScreen=screen;
+    notifyListeners();
+  }
+
   void onBottomNavChanged(index) {
     currentIndex = index;
     notifyListeners();
