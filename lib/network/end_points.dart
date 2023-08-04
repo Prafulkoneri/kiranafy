@@ -436,4 +436,9 @@ class Endpoint {
   static const String customerPlaceAd = "${baseUrl}lsm-shop-owner-banner";
   static const String submitReturn = "${baseUrl}customer_order_refund_submit";
   static const String searchShop = "${baseUrl}lsm-shop-owner-filter-list";
+  static const String shopNotificationDelete =
+      "${baseUrl}lsm-shop-owner-notifications-delete";
+  static const String customerNotificationDelete =
+      "${baseUrl}lsm-customer-notifications-delete";
+  static const String sProfileCoupons = "${baseUrl}lsm-shop-owner-coupons";
 }

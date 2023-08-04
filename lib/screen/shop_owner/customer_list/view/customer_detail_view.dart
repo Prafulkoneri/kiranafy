@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/customerList.dart';
+
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_detail_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
