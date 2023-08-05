@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/cms_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_cms_view.dart';
@@ -39,8 +41,8 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 4, screenName: SAccountCmsPagesView())),
+                  builder: (context) => MainScreenView(
+                      index: 4, screenName: ProfileScreenView())),
               (Route<dynamic> route) => false,
             );
           },

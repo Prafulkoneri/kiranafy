@@ -9,6 +9,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/about_us/view/c_about_us_view.dart';
 import 'package:local_supper_market/screen/customer/about_us/view/c_privacy_policy.dart';
 import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
+import 'package:local_supper_market/screen/customer/account/view/c_faq_view.dart';
 import 'package:local_supper_market/screen/customer/c_setting/view/c_setting_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
@@ -283,7 +284,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               /////////////
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4,MyOrderView(), context);
+                  readMain.onNavigation(4, MyOrderView(), context);
 
                   // Navigator.pushAndRemoveUntil(
                   //   context,
@@ -563,7 +564,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => MainScreenView(
-                            index: 4, screenName: CAboutUsView())),
+                            index: 4, screenName: CustomerFAQView())),
                     (Route<dynamic> route) => false,
                   );
                 },
@@ -763,11 +764,13 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  SharedPreferences pref=await SharedPreferences.getInstance();
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
                   pref.clear();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const OnBoardingScreenView()),
+                    MaterialPageRoute(
+                        builder: (context) => const OnBoardingScreenView()),
                   );
                   // read.customerSignOut(context);
                 },

@@ -85,6 +85,7 @@ import 'screen/shop_owner/bank_account_details/controller/get_bank_account_contr
 import 'screen/shop_owner/help_center/controller/ticket_list_controller.dart';
 import 'screen/shop_owner/help_center/controller/view_ticket_controller.dart';
 import 'screen/shop_owner/notification/controller/notification_controller.dart';
+import 'screen/shop_owner/payment_refund/controller/payment_refund_controller.dart';
 import 'screen/shop_owner/promotion_request/controller/promotion_controller.dart';
 import 'screen/shop_owner/s_coupons/controller/shop_coupons_list_controller.dart';
 import 'screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
@@ -194,6 +195,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => BottomNavigationController()),
         ChangeNotifierProvider(create: (_) => CAllCouponController()),
         ChangeNotifierProvider(create: (_) => ReturnOrderController()),
+        ChangeNotifierProvider(create: (_) => PaymentRefundListController()),
       ],
       child: MyApp(),
     ),
@@ -273,7 +275,6 @@ class _MyAppState extends State<MyApp> {
                         primarySwatch: Colors.blue,
                         fontFamily: 'dm_sans_regular',
                       ),
-
                       debugShowCheckedModeBanner: false,
                       home: SplashScreen()),
                 ),

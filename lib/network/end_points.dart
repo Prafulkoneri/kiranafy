@@ -441,4 +441,7 @@ class Endpoint {
   static const String customerNotificationDelete =
       "${baseUrl}lsm-customer-notifications-delete";
   static const String sProfileCoupons = "${baseUrl}lsm-shop-owner-coupons";
+  static const String customerFaqData = "${baseUrl}lsm-customer-feq-get";
+  static const String paymentRefundList =
+      "${baseUrl}lsm-shop-owner-refund-list";
 }
