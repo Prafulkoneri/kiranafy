@@ -184,4 +184,12 @@ class ProfileController extends ChangeNotifier {
       },
     );
   }
+
+  void onChangeExpansion(value, index) {
+    isFaqExpanded =
+        List.filled(customerfaqdataList?.length ?? 0, false, growable: true);
+    isFaqExpanded[index] = value;
+
+    notifyListeners();
+  }
 }

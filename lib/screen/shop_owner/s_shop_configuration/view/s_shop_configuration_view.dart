@@ -665,6 +665,28 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                       SizedBox(
                         height: 30.w,
                       ),
+                      // Text(
+                      //   "Minimum Order Value for Delivery to Customer",
+                      //   style: TextStyle(
+                      //       fontWeight: FontWeight.w400,
+                      //       fontSize: 15.sp,
+                      //       color: Color(0xff3A3A3A)),
+                      // ),
+                      // PrimarySTextFormField(
+                      //   // readOnly: true,
+                      //   hintText: "Rs. 200",
+                      //   hintFontSize: 15.sp,
+                      // ),
+                      PrimarySTextFormField(
+                        // controller: watch.upiIdController,
+                        hintText: "Rs. 200",
+                        titleHeader:
+                            "Minimum Order Value for Delivery to Customer",
+                        hintFontSize: 15.sp,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

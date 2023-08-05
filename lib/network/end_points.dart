@@ -8,8 +8,8 @@ class Endpoint {
   static const String baseUrl =
       // 'https://projects.m-staging.in/local-super-mart/api/';
       // 'https://localsupermart.com/testing/api/';
-      // 'https://localsupermart.com/testing/api/';
-      'http://lsm.mplussoft.org/api/';
+      'https://localsupermart.com/testing/api/';
+  // 'http://lsm.mplussoft.org/api/';
   // 'https://localsupermart.com/live/api/';
   // Check Mobile Number Exist
   static const String checkMobNoExist =
@@ -250,56 +250,49 @@ class Endpoint {
   ////////Shop Owner Coupons for product and category////
   static const String allCouponsList = "${baseUrl}lsm-shop-owner-coupon-list";
 
-////////Coupon Code Exists////
   static const String couponCodeExists =
       "${baseUrl}lsm-shop-owner-check-if-coupon-code-exists";
-  ///////ADD NEW COUPONS////
+
   static const String addNewCoupons = "${baseUrl}lsm-shop-owner-add-coupon";
-  ///////Coupon Detail View////
+
   static const String couponViewDetail =
       "${baseUrl}lsm-shop-owner-coupon-details-view";
-  ///////ADD NEW COUPONS////
+
   static const String productListAsCategory =
       "${baseUrl}sm-shop-owner-products-list-for-coupon";
-  ///////ADD NEW COUPONS////
+
   static const String couponsDelete = "${baseUrl}lsm-shop-owner-delete-coupon";
-  //////ADD NEW COUPONS////
+
   static const String CouponsUpdate = "${baseUrl}lsm-shop-owner-update-coupon";
-/////Edit Coupons////
+
   static const String editCoupon = "${baseUrl}lsm-shop-owner-edit-coupon";
-  /////Cart List////
+
   static const String cartList = "${baseUrl}lsm-customer-get-cart-list";
-  ////Cart Details////
+
   static const String cartDetailView =
       "${baseUrl}lsm-customer-view-cart-details";
-  ////Add Product To Cart////
+
   static const String addProductToCart =
       "${baseUrl}lsm-customer-add-product-to-cart";
 
-  ///Cart List Detail Delete////
   static const String cartDetailDelete = "${baseUrl}lsm-customer-delete-cart";
 
-  ///Cart Item Quantity////
   static const String cartItemQuantity =
       "${baseUrl}lsm-customer-update-cart-item-quantity";
 
-  ///Shop Cart Delete ////
   static const String shopCartDelete =
       "${baseUrl}lsm-customer-delete-all-carts";
 
-  ///Customer Order Summery////
   static const String customerOrderSummery =
       "${baseUrl}lsm-customer-order-summary-screen";
 
-  ///Customer aplly coupons////
   static const String applyCoupons = "${baseUrl}lsm-customer-apply-coupon";
 
-  ///Customer remove coupons////
   static const String removeCoupons = "${baseUrl}lsm-customer-remove-coupon";
-  //Order PAyment////
+
   static const String orderPayment =
       "${baseUrl}lsm-customer-order-payment-screen";
-  //Order Place////
+
   static const String placeOrder = "${baseUrl}lsm-customer-place-order";
 
   static const String myOrders =
