@@ -10,21 +10,22 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/customer/coupons/view/coupon_all_view.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/utils/coupans_info.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:provider/provider.dart';
 
-class CouponsScreen extends StatefulWidget {
-  const CouponsScreen({super.key});
+class CShopCouponsView extends StatefulWidget {
+  const CShopCouponsView({super.key});
 
   @override
-  State<CouponsScreen> createState() => _CouponsScreenState();
+  State<CShopCouponsView> createState() => _CShopCouponsViewState();
 }
 
-class _CouponsScreenState extends State<CouponsScreen> {
+class _CShopCouponsViewState extends State<CShopCouponsView> {
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<HomeScreenController>();
+    final watch = context.watch<ShopProfileViewController>();
     return Container(
       decoration: BoxDecoration(color: Coupons),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -48,10 +49,10 @@ class _CouponsScreenState extends State<CouponsScreen> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AllCoupons()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => AllCoupons()),
+                  // );
                 },
                 child: Text(
                   "See all",
@@ -93,8 +94,9 @@ class _CouponsScreenState extends State<CouponsScreen> {
           physics: BouncingScrollPhysics(),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            children: List.generate(watch.couponData?.length ?? 0, (index) {
-              final element = watch.couponData?[index];
+            children:
+                List.generate(watch.shopCouponsList?.length ?? 0, (index) {
+              final element = watch.shopCouponsList?[index];
               return Container(
                 margin: EdgeInsets.only(left: index == 0 ? 19.w : 5.w),
                 width: 326.w,
@@ -183,11 +185,13 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                                 discountmaxAmount: element
                                                     ?.couponDiscountMaxAmount,
                                                 disscountPerscentage: element
-                                                    ?.couponDiscountPercentage,
+                                                    ?.couponDiscountPercentage
+                                                    .toString(),
                                                 startDate:
                                                     element?.couponToDate,
                                                 termCondition: element
-                                                    ?.couponTermsAndCondition);
+                                                    ?.couponTermsAndConditions
+                                                    .toString());
                                           },
                                         );
                                       },

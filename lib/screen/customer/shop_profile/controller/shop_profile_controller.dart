@@ -15,10 +15,12 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/remove
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/shop_coupons_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products_model.dart';
 
 import 'package:local_supper_market/screen/customer/shop_profile/repository/all_products_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/customer_view_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/repository/shop_profile_coupons_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,16 +42,19 @@ class ShopProfileViewController extends ChangeNotifier {
   List<CustomerProductData>? seasonalProduct;
   List<CustomerProductData>? recommandedProduct;
   List<BannerImageData>? bannerImageData;
+  List<ShopCouponsList>? shopCouponsList;
+  SProfileCouponData? sprofilecoupondata;
   int _currentPage = 0;
 
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
+  ShopProfileCouponRepo sProfileCouponRepo = ShopProfileCouponRepo();
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
 
   Future<void> initState(context, id, refresh) async {
     if (refresh) {
       await getShopDetails(context, id);
-      // await getAllOfferes(context, id);
+      await sProfileCouponList(context);
     } else {
       showLoader(false);
     }
@@ -276,6 +281,48 @@ class ShopProfileViewController extends ChangeNotifier {
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  ShopPCouponsReqModel get shopPCouponReqModel => ShopPCouponsReqModel(
+        shopId: shopId.toString(),
+      );
+  Future<void> sProfileCouponList(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    print(pref.getString("pincode"));
+    // if(pref.getString("pincode")==null){
+    //   pincode="111111";
+    // }
+    // else{
+    //   pincode=pref.getString("pincode").toString();
+    // }
+    sProfileCouponRepo
+        .sProfileCouponRepo(shopPCouponReqModel, pref.getString("successToken"))
+        .then((response) {
+      print("Shop List");
+      log("Shop_list${response.body}");
+      final result = ShopPCouponsResModel.fromJson(jsonDecode(response.body));
+      log(response.body);
+      if (response.statusCode == 200) {
+        sprofilecoupondata = result.sprofilecoupondata;
+        shopCouponsList = sprofilecoupondata?.shopCouponsList;
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

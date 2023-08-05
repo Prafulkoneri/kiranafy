@@ -28,7 +28,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/view/offer_products.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/s_profile_coupons_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/recommendation_products.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_offer_products.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_seasonal_products.dart';
@@ -514,9 +514,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                         ),
                                         GestureDetector(
                                           onTap: () {
-                                            readProductViewController.updateProductId(element
-                                                ?.id
-                                                .toString(),);
+                                            readProductViewController
+                                                .updateProductId(
+                                              element?.id.toString(),
+                                            );
                                             Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
@@ -840,9 +841,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                           watch.seasonalProduct?[index];
                                       return GestureDetector(
                                         onTap: () {
-                                          readProductViewController.updateProductId(element
-                                              ?.id
-                                              .toString(),);
+                                          readProductViewController
+                                              .updateProductId(
+                                            element?.id.toString(),
+                                          );
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
@@ -1397,10 +1399,16 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 17.w),
-                        child: const CouponsScreen(),
-                      ),
+                      watch.shopCouponsList?.isNotEmpty == true
+                          ? Padding(
+                              padding: EdgeInsets.only(top: 17.w),
+                              child: const CShopCouponsView(),
+                            )
+                          : Container(
+                              // color: Colors.red,
+                              // height: 100,
+                              // width: 100,
+                              ),
                       watch.recommandedProduct?.isNotEmpty ?? false
                           ? Container(
                               width: 352.w,
@@ -1572,9 +1580,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             );
                                             return GestureDetector(
                                               onTap: () {
-                                                readProductViewController.updateProductId(element
-                                                    ?.id
-                                                    .toString(),);
+                                                readProductViewController
+                                                    .updateProductId(
+                                                  element?.id.toString(),
+                                                );
                                                 Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
@@ -1769,14 +1778,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        MainScreenView(
-                                            index: 0,
-                                            screenName:
-                                            CustomerAdsView(
-
-                                            ))),
-                                    (Route<dynamic> route) => false,
+                                    builder: (context) => MainScreenView(
+                                        index: 0,
+                                        screenName: CustomerAdsView())),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(

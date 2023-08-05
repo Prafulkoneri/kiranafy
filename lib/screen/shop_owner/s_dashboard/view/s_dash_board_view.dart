@@ -1,4 +1,3 @@
-
 import 'package:carousel_nullsafety/carousel_nullsafety.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
@@ -64,9 +63,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                           onTap: (){
-
-                           },
+                            onTap: () {},
                             child: Image(
                               image: const AssetImage(
                                 "assets/images/logo.png",
@@ -76,9 +73,16 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               height: 50.w,
                             ),
                           ),
-                          GestureDetector(onTap: (){
-                            Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationsScreenView()));
-                          },child: SvgPicture.asset("assets/icons/notification_shop.svg"))
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            NotificationsScreenView()));
+                              },
+                              child: SvgPicture.asset(
+                                  "assets/icons/notification_shop.svg"))
                         ],
                       ),
                     ),
@@ -89,75 +93,55 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                       // padding: EdgeInsets.only(top: 20.w),
                       child: Stack(
                         children: [
-                          SizedBox(
-                            height: 190.0.h,
+                          Align(
                             child: watch.dashBoardData?.bannerImages!.isEmpty ??
                                     true
                                 ? Container(
                                     height: 190.w,
                                     child: Image.asset(
-
                                       "assets/images/shop_image.png",
                                       height: 190.w,
                                       fit: BoxFit.fill,
                                     ))
-                                : PageView.builder(
-                                    controller: watch.pageController,
-                                    allowImplicitScrolling: true,
-                                    scrollDirection: Axis.horizontal,
-                                    onPageChanged: (index) {},
-                                    itemCount: watch.dashBoardData?.bannerImages
-                                            ?.length ??
-                                        1,
-                                    itemBuilder: (context, index) {
-                                      final element = watch
-                                          .dashBoardData?.bannerImages?[index];
-                                      // final element = watch.onBoardingData?[index];
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          element?.imagesPath == ""
-                                              ? Container(
-                                                  height: 180.w,
-                                                  child: Image.asset(
-                                                    "assets/images/shop_image.png",
-                                                    height: 190.w,
-                                                    fit: BoxFit.fill,
-                                                  ))
-                                              : Container(
-                                                  height: 180.w,
-                                                  child: AppNetworkImages(
-                                                      imageUrl:
-                                                          element?.imagesPath ??
+                                : SizedBox(
+                                    height: 188.0.h,
+                                    child: PageView.builder(
+                                        controller: watch.pageController,
+                                        allowImplicitScrolling: true,
+                                        scrollDirection: Axis.horizontal,
+                                        onPageChanged: (index) {},
+                                        itemCount: watch.dashBoardData
+                                                ?.bannerImages?.length ??
+                                            1,
+                                        itemBuilder: (context, index) {
+                                          final element = watch.dashBoardData
+                                              ?.bannerImages?[index];
+
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              element?.imagesPath == ""
+                                                  ? Container(
+                                                      height: 190.w,
+                                                      child: Image.asset(
+                                                        "assets/images/shop_image.png",
+                                                        height: 191.w,
+                                                        fit: BoxFit.fill,
+                                                      ))
+                                                  : Container(
+                                                      height: 190.w,
+                                                      child: AppNetworkImages(
+                                                          imageUrl: element
+                                                                  ?.imagesPath ??
                                                               "",
-                                                      height: 191.w,
-                                                      fit: BoxFit.fill),
-                                                  width:
-                                                      ScreenUtil().screenWidth,
-                                                ),
-                                        ],
-                                      );
-                                    }),
-                            // Carousel(
-                            //   images: [
-                            //     AssetImage(
-                            //       "assets/images/shop_image.png",
-                            //     ),
-                            //     // AssetImage(
-                            //     //   "assets/images/property2.png",
-                            //     // ),
-                            //
-                            //     // ExactAssetImage("images/image-carousel.jpeg"),
-                            //   ],
-                            //   autoplay: true,
-                            //   animationDuration: Duration(milliseconds: 1000),
-                            //   dotBgColor: Colors.red,
-                            //   showIndicator: false,
-                            //   // dotSize: 6.0,
-                            //   // dotSpacing: 15.0,
-                            //   // dotColor: Colors.lightGreenAccent,
-                            //   // borderRadius: true,
-                            // ),
+                                                          fit: BoxFit.cover),
+                                                      width: ScreenUtil()
+                                                          .screenWidth,
+                                                    ),
+                                            ],
+                                          );
+                                        }),
+                                  ),
                           ),
                           Positioned(
                             //<-- SEE HERE
@@ -252,7 +236,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 ),
                                 Flexible(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "${watch.address} ",

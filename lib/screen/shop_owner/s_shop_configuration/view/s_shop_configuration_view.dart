@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
@@ -9,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -178,6 +180,57 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         hintText: "Type UPI ID",
                         titleHeader: "UPI ID",
                         hintFontSize: 15.sp,
+                      ),
+                      SizedBox(
+                        height: 20.w,
+                      ),
+                      Text(
+                        "Accepted Mode of Payments",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14.sp,
+                            color: Color(0xff3A3A3A)),
+                      ),
+                      SizedBox(
+                        height: 13.w,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          PrimaryCheckBox(
+                            onChanged: (value) {
+                              read.onOnlinePaymentSelected();
+                            },
+                            value: watch.isOnlinePaymentSelected,
+                          ),
+                          Text(
+                            'Online',
+                            style: TextStyle(
+                                color: Black1,
+                                // letterSpacing: .5,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(
+                            width: 30.w,
+                          ),
+                          PrimaryCheckBox(
+                            onChanged: (value) {
+                              read.onCODPaymentSelected();
+                            },
+                            value: watch.isCODPaymentSelected,
+                          ),
+                          Flexible(
+                            child: Text(
+                              'COD',
+                              style: TextStyle(
+                                  color: Black1,
+                                  // letterSpacing: .5,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 20.w,
@@ -423,7 +476,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     readOnly: true,
-                                    hintText: "1 to 500", hintFontSize: 15.sp,
+                                    hintText: "1 to 100", hintFontSize: 15.sp,
                                     // hint: "1 to 500",
                                     // hintSize: 15.sp,
                                   ),
@@ -479,7 +532,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     readOnly: true,
-                                    hintText: "501 to 1200",
+                                    hintText: "100 to 500",
                                     hintFontSize: 15.sp,
                                   ),
                                 ),
@@ -534,7 +587,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     readOnly: true,
-                                    hintText: "1201 to 2500",
+                                    hintText: "500 to 1200",
                                     hintFontSize: 15.sp,
                                   ),
                                 ),
@@ -589,7 +642,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     readOnly: true,
-                                    hintText: "2501 to 5000",
+                                    hintText: "1200 to 3000",
                                     hintFontSize: 15.sp,
                                   ),
                                 ),
@@ -622,7 +675,171 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 fontSize: 15.sp,
                                 color: Color(0xff3A3A3A)),
                           ),
-                          SvgPicture.asset("assets/icons/add_area.svg"),
+                          GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor: Color(0xffFFFFFF),
+                                        // shape: ,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+
+                                        // scrollable: true,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Container(
+                                              width: ScreenUtil().screenWidth,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                      right: 18.0.w,
+                                                      left: 18.0.w,
+                                                      top: 27.h,
+                                                    ),
+                                                    child: SizedBox(
+                                                      width: 351.w,
+                                                      height: 36.h,
+                                                      child: TextField(
+                                                        // autofocus: true,
+                                                        // controller:
+                                                        //     watch.searchController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                                enabledBorder: OutlineInputBorder(
+                                                                    borderSide: BorderSide(
+                                                                        width:
+                                                                            1,
+                                                                        color:
+                                                                            splashnone),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(8
+                                                                            .w)),
+                                                                hintText:
+                                                                    'Search ',
+                                                                hintStyle: GoogleFonts.dmSans(
+                                                                    textStyle: TextStyle(
+                                                                        color: Grey,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 11,
+                                                                        fontWeight: FontWeight.w400)),
+
+                                                                // Add a clear button to the search bar
+
+                                                                // Add a search icon or button to the search bar
+                                                                prefixIcon: IconButton(
+                                                                  icon:
+                                                                      SvgPicture
+                                                                          .asset(
+                                                                    'assets/images/search.svg',
+                                                                    width: 15.w,
+                                                                    height:
+                                                                        15.h,
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {
+                                                                    // Perform the search here
+                                                                  },
+                                                                ),
+                                                                suffixIcon: IconButton(
+                                                                  onPressed:
+                                                                      () {},
+                                                                  icon:
+                                                                      Container(
+                                                                    height:
+                                                                        20.w,
+                                                                    width: 20.w,
+                                                                    decoration: BoxDecoration(
+                                                                        shape: BoxShape
+                                                                            .circle,
+                                                                        color: Colors
+                                                                            .black
+                                                                            .withOpacity(0.5)),
+                                                                    child:
+                                                                        Center(
+                                                                      child: SvgPicture
+                                                                          .asset(
+                                                                        'assets/images/Cross.svg',
+                                                                        width:
+                                                                            3.w,
+                                                                        height:
+                                                                            6.h,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                )),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 15.h,
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                      left: 18,
+                                                    ),
+                                                    child: Row(
+                                                      children: [
+                                                        PrimaryCheckBox(
+                                                            // onChanged: (value) {
+                                                            //   read.onSixToNine();
+                                                            // },
+                                                            // value: watch.isSixToNine,
+                                                            ),
+                                                        Flexible(
+                                                          child: Text(
+                                                            'Vishrantwadi',
+                                                            style: TextStyle(
+                                                                color: Black1,
+                                                                // letterSpacing: .5,
+                                                                fontSize: 14.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 24.h,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 18.0,
+                                                        bottom: 20,
+                                                        right: 19.w),
+                                                    child: PrimaryButton(
+                                                        fontSize: 16.sp,
+                                                        height: 34.w,
+                                                        width: 274.w,
+                                                        text: "Submit",
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color:
+                                                            Color(0xff39C19D),
+                                                        onTap: () {
+                                                          // watch.customerAdsForm(context);
+                                                        }),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    });
+                              },
+                              child: SvgPicture.asset(
+                                  "assets/icons/add_area.svg")),
                         ],
                       ),
                       SizedBox(height: 10.h),

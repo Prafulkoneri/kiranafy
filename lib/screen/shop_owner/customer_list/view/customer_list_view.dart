@@ -275,6 +275,8 @@ class _CustomerListViewState extends State<CustomerListView> {
                                                         index: 4,
                                                         screenName:
                                                             CustomerDetailView(
+                                                          screenName:
+                                                              widget.fromPage,
                                                           customerId: element
                                                               ?.id
                                                               .toString(),

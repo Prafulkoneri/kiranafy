@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/notifications/model/delete_notification_model.dart';
+import 'package:local_supper_market/screen/customer/notifications/repository/c_delete_notification_repo.dart';
 import 'package:local_supper_market/screen/customer/notifications/repository/get_notification_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/model/get_notification_model.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/repository/get_notification_repo.dart';
@@ -13,7 +15,9 @@ class CustomerNoticationController extends ChangeNotifier {
   NotificationData? notificationdata;
   List<NotificationList>? notificationList;
 
-  CustomerNotificationRepo customerNotificationRepo = CustomerNotificationRepo();
+  CustomerNotificationRepo customerNotificationRepo =
+      CustomerNotificationRepo();
+  CDeleteNotificationRepo cDeleteNotificationRepo = CDeleteNotificationRepo();
   Future<void> initState(context) async {
     await getNotificationList(context);
   }
@@ -38,6 +42,35 @@ class CustomerNoticationController extends ChangeNotifier {
         notificationdata = result.notificationdata;
         notificationList = notificationdata?.notificationList;
         showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> cDeleteNotification(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    cDeleteNotificationRepo
+        .cdeleteNotification(pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result = CNotificationModel.fromJson(jsonDecode(response.body));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        notificationList?.clear();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

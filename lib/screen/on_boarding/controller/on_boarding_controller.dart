@@ -57,7 +57,7 @@ class OnBoardingController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print("${response.body}");
         onBoardingData = result.data;
-        Timer.periodic(Duration(seconds:3), (Timer timer) {
+        Timer.periodic(Duration(seconds: 3), (Timer timer) {
           int length = onBoardingData?.length ?? 0;
           if (currentIndex < length) {
             currentIndex++;
