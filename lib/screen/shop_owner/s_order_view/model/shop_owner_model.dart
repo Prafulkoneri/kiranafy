@@ -167,6 +167,12 @@ class OrderProductDetail {
   String? productMrpPrice;
   String? productOfferPrice;
   int? productTotalPrice;
+  String ? refundStatus;
+  String ? reason;
+  String ? customRefundReason;
+  String ? customRefundAmount;
+  String ? refundProductCount;
+
 
   OrderProductDetail({
     required this.id,
@@ -182,6 +188,8 @@ class OrderProductDetail {
     required this.productOfferPrice,
     required this.productTotalPrice,
     required this.status,
+   required this.refundStatus,
+    this.reason,this.refundProductCount,this.customRefundReason,this.customRefundAmount
   });
   OrderProductDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -197,5 +205,16 @@ class OrderProductDetail {
     productOfferPrice = json["product_offer_price"];
     productTotalPrice = json["product_total_price"];
     status = json["status"];
+    refundStatus=json["return_status"];
+    reason=json["reason"];
+    customRefundAmount=json["customer_refund_amount"];
+    // customerRefund=json["customer_refund_amount"];
+    reason=json["reason"];
+    // "reason": "Quality issue",
+    // "custom_refund_reason": "not good",
+    // "customer_refund_amount": "20",
+    // "refund_product_count": "1"
+
+
   }
 }

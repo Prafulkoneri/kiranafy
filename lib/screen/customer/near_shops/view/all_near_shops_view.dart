@@ -558,15 +558,16 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                       left: 19.0.w,
                                     ),
                                     width: ScreenUtil().screenWidth,
+
                                     // height: 100.h,
-                                    child: AppNetworkImages(
+                                    child:watchHome.placeAd.isNotEmpty? AppNetworkImages(
                                       imageUrl: (watchHome.placeAd.toList()
                                             ..shuffle())
                                           .first,
                                       height: 163.h,
                                       width: 352.w,
                                       fit: BoxFit.cover,
-                                    ),
+                                    ):Container(),
                                   ),
                                   SizedBox(
                                     height: 20.h,

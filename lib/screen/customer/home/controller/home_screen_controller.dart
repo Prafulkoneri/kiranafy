@@ -20,7 +20,7 @@ class HomeScreenController extends ChangeNotifier {
   AllCategoriesRepo allCategoriesRepo = AllCategoriesRepo();
   List<Data>? bannerData;
   PageController pageController =
-      PageController(viewportFraction: 0.9, initialPage: 0);
+  PageController(viewportFraction: 0.9, initialPage: 0);
   List<CategoriesList> categoryFirstList = [];
   List<CategoriesList> categorySecondList = [];
   int _currentPage = 0;
@@ -31,6 +31,8 @@ class HomeScreenController extends ChangeNotifier {
   List<CustomerPlaceAd>? customerplacead;
   List placeAd=[];
   // String pincode = "111111";
+
+
   Future<void> initState(context, refresh) async {
     if (refresh) {
       placeAd.clear();
@@ -51,7 +53,7 @@ class HomeScreenController extends ChangeNotifier {
   }
 
   Future<void> getBannerImage(context) async {
-  showLoader(true);
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("bnvuuiwveuciiutwmibijmiuey");
     print(pref.getString("successToken"));
@@ -86,7 +88,7 @@ class HomeScreenController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -129,7 +131,7 @@ class HomeScreenController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

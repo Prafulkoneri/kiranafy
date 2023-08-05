@@ -17,6 +17,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_view/view/cancel_r
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/delivery_code_bottom_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_products.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/stack_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -427,7 +428,50 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               //
                                                             ),
                                                           )
-                                                        : Container()
+                                                        :watch.orderDetails?.orderStatus ==
+                                "Order Refund" ?SizedBox(
+                              height: 22.h,
+                              // width: 85.w,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  elevation:
+                                  MaterialStateProperty
+                                      .all(0),
+                                  // backgroundColor: ,
+                                  backgroundColor:
+                                  MaterialStateProperty
+                                      .all(Colors.white),
+                                  shape: MaterialStateProperty
+                                      .all(
+                                    RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius
+                                          .circular(10),
+                                      side: BorderSide(
+                                        color:
+                                        Color(0xff39C19D),
+                                        // width: 1,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text(
+                                  "${watch.orderDetails?.orderStatus}",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color:
+                                        Color(0xff39C19D),
+                                        // letterSpacing: .5,
+                                        fontSize: 12.sp,
+                                        fontWeight:
+                                        FontWeight.w500),
+                                  ),
+                                ),
+
+                                //
+                              ),
+                            ):Container(),
                           ],
                         ),
                         Text(
@@ -933,7 +977,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               watch.orderDetails?.orderStatus ==
                                                   "Dispatched" ||
                                               watch.orderDetails?.orderStatus ==
-                                                  "Cancelled"
+                                                  "Cancelled"|| watch.orderDetails?.orderStatus ==
+                                          "Order Refund"
                                           ? false
                                           : true,
                                       child: Expanded(
@@ -1560,8 +1605,59 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                         )
                       : Container(),
                   SizedBox(
-                    height: 15.h,
+                    height: 48.h,
                   ),
+                  Container(padding:EdgeInsets.only(left: 19.w),child: Text("Customer has sent 3 products return request. Refund amount is INR 60.",style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w700,color: Color(0xffE80000
+                  )),)),
+                  SizedBox(
+                    height: 14.w,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 19.w,
+                      ),
+                      Expanded(
+                          child:PrimaryButton(color:Color(0xff39C19D), onTap:(){
+                            // read.updateRefundStatus("received", context);
+                          },leading:
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(child: SvgPicture.asset("assets/icons/confirm_shop.svg")),
+                              SizedBox(
+                                  width:10.w
+                              ),
+                              Text("Accept",style: TextStyle(color: Colors.white,fontSize: 16.sp),)
+                            ],
+                          ),)
+                      ),
+                      SizedBox(
+                          width:12.w
+                      ),
+                      Expanded(
+                          child:PrimaryButton(color:Color(0xffFF6258), onTap:(){
+                            // read.updateRefundStatus("not_received", context);
+                          },leading:    Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(child: SvgPicture.asset("assets/icons/cross.svg")),
+                              SizedBox(
+                                  width:10.w
+                              ),
+                              Text("Reject",style: TextStyle(color: Colors.white,fontSize: 16.sp),)
+                            ],
+                          ),)
+                      ),
+                      SizedBox(
+                        width: 19.w,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50.w,
+                  ),
+
                   // Container(
                   //   padding: EdgeInsets.only(left: 19.w, right: 19.w),
                   //   child: SizedBox(

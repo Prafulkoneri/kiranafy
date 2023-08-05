@@ -1747,14 +1747,14 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         ),
                         width: ScreenUtil().screenWidth,
                         // height: 100.h,
-                        child:
+                        child:watchHome.placeAd.isNotEmpty?
                         AppNetworkImages(
                           imageUrl:
                           (watchHome.placeAd.toList()..shuffle()).first,
                           height: 163.h,
                           width: 352.w,
                           fit: BoxFit.cover,
-                        ),
+                        ):Container(),
                       ),
 
                       SizedBox(

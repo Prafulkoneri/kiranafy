@@ -44,7 +44,7 @@ class SAccountScreenController extends ChangeNotifier {
     if (refresh) {
       print("isRefreshedfdsfsfsfgsfsfsf");
       await getShopEditProfileDetails(context);
-      await getFAQData(context);
+      // await getFAQData(context);
     }
     notifyListeners();
   }

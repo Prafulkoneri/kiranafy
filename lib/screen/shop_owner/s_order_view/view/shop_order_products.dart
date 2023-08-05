@@ -85,17 +85,16 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                     ),
                                   ),
                                 ),
-                                PrimaryCheckBox(
+                               watch.orderDetails?.orderStatus=="Pending"? PrimaryCheckBox(
                                   onChanged: (value) {
                                     LoadingOverlay.of(context).show();
                                     read.selectProducts(context,index,element?.id,value);
-                                  // if(!watch.isStackLoading){
-                                  //   context.loaderOverlay.hide();
-                                  // }
-                                    },
+                                },
                                   value:
                                       watch.selectedProductList[index],
-                                ),
+                                ):watch.orderDetails?.orderStatus=="Order Refund"?Container(
+                                 child: Text(element?.refundStatus=="NO"?"Return":'',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13.sp,color: Color(0xffFF0000)),),
+                               ):Container(),
                               ],
                             ),
                             SizedBox(

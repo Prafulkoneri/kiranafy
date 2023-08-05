@@ -22,7 +22,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<SAccountScreenController>().initState(context, true);
+      context.read<SAccountScreenController>().getFAQData(context);
     });
   }
 
@@ -46,7 +46,10 @@ class _ShopFAQViewState extends State<ShopFAQView> {
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body: watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
           padding: EdgeInsets.only(
@@ -83,7 +86,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                               dividerColor: Colors.white,
                             ),
                             child: ExpansionTile(
-                              // key: Key(index.),
+                              key: Key('builder ${watch.isFaqExpanded[index].toString()}'),
                               initiallyExpanded:
                                   watch.isFaqExpanded[index] ? true : false,
                               backgroundColor: Colors.transparent,

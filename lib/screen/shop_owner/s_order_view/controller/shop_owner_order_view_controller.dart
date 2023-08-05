@@ -206,17 +206,18 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           OrderStatusChangeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (oStatus == "order_cancelled") {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                    index: 1,
-                    screenName: SOrderStatusView(
-                      selectedIndex: 4,
-                      isFromOrderView: true,
-                    ))),
-            (Route<dynamic> route) => false,
-          );
+          await shopOwnerOrderView(context, orId, true);
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => SMainScreenView(
+          //           index: 1,
+          //           screenName: SOrderStatusView(
+          //             selectedIndex: 4,
+          //             isFromOrderView: true,
+          //           ))),
+          //   (Route<dynamic> route) => false,
+          // );
         }
         if (result.message != "Delivery code not matched. Please try again.") {
           print("dafaadadasd");
