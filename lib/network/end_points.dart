@@ -425,7 +425,7 @@ class Endpoint {
   static const String checkReturnProduct =
       "${baseUrl}customer_order_refund_submit";
   static const String customerAllCouponList =
-      "${baseUrl}lsm-shop-owner-coupons-list";
+      "${baseUrl}lsm-customer-coupons-list";
   static const String customerPlaceAd = "${baseUrl}lsm-shop-owner-banner";
   static const String submitReturn = "${baseUrl}customer_order_refund_submit";
   static const String searchShop = "${baseUrl}lsm-shop-owner-filter-list";
@@ -435,6 +435,8 @@ class Endpoint {
       "${baseUrl}lsm-customer-notifications-delete";
   static const String sProfileCoupons = "${baseUrl}lsm-shop-owner-coupons";
   static const String customerFaqData = "${baseUrl}lsm-customer-feq-get";
+  static const String couponFiltter =
+      "${baseUrl}lsm-shop-owner-category-and-shop-list";
   static const String paymentRefundList =
       "${baseUrl}lsm-shop-owner-refund-list";
 }

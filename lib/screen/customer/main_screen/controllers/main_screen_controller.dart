@@ -24,36 +24,37 @@ import '../../near_shops/view/all_near_shops_view.dart';
 class MainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
-  bool stackLoaderVisible=false;
-  SetPincodeRepo setPincodeRepo=SetPincodeRepo();
+  bool stackLoaderVisible = false;
+  SetPincodeRepo setPincodeRepo = SetPincodeRepo();
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = HomeScreenView(refreshPage: true,);
-  bool isLocationServiceEnabled=false;
-  bool isPincodeSnackBarVisible=false;
-  String lat="";
-  String lng="";
-  String message="";
-  bool isFirstLoad=true;
-  LatLng defaultLatLng=LatLng(18.5679, 73.9143);
-  String cityName="";
-  String areaName="";
-  bool locationNotFound=false;
-  bool isLocationFound=false;
-  String locationErrorMessage="";
+  Widget currentScreen = HomeScreenView(
+    refreshPage: true,
+  );
+  bool isLocationServiceEnabled = false;
+  bool isPincodeSnackBarVisible = false;
+  String lat = "";
+  String lng = "";
+  String message = "";
+  bool isFirstLoad = true;
+  LatLng defaultLatLng = LatLng(18.5679, 73.9143);
+  String cityName = "";
+  String areaName = "";
+  bool locationNotFound = false;
+  bool isLocationFound = false;
+  String locationErrorMessage = "";
 
-
-  void initState(context,index,currentScreen)async{
-    navigation(index,currentScreen);
-    if(isFirstLoad){
-      showMap(context,true);
+  void initState(context, index, currentScreen) async {
+    navigation(index, currentScreen);
+    if (isFirstLoad) {
+      showMap(context, true);
     }
-    isFirstLoad=false;
+    isFirstLoad = false;
     notifyListeners();
   }
 
-  onNavigation(index,screen,context){
-    currentIndex=index;
-    currentScreen=screen;
+  onNavigation(index, screen, context) {
+    currentIndex = index;
+    currentScreen = screen;
     notifyListeners();
   }
 
@@ -62,8 +63,8 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-  showStackLoader(value){
-    stackLoaderVisible=value;
+  showStackLoader(value) {
+    stackLoaderVisible = value;
     notifyListeners();
   }
 
@@ -74,8 +75,7 @@ class MainScreenController extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-
-  void showMap(context,intialMapView)async{
+  void showMap(context, intialMapView) async {
     isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
     print("hello");
     print(isLocationServiceEnabled);
@@ -86,31 +86,37 @@ class MainScreenController extends ChangeNotifier {
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30))),
+              topLeft: Radius.circular(30), topRight: Radius.circular(30))),
       context: context,
       builder: (BuildContext context) {
-        return WillPopScope(onWillPop: ()async{
-          return false;
-        },child: MapScreenView(isLocationEnabled: isLocationServiceEnabled,initialMapView: intialMapView,latLng: defaultLatLng,));
+        return WillPopScope(
+            onWillPop: () async {
+              return false;
+            },
+            child: MapScreenView(
+              isLocationEnabled: isLocationServiceEnabled,
+              initialMapView: intialMapView,
+              latLng: defaultLatLng,
+            ));
       },
     );
-    if(!isLocationServiceEnabled){
-
-
-    }
-
+    if (!isLocationServiceEnabled) {}
   }
 
   void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = HomeScreenView(refreshPage: false,);
+    currentScreen = HomeScreenView(
+      refreshPage: false,
+    );
     notifyListeners();
   }
 
   void onShopPressed() {
     currentTab = 1;
-    currentScreen = AllNearShopsView(refreshPage:false,);
+    currentScreen = AllNearShopsView(
+      refreshPage: false,
+      isSearchFocus: false,
+    );
     notifyListeners();
   }
 
@@ -132,57 +138,54 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> navigation(tabIndex,screenName)async{
+  Future<void> navigation(tabIndex, screenName) async {
     print("${tabIndex}tabIndex");
-    currentTab=tabIndex;
-    currentScreen=screenName;
+    currentTab = tabIndex;
+    currentScreen = screenName;
     notifyListeners();
   }
 
-  SetPincodeReqModel get setPincodeReqModel=>SetPincodeReqModel(
-    lng: lng,
-    lat: lat,
-  );
+  SetPincodeReqModel get setPincodeReqModel => SetPincodeReqModel(
+        lng: lng,
+        lat: lat,
+      );
 
-  Future<void> setPincode(context,locationEnabled,latitude,longitude)async{
-    if(!locationEnabled){
+  Future<void> setPincode(context, locationEnabled, latitude, longitude) async {
+    if (!locationEnabled) {
       return;
     }
-    lat=latitude.toString();
-    lng=longitude.toString();
+    lat = latitude.toString();
+    lng = longitude.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     setPincodeRepo
-        .setPincode(setPincodeReqModel,pref.getString("successToken"))
+        .setPincode(setPincodeReqModel, pref.getString("successToken"))
         .then((response) {
       print("99999999");
-          print(setPincodeReqModel.toJson());
-          print("99999999");
+      print(setPincodeReqModel.toJson());
+      print("99999999");
       print(response.statusCode);
       log("response.body${response.body}");
-      final result =
-      SetPincodeResModel.fromJson(jsonDecode(response.body));
+      final result = SetPincodeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200){
-          isPincodeSnackBarVisible=true;
-          message=result.message??"";
-          cityName=result.data?.cityName??"";
-          areaName=result.data?.areaName??"";
-          defaultLatLng=LatLng(latitude,longitude);
-          locationNotFound=false;
-          locationErrorMessage="";
-          isLocationFound=true;
-        }
-        else{
-          isLocationFound=false;
-          locationErrorMessage=result.message??"";
-          locationNotFound=true;
+        if (result.status == 200) {
+          isPincodeSnackBarVisible = true;
+          message = result.message ?? "";
+          cityName = result.data?.cityName ?? "";
+          areaName = result.data?.areaName ?? "";
+          defaultLatLng = LatLng(latitude, longitude);
+          locationNotFound = false;
+          locationErrorMessage = "";
+          isLocationFound = true;
+        } else {
+          isLocationFound = false;
+          locationErrorMessage = result.message ?? "";
+          locationNotFound = true;
           notifyListeners();
           Timer(Duration(seconds: 3), () {
             print("duration");
             locationNotFound = false;
             notifyListeners();
           });
-
         }
 
         notifyListeners();
@@ -193,7 +196,7 @@ class MainScreenController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -203,17 +206,16 @@ class MainScreenController extends ChangeNotifier {
     );
   }
 
-void onMapCloseBtnPressed(context){
-    if(!isLocationFound){
-      locationErrorMessage="Select another location to continue";
-      locationNotFound=true;
+  void onMapCloseBtnPressed(context) {
+    if (!isLocationFound) {
+      locationErrorMessage = "Select another location to continue";
+      locationNotFound = true;
       notifyListeners();
       Timer(Duration(seconds: 3), () {
         locationNotFound = false;
         notifyListeners();
       });
-    }
-    else{
+    } else {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -222,18 +224,15 @@ void onMapCloseBtnPressed(context){
                 screenName: HomeScreenView(
                   refreshPage: true,
                 ))),
-            (Route<dynamic> route) => false,
+        (Route<dynamic> route) => false,
       );
       notifyListeners();
     }
+  }
 
-}
-
-void onDismissTaped(){
-  locationNotFound=false;
-  locationErrorMessage="";
-  notifyListeners();
-}
-
-
+  void onDismissTaped() {
+    locationNotFound = false;
+    locationErrorMessage = "";
+    notifyListeners();
+  }
 }

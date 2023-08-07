@@ -21,8 +21,10 @@ import 'package:provider/provider.dart';
 
 class AllNearShopsView extends StatefulWidget {
   final bool? refreshPage;
+  final bool? isSearchFocus;
 
-  const AllNearShopsView({super.key, required this.refreshPage});
+  const AllNearShopsView(
+      {super.key, required this.refreshPage, required this.isSearchFocus});
 
   @override
   State<AllNearShopsView> createState() => _AllNearShopsViewState();
@@ -99,7 +101,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                               onChanged: (value) {
                                 read.shopSearchList(context);
                               },
-                              autofocus: true,
+                              autofocus: widget.isSearchFocus ?? true,
                               controller: watch.searchController,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -560,14 +562,17 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     width: ScreenUtil().screenWidth,
 
                                     // height: 100.h,
-                                    child:watchHome.placeAd.isNotEmpty? AppNetworkImages(
-                                      imageUrl: (watchHome.placeAd.toList()
-                                            ..shuffle())
-                                          .first,
-                                      height: 163.h,
-                                      width: 352.w,
-                                      fit: BoxFit.cover,
-                                    ):Container(),
+                                    child: watchHome.placeAd.isNotEmpty
+                                        ? AppNetworkImages(
+                                            imageUrl:
+                                                (watchHome.placeAd.toList()
+                                                      ..shuffle())
+                                                    .first,
+                                            height: 163.h,
+                                            width: 352.w,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Container(),
                                   ),
                                   SizedBox(
                                     height: 20.h,

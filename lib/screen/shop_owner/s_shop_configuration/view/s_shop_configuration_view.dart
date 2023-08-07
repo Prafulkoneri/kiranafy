@@ -678,7 +678,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                       //   hintFontSize: 15.sp,
                       // ),
                       PrimarySTextFormField(
-                        // controller: watch.upiIdController,
+                        controller: watch.minimumDeliveryAmountController,
                         hintText: "Rs. 200",
                         titleHeader:
                             "Minimum Order Value for Delivery to Customer",

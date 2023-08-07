@@ -59,7 +59,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
 
   @override
   void initState() {
-final watch=Provider.of<ProductViewController>(context, listen: false);
+    final watch = Provider.of<ProductViewController>(context, listen: false);
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ProductViewController>().initState(
           context,
@@ -171,7 +171,7 @@ final watch=Provider.of<ProductViewController>(context, listen: false);
                                       )),
                                       Row(
                                         children: [
-                                                                                   InkWell(
+                                          InkWell(
                                             onTap: () {
                                               read.launchPhone(
                                                   watch.shopDetails
@@ -582,9 +582,18 @@ final watch=Provider.of<ProductViewController>(context, listen: false);
                                                 width: 12.w,
                                               ),
                                               InkWell(
-                                                // onTap: (){
-                                                //      read.addToCart(watch.productDetails?.id,productType,element?.productUnitId,element?.shopId,context);
-                                                //    },
+                                                onTap: () {
+                                                  //  read.addToCart(watch.productDetails?.id,
+                                                  //  watch?.productUnitId,element?.shopId,context);
+                                                  // read.addToCart(
+                                                  //                 watch
+                                                  //                     .productType,
+                                                  //                 watch
+                                                  //                     ?.productUnitId,
+                                                  //                 watch
+                                                  //                     .shopId,
+                                                  //                 context);
+                                                },
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                       color: const Color(
@@ -640,291 +649,294 @@ final watch=Provider.of<ProductViewController>(context, listen: false);
                             SizedBox(
                               height: 30.w,
                             ),
-                            watch.productViewData?.similarProducts?.isNotEmpty??false?Text("Similar Products",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16.sp,
-                                      color: Black1),
-                                )):Container(),
-                            watch.productViewData?.similarProducts?.isNotEmpty??false? SizedBox(
-                              height: 17.w,
-                            ):Container(),
-                            watch.productViewData
-                                ?.similarProducts?.isNotEmpty??false?Container(
-                              height: 205.w,
-                              child: ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  padding: EdgeInsets.zero,
-                                  itemCount: watch.productViewData
-                                          ?.similarProducts?.length ??
-                                      0,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (BuildContext, index) {
-                                    final element = watch.productViewData
-                                        ?.similarProducts?[index];
-                                    return GestureDetector(
-                                      onTap: () {
-                                        print(element?.id);
-watch.updateProductId(  element
-    ?.id
-    .toString(),);
-                                        Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MainScreenView(
-                                                    index: 1,
-                                                    screenName:
-                                                        ProductScreenView(
-                                                            categoryId: element
-                                                                ?.categoryId
-                                                                .toString(),
-                                                            // categoryId: watch.categoryId,
-                                                            productId: element
-                                                                ?.id
-                                                                .toString(),
-                                                            shopId: element
-                                                                ?.shopId
-                                                                .toString(),
-                                                            // widget.shopId,
-                                                            productType: element
-                                                                ?.productType),
-                                                  )),
-                                          (Route<dynamic> route) => false,
-                                        );
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          // color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.03.w),
-                                                blurRadius: 5,
-                                                spreadRadius: 0,
-                                                offset: const Offset(0, 3)),
-                                          ],
-                                        ),
-                                        child: Card(
-                                          // shape: ShapeBorder.
-                                          elevation: 0,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.w),
-                                            ),
-                                            width: 156.w,
-                                            padding: EdgeInsets.only(
-                                                left: 19.w,
-                                                top: 5.w,
-                                                right: 12.w,
-                                                bottom: 12.w),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    element?.discountPercentage !=
-                                                            ""
-                                                        ? Container(
-                                                            width: 60.w,
-                                                            height: 20.h,
-                                                            decoration: BoxDecoration(
-                                                                color:
-                                                                    lightgreen,
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5.w))),
-                                                            child: Center(
-                                                              child: Text(
-                                                                  "${element?.discountPercentage} off",
-                                                                  // textAlign: TextAlign.center,
-                                                                  style:
-                                                                      GoogleFonts
-                                                                          .dmSans(
-                                                                    textStyle: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        letterSpacing:
-                                                                            .5,
-                                                                        fontSize: 12
-                                                                            .sp,
-                                                                        fontWeight:
-                                                                            FontWeight.w500),
-                                                                  )),
-                                                            ),
-                                                          )
-                                                        : Container(
-                                                            width: 60.w,
-                                                            height: 20.h,
-                                                          ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    element?.productImagePath ==
-                                                            ""
-                                                        ? Container(
-                                                            height: 89.w,
-                                                            width: 89.w,
-                                                            child: Image.asset(
-                                                              "assets/images/profile_image.png",
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          )
-                                                        : Container(
-                                                            height: 89.w,
-                                                            width: 89.w,
-                                                            child:
-                                                                AppNetworkImages(
-                                                              imageUrl:
-                                                                  "${element?.productImagePath}",
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 3.w,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Flexible(
-                                                      child: Text(
-                                                        "${element?.productName}",
-                                                        maxLines: 1,
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                          textStyle: TextStyle(
-                                                            color: Black1,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            // letterSpacing: .5,
-                                                            fontSize: 16.sp,
-
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 2.w,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "${element?.weight}${element?.unit}",
-                                                      style: GoogleFonts.roboto(
-                                                        textStyle: TextStyle(
-                                                            color: Black1,
-                                                            // letterSpacing: .5,
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 2.w,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        element?.mrpPrice != ""
-                                                            ? Text(
-                                                                '\u{20B9}${element?.mrpPrice}',
-                                                                style: GoogleFonts.dmSans(
-                                                                    textStyle: element?.offerPrice != "" &&
-                                                                            element?.offerPrice !=
-                                                                                element
-                                                                                    ?.mrpPrice
-                                                                        ? TextStyle(
-                                                                            decoration: TextDecoration
-                                                                                .lineThrough,
-                                                                            color:
-                                                                                Black1,
-                                                                            letterSpacing:
-                                                                                .5,
-                                                                            fontSize: 12
-                                                                                .sp,
-                                                                            fontWeight: FontWeight
-                                                                                .w400)
-                                                                        : TextStyle(
-                                                                            color:
-                                                                                Black1,
-                                                                            letterSpacing:
-                                                                                .5,
-                                                                            fontSize:
-                                                                                12.sp,
-                                                                            fontWeight: FontWeight.w400)))
-                                                            : const Text(""),
-                                                        SizedBox(
-                                                          width: 5.w,
-                                                        ),
-                                                        element?.offerPrice !=
-                                                                    "" &&
-                                                                element?.offerPrice !=
-                                                                    element
-                                                                        ?.mrpPrice
-                                                            ? Text(
-                                                                '\u{20B9}${element?.offerPrice}',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .dmSans(
-                                                                  textStyle: TextStyle(
-                                                                      // decoration:
-                                                                      // TextDecoration.lineThrough,
-                                                                      color: Black,
-                                                                      letterSpacing: .5,
-                                                                      fontSize: 13.sp,
-                                                                      fontWeight: FontWeight.w500),
+                            watch.productViewData?.similarProducts
+                                        ?.isNotEmpty ??
+                                    false
+                                ? Text("Similar Products",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16.sp,
+                                          color: Black1),
+                                    ))
+                                : Container(),
+                            watch.productViewData?.similarProducts
+                                        ?.isNotEmpty ??
+                                    false
+                                ? SizedBox(
+                                    height: 17.w,
+                                  )
+                                : Container(),
+                            watch.productViewData?.similarProducts
+                                        ?.isNotEmpty ??
+                                    false
+                                ? Container(
+                                    height: 205.w,
+                                    child: ListView.builder(
+                                        physics: const BouncingScrollPhysics(),
+                                        padding: EdgeInsets.zero,
+                                        itemCount: watch.productViewData
+                                                ?.similarProducts?.length ??
+                                            0,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (BuildContext, index) {
+                                          final element = watch.productViewData
+                                              ?.similarProducts?[index];
+                                          return GestureDetector(
+                                            onTap: () {
+                                              print(element?.id);
+                                              watch.updateProductId(
+                                                element?.id.toString(),
+                                              );
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MainScreenView(
+                                                          index: 1,
+                                                          screenName:
+                                                              ProductScreenView(
+                                                                  categoryId: element
+                                                                      ?.categoryId
+                                                                      .toString(),
+                                                                  // categoryId: watch.categoryId,
+                                                                  productId: element
+                                                                      ?.id
+                                                                      .toString(),
+                                                                  shopId: element
+                                                                      ?.shopId
+                                                                      .toString(),
+                                                                  // widget.shopId,
+                                                                  productType:
+                                                                      element
+                                                                          ?.productType),
+                                                        )),
+                                                (Route<dynamic> route) => false,
+                                              );
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                // color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: Colors.black
+                                                          .withOpacity(0.03.w),
+                                                      blurRadius: 5,
+                                                      spreadRadius: 0,
+                                                      offset:
+                                                          const Offset(0, 3)),
+                                                ],
+                                              ),
+                                              child: Card(
+                                                // shape: ShapeBorder.
+                                                elevation: 0,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.w),
+                                                  ),
+                                                  width: 156.w,
+                                                  padding: EdgeInsets.only(
+                                                      left: 19.w,
+                                                      top: 5.w,
+                                                      right: 12.w,
+                                                      bottom: 12.w),
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          element?.discountPercentage !=
+                                                                  ""
+                                                              ? Container(
+                                                                  width: 60.w,
+                                                                  height: 20.h,
+                                                                  decoration: BoxDecoration(
+                                                                      color:
+                                                                          lightgreen,
+                                                                      borderRadius:
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(5.w))),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                        "${element?.discountPercentage} off",
+                                                                        // textAlign: TextAlign.center,
+                                                                        style: GoogleFonts
+                                                                            .dmSans(
+                                                                          textStyle: TextStyle(
+                                                                              color: Colors.white,
+                                                                              letterSpacing: .5,
+                                                                              fontSize: 12.sp,
+                                                                              fontWeight: FontWeight.w500),
+                                                                        )),
+                                                                  ),
+                                                                )
+                                                              : Container(
+                                                                  width: 60.w,
+                                                                  height: 20.h,
                                                                 ),
-                                                              )
-                                                            : const Text(""),
-                                                      ],
-                                                    ),
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        read.addToCart(
-                                                            element
-                                                                ?.productType,
-                                                            element
-                                                                ?.productUnitId,
-                                                            element?.shopId,
-                                                            context);
-                                                      },
-                                                      child: SvgPicture.asset(
-                                                        'assets/images/add.svg',
-                                                        // width: 15.w,
-                                                        // height: 19.h,
+                                                        ],
                                                       ),
-                                                    ),
-                                                  ],
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          element?.productImagePath ==
+                                                                  ""
+                                                              ? Container(
+                                                                  height: 89.w,
+                                                                  width: 89.w,
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/images/profile_image.png",
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                )
+                                                              : Container(
+                                                                  height: 89.w,
+                                                                  width: 89.w,
+                                                                  child:
+                                                                      AppNetworkImages(
+                                                                    imageUrl:
+                                                                        "${element?.productImagePath}",
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 3.w,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Flexible(
+                                                            child: Text(
+                                                              "${element?.productName}",
+                                                              maxLines: 1,
+                                                              style: GoogleFonts
+                                                                  .roboto(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                  color: Black1,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  // letterSpacing: .5,
+                                                                  fontSize:
+                                                                      16.sp,
+
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 2.w,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "${element?.weight}${element?.unit}",
+                                                            style: GoogleFonts
+                                                                .roboto(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                      color:
+                                                                          Black1,
+                                                                      // letterSpacing: .5,
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 2.w,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              element?.mrpPrice !=
+                                                                      ""
+                                                                  ? Text(
+                                                                      '\u{20B9}${element?.mrpPrice}',
+                                                                      style: GoogleFonts.dmSans(
+                                                                          textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice
+                                                                              ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)
+                                                                              : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
+                                                                  : const Text(""),
+                                                              SizedBox(
+                                                                width: 5.w,
+                                                              ),
+                                                              element?.offerPrice !=
+                                                                          "" &&
+                                                                      element?.offerPrice !=
+                                                                          element
+                                                                              ?.mrpPrice
+                                                                  ? Text(
+                                                                      '\u{20B9}${element?.offerPrice}',
+                                                                      style: GoogleFonts
+                                                                          .dmSans(
+                                                                        textStyle: TextStyle(
+                                                                            // decoration:
+                                                                            // TextDecoration.lineThrough,
+                                                                            color: Black,
+                                                                            letterSpacing: .5,
+                                                                            fontSize: 13.sp,
+                                                                            fontWeight: FontWeight.w500),
+                                                                      ),
+                                                                    )
+                                                                  : const Text(
+                                                                      ""),
+                                                            ],
+                                                          ),
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              read.addToCart(
+                                                                  element
+                                                                      ?.productType,
+                                                                  element
+                                                                      ?.productUnitId,
+                                                                  element
+                                                                      ?.shopId,
+                                                                  context);
+                                                            },
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              'assets/images/add.svg',
+                                                              // width: 15.w,
+                                                              // height: 19.h,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ):Container(),
+                                          );
+                                        }),
+                                  )
+                                : Container(),
                             SizedBox(
                               height: 100.w,
                             ),

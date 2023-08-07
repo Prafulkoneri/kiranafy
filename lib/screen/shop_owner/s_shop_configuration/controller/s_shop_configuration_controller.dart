@@ -32,6 +32,8 @@ class SShopConfigurationController extends ChangeNotifier {
   TextEditingController startShopTimeController = TextEditingController();
   TextEditingController endShopTimeController = TextEditingController();
   TextEditingController imageNameController = TextEditingController();
+  TextEditingController minimumDeliveryAmountController =
+      TextEditingController();
   // TextEditingController deliveryChargesOneController = TextEditingController();
   // TextEditingController deliveryChargesTwoController = TextEditingController();
   // TextEditingController deliveryChargesThreeController =
@@ -216,6 +218,18 @@ class SShopConfigurationController extends ChangeNotifier {
           isSixToNine = true;
         }
         ////
+        if (data?.acceptedPaymentStatus == "online") {
+          isOnlinePaymentSelected = true;
+          isCODPaymentSelected = false;
+        }
+        if (data?.acceptedPaymentStatus == "cod") {
+          isCODPaymentSelected = true;
+          isOnlinePaymentSelected = false;
+        }
+        if (data?.acceptedPaymentStatus == "cod_and_online") {
+          isCODPaymentSelected = true;
+          isOnlinePaymentSelected = true;
+        }
 
         //////// Delivery type///////////
         if (data?.shopOwnerCustomerPickup == "active") {
@@ -308,11 +322,11 @@ class SShopConfigurationController extends ChangeNotifier {
     }
 
     //////////////////
-    // if (supportNumberController.text.length < 10) {
-    //   Utils.showPrimarySnackbar(context, "Please Enter 10 digits",
-    //       type: SnackType.error);
-    //   return;
-    // }
+    if (minimumDeliveryAmountController.text == "") {
+      Utils.showPrimarySnackbar(context, "Please Enter Order Value",
+          type: SnackType.error);
+      return;
+    }
     if (supportNumberController.text.length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
           type: SnackType.error);
@@ -326,6 +340,11 @@ class SShopConfigurationController extends ChangeNotifier {
     }
     if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
       Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
+          type: SnackType.error);
+      return;
+    }
+    if (!isOnlinePaymentSelected && !isCODPaymentSelected) {
+      Utils.showPrimarySnackbar(context, "Select Payment Mode",
           type: SnackType.error);
       return;
     }
@@ -344,27 +363,33 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   ShopConfigRequestModel get shopConfigRequestModel => ShopConfigRequestModel(
-        shopOwnerAmount1DeliveryCharges: firstDeliveryController.text,
-        shopOwnerAmount2DeliveryCharges: secondDeliveryController.text,
-        shopOwnerAmount3DeliveryCharges: thirdDeliveryController.text,
-        shopOwnerAmount4DeliveryCharges: fourthDeliveryController.text,
-        shopOwnerCustomerPickup:
-            isCustomerPickupSelected ? "active" : "inactive",
-        shopOwnerDeliveryToCustomer:
-            isDeliveryCustomerSelected ? "active" : "inactive",
-        shopOwnerDeliveryChargesFree:
-            isDeliveryChargesSelected ? "inactive" : "active",
-        shopOwnerPaymentQrCodeImageName: '',
-        shopOwnerPaymentQrCodeImagePath: '',
-        shopOwnerShopCloseTime: endShopTimeController.text,
-        shopOwnerShopOpeningTime: startShopTimeController.text,
-        shopOwnerSlot12To3: isTwelveToThree ? "active" : "inactive",
-        shopOwnerSlot3To6: isThreeToSix ? "active" : "inactive",
-        shopOwnerSlot6To9: isSixToNine ? "active" : "inactive",
-        shopOwnerSlot9To12: isNineToTwelve ? "active" : "inactive",
-        shopOwnerSupportNumber: supportNumberController.text,
-        shopOwnerUpiId: upiIdController.text,
-      );
+      shopOwnerAmount1DeliveryCharges: firstDeliveryController.text,
+      shopOwnerAmount2DeliveryCharges: secondDeliveryController.text,
+      shopOwnerAmount3DeliveryCharges: thirdDeliveryController.text,
+      shopOwnerAmount4DeliveryCharges: fourthDeliveryController.text,
+      shopOwnerCustomerPickup: isCustomerPickupSelected ? "active" : "inactive",
+      shopOwnerDeliveryToCustomer:
+          isDeliveryCustomerSelected ? "active" : "inactive",
+      shopOwnerDeliveryChargesFree:
+          isDeliveryChargesSelected ? "inactive" : "active",
+      shopOwnerPaymentQrCodeImageName: '',
+      shopOwnerPaymentQrCodeImagePath: '',
+      shopOwnerShopCloseTime: endShopTimeController.text,
+      shopOwnerShopOpeningTime: startShopTimeController.text,
+      shopOwnerSlot12To3: isTwelveToThree ? "active" : "inactive",
+      shopOwnerSlot3To6: isThreeToSix ? "active" : "inactive",
+      shopOwnerSlot6To9: isSixToNine ? "active" : "inactive",
+      shopOwnerSlot9To12: isNineToTwelve ? "active" : "inactive",
+      shopOwnerSupportNumber: supportNumberController.text,
+      shopOwnerUpiId: upiIdController.text,
+      minimumOrderDeliveryAmount: minimumDeliveryAmountController.text,
+      acceptedPaymentStatus: isOnlinePaymentSelected && isCODPaymentSelected
+          ? "cod_and_online"
+          : isOnlinePaymentSelected
+              ? "online "
+              : isCODPaymentSelected
+                  ? "cod"
+                  : "");
 
   Future editShopconfig(context) async {
     LoadingOverlay.of(context).show();

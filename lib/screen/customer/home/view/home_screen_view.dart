@@ -109,6 +109,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                     builder: (context) => MainScreenView(
                                         index: 1,
                                         screenName: AllNearShopsView(
+                                          isSearchFocus: true,
                                           refreshPage: true,
                                         ))),
                                 (Route<dynamic> route) => false,
@@ -239,6 +240,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                                         index: 1,
                                                         screenName:
                                                             AllNearShopsView(
+                                                          isSearchFocus: false,
                                                           refreshPage: true,
                                                         ))),
                                             (Route<dynamic> route) => false,
@@ -298,7 +300,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       // SizedBox(
                       //   height: 20.h,
                       // ),
-                      watch.couponData?.isNotEmpty ?? false
+                      watch.couponData?.isNotEmpty == true
                           ? CouponsScreen()
                           : Container(
                               // height: 100,
@@ -306,7 +308,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               // color: Colors.black,
                               ),
 
-                      watch.hellotoffersdata?.isNotEmpty ?? false
+                      watch.hellotoffersdata?.isNotEmpty == true
                           ? OfferPage()
                           : Container(
                               // height: 100,
