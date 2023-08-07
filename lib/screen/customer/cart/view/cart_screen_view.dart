@@ -134,6 +134,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                     builder: (context) => MainScreenView(
                                         index: 2,
                                         screenName: AllNearShopsView(
+                                          isSearchFocus: false,
                                           refreshPage: true,
                                         ))),
                                 (Route<dynamic> route) => false,

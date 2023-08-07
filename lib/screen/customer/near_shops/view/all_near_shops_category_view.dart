@@ -88,7 +88,10 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        HeaderView(areaName:watchMain.areaName,cityName:watchMain.cityName,),
+                        HeaderView(
+                          areaName: watchMain.areaName,
+                          cityName: watchMain.cityName,
+                        ),
                         Padding(
                           padding: EdgeInsets.only(
                             right: 19.0.w,
@@ -341,8 +344,8 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                 .toString(),
                                                             routeName:
                                                                 "nearShopsCategory",
-                                                            categoryId:
-                                                                widget.categoryId,
+                                                            categoryId: widget
+                                                                .categoryId,
                                                             refreshPage: true,
                                                           ))),
                                               (Route<dynamic> route) => false,
@@ -375,19 +378,23 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                               // scale: 1.0,
                                                               image: NetworkImage(
                                                                   '${element.shopBannerImagePath}'),
-                                                              fit: BoxFit.cover)),
+                                                              fit: BoxFit
+                                                                  .cover)),
                                                   child: Padding(
-                                                    padding: EdgeInsets.all(10.h),
+                                                    padding:
+                                                        EdgeInsets.all(10.h),
                                                     child: Column(
                                                       crossAxisAlignment:
-                                                          CrossAxisAlignment.start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceBetween,
                                                       children: [
                                                         Row(
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment.end,
+                                                              MainAxisAlignment
+                                                                  .end,
                                                           children: [],
                                                         ),
                                                         Column(
@@ -413,14 +420,14 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                   children: [
                                                                     SvgPicture.asset(
                                                                         "assets/icons/location1.svg",
-                                                                        width: 12.w,
+                                                                        width: 12
+                                                                            .w,
                                                                         height:
                                                                             16.h),
                                                                     Padding(
-                                                                      padding: EdgeInsets
-                                                                          .only(
-                                                                              left:
-                                                                                  8.w),
+                                                                      padding: EdgeInsets.only(
+                                                                          left:
+                                                                              8.w),
                                                                       child: Text(
                                                                           "${element.areaName}, ${element.cityName}",
                                                                           style: GoogleFonts.roboto(
@@ -434,15 +441,16 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                   ],
                                                                 ),
                                                                 Container(
-                                                                  height: 21.49.h,
+                                                                  height:
+                                                                      21.49.h,
                                                                   width: 49.w,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: yellow,
-                                                                    borderRadius: BorderRadius
-                                                                        .all(Radius
-                                                                            .circular(
-                                                                                15)),
+                                                                    color:
+                                                                        yellow,
+                                                                    borderRadius:
+                                                                        BorderRadius.all(
+                                                                            Radius.circular(15)),
                                                                   ),
                                                                   child: Row(
                                                                     mainAxisAlignment:
@@ -454,7 +462,8 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                         "assets/images/star.svg",
                                                                         height:
                                                                             12.h,
-                                                                        width: 12.w,
+                                                                        width:
+                                                                            12.w,
                                                                       ),
                                                                       SizedBox(
                                                                         width:
@@ -465,14 +474,10 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                         style: GoogleFonts
                                                                             .dmSans(
                                                                           textStyle: TextStyle(
-                                                                              color:
-                                                                                  Black,
-                                                                              letterSpacing:
-                                                                                  .5,
-                                                                              fontSize: 12
-                                                                                  .sp,
-                                                                              fontWeight:
-                                                                                  FontWeight.w400),
+                                                                              color: Black,
+                                                                              letterSpacing: .5,
+                                                                              fontSize: 12.sp,
+                                                                              fontWeight: FontWeight.w400),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -498,11 +503,12 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                     width: 352.w,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                13.w),
-                                                        gradient: LinearGradient(
-                                                          begin:
-                                                              Alignment.topCenter,
+                                                            BorderRadius
+                                                                .circular(13.w),
+                                                        gradient:
+                                                            LinearGradient(
+                                                          begin: Alignment
+                                                              .topCenter,
                                                           end: Alignment
                                                               .bottomCenter,
                                                           stops: [
@@ -513,7 +519,8 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                             Colors.white
                                                                 .withOpacity(0),
                                                             Colors.black
-                                                                .withOpacity(0.15),
+                                                                .withOpacity(
+                                                                    0.15),
                                                           ],
                                                         )),
                                                   )),
@@ -523,14 +530,16 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                 child: InkWell(
                                                   onTap: () {
                                                     watch.favAllShop[index]
-                                                        ? read.removeAllShopFavList(
-                                                            context,
-                                                            element.id,
-                                                            index)
-                                                        : read.updateAllShopFavList(
-                                                            context,
-                                                            element.id,
-                                                            index);
+                                                        ? read
+                                                            .removeAllShopFavList(
+                                                                context,
+                                                                element.id,
+                                                                index)
+                                                        : read
+                                                            .updateAllShopFavList(
+                                                                context,
+                                                                element.id,
+                                                                index);
                                                   },
                                                   child: watch.favAllShop[index]
                                                       ? SvgPicture.asset(
@@ -551,23 +560,28 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                       }),
 
                                   /////////////////////////////
-                                  SizedBox(height: 30,),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      right: 19.0.w,
-                                      left: 19.0.w,
-                                    ),
-                                    width: ScreenUtil().screenWidth,
-                                    // height: 100.h,
-                                    child:
-                                    AppNetworkImages(
-                                      imageUrl:
-                                      (watchHome.placeAd.toList()..shuffle()).first,
-                                      height: 163.h,
-                                      width: 352.w,
-                                      fit: BoxFit.cover,
-                                    ),
+                                  SizedBox(
+                                    height: 30,
                                   ),
+                                  watchHome.placeAd.isNotEmpty == true
+                                      ? Container(
+                                          padding: EdgeInsets.only(
+                                            right: 19.0.w,
+                                            left: 19.0.w,
+                                          ),
+                                          width: ScreenUtil().screenWidth,
+                                          // height: 100.h,
+                                          child: AppNetworkImages(
+                                            imageUrl:
+                                                (watchHome.placeAd.toList()
+                                                      ..shuffle())
+                                                    .first,
+                                            height: 163.h,
+                                            width: 352.w,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      : Container(),
 
                                   SizedBox(
                                     height: 20.h,
@@ -585,15 +599,15 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                     MainScreenView(
                                                         index: 0,
                                                         screenName:
-                                                        CustomerAdsView(
-                                                        ))),
-                                                (Route<dynamic> route) => false,
+                                                            CustomerAdsView())),
+                                            (Route<dynamic> route) => false,
                                           );
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
                                               color: Color(0xff39C19D),
-                                              borderRadius: BorderRadius.circular(7.w)),
+                                              borderRadius:
+                                                  BorderRadius.circular(7.w)),
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 14.w, vertical: 2.w),
                                           child: Center(

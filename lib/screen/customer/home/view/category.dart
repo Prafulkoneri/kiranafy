@@ -48,8 +48,14 @@ class _ShopCategoryState extends State<ShopCategory> {
                           onTap: () {
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => MainScreenView(index: 1,screenName:AllNearCategoryShopsView(categoryId: element.id.toString(),refresh: true,))),
-                                  (Route<dynamic> route) => false,
+                              MaterialPageRoute(
+                                  builder: (context) => MainScreenView(
+                                      index: 1,
+                                      screenName: AllNearCategoryShopsView(
+                                        categoryId: element.id.toString(),
+                                        refresh: true,
+                                      ))),
+                              (Route<dynamic> route) => false,
                             );
                           },
                           child: Row(
@@ -70,9 +76,10 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     height: 50.h,
                                     width: 70.w,
                                     child: Padding(
-                                      padding: EdgeInsets.all(8.w),
-                                      child: AppNetworkImages(imageUrl:element.categoryImagePath,)
-                                    ),
+                                        padding: EdgeInsets.all(8.w),
+                                        child: AppNetworkImages(
+                                          imageUrl: element.categoryImagePath,
+                                        )),
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(
@@ -89,10 +96,9 @@ class _ShopCategoryState extends State<ShopCategory> {
                                             color: Black,
                                             letterSpacing: .5,
                                             fontSize: 11.5.sp,
-
                                             fontWeight: FontWeight.w500),
                                       ),
-                                      maxLines:2,
+                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
@@ -121,8 +127,14 @@ class _ShopCategoryState extends State<ShopCategory> {
                           onTap: () {
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => MainScreenView(index: 1,screenName:AllNearCategoryShopsView(categoryId: element.id.toString(),refresh: true,))),
-                                  (Route<dynamic> route) => false,
+                              MaterialPageRoute(
+                                  builder: (context) => MainScreenView(
+                                      index: 1,
+                                      screenName: AllNearCategoryShopsView(
+                                        categoryId: element.id.toString(),
+                                        refresh: true,
+                                      ))),
+                              (Route<dynamic> route) => false,
                             );
                             // readMain.onBackPressed(
                             //     1,
@@ -150,7 +162,8 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     child: Padding(
                                       padding: EdgeInsets.all(8.w),
                                       child: AppNetworkImages(
-                                        imageUrl: element.categoryImagePath ?? "",
+                                        imageUrl:
+                                            element.categoryImagePath ?? "",
                                         width: 68.w,
                                         height: 49.w,
                                       ),

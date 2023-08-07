@@ -79,6 +79,7 @@ class ShopProfileViewController extends ChangeNotifier {
             builder: (context) => MainScreenView(
                 index: 1,
                 screenName: AllNearShopsView(
+                  isSearchFocus: false,
                   refreshPage: false,
                 ))),
         (Route<dynamic> route) => false,

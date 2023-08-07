@@ -260,9 +260,10 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                     final element = watch.productList?[index];
                                     return GestureDetector(
                                       onTap: () {
-                                        readProductViewController.updateProductId(element
-                                            ?.id
-                                            .toString(),);
+                                        readProductViewController
+                                            .updateProductId(
+                                          element?.id.toString(),
+                                        );
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
@@ -472,38 +473,33 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             ),
                           )
                         :
-                    // Container(
-                    //         child: Center(child: Text("No Products found")),
-                    //       )
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(right: 20.w),
-                          child: Image.asset(
-                            "assets/images/emptycart.png",
-                            height: 151.h,
-                            width: 151.w,
-                          ),
-                        ),
-                        Text(
-
-                          "No Products Found",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-
-                                color: Black1,
-                                letterSpacing: .5,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-
-
-                      ],
-                    )
-            )
+                        // Container(
+                        //         child: Center(child: Text("No Products found")),
+                        //       )
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(right: 20.w),
+                                child: Image.asset(
+                                  "assets/images/emptycart.png",
+                                  height: 151.h,
+                                  width: 151.w,
+                                ),
+                              ),
+                              Text(
+                                "No Products Found",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black1,
+                                      letterSpacing: .5,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ],
+                          ))
           ],
         ),
       ),

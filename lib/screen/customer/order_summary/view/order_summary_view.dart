@@ -97,7 +97,11 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => CartDetailView(isRefresh: true,shopId: widget.shopId,cartId: widget.cartId,)));
+                    builder: (context) => CartDetailView(
+                          isRefresh: true,
+                          shopId: widget.shopId,
+                          cartId: widget.cartId,
+                        )));
           },
         ),
       ),
@@ -479,29 +483,12 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       child: Column(
                         children: [
                           Row(
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Text(
-                              "Date:",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    // height: 1.5,
-                                    color: black,
-                                    letterSpacing: .05,
-                                    // overflow: TextOverflow.ellipsis,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                                ),
-                                width: ScreenUtil().screenWidth/2.5.w,
-                              ),
                               Expanded(
-                                  child: Container(
-                                padding: EdgeInsets.only(left: 12.w),
                                 child: Text(
-                                  "Delivery Slot:",
+                                  "Date:",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         // height: 1.5,
@@ -512,10 +499,26 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                              )),
-                              SizedBox(
-                                width: 20.w,
                               ),
+                              Expanded(
+                                  child: Text(
+                                watch.slotGroupValue ==
+                                            "shop_owner_slot_9_to_12" ||
+                                        watch.slotGroupValue ==
+                                            "shop_owner_slot_12_to_3"
+                                    ? " Delivery Slot:"
+                                    : "Delivery Slot",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      // height: 1.5,
+                                      color: black,
+                                      letterSpacing: .05,
+                                      // overflow: TextOverflow.ellipsis,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              )),
+                              SizedBox(width: 22.w),
                             ],
                           ),
                           SizedBox(
@@ -527,55 +530,57 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: ScreenUtil().screenWidth/2.5.w,
-                                      child: Row(
-                                        // mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            watch.expectedDateController.text,
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  // height: 1.5,
-                                                  color: black,
-                                                  letterSpacing: .05,
-                                                  // overflow: TextOverflow.ellipsis,
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10.w,
-                                          ),
-                                          SvgPicture.asset(
-                                            'assets/images/calender.svg',
-                                            width: 12.w,
-                                            height: 14.h,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
                                     Row(
+                                      children: [
+                                        Text(
+                                          watch.expectedDateController.text,
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                // height: 1.5,
+                                                color: black,
+                                                // letterSpacing: .05,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        SvgPicture.asset(
+                                          'assets/images/calender.svg',
+                                          width: 12.w,
+                                          height: 14.h,
+                                        ),
+                                      ],
+                                    ),
+                                    // SizedBox(
+                                    //   width: 20.w,
+                                    // ),
+                                    Row(
+                                      // crossAxisAlignment:
+                                      //     CrossAxisAlignment.end,
+                                      // mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
                                           watch.slotGroupValue ==
                                                   "shop_owner_slot_9_to_12"
-                                              ? "9:00 AM - 12:00 PM"
+                                              ? "09:00 AM - 12:00 PM"
                                               : watch.slotGroupValue ==
                                                       "shop_owner_slot_12_to_3"
-                                                  ? "12:00 PM - 3:00 PM"
+                                                  ? "12:00 PM - 03:00 PM"
                                                   : watch.slotGroupValue ==
                                                           "shop_owner_slot_3_to_6"
-                                                      ? "3:00 PM - 6:00 PM"
+                                                      ? "03:00 PM - 06:00 PM"
                                                       : watch.slotGroupValue ==
                                                               "shop_owner_slot_6_to_9"
-                                                          ? "6:00 PM - 9:00 PM"
+                                                          ? "06:00 PM - 09:00 PM"
                                                           : "",
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 // height: 1.5,
                                                 color: black,
-                                                letterSpacing: .05,
+                                                // letterSpacing: .05,
                                                 // overflow: TextOverflow.ellipsis,
                                                 fontSize: 14.sp,
                                                 fontWeight: FontWeight.w500),
@@ -611,6 +616,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                             height: 14.h,
                                           ),
                                         ),
+                                        // SizedBox(
+                                        //   width: 5.w,
+                                        // ),
                                       ],
                                     ),
                                   ],
@@ -869,9 +877,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      readProductViewController.updateProductId(element
-                                                          ?.id
-                                                          .toString(),);
+                                                      readProductViewController
+                                                          .updateProductId(
+                                                        element?.id.toString(),
+                                                      );
                                                       Navigator
                                                           .pushAndRemoveUntil(
                                                         context,
@@ -1085,8 +1094,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                     ],
                                                                   ),
                                                                   GestureDetector(
-                                                                    onTap: ()async {
-
+                                                                    onTap:
+                                                                        () async {
                                                                       await read.addToCart(
                                                                           element
                                                                               ?.productType,
@@ -1095,7 +1104,15 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                           element
                                                                               ?.shopId,
                                                                           context);
-                                                                      await  read.initState(context,element?.shopId,watch.cartId,true,"cartDetail",
+                                                                      await read
+                                                                          .initState(
+                                                                        context,
+                                                                        element
+                                                                            ?.shopId,
+                                                                        watch
+                                                                            .cartId,
+                                                                        true,
+                                                                        "cartDetail",
                                                                       );
                                                                     },
                                                                     child: SvgPicture
