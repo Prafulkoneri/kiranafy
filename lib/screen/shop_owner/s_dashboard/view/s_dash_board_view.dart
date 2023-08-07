@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
+import 'package:local_supper_market/screen/shop_owner/payment_refund/view/payment_refund_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
@@ -1295,41 +1296,58 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                color: SplashText,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(8)),
+                          child: GestureDetector(
+                            onTap: () {
+                              readOrderStatus.onTabClicked(0);
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                          index: 2,
+                                          screenName: SPaymentRefundList(),
+                                        )),
+                                (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
+                              // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  color: SplashText,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(8)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "INR 0",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "INR 0",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Pending Refund",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Pending Refund",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

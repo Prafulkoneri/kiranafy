@@ -192,6 +192,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ShopOrderView(
+                                  fromOrderStatus: true,
                                       selectedIndex: 0,
                                       orderId: element?.orderId.toString(),
                                     )));

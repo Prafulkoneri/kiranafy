@@ -149,52 +149,56 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 15.h,
                       ),
                       ////image
-                      watch.bannerData?.isNotEmpty==true?Container(
-                        height: 160.h,
-                        padding: EdgeInsets.only(left: 19.w),
-                        child: PageView.builder(
-                            itemCount: watch.bannerData?.length ?? 0,
-                            physics: BouncingScrollPhysics(),
-                            padEnds: false,
-                            pageSnapping: true,
-                            scrollDirection: Axis.horizontal,
-                            allowImplicitScrolling: true,
-                            controller: watch.pageController,
-                            onPageChanged: (page) {
-                              setState(() {
-                                activePage = page;
-                              });
-                            },
-                            itemBuilder: (context, pagePosition) {
-                              final element = watch.bannerData?[pagePosition];
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin: EdgeInsets.only(right: 14.w),
-                                child: element?.bannerImagePath == ""
-                                    ? Image.asset(
-                                        "assets/images/caurosal.png",
-                                        height: 170.w,
-                                        // width: 340.w,
-                                        // scale: 0.5,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : AppNetworkImages(
-                                        imageUrl:
-                                            element?.bannerImagePath ?? "",
-                                        height: 170.w,
-                                        // width: 340.w,
-                                        // scale: 0.5,
-                                        fit: BoxFit.cover,
-                                      ),
-                                // margin: EdgeInsets.only(
-                                //     left: pagePosition == 0 ? 19.w : 0,
-                                //     // top: 15.w,
-                                //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
-                                //         ? 19.w
-                                //         : 10.w),
-                              );
-                            }),
-                      ):Container(),
+                      watch.bannerData?.isNotEmpty == true
+                          ? Container(
+                              height: 160.h,
+                              padding: EdgeInsets.only(left: 19.w),
+                              child: PageView.builder(
+                                  itemCount: watch.bannerData?.length ?? 0,
+                                  physics: BouncingScrollPhysics(),
+                                  padEnds: false,
+                                  pageSnapping: true,
+                                  scrollDirection: Axis.horizontal,
+                                  allowImplicitScrolling: true,
+                                  controller: watch.pageController,
+                                  onPageChanged: (page) {
+                                    setState(() {
+                                      activePage = page;
+                                    });
+                                  },
+                                  itemBuilder: (context, pagePosition) {
+                                    final element =
+                                        watch.bannerData?[pagePosition];
+                                    return Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      margin: EdgeInsets.only(right: 14.w),
+                                      child: element?.bannerImagePath == ""
+                                          ? Image.asset(
+                                              "assets/images/caurosal.png",
+                                              height: 170.w,
+                                              // width: 340.w,
+                                              // scale: 0.5,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : AppNetworkImages(
+                                              imageUrl:
+                                                  element?.bannerImagePath ??
+                                                      "",
+                                              height: 170.w,
+                                              // width: 340.w,
+                                              // scale: 0.5,
+                                              fit: BoxFit.cover,
+                                            ),
+                                      // margin: EdgeInsets.only(
+                                      //     left: pagePosition == 0 ? 19.w : 0,
+                                      //     // top: 15.w,
+                                      //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
+                                      //         ? 19.w
+                                      //         : 10.w),
+                                    );
+                                  }),
+                            )
+                          : Container(),
                       SizedBox(
                         height: 5.h,
                       ),
@@ -294,9 +298,21 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       // SizedBox(
                       //   height: 20.h,
                       // ),
-                      CouponsScreen(),
+                      watch.couponData?.isNotEmpty ?? false
+                          ? CouponsScreen()
+                          : Container(
+                              // height: 100,
+                              // width: 500,
+                              // color: Colors.black,
+                              ),
 
-                      OfferPage(),
+                      watch.hellotoffersdata?.isNotEmpty ?? false
+                          ? OfferPage()
+                          : Container(
+                              // height: 100,
+                              // width: 500,
+                              // color: Colors.red,
+                              ),
                       //
                       SizedBox(
                         height: 20.h,
@@ -357,7 +373,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           ),
                         ],
                       ),
-
                       SizedBox(
                         height: 100.h,
                       )

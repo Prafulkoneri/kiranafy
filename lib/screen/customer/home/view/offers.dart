@@ -7,8 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:provider/provider.dart';
-class OfferPage extends StatefulWidget {
 
+class OfferPage extends StatefulWidget {
   const OfferPage({super.key});
 
   @override
@@ -18,7 +18,7 @@ class OfferPage extends StatefulWidget {
 class _OfferPageState extends State<OfferPage> {
   @override
   Widget build(BuildContext context) {
-    final watch=context.watch<HomeScreenController>();
+    final watch = context.watch<HomeScreenController>();
     return Padding(
         padding: EdgeInsets.only(
           top: 20.h,
@@ -65,8 +65,9 @@ class _OfferPageState extends State<OfferPage> {
                     scrollDirection: Axis.vertical,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 3,
+                    itemCount: watch.hellotoffersdata?.length ?? 0,
                     itemBuilder: (BuildContext, index) {
+                      final element = watch.hellotoffersdata?[index];
                       return Container(
                         padding: EdgeInsets.only(
                             top: 9.w, bottom: 10.h, right: 12.w),
@@ -79,7 +80,9 @@ class _OfferPageState extends State<OfferPage> {
                         child: Row(
                           children: [
                             Image(
-                              image: AssetImage("assets/images/offerone.png"),
+                              image:
+                                  NetworkImage("${element?.productImagePath}"),
+                              // AssetImage("assets/images/offerone.png"),
                               height: 68.h,
                               width: 68.w,
                             ),
@@ -100,7 +103,8 @@ class _OfferPageState extends State<OfferPage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Nescafe Coffee",
+                                      Text("${element?.productName}",
+                                          // "Nescafe Coffee",
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: Black,
@@ -124,7 +128,8 @@ class _OfferPageState extends State<OfferPage> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(5.w))),
                                         child: Center(
-                                          child: Text("50% off",
+                                          child: Text("${element?.off} % off",
+                                              // "50% off",
                                               // textAlign: TextAlign.center,
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
@@ -143,10 +148,11 @@ class _OfferPageState extends State<OfferPage> {
                                   ),
                                   Row(
                                     // mainAxisAlignment:
-                                    //     MainAxisAlignment.start,
+                                    //     MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(
-                                        "500g",
+                                        "${element?.weight}",
+                                        // "500g",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: Grey,
@@ -156,16 +162,41 @@ class _OfferPageState extends State<OfferPage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 10.w,
+                                        width: 20.w,
                                       ),
                                       Text(
-                                        '\u{20B9}${25.00}',
+                                        "\u{20B9}${element?.mrpPrice}",
+                                        // '\u{20B9}${25.00}',
                                         style: GoogleFonts.dmSans(
+                                          decoration:
+                                              TextDecoration.lineThrough,
                                           textStyle: TextStyle(
                                               color: Black,
                                               letterSpacing: .5,
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 15.w,
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '\u{20B9}${element?.offerPrice}',
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Black,
+                                                    letterSpacing: .5,
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -184,7 +215,7 @@ class _OfferPageState extends State<OfferPage> {
                                         width: 5.w,
                                       ),
                                       Text(
-                                        'Kirana Store, Pune',
+                                        '${element?.shopName}',
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: Black,

@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/account/model/faq_model.dart';
 
 import 'package:local_supper_market/screen/customer/account/model/profile_detail_cmodel.dart';
 import 'package:local_supper_market/screen/customer/account/repository/c_profile_repo.dart';
+import 'package:local_supper_market/screen/customer/account/repository/faq_repository_repo.dart';
 import 'package:local_supper_market/screen/customer/account/repository/sign_out_repo.dart';
 
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
@@ -17,11 +19,17 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/model/si
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 class ProfileController extends ChangeNotifier {
   CustomerData? customerData;
   CustomerSignOutRepo customerSignOutRepo = CustomerSignOutRepo();
+  CustomerFAQDataRepo customerFaqRepo = CustomerFAQDataRepo();
+  bool isLoading = true;
+  List<CustomerFaqDataList>? customerfaqdataList;
+  showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
   Future<void> initState(
     context,
   ) async {
@@ -40,8 +48,10 @@ class ProfileController extends ChangeNotifier {
   }
 
   void myNotificationsPressed(context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => CustomerNotificationsScreenView()));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CustomerNotificationsScreenView()));
   }
 
   void favouritesPressed(context) {
@@ -130,5 +140,56 @@ class ProfileController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  List<bool> isFaqExpanded = [];
+  Future<void> getCustomerFAQData(context) async {
+    showLoader(true);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    customerFaqRepo
+        .customerFaqData(pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = CustomerFaqModel.fromJson(jsonDecode(response.body));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        customerfaqdataList = result.customerfaqdataList;
+        print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        print(customerfaqdataList);
+
+        int length = customerfaqdataList?.length ?? 0;
+
+        isFaqExpanded = List.filled(length, false, growable: true);
+
+        isFaqExpanded.removeAt(0);
+        isFaqExpanded.insert(0, true);
+
+        showLoader(false);
+
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  void onChangeExpansion(value, index) {
+    isFaqExpanded =
+        List.filled(customerfaqdataList?.length ?? 0, false, growable: true);
+    isFaqExpanded[index] = value;
+
+    notifyListeners();
   }
 }

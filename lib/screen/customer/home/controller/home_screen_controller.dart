@@ -20,18 +20,19 @@ class HomeScreenController extends ChangeNotifier {
   AllCategoriesRepo allCategoriesRepo = AllCategoriesRepo();
   List<Data>? bannerData;
   PageController pageController =
-  PageController(viewportFraction: 0.9, initialPage: 0);
+      PageController(viewportFraction: 0.9, initialPage: 0);
   List<CategoriesList> categoryFirstList = [];
   List<CategoriesList> categorySecondList = [];
   int _currentPage = 0;
   AllNearShopRepo allNearShopRepo = AllNearShopRepo();
   List<AllNearShops>? nearByShopList;
-  List <HomeScreenCouponData> ? couponData;
+  List<HomeScreenCouponData>? couponData;
+  List<HomeScreenHelloOfferData>? hellotoffersdata;
+
   CPlaceAd? cplacead;
   List<CustomerPlaceAd>? customerplacead;
-  List placeAd=[];
+  List placeAd = [];
   // String pincode = "111111";
-
 
   Future<void> initState(context, refresh) async {
     if (refresh) {
@@ -40,7 +41,6 @@ class HomeScreenController extends ChangeNotifier {
       await getCategoryList(context);
       await getAllNearByShops(context);
       await getPlaceAd(context);
-
     } else {
       showLoader(false);
     }
@@ -88,7 +88,7 @@ class HomeScreenController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -131,7 +131,7 @@ class HomeScreenController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -142,7 +142,6 @@ class HomeScreenController extends ChangeNotifier {
   }
 
   Future<void> getAllNearByShops(context) async {
-
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     print(pref.getString("pincode"));
@@ -161,7 +160,8 @@ class HomeScreenController extends ChangeNotifier {
       log(response.body);
       if (response.statusCode == 200) {
         nearByShopList = result.data;
-        couponData=result.couponData;
+        couponData = result.couponData;
+        hellotoffersdata = result.hellotoffersdata;
         showLoader(false);
         notifyListeners();
       } else {
@@ -171,7 +171,7 @@ class HomeScreenController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -193,10 +193,10 @@ class HomeScreenController extends ChangeNotifier {
       final result = PlaceAdBannerModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print("${response.body}");
-        cplacead =result.cplacead;
-        customerplacead= cplacead?.customerplacead;
+        cplacead = result.cplacead;
+        customerplacead = cplacead?.customerplacead;
         int imageLength = customerplacead?.length ?? 0;
-        for(int i= 0; i< imageLength;i++){
+        for (int i = 0; i < imageLength; i++) {
           placeAd.add(customerplacead?[i].shopBannerImagePath);
         }
 
@@ -208,7 +208,7 @@ class HomeScreenController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
