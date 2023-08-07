@@ -1607,18 +1607,23 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                   SizedBox(
                     height: 48.h,
                   ),
+                  watch.orderDetails?.orderStatus ==
+                      "Order Refund"?
                   Container(padding:EdgeInsets.only(left: 19.w),child: Text("Customer has sent 3 products return request. Refund amount is INR 60.",style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w700,color: Color(0xffE80000
-                  )),)),
+                  )),)):Container(
+                  ),
                   SizedBox(
                     height: 14.w,
                   ),
-                  Row(
+        watch.orderDetails?.orderStatus ==
+            "Order Refund" && watch.acceptPayment==false?  Row(
                     children: [
                       SizedBox(
                         width: 19.w,
                       ),
                       Expanded(
                           child:PrimaryButton(color:Color(0xff39C19D), onTap:(){
+                            read.onRefundAccept();
                             // read.updateRefundStatus("received", context);
                           },leading:
                           Row(
@@ -1653,7 +1658,54 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                         width: 19.w,
                       ),
                     ],
-                  ),
+                  ):watch.orderDetails?.orderStatus ==
+            "Order Refund" && watch.acceptPayment==true?Container(
+                    padding: EdgeInsets.symmetric(horizontal: 17.w),
+                    color: Color(0xffEFFDFF),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 15.w,
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text(
+                                  "Return Request sent",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black,
+                                      fontSize: 18.sp),
+                                ),
+                              ],
+                            ),
+
+                            Container(
+                              height: 22.w,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(5.w),
+                                  border: Border.all(
+                                      color: Color(0xff115B7A))),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.w),
+                              child: Center(
+                                  child: Text(
+                                  "Payment Pending",
+                                    style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xff115B7A)),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ):Container(),
                   SizedBox(
                     height: 50.w,
                   ),

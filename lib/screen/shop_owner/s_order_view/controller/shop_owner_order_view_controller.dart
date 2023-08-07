@@ -53,6 +53,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String cancellationId = "";
   String productId = "";
   List<bool> selectedProductList = [];
+  bool acceptPayment=false;
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -390,6 +391,11 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  onRefundAccept(){
+    acceptPayment=true;
+    notifyListeners();
   }
 
 ///////////////////////////////
