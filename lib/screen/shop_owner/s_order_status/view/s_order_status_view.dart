@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 class SOrderStatusView extends StatefulWidget {
   final int? selectedIndex;
   final bool? isFromOrderView;
-  const SOrderStatusView({Key? key, this.selectedIndex,  this.isFromOrderView})
+  const SOrderStatusView({Key? key, this.selectedIndex, this.isFromOrderView})
       : super(key: key);
 
   @override
@@ -33,8 +33,10 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
           .initState(context, widget.selectedIndex);
       setState(() {
         tabController = TabController(
-            length: 5, vsync: this, initialIndex:
-      context.watch<SOrderStatusController>().selectedIndex);
+            length: 5,
+            vsync: this,
+            initialIndex:
+                context.watch<SOrderStatusController>().selectedIndex);
       });
     });
     print("gudiyaaaaa");
@@ -95,13 +97,16 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                               SizedBox(
                                 height: 10.w,
                               ),
-                              watch.selectedIndex == 0? Container(
-                                height: 6.w,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff39C19D),
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(5.w),topRight:Radius.circular(5.w))
-                                ),
-                              ):Container(),
+                              watch.selectedIndex == 0
+                                  ? Container(
+                                      height: 6.w,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xff39C19D),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5.w),
+                                              topRight: Radius.circular(5.w))),
+                                    )
+                                  : Container(),
                             ],
                           ),
                         ),
@@ -122,13 +127,16 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                               SizedBox(
                                 height: 10.w,
                               ),
-                              watch.selectedIndex == 1? Container(
-                                height: 6.w,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff39C19D),
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(5.w),topRight:Radius.circular(5.w))
-                                ),
-                              ):Container(),
+                              watch.selectedIndex == 1
+                                  ? Container(
+                                      height: 6.w,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xff39C19D),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5.w),
+                                              topRight: Radius.circular(5.w))),
+                                    )
+                                  : Container(),
                             ],
                           ),
                         ),
@@ -149,13 +157,16 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                               SizedBox(
                                 height: 10.w,
                               ),
-                              watch.selectedIndex == 2? Container(
-                                height: 6.w,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff39C19D),
-                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(5.w),topRight:Radius.circular(5.w))
-                                ),
-                              ):Container(),
+                              watch.selectedIndex == 2
+                                  ? Container(
+                                      height: 6.w,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xff39C19D),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5.w),
+                                              topRight: Radius.circular(5.w))),
+                                    )
+                                  : Container(),
                             ],
                           ),
                         ),
@@ -176,13 +187,16 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                               SizedBox(
                                 height: 10.w,
                               ),
-                              watch.selectedIndex == 3? Container(
-                                height: 6.w,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff39C19D),
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(5.w),topRight:Radius.circular(5.w))
-                                ),
-                              ):Container(),
+                              watch.selectedIndex == 3
+                                  ? Container(
+                                      height: 6.w,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xff39C19D),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5.w),
+                                              topRight: Radius.circular(5.w))),
+                                    )
+                                  : Container(),
                             ],
                           ),
                         ),
@@ -203,13 +217,16 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                               SizedBox(
                                 height: 10.w,
                               ),
-                              watch.selectedIndex == 4? Container(
-                                height: 6.w,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff39C19D),
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(5.w),topRight:Radius.circular(5.w))
-                                ),
-                              ):Container(),
+                              watch.selectedIndex == 4
+                                  ? Container(
+                                      height: 6.w,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xff39C19D),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5.w),
+                                              topRight: Radius.circular(5.w))),
+                                    )
+                                  : Container(),
                             ],
                           ),
                         ),
