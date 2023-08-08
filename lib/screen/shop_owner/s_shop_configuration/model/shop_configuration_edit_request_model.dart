@@ -88,3 +88,7 @@ class ShopConfigurationRes {
     message = json["message"];
   }
 }
+
+class DeliverAreaList{
+
+}

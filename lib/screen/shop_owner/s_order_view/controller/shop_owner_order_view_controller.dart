@@ -93,6 +93,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     reasonController.clear();
     rejectReasonController.clear();
     acceptPayment=false;
+    rejectPayment=false;
    isRefundByCash=false;
    isRefundByUpi=false;
    upiIdController.clear();
@@ -456,16 +457,26 @@ void onRefundReject(){
       );
 
   Future<void> shopRefundUpdate(context) async {
-    if(refundPayableAmount.text==""){
-      Utils.showPrimarySnackbar(context,"Please Enter Refundable Amount",
-          type: SnackType.error);
-      return;
+    if(acceptPayment){
+      if(refundPayableAmount.text==""){
+        Utils.showPrimarySnackbar(context,"Please Enter Refundable Amount",
+            type: SnackType.error);
+        return;
+      }
+      if(!isRefundByCash && !isRefundByUpi){
+        Utils.showPrimarySnackbar(context,"Please Select Payment Method",
+            type: SnackType.error);
+        return;
+      }
     }
-    if(!isRefundByCash && !isRefundByUpi){
-      Utils.showPrimarySnackbar(context,"Please Select Payment Method",
-          type: SnackType.error);
-      return;
+    else{
+      if(rejectReasonController.text==""){
+        Utils.showPrimarySnackbar(context,"Please Enter Reject Reason",
+            type: SnackType.error);
+        return;
+      }
     }
+
     LoadingOverlay.of(context).show();
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -509,6 +520,7 @@ void onRefundReject(){
       },
     );
   }
+
 
 
 ///////////////////////////////

@@ -1,13 +1,19 @@
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/shop_delivery_area_dialog.dart';
+
 class ShopConfigurationResponse {
   int? status;
   String? message;
   Data? data;
   String? upiid;
+  List<ShopDeliveryAreaData> ?shopDeliveryAreaData;
+  List? selectedDeliveryArea;
 
   ShopConfigurationResponse({
     required this.status,
     required this.message,
     required this.data,
+    required this.shopDeliveryAreaData,
+    required this.selectedDeliveryArea,
   });
 
   ShopConfigurationResponse.fromJson(Map<String, dynamic> json) {
@@ -16,6 +22,18 @@ class ShopConfigurationResponse {
 
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
     upiid = json["upi_id"];
+    if (json["area_list"] != null) {
+      shopDeliveryAreaData = <ShopDeliveryAreaData>[];
+      json["area_list"].forEach((v) {
+        shopDeliveryAreaData!.add(ShopDeliveryAreaData.fromJson(v));
+      });
+    }
+    if(json["shop_delivery_area"]!=null){
+      selectedDeliveryArea=[];
+      json["shop_delivery_area"].forEach((v){
+        selectedDeliveryArea!.add(v);
+      });
+    }
   }
 }
 
@@ -86,5 +104,17 @@ class Data {
     shopOwnerSlot6To9 = json['shop_owner_slot_6_to_9'];
     acceptedPaymentStatus = json['accepted_payment_status'];
     minimumOrderDeliveryAmount = json['min_order_amount_for_delivery'];
+  }
+}
+class ShopDeliveryAreaData{
+  String ? id;
+  String ? areaName;
+  ShopDeliveryAreaData({
+    this.id,
+    this.areaName,
+});
+  ShopDeliveryAreaData.fromJson(Map<String,dynamic>json){
+    id=json["id"];
+    areaName=json["area_name"];
   }
 }

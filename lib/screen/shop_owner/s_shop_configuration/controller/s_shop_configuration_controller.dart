@@ -32,8 +32,8 @@ class SShopConfigurationController extends ChangeNotifier {
   TextEditingController startShopTimeController = TextEditingController();
   TextEditingController endShopTimeController = TextEditingController();
   TextEditingController imageNameController = TextEditingController();
-  TextEditingController minimumDeliveryAmountController =
-      TextEditingController();
+  TextEditingController minimumDeliveryAmountController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
   // TextEditingController deliveryChargesOneController = TextEditingController();
   // TextEditingController deliveryChargesTwoController = TextEditingController();
   // TextEditingController deliveryChargesThreeController =
@@ -81,6 +81,9 @@ class SShopConfigurationController extends ChangeNotifier {
     isCustomerPickupSelected = !isCustomerPickupSelected;
     notifyListeners();
   }
+
+
+
 
   void onDeliveryCustomerSelected() {
     isDeliveryCustomerSelected = !isDeliveryCustomerSelected;
@@ -537,4 +540,10 @@ class SShopConfigurationController extends ChangeNotifier {
       });
     });
   }
+
+  void onClearAreaSearch(){
+    searchController.clear();
+    notifyListeners();
+  }
+
 }

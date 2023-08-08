@@ -277,11 +277,11 @@ class _MyAppState extends State<MyApp> {
                       ),
                       debugShowCheckedModeBanner: false,
                       home: SplashScreen(),
-                  initialRoute: '/',
-                    routes: {
-                        '/':(context)=>SplashScreen(),
-
-                    },
+                  // initialRoute: '/',
+                  //   routes: {
+                  //       '/':(context)=>SplashScreen(),
+                  //
+                  //   },
                   ),
                 ),
               ));
