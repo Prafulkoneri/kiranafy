@@ -2,16 +2,19 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/payment_refund/view/payment_refund_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/cancel_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/order_status_mode.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/remove_product_from_order.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_owner_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_update_refund_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/add_remove_product_from_order_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/cancel_reason_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/order_status_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/shop_owner_order_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/shop_update_refund_repo.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 
@@ -53,6 +56,13 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String cancellationId = "";
   String productId = "";
   List<bool> selectedProductList = [];
+  bool acceptPayment=false;
+  bool rejectPayment=false;
+  bool isRefundByCash=false;
+  bool isRefundByUpi=false;
+  TextEditingController upiIdController=TextEditingController();
+  TextEditingController rejectReasonController = TextEditingController();
+  TextEditingController refundPayableAmount=TextEditingController();
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -60,6 +70,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   //////////////
   ShopOwnerOrderStatusChangedRepo orderStatusChangedRepo =
       ShopOwnerOrderStatusChangedRepo();
+
+  ShopUpdateRefundRepo shopUpdateRefundRepo=ShopUpdateRefundRepo();
 
   OrderStatusChangeRequestModel get orderStatusChangedRequestModel =>
       OrderStatusChangeRequestModel(
@@ -79,6 +91,12 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     orderCancelledReasonId = "";
     deliveryCode = "";
     reasonController.clear();
+    rejectReasonController.clear();
+    acceptPayment=false;
+   isRefundByCash=false;
+   isRefundByUpi=false;
+   upiIdController.clear();
+   refundPayableAmount.clear();
     await shopOwnerOrderView(context, orId, true);
 
     getCancelOrderList(context);
@@ -391,6 +409,107 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       },
     );
   }
+
+void onRefundAccept(){
+    acceptPayment=true;
+    rejectPayment=false;
+    notifyListeners();
+}
+void onRefundReject(){
+  acceptPayment=false;
+  rejectPayment=true;
+  notifyListeners();
+}
+
+
+  void onRefundByCash(value) {
+    if(!isRefundByCash){
+      isRefundByCash=true;
+      isRefundByUpi=false;
+    }
+    else{
+      isRefundByCash=false;
+      isRefundByUpi=false;
+    }
+    notifyListeners();
+  }
+
+  void onRefundByUpi(value) {
+    if(!isRefundByUpi){
+      isRefundByUpi=true;
+      isRefundByCash=false;
+    }
+    else{
+      isRefundByCash=false;
+      isRefundByUpi=false;
+    }
+    notifyListeners();
+  }
+
+  ShopUpdateRefundReqModel get shopUpdateRefundReqModel=>ShopUpdateRefundReqModel(
+      orderId:orderId,
+  refundOrderStatus: acceptPayment?"accept":"reject",
+  refundPaymentType: isRefundByCash?"cash":"upi",
+  refundRejectReason:rejectReasonController.text,
+  refunPayableAmount:refundPayableAmount.text,
+  transactionId: upiIdController.text,
+      );
+
+  Future<void> shopRefundUpdate(context) async {
+    if(refundPayableAmount.text==""){
+      Utils.showPrimarySnackbar(context,"Please Enter Refundable Amount",
+          type: SnackType.error);
+      return;
+    }
+    if(!isRefundByCash && !isRefundByUpi){
+      Utils.showPrimarySnackbar(context,"Please Select Payment Method",
+          type: SnackType.error);
+      return;
+    }
+    LoadingOverlay.of(context).show();
+    print("loading");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopUpdateRefundRepo.shopUpdateRefund(shopUpdateRefundReqModel,pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = ShopUpdateRefundResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        refundPayableAmount.clear();
+        upiIdController.clear();
+        reasonController.clear();
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SMainScreenView(
+                  index: 2, screenName: SPaymentRefundList(isNavFromAccounts: false,))),
+              (Route<dynamic> route) => false,
+        );
+        notifyListeners();
+      } else {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      LoadingOverlay.of(context).hide();
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+            LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
 
 ///////////////////////////////
 }

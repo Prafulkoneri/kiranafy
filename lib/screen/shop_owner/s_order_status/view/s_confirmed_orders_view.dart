@@ -134,6 +134,7 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                               MaterialPageRoute(
                                   builder: (context) => ShopOrderView(
                                         orderId: element?.id.toString(),
+                                    fromOrderStatus: true,
                                     selectedIndex: watch.selectedIndex,
                                       )),
                             );

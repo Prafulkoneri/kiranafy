@@ -276,7 +276,13 @@ class _MyAppState extends State<MyApp> {
                         fontFamily: 'dm_sans_regular',
                       ),
                       debugShowCheckedModeBanner: false,
-                      home: SplashScreen()),
+                      home: SplashScreen(),
+                  initialRoute: '/',
+                    routes: {
+                        '/':(context)=>SplashScreen(),
+
+                    },
+                  ),
                 ),
               ));
         });

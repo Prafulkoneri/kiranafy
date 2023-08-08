@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_payments/controller/payment_histaory_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/stack_loader.dart';
@@ -286,95 +287,100 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                     itemBuilder: (BuildContext, index) {
                                       final element =
                                           watch.pendingOrdersList?[index];
-                                      return Container(
-                                        padding: EdgeInsets.all(14.w),
-                                        margin: EdgeInsets.only(bottom: 15.w),
-                                        width: ScreenUtil().screenWidth,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.w),
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: Color(0xffEFEFEF)),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  // "",
-                                                  "Order ID: ${element?.orderUniqueId}",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 15.sp,
-                                                      color: Color(0xff3A3A3A)),
-                                                ),
-                                                Text(
-                                                  // "135",
-                                                  "${element?.totalAmount}",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 19.sp,
-                                                      color: Color(0xff39C19D)),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 7.w,
-                                            ),
-                                            Row(
-                                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  // "12/2/23",
-                                                  "${element?.createdAt}",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 12.sp,
-                                                      color: Color(0xffA3A3A3)),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 7.w,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  // "Sham",
-                                                  "${element?.customerName}",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 12.sp,
-                                                      color: Color(0xffA3A3A3)),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      // "Upi",
-                                                      "${element?.paymentMode}",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 12.sp,
-                                                          color: Color(
-                                                              0xffA3A3A3)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                      return GestureDetector(
+                                        onTap: (){
+                                          Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopOrderView(fromOrderStatus: false,selectedIndex: 0,orderId: element?.id.toString(),)));
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(14.w),
+                                          margin: EdgeInsets.only(bottom: 15.w),
+                                          width: ScreenUtil().screenWidth,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.w),
+                                            color: Colors.white,
+                                            border: Border.all(
+                                                color: Color(0xffEFEFEF)),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    // "",
+                                                    "Order ID: ${element?.orderUniqueId}",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 15.sp,
+                                                        color: Color(0xff3A3A3A)),
+                                                  ),
+                                                  Text(
+                                                    // "135",
+                                                    "${element?.totalAmount}",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 19.sp,
+                                                        color: Color(0xff39C19D)),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 7.w,
+                                              ),
+                                              Row(
+                                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    // "12/2/23",
+                                                    "${element?.createdAt}",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 12.sp,
+                                                        color: Color(0xffA3A3A3)),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 7.w,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    // "Sham",
+                                                    "${element?.customerName}",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 12.sp,
+                                                        color: Color(0xffA3A3A3)),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        // "Upi",
+                                                        "${element?.paymentMode}",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 12.sp,
+                                                            color: Color(
+                                                                0xffA3A3A3)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       );
                                     }),
@@ -419,87 +425,92 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                               itemBuilder: (BuildContext, index) {
                                 final element =
                                     watch.confirmedOrdersList?[index];
-                                return Container(
-                                  padding: EdgeInsets.all(14.w),
-                                  margin: EdgeInsets.only(bottom: 15.w),
-                                  width: ScreenUtil().screenWidth,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.w),
-                                    color: Colors.white,
-                                    border:
-                                        Border.all(color: Color(0xffEFEFEF)),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            // "",
-                                            "Order ID: ${element?.orderUniqueId}",
+                                return GestureDetector(
+                                 onTap: (){
+                                   Navigator.push(context,MaterialPageRoute(builder: (context)=>ShopOrderView(fromOrderStatus: false,selectedIndex: 0,orderId: element?.id.toString(),)));
+                                 },
+                                  child: Container(
+                                    padding: EdgeInsets.all(14.w),
+                                    margin: EdgeInsets.only(bottom: 15.w),
+                                    width: ScreenUtil().screenWidth,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.w),
+                                      color: Colors.white,
+                                      border:
+                                          Border.all(color: Color(0xffEFEFEF)),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              // "",
+                                              "Order ID: ${element?.orderUniqueId}",
 
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 15.sp,
-                                                color: Color(0xff3A3A3A)),
-                                          ),
-                                          Text(
-                                            // "135",
-                                            "${element?.customerRefundAmount}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 19.sp,
-                                                color: Color(0xff39C19D)),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 7.w,
-                                      ),
-                                      Row(
-                                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            // "12/2/23",
-                                            "${element?.createdAt}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 12.sp,
-                                                color: Color(0xffA3A3A3)),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 7.w,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            // "Sham",
-                                            "${element?.customerName}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 12.sp,
-                                                color: Color(0xffA3A3A3)),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                // "Upi",
-                                                "${element?.paymentMode}",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 12.sp,
-                                                    color: Color(0xffA3A3A3)),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 15.sp,
+                                                  color: Color(0xff3A3A3A)),
+                                            ),
+                                            Text(
+                                              // "135",
+                                              "${element?.customerRefundAmount}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19.sp,
+                                                  color: Color(0xff39C19D)),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 7.w,
+                                        ),
+                                        Row(
+                                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              // "12/2/23",
+                                              "${element?.createdAt}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12.sp,
+                                                  color: Color(0xffA3A3A3)),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 7.w,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              // "Sham",
+                                              "${element?.customerName}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12.sp,
+                                                  color: Color(0xffA3A3A3)),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  // "Upi",
+                                                  "${element?.paymentMode}",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 12.sp,
+                                                      color: Color(0xffA3A3A3)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 );
                               }),

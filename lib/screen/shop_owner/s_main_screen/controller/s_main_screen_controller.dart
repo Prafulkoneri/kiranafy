@@ -124,7 +124,7 @@ class SMainScreenController extends ChangeNotifier {
   }
 
   onOrderTypeNotification(context,id){
-    currentScreen=ShopOrderView(selectedIndex:0,orderId:id.toString());
+    currentScreen=ShopOrderView(selectedIndex:0,orderId:id.toString(),fromOrderStatus: true,);
     currentIndex=1;
     notifyListeners();
   }
