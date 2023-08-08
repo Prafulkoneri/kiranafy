@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -101,8 +103,27 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("handled background message");
 }
 
+final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+String? selectedNotificationPayload;
+
+class ReceivedNotification {
+  ReceivedNotification({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.payload,
+  });
+
+  final int id;
+  final String title;
+  final String body;
+  final String payload;
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize();
   if (Platform.isIOS) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
@@ -114,6 +135,17 @@ void main() async {
     await Firebase.initializeApp();
   }
   await FireBaseApi().initNotification();
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  final InitializationSettings initializationSettings =
+      InitializationSettings(android: initializationSettingsAndroid);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onSelectNotification: (payload) async {
+    if (payload != null) {
+      debugPrint('notification payload: $payload');
+    }
+  });
   runApp(
     MultiProvider(
       providers: [
@@ -270,18 +302,18 @@ class _MyAppState extends State<MyApp> {
                 textDirection: TextDirection.ltr,
                 child: LoadingOverlay(
                   child: MaterialApp(
-                      title: 'Flutter Demo',
-                      theme: ThemeData(
-                        primarySwatch: Colors.blue,
-                        fontFamily: 'dm_sans_regular',
-                      ),
-                      debugShowCheckedModeBanner: false,
-                      home: SplashScreen(),
-                  initialRoute: '/',
-                    routes: {
-                        '/':(context)=>SplashScreen(),
+                    title: 'Flutter Demo',
+                    theme: ThemeData(
+                      primarySwatch: Colors.blue,
+                      fontFamily: 'dm_sans_regular',
+                    ),
+                    debugShowCheckedModeBanner: false,
+                    home: SplashScreen(),
+                    // initialRoute: '/',
+                    //   routes: {
+                    //       '/':(context)=>SplashScreen(),
 
-                    },
+                    //   },
                   ),
                 ),
               ));

@@ -13,7 +13,7 @@ class BuySubscriptionRequestModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["subscription_id"] = subscriptionId;
-    data["service_id"] = subscriptionId;
+    data["service_id"] = serviceId;
     data["payment_mode"] = paymentMode;
     data["transaction_id"] = transactionId;
     return data;

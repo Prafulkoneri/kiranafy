@@ -1,13 +1,19 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/main.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
@@ -20,6 +26,8 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class SMySubscriptionView extends StatefulWidget {
@@ -36,6 +44,57 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
       context.read<SubscriptionHistoryController>().initState(context);
     });
     // print(context.read<SubscriptionHistoryController>().currentSubscriptionPlan);
+  }
+
+  String? file;
+  String fileurl =
+      "https://localsupermart.com/testing/storage/subscription_pdf_invoice/LSMSUBS000054-2023-08-0810:50:38.pdf";
+
+  Future<void> _showProgressNotification() async {
+    const int maxProgress = 5;
+    for (int i = 0; i <= maxProgress; i++) {
+      await Future<void>.delayed(const Duration(seconds: 1), () async {
+        final AndroidNotificationDetails androidPlatformChannelSpecifics =
+            AndroidNotificationDetails(
+                'progress channel', 'progress channel description',
+                channelShowBadge: false,
+                importance: Importance.max,
+                // priority: Priority.high,
+                onlyAlertOnce: true,
+                showProgress: true,
+                maxProgress: maxProgress,
+                progress: i);
+        final NotificationDetails platformChannelSpecifics =
+            NotificationDetails(android: androidPlatformChannelSpecifics);
+        await flutterLocalNotificationsPlugin.show(
+            0,
+            'progress notification title',
+            'progress notification body',
+            platformChannelSpecifics,
+            payload: 'item x');
+      });
+    }
+  }
+
+  void download(String url) async {
+    final status = await Permission.storage.request();
+
+    if (status.isGranted) {
+      final id = await FlutterDownloader.enqueue(
+        url: url,
+        savedDir: "/storage/emulated/0/Download",
+        showNotification: true,
+        openFileFromNotification: true,
+        fileName: "file.pdf",
+      ).then((value) {
+        print("complated");
+      });
+    } else {
+      setState(() {
+        print("faild");
+      });
+      print('Permission Denied');
+    }
   }
 
   @override
@@ -713,6 +772,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
 
   Widget createTable() {
     final watch = context.watch<SubscriptionHistoryController>();
+    final read = context.watch<SubscriptionHistoryController>();
     List<TableRow> rows = [];
     int length = watch.subscriptionHistory?.length ?? 0;
     for (int i = 0; i < length; i++) {
@@ -802,10 +862,73 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           SizedBox(
                             width: 5,
                           ),
-                          SvgPicture.asset(
-                            'assets/icons/download.svg',
-                            height: 18,
-                            // overflow: TextOverflow.ellipsis,
+                          GestureDetector(
+                            // onTap: () {
+                            //   print("object");
+                            //   read.subscriptionInvoice(context,
+                            //       watch.subscriptionHistory?[i].id.toString());
+                            // },
+                            onTap: () async {
+                              // Map<Permission, PermissionStatus> statuses =
+                              //     await [
+                              //   Permission.storage,
+                              //   //add more permission to request here.
+                              // ].request();
+
+                              // // if (statuses[Permission.storage]!.isGranted) {
+                              // var dir;
+                              // if (Platform.isIOS) {
+                              //   dir = await getApplicationDocumentsDirectory();
+                              // } else {
+                              //   dir = Directory('/storage/emulated/0/Download');
+                              // }
+
+                              // if (dir != null) {
+                              //   String savename = "file.pdf";
+                              //   String savePath = dir.path + "/$savename";
+                              //   print(savePath);
+                              //   //output:  /storage/emulated/0/Download/banner.png
+
+                              //   try {
+                              //     await Dio().download(fileurl, savePath,
+                              //         onReceiveProgress: (received, total) {
+                              //       if (total != -1) {
+                              //         print((received / total * 100)
+                              //                 .toStringAsFixed(0) +
+                              //             "%");
+                              //         //you can build progressbar feature too
+                              //       }
+                              //     });
+                              //     print("File is saved to download folder.");
+                              //   } on DioError catch (e) {
+                              //     print(e.message);
+                              //   }
+                              // }
+
+                              // print("No permission to read and write.");
+                              // _showProgressNotification();
+                              // Map<String, String> requestHeaders = {
+                              //   // 'Authorization': 'Bearer ' + http.cookie,
+                              // };
+
+                              // final assetsDir = "/storage/emulated/0/Download";
+                              // final taskId = await FlutterDownloader.enqueue(
+                              //   url: fileurl,
+                              //   savedDir: assetsDir,
+                              //   fileName: file,
+                              //   headers: requestHeaders,
+                              //   showNotification:
+                              //       true, // show download progress in status bar (for Android)
+                              //   openFileFromNotification:
+                              //       true, // click on notification to open downloaded file (for Android)
+                              // );
+                              download(fileurl);
+                            },
+                            child: SvgPicture.asset(
+                              'assets/icons/download.svg',
+                              height: 18,
+                              // overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ],
                       )
