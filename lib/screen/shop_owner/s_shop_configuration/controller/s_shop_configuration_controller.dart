@@ -32,7 +32,8 @@ class SShopConfigurationController extends ChangeNotifier {
   TextEditingController startShopTimeController = TextEditingController();
   TextEditingController endShopTimeController = TextEditingController();
   TextEditingController imageNameController = TextEditingController();
-  TextEditingController minimumDeliveryAmountController = TextEditingController();
+  TextEditingController minimumDeliveryAmountController =
+      TextEditingController();
   TextEditingController searchController = TextEditingController();
   // TextEditingController deliveryChargesOneController = TextEditingController();
   // TextEditingController deliveryChargesTwoController = TextEditingController();
@@ -55,6 +56,9 @@ class SShopConfigurationController extends ChangeNotifier {
   String image = "";
   bool isLoading = true;
   bool isInitialConfiguration = true;
+  List<ShopDeliveryAreaData>? shopDeliveryAreaData;
+  List<bool> selectedDeliveryAreaList = [];
+  List selectedDeliveryAreaId = [];
 
   Future<void> initState(context, initialConfiguration) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -81,9 +85,6 @@ class SShopConfigurationController extends ChangeNotifier {
     isCustomerPickupSelected = !isCustomerPickupSelected;
     notifyListeners();
   }
-
-
-
 
   void onDeliveryCustomerSelected() {
     isDeliveryCustomerSelected = !isDeliveryCustomerSelected;
@@ -187,6 +188,10 @@ class SShopConfigurationController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final data = result.data;
+        shopDeliveryAreaData = result.shopDeliveryAreaData;
+        selectedDeliveryAreaList = List<bool>.filled(
+            shopDeliveryAreaData?.length ?? 0, false,
+            growable: true);
 
         supportNumberController.text = data?.shopOwnerSupportNumber ?? "";
         if (configuration) {
@@ -541,9 +546,20 @@ class SShopConfigurationController extends ChangeNotifier {
     });
   }
 
-  void onClearAreaSearch(){
+  void onClearAreaSearch() {
     searchController.clear();
     notifyListeners();
   }
 
+  void onSelectedDeliveryArea(index, id) {
+    selectedDeliveryAreaList[index] = !selectedDeliveryAreaList[index];
+    if (selectedDeliveryAreaList[index]) {
+      selectedDeliveryAreaId.removeWhere((item) => item == id);
+      selectedDeliveryAreaId.insert(0, id);
+    } else {
+      selectedDeliveryAreaId.removeWhere((item) => item == id);
+    }
+    print(selectedDeliveryAreaId);
+    notifyListeners();
+  }
 }

@@ -176,8 +176,8 @@ class SSubscriptionController extends ChangeNotifier {
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
-                      index: 4,
-                      screenName: SMySubscriptionView(screenName:"accounts"))),
+                    index: 4,
+                    screenName: SMySubscriptionView(screenName: "accounts"))),
             (Route<dynamic> route) => false,
           );
         } else {

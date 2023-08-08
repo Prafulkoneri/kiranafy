@@ -25,7 +25,7 @@ class PrimaryAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      systemOverlayStyle:SystemUiOverlayStyle.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
       toolbarHeight: 65.w,
       // backgroundColor: kappbar,
       leading: isBackButtonEnabled ?? true
@@ -38,14 +38,18 @@ class PrimaryAppBar extends StatelessWidget {
               ),
             )
           : Container(),
-      title: Text(
-        title ?? "",
-        style: GoogleFonts.dmSans(
-          textStyle: TextStyle(
-              color: Black,
-              letterSpacing: .5,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w700),
+      title: Flexible(
+        child: Text(
+          maxLines: 2,
+          title ?? "",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.dmSans(
+            textStyle: TextStyle(
+                color: Black,
+                letterSpacing: .5,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700),
+          ),
         ),
       ),
       centerTitle: true,
@@ -70,21 +74,20 @@ class PrimaryAppBar extends StatelessWidget {
       actions: <Widget>[
         GestureDetector(
           onTap: onActionTap,
-          child:
-          Container(
+          child: Container(
             color: Colors.transparent,
-              height: 100.w,
-              width: 100.w,
-              // width: 50.w,
-              // height: 65.w,
-              child: Align(alignment: Alignment.centerRight,child: Padding(
-                padding: const EdgeInsets.only(right:20.0),
-                child: action,
-              )),
+            height: 100.w,
+            width: 100.w,
+            // width: 50.w,
+            // height: 65.w,
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: action,
+                )),
           ),
-
         )
-
       ],
     );
   }

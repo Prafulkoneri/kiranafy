@@ -705,8 +705,6 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-
-
                                     return StatefulBuilder(
                                       builder: (context, setState) {
                                         return ShopDeliveryAreaDialogView();

@@ -5,7 +5,7 @@ class ShopConfigurationResponse {
   String? message;
   Data? data;
   String? upiid;
-  List<ShopDeliveryAreaData> ?shopDeliveryAreaData;
+  List<ShopDeliveryAreaData>? shopDeliveryAreaData;
   List? selectedDeliveryArea;
 
   ShopConfigurationResponse({
@@ -28,9 +28,9 @@ class ShopConfigurationResponse {
         shopDeliveryAreaData!.add(ShopDeliveryAreaData.fromJson(v));
       });
     }
-    if(json["shop_delivery_area"]!=null){
-      selectedDeliveryArea=[];
-      json["shop_delivery_area"].forEach((v){
+    if (json["shop_delivery_area"] != null) {
+      selectedDeliveryArea = [];
+      json["shop_delivery_area"].forEach((v) {
         selectedDeliveryArea!.add(v);
       });
     }
@@ -106,15 +106,16 @@ class Data {
     minimumOrderDeliveryAmount = json['min_order_amount_for_delivery'];
   }
 }
-class ShopDeliveryAreaData{
-  String ? id;
-  String ? areaName;
+
+class ShopDeliveryAreaData {
+  int? id;
+  String? areaName;
   ShopDeliveryAreaData({
     this.id,
     this.areaName,
-});
-  ShopDeliveryAreaData.fromJson(Map<String,dynamic>json){
-    id=json["id"];
-    areaName=json["area_name"];
+  });
+  ShopDeliveryAreaData.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    areaName = json["area_name"];
   }
 }
