@@ -91,12 +91,8 @@ class _AllCouponsState extends State<AllCoupons> {
                       itemBuilder: (BuildContext, index) {
                         final element = watch.filterCouponList?[index];
                         return Padding(
-                          // padding: EdgeInsets.only(
-                          //     left: index == 0 ? 19.w : 10.w,
-                          //     top: 20.w,
-                          //     right: index == 4 ? 19.w : 0.w),
                           padding: EdgeInsets.only(
-                              left: index == 0 ? 19.w : 10.w,
+                              left: index == 0 ? 15.w : 10.w,
                               top: 20.w,
                               right: index ==
                                       int.parse(watch.filterCouponList?.length
@@ -159,7 +155,7 @@ class _AllCouponsState extends State<AllCoupons> {
                                       ),
                                       watch.selectedIndex == index
                                           ? SizedBox(
-                                              width: 7.w,
+                                              width: 8.w,
                                             )
                                           : Container(),
                                       watch.selectedIndex == index
@@ -202,9 +198,8 @@ class _AllCouponsState extends State<AllCoupons> {
                               itemBuilder: (BuildContext, index) {
                                 final element = watch.allCouponlistdata
                                     ?.shopEnquiriesDetails?[index];
-                                // final element =  watch.shopEnquiriesDetails?[index];
+
                                 return Container(
-                                  // decoration: BoxDecoration(color: Black),
                                   padding: EdgeInsets.only(
                                       left: 19.0.w, right: 19.w, top: 15.0.w),
                                   child: Stack(
