@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:local_supper_market/main.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/model/get_subscription_history_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/model/subscription_invoice_model.dart';
@@ -38,6 +41,22 @@ class SubscriptionHistoryController extends ChangeNotifier {
       context,
     );
     notifyListeners();
+  }
+
+  Future<void> _showNotification(fileName) async {
+    final android = AndroidNotificationDetails('0', 'Adun Accounts',
+        channelDescription: 'channel description',
+        importance: Importance.max,
+        icon: '');
+    final iOS = IOSNotificationDetails();
+    final platform = NotificationDetails(android: android, iOS: iOS);
+
+    await flutterLocalNotificationsPlugin.show(
+        0, // notification id
+        "${fileName}",
+        'Download complete.',
+        platform,
+        payload: '/storage/emulated/0/Download/file.pdf');
   }
 
   showLoader(value) {
@@ -92,20 +111,49 @@ class SubscriptionHistoryController extends ChangeNotifier {
     subscreptionInvoicesRepo
         .subscriptionInvoice(
             subscreiptionInvoicesReqModel, pref.getString("successToken"))
-        .then((response) {
+        .then((response) async {
       log(response.body);
       final result =
           ShopConfigrationInvoiceResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        // subscriptioninvoicedata = result.subscriptioninvoicedata;
-        // shopInvoiceList = subscriptioninvoicedata?.shopInvoiceList;
-        // downloadFile(
-        //     "https://localsupermart.com/testing/storage/subscription_pdf_invoice/LSMSUBS000054-2023-08-0810:50:38.pdf" ??
-        //     "",
-        // "subscreptionPdf",
-        // directory?.path.toString() ?? "");
-        // customerDetail = result.data;
+        subscriptioninvoicedata = result.subscriptioninvoicedata;
+        Map<Permission, PermissionStatus> statuses = await [
+          Permission.storage,
+          //add more permission to request here.
+        ].request();
+        var dir;
+        if (Platform.isIOS) {
+          dir = await getApplicationDocumentsDirectory();
+        } else {
+          dir = Directory('/storage/emulated/0/Download');
+        }
+
+        if (dir != null) {
+          String fullPath=subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()??"";
+          List splitPath = fullPath.split("/");
+          print(splitPath);
+          String saveName=splitPath[splitPath.length-1];
+          print("savename${saveName}");
+          String savePath = dir.path + "/$saveName";
+          print(savePath);
+          //output:  /storage/emulated/0/Download/banner.png
+
+          try {
+            await Dio().download(fileurl, savePath,
+                onReceiveProgress: (received, total) {
+              if (total != -1) {
+                print((received / total * 100).toStringAsFixed(0) + "%");
+                //you can build progressbar feature too
+              }
+            });
+            print("File is saved to download folder.");
+          } on DioError catch (e) {
+            print(e.message);
+          }
+          _showNotification(saveName);
+        }
+        print("No permission to read and write.");
         print(directory?.path.toString());
         print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
 
@@ -127,101 +175,5 @@ class SubscriptionHistoryController extends ChangeNotifier {
     );
   }
 
-  //////////////////
-  // Future<String> downloadFile(String url, String fileName, String dir) async {
-  //   HttpClient httpClient = new HttpClient();
-  //   File file;
-  //   String filePath = '';
-  //   String myUrl = '';
 
-  //   try {
-  //     myUrl = url;
-  //     var request = await httpClient.getUrl(Uri.parse(myUrl));
-
-  //     var response = await request.close();
-
-  //     if (response.statusCode == 200) {
-  //       var bytes = await consolidateHttpClientResponseBytes(response);
-  //       filePath = '$dir/$fileName';
-  //       file = File(filePath);
-  //       await file.writeAsBytes(bytes);
-  //     } else
-  //       filePath = 'Error code: ' + response.statusCode.toString();
-  //   } catch (ex) {
-  //     filePath = 'Can not fetch url';
-  //   }
-
-  //   return filePath;
-  // }
-
-  // ///////
-  // Future<String?> getDownloadPath() async {
-  //   try {
-  //     if (Platform.isIOS) {
-  //       directory = await getApplicationDocumentsDirectory();
-  //     } else {
-  //       directory = Directory('/storage/emulated/0/Download');
-  //       // Put file in global download folder, if for an unknown reason it didn't exist, we fallback
-  //       // ignore: avoid_slow_async_io
-  //       if (!await directory!.exists())
-  //         directory = await getExternalStorageDirectory();
-  //     }
-  //   } catch (err, stack) {
-  //     print("Cannot get download folder path");
-  //   }
-  //   return directory?.path;
-  // }
-
-  ////////////
-//   Future<String?> saveFileToDevice(
-//       context, String filename, List<int> data) async {
-// // Get the path to the app's documents directory
-//     var status = await Permission.storage.status;
-//     if (!status.isGranted) {
-//       await Permission.storage.request();
-//     }
-
-//     var dir = Platform.isAndroid
-//         ? '/storage/emulated/0/Download'
-//         : (await getApplicationDocumentsDirectory()).path;
-
-// // Create the file and write the data to it
-//     var file = File('$dir/$filename');
-
-//     bool alreadyDownloaded = await file.exists();
-
-//     String incrementCount(String fileName) {
-//       int dotIndex = fileName.lastIndexOf('.');
-//       String newFileName = fileName.substring(0, dotIndex) +
-//           "(${count += 1})" +
-//           fileName.substring(dotIndex);
-
-//       return newFileName;
-//     }
-
-//     if (alreadyDownloaded) {
-//       String newFileName = incrementCount(file.path);
-
-//       var newFile = File('$newFileName');
-//       await newFile.writeAsBytes(data, flush: true);
-
-//       String subStringFileName = newFileName.substring(29);
-//       Utils.showPrimarySnackbar(context, "Saved File", type: SnackType.error);
-
-//       //  Utils.showPrimarySnackbar(context, result.message,
-//       //           type: SnackType.error);
-
-//       file = newFile;
-//       print('modified updating ....--> $file');
-//     } else {
-//       await file.writeAsBytes(data, flush: true);
-
-//       // CommonWidgets.makeToast(
-//       //     fontSize: 14, toastMsg: '${filename} saved to Downloads Folder');
-//       Utils.showPrimarySnackbar(context, "saved to Downloads Folder",
-//           type: SnackType.error);
-//     }
-
-//     return 'file://${file.path}';
-//   }
 }

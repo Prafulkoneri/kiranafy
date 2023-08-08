@@ -63,6 +63,7 @@ import 'package:local_supper_market/screen/splash/view/splash_view.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:local_supper_market/widget/textfield.dart';
+import 'package:open_file/open_file.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -120,6 +121,24 @@ class ReceivedNotification {
   final String body;
   final String payload;
 }
+Future<void> initNotification() async {
+// initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+  const AndroidInitializationSettings initializationSettingsAndroid =
+  AndroidInitializationSettings('notification_icon');
+  final IOSInitializationSettings initializationSettingsIOS =
+  IOSInitializationSettings();
+  final MacOSInitializationSettings initializationSettingsMacOS =
+  MacOSInitializationSettings();
+  final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+      macOS: initializationSettingsMacOS);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onSelectNotification: (String? payload) {
+    print(payload);
+        if (payload != null) OpenFile.open(payload);
+      });
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -138,14 +157,10 @@ void main() async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
 
-  final InitializationSettings initializationSettings =
-      InitializationSettings(android: initializationSettingsAndroid);
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-      onSelectNotification: (payload) async {
-    if (payload != null) {
-      debugPrint('notification payload: $payload');
-    }
-  });
+  // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  // FlutterLocalNotificationsPlugin();
+  initNotification();
+
   runApp(
     MultiProvider(
       providers: [

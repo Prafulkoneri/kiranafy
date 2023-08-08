@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,15 +23,17 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/controller/subscription_history_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/benifits_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/inapp_web_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-
+import 'dart:typed_data';
+import 'dart:io';
 class SMySubscriptionView extends StatefulWidget {
   final String? screenName;
   const SMySubscriptionView({super.key, required this.screenName});
@@ -50,31 +54,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
   String fileurl =
       "https://localsupermart.com/testing/storage/subscription_pdf_invoice/LSMSUBS000054-2023-08-0810:50:38.pdf";
 
-  Future<void> _showProgressNotification() async {
-    const int maxProgress = 5;
-    for (int i = 0; i <= maxProgress; i++) {
-      await Future<void>.delayed(const Duration(seconds: 1), () async {
-        final AndroidNotificationDetails androidPlatformChannelSpecifics =
-            AndroidNotificationDetails(
-                'progress channel', 'progress channel description',
-                channelShowBadge: false,
-                importance: Importance.max,
-                // priority: Priority.high,
-                onlyAlertOnce: true,
-                showProgress: true,
-                maxProgress: maxProgress,
-                progress: i);
-        final NotificationDetails platformChannelSpecifics =
-            NotificationDetails(android: androidPlatformChannelSpecifics);
-        await flutterLocalNotificationsPlugin.show(
-            0,
-            'progress notification title',
-            'progress notification body',
-            platformChannelSpecifics,
-            payload: 'item x');
-      });
-    }
-  }
+
 
   void download(String url) async {
     final status = await Permission.storage.request();
@@ -95,6 +75,59 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
       });
       print('Permission Denied');
     }
+  }
+
+  downloadFile(String url, {filename}) async {
+    var httpClient = http.Client();
+    var request = new http.Request('GET', Uri.parse(url));
+    var response = httpClient.send(request);
+    String dir = (await getApplicationDocumentsDirectory()).path;
+
+    List<List<int>> chunks =[];
+    int downloaded = 0;
+
+    response.asStream().listen((http.StreamedResponse r) {
+
+      r.stream.listen((List<int> chunk) {
+        // Display percentage of completion
+        // debugPrint('downloadPercentage: ${downloaded / r.contentLength * 100}');
+
+        chunks.add(chunk);
+        downloaded += chunk.length;
+      }, onDone: () async {
+        // Display percentage of completion
+        // debugPrint('downloadPercentage: ${downloaded / r.contentLength * 100}');
+
+        // Save the file
+        File file = new File('$dir/$filename');
+        final Uint8List bytes = Uint8List(r.contentLength??0);
+        int offset = 0;
+        for (List<int> chunk in chunks) {
+          bytes.setRange(offset, offset + chunk.length, chunk);
+          offset += chunk.length;
+        }
+        await file.writeAsBytes(bytes);
+        return;
+      });
+    });
+  }
+
+  Future<void> initPlatformState() async {
+    _setPath();
+    if (!mounted) return;
+  }
+
+  String path="";
+
+  void _setPath() async {
+    Directory _path = await getApplicationDocumentsDirectory();
+    String _localPath = _path.path + Platform.pathSeparator + 'Download';
+    final savedDir = Directory(_localPath);
+    bool hasExisted = await savedDir.exists();
+    if (!hasExisted) {
+      savedDir.create();
+    }
+    path = _localPath;
   }
 
   @override
@@ -864,17 +897,22 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                           ),
                           GestureDetector(
                             // onTap: () {
-                            //   print("object");
-                            //   read.subscriptionInvoice(context,
-                            //       watch.subscriptionHistory?[i].id.toString());
+
                             // },
                             onTap: () async {
+                              print("object");
+                              read.subscriptionInvoice(context,
+                                  watch.subscriptionHistory?[i].id.toString());
+
+
+
+
                               // Map<Permission, PermissionStatus> statuses =
                               //     await [
                               //   Permission.storage,
                               //   //add more permission to request here.
                               // ].request();
-
+                              //
                               // // if (statuses[Permission.storage]!.isGranted) {
                               // var dir;
                               // if (Platform.isIOS) {
@@ -882,13 +920,13 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               // } else {
                               //   dir = Directory('/storage/emulated/0/Download');
                               // }
-
+                              //
                               // if (dir != null) {
                               //   String savename = "file.pdf";
                               //   String savePath = dir.path + "/$savename";
                               //   print(savePath);
                               //   //output:  /storage/emulated/0/Download/banner.png
-
+                              //
                               //   try {
                               //     await Dio().download(fileurl, savePath,
                               //         onReceiveProgress: (received, total) {
@@ -904,13 +942,17 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               //     print(e.message);
                               //   }
                               // }
-
+                              //
                               // print("No permission to read and write.");
+                              //
+                              //
+
+
                               // _showProgressNotification();
                               // Map<String, String> requestHeaders = {
                               //   // 'Authorization': 'Bearer ' + http.cookie,
                               // };
-
+                              //
                               // final assetsDir = "/storage/emulated/0/Download";
                               // final taskId = await FlutterDownloader.enqueue(
                               //   url: fileurl,
@@ -922,7 +964,9 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               //   openFileFromNotification:
                               //       true, // click on notification to open downloaded file (for Android)
                               // );
-                              download(fileurl);
+
+
+                              // download(fileurl);
                             },
                             child: SvgPicture.asset(
                               'assets/icons/download.svg',
