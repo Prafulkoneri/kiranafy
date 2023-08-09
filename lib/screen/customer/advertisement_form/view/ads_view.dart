@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -27,8 +25,7 @@ class CustomerAdsView extends StatefulWidget {
   const CustomerAdsView({super.key});
 
   @override
-  State<CustomerAdsView> createState() =>
-      _CustomerAdsViewState();
+  State<CustomerAdsView> createState() => _CustomerAdsViewState();
 }
 
 class _CustomerAdsViewState extends State<CustomerAdsView> {
@@ -40,20 +37,22 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
-          child: PrimaryAppBar(
-            title: "Advertisement Request form",
-            onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => MainScreenView(
-                        index: 0,
-                        screenName: HomeScreenView(
-                         refreshPage: true,
-                        ))),
-                    (Route<dynamic> route) => false,
-              );
-            },
+          child: Center(
+            child: PrimaryAppBar(
+              title: "     Advertisement Request    form",
+              onBackBtnPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MainScreenView(
+                          index: 0,
+                          screenName: HomeScreenView(
+                            refreshPage: true,
+                          ))),
+                  (Route<dynamic> route) => false,
+                );
+              },
+            ),
           ),
         ),
         backgroundColor: Colors.white,
@@ -365,7 +364,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                               child: Text(
                                 // softWrap: true,
                                 // maxLines: 3,//
-                                "For pricing and further details,Local Supermart will contact you within 48 hours.",
+                                "For pricing and further details, Local Supermart will contact you within 48 hours.",
                                 textAlign: TextAlign.justify,
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(

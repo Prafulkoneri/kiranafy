@@ -10,6 +10,8 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/customer/coupons/view/coupon_all_view.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/coupans_info.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +27,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
+    final mainScreenWatch = context.watch<MainScreenController>();
     return Container(
       decoration: BoxDecoration(color: Coupons),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -48,11 +51,19 @@ class _CouponsScreenState extends State<CouponsScreen> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => AllCoupons()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            MainScreenView(index: 0, screenName: AllCoupons())),
+                    (Route<dynamic> route) => false,
                   );
                 },
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => AllCoupons()),
+                // );
+
                 child: Text(
                   "See all",
                   style: GoogleFonts.roboto(

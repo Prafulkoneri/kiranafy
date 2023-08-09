@@ -23,7 +23,6 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/controller/subscription_history_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/benifits_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/inapp_web_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/widget/app_bar.dart';
