@@ -121,6 +121,8 @@ class OrderDetails {
   String? subTotal;
   String? deliveryType;
   String ? shopOwnerPaymentStatus;
+  String ? shopOwnerRefundStatus;
+  String ? customerRefundPaymentStatus;
 
   OrderDetails({
     required this.id,
@@ -137,6 +139,9 @@ class OrderDetails {
     required this.subTotal,
     required this.deliveryType,
   required this.shopOwnerPaymentStatus,
+    required this.shopOwnerRefundStatus,
+    required this.customerRefundPaymentStatus,
+
   });
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -153,6 +158,8 @@ class OrderDetails {
     subTotal = json["sub_total_amount"];
     deliveryType = json["delivery_type"];
 shopOwnerPaymentStatus = json["shop_owner_payment_status"];
+    shopOwnerRefundStatus=json["refund_order_status"];
+    customerRefundPaymentStatus=json["refund_payment_status"];
   }
 }
 
