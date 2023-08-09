@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,8 +11,10 @@ import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_bo
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_response_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_delivery_area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repository/s_shop_configuration_edit_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repository/s_shop_configuration_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repository/shop_delivery_area_repo.dart';
 import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
@@ -22,6 +25,7 @@ import 'dart:io';
 
 class SShopConfigurationController extends ChangeNotifier {
   ShopConfigurationRepo shopConfigRepo = ShopConfigurationRepo();
+  ShopDeliveryAreaRepo shopDeliveryAreaRepo = ShopDeliveryAreaRepo();
   EditConfigRepo shopEditConfigRepo = EditConfigRepo();
   TextEditingController upiIdController = TextEditingController();
   TextEditingController supportNumberController = TextEditingController();
@@ -35,7 +39,7 @@ class SShopConfigurationController extends ChangeNotifier {
   TextEditingController minimumDeliveryAmountController =
       TextEditingController();
   TextEditingController searchController = TextEditingController();
-  // TextEditingController deliveryChargesOneController = TextEditingController();
+  TextEditingController deliveryAreasController = TextEditingController();
   // TextEditingController deliveryChargesTwoController = TextEditingController();
   // TextEditingController deliveryChargesThreeController =
   //     TextEditingController();
@@ -59,6 +63,8 @@ class SShopConfigurationController extends ChangeNotifier {
   List<ShopDeliveryAreaData>? shopDeliveryAreaData;
   List<bool> selectedDeliveryAreaList = [];
   List selectedDeliveryAreaId = [];
+  String selectedAreaId = "0";
+  List<AreaList>? areaList;
 
   Future<void> initState(context, initialConfiguration) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -71,6 +77,7 @@ class SShopConfigurationController extends ChangeNotifier {
       context,
       initialConfiguration,
     );
+    shopDeliveryArea(context);
     notifyListeners();
   }
 
@@ -181,17 +188,31 @@ class SShopConfigurationController extends ChangeNotifier {
     shopConfigRepo
         .shopCongurationDetails(pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result = ShopConfigurationResponse.fromJson(
         jsonDecode(response.body),
       );
 
       if (response.statusCode == 200) {
         final data = result.data;
-        shopDeliveryAreaData = result.shopDeliveryAreaData;
-        selectedDeliveryAreaList = List<bool>.filled(
-            shopDeliveryAreaData?.length ?? 0, false,
-            growable: true);
+        // shopDeliveryAreaData = result.shopDeliveryAreaData;
+        // selectedDeliveryAreaList = List<bool>.filled(
+        //     shopDeliveryAreaData?.length ?? 0, false,
+        //     growable: true);
+        String a = '';
+        if (selectedDeliveryAreaId.isNotEmpty) {
+          for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
+            a += "${selectedDeliveryAreaId[i]},";
+          }
+
+          a = a.substring(0, a.length - 1);
+          selectedAreaId = a;
+          print(selectedAreaId);
+          return;
+        } //
+        else {
+          selectedAreaId = "";
+        }
 
         supportNumberController.text = data?.shopOwnerSupportNumber ?? "";
         if (configuration) {
@@ -210,6 +231,8 @@ class SShopConfigurationController extends ChangeNotifier {
         startShopTimeController.text = data?.shopOwnerShopOpeningTime ?? "";
         endShopTimeController.text = data?.shopOwnerShopCloseTime ?? "";
         upiIdController.text = result.upiid ?? "";
+        minimumDeliveryAmountController.text =
+            data?.minimumOrderDeliveryAmount ?? "";
         networkImage = data?.shopOwnerPaymentQrCodeImagePath ?? "";
 
         ///Slot Selection
@@ -226,6 +249,10 @@ class SShopConfigurationController extends ChangeNotifier {
           isSixToNine = true;
         }
         ////
+        if (data?.acceptedPaymentStatus == "cod_and_online") {
+          isCODPaymentSelected = true;
+          isOnlinePaymentSelected = true;
+        }
         if (data?.acceptedPaymentStatus == "online") {
           isOnlinePaymentSelected = true;
           isCODPaymentSelected = false;
@@ -233,10 +260,6 @@ class SShopConfigurationController extends ChangeNotifier {
         if (data?.acceptedPaymentStatus == "cod") {
           isCODPaymentSelected = true;
           isOnlinePaymentSelected = false;
-        }
-        if (data?.acceptedPaymentStatus == "cod_and_online") {
-          isCODPaymentSelected = true;
-          isOnlinePaymentSelected = true;
         }
 
         //////// Delivery type///////////
@@ -561,5 +584,55 @@ class SShopConfigurationController extends ChangeNotifier {
     }
     print(selectedDeliveryAreaId);
     notifyListeners();
+  }
+
+  /////////////////////////////////////////
+  Future<void> shopDeliveryArea(context) async {
+    showLoader(true);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    shopDeliveryAreaRepo
+        .deliveryAreaRepo(pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+          ShopDeliveryAreaDataModel.fromJson(jsonDecode(response.body));
+      log(response.body);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        areaList = result.areaList;
+        selectedDeliveryAreaList =
+            List<bool>.filled(areaList?.length ?? 0, false, growable: true);
+        // String a = '';
+        // if (selectedDeliveryAreaId.isNotEmpty) {
+        //   for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
+        //     a += "${selectedDeliveryAreaId[i]},";
+        //   }
+
+        //   a = a.substring(0, a.length - 1);
+        //   selectedAreaId = a;
+        //   print(selectedAreaId);
+        //   return;
+        // } //
+        // else {
+        //   selectedAreaId = "";
+        // }
+        showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 }

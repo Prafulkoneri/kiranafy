@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +11,9 @@ import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
 
 class ShopDeliveryAreaDialogView extends StatefulWidget {
-  const ShopDeliveryAreaDialogView({Key? key}) : super(key: key);
+  final bool? initial1ShopConfigration;
+  const ShopDeliveryAreaDialogView({Key? key, this.initial1ShopConfigration})
+      : super(key: key);
 
   @override
   _ShopDeliveryAreaDialogViewState createState() =>
@@ -19,6 +22,15 @@ class ShopDeliveryAreaDialogView extends StatefulWidget {
 
 class _ShopDeliveryAreaDialogViewState
     extends State<ShopDeliveryAreaDialogView> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<SShopConfigurationController>()
+          .initState(context, widget.initial1ShopConfigration);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<SShopConfigurationController>();
@@ -109,10 +121,10 @@ class _ShopDeliveryAreaDialogViewState
                   ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: watch.shopDeliveryAreaData?.length ?? 0,
+                    itemCount: watch.areaList?.length ?? 0,
                     //  watch.shopDeliveryAreaData?.length ?? 0,
                     itemBuilder: (context, index) {
-                      final element = watch.shopDeliveryAreaData?[index];
+                      final element = watch.areaList?[index];
                       return Container(
                         padding: EdgeInsets.only(left: 18, top: 20),
                         child: Row(
@@ -153,7 +165,8 @@ class _ShopDeliveryAreaDialogViewState
                         fontWeight: FontWeight.w700,
                         color: Color(0xff39C19D),
                         onTap: () {
-                          // watch.customerAdsForm(context);
+                          read.getShopConfiguration(
+                              context, widget.initial1ShopConfigration);
                         }),
                   ),
                 ],
