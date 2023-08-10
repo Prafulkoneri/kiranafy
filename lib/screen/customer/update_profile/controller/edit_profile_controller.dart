@@ -108,10 +108,8 @@ class UpdateProfileController extends ChangeNotifier {
         cityList = result.city;
         areaList = result.area;
         pincodeList = result.pincode;
-        if (pincodeList?.contains(pincode.toString()) ?? false) {
-          showPincodeValueField = true;
-        } else {
-          showPincodeValueField = false;
+        if (pincodeList?.contains(pincode.toString())==false) {
+          pincode = "";
         }
         isLoading = false;
         notifyListeners();

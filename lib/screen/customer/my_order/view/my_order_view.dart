@@ -149,8 +149,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                         : element?.orderStatus ==
                                                                 "Packing"
                                                             ? Colors.brown
-                                                            : Colors
-                                                                .transparent,
+                                                            : Color(0xff39C19D),
                                     // width: 1,
                                   ),
                                 ),
@@ -164,7 +163,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                         orderId: element?.id.toString())),
                               );
                             },
-                            child: Text(
+                            child: Text( element?.orderStatus=="Refund"?"Delivered":
                               element?.orderStatus ?? "",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
@@ -190,7 +189,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                                 "Packing"
                                                             ? Colors.brown
                                                             : Colors
-                                                                .transparent,
+                                                                .green,
                                     // letterSpacing: .5
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w700),

@@ -311,7 +311,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                 children: [
                                   GestureDetector(
                                       onTap: () {
-                                        watch.onShareXFileFromAssets(context);
+                                        read.shareProduct(watch.productDetails?.productImagePath);
                                       },
                                       child: SvgPicture.asset(
                                           "assets/icons/share.svg")),

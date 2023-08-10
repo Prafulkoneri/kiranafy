@@ -98,10 +98,9 @@ class OrderPaymentController extends ChangeNotifier {
       final result = OrderPaymentResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         orderPaymentData = result.orderPayment;
-
         shopDetailData = result.orderPayment?.shopDetails;
-        // if(shopDetailData?.minimumOrderAmountForDelivery == shopDetailData.)
         showLoader(false);
+
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -139,14 +138,16 @@ class OrderPaymentController extends ChangeNotifier {
     context,
   ) async {
     // showStackLoader(true);
-    // log(minimumOrderAmountForDelivery);
-    // if (shopDetailData?.minimumOrderAmountForDelivery !=
-    //     int.parse(orderPaymentData?.finalTotalAmount.toString() ?? "0")) {
-    //   Utils.showPrimarySnackbar(context,
-    //       "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
-    //       type: SnackType.error);
-    //   return;
-    // }
+    print(shopDetailData?.minimumOrderAmountForDelivery);
+    print(orderPaymentData?.finalTotalAmount);
+    int minAmount=shopDetailData?.minimumOrderAmountForDelivery??0;
+    int totalOrderAmount=int.parse(orderPaymentData?.finalTotalAmount.toString()??"0");
+    if (minAmount > totalOrderAmount) {
+      Utils.showPrimarySnackbar(context,
+          "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
+          type: SnackType.error);
+      return;
+    }
 
     if (groupValue == "") {
       Utils.showPrimarySnackbar(context, "please select Payment Mode",

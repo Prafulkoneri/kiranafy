@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'dart:io';
+import 'dart:math';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +19,7 @@ import 'package:local_supper_market/screen/customer/products/model/add_admin_pro
 import 'package:local_supper_market/screen/customer/products/model/add_custom_product_to_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_unit_images_res_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_view_model.dart';
-
+import 'package:path_provider/path_provider.dart';
 import 'package:local_supper_market/screen/customer/products/model/remove_admin_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/remove_custom_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/repository/add_admin_product_to_fav_repo.dart';
@@ -30,10 +32,11 @@ import 'package:local_supper_market/screen/customer/products/views/product_scree
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:path/path.dart' as Path;
 class ProductViewController extends ChangeNotifier {
   String? shopId = "";
   String? categoryId = "";
@@ -124,7 +127,7 @@ class ProductViewController extends ChangeNotifier {
         .showProductsViewRepo(
             productViewRequestModel, pref.getString("successToken"))
         .then((response) {
-      log("response.body${response.body}");
+      // log("response.body${response.body}");
       final result =
           ProductViewResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -170,7 +173,7 @@ class ProductViewController extends ChangeNotifier {
         .productUnitImageRepo(
             unitImagesReqModel, pref.getString("successToken"))
         .then((response) {
-      log("response.body${response.body}");
+      // log("response.body${response.body}");
       final result =
           UnitImagesResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -214,7 +217,7 @@ class ProductViewController extends ChangeNotifier {
           .addAdminProductToFav(
               addAdminProductToFavReqModel, pref.getString("successToken"))
           .then((response) {
-        log("response.body${response.body}");
+        // log("response.body${response.body}");
         final result =
             AddAdminProductToFavResModel.fromJson(jsonDecode(response.body));
         if (response.statusCode == 200) {
@@ -243,7 +246,7 @@ class ProductViewController extends ChangeNotifier {
           .addCustomeProductToFav(
               addCustomProductToFavReqModel, pref.getString("successToken"))
           .then((response) {
-        log("response.body${response.body}");
+        // log("response.body${response.body}");
         final result =
             AddCustomProductToFavResModel.fromJson(jsonDecode(response.body));
         if (response.statusCode == 200) {
@@ -287,7 +290,7 @@ class ProductViewController extends ChangeNotifier {
           .removeAdminProductRepo(
               removeFavProductReqModel, pref.getString("successToken"))
           .then((response) {
-        log("response.body${response.body}");
+        // log("response.body${response.body}");
         final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
         if (response.statusCode == 200) {
           isFavProduct = false;
@@ -316,7 +319,7 @@ class ProductViewController extends ChangeNotifier {
           .removeCustomProductRepo(
               removeCustomeProductReqModel, pref.getString("successToken"))
           .then((response) {
-        log("response.body${response.body}");
+        // log("response.body${response.body}");
         final result =
             RemoveCustomProductResModel.fromJson(jsonDecode(response.body));
         if (response.statusCode == 200) {
@@ -364,7 +367,7 @@ class ProductViewController extends ChangeNotifier {
     addFavShopRepo
         .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
         .then((response) {
-      log("response.body${response.body}");
+      // log("response.body${response.body}");
       final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         favAllShop = true;
@@ -402,7 +405,7 @@ class ProductViewController extends ChangeNotifier {
     removeFavShopRepo
         .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
         .then((response) {
-      log("response.body${response.body}");
+      // log("response.body${response.body}");
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         favAllShop = false;
@@ -442,6 +445,7 @@ class ProductViewController extends ChangeNotifier {
           buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
           name: 'flutter_logo',
           mimeType: 'image/png',
+
         ),
       ],
       sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
@@ -449,6 +453,39 @@ class ProductViewController extends ChangeNotifier {
 
     scaffoldMessenger.showSnackBar(getResultSnackBar(shareResult));
   }
+
+  fileFromImageUrl(String url, String userName) async {
+    final response = await http.get(
+      Uri.parse(url),
+    );
+
+    final documentDirectory = await getApplicationDocumentsDirectory();
+
+    var randomNumber = Random();
+
+    final file = File(
+      Path.join(
+        documentDirectory.path,
+        "${randomNumber.nextInt(100)}_$userName.png",
+
+    ));
+
+    file.writeAsBytesSync(response.bodyBytes);
+
+    return XFile(file.path);
+  }
+
+  void shareProduct(url)async{
+    XFile fileForShare = await fileFromImageUrl(
+        url,"Local Supermart");
+
+    Share.shareXFiles(
+      [fileForShare],
+      text: "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
+        subject:"hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US"
+    );
+  }
+
 
   SnackBar getResultSnackBar(ShareResult result) {
     return SnackBar(
@@ -469,7 +506,7 @@ class ProductViewController extends ChangeNotifier {
     addProductToCartRepo
         .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
         .then((response) {
-      log("response.body${response.body}");
+      // log("response.body${response.body}");
       final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
