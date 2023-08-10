@@ -608,6 +608,8 @@ class SShopConfigurationController extends ChangeNotifier {
     notifyListeners();
   }
 
+  List selectedCategoryId = [];
+  List<bool> selectedCategoryList = [];
   /////////////////////////////////////////
   Future<void> shopDeliveryArea(context) async {
     showLoader(true);
@@ -626,6 +628,14 @@ class SShopConfigurationController extends ChangeNotifier {
         areaList = result.areaList;
         selectedDeliveryAreaList =
             List<bool>.filled(areaList?.length ?? 0, false, growable: true);
+        //       int length = areaList?.length ?? 0;
+        // selectedCategoryId.clear();
+        // for (int i = 0; i < length; i++) {
+        //   if (areaList?[i].id == "yes") {
+        //     selectedCategoryList.insert(i, true);
+        //     selectedCategoryId.add(areaList?[i].id);
+        //   }
+        // }
 
         showLoader(false);
         notifyListeners();
@@ -648,11 +658,6 @@ class SShopConfigurationController extends ChangeNotifier {
 
   ////////////////////////////////SearchArea////////////////////
 
-  // ShopDeliveryAreaDataReqModel get searchShopReqModel =>
-  //     ShopDeliveryAreaDataReqModel(
-  //       areaname: areaSearchController.text,
-  //     );
-
   Future<void> deliveryAreaSearch(context) async {
     print(areaSearchController);
     if (areaSearchController.text.isNotEmpty) {
@@ -668,11 +673,6 @@ class SShopConfigurationController extends ChangeNotifier {
         if (response.statusCode == 200) {
           areaList = result.areaList;
           print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-          // if (productList!.isEmpty) {
-          //   Utils.showPrimarySnackbar(context, "no product found",
-          //       type: SnackType.error);
-          // }
-          // showLoader(false);
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
