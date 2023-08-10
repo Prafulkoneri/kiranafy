@@ -100,6 +100,9 @@ class UpdateProfileController extends ChangeNotifier {
         cityId = customerProfileDetails?.customerCityId ?? 0;
         areaId = customerProfileDetails?.customerAreaId ?? 0;
         pincode = customerProfileDetails?.customerPincode.toString() ?? "";
+        print("pincode");
+        print(pincode);
+        print("pincode");
         countryList = result.countries;
         stateList = result.state;
         cityList = result.city;

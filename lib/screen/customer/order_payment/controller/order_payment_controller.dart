@@ -100,6 +100,7 @@ class OrderPaymentController extends ChangeNotifier {
         orderPaymentData = result.orderPayment;
 
         shopDetailData = result.orderPayment?.shopDetails;
+        // if(shopDetailData?.minimumOrderAmountForDelivery == shopDetailData.)
         showLoader(false);
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -138,6 +139,15 @@ class OrderPaymentController extends ChangeNotifier {
     context,
   ) async {
     // showStackLoader(true);
+    // log(minimumOrderAmountForDelivery);
+    // if (shopDetailData?.minimumOrderAmountForDelivery !=
+    //     int.parse(orderPaymentData?.finalTotalAmount.toString() ?? "0")) {
+    //   Utils.showPrimarySnackbar(context,
+    //       "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
+    //       type: SnackType.error);
+    //   return;
+    // }
+
     if (groupValue == "") {
       Utils.showPrimarySnackbar(context, "please select Payment Mode",
           type: SnackType.error);

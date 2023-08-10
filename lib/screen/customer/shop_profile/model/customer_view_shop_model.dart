@@ -178,6 +178,8 @@ class ShopDetails {
   String? shopFavourite;
   String? shopOwnerQrCodeImage;
   String? shopOwnerUpiId;
+  int? minimumOrderAmountForDelivery;
+  String? acceptedPaymentStatus;
 
   ShopDetails({
     required this.id,
@@ -193,6 +195,8 @@ class ShopDetails {
     required this.shopFavourite,
     required this.shopOwnerQrCodeImage,
     required this.shopOwnerUpiId,
+    required this.minimumOrderAmountForDelivery,
+    required this.acceptedPaymentStatus,
   });
   ShopDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -208,5 +212,7 @@ class ShopDetails {
     shopFavourite = json["is_favourite"];
     shopOwnerQrCodeImage = json["shop_owner_payment_qr_code_image_path"];
     shopOwnerUpiId = json["shop_owner_upi_id"];
+    minimumOrderAmountForDelivery = json["min_order_amount_for_delivery"];
+    acceptedPaymentStatus = json["accepted_payment_status"];
   }
 }

@@ -439,6 +439,7 @@ class Endpoint {
   static const String sProfileCoupons = "${baseUrl}lsm-shop-owner-coupons";
   static const String customerFaqData = "${baseUrl}lsm-customer-feq-get";
   static const String subScreiptionInvoice = "${baseUrl}lsm-shop-owner-invoice";
+  static const String orderInvoice = "${baseUrl}lsm-customer-invoice";
   static const String shopDeliveryArealist =
       "${baseUrl}lsm-shop-owner-get-area-list";
   static const String couponFiltter =

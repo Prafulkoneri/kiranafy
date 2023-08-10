@@ -35,13 +35,13 @@ class CustomerSettingController extends ChangeNotifier {
     notifyListeners();
   }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
   Future<void> shopNotification(context, status) async {
-   showLoader(true);
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     settingRepo.shopSetting(pref.getString("successToken")).then((response) {
@@ -52,6 +52,8 @@ class CustomerSettingController extends ChangeNotifier {
         isAppNotificationEnable =
             result.settingData?.appNotification == "on" ? true : false;
         showLoader(false);
+        // Utils.showPrimarySnackbar(context, result.message,
+        //     type: SnackType.success);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();
@@ -80,9 +82,8 @@ class CustomerSettingController extends ChangeNotifier {
   Future<void> changeSettings(context, value) async {
     print(value);
     print("hello");
-    isAppNotificationEnable=!isAppNotificationEnable;
+    isAppNotificationEnable = !isAppNotificationEnable;
     LoadingOverlay.of(context).show();
-
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     changeSettingRepo
