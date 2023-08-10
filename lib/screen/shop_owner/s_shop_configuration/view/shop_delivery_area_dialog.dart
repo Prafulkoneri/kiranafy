@@ -23,8 +23,6 @@ class ShopDeliveryAreaDialogView extends StatefulWidget {
 class _ShopDeliveryAreaDialogViewState
     extends State<ShopDeliveryAreaDialogView> {
   @override
-
-
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<SShopConfigurationController>();
@@ -57,8 +55,11 @@ class _ShopDeliveryAreaDialogViewState
                       width: 351.w,
                       height: 36.h,
                       child: TextField(
+                        onChanged: (value) {
+                          read.deliveryAreaSearch(context);
+                        },
                         // autofocus: true,
-                        controller: watch.searchController,
+                        controller: watch.areaSearchController,
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderSide:
@@ -125,7 +126,8 @@ class _ShopDeliveryAreaDialogViewState
                           children: [
                             PrimaryCheckBox(
                               onChanged: (value) {
-                                read.onSelectedDeliveryArea(index, element?.id,element?.areaName);
+                                read.onSelectedDeliveryArea(
+                                    index, element?.id, element?.areaName);
                               },
                               value: watch.selectedDeliveryAreaList[index],
                             ),

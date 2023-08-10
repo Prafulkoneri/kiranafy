@@ -31,7 +31,7 @@ class AllNearShopsView extends StatefulWidget {
 }
 
 class _AllNearShopsViewState extends State<AllNearShopsView> {
-  final TextEditingController _searchController = TextEditingController();
+  // final TextEditingController _searchController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
   void initState() {
