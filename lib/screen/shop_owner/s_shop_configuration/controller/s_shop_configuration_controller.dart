@@ -40,6 +40,7 @@ class SShopConfigurationController extends ChangeNotifier {
       TextEditingController();
   TextEditingController searchController = TextEditingController();
   TextEditingController deliveryAreasController = TextEditingController();
+  TextEditingController areaSearchController = TextEditingController();
   // TextEditingController deliveryChargesTwoController = TextEditingController();
   // TextEditingController deliveryChargesThreeController =
   //     TextEditingController();
@@ -99,19 +100,21 @@ class SShopConfigurationController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onDeliveryAreaSubmit(context){
+  void onDeliveryAreaSubmit(context) {
     deliveryAreasController.clear();
-    for(int i=0;i<selectedDeliveryAreaName.length;i++){
-      deliveryAreasController.text+=selectedDeliveryAreaName[i]+", ";
+    for (int i = 0; i < selectedDeliveryAreaName.length; i++) {
+      deliveryAreasController.text += selectedDeliveryAreaName[i] + ", ";
     }
-    for(int i=0;i<selectedDeliveryAreaId.length;i++){
-      selectedAreaId+=selectedDeliveryAreaId[i].toString()+",";
+    for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
+      selectedAreaId += selectedDeliveryAreaId[i].toString() + ",";
     }
-    selectedAreaId=selectedAreaId.toString().substring(0,selectedAreaId.length-1);
-    deliveryAreasController.text=deliveryAreasController.text.substring(0,deliveryAreasController.text.length-1);
+    selectedAreaId =
+        selectedAreaId.toString().substring(0, selectedAreaId.length - 1);
+    deliveryAreasController.text = deliveryAreasController.text
+        .substring(0, deliveryAreasController.text.length - 1);
 
     Navigator.pop(context);
-  notifyListeners();
+    notifyListeners();
   }
 
   ////////Mode of payment///
@@ -199,7 +202,7 @@ class SShopConfigurationController extends ChangeNotifier {
     selectedDeliveryAreaName.clear();
     selectedDeliveryAreaId.clear();
     deliveryAreasController.clear();
-    selectedAreaId="0";
+    selectedAreaId = "0";
     showLoader(true);
     isInitialConfiguration = configuration;
     print("successToken");
@@ -220,13 +223,10 @@ class SShopConfigurationController extends ChangeNotifier {
         //     shopDeliveryAreaData?.length ?? 0, false,
         //     growable: true);
 
-
-
         if (configuration) {
           print(pref.getString("mobileNo").toString());
           supportNumberController.text = pref.getString("mobileNo").toString();
-        }
-        else{
+        } else {
           supportNumberController.text = data?.shopOwnerSupportNumber ?? "";
         }
         // print(SupportNumberController);
@@ -364,11 +364,12 @@ class SShopConfigurationController extends ChangeNotifier {
 
     //////////////////
     if (minimumDeliveryAmountController.text == "") {
-      Utils.showPrimarySnackbar(context, "Please Enter Minimum Delivery Order Value",
+      Utils.showPrimarySnackbar(
+          context, "Please Enter Minimum Delivery Order Value",
           type: SnackType.error);
       return;
     }
-    if(deliveryAreasController.text==""){
+    if (deliveryAreasController.text == "") {
       Utils.showPrimarySnackbar(context, "Please Select Delivery Areas",
           type: SnackType.error);
       return;
@@ -591,16 +592,16 @@ class SShopConfigurationController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onSelectedDeliveryArea(index, id,name) {
+  void onSelectedDeliveryArea(index, id, name) {
     selectedDeliveryAreaList[index] = !selectedDeliveryAreaList[index];
     if (selectedDeliveryAreaList[index]) {
       selectedDeliveryAreaId.removeWhere((item) => item == id);
       selectedDeliveryAreaId.insert(0, id);
-      selectedDeliveryAreaName.removeWhere((item) =>item==name);
-      selectedDeliveryAreaName.insert(0,name);
+      selectedDeliveryAreaName.removeWhere((item) => item == name);
+      selectedDeliveryAreaName.insert(0, name);
     } else {
       selectedDeliveryAreaId.removeWhere((item) => item == id);
-      selectedDeliveryAreaName.removeWhere((item) =>item==name);
+      selectedDeliveryAreaName.removeWhere((item) => item == name);
     }
     print(selectedDeliveryAreaId);
     print(selectedDeliveryAreaName);
@@ -613,31 +614,19 @@ class SShopConfigurationController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     shopDeliveryAreaRepo
-        .deliveryAreaRepo(pref.getString("successToken"))
+        .deliveryAreaRepo(pref.getString("successToken"), "")
         .then((response) {
       print(response.body);
       final result =
-          ShopDeliveryAreaDataModel.fromJson(jsonDecode(response.body));
+          ShopDeliveryAreaDataResModel.fromJson(jsonDecode(response.body));
+      print("oooooooooooooooo");
       log(response.body);
       print(response.statusCode);
       if (response.statusCode == 200) {
         areaList = result.areaList;
         selectedDeliveryAreaList =
             List<bool>.filled(areaList?.length ?? 0, false, growable: true);
-        // String a = '';
-        // if (selectedDeliveryAreaId.isNotEmpty) {
-        //   for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
-        //     a += "${selectedDeliveryAreaId[i]},";
-        //   }
 
-        //   a = a.substring(0, a.length - 1);
-        //   selectedAreaId = a;
-        //   print(selectedAreaId);
-        //   return;
-        // } //
-        // else {
-        //   selectedAreaId = "";
-        // }
         showLoader(false);
         notifyListeners();
       } else {
@@ -655,5 +644,53 @@ class SShopConfigurationController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  ////////////////////////////////SearchArea////////////////////
+
+  // ShopDeliveryAreaDataReqModel get searchShopReqModel =>
+  //     ShopDeliveryAreaDataReqModel(
+  //       areaname: areaSearchController.text,
+  //     );
+
+  Future<void> deliveryAreaSearch(context) async {
+    print(areaSearchController);
+    if (areaSearchController.text.isNotEmpty) {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      print(pref.getString("successToken"));
+      shopDeliveryAreaRepo
+          .deliveryAreaRepo(
+              pref.getString("successToken"), areaSearchController.text)
+          .then((response) {
+        log("response.body${response.body}");
+        final result =
+            ShopDeliveryAreaDataResModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          areaList = result.areaList;
+          print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+          // if (productList!.isEmpty) {
+          //   Utils.showPrimarySnackbar(context, "no product found",
+          //       type: SnackType.error);
+          // }
+          // showLoader(false);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+        (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    } else {
+      await shopDeliveryArea(context);
+    }
   }
 }

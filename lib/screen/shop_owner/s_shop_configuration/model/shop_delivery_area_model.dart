@@ -1,14 +1,30 @@
-class ShopDeliveryAreaDataModel {
+class ShopDeliveryAreaDataReqModel {
+  String? areaname;
+
+  ShopDeliveryAreaDataReqModel({
+    this.areaname,
+  });
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = {};
+    data["areaname"] = areaname;
+
+    return data;
+  }
+}
+
+////////////////////////////////////
+class ShopDeliveryAreaDataResModel {
   int? status;
   String? message;
   List<AreaList>? areaList;
 
-  ShopDeliveryAreaDataModel({
+  ShopDeliveryAreaDataResModel({
     required this.status,
     required this.message,
     required this.areaList,
   });
-  ShopDeliveryAreaDataModel.fromJson(Map<String, dynamic> json) {
+  ShopDeliveryAreaDataResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
 
