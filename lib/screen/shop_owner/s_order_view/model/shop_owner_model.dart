@@ -123,6 +123,8 @@ class OrderDetails {
   String ? shopOwnerPaymentStatus;
   String ? shopOwnerRefundStatus;
   String ? customerRefundPaymentStatus;
+  String ? shopOwnerRefundPaymentType;
+  String ? shopOwnerRefundTransactionId;
 
   OrderDetails({
     required this.id,
@@ -141,6 +143,8 @@ class OrderDetails {
   required this.shopOwnerPaymentStatus,
     required this.shopOwnerRefundStatus,
     required this.customerRefundPaymentStatus,
+    required this.shopOwnerRefundTransactionId,
+    required this.shopOwnerRefundPaymentType,
 
   });
   OrderDetails.fromJson(Map<String, dynamic> json) {
@@ -160,6 +164,8 @@ class OrderDetails {
 shopOwnerPaymentStatus = json["shop_owner_payment_status"];
     shopOwnerRefundStatus=json["refund_order_status"];
     customerRefundPaymentStatus=json["refund_payment_status"];
+    shopOwnerRefundTransactionId=json["shop_owner_refund_transaction_id"];
+    shopOwnerRefundPaymentType=json["shop_owner_refund_payment_type"];
   }
 }
 

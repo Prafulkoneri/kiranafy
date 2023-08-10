@@ -539,7 +539,7 @@ class AddEditUnitController extends ChangeNotifier{
       newList.add(multipartFile);
     }
     if(fileImage3.path!=""){
-      File imageFile = fileImage1;
+      File imageFile = fileImage3;
       var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
       var multipartFile = new http.MultipartFile(

@@ -498,7 +498,6 @@ class OrderSummaryController extends ChangeNotifier {
     showOnPageLoader(false);
   }
 
-
   void updateCartId(value){
     cartId=value;
     notifyListeners();

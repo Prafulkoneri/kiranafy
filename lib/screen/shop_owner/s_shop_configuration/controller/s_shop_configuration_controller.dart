@@ -63,7 +63,8 @@ class SShopConfigurationController extends ChangeNotifier {
   List<ShopDeliveryAreaData>? shopDeliveryAreaData;
   List<bool> selectedDeliveryAreaList = [];
   List selectedDeliveryAreaId = [];
-  String selectedAreaId = "0";
+  List selectedDeliveryAreaName = [];
+  String selectedAreaId = "";
   List<AreaList>? areaList;
 
   Future<void> initState(context, initialConfiguration) async {
@@ -96,6 +97,21 @@ class SShopConfigurationController extends ChangeNotifier {
   void onDeliveryCustomerSelected() {
     isDeliveryCustomerSelected = !isDeliveryCustomerSelected;
     notifyListeners();
+  }
+
+  void onDeliveryAreaSubmit(context){
+    deliveryAreasController.clear();
+    for(int i=0;i<selectedDeliveryAreaName.length;i++){
+      deliveryAreasController.text+=selectedDeliveryAreaName[i]+", ";
+    }
+    for(int i=0;i<selectedDeliveryAreaId.length;i++){
+      selectedAreaId+=selectedDeliveryAreaId[i].toString()+",";
+    }
+    selectedAreaId=selectedAreaId.toString().substring(0,selectedAreaId.length-1);
+    deliveryAreasController.text=deliveryAreasController.text.substring(0,deliveryAreasController.text.length-1);
+
+    Navigator.pop(context);
+  notifyListeners();
   }
 
   ////////Mode of payment///
@@ -180,6 +196,10 @@ class SShopConfigurationController extends ChangeNotifier {
 
   ////// Shop Configuration start
   Future<void> getShopConfiguration(context, configuration) async {
+    selectedDeliveryAreaName.clear();
+    selectedDeliveryAreaId.clear();
+    deliveryAreasController.clear();
+    selectedAreaId="0";
     showLoader(true);
     isInitialConfiguration = configuration;
     print("successToken");
@@ -199,25 +219,15 @@ class SShopConfigurationController extends ChangeNotifier {
         // selectedDeliveryAreaList = List<bool>.filled(
         //     shopDeliveryAreaData?.length ?? 0, false,
         //     growable: true);
-        String a = '';
-        if (selectedDeliveryAreaId.isNotEmpty) {
-          for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
-            a += "${selectedDeliveryAreaId[i]},";
-          }
 
-          a = a.substring(0, a.length - 1);
-          selectedAreaId = a;
-          print(selectedAreaId);
-          return;
-        } //
-        else {
-          selectedAreaId = "";
-        }
 
-        supportNumberController.text = data?.shopOwnerSupportNumber ?? "";
+
         if (configuration) {
           print(pref.getString("mobileNo").toString());
           supportNumberController.text = pref.getString("mobileNo").toString();
+        }
+        else{
+          supportNumberController.text = data?.shopOwnerSupportNumber ?? "";
         }
         // print(SupportNumberController);
         firstDeliveryController.text =
@@ -354,10 +364,16 @@ class SShopConfigurationController extends ChangeNotifier {
 
     //////////////////
     if (minimumDeliveryAmountController.text == "") {
-      Utils.showPrimarySnackbar(context, "Please Enter Order Value",
+      Utils.showPrimarySnackbar(context, "Please Enter Minimum Delivery Order Value",
           type: SnackType.error);
       return;
     }
+    if(deliveryAreasController.text==""){
+      Utils.showPrimarySnackbar(context, "Please Select Delivery Areas",
+          type: SnackType.error);
+      return;
+    }
+
     if (supportNumberController.text.length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
           type: SnackType.error);
@@ -414,6 +430,7 @@ class SShopConfigurationController extends ChangeNotifier {
       shopOwnerSupportNumber: supportNumberController.text,
       shopOwnerUpiId: upiIdController.text,
       minimumOrderDeliveryAmount: minimumDeliveryAmountController.text,
+      areaId: selectedAreaId,
       acceptedPaymentStatus: isOnlinePaymentSelected && isCODPaymentSelected
           ? "cod_and_online"
           : isOnlinePaymentSelected
@@ -515,7 +532,7 @@ class SShopConfigurationController extends ChangeNotifier {
     request.fields['shop_owner_slot_6_to_9'] =
         isSixToNine ? "active" : "inactive";
     request.fields['shop_owner_upi_id'] = upiIdController.text;
-    request.fields['shop_owner_upi_id'] = upiIdController.text;
+    request.fields['area_id'] = selectedAreaId;
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     File imageFile = fileImage;
@@ -574,15 +591,19 @@ class SShopConfigurationController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onSelectedDeliveryArea(index, id) {
+  void onSelectedDeliveryArea(index, id,name) {
     selectedDeliveryAreaList[index] = !selectedDeliveryAreaList[index];
     if (selectedDeliveryAreaList[index]) {
       selectedDeliveryAreaId.removeWhere((item) => item == id);
       selectedDeliveryAreaId.insert(0, id);
+      selectedDeliveryAreaName.removeWhere((item) =>item==name);
+      selectedDeliveryAreaName.insert(0,name);
     } else {
       selectedDeliveryAreaId.removeWhere((item) => item == id);
+      selectedDeliveryAreaName.removeWhere((item) =>item==name);
     }
     print(selectedDeliveryAreaId);
+    print(selectedDeliveryAreaName);
     notifyListeners();
   }
 

@@ -18,6 +18,7 @@ class ShopConfigRequestModel {
   String? shopOwnerUpiId;
   String? acceptedPaymentStatus;
   String? minimumOrderDeliveryAmount;
+  String ? areaId;
 
   ShopConfigRequestModel({
     required this.shopOwnerPaymentQrCodeImagePath,
@@ -39,6 +40,7 @@ class ShopConfigRequestModel {
     required this.shopOwnerUpiId,
     required this.acceptedPaymentStatus,
     required this.minimumOrderDeliveryAmount,
+    required this.areaId,
   });
 
   Map<String, dynamic> toJson() {
@@ -68,6 +70,7 @@ class ShopConfigRequestModel {
     data["shop_owner_upi_id"] = shopOwnerUpiId;
     data['accepted_payment_status'] = acceptedPaymentStatus;
     data['min_order_amount_for_delivery'] = minimumOrderDeliveryAmount;
+    data['area_id'] = areaId;
 
     return data;
   }

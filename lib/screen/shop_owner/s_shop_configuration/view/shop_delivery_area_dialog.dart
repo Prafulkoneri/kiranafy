@@ -23,13 +23,7 @@ class ShopDeliveryAreaDialogView extends StatefulWidget {
 class _ShopDeliveryAreaDialogViewState
     extends State<ShopDeliveryAreaDialogView> {
   @override
-  void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<SShopConfigurationController>()
-          .initState(context, widget.initial1ShopConfigration);
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +125,7 @@ class _ShopDeliveryAreaDialogViewState
                           children: [
                             PrimaryCheckBox(
                               onChanged: (value) {
-                                read.onSelectedDeliveryArea(index, element?.id);
+                                read.onSelectedDeliveryArea(index, element?.id,element?.areaName);
                               },
                               value: watch.selectedDeliveryAreaList[index],
                             ),
@@ -165,8 +159,8 @@ class _ShopDeliveryAreaDialogViewState
                         fontWeight: FontWeight.w700,
                         color: Color(0xff39C19D),
                         onTap: () {
-                          read.getShopConfiguration(
-                              context, widget.initial1ShopConfigration);
+                          print("hellooo");
+                          read.onDeliveryAreaSubmit(context);
                         }),
                   ),
                 ],

@@ -27,8 +27,6 @@ class PaymentRefundListController extends ChangeNotifier {
     context,
   ) async {
     await refundPaymentList(context, "");
-    isPendingList = true;
-    isCompletedList = false;
     notifyListeners();
   }
 
@@ -51,6 +49,18 @@ class PaymentRefundListController extends ChangeNotifier {
 
   void showStackLoader(value) {
     isStackLoading = value;
+    notifyListeners();
+  }
+
+  void onNavigationFromDashboard(value){
+    if(value=="completed"){
+      isCompletedList=true;
+      isPendingList=false;
+    }
+    else{
+      isCompletedList=false;
+      isPendingList=true;
+    }
     notifyListeners();
   }
 

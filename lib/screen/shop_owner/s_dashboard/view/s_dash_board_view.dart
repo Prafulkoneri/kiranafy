@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
+import 'package:local_supper_market/screen/shop_owner/payment_refund/controller/payment_refund_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/payment_refund/view/payment_refund_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
@@ -46,6 +47,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
     final watch = context.watch<SDashBoardController>();
     final readOrderStatus = context.watch<SOrderStatusController>();
     final watchDashBoardScreen = context.read<SDashBoardController>();
+    final watchRefundOrderList = context.read<PaymentRefundListController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: watch.isLoading
@@ -1298,7 +1300,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              readOrderStatus.onTabClicked(0);
+                              watchRefundOrderList.onNavigationFromDashboard("pending");
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
@@ -1355,40 +1357,54 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 10.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                color: SplashText,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(10)),
+                          child: GestureDetector(
+                            onTap: (){
+                              watchRefundOrderList.onNavigationFromDashboard("completed");
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SMainScreenView(
+                                      index: 2,
+                                      screenName: SPaymentRefundList(),
+                                    )),
+                                    (Route<dynamic> route) => false,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  color: SplashText,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(10)),
 
-                            child: Column(
-                              children: [
-                                Text(
-                                  "INR 0",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "INR 0",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Refunded",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
+                                  Text(
+                                    "Refunded",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

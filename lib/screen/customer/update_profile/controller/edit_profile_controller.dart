@@ -61,12 +61,13 @@ class UpdateProfileController extends ChangeNotifier {
   Future<void> initState(
     context,
   ) async {
+    await getCountryList(context);
     await getCustomerProfileDetails(context);
   }
 
   Future<void> getCustomerProfileDetails(context) async {
     isLoading = true;
-    await getCountryList(context);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     editCustomerProfileRepo

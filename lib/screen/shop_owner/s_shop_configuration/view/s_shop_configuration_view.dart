@@ -725,7 +725,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                       ),
                       SizedBox(height: 10.h),
                       PrimarySTextFormField(
-                        // readOnly: true,
+                        controller: watch.deliveryAreasController,
+                        readOnly: true,
                         hintText: "Vishrantwadi, Viman Nagar, Kharadi",
                         hintFontSize: 15.sp,
                       ),

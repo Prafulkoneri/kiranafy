@@ -1740,6 +1740,17 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
+                                      SizedBox(
+                                        height: 16.w,
+                                      ),
+                                      Text("Refund Amount",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp)),
+                                      SizedBox(
+                                        height: 10.w,
+                                      ),
+                                      PrimaryCTextFormField(
+                                        controller: watch.refundPayableAmount,
+                                        hintText: "Type Refund Amount",
+                                      ),
 
                                       SizedBox(
                                         height: 27.w,
@@ -1947,14 +1958,28 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                   SizedBox(
                                     height: 27.w,
                                   ),
+                                  watch.orderDetails?.shopOwnerRefundPaymentType!="cash"?
                                   Row(
+                                    children: [
+
+                                      PrimaryCheckBox(
+                                        onChanged: (value) {
+                                          // read.onRefundByUpi(value);
+                                        },
+                                        value:true
+                                      ),
+                                      SizedBox(
+                                        width: 6.w,
+                                      ),
+                                      Text("Refund Payment Transferred by UPI/QR Code",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14.sp),),
+                                    ],
+                                  ):Row(
                                     children: [
                                       PrimaryCheckBox(
                                         onChanged: (value) {
-                                          read.onRefundByCash(value);
+
                                         },
-                                        value:
-                                        watch.isRefundByCash,
+                                        value:true
                                       ),
                                       SizedBox(
                                         width: 6.w,
@@ -1965,29 +1990,20 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                   SizedBox(
                                     height: 16.w,
                                   ),
-                                  Row(
+                                  watch.orderDetails?.shopOwnerRefundTransactionId!=""?Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      PrimaryCheckBox(
-                                        onChanged: (value) {
-                                          read.onRefundByUpi(value);
-                                        },
-                                        value:
-                                        watch.isRefundByUpi,
-                                      ),
-                                      SizedBox(
-                                        width: 6.w,
-                                      ),
-                                      Text("Refund Payment Transferred by UPI/QR Code",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14.sp),),
+                                      Text("Payment Transaction ID",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp)),
+                                   SizedBox(
+                                     height: 14.w,
+                                   ),
+                                      Text(watch.orderDetails?.shopOwnerRefundTransactionId??"",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w500),),
                                     ],
-                                  ),
-                                  SizedBox(
-                                    height: 16.w,
-                                  ),
-                                  Text("Payment Transaction ID",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp)),
+                                  ):Container(),
 
 
                                   SizedBox(
-                                    height: 15.w,
+                                    height: 50.w,
                                   ),
                                 ],
                               ),
