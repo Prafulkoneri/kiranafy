@@ -3,7 +3,9 @@ import 'package:local_supper_market/network/end_points.dart';
 
 class EditCustomerProfileRepo {
   Future<http.Response> editCustomerProfileRepo(token) async {
-    // print(token);
+    print(token);
+    print("kkkkkkkkkkkkkkkkkkkkkkkk");
+    print(Uri.parse(Endpoint.editCustomerProfile));
     try {
       return await http.get(Uri.parse(Endpoint.editCustomerProfile), headers: {
         "Authorization": "Bearer $token",

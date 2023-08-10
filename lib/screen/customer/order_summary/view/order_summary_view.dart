@@ -99,8 +99,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                 MaterialPageRoute(
                     builder: (context) => CartDetailView(
                           isRefresh: true,
-                          shopId: widget.shopId,
-                          cartId: widget.cartId,
+                          shopId: watch.shopId,
+                          cartId: watch.cartId,
                         )));
           },
         ),

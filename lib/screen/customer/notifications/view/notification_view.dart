@@ -76,7 +76,7 @@ class _CustomerNotificationsScreenViewState
                             children: <Widget>[
                               Flexible(
                                 child: Text(
-                                  "Do you really want to Coupon ? ",
+                                  "Do you really want to Delete Notifications ? ",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(

@@ -38,18 +38,16 @@ class PrimaryAppBar extends StatelessWidget {
               ),
             )
           : Container(),
-      title: Flexible(
-        child: Text(
-          maxLines: 2,
-          title ?? "",
-          textAlign: TextAlign.center,
-          style: GoogleFonts.dmSans(
-            textStyle: TextStyle(
-                color: Black,
-                letterSpacing: .5,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700),
-          ),
+      title: Text(
+        // maxLines: 2,
+        title ?? "",
+        // textAlign: TextAlign.center,
+        style: GoogleFonts.dmSans(
+          textStyle: TextStyle(
+              color: Black,
+              letterSpacing: .5,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w700),
         ),
       ),
       centerTitle: true,

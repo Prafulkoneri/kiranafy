@@ -1,10 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:local_supper_market/main.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/customer_cancel_order_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/get_cancel_order_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/order_invoice_download_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/reorder_model.dart';
@@ -13,6 +18,7 @@ import 'package:local_supper_market/screen/customer/delivery_view/model/submit_r
 import 'package:local_supper_market/screen/customer/delivery_view/model/update_refund_status_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_cancel_order_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/order_invoiec_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/reorder_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/review_list_repo.dart';
@@ -28,13 +34,15 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/remove
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomerOrderViewController extends ChangeNotifier {
   String orderId = "";
   String shopId = "";
-  TextEditingController reviewController =TextEditingController();
+  TextEditingController reviewController = TextEditingController();
   double? ratingValue;
   // int? ratingValueTwo;
   // int? ratingValueThree;
@@ -49,6 +57,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   ReorderRepo reOrderRepo = ReorderRepo();
   OReviewListRepo oReviewListrepo = OReviewListRepo();
+  OrderInvoiecRepo OrderInvoiecrepo = OrderInvoiecRepo();
   OrderViewData? orderData;
   OrderDetails? orderDetails;
   CouponDetails? couponDetails;
@@ -62,9 +71,13 @@ class CustomerOrderViewController extends ChangeNotifier {
   TextEditingController reasonController = TextEditingController();
   List<ReviewList>? reviewList;
   OReviewlistData? oreviewlistdata;
-  String ? selectedRefundStatus;
-  UpdateRefundStatusRepo updateRefundStatusRepo=UpdateRefundStatusRepo();
-
+  String? selectedRefundStatus;
+  CustomerInvoiceList? customerInvoiceList;
+  OrderInvoiceData? orderinvoiecdata;
+  UpdateRefundStatusRepo updateRefundStatusRepo = UpdateRefundStatusRepo();
+  String fileurl =
+      "https://localsupermart.com/testing/storage/subscription_pdf_invoice/LSMSUBS000054-2023-08-0810:50:38.pdf";
+  Directory? directory;
   CustomerOrderViewRequestModel get customerOrderViewRequestModel =>
       CustomerOrderViewRequestModel(orderId: orderId.toString());
   //////////////
@@ -133,24 +146,26 @@ class CustomerOrderViewController extends ChangeNotifier {
     );
   }
 
-  UpdateRefundStatusReqModel get updateRefundStatusReqModel=>UpdateRefundStatusReqModel(
-      orderId: orderId,
-  paymentStatus:selectedRefundStatus,
+  UpdateRefundStatusReqModel get updateRefundStatusReqModel =>
+      UpdateRefundStatusReqModel(
+        orderId: orderId,
+        paymentStatus: selectedRefundStatus,
       );
 
-  Future<void> updateRefundStatus(value,context)async{
-    selectedRefundStatus=value;
+  Future<void> updateRefundStatus(value, context) async {
+    selectedRefundStatus = value;
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     updateRefundStatusRepo
         .updateRefundStatus(
-        updateRefundStatusReqModel, pref.getString("successToken"))
-        .then((response) async{
+            updateRefundStatusReqModel, pref.getString("successToken"))
+        .then((response) async {
       log(response.body);
-      final result = UpdateRefundStatusResModel.fromJson(jsonDecode(response.body));
+      final result =
+          UpdateRefundStatusResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-
-        await customerOrderView(context,orderId);
+        await customerOrderView(context, orderId);
+        showLoader(false);
         LoadingOverlay.of(context).hide();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -159,7 +174,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -461,11 +476,12 @@ class CustomerOrderViewController extends ChangeNotifier {
         .submitReview(submitReviewRequestModel, pref.getString("successToken"))
         .then((response) async {
       log("response.body${response.body}");
-      final result = SubmitReviewResponseModel.fromJson(jsonDecode(response.body));
+      final result =
+          SubmitReviewResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        ratingValue=null;
+        ratingValue = null;
         reviewController.clear();
-       await OReviewList(context);
+        await OReviewList(context);
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
@@ -500,23 +516,22 @@ class CustomerOrderViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-  ReviewListRequestModel get reviewListRequestModel =>
-      ReviewListRequestModel(
+  ReviewListRequestModel get reviewListRequestModel => ReviewListRequestModel(
         orderId: orderId.toString(),
       );
-  Future<void> OReviewList(context) async { showLoader(true);
+  Future<void> OReviewList(context) async {
+    showLoader(true);
     // LoadingOverlay.of(context).show();
     // orderId = oId.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
-    oReviewListrepo.oreviewList
-        (reviewListRequestModel, pref.getString("successToken"))
+    oReviewListrepo
+        .oreviewList(reviewListRequestModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result =
-      ReviewListReponseModel.fromJson(jsonDecode(response.body));
+      final result = ReviewListReponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         oreviewlistdata = result.oreviewlistdata;
-        reviewList=oreviewlistdata?.reviewList;
+        reviewList = oreviewlistdata?.reviewList;
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
@@ -538,7 +553,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -546,5 +561,98 @@ class CustomerOrderViewController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+//////////////////////////////////Order Invoice/////////////////////
+  OrderInvoiceRequestModel get subscreiptionInvoicesReqModel =>
+      OrderInvoiceRequestModel(orderId: orderId.toString());
+
+  Future<void> orderInvoiec(context) async {
+    // orderId = oId;
+    // getDownloadPath();
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    OrderInvoiecrepo.orderInvoies(
+            subscreiptionInvoicesReqModel, pref.getString("successToken"))
+        .then((response) async {
+      log(response.body);
+      final result = OrderInvoiceResModel.fromJson(jsonDecode(response.body));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        orderinvoiecdata = result.orderinvoiecdata;
+        Map<Permission, PermissionStatus> statuses = await [
+          Permission.storage,
+          //add more permission to request here.
+        ].request();
+        var dir;
+        if (Platform.isIOS) {
+          dir = await getApplicationDocumentsDirectory();
+        } else {
+          dir = Directory('/storage/emulated/0/Download');
+        }
+
+        if (dir != null) {
+          String fullPath =
+              orderinvoiecdata?.customerInvoiceList?.invoiceLink.toString() ??
+                  "";
+          List splitPath = fullPath.split("/");
+          print(splitPath);
+          String saveName = splitPath[splitPath.length - 1];
+          print("savename${saveName}");
+          String savePath = dir.path + "/$saveName";
+          print(savePath);
+          //output:  /storage/emulated/0/Download/banner.png
+
+          try {
+            await Dio().download(fileurl, savePath,
+                onReceiveProgress: (received, total) {
+              if (total != -1) {
+                print((received / total * 100).toStringAsFixed(0) + "%");
+                //you can build progressbar feature too
+              }
+            });
+            print("File is saved to download folder.");
+          } on DioError catch (e) {
+            print(e.message);
+          }
+          _showNotification(saveName);
+        }
+        print("No permission to read and write.");
+        print(directory?.path.toString());
+        print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> _showNotification(fileName) async {
+    final android = AndroidNotificationDetails('0', 'Adun Accounts',
+        channelDescription: 'channel description',
+        importance: Importance.max,
+        icon: '');
+    final iOS = IOSNotificationDetails();
+    final platform = NotificationDetails(android: android, iOS: iOS);
+
+    await flutterLocalNotificationsPlugin.show(
+        0, // notification id
+        "${fileName}",
+        'Download complete.',
+        platform,
+        payload: '/storage/emulated/0/Download/file.pdf');
   }
 }
