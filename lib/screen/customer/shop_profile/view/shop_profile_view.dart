@@ -97,7 +97,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       Stack(
                         children: [
                           Align(
-                            child: watch.bannerImageData!.isEmpty
+                            child: watch.bannerImageData?.isEmpty==true
                                 ? Container(
                                     height: 188.w,
                                     child: Image.asset(

@@ -290,6 +290,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                       height: 22.h,
                                     ),
                                     Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         SecondaryRadioButton(
                                             value: "upi",
@@ -301,14 +302,16 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                         SizedBox(
                                           width: 10.w,
                                         ),
-                                        Text(
-                                          "UPI ID  - ${watch.shopDetailData?.shopOwnerUpiId}",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                letterSpacing: .5,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w700),
+                                        Flexible(
+                                          child: Text(
+                                            "UPI ID  - ${watch.shopDetailData?.shopOwnerUpiId}",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: Black,
+                                                  letterSpacing: .5,
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
                                           ),
                                         ),
                                         SizedBox(

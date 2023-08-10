@@ -133,6 +133,7 @@ class OrderPaymentController extends ChangeNotifier {
           totalItems: totalItems.toString(),
           finalSubTotal: finalSubTotal.toString(),
           finalDeliveryCharges: finalDeliveryCharges.toString(),
+          transactionId: transactionIdController.text,
           customerPaymentMode: groupValue);
   Future<void> placeOrder(
     context,

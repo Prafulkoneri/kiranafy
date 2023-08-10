@@ -56,7 +56,7 @@ class _ShopDeliveryAreaDialogViewState
                       height: 36.h,
                       child: TextField(
                         onChanged: (value) {
-                          read.deliveryAreaSearch(context);
+                          // read.deliveryAreaSearch(context);
                         },
                         // autofocus: true,
                         controller: watch.areaSearchController,
