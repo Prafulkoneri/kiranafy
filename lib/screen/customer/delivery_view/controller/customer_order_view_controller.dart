@@ -466,11 +466,17 @@ class CustomerOrderViewController extends ChangeNotifier {
 ///////////////////////////////////////////////////////////////////////////////////
   SubmitReviewRequestModel get submitReviewRequestModel =>
       SubmitReviewRequestModel(
-          shopId: orderId.toString(),
+          shopId: shopId.toString(),
           orderId: orderId.toString(),
           review: reviewController.text,
           rating: ratingValue.toString());
   Future<void> shopSubmitreview(context) async {
+    if (reviewController.text == "") {
+      Utils.showPrimarySnackbar(context, "Please  Enter Your Feedback",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
     SharedPreferences pref = await SharedPreferences.getInstance();
     submitReviewRepo
         .submitReview(submitReviewRequestModel, pref.getString("successToken"))
@@ -482,13 +488,7 @@ class CustomerOrderViewController extends ChangeNotifier {
         ratingValue = null;
         reviewController.clear();
         await OReviewList(context);
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) =>
-        //           MainScreenView(index: 4, screenName: MyOrderView())),
-        //   (Route<dynamic> route) => false,
-        // );
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         LoadingOverlay.of(context).hide();

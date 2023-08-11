@@ -401,174 +401,191 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                           : Container(
                               height: 20.h,
                             ),
-
-                      Container(
-                        padding: EdgeInsets.only(
-                          left: 20.w,
-                        ),
-                        child: Text(
-                          "Delivery Address",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black,
-                                // letterSpacing: .5,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 19.w, right: 19.w),
-                        // height: 156.h,
-                        width: double.infinity,
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            // side: BorderSide(color: Colors.white70, width: 1),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                bottom: 20.w,
-                                left: 20.w,
-                                right: 15.w,
-                                top: 20.w),
-                            child: Column(
+                      ///////////////////////////////////////
+                      watch.orderDetails?.deliveryType != "self_pickup"
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/images/person.svg',
-                                          width: 11.w,
-                                          height: 15.h,
-                                        ),
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        Text(
-                                          // "",
-                                          "${watch.deliveryAddressDetails?.customerName}",
-                                          // 'Rachel Green',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                letterSpacing: .5,
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                        ),
-                                        // SizedBox(
-                                        //   width: 11.w,
-                                        // ),
-                                      ],
+                                Container(
+                                  padding: EdgeInsets.only(
+                                    left: 20.w,
+                                  ),
+                                  child: Text(
+                                    "Delivery Address",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Black,
+                                          // letterSpacing: .5,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700),
                                     ),
-                                    SizedBox(
-                                      // height: 21.h,/
-                                      // width: 71.w,
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          elevation:
-                                              MaterialStateProperty.all(0),
-                                          // backgroundColor: ,
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.white),
-                                          shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              side: BorderSide(
-                                                color: lighrgreen,
-                                                // width: 1,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        onPressed: () {},
-                                        child: Text(
-                                          "${watch.deliveryAddressDetails?.deliveryAddressType}",
-                                          // "${element.deliveryAddressType}",
-                                          // "Home",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: SplashText1,
-                                                // letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                        ),
-
-                                        //
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/images/phone.svg',
-                                      width: 14.w,
-                                      height: 15.h,
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Text(
-                                      "${watch.deliveryAddressDetails?.mobileNo}",
-                                      // '${element.mobileNo}',
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black,
-                                            letterSpacing: .5,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                                 SizedBox(
-                                  height: 10.w,
+                                  height: 10.h,
                                 ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/images/location.svg',
-                                      color: SplashText1,
-                                      width: 17.w,
-                                      height: 17.h,
+                                Container(
+                                  margin:
+                                      EdgeInsets.only(left: 19.w, right: 19.w),
+                                  // height: 156.h,
+                                  width: double.infinity,
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      // side: BorderSide(color: Colors.white70, width: 1),
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        "${watch.deliveryAddressDetails?.address1}",
-                                        maxLines: 3,
-                                        // "${element.address1} \n${element.address2} ",
-                                        // textAlign: TextAlign.start,
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              // height: 1.5,
-                                              color: black,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                          bottom: 20.w,
+                                          left: 20.w,
+                                          right: 15.w,
+                                          top: 20.w),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    'assets/images/person.svg',
+                                                    width: 11.w,
+                                                    height: 15.h,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.w,
+                                                  ),
+                                                  Text(
+                                                    // "",
+                                                    "${watch.deliveryAddressDetails?.customerName}",
+                                                    // 'Rachel Green',
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: Black,
+                                                          letterSpacing: .5,
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700),
+                                                    ),
+                                                  ),
+                                                  // SizedBox(
+                                                  //   width: 11.w,
+                                                  // ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                // height: 21.h,/
+                                                // width: 71.w,
+                                                child: ElevatedButton(
+                                                  style: ButtonStyle(
+                                                    elevation:
+                                                        MaterialStateProperty
+                                                            .all(0),
+                                                    // backgroundColor: ,
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.white),
+                                                    shape: MaterialStateProperty
+                                                        .all(
+                                                      RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        side: BorderSide(
+                                                          color: lighrgreen,
+                                                          // width: 1,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  onPressed: () {},
+                                                  child: Text(
+                                                    "${watch.deliveryAddressDetails?.deliveryAddressType}",
+                                                    // "${element.deliveryAddressType}",
+                                                    // "Home",
+                                                    style: GoogleFonts.dmSans(
+                                                      textStyle: TextStyle(
+                                                          color: SplashText1,
+                                                          // letterSpacing: .5,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700),
+                                                    ),
+                                                  ),
+
+                                                  //
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/images/phone.svg',
+                                                width: 14.w,
+                                                height: 15.h,
+                                              ),
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
+                                              Text(
+                                                "${watch.deliveryAddressDetails?.mobileNo}",
+                                                // '${element.mobileNo}',
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black,
+                                                      letterSpacing: .5,
+                                                      fontSize: 13.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10.w,
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/images/location.svg',
+                                                color: SplashText1,
+                                                width: 17.w,
+                                                height: 17.h,
+                                              ),
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  "${watch.deliveryAddressDetails?.address1} ${watch.deliveryAddressDetails?.address2}",
+                                                  maxLines: 3,
+                                                  // "${element.address1} \n${element.address2} ",
+                                                  // textAlign: TextAlign.start,
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        // height: 1.5,
+                                                        color: black,
+                                                        fontSize: 14.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                    )
-                                  ],
+                                    ),
+                                  ),
                                 ),
                               ],
-                            ),
-                          ),
-                        ),
-                      ),
+                            )
+                          : Container(),
+
                       SizedBox(
                         height: 20.h,
                       ),
@@ -810,7 +827,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   ),
                                 ),
                                 Text(
-                                  "Rs ${watch.orderDetails?.subTotalAmount}",
+                                  "Rs. ${watch.orderDetails?.subTotalAmount}",
                                   //  ${watch.orderFinalTotals?.subTotal}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
@@ -838,7 +855,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 RichText(
                                   text: TextSpan(children: [
                                     TextSpan(
-                                      text: 'Discount!!',
+                                      text: 'Discount',
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: Black1,
@@ -868,7 +885,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 ),
                                 watch.orderDetails?.totalDiscount != ""
                                     ? Text(
-                                        "Rs ${watch.orderDetails?.totalDiscount}",
+                                        // "",
+                                        // "- Rs . ${watch.orderDetails?.totalDiscount}",
+                                        " -Rs.  ${watch.couponDetails?.couponDiscount}",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: grey5,
@@ -878,7 +897,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         ),
                                       )
                                     : Text(
-                                        "Rs 0",
+                                        "- Rs. 0",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: grey5,

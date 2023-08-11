@@ -1189,7 +1189,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 ),
                               ),
                               Text(
-                                "Rs ${watch.subTotal}",
+                                "Rs. ${watch.subTotal}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,
@@ -1241,7 +1241,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 ]),
                               ),
                               Text(
-                                "Rs  ${watch.couponDiscount}",
+                                "Rs.  ${watch.couponDiscount}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,

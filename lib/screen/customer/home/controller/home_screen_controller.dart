@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:local_supper_market/screen/customer/home/model/banner_model.dart';
 import 'package:local_supper_market/screen/customer/home/model/category_model.dart';
 import 'package:local_supper_market/screen/customer/home/model/place_add_banner_model.dart';
@@ -216,5 +217,32 @@ class HomeScreenController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  bool isOfferCopied = false;
+  void onDismiss() {
+    isOfferCopied = false;
+    notifyListeners();
+  }
+
+  ///////////////
+  copyCode(context, offer) {
+    isOfferCopied = true;
+    notifyListeners();
+    Clipboard.setData(ClipboardData(text: offer)).then((_) {
+      // Utils.showPrimarySnackbar(context, "coupon code copid",
+      //     type: SnackType.success);
+    });
+    Timer(Duration(seconds: 3), () async {
+      isOfferCopied = false;
+      notifyListeners();
+    });
+  }
+
+  copyCodeForCoupanList(context, offerMsg) {
+    Clipboard.setData(ClipboardData(text: offerMsg)).then((_) {
+      Utils.showPrimarySnackbar(context, "Coupon Code Copied",
+          type: SnackType.success);
+    });
   }
 }
