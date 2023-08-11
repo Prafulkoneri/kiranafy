@@ -154,13 +154,15 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
-                                                    "${element?.categoryName}",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp,
-                                                        color: Black1),
+                                                  Flexible(
+                                                    child: Text(
+                                                      "${element?.categoryName}",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16.sp,
+                                                          color: Black1),
+                                                    ),
                                                   ),
                                                 ],
                                               ),

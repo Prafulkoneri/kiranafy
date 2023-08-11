@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -41,6 +42,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<CustomProductController>().initState(context);
+      context.read<SCategoryListController>().initState(context);
     });
   }
 
@@ -49,6 +51,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
     final watch = context.watch<CustomProductController>();
     final read = context.read<CustomProductController>();
     final readMain = context.read<SMainScreenController>();
+    final selectedCategoryListWatch = context.read<SCategoryListController>();
     final watchDashBoardScreen = context.read<SDashBoardController>();
     return Scaffold(
       backgroundColor: Colors.white,

@@ -99,6 +99,7 @@ class EditCustomProductController extends ChangeNotifier {
         .getCustomProductDetails(
             editCustomProductsRequestModel, pref.getString("successToken"))
         .then((response) {
+          log(response.body);
       final result =
           CustomProductDataResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
