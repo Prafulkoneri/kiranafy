@@ -102,7 +102,10 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                             width: 351.w,
                             height: 36.h,
                             child: TextField(
-                              controller: _searchController,
+                              onChanged: (value){
+                                read.shopSearchList(context);
+                              },
+                              controller: watch.searchController,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide:
@@ -126,6 +129,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                     height: 15.h,
                                   ),
                                   onPressed: () {
+
                                     // Perform the search here
                                   },
                                 ),

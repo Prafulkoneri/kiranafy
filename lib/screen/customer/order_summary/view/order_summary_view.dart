@@ -251,14 +251,36 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                         children: <Widget>[
                           Row(
                             children: [
-                              SecondaryRadioButton(
-                                  value: "delivery_to",
-                                  groupValue: watch.groupValue,
-                                  // groupValue: watch.radioGroupValue,
-                                  onChanged: (value) {
-                                    read.onRadioButtonSelected(value, context);
-                                  },
-                                  leading: ""),
+                              watch.shopDeliveryTypes
+                                          ?.shopOwnerDeliveryToCustomer ==
+                                      "active"
+                                  ? SecondaryRadioButton(
+                                      value: "delivery_to",
+                                      groupValue: watch.groupValue,
+                                      // groupValue: watch.radioGroupValue,
+                                      onChanged: (value) {
+                                        read.onRadioButtonSelected(
+                                            value, context);
+                                      },
+                                      leading: "")
+                                  : InkWell(
+                                      onTap: () {
+                                        Utils.showPrimarySnackbar(context,
+                                            "Cannot Select Delivery To",
+                                            type: SnackType.error);
+                                      },
+                                      child: Container(
+                                        height: 16.w,
+                                        width: 16.w,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Color(0xff03C9CC),
+                                            width: 1.w,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                               SizedBox(
                                 width: 10.w,
                               ),
@@ -276,13 +298,35 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           ),
                           Row(
                             children: [
-                              SecondaryRadioButton(
-                                  value: "self_pickup",
-                                  groupValue: watch.groupValue,
-                                  onChanged: (value) {
-                                    read.onRadioButtonSelected(value, context);
-                                  },
-                                  leading: ""),
+                              watch.shopDeliveryTypes
+                                          ?.shopOwnerCustomerPickup ==
+                                      "active"
+                                  ? SecondaryRadioButton(
+                                      value: "self_pickup",
+                                      groupValue: watch.groupValue,
+                                      onChanged: (value) {
+                                        read.onRadioButtonSelected(
+                                            value, context);
+                                      },
+                                      leading: "")
+                                  : InkWell(
+                                      onTap: () {
+                                        Utils.showPrimarySnackbar(context,
+                                            "Cannot Select  Select Pickup",
+                                            type: SnackType.error);
+                                      },
+                                      child: Container(
+                                        height: 16.w,
+                                        width: 16.w,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Color(0xff03C9CC),
+                                            width: 1.w,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                               SizedBox(
                                 width: 10.w,
                               ),

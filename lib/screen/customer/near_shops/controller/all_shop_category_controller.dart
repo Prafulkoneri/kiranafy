@@ -4,11 +4,14 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/customer_view_all_category_shop_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/customer_view_all_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
+import 'package:local_supper_market/screen/customer/near_shops/model/search_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/customer_view_all_category_repo.dart';
 
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/search_shop_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +22,7 @@ class AllCategoryShopController extends ChangeNotifier {
   List<NearByShops>? nearByShop;
   Data? data;
   String? shopId = "";
-  final List<AllShops> allShops = [];
+   List<AllShops> allShops = [];
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   List<bool> favNearByShop = [];
@@ -29,6 +32,10 @@ class AllCategoryShopController extends ChangeNotifier {
   int offset = 0;
   bool showPaginationLoader = false;
   String categoryId = "";
+  TextEditingController searchController= TextEditingController();
+  SearchShopRepo searchShopRepo = SearchShopRepo();
+  SearchShopData? searchshopData;
+
 
   CustomerViewAllCategoryShopReqModel get customerViewAllCategoryShopReqModel =>
       CustomerViewAllCategoryShopReqModel(
@@ -250,4 +257,53 @@ class AllCategoryShopController extends ChangeNotifier {
 
     notifyListeners();
   }
+
+
+  SearchShopRequestModel get searchShopReqModel => SearchShopRequestModel(
+    shopName: searchController.text,
+  );
+
+  Future<void> shopSearchList(context) async {
+    print(searchController);
+    if (searchController.text.isNotEmpty) {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      print(pref.getString("successToken"));
+      searchShopRepo
+          .searchShop(searchShopReqModel, pref.getString("successToken"))
+          .then((response) {
+            print("isSearching");
+        log("response.body${response.body}");
+        final result =
+        SearchShopResponseModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          searchshopData = result.searchshopData;
+          nearByShop = searchshopData?.nearByShops;
+          allShops = searchshopData?.allShops ?? [];
+          // if (productList!.isEmpty) {
+          //   Utils.showPrimarySnackbar(context, "no product found",
+          //       type: SnackType.error);
+          // }
+          // showLoader(false);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+            (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+    } else {
+      await getAllShops(context,categoryId);
+    }
+  }
+
+
 }

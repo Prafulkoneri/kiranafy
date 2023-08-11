@@ -632,7 +632,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-                                      read.orderInvoiec(
+                                      read.orderInvoice(
                                         context,
                                       );
                                     },

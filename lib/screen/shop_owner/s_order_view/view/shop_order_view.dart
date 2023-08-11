@@ -1618,35 +1618,41 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                           ),
                         ),
                         watch.orderDetails?.orderStatus == "Delivered"
-                            ? Container(
-                                padding: EdgeInsets.only(
-                                    left: 20.w,
-                                    right: 20.w,
-                                    top: 2.w,
-                                    bottom: 2.w),
-                                decoration: BoxDecoration(
-                                  color: Color(0xff39C19D).withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                    color: Color(0xff39C19D),
-                                    style: BorderStyle.solid,
-                                  ),
-                                ),
+                            ? GestureDetector(
+                          onTap: (){
+            read.orderInvoice(context);
 
-                                // color: Color(0xff39C19D).withOpacity(0.3),
-                                // decoration: BoxDecoration(
-                                //     border: Border.all(color: Color(0xff39C19D))),
-                                child: Text(
-                                  "Invoice",
-                                  style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w600),
+                          },
+                              child: Container(
+                                  padding: EdgeInsets.only(
+                                      left: 20.w,
+                                      right: 20.w,
+                                      top: 2.w,
+                                      bottom: 2.w),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff39C19D).withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(
+                                      color: Color(0xff39C19D),
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+
+                                  // color: Color(0xff39C19D).withOpacity(0.3),
+                                  // decoration: BoxDecoration(
+                                  //     border: Border.all(color: Color(0xff39C19D))),
+                                  child: Text(
+                                    "Invoice",
+                                    style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                          color: Black,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
                                 ),
-                              )
+                            )
                             : Container()
                       ],
                     ),

@@ -168,6 +168,7 @@ class OrderSummaryController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        shopDeliveryTypes=result.orderSummaryData?.shopDeliveryTypes;
         customerPickup = result
                 .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ??
             "";

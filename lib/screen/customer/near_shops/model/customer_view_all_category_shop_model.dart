@@ -1,3 +1,5 @@
+import 'package:local_supper_market/screen/customer/near_shops/model/customer_view_all_shop_model.dart';
+
 class CustomerViewAllCategoryShopReqModel {
   String? limit;
   String? offset;
@@ -34,77 +36,8 @@ class CustomerViewAllCategoryShopResModel {
   }
 }
 
-class Data {
-  List<NearByShops>? nearByShops;
-  List<AllShops>? allShops;
-  Data({
-    this.allShops,
-    this.nearByShops,
-  });
-  Data.fromJson(Map<String, dynamic> json) {
-    if (json["nearby_shops"] != null) {
-      nearByShops = <NearByShops>[];
-      json["nearby_shops"].forEach((v) {
-        nearByShops!.add(NearByShops.fromJson(v));
-      });
-    }
-    if (json["all_shops"] != null) {
-      allShops = <AllShops>[];
-      json["all_shops"].forEach((v) {
-        allShops!.add(AllShops.fromJson(v));
-      });
-    }
-  }
-}
 
-class NearByShops {
-  int? id;
-  String? shopName;
-  String? areaName;
-  String? cityName;
-  String? shopBannerImagePath;
-  String? isFavourite;
 
-  NearByShops({
-    required this.id,
-    required this.shopName,
-    required this.areaName,
-    required this.cityName,
-    required this.shopBannerImagePath,
-    required this.isFavourite,
-  });
-  NearByShops.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    shopName = json["shop_name"];
-    areaName = json["area_name"];
-    cityName = json["city_name"];
-    shopBannerImagePath = json["shop_banner_image_path"];
-    isFavourite = json["is_favourite"];
-  }
-}
 
-class AllShops {
-  int? id;
-  String? shopName;
-  String? areaName;
-  String? cityName;
-  String? shopBannerImagePath;
-  String? isFavourite;
 
-  AllShops({
-    required this.id,
-    required this.shopName,
-    required this.areaName,
-    required this.cityName,
-    required this.shopBannerImagePath,
-    required this.isFavourite,
-  });
-  AllShops.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    shopName = json["shop_name"];
-    areaName = json["area_name"];
-    cityName = json["city_name"];
-    shopBannerImagePath = json["shop_banner_image_path"];
-    isFavourite = json["is_favourite"];
-  }
-}
+

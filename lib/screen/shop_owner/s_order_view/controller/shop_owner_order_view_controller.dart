@@ -1,7 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:local_supper_market/main.dart';
+import 'package:local_supper_market/network/end_points.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/order_invoice_download_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/order_invoiec_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/payment_refund/view/payment_refund_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
@@ -20,6 +27,8 @@ import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_
 
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopOwnerOrderViewController extends ChangeNotifier {
@@ -33,7 +42,9 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String totalDiscount = "0";
   String deliveryCharges = "0";
   String totalAmount = "0";
-
+  OrderInvoiceData? orderinvoicedata;
+  String fileurl = "";
+  Directory? directory;
   // String? deliveryCode = "";
   TextEditingController reasonController = TextEditingController();
   bool isDeliveryCodeError = false;
@@ -63,6 +74,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   TextEditingController upiIdController=TextEditingController();
   TextEditingController rejectReasonController = TextEditingController();
   TextEditingController refundPayableAmount=TextEditingController();
+  OrderInvoiceRepo orderInvoicerepo = OrderInvoiceRepo();
+  OrderInvoiceRepo orderInvoiceRepo=OrderInvoiceRepo();
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -168,6 +181,102 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  OrderInvoiceRequestModel get orderInvoiceRequestModel =>
+      OrderInvoiceRequestModel(orderId: orderId.toString());
+
+  Future<void> orderInvoice(context) async {
+    // orderId = oId;
+    // getDownloadPath();
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    orderInvoicerepo.orderInvoice(
+        orderInvoiceRequestModel, pref.getString("successToken"))
+        .then((response) async {
+      log(response.body);
+      final result = OrderInvoiceResModel.fromJson(jsonDecode(response.body));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        orderinvoicedata = result.orderinvoiecdata;
+        Map<Permission, PermissionStatus> statuses = await [
+          Permission.storage,
+          //add more permission to request here.
+        ].request();
+        var dir;
+        if (Platform.isIOS) {
+          dir = await getApplicationDocumentsDirectory();
+        } else {
+          dir = Directory('/storage/emulated/0/Download');
+        }
+
+        if (dir != null) {
+          String fullPath =
+              orderinvoicedata?.customerInvoiceList?.invoiceLink.toString() ??
+                  "";
+          List splitPath = fullPath.split("/");
+          print(splitPath);
+          String saveName = splitPath[splitPath.length - 1];
+          print("savename${saveName}");
+          String savePath = dir.path + "/$saveName";
+          print(savePath);
+          fileurl=Endpoint.baseUrl.toString().substring(0,Endpoint.baseUrl.toString().length-4).toString()+"${orderinvoicedata?.customerInvoiceList?.invoiceLink.toString()}";
+          //output:  /storage/emulated/0/Download/banner.png
+
+          try {
+            await Dio().download(fileurl, savePath,
+                onReceiveProgress: (received, total) {
+
+                  if (total != -1) {
+                    print((received / total * 100).toStringAsFixed(0) + "%");
+                    //you can build progressbar feature too
+                  }
+                });
+            print("File is saved to download folder.");
+          } on DioError catch (e) {
+
+            print(e.message);
+            Utils.showPrimarySnackbar(context,"Invalid Url", type: SnackType.error);
+            return;
+          }
+          _showNotification(saveName);
+        }
+        print("No permission to read and write.");
+        print(directory?.path.toString());
+        print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+  Future<void> _showNotification(fileName) async {
+    final android = AndroidNotificationDetails('0', 'Adun Accounts',
+        channelDescription: 'channel description',
+        importance: Importance.max,
+        icon: '');
+    final iOS = IOSNotificationDetails();
+    final platform = NotificationDetails(android: android, iOS: iOS);
+
+    await flutterLocalNotificationsPlugin.show(
+        0, // notification id
+        "${fileName}",
+        'Download complete.',
+        platform,
+        payload: '$fileName');
   }
 
   Future<void> shopOrderStatus(

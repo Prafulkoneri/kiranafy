@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:local_supper_market/main.dart';
+import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/customer_cancel_order_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/get_cancel_order_model.dart';
@@ -57,7 +58,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   ReorderRepo reOrderRepo = ReorderRepo();
   OReviewListRepo oReviewListrepo = OReviewListRepo();
-  OrderInvoiecRepo OrderInvoiecrepo = OrderInvoiecRepo();
+  OrderInvoiceRepo orderInvoicerepo = OrderInvoiceRepo();
   OrderViewData? orderData;
   OrderDetails? orderDetails;
   CouponDetails? couponDetails;
@@ -73,10 +74,9 @@ class CustomerOrderViewController extends ChangeNotifier {
   OReviewlistData? oreviewlistdata;
   String? selectedRefundStatus;
   CustomerInvoiceList? customerInvoiceList;
-  OrderInvoiceData? orderinvoiecdata;
+  OrderInvoiceData? orderinvoicecdata;
   UpdateRefundStatusRepo updateRefundStatusRepo = UpdateRefundStatusRepo();
-  String fileurl =
-      "https://localsupermart.com/testing/storage/subscription_pdf_invoice/LSMSUBS000054-2023-08-0810:50:38.pdf";
+  String fileurl = "";
   Directory? directory;
   CustomerOrderViewRequestModel get customerOrderViewRequestModel =>
       CustomerOrderViewRequestModel(orderId: orderId.toString());
@@ -568,23 +568,23 @@ class CustomerOrderViewController extends ChangeNotifier {
   }
 
 //////////////////////////////////Order Invoice/////////////////////
-  OrderInvoiceRequestModel get subscreiptionInvoicesReqModel =>
+  OrderInvoiceRequestModel get orderInvoiceRequestModel =>
       OrderInvoiceRequestModel(orderId: orderId.toString());
 
-  Future<void> orderInvoiec(context) async {
+  Future<void> orderInvoice(context) async {
     // orderId = oId;
     // getDownloadPath();
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    OrderInvoiecrepo.orderInvoies(
-            subscreiptionInvoicesReqModel, pref.getString("successToken"))
+    orderInvoicerepo.orderInvoice(
+        orderInvoiceRequestModel, pref.getString("successToken"))
         .then((response) async {
       log(response.body);
       final result = OrderInvoiceResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        orderinvoiecdata = result.orderinvoiecdata;
+        orderinvoicecdata = result.orderinvoiecdata;
         Map<Permission, PermissionStatus> statuses = await [
           Permission.storage,
           //add more permission to request here.
@@ -598,7 +598,7 @@ class CustomerOrderViewController extends ChangeNotifier {
 
         if (dir != null) {
           String fullPath =
-              orderinvoiecdata?.customerInvoiceList?.invoiceLink.toString() ??
+              orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString() ??
                   "";
           List splitPath = fullPath.split("/");
           print(splitPath);
@@ -606,11 +606,13 @@ class CustomerOrderViewController extends ChangeNotifier {
           print("savename${saveName}");
           String savePath = dir.path + "/$saveName";
           print(savePath);
+          fileurl=Endpoint.baseUrl.toString().substring(0,Endpoint.baseUrl.toString().length-4).toString()+"${orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString()}";
           //output:  /storage/emulated/0/Download/banner.png
 
           try {
             await Dio().download(fileurl, savePath,
                 onReceiveProgress: (received, total) {
+
               if (total != -1) {
                 print((received / total * 100).toStringAsFixed(0) + "%");
                 //you can build progressbar feature too
@@ -618,7 +620,10 @@ class CustomerOrderViewController extends ChangeNotifier {
             });
             print("File is saved to download folder.");
           } on DioError catch (e) {
+
             print(e.message);
+            Utils.showPrimarySnackbar(context,"Invalid Url", type: SnackType.error);
+            return;
           }
           _showNotification(saveName);
         }
@@ -657,6 +662,6 @@ class CustomerOrderViewController extends ChangeNotifier {
         "${fileName}",
         'Download complete.',
         platform,
-        payload: '/storage/emulated/0/Download/file.pdf');
+        payload: '$fileName');
   }
 }

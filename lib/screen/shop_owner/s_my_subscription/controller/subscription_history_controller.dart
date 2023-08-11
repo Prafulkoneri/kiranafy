@@ -31,8 +31,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
   int count = 1;
   String subscreptionId = "";
   Directory? directory;
-  String fileurl =
-      "https://localsupermart.com/testing/storage/subscription_pdf_invoice/LSMSUBS000054-2023-08-0810:50:38.pdf";
+  String fileurl ="";
 
   Future<void> initState(
     context,
@@ -56,7 +55,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
         "${fileName}",
         'Download complete.',
         platform,
-        payload: '/storage/emulated/0/Download/file.pdf');
+        payload: '$fileName');
   }
 
   showLoader(value) {
@@ -115,7 +114,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
       log(response.body);
       final result =
           ShopConfigrationInvoiceResModel.fromJson(jsonDecode(response.body));
-      print(response.statusCode);
+      log(response.body);
       if (response.statusCode == 200) {
         subscriptioninvoicedata = result.subscriptioninvoicedata;
         Map<Permission, PermissionStatus> statuses = await [
@@ -137,6 +136,10 @@ class SubscriptionHistoryController extends ChangeNotifier {
           print("savename${saveName}");
           String savePath = dir.path + "/$saveName";
           print(savePath);
+          fileurl=Endpoint.baseUrl.toString().substring(0,Endpoint.baseUrl.toString().length-4).toString()+"${subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()}";
+          print(fileurl);
+          print(subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString());
+
           //output:  /storage/emulated/0/Download/banner.png
 
           try {
@@ -149,7 +152,9 @@ class SubscriptionHistoryController extends ChangeNotifier {
             });
             print("File is saved to download folder.");
           } on DioError catch (e) {
-            print(e.message);
+            Utils.showPrimarySnackbar(context,"Invalid Url",
+                type: SnackType.error);
+            return;
           }
           _showNotification(saveName);
         }
