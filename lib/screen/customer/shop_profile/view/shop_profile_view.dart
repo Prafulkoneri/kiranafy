@@ -173,12 +173,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                     onTap: () {
                                       print(
                                           "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //       builder: (context) =>
-                                      //           CReviewScreenView()),
-                                      // );
+
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(

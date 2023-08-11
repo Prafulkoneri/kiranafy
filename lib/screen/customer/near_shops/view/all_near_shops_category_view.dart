@@ -21,8 +21,12 @@ import 'package:provider/provider.dart';
 class AllNearCategoryShopsView extends StatefulWidget {
   final String? categoryId;
   final bool? refresh;
+  final bool? isSearchFocus;
   const AllNearCategoryShopsView(
-      {super.key, required this.categoryId, required this.refresh});
+      {super.key,
+      required this.categoryId,
+      required this.refresh,
+      this.isSearchFocus});
 
   @override
   State<AllNearCategoryShopsView> createState() =>
@@ -92,6 +96,51 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                           areaName: watchMain.areaName,
                           cityName: watchMain.cityName,
                         ),
+                        // Padding(
+                        //   padding: EdgeInsets.only(
+                        //     right: 19.0.w,
+                        //     left: 19.0.w,
+                        //     top: 13.h,
+                        //   ),
+                        //   child: SizedBox(
+                        //     width: 351.w,
+                        //     height: 36.h,
+                        //     child: TextField(
+                        //       controller: _searchController,
+                        //       decoration: InputDecoration(
+                        //         enabledBorder: OutlineInputBorder(
+                        //             borderSide:
+                        //                 BorderSide(width: 1, color: splashnone),
+                        //             borderRadius: BorderRadius.circular(8.w)),
+                        //         hintText: 'Search your shop...',
+                        //         hintStyle: GoogleFonts.dmSans(
+                        //             textStyle: TextStyle(
+                        //                 color: Grey,
+                        //                 // letterSpacing: .5,
+                        //                 fontSize: 11,
+                        //                 fontWeight: FontWeight.w400)),
+
+                        //         // Add a clear button to the search bar
+
+                        //         // Add a search icon or button to the search bar
+                        //         prefixIcon: IconButton(
+                        //           icon: SvgPicture.asset(
+                        //             'assets/images/search.svg',
+                        //             width: 15.w,
+                        //             height: 15.h,
+                        //           ),
+                        //           onPressed: () {
+                        //             // Perform the search here
+                        //           },
+                        //         ),
+
+                        //         // border: OutlineInputBorder(
+                        //         //   borderRadius: BorderRadius.circular(15.w),
+                        //         // ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         Padding(
                           padding: EdgeInsets.only(
                             right: 19.0.w,
@@ -102,13 +151,17 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                             width: 351.w,
                             height: 36.h,
                             child: TextField(
-                              controller: _searchController,
+                              onChanged: (value) {
+                                // read.shopSearchList(context);
+                              },
+                              autofocus: widget.isSearchFocus ?? true,
+                              // controller: watch.sea
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(width: 1, color: splashnone),
                                     borderRadius: BorderRadius.circular(8.w)),
-                                hintText: 'Search your shop...',
+                                hintText: 'Search your shop and products..',
                                 hintStyle: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Grey,
@@ -316,6 +369,9 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                     ),
                                   );
                                 }))),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         SizedBox(
                           // height: 400.h,
                           child: Stack(
@@ -654,7 +710,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                           ),
                         ),
                         SizedBox(
-                          height: 30.w,
+                          height: 100.w,
                         ),
                       ])),
             ),

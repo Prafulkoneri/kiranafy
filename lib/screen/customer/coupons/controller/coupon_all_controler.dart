@@ -166,7 +166,7 @@ class CAllCouponController extends ChangeNotifier {
     shopId = "";
     categoryId = "";
     getAllCouponList(context, "", "", "", 0);
-    Navigator.pop(context);
+    // Navigator.pop(context);
     notifyListeners();
   }
 }

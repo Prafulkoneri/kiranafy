@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/about_us/view/c_about_us_view.dart';
 import 'package:local_supper_market/screen/customer/about_us/view/c_privacy_policy.dart';
@@ -25,6 +26,7 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../products/views/product_screen_view.dart';
 import 'package:provider/provider.dart';
@@ -685,37 +687,88 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: grey10),
+              // Container(
+              // margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+              // padding: EdgeInsets.only(bottom: 15.w),
+              // decoration: BoxDecoration(
+              //   border: Border(
+              //     bottom: BorderSide(width: 1, color: grey10),
+              //   ),
+              //   // color: Colors.white,
+              // ),
+              // child: Row(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   crossAxisAlignment: CrossAxisAlignment.end,
+              //   children: [
+              //     SvgPicture.asset(
+              //       'assets/icons/rateus.svg',
+              //       // width: 14.w,
+              //       // height: 13.h,
+              //     ),
+              //     SizedBox(
+              //       width: 18.w,
+              //     ),
+              //     Text(
+              //       'Rate Us',
+              //       style: GoogleFonts.dmSans(
+              //         textStyle: TextStyle(
+              //             color: Black,
+              //             fontSize: 14.sp,
+              //             fontWeight: FontWeight.w400),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // ),
+              GestureDetector(
+                onTap: () async {
+                  if (await canLaunch(
+                      "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
+                    await launch(
+                        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+                  } else {
+                    throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
+                  }
+                  LaunchReview.launch(
+                      androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                      iOSAppId: "585027354");
+                  // StoreRedirect.redirect(
+                  //   androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                  //   iOSAppId: "585027354",
+                  // );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
                   ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/rateus.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Rate Us',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/rateus.svg',
+                        // width: 14.w,
+                        // height: 13.h,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Rate Us',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(

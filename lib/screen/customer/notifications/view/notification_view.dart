@@ -193,8 +193,10 @@ class _CustomerNotificationsScreenViewState
                 child: watch.notificationList?.isNotEmpty == true
                     ? ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 19.w, horizontal: 19.w),
+                        // padding: EdgeInsets.symmetric(
+                        //     vertical: 19.w, horizontal: 19.w),
+                        padding: EdgeInsets.only(
+                            left: 19.w, right: 19.w, bottom: 80.w, top: 10),
                         shrinkWrap: true,
                         itemCount: watch.notificationList?.length ?? 0,
                         itemBuilder: (BuildContext, index) {
@@ -287,10 +289,35 @@ class _CustomerNotificationsScreenViewState
                           );
                         })
                     : Container(
-                        color: Colors.red,
-                        height: 100,
-                        width: 100,
-                        child: Text("data"),
-                      )));
+                        child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/images/emptycart.png",
+                              height: 151.h,
+                              width: 151.w,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 20.w,
+                                  right: 20.w,
+                                  top: 15.w,
+                                  bottom: 50.w),
+                              child: Text(
+                                "Looks like you don't have any Notification",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black1,
+                                      letterSpacing: .5,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ))));
   }
 }

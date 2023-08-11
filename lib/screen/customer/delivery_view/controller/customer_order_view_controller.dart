@@ -466,7 +466,7 @@ class CustomerOrderViewController extends ChangeNotifier {
 ///////////////////////////////////////////////////////////////////////////////////
   SubmitReviewRequestModel get submitReviewRequestModel =>
       SubmitReviewRequestModel(
-          shopId: shopId.toString(),
+          shopId: shopDetails?.id.toString(),
           orderId: orderId.toString(),
           review: reviewController.text,
           rating: ratingValue.toString());

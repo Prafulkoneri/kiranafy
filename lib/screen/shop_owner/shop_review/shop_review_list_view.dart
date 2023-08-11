@@ -13,22 +13,23 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/review/controller/customer_review_list_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 
 import 'package:provider/provider.dart';
 
-class CReviewScreenView extends StatefulWidget {
+class ShopReviewScreenView extends StatefulWidget {
   final String? shopId;
   final bool? fromDashBoard;
-  const CReviewScreenView(
+  const ShopReviewScreenView(
       {super.key, this.shopId, required this.fromDashBoard});
 
   @override
-  State<CReviewScreenView> createState() => _CReviewScreenViewState();
+  State<ShopReviewScreenView> createState() => _ShopReviewScreenViewState();
 }
 
-class _CReviewScreenViewState extends State<CReviewScreenView> {
+class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -54,7 +55,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      MainScreenView(index: 1, screenName: ShopProfileView())),
+                      SMainScreenView(index: 1, screenName: ShopProfileView())),
               (Route<dynamic> route) => false,
             );
           },
@@ -71,129 +72,129 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 15.w,
-                      top: 15.w,
-                    ),
-                    child: Text(
-                      "${watch.shopDetails?.shopName}",
-                      // "New Balaji Trading Company",
-                      style: GoogleFonts.roboto(
-                        textStyle: TextStyle(
-                            color: Black,
-                            // letterSpacing: .5,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(12.w),
-                    height: 70.h,
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(width: 1, color: grey2),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/location2.svg',
-                              width: 23.w,
-                              height: 28.h,
-                            ),
-                            SizedBox(
-                              width: 8.w,
-                            ),
-                            Container(
-                              width: 200.w,
-                              child: Text(
-                                "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                  // Padding(
+                  //   padding: EdgeInsets.only(
+                  //     left: 15.w,
+                  //     top: 15.w,
+                  //   ),
+                  //   child: Text(
+                  //     "${watch.shopDetails?.shopName}",
+                  //     // "New Balaji Trading Company",
+                  //     style: GoogleFonts.roboto(
+                  //       textStyle: TextStyle(
+                  //           color: Black,
+                  //           // letterSpacing: .5,
+                  //           fontSize: 18.sp,
+                  //           fontWeight: FontWeight.w600),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   padding: EdgeInsets.all(12.w),
+                  //   height: 70.h,
+                  //   decoration: BoxDecoration(
+                  //     border: Border(
+                  //       bottom: BorderSide(width: 1, color: grey2),
+                  //     ),
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     // crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           SvgPicture.asset(
+                  //             'assets/images/location2.svg',
+                  //             width: 23.w,
+                  //             height: 28.h,
+                  //           ),
+                  //           SizedBox(
+                  //             width: 8.w,
+                  //           ),
+                  //           Container(
+                  //             width: 200.w,
+                  //             child: Text(
+                  //               "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
 
-                                // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      // letterSpacing: .5,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                read.launchPhone(
-                                    watch.shopDetails?.shopOwnerSupportNumber ??
-                                        "",
-                                    context);
-                              },
-                              child: Container(
-                                  padding: EdgeInsets.only(
-                                      left: 13.w,
-                                      right: 13.w,
-                                      top: 14.w,
-                                      bottom: 14.w),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(0xff23AA49),
-                                  ),
-                                  child: SvgPicture.asset(
-                                    "assets/icons/new_call.svg",
-                                    width: 26.w,
-                                    height: 14.h,
-                                  )),
-                            ),
-                            SizedBox(
-                              width: 13.w,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                watch.favAllShop
-                                    ? read.removeAllShopFavList(
-                                        context, watch.shopDetails?.id)
-                                    : read.updateAllShopFavList(
-                                        context, watch.shopDetails?.id);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    left: 13.w,
-                                    right: 13.w,
-                                    top: 14.w,
-                                    bottom: 14.w),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xff4689EC),
-                                ),
-                                child: watch.favAllShop
-                                    ? SvgPicture.asset(
-                                        "assets/icons/fav_selected.svg",
-                                        width: 26.w,
-                                        height: 14.h,
-                                      )
-                                    : SvgPicture.asset(
-                                        "assets/images/favorite.svg",
-                                        width: 26.w,
-                                        height: 14.h,
-                                      ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
+                  //               // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                  //               style: GoogleFonts.roboto(
+                  //                 textStyle: TextStyle(
+                  //                     color: Black,
+                  //                     // letterSpacing: .5,
+                  //                     fontSize: 13.sp,
+                  //                     fontWeight: FontWeight.w400),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           InkWell(
+                  //             onTap: () {
+                  //               read.launchPhone(
+                  //                   watch.shopDetails?.shopOwnerSupportNumber ??
+                  //                       "",
+                  //                   context);
+                  //             },
+                  //             child: Container(
+                  //                 padding: EdgeInsets.only(
+                  //                     left: 13.w,
+                  //                     right: 13.w,
+                  //                     top: 14.w,
+                  //                     bottom: 14.w),
+                  //                 decoration: BoxDecoration(
+                  //                   shape: BoxShape.circle,
+                  //                   color: Color(0xff23AA49),
+                  //                 ),
+                  //                 child: SvgPicture.asset(
+                  //                   "assets/icons/new_call.svg",
+                  //                   width: 26.w,
+                  //                   height: 14.h,
+                  //                 )),
+                  //           ),
+                  //           SizedBox(
+                  //             width: 13.w,
+                  //           ),
+                  //           InkWell(
+                  //             onTap: () {
+                  //               watch.favAllShop
+                  //                   ? read.removeAllShopFavList(
+                  //                       context, watch.shopDetails?.id)
+                  //                   : read.updateAllShopFavList(
+                  //                       context, watch.shopDetails?.id);
+                  //             },
+                  //             child: Container(
+                  //               padding: EdgeInsets.only(
+                  //                   left: 13.w,
+                  //                   right: 13.w,
+                  //                   top: 14.w,
+                  //                   bottom: 14.w),
+                  //               decoration: BoxDecoration(
+                  //                 shape: BoxShape.circle,
+                  //                 color: Color(0xff4689EC),
+                  //               ),
+                  //               child: watch.favAllShop
+                  //                   ? SvgPicture.asset(
+                  //                       "assets/icons/fav_selected.svg",
+                  //                       width: 26.w,
+                  //                       height: 14.h,
+                  //                     )
+                  //                   : SvgPicture.asset(
+                  //                       "assets/images/favorite.svg",
+                  //                       width: 26.w,
+                  //                       height: 14.h,
+                  //                     ),
+                  //             ),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
                   Container(
                     padding: EdgeInsets.only(left: 19.w, right: 19.w),
                     child: Column(
