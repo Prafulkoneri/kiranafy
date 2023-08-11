@@ -99,6 +99,7 @@ class _CustomerNotificationsScreenViewState
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async {
+                                        Navigator.pop(context);
                                         await read.cDeleteNotification(
                                           context,
                                         );
@@ -188,94 +189,108 @@ class _CustomerNotificationsScreenViewState
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.builder(
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.symmetric(vertical: 19.w, horizontal: 19.w),
-                shrinkWrap: true,
-                itemCount: watch.notificationList?.length ?? 0,
-                itemBuilder: (BuildContext, index) {
-                  final element = watch.notificationList?[index];
-                  return GestureDetector(
-                    onTap: () {
-                      if (element?.notificationType == "order") {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrderDeliveryView(
-                                      orderId: element?.orderId.toString(),
-                                    )));
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          right: 16.w, left: 16.w, top: 19.w, bottom: 15.w),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.w),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
-                              blurRadius: 5,
-                              offset: Offset(-.0, 5.0),
-                              spreadRadius: 0),
-                        ],
-                      ),
-                      margin: EdgeInsets.only(bottom: 19.w),
-                      child: IntrinsicHeight(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset(
-                                "assets/icons/notification_bell_icon.svg"),
-                            SizedBox(
-                              width: 15.2.w,
-                            ),
-                            VerticalDivider(
-                              color: Color(0xffEFEFEF),
-                              thickness: 1,
-                            ),
-                            SizedBox(
-                              width: 15.w,
-                            ),
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${element?.title}",
-                                    // "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi semper egestas at cursus maecenas",
-                                    style: TextStyle(
-                                        fontSize: 11.5.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Black1),
-                                  ),
-                                  SizedBox(
-                                    height: 18.w,
-                                  ),
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                          "assets/icons/calendar1.svg"),
-                                      SizedBox(
-                                        width: 8.87.w,
-                                      ),
-                                      Text(
-                                        "${element?.createdAt}",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 11.sp,
-                                            color: Black1),
-                                      )
-                                    ],
-                                  ),
+            : Container(
+                child: watch.notificationList?.isNotEmpty == true
+                    ? ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 19.w, horizontal: 19.w),
+                        shrinkWrap: true,
+                        itemCount: watch.notificationList?.length ?? 0,
+                        itemBuilder: (BuildContext, index) {
+                          final element = watch.notificationList?[index];
+                          return GestureDetector(
+                            onTap: () {
+                              if (element?.notificationType == "order") {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => OrderDeliveryView(
+                                              orderId:
+                                                  element?.orderId.toString(),
+                                            )));
+                              }
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  right: 16.w,
+                                  left: 16.w,
+                                  top: 19.w,
+                                  bottom: 15.w),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.w),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 5,
+                                      offset: Offset(-.0, 5.0),
+                                      spreadRadius: 0),
                                 ],
                               ),
+                              margin: EdgeInsets.only(bottom: 19.w),
+                              child: IntrinsicHeight(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SvgPicture.asset(
+                                        "assets/icons/notification_bell_icon.svg"),
+                                    SizedBox(
+                                      width: 15.2.w,
+                                    ),
+                                    VerticalDivider(
+                                      color: Color(0xffEFEFEF),
+                                      thickness: 1,
+                                    ),
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
+                                    Flexible(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "${element?.title}",
+                                            // "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi semper egestas at cursus maecenas",
+                                            style: TextStyle(
+                                                fontSize: 11.5.sp,
+                                                fontWeight: FontWeight.w400,
+                                                color: Black1),
+                                          ),
+                                          SizedBox(
+                                            height: 18.w,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                  "assets/icons/calendar1.svg"),
+                                              SizedBox(
+                                                width: 8.87.w,
+                                              ),
+                                              Text(
+                                                "${element?.createdAt}",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 11.sp,
+                                                    color: Black1),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }));
+                          );
+                        })
+                    : Container(
+                        color: Colors.red,
+                        height: 100,
+                        width: 100,
+                        child: Text("data"),
+                      )));
   }
 }

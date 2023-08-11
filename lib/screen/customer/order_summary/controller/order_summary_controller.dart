@@ -68,18 +68,25 @@ class OrderSummaryController extends ChangeNotifier {
   TextEditingController couponCodeController = TextEditingController();
   int selectedAddressId = 0;
 
-  Future<void> initState(context, cId, id, refresh, route,) async {
+  Future<void> initState(
+    context,
+    cId,
+    id,
+    refresh,
+    route,
+  ) async {
     // if(route=="addAddress"||route=="editAddress"){
     //    groupValue="delivery_to";
     // }
     print("fsfsdfsdfsdf");
     print(route);
-    if (customerPickup == "active" && route == "addAddress") {
-      groupValue = "self_pickup";
-    } else {
-      groupValue = "delivery_to";
-    }
+
     if (refresh) {
+      if (customerPickup == "active" && route == "addAddress") {
+        groupValue = "self_pickup";
+      } else {
+        groupValue = "delivery_to";
+      }
       await getOrderSummary(context, cId, id, route);
     }
 
@@ -164,12 +171,14 @@ class OrderSummaryController extends ChangeNotifier {
         customerPickup = result
                 .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ??
             "";
-        if (result
-                .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ==
-            "active") {
-          groupValue = "self_pickup";
-        } else {
-          groupValue = "delivery_to";
+        if (groupValue != "") {
+          if (result.orderSummaryData?.shopDeliveryTypes
+                  ?.shopOwnerCustomerPickup ==
+              "active") {
+            groupValue = "self_pickup";
+          } else {
+            groupValue = "delivery_to";
+          }
         }
 
         shopDetailData = result.orderSummaryData?.shopDetails;
@@ -432,7 +441,8 @@ class OrderSummaryController extends ChangeNotifier {
         final data = result.data;
         couponCodeController.clear();
         offerGroupValue = "";
-        couponDiscount= data?.removeCouponData?.couponDiscount.toString()??"0";
+        couponDiscount =
+            data?.removeCouponData?.couponDiscount.toString() ?? "0";
         deliveryCharges =
             data?.removeCouponData?.deliveryCharges.toString() ?? "";
         subTotal = data?.removeCouponData?.subTotal.toString() ?? "";
@@ -498,8 +508,8 @@ class OrderSummaryController extends ChangeNotifier {
     showOnPageLoader(false);
   }
 
-  void updateCartId(value){
-    cartId=value;
+  void updateCartId(value) {
+    cartId = value;
     notifyListeners();
   }
 }

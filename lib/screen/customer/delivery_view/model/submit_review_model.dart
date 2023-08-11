@@ -13,7 +13,6 @@ class SubmitReviewRequestModel {
     data["order_id"] = orderId;
     data["review"] = review;
     data["ratings"] = rating;
-
     return data;
   }
 }

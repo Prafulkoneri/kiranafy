@@ -28,13 +28,13 @@ import 'package:loader_overlay/loader_overlay.dart';
 class ShopOrderView extends StatefulWidget {
   final String? orderId;
   final int? selectedIndex;
-  final bool ? fromOrderStatus;
+  final bool? fromOrderStatus;
 
   const ShopOrderView({
     super.key,
     this.orderId,
     required this.selectedIndex,
-  required this.fromOrderStatus,
+    required this.fromOrderStatus,
   });
 
   @override
@@ -72,21 +72,24 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             //           index: 1, screenName: SOrderStatusView(selectedIndex: widget.selectedIndex,))),
             //   (Route<dynamic> route) => false,
             // );
-            widget.fromOrderStatus==true?
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 1,
-                        screenName: SOrderStatusView(
-                            selectedIndex: widget.selectedIndex)))):
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 2, screenName: SPaymentRefundList(isNavFromAccounts: false,))),
-                  (Route<dynamic> route) => false,
-            );
+            widget.fromOrderStatus == true
+                ? Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SMainScreenView(
+                            index: 1,
+                            screenName: SOrderStatusView(
+                                selectedIndex: widget.selectedIndex))))
+                : Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SMainScreenView(
+                            index: 2,
+                            screenName: SPaymentRefundList(
+                              isNavFromAccounts: false,
+                            ))),
+                    (Route<dynamic> route) => false,
+                  );
           },
           title: "Order",
           onActionTap: () {},
@@ -441,50 +444,56 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               //
                                                             ),
                                                           )
-                                                        :watch.orderDetails?.orderStatus ==
-                                "Order Refund" ?SizedBox(
-                              height: 22.h,
-                              // width: 85.w,
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  elevation:
-                                  MaterialStateProperty
-                                      .all(0),
-                                  // backgroundColor: ,
-                                  backgroundColor:
-                                  MaterialStateProperty
-                                      .all(Colors.white),
-                                  shape: MaterialStateProperty
-                                      .all(
-                                    RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius
-                                          .circular(10),
-                                      side: BorderSide(
-                                        color:
-                                        Color(0xff39C19D),
-                                        // width: 1,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: Text(
-                                  "${watch.orderDetails?.orderStatus}",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color:
-                                        Color(0xff39C19D),
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight:
-                                        FontWeight.w500),
-                                  ),
-                                ),
+                                                        : watch.orderDetails
+                                                                    ?.orderStatus ==
+                                                                "Order Refund"
+                                                            ? SizedBox(
+                                                                height: 22.h,
+                                                                // width: 85.w,
+                                                                child:
+                                                                    ElevatedButton(
+                                                                  style:
+                                                                      ButtonStyle(
+                                                                    elevation:
+                                                                        MaterialStateProperty
+                                                                            .all(0),
+                                                                    // backgroundColor: ,
+                                                                    backgroundColor:
+                                                                        MaterialStateProperty.all(
+                                                                            Colors.white),
+                                                                    shape:
+                                                                        MaterialStateProperty
+                                                                            .all(
+                                                                      RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10),
+                                                                        side:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              Color(0xff39C19D),
+                                                                          // width: 1,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {},
+                                                                  child: Text(
+                                                                    "${watch.orderDetails?.orderStatus}",
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
+                                                                      textStyle: TextStyle(
+                                                                          color: Color(0xff39C19D),
+                                                                          // letterSpacing: .5,
+                                                                          fontSize: 12.sp,
+                                                                          fontWeight: FontWeight.w500),
+                                                                    ),
+                                                                  ),
 
-                                //
-                              ),
-                            ):Container(),
+                                                                  //
+                                                                ),
+                                                              )
+                                                            : Container(),
                           ],
                         ),
                         Text(
@@ -500,10 +509,11 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                       ],
                     ),
                   ),
-                  watch.orderDetails?.deliveryType == "delivery_to"?
-                  SizedBox(
-                    height: 23.h,
-                  ):Container(),
+                  watch.orderDetails?.deliveryType == "delivery_to"
+                      ? SizedBox(
+                          height: 23.h,
+                        )
+                      : Container(),
                   watch.orderDetails?.deliveryType == "delivery_to"
                       ? Container(
                           padding: EdgeInsets.only(
@@ -655,7 +665,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                       ),
                                       Expanded(
                                         child: Text(
-                                          "${watch.deliveryAddressDetails?.address2}\n${watch.deliveryAddressDetails?.address2}  ",
+                                          "${watch.deliveryAddressDetails?.address1}\n${watch.deliveryAddressDetails?.address2}  ",
                                           //
 
                                           maxLines: 3,
@@ -680,7 +690,53 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             ),
                           ),
                         )
-                      : Container(),
+                      : Container(
+                          padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: "Note: ",
+                                      style: TextStyle(
+                                          color: Black,
+                                          fontSize: 12.sp,
+                                          // height: 1.3.w,
+                                          fontWeight: FontWeight.w700),
+                                      children: [
+                                        TextSpan(
+                                          children: [],
+                                          text:
+                                              'This is a Self- Pickup Order, the customer will collect the ordered products from your shop.',
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {},
+                                          style: TextStyle(
+                                              color: Colors.blue,
+                                              // letterSpacing: .5,
+                                              height: 1.5.w,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ]),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                  //  Container(
+                  //     child: Text(
+                  //       maxLines: 2,
+                  //       "This is a Self- Pickup Order, the customer will collect the ordered products from your shop.",
+                  //       textAlign: TextAlign.center,
+                  //       style: GoogleFonts.dmSans(
+                  //         textStyle: TextStyle(
+                  //             color: Colors.black,
+                  //             // letterSpacing: .5,
+                  //             fontSize: 18.sp,
+                  //             fontWeight: FontWeight.w500),
+                  //       ),
+                  //     ),
+                  //   ),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -990,8 +1046,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               watch.orderDetails?.orderStatus ==
                                                   "Dispatched" ||
                                               watch.orderDetails?.orderStatus ==
-                                                  "Cancelled"|| watch.orderDetails?.orderStatus ==
-                                          "Order Refund"
+                                                  "Cancelled" ||
+                                              watch.orderDetails?.orderStatus ==
+                                                  "Order Refund"
                                           ? false
                                           : true,
                                       child: Expanded(
@@ -1620,401 +1677,608 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                   SizedBox(
                     height: 28.h,
                   ),
-                  watch.orderDetails?.orderStatus ==
-                      "Order Refund"?
-                      Column(
-                          crossAxisAlignment:CrossAxisAlignment.start,
+                  watch.orderDetails?.orderStatus == "Order Refund"
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(padding:EdgeInsets.only(left: 19.w),child: Text("Customer has sent 3 products return request. Refund amount is INR 60.",style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w700,color: Color(0xffE80000
-                            )),)),
+                            Container(
+                                padding: EdgeInsets.only(left: 19.w),
+                                child: Text(
+                                  "Customer has sent 3 products return request. Refund amount is INR 60.",
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xffE80000)),
+                                )),
                             SizedBox(
                               height: 5.h,
                             ),
-                            watch.orderDetails?.shopOwnerRefundStatus=="pending" && watch.acceptPayment==false &&watch.rejectPayment==false?  Container(
-                              margin: EdgeInsets.symmetric(vertical: 15.w),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 19.w,
-                                  ),
-                                  Expanded(
-                                      child:PrimaryButton(color:Color(0xff39C19D), onTap:(){
-                                        read.onRefundAccept();
-                                        // read.updateRefundStatus("received", context);
-                                      },leading:
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Center(child: SvgPicture.asset("assets/icons/confirm_shop.svg")),
-                                          SizedBox(
-                                              width:10.w
+                            watch.orderDetails?.shopOwnerRefundStatus ==
+                                        "pending" &&
+                                    watch.acceptPayment == false &&
+                                    watch.rejectPayment == false
+                                ? Container(
+                                    margin:
+                                        EdgeInsets.symmetric(vertical: 15.w),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 19.w,
+                                        ),
+                                        Expanded(
+                                            child: PrimaryButton(
+                                          color: Color(0xff39C19D),
+                                          onTap: () {
+                                            read.onRefundAccept();
+                                            // read.updateRefundStatus("received", context);
+                                          },
+                                          leading: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Center(
+                                                  child: SvgPicture.asset(
+                                                      "assets/icons/confirm_shop.svg")),
+                                              SizedBox(width: 10.w),
+                                              Text(
+                                                "Accept",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16.sp),
+                                              )
+                                            ],
                                           ),
-                                          Text("Accept",style: TextStyle(color: Colors.white,fontSize: 16.sp),)
-                                        ],
-                                      ),)
-                                  ),
-                                  SizedBox(
-                                      width:12.w
-                                  ),
-                                  Expanded(
-                                      child:PrimaryButton(color:Color(0xffFF6258), onTap:(){
-                                        read.onRefundReject();
-                                        // read.updateRefundStatus("not_received", context);
-                                      },leading:    Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Center(child: SvgPicture.asset("assets/icons/cross.svg")),
-                                          SizedBox(
-                                              width:10.w
+                                        )),
+                                        SizedBox(width: 12.w),
+                                        Expanded(
+                                            child: PrimaryButton(
+                                          color: Color(0xffFF6258),
+                                          onTap: () {
+                                            read.onRefundReject();
+                                            // read.updateRefundStatus("not_received", context);
+                                          },
+                                          leading: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Center(
+                                                  child: SvgPicture.asset(
+                                                      "assets/icons/cross.svg")),
+                                              SizedBox(width: 10.w),
+                                              Text(
+                                                "Reject",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16.sp),
+                                              )
+                                            ],
                                           ),
-                                          Text("Reject",style: TextStyle(color: Colors.white,fontSize: 16.sp),)
-                                        ],
-                                      ),)
-                                  ),
-                                  SizedBox(
-                                    width: 19.w,
-                                  ),
-                                ],
-                              ),
-                            ):
-                            watch.orderDetails?.shopOwnerRefundStatus=="pending" && watch.acceptPayment==true?Container(
-                              padding: EdgeInsets.symmetric(horizontal: 17.w),
-                              color: Color(0xffEFFDFF),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 15.w,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Refund Amount",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                fontSize: 18.sp),
-                                          ),
-                                          SizedBox(
-                                            height: 11.w,
-                                          ),
-                                          Text(
-                                            "INR ${watch.orderDetails?.totalAmount}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                fontSize: 18.sp),
-                                          ),
-                                        ],
-                                      ),
-
-                                      Container(
-                                        height: 22.w,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(5.w),
-                                            border: Border.all(
-                                                color: Color(0xff115B7A))),
+                                        )),
+                                        SizedBox(
+                                          width: 19.w,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : watch.orderDetails?.shopOwnerRefundStatus ==
+                                            "pending" &&
+                                        watch.acceptPayment == true
+                                    ? Container(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 12.w),
-                                        child: Center(
-                                            child: Text(
-                                              watch.orderDetails?.shopOwnerRefundStatus=="pending"&&watch.orderDetails?.customerRefundPaymentStatus=="not-received"?
-                                              "Payment Pending":watch.orderDetails?.shopOwnerRefundStatus=="accept"&&watch.orderDetails?.customerRefundPaymentStatus=="not-received"?"Pending from Customer":
-                                              watch.orderDetails?.shopOwnerRefundStatus=="accept"&&watch.orderDetails?.customerRefundPaymentStatus=="received"?"Payment Recieved":"",
-                                              style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xff115B7A)),
-                                            )
-                                         ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: 16.w,
-                                      ),
-                                      Text("Refund Amount",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp)),
-                                      SizedBox(
-                                        height: 10.w,
-                                      ),
-                                      PrimaryCTextFormField(
-                                        controller: watch.refundPayableAmount,
-                                        hintText: "Type Refund Amount",
-                                      ),
-
-                                      SizedBox(
-                                        height: 27.w,
-                                      ),
-                                      Row(
-                                        children: [
-                                          PrimaryCheckBox(
-                                            onChanged: (value) {
-                                              read.onRefundByCash(value);
-                                            },
-                                            value:
-                                            watch.isRefundByCash,
-                                          ),
-                                          SizedBox(
-                                            width: 6.w,
-                                          ),
-                                          Text("Refund Payment Given by Cash",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14.sp),),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 16.w,
-                                      ),
-                                      Row(
-                                        children: [
-                                          PrimaryCheckBox(
-                                            onChanged: (value) {
-                                              read.onRefundByUpi(value);
-                                            },
-                                            value:
-                                            watch.isRefundByUpi,
-                                          ),
-                                          SizedBox(
-                                            width: 6.w,
-                                          ),
-                                          Text("Refund Payment Transferred by UPI/QR Code",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14.sp),),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 16.w,
-                                      ),
-                                      Text("Payment Transaction ID",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp)),
-                                      SizedBox(
-                                        height: 10.w,
-                                      ),
-                                      PrimaryCTextFormField(
-                                        controller: watch.upiIdController,
-                                        hintText: "Type UPI ID",
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 27.w,
-                                  ),
-                                  PrimaryButton(color: Color(0xff39C19D), onTap:(){
-                                    read.shopRefundUpdate(context);
-                                  },text: "Submit Refund Details"),
-                                  SizedBox(
-                                    height: 15.w,
-                                  ),
-                                ],
-                              ),
-                            ):
-                            watch.orderDetails?.shopOwnerRefundStatus=="pending" && watch.acceptPayment==false?Container(
-                              padding: EdgeInsets.symmetric(horizontal: 17.w),
-                              color: Color(0xffEFFDFF),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 15.w,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Refund Amount",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                fontSize: 18.sp),
-                                          ),
-                                          SizedBox(
-                                            height: 11.w,
-                                          ),
-                                          Text(
-                                            "INR ${watch.orderDetails?.totalAmount}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                fontSize: 18.sp),
-                                          ),
-                                        ],
-                                      ),
-
-                                      Container(
-                                        height: 22.w,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(5.w),
-                                            border: Border.all(
-                                                color: Color(0xff115B7A))),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 12.w),
-                                        child: Center(
-                                            child: Text(
-                                              watch.orderDetails?.shopOwnerRefundStatus=="pending"&&watch.orderDetails?.customerRefundPaymentStatus=="not-received"?
-                                              "Payment Pending":watch.orderDetails?.shopOwnerRefundStatus=="accept"&&watch.orderDetails?.customerRefundPaymentStatus=="not-received"?"Pending from Customer":
-                                              watch.orderDetails?.shopOwnerRefundStatus=="accept"&&watch.orderDetails?.customerRefundPaymentStatus=="received"?"Payment Recieved":"",
-                                              style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xff115B7A)),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 16.w,
-                                  ),
-                                  Text("Refund Reject Reason",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp)),
-                                  SizedBox(
-                                    height: 10.w,
-                                  ),
-                                  PrimarySTextFormField(
-                                    height: 100.w,
-                                    maxLines: 5,
-                                    textInputType: TextInputType.number,
-                                    controller: watch.rejectReasonController,
-                                    hintText: "Refund Reject Reason",
-                                  ),
-
-                                  SizedBox(
-                                    height: 27.w,
-                                  ),
-                                  PrimaryButton(color: Color(0xff39C19D), onTap:(){
-                                    read.shopRefundUpdate(context);
-                                  },text: "Submit Refund Details"),
-                                  SizedBox(
-                                    height: 15.w,
-                                  ),
-                                ],
-                              ),
-                            ):
-                            watch.orderDetails?.shopOwnerRefundStatus=="accept"?Container(
-                              padding: EdgeInsets.symmetric(horizontal: 17.w),
-                              color: Color(0xffEFFDFF),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 15.w,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Refund Amount",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                fontSize: 18.sp),
-                                          ),
-                                          SizedBox(
-                                            height: 11.w,
-                                          ),
-                                          Text(
-                                            "INR ${watch.orderDetails?.totalAmount}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                fontSize: 18.sp),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        height: 22.w,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(5.w),
-                                            border: Border.all(
-                                                color: Color(0xff115B7A))),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 12.w),
-                                        child: Center(
-                                            child: Text(
-                                              watch.orderDetails?.shopOwnerRefundStatus=="pending"&&watch.orderDetails?.customerRefundPaymentStatus=="not-received"?
-                                              "Payment Pending":watch.orderDetails?.shopOwnerRefundStatus=="accept"&&watch.orderDetails?.customerRefundPaymentStatus=="not-received"?"Pending from Customer":
-                                              watch.orderDetails?.shopOwnerRefundStatus=="accept"&&watch.orderDetails?.customerRefundPaymentStatus=="received"?"Payment Recieved":"",
-                                              style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xff115B7A)),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 27.w,
-                                  ),
-                                  watch.orderDetails?.shopOwnerRefundPaymentType!="cash"?
-                                  Row(
-                                    children: [
-
-                                      PrimaryCheckBox(
-                                        onChanged: (value) {
-                                          // read.onRefundByUpi(value);
-                                        },
-                                        value:true
-                                      ),
-                                      SizedBox(
-                                        width: 6.w,
-                                      ),
-                                      Text("Refund Payment Transferred by UPI/QR Code",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14.sp),),
-                                    ],
-                                  ):Row(
-                                    children: [
-                                      PrimaryCheckBox(
-                                        onChanged: (value) {
-
-                                        },
-                                        value:true
-                                      ),
-                                      SizedBox(
-                                        width: 6.w,
-                                      ),
-                                      Text("Refund Payment Given by Cash",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14.sp),),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 16.w,
-                                  ),
-                                  watch.orderDetails?.shopOwnerRefundTransactionId!=""?Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Payment Transaction ID",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp)),
-                                   SizedBox(
-                                     height: 14.w,
-                                   ),
-                                      Text(watch.orderDetails?.shopOwnerRefundTransactionId??"",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w500),),
-                                    ],
-                                  ):Container(),
-
-
-                                  SizedBox(
-                                    height: 50.w,
-                                  ),
-                                ],
-                              ),
-                            ):Container(),
+                                            horizontal: 17.w),
+                                        color: Color(0xffEFFDFF),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 15.w,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Refund Amount",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.black,
+                                                          fontSize: 18.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 11.w,
+                                                    ),
+                                                    Text(
+                                                      "INR ${watch.orderDetails?.totalAmount}",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.black,
+                                                          fontSize: 18.sp),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Container(
+                                                  height: 22.w,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.w),
+                                                      border: Border.all(
+                                                          color: Color(
+                                                              0xff115B7A))),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 12.w),
+                                                  child: Center(
+                                                      child: Text(
+                                                    watch.orderDetails
+                                                                    ?.shopOwnerRefundStatus ==
+                                                                "pending" &&
+                                                            watch.orderDetails
+                                                                    ?.customerRefundPaymentStatus ==
+                                                                "not-received"
+                                                        ? "Payment Pending"
+                                                        : watch.orderDetails
+                                                                        ?.shopOwnerRefundStatus ==
+                                                                    "accept" &&
+                                                                watch.orderDetails
+                                                                        ?.customerRefundPaymentStatus ==
+                                                                    "not-received"
+                                                            ? "Pending from Customer"
+                                                            : watch.orderDetails
+                                                                            ?.shopOwnerRefundStatus ==
+                                                                        "accept" &&
+                                                                    watch.orderDetails
+                                                                            ?.customerRefundPaymentStatus ==
+                                                                        "received"
+                                                                ? "Payment Recieved"
+                                                                : "",
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color:
+                                                            Color(0xff115B7A)),
+                                                  )),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  height: 16.w,
+                                                ),
+                                                Text("Refund Amount",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14.sp)),
+                                                SizedBox(
+                                                  height: 10.w,
+                                                ),
+                                                PrimaryCTextFormField(
+                                                  controller:
+                                                      watch.refundPayableAmount,
+                                                  hintText:
+                                                      "Type Refund Amount",
+                                                ),
+                                                SizedBox(
+                                                  height: 27.w,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    PrimaryCheckBox(
+                                                      onChanged: (value) {
+                                                        read.onRefundByCash(
+                                                            value);
+                                                      },
+                                                      value:
+                                                          watch.isRefundByCash,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 6.w,
+                                                    ),
+                                                    Text(
+                                                      "Refund Payment Given by Cash",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14.sp),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 16.w,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    PrimaryCheckBox(
+                                                      onChanged: (value) {
+                                                        read.onRefundByUpi(
+                                                            value);
+                                                      },
+                                                      value:
+                                                          watch.isRefundByUpi,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 6.w,
+                                                    ),
+                                                    Text(
+                                                      "Refund Payment Transferred by UPI/QR Code",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14.sp),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 16.w,
+                                                ),
+                                                Text("Payment Transaction ID",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14.sp)),
+                                                SizedBox(
+                                                  height: 10.w,
+                                                ),
+                                                PrimaryCTextFormField(
+                                                  controller:
+                                                      watch.upiIdController,
+                                                  hintText: "Type UPI ID",
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 27.w,
+                                            ),
+                                            PrimaryButton(
+                                                color: Color(0xff39C19D),
+                                                onTap: () {
+                                                  read.shopRefundUpdate(
+                                                      context);
+                                                },
+                                                text: "Submit Refund Details"),
+                                            SizedBox(
+                                              height: 15.w,
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : watch.orderDetails
+                                                    ?.shopOwnerRefundStatus ==
+                                                "pending" &&
+                                            watch.acceptPayment == false
+                                        ? Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 17.w),
+                                            color: Color(0xffEFFDFF),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  height: 15.w,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "Refund Amount",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 18.sp),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 11.w,
+                                                        ),
+                                                        Text(
+                                                          "INR ${watch.orderDetails?.totalAmount}",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 18.sp),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Container(
+                                                      height: 22.w,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.w),
+                                                          border: Border.all(
+                                                              color: Color(
+                                                                  0xff115B7A))),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 12.w),
+                                                      child: Center(
+                                                          child: Text(
+                                                        watch.orderDetails
+                                                                        ?.shopOwnerRefundStatus ==
+                                                                    "pending" &&
+                                                                watch.orderDetails
+                                                                        ?.customerRefundPaymentStatus ==
+                                                                    "not-received"
+                                                            ? "Payment Pending"
+                                                            : watch.orderDetails
+                                                                            ?.shopOwnerRefundStatus ==
+                                                                        "accept" &&
+                                                                    watch.orderDetails
+                                                                            ?.customerRefundPaymentStatus ==
+                                                                        "not-received"
+                                                                ? "Pending from Customer"
+                                                                : watch.orderDetails?.shopOwnerRefundStatus ==
+                                                                            "accept" &&
+                                                                        watch.orderDetails?.customerRefundPaymentStatus ==
+                                                                            "received"
+                                                                    ? "Payment Recieved"
+                                                                    : "",
+                                                        style: TextStyle(
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Color(
+                                                                0xff115B7A)),
+                                                      )),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 16.w,
+                                                ),
+                                                Text("Refund Reject Reason",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14.sp)),
+                                                SizedBox(
+                                                  height: 10.w,
+                                                ),
+                                                PrimarySTextFormField(
+                                                  height: 100.w,
+                                                  maxLines: 5,
+                                                  textInputType:
+                                                      TextInputType.number,
+                                                  controller: watch
+                                                      .rejectReasonController,
+                                                  hintText:
+                                                      "Refund Reject Reason",
+                                                ),
+                                                SizedBox(
+                                                  height: 27.w,
+                                                ),
+                                                PrimaryButton(
+                                                    color: Color(0xff39C19D),
+                                                    onTap: () {
+                                                      read.shopRefundUpdate(
+                                                          context);
+                                                    },
+                                                    text:
+                                                        "Submit Refund Details"),
+                                                SizedBox(
+                                                  height: 15.w,
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : watch.orderDetails
+                                                    ?.shopOwnerRefundStatus ==
+                                                "accept"
+                                            ? Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 17.w),
+                                                color: Color(0xffEFFDFF),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 15.w,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Refund Amount",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      18.sp),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 11.w,
+                                                            ),
+                                                            Text(
+                                                              "INR ${watch.orderDetails?.totalAmount}",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      18.sp),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Container(
+                                                          height: 22.w,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.w),
+                                                              border: Border.all(
+                                                                  color: Color(
+                                                                      0xff115B7A))),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      12.w),
+                                                          child: Center(
+                                                              child: Text(
+                                                            watch.orderDetails
+                                                                            ?.shopOwnerRefundStatus ==
+                                                                        "pending" &&
+                                                                    watch.orderDetails
+                                                                            ?.customerRefundPaymentStatus ==
+                                                                        "not-received"
+                                                                ? "Payment Pending"
+                                                                : watch.orderDetails?.shopOwnerRefundStatus ==
+                                                                            "accept" &&
+                                                                        watch.orderDetails?.customerRefundPaymentStatus ==
+                                                                            "not-received"
+                                                                    ? "Pending from Customer"
+                                                                    : watch.orderDetails?.shopOwnerRefundStatus ==
+                                                                                "accept" &&
+                                                                            watch.orderDetails?.customerRefundPaymentStatus ==
+                                                                                "received"
+                                                                        ? "Payment Recieved"
+                                                                        : "",
+                                                            style: TextStyle(
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Color(
+                                                                    0xff115B7A)),
+                                                          )),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 27.w,
+                                                    ),
+                                                    watch.orderDetails
+                                                                ?.shopOwnerRefundPaymentType !=
+                                                            "cash"
+                                                        ? Row(
+                                                            children: [
+                                                              PrimaryCheckBox(
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    // read.onRefundByUpi(value);
+                                                                  },
+                                                                  value: true),
+                                                              SizedBox(
+                                                                width: 6.w,
+                                                              ),
+                                                              Text(
+                                                                "Refund Payment Transferred by UPI/QR Code",
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontSize:
+                                                                        14.sp),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : Row(
+                                                            children: [
+                                                              PrimaryCheckBox(
+                                                                  onChanged:
+                                                                      (value) {},
+                                                                  value: true),
+                                                              SizedBox(
+                                                                width: 6.w,
+                                                              ),
+                                                              Text(
+                                                                "Refund Payment Given by Cash",
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontSize:
+                                                                        14.sp),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                    SizedBox(
+                                                      height: 16.w,
+                                                    ),
+                                                    watch.orderDetails
+                                                                ?.shopOwnerRefundTransactionId !=
+                                                            ""
+                                                        ? Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                  "Payment Transaction ID",
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontSize:
+                                                                          14.sp)),
+                                                              SizedBox(
+                                                                height: 14.w,
+                                                              ),
+                                                              Text(
+                                                                watch.orderDetails
+                                                                        ?.shopOwnerRefundTransactionId ??
+                                                                    "",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        16.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : Container(),
+                                                    SizedBox(
+                                                      height: 50.w,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : Container(),
                           ],
-                      )
-                  :Container(
-                    height: 50.w,
-                  ),
-
-
+                        )
+                      : Container(
+                          height: 50.w,
+                        ),
 
                   // Container(
                   //   padding: EdgeInsets.only(left: 19.w, right: 19.w),

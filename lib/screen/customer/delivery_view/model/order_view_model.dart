@@ -130,36 +130,46 @@ class OrderDetails {
   String? orderStatus;
   String? canCancelOrder;
   String? subTotalAmount;
-  String ? refundOrderStatus;
-  String ? reason;
-  String ? customerRefundReason;
-  String ? customerRefundAmount;
-  String ? refundProductCount;
-  String ? refundPaymentStatus;
-  String ? shopOwnerRefundRejectReason;
-  String ? shopOwnerRefundPayableAmount;
-  String ? shopOwnerRefundPaymentType;
-  String ? shopOwnerRefundTransactionId;
-  String ? refundDatetime;
+  String? refundOrderStatus;
+  String? reason;
+  String? customerRefundReason;
+  String? customerRefundAmount;
+  String? refundProductCount;
+  String? refundPaymentStatus;
+  String? shopOwnerRefundRejectReason;
+  String? shopOwnerRefundPayableAmount;
+  String? shopOwnerRefundPaymentType;
+  String? shopOwnerRefundTransactionId;
+  String? refundDatetime;
+  String? deliveryType;
 
-  OrderDetails({
-    required this.id,
-    required this.createdAt,
-    required this.orderUniqueId,
-    required this.deliveryDate,
-    required this.deliverySlot,
-    required this.totalAmount,
-    required this.totalDiscount,
-    required this.deliveryCode,
-    required this.deliveryCharges,
-    required this.paymentMode,
-    required this.transactionId,
-    required this.orderStatus,
-    required this.canCancelOrder,
-    required this.subTotalAmount,
-    this.shopOwnerRefundPayableAmount,
-    required this.customerRefundAmount,this.customerRefundReason,this.reason,this.refundDatetime,this.refundOrderStatus,this.refundPaymentStatus,this.refundProductCount,this.shopOwnerRefundPaymentType,this.shopOwnerRefundRejectReason,this.shopOwnerRefundTransactionId
-  });
+  OrderDetails(
+      {required this.id,
+      required this.createdAt,
+      required this.orderUniqueId,
+      required this.deliveryDate,
+      required this.deliverySlot,
+      required this.totalAmount,
+      required this.totalDiscount,
+      required this.deliveryCode,
+      required this.deliveryCharges,
+      required this.paymentMode,
+      required this.transactionId,
+      required this.orderStatus,
+      required this.canCancelOrder,
+      required this.subTotalAmount,
+      this.shopOwnerRefundPayableAmount,
+      required this.customerRefundAmount,
+      this.customerRefundReason,
+      this.reason,
+      this.refundDatetime,
+      this.refundOrderStatus,
+      this.refundPaymentStatus,
+      this.refundProductCount,
+      this.shopOwnerRefundPaymentType,
+      this.shopOwnerRefundRejectReason,
+      this.deliveryType,
+      this.shopOwnerRefundTransactionId});
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     createdAt = json["created_at"];
@@ -175,17 +185,18 @@ class OrderDetails {
     orderStatus = json["order_status"];
     canCancelOrder = json["can_cancel_order"];
     subTotalAmount = json["sub_total_amount"];
-    refundOrderStatus=json["refund_order_status"];
-    reason=json["reason"];
-    customerRefundReason=json["custom_refund_reason"];
-    customerRefundAmount=json["customer_refund_amount"];
-    refundProductCount=json["refund_product_count"];
-    refundPaymentStatus=json["refund_payment_status"];
-    shopOwnerRefundRejectReason=json["shop_owner_refund_reject_reason"];
-    shopOwnerRefundPayableAmount=json["shop_owner_refund_payable_amount"];
-    shopOwnerRefundPaymentType=json["shop_owner_refund_payment_type"];
-    shopOwnerRefundTransactionId=json["shop_owner_refund_transaction_id"];
-    refundDatetime=json["refund_datetime"];
+    refundOrderStatus = json["refund_order_status"];
+    reason = json["reason"];
+    customerRefundReason = json["custom_refund_reason"];
+    customerRefundAmount = json["customer_refund_amount"];
+    refundProductCount = json["refund_product_count"];
+    refundPaymentStatus = json["refund_payment_status"];
+    shopOwnerRefundRejectReason = json["shop_owner_refund_reject_reason"];
+    shopOwnerRefundPayableAmount = json["shop_owner_refund_payable_amount"];
+    shopOwnerRefundPaymentType = json["shop_owner_refund_payment_type"];
+    shopOwnerRefundTransactionId = json["shop_owner_refund_transaction_id"];
+    refundDatetime = json["refund_datetime"];
+    deliveryType = json["delivery_type"];
   }
 }
 
@@ -202,7 +213,7 @@ class OrderProductDetail {
   String? productMrpPrice;
   String? productOfferPrice;
   int? productTotalPrice;
-  String ? returnStatus;
+  String? returnStatus;
 
   OrderProductDetail({
     required this.id,
@@ -232,7 +243,7 @@ class OrderProductDetail {
     productMrpPrice = json["product_mrp_price"];
     productOfferPrice = json["product_offer_price"];
     productTotalPrice = json["product_total_price"];
-    returnStatus=json["return_status"];
+    returnStatus = json["return_status"];
   }
 }
 

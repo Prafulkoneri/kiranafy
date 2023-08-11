@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 import 'dart:developer';
 
@@ -18,14 +16,13 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class ReturnOrderController extends ChangeNotifier {
   String? orderId = "";
   String? description = "";
   String? productAmount = "";
   String productTotalAmount = "0";
   String? checkStatus = "";
-  String? pId="";
+  String? pId = "";
   ReturnProductListData? returnproductlistdata;
   OrderDetails? orderDetails;
   ShopDetails? shopDetails;
@@ -38,25 +35,24 @@ class ReturnOrderController extends ChangeNotifier {
   bool isCancelOrderErrorMsgVisible = false;
   TextEditingController descriptionController = TextEditingController();
   CheckProductListData? checkproductlistdata;
-  List selectedProductIdList=[];
+  List selectedProductIdList = [];
   List<bool> isReturnProductSelected = [];
-  String productCount="";
-  int refundTotal=0;
-  String productId="";
-  bool isLoading=true;
-  SubmitReturnRepo submitReturnRepo=SubmitReturnRepo();
+  String productCount = "";
+  int refundTotal = 0;
+  String productId = "";
+  bool isLoading = true;
+  SubmitReturnRepo submitReturnRepo = SubmitReturnRepo();
 
-
-
-  Future<void> initState(context,oId) async {
+  Future<void> initState(context, oId) async {
+    productTotalAmount = "0";
     selectedProductIdList.clear();
     isReturnProductSelected.clear();
-  await  returnOrder(context,oId);
+    await returnOrder(context, oId);
     notifyListeners();
   }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -64,30 +60,34 @@ class ReturnOrderController extends ChangeNotifier {
 
   COrderReturnListRequestModel get corderReturnListRequestModel =>
       COrderReturnListRequestModel(
-          orderId: orderId,);
-  Future<void> returnOrder(context,oId) async {
+        orderId: orderId,
+      );
+  Future<void> returnOrder(context, oId) async {
     showLoader(true);
     orderId = oId.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    orderreturnrepo.orderReturn(
-        corderReturnListRequestModel, pref.getString("successToken"))
+    orderreturnrepo
+        .orderReturn(
+            corderReturnListRequestModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
       final result =
-      COrderReturnListResponseModel.fromJson(jsonDecode(response.body));
+          COrderReturnListResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        returnproductlistdata=result.returnproductlistdata;
-        orderDetails=returnproductlistdata?.orderDetails;
-        refundReasonDetails=returnproductlistdata?.refundReasonDetails;
-        orderProductDetails=returnproductlistdata?.orderProductDetails;
-        isReturnProductSelected=List<bool>.filled(orderProductDetails?.length??0, false,growable: true);
+        returnproductlistdata = result.returnproductlistdata;
+        orderDetails = returnproductlistdata?.orderDetails;
+        refundReasonDetails = returnproductlistdata?.refundReasonDetails;
+        orderProductDetails = returnproductlistdata?.orderProductDetails;
+        isReturnProductSelected = List<bool>.filled(
+            orderProductDetails?.length ?? 0, false,
+            growable: true);
         // int length = orderProductDetails?.length??0;
         // for(int i = 0  ; i < length;i++){
         //   selectedProductIdList.add(orderProductDetails?[i].id);
         // }
         // selectedProductIdList
-        shopDetails=returnproductlistdata?.shopDetails;
+        shopDetails = returnproductlistdata?.shopDetails;
         int cancelOrderLength = refundReasonDetails?.length ?? 0;
         isSelectedReason = List<bool>.filled(cancelOrderLength, false);
         showLoader(false);
@@ -99,7 +99,7 @@ class ReturnOrderController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -108,7 +108,6 @@ class ReturnOrderController extends ChangeNotifier {
       },
     );
   }
-
 
   //////////////////
   void onOtherSelected(value) {
@@ -119,7 +118,7 @@ class ReturnOrderController extends ChangeNotifier {
     }
     int cancelOrderLength = refundReasonDetails?.length ?? 0;
     isSelectedReason =
-    List<bool>.filled(cancelOrderLength, false, growable: true);
+        List<bool>.filled(cancelOrderLength, false, growable: true);
     isOtherReasonSelected = true;
     notifyListeners();
   }
@@ -137,15 +136,13 @@ class ReturnOrderController extends ChangeNotifier {
     int cancelOrderLength = refundReasonDetails?.length ?? 0;
 
     isSelectedReason =
-    List<bool>.filled(cancelOrderLength, false, growable: true);
+        List<bool>.filled(cancelOrderLength, false, growable: true);
     isSelectedReason[index] = true;
     cancellationId = id.toString();
     print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
     print(cancellationId);
     print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
     isOtherReasonSelected = false;
-
-
 
     notifyListeners();
   }
@@ -155,57 +152,69 @@ class ReturnOrderController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> onSelectingProduct(index,value,productId,productAmount)async{
+  Future<void> onSelectingProduct(
+      index, value, productId, productAmount) async {
     print(value);
-    isReturnProductSelected[index]=!isReturnProductSelected[index];
-    if(isReturnProductSelected[index]){
-      selectedProductIdList.insert(index,productId);
-      refundTotal=int.parse(refundTotal.toString())+int.parse(productAmount);
-    }
-    else{
+    isReturnProductSelected[index] = !isReturnProductSelected[index];
+    if (isReturnProductSelected[index]) {
+      selectedProductIdList.insert(index, productId);
+      refundTotal =
+          int.parse(refundTotal.toString()) + int.parse(productAmount);
+    } else {
       selectedProductIdList.removeAt(index);
-      refundTotal=int.parse(refundTotal.toString())-int.parse(productAmount);
+      refundTotal =
+          int.parse(refundTotal.toString()) - int.parse(productAmount);
     }
 
     print(selectedProductIdList);
     notifyListeners();
   }
 
-  SubmitReturnOrderReqModel get submitReturnOrderReqModel =>SubmitReturnOrderReqModel(
-  productId: productId,customRefundReason:descriptionController.text,orderId: orderId,reasonId: cancellationId,customerRefundAmount: refundTotal.toString(),totalProducts: selectedProductIdList.length.toString()
-);
+  SubmitReturnOrderReqModel get submitReturnOrderReqModel =>
+      SubmitReturnOrderReqModel(
+          productId: productId,
+          customRefundReason: descriptionController.text,
+          orderId: orderId,
+          reasonId: cancellationId,
+          customerRefundAmount: refundTotal.toString(),
+          totalProducts: selectedProductIdList.length.toString());
 
-  Future<void> submitRefundProduct(context)async{
-    if(selectedProductIdList.isEmpty){
-      Utils.showPrimarySnackbar(context,"Select atleast one product",
+  Future<void> submitRefundProduct(context) async {
+    if (selectedProductIdList.isEmpty) {
+      Utils.showPrimarySnackbar(context, "Select atleast one product",
           type: SnackType.error);
       return;
     }
-    if(cancellationId==""){
-      Utils.showPrimarySnackbar(context,"Select any reason",
+    if (cancellationId == "") {
+      Utils.showPrimarySnackbar(context, "Select any reason",
           type: SnackType.error);
       return;
-  }
-    if(descriptionController.text==""){
-      Utils.showPrimarySnackbar(context,"Enter reason for return",
+    }
+    if (descriptionController.text == "") {
+      Utils.showPrimarySnackbar(context, "Enter reason for return",
           type: SnackType.error);
       return;
     }
     LoadingOverlay.of(context).show();
-    for(int i=0;i<selectedProductIdList.length;i++){
-      productId+=selectedProductIdList[i] + ",";
+    for (int i = 0; i < selectedProductIdList.length; i++) {
+      productId += selectedProductIdList[i] + ",";
     }
-    productId=productId.substring(0,productId.length-1);
+    productId = productId.substring(0, productId.length - 1);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    submitReturnRepo.submitReturn(
-        submitReturnOrderReqModel, pref.getString("successToken"))
+    submitReturnRepo
+        .submitReturn(submitReturnOrderReqModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
       final result =
-      SubmitReturnOrderResModel.fromJson(jsonDecode(response.body));
+          SubmitReturnOrderResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.push(context,MaterialPageRoute(builder: (context)=>OrderDeliveryView(orderId: orderId,)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => OrderDeliveryView(
+                      orderId: orderId,
+                    )));
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         LoadingOverlay.of(context).hide();
@@ -218,7 +227,7 @@ class ReturnOrderController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -226,5 +235,5 @@ class ReturnOrderController extends ChangeNotifier {
         return false;
       },
     );
-    }
+  }
 }

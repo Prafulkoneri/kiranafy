@@ -79,10 +79,16 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                 ),
-element?.returnStatus=="YES"?
-
-                                Text("Return",style: TextStyle(color: Color(0xffFF0000),fontSize: 13.sp,fontWeight: FontWeight.w700),)
-                              :Container()],
+                                element?.returnStatus == "YES"
+                                    ? Text(
+                                        "Return",
+                                        style: TextStyle(
+                                            color: Color(0xffFF0000),
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w700),
+                                      )
+                                    : Container()
+                              ],
                             ),
                             SizedBox(
                               height: 6.h,
@@ -133,7 +139,7 @@ element?.returnStatus=="YES"?
                                     : Row(
                                         children: [
                                           Text(
-                                            "Rs. ${element?.productMrpPrice}  ",
+                                            "Rs . ${element?.productMrpPrice}  ",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   decoration: TextDecoration
@@ -167,7 +173,7 @@ element?.returnStatus=="YES"?
                                         ],
                                       ),
                                 Text(
-                                  "Rs ${element?.productTotalPrice}",
+                                  "Rs. ${element?.productTotalPrice}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: grey5,

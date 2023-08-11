@@ -97,7 +97,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       Stack(
                         children: [
                           Align(
-                            child: watch.bannerImageData?.isEmpty==true
+                            child: watch.bannerImageData?.isEmpty == true
                                 ? Container(
                                     height: 188.w,
                                     child: Image.asset(
@@ -1756,14 +1756,16 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         ),
                         width: ScreenUtil().screenWidth,
                         // height: 100.h,
-                        child:watchHome.placeAd.isNotEmpty?
-                        AppNetworkImages(
-                          imageUrl:
-                          (watchHome.placeAd.toList()..shuffle()).first,
-                          height: 163.h,
-                          width: 352.w,
-                          fit: BoxFit.cover,
-                        ):Container(),
+                        child: watchHome.placeAd.isNotEmpty
+                            ? AppNetworkImages(
+                                imageUrl: (watchHome.placeAd.toList()
+                                      ..shuffle())
+                                    .first,
+                                height: 163.h,
+                                width: 352.w,
+                                fit: BoxFit.cover,
+                              )
+                            : Container(),
                       ),
 
                       SizedBox(
