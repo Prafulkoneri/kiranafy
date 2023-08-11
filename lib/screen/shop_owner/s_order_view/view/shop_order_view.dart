@@ -1684,7 +1684,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             Container(
                                 padding: EdgeInsets.only(left: 19.w),
                                 child: Text(
-                                  "Customer has sent 3 products return request. Refund amount is INR 60.",
+                                  "Customer has sent ${watch.orderDetails?.refundProductCount} products return request. Refund amount is INR ${watch.orderDetails?.totalAmount}.",
                                   style: TextStyle(
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w700,
@@ -1822,14 +1822,14 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 "pending" &&
                                                             watch.orderDetails
                                                                     ?.customerRefundPaymentStatus ==
-                                                                "not-received"
+                                                                "not_received"
                                                         ? "Payment Pending"
                                                         : watch.orderDetails
                                                                         ?.shopOwnerRefundStatus ==
                                                                     "accept" &&
                                                                 watch.orderDetails
                                                                         ?.customerRefundPaymentStatus ==
-                                                                    "not-received"
+                                                                    "not_received"
                                                             ? "Pending from Customer"
                                                             : watch.orderDetails
                                                                             ?.shopOwnerRefundStatus ==
@@ -2024,14 +2024,14 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     "pending" &&
                                                                 watch.orderDetails
                                                                         ?.customerRefundPaymentStatus ==
-                                                                    "not-received"
+                                                                    "not_received"
                                                             ? "Payment Pending"
                                                             : watch.orderDetails
                                                                             ?.shopOwnerRefundStatus ==
                                                                         "accept" &&
                                                                     watch.orderDetails
                                                                             ?.customerRefundPaymentStatus ==
-                                                                        "not-received"
+                                                                        "not_received"
                                                                 ? "Pending from Customer"
                                                                 : watch.orderDetails?.shopOwnerRefundStatus ==
                                                                             "accept" &&
@@ -2159,12 +2159,12 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         "pending" &&
                                                                     watch.orderDetails
                                                                             ?.customerRefundPaymentStatus ==
-                                                                        "not-received"
+                                                                        "not_received"
                                                                 ? "Payment Pending"
                                                                 : watch.orderDetails?.shopOwnerRefundStatus ==
                                                                             "accept" &&
                                                                         watch.orderDetails?.customerRefundPaymentStatus ==
-                                                                            "not-received"
+                                                                            "not_received"
                                                                     ? "Pending from Customer"
                                                                     : watch.orderDetails?.shopOwnerRefundStatus ==
                                                                                 "accept" &&

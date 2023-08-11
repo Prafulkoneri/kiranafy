@@ -145,14 +145,13 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                 Row(
                                   children: [
                                     PrimaryCheckBox(
-                                      value:
-                                          watch.isReturnProductSelected[index],
+                                      value: watch.isReturnProductSelected[index],
                                       onChanged: (value) {
                                         read.onSelectingProduct(
                                             index,
                                             value,
                                             element?.id.toString(),
-                                            element?.productMrpPrice);
+                                            element?.productOfferPrice,element?.productQuantity.toString());
                                       },
                                     ),
                                     AppNetworkImages(
@@ -213,7 +212,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                     ),
                                   ],
                                 ),
-                                Text("INR ${element?.productMrpPrice}",
+                                Text("INR ${element?.productOfferPrice}",
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                           fontSize: 14.sp,

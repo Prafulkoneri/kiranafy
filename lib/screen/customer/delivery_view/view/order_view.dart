@@ -883,7 +883,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           ),
                                   ]),
                                 ),
-                                watch.orderDetails?.totalDiscount != ""
+                                watch.couponDetails?.couponDiscount !=null
                                     ? Text(
                                         // "",
                                         // "- Rs . ${watch.orderDetails?.totalDiscount}",
@@ -897,7 +897,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         ),
                                       )
                                     : Text(
-                                        "- Rs. 0",
+                                        "Rs. 0",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: grey5,
@@ -1073,6 +1073,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                       watch.orderDetails?.orderStatus == "Delivered"
                           ? Container(
                               padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                              margin: EdgeInsets.only(bottom: 10.w),
                               child: SizedBox(
                                 // padding: EdgeInsets.only(
                                 //     left: 91.w, right: 91.w, top: 10.w, bottom: 10.w),

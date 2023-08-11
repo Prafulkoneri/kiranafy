@@ -150,13 +150,15 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                         SizedBox(
                                           width: 9.w,
                                         ),
-                                        Text(
-                                          "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                fontSize: 13.sp,
-                                                fontWeight: FontWeight.w400),
+                                        Flexible(
+                                          child: Text(
+                                            "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: Black,
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
                                           ),
                                         ),
                                       ],

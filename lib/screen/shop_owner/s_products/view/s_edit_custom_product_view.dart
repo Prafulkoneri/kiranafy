@@ -13,6 +13,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -53,6 +54,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<EditCustomProductController>().initState(
           context, CreateWidget(0), 0, widget.productId, widget.categoryId);
+      context.read<SCategoryListController>().initState(context);
     });
   }
 
@@ -61,6 +63,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
     final watch = context.watch<EditCustomProductController>();
     final read = context.read<EditCustomProductController>();
     final watchDashBoardScreen = context.read<SDashBoardController>();
+    final selectedCategoryListWatch = context.read<SCategoryListController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -125,7 +128,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                           onChanged: (value) {
                             read.onCategorySelected(value);
                           },
-                          items: watch.categoryData
+                          items: selectedCategoryListWatch.selectedCategoriesList!
                               .map((item) => DropdownMenuItem<String>(
                                     value: item.id.toString(),
                                     child: Text(

@@ -20,7 +20,7 @@ class ReturnOrderController extends ChangeNotifier {
   String? orderId = "";
   String? description = "";
   String? productAmount = "";
-  String productTotalAmount = "0";
+
   String? checkStatus = "";
   String? pId = "";
   ReturnProductListData? returnproductlistdata;
@@ -44,7 +44,7 @@ class ReturnOrderController extends ChangeNotifier {
   SubmitReturnRepo submitReturnRepo = SubmitReturnRepo();
 
   Future<void> initState(context, oId) async {
-    productTotalAmount = "0";
+    refundTotal=0;
     selectedProductIdList.clear();
     isReturnProductSelected.clear();
     await returnOrder(context, oId);
@@ -153,17 +153,16 @@ class ReturnOrderController extends ChangeNotifier {
   }
 
   Future<void> onSelectingProduct(
-      index, value, productId, productAmount) async {
+      index, value, productId, productAmount,productCount) async {
     print(value);
     isReturnProductSelected[index] = !isReturnProductSelected[index];
     if (isReturnProductSelected[index]) {
-      selectedProductIdList.insert(index, productId);
+      selectedProductIdList.add(productId);
       refundTotal =
-          int.parse(refundTotal.toString()) + int.parse(productAmount);
+          int.parse(refundTotal.toString()) + (int.parse(productAmount)*int.parse(productCount.toString()));
     } else {
-      selectedProductIdList.removeAt(index);
-      refundTotal =
-          int.parse(refundTotal.toString()) - int.parse(productAmount);
+      selectedProductIdList.removeWhere((element) => element==productId);
+      refundTotal = int.parse(refundTotal.toString())-(int.parse(productAmount)*int.parse(productCount.toString()));
     }
 
     print(selectedProductIdList);

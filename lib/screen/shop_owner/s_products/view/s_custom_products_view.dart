@@ -98,7 +98,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                           onChanged: (value) {
                             read.onCategorySelected(value);
                           },
-                          items: watch.categoryData
+                          items: selectedCategoryListWatch.selectedCategoriesList!
                               .map((item) => DropdownMenuItem<String>(
                                     value: item.id.toString(),
                                     child: Text(

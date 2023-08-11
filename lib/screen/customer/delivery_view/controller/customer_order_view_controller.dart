@@ -167,6 +167,10 @@ class CustomerOrderViewController extends ChangeNotifier {
         await customerOrderView(context, orderId);
         showLoader(false);
         LoadingOverlay.of(context).hide();
+        if(value=="not_received"){
+          Utils.showPrimarySnackbar(context,"Have send notification regarding this concern. Will connect with you shortly.",
+              type: SnackType.success);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

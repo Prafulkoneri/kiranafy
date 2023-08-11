@@ -425,7 +425,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               )
                             ],
                           )),
-                      watch.offerProduct!.isNotEmpty
+                      watch.offerProduct?.isNotEmpty==true
                           ? Column(
                               children: [
                                 SizedBox(
@@ -1304,6 +1304,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 child: Text(
                                                   "${element?.categoryName}",
                                                   textAlign: TextAlign.center,
+                                                  maxLines:2,
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         color: Black,
@@ -1311,7 +1312,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                         fontSize: 11.5.sp,
                                                         fontWeight:
                                                             FontWeight.w500),
+
                                                   ),
+                                                  overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
                                             ],
