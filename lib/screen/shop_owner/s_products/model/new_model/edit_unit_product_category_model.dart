@@ -15,39 +15,60 @@ class EditProductUnitCategoryRequestModel {
     return data;
   }
 }
+class EditCustomProductUnitCategoryRequestModel {
+  String? productId;
+  String? productType;
+  String ? productUnitId;
+  EditCustomProductUnitCategoryRequestModel({
+    this.productId,
+    this.productType,
+    required this.productUnitId,
+  });
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = {};
+    data["product_id"] = productId;
+    data["product_type"] = productType;
+    data["product_unit_id"] = productUnitId;
+    return data;
+  }
+}
 
 ////////////////////////RESPONSE MODEL////////////////////
 class EditProductUnitCategoryResModel {
   int? status;
   String? message;
   EditUnitData? editunitdata;
+  ProductUnitDetails? productUnitDetails;
 
 
   EditProductUnitCategoryResModel({
     required this.status,
     required this.message,
     required this.editunitdata,
+    required this.productUnitDetails,
 
   });
   EditProductUnitCategoryResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     editunitdata = json['data'] != null ? EditUnitData.fromJson(json['data']) : null;
+    productUnitDetails = json['product_unit_details'] != null
+        ? ProductUnitDetails.fromJson(json['product_unit_details'])
+        : null;
   }
 }
 
 class EditUnitData {
-  ProductUnitDetails? productUnitDetails;
+
   List<UnitListData>? units;
 
   EditUnitData({
-    required this.productUnitDetails,
+
     required this.units,
   });
   EditUnitData.fromJson(Map<String, dynamic> json) {
-    productUnitDetails = json['product_unit_details'] != null
-        ? ProductUnitDetails.fromJson(json['product_unit_details'])
-        : null;
+
     if (json["unit_data"] != null) {
       units = <UnitListData>[];
       json["unit_data"].forEach((v) {

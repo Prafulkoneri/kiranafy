@@ -17,4 +17,18 @@ class EditUnitProductCategoryRepo {
       throw Exception(e);
     }
   }
+  Future<http.Response> getCustomEditUnit(
+      EditCustomProductUnitCategoryRequestModel reqModel, token) async {
+    print(reqModel.toJson());
+    print(Uri.parse(Endpoint.editUnitProductCategory));
+    try {
+      return await http.post(Uri.parse(Endpoint.editUnitProductCategory),
+          body: reqModel.toJson(),
+          headers: {
+            "Authorization": "Bearer $token",
+          });
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

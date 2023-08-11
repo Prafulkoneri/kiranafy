@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -138,7 +139,7 @@ showLoader(value){
     customProductDataRepo
         .customProductDataModel(pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result =
           CustomProductDataResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
