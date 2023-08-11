@@ -23,10 +23,10 @@ class ShopSettingController extends ChangeNotifier {
   DeleteAccountRepo deleteAccountRepo = DeleteAccountRepo();
   AppVersionRepo appVersionRepo = AppVersionRepo();
   AppVersionData? appversiondata;
-  String appVersion="";
+  String appVersion = "";
   bool isAppNotificationEnable = true;
   bool isStackLoading = false;
-  bool isLoading=true;
+  bool isLoading = true;
 
   // String? selectedValue;
 // Group Value fo
@@ -39,10 +39,10 @@ class ShopSettingController extends ChangeNotifier {
     notifyListeners();
   }
 
- showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
- }
+  }
 
   Future<void> shopNotification(context, status) async {
     showLoader(true);
@@ -129,6 +129,7 @@ class ShopSettingController extends ChangeNotifier {
       final result = DeleteAccountResModel.fromJson(
         jsonDecode(response.body),
       );
+      print(response.body);
       if (response.statusCode == 200) {
         pref.clear();
         Navigator.push(
@@ -158,8 +159,6 @@ class ShopSettingController extends ChangeNotifier {
 
 ////////////////////////////////////////////////////////////////
   Future<void> appVersionCheck(context) async {
-
-
     PackageInfo packageInfo = PackageInfo(
       appName: 'Unknown',
       packageName: 'Unknown',
@@ -170,9 +169,8 @@ class ShopSettingController extends ChangeNotifier {
     );
     final info = await PackageInfo.fromPlatform();
     packageInfo = info;
-    appVersion=packageInfo.version;
+    appVersion = packageInfo.version;
     notifyListeners();
-
 
     // SharedPreferences pref = await SharedPreferences.getInstance();
     // print(pref.getString("successToken"));

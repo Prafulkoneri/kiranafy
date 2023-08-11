@@ -67,7 +67,7 @@ class SShopConfigurationController extends ChangeNotifier {
   List selectedDeliveryAreaName = [];
   String selectedAreaId = "";
   List<AreaList>? areaList;
-  List initialSelectedAreaId=[];
+  List initialSelectedAreaId = [];
 
   Future<void> initState(context, initialConfiguration) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -102,7 +102,7 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   void onDeliveryAreaSubmit(context) {
-    selectedAreaId="";
+    selectedAreaId = "";
     deliveryAreasController.clear();
     for (int i = 0; i < selectedDeliveryAreaName.length; i++) {
       deliveryAreasController.text += selectedDeliveryAreaName[i] + ", ";
@@ -220,7 +220,7 @@ class SShopConfigurationController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final data = result.data;
-        initialSelectedAreaId=result.selectedDeliveryArea??[];
+        initialSelectedAreaId = result.selectedDeliveryArea ?? [];
         // shopDeliveryAreaData = result.shopDeliveryAreaData;
         // selectedDeliveryAreaList = List<bool>.filled(
         //     shopDeliveryAreaData?.length ?? 0, false,
@@ -364,31 +364,22 @@ class SShopConfigurationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+    //////////////////
 
     //////////////////
-    if (minimumDeliveryAmountController.text == "") {
-      Utils.showPrimarySnackbar(
-          context, "Please Enter Minimum Delivery Order Value",
-          type: SnackType.error);
-      return;
-    }
     if (deliveryAreasController.text == "") {
       Utils.showPrimarySnackbar(context, "Please Select Delivery Areas",
           type: SnackType.error);
       return;
     }
-
+//////////////
     if (supportNumberController.text.length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
           type: SnackType.error);
       notifyListeners();
       return;
     }
-    if (!isCustomerPickupSelected && !isDeliveryCustomerSelected) {
-      Utils.showPrimarySnackbar(context, "Select Any Delivery Type",
-          type: SnackType.error);
-      return;
-    }
+
     if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
       Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
           type: SnackType.error);
@@ -399,7 +390,22 @@ class SShopConfigurationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+//////////////////////Minimum Order value/////////////
 
+    if (!isCustomerPickupSelected) {
+      if (minimumDeliveryAmountController.text == "") {
+        Utils.showPrimarySnackbar(
+            context, "Please Enter Minimum Delivery Order Value",
+            type: SnackType.error);
+        return;
+      }
+      ///////////////Delivery Type///////////
+      if (!isCustomerPickupSelected && !isDeliveryCustomerSelected) {
+        Utils.showPrimarySnackbar(context, "Select Any Delivery Type",
+            type: SnackType.error);
+        return;
+      }
+    }
     if (!isNineToTwelve && !isThreeToSix && !isTwelveToThree && !isSixToNine) {
       Utils.showPrimarySnackbar(context, "Select Any Slot",
           type: SnackType.error);
@@ -628,47 +634,37 @@ class SShopConfigurationController extends ChangeNotifier {
       log(response.body);
       print(response.statusCode);
       if (response.statusCode == 200) {
-        selectedAreaId="";
+        selectedAreaId = "";
         deliveryAreasController.clear();
         areaList = result.areaList;
         selectedDeliveryAreaList =
             List<bool>.filled(areaList?.length ?? 0, false, growable: true);
-        int areaLength=areaList?.length??0;
-        if(initialSelectedAreaId.isNotEmpty){
-          selectedDeliveryAreaId=initialSelectedAreaId;
-
-          List ids=[];
-          List name=[];
-          for(int i=0;i<areaLength;i++){
+        int areaLength = areaList?.length ?? 0;
+        if (initialSelectedAreaId.isNotEmpty) {
+          selectedDeliveryAreaId = initialSelectedAreaId;
+          List ids = [];
+          List name = [];
+          for (int i = 0; i < areaLength; i++) {
             ids.add(areaList?[i].id);
             name.add(areaList?[i].areaName);
           }
           print(selectedDeliveryAreaId);
-          for(int i=0;i<selectedDeliveryAreaId.length;i++){
-            selectedDeliveryAreaList[ids.indexOf(selectedDeliveryAreaId[i])]=true;
-            deliveryAreasController.text+=name[ids.indexOf(selectedDeliveryAreaId[i])]+", ";
+          for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
+            selectedDeliveryAreaList[ids.indexOf(selectedDeliveryAreaId[i])] =
+                true;
+            deliveryAreasController.text +=
+                name[ids.indexOf(selectedDeliveryAreaId[i])] + ", ";
           }
-          deliveryAreasController.text=deliveryAreasController.text.substring(0,deliveryAreasController.text.length-2);
+          deliveryAreasController.text = deliveryAreasController.text
+              .substring(0, deliveryAreasController.text.length - 2);
           for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
             selectedAreaId += selectedDeliveryAreaId[i].toString() + ",";
           }
           selectedAreaId =
               selectedAreaId.toString().substring(0, selectedAreaId.length - 1);
-        }
-        else{
+        } else {
           deliveryAreasController.clear();
         }
-
-
-        //       int length = areaList?.length ?? 0;
-        // selectedCategoryId.clear();
-        // for (int i = 0; i < length; i++) {
-        //   if (areaList?[i].id == "yes") {
-        //     selectedCategoryList.insert(i, true);
-        //     selectedCategoryId.add(areaList?[i].id);
-        //   }
-        // }
-
         showLoader(false);
         notifyListeners();
       } else {

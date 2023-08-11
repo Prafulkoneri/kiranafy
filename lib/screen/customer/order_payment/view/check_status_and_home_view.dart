@@ -105,21 +105,29 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                           borderRadius: BorderRadius.circular(14.0)),
                       minimumSize: const Size(100, 40), //////// HERE
                     ),
-                    // style: style,
+
                     // onPressed: () {
                     //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => OrderStatusView()),
-                    //   );
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) =>
+                    // OrderStatusView(
+                    //                 orderId: widget.orderId,
+                    //               )
+                    // )
+                    // );
                     // },
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OrderStatusView(
-                                    orderId: widget.orderId,
-                                  )));
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainScreenView(
+                                index: 2,
+                                screenName: OrderStatusView(
+                                  orderId: widget.orderId,
+                                ))),
+                        (Route<dynamic> route) => false,
+                      );
                     },
                     child: Text(
                       'Check Order Status',

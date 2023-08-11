@@ -102,218 +102,257 @@ class _CustomerListViewState extends State<CustomerListView> {
                 return false;
               },
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: watch.customerList?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        final element = watch.customerList?[index];
-                        return Container(
-                          margin: EdgeInsets.only(
-                              left: 19.w,
-                              right: 19.0.w,
-                              bottom: 0.w,
-                              top: 20.w),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              border: Border.all(color: Color(0xffEFEFEF))),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 15.w, right: 18.0.w, top: 15.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                      children: [
-                                        element?.customerProfileImagePath != ""
-                                            ? Container(
-                                                width: 60.w,
-                                                height: 60.w,
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                        color:
-                                                            Color(0xff115B7A),
-                                                        width: 2.w)),
-                                                child: ClipOval(
-                                                  child: AppNetworkImages(
-                                                    height: 60.w,
-                                                    width: 60.w,
-                                                    imageUrl:
-                                                        '${element?.customerProfileImagePath}',
-                                                    fit: BoxFit.cover,
-                                                    // 'assets/images/ReviewProfile.png',
-                                                  ),
-                                                ),
-                                              )
-                                            : Image.asset(
-                                                'assets/images/profile_last.png',
-                                                width: 60.w,
-                                                height: 60.h,
-                                              ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                            left: 12.w,
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                child: watch.customerList?.isNotEmpty == true
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: watch.customerList?.length ?? 0,
+                            itemBuilder: (context, index) {
+                              final element = watch.customerList?[index];
+                              return Container(
+                                margin: EdgeInsets.only(
+                                    left: 19.w,
+                                    right: 19.0.w,
+                                    bottom: 0.w,
+                                    top: 20.w),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                    border:
+                                        Border.all(color: Color(0xffEFEFEF))),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 15.w, right: 18.0.w, top: 15.w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Row(
                                             children: [
-                                              Text(
-                                                '${element?.customerName}',
-                                                // 'Rahul Singh',
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black,
-                                                      letterSpacing: .5,
-                                                      fontSize: 16.sp,
-                                                      fontWeight:
-                                                          FontWeight.w800),
+                                              element?.customerProfileImagePath !=
+                                                      ""
+                                                  ? Container(
+                                                      width: 60.w,
+                                                      height: 60.w,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          border: Border.all(
+                                                              color: Color(
+                                                                  0xff115B7A),
+                                                              width: 2.w)),
+                                                      child: ClipOval(
+                                                        child: AppNetworkImages(
+                                                          height: 60.w,
+                                                          width: 60.w,
+                                                          imageUrl:
+                                                              '${element?.customerProfileImagePath}',
+                                                          fit: BoxFit.cover,
+                                                          // 'assets/images/ReviewProfile.png',
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Image.asset(
+                                                      'assets/images/profile_last.png',
+                                                      width: 60.w,
+                                                      height: 60.h,
+                                                    ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                  left: 12.w,
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 5.w,
-                                              ),
-                                              Text(
-                                                "${element?.areaName}, ${element?.cityName}",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black,
-                                                      letterSpacing: .5,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      '${element?.customerName}',
+                                                      // 'Rahul Singh',
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Black,
+                                                            letterSpacing: .5,
+                                                            fontSize: 16.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w800),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5.w,
+                                                    ),
+                                                    Text(
+                                                      "${element?.areaName}, ${element?.cityName}",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Black,
+                                                            letterSpacing: .5,
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        element?.isShopFavourite == "yes"
-                                            ? Container(
-                                                width: 32.w,
-                                                height: 32.h,
-                                                child: SvgPicture.asset(
-                                                  'assets/icons/s_fvrt.svg',
-                                                ),
-                                              )
-                                            : Container(),
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            read.launchPhone(
-                                                element?.mobileNumber ?? "",
-                                                context);
-                                          },
-                                          child: Container(
-                                            width: 32.w,
-                                            height: 32.h,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xff115B7A),
-                                                shape: BoxShape.circle),
-                                            child: Center(
-                                              child: SvgPicture.asset(
-                                                'assets/icons/s_call1.svg',
-                                                height: 13.h,
-                                                width: 13.w,
+                                          Row(
+                                            children: [
+                                              element?.isShopFavourite == "yes"
+                                                  ? Container(
+                                                      width: 32.w,
+                                                      height: 32.h,
+                                                      child: SvgPicture.asset(
+                                                        'assets/icons/s_fvrt.svg',
+                                                      ),
+                                                    )
+                                                  : Container(),
+                                              SizedBox(
+                                                width: 10.w,
                                               ),
-                                            ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  read.launchPhone(
+                                                      element?.mobileNumber ??
+                                                          "",
+                                                      context);
+                                                },
+                                                child: Container(
+                                                  width: 32.w,
+                                                  height: 32.h,
+                                                  decoration: BoxDecoration(
+                                                      color: Color(0xff115B7A),
+                                                      shape: BoxShape.circle),
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      'assets/icons/s_call1.svg',
+                                                      height: 13.h,
+                                                      width: 13.w,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: Color(0xffE8E8E8),
+                                      thickness: 1,
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 15.w,
+                                          right: 9.0.w,
+                                          bottom: 8.w,
+                                          top: 7.w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Row(
+                                            children: [
+                                              Text(
+                                                '${element?.orderCount} Orders',
+                                                style: TextStyle(
+                                                    color: Black,
+                                                    // letterSpacing: .5,
+                                                    fontSize: 14.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
+                                          Row(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SMainScreenView(
+                                                              index: 4,
+                                                              screenName:
+                                                                  CustomerDetailView(
+                                                                screenName: widget
+                                                                    .fromPage,
+                                                                customerId: element
+                                                                    ?.id
+                                                                    .toString(),
+                                                              ),
+                                                            )),
+                                                    (Route<dynamic> route) =>
+                                                        false,
+                                                  );
+                                                },
+                                                child: Text(
+                                                  'View Details',
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Black,
+                                                        letterSpacing: .5,
+                                                        fontSize: 14.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 6.w,
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/icons/s_forword.svg',
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
-                              ),
-                              Divider(
-                                color: Color(0xffE8E8E8),
-                                thickness: 1,
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 15.w,
-                                    right: 9.0.w,
-                                    bottom: 8.w,
-                                    top: 7.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                      children: [
-                                        Text(
-                                          '${element?.orderCount} Orders',
-                                          style: TextStyle(
-                                              color: Black,
-                                              // letterSpacing: .5,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SMainScreenView(
-                                                        index: 4,
-                                                        screenName:
-                                                            CustomerDetailView(
-                                                          screenName:
-                                                              widget.fromPage,
-                                                          customerId: element
-                                                              ?.id
-                                                              .toString(),
-                                                        ),
-                                                      )),
-                                              (Route<dynamic> route) => false,
-                                            );
-                                          },
-                                          child: Text(
-                                            'View Details',
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Black,
-                                                  letterSpacing: .5,
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 6.w,
-                                        ),
-                                        SvgPicture.asset(
-                                          'assets/icons/s_forword.svg',
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                        ],
+                      )
+                    : Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 150.h,
+                            ),
+                            Image.asset(
+                              "assets/images/empty_order.png",
+                              width: 150.w,
+                              height: 150.h,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Text(
+                              "No Record Found",
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black1,
+                                    letterSpacing: .5,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
               ),
             ),
     );
