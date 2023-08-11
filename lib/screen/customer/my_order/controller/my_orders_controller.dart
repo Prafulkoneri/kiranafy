@@ -16,16 +16,16 @@ class MyOrdersController extends ChangeNotifier {
   MyOrdersData? myOrdersData;
   List<OrderList>? orderList;
   List<OrderedShopsList>? orderedShopsList;
-  bool isLoading=true;
-  bool isStackLoaderVisible=false;
+  bool isLoading = true;
+  bool isStackLoaderVisible = false;
 
-  void showLoader(value){
-    isLoading=value;
+  void showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
-  void showStackLoader(value){
-    isStackLoaderVisible=value;
+  void showStackLoader(value) {
+    isStackLoaderVisible = value;
     notifyListeners();
   }
 
@@ -36,14 +36,12 @@ class MyOrdersController extends ChangeNotifier {
   MyOrdersRequestModel get myOrderRequestModel => MyOrdersRequestModel(
       shopId: shopId.toString(), orderStatus: orderStatus.toString());
 
-
   Future<void> getMyOrdersList(context, id, orStatus) async {
-
-    isLoading=false;
-   isStackLoaderVisible=false;
+    isLoading = false;
+    isStackLoaderVisible = false;
     showLoader(true);
-    shopId = id==null?"":id.toString();
-    orderStatus =orStatus==null?"":orStatus.toString();
+    shopId = id == null ? "" : id.toString();
+    orderStatus = orStatus == null ? "" : orStatus.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     myOrderRepo
@@ -55,7 +53,7 @@ class MyOrdersController extends ChangeNotifier {
         myOrdersData = result.myOrdersData;
         orderList = myOrdersData?.orderList;
         orderedShopsList = myOrdersData?.orderedShopsList;
-      showLoader(false);
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -74,17 +72,17 @@ class MyOrdersController extends ChangeNotifier {
     );
   }
 
-  void onShopSelected(value){
-    shopId=value;
+  void onShopSelected(value) {
+    shopId = value;
     notifyListeners();
   }
 
-  void onStatusSelected(value){
-    orderStatus=value;
+  void onStatusSelected(value) {
+    orderStatus = value;
     notifyListeners();
   }
 
-  Future<void> applyFilter(context)async{
+  Future<void> applyFilter(context) async {
     showLoader(true);
     showStackLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -109,7 +107,7 @@ class MyOrdersController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -118,9 +116,10 @@ class MyOrdersController extends ChangeNotifier {
       },
     );
   }
-  Future<void> clearFilter(context)async{
-    shopId="";
-    orderStatus="";
+
+  Future<void> clearFilter(context) async {
+    shopId = "";
+    orderStatus = "";
     showLoader(true);
     showStackLoader(true);
 
@@ -137,7 +136,7 @@ class MyOrdersController extends ChangeNotifier {
         orderedShopsList = myOrdersData?.orderedShopsList;
         showStackLoader(false);
         showLoader(false);
-        Navigator.pop(context);
+        // Navigator.pop(context);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -146,7 +145,7 @@ class MyOrdersController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -155,5 +154,4 @@ class MyOrdersController extends ChangeNotifier {
       },
     );
   }
-
 }

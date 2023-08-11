@@ -41,6 +41,7 @@ class CustomerReviewListControler extends ChangeNotifier {
         shopId: shopId.toString(),
       );
   bool favAllShop = true;
+  bool isLoading = true;
   //////////////
 
   Future<void> initState(context, sId) async {
@@ -48,6 +49,10 @@ class CustomerReviewListControler extends ChangeNotifier {
     notifyListeners();
   }
 
+  void showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   CustomerShopReviewListRequestModel get customerShopReviewListRequestModel =>
@@ -59,6 +64,7 @@ class CustomerReviewListControler extends ChangeNotifier {
     print(sId);
     print("object1111111111111111111111");
     shopId = sId.toString();
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopReviewListRepo
         .shopReviewList(
@@ -77,7 +83,7 @@ class CustomerReviewListControler extends ChangeNotifier {
         print("22222222222222222222222222222");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
-
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

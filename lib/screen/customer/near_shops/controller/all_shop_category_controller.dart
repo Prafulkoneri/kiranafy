@@ -34,22 +34,21 @@ class AllCategoryShopController extends ChangeNotifier {
       CustomerViewAllCategoryShopReqModel(
           offset: offset.toString(), limit: "10", categoryId: categoryId);
 
-  Future<void> initState(context, id,refresh) async {
-    if(refresh) {
+  Future<void> initState(context, id, refresh) async {
+    if (refresh) {
       print(id);
       allShops.clear();
       offset = 0;
       getAllShops(context, id);
-    }
-    else{
-      isLoading=false;
+    } else {
+      isLoading = false;
     }
     notifyListeners();
-    }
+  }
 
   Future<void> getAllShops(context, id) async {
-    if(offset==0){
-    isLoading = true;
+    if (offset == 0) {
+      isLoading = true;
     }
     categoryId = id;
     SharedPreferences pref = await SharedPreferences.getInstance();

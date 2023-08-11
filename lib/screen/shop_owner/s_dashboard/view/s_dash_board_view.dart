@@ -21,6 +21,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
+import 'package:local_supper_market/screen/shop_owner/shop_review/shop_review_list_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
@@ -170,38 +171,57 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 15.w),
-                                    height: 24.h,
-                                    width: 55.w,
-                                    decoration: BoxDecoration(
-                                      color: yellow,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          "assets/images/star.svg",
-                                          height: 14.h,
-                                          width: 14.w,
-                                        ),
-                                        SizedBox(
-                                          width: 4.3.w,
-                                        ),
-                                        Text(
-                                          "0.0",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                // letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400),
+                                  GestureDetector(
+                                    onTap: () {
+                                      //  Navigator.pushAndRemoveUntil(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           SMainScreenView(
+                                      //             index: 0,
+                                      //             screenName: ShopReviewScreenView(
+                                      //               shopId: watch
+                                      //                   .shopDetails?.id
+                                      //                   .toString(),
+                                      //               fromDashBoard: true,
+                                      //             ),
+                                      //           )),
+                                      //   (Route<dynamic> route) => false,
+                                      // );
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 15.w),
+                                      height: 24.h,
+                                      width: 55.w,
+                                      decoration: BoxDecoration(
+                                        color: yellow,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/images/star.svg",
+                                            height: 14.h,
+                                            width: 14.w,
                                           ),
-                                        ),
-                                      ],
+                                          SizedBox(
+                                            width: 4.3.w,
+                                          ),
+                                          Text(
+                                            "0.0",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: Black,
+                                                  // letterSpacing: .5,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1300,7 +1320,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              watchRefundOrderList.onNavigationFromDashboard("pending");
+                              watchRefundOrderList
+                                  .onNavigationFromDashboard("pending");
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
@@ -1358,21 +1379,25 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
-                              watchRefundOrderList.onNavigationFromDashboard("completed");
+                            onTap: () {
+                              watchRefundOrderList
+                                  .onNavigationFromDashboard("completed");
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                      index: 2,
-                                      screenName: SPaymentRefundList(),
-                                    )),
-                                    (Route<dynamic> route) => false,
+                                          index: 2,
+                                          screenName: SPaymentRefundList(),
+                                        )),
+                                (Route<dynamic> route) => false,
                               );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: 12.w, right: 12.w, top: 9.w, bottom: 9.w),
+                                  left: 12.w,
+                                  right: 12.w,
+                                  top: 9.w,
+                                  bottom: 9.w),
                               // height: 50.h,/
                               decoration: BoxDecoration(
                                   color: SplashText,

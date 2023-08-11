@@ -1313,8 +1313,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                 // style: style,
                                                 onPressed: () {
                                                   read.shopSubmitreview(
-                                                    context,
-                                                  );
+                                                      context);
                                                 },
                                                 child: Text(
                                                   'Submit',

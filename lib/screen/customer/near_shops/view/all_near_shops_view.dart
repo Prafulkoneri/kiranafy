@@ -313,6 +313,9 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                   );
                                 }))),
                         SizedBox(
+                          height: 10.h,
+                        ),
+                        SizedBox(
                           // height: 400.h,
                           child: Stack(
                             children: [
