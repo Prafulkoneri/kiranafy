@@ -183,7 +183,7 @@ class _OfferPageState extends State<OfferPage> {
                                           //     MainAxisAlignment.spaceAround,
                                           children: [
                                             Text(
-                                              "${element?.weight}",
+                                              "${element?.weight} ${element?.unit}",
                                               // "500g",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(

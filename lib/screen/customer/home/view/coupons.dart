@@ -27,6 +27,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
+    final read = context.watch<HomeScreenController>();
     final mainScreenWatch = context.watch<MainScreenController>();
     return Container(
       decoration: BoxDecoration(color: Coupons),
@@ -259,40 +260,93 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                 SizedBox(
                                   height: 6.w,
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10.33.w, vertical: 6.w),
-                                      decoration: BoxDecoration(
+                                // Row(
+                                //   mainAxisSize: MainAxisSize.min,
+                                //   children: [
+                                //     Container(
+                                //       padding: EdgeInsets.symmetric(
+                                //           horizontal: 10.33.w, vertical: 6.w),
+                                //       decoration: BoxDecoration(
+                                //           borderRadius:
+                                //               BorderRadius.circular(5.w),
+                                //           border:
+                                //               Border.all(color: SplashText)),
+                                //       child: Center(
+                                //         child: Row(
+                                //           children: [
+                                //             Text(
+                                //               element?.couponCode ?? "",
+                                //               style: TextStyle(
+                                //                   fontWeight: FontWeight.w700,
+                                //                   fontSize: 12.sp,
+                                //                   color: SplashText),
+                                //             ),
+                                //             SizedBox(
+                                //               width: 19.w,
+                                //             ),
+                                //             SvgPicture.asset(
+                                //               'assets/images/svg2.svg',
+                                //               width: 14.w,
+                                //               height: 14.w,
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                SizedBox(
+                                  width: 115.w,
+                                  height: 30.h,
+                                  child: ElevatedButton(
+                                    // style: ElevatedButton.styleFrom(
+
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(0),
+
+                                      // backgroundColor: ,
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.white),
+                                      shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(5.w),
-                                          border:
-                                              Border.all(color: SplashText)),
-                                      child: Center(
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              element?.couponCode ?? "",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 12.sp,
-                                                  color: SplashText),
-                                            ),
-                                            SizedBox(
-                                              width: 19.w,
-                                            ),
-                                            SvgPicture.asset(
-                                              'assets/images/svg2.svg',
-                                              width: 14.w,
-                                              height: 14.w,
-                                            ),
-                                          ],
+                                              BorderRadius.circular(10.0),
+                                          side: BorderSide(
+                                              width: 1, color: SplashText),
                                         ),
                                       ),
                                     ),
-                                  ],
+                                    onPressed: () {
+                                      read.copyCodeForCoupanList(
+                                          context, element?.couponCode ?? "");
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "${element?.couponCode}",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: SplashText,
+                                                letterSpacing: .5,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ), // <-- Text
+                                        SizedBox(
+                                          width: 19.w,
+                                        ),
+                                        SvgPicture.asset(
+                                          'assets/images/svg2.svg',
+                                          width: 17.w,
+                                          height: 17.h,
+                                        ),
+                                      ],
+                                    ),
+
+                                    //
+                                  ),
                                 ),
                               ],
                             ),

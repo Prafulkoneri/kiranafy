@@ -45,6 +45,10 @@ class SSubscriptionController extends ChangeNotifier {
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
+    radioGrpValue = "1";
+    paymentMode = "0";
+    selectedServicesId = "0";
+    selectPaymentMode = "0";
   }
 
   showLoader(value) {
