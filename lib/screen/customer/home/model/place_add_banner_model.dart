@@ -11,10 +11,8 @@ class PlaceAdBannerModel {
   PlaceAdBannerModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    cplacead =
-    json['data'] != null ? CPlaceAd.fromJson(json['data']) : null;
+    cplacead = json['data'] != null ? CPlaceAd.fromJson(json['data']) : null;
   }
-
 }
 
 class CPlaceAd {
@@ -31,7 +29,6 @@ class CPlaceAd {
       });
     }
   }
-
 }
 
 class CustomerPlaceAd {
@@ -43,9 +40,7 @@ class CustomerPlaceAd {
     required this.shopBannerImageName,
   });
   CustomerPlaceAd.fromJson(Map<String, dynamic> json) {
-    shopBannerImagePath = json["shop_banner_image_path"];
-    shopBannerImageName = json["shop_banner_image_name"];
-
+    shopBannerImagePath = json["banner_image_path"];
+    shopBannerImageName = json["banner_image_name"];
   }
-
 }

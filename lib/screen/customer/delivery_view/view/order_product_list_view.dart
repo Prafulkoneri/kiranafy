@@ -69,14 +69,16 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "${element?.productName}",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        // letterSpacing: .5,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
+                                Flexible(
+                                  child: Text(
+                                    "${element?.productName}",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Black1,
+                                          // letterSpacing: .5,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
                                   ),
                                 ),
                                 element?.returnStatus == "YES"
