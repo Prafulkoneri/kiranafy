@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +23,8 @@ class _OfferPageState extends State<OfferPage> {
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
+    final watchProductView =
+        Provider.of<ProductViewController>(context, listen: false);
     return Padding(
         padding: EdgeInsets.only(
           top: 20.h,
@@ -74,6 +77,23 @@ class _OfferPageState extends State<OfferPage> {
                       return element?.off != "0"
                           ? GestureDetector(
                               onTap: () {
+                                print("11111111111111111111111111111111111");
+                                print(
+                                  element?.categoryId.toString(),
+                                );
+                                print("product Id");
+                                print(
+                                  element?.productId.toString(),
+                                );
+                                print("product Id");
+                                print(element?.shopId.toString());
+                                print(
+                                  element?.productType.toString(),
+                                );
+                                watchProductView.updateProductId(
+                                  element?.id.toString(),
+                                );
+                                print("22222222222222222222222222222");
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
@@ -82,10 +102,10 @@ class _OfferPageState extends State<OfferPage> {
                                           screenName: ProductScreenView(
                                             categoryId:
                                                 element?.categoryId.toString(),
-                                            productId:
-                                                element?.productId.toString(),
+                                            productId: element?.id.toString(),
                                             shopId: element?.shopId.toString(),
-                                            // productType: element.,
+                                            productType:
+                                                element?.productType.toString(),
                                           ))),
                                   (Route<dynamic> route) => false,
                                 );

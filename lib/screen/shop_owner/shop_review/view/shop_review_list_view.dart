@@ -13,7 +13,10 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/review/controller/customer_review_list_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/shop_review/controller/shop_review_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 
@@ -33,18 +36,17 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<CustomerReviewListControler>().initState(
+      context.read<SShopReviewListController>().initState(
             context,
-            widget.shopId,
           );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<CustomerReviewListControler>();
-    final read = context.read<CustomerReviewListControler>();
-    final watchMain = context.watch<MainScreenController>();
+    final watch = context.watch<SShopReviewListController>();
+    final read = context.read<SShopReviewListController>();
+    final watchMain = context.watch<SMainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -54,8 +56,11 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      SMainScreenView(index: 1, screenName: ShopProfileView())),
+                  builder: (context) => SMainScreenView(
+                      index: 1,
+                      screenName: ShopDashBoardView(
+                        refresh: true,
+                      ))),
               (Route<dynamic> route) => false,
             );
           },
@@ -196,7 +201,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                   //   height: 15.h,
                   // ),
                   Container(
-                    padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                    padding: EdgeInsets.only(left: 19.w, top: 10, right: 19.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

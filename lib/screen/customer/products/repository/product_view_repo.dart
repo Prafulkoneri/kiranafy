@@ -7,6 +7,7 @@ class ProductViewRepo {
       ProductViewRequestModel reqModel, token) async {
     print("qqqqqqqqqqqqqqqqqqqqqqqqqq");
     print(reqModel.toJson());
+    print("qqqqqqqqqqqqqqqqqqqqqqqqqq");
     print(token);
     try {
       return await http.post(Uri.parse(Endpoint.ProductView),

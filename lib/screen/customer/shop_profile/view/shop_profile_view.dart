@@ -420,6 +420,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               )
                             ],
                           )),
+<<<<<<< HEAD
                       SizedBox(
                         height: 10.w,
                       ),
@@ -492,6 +493,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         height: 10.w,
                       ),
                       watch.offerProduct?.isNotEmpty==true
+=======
+                      watch.offerProduct?.isNotEmpty == true
+>>>>>>> 4937470138a299a17bc32a6ee8a7e59d5e553ab0
                           ? Column(
                               children: [
                                 SizedBox(
@@ -1370,7 +1374,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 child: Text(
                                                   "${element?.categoryName}",
                                                   textAlign: TextAlign.center,
-                                                  maxLines:2,
+                                                  maxLines: 2,
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         color: Black,
@@ -1378,9 +1382,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                         fontSize: 11.5.sp,
                                                         fontWeight:
                                                             FontWeight.w500),
-
                                                   ),
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
                                             ],
@@ -1656,24 +1660,24 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
-                                                      builder:
-                                                          (context) =>
-                                                              MainScreenView(
-                                                                index: 1,
-                                                                screenName:
-                                                                    ProductScreenView(
-                                                                        categoryId: element
-                                                                            ?.categoryId
-                                                                            .toString(),
-                                                                        // categoryId: watch.categoryId,
-                                                                        productId: element
-                                                                            ?.id
-                                                                            .toString(),
-                                                                        shopId: element
-                                                                            ?.shopId,
-                                                                        productType:
-                                                                            element?.productType),
-                                                              )),
+                                                    builder: (context) =>
+                                                        MainScreenView(
+                                                      index: 1,
+                                                      screenName:
+                                                          ProductScreenView(
+                                                              categoryId: element
+                                                                  ?.categoryId
+                                                                  .toString(),
+                                                              // categoryId: watch.categoryId,
+                                                              productId: element
+                                                                  ?.id
+                                                                  .toString(),
+                                                              shopId: element
+                                                                  ?.shopId,
+                                                              productType: element
+                                                                  ?.productType),
+                                                    ),
+                                                  ),
                                                   (Route<dynamic> route) =>
                                                       false,
                                                 );

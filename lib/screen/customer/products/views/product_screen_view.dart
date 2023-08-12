@@ -311,7 +311,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                 children: [
                                   GestureDetector(
                                       onTap: () {
-                                        read.shareProduct(watch.productDetails?.productImagePath);
+                                        read.shareProduct(watch
+                                            .productDetails?.productImagePath);
                                       },
                                       child: SvgPicture.asset(
                                           "assets/icons/share.svg")),
@@ -585,14 +586,14 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                 onTap: () {
                                                   //  read.addToCart(watch.productDetails?.id,
                                                   //  watch?.productUnitId,element?.shopId,context);
-                                                  // read.addToCart(
-                                                  //                 watch
-                                                  //                     .productType,
-                                                  //                 watch
-                                                  //                     ?.productUnitId,
-                                                  //                 watch
-                                                  //                     .shopId,
-                                                  //                 context);
+                                                  read.addToCart(
+                                                      watch.addProductShopId
+                                                          .toString(),
+                                                      watch.addProductType
+                                                          .toString(),
+                                                      watch.addProductUnitId
+                                                          .toString(),
+                                                      context);
                                                 },
                                                 child: Container(
                                                   decoration: BoxDecoration(
