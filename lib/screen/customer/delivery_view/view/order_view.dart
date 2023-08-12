@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -584,7 +585,39 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 ),
                               ],
                             )
-                          : Container(),
+                          : Container(
+                              padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: RichText(
+                                      text: TextSpan(
+                                          text: "Note: ",
+                                          style: TextStyle(
+                                              color: Black,
+                                              fontSize: 12.sp,
+                                              // height: 1.3.w,
+                                              fontWeight: FontWeight.w700),
+                                          children: [
+                                            TextSpan(
+                                              children: [],
+                                              text:
+                                                  'Dear customer, as you have chosen the self-pickup option, please collect your ordered products from the shop.',
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {},
+                                              style: TextStyle(
+                                                  color: Colors.blue,
+                                                  // letterSpacing: .5,
+                                                  height: 1.5.w,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ]),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
 
                       SizedBox(
                         height: 20.h,
@@ -883,7 +916,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           ),
                                   ]),
                                 ),
-                                watch.couponDetails?.couponDiscount !=null
+                                watch.couponDetails?.couponDiscount != null
                                     ? Text(
                                         // "",
                                         // "- Rs . ${watch.orderDetails?.totalDiscount}",

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:math';
 import 'package:http/http.dart' as http;
@@ -37,6 +37,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:path/path.dart' as Path;
+
 class ProductViewController extends ChangeNotifier {
   String? shopId = "";
   String? categoryId = "";
@@ -44,6 +45,9 @@ class ProductViewController extends ChangeNotifier {
   String? selectedUnitId = "";
   String? productImage = "";
   String? productType = "";
+  String? addProductUnitId;
+  String? addProductType;
+  String? addProductShopId;
   bool isLoading = true;
   bool favAllShop = true; //fvrt
   bool isFavProduct = true; //fvrt Product
@@ -53,7 +57,7 @@ class ProductViewController extends ChangeNotifier {
   ProductViewShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
   List<CustomerProductData>? similarProduct;
-  String routeName="";
+  String routeName = "";
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
@@ -65,12 +69,9 @@ class ProductViewController extends ChangeNotifier {
       RemoveAdminFvrtProductRepo();
   RemoveCustomFvrtProductRepo removeCustomFavProductRepo =
       RemoveCustomFvrtProductRepo();
-  AddProductToCartRepo addProductToCartRepo=AddProductToCartRepo();
-
-
-
-
-  Future<void> initState(context, sId, cId, pId, suId, pType,rName) async {
+  AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
+  UnitBasedProductImagePath? data;
+  Future<void> initState(context, sId, cId, pId, suId, pType, rName) async {
     print("productId");
     print(pId);
     print(productId);
@@ -79,7 +80,8 @@ class ProductViewController extends ChangeNotifier {
     print(pId);
     unitImages.clear();
     print(pType);
-    routeName=rName;
+
+    routeName = rName;
     // await productsUnitImage(context, suId);
     notifyListeners();
   }
@@ -89,11 +91,15 @@ class ProductViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-  onBackPressed(context){
-    if(routeName=="cart_details"){
-     Navigator.push(context,MaterialPageRoute(builder: (context)=>CartDetailView(isRefresh: false,)));
-    }
-    else{
+  onBackPressed(context) {
+    if (routeName == "cart_details") {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CartDetailView(
+                    isRefresh: false,
+                  )));
+    } else {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -104,7 +110,7 @@ class ProductViewController extends ChangeNotifier {
                   routeName: '',
                   shopId: '',
                 ))),
-            (Route<dynamic> route) => false,
+        (Route<dynamic> route) => false,
       );
     }
   }
@@ -127,7 +133,9 @@ class ProductViewController extends ChangeNotifier {
         .showProductsViewRepo(
             productViewRequestModel, pref.getString("successToken"))
         .then((response) {
-      // log("response.body${response.body}");
+      dev.log('movieTitle: ${response.body}');
+
+      // deb("response.body${response.body}");
       final result =
           ProductViewResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -173,13 +181,22 @@ class ProductViewController extends ChangeNotifier {
         .productUnitImageRepo(
             unitImagesReqModel, pref.getString("successToken"))
         .then((response) {
-      // log("response.body${response.body}");
+      print("2222222222222222222");
+      dev.log('UnitImagess: ${response.body}');
+      print("11111111111111111");
       final result =
           UnitImagesResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         // unitImages = result.data;
-        // productImage = unitImages?.unitBasedProductImagePath;
-        unitImages = result.data?.unitBasedProductImagePath ?? [];
+        addProductShopId =
+            result.data?.unitBasedProductImagePath?.shopId.toString();
+        addProductUnitId =
+            result.data?.unitBasedProductImagePath?.productUnitId.toString();
+        addProductType =
+            result.data?.unitBasedProductImagePath?.productType.toString();
+        unitImages = result.data?.unitBasedProductImagePath?.imageList ?? [];
+        data = result.data?.unitBasedProductImagePath;
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -445,7 +462,6 @@ class ProductViewController extends ChangeNotifier {
           buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
           name: 'flutter_logo',
           mimeType: 'image/png',
-
         ),
       ],
       sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
@@ -463,11 +479,9 @@ class ProductViewController extends ChangeNotifier {
 
     var randomNumber = Random();
 
-    final file = File(
-      Path.join(
-        documentDirectory.path,
-        "${randomNumber.nextInt(100)}_$userName.png",
-
+    final file = File(Path.join(
+      documentDirectory.path,
+      "${randomNumber.nextInt(100)}_$userName.png",
     ));
 
     file.writeAsBytesSync(response.bodyBytes);
@@ -475,17 +489,15 @@ class ProductViewController extends ChangeNotifier {
     return XFile(file.path);
   }
 
-  void shareProduct(url)async{
-    XFile fileForShare = await fileFromImageUrl(
-        url,"Local Supermart");
+  void shareProduct(url) async {
+    XFile fileForShare = await fileFromImageUrl(url, "Local Supermart");
 
-    Share.shareXFiles(
-      [fileForShare],
-      text: "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
-        subject:"hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US"
-    );
+    Share.shareXFiles([fileForShare],
+        text:
+            "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
+        subject:
+            "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US");
   }
-
 
   SnackBar getResultSnackBar(ShareResult result) {
     return SnackBar(
@@ -501,13 +513,20 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType,pId,sId,context)async{
+  Future<void> addToCart(pType, pId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
-        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .addProductToCart(
+            AddProductToCartReqModel(
+                productType: pType,
+                productUnitId: pId.toString(),
+                shopId: sId.toString(),
+                quantity: "1"),
+            pref.getString("successToken"))
         .then((response) {
       // log("response.body${response.body}");
-      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      final result =
+          AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -519,7 +538,7 @@ class ProductViewController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -529,9 +548,9 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  void updateProductId(value){
-productId=value;
-notifyListeners();
+  void updateProductId(value) {
+    productId = value;
+    notifyListeners();
   }
 /////////////////////////
   //   void onBackPressed(screenName,context,cId){

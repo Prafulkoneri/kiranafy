@@ -99,6 +99,7 @@ import 'screen/shop_owner/s_products/controller/new/get_product_unit_list_contro
 import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
+import 'screen/shop_owner/shop_review/controller/shop_review_controller.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("handled background message");
@@ -121,14 +122,15 @@ class ReceivedNotification {
   final String body;
   final String payload;
 }
+
 Future<void> initNotification() async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('mipmap/ic_launcher');
+      AndroidInitializationSettings('mipmap/ic_launcher');
   final IOSInitializationSettings initializationSettingsIOS =
-  IOSInitializationSettings();
+      IOSInitializationSettings();
   final MacOSInitializationSettings initializationSettingsMacOS =
-  MacOSInitializationSettings();
+      MacOSInitializationSettings();
   final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
@@ -136,8 +138,8 @@ Future<void> initNotification() async {
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) {
     print(payload);
-        if (payload != null) OpenFile.open(payload);
-      });
+    if (payload != null) OpenFile.open(payload);
+  });
 }
 
 void main() async {
@@ -243,6 +245,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CAllCouponController()),
         ChangeNotifierProvider(create: (_) => ReturnOrderController()),
         ChangeNotifierProvider(create: (_) => PaymentRefundListController()),
+        ChangeNotifierProvider(create: (_) => SShopReviewListController()),
       ],
       child: MyApp(),
     ),

@@ -134,6 +134,7 @@ class HomeScreenHelloOfferData {
   String? unit;
   String? off;
   int? shopId;
+  String? productType;
 
   HomeScreenHelloOfferData(
       {required this.id,
@@ -150,7 +151,8 @@ class HomeScreenHelloOfferData {
       required this.cityName,
       required this.unit,
       required this.off,
-      required this.shopId});
+      required this.shopId,
+      required this.productType});
   HomeScreenHelloOfferData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     productName = json["product_name"];
@@ -167,5 +169,6 @@ class HomeScreenHelloOfferData {
     unit = json["unit"];
     off = json["off"];
     shopId = json["shop_id"];
+    productType = json["product_type"];
   }
 }
