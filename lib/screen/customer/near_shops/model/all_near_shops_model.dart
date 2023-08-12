@@ -133,23 +133,24 @@ class HomeScreenHelloOfferData {
   String? cityName;
   String? unit;
   String? off;
+  int? shopId;
 
-  HomeScreenHelloOfferData({
-    required this.id,
-    required this.productName,
-    required this.productImagePath,
-    required this.productImageName,
-    required this.productId,
-    required this.weight,
-    required this.mrpPrice,
-    required this.offerPrice,
-    required this.status,
-    required this.categoryId,
-    required this.shopName,
-    required this.cityName,
-    required this.unit,
-    required this.off,
-  });
+  HomeScreenHelloOfferData(
+      {required this.id,
+      required this.productName,
+      required this.productImagePath,
+      required this.productImageName,
+      required this.productId,
+      required this.weight,
+      required this.mrpPrice,
+      required this.offerPrice,
+      required this.status,
+      required this.categoryId,
+      required this.shopName,
+      required this.cityName,
+      required this.unit,
+      required this.off,
+      required this.shopId});
   HomeScreenHelloOfferData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     productName = json["product_name"];
@@ -165,5 +166,6 @@ class HomeScreenHelloOfferData {
     cityName = json["city_name"];
     unit = json["unit"];
     off = json["off"];
+    shopId = json["shop_id"];
   }
 }
