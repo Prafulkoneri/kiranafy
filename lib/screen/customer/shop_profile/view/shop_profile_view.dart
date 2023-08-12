@@ -420,7 +420,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               )
                             ],
                           )),
-<<<<<<< HEAD
+
                       SizedBox(
                         height: 10.w,
                       ),
@@ -493,9 +493,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         height: 10.w,
                       ),
                       watch.offerProduct?.isNotEmpty==true
-=======
-                      watch.offerProduct?.isNotEmpty == true
->>>>>>> 4937470138a299a17bc32a6ee8a7e59d5e553ab0
+
+
                           ? Column(
                               children: [
                                 SizedBox(
