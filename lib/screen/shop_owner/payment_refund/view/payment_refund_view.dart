@@ -189,7 +189,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                               ),
                               Text(
                                 // "",
-                                "${watch.currentMonthCollection}",
+                                "${watch.paymentrefunddata?.pendingRefundOrdersCount}",
                                 // "₹12000",
                                 style: TextStyle(
                                     fontSize: 24.sp,
@@ -237,7 +237,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                               ),
                               Text(
                                 // "",
-                                "${watch.totalBusiness}",
+                                "${watch.paymentrefunddata?.acceptRefundOrdersCount}",
                                 style: TextStyle(
                                     fontSize: 24.sp,
                                     color: Colors.white,
@@ -271,12 +271,13 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                 SizedBox(
                   height: 15.h,
                 ),
-                watch.pendingOrdersList?.isNotEmpty ?? false
-                    ?
+
+
                 ////////Pending//////
                 Visibility(
                   visible: watch.isPendingList,
-                  child: ListView.builder(
+                  child: watch.pendingOrdersList?.isNotEmpty==true?
+                  ListView.builder(
                     // padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
                       itemCount:
                       watch.pendingOrdersList?.length ?? 0,
@@ -381,39 +382,40 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                             ),
                           ),
                         );
-                      }),
-                )
-                    : Column(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 50.h,
-                    ),
-                    Image.asset(
-                      "assets/images/empty_order.png",
-                      width: 150.w,
-                      height: 150.h,
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Text(
-                      "No Record Found",
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black1,
-                            letterSpacing: .5,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w600),
+                      }) : Column(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 50.h,
                       ),
-                    ),
-                  ],
+                      Image.asset(
+                        "assets/images/empty_order.png",
+                        width: 150.w,
+                        height: 150.h,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        "No Record Found",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black1,
+                              letterSpacing: .5,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+
                 //////Completed////
                 Visibility(
                   visible: watch.isCompletedList,
-                  child: ListView.builder(
+                  child: watch.confirmedOrdersList?.isNotEmpty==true?
+                  ListView.builder(
                     // padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
                       itemCount:
                       //  2,
@@ -511,7 +513,33 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                             ),
                           ),
                         );
-                      }),
+                      }):Column(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 50.h,
+                      ),
+                      Image.asset(
+                        "assets/images/empty_order.png",
+                        width: 150.w,
+                        height: 150.h,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        "No Record Found",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black1,
+                              letterSpacing: .5,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

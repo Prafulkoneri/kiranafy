@@ -100,7 +100,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                           },
                           items: selectedCategoryListWatch.selectedCategoriesList!
                               .map((item) => DropdownMenuItem<String>(
-                                    value: item.id.toString(),
+                                    value: item.categoryId.toString(),
                                     child: Text(
                                       item.categoryName ?? "",
                                       style: TextStyle(

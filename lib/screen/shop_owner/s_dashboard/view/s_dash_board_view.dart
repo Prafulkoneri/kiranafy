@@ -1348,7 +1348,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               child: Column(
                                 children: [
                                   Text(
-                                    "INR 0",
+                                    watch.dashBoardData?.pendingRefundOrdersCount.toString()??"0",
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
@@ -1407,7 +1407,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               child: Column(
                                 children: [
                                   Text(
-                                    "INR 0",
+                                    watch.dashBoardData?.acceptRefundOrdersCount.toString()??"0",
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(

@@ -420,6 +420,77 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               )
                             ],
                           )),
+                      SizedBox(
+                        height: 10.w,
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(
+                              left: 19.w, top: 10.w, right: 19.w),
+                          padding: EdgeInsets.only(
+                              left: 10.w, right: 20.w, top: 6.w, bottom: 6.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border:
+                            Border.all(color: Color(0xffDDDDDD), width: 1),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              watch.deliveryAddressStatus==false
+                                  ? Row(children: [
+                                SvgPicture.asset(
+                                  "assets/icons/close_s.svg",
+                                  width: 26.w,
+                                  height: 14.h,
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Delivery to this area is not available",
+                                  style: GoogleFonts.roboto(
+                                    textStyle: TextStyle(
+                                        color: Color(0xffFE5656),
+                                        // letterSpacing: .3,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ])
+                                  : Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    "assets/icons/ok.svg",
+                                    color: Color(0xff02BC7D),
+                                    width: 26.w,
+                                    height: 14.h,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Text(
+                                    "Delivery to this area is available",
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                          color: Color(0xff02BC7D),
+                                          // letterSpacing: .3,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )),
+                      // Container(margin: EdgeInsets.only(left: 19.w,right: 19.w),child: Row(
+                      //   children: [
+                      //     Text("Shop Delivery Area"),
+                      //     Text(watch.shopData?.shopSelectedDeliveryArea.toString()??""),
+                      //   ],
+                      // )),
+                      SizedBox(
+                        height: 10.w,
+                      ),
                       watch.offerProduct?.isNotEmpty==true
                           ? Column(
                               children: [

@@ -36,15 +36,16 @@ class PaymentRefundData {
   List<OrdersRefundListElement>? ordersRefundList;
   List<OrdersRefundListElement>? pendingOrdersList;
   List<ConfirmedOrdersList>? confirmedOrdersList;
-  int? currentMonthCollection;
-  int? totalBusiness;
+  int? acceptRefundOrdersCount;
+  int? pendingRefundOrdersCount;
+
 
   PaymentRefundData({
     required this.ordersRefundList,
     required this.pendingOrdersList,
     required this.confirmedOrdersList,
-    required this.currentMonthCollection,
-    required this.totalBusiness,
+    required this.acceptRefundOrdersCount,
+    required this.pendingRefundOrdersCount,
   });
   PaymentRefundData.fromJson(Map<String, dynamic> json) {
     if (json["orders_refund_list"] != null) {
@@ -65,8 +66,8 @@ class PaymentRefundData {
         confirmedOrdersList!.add(ConfirmedOrdersList.fromJson(v));
       });
     }
-    currentMonthCollection = json['current_month_collection'];
-    totalBusiness = json['total_business'];
+    acceptRefundOrdersCount = json['accept_refund_orders_count'];
+    pendingRefundOrdersCount = json['pending_refund_orders_count'];
   }
 }
 

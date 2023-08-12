@@ -45,6 +45,7 @@ class ShopProfileViewController extends ChangeNotifier {
   List<ShopCouponsList>? shopCouponsList;
   SProfileCouponData? sprofilecoupondata;
   int _currentPage = 0;
+  bool ? deliveryAddressStatus;
 
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   ShopProfileCouponRepo sProfileCouponRepo = ShopProfileCouponRepo();
@@ -134,6 +135,7 @@ class ShopProfileViewController extends ChangeNotifier {
       final result =
           CustomerViewShopResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        deliveryAddressStatus=result.deliveryAddressStatus;
         shopData = result.data;
         shopDetails = shopData?.shopDetails;
         shopCategory = shopData?.shopCategories;

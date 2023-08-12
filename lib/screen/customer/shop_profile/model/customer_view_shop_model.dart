@@ -18,16 +18,19 @@ class CustomerViewShopReqModel {
 class CustomerViewShopResModel {
   int? status;
   String? message;
+  bool ? deliveryAddressStatus;
   ShopViewData? data;
 
   CustomerViewShopResModel({
     required this.status,
     required this.message,
     required this.data,
+    required this.deliveryAddressStatus,
   });
   CustomerViewShopResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
+    deliveryAddressStatus = json["deliveryAddressStatus"];
     data = json['data'] != null ? ShopViewData.fromJson(json['data']) : null;
   }
 }
@@ -95,6 +98,7 @@ class ShopViewData {
   List<CustomerProductData>? seasonalProduct;
   List<CustomerProductData>? recommandedProduct;
   List<BannerImageData>? bannerImages;
+  String ? shopSelectedDeliveryArea;
 
   ShopViewData({
     required this.shopDetails,
@@ -103,6 +107,7 @@ class ShopViewData {
     required this.seasonalProduct,
     required this.recommandedProduct,
     required this.bannerImages,
+    required this.shopSelectedDeliveryArea,
   });
   ShopViewData.fromJson(Map<String, dynamic> json) {
     shopDetails = json['shop_details'] != null
@@ -138,8 +143,11 @@ class ShopViewData {
         bannerImages!.add(BannerImageData.fromJson(v));
       });
     }
+    shopSelectedDeliveryArea=json["delivery_area"];
   }
 }
+
+
 
 class ShopCategory {
   int? id;

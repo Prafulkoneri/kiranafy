@@ -85,9 +85,9 @@ class PaymentRefundListController extends ChangeNotifier {
         pendingOrdersList = paymentrefunddata?.pendingOrdersList;
         confirmedOrdersList = paymentrefunddata?.confirmedOrdersList;
 
-        currentMonthCollection =
-            result.paymentrefunddata?.currentMonthCollection ?? 0;
-        totalBusiness = result.paymentrefunddata?.totalBusiness ?? 0;
+        // currentMonthCollection =
+        //     result.paymentrefunddata?.currentMonthCollection ?? 0;
+        // totalBusiness = result.paymentrefunddata?.totalBusiness ?? 0;
         showLoader(false);
         notifyListeners();
       } else {

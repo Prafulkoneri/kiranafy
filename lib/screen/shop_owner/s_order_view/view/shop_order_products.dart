@@ -93,7 +93,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                   value:
                                       watch.selectedProductList[index],
                                 ):watch.orderDetails?.orderStatus=="Order Refund"?Container(
-                                 child: Text(element?.refundStatus=="NO"?"Return":'',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13.sp,color: Color(0xffFF0000)),),
+                                 child: Text(element?.refundStatus=="YES"?"Return":'',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13.sp,color: Color(0xffFF0000)),),
                                ):Container(),
                               ],
                             ),
@@ -124,7 +124,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                         children: [
                                           Text(
                                             // "",
-                                            "Rs. ${element?.productMrpPrice} x ",
+                                            "Rs. ${element?.productOfferPrice} x ",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: grey5,
