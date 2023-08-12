@@ -63,9 +63,7 @@ class AddEditUnitController extends ChangeNotifier{
     networkImage2="";
     networkImage3="";
     if(isEdit){
-      if(pType=="custom_product"){
-        await getCustomData(context);
-      }
+
       await getData(context);
     }
     else{
@@ -160,44 +158,7 @@ class AddEditUnitController extends ChangeNotifier{
     );
 
   }
-  Future<void> getCustomData(context) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    showLoader(true);
-    editUnitProductCategoryRepo.getCustomEditUnit(editCustomProductUnitCategoryRequestModel,pref.getString("successToken")).then((response) async {
-      final result = EditProductUnitCategoryResModel.fromJson(jsonDecode(response.body));
-      print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
-      log(response.body);
-      print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
-      if (response.statusCode == 200) {
-        data=result.productUnitDetails;
-        valueController.text=data?.weight??"";
-        mrpController.text=data?.mrpPrice.toString()??"";
-        offerPriceController.text=data?.offerPrice.toString()??"";
-        switchValue=data?.status=="active"?true:false;
-        unitList = result.editunitdata?.units;
-        networkImage1=data?.unitBasedProductImage1Path??"";
-        networkImage2=data?.unitBasedProductImage2Path??"";
-        networkImage3=data?.unitBasedProductImage3Path??"";
-        unitId=data?.unitId.toString()??"";
-        showLoader(false);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-          (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
 
-  }
 
   void onUnitSelect(value){
     unitId=value;
