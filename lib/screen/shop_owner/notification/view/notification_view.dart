@@ -238,9 +238,10 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                                     "${element?.title}",
                                     // "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi semper egestas at cursus maecenas",
                                     style: TextStyle(
-                                        fontSize: 11.5.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Black1),
+                                      fontSize: 11.5.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: Black1,
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 18.w,

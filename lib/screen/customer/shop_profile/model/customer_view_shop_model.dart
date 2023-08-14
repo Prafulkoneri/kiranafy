@@ -18,7 +18,7 @@ class CustomerViewShopReqModel {
 class CustomerViewShopResModel {
   int? status;
   String? message;
-  bool ? deliveryAddressStatus;
+  bool? deliveryAddressStatus;
   ShopViewData? data;
 
   CustomerViewShopResModel({
@@ -52,6 +52,7 @@ class CustomerProductData {
   String? unit;
   String? shopId;
   int? productUnitId;
+  String? addToCartCheck;
 
   CustomerProductData({
     this.categoryId, //
@@ -70,6 +71,7 @@ class CustomerProductData {
     this.productType, //
     this.shopId,
     this.productUnitId,
+    this.addToCartCheck,
   });
   CustomerProductData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -88,6 +90,7 @@ class CustomerProductData {
     unit = json["unit"];
     shopId = json["shop_id"];
     productUnitId = json["product_unit_id"];
+    addToCartCheck = json["add_to_cart_check"];
   }
 }
 
@@ -98,7 +101,7 @@ class ShopViewData {
   List<CustomerProductData>? seasonalProduct;
   List<CustomerProductData>? recommandedProduct;
   List<BannerImageData>? bannerImages;
-  String ? shopSelectedDeliveryArea;
+  String? shopSelectedDeliveryArea;
 
   ShopViewData({
     required this.shopDetails,
@@ -143,11 +146,9 @@ class ShopViewData {
         bannerImages!.add(BannerImageData.fromJson(v));
       });
     }
-    shopSelectedDeliveryArea=json["delivery_area"];
+    shopSelectedDeliveryArea = json["delivery_area"];
   }
 }
-
-
 
 class ShopCategory {
   int? id;
