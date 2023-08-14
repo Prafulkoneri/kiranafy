@@ -89,7 +89,6 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                 watch.orderDetails?.orderStatus == "Pending"
                                     ? PrimaryCheckBox(
                                         onChanged: (value) {
-                                          print(watch.orderDetails?.id);
                                           LoadingOverlay.of(context).show();
                                           read.selectProducts(context, index,
                                               element?.id, value);

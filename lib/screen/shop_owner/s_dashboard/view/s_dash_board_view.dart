@@ -151,7 +151,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             //<-- SEE HERE
                             // right: 15.w,
                             // left: 0.w,
-                            bottom: 20.w,
+                            top: 150.w,
+                            // bottom: 20.w,
                             child: Container(
                               padding: EdgeInsets.only(left: 16.w),
                               width: ScreenUtil().screenWidth,
@@ -189,8 +190,13 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(right: 15.w),
-                                      height: 24.h,
-                                      width: 55.w,
+                                      padding: EdgeInsets.only(
+                                          left: 8.w,
+                                          right: 8.w,
+                                          top: 2.w,
+                                          bottom: 2.w),
+                                      // height: 24.h,
+                                      // width: 55.w,
                                       decoration: BoxDecoration(
                                         color: yellow,
                                         borderRadius: BorderRadius.all(

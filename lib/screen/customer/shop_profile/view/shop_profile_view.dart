@@ -432,55 +432,55 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border:
-                            Border.all(color: Color(0xffDDDDDD), width: 1),
+                                Border.all(color: Color(0xffDDDDDD), width: 1),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              watch.deliveryAddressStatus==false
+                              watch.deliveryAddressStatus == false
                                   ? Row(children: [
-                                SvgPicture.asset(
-                                  "assets/icons/close_s.svg",
-                                  width: 26.w,
-                                  height: 14.h,
-                                ),
-                                SizedBox(
-                                  width: 12.w,
-                                ),
-                                Text(
-                                  "Delivery to this area is not available",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                        color: Color(0xffFE5656),
-                                        // letterSpacing: .3,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ])
+                                      SvgPicture.asset(
+                                        "assets/icons/close_s.svg",
+                                        width: 26.w,
+                                        height: 14.h,
+                                      ),
+                                      SizedBox(
+                                        width: 12.w,
+                                      ),
+                                      Text(
+                                        "Delivery to this area is not available",
+                                        style: GoogleFonts.roboto(
+                                          textStyle: TextStyle(
+                                              color: Color(0xffFE5656),
+                                              // letterSpacing: .3,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    ])
                                   : Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/icons/ok.svg",
-                                    color: Color(0xff02BC7D),
-                                    width: 26.w,
-                                    height: 14.h,
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Text(
-                                    "Delivery to this area is available",
-                                    style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
+                                      children: [
+                                        SvgPicture.asset(
+                                          "assets/icons/ok.svg",
                                           color: Color(0xff02BC7D),
-                                          // letterSpacing: .3,
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w600),
+                                          width: 26.w,
+                                          height: 14.h,
+                                        ),
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        Text(
+                                          "Delivery to this area is available",
+                                          style: GoogleFonts.roboto(
+                                            textStyle: TextStyle(
+                                                color: Color(0xff02BC7D),
+                                                // letterSpacing: .3,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
                             ],
                           )),
                       // Container(margin: EdgeInsets.only(left: 19.w,right: 19.w),child: Row(
@@ -492,9 +492,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       SizedBox(
                         height: 10.w,
                       ),
-                      watch.offerProduct?.isNotEmpty==true
-
-
+                      watch.offerProduct?.isNotEmpty == true
                           ? Column(
                               children: [
                                 SizedBox(
@@ -595,7 +593,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                           index: 1,
                                                           screenName:
                                                               ProductScreenView(
-                                                                selectedUnitId: element?.productUnitId.toString(),
+                                                            selectedUnitId: element
+                                                                ?.productUnitId
+                                                                .toString(),
                                                             categoryId: element
                                                                 ?.categoryId
                                                                 .toString(),
@@ -923,7 +923,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                       index: 1,
                                                       screenName:
                                                           ProductScreenView(
-                                                              selectedUnitId: element?.productUnitId.toString(),
+                                                              selectedUnitId: element
+                                                                  ?.productUnitId
+                                                                  .toString(),
                                                               categoryId: element
                                                                   ?.categoryId
                                                                   .toString(),
@@ -1143,12 +1145,23 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                       ?.shopId,
                                                                   context);
                                                             },
-                                                            child: SvgPicture
-                                                                .asset(
-                                                              'assets/images/add.svg',
-                                                              // width: 15.w,
-                                                              // height: 19.h,
-                                                            ),
+                                                            child:
+                                                                element?.addToCartCheck ==
+                                                                        "no"
+                                                                    ? SvgPicture
+                                                                        .asset(
+                                                                        'assets/images/add.svg',
+                                                                        // width: 15.w,
+                                                                        // height: 19.h,
+                                                                      )
+                                                                    : Container(
+                                                                        height:
+                                                                            50,
+                                                                        width:
+                                                                            50,
+                                                                        color: Colors
+                                                                            .black,
+                                                                      ),
                                                           ),
                                                         ],
                                                       ),
@@ -1666,7 +1679,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                       index: 1,
                                                       screenName:
                                                           ProductScreenView(
-                                                              selectedUnitId: element?.productUnitId.toString(),
+                                                              selectedUnitId: element
+                                                                  ?.productUnitId
+                                                                  .toString(),
                                                               categoryId: element
                                                                   ?.categoryId
                                                                   .toString(),
