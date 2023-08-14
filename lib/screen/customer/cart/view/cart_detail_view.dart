@@ -374,6 +374,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                               index: 1,
                                                               screenName:
                                                                   ProductScreenView(
+                                                                    // selectedUnitId: element?.productUnitId.toString(),
                                                                 categoryId: element
                                                                     ?.categoryId
                                                                     .toString(),

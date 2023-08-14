@@ -252,7 +252,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                           SizedBox(
                               // width: MediaQuery.of(context).size.width,
                               height: 241.w,
-                              child: watch.unitImages.isNotEmpty
+                              child: watch.isUnitImagesVisible
                                   ? PageView.builder(
                                       itemCount: watch.unitImages.length,
                                       // watch.productViewData?.productUnitDetails?.length ??
@@ -300,6 +300,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                         fit: BoxFit.fill,
                                       ),
                                     )),
+                          SizedBox(
+                            height: 10.w,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -412,6 +415,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       ?.productUnitDetails?[index];
                                   return GestureDetector(
                                     onTap: () {
+                                      read.showUnitImages(true);
                                       read.productsUnitImage(
                                           context, element?.id.toString());
                                     },
@@ -584,15 +588,20 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                               ),
                                               InkWell(
                                                 onTap: () {
+                                                  read.showUnitImages(false);
+                                                  read.productsUnitImage(
+                                                      context, element?.id.toString());
                                                   //  read.addToCart(watch.productDetails?.id,
                                                   //  watch?.productUnitId,element?.shopId,context);
                                                   read.addToCart(
-                                                      watch.addProductShopId
-                                                          .toString(),
                                                       watch.addProductType
                                                           .toString(),
                                                       watch.addProductUnitId
                                                           .toString(),
+                                                      watch.addProductShopId
+                                                          .toString(),
+
+
                                                       context);
                                                 },
                                                 child: Container(
@@ -688,6 +697,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                             onTap: () {
                                               print(element?.id);
                                               watch.updateProductId(
+
                                                 element?.id.toString(),
                                               );
                                               Navigator.pushAndRemoveUntil(
@@ -698,6 +708,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                           index: 1,
                                                           screenName:
                                                               ProductScreenView(
+                                                                selectedUnitId: element?.productUnitId.toString(),
                                                                   categoryId: element
                                                                       ?.categoryId
                                                                       .toString(),

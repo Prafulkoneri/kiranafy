@@ -595,6 +595,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                           index: 1,
                                                           screenName:
                                                               ProductScreenView(
+                                                                selectedUnitId: element?.productUnitId.toString(),
                                                             categoryId: element
                                                                 ?.categoryId
                                                                 .toString(),
@@ -922,6 +923,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                       index: 1,
                                                       screenName:
                                                           ProductScreenView(
+                                                              selectedUnitId: element?.productUnitId.toString(),
                                                               categoryId: element
                                                                   ?.categoryId
                                                                   .toString(),
@@ -1664,6 +1666,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                       index: 1,
                                                       screenName:
                                                           ProductScreenView(
+                                                              selectedUnitId: element?.productUnitId.toString(),
                                                               categoryId: element
                                                                   ?.categoryId
                                                                   .toString(),

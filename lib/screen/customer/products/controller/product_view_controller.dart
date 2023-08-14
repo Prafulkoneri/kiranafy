@@ -57,6 +57,7 @@ class ProductViewController extends ChangeNotifier {
   ProductViewShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
   List<CustomerProductData>? similarProduct;
+  bool isUnitImagesVisible=false;
   String routeName = "";
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
@@ -75,19 +76,26 @@ class ProductViewController extends ChangeNotifier {
     print("productId");
     print(pId);
     print(productId);
+    unitImages.clear();
     await productsView(context, sId, cId, pId, pType);
+    // await productsUnitImage(context, suId);
     print("55555555555555555555555555555555555");
     print(pId);
     unitImages.clear();
     print(pType);
 
     routeName = rName;
-    // await productsUnitImage(context, suId);
+
     notifyListeners();
   }
 
   showLoader(value) {
     isLoading = value;
+    notifyListeners();
+  }
+
+  showUnitImages(value){
+    isUnitImagesVisible=value;
     notifyListeners();
   }
 
@@ -174,6 +182,7 @@ class ProductViewController extends ChangeNotifier {
   Future<void> productsUnitImage(context, suId) async {
     // print("id$id");
     print("bybeeeeeeeeeeeeeeeeeeeeeeeee");
+    print(suId);
     selectedUnitId = suId;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));

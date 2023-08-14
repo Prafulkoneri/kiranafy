@@ -321,22 +321,18 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       ),
 
                       Container(
-                        padding: EdgeInsets.only(
-                          right: 19.0.w,
-                          left: 19.0.w,
-                        ),
-                        width: ScreenUtil().screenWidth,
-                        // height: 100.h,
-                        child: watch.placeAd.isNotEmpty
-                            ? AppNetworkImages(
-                                imageUrl:
-                                    (watch.placeAd.toList()..shuffle()).first,
-                                height: 163.h,
-                                width: 352.w,
-                                fit: BoxFit.cover,
-                              )
-                            : Container(),
-                      ),
+                          padding: EdgeInsets.only(
+                            right: 19.0.w,
+                            left: 19.0.w,
+                          ),
+                          width: ScreenUtil().screenWidth,
+                          // height: 100.h,
+                          child: AppNetworkImages(
+                            imageUrl: (watch.placeAd.toList()..shuffle()).first,
+                            height: 163.h,
+                            width: 352.w,
+                            fit: BoxFit.cover,
+                          )),
 
                       SizedBox(
                         height: 20.h,

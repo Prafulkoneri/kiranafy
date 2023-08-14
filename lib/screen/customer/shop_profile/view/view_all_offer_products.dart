@@ -109,6 +109,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                           builder: (context) => MainScreenView(
                                                 index: 1,
                                                 screenName: ProductScreenView(
+                                                    selectedUnitId: element?.productUnitId.toString(),
                                                     categoryId:
                                                         element.categoryId.toString(),
                                                     // categoryId: watch.categoryId,

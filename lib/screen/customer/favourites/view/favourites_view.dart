@@ -377,6 +377,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                       index: 1,
                                                       screenName:
                                                           ProductScreenView(
+                                                            selectedUnitId: element?.productUnitId.toString(),
                                                         categoryId: element
                                                             ?.categoryId
                                                             .toString(),

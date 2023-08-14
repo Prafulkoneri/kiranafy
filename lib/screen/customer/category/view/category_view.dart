@@ -271,6 +271,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                   (context) => MainScreenView(
                                                         index: 1,
                                                         screenName: ProductScreenView(
+                                                            selectedUnitId: element?.productUnitId.toString(),
                                                             categoryId: watch
                                                                 .categoryId,
                                                             productId: element

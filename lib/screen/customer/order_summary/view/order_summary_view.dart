@@ -934,6 +934,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                   index: 1,
                                                                   screenName:
                                                                       ProductScreenView(
+                                                                        selectedUnitId: element?.productUnitId.toString(),
                                                                           categoryId: element
                                                                               ?.categoryId
                                                                               .toString(),

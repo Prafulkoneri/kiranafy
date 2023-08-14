@@ -145,13 +145,16 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                 Row(
                                   children: [
                                     PrimaryCheckBox(
-                                      value: watch.isReturnProductSelected[index],
+                                      value:
+                                          watch.isReturnProductSelected[index],
                                       onChanged: (value) {
                                         read.onSelectingProduct(
                                             index,
                                             value,
                                             element?.id.toString(),
-                                            element?.productOfferPrice,element?.productQuantity.toString());
+                                            element?.productOfferPrice,
+                                            element?.productQuantity
+                                                .toString());
                                       },
                                     ),
                                     AppNetworkImages(
@@ -172,13 +175,15 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        Text("${element?.productName}",
-                                            style: GoogleFonts.roboto(
-                                              textStyle: TextStyle(
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Black1),
-                                            )),
+                                        Flexible(
+                                          child: Text("${element?.productName}",
+                                              style: GoogleFonts.roboto(
+                                                textStyle: TextStyle(
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Black1),
+                                              )),
+                                        ),
                                         SizedBox(
                                           height: 5.h,
                                         ),

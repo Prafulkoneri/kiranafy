@@ -114,6 +114,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                             builder: (context) => MainScreenView(
                                                   index: 1,
                                                   screenName: ProductScreenView(
+                                                      selectedUnitId: element?.productUnitId.toString(),
                                                       categoryId: element?.categoryId
                                                           .toString(),
                                                       // categoryId: watch.categoryId,
