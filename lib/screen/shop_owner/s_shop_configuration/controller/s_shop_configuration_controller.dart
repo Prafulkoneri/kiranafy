@@ -380,11 +380,11 @@ class SShopConfigurationController extends ChangeNotifier {
       return;
     }
 
-    if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
-      Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
-          type: SnackType.error);
-      return;
-    }
+    // if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
+    //   Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
+    //       type: SnackType.error);
+    //   return;
+    // }
     if (!isOnlinePaymentSelected && !isCODPaymentSelected) {
       Utils.showPrimarySnackbar(context, "Select Payment Mode",
           type: SnackType.error);
@@ -402,6 +402,12 @@ class SShopConfigurationController extends ChangeNotifier {
       ///////////////Delivery Type///////////
       if (!isCustomerPickupSelected && !isDeliveryCustomerSelected) {
         Utils.showPrimarySnackbar(context, "Select Any Delivery Type",
+            type: SnackType.error);
+        return;
+      }
+      ////////////////////
+      if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
+        Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
             type: SnackType.error);
         return;
       }
@@ -543,7 +549,7 @@ class SShopConfigurationController extends ChangeNotifier {
         isSixToNine ? "active" : "inactive";
     request.fields['shop_owner_upi_id'] = upiIdController.text;
     request.fields['area_id'] = selectedAreaId;
-    //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
+    // multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     File imageFile = fileImage;
     var stream =

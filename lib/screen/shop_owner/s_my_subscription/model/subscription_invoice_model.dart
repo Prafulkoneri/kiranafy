@@ -46,7 +46,7 @@ class SubscriptionInvoiceData {
 }
 
 class ShopInvoiceList {
-  String? id;
+  int? id;
   String? invoiceLink;
 
   ShopInvoiceList({

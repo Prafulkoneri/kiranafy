@@ -442,7 +442,10 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         ),
                       ),
                       Visibility(
-                        visible: watch.isDeliveryChargesSelected,
+                        visible: watch.isDeliveryCustomerSelected &&
+                                watch.isDeliveryChargesSelected
+                            ? true
+                            : false,
                         child: Column(
                           children: [
                             SizedBox(

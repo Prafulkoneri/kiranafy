@@ -97,8 +97,8 @@ class ShopSettingController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        // Utils.showPrimarySnackbar(context, result.message,
+        //     type: SnackType.success);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();

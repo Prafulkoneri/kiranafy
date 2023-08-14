@@ -484,7 +484,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                           Flexible(
                                                                             child:
                                                                                 Text(
-                                                                              "Do you really want to Coupon ? ",
+                                                                              "Do you really want to delete coupon ? ",
                                                                               textAlign: TextAlign.center,
                                                                               style: GoogleFonts.dmSans(
                                                                                 textStyle: TextStyle(color: Color(0xff006F94), fontSize: 20.sp, fontWeight: FontWeight.w700),
@@ -505,6 +505,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                               Expanded(
                                                                                 child: GestureDetector(
                                                                                   onTap: () async {
+                                                                                    Navigator.pop(context);
                                                                                     read.deleteCoupons(context, index, element?.id);
                                                                                   },
                                                                                   child: Container(

@@ -23,27 +23,40 @@ class AddUnitView extends StatefulWidget {
   final String? categoryId;
   final String? productId;
   final String? productType;
-  final String ? productName;
-  final String ? productUnitId;
-  final bool ? isEdit;
-  const AddUnitView({super.key, required this.categoryId,required this.productType,required this.productId,required this.productName,required this.productUnitId,required this.isEdit});
+  final String? productName;
+  final String? productUnitId;
+  final bool? isEdit;
+  const AddUnitView(
+      {super.key,
+      required this.categoryId,
+      required this.productType,
+      required this.productId,
+      required this.productName,
+      required this.productUnitId,
+      required this.isEdit});
 
   @override
   State<AddUnitView> createState() => _AddUnitViewState();
 }
 
 class _AddUnitViewState extends State<AddUnitView> {
-
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<AddEditUnitController>().initState(context,widget.productId,widget.productUnitId,widget.categoryId,widget.productType,widget.isEdit);
+      context.read<AddEditUnitController>().initState(
+          context,
+          widget.productId,
+          widget.productUnitId,
+          widget.categoryId,
+          widget.productType,
+          widget.isEdit);
     });
   }
+
   @override
   Widget build(BuildContext context) {
-    final watch=context.watch<AddEditUnitController>();
-    final read=context.read<AddEditUnitController>();
+    final watch = context.watch<AddEditUnitController>();
+    final read = context.read<AddEditUnitController>();
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: PreferredSize(
@@ -56,432 +69,432 @@ class _AddUnitViewState extends State<AddUnitView> {
                     builder: (context) => SMainScreenView(
                         index: 0,
                         screenName: UnitDetailView(
-                            refresh: false, //
-                            categoryId: widget.categoryId,productType: widget.productType,productId: widget.productId,))),
+                          refresh: false, //
+                          categoryId: widget.categoryId,
+                          productType: widget.productType,
+                          productId: widget.productId,
+                        ))),
                 (Route<dynamic> route) => false,
               );
             },
             title: "Add Unit",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () {
-              if(widget.isEdit==true){
-                if(watch.fileImage1.path==""&&watch.fileImage2.path==""&&watch.fileImage3.path==""){
+              if (widget.isEdit == true) {
+                if (watch.fileImage1.path == "" &&
+                    watch.fileImage2.path == "" &&
+                    watch.fileImage3.path == "") {
                   read.updateEditUnitDetails(context);
+                } else {
+                  read.addUnit(context, "update");
                 }
-                else{
-                  read.addUnit(context,"update");
-                }
+              } else {
+                read.addUnit(context, "add");
               }
-              else{
-                read.addUnit(context,"add");
-              }
-
-
             }),
       ),
-      body:watch.isLoading?Center(
-        child: CircularProgressIndicator(),
-      ):
-      SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          padding: EdgeInsets.only(
-            left: 20.w,
-            right: 28.w,
-            top: 20.w,
-            bottom: 20.w,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                    Flexible(
-                      child: Text(
-
-                        widget.productName??"",
-                        // "${watch.categoryName} -  ${watch.allProductsCount}",
-                        style: GoogleFonts.dmSans(
-
-                          textStyle: TextStyle(
-
-                              color: Black1,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500),
+      body: watch.isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: 20.w,
+                  right: 28.w,
+                  top: 20.w,
+                  bottom: 20.w,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            widget.productName ?? "",
+                            // "${watch.categoryName} -  ${watch.allProductsCount}",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black1,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ),
+                        SizedBox(
+                          width: 25,
+                        ),
+                        Container(
+                          width: 26.w,
+                          child: CupertinoSwitch(
+                            value: watch.switchValue,
+                            activeColor: DarkGreen,
+                            onChanged: (value) {
+                              read.onToggleSwitch(value);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 38.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            textInputType: TextInputType.number,
+                            controller: watch.valueController,
+                            titleHeader: "Value",
+                            // controller: watch.emailIdController,
+                            hintText: "Value",
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15.w,
+                        ),
+                        Expanded(
+                            child: watch.unitId == ""
+                                ? SDropDownField(
+                                    items: watch.unitList
+                                        ?.map(
+                                            (item) => DropdownMenuItem<String>(
+                                                  value: item.id.toString(),
+                                                  child: Text(
+                                                    item.unit ?? "",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ))
+                                        .toList(),
+                                    titleHeader: "Unit",
+                                    onChanged: (value) async {
+                                      read.onUnitSelect(value);
+                                    },
+                                    hint: "Select Unit",
+                                  )
+                                : SDropDownField(
+                                    value: watch.unitId,
+                                    items: watch.unitList
+                                        ?.map(
+                                            (item) => DropdownMenuItem<String>(
+                                                  value: item.id.toString(),
+                                                  child: Text(
+                                                    item.unit ?? "",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ))
+                                        .toList(),
+                                    titleHeader: "Unit",
+                                    onChanged: (value) async {
+                                      read.onUnitSelect(value);
+                                    },
+                                    hint: "Select Unit",
+                                  )),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            textInputType: TextInputType.number,
+                            controller: watch.mrpController,
+                            titleHeader: "MRP",
+                            // controller: watch.emailIdController,
+                            hintText: "MRP",
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15.w,
+                        ),
+                        Expanded(
+                          child: PrimarySTextFormField(
+                            textInputType: TextInputType.number,
+                            controller: watch.offerPriceController,
+                            titleHeader: "Offer Price",
+                            // controller: watch.emailIdController,
+                            hintText: "Offer Price",
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 26.h,
+                    ),
+                    Text(
+                      "Unit Images",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black1,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
-                  SizedBox(width: 25,),
-                  Container(
-                    width: 26.w,
-                    child: CupertinoSwitch(
-                      value: watch.switchValue,
-                      activeColor: DarkGreen,
-                      onChanged: (value) {
-                        read.onToggleSwitch(value);
-                      },
+                    SizedBox(
+                      height: 11.h,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 38.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      textInputType: TextInputType.number,
-                      controller: watch.valueController,
-                      titleHeader: "Value",
-                      // controller: watch.emailIdController,
-                      hintText: "Value",
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
-                  Expanded(
-                      child:watch.unitId==""?
-                      SDropDownField(
-                        items: watch.unitList
-                            ?.map((item) => DropdownMenuItem<String>(
-                          value: item.id.toString(),
-                          child: Text(
-                            item.unit ?? "",
-                            style: const TextStyle(
-                              fontSize: 14,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          read.openCamera1(context);
+                                        },
+                                        child: Text("Camera"),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          read.openGallery1(context);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("gallery "),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 100.h,
+                              width: 110.w,
+                              decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 10.0,
+                                ),
+                              ]),
+                              child: Card(
+                                elevation: 0.3,
+                                child: watch.fileImage1.path == "" &&
+                                        watch.networkImage1 == ""
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/gallary.svg",
+                                            // height: 19.w,
+                                            // width: 21.w,
+                                          ),
+                                          SizedBox(
+                                            height: 10.h,
+                                          ),
+                                          Text(
+                                            "Add Image",
+                                            style: TextStyle(
+                                                color: Color(0xffB3B3B3),
+                                                // letterSpacing: .5,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ],
+                                      )
+                                    : watch.networkImage1 != ""
+                                        ? Center(
+                                            child: AppNetworkImages(
+                                              imageUrl: watch.networkImage1,
+                                              fit: BoxFit.cover,
+                                              height: 90.w,
+                                            ),
+                                          )
+                                        : Image.file(watch.fileImage1),
+                              ),
                             ),
                           ),
-                        ))
-                            .toList(),
-                    titleHeader: "Unit",
-                    onChanged: (value) async {
-                      read.onUnitSelect(value);
-                    },
-                    hint: "Select Unit",
-                  ):
-                      SDropDownField(
-                        value: watch.unitId,
-                        items: watch.unitList
-                            ?.map((item) => DropdownMenuItem<String>(
-                          value: item.id.toString(),
-                          child: Text(
-                            item.unit ?? "",
-                            style: const TextStyle(
-                              fontSize: 14,
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          read.openCamera2(context);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Camera"),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          read.openGallery2(context);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("gallery "),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 100.h,
+                              width: 110.w,
+                              decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 10.0,
+                                ),
+                              ]),
+                              child: Card(
+                                elevation: 0.3,
+                                child: watch.fileImage2.path == "" &&
+                                        watch.networkImage2 == ""
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/gallary.svg",
+                                            // height: 19.w,
+                                            // width: 21.w,
+                                          ),
+                                          SizedBox(
+                                            height: 10.h,
+                                          ),
+                                          Text(
+                                            "Add Image",
+                                            style: TextStyle(
+                                                color: Color(0xffB3B3B3),
+                                                // letterSpacing: .5,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ],
+                                      )
+                                    : watch.networkImage2 != ""
+                                        ? Center(
+                                            child: AppNetworkImages(
+                                              imageUrl: watch.networkImage1,
+                                              fit: BoxFit.cover,
+                                              height: 90.w,
+                                            ),
+                                          )
+                                        : Image.file(watch.fileImage2),
+                              ),
                             ),
                           ),
-                        ))
-                            .toList(),
-                        titleHeader: "Unit",
-                        onChanged: (value) async {
-                          read.onUnitSelect(value);
-                        },
-                        hint: "Select Unit",
-                      )
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      textInputType: TextInputType.number,
-                      controller: watch.mrpController,
-                      titleHeader: "MRP",
-                      // controller: watch.emailIdController,
-                      hintText: "MRP",
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          read.openCamera3(context);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Camera"),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          read.openGallery3(context);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("gallery "),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 100.h,
+                              width: 110.w,
+                              decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 10.0,
+                                ),
+                              ]),
+                              child: Card(
+                                elevation: 0.3,
+                                child: watch.fileImage3.path == "" &&
+                                        watch.networkImage3 == ""
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/icons/gallary.svg",
+                                            // height: 19.w,
+                                            // width: 21.w,
+                                          ),
+                                          SizedBox(
+                                            height: 10.h,
+                                          ),
+                                          Text(
+                                            "Add Image",
+                                            style: TextStyle(
+                                                color: Color(0xffB3B3B3),
+                                                // letterSpacing: .5,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ],
+                                      )
+                                    : watch.networkImage3 != ""
+                                        ? Center(
+                                            child: AppNetworkImages(
+                                              imageUrl: watch.networkImage3,
+                                              fit: BoxFit.cover,
+                                              height: 90.w,
+                                            ),
+                                          )
+                                        : Image.file(watch.fileImage3),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
-                  Expanded(
-                    child: PrimarySTextFormField(
-                      textInputType: TextInputType.number,
-                      controller: watch.offerPriceController,
-                      titleHeader: "Offer Price",
-                      // controller: watch.emailIdController,
-                      hintText: "Offer Price",
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 26.h,
-              ),
-              Text(
-                "Unit Images",
-                style: GoogleFonts.dmSans(
-                  textStyle: TextStyle(
-                      color: Black1,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 11.h,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child:
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    read.openCamera1(context);
-                                  },
-                                  child: Text("Camera"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    read.openGallery1(context);
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("gallery "),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        height: 100.h,
-                        width: 110.w,
-                        decoration: BoxDecoration(boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 10.0,
-                          ),
-                        ]),
-                        child: Card(
-                          elevation: 0.3,
-                          child:
-                              watch.fileImage1.path== "" && watch.networkImage1==""
-                                  ?
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/icons/gallary.svg",
-                                    // height: 19.w,
-                                    // width: 21.w,
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Text(
-                                    "Add Image",
-                                    style: TextStyle(
-                                        color: Color(0xffB3B3B3),
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ],
-                              ):
-                              watch.networkImage1!=""?
-                              Center(
-                                      child: AppNetworkImages(
-                                        imageUrl: watch.networkImage1,
-                                        fit: BoxFit.cover,
-                                        height: 90.w,
-                                      ),
-                                    ):Image.file(watch.fileImage1),
-
-
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    read.openCamera2(context);
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Camera"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    read.openGallery2(context);
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("gallery "),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        height: 100.h,
-                        width: 110.w,
-                        decoration: BoxDecoration(boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 10.0,
-                          ),
-                        ]),
-                        child: Card(
-                          elevation: 0.3,
-                          child:
-                          watch.fileImage2.path== "" && watch.networkImage2==""
-                              ?
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/gallary.svg",
-                                // height: 19.w,
-                                // width: 21.w,
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "Add Image",
-                                style: TextStyle(
-                                    color: Color(0xffB3B3B3),
-                                    // letterSpacing: .5,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ):
-                          watch.networkImage2!=""?
-                          Center(
-                            child: AppNetworkImages(
-                              imageUrl: watch.networkImage1,
-                              fit: BoxFit.cover,
-                              height: 90.w,
-                            ),
-                          ):Image.file(watch.fileImage2),
-
-
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    read.openCamera3(context);
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Camera"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    read.openGallery3(context);
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("gallery "),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        height: 100.h,
-                        width: 110.w,
-                        decoration: BoxDecoration(boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 10.0,
-                          ),
-                        ]),
-                        child: Card(
-                          elevation: 0.3,
-                          child:
-                          watch.fileImage3.path== "" && watch.networkImage3==""
-                              ?
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/gallary.svg",
-                                // height: 19.w,
-                                // width: 21.w,
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "Add Image",
-                                style: TextStyle(
-                                    color: Color(0xffB3B3B3),
-                                    // letterSpacing: .5,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ):
-                          watch.networkImage3!=""?
-                          Center(
-                            child: AppNetworkImages(
-                              imageUrl: watch.networkImage3,
-                              fit: BoxFit.cover,
-                              height: 90.w,
-                            ),
-                          ):Image.file(watch.fileImage3),
-
-
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
-
 }

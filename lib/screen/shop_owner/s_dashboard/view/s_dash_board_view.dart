@@ -1324,7 +1324,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                          index: 2,
+                                          index: 0,
                                           screenName: SPaymentRefundList(),
                                         )),
                                 (Route<dynamic> route) => false,
@@ -1346,7 +1346,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               child: Column(
                                 children: [
                                   Text(
-                                    watch.dashBoardData?.pendingRefundOrdersCount.toString()??"0",
+                                    watch.dashBoardData
+                                            ?.pendingRefundOrdersCount
+                                            .toString() ??
+                                        "0",
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
@@ -1384,7 +1387,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SMainScreenView(
-                                          index: 2,
+                                          index: 0,
                                           screenName: SPaymentRefundList(),
                                         )),
                                 (Route<dynamic> route) => false,
@@ -1405,7 +1408,9 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               child: Column(
                                 children: [
                                   Text(
-                                    watch.dashBoardData?.acceptRefundOrdersCount.toString()??"0",
+                                    watch.dashBoardData?.acceptRefundOrdersCount
+                                            .toString() ??
+                                        "0",
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(

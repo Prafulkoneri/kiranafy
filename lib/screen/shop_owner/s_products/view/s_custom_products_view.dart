@@ -98,17 +98,18 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                           onChanged: (value) {
                             read.onCategorySelected(value);
                           },
-                          items: selectedCategoryListWatch.selectedCategoriesList!
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item.categoryId.toString(),
-                                    child: Text(
-                                      item.categoryName ?? "",
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
+                          items:
+                              selectedCategoryListWatch.selectedCategoriesList!
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item.categoryId.toString(),
+                                        child: Text(
+                                          item.categoryName ?? "",
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
                           hint: "Select Category ",
                         ),
                         SizedBox(

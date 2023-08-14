@@ -57,7 +57,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                      index: 1,
+                      index: 0,
                       screenName: ShopDashBoardView(
                         refresh: true,
                       ))),
