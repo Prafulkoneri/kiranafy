@@ -156,6 +156,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
                 type: SnackType.error);
             return;
           }
+          print(saveName);
           _showNotification(saveName);
         }
         print("No permission to read and write.");
