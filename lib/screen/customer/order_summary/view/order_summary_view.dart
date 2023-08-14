@@ -208,10 +208,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
-                                      left: 13.w,
-                                      right: 13.w,
-                                      top: 14.w,
-                                      bottom: 14.w),
+                                      left: 11.w,
+                                      right: 11.w,
+                                      top: 13.w,
+                                      bottom: 13.w),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Color(0xff4689EC),
@@ -1286,7 +1286,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 ]),
                               ),
                               Text(
-                                "Rs.  ${watch.couponDiscount}",
+                                "- Rs.  ${watch.couponDiscount}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,

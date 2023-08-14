@@ -47,6 +47,8 @@ class ReturnOrderController extends ChangeNotifier {
     refundTotal=0;
     selectedProductIdList.clear();
     isReturnProductSelected.clear();
+    descriptionController.clear();
+
     await returnOrder(context, oId);
     notifyListeners();
   }

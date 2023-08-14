@@ -149,10 +149,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         },
                                         child: Container(
                                             padding: EdgeInsets.only(
-                                                left: 13.w,
-                                                right: 13.w,
-                                                top: 14.w,
-                                                bottom: 14.w),
+                                                left: 11.w,
+                                                right: 11.w,
+                                                top: 13.w,
+                                                bottom: 13.w),
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Color(0xff23AA49),
@@ -796,12 +796,23 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => OrderStatusView(
-                                                orderId: watch.orderId,
-                                              )));
+
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MainScreenView(
+                                            index: 4,
+                                            screenName: OrderStatusView(
+                                              orderId: watch.orderId,
+                                            ))),
+                                        (Route<dynamic> route) => false,
+                                  );
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => OrderStatusView(
+                                  //               orderId: watch.orderId,
+                                  //             )));
                                 },
                                 child: Text(
                                   "Track Order",
@@ -1147,6 +1158,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                       watch.orderDetails?.orderStatus == "Pending"
                           ? Container(
                               padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                              margin: EdgeInsets.only(bottom: 20.w),
                               child: PrimaryButton(
                                 color: Color(0xffD1D1D1),
                                 onTap: () {
@@ -1611,7 +1623,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                       watch.orderDetails?.orderStatus == "Order Refund"
                           ? Container(
                               padding: EdgeInsets.symmetric(horizontal: 17.w),
-                              color: Color(0xffEFFDFF),
+                              color:watch.orderDetails?.refundOrderStatus=="reject"?Color(0xffFFE8E8): Color(0xffEFFDFF),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1643,7 +1655,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           watch.orderDetails
                                                       ?.refundOrderStatus ==
                                                   "pending"
-                                              ? "Payment Pending"
+                                              ? "Payment Pending":
+                                          watch.orderDetails?.refundOrderStatus=="reject"?"Return Rejected"
                                               : watch.orderDetails
                                                               ?.refundOrderStatus ==
                                                           "accept" &&
@@ -1663,7 +1676,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   SizedBox(
                                     height: 13.w,
                                   ),
-                                  Row(
+
+
+
+                                Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -1681,7 +1697,25 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           SizedBox(
                                             height: 19.w,
                                           ),
-                                          Text(
+                               watch.orderDetails?.refundOrderStatus=="reject"?  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      Text("Shop Owner Reject Reason",
+                      style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700)),
+    SizedBox(
+    height: 2.w,
+    ),
+    Text(
+    "${watch.orderDetails?.shopOwnerRefundRejectReason}",
+    style: TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+    ),
+    ),
+    ],
+    ) :Text(
                                             watch.orderDetails
                                                         ?.refundOrderStatus ==
                                                     "pending"
@@ -1720,7 +1754,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                 )
                                               ],
                                             )
-                                          : Container(),
+                                          :Container(),
                                     ],
                                   ),
                                   SizedBox(

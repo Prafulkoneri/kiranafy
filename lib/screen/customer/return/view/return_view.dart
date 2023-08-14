@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -140,82 +141,85 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                         return Column(
                           children: [
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  children: [
-                                    PrimaryCheckBox(
-                                      value:
-                                          watch.isReturnProductSelected[index],
-                                      onChanged: (value) {
-                                        read.onSelectingProduct(
-                                            index,
-                                            value,
-                                            element?.id.toString(),
-                                            element?.productOfferPrice,
-                                            element?.productQuantity
-                                                .toString());
-                                      },
-                                    ),
-                                    AppNetworkImages(
-                                      // '${element}',
-                                      imageUrl: "${element?.productImagePath}",
-                                      // images[pagePosition],
-                                      width: 44.w,
-                                      height: 44.w,
-                                      // width: 102.w,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    SizedBox(
-                                      width: 16.w,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Flexible(
-                                          child: Text("${element?.productName}",
-                                              style: GoogleFonts.roboto(
-                                                textStyle: TextStyle(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Black1),
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          height: 5.h,
-                                        ),
-                                        Row(
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      PrimaryCheckBox(
+                                        value:
+                                            watch.isReturnProductSelected[index],
+                                        onChanged: (value) {
+                                          read.onSelectingProduct(
+                                              index,
+                                              value,
+                                              element?.id.toString(),
+                                              element?.productOfferPrice,
+                                              element?.productQuantity
+                                                  .toString());
+                                        },
+                                      ),
+                                      AppNetworkImages(
+                                        // '${element}',
+                                        imageUrl: "${element?.productImagePath}",
+                                        // images[pagePosition],
+                                        width: 44.w,
+                                        height: 44.w,
+                                        // width: 102.w,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      SizedBox(
+                                        width: 16.w,
+                                      ),
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              " ${element?.productWeight} ${element?.unit} x ",
-                                              style: GoogleFonts.dmSans(
-                                                textStyle: TextStyle(
-                                                    color: grey5,
-                                                    // letterSpacing: .5,
-                                                    fontSize: 14.sp,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
+                                            Text("${element?.productName}",
+                                                style: GoogleFonts.roboto(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w500,
+                                                      color: Black1),
+                                                )),
+                                            SizedBox(
+                                              height: 5.h,
                                             ),
-                                            Text(
-                                              "${element?.productQuantity}",
-                                              style: GoogleFonts.dmSans(
-                                                textStyle: TextStyle(
-                                                    color: grey5,
-                                                    // letterSpacing: .5,
-                                                    fontSize: 14.sp,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  " ${element?.productWeight} ${element?.unit} x ",
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: grey5,
+                                                        // letterSpacing: .5,
+                                                        fontSize: 14.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "${element?.productQuantity}",
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: grey5,
+                                                        // letterSpacing: .5,
+                                                        fontSize: 14.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                      ],
-                                    ),
-                                  ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 Text("INR ${element?.productOfferPrice}",
                                     style: GoogleFonts.roboto(
@@ -301,6 +305,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                             return Column(
                               children: [
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PrimaryCheckBox(
                                       value: watch.isSelectedReason[index],

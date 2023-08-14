@@ -544,9 +544,6 @@ class CustomerOrderViewController extends ChangeNotifier {
         //       (Route<dynamic> route) => false,
         // );
 
-        print("hello");
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
         // LoadingOverlay.of(context).hide();
         showLoader(false);
         notifyListeners();
