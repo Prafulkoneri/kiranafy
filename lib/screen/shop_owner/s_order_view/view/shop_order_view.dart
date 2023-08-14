@@ -1619,11 +1619,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                         ),
                         watch.orderDetails?.orderStatus == "Delivered"
                             ? GestureDetector(
-                          onTap: (){
-            read.orderInvoice(context);
-
-                          },
-                              child: Container(
+                                onTap: () {
+                                  read.orderInvoice(context);
+                                },
+                                child: Container(
                                   padding: EdgeInsets.only(
                                       left: 20.w,
                                       right: 20.w,
@@ -1652,7 +1651,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                     ),
                                   ),
                                 ),
-                            )
+                              )
                             : Container()
                       ],
                     ),
@@ -2069,8 +2068,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 PrimarySTextFormField(
                                                   height: 100.w,
                                                   maxLines: 5,
-                                                  textInputType:
-                                                      TextInputType.number,
+                                                  // textInputType:
+                                                  //     TextInputType.number,
                                                   controller: watch
                                                       .rejectReasonController,
                                                   hintText:

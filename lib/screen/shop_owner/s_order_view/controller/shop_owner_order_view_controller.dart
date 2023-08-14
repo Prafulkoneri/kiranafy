@@ -67,15 +67,15 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   String cancellationId = "";
   String productId = "";
   List<bool> selectedProductList = [];
-  bool acceptPayment=false;
-  bool rejectPayment=false;
-  bool isRefundByCash=false;
-  bool isRefundByUpi=false;
-  TextEditingController upiIdController=TextEditingController();
+  bool acceptPayment = false;
+  bool rejectPayment = false;
+  bool isRefundByCash = false;
+  bool isRefundByUpi = false;
+  TextEditingController upiIdController = TextEditingController();
   TextEditingController rejectReasonController = TextEditingController();
-  TextEditingController refundPayableAmount=TextEditingController();
+  TextEditingController refundPayableAmount = TextEditingController();
   OrderInvoiceRepo orderInvoicerepo = OrderInvoiceRepo();
-  OrderInvoiceRepo orderInvoiceRepo=OrderInvoiceRepo();
+  OrderInvoiceRepo orderInvoiceRepo = OrderInvoiceRepo();
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -84,7 +84,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   ShopOwnerOrderStatusChangedRepo orderStatusChangedRepo =
       ShopOwnerOrderStatusChangedRepo();
 
-  ShopUpdateRefundRepo shopUpdateRefundRepo=ShopUpdateRefundRepo();
+  ShopUpdateRefundRepo shopUpdateRefundRepo = ShopUpdateRefundRepo();
 
   OrderStatusChangeRequestModel get orderStatusChangedRequestModel =>
       OrderStatusChangeRequestModel(
@@ -105,12 +105,12 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     deliveryCode = "";
     reasonController.clear();
     rejectReasonController.clear();
-    acceptPayment=false;
-    rejectPayment=false;
-   isRefundByCash=false;
-   isRefundByUpi=false;
-   upiIdController.clear();
-   refundPayableAmount.clear();
+    acceptPayment = false;
+    rejectPayment = false;
+    isRefundByCash = false;
+    isRefundByUpi = false;
+    upiIdController.clear();
+    refundPayableAmount.clear();
     await shopOwnerOrderView(context, orId, true);
 
     getCancelOrderList(context);
@@ -145,6 +145,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         totalAmount = orderDetails?.totalAmount ?? "";
         deliveryCharges = orderDetails?.deliveryCharges ?? "";
         totalDiscount = orderDetails?.totalDiscount ?? "";
+
         selectedProductList = List<bool>.filled(
             orderProductDetails?.length ?? 0, false,
             growable: true);
@@ -192,8 +193,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    orderInvoicerepo.orderInvoice(
-        orderInvoiceRequestModel, pref.getString("successToken"))
+    orderInvoicerepo
+        .orderInvoice(orderInvoiceRequestModel, pref.getString("successToken"))
         .then((response) async {
       log(response.body);
       final result = OrderInvoiceResModel.fromJson(jsonDecode(response.body));
@@ -221,23 +222,26 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           print("savename${saveName}");
           String savePath = dir.path + "/$saveName";
           print(savePath);
-          fileurl=Endpoint.baseUrl.toString().substring(0,Endpoint.baseUrl.toString().length-4).toString()+"${orderinvoicedata?.customerInvoiceList?.invoiceLink.toString()}";
+          fileurl = Endpoint.baseUrl
+                  .toString()
+                  .substring(0, Endpoint.baseUrl.toString().length - 4)
+                  .toString() +
+              "${orderinvoicedata?.customerInvoiceList?.invoiceLink.toString()}";
           //output:  /storage/emulated/0/Download/banner.png
 
           try {
             await Dio().download(fileurl, savePath,
                 onReceiveProgress: (received, total) {
-
-                  if (total != -1) {
-                    print((received / total * 100).toStringAsFixed(0) + "%");
-                    //you can build progressbar feature too
-                  }
-                });
+              if (total != -1) {
+                print((received / total * 100).toStringAsFixed(0) + "%");
+                //you can build progressbar feature too
+              }
+            });
             print("File is saved to download folder.");
           } on DioError catch (e) {
-
             print(e.message);
-            Utils.showPrimarySnackbar(context,"Invalid Url", type: SnackType.error);
+            Utils.showPrimarySnackbar(context, "Invalid Url",
+                type: SnackType.error);
             return;
           }
           _showNotification(saveName);
@@ -254,7 +258,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -263,6 +267,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       },
     );
   }
+
   Future<void> _showNotification(fileName) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
@@ -520,67 +525,65 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     );
   }
 
-void onRefundAccept(){
-    acceptPayment=true;
-    rejectPayment=false;
+  void onRefundAccept() {
+    acceptPayment = true;
+    rejectPayment = false;
     notifyListeners();
-}
-void onRefundReject(){
-  acceptPayment=false;
-  rejectPayment=true;
-  notifyListeners();
-}
+  }
 
+  void onRefundReject() {
+    acceptPayment = false;
+    rejectPayment = true;
+    notifyListeners();
+  }
 
   void onRefundByCash(value) {
-    if(!isRefundByCash){
-      isRefundByCash=true;
-      isRefundByUpi=false;
-    }
-    else{
-      isRefundByCash=false;
-      isRefundByUpi=false;
+    if (!isRefundByCash) {
+      isRefundByCash = true;
+      isRefundByUpi = false;
+    } else {
+      isRefundByCash = false;
+      isRefundByUpi = false;
     }
     notifyListeners();
   }
 
   void onRefundByUpi(value) {
-    if(!isRefundByUpi){
-      isRefundByUpi=true;
-      isRefundByCash=false;
-    }
-    else{
-      isRefundByCash=false;
-      isRefundByUpi=false;
+    if (!isRefundByUpi) {
+      isRefundByUpi = true;
+      isRefundByCash = false;
+    } else {
+      isRefundByCash = false;
+      isRefundByUpi = false;
     }
     notifyListeners();
   }
 
-  ShopUpdateRefundReqModel get shopUpdateRefundReqModel=>ShopUpdateRefundReqModel(
-      orderId:orderId,
-  refundOrderStatus: acceptPayment?"accept":"reject",
-  refundPaymentType: isRefundByCash?"cash":"upi",
-  refundRejectReason:rejectReasonController.text,
-  refunPayableAmount:refundPayableAmount.text,
-  transactionId: upiIdController.text,
+  ShopUpdateRefundReqModel get shopUpdateRefundReqModel =>
+      ShopUpdateRefundReqModel(
+        orderId: orderId,
+        refundOrderStatus: acceptPayment ? "accept" : "reject",
+        refundPaymentType: isRefundByCash ? "cash" : "upi",
+        refundRejectReason: rejectReasonController.text,
+        refunPayableAmount: refundPayableAmount.text,
+        transactionId: upiIdController.text,
       );
 
   Future<void> shopRefundUpdate(context) async {
-    if(acceptPayment){
-      if(refundPayableAmount.text==""){
-        Utils.showPrimarySnackbar(context,"Please Enter Refundable Amount",
+    if (acceptPayment) {
+      if (refundPayableAmount.text == "") {
+        Utils.showPrimarySnackbar(context, "Please Enter Refundable Amount",
             type: SnackType.error);
         return;
       }
-      if(!isRefundByCash && !isRefundByUpi){
-        Utils.showPrimarySnackbar(context,"Please Select Payment Method",
+      if (!isRefundByCash && !isRefundByUpi) {
+        Utils.showPrimarySnackbar(context, "Please Select Payment Method",
             type: SnackType.error);
         return;
       }
-    }
-    else{
-      if(rejectReasonController.text==""){
-        Utils.showPrimarySnackbar(context,"Please Enter Reject Reason",
+    } else {
+      if (rejectReasonController.text == "") {
+        Utils.showPrimarySnackbar(context, "Please Enter Reject Reason",
             type: SnackType.error);
         return;
       }
@@ -589,10 +592,13 @@ void onRefundReject(){
     LoadingOverlay.of(context).show();
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
-    shopUpdateRefundRepo.shopUpdateRefund(shopUpdateRefundReqModel,pref.getString("successToken"))
+    shopUpdateRefundRepo
+        .shopUpdateRefund(
+            shopUpdateRefundReqModel, pref.getString("successToken"))
         .then((response) {
       log(response.body);
-      final result = ShopUpdateRefundResModel.fromJson(jsonDecode(response.body));
+      final result =
+          ShopUpdateRefundResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
@@ -605,8 +611,11 @@ void onRefundReject(){
           context,
           MaterialPageRoute(
               builder: (context) => SMainScreenView(
-                  index: 2, screenName: SPaymentRefundList(isNavFromAccounts: false,))),
-              (Route<dynamic> route) => false,
+                  index: 2,
+                  screenName: SPaymentRefundList(
+                    isNavFromAccounts: false,
+                  ))),
+          (Route<dynamic> route) => false,
         );
         notifyListeners();
       } else {
@@ -618,8 +627,8 @@ void onRefundReject(){
       LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
-            LoadingOverlay.of(context).hide();
+      (Object e) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -629,8 +638,6 @@ void onRefundReject(){
       },
     );
   }
-
-
 
 ///////////////////////////////
 }

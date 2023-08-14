@@ -107,6 +107,19 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                     width: 12.w,
                                   ),
                                   GestureDetector(
+                                    onTap: () {
+                                      read.onClear(context, "");
+                                    },
+                                    child: SvgPicture.asset(
+                                      height: 12.h,
+                                      'assets/images/Cross.svg',
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  GestureDetector(
                                       onTap: () async {
                                         var pickedDate = await showDatePicker(
                                           builder: (BuildContext, child) {

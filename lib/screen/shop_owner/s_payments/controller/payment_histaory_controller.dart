@@ -82,4 +82,13 @@ class PaymentHistoryController extends ChangeNotifier {
     date = dates;
     notifyListeners();
   }
+
+  void onClear(context, dates) {
+    date = "";
+    paymentHistory(
+      context,
+      dates,
+    );
+    notifyListeners();
+  }
 }

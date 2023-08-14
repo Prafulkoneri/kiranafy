@@ -14,6 +14,7 @@ import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+
 class ShopOrderProducts extends StatefulWidget {
   const ShopOrderProducts({super.key});
 
@@ -85,16 +86,30 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                     ),
                                   ),
                                 ),
-                               watch.orderDetails?.orderStatus=="Pending"? PrimaryCheckBox(
-                                  onChanged: (value) {
-                                    LoadingOverlay.of(context).show();
-                                    read.selectProducts(context,index,element?.id,value);
-                                },
-                                  value:
-                                      watch.selectedProductList[index],
-                                ):watch.orderDetails?.orderStatus=="Order Refund"?Container(
-                                 child: Text(element?.refundStatus=="YES"?"Return":'',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13.sp,color: Color(0xffFF0000)),),
-                               ):Container(),
+                                watch.orderDetails?.orderStatus == "Pending"
+                                    ? PrimaryCheckBox(
+                                        onChanged: (value) {
+                                          print(watch.orderDetails?.id);
+                                          LoadingOverlay.of(context).show();
+                                          read.selectProducts(context, index,
+                                              element?.id, value);
+                                        },
+                                        value: watch.selectedProductList[index],
+                                      )
+                                    : watch.orderDetails?.orderStatus ==
+                                            "Order Refund"
+                                        ? Container(
+                                            child: Text(
+                                              element?.refundStatus == "YES"
+                                                  ? "Return"
+                                                  : '',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 13.sp,
+                                                  color: Color(0xffFF0000)),
+                                            ),
+                                          )
+                                        : Container(),
                               ],
                             ),
                             SizedBox(

@@ -66,7 +66,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                             children: <Widget>[
                               Flexible(
                                 child: Text(
-                                  "Do you really want to All Notification ? ",
+                                  "Do you really want to delete all notification ?",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
@@ -89,6 +89,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async {
+                                        Navigator.pop(context);
                                         await read.sDeleteNotification(
                                           context,
                                         );
@@ -192,7 +193,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ShopOrderView(
-                                  fromOrderStatus: true,
+                                      fromOrderStatus: true,
                                       selectedIndex: 0,
                                       orderId: element?.orderId.toString(),
                                     )));

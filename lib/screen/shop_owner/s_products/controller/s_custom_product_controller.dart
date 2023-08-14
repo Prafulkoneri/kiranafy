@@ -60,16 +60,16 @@ class CustomProductController extends ChangeNotifier {
 
   UploadCustomProductReqModel get uploadCustomProductReqModel =>
       UploadCustomProductReqModel(
-          categoryId: selectedCategory,
-          brandId: brandId,
-          taxId: taxId,
-          productId: productId,
-          productDescription: productDescriptionController.text,
-          productName: productNameController.text,
-          showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
-          showUnderRecommendedProduct:
-              showUnderRecommendedProducts ? "yes" : "no",
-          showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
+        categoryId: selectedCategory,
+        brandId: brandId,
+        taxId: taxId,
+        productId: productId,
+        productDescription: productDescriptionController.text,
+        productName: productNameController.text,
+        showUnderFullfillCravings: fullFillCravings ? "yes" : "no",
+        showUnderRecommendedProduct:
+            showUnderRecommendedProducts ? "yes" : "no",
+        showUnderSeasonalProduct: showUnderSeasonalProducts ? "yes" : "no",
       );
 
   Future<void> uploadCustomProduct(context) async {
@@ -83,7 +83,6 @@ class CustomProductController extends ChangeNotifier {
       final result =
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -127,11 +126,10 @@ class CustomProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
-}
-
+  }
 
   Future<void> getCustomProductData(context) async {
     showLoader(true);
@@ -199,14 +197,6 @@ showLoader(value){
     notifyListeners();
   }
 
-
-
-
-
-
-
-
-
   void validateCustomProuduct(context) {
     if (selectedCategory == "") {
       Utils.showPrimarySnackbar(context, "Select Category",
@@ -239,13 +229,12 @@ showLoader(value){
     // if (productImage.path == "") {
     //   uploadCustomProduct(context);
     // } else {
-      uploadImage(context);
+    uploadImage(context);
     // }
-
   }
 
   Future uploadImage(context) async {
-LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.submitCustomProduct}");
@@ -288,7 +277,7 @@ LoadingOverlay.of(context).show();
                     isRefresh: true,
                     categoryId: selectedCategory,
                   ))),
-              (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
         );
         LoadingOverlay.of(context).hide();
       } else {
@@ -302,8 +291,9 @@ LoadingOverlay.of(context).show();
       });
     });
   }
-  String networkImage1="";
-  File fileImage1=File("");
+
+  String networkImage1 = "";
+  File fileImage1 = File("");
   void openCameras(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
@@ -313,32 +303,32 @@ LoadingOverlay.of(context).show();
     );
     if (pickedFile != null) {
       networkImage1 = "";
-      // final CroppedFile=await ImageCropper().cropImage(sourcePath: pickedFile.path,
-      //   aspectRatioPresets: Platform.isAndroid
-      //       ? [
-      //     CropAspectRatioPreset.square,
-      //     CropAspectRatioPreset.ratio3x2,
-      //     CropAspectRatioPreset.original,
-      //     CropAspectRatioPreset.ratio4x3,
-      //     CropAspectRatioPreset.ratio16x9
-      //   ]
-      //       : [
-      //     CropAspectRatioPreset.original,
-      //     CropAspectRatioPreset.square,
-      //     CropAspectRatioPreset.ratio3x2,
-      //     CropAspectRatioPreset.ratio4x3,
-      //     CropAspectRatioPreset.ratio5x3,
-      //     CropAspectRatioPreset.ratio5x4,
-      //     CropAspectRatioPreset.ratio7x5,
-      //     CropAspectRatioPreset.ratio16x9
-      //   ],
-      //
-      // );
+      final CroppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+            ? [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
+            : [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
+      );
       productImage = File(pickedFile.path);
     }
 
     notifyListeners();
-    Navigator.of(context,rootNavigator: true).pop();
+    Navigator.of(context, rootNavigator: true).pop();
   }
 
   /////////////////////////////////
@@ -351,28 +341,27 @@ LoadingOverlay.of(context).show();
     );
     if (pickedFile != null) {
       networkImage1 = "";
-      // final CroppedFile = await ImageCropper().cropImage(
-      //   sourcePath: pickedFile.path,
-      //   aspectRatioPresets: Platform.isAndroid
-      //       ? [
-      //     CropAspectRatioPreset.square,
-      //     CropAspectRatioPreset.ratio3x2,
-      //     CropAspectRatioPreset.original,
-      //     CropAspectRatioPreset.ratio4x3,
-      //     CropAspectRatioPreset.ratio16x9
-      //   ]
-      //       : [
-      //     CropAspectRatioPreset.original,
-      //     CropAspectRatioPreset.square,
-      //     CropAspectRatioPreset.ratio3x2,
-      //     CropAspectRatioPreset.ratio4x3,
-      //     CropAspectRatioPreset.ratio5x3,
-      //     CropAspectRatioPreset.ratio5x4,
-      //     CropAspectRatioPreset.ratio7x5,
-      //     CropAspectRatioPreset.ratio16x9
-      //   ],
-      //
-      // );
+      final CroppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+            ? [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
+            : [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
+      );
       productImage = File(pickedFile.path);
       // notifyListeners();
     }
