@@ -46,6 +46,9 @@ class ShopProfileViewController extends ChangeNotifier {
   SProfileCouponData? sprofilecoupondata;
   int _currentPage = 0;
   bool ? deliveryAddressStatus;
+  List<bool>  isSeasonalProductAdded=[];
+  List<bool>  isRecommendedProductAdded=[];
+  List<bool>  isOfferProductAdded=[];
 
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   ShopProfileCouponRepo sProfileCouponRepo = ShopProfileCouponRepo();
@@ -140,8 +143,32 @@ class ShopProfileViewController extends ChangeNotifier {
         shopDetails = shopData?.shopDetails;
         shopCategory = shopData?.shopCategories;
         offerProduct = shopData?.offerProduct;
+        //for seasonal
         seasonalProduct = shopData?.seasonalProduct;
+        int seasonProductLength=seasonalProduct?.length??0;
+        isSeasonalProductAdded=List<bool>.filled(seasonProductLength, false,growable: true);
+        for(int i=0;i<seasonProductLength;i++){
+          if(seasonalProduct?[i].addToCartCheck=="yes"){
+            isSeasonalProductAdded.insert(i,true);
+
+          }
+          else{
+            isSeasonalProductAdded.insert(i,false);
+          }
+        }
+        //for recommended
         recommandedProduct = shopData?.recommandedProduct;
+        isRecommendedProductAdded=List<bool>.filled(seasonProductLength, false,growable: true);
+        for(int i=0;i<seasonProductLength;i++){
+          if(seasonalProduct?[i].addToCartCheck=="yes"){
+            isSeasonalProductAdded.insert(i,true);
+
+          }
+
+          else{
+            isSeasonalProductAdded.insert(i,false);
+          }
+        }
         bannerImageData = shopData?.bannerImages;
 
         favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
@@ -180,6 +207,11 @@ class ShopProfileViewController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  void onSeasonalSelected(index){
+    isSeasonalProductAdded[index]=!isSeasonalProductAdded[index];
+    notifyListeners();
   }
 
   void launchPhone(String mobNumber, context) async {

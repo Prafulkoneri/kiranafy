@@ -1144,24 +1144,17 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   element
                                                                       ?.shopId,
                                                                   context);
+                                                              watch.onSeasonalSelected(index);
                                                             },
                                                             child:
-                                                                element?.addToCartCheck ==
-                                                                        "no"
+                                                               watch.isSeasonalProductAdded[index]==false
                                                                     ? SvgPicture
                                                                         .asset(
                                                                         'assets/images/add.svg',
                                                                         // width: 15.w,
                                                                         // height: 19.h,
                                                                       )
-                                                                    : Container(
-                                                                        height:
-                                                                            50,
-                                                                        width:
-                                                                            50,
-                                                                        color: Colors
-                                                                            .black,
-                                                                      ),
+                                                                    : SvgPicture.asset("assets/icons/tick_green_bg.svg"),
                                                           ),
                                                         ],
                                                       ),
