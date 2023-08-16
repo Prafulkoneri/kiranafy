@@ -22,7 +22,7 @@ class AllCategoryShopController extends ChangeNotifier {
   List<NearByShops>? nearByShop;
   Data? data;
   String? shopId = "";
-   List<AllShops> allShops = [];
+  List<AllShops> allShops = [];
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   List<bool> favNearByShop = [];
@@ -32,16 +32,16 @@ class AllCategoryShopController extends ChangeNotifier {
   int offset = 0;
   bool showPaginationLoader = false;
   String categoryId = "";
-  TextEditingController searchController= TextEditingController();
+  TextEditingController searchController = TextEditingController();
   SearchShopRepo searchShopRepo = SearchShopRepo();
   SearchShopData? searchshopData;
-
 
   CustomerViewAllCategoryShopReqModel get customerViewAllCategoryShopReqModel =>
       CustomerViewAllCategoryShopReqModel(
           offset: offset.toString(), limit: "10", categoryId: categoryId);
 
   Future<void> initState(context, id, refresh) async {
+    searchController.clear();
     if (refresh) {
       print(id);
       allShops.clear();
@@ -258,10 +258,9 @@ class AllCategoryShopController extends ChangeNotifier {
     notifyListeners();
   }
 
-
   SearchShopRequestModel get searchShopReqModel => SearchShopRequestModel(
-    shopName: searchController.text,
-  );
+        shopName: searchController.text,
+      );
 
   Future<void> shopSearchList(context) async {
     print(searchController);
@@ -271,10 +270,10 @@ class AllCategoryShopController extends ChangeNotifier {
       searchShopRepo
           .searchShop(searchShopReqModel, pref.getString("successToken"))
           .then((response) {
-            print("isSearching");
+        print("isSearching");
         log("response.body${response.body}");
         final result =
-        SearchShopResponseModel.fromJson(jsonDecode(response.body));
+            SearchShopResponseModel.fromJson(jsonDecode(response.body));
         if (response.statusCode == 200) {
           searchshopData = result.searchshopData;
           nearByShop = searchshopData?.nearByShops;
@@ -292,7 +291,7 @@ class AllCategoryShopController extends ChangeNotifier {
       }).onError((error, stackTrace) {
         Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
       }).catchError(
-            (Object e) {
+        (Object e) {
           Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         },
         test: (Object e) {
@@ -301,9 +300,7 @@ class AllCategoryShopController extends ChangeNotifier {
         },
       );
     } else {
-      await getAllShops(context,categoryId);
+      await getAllShops(context, categoryId);
     }
   }
-
-
 }
