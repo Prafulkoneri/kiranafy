@@ -137,6 +137,70 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       ],
                                     ),
                                   )),
+                                  // Row(
+                                  //   children: [
+                                  //     InkWell(
+                                  //       onTap: () {
+                                  //         read.launchPhone(
+                                  //             watch.shopDetails
+                                  //                     ?.shopOwnerSupportNumber ??
+                                  //                 "",
+                                  //             context);
+                                  //       },
+                                  //       child: Container(
+                                  //           padding: EdgeInsets.only(
+                                  //               left: 11.w,
+                                  //               right: 11.w,
+                                  //               top: 13.w,
+                                  //               bottom: 13.w),
+                                  //           decoration: BoxDecoration(
+                                  //             shape: BoxShape.circle,
+                                  //             color: Color(0xff23AA49),
+                                  //           ),
+                                  //           child: SvgPicture.asset(
+                                  //             "assets/icons/new_call.svg",
+                                  //             width: 26.w,
+                                  //             height: 14.h,
+                                  //           )),
+                                  //     ),
+                                  //     SizedBox(
+                                  //       width: 13.w,
+                                  //     ),
+                                  //     InkWell(
+                                  //       onTap: () {
+                                  //         watch.favAllShop
+                                  //             ? read.removeAllShopFavList(
+                                  //                 context,
+                                  //                 watch.shopDetails?.id)
+                                  //             : read.updateAllShopFavList(
+                                  //                 context,
+                                  //                 watch.shopDetails?.id);
+                                  //       },
+                                  //       child: Container(
+                                  //         padding: EdgeInsets.only(
+                                  //             left: 13.w,
+                                  //             right: 13.w,
+                                  //             top: 14.w,
+                                  //             bottom: 14.w),
+                                  //         decoration: const BoxDecoration(
+                                  //           shape: BoxShape.circle,
+                                  //           color: Color(0xff4689EC),
+                                  //         ),
+                                  //         child: watch.favAllShop
+                                  //             ? SvgPicture.asset(
+                                  //                 "assets/icons/fav_selected.svg",
+                                  //                 width: 26.w,
+                                  //                 height: 14.h,
+                                  //               )
+                                  //             : SvgPicture.asset(
+                                  //                 "assets/images/favorite.svg",
+                                  //                 width: 26.w,
+                                  //                 height: 14.h,
+                                  //               ),
+                                  //       ),
+                                  //     )
+                                  //   ],
+                                  // ),
                                   Row(
                                     children: [
                                       InkWell(
@@ -149,10 +213,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         },
                                         child: Container(
                                             padding: EdgeInsets.only(
-                                                left: 11.w,
-                                                right: 11.w,
-                                                top: 13.w,
-                                                bottom: 13.w),
+                                                left: 13.w,
+                                                right: 13.w,
+                                                top: 14.w,
+                                                bottom: 14.w),
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Color(0xff23AA49),
@@ -182,7 +246,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                               right: 13.w,
                                               top: 14.w,
                                               bottom: 14.w),
-                                          decoration: const BoxDecoration(
+                                          decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: Color(0xff4689EC),
                                           ),
@@ -796,7 +860,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   ),
                                 ),
                                 onPressed: () {
-
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
@@ -805,7 +868,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             screenName: OrderStatusView(
                                               orderId: watch.orderId,
                                             ))),
-                                        (Route<dynamic> route) => false,
+                                    (Route<dynamic> route) => false,
                                   );
                                   // Navigator.push(
                                   //     context,
@@ -1623,7 +1686,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                       watch.orderDetails?.orderStatus == "Order Refund"
                           ? Container(
                               padding: EdgeInsets.symmetric(horizontal: 17.w),
-                              color:watch.orderDetails?.refundOrderStatus=="reject"?Color(0xffFFE8E8): Color(0xffEFFDFF),
+                              color: watch.orderDetails?.refundOrderStatus ==
+                                      "reject"
+                                  ? Color(0xffFFE8E8)
+                                  : Color(0xffEFFDFF),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1655,16 +1721,19 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           watch.orderDetails
                                                       ?.refundOrderStatus ==
                                                   "pending"
-                                              ? "Payment Pending":
-                                          watch.orderDetails?.refundOrderStatus=="reject"?"Return Rejected"
+                                              ? "Payment Pending"
                                               : watch.orderDetails
-                                                              ?.refundOrderStatus ==
-                                                          "accept" &&
-                                                      watch.orderDetails
-                                                              ?.refundPaymentStatus ==
-                                                          "not_received"
-                                                  ? "Shop Refunded"
-                                                  : "Payment Received",
+                                                          ?.refundOrderStatus ==
+                                                      "reject"
+                                                  ? "Return Rejected"
+                                                  : watch.orderDetails
+                                                                  ?.refundOrderStatus ==
+                                                              "accept" &&
+                                                          watch.orderDetails
+                                                                  ?.refundPaymentStatus ==
+                                                              "not_received"
+                                                      ? "Shop Refunded"
+                                                      : "Payment Received",
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500,
@@ -1676,10 +1745,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   SizedBox(
                                     height: 13.w,
                                   ),
-
-
-
-                                Row(
+                                  Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -1697,39 +1763,48 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           SizedBox(
                                             height: 19.w,
                                           ),
-                               watch.orderDetails?.refundOrderStatus=="reject"?  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                      Text("Shop Owner Reject Reason",
-                      style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700)),
-    SizedBox(
-    height: 2.w,
-    ),
-    Text(
-    "${watch.orderDetails?.shopOwnerRefundRejectReason}",
-    style: TextStyle(
-    fontWeight: FontWeight.w400,
-    fontSize: 14.sp,
-    ),
-    ),
-    ],
-    ) :
-                               Text(
-                                            watch.orderDetails
-                                                        ?.refundOrderStatus ==
-                                                    "pending"
-                                                ? "INR ${watch.orderDetails?.customerRefundAmount}"
-                                                : watch.orderDetails
-                                                            ?.refundOrderStatus ==
-                                                        "accept"
-                                                    ? "INR ${watch.orderDetails?.shopOwnerRefundPayableAmount}"
-                                                    : "",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 18.sp),
-                                          ),
+                                          watch.orderDetails
+                                                      ?.refundOrderStatus ==
+                                                  "reject"
+                                              ? Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                        "Shop Owner Reject Reason",
+                                                        style: TextStyle(
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w700)),
+                                                    SizedBox(
+                                                      height: 2.w,
+                                                    ),
+                                                    Text(
+                                                      "${watch.orderDetails?.shopOwnerRefundRejectReason}",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14.sp,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Text(
+                                                  watch.orderDetails
+                                                              ?.refundOrderStatus ==
+                                                          "pending"
+                                                      ? "INR ${watch.orderDetails?.customerRefundAmount}"
+                                                      : watch.orderDetails
+                                                                  ?.refundOrderStatus ==
+                                                              "accept"
+                                                          ? "INR ${watch.orderDetails?.shopOwnerRefundPayableAmount}"
+                                                          : "",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 18.sp),
+                                                ),
                                         ],
                                       ),
                                       watch.orderDetails?.refundOrderStatus ==
@@ -1755,7 +1830,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                 )
                                               ],
                                             )
-                                          :Container(),
+                                          : Container(),
                                     ],
                                   ),
                                   SizedBox(

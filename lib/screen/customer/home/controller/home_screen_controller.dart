@@ -163,7 +163,7 @@ class HomeScreenController extends ChangeNotifier {
         nearByShopList = result.data;
         couponData = result.couponData;
         hellotoffersdata = result.hellotoffersdata;
-        showLoader(false);
+        // showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -184,7 +184,7 @@ class HomeScreenController extends ChangeNotifier {
 
   //////////////////////////////////////
   Future<void> getPlaceAd(context) async {
-    showLoader(true);
+    // showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("bnvuuiwveuciiutwmibijmiuey");
     print(pref.getString("successToken"));
@@ -200,7 +200,7 @@ class HomeScreenController extends ChangeNotifier {
         for (int i = 0; i < imageLength; i++) {
           placeAd.add(customerplacead?[i].shopBannerImagePath);
         }
-
+        showLoader(false);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

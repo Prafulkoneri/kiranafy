@@ -47,6 +47,7 @@ class ShopProfileViewController extends ChangeNotifier {
   int _currentPage = 0;
   bool? deliveryAddressStatus;
   List<bool> isSeasonalProductAdded = [];
+
   List<bool> isRecommendedProductAdded = [];
   List<bool> isOfferProductAdded = [];
 
@@ -157,13 +158,26 @@ class ShopProfileViewController extends ChangeNotifier {
         }
         //for recommended
         recommandedProduct = shopData?.recommandedProduct;
+        int recommandedProductLength = recommandedProduct?.length ?? 0;
         isRecommendedProductAdded =
-            List<bool>.filled(seasonProductLength, false, growable: true);
-        for (int i = 0; i < seasonProductLength; i++) {
-          if (seasonalProduct?[i].addToCartCheck == "yes") {
+            List<bool>.filled(recommandedProductLength, false, growable: true);
+        for (int i = 0; i < recommandedProductLength; i++) {
+          if (recommandedProduct?[i].addToCartCheck == "yes") {
             isRecommendedProductAdded.insert(i, true);
           } else {
             isRecommendedProductAdded.insert(i, false);
+          }
+        }
+        ////////////////////Offer///////////
+        offerProduct = shopData?.offerProduct;
+        int offerProductLength = offerProduct?.length ?? 0;
+        isOfferProductAdded =
+            List<bool>.filled(offerProductLength, false, growable: true);
+        for (int i = 0; i < offerProductLength; i++) {
+          if (offerProduct?[i].addToCartCheck == "yes") {
+            isOfferProductAdded.insert(i, true);
+          } else {
+            isOfferProductAdded.insert(i, false);
           }
         }
         bannerImageData = shopData?.bannerImages;
@@ -211,9 +225,15 @@ class ShopProfileViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-/////
-  void onRecommandedSelected(index) {
+  /////
+  void onRecommandedlSelected(index) {
     isRecommendedProductAdded[index] = true;
+    notifyListeners();
+  }
+
+  ///
+  void onOfferSelected(index) {
+    isOfferProductAdded[index] = true;
     notifyListeners();
   }
 
@@ -312,11 +332,12 @@ class ShopProfileViewController extends ChangeNotifier {
                 shopId: sId.toString(),
                 quantity: "1"),
             pref.getString("successToken"))
-        .then((response) {
+        .then((response) async {
       log("response.body${response.body}");
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        await getShopDetails(context, sId);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();

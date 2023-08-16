@@ -38,17 +38,21 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
     });
     setPagination();
   }
+
   //
   setPagination() {
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         SchedulerBinding.instance.addPostFrameCallback((_) {
-          context.read<ShopAllSeasonalController>().onScrollMaxExtent(context,widget.shopId);
+          context
+              .read<ShopAllSeasonalController>()
+              .onScrollMaxExtent(context, widget.shopId);
         });
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<ShopAllSeasonalController>();
@@ -67,7 +71,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                         screenName: ShopProfileView(
                           shopId: widget.shopId.toString(),
                           routeName: "viewAllSeasonalProduct",
-                          refreshPage: false,
+                          refreshPage: true,
                         ))),
                 (Route<dynamic> route) => false,
               );
@@ -80,23 +84,27 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
-          controller: scrollController,
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      Container(
+                controller: scrollController,
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Container(
                           child: GridView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               padding: EdgeInsets.only(
-                                  left: 10.w, top: 20.w, right: 10.w, bottom: 100.w),
+                                  left: 10.w,
+                                  top: 20.w,
+                                  right: 10.w,
+                                  bottom: 100.w),
                               itemCount: watch.seasonalProduct?.length ?? 0,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: (1.5.w / 1.8.w),
-                                  crossAxisSpacing: 4.0,
-                                  mainAxisSpacing: 4.0),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: (1.5.w / 1.8.w),
+                                      crossAxisSpacing: 4.0,
+                                      mainAxisSpacing: 4.0),
                               itemBuilder: (BuildContext, index) {
                                 final element = watch.seasonalProduct?[index];
                                 return Card(
@@ -105,20 +113,25 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                   ),
                                   child: GestureDetector(
                                     onTap: () {
-                                      readProductViewController.updateProductId(element
-                                          ?.id
-                                          .toString(),);
+                                      readProductViewController.updateProductId(
+                                        element?.id.toString(),
+                                      );
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => MainScreenView(
+                                            builder: (context) =>
+                                                MainScreenView(
                                                   index: 1,
                                                   screenName: ProductScreenView(
-                                                      selectedUnitId: element?.productUnitId.toString(),
-                                                      categoryId: element?.categoryId
+                                                      selectedUnitId: element
+                                                          ?.productUnitId
+                                                          .toString(),
+                                                      categoryId: element
+                                                          ?.categoryId
                                                           .toString(),
                                                       // categoryId: watch.categoryId,
-                                                      productId: element?.id.toString(),
+                                                      productId: element?.id
+                                                          .toString(),
                                                       shopId: element?.shopId,
                                                       productType:
                                                           element?.productType),
@@ -133,15 +146,18 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                       ),
                                       width: 156.w,
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            padding:
-                                                EdgeInsets.only(right: 0.w, top: 10.w),
+                                            padding: EdgeInsets.only(
+                                                right: 0.w, top: 10.w),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
                                               children: [
-                                                element?.discountPercentage != ""
+                                                element?.discountPercentage !=
+                                                        ""
                                                     ? Container(
                                                         width: 60.w,
                                                         height: 20.h,
@@ -154,11 +170,15 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                         child: Center(
                                                           child: Text(
                                                               "${element?.discountPercentage} off",
-                                                              style: GoogleFonts.dmSans(
+                                                              style: GoogleFonts
+                                                                  .dmSans(
                                                                 textStyle: TextStyle(
-                                                                    color: Colors.white,
-                                                                    letterSpacing: .5,
-                                                                    fontSize: 12.sp,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    letterSpacing:
+                                                                        .5,
+                                                                    fontSize:
+                                                                        12.sp,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500),
@@ -176,7 +196,8 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                             height: 10.h,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               element?.productImagePath == ""
                                                   ? Container(
@@ -210,11 +231,13 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                   style: GoogleFonts.roboto(
                                                     textStyle: TextStyle(
                                                       color: Black1,
-                                                      overflow: TextOverflow.ellipsis,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       // letterSpacing: .5,
                                                       fontSize: 16.sp,
 
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                     ),
                                                   ),
                                                 ),
@@ -233,7 +256,8 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                       color: Black1,
                                                       // letterSpacing: .5,
                                                       fontSize: 12.sp,
-                                                      fontWeight: FontWeight.w600),
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                                 ),
                                               ),
                                             ],
@@ -245,7 +269,8 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                             // padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Row(
                                                   children: [
@@ -259,42 +284,50 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                             element
                                                                                 ?.mrpPrice
                                                                     ? TextStyle(
-                                                                        decoration:
-                                                                            TextDecoration
-                                                                                .lineThrough,
-                                                                        color: Black1,
+                                                                        decoration: TextDecoration
+                                                                            .lineThrough,
+                                                                        color:
+                                                                            Black1,
                                                                         letterSpacing:
                                                                             .5,
-                                                                        fontSize: 12.sp,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w400)
+                                                                        fontSize: 12
+                                                                            .sp,
+                                                                        fontWeight: FontWeight
+                                                                            .w400)
                                                                     : TextStyle(
-                                                                        color: Black1,
+                                                                        color:
+                                                                            Black1,
                                                                         letterSpacing:
                                                                             .5,
-                                                                        fontSize: 12.sp,
+                                                                        fontSize: 12
+                                                                            .sp,
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w400)))
+                                                                            FontWeight.w400)))
                                                         : Text(""),
                                                     SizedBox(
                                                       width: 5.w,
                                                     ),
                                                     element?.offerPrice != "" &&
                                                             element?.offerPrice !=
-                                                                element?.mrpPrice
+                                                                element
+                                                                    ?.mrpPrice
                                                         ? Text(
                                                             '\u{20B9}${element?.offerPrice}',
-                                                            style: GoogleFonts.dmSans(
-                                                              textStyle: TextStyle(
-                                                                  // decoration:
-                                                                  // TextDecoration.lineThrough,
-                                                                  color: Black,
-                                                                  letterSpacing: .5,
-                                                                  fontSize: 13.sp,
-                                                                  fontWeight:
-                                                                      FontWeight.w500),
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                      // decoration:
+                                                                      // TextDecoration.lineThrough,
+                                                                      color:
+                                                                          Black,
+                                                                      letterSpacing:
+                                                                          .5,
+                                                                      fontSize:
+                                                                          13.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
                                                             ),
                                                           )
                                                         : Text(""),
@@ -307,12 +340,19 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                         element?.productUnitId,
                                                         element?.shopId,
                                                         context);
+                                                    watch.onSeasonalSelected(
+                                                        index);
                                                   },
-                                                  child: SvgPicture.asset(
-                                                    'assets/images/add.svg',
-                                                    // width: 15.w,
-                                                    // height: 19.h,
-                                                  ),
+                                                  child: watch.isAllSeasonalProductAdded[
+                                                              index] ==
+                                                          false
+                                                      ? SvgPicture.asset(
+                                                          'assets/images/add.svg',
+                                                          // width: 15.w,
+                                                          // height: 19.h,
+                                                        )
+                                                      : SvgPicture.asset(
+                                                          "assets/icons/tick_green_bg.svg"),
                                                 ),
                                               ],
                                             ),
@@ -327,36 +367,35 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                 );
                               }),
                         ),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: 100.w,
-                    left: 0,
-                    right: 0,
-                    child: Visibility(
-                      visible:
-                      watch.showPaginationLoader,
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.1),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Container(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              color: SplashText,
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 100.w,
+                      left: 0,
+                      right: 0,
+                      child: Visibility(
+                        visible: watch.showPaginationLoader,
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Container(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: SplashText,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ));
+                  ],
+                ),
+              ));
   }
 }

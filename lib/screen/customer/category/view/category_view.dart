@@ -267,21 +267,21 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                              builder:
-                                                  (context) => MainScreenView(
-                                                        index: 1,
-                                                        screenName: ProductScreenView(
-                                                            selectedUnitId: element?.productUnitId.toString(),
-                                                            categoryId: watch
-                                                                .categoryId,
-                                                            productId: element
-                                                                ?.id
-                                                                .toString(),
-                                                            shopId:
-                                                                widget.shopId,
-                                                            productType: element
-                                                                ?.productType),
-                                                      )),
+                                              builder: (context) =>
+                                                  MainScreenView(
+                                                    index: 1,
+                                                    screenName: ProductScreenView(
+                                                        selectedUnitId: element
+                                                            ?.productUnitId
+                                                            .toString(),
+                                                        categoryId:
+                                                            watch.categoryId,
+                                                        productId: element?.id
+                                                            .toString(),
+                                                        shopId: widget.shopId,
+                                                        productType: element
+                                                            ?.productType),
+                                                  )),
                                           (Route<dynamic> route) => false,
                                         );
                                       },
@@ -441,13 +441,19 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                           element
                                                                               ?.shopId,
                                                                           context);
+                                                                      watch.onCategoryProductSelected(
+                                                                          index);
                                                                     },
-                                                                    child: SvgPicture
-                                                                        .asset(
-                                                                      'assets/images/add.svg',
-                                                                      // width: 30.w,
-                                                                      // height: 30.h,
-                                                                    ),
+                                                                    child: watch.isCategoryProductAdded[index] ==
+                                                                            false
+                                                                        ? SvgPicture
+                                                                            .asset(
+                                                                            'assets/images/add.svg',
+                                                                            // width: 15.w,
+                                                                            // height: 19.h,
+                                                                          )
+                                                                        : SvgPicture.asset(
+                                                                            "assets/icons/tick_green_bg.svg"),
                                                                   )
                                                                 ],
                                                               ),

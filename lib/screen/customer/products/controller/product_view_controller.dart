@@ -57,7 +57,7 @@ class ProductViewController extends ChangeNotifier {
   ProductViewShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
   List<CustomerProductData>? similarProduct;
-  bool isUnitImagesVisible=false;
+  bool isUnitImagesVisible = false;
   String routeName = "";
   List unitImages = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
@@ -94,8 +94,8 @@ class ProductViewController extends ChangeNotifier {
     notifyListeners();
   }
 
-  showUnitImages(value){
-    isUnitImagesVisible=value;
+  showUnitImages(value) {
+    isUnitImagesVisible = value;
     notifyListeners();
   }
 
@@ -151,10 +151,34 @@ class ProductViewController extends ChangeNotifier {
         productDetails = productViewData?.productDetails;
         productImage = productDetails?.productImagePath;
         shopDetails = productViewData?.shopDetails;
-        productUnitDetail = productViewData?.productUnitDetails;
-        similarProduct = productViewData?.similarProducts;
+
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
         isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
+
+        /////////////Similar Products////////////////
+        similarProduct = productViewData?.similarProducts;
+        int similarProductLength = similarProduct?.length ?? 0;
+        isSimilarProductAdded =
+            List<bool>.filled(similarProductLength, false, growable: true);
+        for (int i = 0; i < similarProductLength; i++) {
+          if (similarProduct?[i].addToCartCheck == "yes") {
+            isSimilarProductAdded.insert(i, true);
+          } else {
+            isSimilarProductAdded.insert(i, false);
+          }
+        }
+        //////////////////Unit Images////////////////
+        productUnitDetail = productViewData?.productUnitDetails;
+        int productUnitImageLength = productUnitDetail?.length ?? 0;
+        isUnitImagesAdded =
+            List<bool>.filled(productUnitImageLength, false, growable: true);
+        for (int i = 0; i < productUnitImageLength; i++) {
+          if (productUnitDetail?[i].addToCartCheck == "yes") {
+            isUnitImagesAdded.insert(i, true);
+          } else {
+            isUnitImagesAdded.insert(i, false);
+          }
+        }
         showLoader(false);
         notifyListeners();
       } else {
@@ -174,8 +198,28 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
+///////////
+  void onSimilarProductSelected(index) {
+    isSimilarProductAdded[index] = true;
+    notifyListeners();
+  }
+/////////////
+
+  void onUnitImagesSelected(index) {
+    isUnitImagesAdded[index] = true;
+    notifyListeners();
+  }
+
+  List<bool> isUnitImagesAdded = [];
+  List<bool> isSimilarProductAdded = [];
   /////////////////////Product Unit Image/////////////////////
 
+  void onUnitImageProductSelected(index) {
+    isUnitImageProductAdded[index] = true;
+    notifyListeners();
+  }
+
+  List<bool> isUnitImageProductAdded = [];
   UnitImagesRequestModel get unitImagesReqModel =>
       UnitImagesRequestModel(slectedUnitId: selectedUnitId);
 
@@ -205,6 +249,18 @@ class ProductViewController extends ChangeNotifier {
             result.data?.unitBasedProductImagePath?.productType.toString();
         unitImages = result.data?.unitBasedProductImagePath?.imageList ?? [];
         data = result.data?.unitBasedProductImagePath;
+        ///////////////////////
+        // similarProduct = productViewData?.similarProducts;
+        // int unitProductLength = similarProduct?.length ?? 0;
+        // isSimilarProductAdded =
+        //     List<bool>.filled(similarProductLength, false, growable: true);
+        // for (int i = 0; i < similarProductLength; i++) {
+        //   if (similarProduct?[i].addToCartCheck == "yes") {
+        //     isSimilarProductAdded.insert(i, true);
+        //   } else {
+        //     isSimilarProductAdded.insert(i, false);
+        //   }
+        // }
 
         notifyListeners();
       } else {

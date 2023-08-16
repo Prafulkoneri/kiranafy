@@ -193,6 +193,7 @@ class FullFillYourCraving {
   int? productId;
   String? status;
   String? unit;
+  String? addToCartCheck;
 
   FullFillYourCraving({
     required this.id,
@@ -210,6 +211,7 @@ class FullFillYourCraving {
     required this.productId,
     required this.status,
     required this.unit,
+    required this.addToCartCheck,
   });
 
   FullFillYourCraving.fromJson(Map<String, dynamic> json) {
@@ -228,6 +230,7 @@ class FullFillYourCraving {
     productId = json["product_id"];
     status = json["status"];
     unit = json["unit"];
+    addToCartCheck = json["add_to_cart_check"];
   }
 }
 
@@ -237,7 +240,7 @@ class OrderFinalTotals {
   int? totalDiscount;
   int? productTotalDiscount;
   String? deliveryCharges;
-  int ? itemCount;
+  int? itemCount;
   int? total;
 
   OrderFinalTotals({
@@ -300,7 +303,7 @@ class ShopDeliveryTypes {
 class FinalCouponList {
   int? id;
   String? couponCode;
-  String ? couponTermsAndCondition;
+  String? couponTermsAndCondition;
   String? couponDiscountPercentage;
   String? couponDiscountMaxAmount;
   int? minOrderAmount;

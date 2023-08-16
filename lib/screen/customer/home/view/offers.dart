@@ -192,27 +192,25 @@ class _OfferPageState extends State<OfferPage> {
                                                             Radius.circular(
                                                                 5.w))),
                                                 child: Center(
-                                                  child: element?.off != ""
-                                                      ? Center(
-                                                          child: Text(
-                                                              "${element?.off}  % off",
-                                                              // textAlign: TextAlign.center,
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                textStyle: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    letterSpacing:
-                                                                        .5,
-                                                                    fontSize:
-                                                                        12.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              )),
-                                                        )
-                                                      : Container(),
-                                                ),
+                                                    child:
+                                                        //  element?.off != ""
+                                                        //     ?
+                                                        Center(
+                                                  child: Text(
+                                                      "${element?.off}  % off",
+                                                      // textAlign: TextAlign.center,
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Colors.white,
+                                                            letterSpacing: .5,
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      )),
+                                                )
+                                                    // : Container(),
+                                                    ),
                                               ),
                                             ],
                                           ),

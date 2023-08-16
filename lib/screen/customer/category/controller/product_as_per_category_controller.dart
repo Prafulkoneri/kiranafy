@@ -27,7 +27,8 @@ class ProductCategoryController extends ChangeNotifier {
   String searchedProductName = "";
   bool isOfferProductSelected = false;
   String groupValue = "1";
-  AddProductToCartRepo addProductToCartRepo =AddProductToCartRepo();
+  List<bool> isCategoryProductAdded = [];
+  AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   SearchProductAsPerCategoryRepo searchProductAsPerCategoryRepo =
       SearchProductAsPerCategoryRepo();
 
@@ -66,6 +67,17 @@ class ProductCategoryController extends ChangeNotifier {
         categoryProductData = result.data;
         allCategoryList = categoryProductData?.allCategoryList;
         productList = categoryProductData?.productList;
+///////////////////////////
+        int productListLength = productList?.length ?? 0;
+        isCategoryProductAdded =
+            List<bool>.filled(productListLength, false, growable: true);
+        for (int i = 0; i < productListLength; i++) {
+          if (productList?[i].addToCartCheck == "yes") {
+            isCategoryProductAdded.insert(i, true);
+          } else {
+            isCategoryProductAdded.insert(i, false);
+          }
+        }
         if (productList!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No Product Found",
               type: SnackType.error);
@@ -88,6 +100,15 @@ class ProductCategoryController extends ChangeNotifier {
       },
     );
   }
+
+////////////////////////////
+
+  void onCategoryProductSelected(index) {
+    isCategoryProductAdded[index] = true;
+    notifyListeners();
+  }
+
+  ///
 
   SearchProductAsPerCategoryReqModel get searchProductAsPerCategoryReqModel =>
       SearchProductAsPerCategoryReqModel(
@@ -194,13 +215,20 @@ class ProductCategoryController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType,pId,sId,context)async{
+  Future<void> addToCart(pType, pId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
-        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .addProductToCart(
+            AddProductToCartReqModel(
+                productType: pType,
+                productUnitId: pId.toString(),
+                shopId: sId.toString(),
+                quantity: "1"),
+            pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      final result =
+          AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -212,7 +240,7 @@ class ProductCategoryController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -221,5 +249,4 @@ class ProductCategoryController extends ChangeNotifier {
       },
     );
   }
-
 }

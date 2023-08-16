@@ -1,45 +1,46 @@
-class CustomerViewAllShopReqModel{
-  String ? pincode;
-  String ? limit;
-  String ? offset;
+class CustomerViewAllShopReqModel {
+  String? pincode;
+  String? limit;
+  String? offset;
   CustomerViewAllShopReqModel({
     this.pincode,
     this.limit,
     this.offset,
-});
-  Map<String,dynamic> toJson(){
-    Map<String,dynamic> data={};
-    data["pincode"]=pincode;
-    data["limit"]=limit;
-    data["offset"]=offset;
+  });
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = {};
+    data["pincode"] = pincode;
+    data["limit"] = limit;
+    data["offset"] = offset;
     return data;
   }
 }
 
-class CustomerViewAllShopResModel{
+class CustomerViewAllShopResModel {
   int? status;
   String? message;
-  Data ? data;
+  Data? data;
 
   CustomerViewAllShopResModel({
     this.status,
-  this.data,
+    this.data,
     this.message,
-});
-  CustomerViewAllShopResModel.fromJson(Map<String,dynamic>json){
-    status=json["status"];
-    message=json["message"];
+  });
+  CustomerViewAllShopResModel.fromJson(Map<String, dynamic> json) {
+    status = json["status"];
+    message = json["message"];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 }
-class Data{
+
+class Data {
   List<NearByShops>? nearByShops;
   List<AllShops>? allShops;
   Data({
     this.allShops,
     this.nearByShops,
-});
-  Data.fromJson(Map<String,dynamic>json){
+  });
+  Data.fromJson(Map<String, dynamic> json) {
     if (json["nearby_shops"] != null) {
       nearByShops = <NearByShops>[];
       json["nearby_shops"].forEach((v) {
@@ -88,6 +89,7 @@ class AllShops {
   String? cityName;
   String? shopBannerImagePath;
   String? isFavourite;
+  String? ratings;
 
   AllShops({
     required this.id,
@@ -96,6 +98,7 @@ class AllShops {
     required this.cityName,
     required this.shopBannerImagePath,
     required this.isFavourite,
+    required this.ratings,
   });
   AllShops.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -104,5 +107,6 @@ class AllShops {
     cityName = json["city_name"];
     shopBannerImagePath = json["shop_banner_image_path"];
     isFavourite = json["is_favourite"];
+    ratings = json["ratings"];
   }
 }

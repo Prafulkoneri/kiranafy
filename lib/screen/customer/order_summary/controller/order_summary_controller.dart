@@ -168,7 +168,7 @@ class OrderSummaryController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        shopDeliveryTypes=result.orderSummaryData?.shopDeliveryTypes;
+        shopDeliveryTypes = result.orderSummaryData?.shopDeliveryTypes;
         customerPickup = result
                 .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ??
             "";
@@ -207,6 +207,17 @@ class OrderSummaryController extends ChangeNotifier {
         viewMore = List<bool>.filled(couponListLength, false);
         couponDiscount = orderFinalTotals?.couponDiscount.toString() ?? "";
         fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
+        //////////////////
+        int fulfilcravingListLength = fullFillYourCravings?.length ?? 0;
+        isFulFilProductAdded =
+            List<bool>.filled(fulfilcravingListLength, false, growable: true);
+        for (int i = 0; i < fulfilcravingListLength; i++) {
+          if (fullFillYourCravings?[i].addToCartCheck == "yes") {
+            isFulFilProductAdded.insert(i, true);
+          } else {
+            isFulFilProductAdded.insert(i, false);
+          }
+        }
         showLoader(false);
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           Navigator.pushAndRemoveUntil(
@@ -248,6 +259,13 @@ class OrderSummaryController extends ChangeNotifier {
 
   void onViewMoreClicked(index) {
     viewMore[index] = true;
+    notifyListeners();
+  }
+
+  /////////////////////
+  List<bool> isFulFilProductAdded = [];
+  void onFulFilCarvingsSelected(index) {
+    isFulFilProductAdded[index] = true;
     notifyListeners();
   }
 

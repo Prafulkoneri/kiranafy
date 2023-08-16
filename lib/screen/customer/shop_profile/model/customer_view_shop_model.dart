@@ -189,6 +189,7 @@ class ShopDetails {
   String? shopOwnerUpiId;
   int? minimumOrderAmountForDelivery;
   String? acceptedPaymentStatus;
+  int? ratings;
 
   ShopDetails({
     required this.id,
@@ -206,6 +207,7 @@ class ShopDetails {
     required this.shopOwnerUpiId,
     required this.minimumOrderAmountForDelivery,
     required this.acceptedPaymentStatus,
+    required this.ratings,
   });
   ShopDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -223,5 +225,6 @@ class ShopDetails {
     shopOwnerUpiId = json["shop_owner_upi_id"];
     minimumOrderAmountForDelivery = json["min_order_amount_for_delivery"];
     acceptedPaymentStatus = json["accepted_payment_status"];
+    ratings = json["ratings"];
   }
 }

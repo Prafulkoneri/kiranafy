@@ -28,13 +28,13 @@ class AllOffersController extends ChangeNotifier {
   List<CustomerProductData>? offerProduct;
   List<CustomerProductData> allOfferProducts = [];
   bool showPaginationLoader = false;
-
+  List<bool> isAllOfferProductAdded = [];
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
 
   Future<void> initState(context, id) async {
     allOfferProducts.clear();
-    offset=0;
+    offset = 0;
     await getAllOfferes(context, id);
     notifyListeners();
   }
@@ -49,7 +49,7 @@ class AllOffersController extends ChangeNotifier {
       offset: offset.toString(), limit: "10", shopId: shopId);
 
   Future<void> getAllOfferes(context, id) async {
-    if(offset==0){
+    if (offset == 0) {
       isLoading = true;
     }
     showPaginationLoader = true;
@@ -66,6 +66,26 @@ class AllOffersController extends ChangeNotifier {
         allproducts = result.data;
         // allOfferProducts = allproducts?.offerProducts;
         allOfferProducts.addAll(result.data?.offerProducts ?? []);
+        // int seasonProductLength = seasonalProduct?.length ?? 0;
+        isAllOfferProductAdded =
+            List<bool>.filled(allOfferProducts.length, false, growable: true);
+        for (int i = 0; i < allOfferProducts.length; i++) {
+          if (allOfferProducts[i].addToCartCheck == "yes") {
+            isAllOfferProductAdded.insert(i, true);
+          } else {
+            isAllOfferProductAdded.insert(i, false);
+          }
+        }
+        //   int seasonProductLength = seasonalProduct?.length ?? 0;
+        // isAllSeasonalProductAdded =
+        //     List<bool>.filled(seasonProductLength, false, growable: true);
+        // for (int i = 0; i < seasonProductLength; i++) {
+        //   if (seasonalProduct?[i].addToCartCheck == "yes") {
+        //     isAllSeasonalProductAdded.insert(i, true);
+        //   } else {
+        //     isAllSeasonalProductAdded.insert(i, false);
+        //   }
+        // }
         showLoader(false);
         showPaginationLoader = false;
         notifyListeners();
@@ -85,7 +105,6 @@ class AllOffersController extends ChangeNotifier {
       },
     );
   }
-
 
   RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
         shopId: shopId.toString(),
@@ -121,6 +140,13 @@ class AllOffersController extends ChangeNotifier {
       },
     );
   }
+
+  void onOfferProductSelected(index) {
+    isAllOfferProductAdded[index] = true;
+    notifyListeners();
+  }
+  //////////////////
+
 ///////////////////Update List
   AddFavReqModel get addFavReqModel => AddFavReqModel(
         shopId: shopId.toString(),
@@ -191,11 +217,10 @@ class AllOffersController extends ChangeNotifier {
     );
   }
 
-  Future<void> onScrollMaxExtent(context,id) async {
-
+  Future<void> onScrollMaxExtent(context, id) async {
     print("hello");
     offset = offset + 1;
-    await getAllOfferes(context,id);
+    await getAllOfferes(context, id);
     isLoading = false;
 
     notifyListeners();

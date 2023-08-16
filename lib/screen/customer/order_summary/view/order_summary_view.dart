@@ -934,7 +934,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                   index: 1,
                                                                   screenName:
                                                                       ProductScreenView(
-                                                                        selectedUnitId: element?.productUnitId.toString(),
+                                                                          selectedUnitId: element
+                                                                              ?.productUnitId
+                                                                              .toString(),
                                                                           categoryId: element
                                                                               ?.categoryId
                                                                               .toString(),
@@ -1159,13 +1161,19 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                         true,
                                                                         "cartDetail",
                                                                       );
+                                                                      watch.onFulFilCarvingsSelected(
+                                                                          index);
                                                                     },
-                                                                    child: SvgPicture
-                                                                        .asset(
-                                                                      'assets/images/add.svg',
-                                                                      // width: 15.w,
-                                                                      // height: 19.h,
-                                                                    ),
+                                                                    child: watch.isFulFilProductAdded[index] ==
+                                                                            false
+                                                                        ? SvgPicture
+                                                                            .asset(
+                                                                            'assets/images/add.svg',
+                                                                            // width: 15.w,
+                                                                            // height: 19.h,
+                                                                          )
+                                                                        : SvgPicture.asset(
+                                                                            "assets/icons/tick_green_bg.svg"),
                                                                   ),
                                                                 ],
                                                               ),
