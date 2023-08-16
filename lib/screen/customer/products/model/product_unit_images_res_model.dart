@@ -47,11 +47,13 @@ class UnitBasedProductImagePath {
   int? productUnitId;
   int? shopId;
   String? productType;
+  String? addToCartCheck;
   UnitBasedProductImagePath({
     required this.imageList,
     required this.productUnitId,
     required this.shopId,
     required this.productType,
+    required this.addToCartCheck,
   });
   UnitBasedProductImagePath.fromJson(Map<String, dynamic> json) {
     if (json["img_arr"] != null) {
@@ -63,5 +65,6 @@ class UnitBasedProductImagePath {
     productUnitId = json["product_unit_id"];
     shopId = json["shop_id"];
     productType = json["product_type"];
+    addToCartCheck = json["add_to_cart_check"];
   }
 }

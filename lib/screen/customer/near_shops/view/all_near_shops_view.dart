@@ -466,7 +466,9 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                             4.3.w,
                                                                       ),
                                                                       Text(
-                                                                        "0.0",
+                                                                        // "${element.ratings}",
+                                                                        "${element.ratings ?? "0.0"}",
+                                                                        // "0.0",
                                                                         style: GoogleFonts
                                                                             .dmSans(
                                                                           textStyle: TextStyle(

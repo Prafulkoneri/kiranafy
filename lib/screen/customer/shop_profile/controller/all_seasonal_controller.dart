@@ -20,13 +20,14 @@ class ShopAllSeasonalController extends ChangeNotifier {
   int offset = 0;
   bool isLoading = true;
   bool showPaginationLoader = false;
+  List<bool> isAllSeasonalProductAdded = [];
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   Data? data;
   // List<CustomerProductData>? seasonalProduct;
   List<CustomerProductData> seasonalProduct = [];
   Future<void> initState(context, id) async {
     seasonalProduct.clear();
-    offset=0;
+    offset = 0;
     // await getShopDetails(context, id);
     await getAllSeasonalProducts(context, id);
     notifyListeners();
@@ -45,7 +46,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
   AllSeasonalProductsRepo allSeasonalProductsRepo = AllSeasonalProductsRepo();
 
   Future<void> getAllSeasonalProducts(context, id) async {
-    if(offset==0){
+    if (offset == 0) {
       isLoading = true;
     }
     showPaginationLoader = true;
@@ -64,6 +65,16 @@ class ShopAllSeasonalController extends ChangeNotifier {
         data = result.data;
         // seasonalProduct = data?.seasonalProducts;
         seasonalProduct.addAll(result.data?.seasonalProducts ?? []);
+        int seasonProductLength = seasonalProduct?.length ?? 0;
+        isAllSeasonalProductAdded =
+            List<bool>.filled(seasonProductLength, false, growable: true);
+        for (int i = 0; i < seasonProductLength; i++) {
+          if (seasonalProduct?[i].addToCartCheck == "yes") {
+            isAllSeasonalProductAdded.insert(i, true);
+          } else {
+            isAllSeasonalProductAdded.insert(i, false);
+          }
+        }
         showLoader(false);
 
         showPaginationLoader = false;
@@ -83,6 +94,12 @@ class ShopAllSeasonalController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  //////////////////
+  void onSeasonalSelected(index) {
+    isAllSeasonalProductAdded[index] = true;
+    notifyListeners();
   }
 
   Future<void> addToCart(pType, pId, sId, context) async {
@@ -119,11 +136,11 @@ class ShopAllSeasonalController extends ChangeNotifier {
       },
     );
   }
-  Future<void> onScrollMaxExtent(context,id) async {
 
+  Future<void> onScrollMaxExtent(context, id) async {
     print("hello");
     offset = offset + 1;
-    await getAllSeasonalProducts(context,id);
+    await getAllSeasonalProducts(context, id);
     isLoading = false;
 
     notifyListeners();

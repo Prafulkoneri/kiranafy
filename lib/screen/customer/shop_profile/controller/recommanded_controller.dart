@@ -18,19 +18,20 @@ class SAllRecommandedProductsController extends ChangeNotifier {
   bool isLoading = true;
   // bool? showPaginationLoader = true;
   bool showPaginationLoader = false;
-  AddProductToCartRepo addProductToCartRepo=AddProductToCartRepo();
+  AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
 
   Data? data;
   // List<CustomerProductData>? recommandedProducts;
   List<CustomerProductData> recommandedProducts = [];
   Future<void> initState(context, id) async {
     recommandedProducts.clear();
-    offset=0;
+    offset = 0;
     await getAllRecommandedProducts(context, id);
     notifyListeners();
   }
-  void showLoader(value){
-    isLoading=value;
+
+  void showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
   //////All Offer Products////////
@@ -41,7 +42,7 @@ class SAllRecommandedProductsController extends ChangeNotifier {
   AllRecomandedRepo allRecommandedProductsRepo = AllRecomandedRepo();
 
   Future<void> getAllRecommandedProducts(context, id) async {
-    if(offset==0){
+    if (offset == 0) {
       isLoading = true;
     }
     showPaginationLoader = true;
@@ -58,6 +59,16 @@ class SAllRecommandedProductsController extends ChangeNotifier {
         data = result.data;
         // recommandedProducts = data?.recommandedProducts;
         recommandedProducts.addAll(result.data?.recommandedProducts ?? []);
+        int recommandedProductLength = recommandedProducts?.length ?? 0;
+        isRecommandedProductAdded =
+            List<bool>.filled(recommandedProductLength, false, growable: true);
+        for (int i = 0; i < recommandedProductLength; i++) {
+          if (recommandedProducts?[i].addToCartCheck == "yes") {
+            isRecommandedProductAdded.insert(i, true);
+          } else {
+            isRecommandedProductAdded.insert(i, false);
+          }
+        }
         showLoader(false);
 
         showPaginationLoader = false;
@@ -78,13 +89,27 @@ class SAllRecommandedProductsController extends ChangeNotifier {
       },
     );
   }
-  Future<void> addToCart(pType,pId,sId,context)async{
+
+  List<bool> isRecommandedProductAdded = [];
+  void onRecommandedSelected(index) {
+    isRecommandedProductAdded[index] = true;
+    notifyListeners();
+  }
+
+  Future<void> addToCart(pType, pId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
-        .addProductToCart(AddProductToCartReqModel(productType:pType,productUnitId: pId.toString(),shopId: sId.toString(),quantity:"1"),pref.getString("successToken"))
+        .addProductToCart(
+            AddProductToCartReqModel(
+                productType: pType,
+                productUnitId: pId.toString(),
+                shopId: sId.toString(),
+                quantity: "1"),
+            pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      final result =
+          AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -96,7 +121,7 @@ class SAllRecommandedProductsController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -107,11 +132,10 @@ class SAllRecommandedProductsController extends ChangeNotifier {
   }
 
   //////////
-  Future<void> onScrollMaxExtent(context,id) async {
-
+  Future<void> onScrollMaxExtent(context, id) async {
     print("hello");
     offset = offset + 1;
-    await getAllRecommandedProducts(context,id);
+    await getAllRecommandedProducts(context, id);
     isLoading = false;
 
     notifyListeners();

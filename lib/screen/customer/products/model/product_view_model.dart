@@ -144,6 +144,7 @@ class ProductUnitDetail {
   String? mrpPrice;
   String? discountPercentage;
   String? unit;
+  String? addToCartCheck;
 
   ProductUnitDetail({
     required this.id,
@@ -152,6 +153,7 @@ class ProductUnitDetail {
     required this.mrpPrice,
     required this.discountPercentage,
     required this.unit,
+    required this.addToCartCheck,
   });
   ProductUnitDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -160,7 +162,6 @@ class ProductUnitDetail {
     mrpPrice = json["mrp_price"];
     discountPercentage = json["discount_percentage"];
     unit = json["unit"];
+    addToCartCheck = json["add_to_cart_check"];
   }
 }
-
-

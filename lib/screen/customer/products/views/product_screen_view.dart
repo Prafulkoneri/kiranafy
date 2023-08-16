@@ -39,14 +39,21 @@ class _ProductScreenViewState extends State<ProductScreenView> {
   List<Widget> indicators(imagesLength, currentIndex) {
     return List<Widget>.generate(imagesLength, (index) {
       return currentIndex == index
-          ? Container(
-              margin: EdgeInsets.only(left: 85.w),
-              width: 16.w,
-              height: 6.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.w),
-                color: currentIndex == index ? indicator : Grey,
-              ),
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 5.w),
+                  width: 16.w,
+                  height: 6.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.w),
+                    color: currentIndex == index ? indicator : Grey,
+                  ),
+                ),
+              ],
             )
           : Container(
               margin: EdgeInsets.only(left: 7.w),
@@ -307,7 +314,11 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(),
+                              SizedBox(
+                                width: 0.w,
+                              ),
                               Row(
+                                  // crossAxisAlignment: CrossAxisAlignment.center,
                                   children: indicators(
                                       watch.unitImages.length, activePage)),
                               Row(
@@ -347,6 +358,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                               ),
                             ],
                           ),
+                          ///////////////////
+
                           SizedBox(
                             height: 25.w,
                           ),
@@ -586,11 +599,46 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                               SizedBox(
                                                 width: 12.w,
                                               ),
-                                              InkWell(
+                                              // InkWell(
+                                              //   onTap: () {
+                                              //     read.showUnitImages(false);
+                                              //     read.productsUnitImage(
+                                              //         context,
+                                              //         element?.id.toString());
+                                              //     //  read.addToCart(watch.productDetails?.id,
+                                              //     //  watch?.productUnitId,element?.shopId,context);
+                                              //     read.addToCart(
+                                              //         watch.addProductType
+                                              //             .toString(),
+                                              //         watch.addProductUnitId
+                                              //             .toString(),
+                                              //         watch.addProductShopId
+                                              //             .toString(),
+                                              //         context);
+                                              //   },
+                                              //   child: Container(
+                                              //     decoration: BoxDecoration(
+                                              //         color: const Color(
+                                              //             0xffFF844C),
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5.w)),
+                                              //     height: 30.w,
+                                              //     width: 30.w,
+                                              //     child: const Center(
+                                              //       child: Icon(
+                                              //         Icons.add,
+                                              //         color: Colors.white,
+                                              //       ),
+                                              //     ),
+                                              //   ),
+                                              // ),
+                                              GestureDetector(
                                                 onTap: () {
                                                   read.showUnitImages(false);
                                                   read.productsUnitImage(
-                                                      context, element?.id.toString());
+                                                      context,
+                                                      element?.id.toString());
                                                   //  read.addToCart(watch.productDetails?.id,
                                                   //  watch?.productUnitId,element?.shopId,context);
                                                   read.addToCart(
@@ -600,27 +648,21 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                           .toString(),
                                                       watch.addProductShopId
                                                           .toString(),
-
-
                                                       context);
+                                                  watch.onUnitImagesSelected(
+                                                      index);
                                                 },
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      color: const Color(
-                                                          0xffFF844C),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5.w)),
-                                                  height: 30.w,
-                                                  width: 30.w,
-                                                  child: const Center(
-                                                    child: Icon(
-                                                      Icons.add,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
+                                                child: watch.isUnitImagesAdded[
+                                                            index] ==
+                                                        false
+                                                    ? SvgPicture.asset(
+                                                        'assets/images/add.svg',
+                                                        // width: 15.w,
+                                                        // height: 19.h,
+                                                      )
+                                                    : SvgPicture.asset(
+                                                        "assets/icons/tick_green_bg.svg"),
+                                              )
                                             ],
                                           ),
                                         ],
@@ -697,7 +739,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                             onTap: () {
                                               print(element?.id);
                                               watch.updateProductId(
-
                                                 element?.id.toString(),
                                               );
                                               Navigator.pushAndRemoveUntil(
@@ -708,7 +749,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                           index: 1,
                                                           screenName:
                                                               ProductScreenView(
-                                                                selectedUnitId: element?.productUnitId.toString(),
+                                                                  selectedUnitId: element
+                                                                      ?.productUnitId
+                                                                      .toString(),
                                                                   categoryId: element
                                                                       ?.categoryId
                                                                       .toString(),
@@ -930,13 +973,21 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                   element
                                                                       ?.shopId,
                                                                   context);
+                                                              watch
+                                                                  .onSimilarProductSelected(
+                                                                      index);
                                                             },
-                                                            child: SvgPicture
-                                                                .asset(
-                                                              'assets/images/add.svg',
-                                                              // width: 15.w,
-                                                              // height: 19.h,
-                                                            ),
+                                                            child: watch.isSimilarProductAdded[
+                                                                        index] ==
+                                                                    false
+                                                                ? SvgPicture
+                                                                    .asset(
+                                                                    'assets/images/add.svg',
+                                                                    // width: 15.w,
+                                                                    // height: 19.h,
+                                                                  )
+                                                                : SvgPicture.asset(
+                                                                    "assets/icons/tick_green_bg.svg"),
                                                           ),
                                                         ],
                                                       ),

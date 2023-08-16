@@ -172,7 +172,7 @@ class Endpoint {
   static const String customerViewShop = "${baseUrl}lsm-customer-view-shop";
   //////////Customer view All Shop
   static const String customerViewAllShop =
-      "${baseUrl}lsm-customer-view-all-shop-list";
+      "${baseUrl}lsm-customer-view-all-shop-list"; /////rating
   //////////Customer view All Shop////////////////////////////////////////////////////////////////////////
   static const String customerViewAllCategoryShop =
       "${baseUrl}lsm-customer-shop-list-as-per-category";

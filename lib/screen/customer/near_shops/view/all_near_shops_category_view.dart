@@ -102,7 +102,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                             width: 351.w,
                             height: 36.h,
                             child: TextField(
-                              onChanged: (value){
+                              onChanged: (value) {
                                 read.shopSearchList(context);
                               },
                               controller: watch.searchController,
@@ -129,7 +129,6 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                     height: 15.h,
                                   ),
                                   onPressed: () {
-
                                     // Perform the search here
                                   },
                                 ),
@@ -477,7 +476,9 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                             4.3.w,
                                                                       ),
                                                                       Text(
-                                                                        "0.0",
+                                                                        // "${element.ratings}",
+                                                                        "${element.ratings ?? "0.0"}",
+                                                                        // "0.0",
                                                                         style: GoogleFonts
                                                                             .dmSans(
                                                                           textStyle: TextStyle(

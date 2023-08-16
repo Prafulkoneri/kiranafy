@@ -308,6 +308,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               // color: Colors.black,
                               ),
 
+                      // watch.hellotoffersdata?.isNotEmpty == true
+                      //     ?
                       watch.hellotoffersdata?.isNotEmpty == true
                           ? OfferPage()
                           : Container(
