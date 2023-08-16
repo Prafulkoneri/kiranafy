@@ -45,6 +45,7 @@ class AllShopController extends ChangeNotifier {
           pincode: pincode, offset: offset.toString(), limit: "5");
 
   Future<void> initState(context, refresh) async {
+    searchController.clear();
     if (refresh) {
       isLoading = true;
       allShops.clear();

@@ -45,10 +45,10 @@ class ShopProfileViewController extends ChangeNotifier {
   List<ShopCouponsList>? shopCouponsList;
   SProfileCouponData? sprofilecoupondata;
   int _currentPage = 0;
-  bool ? deliveryAddressStatus;
-  List<bool>  isSeasonalProductAdded=[];
-  List<bool>  isRecommendedProductAdded=[];
-  List<bool>  isOfferProductAdded=[];
+  bool? deliveryAddressStatus;
+  List<bool> isSeasonalProductAdded = [];
+  List<bool> isRecommendedProductAdded = [];
+  List<bool> isOfferProductAdded = [];
 
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   ShopProfileCouponRepo sProfileCouponRepo = ShopProfileCouponRepo();
@@ -138,35 +138,32 @@ class ShopProfileViewController extends ChangeNotifier {
       final result =
           CustomerViewShopResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        deliveryAddressStatus=result.deliveryAddressStatus;
+        deliveryAddressStatus = result.deliveryAddressStatus;
         shopData = result.data;
         shopDetails = shopData?.shopDetails;
         shopCategory = shopData?.shopCategories;
         offerProduct = shopData?.offerProduct;
         //for seasonal
         seasonalProduct = shopData?.seasonalProduct;
-        int seasonProductLength=seasonalProduct?.length??0;
-        isSeasonalProductAdded=List<bool>.filled(seasonProductLength, false,growable: true);
-        for(int i=0;i<seasonProductLength;i++){
-          if(seasonalProduct?[i].addToCartCheck=="yes"){
-            isSeasonalProductAdded.insert(i,true);
-
-          }
-          else{
-            isSeasonalProductAdded.insert(i,false);
+        int seasonProductLength = seasonalProduct?.length ?? 0;
+        isSeasonalProductAdded =
+            List<bool>.filled(seasonProductLength, false, growable: true);
+        for (int i = 0; i < seasonProductLength; i++) {
+          if (seasonalProduct?[i].addToCartCheck == "yes") {
+            isSeasonalProductAdded.insert(i, true);
+          } else {
+            isSeasonalProductAdded.insert(i, false);
           }
         }
         //for recommended
         recommandedProduct = shopData?.recommandedProduct;
-        isRecommendedProductAdded=List<bool>.filled(seasonProductLength, false,growable: true);
-        for(int i=0;i<seasonProductLength;i++){
-          if(seasonalProduct?[i].addToCartCheck=="yes"){
-            isSeasonalProductAdded.insert(i,true);
-
-          }
-
-          else{
-            isSeasonalProductAdded.insert(i,false);
+        isRecommendedProductAdded =
+            List<bool>.filled(seasonProductLength, false, growable: true);
+        for (int i = 0; i < seasonProductLength; i++) {
+          if (seasonalProduct?[i].addToCartCheck == "yes") {
+            isRecommendedProductAdded.insert(i, true);
+          } else {
+            isRecommendedProductAdded.insert(i, false);
           }
         }
         bannerImageData = shopData?.bannerImages;
@@ -209,8 +206,14 @@ class ShopProfileViewController extends ChangeNotifier {
     );
   }
 
-  void onSeasonalSelected(index){
-    isSeasonalProductAdded[index]=!isSeasonalProductAdded[index];
+  void onSeasonalSelected(index) {
+    isSeasonalProductAdded[index] = true;
+    notifyListeners();
+  }
+
+/////
+  void onRecommandedSelected(index) {
+    isRecommendedProductAdded[index] = true;
     notifyListeners();
   }
 

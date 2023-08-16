@@ -1144,17 +1144,21 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   element
                                                                       ?.shopId,
                                                                   context);
-                                                              watch.onSeasonalSelected(index);
+                                                              watch
+                                                                  .onSeasonalSelected(
+                                                                      index);
                                                             },
-                                                            child:
-                                                               watch.isSeasonalProductAdded[index]==false
-                                                                    ? SvgPicture
-                                                                        .asset(
-                                                                        'assets/images/add.svg',
-                                                                        // width: 15.w,
-                                                                        // height: 19.h,
-                                                                      )
-                                                                    : SvgPicture.asset("assets/icons/tick_green_bg.svg"),
+                                                            child: watch.isSeasonalProductAdded[
+                                                                        index] ==
+                                                                    false
+                                                                ? SvgPicture
+                                                                    .asset(
+                                                                    'assets/images/add.svg',
+                                                                    // width: 15.w,
+                                                                    // height: 19.h,
+                                                                  )
+                                                                : SvgPicture.asset(
+                                                                    "assets/icons/tick_green_bg.svg"),
                                                           ),
                                                         ],
                                                       ),
@@ -1647,12 +1651,28 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                 ?.productUnitId,
                                                             element?.shopId,
                                                             context);
+
+                                                        watch
+                                                            .onRecommandedSelected(
+                                                                index);
                                                       },
-                                                      child: SvgPicture.asset(
-                                                        'assets/images/add.svg',
-                                                        // width: 30.w,
-                                                        // height: 30.h,
-                                                      ),
+                                                      child:
+                                                          // SvgPicture.asset(
+                                                          //   'assets/images/add.svg',
+                                                          //   // width: 30.w,
+                                                          //   // height: 30.h,
+                                                          // ),
+                                                          watch.isRecommendedProductAdded[
+                                                                      index] ==
+                                                                  false
+                                                              ? SvgPicture
+                                                                  .asset(
+                                                                  'assets/images/add.svg',
+                                                                  // width: 15.w,
+                                                                  // height: 19.h,
+                                                                )
+                                                              : SvgPicture.asset(
+                                                                  "assets/icons/tick_green_bg.svg"),
                                                     ),
                                                   ],
                                                 )
