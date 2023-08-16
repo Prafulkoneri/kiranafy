@@ -44,6 +44,7 @@ class ReturnOrderController extends ChangeNotifier {
   SubmitReturnRepo submitReturnRepo = SubmitReturnRepo();
 
   Future<void> initState(context, oId) async {
+    productId="";
     refundTotal=0;
     selectedProductIdList.clear();
     isReturnProductSelected.clear();
@@ -173,7 +174,7 @@ class ReturnOrderController extends ChangeNotifier {
 
   SubmitReturnOrderReqModel get submitReturnOrderReqModel =>
       SubmitReturnOrderReqModel(
-          productId: productId,
+          productId: productId.toString(),
           customRefundReason: descriptionController.text,
           orderId: orderId,
           reasonId: cancellationId,
@@ -197,10 +198,13 @@ class ReturnOrderController extends ChangeNotifier {
       return;
     }
     LoadingOverlay.of(context).show();
+    productId="";
     for (int i = 0; i < selectedProductIdList.length; i++) {
       productId += selectedProductIdList[i] + ",";
     }
     productId = productId.substring(0, productId.length - 1);
+    print(productId);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     submitReturnRepo

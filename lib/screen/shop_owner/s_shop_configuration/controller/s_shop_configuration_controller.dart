@@ -70,6 +70,37 @@ class SShopConfigurationController extends ChangeNotifier {
   List initialSelectedAreaId = [];
 
   Future<void> initState(context, initialConfiguration) async {
+    upiIdController.clear();
+     supportNumberController.clear();
+     firstDeliveryController.clear();
+    secondDeliveryController.clear();
+    thirdDeliveryController.clear();
+    fourthDeliveryController.clear();
+    startShopTimeController.clear();
+    endShopTimeController.clear();
+    imageNameController.clear();
+     isCustomerPickupSelected = false;
+     isOnlinePaymentSelected = false;
+     isCODPaymentSelected = false;
+     ifFreePickupSelected = false;
+     isDeliveryCustomerSelected = false;
+     isDeliveryChargesSelected = false;
+     isNineToTwelve = false;
+     isTwelveToThree = false;
+     isThreeToSix = false;
+     isSixToNine = false;
+    fileImage = File("");
+    networkImage = "";
+     image = "";
+    isLoading = true;
+    isInitialConfiguration = true;
+     shopDeliveryAreaData?.clear();
+    selectedDeliveryAreaList.clear();
+    selectedDeliveryAreaId.clear();
+    selectedDeliveryAreaName.clear();
+     selectedAreaId = "";
+    areaList?.clear();
+    initialSelectedAreaId.clear();
     SharedPreferences pref = await SharedPreferences.getInstance();
     // supportNumberController.text = pref.getString("mobileNumber").toString();
 
@@ -515,7 +546,7 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   Future uploadImage(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.shopconfigurationedit}");
@@ -551,6 +582,7 @@ class SShopConfigurationController extends ChangeNotifier {
     request.fields['area_id'] = selectedAreaId;
     // multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
+    print(fileImage);
     File imageFile = fileImage;
     var stream =
         new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
@@ -562,6 +594,7 @@ class SShopConfigurationController extends ChangeNotifier {
     request.files.addAll(newList);
     print(request.fields);
     await request.send().then((response) {
+      print(response.statusCode);
       if (response.statusCode == 200) {
         print("sucesss");
         LoadingOverlay.of(context).hide();
@@ -603,7 +636,8 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   void onClearAreaSearch() {
-    searchController.clear();
+    print("hello");
+    areaSearchController.clear();
     notifyListeners();
   }
 

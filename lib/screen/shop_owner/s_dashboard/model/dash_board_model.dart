@@ -36,6 +36,8 @@ class Data {
   int? cancelledAmount;
   int ? acceptRefundOrdersCount;
   int ? pendingRefundOrdersCount;
+  int ? totalRefund;
+  int ? cancelledRefundAmount;
   List<BannerImageData>? bannerImages;
 
   Data({
@@ -58,6 +60,8 @@ class Data {
     required this.cancelledAmount,
     required this.pendingRefundOrdersCount,
     required this.acceptRefundOrdersCount,
+    this.cancelledRefundAmount,
+    this.totalRefund,
   });
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -81,6 +85,8 @@ class Data {
     cancelledAmount = json["cancelled_amount"];
     pendingRefundOrdersCount = json["pending_refund_orders_count"];
     acceptRefundOrdersCount = json["accept_refund_orders_count"];
+    totalRefund = json["total_refund"];
+    cancelledRefundAmount = json["cancelled_amount"];
     if (json["shop_banner_images"] != null) {
       bannerImages = <BannerImageData>[];
       json["shop_banner_images"].forEach((v) {

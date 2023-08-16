@@ -53,7 +53,7 @@ class Endpoint {
       '${baseUrl}lsm-shop-owner-update-product-of-category';
 
   // Upload Custom Product
-  static const String uploadCustomProduct =
+  static const String updateEditCustomProduct =
       '${baseUrl}lsm-shop-owner-update-custom-product';
 
   ///Shop Owner get Selected Categories List

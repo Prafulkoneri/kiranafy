@@ -88,7 +88,9 @@ class ShopViewTicketController extends ChangeNotifier {
       TicketReplyRequestModel(
           ticketId: ticketDetails?.id.toString(),
           ticketRemark: remarkController.text,
-          ticketStatus: ticketDetails?.ticketStatus);
+          ticketStatus: ticketDetails?.ticketStatus,
+      type: "",
+      );
 
   Future<void> ticketReply(
     context,

@@ -159,6 +159,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
             selectedProductList.insert(i, false);
           }
         }
+        print("selectedProductList${selectedProductList}");
         await getCancelOrderList(context);
         if (showLoading) {
           showLoader(false);
@@ -244,7 +245,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
                 type: SnackType.error);
             return;
           }
-          _showNotification(saveName);
+          _showNotification(saveName,savePath);
         }
         print("No permission to read and write.");
         print(directory?.path.toString());
@@ -268,7 +269,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> _showNotification(fileName) async {
+  Future<void> _showNotification(fileName,savePath) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
@@ -281,7 +282,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         "${fileName}",
         'Download complete.',
         platform,
-        payload: '$fileName');
+        payload: '$savePath');
   }
 
   Future<void> shopOrderStatus(
@@ -295,16 +296,20 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     if (oStatus == "order_confirmed") {
       List checkDataList = [];
       for (int i = 0; i < selectedProductList.length; i++) {
+        print(selectedProductList);
         if (selectedProductList[i] == true) {
           checkDataList.add(selectedProductList[i]);
         }
-        if (checkDataList.isEmpty) {
-          Utils.showPrimarySnackbar(context, "No product selected",
-              type: SnackType.error);
-          return;
-        }
+        print(checkDataList);
+
+      }
+      if (checkDataList.isEmpty) {
+        Utils.showPrimarySnackbar(context, "No product selected",
+            type: SnackType.error);
+        return;
       }
     }
+
 
     if (oStatus == "order_cancelled") {
       if (!isOtherReasonSelected && orderCancelledReasonId == "") {

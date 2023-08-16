@@ -316,7 +316,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                                         read.openGallery1(context);
                                         Navigator.pop(context);
                                       },
-                                      child: Text("gallery "),
+                                      child: Text("Gallery "),
                                     ),
                                   ],
                                 ),

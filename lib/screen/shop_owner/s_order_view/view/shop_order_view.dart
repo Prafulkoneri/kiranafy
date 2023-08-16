@@ -73,13 +73,14 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             //   (Route<dynamic> route) => false,
             // );
             widget.fromOrderStatus == true
-                ? Navigator.push(
+                ? Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                         builder: (context) => SMainScreenView(
                             index: 1,
                             screenName: SOrderStatusView(
-                                selectedIndex: widget.selectedIndex))))
+                                selectedIndex: widget.selectedIndex))),(Route<dynamic> route) => false,
+            )
                 : Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
@@ -2278,7 +2279,57 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   ],
                                                 ),
                                               )
-                                            : Container(),
+                                            :watch.orderDetails?.shopOwnerRefundStatus =="reject"?Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 17.w),
+                              color: Color(0xffFFE8E8),
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 15.w,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment
+                                            .start,
+                                        children: [
+                                          Text(
+                                            "Return Request Rejected ",
+                                            style: TextStyle(
+                                                fontWeight:
+                                                FontWeight
+                                                    .w700,
+                                                color: Colors
+                                                    .black,
+                                                fontSize:
+                                                18.sp),
+                                          ),
+
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 15.w,
+                                  ),
+                                  Text("Reason",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16.sp),),
+                                  SizedBox(
+                                    height: 6.w,
+                                  ),
+                                  Text(watch.orderDetails?.shopOwnerRejectReason??"Not Mentioned",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16.sp),),
+                              SizedBox(
+                                  height:45.w
+                              ),
+                                ],
+                              ),
+                            ):Container(),
                           ],
                         )
                       : Container(

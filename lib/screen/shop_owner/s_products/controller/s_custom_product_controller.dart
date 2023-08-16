@@ -54,6 +54,11 @@ class CustomProductController extends ChangeNotifier {
     showUnderRecommendedProducts = false;
     showUnderSeasonalProducts = false;
     fullFillCravings = false;
+    taxId="";
+    brandId="";
+    categoryId="";
+    productImage=File("");
+    selectedCategory="";
     await getCustomProductData(context);
     productImage = File("");
   }

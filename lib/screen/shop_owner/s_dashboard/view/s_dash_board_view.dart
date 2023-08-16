@@ -151,7 +151,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             //<-- SEE HERE
                             // right: 15.w,
                             // left: 0.w,
-                            top: 150.w,
+                            top: 155.w,
                             // bottom: 20.w,
                             child: Container(
                               padding: EdgeInsets.only(left: 16.w),
@@ -1550,7 +1550,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "INR 0",
+                                  "INR ${watch.dashBoardData?.totalRefund??"0"}",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(

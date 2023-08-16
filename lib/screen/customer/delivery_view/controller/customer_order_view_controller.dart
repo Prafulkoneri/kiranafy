@@ -602,7 +602,9 @@ class CustomerOrderViewController extends ChangeNotifier {
           String saveName = splitPath[splitPath.length - 1];
           print("savename${saveName}");
           String savePath = dir.path + "/$saveName";
-          print(savePath);
+          print('savepath');
+          print("savePath${savePath}");
+          print('savepath');
           fileurl=Endpoint.baseUrl.toString().substring(0,Endpoint.baseUrl.toString().length-4).toString()+"${orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString()}";
           //output:  /storage/emulated/0/Download/banner.png
 
@@ -622,7 +624,7 @@ class CustomerOrderViewController extends ChangeNotifier {
             Utils.showPrimarySnackbar(context,"Invalid Url", type: SnackType.error);
             return;
           }
-          _showNotification(saveName);
+          _showNotification(saveName,savePath);
         }
         print("No permission to read and write.");
         print(directory?.path.toString());
@@ -646,7 +648,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> _showNotification(fileName) async {
+  Future<void> _showNotification(fileName,savePath) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
@@ -659,6 +661,6 @@ class CustomerOrderViewController extends ChangeNotifier {
         "${fileName}",
         'Download complete.',
         platform,
-        payload: '$fileName');
+        payload: '$savePath');
   }
 }

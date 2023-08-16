@@ -45,7 +45,7 @@ class OrderInvoiceData {
 }
 
 class CustomerInvoiceList {
-  String? id;
+  int? id;
   String? invoiceLink;
 
   CustomerInvoiceList({

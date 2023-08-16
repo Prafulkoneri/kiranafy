@@ -100,7 +100,7 @@ class SBankAccountController extends ChangeNotifier {
           accountNumber: accountNumberController.text,
           bankBranch: bankBranchController.text,
           ifscCode: iFSCCodeController.text,
-          typeOfAccount: accountType);
+          typeOfAccount: accountType.toLowerCase());
 
   Future<void> updateAccountDetails(context) async {
     if (bankNameController.text == "") {

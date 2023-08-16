@@ -42,7 +42,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _showNotification(fileName) async {
+  Future<void> _showNotification(fileName,savePath) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
@@ -55,7 +55,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
         "${fileName}",
         'Download complete.',
         platform,
-        payload: '$fileName');
+        payload: '$savePath');
   }
 
   showLoader(value) {
@@ -135,11 +135,14 @@ class SubscriptionHistoryController extends ChangeNotifier {
           String saveName=splitPath[splitPath.length-1];
           print("savename${saveName}");
           String savePath = dir.path + "/$saveName";
+          print("Save path");
           print(savePath);
           fileurl=Endpoint.baseUrl.toString().substring(0,Endpoint.baseUrl.toString().length-4).toString()+"${subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()}";
+         print("FileUrl");
           print(fileurl);
+          print("Invoice Link");
+          String invoicePath=subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()??"";
           print(subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString());
-
           //output:  /storage/emulated/0/Download/banner.png
 
           try {
@@ -157,7 +160,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
             return;
           }
           print(saveName);
-          _showNotification(saveName);
+          _showNotification(saveName,savePath);
         }
         print("No permission to read and write.");
         print(directory?.path.toString());

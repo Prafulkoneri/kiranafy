@@ -26,6 +26,7 @@ class SAddProductsController extends ChangeNotifier {
   // List<bool> selectedList = [];
   Data? productData;
   List<ProductDetail>? productDetails;
+  List<ProductDetail> allAdminProductList=[];
   List<bool> selectedProduct = [];
   List selectedProductsId = [];
   int? allProductsCount;
@@ -34,10 +35,13 @@ class SAddProductsController extends ChangeNotifier {
   bool isSelectAll = false;
   String categoryName = "";
   bool uploadSuccess = false;
+  bool showPaginationLoader = false;
   MainScreenController mainScreenController = MainScreenController();
-
+int offset=0;
   Future<void> initState(context, id,refresh) async {
     if(refresh){
+      allAdminProductList.clear();
+      offset=0;
       await shopAddProducts(context, id);
     }
 
@@ -79,11 +83,16 @@ class SAddProductsController extends ChangeNotifier {
   ////Shop owner Add Products Start
 
   ShopAddProductsListRequestModel get shopAddProductRequestModel =>
-      ShopAddProductsListRequestModel(category_id: categoryId);
+      ShopAddProductsListRequestModel(category_id: categoryId,limit: "10",offset:offset.toString() );
 
   Future<void> shopAddProducts(context, id) async {
     isSelectAll = false;
-    showLoader(true);
+    if(offset==0){
+      showLoader(true);
+    }
+
+    showPaginationLoader = true;
+    notifyListeners();
     SharedPreferences pref = await SharedPreferences.getInstance();
     categoryId = id.toString();
     print("categoryId$categoryId");
@@ -98,6 +107,7 @@ class SAddProductsController extends ChangeNotifier {
       if (response.statusCode == 200) {
         productData = result.data;
         productDetails = result.data?.productDetails;
+        allAdminProductList.addAll(productDetails??[]);
         categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
 
@@ -112,6 +122,7 @@ class SAddProductsController extends ChangeNotifier {
           }
         }
         showLoader(false);
+        showPaginationLoader=false;
         notifyListeners();
       } else {
         showLoader(false);
@@ -192,6 +203,13 @@ class SAddProductsController extends ChangeNotifier {
         },
       );
     }
+  }
+
+  Future<void> onScrollMaxExtent(context) async {
+    print("hello");
+    offset = offset + 1;
+    await shopAddProducts(context,categoryId);
+    notifyListeners();
   }
 
   upload(context) async {

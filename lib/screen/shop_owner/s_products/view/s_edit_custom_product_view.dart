@@ -324,7 +324,33 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            read.openProductImage();
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        read.openCameras(context);
+                                      },
+                                      child: Text("Camera"),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        read.openGallery(context);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Gallery "),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+
                           },
                           child: Container(
                             height: 185.h,

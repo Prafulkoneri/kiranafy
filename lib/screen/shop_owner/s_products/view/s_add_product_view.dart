@@ -32,12 +32,25 @@ class AddProductView extends StatefulWidget {
 bool _checkbox = false;
 
 class _AddProductViewState extends State<AddProductView> {
+  ScrollController scrollController =ScrollController();
+
   void initState() {
     print("widget.categoryId ${widget.categoryId}");
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SAddProductsController>()
           .initState(context, widget.categoryId,widget.refresh);
+    });
+    setPagination();
+  }
+  setPagination() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          context.read<SAddProductsController>().onScrollMaxExtent(context);
+        });
+      }
     });
   }
 
@@ -75,154 +88,185 @@ class _AddProductViewState extends State<AddProductView> {
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
+          controller: scrollController,
+          physics: AlwaysScrollableScrollPhysics(),
+                child: Stack(
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(
-                        left: 20.w,
-                        right: 28.w,
-                        top: 20.w,
-                        bottom: 20.w,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "${watch.categoryName} -  ${watch.allProductsCount}",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black1,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                            left: 20.w,
+                            right: 28.w,
+                            top: 20.w,
+                            bottom: 20.w,
                           ),
-
-                          ///check Box
-                          PrimaryCheckBox(
-                            // value: watch.selectedProduct[index],
-                            onChanged: (value) {
-                              read.onSelecteAllProducts();
-                            },
-                            value: watch.isSelectAll,
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    ///Products Starts
-
-                    ListView.builder(
-                        padding: EdgeInsets.only(
-                          left: 19.w,
-                          right: 19.w,
-                        ),
-                        itemCount: watch.productDetails?.length ?? 0,
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (BuildContext, index) {
-                          final element = watch.productDetails?[index];
-                          return Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 4.w, top: 4, bottom: 4, right: 9.w),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black.withOpacity(0.03.w),
-                                        blurRadius: 5,
-                                        spreadRadius: 0,
-                                        offset: Offset(5, 6)),
-                                  ],
-                                  border: Border.all(
-                                      color: Colors.black.withOpacity(0.07)),
-                                  borderRadius: BorderRadius.circular(7.w),
-                                ),
-                                // padding: EdgeInsets.only(
-                                //     top: 6.w, bottom: 7.w, right: 9.w, left: 21.w),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    element?.productImagePath != ""
-                                        ? AppNetworkImages(
-                                            imageUrl:
-                                                "${element?.productImagePath}",
-                                            height: 60.h,
-                                            width: 60.w,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Image(
-                                            image: AssetImage(
-                                              "assets/images/profile_image.png",
-                                            ),
-                                            height: 60.h,
-                                            width: 60.w,
-                                            fit: BoxFit.fill,
-                                          ),
-                                    SizedBox(
-                                      width: 12.w,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            height: 10.w,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Flexible(
-                                                child: Text(
-                                                  "${element?.productName}",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 16.sp,
-                                                      color: Black1),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10.w,
-                                          ),
-                                          Text(
-                                            "${element?.unitWithWeight}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 14.sp,
-                                                color: Grey),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(top: 10.w),
-                                      child: PrimaryCheckBox(
-                                        // value: watch.selectedProduct[index],
-                                        onChanged: (value) {
-                                          read.onProductsSelected(
-                                              index, element?.id.toString());
-                                        },
-                                        value: watch.selectedProduct[index],
-                                      ),
-                                    ),
-                                  ],
+                              Text(
+                                "${watch.categoryName} -  ${watch.allProductsCount}",
+                                style: GoogleFonts.dmSans(
+                                  textStyle: TextStyle(
+                                      color: Black1,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ),
-                              SizedBox(
-                                height: 15.w,
+
+                              ///check Box
+                              PrimaryCheckBox(
+                                // value: watch.selectedProduct[index],
+                                onChanged: (value) {
+                                  read.onSelecteAllProducts();
+                                },
+                                value: watch.isSelectAll,
                               ),
                             ],
-                          );
-                        }),
-                    SizedBox(
-                      height: 85.w,
+                          ),
+                        ),
+
+                        ///Products Starts
+
+                        ListView.builder(
+
+                            padding: EdgeInsets.only(
+                              left: 19.w,
+                              right: 19.w,
+                            ),
+                            itemCount: watch.productDetails?.length ?? 0,
+                            shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext, index) {
+                              final element = watch.productDetails?[index];
+                              return Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 4.w, top: 4, bottom: 4, right: 9.w),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.black.withOpacity(0.03.w),
+                                            blurRadius: 5,
+                                            spreadRadius: 0,
+                                            offset: Offset(5, 6)),
+                                      ],
+                                      border: Border.all(
+                                          color: Colors.black.withOpacity(0.07)),
+                                      borderRadius: BorderRadius.circular(7.w),
+                                    ),
+                                    // padding: EdgeInsets.only(
+                                    //     top: 6.w, bottom: 7.w, right: 9.w, left: 21.w),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        element?.productImagePath != ""
+                                            ? AppNetworkImages(
+                                                imageUrl:
+                                                    "${element?.productImagePath}",
+                                                height: 60.h,
+                                                width: 60.w,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : Image(
+                                                image: AssetImage(
+                                                  "assets/images/profile_image.png",
+                                                ),
+                                                height: 60.h,
+                                                width: 60.w,
+                                                fit: BoxFit.fill,
+                                              ),
+                                        SizedBox(
+                                          width: 12.w,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 10.w,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Flexible(
+                                                    child: Text(
+                                                      "${element?.productName}",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 16.sp,
+                                                          color: Black1),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 10.w,
+                                              ),
+                                              Text(
+                                                "${element?.unitWithWeight}",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14.sp,
+                                                    color: Grey),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(top: 10.w),
+                                          child: PrimaryCheckBox(
+                                            // value: watch.selectedProduct[index],
+                                            onChanged: (value) {
+                                              read.onProductsSelected(
+                                                  index, element?.id.toString());
+                                            },
+                                            value: watch.selectedProduct[index],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15.w,
+                                  ),
+                                ],
+                              );
+                            }),
+                        Positioned(
+                          bottom: 50.w,
+                          left: 0,
+                          right: 0,
+                          child: Visibility(
+                            visible: watch.showPaginationLoader,
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Container(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: SplashText,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 85.w,
+                        ),
+                      ],
                     ),
                   ],
                 ),

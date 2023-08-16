@@ -1075,8 +1075,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                     // final unitDetail = watch
                                                     //     .productsFromAdmin?[index]
                                                     //     .unitDetails?[int];
-                                                    final element = watch
-                                                        .productsFromAdmin?[
+                                                    final unitElement = watch
+                                                        .customProduct?[
                                                             index]
                                                         .unitDetails?[int];
 
@@ -1103,7 +1103,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             child: Row(
                                                               children: [
                                                                 Text(
-                                                                  "${element?.weightAndUnit}",
+                                                                  "${unitElement?.weightAndUnit}",
                                                                   style:
                                                                       GoogleFonts
                                                                           .dmSans(
@@ -1127,7 +1127,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               children: [
                                                                 Expanded(
                                                                   child: Text(
-                                                                    "${element?.mrpPrice}",
+                                                                    "${unitElement?.mrpPrice}",
                                                                     textAlign:
                                                                         TextAlign
                                                                             .end,
@@ -1150,7 +1150,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 // ),
                                                                 Expanded(
                                                                   child: Text(
-                                                                    "${element?.offerPrice}",
+                                                                    "${unitElement?.offerPrice}",
                                                                     textAlign:
                                                                         TextAlign
                                                                             .end,

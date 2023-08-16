@@ -123,7 +123,7 @@ class OrdersRefundListElement {
     orderUniqueId = json["order_unique_id"];
     createdAt = json['created_at'];
     customerName = json["customer_name"];
-    totalAmount = json["total_amount"];
+    totalAmount = json["customer_refund_amount"];
     paymentMode = json['payment_mode'];
     totalItems = json['total_items'];
   }

@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:image_cropper/image_cropper.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custom_products_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/edit_custom_product_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_edit_custom_product_repo.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -64,6 +66,7 @@ class EditCustomProductController extends ChangeNotifier {
   String productFeatureImage = "";
 
   UploadCustomProductRepo uploadCustomProductRepo = UploadCustomProductRepo();
+  UploadEditCustomProductRepo uploadEditCustomProductRepo = UploadEditCustomProductRepo();
   String productId = "";
 
   //for adminProduct
@@ -205,6 +208,8 @@ class EditCustomProductController extends ChangeNotifier {
     );
   }
 
+
+
   void onCategorySelected(value) {
     selectedCategory = value;
     notifyListeners();
@@ -224,6 +229,78 @@ class EditCustomProductController extends ChangeNotifier {
     fullFillCravings = value;
     notifyListeners();
   }
+  void openCameras(context) async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+        ? [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+        ]
+        : [
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio5x3,
+        CropAspectRatioPreset.ratio5x4,
+        CropAspectRatioPreset.ratio7x5,
+        CropAspectRatioPreset.ratio16x9
+        ],
+      );
+      productImage = File(croppedFile!.path);
+    }
+
+    notifyListeners();
+    Navigator.of(context, rootNavigator: true).pop();
+  }
+
+  void openGallery(context) async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: double.infinity,
+      maxWidth: double.infinity,
+      imageQuality: 100,
+    );
+    if (pickedFile != null) {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        aspectRatioPresets: Platform.isAndroid
+        ? [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+        ]
+        : [
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio5x3,
+        CropAspectRatioPreset.ratio5x4,
+        CropAspectRatioPreset.ratio7x5,
+        CropAspectRatioPreset.ratio16x9
+        ],
+      );
+      productImage = File(croppedFile!.path);
+    }
+
+    notifyListeners();
+    Navigator.of(context, rootNavigator: true).pop();
+  }
+
 
   void openProductImage() async {
     final ImagePicker imgpicker = ImagePicker();
@@ -252,15 +329,16 @@ class EditCustomProductController extends ChangeNotifier {
       context, isNavFromAccount, selectedIndex) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
-    await uploadCustomProductRepo
-        .uploadCustomProduct(
+    await uploadEditCustomProductRepo
+        .uploadEditCustomProduct(
             uploadCustomProductReqModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result =
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if (isNavFromAccount) {
+        if(result.status==200){
+          if (isNavFromAccount) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -292,6 +370,11 @@ class EditCustomProductController extends ChangeNotifier {
             type: SnackType.success);
         LoadingOverlay.of(context).hide();
         notifyListeners();
+        }else{
+          LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
       } else {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
@@ -344,7 +427,7 @@ class EditCustomProductController extends ChangeNotifier {
   Future uploadImage(context, isNavFromAccount) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.uploadCustomProduct}");
+    var uri = Uri.parse("${Endpoint.updateEditCustomProduct}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['product_id'] = productId;
@@ -380,7 +463,13 @@ class EditCustomProductController extends ChangeNotifier {
     await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
       print("respStr${respStr}");
+
       if (response.statusCode == 200) {
+        // var splitText = respStr.split(",");
+        // print(splitText);
+        // var splitText2=splitText[0].toString();
+        // print(splitText2);
+        // return;
         if (isNavFromAccount) {
           Navigator.pushAndRemoveUntil(
             context,

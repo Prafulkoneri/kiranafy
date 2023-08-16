@@ -365,8 +365,9 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                     Row(
                                       children: [
                                         Text(
+                                          element?.paymentMode=="cash"?"Cash":element?.paymentMode=="qr_code"?"QR Code":"UPI",
                                           // "Upi",
-                                          "${element?.paymentMode}",
+                                          // "${element?.paymentMode}",
                                           style: TextStyle(
                                               fontWeight:
                                               FontWeight.w400,
@@ -499,7 +500,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                       children: [
                                         Text(
                                           // "Upi",
-                                          "${element?.paymentMode}",
+                                          element?.paymentMode=="cash"?"Cash":element?.paymentMode=="qr_code"?"QR Code":"UPI",
                                           style: TextStyle(
                                               fontWeight: FontWeight.w400,
                                               fontSize: 12.sp,

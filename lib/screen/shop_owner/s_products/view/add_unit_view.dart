@@ -98,6 +98,7 @@ class _AddUnitViewState extends State<AddUnitView> {
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
+
               physics: BouncingScrollPhysics(),
               child: Container(
                 padding: EdgeInsets.only(
@@ -270,7 +271,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                           read.openGallery1(context);
                                           Navigator.pop(context);
                                         },
-                                        child: Text("gallery "),
+                                        child: Text("Gallery "),
                                       ),
                                     ],
                                   ),
@@ -398,7 +399,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                     : watch.networkImage2 != ""
                                         ? Center(
                                             child: AppNetworkImages(
-                                              imageUrl: watch.networkImage1,
+                                              imageUrl: watch.networkImage2,
                                               fit: BoxFit.cover,
                                               height: 90.w,
                                             ),

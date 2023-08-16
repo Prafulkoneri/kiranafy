@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/shop_owner/notification/controller/no
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +33,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
   Widget build(BuildContext context) {
     final read = context.read<ShopNoticationController>();
     final watch = context.watch<ShopNoticationController>();
+    final readOrderStatus = context.read<SOrderStatusController>();
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
         resizeToAvoidBottomInset: true,
@@ -189,6 +191,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                   return GestureDetector(
                     onTap: () {
                       if (element?.notificationType == "order") {
+                        readOrderStatus.onTabClicked(0);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -1,14 +1,20 @@
 ////Request Model
 class ShopAddProductsListRequestModel {
   String? category_id;
+  String ? limit;
+  String ? offset;
 
   ShopAddProductsListRequestModel({
     this.category_id,
+    this.offset,
+    this.limit,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["category_id"] = category_id;
+    data["limit"] = limit;
+    data["offset"] = offset;
     return data;
   }
 }
