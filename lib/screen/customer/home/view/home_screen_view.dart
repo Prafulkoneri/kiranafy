@@ -329,12 +329,12 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           ),
                           width: ScreenUtil().screenWidth,
                           // height: 100.h,
-                          child: AppNetworkImages(
+                          child: watch.placeAd.isNotEmpty==true?AppNetworkImages(
                             imageUrl: (watch.placeAd.toList()..shuffle()).first,
                             height: 163.h,
                             width: 352.w,
                             fit: BoxFit.cover,
-                          )),
+                          ):Container()),
 
                       SizedBox(
                         height: 20.h,

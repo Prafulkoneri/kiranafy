@@ -7,7 +7,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/cart_detail_repo.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
@@ -50,6 +53,7 @@ class ProductViewController extends ChangeNotifier {
   String? addProductUnitId;
   String? addProductType;
   String? addProductShopId;
+  bool isQuanityBtnPressed = false;
   bool isLoading = true;
   bool favAllShop = true; //fvrt
   bool isFavProduct = true; //fvrt Product
@@ -59,9 +63,13 @@ class ProductViewController extends ChangeNotifier {
   ProductViewShopDetails? shopDetails;
   List<ProductUnitDetail>? productUnitDetail;
   List<CustomerProductData>? similarProduct;
+  List quantityList = [];
   bool isUnitImagesVisible = false;
   String routeName = "";
   List unitImages = [];
+  String cartItemId="";
+  String quantityAction="";
+
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
   AddAdminProductToFavRepo addAdminProductToFavRepo =
@@ -74,10 +82,16 @@ class ProductViewController extends ChangeNotifier {
       RemoveCustomFvrtProductRepo();
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   UnitBasedProductImagePath? data;
+  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
+
+
+
+
   Future<void> initState(context, sId, cId, pId, suId, pType, rName) async {
     print("productId");
     print(pId);
     print(productId);
+    quantityList.clear();
     unitImages.clear();
     await productsView(context, sId, cId, pId, pType);
     // await productsUnitImage(context, suId);
@@ -98,6 +112,10 @@ class ProductViewController extends ChangeNotifier {
 
   showUnitImages(value) {
     isUnitImagesVisible = value;
+    notifyListeners();
+  }
+  quantityBtnPressed(value) {
+    isQuanityBtnPressed = value;
     notifyListeners();
   }
 
@@ -123,6 +141,95 @@ class ProductViewController extends ChangeNotifier {
         (Route<dynamic> route) => false,
       );
     }
+  }
+
+  CartItemQuantityReqModel get cartItemQuantityRequestModel => CartItemQuantityReqModel(
+      cartItemId: cartItemId,
+      quantityAction: quantityAction
+  );
+
+  Future<void> subtractItemQuantity(context, CIId,index,pType,pUnitId) async {
+    quantityBtnPressed(true);
+    print("*********");
+    print(quantityList);
+    print(quantityList[index]);
+    print("*********");
+    quantityAction = "subtract";
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+        cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      dev.log("response.body${response.body}");
+      final result =
+      CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        int value = quantityList[index];
+        quantityList.removeAt(index);
+        print("${value}valueeeeeeeee");
+        quantityList.insert(index, value - 1);
+
+        if (quantityList[index] == 0) {
+          removeFromCart(pType,pUnitId,shopDetails?.id,index,context);
+          isUnitImagesAdded[index] =false;
+        }
+        quantityBtnPressed(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> addItemQuantity(context, CIId, index) async {
+    quantityBtnPressed(true);
+    quantityAction = "add";
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+        cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      dev.log("response.body${response.body}");
+      final result =
+      CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        int value = quantityList[index];
+        quantityList.removeAt(index);
+        quantityList.insert(index, value + 1);
+        quantityBtnPressed(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 
   ProductViewRequestModel get productViewRequestModel =>
@@ -153,6 +260,10 @@ class ProductViewController extends ChangeNotifier {
         productDetails = productViewData?.productDetails;
         productImage = productDetails?.productImagePath;
         shopDetails = productViewData?.shopDetails;
+        int unitDetailLength=productViewData?.productUnitDetails?.length??0;
+        for(int i=0;i<unitDetailLength;i++){
+          quantityList.add(productViewData?.productUnitDetails?[i].quantity);
+        }
 
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
         isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
@@ -209,6 +320,7 @@ class ProductViewController extends ChangeNotifier {
 
   void onUnitImagesSelected(index) {
     isUnitImagesAdded[index] = true;
+    quantityList.insert(index,1);
     notifyListeners();
   }
 
@@ -591,10 +703,11 @@ class ProductViewController extends ChangeNotifier {
                 quantity: "1"),
             pref.getString("successToken"))
         .then((response) {
-      // log("response.body${response.body}");
+      dev.log("response.body${response.body}");
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        cartItemId=result.cartItemId.toString();
         isSimilarProductAdded[index] = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

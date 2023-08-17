@@ -22,12 +22,15 @@ class AddProductToCartReqModel{
 class AddProductToCartResModel{
   int ? status;
   String ? message;
+  int ? cartItemId;
   AddProductToCartResModel({
     this.status,
     this.message,
+    this.cartItemId,
 });
   AddProductToCartResModel.fromJson(Map<String,dynamic>json){
     status=json["status"];
     message=json["message"];
+    cartItemId=json["cart_item_id"];
   }
 }

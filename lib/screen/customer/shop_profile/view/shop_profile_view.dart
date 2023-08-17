@@ -597,6 +597,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                           index: 1,
                                                           screenName:
                                                               ProductScreenView(
+
                                                             selectedUnitId: element
                                                                 ?.productUnitId
                                                                 .toString(),
