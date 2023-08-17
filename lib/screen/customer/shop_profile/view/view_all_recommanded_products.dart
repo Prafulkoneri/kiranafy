@@ -332,27 +332,63 @@ class _AllRecommandedProductsViewState
                                                         : Text(""),
                                                   ],
                                                 ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    read.addToCart(
-                                                        element?.productType,
-                                                        element?.productUnitId,
-                                                        element?.shopId,
-                                                        context);
-                                                    watch.onRecommandedSelected(
-                                                        index);
-                                                  },
-                                                  child: watch.isRecommandedProductAdded[
-                                                              index] ==
-                                                          false
-                                                      ? SvgPicture.asset(
+                                                watch.isRecommandedProductAdded[
+                                                            index] ==
+                                                        false
+                                                    ? GestureDetector(
+                                                        onTap: () {
+                                                          read.addToCart(
+                                                              element
+                                                                  ?.productType,
+                                                              element
+                                                                  ?.productUnitId,
+                                                              element?.shopId,
+                                                              index,
+                                                              context);
+                                                          // watch
+                                                          //     .onOfferSelected(
+                                                          //         index);
+                                                        },
+                                                        child: SvgPicture.asset(
                                                           'assets/images/add.svg',
                                                           // width: 15.w,
                                                           // height: 19.h,
-                                                        )
-                                                      : SvgPicture.asset(
-                                                          "assets/icons/tick_green_bg.svg"),
-                                                ),
+                                                        ))
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          read.removeFromCart(
+                                                              element
+                                                                  ?.productType,
+                                                              element
+                                                                  ?.productUnitId,
+                                                              element?.shopId,
+                                                              index,
+                                                              context);
+                                                        },
+                                                        child: SvgPicture.asset(
+                                                            "assets/icons/tick_green_bg.svg"),
+                                                      ),
+                                                // GestureDetector(
+                                                //   onTap: () {
+                                                //     read.addToCart(
+                                                //         element?.productType,
+                                                //         element?.productUnitId,
+                                                //         element?.shopId,
+                                                //         context);
+                                                //     watch.onRecommandedSelected(
+                                                //         index);
+                                                //   },
+                                                //   child: watch.isRecommandedProductAdded[
+                                                //               index] ==
+                                                //           false
+                                                //       ? SvgPicture.asset(
+                                                //           'assets/images/add.svg',
+                                                //           // width: 15.w,
+                                                //           // height: 19.h,
+                                                //         )
+                                                //       : SvgPicture.asset(
+                                                //           "assets/icons/tick_green_bg.svg"),
+                                                // ),
                                               ],
                                             ),
                                           ),

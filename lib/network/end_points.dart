@@ -440,6 +440,8 @@ class Endpoint {
   static const String customerFaqData = "${baseUrl}lsm-customer-feq-get";
   static const String subScreiptionInvoice = "${baseUrl}lsm-shop-owner-invoice";
   static const String orderInvoice = "${baseUrl}lsm-customer-invoice";
+  static const String removeCartItem =
+      "${baseUrl}lsm-customer-remove-cart-from-favourite";
   static const String shopReviewList =
       "${baseUrl}lsm-shop-owner-review-list-for-shop";
   static const String shopDeliveryArealist =

@@ -15,11 +15,13 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/remove
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/shop_coupons_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products_model.dart';
 
 import 'package:local_supper_market/screen/customer/shop_profile/repository/all_products_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/customer_view_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/shop_profile_coupons_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -28,6 +30,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ShopProfileViewController extends ChangeNotifier {
   String shopId = "";
+  String productType = "";
+  String productUnitId = "";
+  String quantity = "";
   int offset = 0;
   bool isLoading = true;
   PageController pageController = PageController();
@@ -52,12 +57,15 @@ class ShopProfileViewController extends ChangeNotifier {
   List<bool> isOfferProductAdded = [];
 
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
+  RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
   ShopProfileCouponRepo sProfileCouponRepo = ShopProfileCouponRepo();
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
+  bool isPageRefresh = false;
 
   Future<void> initState(context, id, refresh) async {
     if (refresh) {
+      showLoader(true);
       await getShopDetails(context, id);
       await sProfileCouponList(context);
     } else {
@@ -126,7 +134,7 @@ class ShopProfileViewController extends ChangeNotifier {
   }
 
   Future<void> getShopDetails(context, id) async {
-    showLoader(true);
+    // showLoader(true);
     print("id$id");
     shopId = id;
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -186,7 +194,7 @@ class ShopProfileViewController extends ChangeNotifier {
         print("bye");
         print(favAllShop);
         print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
-        showLoader(false);
+        // showLoader(false);
         int imageLength = bannerImageData?.length ?? 0;
         if (bannerImageData!.isNotEmpty) {
           Timer.periodic(Duration(seconds: 5), (Timer timer) {
@@ -382,6 +390,50 @@ class ShopProfileViewController extends ChangeNotifier {
         sprofilecoupondata = result.sprofilecoupondata;
         shopCouponsList = sprofilecoupondata?.shopCouponsList;
         showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+  ////////////////////////////////////////////////
+
+  // RemoveItemFromCartReq get remveCouponFromListReq => RemoveItemFromCartReq(
+  //       productType: productType,
+  //       productUnitId: productUnitId,
+  //       quantity: quantity,
+  //       shopId: shopId.toString(),
+  //     );
+
+  Future<void> removeFromCart(pType, puId, sId, context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeCartItemRepo
+        .removeCartItem(
+            RemoveItemFromCartReq(
+                productType: pType.toString(),
+                productUnitId: puId.toString(),
+                shopId: sId.toString(),
+                quantity: "0"),
+            pref.getString("successToken"))
+        .then((response) async {
+      log("response.body${response.body}");
+      final result =
+          CartRemoveResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        await getShopDetails(context, sId);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
