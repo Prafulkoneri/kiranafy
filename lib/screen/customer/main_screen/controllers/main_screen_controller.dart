@@ -114,7 +114,7 @@ class MainScreenController extends ChangeNotifier {
   void onShopPressed() {
     currentTab = 1;
     currentScreen = AllNearShopsView(
-      refreshPage: false,
+      refreshPage: true,
       isSearchFocus: false,
     );
     notifyListeners();

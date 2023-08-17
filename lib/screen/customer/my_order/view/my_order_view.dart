@@ -99,6 +99,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => OrderDeliveryView(
+                                      isRefresh: true,
                                       orderId: element?.id.toString())),
                             );
                           },

@@ -357,6 +357,13 @@ class OrderSummaryController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        initState(
+          context,
+          shopId,
+          cartId,
+          true,
+          "cartDetail",
+        );
         // isFulFilProductAdded[index] = false;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -552,6 +559,13 @@ class OrderSummaryController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        initState(
+          context,
+          shopId,
+          cartId,
+          true,
+          "cartDetail",
+        );
         // isFulFilProductAdded[index] = false;
         // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,

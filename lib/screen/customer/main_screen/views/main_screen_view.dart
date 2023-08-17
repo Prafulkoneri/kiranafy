@@ -12,12 +12,11 @@ import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
-
 class MainScreenView extends StatefulWidget {
+  final bool? isRefresh;
   final Widget? screenName;
   final int? index;
-  const MainScreenView({Key? key, this.screenName, this.index})
+  const MainScreenView({Key? key, this.isRefresh, this.screenName, this.index})
       : super(key: key);
 
   @override
@@ -41,14 +40,11 @@ class _MainScreenViewState extends State<MainScreenView> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainScreenController>();
     final watch = context.watch<MainScreenController>();
     final cartWatch = context.watch<CartListController>();
-
 
     return Scaffold(
       extendBody: true,
