@@ -26,10 +26,11 @@ import 'package:provider/provider.dart';
 
 class OrderDeliveryView extends StatefulWidget {
   final String? orderId;
-
+  final bool? isRefresh;
   const OrderDeliveryView({
     super.key,
     this.orderId,
+    this.isRefresh,
   });
 
   @override
@@ -230,6 +231,39 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       SizedBox(
                                         width: 13.w,
                                       ),
+                                      // InkWell(
+                                      //   onTap: () {
+                                      //     watch.favAllShop
+                                      //         ? read.removeAllShopFavList(
+                                      //             context,
+                                      //             watch.shopDetails?.id)
+                                      //         : read.updateAllShopFavList(
+                                      //             context,
+                                      //             watch.shopDetails?.id);
+                                      //   },
+                                      //   child: Container(
+                                      //     padding: EdgeInsets.only(
+                                      //         left: 13.w,
+                                      //         right: 13.w,
+                                      //         top: 14.w,
+                                      //         bottom: 14.w),
+                                      //     decoration: BoxDecoration(
+                                      //       shape: BoxShape.circle,
+                                      //       color: Color(0xff4689EC),
+                                      //     ),
+                                      //     child: watch.favAllShop
+                                      //         ? SvgPicture.asset(
+                                      //             "assets/icons/fav_selected.svg",
+                                      //             width: 26.w,
+                                      //             height: 14.h,
+                                      //           )
+                                      //         : SvgPicture.asset(
+                                      //             "assets/images/favorite.svg",
+                                      //             width: 26.w,
+                                      //             height: 14.h,
+                                      //           ),
+                                      //   ),
+                                      // )
                                       InkWell(
                                         onTap: () {
                                           watch.favAllShop
@@ -246,7 +280,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                               right: 13.w,
                                               top: 14.w,
                                               bottom: 14.w),
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: Color(0xff4689EC),
                                           ),

@@ -232,7 +232,7 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        isCategoryProductAdded[index] = false;
+        isCategoryProductAdded[index] = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
