@@ -246,22 +246,97 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w800),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10, top: 5, bottom: 5),
-                                  decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: Color(0xffE4C400)),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                  ),
-                                  child: Text(
-                                    '${element?.orderStatus}',
-                                    style: TextStyle(
-                                        color: Color(0xffE4C400),
-                                        letterSpacing: .5,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
+                                SizedBox(
+                                  width: 100.w,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      elevation:
+                                      MaterialStateProperty.all(0),
+                                      // backgroundColor: ,
+                                      backgroundColor:
+                                      MaterialStateProperty.all(
+                                          Colors.white),
+                                      shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(10),
+                                          side: BorderSide(
+                                            color: element?.orderStatus ==
+                                                "Pending"
+                                                ? Yellow
+                                                : element?.orderStatus ==
+                                                "Delivered"
+                                                ? Color(0xff39C19D)
+                                                : element?.orderStatus ==
+                                                "Confirmed"
+                                                ? Color(0xff115B7A)
+                                                : element?.orderStatus ==
+                                                "Cancelled"
+                                                ? Colors.red
+                                                : element?.orderStatus ==
+                                                "Dispatched"
+                                                ? Colors
+                                                .orange
+                                                : element?.orderStatus ==
+                                                "Packing"
+                                                ? Colors
+                                                .brown
+                                                : Color(
+                                                0xff39C19D),
+                                            // width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           OrderDeliveryView(
+                                      //               orderId: element?.id
+                                      //                   .toString())),
+                                      // );
+                                    },
+                                    child: Text(
+                                      element?.orderStatus == "Refund"
+                                          ? "Delivered"
+                                          : element?.orderStatus ?? "",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: element?.orderStatus ==
+                                                "Pending"
+                                                ? Yellow
+                                            ///////
+                                                : element?.orderStatus ==
+                                                "Delivered"
+                                                ? Color(0xff39C19D)
+                                            ///////
+                                                : element?.orderStatus ==
+                                                "Confirmed"
+                                                ? Color(0xff115B7A)
+                                            /////////
+                                                : element?.orderStatus ==
+                                                "Cancelled"
+                                                ? Colors.red
+                                            //////////////
+                                                : element?.orderStatus ==
+                                                "Dispatched"
+                                                ? Colors
+                                                .orange
+                                                : element?.orderStatus ==
+                                                "Packing"
+                                                ? Colors
+                                                .brown
+                                                : Colors
+                                                .green,
+                                            // letterSpacing: .5
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+
+                                    //
                                   ),
                                 ),
                               ],

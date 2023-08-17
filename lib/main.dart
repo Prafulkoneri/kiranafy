@@ -287,6 +287,22 @@ class _MyAppState extends State<MyApp> {
     // fireBaseApi();
   }
 
+  Future<void> _showNotification(fileName,savePath) async {
+    final android = AndroidNotificationDetails('0', 'Adun Accounts',
+        channelDescription: 'channel description',
+        importance: Importance.max,
+        icon: '');
+    final iOS = IOSNotificationDetails();
+    final platform = NotificationDetails(android: android, iOS: iOS);
+
+    await flutterLocalNotificationsPlugin.show(
+        0, // notification id
+        "${fileName}",
+        'Download complete.',
+        platform,
+        payload: '$savePath');
+  }
+
   void fireBaseApi() async {
     await firebaseMessaging.requestPermission();
 

@@ -239,9 +239,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         height: 20.w,
                       ),
                       Container(
-                        width: 140.w,
                         child: Text(
-                          "Shop Timing",
+                          "Shop Timing(eg 9 am - 9 pm)",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 14.sp,

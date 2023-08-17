@@ -301,7 +301,10 @@ class AllShopController extends ChangeNotifier {
         },
       );
     } else {
+      offset=0;
+      allShops.clear();
       await getAllShops(context);
+      notifyListeners();
     }
   }
 }
