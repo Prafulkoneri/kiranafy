@@ -324,14 +324,16 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text(
-                                          "${element?.couponCode}",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: SplashText,
-                                                letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w700),
+                                        Flexible(
+                                          child: Text(
+                                            "${element?.couponCode}",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: SplashText,
+                                                  letterSpacing: .5,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
                                           ),
                                         ), // <-- Text
                                         SizedBox(

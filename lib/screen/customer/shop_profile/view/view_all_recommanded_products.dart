@@ -70,7 +70,7 @@ class _AllRecommandedProductsViewState
                       screenName: ShopProfileView(
                         shopId: widget.shopId.toString(),
                         routeName: "viewAllRecommandedProduct",
-                        refreshPage: false,
+                        refreshPage: true,
                       ))),
               (Route<dynamic> route) => false,
             );

@@ -192,13 +192,6 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 width: 13.w,
                               ),
                               InkWell(
-                                // onTap: () {
-                                //   watch.favAllShop
-                                //       ? read.removeAllShopFavList(
-                                //           context, watch.shopDetailData?.id)
-                                //       : read.updateAllShopFavList(
-                                //           context, watch.shopDetailData?.id);
-                                // },
                                 onTap: () {
                                   watch.favAllShop
                                       ? read.removeAllShopFavList(

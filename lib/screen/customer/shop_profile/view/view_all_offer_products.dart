@@ -80,7 +80,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
-                // physics: BouncingScrollPhysics(),
+                physics: AlwaysScrollableScrollPhysics(),
                 controller: scrollController,
                 child: Stack(
                   children: [
