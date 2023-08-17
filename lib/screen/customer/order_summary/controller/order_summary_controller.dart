@@ -208,16 +208,16 @@ class OrderSummaryController extends ChangeNotifier {
         couponDiscount = orderFinalTotals?.couponDiscount.toString() ?? "";
         fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
         //////////////////
-        // int fulfilcravingListLength = fullFillYourCravings?.length ?? 0;
-        // isFulFilProductAdded =
-        //     List<bool>.filled(fulfilcravingListLength, false, growable: true);
-        // for (int i = 0; i < fulfilcravingListLength; i++) {
-        //   if (fullFillYourCravings?[i].addToCartCheck == "yes") {
-        //     isFulFilProductAdded.insert(i, true);
-        //   } else {
-        //     isFulFilProductAdded.insert(i, false);
-        //   }
-        // }
+        int fulfilcravingListLength = fullFillYourCravings?.length ?? 0;
+        isFulFilProductAdded =
+            List<bool>.filled(fulfilcravingListLength, false, growable: true);
+        for (int i = 0; i < fulfilcravingListLength; i++) {
+          if (fullFillYourCravings?[i].addToCartCheck == "yes") {
+            isFulFilProductAdded.insert(i, true);
+          } else {
+            isFulFilProductAdded.insert(i, false);
+          }
+        }
         showLoader(false);
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           Navigator.pushAndRemoveUntil(

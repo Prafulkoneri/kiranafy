@@ -239,7 +239,7 @@ class CustomProductController extends ChangeNotifier {
   }
 
   Future uploadImage(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.submitCustomProduct}");
@@ -268,26 +268,38 @@ class CustomProductController extends ChangeNotifier {
     newList.add(multipartFile);
     request.files.addAll(newList);
     print(request.fields);
-    await request.send().then((response) {
+    await request.send().then((response)async {
+      final respStr = await response.stream.bytesToString();
+      print("respStr${respStr}");
+      var res=jsonDecode(respStr);
+      print(res["status"]);
       if (response.statusCode == 200) {
         print("sucesss");
-        Utils.showPrimarySnackbar(context, "Updated Successfully",
-            type: SnackType.success);
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: SSelectedProductView(
-                    isRefresh: true,
-                    categoryId: selectedCategory,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
-        LoadingOverlay.of(context).hide();
+        if(res["status"]==200){
+          Utils.showPrimarySnackbar(context, res["message"],
+              type: SnackType.success);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                    index: 0,
+                    screenName: SSelectedProductView(
+                      isRefresh: true,
+                      categoryId: selectedCategory,
+                    ))),
+                (Route<dynamic> route) => false,
+          );
+          LoadingOverlay.of(context).hide();
+        }
+        else{
+          LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context,res["message"],
+              type: SnackType.error);
+        }
+
       } else {
         LoadingOverlay.of(context).hide();
-        Utils.showPrimarySnackbar(context, "Error on uploading",
+        Utils.showPrimarySnackbar(context, res["message"],
             type: SnackType.error);
         return;
       }

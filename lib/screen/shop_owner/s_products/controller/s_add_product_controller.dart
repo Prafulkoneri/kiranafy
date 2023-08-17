@@ -89,6 +89,7 @@ int offset=0;
     isSelectAll = false;
     if(offset==0){
       showLoader(true);
+
     }
 
     showPaginationLoader = true;
@@ -107,18 +108,19 @@ int offset=0;
       if (response.statusCode == 200) {
         productData = result.data;
         productDetails = result.data?.productDetails;
+        allAdminProductList.clear();
         allAdminProductList.addAll(productDetails??[]);
         categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
 
-        selectedProduct = List<bool>.filled(productDetails?.length ?? 0, false,
+        selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
             growable: true);
-        int length = productDetails?.length ?? 0;
+        int length = allAdminProductList.length ?? 0;
         selectedProductsId.clear();
         for (int i = 0; i < length; i++) {
-          if (productDetails?[i].selectedByShopOwner == "yes") {
+          if (allAdminProductList[i].selectedByShopOwner == "yes") {
             selectedProduct.insert(i, true);
-            selectedProductsId.add(productDetails?[i].id);
+            selectedProductsId.add(allAdminProductList[i].id);
           }
         }
         showLoader(false);
@@ -208,7 +210,54 @@ int offset=0;
   Future<void> onScrollMaxExtent(context) async {
     print("hello");
     offset = offset + 1;
-    await shopAddProducts(context,categoryId);
+    showPaginationLoader = true;
+    notifyListeners();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print("categoryId$categoryId");
+    shopAddProductRepo
+        .shopAddProducts(
+        shopAddProductRequestModel, pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+      ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
+
+      if (response.statusCode == 200) {
+        productData = result.data;
+        productDetails = result.data?.productDetails;
+        allAdminProductList.addAll(productDetails??[]);
+        categoryName = result.data?.categoryName ?? "";
+        allProductsCount = productData?.allProductsCount ?? 0;
+
+        selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
+            growable: true);
+        int length = allAdminProductList.length ?? 0;
+        selectedProductsId.clear();
+        for (int i = 0; i < length; i++) {
+          if (allAdminProductList[i].selectedByShopOwner == "yes") {
+            selectedProduct.insert(i, true);
+            selectedProductsId.add(allAdminProductList[i].id);
+          }
+        }
+        showLoader(false);
+        showPaginationLoader=false;
+        notifyListeners();
+      } else {
+        showLoader(false);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
     notifyListeners();
   }
 
@@ -224,15 +273,15 @@ int offset=0;
     isSelectAll = !isSelectAll;
     if (isSelectAll) {
       selectedProduct =
-          List<bool>.filled(productDetails?.length ?? 0, true, growable: true);
-      int length = productDetails?.length ?? 0;
+          List<bool>.filled(allAdminProductList.length ?? 0, true, growable: true);
+      int length = allAdminProductList.length ?? 0;
       selectedProductsId.clear();
       for (int i = 0; i < length; i++) {
-        selectedProductsId.add(productDetails?[i].id);
+        selectedProductsId.add(allAdminProductList[i].id);
       }
     } else {
       selectedProduct =
-          List<bool>.filled(productDetails?.length ?? 0, false, growable: true);
+          List<bool>.filled(allAdminProductList.length ?? 0, false, growable: true);
       selectedProductsId.clear();
     }
 

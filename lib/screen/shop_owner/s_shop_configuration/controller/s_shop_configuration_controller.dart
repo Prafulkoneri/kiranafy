@@ -546,7 +546,7 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   Future uploadImage(context) async {
-    // LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.shopconfigurationedit}");
@@ -580,6 +580,14 @@ class SShopConfigurationController extends ChangeNotifier {
         isSixToNine ? "active" : "inactive";
     request.fields['shop_owner_upi_id'] = upiIdController.text;
     request.fields['area_id'] = selectedAreaId;
+    request.fields['min_order_amount_for_delivery'] =  minimumDeliveryAmountController.text;
+    request.fields['accepted_payment_status'] =  isOnlinePaymentSelected && isCODPaymentSelected
+        ? "cod_and_online"
+        : isOnlinePaymentSelected
+        ? "online "
+        : isCODPaymentSelected
+        ? "cod"
+        : "";
     // multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     print(fileImage);
@@ -625,6 +633,7 @@ class SShopConfigurationController extends ChangeNotifier {
           );
         }
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);
         return;
