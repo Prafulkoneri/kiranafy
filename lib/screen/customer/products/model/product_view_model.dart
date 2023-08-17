@@ -114,6 +114,7 @@ class ProductDetails {
   String? productType;
   String? isProductFvrt;
 
+
   ProductDetails(
       {required this.id,
       required this.productName,
@@ -145,6 +146,8 @@ class ProductUnitDetail {
   String? discountPercentage;
   String? unit;
   String? addToCartCheck;
+  String ? productType;
+  // String ? productType;
 
   ProductUnitDetail({
     required this.id,

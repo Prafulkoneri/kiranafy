@@ -635,10 +635,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                               // ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  read.showUnitImages(false);
-                                                  read.productsUnitImage(
-                                                      context,
-                                                      element?.id.toString());
+
+
                                                   //  read.addToCart(watch.productDetails?.id,
                                                   //  watch?.productUnitId,element?.shopId,context);
                                                   read.addToCart(
