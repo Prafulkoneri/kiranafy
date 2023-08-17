@@ -19,6 +19,8 @@ import 'package:local_supper_market/screen/customer/order_summary/repository/app
 import 'package:local_supper_market/screen/customer/order_summary/repository/order_summary_repo.dart';
 import 'package:local_supper_market/screen/customer/order_summary/repository/remove_coupon_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -67,7 +69,7 @@ class OrderSummaryController extends ChangeNotifier {
   String customerPickup = "";
   TextEditingController couponCodeController = TextEditingController();
   int selectedAddressId = 0;
-
+  List<bool> isFulFilProductAdded = [];
   Future<void> initState(
     context,
     cId,
@@ -263,7 +265,7 @@ class OrderSummaryController extends ChangeNotifier {
   }
 
   /////////////////////
-  List<bool> isFulFilProductAdded = [];
+
   void onFulFilCarvingsSelected(index) {
     isFulFilProductAdded[index] = true;
     notifyListeners();
@@ -355,6 +357,7 @@ class OrderSummaryController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        // isFulFilProductAdded[index] = false;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -530,5 +533,44 @@ class OrderSummaryController extends ChangeNotifier {
   void updateCartId(value) {
     cartId = value;
     notifyListeners();
+  }
+
+  ///////////////////////////////////////////////////////
+  RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
+  Future<void> removeFromCart(pType, puId, sId, context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeCartItemRepo
+        .removeCartItem(
+            RemoveItemFromCartReq(
+                productType: pType.toString(),
+                productUnitId: puId.toString(),
+                shopId: sId.toString(),
+                quantity: "0"),
+            pref.getString("successToken"))
+        .then((response) async {
+      log("response.body${response.body}");
+      final result =
+          CartRemoveResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        // isFulFilProductAdded[index] = false;
+        // await getAllOfferes(context, sId);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 }

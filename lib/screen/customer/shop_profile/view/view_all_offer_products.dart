@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +11,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
+
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -95,7 +95,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                   right: 10.w,
                                   bottom: 100.w),
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: watch.allOfferProducts.length ?? 0,
+                              itemCount: watch.allOfferProducts.length,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
@@ -107,7 +107,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                 return GestureDetector(
                                   onTap: () {
                                     readProductViewController.updateProductId(
-                                      element?.id.toString(),
+                                      element.id.toString(),
                                     );
                                     Navigator.pushAndRemoveUntil(
                                       context,
@@ -116,7 +116,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                 index: 1,
                                                 screenName: ProductScreenView(
                                                     selectedUnitId: element
-                                                        ?.productUnitId
+                                                        .productUnitId
                                                         .toString(),
                                                     categoryId: element
                                                         .categoryId
@@ -325,28 +325,64 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                         : Text(""),
                                                   ],
                                                 ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    read.addToCart(
-                                                        element.productType,
-                                                        element.productUnitId,
-                                                        element.shopId,
-                                                        context);
-                                                    watch
-                                                        .onOfferProductSelected(
-                                                            index);
-                                                  },
-                                                  child: watch.isAllOfferProductAdded[
-                                                              index] ==
-                                                          false
-                                                      ? SvgPicture.asset(
+                                                // GestureDetector(
+                                                //   onTap: () {
+                                                //     read.addToCart(
+                                                //         element.productType,
+                                                //         element.productUnitId,
+                                                //         element.shopId,
+                                                //         context);
+                                                //     watch
+                                                //         .onOfferProductSelected(
+                                                //             index);
+                                                //   },
+                                                // child: watch.isAllOfferProductAdded[
+                                                //             index] ==
+                                                //         false
+                                                //       ? SvgPicture.asset(
+                                                //           'assets/images/add.svg',
+                                                //           // width: 15.w,
+                                                //           // height: 19.h,
+                                                //         )
+                                                //       : SvgPicture.asset(
+                                                //           "assets/icons/tick_green_bg.svg"),
+                                                // ),
+                                                watch.isAllOfferProductAdded[
+                                                            index] ==
+                                                        false
+                                                    ? GestureDetector(
+                                                        onTap: () {
+                                                          read.addToCart(
+                                                              element
+                                                                  .productType,
+                                                              element
+                                                                  .productUnitId,
+                                                              element.shopId,
+                                                              index,
+                                                              context);
+                                                          // watch
+                                                          //     .onOfferSelected(
+                                                          //         index);
+                                                        },
+                                                        child: SvgPicture.asset(
                                                           'assets/images/add.svg',
                                                           // width: 15.w,
                                                           // height: 19.h,
-                                                        )
-                                                      : SvgPicture.asset(
-                                                          "assets/icons/tick_green_bg.svg"),
-                                                ),
+                                                        ))
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          read.removeFromCart(
+                                                              element
+                                                                  .productType,
+                                                              element
+                                                                  .productUnitId,
+                                                              element.shopId,
+                                                              index,
+                                                              context);
+                                                        },
+                                                        child: SvgPicture.asset(
+                                                            "assets/icons/tick_green_bg.svg"),
+                                                      ),
                                               ],
                                             ),
                                           ),

@@ -9,10 +9,12 @@ import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products_model.dart';
 
 import 'package:local_supper_market/screen/customer/shop_profile/repository/all_products_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/customer_view_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,7 +33,7 @@ class AllOffersController extends ChangeNotifier {
   List<bool> isAllOfferProductAdded = [];
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
-
+  RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
   Future<void> initState(context, id) async {
     allOfferProducts.clear();
     offset = 0;
@@ -182,7 +184,7 @@ class AllOffersController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType, pId, sId, context) async {
+  Future<void> addToCart(pType, pId, sId, index, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
         .addProductToCart(
@@ -197,6 +199,7 @@ class AllOffersController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        isAllOfferProductAdded[index] = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -224,5 +227,43 @@ class AllOffersController extends ChangeNotifier {
     isLoading = false;
 
     notifyListeners();
+  }
+
+  ////////////////////////////////////////////////////////
+  Future<void> removeFromCart(pType, puId, sId, index, context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeCartItemRepo
+        .removeCartItem(
+            RemoveItemFromCartReq(
+                productType: pType.toString(),
+                productUnitId: puId.toString(),
+                shopId: sId.toString(),
+                quantity: "0"),
+            pref.getString("successToken"))
+        .then((response) async {
+      log("response.body${response.body}");
+      final result =
+          CartRemoveResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        isAllOfferProductAdded[index] = false;
+        // await getAllOfferes(context, sId);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 }
