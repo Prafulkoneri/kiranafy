@@ -11,6 +11,8 @@ import 'package:local_supper_market/screen/customer/category/repository/product_
 import 'package:local_supper_market/screen/customer/category/repository/product_as_per_filter_repo.dart';
 import 'package:local_supper_market/screen/customer/category/repository/search_product_as_per_category_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -215,7 +217,7 @@ class ProductCategoryController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType, pId, sId, context) async {
+  Future<void> addToCart(pType, pId, sId, index, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
         .addProductToCart(
@@ -230,6 +232,46 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        isCategoryProductAdded[index] = false;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
+  ///////////////////////////////
+  Future<void> removeFromCart(pType, puId, sId, index, context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    removeCartItemRepo
+        .removeCartItem(
+            RemoveItemFromCartReq(
+                productType: pType.toString(),
+                productUnitId: puId.toString(),
+                shopId: sId.toString(),
+                quantity: "0"),
+            pref.getString("successToken"))
+        .then((response) async {
+      log("response.body${response.body}");
+      final result =
+          CartRemoveResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        isCategoryProductAdded[index] = false;
+        // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
