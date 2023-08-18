@@ -67,6 +67,7 @@ class ProductViewController extends ChangeNotifier {
   bool isUnitImagesVisible = false;
   String routeName = "";
   List unitImages = [];
+  List cartItemIdList=[];
   String cartItemId="";
   String quantityAction="";
 
@@ -93,6 +94,7 @@ class ProductViewController extends ChangeNotifier {
     print(productId);
     quantityList.clear();
     unitImages.clear();
+    cartItemIdList.clear();
     await productsView(context, sId, cId, pId, pType);
     // await productsUnitImage(context, suId);
     print("55555555555555555555555555555555555");
@@ -155,6 +157,7 @@ class ProductViewController extends ChangeNotifier {
     print(quantityList[index]);
     print("*********");
     quantityAction = "subtract";
+    cartItemId=cartItemIdList[index].toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
         .cartItemQuantity(
@@ -198,6 +201,7 @@ class ProductViewController extends ChangeNotifier {
   Future<void> addItemQuantity(context, CIId, index) async {
     quantityBtnPressed(true);
     quantityAction = "add";
+    cartItemId=cartItemIdList[index].toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
         .cartItemQuantity(
@@ -211,6 +215,7 @@ class ProductViewController extends ChangeNotifier {
         quantityList.removeAt(index);
         quantityList.insert(index, value + 1);
         quantityBtnPressed(false);
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -263,8 +268,9 @@ class ProductViewController extends ChangeNotifier {
         int unitDetailLength=productViewData?.productUnitDetails?.length??0;
         for(int i=0;i<unitDetailLength;i++){
           quantityList.add(productViewData?.productUnitDetails?[i].quantity);
+          cartItemIdList.add(productViewData?.productUnitDetails?[i].cartItemId);
         }
-
+print("cartIteMlIST${cartItemIdList}");
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
         isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
 
@@ -708,6 +714,7 @@ class ProductViewController extends ChangeNotifier {
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         cartItemId=result.cartItemId.toString();
+        cartItemIdList.insert(index,result.cartItemId);
         isSimilarProductAdded[index] = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -799,6 +806,7 @@ class ProductViewController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        cartItemIdList.insert(index,0);
         isSimilarProductAdded[index] = false;
         // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,

@@ -388,10 +388,7 @@ class _MainScreenViewState extends State<MainScreenView> {
               ),
             ),
           )),
-      body: PageStorage(
-        bucket: watch.bucket,
-        child: watch.currentScreen,
-      ),
+      body:  watch.currentScreen,
     );
   }
 }
