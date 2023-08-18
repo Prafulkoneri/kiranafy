@@ -94,7 +94,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                 ),
                                 Expanded(
                                   child: GestureDetector(
-                                    onTap: () async {
+                                    onTap: () {
                                       Navigator.pop(context);
                                       // await read.deleteShopCart(
                                       //   context,
@@ -374,7 +374,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                               index: 1,
                                                               screenName:
                                                                   ProductScreenView(
-                                                                    // selectedUnitId: element?.productUnitId.toString(),
+                                                                // selectedUnitId: element?.productUnitId.toString(),
                                                                 categoryId: element
                                                                     ?.categoryId
                                                                     .toString(),
