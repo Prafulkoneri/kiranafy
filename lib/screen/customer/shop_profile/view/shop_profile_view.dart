@@ -415,7 +415,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                     width: 9.w,
                                   ),
                                   Text(
-                                    "${watch.shopDetails?.shopOwnerShopOpeningTime} ${watch.shopDetails?.shopOwnerShopCloseTime}",
+                                    "${watch.shopDetails?.shopOwnerShopOpeningTime} - ${watch.shopDetails?.shopOwnerShopCloseTime}",
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                           color: Color(0xff3A3A3A),

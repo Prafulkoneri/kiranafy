@@ -637,7 +637,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                 ],
                               ),
                               Positioned(
-                                bottom: 50.w,
+                                bottom: 40.w,
                                 left: 0,
                                 right: 0,
                                 child: Visibility(
@@ -665,7 +665,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                           ),
                         ),
                         SizedBox(
-                          height: 30.w,
+                          height: 100.w,
                         ),
                       ])),
             ),

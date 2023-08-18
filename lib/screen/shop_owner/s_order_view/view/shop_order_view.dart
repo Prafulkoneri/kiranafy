@@ -317,9 +317,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     .circular(
                                                                         10),
                                                             side: BorderSide(
-                                                              color: Color(
-                                                                  0xff39C19D),
+                                                              // color: Color(
+                                                              //     0xff39C19D),
                                                               // width: 1,
+                                                              color: Colors.red,
                                                             ),
                                                           ),
                                                         ),
@@ -330,8 +331,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                         style:
                                                             GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
-                                                              color: Color(
-                                                                  0xff39C19D),
+                                                              color: Colors.red,
+                                                              //  Color(
+                                                              //     0xff39C19D),
                                                               // letterSpacing: .5,
                                                               fontSize: 12.sp,
                                                               fontWeight:
@@ -339,7 +341,6 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                       .w500),
                                                         ),
                                                       ),
-
                                                       //
                                                     ),
                                                   )
@@ -1211,7 +1212,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 ),
                                 Container(
                                   padding:
-                                      EdgeInsets.only(left: 19.w, right: 25.w),
+                                      EdgeInsets.only(left: 19.w, right: 18.w),
                                   child: Row(
                                     // crossAxisAlignment: CrossAxisAlignment.start,/
                                     mainAxisAlignment:
@@ -1237,19 +1238,19 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                         // maxLines: 3,
                                         watch.orderDetails?.deliverySlot ==
                                                 "shop_owner_slot_9_to_12"
-                                            ? "9:00 AM - 12:00 PM"
+                                            ? "09:00 AM - 12:00 PM"
                                             : watch.orderDetails
                                                         ?.deliverySlot ==
                                                     "shop_owner_slot_12_to_3"
-                                                ? "12:00 PM - 3:00 PM"
+                                                ? "12:00 PM - 03:00 PM"
                                                 : watch.orderDetails
                                                             ?.deliverySlot ==
                                                         "shop_owner_slot_3_to_6"
-                                                    ? "3:00 PM - 6:00 PM"
+                                                    ? "03:00 PM - 06:00 PM"
                                                     : watch.orderDetails
                                                                 ?.deliverySlot ==
                                                             "shop_owner_slot_6_to_9"
-                                                        ? "6:00 PM - 9:00 PM"
+                                                        ? "06:00 PM - 09:00 PM"
                                                         : "",
                                         // textAlign: TextAlign.start,
                                         style: GoogleFonts.dmSans(
