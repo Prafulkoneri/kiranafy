@@ -252,7 +252,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                   // height: 95.h,
                                   // width: 352.w,
                                   child: ListView.builder(
-                                      padding: EdgeInsets.only(bottom: 100.w),
+                                      padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
                                       physics: BouncingScrollPhysics(),
                                       // physics: NeverScrollableScrollPhysics(),
@@ -288,6 +288,9 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                 ?.productType),
                                                       )),
                                               (Route<dynamic> route) => false,
+                                            );
+                                            print(
+                                              element?.productUnitId.toString(),
                                             );
                                           },
                                           child: Column(
@@ -514,7 +517,8 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                         return element?.offerPrice == "" &&
                                                 element?.mrpPrice == "" &&
                                                 element?.productUnitId == null
-                                            ? GestureDetector(
+                                            ? Container()
+                                            : GestureDetector(
                                                 onTap: () {
                                                   readProductViewController
                                                       .updateProductId(
@@ -739,8 +743,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                     ),
                                                   ],
                                                 ),
-                                              )
-                                            : Container();
+                                              );
                                       }),
                                 ),
                               ],
