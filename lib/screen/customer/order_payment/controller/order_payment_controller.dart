@@ -100,7 +100,6 @@ class OrderPaymentController extends ChangeNotifier {
         orderPaymentData = result.orderPayment;
         shopDetailData = result.orderPayment?.shopDetails;
         showLoader(false);
-
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -141,8 +140,9 @@ class OrderPaymentController extends ChangeNotifier {
     // showStackLoader(true);
     print(shopDetailData?.minimumOrderAmountForDelivery);
     print(orderPaymentData?.finalTotalAmount);
-    int minAmount=shopDetailData?.minimumOrderAmountForDelivery??0;
-    int totalOrderAmount=int.parse(orderPaymentData?.finalTotalAmount.toString()??"0");
+    int minAmount = shopDetailData?.minimumOrderAmountForDelivery ?? 0;
+    double totalOrderAmount =
+        double.parse(orderPaymentData?.finalTotalAmount.toString() ?? "0");
     if (minAmount > totalOrderAmount) {
       Utils.showPrimarySnackbar(context,
           "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
