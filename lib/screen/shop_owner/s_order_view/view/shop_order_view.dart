@@ -1464,9 +1464,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                       ),
                               ]),
                             ),
-                            watch.orderDetails?.totalDiscount != ""
+                            watch.couponDetails?.couponDiscount != null
                                 ? Text(
-                                    " - Rs ${watch.orderDetails?.totalDiscount}",
+                                    " - Rs. ${watch.couponDetails?.couponDiscount}",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: grey5,
@@ -1476,7 +1476,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                     ),
                                   )
                                 : Text(
-                                    "Rs 0",
+                                    "- Rs. 0",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: grey5,

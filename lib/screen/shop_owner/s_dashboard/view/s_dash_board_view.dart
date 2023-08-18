@@ -1550,7 +1550,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "INR ${watch.dashBoardData?.totalRefund??"0"}",
+                                  "INR ${watch.dashBoardData?.totalRefund ?? "0"}",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(

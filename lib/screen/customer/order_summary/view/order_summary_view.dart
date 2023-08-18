@@ -1703,7 +1703,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   : InkWell(
                                       onTap: () {
                                         Utils.showPrimarySnackbar(context,
-                                            "Cannot Select Delivery To",
+                                            "This shop provides only self- pickup option.",
                                             type: SnackType.error);
                                       },
                                       child: Container(
@@ -1749,7 +1749,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   : InkWell(
                                       onTap: () {
                                         Utils.showPrimarySnackbar(context,
-                                            "Cannot Select  Select Pickup",
+                                            "This shop provides only delivery option.",
                                             type: SnackType.error);
                                       },
                                       child: Container(
