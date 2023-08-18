@@ -118,7 +118,7 @@ class _AddProductViewState extends State<AddProductView> {
                               PrimaryCheckBox(
                                 // value: watch.selectedProduct[index],
                                 onChanged: (value) {
-                                  read.onSelecteAllProducts();
+                                  read.onSelecteAllProducts(context);
                                 },
                                 value: watch.isSelectAll,
                               ),

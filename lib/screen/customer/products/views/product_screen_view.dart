@@ -637,6 +637,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                 onTap: () {
                                                   //  read.addToCart(watch.productDetails?.id,
                                                   //  watch?.productUnitId,element?.shopId,context);
+                                                  watch.onUnitImagesSelected(
+                                                      index);
                                                   read.addToCart(
                                                       element?.productType
                                                           .toString(),
@@ -646,8 +648,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                           .toString(),
                                                       index,
                                                       context);
-                                                  watch.onUnitImagesSelected(
-                                                      index);
+
                                                 },
                                                 child: watch.isUnitImagesAdded[
                                                             index] ==

@@ -99,14 +99,17 @@ class Data {
 class BannerImageData {
   String? imagesPath;
   String? imageName;
+  String ? rating;
 
   BannerImageData({
     this.imageName,
     this.imagesPath,
+    this.rating,
   });
 
   BannerImageData.fromJson(Map<String, dynamic> json) {
     imagesPath = json["shop_banner_image_path"];
     imageName = json["shop_banner_image_name"];
+    rating = json["ratings"];
   }
 }
