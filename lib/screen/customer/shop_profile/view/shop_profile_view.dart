@@ -35,17 +35,17 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_s
 import 'package:url_launcher/url_launcher.dart';
 
 class ShopProfileView extends StatefulWidget {
-  final String? shopId;
-  final String? routeName;
-  final String? categoryId;
-  final bool? refreshPage;
-
   const ShopProfileView(
       {super.key,
       this.shopId,
       this.routeName,
       this.categoryId,
       this.refreshPage});
+
+  final String? categoryId;
+  final bool? refreshPage;
+  final String? routeName;
+  final String? shopId;
 
   @override
   State<ShopProfileView> createState() => _ShopProfileViewState();
