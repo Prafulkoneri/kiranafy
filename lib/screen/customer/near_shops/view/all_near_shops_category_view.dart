@@ -477,7 +477,10 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                       ),
                                                                       Text(
                                                                         // "${element.ratings}",
-                                                                        "${element.ratings ?? "0.0"}",
+                                                                        // "${element.ratings ?? "0.0"}",
+                                                                        double.parse(element.ratings.toString() ??
+                                                                                "0.0")
+                                                                            .toStringAsFixed(1),
                                                                         // "0.0",
                                                                         style: GoogleFonts
                                                                             .dmSans(

@@ -195,6 +195,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                                                   onTap: () {
                                                     read.shopAccountDelete(
                                                         context);
+                                                    //  read.shopAccountDelete(context);
                                                   },
                                                   child: Container(
                                                     padding: EdgeInsets.only(

@@ -658,56 +658,76 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                         // width: 15.w,
                                                         // height: 19.h,
                                                       )
-                                                    :     Row(
-                                                  children: [
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        if (watch.isQuanityBtnPressed) {
-                                                          return;
-                                                        }
-                                                        read.subtractItemQuantity(context, element?.cartItemId.toString(),index,element?.productType,element?.productUnitId);
-                                                      },
-                                                      child: SvgPicture.asset(
-                                                        'assets/icons/minus.svg',
-                                                        // width: 30.w,
-                                                        // height: 30.h,
+                                                    : Row(
+                                                        children: [
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              if (watch
+                                                                  .isQuanityBtnPressed) {
+                                                                return;
+                                                              }
+                                                              read.subtractItemQuantity(
+                                                                  context,
+                                                                  element
+                                                                      ?.cartItemId
+                                                                      .toString(),
+                                                                  index,
+                                                                  element
+                                                                      ?.productType,
+                                                                  element
+                                                                      ?.productUnitId);
+                                                            },
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              'assets/icons/minus.svg',
+                                                              // width: 30.w,
+                                                              // height: 30.h,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 12.w,
+                                                          ),
+                                                          Text(
+                                                            "${watch.quantityList[index]}",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  // decoration:
+                                                                  // TextDecoration.lineThrough,
+                                                                  color: Black,
+                                                                  // letterSpacing:
+                                                                  //     .5,
+                                                                  fontSize: 16.sp,
+                                                                  fontWeight: FontWeight.w500),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 12.w,
+                                                          ),
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              print(watch
+                                                                  .isQuanityBtnPressed);
+                                                              if (watch
+                                                                  .isQuanityBtnPressed) {
+                                                                return;
+                                                              }
+                                                              read.addItemQuantity(
+                                                                  context,
+                                                                  element
+                                                                      ?.cartItemId
+                                                                      .toString(),
+                                                                  index);
+                                                            },
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              'assets/images/add.svg',
+                                                              // width: 30.w,
+                                                              // height: 30.h,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 12.w,
-                                                    ),
-                                                    Text(
-                                                      "${watch.quantityList[index]}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                          // decoration:
-                                                          // TextDecoration.lineThrough,
-                                                            color: Black,
-                                                            // letterSpacing:
-                                                            //     .5,
-                                                            fontSize: 16.sp,
-                                                            fontWeight: FontWeight.w500),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 12.w,
-                                                    ),
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        print(watch.isQuanityBtnPressed);
-                                                        if (watch.isQuanityBtnPressed) {
-                                                          return;
-                                                        }
-                                                        read.addItemQuantity(context, element?.cartItemId.toString(),index);
-                                                      },
-                                                      child: SvgPicture.asset(
-                                                        'assets/images/add.svg',
-                                                        // width: 30.w,
-                                                        // height: 30.h,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
                                               )
                                             ],
                                           ),

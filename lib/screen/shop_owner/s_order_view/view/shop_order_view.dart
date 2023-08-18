@@ -79,8 +79,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                         builder: (context) => SMainScreenView(
                             index: 1,
                             screenName: SOrderStatusView(
-                                selectedIndex: widget.selectedIndex))),(Route<dynamic> route) => false,
-            )
+                                selectedIndex: widget.selectedIndex))),
+                    (Route<dynamic> route) => false,
+                  )
                 : Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
@@ -1338,19 +1339,19 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                         // maxLines: 3,
                                         watch.orderDetails?.deliverySlot ==
                                                 "shop_owner_slot_9_to_12"
-                                            ? "9:00 AM - 12:00 PM"
+                                            ? "09:00 AM - 12:00 PM"
                                             : watch.orderDetails
                                                         ?.deliverySlot ==
                                                     "shop_owner_slot_12_to_3"
-                                                ? "12:00 PM - 3:00 PM"
+                                                ? "12:00 PM - 03:00 PM"
                                                 : watch.orderDetails
                                                             ?.deliverySlot ==
                                                         "shop_owner_slot_3_to_6"
-                                                    ? "3:00 PM - 6:00 PM"
+                                                    ? "03:00 PM - 06:00 PM"
                                                     : watch.orderDetails
                                                                 ?.deliverySlot ==
                                                             "shop_owner_slot_6_to_9"
-                                                        ? "6:00 PM - 9:00 PM"
+                                                        ? "06:00 PM - 09:00 PM"
                                                         : "",
                                         // textAlign: TextAlign.start,
                                         style: GoogleFonts.dmSans(
@@ -2279,57 +2280,76 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   ],
                                                 ),
                                               )
-                                            :watch.orderDetails?.shopOwnerRefundStatus =="reject"?Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 17.w),
-                              color: Color(0xffFFE8E8),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 15.w,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment
-                                        .spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .start,
-                                        children: [
-                                          Text(
-                                            "Return Request Rejected ",
-                                            style: TextStyle(
-                                                fontWeight:
-                                                FontWeight
-                                                    .w700,
-                                                color: Colors
-                                                    .black,
-                                                fontSize:
-                                                18.sp),
-                                          ),
-
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 15.w,
-                                  ),
-                                  Text("Reason",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16.sp),),
-                                  SizedBox(
-                                    height: 6.w,
-                                  ),
-                                  Text(watch.orderDetails?.shopOwnerRejectReason??"Not Mentioned",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16.sp),),
-                              SizedBox(
-                                  height:45.w
-                              ),
-                                ],
-                              ),
-                            ):Container(),
+                                            : watch.orderDetails
+                                                        ?.shopOwnerRefundStatus ==
+                                                    "reject"
+                                                ? Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 17.w),
+                                                    color: Color(0xffFFE8E8),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 15.w,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  "Return Request Rejected ",
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          18.sp),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 15.w,
+                                                        ),
+                                                        Text(
+                                                          "Reason",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 16.sp),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 6.w,
+                                                        ),
+                                                        Text(
+                                                          watch.orderDetails
+                                                                  ?.shopOwnerRejectReason ??
+                                                              "Not Mentioned",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 16.sp),
+                                                        ),
+                                                        SizedBox(height: 45.w),
+                                                      ],
+                                                    ),
+                                                  )
+                                                : Container(),
                           ],
                         )
                       : Container(

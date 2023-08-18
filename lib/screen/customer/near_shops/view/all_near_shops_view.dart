@@ -75,7 +75,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                 //           ))),
                 //   (Route<dynamic> route) => false,
                 // );
-                Navigator.of(context).popUntil((route) => route.settings.name == "MainScreenView");
+                Navigator.of(context).popUntil(
+                    (route) => route.settings.name == "MainScreenView");
                 return false;
               },
               child: SingleChildScrollView(
@@ -109,7 +110,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     borderSide:
                                         BorderSide(width: 1, color: splashnone),
                                     borderRadius: BorderRadius.circular(8.w)),
-                                hintText: 'Search your shop and products..',
+                                hintText: 'Search your shop.......',
                                 hintStyle: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Grey,
@@ -468,8 +469,11 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                       ),
                                                                       Text(
                                                                         // "${element.ratings}",
-                                                                        "${element.ratings ?? "0.0"}",
+                                                                        // "${element.ratings ?? "0.0"}",
                                                                         // "0.0",
+                                                                        double.parse(element.ratings.toString() ??
+                                                                                "0.0")
+                                                                            .toStringAsFixed(1),
                                                                         style: GoogleFonts
                                                                             .dmSans(
                                                                           textStyle: TextStyle(

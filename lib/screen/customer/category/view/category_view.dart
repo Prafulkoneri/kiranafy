@@ -73,7 +73,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                       screenName: ShopProfileView(
                         shopId: widget.shopId.toString(),
                         routeName: "categoryView",
-                        refreshPage: false,
+                        refreshPage: true,
                       ))),
               (Route<dynamic> route) => false,
             );

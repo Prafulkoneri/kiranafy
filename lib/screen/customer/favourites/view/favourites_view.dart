@@ -264,7 +264,13 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                   width: 4.3.w,
                                                                 ),
                                                                 Text(
-                                                                  "4.5",
+                                                                  // "",
+                                                                  double.parse(element
+                                                                              ?.ratings
+                                                                              .toString() ??
+                                                                          "0.0")
+                                                                      .toStringAsFixed(
+                                                                          1),
                                                                   style:
                                                                       GoogleFonts
                                                                           .dmSans(
@@ -366,9 +372,10 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                           watch.adminProductList?[index];
                                       return GestureDetector(
                                         onTap: () {
-                                          readProductViewController.updateProductId(element
-                                              ?.id
-                                              .toString(),);
+                                          readProductViewController
+                                              .updateProductId(
+                                            element?.id.toString(),
+                                          );
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
@@ -377,7 +384,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                       index: 1,
                                                       screenName:
                                                           ProductScreenView(
-                                                            selectedUnitId: element?.productUnitId.toString(),
+                                                        selectedUnitId: element
+                                                            ?.productUnitId
+                                                            .toString(),
                                                         categoryId: element
                                                             ?.categoryId
                                                             .toString(),
@@ -398,11 +407,6 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                               color: Colors.white,
                                               borderRadius:
                                                   BorderRadius.circular(15.w)),
-                                          // padding: EdgeInsets.only(
-                                          //     left: 17.h,
-                                          //     // right: 15.w,
-                                          //     top: 13.w,
-                                          //     bottom: 14.w),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -414,7 +418,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                 child: AppNetworkImages(
                                                   imageUrl:
                                                       "${element?.productImagePath}",
-                                                  // fit: BoxFit.contain,/
+                                                  fit: BoxFit.contain,
                                                 ),
                                               )),
                                               SizedBox(

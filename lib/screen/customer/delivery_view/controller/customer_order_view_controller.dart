@@ -167,8 +167,9 @@ class CustomerOrderViewController extends ChangeNotifier {
         await customerOrderView(context, orderId);
         showLoader(false);
         LoadingOverlay.of(context).hide();
-        if(value=="not_received"){
-          Utils.showPrimarySnackbar(context,"Have send notification regarding this concern. Will connect with you shortly.",
+        if (value == "not_received") {
+          Utils.showPrimarySnackbar(context,
+              "Have send notification regarding this concern. Will connect with you shortly.",
               type: SnackType.success);
         }
       } else {
@@ -475,6 +476,12 @@ class CustomerOrderViewController extends ChangeNotifier {
           review: reviewController.text,
           rating: ratingValue.toString());
   Future<void> shopSubmitreview(context) async {
+    if (ratingValue == null) {
+      Utils.showPrimarySnackbar(context, "Please Select Rating",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
     if (reviewController.text == "") {
       Utils.showPrimarySnackbar(context, "Please  Enter Your Feedback",
           type: SnackType.error);
@@ -574,8 +581,8 @@ class CustomerOrderViewController extends ChangeNotifier {
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
-    orderInvoicerepo.orderInvoice(
-        orderInvoiceRequestModel, pref.getString("successToken"))
+    orderInvoicerepo
+        .orderInvoice(orderInvoiceRequestModel, pref.getString("successToken"))
         .then((response) async {
       log(response.body);
       final result = OrderInvoiceResModel.fromJson(jsonDecode(response.body));
@@ -605,13 +612,16 @@ class CustomerOrderViewController extends ChangeNotifier {
           print('savepath');
           print("savePath${savePath}");
           print('savepath');
-          fileurl=Endpoint.baseUrl.toString().substring(0,Endpoint.baseUrl.toString().length-4).toString()+"${orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString()}";
+          fileurl = Endpoint.baseUrl
+                  .toString()
+                  .substring(0, Endpoint.baseUrl.toString().length - 4)
+                  .toString() +
+              "${orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString()}";
           //output:  /storage/emulated/0/Download/banner.png
 
           try {
             await Dio().download(fileurl, savePath,
                 onReceiveProgress: (received, total) {
-
               if (total != -1) {
                 print((received / total * 100).toStringAsFixed(0) + "%");
                 //you can build progressbar feature too
@@ -619,12 +629,12 @@ class CustomerOrderViewController extends ChangeNotifier {
             });
             print("File is saved to download folder.");
           } on DioError catch (e) {
-
             print(e.message);
-            Utils.showPrimarySnackbar(context,"Invalid Url", type: SnackType.error);
+            Utils.showPrimarySnackbar(context, "Invalid Url",
+                type: SnackType.error);
             return;
           }
-          _showNotification(saveName,savePath);
+          _showNotification(saveName, savePath);
         }
         print("No permission to read and write.");
         print(directory?.path.toString());
@@ -648,7 +658,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> _showNotification(fileName,savePath) async {
+  Future<void> _showNotification(fileName, savePath) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
