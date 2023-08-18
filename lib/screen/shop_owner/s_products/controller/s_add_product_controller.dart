@@ -228,9 +228,15 @@ int offset=0;
         allAdminProductList.addAll(productDetails??[]);
         categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
+        if(isSelectAll){
+          selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, true,
+              growable: true);
+        }
+        else{
+          selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
+              growable: true);
+        }
 
-        selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
-            growable: true);
         int length = allAdminProductList.length ?? 0;
         selectedProductsId.clear();
         for (int i = 0; i < length; i++) {
@@ -269,16 +275,51 @@ int offset=0;
     return status;
   }
 
-  void onSelecteAllProducts() {
+  void onSelecteAllProducts(context)async {
     isSelectAll = !isSelectAll;
     if (isSelectAll) {
-      selectedProduct =
-          List<bool>.filled(allAdminProductList.length ?? 0, true, growable: true);
-      int length = allAdminProductList.length ?? 0;
       selectedProductsId.clear();
-      for (int i = 0; i < length; i++) {
-        selectedProductsId.add(allAdminProductList[i].id);
-      }
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      print("categoryId$categoryId");
+      shopAddProductRepo
+          .shopAddProducts(
+          ShopAddProductsListRequestModel(category_id: categoryId,limit: "5000",offset:offset.toString() ), pref.getString("successToken"))
+          .then((response) {
+        print(response.body);
+        final result =
+        ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
+
+        if (response.statusCode == 200) {
+          productData = result.data;
+          productDetails = result.data?.productDetails;
+          selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, true,
+                growable: true);
+int length=productDetails?.length??0;
+          for (int i = 0; i < length; i++) {
+            selectedProductsId.add(productDetails?[i].id);
+          }
+          print(selectedProductsId);
+          // showPaginationLoader=false;
+          notifyListeners();
+        } else {
+          showLoader(false);
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+            (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+      notifyListeners();
+
+      print(selectedProductsId);
     } else {
       selectedProduct =
           List<bool>.filled(allAdminProductList.length ?? 0, false, growable: true);

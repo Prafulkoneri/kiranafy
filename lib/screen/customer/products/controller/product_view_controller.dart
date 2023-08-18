@@ -89,6 +89,7 @@ class ProductViewController extends ChangeNotifier {
 
 
   Future<void> initState(context, sId, cId, pId, suId, pType, rName) async {
+    isUnitImagesVisible=false;
     print("productId");
     print(pId);
     print(productId);
@@ -237,12 +238,57 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
+  Future<void> addToCart(pType, pId, sId, index, context) async {
+
+    print("quantityList1${quantityList}");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    addProductToCartRepo
+        .addProductToCart(
+        AddProductToCartReqModel(
+            productType: pType,
+            productUnitId: pId.toString(),
+            shopId: sId.toString(),
+            quantity: "1"),
+        pref.getString("successToken"))
+        .then((response) {
+      dev.log("response.body${response.body}");
+      final result =
+      AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        cartItemId=result.cartItemId.toString();
+        print("quantityList2${quantityList}");
+        // quantityList.removeAt(index);
+        // quantityList.insert(index,1);
+        print("quantityList3${quantityList}");
+        cartItemIdList.insert(index,result.cartItemId);
+        isSimilarProductAdded[index] = true;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
   ProductViewRequestModel get productViewRequestModel =>
       ProductViewRequestModel(
           shopId: shopId, categoryId: categoryId, productId: productId);
 
   Future<void> productsView(context, sId, cId, pId, pType) async {
     // print("id$id");
+    quantityList.clear();
     print("helohhhhhhhhooooooooooooo");
     shopId = sId.toString();
     categoryId = cId.toString();
@@ -270,6 +316,7 @@ class ProductViewController extends ChangeNotifier {
           quantityList.add(productViewData?.productUnitDetails?[i].quantity);
           cartItemIdList.add(productViewData?.productUnitDetails?[i].cartItemId);
         }
+        print("quantityListInitState${quantityList}");
 print("cartIteMlIST${cartItemIdList}");
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
         isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
@@ -326,6 +373,7 @@ print("cartIteMlIST${cartItemIdList}");
 
   void onUnitImagesSelected(index) {
     isUnitImagesAdded[index] = true;
+    quantityList.removeAt(index);
     quantityList.insert(index,1);
     notifyListeners();
   }
@@ -698,43 +746,7 @@ print("cartIteMlIST${cartItemIdList}");
     );
   }
 
-  Future<void> addToCart(pType, pId, sId, index, context) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    addProductToCartRepo
-        .addProductToCart(
-            AddProductToCartReqModel(
-                productType: pType,
-                productUnitId: pId.toString(),
-                shopId: sId.toString(),
-                quantity: "1"),
-            pref.getString("successToken"))
-        .then((response) {
-      dev.log("response.body${response.body}");
-      final result =
-          AddProductToCartResModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        cartItemId=result.cartItemId.toString();
-        cartItemIdList.insert(index,result.cartItemId);
-        isSimilarProductAdded[index] = true;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
+
 
   void updateProductId(value) {
     productId = value;
