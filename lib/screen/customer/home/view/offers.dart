@@ -197,7 +197,7 @@ class _OfferPageState extends State<OfferPage> {
                                                         //     ?
                                                         Center(
                                                   child: Text(
-                                                      "${element?.off}  % off",
+                                                      "${element?.off}% off",
                                                       // textAlign: TextAlign.center,
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(

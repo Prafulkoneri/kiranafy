@@ -71,34 +71,34 @@ class SShopConfigurationController extends ChangeNotifier {
 
   Future<void> initState(context, initialConfiguration) async {
     upiIdController.clear();
-     supportNumberController.clear();
-     firstDeliveryController.clear();
+    supportNumberController.clear();
+    firstDeliveryController.clear();
     secondDeliveryController.clear();
     thirdDeliveryController.clear();
     fourthDeliveryController.clear();
     startShopTimeController.clear();
     endShopTimeController.clear();
     imageNameController.clear();
-     isCustomerPickupSelected = false;
-     isOnlinePaymentSelected = false;
-     isCODPaymentSelected = false;
-     ifFreePickupSelected = false;
-     isDeliveryCustomerSelected = false;
-     isDeliveryChargesSelected = false;
-     isNineToTwelve = false;
-     isTwelveToThree = false;
-     isThreeToSix = false;
-     isSixToNine = false;
+    isCustomerPickupSelected = false;
+    isOnlinePaymentSelected = false;
+    isCODPaymentSelected = false;
+    ifFreePickupSelected = false;
+    isDeliveryCustomerSelected = false;
+    isDeliveryChargesSelected = false;
+    isNineToTwelve = false;
+    isTwelveToThree = false;
+    isThreeToSix = false;
+    isSixToNine = false;
     fileImage = File("");
     networkImage = "";
-     image = "";
+    image = "";
     isLoading = true;
     isInitialConfiguration = true;
-     shopDeliveryAreaData?.clear();
+    shopDeliveryAreaData?.clear();
     selectedDeliveryAreaList.clear();
     selectedDeliveryAreaId.clear();
     selectedDeliveryAreaName.clear();
-     selectedAreaId = "";
+    selectedAreaId = "";
     areaList?.clear();
     initialSelectedAreaId.clear();
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -580,14 +580,16 @@ class SShopConfigurationController extends ChangeNotifier {
         isSixToNine ? "active" : "inactive";
     request.fields['shop_owner_upi_id'] = upiIdController.text;
     request.fields['area_id'] = selectedAreaId;
-    request.fields['min_order_amount_for_delivery'] =  minimumDeliveryAmountController.text;
-    request.fields['accepted_payment_status'] =  isOnlinePaymentSelected && isCODPaymentSelected
-        ? "cod_and_online"
-        : isOnlinePaymentSelected
-        ? "online "
-        : isCODPaymentSelected
-        ? "cod"
-        : "";
+    request.fields['min_order_amount_for_delivery'] =
+        minimumDeliveryAmountController.text;
+    request.fields['accepted_payment_status'] =
+        isOnlinePaymentSelected && isCODPaymentSelected
+            ? "cod_and_online"
+            : isOnlinePaymentSelected
+                ? "online "
+                : isCODPaymentSelected
+                    ? "cod"
+                    : "";
     // multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     print(fileImage);
@@ -647,6 +649,7 @@ class SShopConfigurationController extends ChangeNotifier {
   void onClearAreaSearch() {
     print("hello");
     areaSearchController.clear();
+    shopDeliveryArea(context);
     notifyListeners();
   }
 

@@ -240,7 +240,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                       ),
                       Container(
                         child: Text(
-                          "Shop Timing(eg 9 am - 9 pm)",
+                          "Shop Timing",
+                          // (09:00 AM - 09:00 PM)",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 14.sp,
@@ -256,7 +257,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                           Expanded(
                             // width: 155.w,
                             child: PrimarySTextFormField(
-                              hintText: "Opening Time",
+                              hintText: "09:00 AM",
                               controller: watch.startShopTimeController,
                               // hint: "Opening Time",
                               // hintSize: 15.sp,
@@ -267,7 +268,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                           ),
                           Expanded(
                             child: PrimarySTextFormField(
-                              hintText: "Closing Time",
+                              hintText: "08:00 PM",
                               controller: watch.endShopTimeController,
                               // hint: "Closing Time",
                               // hintSize: 15.sp,

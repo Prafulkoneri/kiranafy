@@ -296,7 +296,13 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                                             width: 7.w,
                                                           ),
                                                           Text(
-                                                            "${element?.ratings}",
+                                                            "${element?.ratings}.0",
+                                                            // double.parse(element
+                                                            //             ?.ratings
+                                                            //             .toString() ??
+                                                            //         "0.0")
+                                                            //     .toStringAsFixed(
+                                                            //         1),
                                                             style: GoogleFonts
                                                                 .dmSans(
                                                               textStyle: TextStyle(

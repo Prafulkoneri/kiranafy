@@ -67,9 +67,9 @@ class ProductViewController extends ChangeNotifier {
   bool isUnitImagesVisible = false;
   String routeName = "";
   List unitImages = [];
-  List cartItemIdList=[];
-  String cartItemId="";
-  String quantityAction="";
+  List cartItemIdList = [];
+  String cartItemId = "";
+  String quantityAction = "";
 
   ProductViewRepo productViewRepo = ProductViewRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
@@ -85,10 +85,8 @@ class ProductViewController extends ChangeNotifier {
   UnitBasedProductImagePath? data;
   CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
 
-
-
-
   Future<void> initState(context, sId, cId, pId, suId, pType, rName) async {
+    isUnitImagesVisible = false;
     print("productId");
     print(pId);
     print(productId);
@@ -116,6 +114,7 @@ class ProductViewController extends ChangeNotifier {
     isUnitImagesVisible = value;
     notifyListeners();
   }
+
   quantityBtnPressed(value) {
     isQuanityBtnPressed = value;
     notifyListeners();
@@ -133,39 +132,39 @@ class ProductViewController extends ChangeNotifier {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-            builder: (context) => const MainScreenView(
+            builder: (context) => MainScreenView(
                 index: 1,
                 screenName: ShopProfileView(
-                  refreshPage: false,
+                  refreshPage: true,
                   routeName: '',
-                  shopId: '',
+                  shopId: shopDetails?.id.toString(),
                 ))),
         (Route<dynamic> route) => false,
       );
     }
   }
 
-  CartItemQuantityReqModel get cartItemQuantityRequestModel => CartItemQuantityReqModel(
-      cartItemId: cartItemId,
-      quantityAction: quantityAction
-  );
+  CartItemQuantityReqModel get cartItemQuantityRequestModel =>
+      CartItemQuantityReqModel(
+          cartItemId: cartItemId, quantityAction: quantityAction);
 
-  Future<void> subtractItemQuantity(context, CIId,index,pType,pUnitId) async {
+  Future<void> subtractItemQuantity(
+      context, CIId, index, pType, pUnitId) async {
     quantityBtnPressed(true);
     print("*********");
     print(quantityList);
     print(quantityList[index]);
     print("*********");
     quantityAction = "subtract";
-    cartItemId=cartItemIdList[index].toString();
+    cartItemId = cartItemIdList[index].toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
         .cartItemQuantity(
-        cartItemQuantityRequestModel, pref.getString("successToken"))
+            cartItemQuantityRequestModel, pref.getString("successToken"))
         .then((response) {
       dev.log("response.body${response.body}");
       final result =
-      CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         int value = quantityList[index];
         quantityList.removeAt(index);
@@ -173,8 +172,8 @@ class ProductViewController extends ChangeNotifier {
         quantityList.insert(index, value - 1);
 
         if (quantityList[index] == 0) {
-          removeFromCart(pType,pUnitId,shopDetails?.id,index,context);
-          isUnitImagesAdded[index] =false;
+          removeFromCart(pType, pUnitId, shopDetails?.id, index, context);
+          isUnitImagesAdded[index] = false;
         }
         quantityBtnPressed(false);
         notifyListeners();
@@ -187,7 +186,7 @@ class ProductViewController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
       quantityBtnPressed(false);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         quantityBtnPressed(false);
       },
@@ -201,15 +200,15 @@ class ProductViewController extends ChangeNotifier {
   Future<void> addItemQuantity(context, CIId, index) async {
     quantityBtnPressed(true);
     quantityAction = "add";
-    cartItemId=cartItemIdList[index].toString();
+    cartItemId = cartItemIdList[index].toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
         .cartItemQuantity(
-        cartItemQuantityRequestModel, pref.getString("successToken"))
+            cartItemQuantityRequestModel, pref.getString("successToken"))
         .then((response) {
       dev.log("response.body${response.body}");
       final result =
-      CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         int value = quantityList[index];
         quantityList.removeAt(index);
@@ -226,7 +225,7 @@ class ProductViewController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
       quantityBtnPressed(false);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         quantityBtnPressed(false);
       },
@@ -265,12 +264,13 @@ class ProductViewController extends ChangeNotifier {
         productDetails = productViewData?.productDetails;
         productImage = productDetails?.productImagePath;
         shopDetails = productViewData?.shopDetails;
-        int unitDetailLength=productViewData?.productUnitDetails?.length??0;
-        for(int i=0;i<unitDetailLength;i++){
+        int unitDetailLength = productViewData?.productUnitDetails?.length ?? 0;
+        for (int i = 0; i < unitDetailLength; i++) {
           quantityList.add(productViewData?.productUnitDetails?[i].quantity);
-          cartItemIdList.add(productViewData?.productUnitDetails?[i].cartItemId);
+          cartItemIdList
+              .add(productViewData?.productUnitDetails?[i].cartItemId);
         }
-print("cartIteMlIST${cartItemIdList}");
+        print("cartIteMlIST${cartItemIdList}");
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
         isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
 
@@ -326,7 +326,7 @@ print("cartIteMlIST${cartItemIdList}");
 
   void onUnitImagesSelected(index) {
     isUnitImagesAdded[index] = true;
-    quantityList.insert(index,1);
+    quantityList.insert(index, 1);
     notifyListeners();
   }
 
@@ -713,8 +713,8 @@ print("cartIteMlIST${cartItemIdList}");
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        cartItemId=result.cartItemId.toString();
-        cartItemIdList.insert(index,result.cartItemId);
+        cartItemId = result.cartItemId.toString();
+        cartItemIdList.insert(index, result.cartItemId);
         isSimilarProductAdded[index] = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -806,7 +806,7 @@ print("cartIteMlIST${cartItemIdList}");
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        cartItemIdList.insert(index,0);
+        cartItemIdList.insert(index, 0);
         isSimilarProductAdded[index] = false;
         // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,
