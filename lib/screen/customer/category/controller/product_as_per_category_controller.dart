@@ -24,6 +24,7 @@ class ProductCategoryController extends ChangeNotifier {
   CategoryProductData? categoryProductData;
   List<AllCategoryList>? allCategoryList;
   List<CustomerProductData>? productList;
+  List<CustomerProductData>? customProductList;
   bool isLoading = true;
   TextEditingController searchController = TextEditingController();
   String searchedProductName = "";
@@ -69,6 +70,7 @@ class ProductCategoryController extends ChangeNotifier {
         categoryProductData = result.data;
         allCategoryList = categoryProductData?.allCategoryList;
         productList = categoryProductData?.productList;
+        customProductList=categoryProductData?.customProductList;
 ///////////////////////////
         int productListLength = productList?.length ?? 0;
         isCategoryProductAdded =

@@ -38,18 +38,26 @@ class ProductAsPerCategoryResModel {
 class CategoryProductData {
   List<AllCategoryList>? allCategoryList;
   List<CustomerProductData>? productList;
+  List<CustomerProductData>? customProductList;
   int? totalSelectedAndCustomProducts;
 
   CategoryProductData({
     required this.allCategoryList,
     required this.productList,
     required this.totalSelectedAndCustomProducts,
+    required this.customProductList,
   });
   CategoryProductData.fromJson(Map<String, dynamic> json) {
     if (json["product_list"] != null) {
       productList = <CustomerProductData>[];
       json["product_list"].forEach((v) {
         productList!.add(CustomerProductData.fromJson(v));
+      });
+    }
+    if (json["custom_product_list"] != null) {
+      customProductList = <CustomerProductData>[];
+      json["custom_product_list"].forEach((v) {
+        customProductList!.add(CustomerProductData.fromJson(v));
       });
     }
     if (json["all_category_list"] != null) {
