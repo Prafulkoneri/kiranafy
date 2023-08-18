@@ -22,7 +22,6 @@ import 'package:local_supper_market/screen/customer/help_center/controller/ticke
 import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
@@ -343,13 +342,12 @@ class _MyAppState extends State<MyApp> {
                       fontFamily: 'dm_sans_regular',
                     ),
                     debugShowCheckedModeBanner: false,
-                    // home: SplashScreen(),
-                    initialRoute: '/',
-                      routes: {
-                          '/':(context)=>SplashScreen(),
-                          'MainScreenView':(context)=>MainScreenView(),
+                    home: SplashScreen(),
+                    // initialRoute: '/',
+                    //   routes: {
+                    //       '/':(context)=>SplashScreen(),
 
-                      },
+                    //   },
                   ),
                 ),
               ));
