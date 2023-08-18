@@ -211,10 +211,14 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             width: 4.3.w,
                                           ),
                                           Text(
-                                            "${watch.shopDetails?.ratings ?? "0.0"}",
+                                            double.parse(watch
+                                                        .shopDetails?.ratings
+                                                        .toString() ??
+                                                    "0.0")
+                                                .toStringAsFixed(1),
                                             // watch.shopDetails?.ratings
                                             //          ??
-                                            //     "",
+                                            //     "",.
                                             // "0.0",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(

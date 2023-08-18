@@ -1747,7 +1747,12 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             borderRadius:
                                                 BorderRadius.circular(5.w),
                                             border: Border.all(
-                                                color: Color(0xff115B7A))),
+                                                // color: Color(0xff115B7A)
+                                                color: watch.orderDetails
+                                                            ?.refundPaymentStatus ==
+                                                        "received"
+                                                    ? Colors.green
+                                                    : Color(0xff115B7A))),
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 12.w),
                                         child: Center(
@@ -1771,7 +1776,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500,
-                                              color: Color(0xff115B7A)),
+                                              color: watch.orderDetails
+                                                          ?.refundPaymentStatus ==
+                                                      "received"
+                                                  ? Colors.green
+                                                  : Color(0xff115B7A)),
                                         )),
                                       ),
                                     ],

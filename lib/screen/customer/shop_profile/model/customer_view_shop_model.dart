@@ -189,7 +189,7 @@ class ShopDetails {
   String? shopOwnerUpiId;
   int? minimumOrderAmountForDelivery;
   String? acceptedPaymentStatus;
-  int? ratings;
+  String? ratings;
 
   ShopDetails({
     required this.id,
