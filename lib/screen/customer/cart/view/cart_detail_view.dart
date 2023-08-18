@@ -95,12 +95,13 @@ class _CartDetailViewState extends State<CartDetailView> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-                                      Navigator.pop(context);
+
                                       // await read.deleteShopCart(
                                       //   context,
                                       // );
                                       read.deleteCartDetails(
                                           context, widget.cartId);
+
                                     },
                                     child: Container(
                                       padding: EdgeInsets.only(

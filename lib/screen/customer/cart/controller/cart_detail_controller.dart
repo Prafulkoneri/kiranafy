@@ -150,7 +150,8 @@ class CartDetailController extends ChangeNotifier {
           CartDetailDeleteResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          cartDetailData = null;
+          print("helloooo");
+          Navigator.pop(context);
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
