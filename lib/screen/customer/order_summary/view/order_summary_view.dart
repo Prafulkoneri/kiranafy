@@ -1961,18 +1961,20 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       decoration: BoxDecoration(
                           border: Border.all(color: grey3),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Column(
+                      child:     Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Text(
+                          Container(
+                            child:
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
                                   "Date:",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
-                                        // height: 1.5,
+                                      // height: 1.5,
                                         color: black,
                                         letterSpacing: .05,
                                         // overflow: TextOverflow.ellipsis,
@@ -1980,158 +1982,162 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                watch.slotGroupValue ==
-                                            "shop_owner_slot_9_to_12" ||
-                                        watch.slotGroupValue ==
-                                            "shop_owner_slot_12_to_3"
-                                    ? " Delivery Slot:"
-                                    : "Delivery Slot",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      // height: 1.5,
-                                      color: black,
-                                      letterSpacing: .05,
-                                      // overflow: TextOverflow.ellipsis,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500),
+                                SizedBox(
+                                  height: 10.h,
                                 ),
-                              )),
-                              SizedBox(width: 22.w),
-                            ],
+                                watch.expectedDateController.text != "" ||
+                                    watch.slotGroupValue != ""
+                                    ?  Row(
+                                  children: [
+                                    Text(
+                                      watch.expectedDateController.text,
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                          // height: 1.5,
+                                            color: black,
+                                            // letterSpacing: .05,
+                                            // overflow: TextOverflow.ellipsis,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    SvgPicture.asset(
+                                      'assets/images/calender.svg',
+                                      width: 12.w,
+                                      height: 14.h,
+                                    ),
+                                  ],
+                                ):Container()
+                              ],
+                            ),
                           ),
                           SizedBox(
-                            height: 10.h,
+                            width: 20.w,
                           ),
-                          watch.expectedDateController.text != "" ||
-                                  watch.slotGroupValue != ""
-                              ? Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          watch.expectedDateController.text,
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                // height: 1.5,
-                                                color: black,
-                                                // letterSpacing: .05,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
+                          Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    watch.slotGroupValue ==
+                                        "shop_owner_slot_9_to_12" ||
+                                        watch.slotGroupValue ==
+                                            "shop_owner_slot_12_to_3"
+                                        ? "Delivery Slot:"
+                                        : "Delivery Slot",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                        // height: 1.5,
+                                          color: black,
+                                          letterSpacing: .05,
+                                          // overflow: TextOverflow.ellipsis,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.w,
+                                  ),
+                                  watch.expectedDateController.text != "" ||
+                                      watch.slotGroupValue != ""
+                                      ?  Row(
+                                    // crossAxisAlignment:
+                                    //     CrossAxisAlignment.end,
+                                    // mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        watch.slotGroupValue ==
+                                            "shop_owner_slot_9_to_12"
+                                            ? "09:00 AM - 12:00 PM"
+                                            : watch.slotGroupValue ==
+                                            "shop_owner_slot_12_to_3"
+                                            ? "12:00 PM - 03:00 PM"
+                                            : watch.slotGroupValue ==
+                                            "shop_owner_slot_3_to_6"
+                                            ? "03:00 PM - 06:00 PM"
+                                            : watch.slotGroupValue ==
+                                            "shop_owner_slot_6_to_9"
+                                            ? "06:00 PM - 09:00 PM"
+                                            : "",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                            // height: 1.5,
+                                              color: black,
+                                              // letterSpacing: .05,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w500),
                                         ),
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        SvgPicture.asset(
-                                          'assets/images/calender.svg',
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                              backgroundColor: Colors.white,
+                                              isScrollControlled: true,
+                                              shape:
+                                              const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.only(
+                                                      topLeft: Radius
+                                                          .circular(
+                                                          30),
+                                                      topRight: Radius
+                                                          .circular(
+                                                          30))),
+                                              context: context,
+                                              builder: (context) {
+                                                // using a scaffold helps to more easily position the FAB
+                                                return ExpectedDeliveryDateSheetView();
+                                              });
+                                        },
+                                        child: SvgPicture.asset(
+                                          'assets/images/pencil.svg',
                                           width: 12.w,
                                           height: 14.h,
                                         ),
-                                      ],
-                                    ),
-                                    // SizedBox(
-                                    //   width: 20.w,
-                                    // ),
-                                    Row(
-                                      // crossAxisAlignment:
-                                      //     CrossAxisAlignment.end,
-                                      // mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          watch.slotGroupValue ==
-                                                  "shop_owner_slot_9_to_12"
-                                              ? "09:00 AM - 12:00 PM"
-                                              : watch.slotGroupValue ==
-                                                      "shop_owner_slot_12_to_3"
-                                                  ? "12:00 PM - 03:00 PM"
-                                                  : watch.slotGroupValue ==
-                                                          "shop_owner_slot_3_to_6"
-                                                      ? "03:00 PM - 06:00 PM"
-                                                      : watch.slotGroupValue ==
-                                                              "shop_owner_slot_6_to_9"
-                                                          ? "06:00 PM - 09:00 PM"
-                                                          : "",
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                // height: 1.5,
-                                                color: black,
-                                                // letterSpacing: .05,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                                backgroundColor: Colors.white,
-                                                isScrollControlled: true,
-                                                shape:
-                                                    const RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        30),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        30))),
-                                                context: context,
-                                                builder: (context) {
-                                                  // using a scaffold helps to more easily position the FAB
-                                                  return ExpectedDeliveryDateSheetView();
-                                                });
-                                          },
-                                          child: SvgPicture.asset(
-                                            'assets/images/pencil.svg',
-                                            width: 12.w,
-                                            height: 14.h,
-                                          ),
-                                        ),
-                                        // SizedBox(
-                                        //   width: 5.w,
-                                        // ),
-                                      ],
-                                    ),
-                                  ],
-                                )
-                              : Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        showModalBottomSheet(
-                                            backgroundColor: Colors.white,
-                                            isScrollControlled: true,
-                                            shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(30),
-                                                    topRight:
-                                                        Radius.circular(30))),
-                                            context: context,
-                                            builder: (context) {
-                                              // using a scaffold helps to more easily position the FAB
-                                              return ExpectedDeliveryDateSheetView();
-                                            });
-                                      },
-                                      child: SvgPicture.asset(
-                                        'assets/images/pencil.svg',
-                                        width: 12.w,
-                                        height: 14.h,
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                      // SizedBox(
+                                      //   width: 5.w,
+                                      // ),
+                                    ],
+                                  )
+                                      : Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                              backgroundColor: Colors.white,
+                                              isScrollControlled: true,
+                                              shape: const RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.only(
+                                                      topLeft:
+                                                      Radius.circular(30),
+                                                      topRight:
+                                                      Radius.circular(30))),
+                                              context: context,
+                                              builder: (context) {
+                                                // using a scaffold helps to more easily position the FAB
+                                                return ExpectedDeliveryDateSheetView();
+                                              });
+                                        },
+                                        child: SvgPicture.asset(
+                                          'assets/images/pencil.svg',
+                                          width: 12.w,
+                                          height: 14.h,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                          // SizedBox(width: 22.w),
                         ],
                       ),
                     ),
