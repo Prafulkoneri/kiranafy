@@ -5,14 +5,17 @@ class ProductViewRequestModel {
   String? shopId;
   String? categoryId;
   String? productId;
+  String? productType;
 
-  ProductViewRequestModel({this.shopId, this.categoryId, this.productId});
+  ProductViewRequestModel(
+      {this.shopId, this.categoryId, this.productId, this.productType});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
     data["shop_id"] = shopId;
     data["category_id"] = categoryId;
     data["product_id"] = productId;
+    data["product_type"] = productType;
     return data;
   }
 }
@@ -114,7 +117,6 @@ class ProductDetails {
   String? productType;
   String? isProductFvrt;
 
-
   ProductDetails(
       {required this.id,
       required this.productName,
@@ -146,10 +148,10 @@ class ProductUnitDetail {
   String? discountPercentage;
   String? unit;
   String? addToCartCheck;
-  String ? productType;
-  int ? cartItemId;
-  int ? quantity;
-  int ? productUnitId;
+  String? productType;
+  int? cartItemId;
+  int? quantity;
+  int? productUnitId;
 
   ProductUnitDetail({
     required this.id,

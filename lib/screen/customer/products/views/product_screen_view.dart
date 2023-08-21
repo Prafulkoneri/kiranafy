@@ -21,7 +21,7 @@ class ProductScreenView extends StatefulWidget {
 
   const ProductScreenView(
       {super.key,
-      this.productType,
+    required this.productType,
       this.selectedUnitId,
       this.shopId,
       this.categoryId,
