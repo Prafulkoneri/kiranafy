@@ -281,7 +281,10 @@ class ProductViewController extends ChangeNotifier {
 
   ProductViewRequestModel get productViewRequestModel =>
       ProductViewRequestModel(
-          shopId: shopId, categoryId: categoryId, productId: productId);
+          shopId: shopId,
+          categoryId: categoryId,
+          productId: productId,
+          productType: productType);
 
   Future<void> productsView(context, sId, cId, pId, pType) async {
     // print("id$id");

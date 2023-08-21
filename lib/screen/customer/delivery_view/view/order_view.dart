@@ -1028,7 +1028,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     ? Text(
                                         // "",
                                         // "- Rs . ${watch.orderDetails?.totalDiscount}",
-                                        " -Rs.  ${watch.couponDetails?.couponDiscount}",
+                                        " - Rs.  ${watch.couponDetails?.couponDiscount}",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: grey5,
@@ -1038,7 +1038,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         ),
                                       )
                                     : Text(
-                                        "Rs. 0",
+                                        "- Rs. 0",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: grey5,

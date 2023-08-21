@@ -593,6 +593,11 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 .updateProductId(
                                               element?.id.toString(),
                                             );
+                                            print("1111DDDD1");
+                                            print(
+                                              element?.productType,
+                                            );
+                                            print("11111444444");
                                             Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
@@ -612,6 +617,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                 .toString(),
                                                             shopId:
                                                                 element?.shopId,
+                                                            productType: element
+                                                                ?.productType,
                                                           ))),
                                               (Route<dynamic> route) => false,
                                             );

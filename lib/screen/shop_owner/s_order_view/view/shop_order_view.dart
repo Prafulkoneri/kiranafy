@@ -1942,7 +1942,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 PrimaryCTextFormField(
                                                   controller:
                                                       watch.upiIdController,
-                                                  hintText: "Type UPI ID",
+                                                  hintText:
+                                                      "Type Transaction ID",
                                                 ),
                                               ],
                                             ),

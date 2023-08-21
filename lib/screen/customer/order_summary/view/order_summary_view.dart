@@ -1953,84 +1953,43 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                         ),
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.only(
-                          left: 20.w, right: 17.w, top: 8.w, bottom: 10.w),
-                      margin: EdgeInsets.only(
-                          left: 10.w, right: 17.w, top: 8.w, bottom: 10.w),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: grey3),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child:     Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            child:
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Date:",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                      // height: 1.5,
-                                        color: black,
-                                        letterSpacing: .05,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                watch.expectedDateController.text != "" ||
-                                    watch.slotGroupValue != ""
-                                    ?  Row(
-                                  children: [
-                                    Text(
-                                      watch.expectedDateController.text,
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                          // height: 1.5,
-                                            color: black,
-                                            // letterSpacing: .05,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    SvgPicture.asset(
-                                      'assets/images/calender.svg',
-                                      width: 12.w,
-                                      height: 14.h,
-                                    ),
-                                  ],
-                                ):Container()
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20.w,
-                          ),
-                          Expanded(
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                            backgroundColor: Colors.white,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30))),
+                            context: context,
+                            builder: (context) {
+                              // using a scaffold helps to more easily position the FAB
+                              return ExpectedDeliveryDateSheetView();
+                            });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 20.w, right: 17.w, top: 8.w, bottom: 10.w),
+                        margin: EdgeInsets.only(
+                            left: 10.w, right: 17.w, top: 8.w, bottom: 10.w),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: grey3),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    watch.slotGroupValue ==
-                                        "shop_owner_slot_9_to_12" ||
-                                        watch.slotGroupValue ==
-                                            "shop_owner_slot_12_to_3"
-                                        ? "Delivery Slot:"
-                                        : "Delivery Slot",
+                                    "Date:",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
-                                        // height: 1.5,
+                                          // height: 1.5,
                                           color: black,
                                           letterSpacing: .05,
                                           // overflow: TextOverflow.ellipsis,
@@ -2039,108 +1998,170 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 10.w,
+                                    height: 10.h,
                                   ),
                                   watch.expectedDateController.text != "" ||
-                                      watch.slotGroupValue != ""
-                                      ?  Row(
-                                    // crossAxisAlignment:
-                                    //     CrossAxisAlignment.end,
-                                    // mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        watch.slotGroupValue ==
-                                            "shop_owner_slot_9_to_12"
-                                            ? "09:00 AM - 12:00 PM"
-                                            : watch.slotGroupValue ==
-                                            "shop_owner_slot_12_to_3"
-                                            ? "12:00 PM - 03:00 PM"
-                                            : watch.slotGroupValue ==
-                                            "shop_owner_slot_3_to_6"
-                                            ? "03:00 PM - 06:00 PM"
-                                            : watch.slotGroupValue ==
-                                            "shop_owner_slot_6_to_9"
-                                            ? "06:00 PM - 09:00 PM"
-                                            : "",
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                            // height: 1.5,
-                                              color: black,
-                                              // letterSpacing: .05,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10.w,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                              backgroundColor: Colors.white,
-                                              isScrollControlled: true,
-                                              shape:
-                                              const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.only(
-                                                      topLeft: Radius
-                                                          .circular(
-                                                          30),
-                                                      topRight: Radius
-                                                          .circular(
-                                                          30))),
-                                              context: context,
-                                              builder: (context) {
-                                                // using a scaffold helps to more easily position the FAB
-                                                return ExpectedDeliveryDateSheetView();
-                                              });
-                                        },
-                                        child: SvgPicture.asset(
-                                          'assets/images/pencil.svg',
-                                          width: 12.w,
-                                          height: 14.h,
-                                        ),
-                                      ),
-                                      // SizedBox(
-                                      //   width: 5.w,
-                                      // ),
-                                    ],
-                                  )
-                                      : Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                              backgroundColor: Colors.white,
-                                              isScrollControlled: true,
-                                              shape: const RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.only(
-                                                      topLeft:
-                                                      Radius.circular(30),
-                                                      topRight:
-                                                      Radius.circular(30))),
-                                              context: context,
-                                              builder: (context) {
-                                                // using a scaffold helps to more easily position the FAB
-                                                return ExpectedDeliveryDateSheetView();
-                                              });
-                                        },
-                                        child: SvgPicture.asset(
-                                          'assets/images/pencil.svg',
-                                          width: 12.w,
-                                          height: 14.h,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                          watch.slotGroupValue != ""
+                                      ? Row(
+                                          children: [
+                                            Text(
+                                              watch.expectedDateController.text,
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    // height: 1.5,
+                                                    color: black,
+                                                    // letterSpacing: .05,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontSize: 14.sp,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10.w,
+                                            ),
+                                            SvgPicture.asset(
+                                              'assets/images/calender.svg',
+                                              width: 12.w,
+                                              height: 14.h,
+                                            ),
+                                          ],
+                                        )
+                                      : Container()
                                 ],
-                              )),
-                          // SizedBox(width: 22.w),
-                        ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20.w,
+                            ),
+                            Expanded(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  watch.slotGroupValue ==
+                                              "shop_owner_slot_9_to_12" ||
+                                          watch.slotGroupValue ==
+                                              "shop_owner_slot_12_to_3"
+                                      ? "Delivery Slot:"
+                                      : "Delivery Slot",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        // height: 1.5,
+                                        color: black,
+                                        letterSpacing: .05,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.w,
+                                ),
+                                watch.expectedDateController.text != "" ||
+                                        watch.slotGroupValue != ""
+                                    ? Row(
+                                        // crossAxisAlignment:
+                                        //     CrossAxisAlignment.end,
+                                        // mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            watch.slotGroupValue ==
+                                                    "shop_owner_slot_9_to_12"
+                                                ? "09:00 AM - 12:00 PM"
+                                                : watch.slotGroupValue ==
+                                                        "shop_owner_slot_12_to_3"
+                                                    ? "12:00 PM - 03:00 PM"
+                                                    : watch.slotGroupValue ==
+                                                            "shop_owner_slot_3_to_6"
+                                                        ? "03:00 PM - 06:00 PM"
+                                                        : watch.slotGroupValue ==
+                                                                "shop_owner_slot_6_to_9"
+                                                            ? "06:00 PM - 09:00 PM"
+                                                            : "",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: black,
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              // showModalBottomSheet(
+                                              //     backgroundColor: Colors.white,
+                                              //     isScrollControlled: true,
+                                              //     shape:
+                                              //         const RoundedRectangleBorder(
+                                              //             borderRadius:
+                                              //                 BorderRadius.only(
+                                              //                     topLeft: Radius
+                                              //                         .circular(
+                                              //                             30),
+                                              //                     topRight: Radius
+                                              //                         .circular(
+                                              //                             30))),
+                                              //     context: context,
+                                              //     builder: (context) {
+                                              //       // using a scaffold helps to more easily position the FAB
+                                              //       return ExpectedDeliveryDateSheetView();
+                                              //     });
+                                            },
+                                            child: SvgPicture.asset(
+                                              'assets/images/pencil.svg',
+                                              width: 12.w,
+                                              height: 14.h,
+                                            ),
+                                          ),
+                                          // SizedBox(
+                                          //   width: 5.w,
+                                          // ),
+                                        ],
+                                      )
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              // showModalBottomSheet(
+                                              //     backgroundColor: Colors.white,
+                                              //     isScrollControlled: true,
+                                              //     shape:
+                                              //         const RoundedRectangleBorder(
+                                              //             borderRadius:
+                                              //                 BorderRadius.only(
+                                              //                     topLeft: Radius
+                                              //                         .circular(
+                                              //                             30),
+                                              //                     topRight: Radius
+                                              //                         .circular(
+                                              //                             30))),
+                                              //     context: context,
+                                              //     builder: (context) {
+                                              //       // using a scaffold helps to more easily position the FAB
+                                              //       return ExpectedDeliveryDateSheetView();
+                                              //     });
+                                            },
+                                            child: SvgPicture.asset(
+                                              'assets/images/pencil.svg',
+                                              width: 12.w,
+                                              height: 14.h,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                              ],
+                            )),
+                            // SizedBox(width: 22.w),
+                          ],
+                        ),
                       ),
                     ),
+                    ///////////////////////////////////
                     Container(
                       padding:
                           EdgeInsets.only(left: 19.w, top: 30.w, right: 19.w),
@@ -2474,16 +2495,16 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                         element?.productImagePath ==
                                                                                 ""
                                                                             ? Container(
-                                                                                height: 89.w,
-                                                                                width: 89.w,
+                                                                                height: 55.w,
+                                                                                width: 55.w,
                                                                                 child: Image.asset(
                                                                                   "assets/images/profile_image.png",
                                                                                   fit: BoxFit.cover,
                                                                                 ),
                                                                               )
                                                                             : Container(
-                                                                                height: 89.w,
-                                                                                width: 89.w,
+                                                                                height: 60.w,
+                                                                                width: 60.w,
                                                                                 child: Image.network(
                                                                                   "${element?.productImagePath}",
                                                                                   fit: BoxFit.cover,

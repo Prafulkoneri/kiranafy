@@ -51,8 +51,8 @@ class _OrderProductsState extends State<OrderProducts> {
                               ),
                             )
                           : Container(
-                              height: 89.w,
-                              width: 89.w,
+                              height: 60.w,
+                              width: 69.w,
                               child: AppNetworkImages(
                                 imageUrl: "${element?.productImagePath}",
                                 fit: BoxFit.cover,
