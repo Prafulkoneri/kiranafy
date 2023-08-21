@@ -51,7 +51,7 @@
            android:value="AIzaSyCm27F5Jrl8b6vXkNCOotiTdnM8QeygfOY"/>
         <provider
             android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
-            android:authorities="im.mingguang.mingguang_app.flutter_downloader.provider"
+            android:authorities="com.lsm.local_supper_market.contentprovider"
             android:exported="false"
             android:grantUriPermissions="true"
             android:requestLegacyExternalStorage="true">
