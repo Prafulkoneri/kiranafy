@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
@@ -116,17 +114,20 @@ class SMainScreenController extends ChangeNotifier {
     currentScreen = screenName;
     notifyListeners();
   }
-  onCustomTypeNotification(context){
 
-    currentScreen=NotificationsScreenView();
-    currentIndex=0;
+  onCustomTypeNotification(context) {
+    currentScreen = NotificationsScreenView();
+    currentIndex = 0;
     notifyListeners();
   }
 
-  onOrderTypeNotification(context,id){
-    currentScreen=ShopOrderView(selectedIndex:0,orderId:id.toString(),fromOrderStatus: true,);
-    currentIndex=1;
+  onOrderTypeNotification(context, id) {
+    currentScreen = ShopOrderView(
+      selectedIndex: 0,
+      orderId: id.toString(),
+      fromOrderStatus: true,
+    );
+    currentIndex = 1;
     notifyListeners();
   }
-
 }

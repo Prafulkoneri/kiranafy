@@ -215,7 +215,17 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                             width: 4.3.w,
                                           ),
                                           Text(
-                                            double.parse(watch.dashBoardData?.bannerImages?[0].rating.toString()??"0.0").toStringAsFixed(1),
+                                            watch.dashBoardData?.bannerImages
+                                                        ?.isNotEmpty ==
+                                                    true
+                                                ? double.parse(watch
+                                                            .dashBoardData
+                                                            ?.bannerImages?[0]
+                                                            .rating
+                                                            .toString() ??
+                                                        "0.0")
+                                                    .toStringAsFixed(1)
+                                                : "0.0",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: Black,

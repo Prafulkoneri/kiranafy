@@ -57,7 +57,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             title: "Orders",
             isBackButtonEnabled: false,

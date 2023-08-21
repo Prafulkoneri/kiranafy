@@ -190,7 +190,7 @@ class Endpoint {
       "${baseUrl}lsm-customer-add-admin-product-to-favourite";
   //////////Customer Add Custom Product To Fav
   static const String addCustomProductToFav =
-      "${baseUrl}sm-customer-add-custom-product-to-favourite";
+      "${baseUrl}lsm-customer-add-custom-product-to-favourite";
   //////////////Seasonal Products
   static const String AllSeasonalProducts =
       "${baseUrl}lsm-customer-view-all-seasonal-products-of-shop";
@@ -441,8 +441,7 @@ class Endpoint {
   static const String customerFaqData = "${baseUrl}lsm-customer-feq-get";
   static const String subScreiptionInvoice = "${baseUrl}lsm-shop-owner-invoice";
   static const String orderInvoice = "${baseUrl}lsm-customer-invoice";
-  static const String removeCartItem =
-      "${baseUrl}lsm-customer-remove-cart";
+  static const String removeCartItem = "${baseUrl}lsm-customer-remove-cart";
   static const String shopReviewList =
       "${baseUrl}lsm-shop-owner-review-list-for-shop";
   static const String shopDeliveryArealist =

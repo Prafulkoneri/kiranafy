@@ -77,22 +77,21 @@ class SDashBoardController extends ChangeNotifier {
       log("${response.body}");
       if (response.statusCode == 200) {
         dashBoardData = result.data;
-        // int imageLength=dashBoardData?.bannerImages?.length??0;
-        // if(dashBoardData?.bannerImages!.isNotEmpty??true){
-        //   Timer.periodic(Duration(seconds: 5), (Timer timer) {
-        //       if (_currentPage < imageLength-1) {
-        //         _currentPage++;
-        //       } else {
-        //         _currentPage = 0;
-        //       }
-        //       pageController.animateToPage(
-        //         _currentPage,
-        //         duration: Duration(milliseconds: 350),
-        //         curve: Curves.easeIn,
-        //       );
-        //
-        //   });
-        // }
+        int imageLength = dashBoardData?.bannerImages?.length ?? 0;
+        if (dashBoardData?.bannerImages!.isNotEmpty ?? true) {
+          Timer.periodic(Duration(seconds: 5), (Timer timer) {
+            if (_currentPage < imageLength - 1) {
+              _currentPage++;
+            } else {
+              _currentPage = 0;
+            }
+            pageController.animateToPage(
+              _currentPage,
+              duration: Duration(milliseconds: 450),
+              curve: Curves.easeIn,
+            );
+          });
+        }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -168,10 +167,11 @@ class SDashBoardController extends ChangeNotifier {
         currentSubscriptionPlan = subscriptiondata?.currentSubscriptionPlan;
         subscriptionHistory = subscriptiondata?.subscriptionHistory;
         specialBenifitlist.clear();
-        specialBenifitlist=currentSubscriptionPlan?.subscriptionSpecialBenifits??[];
+        specialBenifitlist =
+            currentSubscriptionPlan?.subscriptionSpecialBenifits ?? [];
         print("77777777");
         print(specialBenifitlist);
-print(specialBenifitlist.contains("create_offer_coupons"));
+        print(specialBenifitlist.contains("create_offer_coupons"));
         // print(specialBenifitlist[1]);
         showLoader(false);
         notifyListeners();

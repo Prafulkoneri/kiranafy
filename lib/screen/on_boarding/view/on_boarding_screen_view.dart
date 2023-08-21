@@ -143,6 +143,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                   color: Colors.black),
                             ),
                             ExpandablePageView.builder(
+                              // physics: CustomPageViewScrollPhysics(),
                               // physics: NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               controller: watch.pageController,
