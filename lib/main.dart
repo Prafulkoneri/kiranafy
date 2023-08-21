@@ -260,6 +260,7 @@ class MyApp extends StatefulWidget {
 }
 
 var fcmToken;
+
 final firebaseMessaging = FirebaseMessaging.instance;
 
 class _MyAppState extends State<MyApp> {

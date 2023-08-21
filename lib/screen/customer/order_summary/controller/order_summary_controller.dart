@@ -24,6 +24,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/repository/remo
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 
 class OrderSummaryController extends ChangeNotifier {
   OrderSummaryRepo orderSummaryRepo = OrderSummaryRepo();
@@ -64,7 +65,9 @@ class OrderSummaryController extends ChangeNotifier {
   String deliveryCharges = "";
   String productTotalDiscount = "";
   String subTotal = "";
-  String total = "";
+  String totalAmount = "";
+  String selfPickupTotalAmount = "";
+  String selfPickupDeliveryCharges = "";
   String totalDiscount = "";
   String customerPickup = "";
   TextEditingController couponCodeController = TextEditingController();
@@ -127,6 +130,10 @@ class OrderSummaryController extends ChangeNotifier {
         (Route<dynamic> route) => false,
       );
     }
+    if(groupValue=="self_pickup"){
+      selfPickupTotalAmount=(int.parse(totalAmount)-int.parse(deliveryCharges)).toString();
+      selfPickupDeliveryCharges="0";
+    }
     notifyListeners();
   }
 
@@ -174,27 +181,37 @@ class OrderSummaryController extends ChangeNotifier {
         customerPickup = result
                 .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ??
             "";
-        if (groupValue != "") {
-          if (result.orderSummaryData?.shopDeliveryTypes
-                  ?.shopOwnerCustomerPickup ==
-              "active") {
-            groupValue = "self_pickup";
-          } else {
-            groupValue = "delivery_to";
-          }
-        }
 
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
         slotGroupValue = shopDeliverySlots?[0];
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
+        totalAmount = orderFinalTotals?.total.toString() ?? "";
+        if (groupValue != "") {
+          if (result.orderSummaryData?.shopDeliveryTypes
+                  ?.shopOwnerCustomerPickup ==
+              "active") {
+            groupValue = "self_pickup";
+            print("heloo");
+            print(totalAmount.toString());
+            print((int.parse(totalAmount.toString())-int.parse(deliveryCharges.toString())));
+            selfPickupTotalAmount=(int.parse(totalAmount.toString())-int.parse(deliveryCharges.toString())).toString();
+            print("selfPickupTotalAmount${selfPickupTotalAmount}");
+            selfPickupDeliveryCharges="0";
+
+          } else {
+            groupValue = "delivery_to";
+          }
+        }
+
+
         expectedDateController.text =
             DateFormat('dd-MM-yyy').format(DateTime.now());
         productTotalDiscount =
             orderFinalTotals?.productTotalDiscount.toString() ?? "";
         subTotal = orderFinalTotals?.subTotal.toString() ?? "";
-        total = orderFinalTotals?.total.toString() ?? "";
+
         totalDiscount = orderFinalTotals?.totalDiscount.toString() ?? "";
         customerAddress = result.orderSummaryData?.customerAddresses;
         int addressListLength = customerAddress?.length ?? 0;
@@ -415,11 +432,13 @@ class OrderSummaryController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final data = result.applyCouponData;
         couponCodeController.text = data?.couponCode.toString() ?? "";
-        deliveryCharges = data?.deliveryCharges.toString() ?? "";
-        subTotal = data?.subTotal ?? "";
-        couponDiscount = data?.couponDiscount.toString() ?? "";
-        total = data?.total ?? "";
-        totalDiscount = data?.totalDiscount ?? "";
+        deliveryCharges=double.parse(data?.deliveryCharges??"0").toInt().toString();
+        selfPickupDeliveryCharges="0";
+        subTotal = double.parse(data?.subTotal??"0").toInt().toString() ?? "";
+        couponDiscount = double.parse(data?.couponDiscount??"0").toInt().toString() ?? "";
+        totalAmount = double.parse(data?.total??"0").toInt().toString();
+        selfPickupTotalAmount=(double.parse(totalAmount).toInt()-double.parse(deliveryCharges).toInt()).toString()??"";
+        totalDiscount = double.parse(data?.totalDiscount??"0").toInt().toString() ?? "";
         discountPercentage = data?.discountPercentage ?? "";
         showOnPageLoader(false);
         showLoader(false);
@@ -472,10 +491,12 @@ class OrderSummaryController extends ChangeNotifier {
         offerGroupValue = "";
         couponDiscount =
             data?.removeCouponData?.couponDiscount.toString() ?? "0";
-        deliveryCharges =
-            data?.removeCouponData?.deliveryCharges.toString() ?? "";
+        // deliveryCharges =
+        //     data?.removeCouponData?.deliveryCharges.toString() ?? "";
+        selfPickupDeliveryCharges="0";
         subTotal = data?.removeCouponData?.subTotal.toString() ?? "";
-        total = data?.removeCouponData?.total.toString() ?? "";
+        totalAmount = data?.removeCouponData?.total.toString() ?? "";
+        selfPickupTotalAmount=(int.parse(totalAmount)-int.parse(deliveryCharges)).toString();
         totalDiscount = data?.removeCouponData?.totalDiscount.toString() ?? "";
         discountPercentage = "";
         showOnPageLoader(false);
@@ -526,10 +547,10 @@ class OrderSummaryController extends ChangeNotifier {
                 customerDeliveryDate: expectedDateController.text,
                 customerDeliverySlot: slotGroupValue,
                 customerDeliveryType: groupValue,
-                finalDeliveryCharges:
+                finalDeliveryCharges:groupValue=="self_pickup"?selfPickupDeliveryCharges:
                     deliveryCharges == "" ? "0" : deliveryCharges,
                 finalSubTotal: subTotal,
-                finalTotalAmount: total,
+                finalTotalAmount:groupValue=="self_pickup"?selfPickupTotalAmount:totalAmount,
                 finalTotalDiscount: totalDiscount,
                 totalItems: orderFinalTotals?.itemCount.toString(),
               )),
@@ -541,6 +562,10 @@ class OrderSummaryController extends ChangeNotifier {
     cartId = value;
     notifyListeners();
   }
+
+ void checkDeliverySlotAccodringToDate(date)async{
+    var currentDate=DateFormat('dd-MM-yyy').format(DateTime.now());
+ }
 
   ///////////////////////////////////////////////////////
   RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();

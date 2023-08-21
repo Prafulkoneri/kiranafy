@@ -2783,7 +2783,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                       ),
                                     )
                                   : Text(
-                                      "Rs. ${watch.deliveryCharges}",
+                                      "Rs. ${watch.groupValue=="self_pickup"?watch.selfPickupDeliveryCharges:watch.deliveryCharges}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: grey5,
@@ -2818,7 +2818,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 ),
                               ),
                               Text(
-                                "Rs. ${watch.total}",
+                                "Rs. ${watch.groupValue=="self_pickup"?watch.selfPickupTotalAmount:watch.totalAmount}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black1,
