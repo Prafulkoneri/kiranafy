@@ -186,7 +186,7 @@ class _ExpectedDeliveryDateSheetViewState
             left: 0,
             right: 0,
             child: Visibility(
-              visible: watch.isNotFilled,
+              visible: watch.isExpectedDeliverySlotNotAvailable,
               child: Container(
                 padding: EdgeInsets.only(
                     top: 15.w, bottom: 15.w, left: 10.w, right: 10.w),
@@ -197,7 +197,7 @@ class _ExpectedDeliveryDateSheetViewState
                   children: [
                     Expanded(
                       child: Text(
-                        "Coupon Code Copied",
+                        watch.deliverySlotErrorMsg,
                         style: TextStyle(color: Colors.white, fontSize: 14.sp),
                       ),
                     ),
@@ -205,9 +205,9 @@ class _ExpectedDeliveryDateSheetViewState
                       children: [
                         InkWell(
                           onTap: () {
-                            // read.onDismiss();
+                            read.onDismiss();
                           },
-                          child: Text("Dismiss"),
+                          child: Text("Dismiss",style: TextStyle(color: Colors.white),),
                         ),
                         SizedBox(
                           width: 10.w,

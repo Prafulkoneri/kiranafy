@@ -125,7 +125,8 @@ class SubscriptionHistoryController extends ChangeNotifier {
         if (Platform.isIOS) {
           dir = await getApplicationDocumentsDirectory();
         } else {
-          dir = Directory('/storage/emulated/0/Download');
+          Directory tempDir = await getTemporaryDirectory();
+          dir = Directory(tempDir.path);
         }
 
         if (dir != null) {

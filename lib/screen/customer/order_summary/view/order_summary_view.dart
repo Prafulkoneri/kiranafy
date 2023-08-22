@@ -2012,7 +2012,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                     color: black,
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
-                                                    fontSize: 14.sp,
+                                                    fontSize: 13.sp,
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
@@ -2065,25 +2065,27 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         //     CrossAxisAlignment.end,
                                         // mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Text(
-                                            watch.slotGroupValue ==
-                                                    "shop_owner_slot_9_to_12"
-                                                ? "09:00 AM - 12:00 PM"
-                                                : watch.slotGroupValue ==
-                                                        "shop_owner_slot_12_to_3"
-                                                    ? "12:00 PM - 03:00 PM"
-                                                    : watch.slotGroupValue ==
-                                                            "shop_owner_slot_3_to_6"
-                                                        ? "03:00 PM - 06:00 PM"
-                                                        : watch.slotGroupValue ==
-                                                                "shop_owner_slot_6_to_9"
-                                                            ? "06:00 PM - 09:00 PM"
-                                                            : "",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: black,
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w500),
+                                          Flexible(
+                                            child: Text(
+                                              watch.slotGroupValue ==
+                                                      "shop_owner_slot_9_to_12"
+                                                  ? "09:00 AM - 12:00 PM"
+                                                  : watch.slotGroupValue ==
+                                                          "shop_owner_slot_12_to_3"
+                                                      ? "12:00 PM - 03:00 PM"
+                                                      : watch.slotGroupValue ==
+                                                              "shop_owner_slot_3_to_6"
+                                                          ? "03:00 PM - 06:00 PM"
+                                                          : watch.slotGroupValue ==
+                                                                  "shop_owner_slot_6_to_9"
+                                                              ? "06:00 PM - 09:00 PM"
+                                                              : "",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: black,
+                                                    fontSize: 13.sp,
+                                                    fontWeight: FontWeight.w500),
+                                              ),
                                             ),
                                           ),
                                           SizedBox(

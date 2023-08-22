@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -61,6 +62,8 @@ class OrderSummaryController extends ChangeNotifier {
   String offerGroupValue = "";
   String addressGroupValue = "";
   bool isNotFilled = false;
+  bool isExpectedDeliverySlotNotAvailable = false;
+  String deliverySlotErrorMsg = "";
   String couponDiscount = "";
   String deliveryCharges = "";
   String productTotalDiscount = "";
@@ -138,7 +141,9 @@ class OrderSummaryController extends ChangeNotifier {
   }
 
   void onDeliverySlotSelected(value) {
-    slotGroupValue = value;
+    checkDeliverySlotAccodringToDate(value);
+
+
     notifyListeners();
   }
 
@@ -184,7 +189,27 @@ class OrderSummaryController extends ChangeNotifier {
 
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
-        slotGroupValue = shopDeliverySlots?[0];
+
+        expectedDateController.text =
+            DateFormat('dd-MM-yyy').format(DateTime.now());
+        var currentHour= DateTime.now().hour;
+          if(currentHour<12){
+              slotGroupValue = shopDeliverySlots?[0];
+            }
+          if(currentHour<15){
+            slotGroupValue = shopDeliverySlots?[1];
+            }
+
+
+            if(currentHour<18){
+              slotGroupValue = shopDeliverySlots?[2];
+          }
+            if(currentHour<21){
+              slotGroupValue = shopDeliverySlots?[3];
+            }
+
+
+
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
         totalAmount = orderFinalTotals?.total.toString() ?? "";
@@ -206,8 +231,6 @@ class OrderSummaryController extends ChangeNotifier {
         }
 
 
-        expectedDateController.text =
-            DateFormat('dd-MM-yyy').format(DateTime.now());
         productTotalDiscount =
             orderFinalTotals?.productTotalDiscount.toString() ?? "";
         subTotal = orderFinalTotals?.subTotal.toString() ?? "";
@@ -563,8 +586,71 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
- void checkDeliverySlotAccodringToDate(date)async{
+ void checkDeliverySlotAccodringToDate(timeSlot)async{
     var currentDate=DateFormat('dd-MM-yyy').format(DateTime.now());
+    if(expectedDateController.text==currentDate){
+      var currentHour= DateTime.now().hour;
+     if(timeSlot=="shop_owner_slot_9_to_12"){
+       print("hello");
+       print(currentHour);
+       if(currentHour>=12){
+         isExpectedDeliverySlotNotAvailable=true;
+         Timer(Duration(seconds: 3), () {
+           isExpectedDeliverySlotNotAvailable=false;
+           notifyListeners();
+         });
+
+         deliverySlotErrorMsg="This time slot cannot be selected";
+     return;
+       }
+
+     }
+     if(timeSlot=="shop_owner_slot_12_to_3"){
+       if(currentHour>=15){
+         isExpectedDeliverySlotNotAvailable=true;
+         Timer(Duration(seconds: 3), () {
+           isExpectedDeliverySlotNotAvailable=false;
+           notifyListeners();
+         });
+         deliverySlotErrorMsg="This time slot cannot be selected";
+         return;
+       }
+
+     }
+     if(timeSlot=="shop_owner_slot_3_to_6"){
+       print("hiii");
+       print(currentHour);
+       if(currentHour>=18){
+         isExpectedDeliverySlotNotAvailable=true;
+         Timer(Duration(seconds: 3), () {
+           isExpectedDeliverySlotNotAvailable=false;
+           notifyListeners();
+         });
+         deliverySlotErrorMsg="This time slot cannot be selected";
+         return;
+       }
+
+     }
+     if(timeSlot=="shop_owner_slot_6_to_9"){
+       if(currentHour>=21){
+         isExpectedDeliverySlotNotAvailable=true;
+         Timer(Duration(seconds: 3), () {
+           isExpectedDeliverySlotNotAvailable=false;
+           notifyListeners();
+         });
+         deliverySlotErrorMsg="This time slot cannot be selected";
+         return;
+       }
+
+     }
+    }
+    slotGroupValue=timeSlot;
+    notifyListeners();
+ }
+
+ void onDismiss(){
+   isExpectedDeliverySlotNotAvailable=false;
+   notifyListeners();
  }
 
   ///////////////////////////////////////////////////////
