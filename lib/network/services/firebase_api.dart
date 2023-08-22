@@ -93,15 +93,13 @@ class FireBaseApi {
       final notification = message.notification;
       if (notification == null) return;
       // _showNotification("abc", "cyu");
-      await flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-              android: AndroidNotificationDetails(
-                  androidChannel.id, androidChannel.name,
-                  channelDescription: androidChannel.description,
-                  icon: '@drawable/ic_launcher')),
+      await flutterLocalNotificationsPlugin.show(notification.hashCode,
+          notification.title, notification.body, platform,
+          // NotificationDetails(
+          //     android: AndroidNotificationDetails(
+          //         androidChannel.id, androidChannel.name,
+          //         channelDescription: androidChannel.description,
+          //         icon: '@drawable/ic_launcher')),
           payload: jsonEncode(message.toMap()));
     });
     // await flutterLocalNotificationsPlugin.show(
