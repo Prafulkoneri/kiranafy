@@ -359,6 +359,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                             child: Column(
                               children: [
                                 GridView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount:
                                         watch.adminProductList?.length ?? 0,

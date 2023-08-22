@@ -15,7 +15,7 @@ class AddCustomProductToFavReqModel {
 }
 
 class AddCustomProductToFavResModel {
-  String? status;
+  int? status;
   String? message;
   AddCustomProductToFavResModel({
     this.status,

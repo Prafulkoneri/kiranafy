@@ -656,7 +656,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                                 if (watch.isQuanityBtnPressed) {
                                                                                   return;
                                                                                 }
-                                                                                read.addItemQuantity(context, element?.cartItemId.toString(), "add", index);
+                                                                                read.addItemQuantity(context, element?.cartItemId.toString(), "add", element?.productType, index);
                                                                               },
                                                                               child: SvgPicture.asset(
                                                                                 'assets/images/add.svg',

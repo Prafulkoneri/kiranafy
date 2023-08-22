@@ -64,14 +64,6 @@ class _ShopOrderViewState extends State<ShopOrderView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            print(widget.selectedIndex);
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => SMainScreenView(
-            //           index: 1, screenName: SOrderStatusView(selectedIndex: widget.selectedIndex,))),
-            //   (Route<dynamic> route) => false,
-            // );
             widget.fromOrderStatus == true
                 ? Navigator.pushAndRemoveUntil(
                     context,

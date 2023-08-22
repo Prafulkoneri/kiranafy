@@ -45,7 +45,10 @@ class CartDetailController extends ChangeNotifier {
 
   CartItemQuantityReqModel get cartItemQuantityRequestModel =>
       CartItemQuantityReqModel(
-          cartItemId: cartItemId, quantityAction: quantityAction);
+          cartItemId: cartItemId,
+          quantityAction: quantityAction,
+          productType: productType,
+          shopId: shopId);
   CartDetailDeleteRequestModel get cartDetailDeleteReqModel =>
       CartDetailDeleteRequestModel(
         cartId: cartId,
@@ -68,6 +71,7 @@ class CartDetailController extends ChangeNotifier {
   String cartId = "";
   String cartItemId = "";
   String quantityAction = "";
+  String productType = "";
   String orderCartId = "";
   bool isLoading = true;
   bool favAllShop = true;
@@ -253,10 +257,11 @@ class CartDetailController extends ChangeNotifier {
     );
   }
 
-  Future<void> addItemQuantity(context, CIId, action, index) async {
+  Future<void> addItemQuantity(context, CIId, action, pType, index) async {
     quantityBtnPressed(true);
     cartItemId = CIId.toString();
     quantityAction = action;
+    productType = pType;
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
         .cartItemQuantity(

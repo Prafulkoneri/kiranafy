@@ -388,7 +388,7 @@ class _MainScreenViewState extends State<MainScreenView> {
               ),
             ),
           )),
-      body:  watch.currentScreen,
+      body: watch.currentScreen,
     );
   }
 }
