@@ -359,6 +359,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                             child: Column(
                               children: [
                                 GridView.builder(
+                                    padding: EdgeInsets.zero,
                                     physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount:
@@ -542,8 +543,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                           watch.customProductList?[index];
                                       return Container(
                                         decoration: BoxDecoration(
+                                            color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(15.0.w)),
+                                                BorderRadius.circular(15.w)),
                                         padding: EdgeInsets.only(
                                             left: 17.h,
                                             top: 13.w,
