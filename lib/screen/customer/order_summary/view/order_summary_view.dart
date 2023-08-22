@@ -2332,7 +2332,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                     SizedBox(
                       height: 30.w,
                     ),
-                    watch.fullFillYourCravings!.isNotEmpty
+                    watch.fullFillYourCravings?.isNotEmpty==true
                         ? Container(
                             // height: 203.h,
                             width: ScreenUtil().screenWidth,

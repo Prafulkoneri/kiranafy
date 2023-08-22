@@ -193,20 +193,41 @@ class OrderSummaryController extends ChangeNotifier {
         expectedDateController.text =
             DateFormat('dd-MM-yyy').format(DateTime.now());
         var currentHour= DateTime.now().hour;
-          if(currentHour<12){
-              slotGroupValue = shopDeliverySlots?[0];
+        int deliverySlotLength=shopDeliverySlots?.length??0;
+        for(int i=0;i<deliverySlotLength;i++){
+          if(shopDeliverySlots?[i]=="shop_owner_slot_9_to_12"){
+            if(currentHour<12){
+              slotGroupValue = "shop_owner_slot_9_to_12";
             }
-          if(currentHour<15){
-            slotGroupValue = shopDeliverySlots?[1];
-            }
-
-
-            if(currentHour<18){
-              slotGroupValue = shopDeliverySlots?[2];
           }
-            if(currentHour<21){
-              slotGroupValue = shopDeliverySlots?[3];
+          if(shopDeliverySlots?[i]=="shop_owner_slot_12_to_3"){
+            if(currentHour<15){
+              slotGroupValue = "shop_owner_slot_12_to_3";
             }
+          }
+          if(shopDeliverySlots?[i]=="shop_owner_slot_3_to_6"){
+            if(currentHour<18){
+              slotGroupValue = "shop_owner_slot_3_to_6";
+            }
+          }
+          if(shopDeliverySlots?[i]=="shop_owner_slot_6_to_9"){
+            if(currentHour<21){
+              slotGroupValue = "shop_owner_slot_6_to_9";
+            }
+          }
+        }
+          //
+          // if(currentHour<15){
+          //   slotGroupValue = shopDeliverySlots?[1];
+          //   }
+          //
+          //
+          //   if(currentHour<18){
+          //     slotGroupValue = shopDeliverySlots?[2];
+          // }
+          //   if(currentHour<21){
+          //     slotGroupValue = shopDeliverySlots?[3];
+          //   }
 
 
 

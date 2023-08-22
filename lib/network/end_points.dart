@@ -167,34 +167,45 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-add-custom-product";
 
 //////////Banner
+
   static const String bannerAds = "${baseUrl}lsm-customer-get-banner-ads";
   //////////Customer view Shop
+
   static const String customerViewShop = "${baseUrl}lsm-customer-view-shop";
   //////////Customer view All Shop
+
   static const String customerViewAllShop =
       "${baseUrl}lsm-customer-view-all-shop-list"; /////rating
   //////////Customer view All Shop////////////////////////////////////////////////////////////////////////
+
   static const String customerViewAllCategoryShop =
       "${baseUrl}lsm-customer-shop-list-as-per-category";
   //////////Customer view Shop
+
   static const String customerProductListAsPerCategory =
       "${baseUrl}lsm-customer-product-list-as-per-category";
   //////////Customer Product List As Per Search
+
   static const String customerProductListAsPerSearch =
       "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
   //////////Customer Product List As Per Filter
+
   static const String customerProductListAsPerFilter =
       "${baseUrl}lsm-customer-product-list-as-per-category-and-filter";
   //////////Customer Add Admin Product To Fav
+
   static const String addAdminProductToFav =
       "${baseUrl}lsm-customer-add-admin-product-to-favourite";
   //////////Customer Add Custom Product To Fav
+
   static const String addCustomProductToFav =
       "${baseUrl}lsm-customer-add-custom-product-to-favourite";
   //////////////Seasonal Products
+
   static const String AllSeasonalProducts =
       "${baseUrl}lsm-customer-view-all-seasonal-products-of-shop";
   //////////////recommandation
+
   static const String AllRecommandedProducts =
       "${baseUrl}lsm-customer-view-all-recommendation-products-of-shop";
 

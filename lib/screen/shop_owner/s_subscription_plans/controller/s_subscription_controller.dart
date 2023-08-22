@@ -45,7 +45,7 @@ class SSubscriptionController extends ChangeNotifier {
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
-    radioGrpValue = "1";
+    // radioGrpValue = "1";
     paymentMode = "0";
     selectedServicesId = "0";
     selectPaymentMode = "0";
@@ -68,25 +68,25 @@ class SSubscriptionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onTimeShopSetup() {
-    oneTimeShop = !oneTimeShop;
-    notifyListeners();
-  }
+  // void onTimeShopSetup() {
+  //   oneTimeShop = !oneTimeShop;
+  //   notifyListeners();
+  // }
+  //
+  // void onProductPrice() {
+  //   productPrice = !productPrice;
+  //   notifyListeners();
+  // }
+  //
+  // void onShopDigital() {
+  //   shopDigital = !shopDigital;
+  //   notifyListeners();
+  // }
 
-  void onProductPrice() {
-    productPrice = !productPrice;
-    notifyListeners();
-  }
-
-  void onShopDigital() {
-    shopDigital = !shopDigital;
-    notifyListeners();
-  }
-
-  void onPrimeCatchy() {
-    primeCatchy = !primeCatchy;
-    notifyListeners();
-  }
+  // void onPrimeCatchy() {
+  //   primeCatchy = !primeCatchy;
+  //   notifyListeners();
+  // }
 
   Future<void> getSubscriptionPlanDetails(context) async {
     showLoader(true);
@@ -112,8 +112,11 @@ class SSubscriptionController extends ChangeNotifier {
         for (int i = 0; i < length; i++) {
           radioValue.add(subscriptionData?[i].id.toString());
         }
+        radioGrpValue=radioValue[0];
+        selectedPlanId=radioGrpValue;
         print("sfsfsdfsfsdf");
         print(radioValue);
+        print(radioGrpValue);
         print("sfsfsdfsfsdf");
         showLoader(false);
         notifyListeners();
