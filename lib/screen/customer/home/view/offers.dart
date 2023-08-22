@@ -75,7 +75,16 @@ class _OfferPageState extends State<OfferPage> {
                     itemBuilder: (BuildContext, index) {
                       final element = watch.hellotoffersdata?[index];
                       return element?.off != "0"
-                          ? GestureDetector(
+                          ?
+                          //  element?.weight == "" &&
+                          //     element?.offerPrice == "" &&
+                          //     element?.mrpPrice == "" &&
+                          //     element?.unit == "" &&
+                          //     element?.productType == null
+                          // ? Container()
+                          // :
+
+                          GestureDetector(
                               onTap: () {
                                 print("11111111111111111111111111111111111");
                                 print(
