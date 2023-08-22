@@ -145,6 +145,9 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                             ExpandablePageView.builder(
                               // physics: CustomPageViewScrollPhysics(),
                               // physics: NeverScrollableScrollPhysics(),
+
+                              physics: ClampingScrollPhysics(),
+
                               scrollDirection: Axis.horizontal,
                               controller: watch.pageController,
                               onPageChanged: (index) {
