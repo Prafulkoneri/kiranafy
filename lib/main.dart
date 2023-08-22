@@ -106,7 +106,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
+final navigatorKey = GlobalKey<NavigatorState>();
 String? selectedNotificationPayload;
 
 class ReceivedNotification {
@@ -288,7 +288,7 @@ class _MyAppState extends State<MyApp> {
     // fireBaseApi();
   }
 
-  Future<void> _showNotification(fileName,savePath) async {
+  Future<void> _showNotification(fileName, savePath) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,

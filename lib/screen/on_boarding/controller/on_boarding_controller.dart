@@ -48,7 +48,7 @@ class OnBoardingController extends ChangeNotifier {
 ////Function OnBoaring
   Future<void> getOnBoardingData(context) async {
     isLoading = true;
-
+    // currentIndex = 0;
     onBoardingRepo.onBoardingScreen().then((response) {
       print(response.statusCode);
       print(response.body);
@@ -59,13 +59,15 @@ class OnBoardingController extends ChangeNotifier {
         onBoardingData = result.data;
         Timer.periodic(Duration(seconds: 3), (Timer timer) {
           int length = onBoardingData?.length ?? 0;
-          if (currentIndex < length) {
+          if (currentIndex < length - 1) {
             currentIndex++;
-            pageController.animateToPage(
-              currentIndex,
-              duration: Duration(milliseconds: 900),
-              curve: Curves.easeIn,
-            );
+            // pageController.animateToPage(
+            //   currentIndex,
+            //   duration: Duration(milliseconds: 900),
+            //   curve: Curves.easeIn,
+            // );
+            pageController.nextPage(
+                duration: Duration(milliseconds: 300), curve: Curves.easeIn);
           } else {
             currentIndex = length;
           }

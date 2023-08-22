@@ -12,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/view/ads_view.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
-
 import 'package:local_supper_market/screen/customer/home/view/category.dart';
 import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
 import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
@@ -329,12 +328,15 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           ),
                           width: ScreenUtil().screenWidth,
                           // height: 100.h,
-                          child: watch.placeAd.isNotEmpty==true?AppNetworkImages(
-                            imageUrl: (watch.placeAd.toList()..shuffle()).first,
-                            height: 163.h,
-                            width: 352.w,
-                            fit: BoxFit.cover,
-                          ):Container()),
+                          child: watch.placeAd.isNotEmpty == true
+                              ? AppNetworkImages(
+                                  imageUrl:
+                                      (watch.placeAd.toList()..shuffle()).first,
+                                  height: 163.h,
+                                  width: 352.w,
+                                  fit: BoxFit.cover,
+                                )
+                              : Container()),
 
                       SizedBox(
                         height: 20.h,

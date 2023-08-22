@@ -21,113 +21,119 @@ class HomeCarousal extends StatefulWidget {
 
 class _HomeCarousalState extends State<HomeCarousal> {
   @override
-
-
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
     return watch.nearByShopList?.isNotEmpty ?? false
-        ? SizedBox(
-            height: 120.h,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: watch.nearByShopList?.length ?? 0,
-                itemBuilder: (BuildContext, index) {
-                  final element = watch.nearByShopList?[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainScreenView(
-                                index: 1,
-                                screenName: ShopProfileView(
-                                  shopId: element?.id.toString(),
-                                  routeName: "homeNearbyShop",
-                                  refreshPage: true,
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
-                    },
-                    child: Stack(
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              height: 120.h,
-                              width: 168.w,
-                              margin: EdgeInsets.only(
-                                  left: index == 0 ? 19.w : 0,
-                                  right: index == 10 ? 19.w : 5.w),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(13.w),
-                                image: element?.shopBannerImagePath == ""
-                                    ? DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/nearshop2.png"),
-                                        fit: BoxFit.cover)
-                                    : DecorationImage(
-                                        image: NetworkImage(
-                                            "${element?.shopBannerImagePath}"),
-                                        fit: BoxFit.cover),
-                              ),
-                              child: Container(
-                                padding: EdgeInsets.all(10.h),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text("${element?.shopName}",
-                                        style: GoogleFonts.roboto(
-                                            textStyle: TextStyle(
-                                                color: Colors.white,
-                                                // letterSpacing: .5,
-                                                fontSize: 13.sp,
-                                                fontWeight: FontWeight.w600))),
-                                    Text("${element?.areaName}",
-                                        style: GoogleFonts.roboto(
-                                            textStyle: TextStyle(
-                                                color: Colors.white,
-                                                // letterSpacing: .5,
-                                                fontSize: 12.sp,
-                                                // height: 10,
-                                                fontWeight: FontWeight.w400))),
-                                  ],
+        ? WillPopScope(
+            onWillPop: () async {
+              return false;
+            },
+            child: SizedBox(
+              height: 120.h,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: watch.nearByShopList?.length ?? 0,
+                  itemBuilder: (BuildContext, index) {
+                    final element = watch.nearByShopList?[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainScreenView(
+                                  index: 1,
+                                  screenName: ShopProfileView(
+                                    shopId: element?.id.toString(),
+                                    routeName: "homeNearbyShop",
+                                    refreshPage: true,
+                                  ))),
+                          (Route<dynamic> route) => false,
+                        );
+                      },
+                      child: Stack(
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                height: 120.h,
+                                width: 168.w,
+                                margin: EdgeInsets.only(
+                                    left: index == 0 ? 19.w : 0,
+                                    right: index == 10 ? 19.w : 5.w),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(13.w),
+                                  image: element?.shopBannerImagePath == ""
+                                      ? DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/nearshop2.png"),
+                                          fit: BoxFit.cover)
+                                      : DecorationImage(
+                                          image: NetworkImage(
+                                              "${element?.shopBannerImagePath}"),
+                                          fit: BoxFit.cover),
+                                ),
+                                child: Container(
+                                  padding: EdgeInsets.all(10.h),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text("${element?.shopName}",
+                                          style: GoogleFonts.roboto(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  // letterSpacing: .5,
+                                                  fontSize: 13.sp,
+                                                  fontWeight:
+                                                      FontWeight.w600))),
+                                      Text("${element?.areaName}",
+                                          style: GoogleFonts.roboto(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  // letterSpacing: .5,
+                                                  fontSize: 12.sp,
+                                                  // height: 10,
+                                                  fontWeight:
+                                                      FontWeight.w400))),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                            child: Container(
-                          margin: EdgeInsets.only(
-                              left: index == 0 ? 19.w : 0,
-                              right: index + 1 == watch.nearByShopList?.length
-                                  ? 19.w
-                                  : 5.w),
-                          height: 120.h,
-                          width: 168.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(13.w),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                stops: [
-                                  0.1,
-                                  0.9,
-                                ],
-                                colors: [
-                                  Colors.white.withOpacity(0),
-                                  Colors.black.withOpacity(0.05),
-                                ],
-                              )),
-                        )),
-                      ],
-                    ),
-                  );
-                }),
+                            ],
+                          ),
+                          Positioned(
+                              child: Container(
+                            margin: EdgeInsets.only(
+                                left: index == 0 ? 19.w : 0,
+                                right: index + 1 == watch.nearByShopList?.length
+                                    ? 19.w
+                                    : 5.w),
+                            height: 120.h,
+                            width: 168.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(13.w),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  stops: [
+                                    0.1,
+                                    0.9,
+                                  ],
+                                  colors: [
+                                    Colors.white.withOpacity(0),
+                                    Colors.black.withOpacity(0.05),
+                                  ],
+                                )),
+                          )),
+                        ],
+                      ),
+                    );
+                  }),
+            ),
           )
         : Container();
   }
