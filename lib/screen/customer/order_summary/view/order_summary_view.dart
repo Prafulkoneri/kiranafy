@@ -2079,7 +2079,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                           : watch.slotGroupValue ==
                                                                   "shop_owner_slot_6_to_9"
                                                               ? "06:00 PM - 09:00 PM"
-                                                              : "",
+                                                              : "No Slot Selected",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     color: black,

@@ -146,7 +146,10 @@ class ProductViewController extends ChangeNotifier {
 
   CartItemQuantityReqModel get cartItemQuantityRequestModel =>
       CartItemQuantityReqModel(
-          cartItemId: cartItemId, quantityAction: quantityAction);
+          cartItemId: cartItemId, quantityAction: quantityAction,productType: productType,shopId:shopDetails?.id);
+
+
+
 
   Future<void> subtractItemQuantity(
       context, CIId, index, pType, pUnitId) async {
@@ -235,6 +238,12 @@ class ProductViewController extends ChangeNotifier {
       },
     );
   }
+
+
+
+
+
+
 
   Future<void> addToCart(pType, pId, sId, index, context) async {
     print("quantityList1${quantityList}");

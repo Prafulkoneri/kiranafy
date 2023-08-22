@@ -142,6 +142,8 @@ class OrderDetails {
   String? shopOwnerRefundTransactionId;
   String? refundDatetime;
   String? deliveryType;
+  String? shopOwnerCancelledReason;
+  String? customerCancelledReason;
 
   OrderDetails(
       {required this.id,
@@ -161,6 +163,8 @@ class OrderDetails {
       this.shopOwnerRefundPayableAmount,
       required this.customerRefundAmount,
       this.customerRefundReason,
+        this.shopOwnerCancelledReason,
+        this.customerCancelledReason,
       this.reason,
       this.refundDatetime,
       this.refundOrderStatus,
@@ -197,6 +201,8 @@ class OrderDetails {
     shopOwnerRefundTransactionId = json["shop_owner_refund_transaction_id"];
     refundDatetime = json["refund_datetime"];
     deliveryType = json["delivery_type"];
+    shopOwnerCancelledReason = json["shop_owner_order_cancelled_reason"];
+    customerCancelledReason = json["customer_order_cancelled_reason"];
   }
 }
 

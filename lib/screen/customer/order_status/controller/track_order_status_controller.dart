@@ -54,6 +54,7 @@ class TrackOrderStatusController extends ChangeNotifier {
         trackOrderDetails = trackData?.trackOrderDetails;
         shopDetails = trackData?.shopDetails;
         deliveryAddressDetails = trackData?.deliveryAddressDetails;
+        favAllShop=shopDetails?.shopFavourite=="yes"?true:false;
         showLoader(false);
       } else {
         Utils.showPrimarySnackbar(context, result.message,

@@ -65,18 +65,18 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
             )
           : WillPopScope(
               onWillPop: () async {
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => MainScreenView(
-                //           index: 0,
-                //           screenName: HomeScreenView(
-                //             refreshPage: false,
-                //           ))),
-                //   (Route<dynamic> route) => false,
-                // );
-                Navigator.of(context).popUntil(
-                    (route) => route.settings.name == "MainScreenView");
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MainScreenView(
+                          index: 0,
+                          screenName: HomeScreenView(
+                            refreshPage: false,
+                          ))),
+                  (Route<dynamic> route) => false,
+                );
+                // Navigator.of(context).popUntil(
+                //     (route) => route.settings.name == "MainScreenView");
                 return false;
               },
               child: SingleChildScrollView(

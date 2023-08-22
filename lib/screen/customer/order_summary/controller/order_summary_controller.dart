@@ -189,33 +189,13 @@ class OrderSummaryController extends ChangeNotifier {
 
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
-
+        favAllShop=shopDetailData?.shopFavourite=="yes"?true:false;
         expectedDateController.text =
             DateFormat('dd-MM-yyy').format(DateTime.now());
-        var currentHour= DateTime.now().hour;
-        int deliverySlotLength=shopDeliverySlots?.length??0;
-        for(int i=0;i<deliverySlotLength;i++){
-          if(shopDeliverySlots?[i]=="shop_owner_slot_9_to_12"){
-            if(currentHour<12){
-              slotGroupValue = "shop_owner_slot_9_to_12";
-            }
-          }
-          if(shopDeliverySlots?[i]=="shop_owner_slot_12_to_3"){
-            if(currentHour<15){
-              slotGroupValue = "shop_owner_slot_12_to_3";
-            }
-          }
-          if(shopDeliverySlots?[i]=="shop_owner_slot_3_to_6"){
-            if(currentHour<18){
-              slotGroupValue = "shop_owner_slot_3_to_6";
-            }
-          }
-          if(shopDeliverySlots?[i]=="shop_owner_slot_6_to_9"){
-            if(currentHour<21){
-              slotGroupValue = "shop_owner_slot_6_to_9";
-            }
-          }
-        }
+
+        // if(slotGroupValue==""){
+        //   slotGroupValue=shopDeliverySlots?[0];
+        // }
           //
           // if(currentHour<15){
           //   slotGroupValue = shopDeliverySlots?[1];
@@ -282,6 +262,10 @@ class OrderSummaryController extends ChangeNotifier {
           }
         }
         showLoader(false);
+
+        int deliverySlotLength=shopDeliverySlots?.length??0;
+
+
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           Navigator.pushAndRemoveUntil(
             context,
@@ -301,6 +285,34 @@ class OrderSummaryController extends ChangeNotifier {
           print("fsfsdfsfsfsdfdsfdfsdfsdfs");
           groupValue = "delivery_to";
           notifyListeners();
+        }
+        var currentHour= DateTime.now().hour;
+        print(currentHour);
+        for(int i=0;i<deliverySlotLength;i++){
+          if(shopDeliverySlots?[i]=="shop_owner_slot_9_to_12"){
+            if(currentHour<=12){
+              slotGroupValue = "shop_owner_slot_9_to_12";
+              return;
+            }
+          }
+          if(shopDeliverySlots?[i]=="shop_owner_slot_12_to_3"){
+            if(currentHour<=15){
+              slotGroupValue = "shop_owner_slot_12_to_3";
+              return;
+            }
+          }
+          if(shopDeliverySlots?[i]=="shop_owner_slot_3_to_6"){
+            if(currentHour<=18){
+              slotGroupValue = "shop_owner_slot_3_to_6";
+              return;
+            }
+          }
+          if(shopDeliverySlots?[i]=="shop_owner_slot_6_to_9"){
+            if(currentHour<=21){
+              slotGroupValue = "shop_owner_slot_6_to_9";
+              return;
+            }
+          }
         }
         notifyListeners();
       } else {

@@ -31,6 +31,7 @@ class ProductCategoryController extends ChangeNotifier {
   bool isOfferProductSelected = false;
   String groupValue = "1";
   List<bool> isCategoryProductAdded = [];
+  List<bool> isCustomCategoryProductAdded = [];
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   SearchProductAsPerCategoryRepo searchProductAsPerCategoryRepo =
       SearchProductAsPerCategoryRepo();
@@ -73,13 +74,24 @@ class ProductCategoryController extends ChangeNotifier {
         customProductList=categoryProductData?.customProductList;
 ///////////////////////////
         int productListLength = productList?.length ?? 0;
+        int customproductListLength = customProductList?.length ?? 0;
         isCategoryProductAdded =
             List<bool>.filled(productListLength, false, growable: true);
+        isCustomCategoryProductAdded =
+            List<bool>.filled(customProductList?.length??0, false, growable: true);
         for (int i = 0; i < productListLength; i++) {
           if (productList?[i].addToCartCheck == "yes") {
             isCategoryProductAdded.insert(i, true);
           } else {
             isCategoryProductAdded.insert(i, false);
+          }
+        }
+        for(int i=0;i<customproductListLength;i++){
+          if(customProductList?[i].addToCartCheck=="yes"){
+            isCustomCategoryProductAdded.insert(i,true);
+          }
+          else{
+            isCustomCategoryProductAdded.insert(i,false);
           }
         }
         if (productList!.isEmpty) {
@@ -234,7 +246,13 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        isCategoryProductAdded[index] = true;
+        if(pType=="admin_product"){
+          isCategoryProductAdded[index] = true;
+        }
+        else{
+          isCustomCategoryProductAdded[index]=true;
+        }
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -272,7 +290,13 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        isCategoryProductAdded[index] = false;
+        if(pType=="admin_product"){
+          isCategoryProductAdded[index] = false;
+        }
+        else{
+          isCustomCategoryProductAdded[index] = false;
+        }
+
         // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

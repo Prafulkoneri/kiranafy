@@ -25,6 +25,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/repository/remo
 import 'package:local_supper_market/screen/customer/shop_profile/repository/shop_profile_coupons_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -66,8 +67,8 @@ class ShopProfileViewController extends ChangeNotifier {
   Future<void> initState(context, id, refresh) async {
     if (refresh) {
       showLoader(true);
-      await getShopDetails(context, id);
-      await sProfileCouponList(context);
+      await getShopDetails(context, id,refresh);
+
     } else {
       showLoader(false);
     }
@@ -133,8 +134,8 @@ class ShopProfileViewController extends ChangeNotifier {
     }
   }
 
-  Future<void> getShopDetails(context, id) async {
-    // showLoader(true);
+  Future<void> getShopDetails(context, id,refresh) async {
+
     print("id$id");
     shopId = id;
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -142,7 +143,7 @@ class ShopProfileViewController extends ChangeNotifier {
     customerViewShopRepo
         .getShopDetails(
             customerViewShopReqModel, pref.getString("successToken"))
-        .then((response) {
+        .then((response)async{
       log("response.body${response.body}");
       final result =
           CustomerViewShopResModel.fromJson(jsonDecode(response.body));
@@ -194,7 +195,7 @@ class ShopProfileViewController extends ChangeNotifier {
         print("bye");
         print(favAllShop);
         print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
-        // showLoader(false);
+
         int imageLength = bannerImageData?.length ?? 0;
         if (bannerImageData!.isNotEmpty) {
           Timer.periodic(Duration(seconds: 5), (Timer timer) {
@@ -210,6 +211,11 @@ class ShopProfileViewController extends ChangeNotifier {
             );
           });
         }
+        if(refresh){
+          await sProfileCouponList(context);
+        }
+
+LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -332,6 +338,7 @@ class ShopProfileViewController extends ChangeNotifier {
 
   Future<void> addToCart(pType, pId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+    LoadingOverlay.of(context).show();
     addProductToCartRepo
         .addProductToCart(
             AddProductToCartReqModel(
@@ -345,22 +352,27 @@ class ShopProfileViewController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        await getShopDetails(context, sId);
+
+        await getShopDetails(context, sId,false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
+        LoadingOverlay.of(context).hide();
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      LoadingOverlay.of(context).hide();
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        LoadingOverlay.of(context).hide();
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        LoadingOverlay.of(context).hide();
         return false;
       },
     );
@@ -394,15 +406,19 @@ class ShopProfileViewController extends ChangeNotifier {
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
+        showLoader(false);
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      showLoader(false);
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        showLoader(false);
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        showLoader(false);
         return false;
       },
     );
@@ -418,6 +434,7 @@ class ShopProfileViewController extends ChangeNotifier {
 
   Future<void> removeFromCart(pType, puId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+    LoadingOverlay.of(context).show();
     removeCartItemRepo
         .removeCartItem(
             RemoveItemFromCartReq(
@@ -431,22 +448,27 @@ class ShopProfileViewController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        await getShopDetails(context, sId);
+
+        await getShopDetails(context, sId,false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
+        LoadingOverlay.of(context).hide();
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      LoadingOverlay.of(context).hide();
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        LoadingOverlay.of(context).hide();
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        LoadingOverlay.of(context).hide();
         return false;
       },
     );

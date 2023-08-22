@@ -948,7 +948,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                                 ),
                                                                               ),
                                                                             ),
-                                                                            watch.isCategoryProductAdded[index] == false
+                                                                            watch.isCustomCategoryProductAdded[index] == false
                                                                                 ? GestureDetector(
                                                                                     onTap: () {
                                                                                       read.addToCart(element?.productType, element?.productUnitId, element?.shopId, index, context);

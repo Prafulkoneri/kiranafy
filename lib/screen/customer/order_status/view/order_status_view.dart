@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/delivery_view_second.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
@@ -79,15 +80,13 @@ class _OrderStatusViewState extends State<OrderStatusView> {
             //         builder: (context) => OrderStatusView(
             //               orderId: widget.orderId,
             //             )));
-            Navigator.pushAndRemoveUntil(
+            Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 2,
-                      screenName: OrderStatusView(
-                        orderId: widget.orderId,
-                      ))),
-              (Route<dynamic> route) => false,
+                  builder: (context) =>  OrderDeliveryView(
+                        orderId : widget.orderId,
+                        isRefresh: true,
+                      )),
             );
           },
           isBackButtonEnabled: false,
@@ -100,15 +99,13 @@ class _OrderStatusViewState extends State<OrderStatusView> {
             )
           : WillPopScope(
               onWillPop: () async {
-                Navigator.pushAndRemoveUntil(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => MainScreenView(
-                          index: 2,
-                          screenName: CheckOrderStatusView(
-                            orderId: widget.orderId,
-                          ))),
-                  (Route<dynamic> route) => false,
+                      builder: (context) => OrderDeliveryView(
+                            orderId : widget.orderId,
+                            isRefresh: true,
+                          )),
                 );
                 return true;
               },

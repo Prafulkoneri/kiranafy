@@ -529,116 +529,293 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                         ),
                                       );
                                     }),
+                                SizedBox(
+                                  height: 5.w,
+                                ),
                                 GridView.builder(
+                                    padding: EdgeInsets.zero,
+                                    physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount:
-                                        watch.customProductList?.length ?? 0,
+                                    watch.customProductList?.length ?? 0,
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
-                                            crossAxisSpacing: 4.0,
+                                            crossAxisSpacing: 20.0,
                                             mainAxisSpacing: 4.0),
                                     itemBuilder: (BuildContext, index) {
                                       final element =
                                           watch.customProductList?[index];
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(15.w)),
-                                        padding: EdgeInsets.only(
-                                            left: 17.h,
-                                            top: 13.w,
-                                            bottom: 14.w),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                                child: Center(
-                                              child: AppNetworkImages(
-                                                imageUrl:
-                                                    "${element?.productImagePath}",
-                                                fit: BoxFit.cover,
+                                      return GestureDetector(
+                                        onTap: () {
+                                          readProductViewController
+                                              .updateProductId(
+                                            element?.id.toString(),
+                                          );
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MainScreenView(
+                                                      index: 1,
+                                                      screenName:
+                                                          ProductScreenView(
+                                                        selectedUnitId: element
+                                                            ?.productUnitId
+                                                            .toString(),
+                                                        categoryId: element
+                                                            ?.categoryId
+                                                            .toString(),
+                                                        productId: element?.id
+                                                            .toString(),
+                                                        shopId: element?.shopId
+                                                            .toString(),
+                                                        productType: element
+                                                            ?.productType
+                                                            .toString(),
+                                                      ),
+                                                    )),
+                                            (Route<dynamic> route) => false,
+                                          );
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(15.w)),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            // mainAxisAlignment:
+                                            //     MainAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                  child: Center(
+                                                child: AppNetworkImages(
+                                                  imageUrl:
+                                                      "${element?.productImagePath}",
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              )),
+                                              SizedBox(
+                                                height: 3.w,
                                               ),
-                                            )),
-                                            SizedBox(
-                                              height: 3.w,
-                                            ),
-                                            Text(
-                                              "${element?.productName}",
-                                              // "Red Label",
-                                              style: GoogleFonts.dmSans(
-                                                textStyle: TextStyle(
-                                                    color: Black1,
-                                                    fontSize: 16.sp,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 2.w,
-                                            ),
-                                            Text(
-                                              // "100g",
-                                              "${element?.weight}",
-                                              style: TextStyle(
-                                                  color: Black1,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            SizedBox(
-                                              height: 2.w,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Expanded(
-                                                  child: Text(
-                                                    '\u{20B9}${element?.price}',
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black1,
-                                                          fontSize: 12.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                  left: 17.h,
+                                                  // right: 15.w,
+                                                ),
+                                                child: Text(
+                                                  "${element?.productName}",
+                                                  // "Red Label",
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Black1,
+                                                        fontSize: 16.sp,
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                   ),
                                                 ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    read.removeCustomFavProduct(
-                                                        context,
-                                                        element?.shopId,
-                                                        element?.id,
-                                                        index);
-                                                  },
-                                                  child: Expanded(
-                                                    child: SvgPicture.asset(
-                                                      'assets/icons/fvrt_products.svg',
-                                                    ),
-                                                  ),
+                                              ),
+                                              SizedBox(
+                                                height: 2.w,
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                  left: 17.h,
+                                                  // right: 15.w,
                                                 ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 4.w,
-                                            ),
-                                            Text(
-                                              "${element?.shopName}",
-                                              // "Maharaj Kirana Store",
-                                              style: TextStyle(
-                                                  color: Black1,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                          ],
+                                                child: Text(
+                                                  // "100g",
+                                                  "${element?.weight} ${element?.unit}",
+                                                  style: TextStyle(
+                                                      color: Black1,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 2.w,
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                  left: 17.h,
+                                                  right: 15.w,
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        '\u{20B9}${element?.price}',
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Black1,
+                                                              fontSize: 12.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        read.removeCustomFavProduct(
+                                                            context,
+                                                            element?.shopId,
+                                                            element?.id,
+                                                            index);
+                                                      },
+                                                      child: SvgPicture.asset(
+                                                        'assets/icons/fvrt_products.svg',
+                                                      ),
+                                                    ),
+                                                    // SizedBox(
+                                                    //   width: 15.w,
+                                                    // ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 4.w,
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                  left: 17.h,
+                                                  bottom: 10.w,
+                                                ),
+                                                child: Text(
+                                                  "${element?.shopName}",
+                                                  // "Maharaj Kirana Store",
+                                                  style: TextStyle(
+                                                      color: Black1,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       );
                                     }),
+                                SizedBox(
+                                  height: 80.w,
+                                ),
+                                // GridView.builder(
+                                //     shrinkWrap: true,
+                                //     itemCount:
+                                //         watch.customProductList?.length ?? 0,
+                                //     gridDelegate:
+                                //         SliverGridDelegateWithFixedCrossAxisCount(
+                                //             crossAxisCount: 2,
+                                //             crossAxisSpacing: 4.0,
+                                //             mainAxisSpacing: 4.0),
+                                //     itemBuilder: (BuildContext, index) {
+                                //       final element =
+                                //           watch.customProductList?[index];
+                                //       return Container(
+                                //         decoration: BoxDecoration(
+                                //             color: Colors.white,
+                                //             borderRadius:
+                                //                 BorderRadius.circular(15.w)),
+                                //         padding: EdgeInsets.only(
+                                //             left: 17.h,
+                                //             top: 13.w,
+                                //             bottom: 14.w),
+                                //         child: Column(
+                                //           crossAxisAlignment:
+                                //               CrossAxisAlignment.start,
+                                //           children: [
+                                //             Expanded(
+                                //                 child: Center(
+                                //               child: AppNetworkImages(
+                                //                 imageUrl:
+                                //                     "${element?.productImagePath}",
+                                //                 fit: BoxFit.cover,
+                                //               ),
+                                //             )),
+                                //             SizedBox(
+                                //               height: 3.w,
+                                //             ),
+                                //             Text(
+                                //               "${element?.productName}",
+                                //               // "Red Label",
+                                //               style: GoogleFonts.dmSans(
+                                //                 textStyle: TextStyle(
+                                //                     color: Black1,
+                                //                     fontSize: 16.sp,
+                                //                     fontWeight:
+                                //                         FontWeight.w600),
+                                //               ),
+                                //             ),
+                                //             SizedBox(
+                                //               height: 2.w,
+                                //             ),
+                                //             Text(
+                                //               // "100g",
+                                //               "${element?.weight}",
+                                //               style: TextStyle(
+                                //                   color: Black1,
+                                //                   fontSize: 12.sp,
+                                //                   fontWeight: FontWeight.w600),
+                                //             ),
+                                //             SizedBox(
+                                //               height: 2.w,
+                                //             ),
+                                //             Row(
+                                //               mainAxisAlignment:
+                                //                   MainAxisAlignment.start,
+                                //               crossAxisAlignment:
+                                //                   CrossAxisAlignment.end,
+                                //               children: [
+                                //                 Expanded(
+                                //                   child: Text(
+                                //                     '\u{20B9}${element?.price}',
+                                //                     style: GoogleFonts.dmSans(
+                                //                       textStyle: TextStyle(
+                                //                           color: Black1,
+                                //                           fontSize: 12.sp,
+                                //                           fontWeight:
+                                //                               FontWeight.w600),
+                                //                     ),
+                                //                   ),
+                                //                 ),
+                                //                 GestureDetector(
+                                //                   onTap: () {
+                                //                     read.removeCustomFavProduct(
+                                //                         context,
+                                //                         element?.shopId,
+                                //                         element?.id,
+                                //                         index);
+                                //                   },
+                                //                   child: Expanded(
+                                //                     child: SvgPicture.asset(
+                                //                       'assets/icons/fvrt_products.svg',
+                                //                     ),
+                                //                   ),
+                                //                 ),
+                                //               ],
+                                //             ),
+                                //             SizedBox(
+                                //               height: 4.w,
+                                //             ),
+                                //             Text(
+                                //               "${element?.shopName}",
+                                //               // "Maharaj Kirana Store",
+                                //               style: TextStyle(
+                                //                   color: Black1,
+                                //                   fontSize: 12.sp,
+                                //                   fontWeight: FontWeight.w600),
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       );
+                                //     }),
                               ],
                             ),
                           ),
