@@ -83,8 +83,9 @@ class _OrderStatusViewState extends State<OrderStatusView> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>  OrderDeliveryView(
-                        orderId : widget.orderId,
+                  builder: (context) => OrderDeliveryView(
+                        screenName: "myorderview",
+                        orderId: widget.orderId,
                         isRefresh: true,
                       )),
             );
@@ -103,7 +104,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => OrderDeliveryView(
-                            orderId : widget.orderId,
+                            screenName: "myorderview",
+                            orderId: widget.orderId,
                             isRefresh: true,
                           )),
                 );

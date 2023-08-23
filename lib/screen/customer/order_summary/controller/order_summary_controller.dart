@@ -133,16 +133,16 @@ class OrderSummaryController extends ChangeNotifier {
         (Route<dynamic> route) => false,
       );
     }
-    if(groupValue=="self_pickup"){
-      selfPickupTotalAmount=(int.parse(totalAmount)-int.parse(deliveryCharges)).toString();
-      selfPickupDeliveryCharges="0";
+    if (groupValue == "self_pickup") {
+      selfPickupTotalAmount =
+          (int.parse(totalAmount) - int.parse(deliveryCharges)).toString();
+      selfPickupDeliveryCharges = "0";
     }
     notifyListeners();
   }
 
   void onDeliverySlotSelected(value) {
     checkDeliverySlotAccodringToDate(value);
-
 
     notifyListeners();
   }
@@ -189,27 +189,25 @@ class OrderSummaryController extends ChangeNotifier {
 
         shopDetailData = result.orderSummaryData?.shopDetails;
         shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
-        favAllShop=shopDetailData?.shopFavourite=="yes"?true:false;
+        favAllShop = shopDetailData?.shopFavourite == "yes" ? true : false;
         expectedDateController.text =
             DateFormat('dd-MM-yyy').format(DateTime.now());
 
         // if(slotGroupValue==""){
         //   slotGroupValue=shopDeliverySlots?[0];
         // }
-          //
-          // if(currentHour<15){
-          //   slotGroupValue = shopDeliverySlots?[1];
-          //   }
-          //
-          //
-          //   if(currentHour<18){
-          //     slotGroupValue = shopDeliverySlots?[2];
-          // }
-          //   if(currentHour<21){
-          //     slotGroupValue = shopDeliverySlots?[3];
-          //   }
-
-
+        //
+        // if(currentHour<15){
+        //   slotGroupValue = shopDeliverySlots?[1];
+        //   }
+        //
+        //
+        //   if(currentHour<18){
+        //     slotGroupValue = shopDeliverySlots?[2];
+        // }
+        //   if(currentHour<21){
+        //     slotGroupValue = shopDeliverySlots?[3];
+        //   }
 
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
@@ -221,16 +219,17 @@ class OrderSummaryController extends ChangeNotifier {
             groupValue = "self_pickup";
             print("heloo");
             print(totalAmount.toString());
-            print((int.parse(totalAmount.toString())-int.parse(deliveryCharges.toString())));
-            selfPickupTotalAmount=(int.parse(totalAmount.toString())-int.parse(deliveryCharges.toString())).toString();
+            print((int.parse(totalAmount.toString()) -
+                int.parse(deliveryCharges.toString())));
+            selfPickupTotalAmount = (int.parse(totalAmount.toString()) -
+                    int.parse(deliveryCharges.toString()))
+                .toString();
             print("selfPickupTotalAmount${selfPickupTotalAmount}");
-            selfPickupDeliveryCharges="0";
-
+            selfPickupDeliveryCharges = "0";
           } else {
             groupValue = "delivery_to";
           }
         }
-
 
         productTotalDiscount =
             orderFinalTotals?.productTotalDiscount.toString() ?? "";
@@ -263,8 +262,7 @@ class OrderSummaryController extends ChangeNotifier {
         }
         showLoader(false);
 
-        int deliverySlotLength=shopDeliverySlots?.length??0;
-
+        int deliverySlotLength = shopDeliverySlots?.length ?? 0;
 
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           Navigator.pushAndRemoveUntil(
@@ -286,29 +284,29 @@ class OrderSummaryController extends ChangeNotifier {
           groupValue = "delivery_to";
           notifyListeners();
         }
-        var currentHour= DateTime.now().hour;
+        var currentHour = DateTime.now().hour;
         print(currentHour);
-        for(int i=0;i<deliverySlotLength;i++){
-          if(shopDeliverySlots?[i]=="shop_owner_slot_9_to_12"){
-            if(currentHour<=12){
+        for (int i = 0; i < deliverySlotLength; i++) {
+          if (shopDeliverySlots?[i] == "shop_owner_slot_9_to_12") {
+            if (currentHour <= 12) {
               slotGroupValue = "shop_owner_slot_9_to_12";
               return;
             }
           }
-          if(shopDeliverySlots?[i]=="shop_owner_slot_12_to_3"){
-            if(currentHour<=15){
+          if (shopDeliverySlots?[i] == "shop_owner_slot_12_to_3") {
+            if (currentHour <= 15) {
               slotGroupValue = "shop_owner_slot_12_to_3";
               return;
             }
           }
-          if(shopDeliverySlots?[i]=="shop_owner_slot_3_to_6"){
-            if(currentHour<=18){
+          if (shopDeliverySlots?[i] == "shop_owner_slot_3_to_6") {
+            if (currentHour <= 18) {
               slotGroupValue = "shop_owner_slot_3_to_6";
               return;
             }
           }
-          if(shopDeliverySlots?[i]=="shop_owner_slot_6_to_9"){
-            if(currentHour<=21){
+          if (shopDeliverySlots?[i] == "shop_owner_slot_6_to_9") {
+            if (currentHour <= 21) {
               slotGroupValue = "shop_owner_slot_6_to_9";
               return;
             }
@@ -488,13 +486,18 @@ class OrderSummaryController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final data = result.applyCouponData;
         couponCodeController.text = data?.couponCode.toString() ?? "";
-        deliveryCharges=double.parse(data?.deliveryCharges??"0").toString();
-        selfPickupDeliveryCharges="0";
-        subTotal = double.parse(data?.subTotal??"0").toString() ?? "";
-        couponDiscount = double.parse(data?.couponDiscount??"0").toString() ?? "";
-        totalAmount = double.parse(data?.total??"0").toString();
-        selfPickupTotalAmount=(double.parse(totalAmount)-double.parse(deliveryCharges)).toString()??"";
-        totalDiscount = double.parse(data?.totalDiscount??"0").toString() ?? "";
+        deliveryCharges = double.parse(data?.deliveryCharges ?? "0").toString();
+        selfPickupDeliveryCharges = "0";
+        subTotal = double.parse(data?.subTotal ?? "0").toString() ?? "";
+        couponDiscount =
+            double.parse(data?.couponDiscount ?? "0").toString() ?? "";
+        totalAmount = double.parse(data?.total ?? "0").toString();
+        selfPickupTotalAmount =
+            (double.parse(totalAmount) - double.parse(deliveryCharges))
+                    .toString() ??
+                "";
+        totalDiscount =
+            double.parse(data?.totalDiscount ?? "0").toString() ?? "";
         discountPercentage = data?.discountPercentage ?? "";
         showOnPageLoader(false);
         showLoader(false);
@@ -549,10 +552,12 @@ class OrderSummaryController extends ChangeNotifier {
             data?.removeCouponData?.couponDiscount.toString() ?? "0";
         // deliveryCharges =
         //     data?.removeCouponData?.deliveryCharges.toString() ?? "";
-        selfPickupDeliveryCharges="0";
+        selfPickupDeliveryCharges = "0";
         subTotal = data?.removeCouponData?.subTotal.toString() ?? "";
         totalAmount = data?.removeCouponData?.total.toString() ?? "";
-        selfPickupTotalAmount=(double.parse(totalAmount)-double.parse(deliveryCharges)).toString();
+        selfPickupTotalAmount =
+            (double.parse(totalAmount) - double.parse(deliveryCharges))
+                .toString();
         totalDiscount = data?.removeCouponData?.totalDiscount.toString() ?? "";
         discountPercentage = "";
         showOnPageLoader(false);
@@ -603,10 +608,15 @@ class OrderSummaryController extends ChangeNotifier {
                 customerDeliveryDate: expectedDateController.text,
                 customerDeliverySlot: slotGroupValue,
                 customerDeliveryType: groupValue,
-                finalDeliveryCharges:groupValue=="self_pickup"?selfPickupDeliveryCharges:
-                    deliveryCharges == "" ? "0" : deliveryCharges,
+                finalDeliveryCharges: groupValue == "self_pickup"
+                    ? selfPickupDeliveryCharges
+                    : deliveryCharges == ""
+                        ? "0"
+                        : deliveryCharges,
                 finalSubTotal: subTotal,
-                finalTotalAmount:groupValue=="self_pickup"?selfPickupTotalAmount:totalAmount,
+                finalTotalAmount: groupValue == "self_pickup"
+                    ? selfPickupTotalAmount
+                    : totalAmount,
                 finalTotalDiscount: totalDiscount,
                 totalItems: orderFinalTotals?.itemCount.toString(),
               )),
@@ -619,72 +629,68 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
- void checkDeliverySlotAccodringToDate(timeSlot)async{
-    var currentDate=DateFormat('dd-MM-yyy').format(DateTime.now());
-    if(expectedDateController.text==currentDate){
-      var currentHour= DateTime.now().hour;
-     if(timeSlot=="shop_owner_slot_9_to_12"){
-       print("hello");
-       print(currentHour);
-       if(currentHour>=12){
-         isExpectedDeliverySlotNotAvailable=true;
-         Timer(Duration(seconds: 3), () {
-           isExpectedDeliverySlotNotAvailable=false;
-           notifyListeners();
-         });
+  void checkDeliverySlotAccodringToDate(timeSlot) async {
+    var currentDate = DateFormat('dd-MM-yyy').format(DateTime.now());
+    if (expectedDateController.text == currentDate) {
+      var currentHour = DateTime.now().hour;
+      if (timeSlot == "shop_owner_slot_9_to_12") {
+        print("hello");
+        print(currentHour);
+        if (currentHour >= 12) {
+          isExpectedDeliverySlotNotAvailable = true;
+          Timer(Duration(seconds: 3), () {
+            isExpectedDeliverySlotNotAvailable = false;
+            notifyListeners();
+          });
 
-         deliverySlotErrorMsg="This time slot cannot be selected";
-     return;
-       }
-
-     }
-     if(timeSlot=="shop_owner_slot_12_to_3"){
-       if(currentHour>=15){
-         isExpectedDeliverySlotNotAvailable=true;
-         Timer(Duration(seconds: 3), () {
-           isExpectedDeliverySlotNotAvailable=false;
-           notifyListeners();
-         });
-         deliverySlotErrorMsg="This time slot cannot be selected";
-         return;
-       }
-
-     }
-     if(timeSlot=="shop_owner_slot_3_to_6"){
-       print("hiii");
-       print(currentHour);
-       if(currentHour>=18){
-         isExpectedDeliverySlotNotAvailable=true;
-         Timer(Duration(seconds: 3), () {
-           isExpectedDeliverySlotNotAvailable=false;
-           notifyListeners();
-         });
-         deliverySlotErrorMsg="This time slot cannot be selected";
-         return;
-       }
-
-     }
-     if(timeSlot=="shop_owner_slot_6_to_9"){
-       if(currentHour>=21){
-         isExpectedDeliverySlotNotAvailable=true;
-         Timer(Duration(seconds: 3), () {
-           isExpectedDeliverySlotNotAvailable=false;
-           notifyListeners();
-         });
-         deliverySlotErrorMsg="This time slot cannot be selected";
-         return;
-       }
-
-     }
+          deliverySlotErrorMsg = "This time slot cannot be selected";
+          return;
+        }
+      }
+      if (timeSlot == "shop_owner_slot_12_to_3") {
+        if (currentHour >= 15) {
+          isExpectedDeliverySlotNotAvailable = true;
+          Timer(Duration(seconds: 3), () {
+            isExpectedDeliverySlotNotAvailable = false;
+            notifyListeners();
+          });
+          deliverySlotErrorMsg = "This time slot cannot be selected";
+          return;
+        }
+      }
+      if (timeSlot == "shop_owner_slot_3_to_6") {
+        print("hiii");
+        print(currentHour);
+        if (currentHour >= 18) {
+          isExpectedDeliverySlotNotAvailable = true;
+          Timer(Duration(seconds: 3), () {
+            isExpectedDeliverySlotNotAvailable = false;
+            notifyListeners();
+          });
+          deliverySlotErrorMsg = "This time slot cannot be selected";
+          return;
+        }
+      }
+      if (timeSlot == "shop_owner_slot_6_to_9") {
+        if (currentHour >= 21) {
+          isExpectedDeliverySlotNotAvailable = true;
+          Timer(Duration(seconds: 3), () {
+            isExpectedDeliverySlotNotAvailable = false;
+            notifyListeners();
+          });
+          deliverySlotErrorMsg = "This time slot cannot be selected";
+          return;
+        }
+      }
     }
-    slotGroupValue=timeSlot;
+    slotGroupValue = timeSlot;
     notifyListeners();
- }
+  }
 
- void onDismiss(){
-   isExpectedDeliverySlotNotAvailable=false;
-   notifyListeners();
- }
+  void onDismiss() {
+    isExpectedDeliverySlotNotAvailable = false;
+    notifyListeners();
+  }
 
   ///////////////////////////////////////////////////////
   RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();

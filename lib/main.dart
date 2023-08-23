@@ -270,6 +270,8 @@ class _MyAppState extends State<MyApp> {
       print(message.data);
       print("onMessageOpenedApp: $message");
       print("okkkkk");
+
+      ////////////Shop Notification Navigation /////////////////////
       print(message.data["notification_type"]);
       if (message.data["notification_type"] == "custom") {
         context.read<SMainScreenController>().onCustomTypeNotification(context);

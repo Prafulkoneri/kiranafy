@@ -1,5 +1,3 @@
-
-
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/all_near_shops_model.dart';

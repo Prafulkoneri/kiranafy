@@ -69,7 +69,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SMainScreenView(
-                            index: 1,
+                            index: 0,
                             screenName: SOrderStatusView(
                                 selectedIndex: widget.selectedIndex))),
                     (Route<dynamic> route) => false,
@@ -78,7 +78,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SMainScreenView(
-                            index: 2,
+                            index: 0,
                             screenName: SPaymentRefundList(
                               isNavFromAccounts: false,
                             ))),
@@ -2347,8 +2347,62 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                           ],
                         )
                       : Container(
-                          height: 50.w,
-                        ),
+                          // height: 50.w,
+                          ),
+                  watch.orderDetails?.orderStatus == "Cancelled"
+                      // &&
+                      //  watch.orderDetails?.customerCancelledReason!=""
+                      //   watch.orderDetails?.shopOwnerCancelledReason != ""
+                      ? Container(
+                          padding: EdgeInsets.only(
+                              left: 15.w, top: 11.w, bottom: 45.w),
+                          // height: ScreenUtil().screenHeight,
+                          width: ScreenUtil().screenWidth,
+                          decoration: BoxDecoration(color: Color(0xffFFE8E8)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Order Cancelled",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18.sp),
+                              ),
+                              SizedBox(
+                                height: 15.w,
+                              ),
+                              Text(
+                                "Reason",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16.sp),
+                              ),
+                              SizedBox(
+                                height: 5.w,
+                              ),
+                              Text(
+                                watch.orderDetails?.customerCancelledReason ==
+                                        ""
+                                    ? watch.orderDetails
+                                            ?.shopOwnerCancelledReason
+                                            .toString() ??
+                                        ""
+                                    : watch.orderDetails
+                                            ?.customerCancelledReason
+                                            .toString() ??
+                                        "",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16.sp),
+                              ),
+                            ],
+                          ),
+                          // Text(watch.orderDetails
+                          //         ?.shopOwnerCancelledReason
+                          //         .toString() ??
+                          //     "0"),
+                        )
+                      : Container()
 
                   // Container(
                   //   padding: EdgeInsets.only(left: 19.w, right: 19.w),
