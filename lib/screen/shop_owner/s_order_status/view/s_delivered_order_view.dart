@@ -191,7 +191,7 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
                                       element?.shopOwnerPaymentStatus ==
                                               "payment-not-given"
                                           ? Text(
-                                              "Pendding",
+                                              "Pending",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 14.sp,

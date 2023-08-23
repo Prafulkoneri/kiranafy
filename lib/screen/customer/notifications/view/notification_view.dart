@@ -17,7 +17,9 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class CustomerNotificationsScreenView extends StatefulWidget {
-  const CustomerNotificationsScreenView({Key? key}) : super(key: key);
+  final bool? isRefresh;
+  const CustomerNotificationsScreenView({Key? key, this.isRefresh})
+      : super(key: key);
 
   @override
   _CustomerNotificationsScreenViewState createState() =>
@@ -210,6 +212,7 @@ class _CustomerNotificationsScreenViewState
                                         builder: (context) => OrderDeliveryView(
                                               orderId:
                                                   element?.orderId.toString(),
+                                              screenName: "notification",
                                             )));
                               }
                             },

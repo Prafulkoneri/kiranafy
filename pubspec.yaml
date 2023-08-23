@@ -72,7 +72,7 @@ dependencies:
   flutter_downloader:
   flutter_inappwebview: ^5.7.2+3
   # sms_autofill: ^2.3.0
-  sms_autofill: ^2.3.0
+  sms_autofill: ^2.2.0
 
 
   # country_picker: ^2.0.20

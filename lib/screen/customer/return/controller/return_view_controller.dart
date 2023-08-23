@@ -44,8 +44,8 @@ class ReturnOrderController extends ChangeNotifier {
   SubmitReturnRepo submitReturnRepo = SubmitReturnRepo();
 
   Future<void> initState(context, oId) async {
-    productId="";
-    refundTotal=0;
+    productId = "";
+    refundTotal = 0;
     selectedProductIdList.clear();
     isReturnProductSelected.clear();
     descriptionController.clear();
@@ -156,16 +156,17 @@ class ReturnOrderController extends ChangeNotifier {
   }
 
   Future<void> onSelectingProduct(
-      index, value, productId, productAmount,productCount) async {
+      index, value, productId, productAmount, productCount) async {
     print(value);
     isReturnProductSelected[index] = !isReturnProductSelected[index];
     if (isReturnProductSelected[index]) {
       selectedProductIdList.add(productId);
-      refundTotal =
-          int.parse(refundTotal.toString()) + (int.parse(productAmount)*int.parse(productCount.toString()));
+      refundTotal = int.parse(refundTotal.toString()) +
+          (int.parse(productAmount) * int.parse(productCount.toString()));
     } else {
-      selectedProductIdList.removeWhere((element) => element==productId);
-      refundTotal = int.parse(refundTotal.toString())-(int.parse(productAmount)*int.parse(productCount.toString()));
+      selectedProductIdList.removeWhere((element) => element == productId);
+      refundTotal = int.parse(refundTotal.toString()) -
+          (int.parse(productAmount) * int.parse(productCount.toString()));
     }
 
     print(selectedProductIdList);
@@ -198,7 +199,7 @@ class ReturnOrderController extends ChangeNotifier {
       return;
     }
     LoadingOverlay.of(context).show();
-    productId="";
+    productId = "";
     for (int i = 0; i < selectedProductIdList.length; i++) {
       productId += selectedProductIdList[i] + ",";
     }
@@ -218,6 +219,7 @@ class ReturnOrderController extends ChangeNotifier {
             context,
             MaterialPageRoute(
                 builder: (context) => OrderDeliveryView(
+                      screenName: "myorderview",
                       orderId: orderId,
                     )));
         Utils.showPrimarySnackbar(context, result.message,

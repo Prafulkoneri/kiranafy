@@ -74,6 +74,7 @@ class AllCategoryShopController extends ChangeNotifier {
           jsonDecode(response.body));
       if (response.statusCode == 200) {
         print("111111123e24errfsdfs");
+        allShops.clear();
         data = result.data;
         nearByShop = data?.nearByShops;
         allShops.addAll(result.data?.allShops ?? []);
