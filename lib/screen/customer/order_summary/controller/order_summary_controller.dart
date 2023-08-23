@@ -469,7 +469,7 @@ class OrderSummaryController extends ChangeNotifier {
             : orderFinalTotals?.deliveryCharges,
         productTotalDiscount: orderFinalTotals?.productTotalDiscount.toString(),
         subTotal: orderFinalTotals?.subTotal.toString(),
-        total: orderFinalTotals?.total.toString(),
+        total: orderFinalTotals?.subTotal.toString(),
         totalDiscount: orderFinalTotals?.totalDiscount.toString(),
       );
 
@@ -488,13 +488,13 @@ class OrderSummaryController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final data = result.applyCouponData;
         couponCodeController.text = data?.couponCode.toString() ?? "";
-        deliveryCharges=double.parse(data?.deliveryCharges??"0").toInt().toString();
+        deliveryCharges=double.parse(data?.deliveryCharges??"0").toString();
         selfPickupDeliveryCharges="0";
-        subTotal = double.parse(data?.subTotal??"0").toInt().toString() ?? "";
-        couponDiscount = double.parse(data?.couponDiscount??"0").toInt().toString() ?? "";
-        totalAmount = double.parse(data?.total??"0").toInt().toString();
-        selfPickupTotalAmount=(double.parse(totalAmount).toInt()-double.parse(deliveryCharges).toInt()).toString()??"";
-        totalDiscount = double.parse(data?.totalDiscount??"0").toInt().toString() ?? "";
+        subTotal = double.parse(data?.subTotal??"0").toString() ?? "";
+        couponDiscount = double.parse(data?.couponDiscount??"0").toString() ?? "";
+        totalAmount = double.parse(data?.total??"0").toString();
+        selfPickupTotalAmount=(double.parse(totalAmount)-double.parse(deliveryCharges)).toString()??"";
+        totalDiscount = double.parse(data?.totalDiscount??"0").toString() ?? "";
         discountPercentage = data?.discountPercentage ?? "";
         showOnPageLoader(false);
         showLoader(false);
@@ -552,7 +552,7 @@ class OrderSummaryController extends ChangeNotifier {
         selfPickupDeliveryCharges="0";
         subTotal = data?.removeCouponData?.subTotal.toString() ?? "";
         totalAmount = data?.removeCouponData?.total.toString() ?? "";
-        selfPickupTotalAmount=(int.parse(totalAmount)-int.parse(deliveryCharges)).toString();
+        selfPickupTotalAmount=(double.parse(totalAmount)-double.parse(deliveryCharges)).toString();
         totalDiscount = data?.removeCouponData?.totalDiscount.toString() ?? "";
         discountPercentage = "";
         showOnPageLoader(false);

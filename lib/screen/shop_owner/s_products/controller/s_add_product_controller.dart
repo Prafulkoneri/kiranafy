@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
@@ -101,7 +102,7 @@ int offset=0;
         .shopAddProducts(
             shopAddProductRequestModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log("response${response.body}");
       final result =
           ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
 
@@ -115,6 +116,20 @@ int offset=0;
 
         selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
             growable: true);
+        int allcheckedProductListLength=productDetails?.length??0;
+        List checkedProductList=[];
+        for(int i=0;i<allcheckedProductListLength;i++){
+          if(productDetails?[i].selectedByShopOwner=="yes"){
+            checkedProductList.add(productDetails?[i].selectedByShopOwner);
+          }
+        }
+        print(checkedProductList.length);
+        if(checkedProductList.length==allProductsCount){
+          isSelectAll=true;
+        }
+        else{
+          isSelectAll=false;
+        }
         int length = allAdminProductList.length ?? 0;
         selectedProductsId.clear();
         for (int i = 0; i < length; i++) {
@@ -228,23 +243,27 @@ int offset=0;
         allAdminProductList.addAll(productDetails??[]);
         categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
+        print(isSelectAll);
         if(isSelectAll){
           selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, true,
               growable: true);
+          selectedProductsId.clear();
+          int length = allAdminProductList.length ?? 0;
+          for (int i = 0; i < length; i++) {
+            if (allAdminProductList[i].selectedByShopOwner == "yes") {
+              selectedProduct.insert(i, true);
+              selectedProductsId.add(allAdminProductList[i].id);
+            }
+          }
         }
         else{
           selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
               growable: true);
         }
 
-        int length = allAdminProductList.length ?? 0;
-        selectedProductsId.clear();
-        for (int i = 0; i < length; i++) {
-          if (allAdminProductList[i].selectedByShopOwner == "yes") {
-            selectedProduct.insert(i, true);
-            selectedProductsId.add(allAdminProductList[i].id);
-          }
-        }
+
+
+        print(selectedProductsId);
         showLoader(false);
         showPaginationLoader=false;
         notifyListeners();
@@ -277,13 +296,16 @@ int offset=0;
 
   void onSelecteAllProducts(context)async {
     isSelectAll = !isSelectAll;
+
+    print(isSelectAll);
     if (isSelectAll) {
+      LoadingOverlay.of(context).show();
       selectedProductsId.clear();
       SharedPreferences pref = await SharedPreferences.getInstance();
       print("categoryId$categoryId");
       shopAddProductRepo
           .shopAddProducts(
-          ShopAddProductsListRequestModel(category_id: categoryId,limit: "5000",offset:offset.toString() ), pref.getString("successToken"))
+          ShopAddProductsListRequestModel(category_id: categoryId,limit: "5000",offset:"0"), pref.getString("successToken"))
           .then((response) {
         print(response.body);
         final result =
@@ -294,15 +316,20 @@ int offset=0;
           productDetails = result.data?.productDetails;
           selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, true,
                 growable: true);
+
 int length=productDetails?.length??0;
           for (int i = 0; i < length; i++) {
+            print("hello");
+            print(productDetails?[i].id);
+            print("hello");
             selectedProductsId.add(productDetails?[i].id);
           }
           print(selectedProductsId);
           // showPaginationLoader=false;
+          LoadingOverlay.of(context).hide();
           notifyListeners();
         } else {
-          showLoader(false);
+          LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
@@ -324,7 +351,11 @@ int length=productDetails?.length??0;
       selectedProduct =
           List<bool>.filled(allAdminProductList.length ?? 0, false, growable: true);
       selectedProductsId.clear();
+      print("not selected");
+    print(selectedProductsId);
+      print("not selected");
     }
+
 
     notifyListeners();
   }
