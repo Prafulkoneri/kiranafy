@@ -154,8 +154,7 @@ class ProductViewController extends ChangeNotifier {
     }
   }
 
-  CartItemQuantityReqModel get cartItemQuantityRequestModel =>
-      CartItemQuantityReqModel(
+  CartItemQuantityReqModel get cartItemQuantityRequestModel => CartItemQuantityReqModel(
           cartItemId: cartItemId,
           quantityAction: quantityAction,
           productType: productType,

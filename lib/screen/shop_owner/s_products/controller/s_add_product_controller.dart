@@ -27,6 +27,7 @@ class SAddProductsController extends ChangeNotifier {
   // List<bool> selectedList = [];
   Data? productData;
   List<ProductDetail>? productDetails;
+  List<SelectedProductIdData>? selectedProductIdData;
   List<ProductDetail> allAdminProductList=[];
   List<bool> selectedProduct = [];
   List selectedProductsId = [];
@@ -36,6 +37,7 @@ class SAddProductsController extends ChangeNotifier {
   bool isSelectAll = false;
   String categoryName = "";
   bool uploadSuccess = false;
+  bool customerSelectedClicked=false;
   bool showPaginationLoader = false;
   MainScreenController mainScreenController = MainScreenController();
 int offset=0;
@@ -61,8 +63,10 @@ int offset=0;
       selectedProductsId.removeWhere((item) => item == int.parse(id));
       selectedProductsId.insert(0, id);
     } else {
+      print(id);
       selectedProductsId.removeWhere((item) => item == int.parse(id));
     }
+    print(selectedProductsId);
 
     notifyListeners();
   }
@@ -87,6 +91,7 @@ int offset=0;
       ShopAddProductsListRequestModel(category_id: categoryId,limit: "10",offset:offset.toString() );
 
   Future<void> shopAddProducts(context, id) async {
+    customerSelectedClicked=false;
     isSelectAll = false;
     if(offset==0){
       showLoader(true);
@@ -113,29 +118,25 @@ int offset=0;
         allAdminProductList.addAll(productDetails??[]);
         categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
-
-        selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
-            growable: true);
-        int allcheckedProductListLength=productDetails?.length??0;
-        List checkedProductList=[];
-        for(int i=0;i<allcheckedProductListLength;i++){
-          if(productDetails?[i].selectedByShopOwner=="yes"){
-            checkedProductList.add(productDetails?[i].selectedByShopOwner);
-          }
-        }
-        print(checkedProductList.length);
-        if(checkedProductList.length==allProductsCount){
+        selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false, growable: true);
+        if(productData?.selectedProductCount==allProductsCount){
           isSelectAll=true;
         }
         else{
           isSelectAll=false;
         }
+        selectedProductIdData=result.data?.selectedProductIdData;
         int length = allAdminProductList.length ?? 0;
         selectedProductsId.clear();
+        int selectedProductLength=selectedProductIdData?.length??0;
+        for(int i=0;i<selectedProductLength;i++){
+          selectedProductsId.add(selectedProductIdData?[i].selectedProductId);
+        }
+        print(selectedProductsId);
         for (int i = 0; i < length; i++) {
           if (allAdminProductList[i].selectedByShopOwner == "yes") {
             selectedProduct.insert(i, true);
-            selectedProductsId.add(allAdminProductList[i].id);
+
           }
         }
         showLoader(false);
@@ -251,16 +252,37 @@ int offset=0;
           int length = allAdminProductList.length ?? 0;
           for (int i = 0; i < length; i++) {
             if (allAdminProductList[i].selectedByShopOwner == "yes") {
-              selectedProduct.insert(i, true);
+              // selectedProduct.insert(i, true);
               selectedProductsId.add(allAdminProductList[i].id);
             }
           }
+
         }
         else{
-          selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
-              growable: true);
+          if(customerSelectedClicked){
+            selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
+                growable: true);
+            int length = allAdminProductList.length ?? 0;
+            // for (int i = 0; i < length; i++) {
+              // if (allAdminProductList[i].selectedByShopOwner == "yes") {
+              //   // selectedProduct.insert(i, true);
+              //   selectedProductsId.add(allAdminProductList[i].id);
+              // }
+            // }
+          }
+          else{
+            print("hiii");
+            selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
+                growable: true);
+            int length = allAdminProductList.length ?? 0;
+            for (int i = 0; i < length; i++) {
+              if (allAdminProductList[i].selectedByShopOwner == "yes") {
+                selectedProduct.insert(i, true);
+                selectedProductsId.add(allAdminProductList[i].id);
+              }
+            }
+          }
         }
-
 
 
         print(selectedProductsId);
@@ -295,6 +317,7 @@ int offset=0;
   }
 
   void onSelecteAllProducts(context)async {
+    customerSelectedClicked=true;
     isSelectAll = !isSelectAll;
 
     print(isSelectAll);
