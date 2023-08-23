@@ -50,6 +50,7 @@ class ProductViewController extends ChangeNotifier {
   String? selectedUnitId = "";
   String? productImage = "";
   String? productType = "";
+  String? cartId;
   String? addProductUnitId;
   String? addProductType;
   String? addProductShopId;
@@ -120,14 +121,23 @@ class ProductViewController extends ChangeNotifier {
     notifyListeners();
   }
 
+  getCartId(id) {
+    print("iiiiiiiiiiiiiiiiiiii");
+    cartId = id;
+    print("kirannnnnn");
+    print(cartId);
+    print("kirannnnnn");
+  }
+
   onBackPressed(context) {
     if (routeName == "cart_details") {
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => CartDetailView(
-                    isRefresh: false,
-                  )));
+                  isRefresh: true,
+                  shopId: shopDetails?.id.toString(),
+                  cartId: cartId)));
     } else {
       Navigator.pushAndRemoveUntil(
         context,
@@ -146,10 +156,10 @@ class ProductViewController extends ChangeNotifier {
 
   CartItemQuantityReqModel get cartItemQuantityRequestModel =>
       CartItemQuantityReqModel(
-          cartItemId: cartItemId, quantityAction: quantityAction,productType: productType,shopId:shopDetails?.id);
-
-
-
+          cartItemId: cartItemId,
+          quantityAction: quantityAction,
+          productType: productType,
+          shopId: shopDetails?.id);
 
   Future<void> subtractItemQuantity(
       context, CIId, index, pType, pUnitId) async {
@@ -238,12 +248,6 @@ class ProductViewController extends ChangeNotifier {
       },
     );
   }
-
-
-
-
-
-
 
   Future<void> addToCart(pType, pId, sId, index, context) async {
     print("quantityList1${quantityList}");
@@ -756,8 +760,11 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  void updateProductId(value) {
+  void updateProductId(
+    value,
+  ) {
     productId = value;
+
     notifyListeners();
   }
 
