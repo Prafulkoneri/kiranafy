@@ -68,32 +68,8 @@ class FireBaseApi {
     FirebaseMessaging.onMessage.listen((message) {
       final notification = message.notification;
       if (notification == null) return;
-      _showNotification();
-      // _localNotification.show(
-      //     notification.hashCode,
-      //     notification.title,
-      //     notification.body,
-      //     NotificationDetails(
-      //         android: AndroidNotificationDetails(
-      //             androidChannel.id, androidChannel.name,
-      //             channelDescription: androidChannel.description,
-      //             icon: '@drawable/ic_launcher')),
-      //     payload: jsonEncode(message.toMap()));
-    });
-  }
-
-  Future<void> _showNotification() async {
-    final android = AndroidNotificationDetails('0', 'Adun Accounts',
-        channelDescription: 'channel description',
-        importance: Importance.max,
-        icon: '');
-    final iOS = IOSNotificationDetails();
-    final platform = NotificationDetails(android: android, iOS: iOS);
-    FirebaseMessaging.onMessage.listen((message) async {
-      final notification = message.notification;
-      if (notification == null) return;
-      // _showNotification("abc", "cyu");
-      await flutterLocalNotificationsPlugin.show(
+      // _showNotification();
+      _localNotification.show(
           notification.hashCode,
           notification.title,
           notification.body,
@@ -104,13 +80,41 @@ class FireBaseApi {
                   icon: '@drawable/ic_launcher')),
           payload: jsonEncode(message.toMap()));
     });
-    // await flutterLocalNotificationsPlugin.show(
-    //     0, // notification id
-    //     "${fileName}",
-    //     'Download complete.',
-    //     platform,
-    //     payload: '$savePath');
   }
+
+  // Future<void> _showNotification() async {
+  //   final android = AndroidNotificationDetails('0', 'Adun Accounts',
+  //       channelDescription: 'channel description',
+  //       importance: Importance.max,
+  //       icon: '');
+  //   final iOS = IOSNotificationDetails();
+  //   final platform = NotificationDetails(android: android, iOS: iOS);
+  //   FirebaseMessaging.onMessage.listen((message) async {
+  //     final notification = message.notification;
+  //     if (notification == null) return;
+  //     await flutterLocalNotificationsPlugin.show(
+  //         0, // notification id
+  //         "vdddfsn",
+  //         'Download complete.',
+  //         platform,
+  //         payload: '');
+  //     // _showNotification();
+  //     // await flutterLocalNotificationsPlugin.show(notification.hashCode,
+  //     //     notification.title, notification.body, platform,
+  //     //     // NotificationDetails(
+  //     //     //     android: AndroidNotificationDetails(
+  //     //     //         androidChannel.id, androidChannel.name,
+  //     //     //         channelDescription: androidChannel.description,
+  //     //     //         icon: '@drawable/ic_launcher')),
+  //     //     payload: jsonEncode(message.toMap()));
+  //   });
+  //   // await flutterLocalNotificationsPlugin.show(
+  //   //     0, // notification id
+  //   //     "${fileName}",
+  //   //     'Download complete.',
+  //   //     platform,
+  //   //     payload: '$savePath');
+  // }
 
   //////////////////////////////////////
   // Future<void> initPushNotifications() async {

@@ -366,6 +366,9 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                         .toString(),
                                                   );
                                                   print("anobot");
+                                                  readProductViewController
+                                                      .getCartId(
+                                                          watch.orderCartId);
                                                   Navigator.pushAndRemoveUntil(
                                                     context,
                                                     MaterialPageRoute(
