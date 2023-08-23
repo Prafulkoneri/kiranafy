@@ -59,15 +59,15 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
             itemBuilder: (BuildContext, index) {
               final element = watch.deliveredOrdersList?[index];
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ShopOrderView(
-                          orderId: element?.id.toString(),
-                          fromOrderStatus: true,
-                          selectedIndex: watch.selectedIndex,
-                        )),
+                              orderId: element?.id.toString(),
+                              fromOrderStatus: true,
+                              selectedIndex: watch.selectedIndex,
+                            )),
                   );
                 },
                 child: Container(
@@ -140,8 +140,6 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
                           InkWell(
                             onTap: () {
                               // Within the `FirstRoute` widget
-
-
                             },
                             child: Row(
                               children: [
@@ -155,12 +153,77 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
                                 SizedBox(
                                   width: 7.w,
                                 ),
-                                SvgPicture.asset("assets/icons/arrow_right.svg"),
+                                SvgPicture.asset(
+                                    "assets/icons/arrow_right.svg"),
                               ],
                             ),
                           ),
                         ],
                       ),
+                      ///////////////////////
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      element?.refundCount != 0
+                          ? Container(
+                              padding: EdgeInsets.only(
+                                  left: 11.w,
+                                  right: 9.w,
+                                  top: 4.w,
+                                  bottom: 3.w),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Color(0xffFBDFDF),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${element?.refundCount} products return request",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12.sp,
+                                        color: Black),
+                                  ),
+                                  Row(
+                                    children: [
+                                      element?.shopOwnerPaymentStatus ==
+                                              "payment-not-given"
+                                          ? Text(
+                                              "Pendding",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14.sp,
+                                                  color: Black),
+                                            )
+                                          : element?.shopOwnerPaymentStatus ==
+                                                  "payment-submit"
+                                              ? Text(
+                                                  "Acepeted",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14.sp,
+                                                      color: Black),
+                                                )
+                                              : element?.shopOwnerPaymentStatus ==
+                                                      "payment-rejected"
+                                                  ? Text(
+                                                      "Rejected",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 14.sp,
+                                                          color: Black),
+                                                    )
+                                                  : Container()
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container()
                     ],
                   ),
                 ),

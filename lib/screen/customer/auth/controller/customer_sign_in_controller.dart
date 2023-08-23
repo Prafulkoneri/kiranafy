@@ -14,7 +14,6 @@ import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_v
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 
 class CustomerSignInController extends ChangeNotifier {
   TextEditingController mobileController = TextEditingController();
@@ -28,22 +27,6 @@ class CustomerSignInController extends ChangeNotifier {
   String verificationID = "";
   bool isLoginBtnEnabled = false;
   // bool isNextBtnEnabled = false;
-  @override
-  void initState() {
-    _listenOtp();
-  }
-
-  @override
-  void dispose() {
-    SmsAutoFill().unregisterListener();
-    print("Unregistered Listener");
-    super.dispose();
-  }
-
-  void _listenOtp() async {
-    await SmsAutoFill().listenForCode();
-    print("OTP Listen is called");
-  }
 
   void onOtpSubmitPressed(context) {
     onCodeVerification(context);

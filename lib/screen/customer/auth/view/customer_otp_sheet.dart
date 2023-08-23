@@ -6,7 +6,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 
 import 'package:provider/provider.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 
 class OtpCustomerBottomSheet extends StatefulWidget {
   const OtpCustomerBottomSheet({Key? key}) : super(key: key);
@@ -16,25 +15,6 @@ class OtpCustomerBottomSheet extends StatefulWidget {
 }
 
 class _OtpCustomerBottomSheetState extends State<OtpCustomerBottomSheet> {
-  // bool isNextBtnEnabled = false;
-  @override
-  void initState() {
-    _listenOtp();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    SmsAutoFill().unregisterListener();
-    print("Unregistered Listener");
-    super.dispose();
-  }
-
-  void _listenOtp() async {
-    await SmsAutoFill().listenForCode();
-    print("OTP Listen is called");
-  }
-
   @override
   Widget build(BuildContext context) {
     final read = context.read<CustomerSignInController>();
@@ -81,21 +61,20 @@ class _OtpCustomerBottomSheetState extends State<OtpCustomerBottomSheet> {
                           ),
                         ),
                       ),
-                      PinFieldAutoFill(
-                        currentCode: watch.otpCode,
+                      OtpTextField(
                         autoFocus: true,
                         //  controller: otpController,
-                        codeLength: 6,
-                        // borderColor: Color(0xFF512DA8),
+                        numberOfFields: 6,
+                        borderColor: Color(0xFF512DA8),
                         //set to true to show as box or false to show as dash
-                        // showFieldAsBox: false,
+                        showFieldAsBox: false,
                         //runs when a code is typed in
-                        onCodeChanged: (String? code) {
+                        onCodeChanged: (String code) {
                           print(code);
                           //handle validation or checks here
                         },
                         //runs when every textfield is filled
-                        onCodeSubmitted: (String verificationCode) {
+                        onSubmit: (String verificationCode) {
                           print(verificationCode);
                           read.onOtpEntered(verificationCode);
                         }, // end onSubmit
