@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+// import 'dart:js';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:local_supper_market/main.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 
 Future<void> handleBackGroundMessage(RemoteMessage message) async {
+  print("notification");
   print("Title : ${message.notification?.title}");
   print("Body : ${message.notification?.body}");
   print("Payload : ${message.data}");
@@ -36,15 +39,24 @@ class FireBaseApi {
 
   ///
 
-  Future initLocalNotifications() async {
+  Future initLocalNotifications(context) async {
     const iOS = IOSInitializationSettings();
-    const android = AndroidInitializationSettings('@drawable/ic_launcher');
+    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
     const settings = InitializationSettings(android: android, iOS: iOS);
     await _localNotification.initialize(settings,
         onSelectNotification: (payload) {
       final message = RemoteMessage.fromMap(
         jsonDecode(payload!),
       );
+      print(payload);
+      var res = jsonDecode(payload.toString());
+      print(res["data"]["user_type"]);
+      if (res["data"] == "shop_owner") {
+        context
+            .read<SMainScreenController>()
+            .onOrderTypeNotification(context, res["data"]["redirect_id"]);
+      }
+      print("notificationnnnnnnnnnnnnnnnnnn");
       handleMessage(message);
     });
     final platform = _localNotification.resolvePlatformSpecificImplementation<
@@ -77,7 +89,7 @@ class FireBaseApi {
               android: AndroidNotificationDetails(
                   androidChannel.id, androidChannel.name,
                   channelDescription: androidChannel.description,
-                  icon: '@drawable/ic_launcher')),
+                  icon: '@mipmap/ic_launcher')),
           payload: jsonEncode(message.toMap()));
     });
   }
@@ -150,7 +162,7 @@ class FireBaseApi {
     fcmToken = await firebasemessaging.getToken();
     log("Token : ${fcmToken}");
     initPushNotification();
-    initLocalNotifications();
+    initLocalNotifications(BuildContext);
     // initPushNotifications();
   }
 }

@@ -623,6 +623,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                     ?.shopId,
                                                                 productType: element
                                                                     ?.productType,
+                                                                routeName:
+                                                                    "ShopProfileView",
                                                               ))),
                                                   (Route<dynamic> route) =>
                                                       false,

@@ -65,6 +65,7 @@ class AllOffersController extends ChangeNotifier {
       log(response.body);
       final result = ViewAllOfferProducts.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        // allOfferProducts.clear();
         allproducts = result.data;
         // allOfferProducts = allproducts?.offerProducts;
         allOfferProducts.addAll(result.data?.offerProducts ?? []);

@@ -66,6 +66,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
           ViewAllSeasonalProducts.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         data = result.data;
+        // seasonalProduct.clear();
         // seasonalProduct = data?.seasonalProducts;
         seasonalProduct.addAll(result.data?.seasonalProducts ?? []);
         int seasonProductLength = seasonalProduct?.length ?? 0;
