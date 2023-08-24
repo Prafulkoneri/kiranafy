@@ -65,7 +65,7 @@ class AllOffersController extends ChangeNotifier {
       log(response.body);
       final result = ViewAllOfferProducts.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        // allOfferProducts.clear();
+        allOfferProducts.clear();
         allproducts = result.data;
         // allOfferProducts = allproducts?.offerProducts;
         allOfferProducts.addAll(result.data?.offerProducts ?? []);
@@ -224,9 +224,61 @@ class AllOffersController extends ChangeNotifier {
   Future<void> onScrollMaxExtent(context, id) async {
     print("hello");
     offset = offset + 1;
+    showPaginationLoader = true;
+    shopId = id;
+    showLoader(true);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    allOfferProductsRepo
+        .getAllOffereProducts(
+            shopAllProductsReqModel, pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = ViewAllOfferProducts.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        // allOfferProducts.clear();
+        allproducts = result.data;
+        // allOfferProducts = allproducts?.offerProducts;
+        allOfferProducts.addAll(result.data?.offerProducts ?? []);
+        // int seasonProductLength = seasonalProduct?.length ?? 0;
+        isAllOfferProductAdded =
+            List<bool>.filled(allOfferProducts.length, false, growable: true);
+        for (int i = 0; i < allOfferProducts.length; i++) {
+          if (allOfferProducts[i].addToCartCheck == "yes") {
+            isAllOfferProductAdded.insert(i, true);
+          } else {
+            isAllOfferProductAdded.insert(i, false);
+          }
+        }
+        //   int seasonProductLength = seasonalProduct?.length ?? 0;
+        // isAllSeasonalProductAdded =
+        //     List<bool>.filled(seasonProductLength, false, growable: true);
+        // for (int i = 0; i < seasonProductLength; i++) {
+        //   if (seasonalProduct?[i].addToCartCheck == "yes") {
+        //     isAllSeasonalProductAdded.insert(i, true);
+        //   } else {
+        //     isAllSeasonalProductAdded.insert(i, false);
+        //   }
+        // }
+        showLoader(false);
+        showPaginationLoader = false;
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
     await getAllOfferes(context, id);
     isLoading = false;
-
     notifyListeners();
   }
 

@@ -154,7 +154,8 @@ class ProductViewController extends ChangeNotifier {
     }
   }
 
-  CartItemQuantityReqModel get cartItemQuantityRequestModel => CartItemQuantityReqModel(
+  CartItemQuantityReqModel get cartItemQuantityRequestModel =>
+      CartItemQuantityReqModel(
           cartItemId: cartItemId,
           quantityAction: quantityAction,
           productType: productType,
@@ -401,8 +402,8 @@ class ProductViewController extends ChangeNotifier {
   }
 
   List<bool> isUnitImageProductAdded = [];
-  UnitImagesRequestModel get unitImagesReqModel =>
-      UnitImagesRequestModel(slectedUnitId: selectedUnitId);
+  UnitImagesRequestModel get unitImagesReqModel => UnitImagesRequestModel(
+      slectedUnitId: selectedUnitId, productType: productType);
 
   Future<void> productsUnitImage(context, suId) async {
     // print("id$id");

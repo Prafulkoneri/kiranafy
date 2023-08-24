@@ -59,6 +59,7 @@ class SAllRecommandedProductsController extends ChangeNotifier {
       final result = RecommandedResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         data = result.data;
+        recommandedProducts.clear();
         // recommandedProducts = data?.recommandedProducts;
         recommandedProducts.addAll(result.data?.recommandedProducts ?? []);
         int recommandedProductLength = recommandedProducts?.length ?? 0;
@@ -137,7 +138,51 @@ class SAllRecommandedProductsController extends ChangeNotifier {
   Future<void> onScrollMaxExtent(context, id) async {
     print("hello");
     offset = offset + 1;
-    await getAllRecommandedProducts(context, id);
+    showPaginationLoader = true;
+    showLoader(true);
+    shopId = id; //store id
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    allRecommandedProductsRepo
+        .getAllRecommandedRepo(
+            shopAllRecomandedReqModel, pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = RecommandedResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        data = result.data;
+        // recommandedProducts.clear();
+        // recommandedProducts = data?.recommandedProducts;
+        recommandedProducts.addAll(result.data?.recommandedProducts ?? []);
+        int recommandedProductLength = recommandedProducts?.length ?? 0;
+        isRecommandedProductAdded =
+            List<bool>.filled(recommandedProductLength, false, growable: true);
+        for (int i = 0; i < recommandedProductLength; i++) {
+          if (recommandedProducts?[i].addToCartCheck == "yes") {
+            isRecommandedProductAdded.insert(i, true);
+          } else {
+            isRecommandedProductAdded.insert(i, false);
+          }
+        }
+        showLoader(false);
+
+        showPaginationLoader = false;
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+    // await getAllRecommandedProducts(context, id);
     isLoading = false;
 
     notifyListeners();

@@ -66,7 +66,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
           ViewAllSeasonalProducts.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         data = result.data;
-        // seasonalProduct.clear();
+        seasonalProduct.clear();
         // seasonalProduct = data?.seasonalProducts;
         seasonalProduct.addAll(result.data?.seasonalProducts ?? []);
         int seasonProductLength = seasonalProduct?.length ?? 0;
@@ -145,7 +145,53 @@ class ShopAllSeasonalController extends ChangeNotifier {
   Future<void> onScrollMaxExtent(context, id) async {
     print("hello");
     offset = offset + 1;
-    await getAllSeasonalProducts(context, id);
+    showPaginationLoader = true;
+    showLoader(true);
+    shopId = id;
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    allSeasonalProductsRepo
+        .getAllSeasonalProducts(
+            shopAllSeasonalReqModel, pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result =
+          ViewAllSeasonalProducts.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        data = result.data;
+        // seasonalProduct.clear();
+        // seasonalProduct = data?.seasonalProducts;
+        seasonalProduct.addAll(result.data?.seasonalProducts ?? []);
+        int seasonProductLength = seasonalProduct?.length ?? 0;
+        isAllSeasonalProductAdded =
+            List<bool>.filled(seasonProductLength, false, growable: true);
+        for (int i = 0; i < seasonProductLength; i++) {
+          if (seasonalProduct?[i].addToCartCheck == "yes") {
+            isAllSeasonalProductAdded.insert(i, true);
+          } else {
+            isAllSeasonalProductAdded.insert(i, false);
+          }
+        }
+        showLoader(false);
+
+        showPaginationLoader = false;
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+    // await getAllSeasonalProducts(context, id);
     isLoading = false;
 
     notifyListeners();

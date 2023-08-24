@@ -278,29 +278,6 @@ class _MyAppState extends State<MyApp> {
   @override
 
   void initState() {
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      print(message.data);
-      print("onMessageOpenedApp: $message");
-      print("okkkkk");
-
-      ////////////Shop Notification Navigation /////////////////////
-      print(message.data["notification_type"]);
-      if (message.data["notification_type"] == "custom") {
-        context.read<SMainScreenController>().onCustomTypeNotification(context);
-      }
-      if (message.data["notification_type"] == "order") {
-        context
-            .read<SMainScreenController>()
-            .onOrderTypeNotification(context, message.data["redirect_id"]);
-      }
-    });
-
-    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-      print("onBackgroundMessage: $message");
-    });
-
-    // fireBaseApi();
-
     Future<void> initNotification(context) async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
       const AndroidInitializationSettings initializationSettingsAndroid =
@@ -335,6 +312,29 @@ class _MyAppState extends State<MyApp> {
         if (payload != null) OpenFile.open(payload);
       });
     }
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      print(message.data);
+      print("onMessageOpenedApp: $message");
+      print("okkkkk");
+
+      ////////////Shop Notification Navigation /////////////////////
+      print(message.data["notification_type"]);
+      if (message.data["notification_type"] == "custom") {
+        context.read<SMainScreenController>().onCustomTypeNotification(context);
+      }
+      if (message.data["notification_type"] == "order") {
+        context
+            .read<SMainScreenController>()
+            .onOrderTypeNotification(context, message.data["redirect_id"]);
+      }
+    });
+
+    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      print("onBackgroundMessage: $message");
+    });
+
+    // fireBaseApi();
   }
 
   Future<void> _showNotification(fileName, savePath) async {

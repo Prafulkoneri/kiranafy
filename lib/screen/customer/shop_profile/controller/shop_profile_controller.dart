@@ -67,8 +67,7 @@ class ShopProfileViewController extends ChangeNotifier {
   Future<void> initState(context, id, refresh) async {
     if (refresh) {
       showLoader(true);
-      await getShopDetails(context, id,refresh);
-
+      await getShopDetails(context, id, refresh);
     } else {
       showLoader(false);
     }
@@ -134,8 +133,7 @@ class ShopProfileViewController extends ChangeNotifier {
     }
   }
 
-  Future<void> getShopDetails(context, id,refresh) async {
-
+  Future<void> getShopDetails(context, id, refresh) async {
     print("id$id");
     shopId = id;
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -143,7 +141,7 @@ class ShopProfileViewController extends ChangeNotifier {
     customerViewShopRepo
         .getShopDetails(
             customerViewShopReqModel, pref.getString("successToken"))
-        .then((response)async{
+        .then((response) async {
       log("response.body${response.body}");
       final result =
           CustomerViewShopResModel.fromJson(jsonDecode(response.body));
@@ -204,18 +202,18 @@ class ShopProfileViewController extends ChangeNotifier {
             } else {
               _currentPage = 0;
             }
-            pageController.animateToPage(
-              _currentPage,
+            pageController.nextPage(
+              // _currentPage,
               duration: Duration(milliseconds: 350),
               curve: Curves.easeIn,
             );
           });
         }
-        if(refresh){
+        if (refresh) {
           await sProfileCouponList(context);
         }
 
-LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -352,8 +350,7 @@ LoadingOverlay.of(context).hide();
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-
-        await getShopDetails(context, sId,false);
+        await getShopDetails(context, sId, false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -448,8 +445,7 @@ LoadingOverlay.of(context).hide();
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-
-        await getShopDetails(context, sId,false);
+        await getShopDetails(context, sId, false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();

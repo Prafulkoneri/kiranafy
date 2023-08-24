@@ -484,38 +484,49 @@ class OrderSummaryController extends ChangeNotifier {
       final result =
           CustomerApplyCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        final data = result.applyCouponData;
-        couponCodeController.text = data?.couponCode.toString() ?? "";
-        deliveryCharges = double.parse(data?.deliveryCharges ?? "0").toString();
-        selfPickupDeliveryCharges = "0";
-        subTotal = double.parse(data?.subTotal ?? "0").toString() ?? "";
-        couponDiscount =
-            double.parse(data?.couponDiscount ?? "0").toString() ?? "";
-        totalAmount = double.parse(data?.total ?? "0").toString();
-        selfPickupTotalAmount =
-            (double.parse(totalAmount) - double.parse(deliveryCharges))
-                    .toString() ??
-                "";
-        totalDiscount =
-            double.parse(data?.totalDiscount ?? "0").toString() ?? "";
-        discountPercentage = data?.discountPercentage ?? "";
-        showOnPageLoader(false);
-        showLoader(false);
-        Navigator.pop(context);
-        notifyListeners();
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        if (result.status == 200) {
+          final data = result.applyCouponData;
+          couponCodeController.text = data?.couponCode.toString() ?? "";
+          deliveryCharges =
+              double.parse(data?.deliveryCharges ?? "0").toString();
+          selfPickupDeliveryCharges = "0";
+          subTotal = double.parse(data?.subTotal ?? "0").toString() ?? "";
+          couponDiscount =
+              double.parse(data?.couponDiscount ?? "0").toString() ?? "";
+          totalAmount = double.parse(data?.total ?? "0").toString();
+          selfPickupTotalAmount =
+              (double.parse(totalAmount) - double.parse(deliveryCharges))
+                      .toString() ??
+                  "";
+          totalDiscount =
+              double.parse(data?.totalDiscount ?? "0").toString() ?? "";
+          discountPercentage = data?.discountPercentage ?? "";
+          showOnPageLoader(false);
+          showLoader(false);
+          Navigator.pop(context);
+          notifyListeners();
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+        } else {
+          showOnPageLoader(false);
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
       } else {
+        showOnPageLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      showOnPageLoader(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        showOnPageLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        showOnPageLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
