@@ -386,7 +386,7 @@ class _MyAppState extends State<MyApp> {
                 textDirection: TextDirection.ltr,
                 child: LoadingOverlay(
                   child: MaterialApp(
-                    title: 'Flutter Demo',
+                    title: 'Local Supermart',
                     theme: ThemeData(
                       primarySwatch: Colors.blue,
                       fontFamily: 'dm_sans_regular',

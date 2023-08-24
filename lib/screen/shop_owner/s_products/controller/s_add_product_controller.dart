@@ -108,9 +108,7 @@ int offset=0;
             shopAddProductRequestModel, pref.getString("successToken"))
         .then((response) {
       log("response${response.body}");
-      final result =
-          ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
-
+      final result = ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         productData = result.data;
         productDetails = result.data?.productDetails;
@@ -132,7 +130,7 @@ int offset=0;
         for(int i=0;i<selectedProductLength;i++){
           selectedProductsId.add(selectedProductIdData?[i].selectedProductId);
         }
-        print(selectedProductsId);
+        print("selectedProductsId${selectedProductsId}");
         for (int i = 0; i < length; i++) {
           if (allAdminProductList[i].selectedByShopOwner == "yes") {
             selectedProduct.insert(i, true);
@@ -158,6 +156,101 @@ int offset=0;
         return false;
       },
     );
+  }
+
+  Future<void> onScrollMaxExtent(context) async {
+    print("hello");
+    offset = offset + 1;
+    showPaginationLoader = true;
+    notifyListeners();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print("categoryId$categoryId");
+    shopAddProductRepo
+        .shopAddProducts(
+        shopAddProductRequestModel, pref.getString("successToken"))
+        .then((response) {
+      print(response.body);
+      final result =
+      ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
+
+      if (response.statusCode == 200) {
+        productData = result.data;
+        productDetails = result.data?.productDetails;
+        allAdminProductList.addAll(productDetails??[]);
+        categoryName = result.data?.categoryName ?? "";
+        allProductsCount = productData?.allProductsCount ?? 0;
+        print(isSelectAll);
+        if(isSelectAll){
+          selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, true,
+              growable: true);
+          selectedProductsId.clear();
+          int length = allAdminProductList.length ?? 0;
+          for (int i = 0; i < length; i++) {
+            if (allAdminProductList[i].selectedByShopOwner == "yes") {
+              // selectedProduct.insert(i, true);
+              selectedProductsId.add(allAdminProductList[i].id);
+            }
+          }
+
+        }
+        else{
+          if(customerSelectedClicked){
+            print("isCustomerSelected");
+            selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
+                growable: true);
+            int length = allAdminProductList.length ?? 0;
+            // for (int i = 0; i < length; i++) {
+            // if (allAdminProductList[i].selectedByShopOwner == "yes") {
+            //   // selectedProduct.insert(i, true);
+            //   selectedProductsId.add(allAdminProductList[i].id);
+            // }
+            // }
+          }
+          else{
+            print("isCustomerSelectedNotClicked");
+            selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
+                growable: true);
+            int length = allAdminProductList.length ?? 0;
+            int productlength = productDetails?.length ?? 0;
+            for (int i = 0; i < length; i++) {
+              if (allAdminProductList[i].selectedByShopOwner == "yes") {
+                if(!selectedProduct[i]){
+                  selectedProduct.insert(i, true);
+                }
+              }
+            }
+            print(selectedProduct);
+            for(int i=0;i<productlength;i++) {
+              if (productDetails?[i].selectedByShopOwner == "yes") {
+                selectedProductsId.add(productDetails?[i].id);
+              }
+            }
+          }
+        }
+
+
+        print(selectedProductsId);
+        showLoader(false);
+        showPaginationLoader=false;
+        notifyListeners();
+      }
+      else {
+        showLoader(false);
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+    notifyListeners();
   }
 
   UploadAddProductsRequestModel get uploadAddProductsRequestModel =>
@@ -223,90 +316,7 @@ int offset=0;
     }
   }
 
-  Future<void> onScrollMaxExtent(context) async {
-    print("hello");
-    offset = offset + 1;
-    showPaginationLoader = true;
-    notifyListeners();
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    print("categoryId$categoryId");
-    shopAddProductRepo
-        .shopAddProducts(
-        shopAddProductRequestModel, pref.getString("successToken"))
-        .then((response) {
-      print(response.body);
-      final result =
-      ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
 
-      if (response.statusCode == 200) {
-        productData = result.data;
-        productDetails = result.data?.productDetails;
-        allAdminProductList.addAll(productDetails??[]);
-        categoryName = result.data?.categoryName ?? "";
-        allProductsCount = productData?.allProductsCount ?? 0;
-        print(isSelectAll);
-        if(isSelectAll){
-          selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, true,
-              growable: true);
-          selectedProductsId.clear();
-          int length = allAdminProductList.length ?? 0;
-          for (int i = 0; i < length; i++) {
-            if (allAdminProductList[i].selectedByShopOwner == "yes") {
-              // selectedProduct.insert(i, true);
-              selectedProductsId.add(allAdminProductList[i].id);
-            }
-          }
-
-        }
-        else{
-          if(customerSelectedClicked){
-            selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
-                growable: true);
-            int length = allAdminProductList.length ?? 0;
-            // for (int i = 0; i < length; i++) {
-              // if (allAdminProductList[i].selectedByShopOwner == "yes") {
-              //   // selectedProduct.insert(i, true);
-              //   selectedProductsId.add(allAdminProductList[i].id);
-              // }
-            // }
-          }
-          else{
-            print("hiii");
-            selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
-                growable: true);
-            int length = allAdminProductList.length ?? 0;
-            for (int i = 0; i < length; i++) {
-              if (allAdminProductList[i].selectedByShopOwner == "yes") {
-                selectedProduct.insert(i, true);
-                selectedProductsId.add(allAdminProductList[i].id);
-              }
-            }
-          }
-        }
-
-
-        print(selectedProductsId);
-        showLoader(false);
-        showPaginationLoader=false;
-        notifyListeners();
-      } else {
-        showLoader(false);
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-          (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-    notifyListeners();
-  }
 
   upload(context) async {
     bool? status;
