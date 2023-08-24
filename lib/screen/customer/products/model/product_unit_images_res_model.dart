@@ -1,10 +1,12 @@
 ////Request Model///////////
 class UnitImagesRequestModel {
   String? slectedUnitId;
-  UnitImagesRequestModel({this.slectedUnitId});
+  String? productType;
+  UnitImagesRequestModel({this.slectedUnitId, this.productType});
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
     data["selected_unit_id"] = slectedUnitId;
+    data["product_type"] = productType;
     return data;
   }
 }
