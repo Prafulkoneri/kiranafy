@@ -126,7 +126,7 @@ class CustomerOrderViewController extends ChangeNotifier {
         orderDetails = orderData?.orderDetails;
         couponDetails = orderData?.couponDetails;
         shopDetails = orderData?.shopDetails;
-        favAllShop=shopDetails?.shopFavourite=="yes"?true:false;
+        favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
         deliveryAddressDetails = orderData?.deliveryAddressDetails;
         orderProductDetails = orderData?.orderProductDetails;
         notifyListeners();
@@ -532,7 +532,6 @@ class CustomerOrderViewController extends ChangeNotifier {
         orderId: orderId.toString(),
       );
   Future<void> OReviewList(context) async {
-
     // LoadingOverlay.of(context).show();
     // orderId = oId.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();

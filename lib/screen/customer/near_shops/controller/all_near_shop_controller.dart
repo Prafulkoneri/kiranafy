@@ -36,12 +36,7 @@ class AllNearShopsAsPerPincode extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     print(pref.getString("pincode"));
-    // if(pref.getString("pincode")==null){
-    //   pincode="111111";
-    // }
-    // else{
-    //   pincode=pref.getString("pincode").toString();
-    // }
+
     allNearShopRepo
         .getAllNearShop(pref.getString("successToken"))
         .then((response) {
@@ -54,6 +49,7 @@ class AllNearShopsAsPerPincode extends ChangeNotifier {
 
         fav = List<bool>.filled(nearByShopList?.length ?? 0, false,
             growable: true);
+
         int length = nearByShopList?.length ?? 0;
         for (int i = 0; i < length; i++) {
           if (nearByShopList?[i].isFavourite == "yes") {

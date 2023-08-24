@@ -294,7 +294,8 @@ class Endpoint {
   static const String shopCartDelete =
       "${baseUrl}lsm-customer-delete-all-carts";
 
-  static const String customerOrderSummery = "${baseUrl}lsm-customer-order-summary-screen";
+  static const String customerOrderSummery =
+      "${baseUrl}lsm-customer-order-summary-screen";
 
   static const String applyCoupons = "${baseUrl}lsm-customer-apply-coupon";
 

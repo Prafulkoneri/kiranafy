@@ -144,6 +144,7 @@ class OrderDetails {
   String? deliveryType;
   String? shopOwnerCancelledReason;
   String? customerCancelledReason;
+  String? customerCancelledStatus;
 
   OrderDetails(
       {required this.id,
@@ -163,8 +164,8 @@ class OrderDetails {
       this.shopOwnerRefundPayableAmount,
       required this.customerRefundAmount,
       this.customerRefundReason,
-        this.shopOwnerCancelledReason,
-        this.customerCancelledReason,
+      this.shopOwnerCancelledReason,
+      this.customerCancelledReason,
       this.reason,
       this.refundDatetime,
       this.refundOrderStatus,
@@ -173,7 +174,8 @@ class OrderDetails {
       this.shopOwnerRefundPaymentType,
       this.shopOwnerRefundRejectReason,
       this.deliveryType,
-      this.shopOwnerRefundTransactionId});
+      this.shopOwnerRefundTransactionId,
+      this.customerCancelledStatus});
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     createdAt = json["created_at"];
@@ -203,6 +205,7 @@ class OrderDetails {
     deliveryType = json["delivery_type"];
     shopOwnerCancelledReason = json["shop_owner_order_cancelled_reason"];
     customerCancelledReason = json["customer_order_cancelled_reason"];
+    customerCancelledStatus = json["customer_cancelled_status"];
   }
 }
 

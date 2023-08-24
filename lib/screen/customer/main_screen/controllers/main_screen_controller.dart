@@ -44,6 +44,7 @@ class MainScreenController extends ChangeNotifier {
   String locationErrorMessage = "";
 
   void initState(context, index, currentScreen) async {
+    onMyCartPressed();
     navigation(index, currentScreen);
     if (isFirstLoad) {
       showMap(context, true);
