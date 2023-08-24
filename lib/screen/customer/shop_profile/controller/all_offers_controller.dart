@@ -69,7 +69,6 @@ class AllOffersController extends ChangeNotifier {
         allproducts = result.data;
         // allOfferProducts = allproducts?.offerProducts;
         allOfferProducts.addAll(result.data?.offerProducts ?? []);
-        // int seasonProductLength = seasonalProduct?.length ?? 0;
         isAllOfferProductAdded =
             List<bool>.filled(allOfferProducts.length, false, growable: true);
         for (int i = 0; i < allOfferProducts.length; i++) {

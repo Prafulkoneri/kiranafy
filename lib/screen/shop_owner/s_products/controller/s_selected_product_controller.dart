@@ -23,6 +23,7 @@ class SSelectedProductsController extends ChangeNotifier {
 
   // List<SelectedProducts>? selectedProductList;
   List<ProductsFromAdmin>? productsFromAdmin;
+  List<ProductsFromAdmin> productsFromAdmins = [];
   List<UnitDetail>? unitDetails;
   int? totalSelectedAndCustomProducts;
   String categoryName = "";
@@ -30,15 +31,20 @@ class SSelectedProductsController extends ChangeNotifier {
   SearchProductRepo searchProductRepo = SearchProductRepo();
   TextEditingController searchController = TextEditingController();
   DeleteAdminProductRepo deleteAdminProductRepo = DeleteAdminProductRepo();
-  DeleteCustomeProductRepo deleteCustomeProductRepo = DeleteCustomeProductRepo();
+  DeleteCustomeProductRepo deleteCustomeProductRepo =
+      DeleteCustomeProductRepo();
   String categoryId = "";
   String productId = "";
   String productName = "";
-  int offset=0;
+  int offset = 0;
   List<CustomProduct>? customProduct;
-
+  List<CustomProduct> customProducts = [];
+  bool showPaginationLoader = false;
   Future<void> initState(context, id, refresh) async {
+    offset = 0;
     searchController.clear();
+    customProducts.clear();
+    productsFromAdmins.clear();
     if (refresh) {
       await selectedProducts(context, id);
     }
@@ -53,12 +59,17 @@ class SSelectedProductsController extends ChangeNotifier {
 
   //////////////Select product
   SelecteProductsRequestModel get selecteProductRequestModel =>
-      SelecteProductsRequestModel(category_id: categoryId,offset: offset.toString(),limit: "5");
+      SelecteProductsRequestModel(
+          category_id: categoryId, offset: offset.toString(), limit: "5");
 
   DeleteAdminProductReqModel get deleteAdminProductReqModel =>
       DeleteAdminProductReqModel(productId: productId);
 
   Future<void> selectedProducts(context, id) async {
+    if (offset == 0) {
+      isLoading = true;
+    }
+    showPaginationLoader = true;
     categoryId = id;
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -76,9 +87,11 @@ class SSelectedProductsController extends ChangeNotifier {
         customProduct = result.data?.customProduct;
         totalSelectedAndCustomProducts =
             result.data?.totalSelectedAndCustomProducts ?? 0;
-
+        productsFromAdmins.addAll(result.data?.productsFromAdmin ?? []);
+        customProducts.addAll(result.data?.customProduct ?? []);
         // Utils.showPrimarySnackbar(context, result.message,
         //     type: SnackType.success);
+        showPaginationLoader = false;
         showLoader(false);
         notifyListeners();
       } else {
@@ -104,7 +117,10 @@ class SSelectedProductsController extends ChangeNotifier {
       MaterialPageRoute(
           builder: (context) => SMainScreenView(
                 index: 0,
-                screenName: AddProductView(categoryId: id,refresh: true,),
+                screenName: AddProductView(
+                  categoryId: id,
+                  refresh: true,
+                ),
               )),
       (Route<dynamic> route) => false,
     );
@@ -249,5 +265,50 @@ class SSelectedProductsController extends ChangeNotifier {
     } else {
       await selectedProducts(context, cId);
     }
+  }
+
+  Future<void> onScrollMaxExtent(context, id) async {
+    print("hello");
+    offset = offset + 1;
+    showLoader(true);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopSelecteProductRepo
+        .selectedProducts(
+            selecteProductRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result =
+          GetSelectedProductsResponseModel.fromJson(jsonDecode(response.body));
+
+      if (response.statusCode == 200) {
+        productsFromAdmin = result.data?.productsFromAdmin;
+        categoryName = result.data?.categoryName ?? "";
+        customProduct = result.data?.customProduct;
+        totalSelectedAndCustomProducts =
+            result.data?.totalSelectedAndCustomProducts ?? 0;
+        productsFromAdmins.addAll(result.data?.productsFromAdmin ?? []);
+        customProducts.addAll(result.data?.customProduct ?? []);
+        // Utils.showPrimarySnackbar(context, result.message,
+        //     type: SnackType.success);
+        showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+    await selectedProducts(context, id);
+    isLoading = false;
+    notifyListeners();
   }
 }

@@ -366,6 +366,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         fontWeight: FontWeight.w700),
                                   ),
                                 ),
+                                // watch.orderDetails.
                                 SizedBox(
                                   width: 100.w,
                                   child: ElevatedButton(
@@ -406,11 +407,15 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                     ? Colors
                                                                         .brown
                                                                     : watch.orderDetails?.orderStatus ==
-                                                                            "Order Refund"
+                                                                                "Order Refund" &&
+                                                                            watch.orderDetails?.customerCancelledStatus ==
+                                                                                "YES"
                                                                         ? Colors
-                                                                            .green
-                                                                        : Colors
-                                                                            .transparent,
+                                                                            .red
+                                                                        : watch.orderDetails?.orderStatus ==
+                                                                                "Order Refund"
+                                                                            ? Colors.green
+                                                                            : Colors.transparent,
                                             // width: 1,
                                           ),
                                         ),
@@ -426,10 +431,17 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     },
                                     child: Text(
                                       watch.orderDetails?.orderStatus ==
-                                              "Order Refund"
-                                          ? "Delivered"
-                                          : watch.orderDetails?.orderStatus ??
-                                              "",
+                                                  "Order Refund" &&
+                                              watch.orderDetails
+                                                      ?.customerCancelledStatus ==
+                                                  "YES"
+                                          ? "Cancelled"
+                                          : watch.orderDetails?.orderStatus ==
+                                                  "Order Refund"
+                                              ? "Delivered"
+                                              : watch.orderDetails
+                                                      ?.orderStatus ??
+                                                  "",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: watch.orderDetails
@@ -462,11 +474,15 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                     ? Colors
                                                                         .brown
                                                                     : watch.orderDetails?.orderStatus ==
-                                                                            "Order Refund"
+                                                                                "Order Refund" &&
+                                                                            watch.orderDetails?.customerCancelledStatus ==
+                                                                                "YES"
                                                                         ? Colors
-                                                                            .green
-                                                                        : Colors
-                                                                            .transparent,
+                                                                            .red
+                                                                        : watch.orderDetails?.orderStatus ==
+                                                                                "Order Refund"
+                                                                            ? Colors.green
+                                                                            : Colors.transparent,
                                             // letterSpacing: .5
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w700),
