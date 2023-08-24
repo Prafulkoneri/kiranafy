@@ -34,6 +34,7 @@ class SSelectedProductsController extends ChangeNotifier {
   String categoryId = "";
   String productId = "";
   String productName = "";
+  int offset=0;
   List<CustomProduct>? customProduct;
 
   Future<void> initState(context, id, refresh) async {
@@ -52,7 +53,7 @@ class SSelectedProductsController extends ChangeNotifier {
 
   //////////////Select product
   SelecteProductsRequestModel get selecteProductRequestModel =>
-      SelecteProductsRequestModel(category_id: categoryId);
+      SelecteProductsRequestModel(category_id: categoryId,offset: offset.toString(),limit: "5");
 
   DeleteAdminProductReqModel get deleteAdminProductReqModel =>
       DeleteAdminProductReqModel(productId: productId);

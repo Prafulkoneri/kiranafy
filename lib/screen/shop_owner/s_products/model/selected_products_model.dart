@@ -2,14 +2,20 @@
 
 class SelecteProductsRequestModel {
   String? category_id;
+  String ? limit;
+  String ? offset;
 
   SelecteProductsRequestModel({
     this.category_id,
+    this.limit,
+    this.offset,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data["category_id"] = category_id;
+    data["limit"] = limit;
+    data["offset"] = offset;
     return data;
   }
 }

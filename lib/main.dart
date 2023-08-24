@@ -215,10 +215,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(create: (_) => ProductViewController()),
         ChangeNotifierProvider(create: (_) => SCustomerListController()),
-        ChangeNotifierProvider(
-            create: (_) => SAllRecommandedProductsController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(create: (_) => SAllRecommandedProductsController()),
+        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
         ChangeNotifierProvider(create: (_) => DeliveryAddressController()),
         ChangeNotifierProvider(create: (_) => AddAddressController()),
@@ -242,10 +240,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => SubscriptionHistoryController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
-        ChangeNotifierProvider(
-            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
         ChangeNotifierProvider(create: (_) => SBankAccountController()),
         ChangeNotifierProvider(create: (_) => SGetProductUnitListController()),
         ChangeNotifierProvider(create: (_) => CustomerSettingController()),
@@ -280,6 +276,7 @@ final firebaseMessaging = FirebaseMessaging.instance;
 
 class _MyAppState extends State<MyApp> {
   @override
+
   void initState() {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print(message.data);
