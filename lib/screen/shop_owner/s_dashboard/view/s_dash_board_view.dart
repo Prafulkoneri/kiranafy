@@ -1512,7 +1512,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   ),
                                 ),
                                 Text(
-                                  "INR ${watch.dashBoardData?.totalBusiness}",
+                                  "Rs. ${watch.dashBoardData?.totalBusiness}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: Colors.white,
@@ -1560,7 +1560,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "INR ${watch.dashBoardData?.totalRefund ?? "0"}",
+                                  "Rs. ${watch.dashBoardData?.totalRefund ?? "0"}",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
@@ -1608,7 +1608,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "INR ${watch.dashBoardData?.cancelledAmount}",
+                                  "Rs. ${watch.dashBoardData?.cancelledAmount}",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(

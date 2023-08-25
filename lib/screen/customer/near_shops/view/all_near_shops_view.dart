@@ -58,6 +58,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
     final read = context.read<AllShopController>();
     final watchHome = context.watch<HomeScreenController>();
     final watchMain = context.watch<MainScreenController>();
+
     return Scaffold(
       body: watch.isLoading
           ? Center(

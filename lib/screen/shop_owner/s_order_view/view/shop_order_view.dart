@@ -1684,7 +1684,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             Container(
                                 padding: EdgeInsets.only(left: 19.w),
                                 child: Text(
-                                  "Customer has sent ${watch.orderDetails?.refundProductCount} products return request. Refund amount is INR ${watch.orderDetails?.customerRefundAmount}.",
+                                  "Customer has sent ${watch.orderDetails?.refundProductCount} products return request. Refund amount is Rs. ${watch.orderDetails?.customerRefundAmount}.",
                                   style: TextStyle(
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w700,
@@ -1795,7 +1795,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       height: 11.w,
                                                     ),
                                                     Text(
-                                                      "INR ${watch.orderDetails?.customerRefundAmount}",
+                                                      "Rs. ${watch.orderDetails?.customerRefundAmount}",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -1994,7 +1994,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           height: 11.w,
                                                         ),
                                                         Text(
-                                                          "INR ${watch.orderDetails?.totalAmount}",
+                                                          "Rs. ${watch.orderDetails?.totalAmount}",
                                                           style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
@@ -2127,7 +2127,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               height: 11.w,
                                                             ),
                                                             Text(
-                                                              "INR ${watch.orderDetails?.totalAmount}",
+                                                              "Rs. ${watch.orderDetails?.totalAmount}",
                                                               style: TextStyle(
                                                                   fontWeight:
                                                                       FontWeight

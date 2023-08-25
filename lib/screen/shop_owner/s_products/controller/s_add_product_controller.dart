@@ -28,7 +28,7 @@ class SAddProductsController extends ChangeNotifier {
   Data? productData;
   List<ProductDetail>? productDetails;
   List<SelectedProductIdData>? selectedProductIdData;
-  List<ProductDetail> allAdminProductList=[];
+  List<ProductDetail> allAdminProductList = [];
   List<bool> selectedProduct = [];
   List selectedProductsId = [];
   int? allProductsCount;
@@ -37,22 +37,22 @@ class SAddProductsController extends ChangeNotifier {
   bool isSelectAll = false;
   String categoryName = "";
   bool uploadSuccess = false;
-  bool customerSelectedClicked=false;
+  bool customerSelectedClicked = false;
   bool showPaginationLoader = false;
   MainScreenController mainScreenController = MainScreenController();
-int offset=0;
-  Future<void> initState(context, id,refresh) async {
-    if(refresh){
+  int offset = 0;
+  Future<void> initState(context, id, refresh) async {
+    if (refresh) {
       allAdminProductList.clear();
-      offset=0;
+      offset = 0;
       await shopAddProducts(context, id);
     }
 
     notifyListeners();
   }
 
-  showLoader(value){
-    isLoading=value;
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
@@ -88,14 +88,14 @@ int offset=0;
   ////Shop owner Add Products Start
 
   ShopAddProductsListRequestModel get shopAddProductRequestModel =>
-      ShopAddProductsListRequestModel(category_id: categoryId,limit: "10",offset:offset.toString() );
+      ShopAddProductsListRequestModel(
+          category_id: categoryId, limit: "10", offset: offset.toString());
 
   Future<void> shopAddProducts(context, id) async {
-    customerSelectedClicked=false;
+    customerSelectedClicked = false;
     isSelectAll = false;
-    if(offset==0){
+    if (offset == 0) {
       showLoader(true);
-
     }
 
     showPaginationLoader = true;
@@ -108,37 +108,38 @@ int offset=0;
             shopAddProductRequestModel, pref.getString("successToken"))
         .then((response) {
       log("response${response.body}");
-      final result = ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
+      final result =
+          ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         productData = result.data;
         productDetails = result.data?.productDetails;
         allAdminProductList.clear();
-        allAdminProductList.addAll(productDetails??[]);
+        allAdminProductList.addAll(productDetails ?? []);
         categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
-        selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false, growable: true);
-        if(productData?.selectedProductCount==allProductsCount){
-          isSelectAll=true;
+        selectedProduct = List<bool>.filled(
+            allAdminProductList.length ?? 0, false,
+            growable: true);
+        if (productData?.selectedProductCount == allProductsCount) {
+          isSelectAll = true;
+        } else {
+          isSelectAll = false;
         }
-        else{
-          isSelectAll=false;
-        }
-        selectedProductIdData=result.data?.selectedProductIdData;
+        selectedProductIdData = result.data?.selectedProductIdData;
         int length = allAdminProductList.length ?? 0;
         selectedProductsId.clear();
-        int selectedProductLength=selectedProductIdData?.length??0;
-        for(int i=0;i<selectedProductLength;i++){
+        int selectedProductLength = selectedProductIdData?.length ?? 0;
+        for (int i = 0; i < selectedProductLength; i++) {
           selectedProductsId.add(selectedProductIdData?[i].selectedProductId);
         }
         print("selectedProductsId${selectedProductsId}");
         for (int i = 0; i < length; i++) {
           if (allAdminProductList[i].selectedByShopOwner == "yes") {
             selectedProduct.insert(i, true);
-
           }
         }
         showLoader(false);
-        showPaginationLoader=false;
+        showPaginationLoader = false;
         notifyListeners();
       } else {
         showLoader(false);
@@ -167,21 +168,22 @@ int offset=0;
     print("categoryId$categoryId");
     shopAddProductRepo
         .shopAddProducts(
-        shopAddProductRequestModel, pref.getString("successToken"))
+            shopAddProductRequestModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result =
-      ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
+          ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
         productData = result.data;
         productDetails = result.data?.productDetails;
-        allAdminProductList.addAll(productDetails??[]);
+        allAdminProductList.addAll(productDetails ?? []);
         categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
         print(isSelectAll);
-        if(isSelectAll){
-          selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, true,
+        if (isSelectAll) {
+          selectedProduct = List<bool>.filled(
+              allAdminProductList.length ?? 0, true,
               growable: true);
           selectedProductsId.clear();
           int length = allAdminProductList.length ?? 0;
@@ -191,12 +193,11 @@ int offset=0;
               selectedProductsId.add(allAdminProductList[i].id);
             }
           }
-
-        }
-        else{
-          if(customerSelectedClicked){
+        } else {
+          if (customerSelectedClicked) {
             print("isCustomerSelected");
-            selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
+            selectedProduct = List<bool>.filled(
+                allAdminProductList.length ?? 0, false,
                 growable: true);
             int length = allAdminProductList.length ?? 0;
             // for (int i = 0; i < length; i++) {
@@ -205,22 +206,22 @@ int offset=0;
             //   selectedProductsId.add(allAdminProductList[i].id);
             // }
             // }
-          }
-          else{
+          } else {
             print("isCustomerSelectedNotClicked");
-            selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, false,
+            selectedProduct = List<bool>.filled(
+                allAdminProductList.length ?? 0, false,
                 growable: true);
             int length = allAdminProductList.length ?? 0;
             int productlength = productDetails?.length ?? 0;
             for (int i = 0; i < length; i++) {
               if (allAdminProductList[i].selectedByShopOwner == "yes") {
-                if(!selectedProduct[i]){
+                if (!selectedProduct[i]) {
                   selectedProduct.insert(i, true);
                 }
               }
             }
             print(selectedProduct);
-            for(int i=0;i<productlength;i++) {
+            for (int i = 0; i < productlength; i++) {
               if (productDetails?[i].selectedByShopOwner == "yes") {
                 selectedProductsId.add(productDetails?[i].id);
               }
@@ -228,13 +229,11 @@ int offset=0;
           }
         }
 
-
         print(selectedProductsId);
         showLoader(false);
-        showPaginationLoader=false;
+        showPaginationLoader = false;
         notifyListeners();
-      }
-      else {
+      } else {
         showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -242,7 +241,7 @@ int offset=0;
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -290,7 +289,8 @@ int offset=0;
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
                       index: 0,
-                      screenName: SSelectedProductView(categoryId: categoryId,isRefresh: true),
+                      screenName: SSelectedProductView(
+                          categoryId: categoryId, isRefresh: true),
                     )),
             (Route<dynamic> route) => false,
           );
@@ -316,8 +316,6 @@ int offset=0;
     }
   }
 
-
-
   upload(context) async {
     bool? status;
     await uploadAddProducts(context).then((value) {
@@ -326,8 +324,8 @@ int offset=0;
     return status;
   }
 
-  void onSelecteAllProducts(context)async {
-    customerSelectedClicked=true;
+  void onSelecteAllProducts(context) async {
+    customerSelectedClicked = true;
     isSelectAll = !isSelectAll;
 
     print(isSelectAll);
@@ -338,19 +336,22 @@ int offset=0;
       print("categoryId$categoryId");
       shopAddProductRepo
           .shopAddProducts(
-          ShopAddProductsListRequestModel(category_id: categoryId,limit: "5000",offset:"0"), pref.getString("successToken"))
+              ShopAddProductsListRequestModel(
+                  category_id: categoryId, limit: "5000", offset: "0"),
+              pref.getString("successToken"))
           .then((response) {
         print(response.body);
         final result =
-        ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
+            ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
 
         if (response.statusCode == 200) {
           productData = result.data;
           productDetails = result.data?.productDetails;
-          selectedProduct = List<bool>.filled(allAdminProductList.length ?? 0, true,
-                growable: true);
+          selectedProduct = List<bool>.filled(
+              allAdminProductList.length ?? 0, true,
+              growable: true);
 
-int length=productDetails?.length??0;
+          int length = productDetails?.length ?? 0;
           for (int i = 0; i < length; i++) {
             print("hello");
             print(productDetails?[i].id);
@@ -369,7 +370,7 @@ int length=productDetails?.length??0;
       }).onError((error, stackTrace) {
         Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
       }).catchError(
-            (Object e) {
+        (Object e) {
           Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         },
         test: (Object e) {
@@ -381,14 +382,14 @@ int length=productDetails?.length??0;
 
       print(selectedProductsId);
     } else {
-      selectedProduct =
-          List<bool>.filled(allAdminProductList.length ?? 0, false, growable: true);
+      selectedProduct = List<bool>.filled(
+          allAdminProductList.length ?? 0, false,
+          growable: true);
       selectedProductsId.clear();
       print("not selected");
-    print(selectedProductsId);
+      print(selectedProductsId);
       print("not selected");
     }
-
 
     notifyListeners();
   }

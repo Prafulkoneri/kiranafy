@@ -64,6 +64,10 @@ class OrderList {
   String? createdAt;
   String? totalAmount;
   String? totalItems;
+  String? refundProductCount;
+  String? refundPaymentStatus;
+  String? customerCancelledStatus;
+  String? refundOrderStatus;
 
   OrderList({
     required this.id,
@@ -72,6 +76,10 @@ class OrderList {
     required this.createdAt,
     required this.totalAmount,
     required this.totalItems,
+    required this.refundProductCount,
+    required this.refundPaymentStatus,
+    required this.customerCancelledStatus,
+    required this.refundOrderStatus,
   });
   OrderList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -80,6 +88,10 @@ class OrderList {
     createdAt = json["created_at"];
     totalAmount = json["total_amount"];
     totalItems = json["total_items"];
+    refundProductCount = json["refund_product_count"];
+    refundPaymentStatus = json["refund_payment_status"];
+    customerCancelledStatus = json["customer_cancelled_status"];
+    refundOrderStatus = json["refund_order_status"];
   }
 }
 

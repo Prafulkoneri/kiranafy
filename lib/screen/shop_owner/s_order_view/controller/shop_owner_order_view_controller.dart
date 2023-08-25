@@ -246,7 +246,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
                 type: SnackType.error);
             return;
           }
-          _showNotification(saveName,savePath);
+          _showNotification(saveName, savePath);
         }
         print("No permission to read and write.");
         print(directory?.path.toString());
@@ -270,7 +270,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> _showNotification(fileName,savePath) async {
+  Future<void> _showNotification(fileName, savePath) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
@@ -302,7 +302,6 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           checkDataList.add(selectedProductList[i]);
         }
         print(checkDataList);
-
       }
       if (checkDataList.isEmpty) {
         Utils.showPrimarySnackbar(context, "No product selected",
@@ -310,7 +309,6 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         return;
       }
     }
-
 
     if (oStatus == "order_cancelled") {
       if (!isOtherReasonSelected && orderCancelledReasonId == "") {

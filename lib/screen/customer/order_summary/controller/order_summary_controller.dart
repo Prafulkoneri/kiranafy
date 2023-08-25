@@ -509,24 +509,29 @@ class OrderSummaryController extends ChangeNotifier {
               type: SnackType.success);
         } else {
           showOnPageLoader(false);
+          showLoader(false);
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
       } else {
         showOnPageLoader(false);
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
       showOnPageLoader(false);
+      showLoader(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
         showOnPageLoader(false);
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
         showOnPageLoader(false);
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
@@ -654,7 +659,8 @@ class OrderSummaryController extends ChangeNotifier {
             notifyListeners();
           });
 
-          deliverySlotErrorMsg = "This time slot cannot be selected";
+          deliverySlotErrorMsg = "Select another date as no slot available";
+          // Select another date as no slot available
           return;
         }
       }
@@ -665,7 +671,7 @@ class OrderSummaryController extends ChangeNotifier {
             isExpectedDeliverySlotNotAvailable = false;
             notifyListeners();
           });
-          deliverySlotErrorMsg = "This time slot cannot be selected";
+          deliverySlotErrorMsg = "Select another date as no slot available";
           return;
         }
       }
@@ -678,7 +684,7 @@ class OrderSummaryController extends ChangeNotifier {
             isExpectedDeliverySlotNotAvailable = false;
             notifyListeners();
           });
-          deliverySlotErrorMsg = "This time slot cannot be selected";
+          deliverySlotErrorMsg = "Select another date as no slot available";
           return;
         }
       }
@@ -689,7 +695,7 @@ class OrderSummaryController extends ChangeNotifier {
             isExpectedDeliverySlotNotAvailable = false;
             notifyListeners();
           });
-          deliverySlotErrorMsg = "This time slot cannot be selected";
+          deliverySlotErrorMsg = "Select another date as no slot available";
           return;
         }
       }
