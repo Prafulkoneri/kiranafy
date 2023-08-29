@@ -104,8 +104,8 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
-                                  // color: SplashTex
-                                  // letterSpacing: .5,
+                                // color: SplashTex
+                                // letterSpacing: .5,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -127,8 +127,8 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                               'Resend OTP',
                               style: GoogleFonts.dmSans(
                                 textStyle: const TextStyle(
-                                    // color: SplashTex
-                                    // letterSpacing: .5,
+                                  // color: SplashTex
+                                  // letterSpacing: .5,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -170,7 +170,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                           child: Text(
                             "Dismiss",
                             style:
-                                TextStyle(color: Colors.white, fontSize: 14.sp),
+                            TextStyle(color: Colors.white, fontSize: 14.sp),
                           ),
                         ),
                         SizedBox(

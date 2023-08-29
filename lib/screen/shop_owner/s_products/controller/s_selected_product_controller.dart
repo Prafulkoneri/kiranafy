@@ -41,11 +41,12 @@ class SSelectedProductsController extends ChangeNotifier {
   List<CustomProduct> customProducts = [];
   bool showPaginationLoader = false;
   Future<void> initState(context, id, refresh) async {
-    offset = 0;
-    searchController.clear();
-    customProducts.clear();
-    productsFromAdmins.clear();
+
     if (refresh) {
+      offset = 0;
+      searchController.clear();
+      customProducts.clear();
+      productsFromAdmins.clear();
       await selectedProducts(context, id);
     }
 
@@ -82,6 +83,8 @@ class SSelectedProductsController extends ChangeNotifier {
           GetSelectedProductsResponseModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
+        productsFromAdmins.clear();
+        customProducts.clear();
         productsFromAdmin = result.data?.productsFromAdmin;
         categoryName = result.data?.categoryName ?? "";
         customProduct = result.data?.customProduct;
