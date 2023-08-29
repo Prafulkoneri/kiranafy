@@ -76,10 +76,10 @@ class OrderList {
     required this.createdAt,
     required this.totalAmount,
     required this.totalItems,
-    required this.refundProductCount,
-    required this.refundPaymentStatus,
-    required this.customerCancelledStatus,
-    required this.refundOrderStatus,
+    required this.refundProductCount, //
+    required this.refundPaymentStatus, //
+    required this.customerCancelledStatus, //
+    required this.refundOrderStatus, //
   });
   OrderList.fromJson(Map<String, dynamic> json) {
     id = json["id"];

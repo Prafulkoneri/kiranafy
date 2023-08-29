@@ -117,7 +117,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                     ? Row(
                                         children: [
                                           Text(
-                                            "Rs. ${element?.productMrpPrice} x ",
+                                            "\u{20B9}. ${element?.productMrpPrice} x ",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: grey5,
@@ -153,7 +153,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                             ),
                                           ),
                                           Text(
-                                            "Rs. ${element?.productOfferPrice} x ",
+                                            "\u{20B9}. ${element?.productOfferPrice} x ",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: grey5,
@@ -175,7 +175,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                         ],
                                       ),
                                 Text(
-                                  "Rs. ${element?.productTotalPrice}",
+                                  "\u{20B9}. ${element?.productTotalPrice}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: grey5,

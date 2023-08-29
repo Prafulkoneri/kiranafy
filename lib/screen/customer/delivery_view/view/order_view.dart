@@ -442,6 +442,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                               : watch.orderDetails
                                                       ?.orderStatus ??
                                                   "",
+                                      ///////////////
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: watch.orderDetails
@@ -1050,7 +1051,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       ),
                                     ),
                                     Text(
-                                      "Rs. ${watch.orderDetails?.subTotalAmount}",
+                                      "\u{20B9}. ${watch.orderDetails?.subTotalAmount}",
                                       //  ${watch.orderFinalTotals?.subTotal}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
@@ -1113,7 +1114,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         ? Text(
                                             // "",
                                             // "- Rs . ${watch.orderDetails?.totalDiscount}",
-                                            " - Rs.  ${watch.couponDetails?.couponDiscount}",
+                                            " - \u{20B9}.  ${watch.couponDetails?.couponDiscount}",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: grey5,
@@ -1123,7 +1124,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             ),
                                           )
                                         : Text(
-                                            "- Rs. 0",
+                                            "- \u{20B9}. 0",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: grey5,
@@ -1153,8 +1154,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     ),
                                     Text(
                                       watch.orderDetails?.deliveryCharges == ""
-                                          ? "Rs. 0"
-                                          : "Rs.  ${watch.orderDetails?.deliveryCharges}",
+                                          ? "\u{20B9}.0"
+                                          : "\u{20B9}.${watch.orderDetails?.deliveryCharges}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: grey5,
@@ -1190,7 +1191,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       ),
                                     ),
                                     Text(
-                                      "Rs. ${watch.orderDetails?.totalAmount} ",
+                                      "\u{20B9}. ${watch.orderDetails?.totalAmount} ",
                                       // ${watch.orderFinalTotals?.total}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
@@ -1217,7 +1218,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                 ),
                                 Container(
                                   child: Text(
-                                    "You will save Rs. ${watch.orderDetails?.totalDiscount}",
+                                    "You will save \u{20B9}. ${watch.orderDetails?.totalDiscount}",
                                     //  ",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(

@@ -399,7 +399,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                "Rs. ${element?.totalAmount}",
+                                                "\u{20B9}. ${element?.totalAmount}",
                                                 style: GoogleFonts.dmSans(
                                                   textStyle: TextStyle(
                                                       // height: 1.5,

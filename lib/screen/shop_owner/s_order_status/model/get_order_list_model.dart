@@ -81,6 +81,7 @@ class ShopOrderList {
   String? createdAt;
   int? refundCount;
   String? shopOwnerPaymentStatus;
+  String? refundOrderStatus;
 
   ShopOrderList({
     required this.id,
@@ -91,6 +92,7 @@ class ShopOrderList {
     required this.createdAt,
     required this.shopOwnerPaymentStatus,
     required this.refundCount,
+    required this.refundOrderStatus,
   });
   ShopOrderList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -101,6 +103,7 @@ class ShopOrderList {
     createdAt = json["created_at"];
     shopOwnerPaymentStatus = json["shop_owner_payment_status"];
     refundCount = json["refund_count"];
+    refundOrderStatus = json["refund_order_status"];
   }
 }
 

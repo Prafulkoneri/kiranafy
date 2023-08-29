@@ -582,7 +582,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 Expanded(
                                                                   child: Text(
                                                                     // "",
-                                                                    "${element?.offerPrice}",
+                                                                    "\u{20B9}${element?.offerPrice}",
                                                                     textAlign:
                                                                         TextAlign
                                                                             .end,
@@ -1038,7 +1038,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                       child:
                                                                           Text(
                                                                         // "",
-                                                                        "${element?.offerPrice}",
+                                                                        "\u{20B9}${element?.offerPrice}",
                                                                         textAlign:
                                                                             TextAlign.end,
                                                                         style: GoogleFonts
@@ -1496,7 +1496,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                       child:
                                                                           Text(
                                                                         // "",
-                                                                        "${element?.offerPrice}",
+                                                                        "\u{20B9}${element?.offerPrice}",
                                                                         textAlign:
                                                                             TextAlign.end,
                                                                         style: GoogleFonts

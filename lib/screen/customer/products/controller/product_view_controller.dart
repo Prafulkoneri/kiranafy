@@ -695,27 +695,27 @@ class ProductViewController extends ChangeNotifier {
   }
   ///////////////End/////////////
 
-  void onShareXFileFromAssets(BuildContext context) async {
-    final box = context.findRenderObject() as RenderBox?;
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
-    final data = await rootBundle.load('assets/images/redlabel.png');
-    // final data = '${productDetails?.productImagePath}/image1.jpg';
+  // void onShareXFileFromAssets(BuildContext context) async {
+  //   final box = context.findRenderObject() as RenderBox?;
+  //   final scaffoldMessenger = ScaffoldMessenger.of(context);
+  //   final data = await rootBundle.load('assets/images/redlabel.png');
+  //   // final data = '${productDetails?.productImagePath}/image1.jpg';
 
-    final buffer = data.buffer;
-    // final buffer = path
-    final shareResult = await Share.shareXFiles(
-      [
-        XFile.fromData(
-          buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
-          name: 'flutter_logo',
-          mimeType: 'image/png',
-        ),
-      ],
-      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
-    );
+  //   final buffer = data.buffer;
+  //   // final buffer = path
+  //   final shareResult = await Share.shareXFiles(
+  //     [
+  //       XFile.fromData(
+  //         buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+  //         name: 'flutter_logo',
+  //         mimeType: 'image/png',
+  //       ),
+  //     ],
+  //     sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+  //   );
 
-    scaffoldMessenger.showSnackBar(getResultSnackBar(shareResult));
-  }
+  //   scaffoldMessenger.showSnackBar(getResultSnackBar(shareResult));
+  // }
 
   fileFromImageUrl(String url, String userName) async {
     final response = await http.get(
@@ -741,7 +741,8 @@ class ProductViewController extends ChangeNotifier {
 
     Share.shareXFiles([fileForShare],
         text:
-            "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
+            " Download Local Supermart now!\n Buy ${productDetails?.productName} at a discounted price's \nDownload app here :  https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
+        // "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
         subject:
             "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US");
   }

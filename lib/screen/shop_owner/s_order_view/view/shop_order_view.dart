@@ -1403,7 +1403,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                               ),
                             ),
                             Text(
-                              "Rs ${watch.subTotal}",
+                              "\u{20B9}. ${watch.subTotal}",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
                                     color: grey5,
@@ -1459,7 +1459,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             ),
                             watch.couponDetails?.couponDiscount != null
                                 ? Text(
-                                    " - Rs. ${watch.couponDetails?.couponDiscount}",
+                                    " - \u{20B9}. ${watch.couponDetails?.couponDiscount}",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: grey5,
@@ -1469,7 +1469,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                     ),
                                   )
                                 : Text(
-                                    "- Rs. 0",
+                                    "- \u{20B9}. 0",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           color: grey5,
@@ -1498,8 +1498,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             ),
                             Text(
                               watch.orderDetails?.deliveryCharges == ""
-                                  ? "Rs. 0"
-                                  : "Rs.  ${watch.deliveryCharges}",
+                                  ? "\u{20B9}. 0"
+                                  : "\u{20B9}.  ${watch.deliveryCharges}",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
                                     color: grey5,
@@ -1534,7 +1534,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                               ),
                             ),
                             Text(
-                              "Rs. ${watch.totalAmount} ",
+                              "\u{20B9}. ${watch.totalAmount} ",
                               // ${watch.orderFinalTotals?.total}",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
@@ -1561,7 +1561,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                         ),
                         Container(
                           child: Text(
-                            "You will save Rs. ${watch.totalDiscount}",
+                            "You will save \u{20B9}. ${watch.totalDiscount}",
                             //  ",
                             style: GoogleFonts.dmSans(
                               textStyle: TextStyle(
@@ -1684,7 +1684,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             Container(
                                 padding: EdgeInsets.only(left: 19.w),
                                 child: Text(
-                                  "Customer has sent ${watch.orderDetails?.refundProductCount} products return request. Refund amount is Rs. ${watch.orderDetails?.customerRefundAmount}.",
+                                  "Customer has sent ${watch.orderDetails?.refundProductCount} products return request. Refund amount is \u{20B9}. ${watch.orderDetails?.customerRefundAmount}.",
                                   style: TextStyle(
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w700,
@@ -1795,7 +1795,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       height: 11.w,
                                                     ),
                                                     Text(
-                                                      "Rs. ${watch.orderDetails?.customerRefundAmount}",
+                                                      "\u{20B9}. ${watch.orderDetails?.customerRefundAmount}",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -1994,7 +1994,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           height: 11.w,
                                                         ),
                                                         Text(
-                                                          "Rs. ${watch.orderDetails?.totalAmount}",
+                                                          "\u{20B9}. ${watch.orderDetails?.totalAmount}",
                                                           style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
@@ -2127,7 +2127,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               height: 11.w,
                                                             ),
                                                             Text(
-                                                              "Rs. ${watch.orderDetails?.totalAmount}",
+                                                              "\u{20B9}. ${watch.orderDetails?.totalAmount}",
                                                               style: TextStyle(
                                                                   fontWeight:
                                                                       FontWeight

@@ -175,8 +175,12 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                                             "Packing"
                                                                         ? Colors
                                                                             .brown
-                                                                        : Color(
-                                                                            0xff39C19D),
+                                                                        : element?.orderStatus == "Refund" &&
+                                                                                element?.customerCancelledStatus == "YES"
+                                                                            ? Colors.red
+                                                                            : element?.orderStatus == "Refund"
+                                                                                ? Colors.green
+                                                                                : Colors.transparent,
                                                 // width: 1,
                                               ),
                                             ),
@@ -195,9 +199,16 @@ class _MyOrderViewState extends State<MyOrderView> {
                                           );
                                         },
                                         child: Text(
-                                          element?.orderStatus == "Refund"
-                                              ? "Delivered"
-                                              : element?.orderStatus ?? "",
+                                          // element?.orderStatus == "Refund"
+                                          //     ? "Delivered"
+                                          //     : element?.orderStatus ?? "",
+                                          element?.orderStatus == "Refund" &&
+                                                  element?.customerCancelledStatus ==
+                                                      "YES"
+                                              ? "Cancelled"
+                                              : element?.orderStatus == "Refund"
+                                                  ? "Delivered"
+                                                  : element?.orderStatus ?? "",
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: element?.orderStatus ==
@@ -224,8 +235,12 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                                             "Packing"
                                                                         ? Colors
                                                                             .brown
-                                                                        : Colors
-                                                                            .green,
+                                                                        : element?.orderStatus == "Refund" &&
+                                                                                element?.customerCancelledStatus == "YES"
+                                                                            ? Colors.red
+                                                                            : element?.orderStatus == "Refund"
+                                                                                ? Colors.green
+                                                                                : Colors.transparent,
                                                 // letterSpacing: .5
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w700),
@@ -283,7 +298,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Rs. ${element?.totalAmount}",
+                                      "\u{20B9}. ${element?.totalAmount}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: lightblack1,
@@ -302,66 +317,73 @@ class _MyOrderViewState extends State<MyOrderView> {
                                     ),
                                   ],
                                 ),
-                                //        element?.refundCount != 0
-                                // ? Container(
-                                //     padding: EdgeInsets.only(
-                                //         left: 11.w,
-                                //         right: 9.w,
-                                //         top: 4.w,
-                                //         bottom: 3.w),
-                                //     decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.circular(5),
-                                //       color: Color(0xffFBDFDF),
-                                //     ),
-                                //     child: Row(
-                                //       mainAxisAlignment:
-                                //           MainAxisAlignment.spaceBetween,
-                                //       children: [
-                                //         Text(
-                                //           "${element?.refundCount} products return request",
-                                //           style: TextStyle(
-                                //               fontWeight: FontWeight.w400,
-                                //               fontSize: 12.sp,
-                                //               color: Black),
-                                //         ),
-                                //         Row(
-                                //           children: [
-                                //             element?.shopOwnerPaymentStatus ==
-                                //                     "payment-not-given"
-                                //                 ? Text(
-                                //                     "Pending",
-                                //                     style: TextStyle(
-                                //                         fontWeight: FontWeight.w500,
-                                //                         fontSize: 14.sp,
-                                //                         color: Black),
-                                //                   )
-                                //                 : element?.shopOwnerPaymentStatus ==
-                                //                         "payment-submit"
-                                //                     ? Text(
-                                //                         "Acepeted",
-                                //                         style: TextStyle(
-                                //                             fontWeight:
-                                //                                 FontWeight.w500,
-                                //                             fontSize: 14.sp,
-                                //                             color: Black),
-                                //                       )
-                                //                     : element?.shopOwnerPaymentStatus ==
-                                //                             "payment-rejected"
-                                //                         ? Text(
-                                //                             "Rejected",
-                                //                             style: TextStyle(
-                                //                                 fontWeight:
-                                //                                     FontWeight.w500,
-                                //                                 fontSize: 14.sp,
-                                //                                 color: Black),
-                                //                           )
-                                //                         : Container()
-                                //           ],
-                                //         ),
-                                //       ],
-                                //     ),
-                                //   )
-                                // : Container()
+                                ////////////////////////////////////NEW////////////////////////////
+                                element?.refundProductCount != ""
+                                    ? Container(
+                                        padding: EdgeInsets.only(
+                                            left: 11.w,
+                                            right: 9.w,
+                                            top: 4.w,
+                                            bottom: 3.w),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Color(0xffFBDFDF),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "${element?.refundProductCount} products return request",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12.sp,
+                                                  color: Black),
+                                            ),
+                                            Row(
+                                              children: [
+                                                element?.refundOrderStatus ==
+                                                        "pending"
+                                                    ? Text(
+                                                        "Pending",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 14.sp,
+                                                            color: Black),
+                                                      )
+                                                    : element?.refundOrderStatus ==
+                                                            "accept"
+                                                        ? Text(
+                                                            "Accepted",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 14.sp,
+                                                                color: Black),
+                                                          )
+                                                        : element?.refundOrderStatus ==
+                                                                "reject"
+                                                            ? Text(
+                                                                "Rejected",
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    color:
+                                                                        Black),
+                                                              )
+                                                            : Container()
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : Container()
                               ],
                             ),
                           ),

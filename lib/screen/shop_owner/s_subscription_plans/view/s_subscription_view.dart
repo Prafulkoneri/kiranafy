@@ -233,7 +233,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        "Rs. ${element?.subscriptionPrice}",
+                                                        "\u{20B9}. ${element?.subscriptionPrice}",
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w400,

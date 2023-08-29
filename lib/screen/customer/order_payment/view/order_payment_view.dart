@@ -213,7 +213,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        "You will save Rs. ${watch.finalTotalDiscount}",
+                                        "You will save \u{20B9}. ${watch.finalTotalDiscount}",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: SplashText,
@@ -224,7 +224,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                       ),
                                     ),
                                     Text(
-                                      "Rs. ${watch.finalTotalAmount}",
+                                      "\u{20B9}. ${watch.finalTotalAmount}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: Black,

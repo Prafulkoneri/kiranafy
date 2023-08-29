@@ -209,7 +209,10 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                   Flexible(
                                                     child: Text(
                                                       // "Active",
-                                                      element?.status=="active"?"Active":"InActive",
+                                                      element?.status ==
+                                                              "active"
+                                                          ? "Active"
+                                                          : "InActive",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -239,7 +242,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     Text(
                                                       // "Rs. 60",
 
-                                                      "Rs. ${element?.mrpPrice}", //
+                                                      "\u{20B9}. ${element?.mrpPrice}", //
                                                       style: TextStyle(
                                                           decoration:
                                                               TextDecoration
@@ -254,7 +257,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     ),
                                                     Text(
                                                       // "Rs. 24",
-                                                      " Rs. ${element?.offerPrice}",
+                                                      "\u{20B9}. ${element?.offerPrice}",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,

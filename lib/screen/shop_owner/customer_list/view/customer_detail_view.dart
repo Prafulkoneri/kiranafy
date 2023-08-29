@@ -250,39 +250,37 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                   width: 100.w,
                                   child: ElevatedButton(
                                     style: ButtonStyle(
-                                      elevation:
-                                      MaterialStateProperty.all(0),
+                                      elevation: MaterialStateProperty.all(0),
                                       // backgroundColor: ,
                                       backgroundColor:
-                                      MaterialStateProperty.all(
-                                          Colors.white),
+                                          MaterialStateProperty.all(
+                                              Colors.white),
                                       shape: MaterialStateProperty.all(
                                         RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                           side: BorderSide(
                                             color: element?.orderStatus ==
-                                                "Pending"
+                                                    "Pending"
                                                 ? Yellow
                                                 : element?.orderStatus ==
-                                                "Delivered"
-                                                ? Color(0xff39C19D)
-                                                : element?.orderStatus ==
-                                                "Confirmed"
-                                                ? Color(0xff115B7A)
-                                                : element?.orderStatus ==
-                                                "Cancelled"
-                                                ? Colors.red
-                                                : element?.orderStatus ==
-                                                "Dispatched"
-                                                ? Colors
-                                                .orange
-                                                : element?.orderStatus ==
-                                                "Packing"
-                                                ? Colors
-                                                .brown
-                                                : Color(
-                                                0xff39C19D),
+                                                        "Delivered"
+                                                    ? Color(0xff39C19D)
+                                                    : element?.orderStatus ==
+                                                            "Confirmed"
+                                                        ? Color(0xff115B7A)
+                                                        : element?.orderStatus ==
+                                                                "Cancelled"
+                                                            ? Colors.red
+                                                            : element?.orderStatus ==
+                                                                    "Dispatched"
+                                                                ? Colors.orange
+                                                                : element?.orderStatus ==
+                                                                        "Packing"
+                                                                    ? Colors
+                                                                        .brown
+                                                                    : Color(
+                                                                        0xff39C19D),
                                             // width: 1,
                                           ),
                                         ),
@@ -305,31 +303,30 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: element?.orderStatus ==
-                                                "Pending"
+                                                    "Pending"
                                                 ? Yellow
-                                            ///////
+                                                ///////
                                                 : element?.orderStatus ==
-                                                "Delivered"
-                                                ? Color(0xff39C19D)
-                                            ///////
-                                                : element?.orderStatus ==
-                                                "Confirmed"
-                                                ? Color(0xff115B7A)
-                                            /////////
-                                                : element?.orderStatus ==
-                                                "Cancelled"
-                                                ? Colors.red
-                                            //////////////
-                                                : element?.orderStatus ==
-                                                "Dispatched"
-                                                ? Colors
-                                                .orange
-                                                : element?.orderStatus ==
-                                                "Packing"
-                                                ? Colors
-                                                .brown
-                                                : Colors
-                                                .green,
+                                                        "Delivered"
+                                                    ? Color(0xff39C19D)
+                                                    ///////
+                                                    : element?.orderStatus ==
+                                                            "Confirmed"
+                                                        ? Color(0xff115B7A)
+                                                        /////////
+                                                        : element?.orderStatus ==
+                                                                "Cancelled"
+                                                            ? Colors.red
+                                                            //////////////
+                                                            : element?.orderStatus ==
+                                                                    "Dispatched"
+                                                                ? Colors.orange
+                                                                : element?.orderStatus ==
+                                                                        "Packing"
+                                                                    ? Colors
+                                                                        .brown
+                                                                    : Colors
+                                                                        .green,
                                             // letterSpacing: .5
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w700),
@@ -388,7 +385,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Rs. ${element?.totalAmount}',
+                                  '\u{20B9}. ${element?.totalAmount}',
                                   style: TextStyle(
                                       color: const Color(0xff5B5B5B),
                                       letterSpacing: .5,

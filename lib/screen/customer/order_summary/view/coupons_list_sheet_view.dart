@@ -38,9 +38,9 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
             showLoader: watch.isStackLoaderVisible,
             child: SingleChildScrollView(
               child: Column(
-                mainAxisSize : MainAxisSize.min,
-                crossAxisAlignment : CrossAxisAlignment.start,
-                children:[
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   SizedBox(
                     height: 20.w,
                   ),
@@ -57,7 +57,7 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                       ),
                       InkWell(
                         child: Icon(Icons.clear),
-                        onTap: (){
+                        onTap: () {
                           Navigator.pop(context);
                         },
                       ),
@@ -71,7 +71,7 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                     height: 15.w,
                   ),
                   ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                      physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: watch.finalCouponList?.length,
                       padding: EdgeInsets.zero,
@@ -79,11 +79,10 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                         final element = watch.finalCouponList?[index];
                         return GestureDetector(
                           onTap: () {
-                            read.onOfferSelected(element?.id.toString(), context,
-                                element?.couponDiscountMaxAmount);
+                            read.onOfferSelected(element?.id.toString(),
+                                context, element?.couponDiscountMaxAmount);
                           },
-                          child:
-                          Container(
+                          child: Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 11.w, vertical: 14.w),
                             decoration: BoxDecoration(
@@ -105,7 +104,8 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                               read.onOfferSelected(
                                                   element?.id.toString(),
                                                   context,
-                                                  element?.couponDiscountMaxAmount);
+                                                  element
+                                                      ?.couponDiscountMaxAmount);
                                             }),
                                       ],
                                     ),
@@ -127,8 +127,8 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                           SizedBox(
                                             height: 5.w,
                                           ),
-                                          Text("Get Up To ${double.parse(element?.couponDiscountPercentage.toString()??"0").round()}% OFF | Minimum Order of Rs. ${element?.minOrderAmount}"),
-
+                                          Text(
+                                              "Get Up To ${double.parse(element?.couponDiscountPercentage.toString() ?? "0").round()}% OFF | Minimum Order of \u{20B9}. ${element?.minOrderAmount}"),
                                         ],
                                       ),
                                     ),
@@ -141,39 +141,50 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                 SizedBox(
                                   height: 5.w,
                                 ),
-                                Visibility(visible: !watch.viewMore[index],child:  RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                          text: " View More",
-                                          recognizer: TapGestureRecognizer()..onTap = () {
-print("hello");
+                                Visibility(
+                                  visible: !watch.viewMore[index],
+                                  child: RichText(
+                                      text: TextSpan(children: [
+                                    TextSpan(
+                                        text: " View More",
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            print("hello");
                                             read.onViewMoreClicked(index);
                                           },
-                                          style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color(0xff006F94))),
-                                    ])),),
-                                Visibility(visible:watch.viewMore[index],child:
-
-                                Row(
-                                  children: [
-                                    SecondaryRadioButton(value:false, groupValue: "", onChanged:(value){},innerColor: Colors.transparent,outerColor: Colors.transparent,backgroundColor: Colors.transparent),
-                                    SizedBox(
-                                      width: 18.w,
-                                    ),
-                                    Flexible(
-                                      child: Text(
-                                        "${element?.couponTermsAndCondition ?? ""}",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
-                                            color: Color(0xff3A3A3A)
-                                                .withOpacity(0.63)),
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xff006F94))),
+                                  ])),
+                                ),
+                                Visibility(
+                                  visible: watch.viewMore[index],
+                                  child: Row(
+                                    children: [
+                                      SecondaryRadioButton(
+                                          value: false,
+                                          groupValue: "",
+                                          onChanged: (value) {},
+                                          innerColor: Colors.transparent,
+                                          outerColor: Colors.transparent,
+                                          backgroundColor: Colors.transparent),
+                                      SizedBox(
+                                        width: 18.w,
                                       ),
-                                    ),
-                                  ],
-                                ),),
+                                      Flexible(
+                                        child: Text(
+                                          "${element?.couponTermsAndCondition ?? ""}",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14.sp,
+                                              color: Color(0xff3A3A3A)
+                                                  .withOpacity(0.63)),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
