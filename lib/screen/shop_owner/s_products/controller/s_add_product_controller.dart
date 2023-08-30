@@ -58,6 +58,7 @@ class SAddProductsController extends ChangeNotifier {
 
 //////to dlectect Ptroducts
   void onProductsSelected(index, id) {
+    customerSelectedClicked=false;
     selectedProduct[index] = !selectedProduct[index];
     if (selectedProduct[index]) {
       selectedProductsId.removeWhere((item) => item == int.parse(id));
@@ -195,37 +196,49 @@ class SAddProductsController extends ChangeNotifier {
           }
         } else {
           if (customerSelectedClicked) {
-            print("isCustomerSelected");
-            selectedProduct = List<bool>.filled(
-                allAdminProductList.length ?? 0, false,
-                growable: true);
-            int length = allAdminProductList.length ?? 0;
-            // for (int i = 0; i < length; i++) {
-            // if (allAdminProductList[i].selectedByShopOwner == "yes") {
-            //   // selectedProduct.insert(i, true);
-            //   selectedProductsId.add(allAdminProductList[i].id);
-            // }
-            // }
+            for(int i=0;i<allAdminProductList.length;i++){
+              selectedProduct.add(false);
+            }
+
           } else {
-            print("isCustomerSelectedNotClicked");
-            selectedProduct = List<bool>.filled(
-                allAdminProductList.length ?? 0, false,
-                growable: true);
-            int length = allAdminProductList.length ?? 0;
-            int productlength = productDetails?.length ?? 0;
-            for (int i = 0; i < length; i++) {
-              if (allAdminProductList[i].selectedByShopOwner == "yes") {
-                if (!selectedProduct[i]) {
-                  selectedProduct.insert(i, true);
-                }
-              }
+            for(int i=0;i<allAdminProductList.length;i++){
+              selectedProduct.add(false);
             }
             print(selectedProduct);
-            for (int i = 0; i < productlength; i++) {
-              if (productDetails?[i].selectedByShopOwner == "yes") {
-                selectedProductsId.add(productDetails?[i].id);
+            for (int i = 0; i < allAdminProductList.length; i++) {
+              if (allAdminProductList[i].selectedByShopOwner == "yes") {
+                selectedProduct.insert(i, true);
+                selectedProduct.removeAt(i);
+                // selectedProductsId.add(allAdminProductList[i].id);
               }
             }
+            // int productlength = productDetails?.length ?? 0;
+            // for (int i = 0; i < productlength; i++) {
+            //   if (productDetails?[i].selectedByShopOwner == "yes") {
+            //     selectedProduct.insert(i, true);
+            //     selectedProductsId.add(productDetails?[i].id);
+            //   }
+            // }
+
+            print("isCustomerSelectedNotClicked");
+            // selectedProduct = List<bool>.filled(
+            //     allAdminProductList.length ?? 0, false,
+            //     growable: true);
+            // int length = allAdminProductList.length ?? 0;
+            // int productlength = productDetails?.length ?? 0;
+            // for (int i = 0; i < length; i++) {
+            //   if (allAdminProductList[i].selectedByShopOwner == "yes") {
+            //     if (!selectedProduct[i]) {
+            //       selectedProduct.insert(i, true);
+            //     }
+            //   }
+            // }
+            // print(selectedProduct);
+            // for (int i = 0; i < productlength; i++) {
+            //   if (productDetails?[i].selectedByShopOwner == "yes") {
+            //     selectedProductsId.add(productDetails?[i].id);
+            //   }
+            // }
           }
         }
 
@@ -330,6 +343,7 @@ class SAddProductsController extends ChangeNotifier {
 
     print(isSelectAll);
     if (isSelectAll) {
+
       LoadingOverlay.of(context).show();
       selectedProductsId.clear();
       SharedPreferences pref = await SharedPreferences.getInstance();
@@ -382,6 +396,7 @@ class SAddProductsController extends ChangeNotifier {
 
       print(selectedProductsId);
     } else {
+
       selectedProduct = List<bool>.filled(
           allAdminProductList.length ?? 0, false,
           growable: true);
