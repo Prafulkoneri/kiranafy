@@ -24,14 +24,9 @@ class CustomerSettingController extends ChangeNotifier {
   // String? selectedValue;
 // Group Value fo
 // r Radio Button.
-
   Future<void> initState(context) async {
     await shopNotification(context, "");
-    notifyListeners();
-  }
 
-  void showStackLoader(value) {
-    isStackLoading = value;
     notifyListeners();
   }
 
@@ -45,15 +40,15 @@ class CustomerSettingController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     settingRepo.shopSetting(pref.getString("successToken")).then((response) {
+      print("444444444");
       print(response.body);
+      print("444444444");
       final result = SettingsModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
         isAppNotificationEnable =
             result.settingData?.appNotification == "on" ? true : false;
         showLoader(false);
-        // Utils.showPrimarySnackbar(context, result.message,
-        //     type: SnackType.success);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();
@@ -80,11 +75,8 @@ class CustomerSettingController extends ChangeNotifier {
           appNotification: isAppNotificationEnable ? "on" : "off");
 
   Future<void> changeSettings(context, value) async {
-    print(value);
-    print("hello");
-    isAppNotificationEnable = !isAppNotificationEnable;
     LoadingOverlay.of(context).show();
-
+    isAppNotificationEnable = value;
     SharedPreferences pref = await SharedPreferences.getInstance();
     changeSettingRepo
         .changeSetting(
@@ -96,6 +88,8 @@ class CustomerSettingController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
+        // Utils.showPrimarySnackbar(context, result.message,
+        //     type: SnackType.success);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();

@@ -59,16 +59,15 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
             itemBuilder: (BuildContext, index) {
               final element = watch.cancelledOrdersList?[index];
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ShopOrderView(
-                          orderId: element?.id.toString(),
-                          fromOrderStatus: true,
-                          selectedIndex: watch.selectedIndex,
-
-                        )),
+                              orderId: element?.id.toString(),
+                              fromOrderStatus: true,
+                              selectedIndex: watch.selectedIndex,
+                            )),
                   );
                 },
                 child: Container(
@@ -141,8 +140,6 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
                           InkWell(
                             onTap: () {
                               // Within the `FirstRoute` widget
-
-
                             },
                             child: Row(
                               children: [
@@ -156,7 +153,8 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
                                 SizedBox(
                                   width: 7.w,
                                 ),
-                                SvgPicture.asset("assets/icons/arrow_right.svg"),
+                                SvgPicture.asset(
+                                    "assets/icons/arrow_right.svg"),
                               ],
                             ),
                           ),
