@@ -52,14 +52,22 @@ class PaymentRefundListController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onNavigationFromDashboard(value){
-    if(value=="completed"){
-      isCompletedList=true;
-      isPendingList=false;
-    }
-    else{
-      isCompletedList=false;
-      isPendingList=true;
+  void onClear(context, dates) {
+    date = "";
+    refundPaymentList(
+      context,
+      dates,
+    );
+    notifyListeners();
+  }
+
+  void onNavigationFromDashboard(value) {
+    if (value == "completed") {
+      isCompletedList = true;
+      isPendingList = false;
+    } else {
+      isCompletedList = false;
+      isPendingList = true;
     }
     notifyListeners();
   }

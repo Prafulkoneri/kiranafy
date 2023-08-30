@@ -103,6 +103,19 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                             children: [
                               Text("${watch.date}"),
                               SizedBox(
+                                width: 8.w,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  read.onClear(context, "");
+                                },
+                                child: SvgPicture.asset(
+                                  height: 12.h,
+                                  'assets/images/Cross.svg',
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(
                                 width: 12.w,
                               ),
                               GestureDetector(
