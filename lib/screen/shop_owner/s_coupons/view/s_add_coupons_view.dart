@@ -454,7 +454,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                   onChanged: (value) {
                                     read.onCategorySelect(value, context);
                                   },
-                                  items: watch.categoriesList
+                                  items: watch.selectedcategorydata
                                       ?.map((item) => DropdownMenuItem<String>(
                                             value: item.id.toString(),
                                             child: Text(
@@ -474,7 +474,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                   onChanged: (value) {
                                     read.onCategorySelect(value, context);
                                   },
-                                  items: watch.categoriesList
+                                  items: watch.selectedcategorydata
                                       ?.map((item) => DropdownMenuItem<String>(
                                             value: item.id.toString(),
                                             child: Text(

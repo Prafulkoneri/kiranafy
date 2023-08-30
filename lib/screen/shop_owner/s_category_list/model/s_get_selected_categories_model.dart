@@ -1,15 +1,15 @@
 class GetSelectedCategoryResponseModel {
   int? status;
   String? message;
-  List<SelectedCategoryData>? data;
+  List<SelectedCategoryData>? selectedcategorydata;
 
   GetSelectedCategoryResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     if (json["data"] != null) {
-      data = <SelectedCategoryData>[];
+      selectedcategorydata = <SelectedCategoryData>[];
       json["data"].forEach((v) {
-        data!.add(SelectedCategoryData.fromJson(v));
+        selectedcategorydata!.add(SelectedCategoryData.fromJson(v));
       });
     }
   }
@@ -17,7 +17,7 @@ class GetSelectedCategoryResponseModel {
   GetSelectedCategoryResponseModel({
     required this.status,
     required this.message,
-    required this.data,
+    required this.selectedcategorydata,
   });
 }
 

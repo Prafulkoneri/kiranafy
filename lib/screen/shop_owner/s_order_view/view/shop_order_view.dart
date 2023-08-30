@@ -1677,7 +1677,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                   SizedBox(
                     height: 28.h,
                   ),
-                  watch.orderDetails?.orderStatus == "Order Refund"
+                  watch.orderDetails?.deliveryType == "self_pickup" &&
+                          watch.orderDetails?.orderStatus == "Order Refund"
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -2349,10 +2350,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                       : Container(
                           // height: 50.w,
                           ),
-                  watch.orderDetails?.orderStatus == "Cancelled"
-                      // &&
-                      //  watch.orderDetails?.customerCancelledReason!=""
-                      //   watch.orderDetails?.shopOwnerCancelledReason != ""
+                  watch.orderDetails?.orderStatus == "Cancelled" &&
+                          watch.orderDetails?.shopOwnerCancelledReason != "No"
                       ? Container(
                           padding: EdgeInsets.only(
                               left: 15.w, top: 11.w, bottom: 45.w),

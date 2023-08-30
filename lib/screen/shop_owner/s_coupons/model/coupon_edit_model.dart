@@ -1,3 +1,4 @@
+import 'package:local_supper_market/screen/shop_owner/s_category_list/model/s_get_selected_categories_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/product_as_per_category_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_categories_list_model.dart';
 
@@ -38,12 +39,13 @@ class EditCouponsResModel {
 
 class EditCouponsData {
   CouponDetails? couponDetails;
-  List<CategoryData>? categoryList;
+  // List<CategoryData>? categoryList;
+  List<SelectedCategoryData>? selectedcategorydata;
   List<ProductData>? allProductsList;
 
   EditCouponsData({
     required this.couponDetails,
-    required this.categoryList,
+    required this.selectedcategorydata,
     required this.allProductsList,
   });
 
@@ -52,9 +54,9 @@ class EditCouponsData {
         ? CouponDetails.fromJson(json['coupon_details'])
         : null;
     if (json["category_list"] != null) {
-      categoryList = <CategoryData>[];
+      selectedcategorydata = <SelectedCategoryData>[];
       json["category_list"].forEach((v) {
-        categoryList!.add(CategoryData.fromJson(v));
+        selectedcategorydata!.add(SelectedCategoryData.fromJson(v));
       });
     }
 

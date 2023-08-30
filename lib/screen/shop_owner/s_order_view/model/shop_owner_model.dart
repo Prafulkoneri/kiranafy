@@ -120,16 +120,18 @@ class OrderDetails {
   String? orderStatus;
   String? subTotal;
   String? deliveryType;
-  String ? shopOwnerPaymentStatus;
-  String ? shopOwnerRefundStatus;
-  String ? customerRefundPaymentStatus;
-  String ? shopOwnerRefundPaymentType;
-  String ? refundProductCount;
-  String ? customerRefundAmount;
-  String ? shopOwnerRefundTransactionId;
-  String ? shopOwnerRejectReason;
-  String ? shopOwnerCancelledReason;
-  String ? customerCancelledReason ;
+  String? shopOwnerPaymentStatus;
+  String? shopOwnerRefundStatus;
+  String? customerRefundPaymentStatus;
+  String? shopOwnerRefundPaymentType;
+  String? refundProductCount;
+  String? customerRefundAmount;
+  String? shopOwnerRefundTransactionId;
+  String? shopOwnerRejectReason;
+  String? shopOwnerCancelledReason;
+  String? customerCancelledReason;
+  String? shopOwnerCancelledStatus;
+  String? customerCancelledStatus;
 
   OrderDetails({
     required this.id,
@@ -151,10 +153,12 @@ class OrderDetails {
     required this.shopOwnerRefundTransactionId,
     required this.shopOwnerRefundPaymentType,
     required this.refundProductCount,
-   required this.customerRefundAmount,
-   required this.shopOwnerRejectReason,
+    required this.customerRefundAmount,
+    required this.shopOwnerRejectReason,
     required this.customerCancelledReason,
     required this.shopOwnerCancelledReason,
+    required this.shopOwnerCancelledStatus,
+    required this.customerCancelledStatus,
   });
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -171,15 +175,17 @@ class OrderDetails {
     subTotal = json["sub_total_amount"];
     deliveryType = json["delivery_type"];
     shopOwnerPaymentStatus = json["shop_owner_payment_status"];
-    shopOwnerRefundStatus=json["refund_order_status"];
-    customerRefundPaymentStatus=json["refund_payment_status"];
-    shopOwnerRefundTransactionId=json["shop_owner_refund_transaction_id"];
-    shopOwnerRefundPaymentType=json["shop_owner_refund_payment_type"];
-    refundProductCount=json["refund_product_count"];
-    customerRefundAmount=json["customer_refund_amount"];
-    shopOwnerRejectReason=json["shop_owner_refund_reject_reason"];
-   shopOwnerCancelledReason = json["shop_owner_order_cancelled_reason"];
-    customerCancelledReason=json["customer_order_cancelled_reason"];
+    shopOwnerRefundStatus = json["refund_order_status"];
+    customerRefundPaymentStatus = json["refund_payment_status"];
+    shopOwnerRefundTransactionId = json["shop_owner_refund_transaction_id"];
+    shopOwnerRefundPaymentType = json["shop_owner_refund_payment_type"];
+    refundProductCount = json["refund_product_count"];
+    customerRefundAmount = json["customer_refund_amount"];
+    shopOwnerRejectReason = json["shop_owner_refund_reject_reason"];
+    shopOwnerCancelledReason = json["shop_owner_order_cancelled_reason"];
+    customerCancelledReason = json["customer_order_cancelled_reason"];
+    shopOwnerCancelledStatus = json["shop_owner_cancelled_status"];
+    customerCancelledStatus = json["customer_cancelled_status"];
   }
 }
 
@@ -191,36 +197,37 @@ class OrderProductDetail {
   String? productImagePath;
   String? productImageName;
   String? productWeight;
-  String ? status;
+  String? status;
   String? unit;
   String? productQuantity;
   String? productMrpPrice;
   String? productOfferPrice;
   int? productTotalPrice;
-  String ? refundStatus;
-  String ? reason;
-  String ? customRefundReason;
-  String ? customRefundAmount;
-  String ? refundProductCount;
+  String? refundStatus;
+  String? reason;
+  String? customRefundReason;
+  String? customRefundAmount;
+  String? refundProductCount;
 
-
-  OrderProductDetail({
-    required this.id,
-    required this.productType,
-    required this.productUnitId,
-    required this.productName,
-    required this.productImagePath,
-    required this.productImageName,
-    required this.productWeight,
-    required this.unit,
-    required this.productQuantity,
-    required this.productMrpPrice,
-    required this.productOfferPrice,
-    required this.productTotalPrice,
-    required this.status,
-   required this.refundStatus,
-    this.reason,this.refundProductCount,this.customRefundReason,this.customRefundAmount
-  });
+  OrderProductDetail(
+      {required this.id,
+      required this.productType,
+      required this.productUnitId,
+      required this.productName,
+      required this.productImagePath,
+      required this.productImageName,
+      required this.productWeight,
+      required this.unit,
+      required this.productQuantity,
+      required this.productMrpPrice,
+      required this.productOfferPrice,
+      required this.productTotalPrice,
+      required this.status,
+      required this.refundStatus,
+      this.reason,
+      this.refundProductCount,
+      this.customRefundReason,
+      this.customRefundAmount});
   OrderProductDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     productType = json["product_type"];
@@ -235,16 +242,14 @@ class OrderProductDetail {
     productOfferPrice = json["product_offer_price"];
     productTotalPrice = json["product_total_price"];
     status = json["status"];
-    refundStatus=json["return_status"];
-    reason=json["reason"];
-    customRefundAmount=json["customer_refund_amount"];
+    refundStatus = json["return_status"];
+    reason = json["reason"];
+    customRefundAmount = json["customer_refund_amount"];
     // customerRefund=json["customer_refund_amount"];
-    reason=json["reason"];
+    reason = json["reason"];
     // "reason": "Quality issue",
     // "custom_refund_reason": "not good",
     // "customer_refund_amount": "20",
     // "refund_product_count": "1"
-
-
   }
 }

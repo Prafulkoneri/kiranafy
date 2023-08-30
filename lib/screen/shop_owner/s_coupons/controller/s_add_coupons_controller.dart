@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/model/s_get_selected_categories_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_category_list/repository/s_get_selected_categories_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/add_coupons_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/coupon_code_exists_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/coupon_edit_model.dart';
@@ -31,9 +33,13 @@ class SAddCouponsController extends ChangeNotifier {
   String groupValue = "full_order_amount";
   String categoryId = "";
   String productId = "";
-  List<CategoryData>? categoriesList;
+  // List<CategoryData>? categoriesList;
+  List<SelectedCategoryData>? selectedcategorydata;
+  ShopSelectedCategoriesRepo SelectedCategoriesListRepo =
+      ShopSelectedCategoriesRepo();
+
   List<ProductData>? productList;
-  ShopAllCategoriesRepo categoriesListRepo = ShopAllCategoriesRepo();
+  // ShopAllCategoriesRepo categoriesListRepo = ShopAllCategoriesRepo();
   TextEditingController couponCodeController = TextEditingController();
   TextEditingController discountPercentageController = TextEditingController();
   TextEditingController minOrderAmountController = TextEditingController();
@@ -112,15 +118,16 @@ class SAddCouponsController extends ChangeNotifier {
   Future<void> getCategoriesList(context) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
-    categoriesListRepo
-        .shopAllCategoriesList(pref.getString("successToken"))
+    SelectedCategoriesListRepo.shopSelectedCategoriesList(
+            pref.getString("successToken"))
+        // .shopAllCategoriesList(pref.getString("successToken"))
         .then((response) {
       print(response.statusCode);
       log("response.body${response.body}");
       final result =
-          AllCategoryResponseModel.fromJson(jsonDecode(response.body));
+          GetSelectedCategoryResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        categoriesList = result.data;
+        selectedcategorydata = result.selectedcategorydata;
         showLoader(false);
         notifyListeners();
       } else {
@@ -365,9 +372,9 @@ class SAddCouponsController extends ChangeNotifier {
             details?.couponTermsAndConditions.toString() ?? "";
         groupValue = details?.couponType ?? "";
 
-        categoriesList = result.editCouponsData?.categoryList;
+        selectedcategorydata = result.editCouponsData?.selectedcategorydata;
         print("99999999");
-        print(result.editCouponsData?.categoryList?[0].categoryName);
+        print(result.editCouponsData?.selectedcategorydata?[0].categoryName);
         print("99999999");
         productList = result.editCouponsData?.allProductsList;
         categoryId = details?.shopOwnerCategoryId.toString() ?? "";

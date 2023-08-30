@@ -31,8 +31,8 @@ class SCategoryListController extends ChangeNotifier {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                SSelectedProductView(isRefresh: true,categoryId: id.toString())));
+            builder: (context) => SSelectedProductView(
+                isRefresh: true, categoryId: id.toString())));
   }
 
   ////////////////// shop owner get selected categories list/////
@@ -47,7 +47,7 @@ class SCategoryListController extends ChangeNotifier {
       final result =
           GetSelectedCategoryResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        selectedCategoriesList = result.data;
+        selectedCategoriesList = result.selectedcategorydata;
         isLoading = false;
         notifyListeners();
       } else {
