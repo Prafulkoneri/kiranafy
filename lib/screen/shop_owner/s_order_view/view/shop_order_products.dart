@@ -41,7 +41,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
             final element = watch.orderProductDetails?[index];
             return Column(
               children: [
-                watch.orderDetails?.orderStatus == "Pending"
+                watch.orderDetails?.orderStatus == "Pending"|| watch.orderDetails?.orderStatus == "Confirmed"
                     ? Container(
                         width: ScreenUtil().screenWidth,
                         child: Row(
@@ -89,8 +89,11 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                           ),
                                         ),
                                       ),
-                                      watch.orderDetails?.orderStatus ==
-                                              "Pending"
+                                      Text(watch.orderDetails?.orderStatus??""),
+                                      // watch.orderDetails?.orderStatus ==
+                                      //         "Pending"||
+                                          watch.orderDetails?.orderStatus ==
+                                          "Confirmed"
                                           ? PrimaryCheckBox(
                                               onChanged: (value) {
                                                 LoadingOverlay.of(context)
