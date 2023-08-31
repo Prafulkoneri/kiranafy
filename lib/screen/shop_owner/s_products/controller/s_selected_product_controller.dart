@@ -144,7 +144,7 @@ class SSelectedProductsController extends ChangeNotifier {
           DeleteAdminProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          productsFromAdmin?.removeAt(index);
+          productsFromAdmins.removeAt(index);
           LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
@@ -186,7 +186,7 @@ class SSelectedProductsController extends ChangeNotifier {
           DeleteAdminProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          customProduct?.removeAt(index);
+          customProducts.removeAt(index);
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
         } else {
@@ -273,6 +273,7 @@ class SSelectedProductsController extends ChangeNotifier {
   Future<void> onScrollMaxExtent(context, id) async {
     print("hello");
     offset = offset + 1;
+    print(offset);
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopSelecteProductRepo
