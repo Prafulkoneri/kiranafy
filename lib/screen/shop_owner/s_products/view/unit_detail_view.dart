@@ -242,7 +242,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     Text(
                                                       // "Rs. 60",
 
-                                                      "\u{20B9}. ${element?.mrpPrice}", //
+                                                      "\u{20B9} ${element?.mrpPrice}", //
                                                       style: TextStyle(
                                                           decoration:
                                                               TextDecoration
@@ -257,7 +257,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     ),
                                                     Text(
                                                       // "Rs. 24",
-                                                      "\u{20B9}. ${element?.offerPrice}",
+                                                      "\u{20B9} ${element?.offerPrice}",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,

@@ -36,23 +36,45 @@ class CustomerViewShopResModel {
 }
 
 class CustomerProductData {
-  int? id;
-  String? productName;
-  String? productImagePath;
-  String? productImageName;
+  int? id; //
+  String? productName; //
+  String? productImagePath; //
+  String? productImageName; //
   String? weight;
+
+  ///
   String? offerPrice;
+
+  ///
   String? mrpPrice;
+
+  ///
   int? productId;
+
+  ///
   int? categoryId;
+
+  ///
   String? productType;
-  int? selectedProductId;
+
+  ///
+  int? selectedProductId; //No
   String? discountPercentage;
+
+  ///
   String? status;
+
+  ///
   String? unit;
+
+  ///
   String? shopId;
+
+  ///
   int? productUnitId;
-  String? addToCartCheck;
+
+  ///
+  String? addToCartCheck; //No
 
   CustomerProductData({
     this.categoryId, //

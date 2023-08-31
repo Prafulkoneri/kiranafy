@@ -99,7 +99,7 @@ class _OrderProductsState extends State<OrderProducts> {
                                     ? Row(
                                         children: [
                                           Text(
-                                            "\u{20B9}. ${element?.mrpPrice} x ",
+                                            "\u{20B9} ${element?.mrpPrice} x ",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: grey5,
@@ -123,7 +123,7 @@ class _OrderProductsState extends State<OrderProducts> {
                                     : Row(
                                         children: [
                                           Text(
-                                            "\u{20B9}. ${element?.mrpPrice}  ",
+                                            "\u{20B9} ${element?.mrpPrice}  ",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   decoration: TextDecoration
@@ -135,7 +135,7 @@ class _OrderProductsState extends State<OrderProducts> {
                                             ),
                                           ),
                                           Text(
-                                            "\u{20B9}. ${element?.offerPrice} x ",
+                                            "\u{20B9} ${element?.offerPrice} x ",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: grey5,
@@ -157,7 +157,7 @@ class _OrderProductsState extends State<OrderProducts> {
                                         ],
                                       ),
                                 Text(
-                                  "\u{20B9}. ${element?.productTotalPrice}",
+                                  "\u{20B9} ${element?.productTotalPrice}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
                                         color: grey5,

@@ -2716,7 +2716,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 ),
                               ),
                               Text(
-                                "\u{20B9}. ${watch.subTotal}",
+                                "\u{20B9} ${watch.subTotal}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,
@@ -2768,7 +2768,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 ]),
                               ),
                               Text(
-                                "- \u{20B9}.  ${watch.couponDiscount}",
+                                "- \u{20B9}  ${watch.couponDiscount}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: grey5,
@@ -2797,7 +2797,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                               ),
                               watch.deliveryCharges == ""
                                   ? Text(
-                                      "\u{20B9}. 0",
+                                      "\u{20B9} 0",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: grey5,
@@ -2807,7 +2807,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                       ),
                                     )
                                   : Text(
-                                      "\u{20B9}. ${watch.groupValue == "self_pickup" ? watch.selfPickupDeliveryCharges : watch.deliveryCharges}",
+                                      "\u{20B9} ${watch.groupValue == "self_pickup" ? watch.selfPickupDeliveryCharges : watch.deliveryCharges}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: grey5,
@@ -2842,7 +2842,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 ),
                               ),
                               Text(
-                                "\u{20B9}. ${watch.groupValue == "self_pickup" ? watch.selfPickupTotalAmount : watch.totalAmount}",
+                                "\u{20B9} ${watch.groupValue == "self_pickup" ? watch.selfPickupTotalAmount : watch.totalAmount}",
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
                                       color: Black1,
@@ -2868,7 +2868,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           ),
                           Container(
                             child: Text(
-                              "You will save \u{20B9}. ${watch.totalDiscount}",
+                              "You will save \u{20B9} ${watch.totalDiscount}",
                               style: GoogleFonts.dmSans(
                                 textStyle: TextStyle(
                                     color: SplashText,

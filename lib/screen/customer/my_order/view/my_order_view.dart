@@ -298,7 +298,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "\u{20B9}. ${element?.totalAmount}",
+                                      "\u{20B9} ${element?.totalAmount}",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: lightblack1,

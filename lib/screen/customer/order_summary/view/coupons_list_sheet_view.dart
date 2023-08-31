@@ -128,7 +128,7 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                             height: 5.w,
                                           ),
                                           Text(
-                                              "Get Up To ${double.parse(element?.couponDiscountPercentage.toString() ?? "0").round()}% OFF | Minimum Order of \u{20B9}. ${element?.minOrderAmount}"),
+                                              "Get Up To ${double.parse(element?.couponDiscountPercentage.toString() ?? "0").round()}% OFF | Minimum Order of \u{20B9} ${element?.minOrderAmount}"),
                                         ],
                                       ),
                                     ),

@@ -41,7 +41,8 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
             final element = watch.orderProductDetails?[index];
             return Column(
               children: [
-                watch.orderDetails?.orderStatus == "Pending"|| watch.orderDetails?.orderStatus == "Confirmed"
+                watch.orderDetails?.orderStatus == "Pending" ||
+                        watch.orderDetails?.orderStatus == "Confirmed"
                     ? Container(
                         width: ScreenUtil().screenWidth,
                         child: Row(
@@ -90,9 +91,9 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                         ),
                                       ),
                                       watch.orderDetails?.orderStatus ==
-                                              "Pending"||
-                                          watch.orderDetails?.orderStatus ==
-                                          "Confirmed"
+                                                  "Pending" ||
+                                              watch.orderDetails?.orderStatus ==
+                                                  "Confirmed"
                                           ? PrimaryCheckBox(
                                               onChanged: (value) {
                                                 LoadingOverlay.of(context)
@@ -150,7 +151,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                               children: [
                                                 Text(
                                                   // "",
-                                                  "\u{20B9}. ${element?.productOfferPrice} x ",
+                                                  "\u{20B9} ${element?.productOfferPrice} x ",
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         color: grey5,
@@ -178,7 +179,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                               children: [
                                                 Text(
                                                   // "",
-                                                  "\u{20B9}. ${element?.productMrpPrice}  ",
+                                                  "\u{20B9} ${element?.productMrpPrice}  ",
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         decoration:
@@ -193,7 +194,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                                 ),
                                                 Text(
                                                   // "",
-                                                  "\u{20B9}. ${element?.productOfferPrice} x ",
+                                                  "\u{20B9} ${element?.productOfferPrice} x ",
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         color: grey5,
@@ -219,7 +220,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                             ),
                                       Text(
                                         // "",
-                                        "\u{20B9}. ${element?.productTotalPrice}",
+                                        "\u{20B9} ${element?.productTotalPrice}",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: grey5,
@@ -236,7 +237,8 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                           ],
                         ),
                       )
-                    : watch.orderDetails?.orderStatus != "Pending" && watch.orderDetails?.orderStatus != "Confirmed"&&
+                    : watch.orderDetails?.orderStatus != "Pending" &&
+                            watch.orderDetails?.orderStatus != "Confirmed" &&
                             element?.status == "active"
                         ? Container(
                             width: ScreenUtil().screenWidth,
@@ -354,7 +356,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                                   children: [
                                                     Text(
                                                       // "",
-                                                      "\u{20B9}. ${element?.productOfferPrice} x ",
+                                                      "\u{20B9} ${element?.productOfferPrice} x ",
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(
                                                             color: grey5,
@@ -384,7 +386,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                                   children: [
                                                     Text(
                                                       // "",
-                                                      "\u{20B9}. ${element?.productMrpPrice}  ",
+                                                      "\u{20B9} ${element?.productMrpPrice}  ",
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(
                                                             decoration:
@@ -400,7 +402,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                                     ),
                                                     Text(
                                                       // "",
-                                                      "\u{20B9}. ${element?.productOfferPrice} x ",
+                                                      "\u{20B9} ${element?.productOfferPrice} x ",
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(
                                                             color: grey5,
@@ -428,7 +430,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                                 ),
                                           Text(
                                             // "",
-                                            "\u{20B9}. ${element?.productTotalPrice}",
+                                            "\u{20B9} ${element?.productTotalPrice}",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: grey5,
@@ -446,224 +448,237 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                             ),
                           )
                         : Container(
-                  width: ScreenUtil().screenWidth,
-                  child: Row(
-                    children: [
-                      element?.productImagePath == ""
-                          ? Container(
-                        height: 89.w,
-                        width: 89.w,
-                        child: Image.asset(
-                          "assets/images/profile_image.png",
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                          : Container(
-                        height: 89.w,
-                        width: 89.w,
-                        child: AppNetworkImages(
-                          imageUrl:
-                          "${element?.productImagePath}",
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
+                            width: ScreenUtil().screenWidth,
+                            child: Row(
                               children: [
-                                Flexible(
-                                  child: Text(
-                                    // "",
-                                    "${element?.productName}",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Black1,
-                                          // letterSpacing: .5,
-                                          fontSize: 14.sp,
-                                          fontWeight:
-                                          FontWeight.w400),
-                                      decoration: TextDecoration.lineThrough,
-                                    ),
-                                  ),
-                                ),
-                                watch.orderDetails?.orderStatus ==
-                                    "Pending"
-                                    ? PrimaryCheckBox(
-                                  onChanged: (value) {
-                                    LoadingOverlay.of(context)
-                                        .show();
-                                    read.selectProducts(
-                                        context,
-                                        index,
-                                        element?.id,
-                                        value);
-                                  },
-                                  value:
-                                  watch.selectedProductList[
-                                  index],
-                                )
-                                    : watch.orderDetails
-                                    ?.orderStatus ==
-                                    "Order Refund"
+                                element?.productImagePath == ""
                                     ? Container(
-                                  child: Text(
-                                    element?.refundStatus ==
-                                        "YES"
-                                        ? "Return"
-                                        : '',
-                                    style: TextStyle(
-                                        fontWeight:
-                                        FontWeight.w700,
-                                        fontSize: 13.sp,
-                                        color: Color(
-                                            0xffFF0000),
-                                      decoration: TextDecoration.lineThrough,
-                                    ),
-
+                                        height: 89.w,
+                                        width: 89.w,
+                                        child: Image.asset(
+                                          "assets/images/profile_image.png",
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 89.w,
+                                        width: 89.w,
+                                        child: AppNetworkImages(
+                                          imageUrl:
+                                              "${element?.productImagePath}",
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              // "",
+                                              "${element?.productName}",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Black1,
+                                                    // letterSpacing: .5,
+                                                    fontSize: 14.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                              ),
+                                            ),
+                                          ),
+                                          watch.orderDetails?.orderStatus ==
+                                                  "Pending"
+                                              ? PrimaryCheckBox(
+                                                  onChanged: (value) {
+                                                    LoadingOverlay.of(context)
+                                                        .show();
+                                                    read.selectProducts(
+                                                        context,
+                                                        index,
+                                                        element?.id,
+                                                        value);
+                                                  },
+                                                  value:
+                                                      watch.selectedProductList[
+                                                          index],
+                                                )
+                                              : watch.orderDetails
+                                                          ?.orderStatus ==
+                                                      "Order Refund"
+                                                  ? Container(
+                                                      child: Text(
+                                                        element?.refundStatus ==
+                                                                "YES"
+                                                            ? "Return"
+                                                            : '',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 13.sp,
+                                                          color:
+                                                              Color(0xffFF0000),
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Container(),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 6.h,
+                                      ),
+                                      Text(
+                                        // "",/
+                                        "${element?.productWeight}  ${element?.unit}",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: grey5,
+                                              // letterSpacing: .5,
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w400),
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 11.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          element?.productOfferPrice ==
+                                                      element
+                                                          ?.productOfferPrice ||
+                                                  element?.productOfferPrice ==
+                                                      ""
+                                              ? Row(
+                                                  children: [
+                                                    Text(
+                                                      // "",
+                                                      "\u{20B9} ${element?.productOfferPrice} x ",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: grey5,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 16.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      // "",
+                                                      "${element?.productQuantity}",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: grey5,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 16.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Row(
+                                                  children: [
+                                                    Text(
+                                                      // "",
+                                                      "\u{20B9} ${element?.productMrpPrice}  ",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .lineThrough,
+                                                            color: grey5,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      // "",
+                                                      "\u{20B9} ${element?.productOfferPrice} x ",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: grey5,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 16.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      // "",
+                                                      "${element?.productQuantity}",
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: grey5,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 16.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                          Text(
+                                            // "",
+                                            "\u{20B9} ${element?.productTotalPrice}",
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: grey5,
+                                                  // letterSpacing: .5,
+                                                  fontSize: 16.sp,
+                                                  fontWeight: FontWeight.w400),
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 )
-                                    : Container(),
                               ],
                             ),
-                            SizedBox(
-                              height: 6.h,
-                            ),
-                            Text(
-                              // "",/
-                              "${element?.productWeight}  ${element?.unit}",
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: grey5,
-                                    // letterSpacing: .5,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w400),
-                                decoration: TextDecoration.lineThrough,
-                              ),
-
-                            ),
-                            SizedBox(
-                              height: 11.h,
-                            ),
-                            Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                element?.productOfferPrice ==
-                                    element
-                                        ?.productOfferPrice ||
-                                    element?.productOfferPrice ==
-                                        ""
-                                    ? Row(
-                                  children: [
-                                    Text(
-                                      // "",
-                                      "\u{20B9}. ${element?.productOfferPrice} x ",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: grey5,
-                                            // letterSpacing: .5,
-                                            fontSize: 16.sp,
-                                            fontWeight:
-                                            FontWeight
-                                                .w400),
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                    Text(
-                                      // "",
-                                      "${element?.productQuantity}",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: grey5,
-                                            // letterSpacing: .5,
-                                            fontSize: 16.sp,
-                                            fontWeight:
-                                            FontWeight
-                                                .w400),
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                                    : Row(
-                                  children: [
-                                    Text(
-                                      // "",
-                                      "\u{20B9}. ${element?.productMrpPrice}  ",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            decoration:
-                                            TextDecoration
-                                                .lineThrough,
-                                            color: grey5,
-                                            // letterSpacing: .5,
-                                            fontSize: 14.sp,
-                                            fontWeight:
-                                            FontWeight
-                                                .w400),
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                    Text(
-                                      // "",
-                                      "\u{20B9}. ${element?.productOfferPrice} x ",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: grey5,
-                                            // letterSpacing: .5,
-                                            fontSize: 16.sp,
-                                            fontWeight:
-                                            FontWeight
-                                                .w400),
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                    Text(
-                                      // "",
-                                      "${element?.productQuantity}",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: grey5,
-                                            // letterSpacing: .5,
-                                            fontSize: 16.sp,
-                                            fontWeight:
-                                            FontWeight
-                                                .w400),
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  // "",
-                                  "\u{20B9}. ${element?.productTotalPrice}",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: grey5,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w400),
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                          ),
                 Divider(
                   // height: 100,
                   color: grey2,

@@ -385,7 +385,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '\u{20B9}. ${element?.totalAmount}',
+                                  '\u{20B9} ${element?.totalAmount}',
                                   style: TextStyle(
                                       color: const Color(0xff5B5B5B),
                                       letterSpacing: .5,

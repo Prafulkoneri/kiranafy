@@ -713,7 +713,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                     Expanded(
                                                                       child:
                                                                           Text(
-                                                                        "\u{20B9}.${element?.offerPrice}",
+                                                                        "\u{20B9}${element?.offerPrice}",
                                                                         textAlign:
                                                                             TextAlign.end,
                                                                         style: GoogleFonts
@@ -1205,7 +1205,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                     Expanded(
                                                                       child:
                                                                           Text(
-                                                                        "\u{20B9}.${unitElement?.offerPrice}",
+                                                                        "\u{20B9}${unitElement?.offerPrice}",
                                                                         textAlign:
                                                                             TextAlign.end,
                                                                         style: GoogleFonts
