@@ -41,39 +41,17 @@ class CustomerProductData {
   String? productImagePath; //
   String? productImageName; //
   String? weight;
-
-  ///
   String? offerPrice;
-
-  ///
   String? mrpPrice;
-
-  ///
   int? productId;
-
-  ///
   int? categoryId;
-
-  ///
   String? productType;
-
-  ///
   int? selectedProductId; //No
   String? discountPercentage;
-
-  ///
   String? status;
-
-  ///
   String? unit;
-
-  ///
   String? shopId;
-
-  ///
   int? productUnitId;
-
-  ///
   String? addToCartCheck; //No
 
   CustomerProductData({
