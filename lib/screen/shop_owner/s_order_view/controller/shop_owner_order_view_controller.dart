@@ -160,9 +160,12 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           }
         }
         print("selectedProductList${selectedProductList}");
-        if(orderDetails?.customerCancelledStatus=="YES"||orderDetails?.shopOwnerCancelledStatus=="YES"){
-          acceptPayment=true;
+        if(orderDetails?.shopOwnerRefundStatus=="pending"){
+          if(orderDetails?.customerCancelledStatus=="YES"||orderDetails?.shopOwnerCancelledStatus=="YES"){
+            acceptPayment=true;
+          }
         }
+
         await getCancelOrderList(context);
         if (showLoading) {
           showLoader(false);
