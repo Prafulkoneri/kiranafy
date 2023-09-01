@@ -38,7 +38,7 @@ class AllCategoryShopController extends ChangeNotifier {
 
   CustomerViewAllCategoryShopReqModel get customerViewAllCategoryShopReqModel =>
       CustomerViewAllCategoryShopReqModel(
-          offset: offset.toString(), limit: "30", categoryId: categoryId);
+          offset: offset.toString(), limit: "10", categoryId: categoryId);
 
   Future<void> initState(context, id, refresh) async {
     searchController.clear();
@@ -74,7 +74,7 @@ class AllCategoryShopController extends ChangeNotifier {
           jsonDecode(response.body));
       if (response.statusCode == 200) {
         print("111111123e24errfsdfs");
-        // allShops.clear();
+        allShops.clear();
         data = result.data;
         nearByShop = data?.nearByShops;
         allShops.addAll(result.data?.allShops ?? []);
@@ -255,11 +255,6 @@ class AllCategoryShopController extends ChangeNotifier {
     offset = offset + 1;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("kkkkkkkkkk");
-    // if (pref.getString("pincode") == null) {
-    //   pincode = "111111";
-    // } else {
-    //   pincode = pref.getString("pincode").toString();
-    // }
     customerViewAllCategoryShopRepo
         .getAllCategoryShopList(
             customerViewAllCategoryShopReqModel, pref.getString("successToken"))

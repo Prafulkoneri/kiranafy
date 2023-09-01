@@ -318,7 +318,8 @@ class _MyOrderViewState extends State<MyOrderView> {
                                   ],
                                 ),
                                 ////////////////////////////////////NEW////////////////////////////
-                                element?.refundProductCount != ""
+                                element?.refundProductCount != "" &&
+                                        element?.orderStatus == "Delivered"
                                     ? Container(
                                         padding: EdgeInsets.only(
                                             left: 11.w,

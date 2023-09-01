@@ -594,9 +594,9 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                         )
                                       : Container(),
 
-                                  // SizedBox(
-                                  //   height: 20.h,
-                                  // ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
 
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

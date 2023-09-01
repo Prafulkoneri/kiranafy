@@ -741,7 +741,7 @@ class ProductViewController extends ChangeNotifier {
 
     Share.shareXFiles([fileForShare],
         text:
-            " Download Local Supermart now!\n Buy ${productDetails?.productName} at a discounted price's \nDownload app here :  https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
+            " Download Local Supermart now!\n Buy ${productDetails?.productName} at a discounted prices! \nDownload app here :  https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
         // "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US",
         subject:
             "hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US");
