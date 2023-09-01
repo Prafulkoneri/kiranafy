@@ -90,7 +90,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                       fontWeight: FontWeight.w500,
                                       color: Black1),
                                 )),
-                            Text("INR ${watch.orderDetails?.totalAmount}",
+                            Text("\u{20B9} ${watch.orderDetails?.totalAmount}",
                                 style: GoogleFonts.roboto(
                                   textStyle: TextStyle(
                                       fontSize: 14.sp,
@@ -148,8 +148,8 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                   child: Row(
                                     children: [
                                       PrimaryCheckBox(
-                                        value:
-                                            watch.isReturnProductSelected[index],
+                                        value: watch
+                                            .isReturnProductSelected[index],
                                         onChanged: (value) {
                                           read.onSelectingProduct(
                                               index,
@@ -162,7 +162,8 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                       ),
                                       AppNetworkImages(
                                         // '${element}',
-                                        imageUrl: "${element?.productImagePath}",
+                                        imageUrl:
+                                            "${element?.productImagePath}",
                                         // images[pagePosition],
                                         width: 44.w,
                                         height: 44.w,
@@ -183,7 +184,8 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                                 style: GoogleFonts.roboto(
                                                   textStyle: TextStyle(
                                                       fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                       color: Black1),
                                                 )),
                                             SizedBox(
@@ -221,7 +223,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                     ],
                                   ),
                                 ),
-                                Text("INR ${element?.productOfferPrice}",
+                                Text("\u{20B9} ${element?.productOfferPrice}",
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                           fontSize: 14.sp,
@@ -265,7 +267,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                       fontWeight: FontWeight.w400,
                                       color: Black1),
                                 )),
-                            Text("INR ${watch.refundTotal}",
+                            Text("\u{20B9} ${watch.refundTotal}",
                                 style: GoogleFonts.roboto(
                                   textStyle: TextStyle(
                                       fontSize: 16.sp,

@@ -1171,7 +1171,7 @@ class _MyAppState extends State<MyApp> {
                 textDirection: TextDirection.ltr,
                 child: LoadingOverlay(
                   child: MaterialApp(
-                    title: 'Local Suppermart',
+                    title: 'Local Supermart',
                     theme: ThemeData(
                       primarySwatch: Colors.blue,
                       fontFamily: 'dm_sans_regular',

@@ -11,8 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MyOrdersController extends ChangeNotifier {
   MyOrdersRepo myOrderRepo = MyOrdersRepo();
-  String? shopId = "";
-  String? orderStatus = "";
+  String shopId = "";
+  String orderStatus = "";
   MyOrdersData? myOrdersData;
   List<OrderList>? orderList;
   List<OrderedShopsList>? orderedShopsList;

@@ -1712,23 +1712,23 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                     ),
                   ),
                   //////////////
-                  watch.orderDetails?.customerCancelledStatus == "NO" &&
-                          watch.orderDetails?.shopOwnerCancelledStatus == "YES"
-                      ? Container(
-                          padding:
-                              EdgeInsets.only(left: 19.w, top: 10, right: 19.w),
-                          child: Text(
-                            "${watch.orderDetails?.shopOwnerCancelledReason}",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Colors.red,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        )
-                      : Container(),
+                  // watch.orderDetails?.customerCancelledStatus == "NO" &&
+                  //         watch.orderDetails?.shopOwnerCancelledStatus == "YES"
+                  //     ? Container(
+                  //         padding:
+                  //             EdgeInsets.only(left: 19.w, top: 10, right: 19.w),
+                  //         child: Text(
+                  //           "${watch.orderDetails?.shopOwnerCancelledReason}",
+                  //           style: GoogleFonts.dmSans(
+                  //             textStyle: TextStyle(
+                  //                 color: Colors.red,
+                  //                 // letterSpacing: .5,
+                  //                 fontSize: 14.sp,
+                  //                 fontWeight: FontWeight.w500),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : Container(),
                   ///////////
                   watch.orderDetails?.transactionId != ""
                       ? SizedBox(
