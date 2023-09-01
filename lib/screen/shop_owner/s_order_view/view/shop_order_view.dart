@@ -1757,10 +1757,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                   ),
                   // watch.orderDetails?.deliveryType == "self_pickup" &&
 
-                  watch.orderDetails?.orderStatus == "Order Refund" &&
+                  watch.orderDetails?.orderStatus == "Order Refund" &&(
                           watch.orderDetails?.shopOwnerCancelledStatus ==
                               "NO" &&
-                          watch.orderDetails?.shopOwnerCancelledStatus == "NO"
+                          watch.orderDetails?.customerCancelledStatus == "NO")
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -2429,11 +2429,11 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 : Container(),
                           ],
                         )
-                      : watch.orderDetails?.orderStatus == "Order Refund" &&
+                      : watch.orderDetails?.orderStatus == "Order Refund" &&(
                               watch.orderDetails?.shopOwnerCancelledStatus ==
-                                  "YES" &&
-                              watch.orderDetails?.shopOwnerCancelledStatus ==
-                                  "YES"
+                                  "YES" ||
+                              watch.orderDetails?.customerCancelledStatus ==
+                                  "YES")
                           ? Container(
                               padding: EdgeInsets.symmetric(horizontal: 17.w),
                               color: Color(0xffEFFDFF),
@@ -2584,8 +2584,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             )
                           : Container(),
 
-                  watch.orderDetails?.orderStatus == "Cancelled" &&
-                          watch.orderDetails?.shopOwnerCancelledReason == "No"
+                  watch.orderDetails?.orderStatus == "Cancelled"
+          // &&
+                          // watch.orderDetails?.shopOwnerCancelledReason == "No"
                       ? Container(
                           padding: EdgeInsets.only(
                               left: 15.w, top: 11.w, bottom: 45.w),

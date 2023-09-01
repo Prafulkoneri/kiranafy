@@ -38,10 +38,13 @@ class HomeScreenController extends ChangeNotifier {
   Future<void> initState(context, refresh) async {
     if (refresh) {
       placeAd.clear();
-      await getBannerImage(context);
-      await getCategoryList(context);
-      await getAllNearByShops(context);
-      await getPlaceAd(context);
+    final a=  await getBannerImage(context);
+    print("HELLO1");
+      final b=   await getCategoryList(context);
+      print("HELLO2");
+      final c=   await getAllNearByShops(context);
+      print("HELLO3");
+      final d=   await getPlaceAd(context);
     } else {
       showLoader(false);
     }
@@ -220,6 +223,7 @@ class HomeScreenController extends ChangeNotifier {
   }
 
   bool isOfferCopied = false;
+
   void onDismiss() {
     isOfferCopied = false;
     notifyListeners();
