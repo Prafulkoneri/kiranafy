@@ -474,6 +474,7 @@ class OrderSummaryController extends ChangeNotifier {
   Future<void> applyCoupon(context) async {
     showLoader(true);
     showOnPageLoader(true);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     applyCouponRepo
@@ -510,6 +511,8 @@ class OrderSummaryController extends ChangeNotifier {
         } else {
           showOnPageLoader(false);
           showLoader(false);
+          Navigator.pop(context);
+          removeCoupon(context,false);
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
@@ -544,13 +547,16 @@ class OrderSummaryController extends ChangeNotifier {
         shopId: shopId,
       );
 
-  Future<void> removeCoupon(context) async {
+  Future<void> removeCoupon(context,loading) async {
     if (couponCodeController.text == "") {
       Utils.showPrimarySnackbar(context, "No Coupon Added",
           type: SnackType.error);
       return;
     }
-    showOnPageLoader(true);
+    if(loading){
+      showOnPageLoader(true);
+    }
+
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     removeCouponRepo
@@ -578,8 +584,11 @@ class OrderSummaryController extends ChangeNotifier {
         discountPercentage = "";
         showOnPageLoader(false);
         notifyListeners();
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        if(loading){
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+        }
+
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

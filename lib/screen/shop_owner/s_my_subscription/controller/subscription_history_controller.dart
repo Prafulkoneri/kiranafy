@@ -50,6 +50,8 @@ class SubscriptionHistoryController extends ChangeNotifier {
     final iOS = IOSNotificationDetails();
     final platform = NotificationDetails(android: android, iOS: iOS);
 
+    print(savePath);
+
     await flutterLocalNotificationsPlugin.show(
         0, // notification id
         "${fileName}",
@@ -125,8 +127,16 @@ class SubscriptionHistoryController extends ChangeNotifier {
         if (Platform.isIOS) {
           dir = await getApplicationDocumentsDirectory();
         } else {
-          Directory tempDir = await getTemporaryDirectory();
-          dir = Directory(tempDir.path);
+          directory = Directory('/storage/emulated/0/Download');
+          // Put file in global download folder, if for an unknown reason it didn't exist, we fallback
+          // ignore: avoid_slow_async_io
+          if (!await directory!.exists()){
+            directory = await getExternalStorageDirectory();
+
+          }
+          dir = Directory(directory!.path);
+          // Directory tempDir = await getTemporaryDirectory();
+
         }
 
         if (dir != null) {
@@ -161,6 +171,8 @@ class SubscriptionHistoryController extends ChangeNotifier {
             return;
           }
           print(saveName);
+          print("000000");
+          print(savePath);
           _showNotification(saveName,savePath);
         }
         print("No permission to read and write.");

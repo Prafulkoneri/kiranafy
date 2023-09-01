@@ -2275,7 +2275,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   color: SplashText,
 
                                   onTap: () {
-                                    read.removeCoupon(context);
+                                    read.removeCoupon(context,true);
                                   },
                                   child: Text(
                                     "Remove",
