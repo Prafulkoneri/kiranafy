@@ -15,11 +15,13 @@ import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_orde
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/cancel_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/order_status_mode.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/remove_product_from_order.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_owner_delivered_refund_submit_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_owner_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_update_refund_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/add_remove_product_from_order_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/cancel_reason_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/order_status_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/shop_owner_delivered_refund_submit_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/shop_owner_order_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/repository/shop_update_refund_repo.dart';
 
@@ -66,6 +68,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   bool isCancelOrderErrorMsgVisible = false;
   String cancellationId = "";
   String productId = "";
+  String totalRefundAmount = "0";
   List<bool> selectedProductList = [];
   bool acceptPayment = false;
   bool rejectPayment = false;
@@ -76,6 +79,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   TextEditingController refundPayableAmount = TextEditingController();
   OrderInvoiceRepo orderInvoicerepo = OrderInvoiceRepo();
   OrderInvoiceRepo orderInvoiceRepo = OrderInvoiceRepo();
+  ShopUpdateDeliveredRefundRepo shopUpdateDeliveredRefundRepo = ShopUpdateDeliveredRefundRepo();
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -145,7 +149,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         totalAmount = orderDetails?.totalAmount ?? "";
         deliveryCharges = orderDetails?.deliveryCharges ?? "";
         totalDiscount = orderDetails?.totalDiscount ?? "";
-
+        totalRefundAmount=shopOrderViewData?.orderRefundAmount??"0";
         selectedProductList = List<bool>.filled(
             orderProductDetails?.length ?? 0, false,
             growable: true);
@@ -513,10 +517,16 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           selectedProductList.insert(index, true);
         }
 
+
         totalDiscount = result.data?.totalDiscount.toString() ?? "";
         totalAmount = result.data?.totalAmount.toString() ?? "";
         subTotal = result.data?.subTotalAmount.toString() ?? "";
         deliveryCharges = result.data?.deliveryCharges.toString() ?? "";
+
+        totalRefundAmount=result.data?.totalRefundAmount.toString()??"";
+
+
+
         LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
@@ -643,6 +653,74 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
                   ))),
           (Route<dynamic> route) => false,
         );
+        notifyListeners();
+      } else {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      LoadingOverlay.of(context).hide();
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  ShopOwnerDeliveredRefundSubmitReqModel get shopOwnerDeliveredRefundSubmitReqModel =>
+      ShopOwnerDeliveredRefundSubmitReqModel(
+        orderId: orderId,
+        shopDeliveredRefundStatus:"YES",
+        shopDeliveredPaymentType:"upi",
+        shopDeliveredPayableAmount: refundPayableAmount.text,
+        shopDeliveredTransactionId: upiIdController.text,
+      );
+
+  Future<void> shopDeliveredRefundUpdate(context) async {
+
+    print(orderId);
+    print(refundPayableAmount.text);
+    print(upiIdController.text);
+
+
+
+      if (refundPayableAmount.text == "") {
+        Utils.showPrimarySnackbar(context, "Please Enter Refundable Amount",
+            type: SnackType.error);
+        return;
+      }
+      if (!isRefundByCash && !isRefundByUpi) {
+        Utils.showPrimarySnackbar(context, "Please Select Payment Method",
+            type: SnackType.error);
+        return;
+      }
+
+    LoadingOverlay.of(context).show();
+    print("loading");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopUpdateDeliveredRefundRepo
+        .shopUpdateRefund(
+        shopOwnerDeliveredRefundSubmitReqModel, pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result =
+      ShopOwnerDeliveredRefundSubmitResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
+        refundPayableAmount.clear();
+        upiIdController.clear();
+        reasonController.clear();
+        shopOwnerOrderView(context,orderId,true);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();

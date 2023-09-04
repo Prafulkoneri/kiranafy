@@ -321,6 +321,9 @@ class Endpoint {
   static const String shopOwnerRefundUpdate =
       "${baseUrl}lsm-shop-owner-update-refund-status";
 
+  static const String shopOwnerDeliveredRefundUpdate =
+      "${baseUrl}lsm-shop-owner-deliverd-order-refund-submit";
+
   static const String shopOwnerOrderStatusChange =
       "${baseUrl}lsm-shop-owner-change-order-delivery-status";
 
@@ -425,6 +428,8 @@ class Endpoint {
       "${baseUrl}lsm-customer-submit-review-for-shop";
   static const String updateRefundStatus =
       "${baseUrl}customer-update-refund-payment-status";
+  static const String updateDeliveredRefundStatus =
+      "${baseUrl}customer-update-deliverd-refund-payment-status";
 
   static const String customerTicketList = "${baseUrl}lsm-customer-get-tickets";
 

@@ -9,6 +9,7 @@ import 'package:local_supper_market/main.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/customer_cancel_order_model.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/model/customer_delivered_refund_submit_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/get_cancel_order_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_invoice_download_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
@@ -18,6 +19,7 @@ import 'package:local_supper_market/screen/customer/delivery_view/model/review_l
 import 'package:local_supper_market/screen/customer/delivery_view/model/submit_review_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/update_refund_status_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_cancel_order_repo.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_delivery_refund_status_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_invoiec_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
@@ -87,6 +89,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   GetCustomerCancelOrderRepo getcustomerCancelOrderRepo =
       GetCustomerCancelOrderRepo();
   CustomerCancelOrderRepo customerCancelOrderRepo = CustomerCancelOrderRepo();
+  UpdateDeliveredRefundStatusRepo updateDeliveredRefundStatusRepo = UpdateDeliveredRefundStatusRepo();
 
   Future<void> initState(
     context,
@@ -164,6 +167,49 @@ class CustomerOrderViewController extends ChangeNotifier {
       log(response.body);
       final result =
           UpdateRefundStatusResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        await customerOrderView(context, orderId);
+        showLoader(false);
+        LoadingOverlay.of(context).hide();
+        if (value == "not_received") {
+          Utils.showPrimarySnackbar(context,
+              "Have send notification regarding this concern. Will connect with you shortly.",
+              type: SnackType.success);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  CustomerDeliveredRefundStatusUpdateReqModel get customerDeliveredRefundStatusUpdateReqModel =>
+      CustomerDeliveredRefundStatusUpdateReqModel(
+        orderId: orderId,
+        paymentStatus: selectedRefundStatus,
+      );
+
+  Future<void> updateDeliveredRefundStatus(value, context) async {
+    selectedRefundStatus = value;
+    LoadingOverlay.of(context).show();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    updateDeliveredRefundStatusRepo
+        .updateDeliveredRefundStatus(
+        customerDeliveredRefundStatusUpdateReqModel, pref.getString("successToken"))
+        .then((response) async {
+      log(response.body);
+      final result =
+      CustomerDeliveredRefundStatusUpdateResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         await customerOrderView(context, orderId);
         showLoader(false);

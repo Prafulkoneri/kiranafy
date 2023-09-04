@@ -38,6 +38,7 @@ class SAccountScreenController extends ChangeNotifier {
   // }
 
   Future<void> initState(context, refresh) async {
+
     if (!refresh) {
       return;
     }

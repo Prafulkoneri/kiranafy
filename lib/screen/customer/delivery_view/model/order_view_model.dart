@@ -40,6 +40,7 @@ class OrderViewData {
   ShopDetails? shopDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
+  bool ? orderRefundStatus;
 
   OrderViewData({
     required this.orderDetails,
@@ -47,6 +48,7 @@ class OrderViewData {
     required this.shopDetails,
     required this.deliveryAddressDetails,
     required this.orderProductDetails,
+    required this.orderRefundStatus,
   });
   OrderViewData.fromJson(Map<String, dynamic> json) {
     orderDetails = json['order_details'] != null
@@ -68,6 +70,7 @@ class OrderViewData {
         orderProductDetails!.add(OrderProductDetail.fromJson(v));
       });
     }
+    orderRefundStatus=json["order_refund_status"];
   }
 }
 
@@ -145,6 +148,11 @@ class OrderDetails {
   String? shopOwnerCancelledReason;
   String? customerCancelledReason;
   String? customerCancelledStatus;
+  String ? shopDeliveredRefundStatus;
+  int ? shopDeliveredPayableAmount;
+  String ? shopDeliveredPayableType;
+  String ? shopDeliveredTransactionId;
+  String ? shopDeliveredCustomerPaymentStatus;
 
   OrderDetails(
       {required this.id,
@@ -175,6 +183,11 @@ class OrderDetails {
       this.shopOwnerRefundRejectReason,
       this.deliveryType,
       this.shopOwnerRefundTransactionId,
+        required this.shopDeliveredCustomerPaymentStatus,
+        required this.shopDeliveredPayableAmount,
+        required this.shopDeliveredPayableType,
+        required this.shopDeliveredRefundStatus,
+        required this.shopDeliveredTransactionId,
       this.customerCancelledStatus});
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -206,6 +219,11 @@ class OrderDetails {
     shopOwnerCancelledReason = json["shop_owner_order_cancelled_reason"];
     customerCancelledReason = json["customer_order_cancelled_reason"];
     customerCancelledStatus = json["customer_cancelled_status"];
+    shopDeliveredCustomerPaymentStatus=json["shop_de_customer_payment_status"];
+    shopDeliveredPayableAmount=json["shop_de_payable_amount"];
+    shopDeliveredPayableType=json["shop_de_payment_type"];
+    shopDeliveredRefundStatus=json["shop_de_refund_status"];
+    shopDeliveredTransactionId=json["shop_de_transaction_id"];
   }
 }
 
