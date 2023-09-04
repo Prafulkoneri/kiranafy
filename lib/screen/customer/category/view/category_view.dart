@@ -842,7 +842,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                         ""
                                                                     ? Image
                                                                         .asset(
-                                                                        'assets/images/sprite.png',
+                                                                        'assets/images/profile_image.png',
                                                                         width:
                                                                             39.w,
                                                                         height:

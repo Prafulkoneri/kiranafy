@@ -2,8 +2,8 @@
 
 class SelecteProductsRequestModel {
   String? category_id;
-  String ? limit;
-  String ? offset;
+  String? limit;
+  String? offset;
 
   SelecteProductsRequestModel({
     this.category_id,
@@ -72,14 +72,16 @@ class Data {
 
 class ProductsFromAdmin {
   int? id;
+  int? productId;
   String? productName;
   String? productType;
   String? productImagePath;
-  int ? unitCount;
+  int? unitCount;
   List<UnitDetail>? unitDetails;
 
   ProductsFromAdmin({
     required this.id,
+    required this.productId,
     required this.productName,
     required this.productType,
     required this.productImagePath,
@@ -89,6 +91,7 @@ class ProductsFromAdmin {
 
   ProductsFromAdmin.fromJson(Map<String, dynamic> json) {
     id = json["id"];
+    productId = json["product_id"];
     productName = json["product_name"];
     productType = json["product_type"];
     productImagePath = json['product_image_path'];
@@ -107,17 +110,20 @@ class UnitDetail {
   String? weightAndUnit;
   int? offerPrice;
   int? mrpPrice;
+  String? status;
 
   UnitDetail({
     required this.weightAndUnit,
     required this.offerPrice,
     required this.mrpPrice,
+    required this.status,
   });
 
   UnitDetail.fromJson(Map<String, dynamic> json) {
     weightAndUnit = json["weight_and_unit"];
     offerPrice = json["offer_price"];
     mrpPrice = json["mrp_price"];
+    status = json["status"];
   }
 }
 

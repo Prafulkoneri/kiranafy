@@ -160,9 +160,10 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           }
         }
         print("selectedProductList${selectedProductList}");
-        if(orderDetails?.shopOwnerRefundStatus=="pending"){
-          if(orderDetails?.customerCancelledStatus=="YES"||orderDetails?.shopOwnerCancelledStatus=="YES"){
-            acceptPayment=true;
+        if (orderDetails?.shopOwnerRefundStatus == "pending") {
+          if (orderDetails?.customerCancelledStatus == "YES" ||
+              orderDetails?.shopOwnerCancelledStatus == "YES") {
+            acceptPayment = true;
           }
         }
 
@@ -581,6 +582,21 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
 
   Future<void> shopRefundUpdate(context) async {
     if (acceptPayment) {
+      if (refundPayableAmount.text == "") {
+        Utils.showPrimarySnackbar(context, "Please Enter Refundable Amount",
+            type: SnackType.error);
+        return;
+      }
+      //   if (!isQrCodeSeleted & !isSelectedPaymentUpi) {
+      //   Utils.showPrimarySnackbar(context, "Please Select Mode Of Payment",
+      //       type: SnackType.error);
+      //   return;
+      // }
+      if (upiIdController.text == "") {
+        Utils.showPrimarySnackbar(context, "Please Enter Transaction ID",
+            type: SnackType.error);
+        return;
+      }
       if (refundPayableAmount.text == "") {
         Utils.showPrimarySnackbar(context, "Please Enter Refundable Amount",
             type: SnackType.error);

@@ -2524,6 +2524,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 ),
                                               ],
                                             ),
+                                            /////////////////////////////////////
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -2544,6 +2545,31 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       watch.refundPayableAmount,
                                                   hintText:
                                                       "Type Refund Amount",
+                                                ),
+                                                SizedBox(
+                                                  height: 16.w,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    PrimaryCheckBox(
+                                                      onChanged: (value) {
+                                                        read.onRefundByCash(
+                                                            value);
+                                                      },
+                                                      value:
+                                                          watch.isRefundByCash,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 6.w,
+                                                    ),
+                                                    Text(
+                                                      "Refund Payment Given by Cash",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14.sp),
+                                                    ),
+                                                  ],
                                                 ),
                                                 SizedBox(
                                                   height: 16.w,
@@ -2589,6 +2615,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 ),
                                               ],
                                             ),
+                                            //////////////
                                             SizedBox(
                                               height: 27.w,
                                             ),
@@ -2856,9 +2883,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             : Container(),
                               ],
                             )
-                          : Container(
-                              // (child: Text("hello")
-                              ),
+                          : Container(),
 
                   watch.orderDetails?.orderStatus == "Cancelled"
                       // &&

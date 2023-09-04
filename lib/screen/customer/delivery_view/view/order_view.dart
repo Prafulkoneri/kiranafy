@@ -1832,7 +1832,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "Return Request sent",
+                                            "Refund Request sent",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 color: Colors.black,
@@ -1936,11 +1936,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                       watch.orderDetails
                                                                   ?.refundOrderStatus ==
                                                               "pending"
-                                                          ? "INR ${watch.orderDetails?.customerRefundAmount}"
+                                                          ? "\u{20B9} ${watch.orderDetails?.customerRefundAmount}"
                                                           : watch.orderDetails
                                                                       ?.refundOrderStatus ==
                                                                   "accept"
-                                                              ? "INR ${watch.orderDetails?.shopOwnerRefundPayableAmount}"
+                                                              ? "\u{20B9} ${watch.orderDetails?.shopOwnerRefundPayableAmount}"
                                                               : "",
                                                       style: TextStyle(
                                                           fontWeight:
