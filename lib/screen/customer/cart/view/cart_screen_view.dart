@@ -195,75 +195,71 @@ class _CartScreenViewState extends State<CartScreenView> {
                             textStyle: TextStyle(
                                 color: Black1,
                                 letterSpacing: .5,
-                                fontSize: 18.sp,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 20.w, right: 20.w, top: 15.w, bottom: 50.w),
-                          child: Column(
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Looks like you have not added anything to your",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black1,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                              Text(
-                                "cart. Go ahead explore top categories",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black1,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ],
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Text(
+                          "Looks like you have not added anything to your",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black1,
+                                // letterSpacing: .5,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        // SizedBox(
+                        //   height: 5.h,
+                        // ),
+                        Text(
+                          "cart. Go ahead explore top categories",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black1,
+                                letterSpacing: .5,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
                           ),
                         ),
                         SizedBox(
-                          width: 160.w, // <-- Your width
-                          height: 45.h,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: SplashText,
-                              // onPrimary: Colors.white,
-                              // shadowColor: Colors.greenAccent,
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(14.0)),
-                              minimumSize: const Size(100, 40), //////// HERE
-                            ),
-                            // style: style,
-                            onPressed: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainScreenView(
-                                        index: 2,
-                                        screenName: AllNearShopsView(
-                                          isSearchFocus: false,
-                                          refreshPage: true,
-                                        ))),
-                                (Route<dynamic> route) => false,
-                              );
-                            },
-                            child: Text(
-                              'Browse Products',
-                              style: GoogleFonts.dmSans(
-                                textStyle: const TextStyle(
-                                    // color: SplashTex
-                                    letterSpacing: .5,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
-                              ),
+                          height: 5.h,
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: SplashText,
+                            // onPrimary: Colors.white,
+                            // shadowColor: Colors.greenAccent,
+                            elevation: 3,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14.0)),
+                            minimumSize: const Size(100, 40), //////// HERE
+                          ),
+                          // style: style,
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainScreenView(
+                                      index: 2,
+                                      screenName: AllNearShopsView(
+                                        isSearchFocus: false,
+                                        refreshPage: true,
+                                      ))),
+                              (Route<dynamic> route) => false,
+                            );
+                          },
+                          child: Text(
+                            'Browse Products',
+                            style: GoogleFonts.dmSans(
+                              textStyle: const TextStyle(
+                                  // color: SplashTex
+                                  letterSpacing: .5,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),

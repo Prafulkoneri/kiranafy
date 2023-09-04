@@ -33,6 +33,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'dart:typed_data';
 import 'dart:io';
+
 class SMySubscriptionView extends StatefulWidget {
   final String? screenName;
   const SMySubscriptionView({super.key, required this.screenName});
@@ -52,8 +53,6 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
   String? file;
   String fileurl =
       "https://localsupermart.com/testing/storage/subscription_pdf_invoice/LSMSUBS000054-2023-08-0810:50:38.pdf";
-
-
 
   void download(String url) async {
     final status = await Permission.storage.request();
@@ -82,11 +81,10 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
     var response = httpClient.send(request);
     String dir = (await getApplicationDocumentsDirectory()).path;
 
-    List<List<int>> chunks =[];
+    List<List<int>> chunks = [];
     int downloaded = 0;
 
     response.asStream().listen((http.StreamedResponse r) {
-
       r.stream.listen((List<int> chunk) {
         // Display percentage of completion
         // debugPrint('downloadPercentage: ${downloaded / r.contentLength * 100}');
@@ -99,7 +97,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
 
         // Save the file
         File file = new File('$dir/$filename');
-        final Uint8List bytes = Uint8List(r.contentLength??0);
+        final Uint8List bytes = Uint8List(r.contentLength ?? 0);
         int offset = 0;
         for (List<int> chunk in chunks) {
           bytes.setRange(offset, offset + chunk.length, chunk);
@@ -116,7 +114,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
     if (!mounted) return;
   }
 
-  String path="";
+  String path = "";
 
   void _setPath() async {
     Directory _path = await getApplicationDocumentsDirectory();
@@ -903,9 +901,6 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               read.subscriptionInvoice(context,
                                   watch.subscriptionHistory?[i].id.toString());
 
-
-
-
                               // Map<Permission, PermissionStatus> statuses =
                               //     await [
                               //   Permission.storage,
@@ -946,7 +941,6 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               //
                               //
 
-
                               // _showProgressNotification();
                               // Map<String, String> requestHeaders = {
                               //   // 'Authorization': 'Bearer ' + http.cookie,
@@ -963,7 +957,6 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               //   openFileFromNotification:
                               //       true, // click on notification to open downloaded file (for Android)
                               // );
-
 
                               // download(fileurl);
                             },
