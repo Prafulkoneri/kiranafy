@@ -79,7 +79,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   TextEditingController refundPayableAmount = TextEditingController();
   OrderInvoiceRepo orderInvoicerepo = OrderInvoiceRepo();
   OrderInvoiceRepo orderInvoiceRepo = OrderInvoiceRepo();
-  ShopUpdateDeliveredRefundRepo shopUpdateDeliveredRefundRepo = ShopUpdateDeliveredRefundRepo();
+  ShopUpdateDeliveredRefundRepo shopUpdateDeliveredRefundRepo =
+      ShopUpdateDeliveredRefundRepo();
 
   ShopOrderViewRequestModel get shopOrderViewReqModel =>
       ShopOrderViewRequestModel(orderId: orderId.toString());
@@ -149,7 +150,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         totalAmount = orderDetails?.totalAmount ?? "";
         deliveryCharges = orderDetails?.deliveryCharges ?? "";
         totalDiscount = orderDetails?.totalDiscount ?? "";
-        totalRefundAmount=shopOrderViewData?.orderRefundAmount??"0";
+        totalRefundAmount = shopOrderViewData?.orderRefundAmount ?? "0";
         selectedProductList = List<bool>.filled(
             orderProductDetails?.length ?? 0, false,
             growable: true);
@@ -517,15 +518,12 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           selectedProductList.insert(index, true);
         }
 
-
         totalDiscount = result.data?.totalDiscount.toString() ?? "";
         totalAmount = result.data?.totalAmount.toString() ?? "";
         subTotal = result.data?.subTotalAmount.toString() ?? "";
         deliveryCharges = result.data?.deliveryCharges.toString() ?? "";
 
-        totalRefundAmount=result.data?.totalRefundAmount.toString()??"";
-
-
+        totalRefundAmount = result.data?.totalRefundAmount.toString() ?? "";
 
         LoadingOverlay.of(context).hide();
         notifyListeners();
@@ -675,44 +673,42 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
     );
   }
 
-  ShopOwnerDeliveredRefundSubmitReqModel get shopOwnerDeliveredRefundSubmitReqModel =>
-      ShopOwnerDeliveredRefundSubmitReqModel(
-        orderId: orderId,
-        shopDeliveredRefundStatus:"YES",
-        shopDeliveredPaymentType:"upi",
-        shopDeliveredPayableAmount: refundPayableAmount.text,
-        shopDeliveredTransactionId: upiIdController.text,
-      );
+  ShopOwnerDeliveredRefundSubmitReqModel
+      get shopOwnerDeliveredRefundSubmitReqModel =>
+          ShopOwnerDeliveredRefundSubmitReqModel(
+            orderId: orderId,
+            shopDeliveredRefundStatus: "YES",
+            shopDeliveredPaymentType: "upi",
+            shopDeliveredPayableAmount: refundPayableAmount.text,
+            shopDeliveredTransactionId: upiIdController.text,
+          );
 
   Future<void> shopDeliveredRefundUpdate(context) async {
-
     print(orderId);
     print(refundPayableAmount.text);
     print(upiIdController.text);
 
-
-
-      if (refundPayableAmount.text == "") {
-        Utils.showPrimarySnackbar(context, "Please Enter Refundable Amount",
-            type: SnackType.error);
-        return;
-      }
-      if (!isRefundByCash && !isRefundByUpi) {
-        Utils.showPrimarySnackbar(context, "Please Select Payment Method",
-            type: SnackType.error);
-        return;
-      }
+    if (refundPayableAmount.text == "") {
+      Utils.showPrimarySnackbar(context, "Please Enter Refundable Amount",
+          type: SnackType.error);
+      return;
+    }
+    if (!isRefundByCash && !isRefundByUpi) {
+      Utils.showPrimarySnackbar(context, "Please Select Payment Method",
+          type: SnackType.error);
+      return;
+    }
 
     LoadingOverlay.of(context).show();
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopUpdateDeliveredRefundRepo
-        .shopUpdateRefund(
-        shopOwnerDeliveredRefundSubmitReqModel, pref.getString("successToken"))
+        .shopUpdateRefund(shopOwnerDeliveredRefundSubmitReqModel,
+            pref.getString("successToken"))
         .then((response) {
       log(response.body);
-      final result =
-      ShopOwnerDeliveredRefundSubmitResModel.fromJson(jsonDecode(response.body));
+      final result = ShopOwnerDeliveredRefundSubmitResModel.fromJson(
+          jsonDecode(response.body));
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
@@ -720,7 +716,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         refundPayableAmount.clear();
         upiIdController.clear();
         reasonController.clear();
-        shopOwnerOrderView(context,orderId,true);
+        shopOwnerOrderView(context, orderId, true);
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();
