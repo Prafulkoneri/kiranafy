@@ -941,45 +941,7 @@ class ReceivedNotification {
   final String payload;
 }
 
-// Future<void> initNotification(context) async {
-// // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-//   const AndroidInitializationSettings initializationSettingsAndroid =
-//       AndroidInitializationSettings('mipmap/ic_launcher');
-//   final IOSInitializationSettings initializationSettingsIOS =
-//       IOSInitializationSettings();
-//   final MacOSInitializationSettings initializationSettingsMacOS =
-//       MacOSInitializationSettings();
-//   final InitializationSettings initializationSettings = InitializationSettings(
-//       android: initializationSettingsAndroid,
-//       iOS: initializationSettingsIOS,
-//       macOS: initializationSettingsMacOS);
-//   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-//       onSelectNotification: (String? payload) {
-//     print("nnnnnnnnnnnnnnnnnn");
-
-//     print(payload);
-//     var res = jsonDecode(payload.toString());
-//     print(res["data"]["user_type"]);
-//     if (res["data"] == "shop_owner") {
-//       context
-//           .read<SMainScreenController>()
-//           .onOrderTypeNotification(context, res["data"]["redirect_id"]);
-//     }
-//     if (res["data"] == "customer") {
-//       context
-//           .read<MainScreenController>()
-//           .onOrderTypeNotification(context, res["data"]["redirect_id"]);
-//     }
-//     print("lllllllllllllllllllll");
-//     if (payload != null) OpenFile.open(payload);
-//   });
-// }
-
-///////////
-// FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-//     FlutterLocalNotificationsPlugin();
-
-Future<void> initNotification() async {
+Future<void> initNotification(context) async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
@@ -993,11 +955,25 @@ Future<void> initNotification() async {
       macOS: initializationSettingsMacOS);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) {
+    print("nnnnnnnnnnnnnnnnnn");
+
+    print(payload);
+    var res = jsonDecode(payload.toString());
+    print(res["data"]["user_type"]);
+    if (res["data"] == "shop_owner") {
+      context
+          .read<SMainScreenController>()
+          .onOrderTypeNotification(context, res["data"]["redirect_id"]);
+    }
+    if (res["data"] == "customer") {
+      context
+          .read<MainScreenController>()
+          .onOrderTypeNotification(context, res["data"]["redirect_id"]);
+    }
+    print("lllllllllllllllllllll");
     if (payload != null) OpenFile.open(payload);
   });
 }
-
-///
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -1146,35 +1122,20 @@ class _MyAppState extends State<MyApp> {
     // fireBaseApi();
   }
 
-  // Future<void> _showNotification(fileName, savePath) async {
-  //   final android = AndroidNotificationDetails('0', 'Adun Accounts',
-  //       channelDescription: 'channel description',
-  //       importance: Importance.max,
-  //       icon: '');
-  //   final iOS = IOSNotificationDetails();
-  //   final platform = NotificationDetails(android: android, iOS: iOS);
-
-  //   await flutterLocalNotificationsPlugin.show(
-  //       0, // notification id
-  //       "${fileName}",
-  //       'Download complete.',
-  //       platform,
-  //       payload: '$savePath');
-  // }
   Future<void> _showNotification(fileName, savePath) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
-        // priority: Priority.high,
         importance: Importance.max,
         icon: '');
     final iOS = IOSNotificationDetails();
     final platform = NotificationDetails(android: android, iOS: iOS);
 
-    flutterLocalNotificationsPlugin.show(
+    await flutterLocalNotificationsPlugin.show(
         0, // notification id
-        fileName,
+        "${fileName}",
         'Download complete.',
-        platform);
+        platform,
+        payload: '$savePath');
   }
 
   void fireBaseApi() async {
