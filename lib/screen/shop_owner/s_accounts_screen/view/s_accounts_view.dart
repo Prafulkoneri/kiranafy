@@ -139,19 +139,33 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                         ),
                                         GestureDetector(
                                           onTap: () {
-                                            Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SMainScreenView(
-                                                        index: 4,
-                                                        screenName:
-                                                            SEditProfileView(
-                                                          fromDashBoard: false,
-                                                        ),
-                                                      )),
-                                              (Route<dynamic> route) => false,
-                                            );
+                                            // Navigator.pushAndRemoveUntil(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           SMainScreenView(
+                                            //             index: 4,
+                                            //             screenName:
+                                            //                 SEditProfileView(
+                                            //               fromDashBoard: false,
+                                            //             ),
+                                            //           )),
+                                            //   (Route<dynamic> route) => false,
+                                            // );
+                                            Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>SEditProfileView(
+                                              fromDashBoard: false,
+                                            ), ));
+                                            // Navigator.pushAndRemoveUntil(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //     builder: (context) =>
+                                            //     SMainScreenView(
+                                            //       index: 4,
+                                            //       screenName:
+                                            //       SEditProfileView(
+                                            //         fromDashBoard: false,
+                                            //       ),
+                                            //     ));
                                             // Navigator.push(©
                                             //     context,
                                             //     MaterialPageRoute(
