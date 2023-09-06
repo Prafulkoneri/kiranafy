@@ -9784,7 +9784,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
 
 
 
-                  watch.orderDetails?.orderStatus != "Delivered" &&  watch.orderDetails?.orderStatus != "Order Refund" &&
+                  (watch.orderDetails?.orderStatus != "Delivered" &&  watch.orderDetails?.orderStatus != "Order Refund") &&
                           watch.shopOrderViewData?.orderRefundStatus == true &&
                           watch.totalRefundAmount != "0"
                       ? Container(

@@ -293,6 +293,7 @@ class FireBaseApi {
   }
 
   Future<void> _showNotification() async {
+    print("lets gooo");
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,

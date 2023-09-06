@@ -1,5 +1,7 @@
 import 'dart:io';
 
+
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -21,6 +23,7 @@ import 'package:local_supper_market/screen/customer/favourites/controller/favour
 import 'package:local_supper_market/screen/customer/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
@@ -100,13 +103,13 @@ import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
 import 'screen/shop_owner/shop_review/controller/shop_review_controller.dart';
-
+import 'package:provider/provider.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("handled background message");
 }
 
 final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-final navigatorKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 String? selectedNotificationPayload;
 
 class ReceivedNotification {
@@ -138,7 +141,10 @@ Future<void> initNotification() async {
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) {
         print(payload);
-        if (payload != null) OpenFile.open(payload);
+        print("hello allllllll");
+
+     // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
+     if (payload != null) OpenFile.open(payload);
       });
 }
 
