@@ -224,7 +224,7 @@ Future<void> handleBackGroundMessage(RemoteMessage message) async {
   print("Body : ${message.notification?.body}");
   print("Payload : ${message.data}");
 }
-/////////////CURRENT///////////////////
+
 // Future<void> handleForegroundMessage(RemoteMessage message) async {
 //   print("Title : ${message.notification?.title}");
 //   print("Body : ${message.notification?.body}");

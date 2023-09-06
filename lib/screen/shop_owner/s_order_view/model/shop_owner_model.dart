@@ -19,19 +19,16 @@ class ShopOrderViewResModel {
   String? message;
   ShopOrderViewData? shopOrderViewData;
 
-
   ShopOrderViewResModel({
     required this.status,
     required this.message,
     required this.shopOrderViewData,
-
   });
   ShopOrderViewResModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     shopOrderViewData =
         json['data'] != null ? ShopOrderViewData.fromJson(json['data']) : null;
-
   }
 }
 
@@ -40,9 +37,8 @@ class ShopOrderViewData {
   CouponDetails? couponDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
-  bool ? orderRefundStatus;
-  String ? orderRefundAmount;
-
+  bool? orderRefundStatus;
+  String? orderRefundAmount;
 
   ShopOrderViewData({
     required this.orderDetails,
@@ -68,8 +64,8 @@ class ShopOrderViewData {
         orderProductDetails!.add(OrderProductDetail.fromJson(v));
       });
     }
-    orderRefundStatus=json["order_refund_status"];
-    orderRefundAmount=json["order_refund_amount"];
+    orderRefundStatus = json["order_refund_status"];
+    orderRefundAmount = json["order_refund_amount"];
   }
 }
 
@@ -142,11 +138,12 @@ class OrderDetails {
   String? customerCancelledReason;
   String? shopOwnerCancelledStatus;
   String? customerCancelledStatus;
-  String ? shopDeliveredRefundStatus;
-  int ? shopDeliveredPayableAmount;
-  String ? shopDeliveredPayableType;
-  String ? shopDeliveredTransactionId;
-  String ? shopDeliveredCustomerPaymentStatus;
+  String? shopDeliveredRefundStatus;
+  int? shopDeliveredPayableAmount;
+  String? shopDeliveredPayableType;
+  String? shopDeliveredTransactionId;
+  String? shopDeliveredCustomerPaymentStatus;
+  int? shopOwnerRefunPaybelAmount;
 
   OrderDetails({
     required this.id,
@@ -179,6 +176,7 @@ class OrderDetails {
     required this.shopDeliveredPayableType,
     required this.shopDeliveredRefundStatus,
     required this.shopDeliveredTransactionId,
+    required this.shopOwnerRefunPaybelAmount,
   });
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -206,11 +204,13 @@ class OrderDetails {
     customerCancelledReason = json["customer_order_cancelled_reason"];
     shopOwnerCancelledStatus = json["shop_owner_cancelled_status"];
     customerCancelledStatus = json["customer_cancelled_status"];
-    shopDeliveredCustomerPaymentStatus=json["shop_de_customer_payment_status"];
-    shopDeliveredPayableAmount=json["shop_de_payable_amount"];
-    shopDeliveredPayableType=json["shop_de_payment_type"];
-    shopDeliveredRefundStatus=json["shop_de_refund_status"];
-    shopDeliveredTransactionId=json["shop_de_transaction_id"];
+    shopDeliveredCustomerPaymentStatus =
+        json["shop_de_customer_payment_status"];
+    shopDeliveredPayableAmount = json["shop_de_payable_amount"];
+    shopDeliveredPayableType = json["shop_de_payment_type"];
+    shopDeliveredRefundStatus = json["shop_de_refund_status"];
+    shopDeliveredTransactionId = json["shop_de_transaction_id"];
+    shopOwnerRefunPaybelAmount = json["shop_owner_refund_payable_amount"];
   }
 }
 
