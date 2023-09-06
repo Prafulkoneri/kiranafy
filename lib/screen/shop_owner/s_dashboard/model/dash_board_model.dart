@@ -34,10 +34,10 @@ class Data {
   int? cancelledOrdersCount;
   int? totalBusiness;
   int? cancelledAmount;
-  int ? acceptRefundOrdersCount;
-  int ? pendingRefundOrdersCount;
-  int ? totalRefund;
-  int ? cancelledRefundAmount;
+  int? acceptRefundOrdersCount;
+  int? pendingRefundOrdersCount;
+  int? totalRefund;
+  int? cancelledRefundAmount;
   List<BannerImageData>? bannerImages;
 
   Data({
@@ -82,7 +82,7 @@ class Data {
     deliveredOrdersCount = json["delivered_orders_count"];
     cancelledOrdersCount = json["cancelled_orders_count"];
     totalBusiness = json["total_business"];
-    cancelledAmount = json["cancelled_amount"];
+    // cancelledAmount = json["cancelled_amount"];
     pendingRefundOrdersCount = json["pending_refund_orders_count"];
     acceptRefundOrdersCount = json["accept_refund_orders_count"];
     totalRefund = json["total_refund"];
@@ -99,7 +99,7 @@ class Data {
 class BannerImageData {
   String? imagesPath;
   String? imageName;
-  String ? rating;
+  String? rating;
 
   BannerImageData({
     this.imageName,

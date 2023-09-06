@@ -2275,7 +2275,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   color: SplashText,
 
                                   onTap: () {
-                                    read.removeCoupon(context,true);
+                                    read.removeCoupon(context, true);
                                   },
                                   child: Text(
                                     "Remove",
@@ -2489,6 +2489,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 height: 20.h,
                                                                               ),
                                                                       ],
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          5.h,
                                                                     ),
                                                                     Row(
                                                                       mainAxisAlignment:

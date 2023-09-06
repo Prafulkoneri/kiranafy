@@ -687,16 +687,16 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                           ),
                                         )
                                       : Container(),
-                                  // Text(
-                                  //   "Extra 18% GST",
-                                  //   style: GoogleFonts.dmSans(
-                                  //     textStyle: TextStyle(
-                                  //         color: Colors.white,
-                                  //         // letterSpacing: .5,
-                                  //         fontSize: 10.sp,
-                                  //         fontWeight: FontWeight.w500),
-                                  //   ),
-                                  // ),
+                                  Text(
+                                    "Inclusive of 18% GST",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Container(

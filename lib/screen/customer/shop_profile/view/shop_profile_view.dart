@@ -694,6 +694,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                 : Container(),
                                                           ],
                                                         ),
+                                                        SizedBox(
+                                                          height: 5.h,
+                                                        ),
                                                         Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -1059,6 +1062,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                     height:
                                                                         20.h,
                                                                   ),
+                                                            SizedBox(
+                                                              height: 5.h,
+                                                            ),
                                                             Row(
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
