@@ -60,7 +60,8 @@ class SSelectedProductsController extends ChangeNotifier {
   //////////////Select product
   SelecteProductsRequestModel get selecteProductRequestModel =>
       SelecteProductsRequestModel(
-          category_id: categoryId, offset: offset.toString(), limit: "5");
+        category_id: categoryId,
+      );
 
   DeleteAdminProductReqModel get deleteAdminProductReqModel =>
       DeleteAdminProductReqModel(productId: productId);

@@ -1977,24 +1977,40 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 35.w,
+                                        height: 15.w,
                                       ),
                                       Text("Reason",
                                           style: TextStyle(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w700)),
                                       SizedBox(
-                                        height: 2.w,
+                                        height: 5.w,
                                       ),
+                                      // Text(
+                                      //   "${watch.orderDetails?.reason}",
+                                      //   style: TextStyle(
+                                      //     fontWeight: FontWeight.w400,
+                                      //     fontSize: 14.sp,
+                                      //   ),
+                                      // ),
                                       Text(
-                                        "${watch.orderDetails?.reason}",
+                                        watch.orderDetails
+                                                    ?.customerCancelledReason ==
+                                                ""
+                                            ? watch.orderDetails
+                                                    ?.shopOwnerCancelledReason
+                                                    .toString() ??
+                                                ""
+                                            : watch.orderDetails
+                                                    ?.customerCancelledReason
+                                                    .toString() ??
+                                                "",
                                         style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14.sp,
-                                        ),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16.sp),
                                       ),
                                       SizedBox(
-                                        height: 31.w,
+                                        height: 10.w,
                                       ),
                                       watch.orderDetails?.refundPaymentStatus ==
                                                   "not_received" &&
@@ -2162,231 +2178,254 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   //     "0"),
                                   )
                               : Container(),
-                         watch.orderDetails?.shopDeliveredRefundStatus=="YES"&&watch.orderData?.orderRefundStatus==true? Container(
-                            padding:
-                            EdgeInsets.symmetric(horizontal: 17.w),
-                            color:
-                            watch.orderDetails?.refundOrderStatus ==
-                                "reject"
-                                ? Color(0xffFFE8E8)
-                                : Color(0xffEFFDFF),
-                            child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 15.w,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Refund Amount",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.black,
-                                          fontSize: 18.sp),
-                                    ),
-                                    Container(
-                                      height: 22.w,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(5.w),
-                                          border: Border.all(
-                                            // color: Color(0xff115B7A)
-                                              color: watch.orderDetails
-                                                  ?.shopDeliveredCustomerPaymentStatus ==
-                                                  "received"
-                                                  ? Colors.green
-                                                  : Color(0xff115B7A))),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 12.w),
-                                      child: Center(
-                                          child: Text(
-                                            watch.orderDetails?.shopDeliveredRefundStatus=="YES"&&watch.orderDetails?.shopDeliveredCustomerPaymentStatus=="not_received"?
-                                            "Shop Refunded" :watch.orderDetails?.shopDeliveredRefundStatus=="YES"&&watch.orderDetails?.shopDeliveredCustomerPaymentStatus=="received"?"Payment Received":"Payment Not Recieved",
+                          watch.orderDetails?.shopDeliveredRefundStatus ==
+                                      "YES" &&
+                                  watch.orderData?.orderRefundStatus == true
+                              ? Container(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 17.w),
+                                  color:
+                                      watch.orderDetails?.refundOrderStatus ==
+                                              "reject"
+                                          ? Color(0xffFFE8E8)
+                                          : Color(0xffEFFDFF),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 15.w,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Refund Amount",
                                             style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: watch.orderDetails
-                                                    ?.shopDeliveredCustomerPaymentStatus ==
-                                                    "received"
-                                                    ? Colors.green
-                                                    : Color(0xff115B7A)),
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black,
+                                                fontSize: 18.sp),
+                                          ),
+                                          Container(
+                                            height: 22.w,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.w),
+                                                border: Border.all(
+                                                    // color: Color(0xff115B7A)
+                                                    color: watch.orderDetails
+                                                                ?.shopDeliveredCustomerPaymentStatus ==
+                                                            "received"
+                                                        ? Colors.green
+                                                        : Color(0xff115B7A))),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 12.w),
+                                            child: Center(
+                                                child: Text(
+                                              watch.orderDetails
+                                                              ?.shopDeliveredRefundStatus ==
+                                                          "YES" &&
+                                                      watch.orderDetails
+                                                              ?.shopDeliveredCustomerPaymentStatus ==
+                                                          "not_received"
+                                                  ? "Shop Refunded"
+                                                  : watch.orderDetails
+                                                                  ?.shopDeliveredRefundStatus ==
+                                                              "YES" &&
+                                                          watch.orderDetails
+                                                                  ?.shopDeliveredCustomerPaymentStatus ==
+                                                              "received"
+                                                      ? "Payment Received"
+                                                      : "Payment Not Recieved",
+                                              style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: watch.orderDetails
+                                                              ?.shopDeliveredCustomerPaymentStatus ==
+                                                          "received"
+                                                      ? Colors.green
+                                                      : Color(0xff115B7A)),
+                                            )),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 13.w,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "0 Products",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 18.sp),
+                                              ),
+                                              SizedBox(
+                                                height: 19.w,
+                                              ),
+                                              Text(
+                                                "INR ${watch.orderDetails?.shopDeliveredPayableAmount ?? "0"}",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 18.sp),
+                                              ),
+                                            ],
+                                          ),
+                                          watch.orderDetails
+                                                          ?.shopDeliveredRefundStatus ==
+                                                      "YES" &&
+                                                  watch.orderDetails
+                                                          ?.shopDeliveredCustomerPaymentStatus ==
+                                                      "received"
+                                              ? Column(
+                                                  children: [
+                                                    Text(watch.orderDetails
+                                                            ?.refundDatetime ??
+                                                        ""),
+                                                    SizedBox(
+                                                      height: 8.w,
+                                                    ),
+                                                    Text(
+                                                      "Transaction ID : ${watch.orderDetails?.shopDeliveredTransactionId}",
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Black1),
+                                                    )
+                                                  ],
+                                                )
+                                              : Container(),
+                                        ],
+                                      ),
+                                      // SizedBox(
+                                      //   height: 35.w,
+                                      // ),
+                                      // Text("Reason",
+                                      //     style: TextStyle(
+                                      //         fontSize: 14.sp,
+                                      //         fontWeight: FontWeight.w700)),
+                                      // SizedBox(
+                                      //   height: 2.w,
+                                      // ),
+                                      // Text(
+                                      //   "${watch.orderDetails?.reason}",
+                                      //   style: TextStyle(
+                                      //     fontWeight: FontWeight.w400,
+                                      //     fontSize: 14.sp,
+                                      //   ),
+                                      // ),
+                                      SizedBox(
+                                        height: 31.w,
+                                      ),
+                                      watch.orderDetails
+                                                  ?.shopDeliveredRefundStatus ==
+                                              "YES"
+                                          ? Row(
+                                              children: [
+                                                Expanded(
+                                                    child: PrimaryButton(
+                                                  color: Color(0xff39C19D),
+                                                  onTap: () {
+                                                    read.updateDeliveredRefundStatus(
+                                                        "received", context);
+                                                  },
+                                                  text: "Yes Received",
+                                                )),
+                                                SizedBox(width: 12.w),
+                                                Expanded(
+                                                    child: PrimaryButton(
+                                                  color: Color(0xffFF6258),
+                                                  onTap: () {
+                                                    read.updateDeliveredRefundStatus(
+                                                        "not_received",
+                                                        context);
+                                                  },
+                                                  text: "Not Received",
+                                                )),
+                                              ],
+                                            )
+                                          : Container(),
+                                      SizedBox(
+                                        height: 31.w,
+                                      ),
+                                      Text(
+                                        "Note",
+                                        style: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      SizedBox(
+                                        height: 5.w,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(width: 3.w),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 5.w),
+                                            height: 4.w,
+                                            width: 4.w,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black,
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 7.w,
+                                          ),
+                                          Flexible(
+                                              child: Text(
+                                            "Please collect your refund amount from the shop owner",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14.sp),
                                           )),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 13.w,
-                                ),
-                                Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.end,
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text("0 Products",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 18.sp),
-                                        ),
-                                        SizedBox(
-                                          height: 19.w,
-                                        ),
-                                         Text("INR ${watch.orderDetails?.shopDeliveredPayableAmount??"0"}",
-                                          style: TextStyle(
-                                              fontWeight:
-                                              FontWeight.w700,
-                                              fontSize: 18.sp),
-                                        ),
-                                      ],
-                                    ),
-                                    watch.orderDetails?.shopDeliveredRefundStatus=="YES"&&watch.orderDetails?.shopDeliveredCustomerPaymentStatus=="received"
-                                        ? Column(
-                                      children: [
-                                        Text(watch.orderDetails
-                                            ?.refundDatetime ??
-                                            ""),
-                                        SizedBox(
-                                          height: 8.w,
-                                        ),
-                                        Text(
-                                          "Transaction ID : ${watch.orderDetails?.shopDeliveredTransactionId}",
-                                          style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight:
-                                              FontWeight.w400,
-                                              color: Black1),
-                                        )
-                                      ],
-                                    )
-                                        : Container(),
-                                  ],
-                                ),
-                                // SizedBox(
-                                //   height: 35.w,
-                                // ),
-                                // Text("Reason",
-                                //     style: TextStyle(
-                                //         fontSize: 14.sp,
-                                //         fontWeight: FontWeight.w700)),
-                                // SizedBox(
-                                //   height: 2.w,
-                                // ),
-                                // Text(
-                                //   "${watch.orderDetails?.reason}",
-                                //   style: TextStyle(
-                                //     fontWeight: FontWeight.w400,
-                                //     fontSize: 14.sp,
-                                //   ),
-                                // ),
-                                SizedBox(
-                                  height: 31.w,
-                                ),
-                               watch.orderDetails?.shopDeliveredRefundStatus=="YES"
-                                    ? Row(
-                                  children: [
-                                    Expanded(
-                                        child: PrimaryButton(
-                                          color: Color(0xff39C19D),
-                                          onTap: () {
-                                            read.updateDeliveredRefundStatus(
-                                                "received", context);
-                                          },
-                                          text: "Yes Received",
-                                        )),
-                                    SizedBox(width: 12.w),
-                                    Expanded(
-                                        child: PrimaryButton(
-                                          color: Color(0xffFF6258),
-                                          onTap: () {
-                                            read.updateDeliveredRefundStatus(
-                                                "not_received",
-                                                context);
-                                          },
-                                          text: "Not Received",
-                                        )),
-                                  ],
+                                        ],
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(width: 3.w),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 6.w),
+                                            height: 4.w,
+                                            width: 4.w,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black,
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 7.w,
+                                          ),
+                                          Flexible(
+                                              child: Text(
+                                            "On receipt of refund amount, please provide acknowledgement.",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14.sp),
+                                          )),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 35.w,
+                                      ),
+                                    ],
+                                  ),
                                 )
-                                    : Container(),
-                                SizedBox(
-                                  height: 31.w,
-                                ),
-                                Text(
-                                  "Note",
-                                  style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(width: 3.w),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 5.w),
-                                      height: 4.w,
-                                      width: 4.w,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 7.w,
-                                    ),
-                                    Flexible(
-                                        child: Text(
-                                          "Please collect your refund amount from the shop owner",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14.sp),
-                                        )),
-                                  ],
-                                ),
-                                Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(width: 3.w),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 6.w),
-                                      height: 4.w,
-                                      width: 4.w,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 7.w,
-                                    ),
-                                    Flexible(
-                                        child: Text(
-                                          "On receipt of refund amount, please provide acknowledgement.",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14.sp),
-                                        )),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 35.w,
-                                ),
-                              ],
-                            ),
-                          )
-
-                         :Container()
+                              : Container()
                           // Container(
                           //   padding: EdgeInsets.only(
                           //       left: 19.w, right: 19.w, top: 15.w, bottom: 15.w),

@@ -1608,7 +1608,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 Text(
-                                  "\u{20B9} ${watch.dashBoardData?.cancelledAmount}",
+                                  "\u{20B9} ${watch.dashBoardData?.cancelledRefundAmount}",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(

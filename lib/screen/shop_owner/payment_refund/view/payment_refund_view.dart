@@ -55,7 +55,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                   builder: (context) => SMainScreenView(
                       index: 0,
                       screenName: ShopDashBoardView(
-                        refresh: false,
+                        refresh: true,
                       ))),
               (Route<dynamic> route) => false,
             );

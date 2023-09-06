@@ -1410,6 +1410,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                       textStyle: TextStyle(
                                                           color: Black1,
                                                           fontSize: 16.sp,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           fontWeight:
                                                               FontWeight.w600),
                                                     ),
@@ -1426,9 +1428,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                 //             GoogleFonts.roboto(
                                                 //           textStyle: TextStyle(
                                                 //             color: Black1,
-                                                //             // overflow:
-                                                //             //     TextOverflow
-                                                //             //         .ellipsis,
+                                                // overflow:
+                                                //     TextOverflow
+                                                //         .ellipsis,
                                                 //             // letterSpacing: .5,
                                                 //             fontSize: 16.sp,
 
@@ -1483,7 +1485,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
-                                                        read.removeCustomFavProduct(
+                                                        read.removeAdminFavProduct(
                                                             context,
                                                             element?.shopId,
                                                             element?.id,
@@ -1721,6 +1723,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                     textStyle: TextStyle(
                                                         color: Black1,
                                                         fontSize: 16.sp,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         fontWeight:
                                                             FontWeight.w600),
                                                   ),
