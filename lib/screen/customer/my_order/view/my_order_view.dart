@@ -177,7 +177,10 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                                             .brown
                                                                         : element?.orderStatus == "Refund" &&
                                                                                 element?.customerCancelledStatus == "YES"
-                                                                            ? Colors.red
+                                                                            ? Colors.red:
+                                                element?.orderStatus == "Refund" &&
+                                                    element?.shopCancelledStatus ==
+                                                        "YES"?Colors.red
                                                                             : element?.orderStatus == "Refund"
                                                                                 ? Colors.green
                                                                                 : Colors.transparent,
@@ -205,6 +208,11 @@ class _MyOrderViewState extends State<MyOrderView> {
                                           element?.orderStatus == "Refund" &&
                                                   element?.customerCancelledStatus ==
                                                       "YES"
+                                              ? "Cancelled":
+
+                                          element?.orderStatus == "Refund" &&
+                                              element?.shopCancelledStatus ==
+                                                  "YES"
                                               ? "Cancelled"
                                               : element?.orderStatus == "Refund"
                                                   ? "Delivered"
@@ -237,7 +245,10 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                                             .brown
                                                                         : element?.orderStatus == "Refund" &&
                                                                                 element?.customerCancelledStatus == "YES"
-                                                                            ? Colors.red
+                                                                            ? Colors.red:
+                                                element?.orderStatus == "Refund" &&
+                                                    element?.shopCancelledStatus ==
+                                                        "YES"?Colors.red
                                                                             : element?.orderStatus == "Refund"
                                                                                 ? Colors.green
                                                                                 : Colors.transparent,

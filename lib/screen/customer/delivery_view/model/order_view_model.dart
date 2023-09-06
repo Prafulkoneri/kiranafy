@@ -148,6 +148,7 @@ class OrderDetails {
   String? shopOwnerCancelledReason;
   String? customerCancelledReason;
   String? customerCancelledStatus;
+  String? shopCancelledStatus;
   String ? shopDeliveredRefundStatus;
   int ? shopDeliveredPayableAmount;
   String ? shopDeliveredPayableType;
@@ -188,6 +189,7 @@ class OrderDetails {
         required this.shopDeliveredPayableType,
         required this.shopDeliveredRefundStatus,
         required this.shopDeliveredTransactionId,
+        required this.shopCancelledStatus,
       this.customerCancelledStatus});
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -224,6 +226,7 @@ class OrderDetails {
     shopDeliveredPayableType=json["shop_de_payment_type"];
     shopDeliveredRefundStatus=json["shop_de_refund_status"];
     shopDeliveredTransactionId=json["shop_de_transaction_id"];
+    shopCancelledStatus=json["shop_owner_cancelled_status"];
   }
 }
 

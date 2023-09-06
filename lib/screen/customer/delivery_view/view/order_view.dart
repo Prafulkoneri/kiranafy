@@ -411,7 +411,12 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                             watch.orderDetails?.customerCancelledStatus ==
                                                                                 "YES"
                                                                         ? Colors
-                                                                            .red
+                                                                            .red:watch.orderDetails?.orderStatus ==
+                                                "Order Refund" &&
+                                                watch.orderDetails?.shopCancelledStatus ==
+                                                    "YES"
+                                                ? Colors
+                                                .red
                                                                         : watch.orderDetails?.orderStatus ==
                                                                                 "Order Refund"
                                                                             ? Colors.green
@@ -435,6 +440,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                               watch.orderDetails
                                                       ?.customerCancelledStatus ==
                                                   "YES"
+                                          ? "Cancelled":watch.orderDetails?.orderStatus == "Order Refund" &&
+                                          watch.orderDetails?.shopCancelledStatus ==
+                                              "YES"
                                           ? "Cancelled"
                                           : watch.orderDetails?.orderStatus ==
                                                   "Order Refund"
@@ -479,7 +487,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                             watch.orderDetails?.customerCancelledStatus ==
                                                                                 "YES"
                                                                         ? Colors
-                                                                            .red
+                                                                            .red:watch.orderDetails?.orderStatus == "Order Refund" &&
+                                                watch.orderDetails?.shopCancelledStatus ==
+                                                    "YES"
+                                                ?Colors
+                                                .red
                                                                         : watch.orderDetails?.orderStatus ==
                                                                                 "Order Refund"
                                                                             ? Colors.green
