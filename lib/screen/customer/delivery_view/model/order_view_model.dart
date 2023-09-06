@@ -41,6 +41,8 @@ class OrderViewData {
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
   bool ? orderRefundStatus;
+  String ? orderRefundAmount;
+  String ? orderRefundProductCount;
 
   OrderViewData({
     required this.orderDetails,
@@ -49,6 +51,8 @@ class OrderViewData {
     required this.deliveryAddressDetails,
     required this.orderProductDetails,
     required this.orderRefundStatus,
+    required this.orderRefundProductCount,
+    required this.orderRefundAmount,
   });
   OrderViewData.fromJson(Map<String, dynamic> json) {
     orderDetails = json['order_details'] != null
@@ -71,6 +75,8 @@ class OrderViewData {
       });
     }
     orderRefundStatus=json["order_refund_status"];
+    orderRefundProductCount=json["order_refund_product_count"];
+    orderRefundAmount=json["order_refund_amount"];
   }
 }
 
@@ -244,6 +250,7 @@ class OrderProductDetail {
   String? productOfferPrice;
   int? productTotalPrice;
   String? returnStatus;
+  String ? status;
 
   OrderProductDetail({
     required this.id,
@@ -259,6 +266,7 @@ class OrderProductDetail {
     required this.productOfferPrice,
     required this.productTotalPrice,
     required this.returnStatus,
+    required this.status,
   });
   OrderProductDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -274,6 +282,7 @@ class OrderProductDetail {
     productOfferPrice = json["product_offer_price"];
     productTotalPrice = json["product_total_price"];
     returnStatus = json["return_status"];
+    status = json["status"];
   }
 }
 

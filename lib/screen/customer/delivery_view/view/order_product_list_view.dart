@@ -38,6 +38,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
             final element = watch.orderProductDetails?[index];
             return Column(
               children: [
+                element?.status=="active"?
                 Container(
                   width: ScreenUtil().screenWidth,
                   child: Row(
@@ -178,6 +179,165 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                   "\u{20B9} ${element?.productTotalPrice}",
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
+                                        color: grey5,
+                                        // letterSpacing: .5,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ): Container(
+                  width: ScreenUtil().screenWidth,
+                  child: Row(
+                    children: [
+                      element?.productImagePath == ""
+                          ? Container(
+                        height: 89.w,
+                        width: 89.w,
+                        child: Image.asset(
+                          "assets/images/profile_image.png",
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                          : Container(
+                        height: 89.w,
+                        width: 89.w,
+                        child: AppNetworkImages(
+                          imageUrl: "${element?.productImagePath}",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    "${element?.productName}",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Black1,
+                                          // letterSpacing: .5,
+                                          fontSize: 14.sp,
+                                          decoration: TextDecoration.lineThrough,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ),
+                                element?.returnStatus == "YES"
+                                    ? Text(
+                                  "Return",
+                                  style: TextStyle(
+                                      color: Color(0xffFF0000),
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w700),
+                                )
+                                    : Container()
+                              ],
+                            ),
+                            SizedBox(
+                              height: 6.h,
+                            ),
+                            Text(
+                              "${element?.productWeight}  ${element?.unit}",
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: grey5,
+                                    // letterSpacing: .5,
+                                    fontSize: 13.sp,
+                                    decoration: TextDecoration.lineThrough,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 11.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                element?.productOfferPrice ==
+                                    element?.productMrpPrice ||
+                                    element?.productOfferPrice == ""
+                                    ? Row(
+                                  children: [
+                                    Text(
+                                      "\u{20B9} ${element?.productMrpPrice} x ",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: grey5,
+                                            // letterSpacing: .5,
+                                            fontSize: 16.sp,
+                                            decoration: TextDecoration.lineThrough,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    Text(
+                                      "${element?.productQuantity}",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: grey5,
+                                            // letterSpacing: .5,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                                    : Row(
+                                  children: [
+                                    Text(
+                                      "\u{20B9} ${element?.productMrpPrice}  ",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            decoration: TextDecoration
+                                                .lineThrough,
+                                            color: grey5,
+                                            // letterSpacing: .5,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    Text(
+                                      "\u{20B9}${element?.productOfferPrice} x ",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: grey5,
+                                            // letterSpacing: .5,
+                                            decoration: TextDecoration.lineThrough,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    Text(
+                                      "${element?.productQuantity}",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            decoration: TextDecoration.lineThrough,
+                                            color: grey5,
+                                            // letterSpacing: .5,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  "\u{20B9} ${element?.productTotalPrice}",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
                                         color: grey5,
                                         // letterSpacing: .5,
                                         fontSize: 16.sp,

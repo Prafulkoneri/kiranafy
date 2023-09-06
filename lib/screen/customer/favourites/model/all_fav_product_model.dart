@@ -17,7 +17,7 @@ class FavProductResModel {
 
 class FavProductData {
   List<AdminProduct>? adminProducts;
-  List<CustomeProduct>? customProducts;
+  List<AdminProduct>? customProducts;
 
   FavProductData({
     required this.adminProducts,
@@ -31,9 +31,9 @@ class FavProductData {
       });
     }
     if (json["custom_products"] != null) {
-      customProducts = <CustomeProduct>[];
+      customProducts = <AdminProduct>[];
       json["custom_products"].forEach((v) {
-        customProducts!.add(CustomeProduct.fromJson(v));
+        customProducts!.add(AdminProduct.fromJson(v));
       });
     }
   }

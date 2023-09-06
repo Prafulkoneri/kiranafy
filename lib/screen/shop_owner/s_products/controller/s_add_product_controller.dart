@@ -171,7 +171,7 @@ class SAddProductsController extends ChangeNotifier {
         .shopAddProducts(
             shopAddProductRequestModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result =
           ShopAddProductsListResponse.fromJson(jsonDecode(response.body));
 
@@ -200,15 +200,17 @@ class SAddProductsController extends ChangeNotifier {
               selectedProduct.add(false);
             }
 
-          } else {
+          }
+          else {
             for(int i=0;i<allAdminProductList.length;i++){
               selectedProduct.add(false);
             }
             print(selectedProduct);
             for (int i = 0; i < allAdminProductList.length; i++) {
               if (allAdminProductList[i].selectedByShopOwner == "yes") {
-                selectedProduct.insert(i, true);
                 selectedProduct.removeAt(i);
+                selectedProduct.insert(i, true);
+
                 // selectedProductsId.add(allAdminProductList[i].id);
               }
             }

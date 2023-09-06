@@ -134,6 +134,7 @@ class OrderSummaryController extends ChangeNotifier {
       );
     }
     if (groupValue == "self_pickup") {
+      print(deliveryCharges);
       selfPickupTotalAmount =
           (int.parse(totalAmount) - int.parse(deliveryCharges)).toString();
       selfPickupDeliveryCharges = "0";
@@ -486,21 +487,22 @@ class OrderSummaryController extends ChangeNotifier {
           CustomerApplyCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
+          print("hellooo");
           final data = result.applyCouponData;
           couponCodeController.text = data?.couponCode.toString() ?? "";
           deliveryCharges =
-              double.parse(data?.deliveryCharges ?? "0").toString();
+              double.parse(data?.deliveryCharges ?? "0").toInt().toString();
           selfPickupDeliveryCharges = "0";
-          subTotal = double.parse(data?.subTotal ?? "0").toString() ?? "";
+          subTotal = double.parse(data?.subTotal ?? "0").toInt().toString() ?? "";
           couponDiscount =
-              double.parse(data?.couponDiscount ?? "0").toString() ?? "";
-          totalAmount = double.parse(data?.total ?? "0").toString();
+              double.parse(data?.couponDiscount ?? "0").toInt().toString() ?? "";
+          totalAmount = double.parse(data?.total ?? "0").toInt().toString();
           selfPickupTotalAmount =
-              (double.parse(totalAmount) - double.parse(deliveryCharges))
+              (double.parse(totalAmount) - double.parse(deliveryCharges)).toInt()
                       .toString() ??
                   "";
           totalDiscount =
-              double.parse(data?.totalDiscount ?? "0").toString() ?? "";
+              double.parse(data?.totalDiscount ?? "0").toInt().toString() ?? "";
           discountPercentage = data?.discountPercentage ?? "";
           showOnPageLoader(false);
           showLoader(false);
@@ -512,7 +514,10 @@ class OrderSummaryController extends ChangeNotifier {
           showOnPageLoader(false);
           showLoader(false);
           Navigator.pop(context);
-          removeCoupon(context,false);
+          couponDiscount="0";
+            removeCoupon(context,false);
+
+
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }

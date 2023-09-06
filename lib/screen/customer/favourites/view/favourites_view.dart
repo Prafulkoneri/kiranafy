@@ -1193,7 +1193,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                     physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount:
-                                        watch.adminProductList?.length ?? 0,
+                                        watch.allProduct.length,
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
@@ -1201,12 +1201,12 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                             mainAxisSpacing: 4.0),
                                     itemBuilder: (BuildContext, index) {
                                       final element =
-                                          watch.adminProductList?[index];
+                                          watch.allProduct[index];
                                       return GestureDetector(
                                         onTap: () {
                                           readProductViewController
                                               .updateProductId(
-                                            element?.id.toString(),
+                                            element.id.toString(),
                                           );
                                           Navigator.pushAndRemoveUntil(
                                             context,
@@ -1217,17 +1217,17 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                       screenName:
                                                           ProductScreenView(
                                                         selectedUnitId: element
-                                                            ?.productUnitId
+                                                            .productUnitId
                                                             .toString(),
                                                         categoryId: element
-                                                            ?.categoryId
+                                                            .categoryId
                                                             .toString(),
-                                                        productId: element?.id
+                                                        productId: element.id
                                                             .toString(),
-                                                        shopId: element?.shopId
+                                                        shopId: element.shopId
                                                             .toString(),
                                                         productType: element
-                                                            ?.productType
+                                                            .productType
                                                             .toString(),
                                                       ),
                                                     )),
@@ -1377,7 +1377,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: [
-                                                    element?.productImagePath ==
+                                                    element.productImagePath ==
                                                             ""
                                                         ? Container(
                                                             height: 68.w,
@@ -1393,7 +1393,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                             child:
                                                                 AppNetworkImages(
                                                               imageUrl:
-                                                                  "${element?.productImagePath}",
+                                                                  "${element.productImagePath}",
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
@@ -1404,7 +1404,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                 // ),
                                                 Flexible(
                                                   child: Text(
-                                                    "${element?.productName}",
+                                                    "${element.productName}",
                                                     // "Red Label",
                                                     style: GoogleFonts.dmSans(
                                                       textStyle: TextStyle(
@@ -1448,7 +1448,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      "${element?.weight} ${element?.unit}",
+                                                      "${element.weight} ${element.unit}",
                                                       style: GoogleFonts.roboto(
                                                         textStyle: TextStyle(
                                                             color: Black1,
@@ -1471,7 +1471,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                   children: [
                                                     Expanded(
                                                       child: Text(
-                                                        '\u{20B9}${element?.price}',
+                                                        '\u{20B9}${element.price}',
                                                         style:
                                                             GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
@@ -1485,10 +1485,12 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
+                                                        element.productType=="custom_product"?read.removeCustomFavProduct(context,  element.shopId,
+                                                            element.id, index):
                                                         read.removeAdminFavProduct(
                                                             context,
-                                                            element?.shopId,
-                                                            element?.id,
+                                                            element.shopId,
+                                                            element.id,
                                                             index);
                                                       },
                                                       child: SvgPicture.asset(
@@ -1501,7 +1503,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                   ],
                                                 ),
                                                 Text(
-                                                  "${element?.shopName}",
+                                                  "${element.shopName}",
                                                   // "Maharaj Kirana Store",
                                                   style: TextStyle(
                                                       color: Black1,
@@ -1640,185 +1642,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                         ),
                                       );
                                     }),
-                                SizedBox(
-                                  height: 5.w,
-                                ),
-                                GridView.builder(
-                                    padding: EdgeInsets.zero,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount:
-                                        watch.customProductList?.length ?? 0,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 20.0,
-                                            mainAxisSpacing: 4.0),
-                                    itemBuilder: (BuildContext, index) {
-                                      final element =
-                                          watch.customProductList?[index];
-                                      return GestureDetector(
-                                        onTap: () {
-                                          readProductViewController
-                                              .updateProductId(
-                                            element?.id.toString(),
-                                          );
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainScreenView(
-                                                      index: 1,
-                                                      screenName:
-                                                          ProductScreenView(
-                                                        selectedUnitId: element
-                                                            ?.productUnitId
-                                                            .toString(),
-                                                        categoryId: element
-                                                            ?.categoryId
-                                                            .toString(),
-                                                        productId: element?.id
-                                                            .toString(),
-                                                        shopId: element?.shopId
-                                                            .toString(),
-                                                        productType: element
-                                                            ?.productType
-                                                            .toString(),
-                                                      ),
-                                                    )),
-                                            (Route<dynamic> route) => false,
-                                          );
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(15.w)),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            // mainAxisAlignment:
-                                            //     MainAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                  child: Center(
-                                                child: AppNetworkImages(
-                                                  imageUrl:
-                                                      "${element?.productImagePath}",
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              )),
-                                              SizedBox(
-                                                height: 3.w,
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                  left: 17.h,
-                                                  // right: 15.w,
-                                                ),
-                                                child: Text(
-                                                  "${element?.productName}",
-                                                  // "Red Label",
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: TextStyle(
-                                                        color: Black1,
-                                                        fontSize: 16.sp,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 2.w,
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                  left: 17.h,
-                                                  // right: 15.w,
-                                                ),
-                                                child: Text(
-                                                  // "100g",
-                                                  "${element?.weight} ${element?.unit}",
-                                                  style: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 2.w,
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                  left: 17.h,
-                                                  right: 15.w,
-                                                ),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        '\u{20B9}${element?.price}',
-                                                        style:
-                                                            GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color: Black1,
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        read.removeCustomFavProduct(
-                                                            context,
-                                                            element?.shopId,
-                                                            element?.id,
-                                                            index);
-                                                      },
-                                                      child: SvgPicture.asset(
-                                                        'assets/icons/fvrt_products.svg',
-                                                      ),
-                                                    ),
-                                                    // SizedBox(
-                                                    //   width: 15.w,
-                                                    // ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 4.w,
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                  left: 17.h,
-                                                  bottom: 10.w,
-                                                ),
-                                                child: Text(
-                                                  "${element?.shopName}",
-                                                  // "Maharaj Kirana Store",
-                                                  style: TextStyle(
-                                                      color: Black1,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                SizedBox(
-                                  height: 80.w,
-                                ),
+
+
                                 // GridView.builder(
                                 //     shrinkWrap: true,
                                 //     itemCount:
