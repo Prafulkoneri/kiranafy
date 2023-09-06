@@ -7,7 +7,7 @@ class ShopConfigrationInvoiceRequestModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data["id"] = subscriptionId;
+    data["subscription_invoice_id"] = subscriptionId;
     return data;
   }
 }

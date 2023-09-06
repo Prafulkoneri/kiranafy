@@ -132,6 +132,7 @@ class SubcriptionData {
 class CurrentSubscriptionPlan {
   int? id;
   String? planName;
+  int? invoiceId;
   String? subscriptionActiveTill;
   String? paidAmount;
   String? planBenifits;
@@ -144,6 +145,7 @@ class CurrentSubscriptionPlan {
     required this.paidAmount,
     required this.planBenifits,
     required this.subscriptionSpecialBenifits,
+    required this.invoiceId,
   });
   CurrentSubscriptionPlan.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -151,6 +153,7 @@ class CurrentSubscriptionPlan {
     subscriptionActiveTill = json["subscription_active_till"];
     paidAmount = json["paid_amount"];
     planBenifits = json["plan_benifits"];
+    invoiceId = json["invoice_id"];
     // subscriptionSpecialBenifits = json["subscription_special_benifits"];
     //////////////
     if (json["subscription_special_benifits"] != null) {
@@ -164,6 +167,7 @@ class CurrentSubscriptionPlan {
 
 class SubscriptionHistory {
   int? id;
+  int? invoiceId;
   String? planName;
   String? validity;
   String? subscriptionActiveTill;
@@ -172,6 +176,7 @@ class SubscriptionHistory {
   SubscriptionHistory({
     required this.id,
     required this.planName,
+    required this.invoiceId,
     required this.validity,
     required this.subscriptionActiveTill,
     required this.paidAmount,
@@ -180,6 +185,7 @@ class SubscriptionHistory {
   SubscriptionHistory.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     planName = json["plan_name"];
+    invoiceId = json["invoice_id"];
     validity = json["validity"];
     subscriptionActiveTill = json["subscription_active_till"];
     paidAmount = json["paid_amount"];

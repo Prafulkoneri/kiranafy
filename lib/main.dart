@@ -124,39 +124,40 @@ class ReceivedNotification {
   final String payload;
 }
 
-// Future<void> initNotification(context) async {
-// // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-//   const AndroidInitializationSettings initializationSettingsAndroid =
-//       AndroidInitializationSettings('mipmap/ic_launcher');
-//   final IOSInitializationSettings initializationSettingsIOS =
-//       IOSInitializationSettings();
-//   final MacOSInitializationSettings initializationSettingsMacOS =
-//       MacOSInitializationSettings();
-//   final InitializationSettings initializationSettings = InitializationSettings(
-//       android: initializationSettingsAndroid,
-//       iOS: initializationSettingsIOS,
-//       macOS: initializationSettingsMacOS);
-//   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-//       onSelectNotification: (String? payload) {
-//     print("nnnnnnnnnnnnnnnnnn");
+//current//
+Future<void> initNotification(context) async {
+// initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('mipmap/ic_launcher');
+  final IOSInitializationSettings initializationSettingsIOS =
+      IOSInitializationSettings();
+  final MacOSInitializationSettings initializationSettingsMacOS =
+      MacOSInitializationSettings();
+  final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+      macOS: initializationSettingsMacOS);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onSelectNotification: (String? payload) {
+    print("nnnnnnnnnnnnnnnnnn");
 
-//     print(payload);
-//     var res = jsonDecode(payload.toString());
-//     print(res["data"]["user_type"]);
-//     if (res["data"] == "shop_owner") {
-//       context
-//           .read<SMainScreenController>()
-//           .onOrderTypeNotification(context, res["data"]["redirect_id"]);
-//     }
-//     if (res["data"] == "customer") {
-//       context
-//           .read<MainScreenController>()
-//           .onOrderTypeNotification(context, res["data"]["redirect_id"]);
-//     }
-//     print("lllllllllllllllllllll");
-//     if (payload != null) OpenFile.open(payload);
-//   });
-// }
+    print(payload);
+    var res = jsonDecode(payload.toString());
+    print(res["data"]["user_type"]);
+    if (res["data"] == "shop_owner") {
+      context
+          .read<SMainScreenController>()
+          .onOrderTypeNotification(context, res["data"]["redirect_id"]);
+    }
+    if (res["data"] == "customer") {
+      context
+          .read<MainScreenController>()
+          .onOrderTypeNotification(context, res["data"]["redirect_id"]);
+    }
+    print("lllllllllllllllllllll");
+    if (payload != null) OpenFile.open(payload);
+  });
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -173,7 +174,7 @@ void main() async {
   }
   await FireBaseApi().initNotification();
   const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
 
   // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   // FlutterLocalNotificationsPlugin();
@@ -215,8 +216,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(create: (_) => ProductViewController()),
         ChangeNotifierProvider(create: (_) => SCustomerListController()),
-        ChangeNotifierProvider(create: (_) => SAllRecommandedProductsController()),
-        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(
+            create: (_) => SAllRecommandedProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
         ChangeNotifierProvider(create: (_) => DeliveryAddressController()),
         ChangeNotifierProvider(create: (_) => AddAddressController()),
@@ -240,8 +243,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => SubscriptionHistoryController()),
-        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
-        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
         ChangeNotifierProvider(create: (_) => SBankAccountController()),
         ChangeNotifierProvider(create: (_) => SGetProductUnitListController()),
         ChangeNotifierProvider(create: (_) => CustomerSettingController()),
@@ -276,43 +281,7 @@ final firebaseMessaging = FirebaseMessaging.instance;
 
 class _MyAppState extends State<MyApp> {
   @override
-
   void initState() {
-    Future<void> initNotification(context) async {
-// initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-      const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('mipmap/ic_launcher');
-      final IOSInitializationSettings initializationSettingsIOS =
-      IOSInitializationSettings();
-      final MacOSInitializationSettings initializationSettingsMacOS =
-      MacOSInitializationSettings();
-      final InitializationSettings initializationSettings =
-      InitializationSettings(
-          android: initializationSettingsAndroid,
-          iOS: initializationSettingsIOS,
-          macOS: initializationSettingsMacOS);
-      await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-          onSelectNotification: (String? payload) {
-            print("nnnnnnnnnnnnnnnnnn");
-
-            print(payload);
-            var res = jsonDecode(payload.toString());
-            print(res["data"]["user_type"]);
-            if (res["data"] == "shop_owner") {
-              context
-                  .read<SMainScreenController>()
-                  .onOrderTypeNotification(context, res["data"]["redirect_id"]);
-            }
-            if (res["data"] == "customer") {
-              context
-                  .read<MainScreenController>()
-                  .onOrderTypeNotification(context, res["data"]["redirect_id"]);
-            }
-            print("lllllllllllllllllllll");
-            if (payload != null) OpenFile.open(payload);
-          });
-    }
-
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print(message.data);
       print("onMessageOpenedApp: $message");

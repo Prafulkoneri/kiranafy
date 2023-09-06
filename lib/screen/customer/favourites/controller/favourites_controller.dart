@@ -259,7 +259,7 @@ class FavouritesController extends ChangeNotifier {
       final result =
           RemoveCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        favAdminproduct[index] = false;
+        favCustomproduct[index] = false;
         adminProductList?.removeAt(index);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
