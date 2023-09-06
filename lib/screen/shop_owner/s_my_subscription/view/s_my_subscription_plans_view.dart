@@ -898,8 +898,10 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                             // },
                             onTap: () async {
                               print("object");
-                              read.subscriptionInvoice(context,
-                                  watch.subscriptionHistory?[i].id.toString());
+                              read.subscriptionInvoice(
+                                  context,
+                                  watch.subscriptionHistory?[i].invoiceId
+                                      .toString());
 
                               // Map<Permission, PermissionStatus> statuses =
                               //     await [
