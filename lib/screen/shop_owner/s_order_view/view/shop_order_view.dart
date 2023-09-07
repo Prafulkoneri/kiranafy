@@ -9408,11 +9408,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               style: TextStyle(
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w700,
-                                                                  color: Colors
-                                                                      .black,
+                                                                          .w400,
                                                                   fontSize:
-                                                                      18.sp),
+                                                                      14.sp),
                                                             ),
                                                           ),
                                                         ],
