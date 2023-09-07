@@ -9510,7 +9510,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           height: 11.w,
                                                         ),
                                                         Text(
-                                                          "\u{20B9} ${watch.orderDetails?.totalAmount}",
+                                                          "\u{20B9} ${watch.orderDetails?.shopOwnerRefunPaybelAmount}",
                                                           style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight

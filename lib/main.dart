@@ -157,7 +157,7 @@ void main() async {
   }
   await FireBaseApi().initNotification();
   const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('mipmap/ic_launcher');
 
   // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   // FlutterLocalNotificationsPlugin();
