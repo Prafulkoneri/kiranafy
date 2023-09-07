@@ -2060,7 +2060,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       // ),
                                       watch.orderDetails
                                                       ?.customerCancelledReason !=
-                                                  "" &&
+                                                  "" ||
                                               watch.orderDetails
                                                       ?.shopOwnerCancelledReason !=
                                                   ""

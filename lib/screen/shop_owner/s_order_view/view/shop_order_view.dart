@@ -8070,7 +8070,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                     children: [
                                       Text(
                                         // maxLines: 3,
-                                        "Expected Delivery Date :",
+                                        "Expected Delivery Date ",
                                         // textAlign: TextAlign.start,
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
@@ -9310,7 +9310,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           fontSize: 18.sp),
                                                     ),
                                                     SizedBox(
-                                                      height: 11.w,
+                                                      height: 10.w,
                                                     ),
                                                     Text(
                                                       "\u{20B9} ${watch.orderDetails?.customerRefundAmount}",
@@ -9319,6 +9319,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               FontWeight.w700,
                                                           color: Colors.black,
                                                           fontSize: 18.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20.w,
                                                     ),
                                                   ],
                                                 ),
@@ -9365,6 +9368,55 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                             Color(0xff115B7A)),
                                                   )),
                                                 ),
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Cancel Reason",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: Colors.black,
+                                                      fontSize: 18.sp),
+                                                ),
+                                                watch.orderDetails
+                                                            ?.customerCancelledReason !=
+                                                        ""
+                                                    ? Row(
+                                                        children: [
+                                                          Flexible(
+                                                            child: Text(
+                                                              " ${watch.orderDetails?.customerCancelledReason}",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize:
+                                                                      14.sp),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : Row(
+                                                        children: [
+                                                          Flexible(
+                                                            child: Text(
+                                                              "${watch.orderDetails?.shopOwnerCancelledReason}",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      18.sp),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                               ],
                                             ),
                                             Column(

@@ -1986,7 +1986,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Date:",
+                                    "Date",
                                     style: GoogleFonts.dmSans(
                                       textStyle: TextStyle(
                                           // height: 1.5,
