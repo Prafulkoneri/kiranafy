@@ -160,6 +160,68 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      element?.orderStatus == "order_refund"
+                          ? Container(
+                              padding: EdgeInsets.only(
+                                  left: 11.w,
+                                  right: 9.w,
+                                  top: 4.w,
+                                  bottom: 3.w),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Color(0xffFBDFDF),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Cancel Refund Request ",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12.sp,
+                                        color: Black),
+                                  ),
+                                  Row(
+                                    children: [
+                                      element?.refundOrderStatus == "pending"
+                                          ? Text(
+                                              "Pending",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14.sp,
+                                                  color: Black),
+                                            )
+                                          : element?.refundOrderStatus ==
+                                                  "accept"
+                                              ? Text(
+                                                  "Accepted",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14.sp,
+                                                      color: Black),
+                                                )
+                                              : element?.refundOrderStatus ==
+                                                      "reject"
+                                                  ? Text(
+                                                      "Rejected",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 14.sp,
+                                                          color: Black),
+                                                    )
+                                                  : Container()
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container()
                     ],
                   ),
                 ),

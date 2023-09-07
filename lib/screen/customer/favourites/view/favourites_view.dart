@@ -1182,7 +1182,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                         )
                       : Container(
                           padding: EdgeInsets.only(
-                              left: 12.h, top: 20.w, right: 12.h, bottom: 15.w),
+                              left: 12.h, top: 5.w, right: 12.h, bottom: 100.w),
                           child: SizedBox(
                             // height: 156.h,
                             // width: 2.w,
@@ -1192,16 +1192,14 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                     padding: EdgeInsets.zero,
                                     physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
-                                    itemCount:
-                                        watch.allProduct.length,
+                                    itemCount: watch.allProduct.length,
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
                                             crossAxisSpacing: 20.0,
                                             mainAxisSpacing: 4.0),
                                     itemBuilder: (BuildContext, index) {
-                                      final element =
-                                          watch.allProduct[index];
+                                      final element = watch.allProduct[index];
                                       return GestureDetector(
                                         onTap: () {
                                           readProductViewController
@@ -1485,13 +1483,22 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
-                                                        element.productType=="custom_product"?read.removeCustomFavProduct(context,  element.shopId,
-                                                            element.id, index):
-                                                        read.removeAdminFavProduct(
-                                                            context,
-                                                            element.shopId,
-                                                            element.id,
-                                                            index);
+                                                        element.productType ==
+                                                                "custom_product"
+                                                            ? read
+                                                                .removeCustomFavProduct(
+                                                                    context,
+                                                                    element
+                                                                        .shopId,
+                                                                    element.id,
+                                                                    index)
+                                                            : read
+                                                                .removeAdminFavProduct(
+                                                                    context,
+                                                                    element
+                                                                        .shopId,
+                                                                    element.id,
+                                                                    index);
                                                       },
                                                       child: SvgPicture.asset(
                                                         'assets/icons/fvrt_products.svg',
@@ -1642,7 +1649,6 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                         ),
                                       );
                                     }),
-
 
                                 // GridView.builder(
                                 //     shrinkWrap: true,

@@ -414,7 +414,7 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "${element?.refundCount} products return request",
+                                    "${element?.refundCount} Products Return Request",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 12.sp,
