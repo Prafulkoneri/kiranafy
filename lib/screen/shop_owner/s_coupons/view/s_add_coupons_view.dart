@@ -448,7 +448,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                           widget.isEditCoupon == true &&
                                   watch.details?.shopOwnerCategoryId != ""
                               ? SDropDownField(
-                                  value: watch.categoryId,
+                                  value: watch.categoryId.toString(),
                                   // hintText: "Delivery Charge",
                                   hintSize: 15.sp,
                                   onChanged: (value) {
