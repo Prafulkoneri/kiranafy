@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 
@@ -126,7 +127,7 @@ class ReceivedNotification {
   final String payload;
 }
 
-Future<void> initNotification() async {
+Future<void> initNotification(context) async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid =
   AndroidInitializationSettings('mipmap/ic_launcher');
@@ -143,8 +144,35 @@ Future<void> initNotification() async {
         print(payload);
         print("hello allllllll");
 
-     // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
-     if (payload != null) OpenFile.open(payload);
+        // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
+        if (payload != null){
+          print("lets go");
+          final readShop = Provider.of<SMainScreenController>(context, listen: false);
+          final readCustomer=Provider.of<MainScreenController>(context,listen: false);
+          var res=jsonDecode(payload);
+          print("common baby");
+          print(res["data"]["user_type"]);
+          print("common baby");
+          if(res["data"]["notification_type"]=="order"){
+            if(res["data"]["user_type"]=="customer"){
+
+              readCustomer.onOrderTypeNotification(context,res["data"]["redirect_id"]);
+            }
+            if(res["data"]["user_type"]=="shop"){
+              readShop.onOrderTypeNotification(context,res["data"]["redirect_id"]);
+            }
+          }
+          if(res["data"]["notification_type"]=="custom"){
+            if(res["data"]["user_type"]=="customer"){
+
+              readCustomer.onCustomTypeNotification(context);
+            }
+            if(res["data"]["user_type"]=="shop"){
+        readShop.onCustomTypeNotification(context);
+            }
+          }
+          // OpenFile.open(payload);
+        }
       });
 }
 
@@ -167,7 +195,7 @@ void main() async {
 
   // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   // FlutterLocalNotificationsPlugin();
-  initNotification();
+  // initNotification(navigatorKey.currentState?.context);
 
   runApp(
     MultiProvider(
@@ -272,6 +300,9 @@ final firebaseMessaging = FirebaseMessaging.instance;
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    initNotification(context);
+
+
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print(message.data);
       print("onMessageOpenedApp: $message");

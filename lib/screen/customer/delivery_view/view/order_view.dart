@@ -12,6 +12,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/controller/customer_order_view_controller.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/cancel_order_view_bottom_sheet.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_product_list_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
@@ -56,6 +57,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
   Widget build(BuildContext context) {
     final watch = context.watch<CustomerOrderViewController>();
     final read = context.read<CustomerOrderViewController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
@@ -98,6 +100,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                               )),
                       (Route<dynamic> route) => false,
                     );
+              readMain.showBottomNavigationBar();
             },
             title: "Order",
           ),

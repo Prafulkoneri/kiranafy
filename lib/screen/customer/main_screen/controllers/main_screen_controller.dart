@@ -10,10 +10,13 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/model/set_pincode_model.dart';
 import 'package:local_supper_market/screen/customer/main_screen/repository/set_pincode_repo.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
+import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/maps/view/map_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,6 +45,7 @@ class MainScreenController extends ChangeNotifier {
   bool locationNotFound = false;
   bool isLocationFound = false;
   String locationErrorMessage = "";
+  bool hideBottomNavigation=false;
 
   void initState(context, index, currentScreen) async {
     onMyCartPressed();
@@ -109,6 +113,33 @@ class MainScreenController extends ChangeNotifier {
     currentScreen = HomeScreenView(
       refreshPage: false,
     );
+    notifyListeners();
+  }
+
+  onOrderTypeNotification(context, id) {
+    currentScreen = OrderDeliveryView(
+      orderId: id.toString(),
+      screenName: "main",
+      isRefresh: true,
+    );
+    hideBottomNavigation=true;
+    // Navigator.push(context,MaterialPageRoute(builder: (context)=> OrderDeliveryView(
+    //   orderId: id.toString(),
+    //   screenName: "main",
+    //   isRefresh: true,
+    // )));
+    notifyListeners();
+  }
+
+  onCustomTypeNotification(context) {
+    print("hello");
+    currentScreen = CustomerNotificationsScreenView();
+    hideBottomNavigation=false;
+    notifyListeners();
+  }
+
+  showBottomNavigationBar(){
+    hideBottomNavigation=false;
     notifyListeners();
   }
 

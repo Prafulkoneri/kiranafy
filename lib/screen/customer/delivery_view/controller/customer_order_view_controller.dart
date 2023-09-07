@@ -102,8 +102,8 @@ class CustomerOrderViewController extends ChangeNotifier {
     print("rvmjioureicvnwcy");
     print(orId);
     await customerOrderView(context, orId);
-    getCancelOrderList(context);
-    OReviewList(context);
+    await   getCancelOrderList(context);
+    await  OReviewList(context);
     notifyListeners();
   }
 
