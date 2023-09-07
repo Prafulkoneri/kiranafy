@@ -35,6 +35,7 @@ class SAddCouponsController extends ChangeNotifier {
   String productId = "";
   // List<CategoryData>? categoriesList;
   List<SelectedCategoryData>? selectedcategorydata;
+  List<EditCategoryList>? editCategoryList;
   ShopSelectedCategoriesRepo SelectedCategoriesListRepo =
       ShopSelectedCategoriesRepo();
 
@@ -62,6 +63,7 @@ class SAddCouponsController extends ChangeNotifier {
 
   Future<void> initState(context, isEditCoupon, id) async {
     if (isEditCoupon) {
+      await getCategoriesList(context);
       await getEditCouponDetails(context, id);
     } else {
       fromDateController.clear();
@@ -86,6 +88,7 @@ class SAddCouponsController extends ChangeNotifier {
 
   void onCategorySelect(value, context) async {
     categoryId = value;
+    productId="";
     await getProductList(context);
     notifyListeners();
   }
@@ -371,13 +374,15 @@ class SAddCouponsController extends ChangeNotifier {
         termsAndConditionController.text =
             details?.couponTermsAndConditions.toString() ?? "";
         groupValue = details?.couponType ?? "";
+        editCategoryList=result.editCouponsData?.categoryList;
 
-        selectedcategorydata = result.editCouponsData?.selectedcategorydata;
+        print(selectedcategorydata);
         print("99999999");
-        print(result.editCouponsData?.selectedcategorydata?[0].categoryName);
+
         print("99999999");
         productList = result.editCouponsData?.allProductsList;
         categoryId = details?.shopOwnerCategoryId.toString() ?? "";
+
         print("00000");
         print(categoryId);
         print("00000");

@@ -236,9 +236,9 @@ class SSelectedProductsController extends ChangeNotifier {
         final result = GetSelectedProductsResponseModel.fromJson(
             jsonDecode(response.body));
         if (response.statusCode == 200) {
-          productsFromAdmin = result.data?.productsFromAdmin;
+          productsFromAdmins = result.data?.productsFromAdmin??[];
           categoryName = result.data?.categoryName ?? "";
-          customProduct = result.data?.customProduct;
+          customProducts = result.data?.customProduct??[];
           totalSelectedAndCustomProducts =
               result.data?.totalSelectedAndCustomProducts ?? 0;
           // categoryProductData = result.data;

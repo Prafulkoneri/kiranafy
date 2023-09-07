@@ -796,6 +796,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   bool isDeliveryCodeError = false;
   bool isLoading = true;
   bool isStackLoading = false;
+  bool isDetailsAvailable=false;
   List<bool> isSelectedReason = [];
   bool isOtherReasonSelected = false;
   ShopOrderViewData? shopOrderViewData;
@@ -885,6 +886,9 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       log(response.body);
       final result = ShopOrderViewResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        if(result.status==200){
+
+
         shopOrderViewData = result.shopOrderViewData;
         orderDetails = shopOrderViewData?.orderDetails;
         couponDetails = shopOrderViewData?.couponDetails;
@@ -922,9 +926,17 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         } else {
           showLoader(true);
         }
-
+        isDetailsAvailable=true;
         notifyListeners();
-      } else {
+      }
+        else{
+          isDetailsAvailable=false;
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          showLoader(false);
+        }
+      }
+        else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

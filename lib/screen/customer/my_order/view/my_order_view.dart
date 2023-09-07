@@ -177,13 +177,12 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                                             .brown
                                                                         : element?.orderStatus == "Refund" &&
                                                                                 element?.customerCancelledStatus == "YES"
-                                                                            ? Colors.red:
-                                                element?.orderStatus == "Refund" &&
-                                                    element?.shopCancelledStatus ==
-                                                        "YES"?Colors.red
-                                                                            : element?.orderStatus == "Refund"
-                                                                                ? Colors.green
-                                                                                : Colors.transparent,
+                                                                            ? Colors.red
+                                                                            : element?.orderStatus == "Refund" && element?.shopCancelledStatus == "YES"
+                                                                                ? Colors.red
+                                                                                : element?.orderStatus == "Refund"
+                                                                                    ? Colors.green
+                                                                                    : Colors.transparent,
                                                 // width: 1,
                                               ),
                                             ),
@@ -208,15 +207,17 @@ class _MyOrderViewState extends State<MyOrderView> {
                                           element?.orderStatus == "Refund" &&
                                                   element?.customerCancelledStatus ==
                                                       "YES"
-                                              ? "Cancelled":
-
-                                          element?.orderStatus == "Refund" &&
-                                              element?.shopCancelledStatus ==
-                                                  "YES"
                                               ? "Cancelled"
-                                              : element?.orderStatus == "Refund"
-                                                  ? "Delivered"
-                                                  : element?.orderStatus ?? "",
+                                              : element?.orderStatus ==
+                                                          "Refund" &&
+                                                      element?.shopCancelledStatus ==
+                                                          "YES"
+                                                  ? "Cancelled"
+                                                  : element?.orderStatus ==
+                                                          "Refund"
+                                                      ? "Delivered"
+                                                      : element?.orderStatus ??
+                                                          "",
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: element?.orderStatus ==
@@ -245,13 +246,12 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                                             .brown
                                                                         : element?.orderStatus == "Refund" &&
                                                                                 element?.customerCancelledStatus == "YES"
-                                                                            ? Colors.red:
-                                                element?.orderStatus == "Refund" &&
-                                                    element?.shopCancelledStatus ==
-                                                        "YES"?Colors.red
-                                                                            : element?.orderStatus == "Refund"
-                                                                                ? Colors.green
-                                                                                : Colors.transparent,
+                                                                            ? Colors.red
+                                                                            : element?.orderStatus == "Refund" && element?.shopCancelledStatus == "YES"
+                                                                                ? Colors.red
+                                                                                : element?.orderStatus == "Refund"
+                                                                                    ? Colors.green
+                                                                                    : Colors.transparent,
                                                 // letterSpacing: .5
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w700),
@@ -329,9 +329,11 @@ class _MyOrderViewState extends State<MyOrderView> {
                                   ],
                                 ),
                                 ////////////////////////////////////NEW////////////////////////////
-                                element?.refundProductCount != ""
-                                    // &&
-                                    //         element?.orderStatus == "Delivered"
+
+                                (element?.orderStatus == "Refund" ||
+                                            element?.orderStatus ==
+                                                "Cancelled") &&
+                                        element?.refundProductCount != ""
                                     ? Container(
                                         padding: EdgeInsets.only(
                                             left: 11.w,
@@ -347,13 +349,49 @@ class _MyOrderViewState extends State<MyOrderView> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "${element?.refundProductCount} products return request",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12.sp,
-                                                  color: Black),
-                                            ),
+                                            element?.orderStatus == "Refund" &&
+                                                    element?.customerCancelledStatus ==
+                                                        "YES"
+                                                ? Text(
+                                                    "Cancel Refund Request",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 12.sp,
+                                                        color: Black),
+                                                  )
+                                                : element?.orderStatus ==
+                                                            "Refund" &&
+                                                        element?.shopCancelledStatus ==
+                                                            "YES"
+                                                    ? Text(
+                                                        "Cancel Refund Request",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 12.sp,
+                                                            color: Black),
+                                                      )
+                                                    : element?.orderStatus ==
+                                                            "Refund"
+                                                        ? Text(
+                                                            "${element?.refundProductCount} products return request",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 12.sp,
+                                                                color: Black),
+                                                          )
+                                                        : Text(
+                                                            "Cancel Refund Request",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 12.sp,
+                                                                color: Black),
+                                                          ),
                                             Row(
                                               children: [
                                                 element?.refundOrderStatus ==

@@ -454,9 +454,9 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                   onChanged: (value) {
                                     read.onCategorySelect(value, context);
                                   },
-                                  items: watch.selectedcategorydata
+                                  items: watch.editCategoryList
                                       ?.map((item) => DropdownMenuItem<String>(
-                                            value: item.categoryId.toString(),
+                                            value: item.id.toString(),
                                             child: Text(
                                               item.categoryName ?? "",
                                               style: TextStyle(
@@ -492,7 +492,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                             height: 20.h,
                           ),
                           widget.isEditCoupon == true &&
-                                  watch.details?.shopOwnerProductId != ""
+                              watch.productId!= ""
                               ? SDropDownField(
                                   value: watch.productId,
                                   // hintText: "Delivery Charge",

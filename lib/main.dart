@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -105,6 +103,7 @@ import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
 import 'screen/shop_owner/shop_review/controller/shop_review_controller.dart';
 import 'package:provider/provider.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("handled background message");
 }
@@ -130,50 +129,57 @@ class ReceivedNotification {
 Future<void> initNotification(context) async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('mipmap/ic_launcher');
+      AndroidInitializationSettings('mipmap/ic_launcher');
   final IOSInitializationSettings initializationSettingsIOS =
-  IOSInitializationSettings();
+      IOSInitializationSettings();
   final MacOSInitializationSettings initializationSettingsMacOS =
-  MacOSInitializationSettings();
+      MacOSInitializationSettings();
   final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       macOS: initializationSettingsMacOS);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) {
-        print(payload);
-        print("hello allllllll");
+    print(payload);
+    print("hello allllllll");
 
-        // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
-        if (payload != null){
-          print("lets go");
-          final readShop = Provider.of<SMainScreenController>(context, listen: false);
-          final readCustomer=Provider.of<MainScreenController>(context,listen: false);
-          var res=jsonDecode(payload);
-          print("common baby");
-          print(res["data"]["user_type"]);
-          print("common baby");
-          if(res["data"]["notification_type"]=="order"){
-            if(res["data"]["user_type"]=="customer"){
-
-              readCustomer.onOrderTypeNotification(context,res["data"]["redirect_id"]);
-            }
-            if(res["data"]["user_type"]=="shop"){
-              readShop.onOrderTypeNotification(context,res["data"]["redirect_id"]);
-            }
-          }
-          if(res["data"]["notification_type"]=="custom"){
-            if(res["data"]["user_type"]=="customer"){
-
-              readCustomer.onCustomTypeNotification(context);
-            }
-            if(res["data"]["user_type"]=="shop"){
-        readShop.onCustomTypeNotification(context);
-            }
-          }
-          // OpenFile.open(payload);
+    // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
+    if (payload != null) {
+      if(payload.endsWith(".pdf")){
+        print("its a pdf");
+        OpenFile.open(payload);
+      }
+      else{
+      print("lets go");
+      final readShop =
+          Provider.of<SMainScreenController>(context, listen: false);
+      final readCustomer =
+          Provider.of<MainScreenController>(context, listen: false);
+      var res = jsonDecode(payload);
+      print("common baby");
+      print(res["data"]["user_type"]);
+      print("common baby");
+      if (res["data"]["notification_type"] == "order") {
+        if (res["data"]["user_type"] == "customer") {
+          readCustomer.onOrderTypeNotification(
+              context, res["data"]["redirect_id"]);
         }
-      });
+        if (res["data"]["user_type"] == "shop_owner") {
+          readShop.onOrderTypeNotification(context, res["data"]["redirect_id"]);
+        }
+      }
+      if (res["data"]["notification_type"] == "custom") {
+        if (res["data"]["user_type"] == "customer") {
+          readCustomer.onCustomTypeNotification(context);
+        }
+        if (res["data"]["user_type"] == "shop_owner") {
+          readShop.onCustomTypeNotification(context);
+        }
+      }
+      }
+      // OpenFile.open(payload);
+    }
+  });
 }
 
 void main() async {
@@ -191,7 +197,7 @@ void main() async {
   }
   await FireBaseApi().initNotification();
   const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
 
   // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   // FlutterLocalNotificationsPlugin();
@@ -302,7 +308,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     initNotification(context);
 
-
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print(message.data);
       print("onMessageOpenedApp: $message");
@@ -374,7 +379,7 @@ class _MyAppState extends State<MyApp> {
                 textDirection: TextDirection.ltr,
                 child: LoadingOverlay(
                   child: MaterialApp(
-                    title: 'Flutter Demo',
+                    title: 'Local Supermart',
                     theme: ThemeData(
                       primarySwatch: Colors.blue,
                       fontFamily: 'dm_sans_regular',

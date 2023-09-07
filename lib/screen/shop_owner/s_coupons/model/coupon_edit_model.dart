@@ -39,13 +39,13 @@ class EditCouponsResModel {
 
 class EditCouponsData {
   CouponDetails? couponDetails;
-  // List<CategoryData>? categoryList;
-  List<SelectedCategoryData>? selectedcategorydata;
+  List<EditCategoryList>? categoryList;
+  // List<SelectedCategoryData>? selectedcategorydata;
   List<ProductData>? allProductsList;
 
   EditCouponsData({
     required this.couponDetails,
-    required this.selectedcategorydata,
+    required this.categoryList,
     required this.allProductsList,
   });
 
@@ -54,9 +54,9 @@ class EditCouponsData {
         ? CouponDetails.fromJson(json['coupon_details'])
         : null;
     if (json["category_list"] != null) {
-      selectedcategorydata = <SelectedCategoryData>[];
+      categoryList = <EditCategoryList>[];
       json["category_list"].forEach((v) {
-        selectedcategorydata!.add(SelectedCategoryData.fromJson(v));
+        categoryList!.add(EditCategoryList.fromJson(v));
       });
     }
 
@@ -67,6 +67,19 @@ class EditCouponsData {
         allProductsList!.add(ProductData.fromJson(v));
       });
     }
+  }
+}
+
+class EditCategoryList{
+  int ? id;
+  String ? categoryName;
+  EditCategoryList({
+    this.id,
+    this.categoryName
+});
+  EditCategoryList.fromJson(Map<String,dynamic>json){
+    id=json["id"];
+    categoryName=json["category_name"];
   }
 }
 

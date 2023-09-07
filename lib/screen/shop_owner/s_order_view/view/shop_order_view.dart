@@ -6936,7 +6936,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(
+          :watch.isDetailsAvailable?
+          SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -9511,7 +9512,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           height: 11.w,
                                                         ),
                                                         Text(
-                                                          "\u{20B9} ${watch.orderDetails?.totalAmount}",
+                                                          "\u{20B9} ${watch.orderDetails?.shopOwnerRefunPaybelAmount}",
                                                           style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
@@ -10455,7 +10456,35 @@ class _ShopOrderViewState extends State<ShopOrderView> {
               //     ))
               //   ],
               // ),
+            ):Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/images/empty_order.png",
+                width: 250.w,
+                height: 250.h,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Text(
+            "Order details not found",
+            style: GoogleFonts.dmSans(
+              textStyle: TextStyle(
+                  color: Black1,
+                  letterSpacing: .5,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600),
             ),
+          ),
+        ],
+      ),
     );
   }
 }
