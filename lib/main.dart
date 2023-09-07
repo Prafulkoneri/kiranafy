@@ -145,6 +145,11 @@ Future<void> initNotification(context) async {
 
     // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
     if (payload != null) {
+      if(payload.endsWith(".pdf")){
+        print("its a pdf");
+        OpenFile.open(payload);
+      }
+      else{
       print("lets go");
       final readShop =
           Provider.of<SMainScreenController>(context, listen: false);
@@ -170,6 +175,7 @@ Future<void> initNotification(context) async {
         if (res["data"]["user_type"] == "shop_owner") {
           readShop.onCustomTypeNotification(context);
         }
+      }
       }
       // OpenFile.open(payload);
     }
@@ -373,7 +379,7 @@ class _MyAppState extends State<MyApp> {
                 textDirection: TextDirection.ltr,
                 child: LoadingOverlay(
                   child: MaterialApp(
-                    title: 'Flutter Demo',
+                    title: 'Local Supermart',
                     theme: ThemeData(
                       primarySwatch: Colors.blue,
                       fontFamily: 'dm_sans_regular',

@@ -448,15 +448,15 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                           widget.isEditCoupon == true &&
                                   watch.details?.shopOwnerCategoryId != ""
                               ? SDropDownField(
-                                  value: watch.categoryId,
+                                  value: watch.categoryId.toString(),
                                   // hintText: "Delivery Charge",
                                   hintSize: 15.sp,
                                   onChanged: (value) {
                                     read.onCategorySelect(value, context);
                                   },
-                                  items: watch.selectedcategorydata
+                                  items: watch.editCategoryList
                                       ?.map((item) => DropdownMenuItem<String>(
-                                            value: item.categoryId.toString(),
+                                            value: item.id.toString(),
                                             child: Text(
                                               item.categoryName ?? "",
                                               style: TextStyle(
@@ -492,7 +492,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                             height: 20.h,
                           ),
                           widget.isEditCoupon == true &&
-                                  watch.details?.shopOwnerProductId != ""
+                              watch.productId!= ""
                               ? SDropDownField(
                                   value: watch.productId,
                                   // hintText: "Delivery Charge",
