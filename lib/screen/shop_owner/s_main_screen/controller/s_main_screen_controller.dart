@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/
 class SMainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
+  bool hideBottomNavigation=false;
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = ShopDashBoardView(
     refresh: true,
@@ -116,8 +117,10 @@ class SMainScreenController extends ChangeNotifier {
   }
 
   onCustomTypeNotification(context) {
+    print("hello");
     currentScreen = NotificationsScreenView();
     currentIndex = 0;
+    hideBottomNavigation=false;
     notifyListeners();
   }
 
@@ -127,7 +130,13 @@ class SMainScreenController extends ChangeNotifier {
       orderId: id.toString(),
       fromOrderStatus: true,
     );
-    currentIndex = 1;
+    hideBottomNavigation=true;
     notifyListeners();
   }
+
+  showBottomNavigationBar(){
+    hideBottomNavigation=false;
+    notifyListeners();
+  }
+
 }

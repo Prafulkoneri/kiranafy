@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +22,7 @@ import 'package:local_supper_market/screen/customer/favourites/controller/favour
 import 'package:local_supper_market/screen/customer/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
@@ -100,13 +102,14 @@ import 'screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
 import 'screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
 import 'screen/shop_owner/shop_review/controller/shop_review_controller.dart';
+import 'package:provider/provider.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("handled background message");
 }
 
 final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-final navigatorKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 String? selectedNotificationPayload;
 
 class ReceivedNotification {
@@ -123,7 +126,7 @@ class ReceivedNotification {
   final String payload;
 }
 
-Future<void> initNotification() async {
+Future<void> initNotification(context) async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
@@ -138,7 +141,38 @@ Future<void> initNotification() async {
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) {
     print(payload);
-    if (payload != null) OpenFile.open(payload);
+    print("hello allllllll");
+
+    // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
+    if (payload != null) {
+      print("lets go");
+      final readShop =
+          Provider.of<SMainScreenController>(context, listen: false);
+      final readCustomer =
+          Provider.of<MainScreenController>(context, listen: false);
+      var res = jsonDecode(payload);
+      print("common baby");
+      print(res["data"]["user_type"]);
+      print("common baby");
+      if (res["data"]["notification_type"] == "order") {
+        if (res["data"]["user_type"] == "customer") {
+          readCustomer.onOrderTypeNotification(
+              context, res["data"]["redirect_id"]);
+        }
+        if (res["data"]["user_type"] == "shop_owner") {
+          readShop.onOrderTypeNotification(context, res["data"]["redirect_id"]);
+        }
+      }
+      if (res["data"]["notification_type"] == "custom") {
+        if (res["data"]["user_type"] == "customer") {
+          readCustomer.onCustomTypeNotification(context);
+        }
+        if (res["data"]["user_type"] == "shop_owner") {
+          readShop.onCustomTypeNotification(context);
+        }
+      }
+      // OpenFile.open(payload);
+    }
   });
 }
 
@@ -157,11 +191,11 @@ void main() async {
   }
   await FireBaseApi().initNotification();
   const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
 
   // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   // FlutterLocalNotificationsPlugin();
-  initNotification();
+  // initNotification(navigatorKey.currentState?.context);
 
   runApp(
     MultiProvider(
@@ -266,6 +300,8 @@ final firebaseMessaging = FirebaseMessaging.instance;
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    initNotification(context);
+
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print(message.data);
       print("onMessageOpenedApp: $message");
@@ -337,7 +373,7 @@ class _MyAppState extends State<MyApp> {
                 textDirection: TextDirection.ltr,
                 child: LoadingOverlay(
                   child: MaterialApp(
-                    title: 'Local Supermart',
+                    title: 'Flutter Demo',
                     theme: ThemeData(
                       primarySwatch: Colors.blue,
                       fontFamily: 'dm_sans_regular',

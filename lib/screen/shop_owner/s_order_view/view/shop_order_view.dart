@@ -6926,6 +6926,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             ))),
                     (Route<dynamic> route) => false,
                   );
+            readMainScreen.showBottomNavigationBar();
           },
           title: "Order",
           onActionTap: () {},

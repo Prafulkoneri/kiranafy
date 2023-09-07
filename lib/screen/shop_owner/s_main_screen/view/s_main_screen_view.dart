@@ -42,7 +42,8 @@ class _SMainScreenViewState extends State<SMainScreenView> {
       },
       child: Scaffold(
         extendBody: true,
-        bottomNavigationBar: Container(
+        bottomNavigationBar: !watch.hideBottomNavigation?
+        Container(
             height: 87.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -359,7 +360,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                   ),
                 ),
               ),
-            )),
+            )):Container(),
         body: watch.currentScreen,
       ),
     );

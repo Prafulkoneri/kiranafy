@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/controller/notification_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/controller/notification_controller.dart';
@@ -38,6 +39,7 @@ class _CustomerNotificationsScreenViewState
   @override
   Widget build(BuildContext context) {
     final read = context.read<CustomerNoticationController>();
+    final readMain = context.read<MainScreenController>();
     final watch = context.watch<CustomerNoticationController>();
     return Scaffold(
         resizeToAvoidBottomInset: true,
@@ -52,6 +54,7 @@ class _CustomerNotificationsScreenViewState
                         index: 4, screenName: ProfileScreenView())),
                 (Route<dynamic> route) => false,
               );
+              readMain.showBottomNavigationBar();
             },
             title: "Notifications",
             action: InkWell(

@@ -378,6 +378,9 @@ class SAddCouponsController extends ChangeNotifier {
         print("99999999");
         productList = result.editCouponsData?.allProductsList;
         categoryId = details?.shopOwnerCategoryId.toString() ?? "";
+        print("00000");
+        print(categoryId);
+        print("00000");
         productId = details?.shopOwnerProductId.toString() ?? "";
         showLoader(false);
         notifyListeners();

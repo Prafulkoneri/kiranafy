@@ -42,6 +42,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
           child: PrimaryAppBar(
             onBackBtnPressed: () {
               Navigator.pop(context);
+              readMainScreen.showBottomNavigationBar();
             },
             title: "Notifications",
             action: InkWell(
