@@ -123,6 +123,7 @@ class SCouponsListController extends ChangeNotifier {
           couponsListData?.removeAt(index);
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
+          Navigator.pop(context);
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,

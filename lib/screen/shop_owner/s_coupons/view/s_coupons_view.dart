@@ -505,7 +505,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                               Expanded(
                                                                                 child: GestureDetector(
                                                                                   onTap: () async {
-                                                                                    Navigator.pop(context);
+                                                                                    // Navigator.pop(context);
                                                                                     read.deleteCoupons(context, index, element?.id);
                                                                                   },
                                                                                   child: Container(
