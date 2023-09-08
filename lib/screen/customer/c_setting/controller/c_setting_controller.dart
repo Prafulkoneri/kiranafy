@@ -25,7 +25,7 @@ class CustomerSettingController extends ChangeNotifier {
 // Group Value fo
 // r Radio Button.
   Future<void> initState(context) async {
-    await shopNotification(context, "");
+    await customerNotification(context, "");
 
     notifyListeners();
   }
@@ -35,7 +35,7 @@ class CustomerSettingController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> shopNotification(context, status) async {
+  Future<void> customerNotification(context, status) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
