@@ -39,7 +39,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
           preferredSize: Size.fromHeight(60.w),
           child: Center(
             child: PrimaryAppBar(
-              title: "            Advertisement Request form",
+              title: "Advertisement form",
               onBackBtnPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,

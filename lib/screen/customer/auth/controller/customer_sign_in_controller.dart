@@ -217,6 +217,7 @@ import 'package:local_supper_market/screen/customer/auth/repository/customer_sig
 import 'package:local_supper_market/screen/customer/auth/repository/mobile_number_check_repo.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_view.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -349,6 +350,7 @@ class CustomerSignInController extends ChangeNotifier {
             MaterialPageRoute(
                 builder: (context) => MainScreenView(
                       index: 0,
+                  screenName: HomeScreenView(refreshPage: true),
                     )));
       } else {
         Utils.showPrimarySnackbar(context, result.message,

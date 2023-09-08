@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/shop_owner/s_setting/model/delete_acc
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/get_setting_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerSettingController extends ChangeNotifier {
@@ -21,13 +22,61 @@ class CustomerSettingController extends ChangeNotifier {
   bool isAppNotificationEnable = true;
   bool isStackLoading = false;
   bool isLoading = true;
+  String appVersion = "";
   // String? selectedValue;
 // Group Value fo
 // r Radio Button.
   Future<void> initState(context) async {
-    await customerNotification(context, "");
+    await appVersionCheck(context);
+    await shopNotification(context, "");
 
     notifyListeners();
+  }
+
+  Future<void> appVersionCheck(context) async {
+    PackageInfo packageInfo = PackageInfo(
+      appName: 'Unknown',
+      packageName: 'Unknown',
+      version: 'Unknown',
+      buildNumber: 'Unknown',
+      buildSignature: 'Unknown',
+      installerStore: 'Unknown',
+    );
+    final info = await PackageInfo.fromPlatform();
+    packageInfo = info;
+    appVersion = packageInfo.version;
+    notifyListeners();
+
+    // SharedPreferences pref = await SharedPreferences.getInstance();
+    // print(pref.getString("successToken"));
+    // appVersionRepo.appVersion(pref.getString("successToken")).then((response) {
+    //   print(response.body);
+    //   final result = AppVersionModel.fromJson(jsonDecode(response.body));
+    //   print(response.statusCode);
+    //   if (response.statusCode == 200) {
+    //     appversiondata = result.appversiondata;
+    //
+    //     // isAppNotificationEnable =
+    //     //     result.settingData?.appNotification == "on" ? true : false;
+    //     Utils.showPrimarySnackbar(context, result.message,
+    //         type: SnackType.success);
+    //     notifyListeners();
+    //   } else {
+    //     LoadingOverlay.of(context).hide();
+    //     Utils.showPrimarySnackbar(context, result.message,
+    //         type: SnackType.error);
+    //   }
+    // }).onError((error, stackTrace) {
+    //   Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    // }).catchError(
+    //   (Object e) {
+    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+    //   },
+    //   test: (Object e) {
+    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+    //     return false;
+    //   },
+    // );
   }
 
   showLoader(value) {
@@ -35,7 +84,7 @@ class CustomerSettingController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> customerNotification(context, status) async {
+  Future<void> shopNotification(context, status) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));

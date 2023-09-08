@@ -36,8 +36,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
   Widget build(BuildContext context) {
     final watch = context.watch<CustomerSettingController>();
     final read = context.read<CustomerSettingController>();
-    final readMainScreen = context.read<MainScreenController>();
-    final reaMainScreen = context.read<ShopSettingController>();
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(66.w),
@@ -308,7 +307,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
                     height: 15.h,
                   ),
                   Text(
-                    "App Version - ${reaMainScreen.appVersion}",
+                    "App Version - ${watch.appVersion}",
                     style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w400,

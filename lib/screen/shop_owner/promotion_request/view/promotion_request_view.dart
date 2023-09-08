@@ -575,7 +575,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(66.w),
           child: PrimaryAppBar(
-            title: "Promotion Request form",
+            title: "Promotion form",
             onBackBtnPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
