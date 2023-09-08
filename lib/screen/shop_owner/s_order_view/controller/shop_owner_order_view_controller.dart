@@ -796,7 +796,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   bool isDeliveryCodeError = false;
   bool isLoading = true;
   bool isStackLoading = false;
-  bool isDetailsAvailable=false;
+  bool isDetailsAvailable = false;
   List<bool> isSelectedReason = [];
   bool isOtherReasonSelected = false;
   ShopOrderViewData? shopOrderViewData;
@@ -886,57 +886,53 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       log(response.body);
       final result = ShopOrderViewResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200){
+        if (result.status == 200) {
+          shopOrderViewData = result.shopOrderViewData;
+          orderDetails = shopOrderViewData?.orderDetails;
+          couponDetails = shopOrderViewData?.couponDetails;
+          deliveryAddressDetails = shopOrderViewData?.deliveryAddressDetails;
+          orderProductDetails = shopOrderViewData?.orderProductDetails;
+          subTotal = orderDetails?.subTotal ?? "";
+          totalAmount = orderDetails?.totalAmount ?? "";
+          deliveryCharges = orderDetails?.deliveryCharges ?? "";
+          totalDiscount = orderDetails?.totalDiscount ?? "";
+          totalRefundAmount = shopOrderViewData?.orderRefundAmount ?? "0";
+          selectedProductList = List<bool>.filled(
+              orderProductDetails?.length ?? 0, false,
+              growable: true);
+          int productListLength = orderProductDetails?.length ?? 0;
+          for (int i = 0; i < productListLength; i++) {
+            if (orderProductDetails?[i].status == "active") {
+              selectedProductList.removeAt(i);
+              selectedProductList.insert(i, true);
+            } else {
+              selectedProductList.removeAt(i);
+              selectedProductList.insert(i, false);
+            }
+          }
+          print("selectedProductList${selectedProductList}");
+          if (orderDetails?.shopOwnerRefundStatus == "pending") {
+            if (orderDetails?.customerCancelledStatus == "YES" ||
+                orderDetails?.shopOwnerCancelledStatus == "YES") {
+              acceptPayment = true;
+            }
+          }
 
-
-        shopOrderViewData = result.shopOrderViewData;
-        orderDetails = shopOrderViewData?.orderDetails;
-        couponDetails = shopOrderViewData?.couponDetails;
-        deliveryAddressDetails = shopOrderViewData?.deliveryAddressDetails;
-        orderProductDetails = shopOrderViewData?.orderProductDetails;
-        subTotal = orderDetails?.subTotal ?? "";
-        totalAmount = orderDetails?.totalAmount ?? "";
-        deliveryCharges = orderDetails?.deliveryCharges ?? "";
-        totalDiscount = orderDetails?.totalDiscount ?? "";
-        totalRefundAmount = shopOrderViewData?.orderRefundAmount ?? "0";
-        selectedProductList = List<bool>.filled(
-            orderProductDetails?.length ?? 0, false,
-            growable: true);
-        int productListLength = orderProductDetails?.length ?? 0;
-        for (int i = 0; i < productListLength; i++) {
-          if (orderProductDetails?[i].status == "active") {
-            selectedProductList.removeAt(i);
-            selectedProductList.insert(i, true);
+          await getCancelOrderList(context);
+          if (showLoading) {
+            showLoader(false);
           } else {
-            selectedProductList.removeAt(i);
-            selectedProductList.insert(i, false);
+            showLoader(true);
           }
-        }
-        print("selectedProductList${selectedProductList}");
-        if (orderDetails?.shopOwnerRefundStatus == "pending") {
-          if (orderDetails?.customerCancelledStatus == "YES" ||
-              orderDetails?.shopOwnerCancelledStatus == "YES") {
-            acceptPayment = true;
-          }
-        }
-
-        await getCancelOrderList(context);
-        if (showLoading) {
-          showLoader(false);
+          isDetailsAvailable = true;
+          notifyListeners();
         } else {
-          showLoader(true);
-        }
-        isDetailsAvailable=true;
-        notifyListeners();
-      }
-        else{
-          isDetailsAvailable=false;
+          isDetailsAvailable = false;
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
           showLoader(false);
         }
-      }
-        else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -957,6 +953,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       OrderInvoiceRequestModel(orderId: orderId.toString());
 
   Future<void> orderInvoice(context) async {
+    ///////
     // orderId = oId;
     // getDownloadPath();
 
