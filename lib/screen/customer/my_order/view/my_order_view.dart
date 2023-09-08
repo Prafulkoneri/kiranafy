@@ -329,9 +329,8 @@ class _MyOrderViewState extends State<MyOrderView> {
                                   ],
                                 ),
                                 ////////////////////////////////////NEW////////////////////////////
-                                element?.orderStatus == "Refund"
-                                    // &&
-                                    //         element?.refundProductCount != ""
+                                element?.orderStatus == "Refund" &&
+                                        element?.refundProductCount != ""
                                     ? Container(
                                         padding: EdgeInsets.only(
                                             left: 11.w,
@@ -374,9 +373,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                     /////////////////////
 
                                                     : element?.orderStatus ==
-                                                                "Refund" &&
-                                                            element?.refundProductCount !=
-                                                                ""
+                                                            "Refund"
                                                         ? Text(
                                                             "${element?.refundProductCount} products return request",
                                                             style: TextStyle(
@@ -386,16 +383,15 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                                 fontSize: 12.sp,
                                                                 color: Black),
                                                           )
-                                                        : Container(),
-                                            // Text(
-                                            //     "Cancel Refund Request",
-                                            //     style: TextStyle(
-                                            //         fontWeight:
-                                            //             FontWeight
-                                            //                 .w400,
-                                            //         fontSize: 12.sp,
-                                            //         color: Black),
-                                            //   ),
+                                                        : Text(
+                                                            "Cancel Refund Request",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 12.sp,
+                                                                color: Black),
+                                                          ),
                                             Row(
                                               children: [
                                                 element?.refundOrderStatus ==
