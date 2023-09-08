@@ -329,12 +329,9 @@ class _MyOrderViewState extends State<MyOrderView> {
                                   ],
                                 ),
                                 ////////////////////////////////////NEW////////////////////////////
-
-                                (element?.orderStatus == "Refund" ||
-                                            element?.orderStatus ==
-                                                "Cancelled") &&
-                                        element?.refundProductCount != ""
-                                    ? Container(
+                                  element?.orderStatus == "Refund" &&
+                                    element?.refundProductCount != ""?
+                                    Container(
                                         padding: EdgeInsets.only(
                                             left: 11.w,
                                             right: 9.w,
@@ -372,26 +369,29 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                             fontSize: 12.sp,
                                                             color: Black),
                                                       )
-                                                    : element?.orderStatus ==
-                                                            "Refund"
-                                                        ? Text(
-                                                            "${element?.refundProductCount} products return request",
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontSize: 12.sp,
-                                                                color: Black),
-                                                          )
-                                                        : Text(
-                                                            "Cancel Refund Request",
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontSize: 12.sp,
-                                                                color: Black),
-                                                          ),
+
+                                                    /////////////////////
+                                                    
+                                            : element?.orderStatus ==
+                                                    "Refund"
+                                                ? Text(
+                                                    "${element?.refundProductCount} products return request",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight
+                                                                .w400,
+                                                        fontSize: 12.sp,
+                                                        color: Black),
+                                                  )
+                                                : Text(
+                                                    "Cancel Refund Request",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight
+                                                                .w400,
+                                                        fontSize: 12.sp,
+                                                        color: Black),
+                                                  ),
                                             Row(
                                               children: [
                                                 element?.refundOrderStatus ==
@@ -432,9 +432,117 @@ class _MyOrderViewState extends State<MyOrderView> {
                                               ],
                                             ),
                                           ],
-                                        ),
-                                      )
-                                    : Container()
+                                        )
+                                      ):
+                                // (element?.orderStatus == "Refund" ||
+                                //         element?.orderStatus == "Cancelled")
+                                //     // element?.refundProductCount != ""
+                                //     ? Container(
+                                //         padding: EdgeInsets.only(
+                                //             left: 11.w,
+                                //             right: 9.w,
+                                //             top: 4.w,
+                                //             bottom: 3.w),
+                                //         decoration: BoxDecoration(
+                                //           borderRadius:
+                                //               BorderRadius.circular(5),
+                                //           color: Color(0xffFBDFDF),
+                                //         ),
+                                //         child: Row(
+                                //           mainAxisAlignment:
+                                //               MainAxisAlignment.spaceBetween,
+                                //           children: [
+                                //             element?.orderStatus == "Refund" &&
+                                //                     element?.customerCancelledStatus ==
+                                //                         "YES"
+                                //                 ? Text(
+                                //                     "Cancel Refund Request",
+                                //                     style: TextStyle(
+                                //                         fontWeight:
+                                //                             FontWeight.w400,
+                                //                         fontSize: 12.sp,
+                                //                         color: Black),
+                                //                   )
+                                //                 : element?.orderStatus ==
+                                //                             "Refund" &&
+                                //                         element?.shopCancelledStatus ==
+                                //                             "YES"
+                                //                     ? Text(
+                                //                         "Cancel Refund Request",
+                                //                         style: TextStyle(
+                                //                             fontWeight:
+                                //                                 FontWeight.w400,
+                                //                             fontSize: 12.sp,
+                                //                             color: Black),
+                                //                       )
+                                //                     : Container(),
+                                //                     /////////////////////
+                                //
+                                //             // : element?.orderStatus ==
+                                //             //         "Refund"
+                                //             //     ? Text(
+                                //             //         "${element?.refundProductCount} products return request",
+                                //             //         style: TextStyle(
+                                //             //             fontWeight:
+                                //             //                 FontWeight
+                                //             //                     .w400,
+                                //             //             fontSize: 12.sp,
+                                //             //             color: Black),
+                                //             //       )
+                                //             //     : Text(
+                                //             //         "Cancel Refund Request",
+                                //             //         style: TextStyle(
+                                //             //             fontWeight:
+                                //             //                 FontWeight
+                                //             //                     .w400,
+                                //             //             fontSize: 12.sp,
+                                //             //             color: Black),
+                                //             //       ),
+                                //             Row(
+                                //               children: [
+                                //                 element?.refundOrderStatus ==
+                                //                         "pending"
+                                //                     ? Text(
+                                //                         "Pending",
+                                //                         style: TextStyle(
+                                //                             fontWeight:
+                                //                                 FontWeight.w500,
+                                //                             fontSize: 14.sp,
+                                //                             color: Black),
+                                //                       )
+                                //                     : element?.refundOrderStatus ==
+                                //                             "accept"
+                                //                         ? Text(
+                                //                             "Accepted",
+                                //                             style: TextStyle(
+                                //                                 fontWeight:
+                                //                                     FontWeight
+                                //                                         .w500,
+                                //                                 fontSize: 14.sp,
+                                //                                 color: Black),
+                                //                           )
+                                //                         : element?.refundOrderStatus ==
+                                //                                 "reject"
+                                //                             ? Text(
+                                //                                 "Rejected",
+                                //                                 style: TextStyle(
+                                //                                     fontWeight:
+                                //                                         FontWeight
+                                //                                             .w500,
+                                //                                     fontSize:
+                                //                                         14.sp,
+                                //                                     color:
+                                //                                         Black),
+                                //                               )
+                                //                             : Container()
+                                //               ],
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       )
+                                //     :
+                                Container()
+                                    
                               ],
                             ),
                           ),
