@@ -649,6 +649,7 @@ class OrderSummaryController extends ChangeNotifier {
                     : totalAmount,
                 finalTotalDiscount: totalDiscount,
                 totalItems: orderFinalTotals?.itemCount.toString(),
+            couponDiscountAmount: couponDiscount,
               )),
     );
     showOnPageLoader(false);

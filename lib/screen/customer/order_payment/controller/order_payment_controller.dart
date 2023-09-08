@@ -34,15 +34,16 @@ class OrderPaymentController extends ChangeNotifier {
   String finalSubTotal = "";
   String finalDeliveryCharges = "";
   String customerPaymentMode = "";
+  String couponDiscount="";
 
   ShopDetails? shopDetailData;
   OrderPaymentData? orderPaymentData;
   Future<void> initState(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
-      ftAmount, ftDiscount, tItems, fSubTotal, fDCharges) async {
+      ftAmount, ftDiscount, tItems, fSubTotal, fDCharges,cDiscountAmount) async {
     showStackLoader(false);
     groupValue = "cash";
     await orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
-        ftAmount, ftDiscount, tItems, fSubTotal, fDCharges);
+        ftAmount, ftDiscount, tItems, fSubTotal, fDCharges,cDiscountAmount);
   }
 
   void onRadioButtonSelected(value) {
@@ -75,7 +76,7 @@ class OrderPaymentController extends ChangeNotifier {
       finalDeliveryCharges: finalDeliveryCharges.toString());
 
   Future<void> orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot,
-      cdType, ftAmount, ftDiscount, tItems, fSubTotal, fDCharges) async {
+      cdType, ftAmount, ftDiscount, tItems, fSubTotal, fDCharges,cDiscountAmount) async {
     showLoader(true);
     shopId = id.toString();
     cartId = cId.toString();
@@ -89,6 +90,7 @@ class OrderPaymentController extends ChangeNotifier {
     totalItems = tItems.toString();
     finalSubTotal = fSubTotal.toString();
     finalDeliveryCharges = fDCharges.toString();
+    couponDiscount=cDiscountAmount.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     orderPaymentRepo
@@ -133,7 +135,10 @@ class OrderPaymentController extends ChangeNotifier {
           finalSubTotal: finalSubTotal.toString(),
           finalDeliveryCharges: finalDeliveryCharges.toString(),
           transactionId: transactionIdController.text,
-          customerPaymentMode: groupValue);
+          customerPaymentMode: groupValue,couponDiscountAmount: couponDiscount);
+
+
+
   Future<void> placeOrder(
     context,
   ) async {
@@ -208,6 +213,4 @@ class OrderPaymentController extends ChangeNotifier {
           type: SnackType.success);
     });
   }
-
-  Future<void> removeCoupon() async {}
 }

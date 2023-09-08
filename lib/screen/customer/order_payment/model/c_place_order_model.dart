@@ -13,6 +13,7 @@ class CustomerPlaceOrderReqModel {
   String? finalDeliveryCharges;
   String? customerPaymentMode;
   String ? transactionId;
+  String ? couponDiscountAmount;
 
   CustomerPlaceOrderReqModel(
       {this.cartId,
@@ -28,7 +29,7 @@ class CustomerPlaceOrderReqModel {
       this.finalSubTotal,
       this.finalDeliveryCharges,
         this.transactionId,
-      this.customerPaymentMode});
+      this.customerPaymentMode,this.couponDiscountAmount});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
@@ -46,6 +47,7 @@ class CustomerPlaceOrderReqModel {
     data["final_delivery_charges"] = finalDeliveryCharges;
     data["customer_payment_mode"] = customerPaymentMode;
     data["customer_transaction_id"] = transactionId;
+    data["coupon_discount_amount"] = couponDiscountAmount;
 
     return data;
   }

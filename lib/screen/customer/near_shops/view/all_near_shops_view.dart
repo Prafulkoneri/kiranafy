@@ -58,6 +58,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
     final read = context.read<AllShopController>();
     final watchHome = context.watch<HomeScreenController>();
     final watchMain = context.watch<MainScreenController>();
+    final readMain = context.watch<MainScreenController>();
 
     return Scaffold(
       body: watch.isLoading
@@ -66,19 +67,10 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
             )
           : WillPopScope(
               onWillPop: () async {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MainScreenView(
-                          index: 0,
-                          screenName: HomeScreenView(
-                            refreshPage: false,
-                          ))),
-                  (Route<dynamic> route) => false,
-                );
+                readMain.onNavigation(0, HomeScreenView(refreshPage: false), context);
                 // Navigator.of(context).popUntil(
                 //     (route) => route.settings.name == "MainScreenView");
-                return false;
+                return true;
               },
               child: SingleChildScrollView(
                   controller: scrollController,
@@ -165,19 +157,25 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                   final element = watch.nearByShop?[index];
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => MainScreenView(
-                                                index: 1,
-                                                screenName: ShopProfileView(
-                                                    shopId:
-                                                        element?.id.toString(),
-                                                    refreshPage: true,
-                                                    routeName:
-                                                        "allNearShopView"))),
-                                        (Route<dynamic> route) => false,
-                                      );
+                                      readMain.onNavigation(1,ShopProfileView(
+                                          shopId:
+                                          element?.id.toString(),
+                                          refreshPage: true,
+                                          routeName:
+                                          "allNearShopView"), context);
+                                      // Navigator.pushReplacement(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) => MainScreenView(
+                                      //           index: 1,
+                                      //           screenName: ShopProfileView(
+                                      //               shopId:
+                                      //                   element?.id.toString(),
+                                      //               refreshPage: true,
+                                      //               routeName:
+                                      //                   "allNearShopView"))),
+                                      //   // (Route<dynamic> route) => false,
+                                      // );
                                     },
                                     child: Stack(
                                       children: [

@@ -79,7 +79,6 @@ class _ShopProfileViewState extends State<ShopProfileView> {
               onWillPop: () async {
                 read.onBackPressed(
                     widget.routeName, context, widget.categoryId);
-
                 return false;
               },
               child: SingleChildScrollView(

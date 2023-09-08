@@ -39,6 +39,8 @@ class _MainScreenViewState extends State<MainScreenView> {
           .initState(context, widget.index, widget.screenName);
     });
   }
+  final GlobalKey<NavigatorState> navigatorKey =
+  new GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -389,7 +391,20 @@ class _MainScreenViewState extends State<MainScreenView> {
               ),
             ),
           )):Container(),
-      body: watch.currentScreen,
+      body:watch.currentScreen
+      // Stack(
+      //   children: [
+      //     Navigator(
+      //       key: navigatorKey,
+      //       onGenerateRoute: (RouteSettings settings) {
+      //         return MaterialPageRoute(
+      //           builder: (BuildContext context) => watch.currentScreen,
+      //         );
+      //       },
+      //     ),
+      //   ],
+      // ),
+
     );
   }
 }

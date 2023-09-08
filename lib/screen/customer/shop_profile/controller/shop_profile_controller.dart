@@ -85,52 +85,7 @@ class ShopProfileViewController extends ChangeNotifier {
 
   void onBackPressed(screenName, context, cId) {
     print(screenName);
-    if (screenName == "allNearShopView") {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MainScreenView(
-                index: 1,
-                screenName: AllNearShopsView(
-                  isSearchFocus: false,
-                  refreshPage: false,
-                ))),
-        (Route<dynamic> route) => false,
-      );
-    }
-    if (screenName == "nearShopsCategory") {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MainScreenView(
-                index: 1,
-                screenName: AllNearCategoryShopsView(
-                  categoryId: cId,
-                  refresh: false,
-                ))),
-        (Route<dynamic> route) => false,
-      );
-    }
-    if (screenName == "homeNearbyShop") {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MainScreenView(
-                index: 0,
-                screenName: HomeScreenView(
-                  refreshPage: false,
-                ))),
-        (Route<dynamic> route) => false,
-      );
-    } else {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MainScreenView(
-                index: 0, screenName: HomeScreenView(refreshPage: false))),
-        (Route<dynamic> route) => false,
-      );
-    }
+
   }
 
   Future<void> getShopDetails(context, id, refresh) async {
