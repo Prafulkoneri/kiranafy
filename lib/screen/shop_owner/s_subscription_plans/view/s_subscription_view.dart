@@ -521,7 +521,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                         PrimaryCheckBox(
                                           value: watch.isSelectedPaymentUpi,
                                           onChanged: (value) {
-                                            read.onFavToShopSelected(value);
+                                            read.onPaymentModeSelected(value);
                                           },
                                         ),
                                         Text(

@@ -145,37 +145,38 @@ Future<void> initNotification(context) async {
 
     // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
     if (payload != null) {
-      if(payload.endsWith(".pdf")){
+      if (payload.endsWith(".pdf")) {
         print("its a pdf");
         OpenFile.open(payload);
-      }
-      else{
-      print("lets go");
-      final readShop =
-          Provider.of<SMainScreenController>(context, listen: false);
-      final readCustomer =
-          Provider.of<MainScreenController>(context, listen: false);
-      var res = jsonDecode(payload);
-      print("common baby");
-      print(res["data"]["user_type"]);
-      print("common baby");
-      if (res["data"]["notification_type"] == "order") {
-        if (res["data"]["user_type"] == "customer") {
-          readCustomer.onOrderTypeNotification(
-              context, res["data"]["redirect_id"]);
+      } else {
+        print("lets go");
+        final readShop =
+            Provider.of<SMainScreenController>(context, listen: false);
+        final readCustomer =
+            Provider.of<MainScreenController>(context, listen: false);
+        var res = jsonDecode(payload);
+        print("common baby");
+        print(res["data"]["user_type"]);
+        print("common baby");
+        if (res["data"]["notification_type"] == "order") {
+          if (res["data"]["user_type"] == "customer") {
+            readCustomer.onOrderTypeNotification(
+                context, res["data"]["redirect_id"]);
+          }
+          if (res["data"]["user_type"] == "shop_owner") {
+            readShop.onOrderTypeNotification(
+                context, res["data"]["redirect_id"]);
+          }
         }
-        if (res["data"]["user_type"] == "shop_owner") {
-          readShop.onOrderTypeNotification(context, res["data"]["redirect_id"]);
+
+        if (res["data"]["notification_type"] == "custom") {
+          if (res["data"]["user_type"] == "customer") {
+            readCustomer.onCustomTypeNotification(context);
+          }
+          if (res["data"]["user_type"] == "shop_owner") {
+            readShop.onCustomTypeNotification(context);
+          }
         }
-      }
-      if (res["data"]["notification_type"] == "custom") {
-        if (res["data"]["user_type"] == "customer") {
-          readCustomer.onCustomTypeNotification(context);
-        }
-        if (res["data"]["user_type"] == "shop_owner") {
-          readShop.onCustomTypeNotification(context);
-        }
-      }
       }
       // OpenFile.open(payload);
     }
@@ -314,9 +315,27 @@ class _MyAppState extends State<MyApp> {
       print("okkkkk");
       print(message.data["notification_type"]);
       if (message.data["notification_type"] == "custom") {
-        context.read<SMainScreenController>().onCustomTypeNotification(context);
+        if (message.data["user_type"] == "customer") {
+          context
+              .read<MainScreenController>()
+              .onCustomTypeNotification(context);
+        } else {
+          context
+              .read<SMainScreenController>()
+              .onCustomTypeNotification(context);
+        }
+        // context.read<SMainScreenController>().onCustomTypeNotification(context);
       }
       if (message.data["notification_type"] == "order") {
+        if (message.data["user_type"] == "customer") {
+          context
+              .read<MainScreenController>()
+              .onOrderTypeNotification(context, message.data["redirect_id"]);
+        } else {
+          context
+              .read<SMainScreenController>()
+              .onOrderTypeNotification(context, message.data["redirect_id"]);
+        }
         context
             .read<SMainScreenController>()
             .onOrderTypeNotification(context, message.data["redirect_id"]);
@@ -325,6 +344,32 @@ class _MyAppState extends State<MyApp> {
 
     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
       print("onBackgroundMessage: $message");
+      if (message.data["notification_type"] == "custom") {
+        if (message.data["user_type"] == "customer") {
+          context
+              .read<MainScreenController>()
+              .onCustomTypeNotification(context);
+        } else {
+          context
+              .read<SMainScreenController>()
+              .onCustomTypeNotification(context);
+        }
+        // context.read<SMainScreenController>().onCustomTypeNotification(context);
+      }
+      if (message.data["notification_type"] == "order") {
+        if (message.data["user_type"] == "customer") {
+          context
+              .read<MainScreenController>()
+              .onOrderTypeNotification(context, message.data["redirect_id"]);
+        } else {
+          context
+              .read<SMainScreenController>()
+              .onOrderTypeNotification(context, message.data["redirect_id"]);
+        }
+        context
+            .read<SMainScreenController>()
+            .onOrderTypeNotification(context, message.data["redirect_id"]);
+      }
     });
 
     // fireBaseApi();

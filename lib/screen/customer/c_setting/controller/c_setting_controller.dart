@@ -22,7 +22,7 @@ class CustomerSettingController extends ChangeNotifier {
   bool isAppNotificationEnable = true;
   bool isStackLoading = false;
   bool isLoading = true;
-  String appVersion="";
+  String appVersion = "";
   // String? selectedValue;
 // Group Value fo
 // r Radio Button.
@@ -32,7 +32,6 @@ class CustomerSettingController extends ChangeNotifier {
 
     notifyListeners();
   }
-
 
   Future<void> appVersionCheck(context) async {
     PackageInfo packageInfo = PackageInfo(
