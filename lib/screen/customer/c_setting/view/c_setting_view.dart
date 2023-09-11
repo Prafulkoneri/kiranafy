@@ -39,7 +39,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "Settings",
           onBackBtnPressed: () {

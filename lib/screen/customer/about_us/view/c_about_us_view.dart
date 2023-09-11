@@ -198,7 +198,7 @@ class _CAboutUsViewState extends State<CAboutUsView> {
     final watch = context.watch<CmsController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "About Us",
           onBackBtnPressed: () {

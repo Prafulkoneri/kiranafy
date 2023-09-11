@@ -37,7 +37,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
     // var dropdownValue;
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             title: "KYC Verification Details",
             isBackButtonEnabled: false,
@@ -106,57 +106,61 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 ),
                                 child: watch.fileImage1.path != ""
                                     ? Center(
-                                        child:
-                                        watch.image1Type=="pdf" ?
-                                        Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/pdf_image.png",
-                                              width: 31.33.w,
-                                              height: 39.17.w,
-                                              fit: BoxFit.contain,
-                                            ),
-                                            SizedBox(
-                                              height: 15.w,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  watch.fileName1,
-                                                  textAlign: TextAlign.center,
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: TextStyle(
-                                                        color: kgrey,
-                                                        letterSpacing: .5,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight.w400),
+                                        child: watch.image1Type == "pdf"
+                                            ? Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/pdf_image.png",
+                                                    width: 31.33.w,
+                                                    height: 39.17.w,
+                                                    fit: BoxFit.contain,
                                                   ),
+                                                  SizedBox(
+                                                    height: 15.w,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        watch.fileName1,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: kgrey,
+                                                              letterSpacing: .5,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                            : Container(
+                                                height: 160.h,
+                                                width: 160.w,
+                                                // height: 112.h,
+                                                // width: 310.w,
+                                                // width: ScreenUtil().screenWidth,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
+                                                        width: 1,
+                                                        color: grey6)),
+                                                child: Image.file(
+                                                  watch.fileImage1,
+                                                  fit: BoxFit.contain,
                                                 ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                      :Container(
-                                          height: 160.h,
-                                          width: 160.w,
-                                          // height: 112.h,
-                                          // width: 310.w,
-                                          // width: ScreenUtil().screenWidth,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                  width: 1, color: grey6)),
-                                          child: Image.file(
-                                            watch.fileImage1,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        ),
+                                              ),
                                       )
                                     : Column(
                                         mainAxisAlignment:
@@ -213,58 +217,61 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 ),
                                 child: watch.fileImage2.path != ""
                                     ? Center(
-                                        child:
-                                        watch.image2Type=="pdf" ?
-                                        Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/pdf_image.png",
-                                              width: 31.33.w,
-                                              height: 39.17.w,
-                                              fit: BoxFit.contain,
-                                            ),
-                                            SizedBox(
-                                              height: 15.w,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  watch.fileName2,
-                                                  textAlign: TextAlign.center,
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: TextStyle(
-                                                        color: kgrey,
-                                                        letterSpacing: .5,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight.w400),
+                                        child: watch.image2Type == "pdf"
+                                            ? Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/pdf_image.png",
+                                                    width: 31.33.w,
+                                                    height: 39.17.w,
+                                                    fit: BoxFit.contain,
                                                   ),
+                                                  SizedBox(
+                                                    height: 15.w,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        watch.fileName2,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: kgrey,
+                                                              letterSpacing: .5,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                            : Container(
+                                                height: 160.h,
+                                                width: 160.w,
+                                                // height: 112.h,
+                                                // width: 310.w,
+                                                // width: ScreenUtil().screenWidth,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
+                                                        width: 1,
+                                                        color: grey6)),
+                                                child: Image.file(
+                                                  watch.fileImage2,
+                                                  fit: BoxFit.contain,
                                                 ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                            :
-                                        Container(
-                                          height: 160.h,
-                                          width: 160.w,
-                                          // height: 112.h,
-                                          // width: 310.w,
-                                          // width: ScreenUtil().screenWidth,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                  width: 1, color: grey6)),
-                                          child: Image.file(
-                                            watch.fileImage2,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        ),
+                                              ),
                                       )
                                     : Column(
                                         mainAxisAlignment:
@@ -334,8 +341,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        Row(
-                            children: [
+                        Row(children: [
                           Expanded(
                             child: GestureDetector(
                               onTap: () async {
@@ -352,58 +358,62 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 ),
                                 child: watch.fileImage3.path != ""
                                     ? Center(
-                                        child:  watch.image3Type=="pdf" ?
-                                        Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/pdf_image.png",
-                                              width: 31.33.w,
-                                              height: 39.17.w,
-                                              fit: BoxFit.contain,
-                                            ),
-                                            SizedBox(
-                                              height: 15.w,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  watch.fileName3,
-                                                  textAlign: TextAlign.center,
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: TextStyle(
-                                                        color: kgrey,
-                                                        letterSpacing: .5,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight.w400),
+                                        child: watch.image3Type == "pdf"
+                                            ? Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/pdf_image.png",
+                                                    width: 31.33.w,
+                                                    height: 39.17.w,
+                                                    fit: BoxFit.contain,
                                                   ),
+                                                  SizedBox(
+                                                    height: 15.w,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        watch.fileName3,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: kgrey,
+                                                              letterSpacing: .5,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                            : Container(
+                                                height: 160.h,
+                                                width: 160.w,
+                                                // height: 112.h,
+                                                // width: 310.w,
+                                                // width: ScreenUtil().screenWidth,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
+                                                        width: 1,
+                                                        color: grey6)),
+                                                child: Image.file(
+                                                  watch.fileImage3,
+                                                  // fit: BoxFit.cover,
+                                                  fit: BoxFit.contain,
                                                 ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                            :
-                                        Container(
-                                          height: 160.h,
-                                          width: 160.w,
-                                          // height: 112.h,
-                                          // width: 310.w,
-                                          // width: ScreenUtil().screenWidth,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                  width: 1, color: grey6)),
-                                          child: Image.file(
-                                            watch.fileImage3,
-                                            // fit: BoxFit.cover,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        ),
+                                              ),
                                       )
                                     : Column(
                                         mainAxisAlignment:
@@ -459,58 +469,61 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 ),
                                 child: watch.fileImage4.path != ""
                                     ? Center(
-                                        child:
-                                        watch.image4Type=="pdf" ?
-                                        Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/pdf_image.png",
-                                              width: 31.33.w,
-                                              height: 39.17.w,
-                                              fit: BoxFit.contain,
-                                            ),
-                                            SizedBox(
-                                              height: 15.w,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  watch.fileName4,
-                                                  textAlign: TextAlign.center,
-                                                  style: GoogleFonts.dmSans(
-                                                    textStyle: TextStyle(
-                                                        color: kgrey,
-                                                        letterSpacing: .5,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight.w400),
+                                        child: watch.image4Type == "pdf"
+                                            ? Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/pdf_image.png",
+                                                    width: 31.33.w,
+                                                    height: 39.17.w,
+                                                    fit: BoxFit.contain,
                                                   ),
+                                                  SizedBox(
+                                                    height: 15.w,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        watch.fileName4,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
+                                                            GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: kgrey,
+                                                              letterSpacing: .5,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                            : Container(
+                                                height: 160.h,
+                                                width: 160.w,
+                                                // height: 112.h,
+                                                // width: 310.w,
+                                                // width: ScreenUtil().screenWidth,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
+                                                        width: 1,
+                                                        color: grey6)),
+                                                child: Image.file(
+                                                  watch.fileImage4,
+                                                  fit: BoxFit.contain,
                                                 ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                            :
-                                        Container(
-                                          height: 160.h,
-                                          width: 160.w,
-                                          // height: 112.h,
-                                          // width: 310.w,
-                                          // width: ScreenUtil().screenWidth,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                  width: 1, color: grey6)),
-                                          child: Image.file(
-                                            watch.fileImage4,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        ),
+                                              ),
                                       )
                                     : Column(
                                         mainAxisAlignment:

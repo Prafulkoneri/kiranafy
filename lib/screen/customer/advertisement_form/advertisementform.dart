@@ -558,7 +558,7 @@ class _AdvertisementFormState extends State<AdvertisementForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(title: "Promotion Request form"),
       ),
       backgroundColor: Colors.white,

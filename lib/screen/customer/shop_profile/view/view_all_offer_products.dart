@@ -56,7 +56,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
     final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
               Navigator.pushAndRemoveUntil(

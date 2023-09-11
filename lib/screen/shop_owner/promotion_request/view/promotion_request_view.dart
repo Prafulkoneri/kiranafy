@@ -573,7 +573,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             title: "Promotion form",
             onBackBtnPressed: () {

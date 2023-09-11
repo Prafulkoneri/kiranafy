@@ -39,7 +39,7 @@ class _SHelpCenterViewState extends State<SHelpCenterView> {
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             Navigator.pushAndRemoveUntil(

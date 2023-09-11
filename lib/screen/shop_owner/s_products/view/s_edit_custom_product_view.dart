@@ -67,7 +67,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             widget.isFromAccountScreen == false
@@ -128,17 +128,18 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                           onChanged: (value) {
                             read.onCategorySelected(value);
                           },
-                          items: selectedCategoryListWatch.selectedCategoriesList!
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item.categoryId.toString(),
-                                    child: Text(
-                                      item.categoryName ?? "",
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
+                          items:
+                              selectedCategoryListWatch.selectedCategoriesList!
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item.categoryId.toString(),
+                                        child: Text(
+                                          item.categoryName ?? "",
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
                           hint: "Select Category ",
                         ),
                         SizedBox(
@@ -350,7 +351,6 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                 ),
                               ),
                             );
-
                           },
                           child: Container(
                             height: 185.h,
