@@ -47,21 +47,21 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
           .read<SSelectedProductsController>()
           .initState(context, widget.categoryId, widget.isRefresh);
     });
-    // setPagination();
+    setPagination();
   }
 
-  // setPagination() {
-  //   scrollController.addListener(() {
-  //     if (scrollController.position.pixels ==
-  //         scrollController.position.maxScrollExtent) {
-  //       SchedulerBinding.instance.addPostFrameCallback((_) {
-  //         context
-  //             .read<SSelectedProductsController>()
-  //             .onScrollMaxExtent(context, widget.categoryId);
-  //       });
-  //     }
-  //   });
-  // }
+  setPagination() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          context
+              .read<SSelectedProductsController>()
+              .onScrollMaxExtent(context, widget.categoryId);
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
