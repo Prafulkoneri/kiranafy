@@ -78,7 +78,7 @@ class _AddProductViewState extends State<AddProductView> {
                 (Route<dynamic> route) => false,
               );
             },
-            title: "Add Products",
+            title: "Add Paaroducts",
             action: SvgPicture.asset("assets/icons/forward.svg"),
             onActionTap: () async {
               read.uploadAddProducts(context);
@@ -142,102 +142,109 @@ class _AddProductViewState extends State<AddProductView> {
                               final element = watch.allAdminProductList[index];
                               return Column(
                                 children: [
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                        left: 4.w,
-                                        top: 4,
-                                        bottom: 4,
-                                        right: 9.w),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black
-                                                .withOpacity(0.03.w),
-                                            blurRadius: 5,
-                                            spreadRadius: 0,
-                                            offset: Offset(5, 6)),
-                                      ],
-                                      border: Border.all(
-                                          color:
-                                              Colors.black.withOpacity(0.07)),
-                                      borderRadius: BorderRadius.circular(7.w),
-                                    ),
-                                    // padding: EdgeInsets.only(
-                                    //     top: 6.w, bottom: 7.w, right: 9.w, left: 21.w),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        element.productImagePath != ""
-                                            ? AppNetworkImages(
-                                                imageUrl:
-                                                    "${element.productImagePath}",
-                                                height: 60.h,
-                                                width: 60.w,
-                                                fit: BoxFit.cover,
-                                              )
-                                            : Image(
-                                                image: AssetImage(
-                                                  "assets/images/profile_image.png",
-                                                ),
-                                                height: 60.h,
-                                                width: 60.w,
-                                                fit: BoxFit.fill,
-                                              ),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                height: 10.w,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Flexible(
-                                                    child: Text(
-                                                      "${element.productName}",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 16.sp,
-                                                          color: Black1),
-                                                    ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      read.onProductsSelected(
+                                          index, element.id.toString());
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                          left: 4.w,
+                                          top: 4,
+                                          bottom: 4,
+                                          right: 9.w),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black
+                                                  .withOpacity(0.03.w),
+                                              blurRadius: 5,
+                                              spreadRadius: 0,
+                                              offset: Offset(5, 6)),
+                                        ],
+                                        border: Border.all(
+                                            color:
+                                                Colors.black.withOpacity(0.07)),
+                                        borderRadius:
+                                            BorderRadius.circular(7.w),
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          element.productImagePath != ""
+                                              ? AppNetworkImages(
+                                                  imageUrl:
+                                                      "${element.productImagePath}",
+                                                  height: 60.h,
+                                                  width: 60.w,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Image(
+                                                  image: AssetImage(
+                                                    "assets/images/profile_image.png",
                                                   ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 10.w,
-                                              ),
-                                              Text(
-                                                "${element.unitWithWeight}",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14.sp,
-                                                    color: Grey),
-                                              )
-                                            ],
+                                                  height: 60.h,
+                                                  width: 60.w,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                          SizedBox(
+                                            width: 12.w,
                                           ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(top: 10.w),
-                                          child: PrimaryCheckBox(
-                                            // value: watch.selectedProduct[index],
-                                            onChanged: (value) {
-                                              read.onProductsSelected(
-                                                  index, element.id.toString());
-                                            },
-                                            value: watch.selectedProduct[index],
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  height: 10.w,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${element.productName}",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize: 16.sp,
+                                                            color: Black1),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10.w,
+                                                ),
+                                                Text(
+                                                  "${element.unitWithWeight}",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14.sp,
+                                                      color: Grey),
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Container(
+                                            padding: EdgeInsets.only(top: 10.w),
+                                            child: PrimaryCheckBox(
+                                              // value: watch.selectedProduct[index],
+                                              onChanged: (value) {
+                                                read.onProductsSelected(index,
+                                                    element.id.toString());
+                                              },
+                                              value:
+                                                  watch.selectedProduct[index],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
