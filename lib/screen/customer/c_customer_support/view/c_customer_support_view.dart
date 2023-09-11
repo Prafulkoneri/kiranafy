@@ -19,7 +19,7 @@ class _CCustomerSupportViewState extends State<CCustomerSupportView> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             title: "Customer Support",
             action: SvgPicture.asset("assets/icons/addressadd.svg"),

@@ -50,7 +50,7 @@ class _AddAddressViewState extends State<AddAddressView> {
     final read = context.read<AddAddressController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             read.onBackBtnPressed(context, widget.cartId, widget.shopId);
@@ -495,9 +495,9 @@ class _AddAddressViewState extends State<AddAddressView> {
                       controller: watch.landMarkController,
                       titleHeader: "Landmark",
                     ),
-SizedBox(
-  height: 100.w,
-),
+                    SizedBox(
+                      height: 100.w,
+                    ),
                   ],
                 ),
               ),

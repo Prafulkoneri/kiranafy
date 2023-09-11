@@ -135,7 +135,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "My Subscription",
           onBackBtnPressed: () {

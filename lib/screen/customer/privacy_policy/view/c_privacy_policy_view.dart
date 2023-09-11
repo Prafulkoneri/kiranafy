@@ -11,7 +11,7 @@ class CPriacyPolicyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "Privacy Policy",
           onActionTap: () {},

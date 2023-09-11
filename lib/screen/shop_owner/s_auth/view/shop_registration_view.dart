@@ -45,7 +45,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
     // var dropdownValue;
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             title: "Shop Registration",
             isBackButtonEnabled: false,
@@ -184,7 +184,6 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                           ),
                           Expanded(
                               child: SDropDownField(
-
                             onChanged: (value) async {
                               await read.onStateSelected(value);
                               await read.getCityList(context);

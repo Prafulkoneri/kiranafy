@@ -21,9 +21,10 @@ import 'package:provider/provider.dart';
 
 class AddProductView extends StatefulWidget {
   final String? categoryId;
-  final bool ? refresh;
+  final bool? refresh;
 
-  const AddProductView({super.key, required this.categoryId,required this.refresh});
+  const AddProductView(
+      {super.key, required this.categoryId, required this.refresh});
 
   @override
   State<AddProductView> createState() => _AddProductViewState();
@@ -32,17 +33,18 @@ class AddProductView extends StatefulWidget {
 bool _checkbox = false;
 
 class _AddProductViewState extends State<AddProductView> {
-  ScrollController scrollController =ScrollController();
+  ScrollController scrollController = ScrollController();
 
   void initState() {
     print("widget.categoryId ${widget.categoryId}");
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
           .read<SAddProductsController>()
-          .initState(context, widget.categoryId,widget.refresh);
+          .initState(context, widget.categoryId, widget.refresh);
     });
     setPagination();
   }
+
   setPagination() {
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
@@ -62,7 +64,7 @@ class _AddProductViewState extends State<AddProductView> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(66.w),
+          preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
               Navigator.pushAndRemoveUntil(
@@ -88,8 +90,8 @@ class _AddProductViewState extends State<AddProductView> {
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
-          controller: scrollController,
-          physics: AlwaysScrollableScrollPhysics(),
+                controller: scrollController,
+                physics: AlwaysScrollableScrollPhysics(),
                 child: Stack(
                   children: [
                     Column(
@@ -129,38 +131,43 @@ class _AddProductViewState extends State<AddProductView> {
                         ///Products Starts
 
                         ListView.builder(
-
                             padding: EdgeInsets.only(
                               left: 19.w,
                               right: 19.w,
                             ),
                             itemCount: watch.allAdminProductList.length ?? 0,
                             shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                            physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext, index) {
                               final element = watch.allAdminProductList[index];
                               return Column(
                                 children: [
                                   Container(
                                     padding: EdgeInsets.only(
-                                        left: 4.w, top: 4, bottom: 4, right: 9.w),
+                                        left: 4.w,
+                                        top: 4,
+                                        bottom: 4,
+                                        right: 9.w),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       boxShadow: [
                                         BoxShadow(
-                                            color: Colors.black.withOpacity(0.03.w),
+                                            color: Colors.black
+                                                .withOpacity(0.03.w),
                                             blurRadius: 5,
                                             spreadRadius: 0,
                                             offset: Offset(5, 6)),
                                       ],
                                       border: Border.all(
-                                          color: Colors.black.withOpacity(0.07)),
+                                          color:
+                                              Colors.black.withOpacity(0.07)),
                                       borderRadius: BorderRadius.circular(7.w),
                                     ),
                                     // padding: EdgeInsets.only(
                                     //     top: 6.w, bottom: 7.w, right: 9.w, left: 21.w),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         element.productImagePath != ""
                                             ? AppNetworkImages(
@@ -191,7 +198,8 @@ class _AddProductViewState extends State<AddProductView> {
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Flexible(
                                                     child: Text(

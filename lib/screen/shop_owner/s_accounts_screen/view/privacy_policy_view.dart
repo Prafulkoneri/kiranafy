@@ -30,7 +30,7 @@ class _PrivacyPolicyViewState extends State<PrivacyPolicyView> {
     final watch = context.watch<CmsController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "Privacy Policy",
           onBackBtnPressed: () {
@@ -45,7 +45,7 @@ class _PrivacyPolicyViewState extends State<PrivacyPolicyView> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           child: Container(
               padding: EdgeInsets.all(20.w),
               child: HtmlWidget(

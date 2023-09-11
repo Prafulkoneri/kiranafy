@@ -50,7 +50,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
     final read = context.read<SAddCouponsController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: widget.isEditCoupon == false ? "Add Coupon" : "Edit Coupon",
           onBackBtnPressed: () {
@@ -491,8 +491,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                           SizedBox(
                             height: 20.h,
                           ),
-                          widget.isEditCoupon == true &&
-                              watch.productId!= ""
+                          widget.isEditCoupon == true && watch.productId != ""
                               ? SDropDownField(
                                   value: watch.productId,
                                   // hintText: "Delivery Charge",

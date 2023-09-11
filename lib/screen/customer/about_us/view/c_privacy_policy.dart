@@ -32,7 +32,7 @@ class _CustomerPrivacyPolicyState extends State<CustomerPrivacyPolicy> {
     final watch = context.watch<CmsController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "Privacy Policy",
           onBackBtnPressed: () {

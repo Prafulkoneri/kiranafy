@@ -65,12 +65,12 @@ class _KycCompletedViewState extends State<KycCompletedView> {
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(66.w),
+        preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
             title: "KYC Verification", isBackButtonEnabled: false),
       ),
       body: WillPopScope(
-        onWillPop: ()async{
+        onWillPop: () async {
           return false;
         },
         child: Stack(
@@ -159,7 +159,8 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SSubscriptionScreenView(loggedIn: false,
+                                builder: (context) => SSubscriptionScreenView(
+                                      loggedIn: false,
                                     )),
                             (Route<dynamic> route) => false,
                           );
