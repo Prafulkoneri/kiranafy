@@ -454,7 +454,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                           color: watch.isUnitImagesAdded[
                                           index]? Color(0xffEAFFF1):Colors.white,
                                           border: Border.all(
-                                              color: const Color(0xff69BB86)),
+                                              color: watch.isUnitImagesAdded[
+                                              index]? Color(0xff69BB86):Color(0xffB3B3B3)),
                                           borderRadius:
                                               BorderRadius.circular(10.w)),
                                       padding: EdgeInsets.symmetric(
