@@ -98,7 +98,6 @@ class _AddUnitViewState extends State<AddUnitView> {
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
-
               physics: BouncingScrollPhysics(),
               child: Container(
                 padding: EdgeInsets.only(
@@ -352,7 +351,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                           read.openGallery2(context);
                                           Navigator.pop(context);
                                         },
-                                        child: Text("gallery "),
+                                        child: Text("Gallery "),
                                       ),
                                     ],
                                   ),
@@ -433,7 +432,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                           read.openGallery3(context);
                                           Navigator.pop(context);
                                         },
-                                        child: Text("gallery "),
+                                        child: Text("Gallery "),
                                       ),
                                     ],
                                   ),

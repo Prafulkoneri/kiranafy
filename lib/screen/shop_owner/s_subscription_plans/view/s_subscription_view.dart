@@ -581,14 +581,17 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                               SizedBox(
                                 height: 31.h,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/new_qrcode.jpg",
-                                    width: 200.w,
-                                  )
-                                ],
+                              Visibility(
+                                visible: watch.isQrCodeSeleted,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/new_qrcode.jpg",
+                                      width: 200.w,
+                                    )
+                                  ],
+                                ),
                               ),
                               SizedBox(
                                 height: 20.h,
@@ -708,7 +711,6 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                       print("hello");
                                       await read.buySubscriptionPlan(
                                           context, widget.loggedIn);
-
                                       // readMainScreen.onNavigation(
                                       //     4, SShopConfigurationView(), context);
                                       // };

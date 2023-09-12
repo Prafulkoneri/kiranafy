@@ -1857,7 +1857,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                           ?.productImagePath ==
                                                                       ""
                                                                   ? Image.asset(
-                                                                      "assets/images/offerone.png",
+                                                                      "assets/images/profile_image.png",
                                                                       height:
                                                                           68.h,
                                                                       width:

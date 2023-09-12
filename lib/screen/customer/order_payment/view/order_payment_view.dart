@@ -34,7 +34,7 @@ class OrderPaymentView extends StatefulWidget {
   final String? totalItems;
   final String? finalSubTotal;
   final String? finalDeliveryCharges;
-  final String ? couponDiscountAmount;
+  final String? couponDiscountAmount;
 
   const OrderPaymentView(
       {super.key,
@@ -49,7 +49,8 @@ class OrderPaymentView extends StatefulWidget {
       this.finalTotalDiscount,
       this.totalItems,
       this.finalSubTotal,
-      this.finalDeliveryCharges,this.couponDiscountAmount});
+      this.finalDeliveryCharges,
+      this.couponDiscountAmount});
 
   @override
   State<OrderPaymentView> createState() => _OrderPaymentViewState();
@@ -76,7 +77,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
           widget.finalTotalDiscount,
           widget.totalItems,
           widget.finalSubTotal,
-          widget.finalDeliveryCharges,widget.couponDiscountAmount);
+          widget.finalDeliveryCharges,
+          widget.couponDiscountAmount);
     });
   }
 
@@ -739,35 +741,40 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                               ),
                               watch.shopDetailData?.acceptedPaymentStatus !=
                                       "cod"
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        watch.shopDetailData
-                                                    ?.shopOwnerQrCodeImage ==
-                                                ""
-                                            ? Image.asset(
-                                                "assets/images/shop_image.png",
-                                                width: 165.w,
-                                                height: 150.h,
-                                                fit: BoxFit.cover,
-                                              )
-                                            : AppNetworkImages(
-                                                width: 165.w,
-                                                height: 150.h,
-                                                fit: BoxFit.cover,
-                                                imageUrl: watch.shopDetailData
-                                                        ?.shopOwnerQrCodeImage ??
-                                                    "",
-                                              ),
-                                        // AppNetworkImages(
-                                        //   imageUrl:
-                                        //       "${watch.shopDetailData?.shopOwnerQrCodeImage}",
-                                        //   // "assets/images/qrcode.png",
-                                        //   // height: 165.h,
-                                        //   width: 165.w,
-                                        // ),
-                                      ],
+                                  ? Visibility(
+                                      visible: watch.groupValue == "qr_code"
+                                          ? true
+                                          : false,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          watch.shopDetailData
+                                                      ?.shopOwnerQrCodeImage ==
+                                                  ""
+                                              ? Image.asset(
+                                                  "assets/images/shop_image.png",
+                                                  width: 165.w,
+                                                  height: 150.h,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : AppNetworkImages(
+                                                  width: 165.w,
+                                                  height: 150.h,
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: watch.shopDetailData
+                                                          ?.shopOwnerQrCodeImage ??
+                                                      "",
+                                                ),
+                                          // AppNetworkImages(
+                                          //   imageUrl:
+                                          //       "${watch.shopDetailData?.shopOwnerQrCodeImage}",
+                                          //   // "assets/images/qrcode.png",
+                                          //   // height: 165.h,
+                                          //   width: 165.w,
+                                          // ),
+                                        ],
+                                      ),
                                     )
                                   : Container(),
                               SizedBox(

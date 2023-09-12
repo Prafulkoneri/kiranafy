@@ -440,246 +440,275 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                         ),
                                                         // height: 95.h,
                                                         // width: 355.w,
-                                                        child: Row(
-                                                          children: [
-                                                            Container(
+                                                        child: Container(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 10.w),
+                                                          child: Row(
+                                                            children: [
+                                                              element?.productImagePath ==
+                                                                      ""
+                                                                  ? Container(
+                                                                      width:
+                                                                          80.w,
+                                                                      height:
+                                                                          80.h,
+                                                                      child: Image
+                                                                          .asset(
+                                                                        "assets/images/profile_image.png",
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
+                                                                    )
+                                                                  : Container(
+                                                                      width:
+                                                                          80.w,
+                                                                      height:
+                                                                          80.h,
+                                                                      child:
+                                                                          AppNetworkImages(
+                                                                        imageUrl:
+                                                                            "${element?.productImagePath}",
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
+                                                                    ),
+                                                              // Container(
                                                               // padding:
                                                               //     EdgeInsets.only(left: 10.w),
-                                                              child:
-                                                                  AppNetworkImages(
-                                                                imageUrl: element
-                                                                    ?.productImagePath,
-                                                                width: 80.w,
-                                                                height: 80.h,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                                // height: 92.h,
+                                                              //   child:
+                                                              //       AppNetworkImages(
+                                                              //     imageUrl: element
+                                                              //         ?.productImagePath,
+                                                              // width: 80.w,
+                                                              // height: 80.h,
+                                                              //     fit: BoxFit
+                                                              //         .cover,
+                                                              //     // height: 92.h,
+                                                              //   ),
+                                                              // ),
+                                                              SizedBox(
+                                                                width: 5.w,
                                                               ),
-                                                            ),
-                                                            // SizedBox(
-                                                            //   width: 15.w,
-                                                            // ),
-                                                            Container(
-                                                              height: 70.h,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      border:
-                                                                          Border(
-                                                                left:
-                                                                    BorderSide(
-                                                                  //                   <--- right side
-                                                                  color: Color(
-                                                                      0xffE0E0E0),
-                                                                  // width: 1.0,
-                                                                ),
-                                                              )),
-                                                            ),
-                                                            // VerticalDivider(
-                                                            //   color: lightgrey,
-                                                            //   thickness: 1,
-                                                            // ),
-                                                            SizedBox(
-                                                              width: 15.w,
-                                                            ),
-                                                            Expanded(
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  SizedBox(
-                                                                    height: 5.w,
+                                                              Container(
+                                                                height: 70.h,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                        border:
+                                                                            Border(
+                                                                  left:
+                                                                      BorderSide(
+                                                                    //                   <--- right side
+                                                                    color: Color(
+                                                                        0xffE0E0E0),
+                                                                    // width: 1.0,
                                                                   ),
-                                                                  Container(
-                                                                    padding: EdgeInsets.only(
-                                                                        right: 5
-                                                                            .w),
-                                                                    child: Row(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Flexible(
-                                                                          child:
-                                                                              Text(
-                                                                            "${element?.productName}",
-                                                                            // "Ariel Washing Powder",
-                                                                            style:
-                                                                                GoogleFonts.dmSans(
-                                                                              textStyle: TextStyle(
-                                                                                  color: Black1,
-                                                                                  // letterSpacing: .5,
-                                                                                  fontSize: 16.sp,
-                                                                                  fontWeight: FontWeight.w700),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                        element?.discountPercentage !=
-                                                                                ""
-                                                                            ? Container(
-                                                                                width: 60.w,
-                                                                                height: 20.h,
-                                                                                decoration: BoxDecoration(color: lightgreen, borderRadius: BorderRadius.all(Radius.circular(5.w))),
-                                                                                child: Center(
-                                                                                  child: Text("${element?.discountPercentage} off",
-                                                                                      // textAlign: TextAlign.center,
-                                                                                      style: GoogleFonts.dmSans(
-                                                                                        textStyle: TextStyle(color: Colors.white, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w500),
-                                                                                      )),
-                                                                                ),
-                                                                              )
-                                                                            : Container(),
-                                                                        // Container(
-                                                                        //   padding: EdgeInsets
-                                                                        //       .symmetric(
-                                                                        //           vertical:
-                                                                        //               0.91.w,
-                                                                        //           horizontal:
-                                                                        //               7.84.w),
-                                                                        //   // width: 60.w,
-                                                                        //   // height: 20.h,
-                                                                        //   decoration: BoxDecoration(
-                                                                        //       color: lightgreen
-                                                                        //           .withOpacity(
-                                                                        //               0.6),
-                                                                        //       borderRadius:
-                                                                        //           BorderRadius.all(
-                                                                        //               Radius.circular(
-                                                                        //                   5.w))),
-                                                                        //   child: Center(
-                                                                        //     child: Text("50% off",
-                                                                        //         // textAlign: TextAlign.center,
-                                                                        //         style: GoogleFonts
-                                                                        //             .dmSans(
-                                                                        //           textStyle: TextStyle(
-                                                                        //               color: Colors.white,
-                                                                        //               // letterSpacing:
-                                                                        //               //     .5,
-                                                                        //               fontSize: 12.sp,
-                                                                        //               fontWeight: FontWeight.w500),
-                                                                        //         )),
-                                                                        //   ),
-                                                                        // ),
-                                                                      ],
+                                                                )),
+                                                              ),
+                                                              // VerticalDivider(
+                                                              //   color: lightgrey,
+                                                              //   thickness: 1,
+                                                              // ),
+                                                              SizedBox(
+                                                                width: 15.w,
+                                                              ),
+                                                              Expanded(
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      height:
+                                                                          5.w,
                                                                     ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 5.w,
-                                                                  ),
-                                                                  Text(
-                                                                      "${element?.weight}  ${element?.unit}",
-                                                                      style: GoogleFonts
-                                                                          .dmSans(
-                                                                        textStyle: TextStyle(
-                                                                            color: Grey,
-                                                                            // letterSpacing: .5,
-                                                                            fontSize: 14.sp,
-                                                                            fontWeight: FontWeight.w500),
-                                                                      )),
-                                                                  SizedBox(
-                                                                    height:
-                                                                        9.48.w,
-                                                                  ),
-                                                                  Container(
-                                                                    padding: EdgeInsets.only(
-                                                                        right: 5
-                                                                            .w),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Row(
-                                                                          children: [
-                                                                            element?.mrpPrice != ""
-                                                                                ? Text('\u{20B9}${element?.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
-                                                                                : Text(""),
-                                                                            SizedBox(
-                                                                              width: 10.w,
-                                                                            ),
-                                                                            element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice
-                                                                                ? Text(
-                                                                                    '\u{20B9}${element?.offerPrice}',
-                                                                                    style: GoogleFonts.dmSans(
-                                                                                      textStyle: TextStyle(
-                                                                                          // decoration:
-                                                                                          // TextDecoration.lineThrough,
-                                                                                          color: Black,
-                                                                                          letterSpacing: .5,
-                                                                                          fontSize: 13.sp,
-                                                                                          fontWeight: FontWeight.w500),
-                                                                                    ),
-                                                                                  )
-                                                                                : Container()
-                                                                          ],
-                                                                        ),
-                                                                        Row(
-                                                                          children: [
-                                                                            GestureDetector(
-                                                                              onTap: () {
-                                                                                if (watch.isQuanityBtnPressed) {
-                                                                                  return;
-                                                                                }
-                                                                                read.subtractItemQuantity(context, element?.cartItemId.toString(), "subtract", index);
-                                                                              },
-                                                                              child: SvgPicture.asset(
-                                                                                'assets/icons/minus.svg',
-                                                                                // width: 30.w,
-                                                                                // height: 30.h,
-                                                                              ),
-                                                                            ),
-                                                                            SizedBox(
-                                                                              width: 12.w,
-                                                                            ),
-                                                                            Text(
-                                                                              "${watch.quantityList[index]}",
+                                                                    Container(
+                                                                      padding: EdgeInsets.only(
+                                                                          right:
+                                                                              5.w),
+                                                                      child:
+                                                                          Row(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Flexible(
+                                                                            child:
+                                                                                Text(
+                                                                              "${element?.productName}",
+                                                                              // "Ariel Washing Powder",
                                                                               style: GoogleFonts.dmSans(
                                                                                 textStyle: TextStyle(
-                                                                                    // decoration:
-                                                                                    // TextDecoration.lineThrough,
-                                                                                    color: Black,
-                                                                                    // letterSpacing:
-                                                                                    //     .5,
+                                                                                    color: Black1,
+                                                                                    // letterSpacing: .5,
                                                                                     fontSize: 16.sp,
-                                                                                    fontWeight: FontWeight.w500),
+                                                                                    fontWeight: FontWeight.w700),
                                                                               ),
                                                                             ),
-                                                                            SizedBox(
-                                                                              width: 12.w,
-                                                                            ),
-                                                                            GestureDetector(
-                                                                              onTap: () {
-                                                                                print(watch.isQuanityBtnPressed);
-                                                                                if (watch.isQuanityBtnPressed) {
-                                                                                  return;
-                                                                                }
-                                                                                read.addItemQuantity(context, element?.cartItemId.toString(), "add", element?.productType, index);
-                                                                              },
-                                                                              child: SvgPicture.asset(
-                                                                                'assets/images/add.svg',
-                                                                                // width: 30.w,
-                                                                                // height: 30.h,
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
+                                                                          ),
+                                                                          element?.discountPercentage != ""
+                                                                              ? Container(
+                                                                                  width: 60.w,
+                                                                                  height: 20.h,
+                                                                                  decoration: BoxDecoration(color: lightgreen, borderRadius: BorderRadius.all(Radius.circular(5.w))),
+                                                                                  child: Center(
+                                                                                    child: Text("${element?.discountPercentage} off",
+                                                                                        // textAlign: TextAlign.center,
+                                                                                        style: GoogleFonts.dmSans(
+                                                                                          textStyle: TextStyle(color: Colors.white, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w500),
+                                                                                        )),
+                                                                                  ),
+                                                                                )
+                                                                              : Container(),
+                                                                          // Container(
+                                                                          //   padding: EdgeInsets
+                                                                          //       .symmetric(
+                                                                          //           vertical:
+                                                                          //               0.91.w,
+                                                                          //           horizontal:
+                                                                          //               7.84.w),
+                                                                          //   // width: 60.w,
+                                                                          //   // height: 20.h,
+                                                                          //   decoration: BoxDecoration(
+                                                                          //       color: lightgreen
+                                                                          //           .withOpacity(
+                                                                          //               0.6),
+                                                                          //       borderRadius:
+                                                                          //           BorderRadius.all(
+                                                                          //               Radius.circular(
+                                                                          //                   5.w))),
+                                                                          //   child: Center(
+                                                                          //     child: Text("50% off",
+                                                                          //         // textAlign: TextAlign.center,
+                                                                          //         style: GoogleFonts
+                                                                          //             .dmSans(
+                                                                          //           textStyle: TextStyle(
+                                                                          //               color: Colors.white,
+                                                                          //               // letterSpacing:
+                                                                          //               //     .5,
+                                                                          //               fontSize: 12.sp,
+                                                                          //               fontWeight: FontWeight.w500),
+                                                                          //         )),
+                                                                          //   ),
+                                                                          // ),
+                                                                        ],
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height:
-                                                                        10.w,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            )
-                                                          ],
+                                                                    SizedBox(
+                                                                      height:
+                                                                          5.w,
+                                                                    ),
+                                                                    Text(
+                                                                        "${element?.weight}  ${element?.unit}",
+                                                                        style: GoogleFonts
+                                                                            .dmSans(
+                                                                          textStyle: TextStyle(
+                                                                              color: Grey,
+                                                                              // letterSpacing: .5,
+                                                                              fontSize: 14.sp,
+                                                                              fontWeight: FontWeight.w500),
+                                                                        )),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          9.48.w,
+                                                                    ),
+                                                                    Container(
+                                                                      padding: EdgeInsets.only(
+                                                                          right:
+                                                                              5.w),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Row(
+                                                                            children: [
+                                                                              element?.mrpPrice != "" ? Text('\u{20B9}${element?.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : Text(""),
+                                                                              SizedBox(
+                                                                                width: 10.w,
+                                                                              ),
+                                                                              element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice
+                                                                                  ? Text(
+                                                                                      '\u{20B9}${element?.offerPrice}',
+                                                                                      style: GoogleFonts.dmSans(
+                                                                                        textStyle: TextStyle(
+                                                                                            // decoration:
+                                                                                            // TextDecoration.lineThrough,
+                                                                                            color: Black,
+                                                                                            letterSpacing: .5,
+                                                                                            fontSize: 13.sp,
+                                                                                            fontWeight: FontWeight.w500),
+                                                                                      ),
+                                                                                    )
+                                                                                  : Container()
+                                                                            ],
+                                                                          ),
+                                                                          Row(
+                                                                            children: [
+                                                                              GestureDetector(
+                                                                                onTap: () {
+                                                                                  if (watch.isQuanityBtnPressed) {
+                                                                                    return;
+                                                                                  }
+                                                                                  read.subtractItemQuantity(context, element?.cartItemId.toString(), "subtract", index);
+                                                                                },
+                                                                                child: SvgPicture.asset(
+                                                                                  'assets/icons/minus.svg',
+                                                                                  // width: 30.w,
+                                                                                  // height: 30.h,
+                                                                                ),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 12.w,
+                                                                              ),
+                                                                              Text(
+                                                                                "${watch.quantityList[index]}",
+                                                                                style: GoogleFonts.dmSans(
+                                                                                  textStyle: TextStyle(
+                                                                                      // decoration:
+                                                                                      // TextDecoration.lineThrough,
+                                                                                      color: Black,
+                                                                                      // letterSpacing:
+                                                                                      //     .5,
+                                                                                      fontSize: 16.sp,
+                                                                                      fontWeight: FontWeight.w500),
+                                                                                ),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 12.w,
+                                                                              ),
+                                                                              GestureDetector(
+                                                                                onTap: () {
+                                                                                  print(watch.isQuanityBtnPressed);
+                                                                                  if (watch.isQuanityBtnPressed) {
+                                                                                    return;
+                                                                                  }
+                                                                                  read.addItemQuantity(context, element?.cartItemId.toString(), "add", element?.productType, index);
+                                                                                },
+                                                                                child: SvgPicture.asset(
+                                                                                  'assets/images/add.svg',
+                                                                                  // width: 30.w,
+                                                                                  // height: 30.h,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          10.w,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -769,7 +798,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                         SizedBox(
                                           width: 8.w,
                                         ),
-                                        Text("saved ₹${watch.totalSavedAmount}",
+                                        Text("Saved ₹${watch.totalSavedAmount}",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: Colors.white,

@@ -330,8 +330,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 ),
                                                                 height: 61.h,
                                                                 width: 60.w,
-                                                                fit:
-                                                                    BoxFit.fill,
+                                                                fit: BoxFit
+                                                                    .cover,
                                                               ),
                                                         SizedBox(
                                                           width: 8.w,

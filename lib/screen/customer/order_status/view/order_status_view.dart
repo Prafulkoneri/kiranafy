@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/delivery_view_second.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
@@ -25,7 +26,8 @@ import 'package:provider/provider.dart';
 
 class OrderStatusView extends StatefulWidget {
   final String? orderId;
-  OrderStatusView({super.key, this.orderId});
+  final String? screenName;
+  OrderStatusView({super.key, this.orderId, required this.screenName});
 
   @override
   State<OrderStatusView> createState() => _OrderStatusViewState();
@@ -71,26 +73,53 @@ class _OrderStatusViewState extends State<OrderStatusView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
-          onBackBtnPressed: () {
-            // Navigator.pop(context);
+          // onBackBtnPressed: () {
+          //   // Navigator.pop(context);
 
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => OrderStatusView(
-            //               orderId: widget.orderId,
-            //             )));
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => OrderDeliveryView(
-                        screenName: "myorderview",
-                        orderId: widget.orderId,
-                        isRefresh: true,
-                      )),
-            );
+          //   // Navigator.push(
+          //   //     context,
+          //   //     MaterialPageRoute(
+          //   //         builder: (context) => OrderStatusView(
+          //   //               orderId: widget.orderId,
+          //   //             )));
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => OrderDeliveryView(
+          //               screenName: "myorderview",
+          //               orderId: widget.orderId,
+          //               isRefresh: true,
+          //             )),
+          //   );
+          // },
+          // isBackButtonEnabled: false,
+          onBackBtnPressed: () {
+            widget.screenName == "orderSummary"
+                ? Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                              index: 0,
+                              screenName: HomeScreenView(
+                                refreshPage: true,
+                              ),
+                            )),
+                    (Route<dynamic> route) => false,
+                  )
+                : Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreenView(
+                              index: 0,
+                              screenName: OrderDeliveryView(
+                                orderId: widget.orderId,
+                                isRefresh: true,
+                                screenName: 'orderdeliveryview',
+                              ),
+                            )),
+                    (Route<dynamic> route) => false,
+                  );
           },
-          isBackButtonEnabled: false,
           title: "Order Status",
         ),
       ),

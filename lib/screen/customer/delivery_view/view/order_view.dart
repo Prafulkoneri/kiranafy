@@ -995,6 +995,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     index: 4,
                                                     screenName: OrderStatusView(
                                                       orderId: watch.orderId,
+                                                      screenName: "orderView",
                                                     ))),
                                         (Route<dynamic> route) => false,
                                       );
