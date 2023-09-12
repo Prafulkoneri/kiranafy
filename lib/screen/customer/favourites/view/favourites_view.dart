@@ -1041,131 +1041,24 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                             image: AssetImage(
                                                                 "assets/images/nearshop2.png"),
                                                             fit: BoxFit.cover)),
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(10.h),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [],
-                                                      ),
-                                                      Column(
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                  "${element?.shopName}",
-                                                                  style: GoogleFonts.roboto(
-                                                                      textStyle: TextStyle(
-                                                                          color: Colors.white,
-                                                                          // letterSpacing: .5,
-                                                                          fontSize: 15.sp,
-                                                                          fontWeight: FontWeight.w600))),
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Row(
-                                                                children: [
-                                                                  SvgPicture.asset(
-                                                                      "assets/icons/location1.svg",
-                                                                      width:
-                                                                          12.w,
-                                                                      height:
-                                                                          16.h),
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 8
-                                                                            .w),
-                                                                    child: Text(
-                                                                        "${element?.areaName} ${element?.cityName}",
-                                                                        style: GoogleFonts.roboto(
-                                                                            textStyle: TextStyle(
-                                                                                color: Colors.white,
-                                                                                letterSpacing: .5,
-                                                                                fontSize: 12.sp,
-                                                                                // height: 10,
-                                                                                fontWeight: FontWeight.w400))),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Container(
-                                                                height: 21.49.h,
-                                                                width: 49.w,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: yellow,
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              15)),
-                                                                ),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    SvgPicture
-                                                                        .asset(
-                                                                      "assets/images/star.svg",
-                                                                      height:
-                                                                          12.h,
-                                                                      width:
-                                                                          12.w,
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width:
-                                                                          4.3.w,
-                                                                    ),
-                                                                    Text(
-                                                                      // "",
-                                                                      double.parse(element?.ratings.toString() ??
-                                                                              "0.0")
-                                                                          .toStringAsFixed(
-                                                                              1),
-                                                                      style: GoogleFonts
-                                                                          .dmSans(
-                                                                        textStyle: TextStyle(
-                                                                            color:
-                                                                                Black,
-                                                                            letterSpacing:
-                                                                                .5,
-                                                                            fontSize:
-                                                                                12.sp,
-                                                                            fontWeight: FontWeight.w400),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+
                                               ),
                                             ),
                                             Positioned(
                                                 child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: index == 0 ? 19.w : 0,
-                                                  right:
-                                                      index == 2 ? 19.w : 5.w),
-                                              height: 160.h,
-                                              width: 352.w,
+                                                  margin:EdgeInsets.only(
+                                                left: 19.w,right: 12.w),
+                                                  padding: EdgeInsets.only(
+                                                      left: 10.w,
+                                                      right: 12,
+                                                      // top: 20.w,
+                                                      bottom: 5.w),
+                                              // margin: EdgeInsets.only(
+                                              //     left: index == 0 ? 19.w : 0,
+                                              //     right:
+                                              //         index == 2 ? 19.w : 5.w),
+                                                  height: 160.h,
+                                                  width: 352.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -1181,9 +1074,124 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                       Colors.white
                                                           .withOpacity(0),
                                                       Colors.black
-                                                          .withOpacity(0.0),
+                                                          .withOpacity(0.3),
                                                     ],
                                                   )),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.zero,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .end,
+                                                          children: [],
+                                                        ),
+                                                        Column(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                    "${element?.shopName}",
+                                                                    style: GoogleFonts.roboto(
+                                                                        textStyle: TextStyle(
+                                                                            color: Colors.white,
+                                                                            // letterSpacing: .5,
+                                                                            fontSize: 15.sp,
+                                                                            fontWeight: FontWeight.w600))),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    SvgPicture.asset(
+                                                                        "assets/icons/location1.svg",
+                                                                        width:
+                                                                        12.w,
+                                                                        height:
+                                                                        16.h),
+                                                                    Padding(
+                                                                      padding: EdgeInsets.only(
+                                                                          left: 8
+                                                                              .w),
+                                                                      child: Text(
+                                                                          "${element?.areaName} ${element?.cityName}",
+                                                                          style: GoogleFonts.roboto(
+                                                                              textStyle: TextStyle(
+                                                                                  color: Colors.white,
+                                                                                  letterSpacing: .5,
+                                                                                  fontSize: 12.sp,
+                                                                                  // height: 10,
+                                                                                  fontWeight: FontWeight.w400))),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Container(
+                                                                  height: 21.49.h,
+                                                                  width: 49.w,
+                                                                  decoration:
+                                                                  BoxDecoration(
+                                                                    color: yellow,
+                                                                    borderRadius:
+                                                                    BorderRadius.all(
+                                                                        Radius.circular(
+                                                                            15)),
+                                                                  ),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                    children: [
+                                                                      SvgPicture
+                                                                          .asset(
+                                                                        "assets/images/star.svg",
+                                                                        height:
+                                                                        12.h,
+                                                                        width:
+                                                                        12.w,
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                        4.3.w,
+                                                                      ),
+                                                                      Text(
+                                                                        // "",
+                                                                        double.parse(element?.ratings.toString() ??
+                                                                            "0.0")
+                                                                            .toStringAsFixed(
+                                                                            1),
+                                                                        style: GoogleFonts
+                                                                            .dmSans(
+                                                                          textStyle: TextStyle(
+                                                                              color:
+                                                                              Black,
+                                                                              letterSpacing:
+                                                                              .5,
+                                                                              fontSize:
+                                                                              12.sp,
+                                                                              fontWeight: FontWeight.w400),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
                                             )),
                                             Positioned(
                                               right: 22.w,

@@ -128,7 +128,7 @@ class _ShopDeliveryAreaDialogViewState
                                 read.onSelectedDeliveryArea(
                                     index, element?.id, element?.areaName);
                               },
-                              value: watch.selectedDeliveryAreaList[index],
+                              value: watch.selectedDeliveryAreaId.contains(element?.id),
                             ),
                             Flexible(
                               child: Text(

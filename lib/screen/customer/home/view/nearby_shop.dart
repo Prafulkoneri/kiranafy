@@ -75,33 +75,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
                                               "${element?.shopBannerImagePath}"),
                                           fit: BoxFit.cover),
                                 ),
-                                child: Container(
-                                  padding: EdgeInsets.all(10.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text("${element?.shopName}",
-                                          style: GoogleFonts.roboto(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 13.sp,
-                                                  fontWeight:
-                                                      FontWeight.w600))),
-                                      Text("${element?.areaName}",
-                                          style: GoogleFonts.roboto(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  // height: 10,
-                                                  fontWeight:
-                                                      FontWeight.w400))),
-                                    ],
-                                  ),
-                                ),
+
                               ),
                             ],
                           ),
@@ -125,9 +99,36 @@ class _HomeCarousalState extends State<HomeCarousal> {
                                   ],
                                   colors: [
                                     Colors.white.withOpacity(0),
-                                    Colors.black.withOpacity(0.05),
+                                    Colors.black.withOpacity(0.3),
                                   ],
                                 )),
+                                child: Container(
+                                  padding: EdgeInsets.all(10.h),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text("${element?.shopName}",
+                                          style: GoogleFonts.roboto(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  // letterSpacing: .5,
+                                                  fontSize: 13.sp,
+                                                  fontWeight:
+                                                  FontWeight.w600))),
+                                      Text("${element?.areaName}",
+                                          style: GoogleFonts.roboto(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  // letterSpacing: .5,
+                                                  fontSize: 12.sp,
+                                                  // height: 10,
+                                                  fontWeight:
+                                                  FontWeight.w400))),
+                                    ],
+                                  ),
+                                ),
                           )),
                         ],
                       ),

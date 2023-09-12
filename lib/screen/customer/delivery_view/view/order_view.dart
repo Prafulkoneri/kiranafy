@@ -20,6 +20,7 @@ import 'package:local_supper_market/screen/customer/order_payment/view/check_sta
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/order_products.dart';
 import 'package:local_supper_market/screen/customer/return/view/return_view.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/rating.dart';
@@ -125,226 +126,242 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 20.w,
-                                ),
-                                Text("${watch.shopDetails?.shopName}",
-                                    style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: Black1),
-                                    )),
-                                SizedBox(
-                                  height: 10.w,
-                                ),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                          child: Container(
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/images/location2.svg',
-                                              width: 28.w,
-                                              height: 28.w,
-                                            ),
-                                            SizedBox(
-                                              width: 9.w,
-                                            ),
-                                            Flexible(
-                                              child: Text(
-                                                // "",
-                                                "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
-                                                // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                                style: GoogleFonts.dmSans(
-                                                  textStyle: TextStyle(
-                                                      color: Black,
-                                                      letterSpacing: .5,
-                                                      fontSize: 13.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                          GestureDetector(
+                           onTap: (){
+                             Navigator.pushAndRemoveUntil(
+                               context,
+                               MaterialPageRoute(
+                                   builder: (context) => MainScreenView(
+                                       index: 1,
+                                       screenName: ShopProfileView(
+                                         refreshPage: true,
+                                         routeName: '',
+                                         shopId: watch.shopDetails?.id.toString(),
+                                       ))),
+                                   (Route<dynamic> route) => false,
+                             );
+                           },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 15.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 20.w,
+                                  ),
+                                  Text("${watch.shopDetails?.shopName}",
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: Black1),
+                                      )),
+                                  SizedBox(
+                                    height: 10.w,
+                                  ),
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child: Container(
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/images/location2.svg',
+                                                width: 28.w,
+                                                height: 28.w,
+                                              ),
+                                              SizedBox(
+                                                width: 9.w,
+                                              ),
+                                              Flexible(
+                                                child: Text(
+                                                  // "",
+                                                  "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                                                  // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Black,
+                                                        letterSpacing: .5,
+                                                        fontSize: 13.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
                                                 ),
                                               ),
+                                            ],
+                                          ),
+                                        )),
+                                        // Row(
+                                        //   children: [
+                                        //     InkWell(
+                                        //       onTap: () {
+                                        //         read.launchPhone(
+                                        //             watch.shopDetails
+                                        //                     ?.shopOwnerSupportNumber ??
+                                        //                 "",
+                                        //             context);
+                                        //       },
+                                        //       child: Container(
+                                        //           padding: EdgeInsets.only(
+                                        //               left: 11.w,
+                                        //               right: 11.w,
+                                        //               top: 13.w,
+                                        //               bottom: 13.w),
+                                        //           decoration: BoxDecoration(
+                                        //             shape: BoxShape.circle,
+                                        //             color: Color(0xff23AA49),
+                                        //           ),
+                                        //           child: SvgPicture.asset(
+                                        //             "assets/icons/new_call.svg",
+                                        //             width: 26.w,
+                                        //             height: 14.h,
+                                        //           )),
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 13.w,
+                                        //     ),
+                                        //     InkWell(
+                                        //       onTap: () {
+                                        //         watch.favAllShop
+                                        //             ? read.removeAllShopFavList(
+                                        //                 context,
+                                        //                 watch.shopDetails?.id)
+                                        //             : read.updateAllShopFavList(
+                                        //                 context,
+                                        //                 watch.shopDetails?.id);
+                                        //       },
+                                        //       child: Container(
+                                        //         padding: EdgeInsets.only(
+                                        //             left: 13.w,
+                                        //             right: 13.w,
+                                        //             top: 14.w,
+                                        //             bottom: 14.w),
+                                        //         decoration: const BoxDecoration(
+                                        //           shape: BoxShape.circle,
+                                        //           color: Color(0xff4689EC),
+                                        //         ),
+                                        //         child: watch.favAllShop
+                                        //             ? SvgPicture.asset(
+                                        //                 "assets/icons/fav_selected.svg",
+                                        //                 width: 26.w,
+                                        //                 height: 14.h,
+                                        //               )
+                                        //             : SvgPicture.asset(
+                                        //                 "assets/images/favorite.svg",
+                                        //                 width: 26.w,
+                                        //                 height: 14.h,
+                                        //               ),
+                                        //       ),
+                                        //     )
+                                        //   ],
+                                        // ),
+                                        Row(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                read.launchPhone(
+                                                    watch.shopDetails
+                                                            ?.shopOwnerSupportNumber ??
+                                                        "",
+                                                    context);
+                                              },
+                                              child: Container(
+                                                  padding: EdgeInsets.only(
+                                                      left: 13.w,
+                                                      right: 13.w,
+                                                      top: 14.w,
+                                                      bottom: 14.w),
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Color(0xff23AA49),
+                                                  ),
+                                                  child: SvgPicture.asset(
+                                                    "assets/icons/new_call.svg",
+                                                    width: 26.w,
+                                                    height: 14.h,
+                                                  )),
                                             ),
-                                          ],
-                                        ),
-                                      )),
-                                      // Row(
-                                      //   children: [
-                                      //     InkWell(
-                                      //       onTap: () {
-                                      //         read.launchPhone(
-                                      //             watch.shopDetails
-                                      //                     ?.shopOwnerSupportNumber ??
-                                      //                 "",
-                                      //             context);
-                                      //       },
-                                      //       child: Container(
-                                      //           padding: EdgeInsets.only(
-                                      //               left: 11.w,
-                                      //               right: 11.w,
-                                      //               top: 13.w,
-                                      //               bottom: 13.w),
-                                      //           decoration: BoxDecoration(
-                                      //             shape: BoxShape.circle,
-                                      //             color: Color(0xff23AA49),
-                                      //           ),
-                                      //           child: SvgPicture.asset(
-                                      //             "assets/icons/new_call.svg",
-                                      //             width: 26.w,
-                                      //             height: 14.h,
-                                      //           )),
-                                      //     ),
-                                      //     SizedBox(
-                                      //       width: 13.w,
-                                      //     ),
-                                      //     InkWell(
-                                      //       onTap: () {
-                                      //         watch.favAllShop
-                                      //             ? read.removeAllShopFavList(
-                                      //                 context,
-                                      //                 watch.shopDetails?.id)
-                                      //             : read.updateAllShopFavList(
-                                      //                 context,
-                                      //                 watch.shopDetails?.id);
-                                      //       },
-                                      //       child: Container(
-                                      //         padding: EdgeInsets.only(
-                                      //             left: 13.w,
-                                      //             right: 13.w,
-                                      //             top: 14.w,
-                                      //             bottom: 14.w),
-                                      //         decoration: const BoxDecoration(
-                                      //           shape: BoxShape.circle,
-                                      //           color: Color(0xff4689EC),
-                                      //         ),
-                                      //         child: watch.favAllShop
-                                      //             ? SvgPicture.asset(
-                                      //                 "assets/icons/fav_selected.svg",
-                                      //                 width: 26.w,
-                                      //                 height: 14.h,
-                                      //               )
-                                      //             : SvgPicture.asset(
-                                      //                 "assets/images/favorite.svg",
-                                      //                 width: 26.w,
-                                      //                 height: 14.h,
-                                      //               ),
-                                      //       ),
-                                      //     )
-                                      //   ],
-                                      // ),
-                                      Row(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              read.launchPhone(
-                                                  watch.shopDetails
-                                                          ?.shopOwnerSupportNumber ??
-                                                      "",
-                                                  context);
-                                            },
-                                            child: Container(
+                                            SizedBox(
+                                              width: 13.w,
+                                            ),
+                                            // InkWell(
+                                            //   onTap: () {
+                                            //     watch.favAllShop
+                                            //         ? read.removeAllShopFavList(
+                                            //             context,
+                                            //             watch.shopDetails?.id)
+                                            //         : read.updateAllShopFavList(
+                                            //             context,
+                                            //             watch.shopDetails?.id);
+                                            //   },
+                                            //   child: Container(
+                                            //     padding: EdgeInsets.only(
+                                            //         left: 13.w,
+                                            //         right: 13.w,
+                                            //         top: 14.w,
+                                            //         bottom: 14.w),
+                                            //     decoration: BoxDecoration(
+                                            //       shape: BoxShape.circle,
+                                            //       color: Color(0xff4689EC),
+                                            //     ),
+                                            //     child: watch.favAllShop
+                                            //         ? SvgPicture.asset(
+                                            //             "assets/icons/fav_selected.svg",
+                                            //             width: 26.w,
+                                            //             height: 14.h,
+                                            //           )
+                                            //         : SvgPicture.asset(
+                                            //             "assets/images/favorite.svg",
+                                            //             width: 26.w,
+                                            //             height: 14.h,
+                                            //           ),
+                                            //   ),
+                                            // )
+                                            InkWell(
+                                              onTap: () {
+                                                watch.favAllShop
+                                                    ? read.removeAllShopFavList(
+                                                        context,
+                                                        watch.shopDetails?.id)
+                                                    : read.updateAllShopFavList(
+                                                        context,
+                                                        watch.shopDetails?.id);
+                                              },
+                                              child: Container(
                                                 padding: EdgeInsets.only(
                                                     left: 13.w,
                                                     right: 13.w,
                                                     top: 14.w,
                                                     bottom: 14.w),
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: Color(0xff23AA49),
+                                                  color: Color(0xff4689EC),
                                                 ),
-                                                child: SvgPicture.asset(
-                                                  "assets/icons/new_call.svg",
-                                                  width: 26.w,
-                                                  height: 14.h,
-                                                )),
-                                          ),
-                                          SizedBox(
-                                            width: 13.w,
-                                          ),
-                                          // InkWell(
-                                          //   onTap: () {
-                                          //     watch.favAllShop
-                                          //         ? read.removeAllShopFavList(
-                                          //             context,
-                                          //             watch.shopDetails?.id)
-                                          //         : read.updateAllShopFavList(
-                                          //             context,
-                                          //             watch.shopDetails?.id);
-                                          //   },
-                                          //   child: Container(
-                                          //     padding: EdgeInsets.only(
-                                          //         left: 13.w,
-                                          //         right: 13.w,
-                                          //         top: 14.w,
-                                          //         bottom: 14.w),
-                                          //     decoration: BoxDecoration(
-                                          //       shape: BoxShape.circle,
-                                          //       color: Color(0xff4689EC),
-                                          //     ),
-                                          //     child: watch.favAllShop
-                                          //         ? SvgPicture.asset(
-                                          //             "assets/icons/fav_selected.svg",
-                                          //             width: 26.w,
-                                          //             height: 14.h,
-                                          //           )
-                                          //         : SvgPicture.asset(
-                                          //             "assets/images/favorite.svg",
-                                          //             width: 26.w,
-                                          //             height: 14.h,
-                                          //           ),
-                                          //   ),
-                                          // )
-                                          InkWell(
-                                            onTap: () {
-                                              watch.favAllShop
-                                                  ? read.removeAllShopFavList(
-                                                      context,
-                                                      watch.shopDetails?.id)
-                                                  : read.updateAllShopFavList(
-                                                      context,
-                                                      watch.shopDetails?.id);
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 13.w,
-                                                  right: 13.w,
-                                                  top: 14.w,
-                                                  bottom: 14.w),
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Color(0xff4689EC),
+                                                child: watch.favAllShop
+                                                    ? SvgPicture.asset(
+                                                        "assets/icons/fav_selected.svg",
+                                                        width: 26.w,
+                                                        height: 14.h,
+                                                      )
+                                                    : SvgPicture.asset(
+                                                        "assets/images/favorite.svg",
+                                                        width: 26.w,
+                                                        height: 14.h,
+                                                      ),
                                               ),
-                                              child: watch.favAllShop
-                                                  ? SvgPicture.asset(
-                                                      "assets/icons/fav_selected.svg",
-                                                      width: 26.w,
-                                                      height: 14.h,
-                                                    )
-                                                  : SvgPicture.asset(
-                                                      "assets/images/favorite.svg",
-                                                      width: 26.w,
-                                                      height: 14.h,
-                                                    ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(
