@@ -301,7 +301,7 @@ class ProductViewController extends ChangeNotifier {
 
   Future<void> productsView(context, sId, cId, pId, pType) async {
     // print("id$id");
-    quantityList.clear();
+
     print("helohhhhhhhhooooooooooooo");
     shopId = sId.toString();
     categoryId = cId.toString();
@@ -320,6 +320,7 @@ class ProductViewController extends ChangeNotifier {
       final result =
           ProductViewResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        quantityList.clear();
         productViewData = result.data;
         productDetails = productViewData?.productDetails;
         productImage = productDetails?.productImagePath;

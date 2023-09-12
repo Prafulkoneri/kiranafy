@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/customer/order_payment/view/check_sta
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -120,53 +121,69 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                  left: 20.w,
-                                  top: 20.w,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${watch.shopDetailData?.shopName}",
-                                      // "New Balaji Trading Company",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black1,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
+                              GestureDetector(
+                                onTap:(){
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MainScreenView(
+                                            index: 1,
+                                            screenName: ShopProfileView(
+                                              refreshPage: true,
+                                              routeName: '',
+                                              shopId: watch.shopDetailData?.id.toString(),
+                                            ))),
+                                        (Route<dynamic> route) => false,
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                    left: 20.w,
+                                    top: 20.w,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${watch.shopDetailData?.shopName}",
+                                        // "New Balaji Trading Company",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black1,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 7.h,
-                                    ),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/images/location2.svg',
-                                          // width: 15.w,
-                                          // height: 19.h,
-                                        ),
-                                        SizedBox(
-                                          width: 9.w,
-                                        ),
-                                        Flexible(
-                                          child: Text(
-                                            "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Black,
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w400),
+                                      SizedBox(
+                                        height: 7.h,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/images/location2.svg',
+                                            // width: 15.w,
+                                            // height: 19.h,
+                                          ),
+                                          SizedBox(
+                                            width: 9.w,
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Black,
+                                                    fontSize: 13.sp,
+                                                    fontWeight: FontWeight.w400),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               Divider(thickness: 1, color: grey2),
