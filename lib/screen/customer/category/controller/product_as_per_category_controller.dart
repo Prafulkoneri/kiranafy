@@ -71,14 +71,15 @@ class ProductCategoryController extends ChangeNotifier {
         categoryProductData = result.data;
         allCategoryList = categoryProductData?.allCategoryList;
         productList = categoryProductData?.productList;
-        customProductList=categoryProductData?.customProductList;
+        customProductList = categoryProductData?.customProductList;
 ///////////////////////////
         int productListLength = productList?.length ?? 0;
         int customproductListLength = customProductList?.length ?? 0;
         isCategoryProductAdded =
             List<bool>.filled(productListLength, false, growable: true);
-        isCustomCategoryProductAdded =
-            List<bool>.filled(customProductList?.length??0, false, growable: true);
+        isCustomCategoryProductAdded = List<bool>.filled(
+            customProductList?.length ?? 0, false,
+            growable: true);
         for (int i = 0; i < productListLength; i++) {
           if (productList?[i].addToCartCheck == "yes") {
             isCategoryProductAdded.insert(i, true);
@@ -86,15 +87,15 @@ class ProductCategoryController extends ChangeNotifier {
             isCategoryProductAdded.insert(i, false);
           }
         }
-        for(int i=0;i<customproductListLength;i++){
-          if(customProductList?[i].addToCartCheck=="yes"){
-            isCustomCategoryProductAdded.insert(i,true);
-          }
-          else{
-            isCustomCategoryProductAdded.insert(i,false);
+        for (int i = 0; i < customproductListLength; i++) {
+          if (customProductList?[i].addToCartCheck == "yes") {
+            isCustomCategoryProductAdded.insert(i, true);
+          } else {
+            isCustomCategoryProductAdded.insert(i, false);
           }
         }
-        if (productList!.isEmpty) {
+        if (productList?.isEmpty == true &&
+            customProductList?.isEmpty == true) {
           Utils.showPrimarySnackbar(context, "No Product Found",
               type: SnackType.error);
         }
@@ -149,8 +150,14 @@ class ProductCategoryController extends ChangeNotifier {
           categoryProductData = result.data;
           allCategoryList = categoryProductData?.allCategoryList;
           productList = categoryProductData?.productList;
-          if (productList!.isEmpty) {
-            Utils.showPrimarySnackbar(context, "no product found",
+          customProductList = categoryProductData?.customProductList;
+          // if (productList!.isEmpty) {
+          //   Utils.showPrimarySnackbar(context, "no product found",
+          //       type: SnackType.error);
+          // }
+          if (productList?.isEmpty == true &&
+              customProductList?.isEmpty == true) {
+            Utils.showPrimarySnackbar(context, "No Product Found",
                 type: SnackType.error);
           }
           showLoader(false);
@@ -246,11 +253,10 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(pType=="admin_product"){
+        if (pType == "admin_product") {
           isCategoryProductAdded[index] = true;
-        }
-        else{
-          isCustomCategoryProductAdded[index]=true;
+        } else {
+          isCustomCategoryProductAdded[index] = true;
         }
 
         Utils.showPrimarySnackbar(context, result.message,
@@ -290,10 +296,9 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(pType=="admin_product"){
+        if (pType == "admin_product") {
           isCategoryProductAdded[index] = false;
-        }
-        else{
+        } else {
           isCustomCategoryProductAdded[index] = false;
         }
 

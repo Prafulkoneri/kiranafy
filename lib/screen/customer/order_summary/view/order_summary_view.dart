@@ -2325,7 +2325,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                     RichText(
                                       text: TextSpan(children: [
                                         TextSpan(
-                                          text: 'Congratulations!! ',
+                                          text: 'Congratulations, ',
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: SplashText,
@@ -2335,8 +2335,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                           ),
                                         ),
                                         TextSpan(
-                                          text:
-                                              ' ${watch.discountPercentage} Discount applied successfully.',
+                                          text: 'Coupon Applied successfully.',
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
                                                 color: SplashText,

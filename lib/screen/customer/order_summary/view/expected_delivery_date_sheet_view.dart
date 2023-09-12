@@ -46,12 +46,37 @@ class _ExpectedDeliveryDateSheetViewState
               SizedBox(
                 height: 17.w,
               ),
-              Text(
-                "Expected Delivery Date",
-                style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xff006F94)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Expected Delivery Date",
+                    style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff006F94)),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 20.w,
+                      width: 20.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          'assets/images/Cross.svg',
+                          width: 8.w,
+                          height: 8.h,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 20.w,
@@ -207,7 +232,10 @@ class _ExpectedDeliveryDateSheetViewState
                           onTap: () {
                             read.onDismiss();
                           },
-                          child: Text("Dismiss",style: TextStyle(color: Colors.white),),
+                          child: Text(
+                            "Dismiss",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                         SizedBox(
                           width: 10.w,

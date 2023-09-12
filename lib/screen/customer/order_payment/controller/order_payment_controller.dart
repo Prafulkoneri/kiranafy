@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/order_payment/repository/ord
 import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderPaymentController extends ChangeNotifier {
@@ -34,16 +35,29 @@ class OrderPaymentController extends ChangeNotifier {
   String finalSubTotal = "";
   String finalDeliveryCharges = "";
   String customerPaymentMode = "";
-  String couponDiscount="";
+  String couponDiscount = "";
 
   ShopDetails? shopDetailData;
   OrderPaymentData? orderPaymentData;
-  Future<void> initState(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
-      ftAmount, ftDiscount, tItems, fSubTotal, fDCharges,cDiscountAmount) async {
+  Future<void> initState(
+      context,
+      cId,
+      id,
+      cuId,
+      cdaId,
+      cdDate,
+      cdSlot,
+      cdType,
+      ftAmount,
+      ftDiscount,
+      tItems,
+      fSubTotal,
+      fDCharges,
+      cDiscountAmount) async {
     showStackLoader(false);
     groupValue = "cash";
     await orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
-        ftAmount, ftDiscount, tItems, fSubTotal, fDCharges,cDiscountAmount);
+        ftAmount, ftDiscount, tItems, fSubTotal, fDCharges, cDiscountAmount);
   }
 
   void onRadioButtonSelected(value) {
@@ -75,8 +89,21 @@ class OrderPaymentController extends ChangeNotifier {
       finalSubTotal: finalSubTotal.toString(),
       finalDeliveryCharges: finalDeliveryCharges.toString());
 
-  Future<void> orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot,
-      cdType, ftAmount, ftDiscount, tItems, fSubTotal, fDCharges,cDiscountAmount) async {
+  Future<void> orderPayment(
+      context,
+      cId,
+      id,
+      cuId,
+      cdaId,
+      cdDate,
+      cdSlot,
+      cdType,
+      ftAmount,
+      ftDiscount,
+      tItems,
+      fSubTotal,
+      fDCharges,
+      cDiscountAmount) async {
     showLoader(true);
     shopId = id.toString();
     cartId = cId.toString();
@@ -90,7 +117,7 @@ class OrderPaymentController extends ChangeNotifier {
     totalItems = tItems.toString();
     finalSubTotal = fSubTotal.toString();
     finalDeliveryCharges = fDCharges.toString();
-    couponDiscount=cDiscountAmount.toString();
+    couponDiscount = cDiscountAmount.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     orderPaymentRepo
@@ -135,14 +162,13 @@ class OrderPaymentController extends ChangeNotifier {
           finalSubTotal: finalSubTotal.toString(),
           finalDeliveryCharges: finalDeliveryCharges.toString(),
           transactionId: transactionIdController.text,
-          customerPaymentMode: groupValue,couponDiscountAmount: couponDiscount);
-
-
+          customerPaymentMode: groupValue,
+          couponDiscountAmount: couponDiscount);
 
   Future<void> placeOrder(
     context,
   ) async {
-    // showStackLoader(true);
+    LoadingOverlay.of(context).show();
     print(shopDetailData?.minimumOrderAmountForDelivery);
     print(orderPaymentData?.finalTotalAmount);
     int minAmount = shopDetailData?.minimumOrderAmountForDelivery ?? 0;
@@ -188,7 +214,7 @@ class OrderPaymentController extends ChangeNotifier {
                   ))),
           (Route<dynamic> route) => false,
         );
-        showStackLoader(false);
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

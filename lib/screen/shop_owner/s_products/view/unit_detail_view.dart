@@ -167,7 +167,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                   "${element?.unitBasedProductImage1Path}",
                                               height: 60.h,
                                               width: 60.w,
-                                              fit: BoxFit.cover,
+                                              fit: BoxFit.fill,
                                             )
                                           : Image(
                                               image: AssetImage(

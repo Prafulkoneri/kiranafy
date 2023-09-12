@@ -125,6 +125,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                                 index: 2,
                                 screenName: OrderStatusView(
                                   orderId: widget.orderId,
+                                  screenName: "orderSummary",
                                 ))),
                         (Route<dynamic> route) => false,
                       );
