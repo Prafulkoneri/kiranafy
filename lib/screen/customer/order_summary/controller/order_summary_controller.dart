@@ -90,11 +90,14 @@ class OrderSummaryController extends ChangeNotifier {
     print(route);
 
     if (refresh) {
-      if (customerPickup == "active" && route == "addAddress") {
-        groupValue = "self_pickup";
-      } else {
-        groupValue = "delivery_to";
+      if(route!="orderSummary"){
+        if (customerPickup == "active" && route == "addAddress") {
+          groupValue = "self_pickup";
+        } else {
+          groupValue = "delivery_to";
+        }
       }
+
       await getOrderSummary(context, cId, id, route);
     }
 
@@ -164,6 +167,8 @@ class OrderSummaryController extends ChangeNotifier {
       OrderSummaryReqModel(shopId: shopId, cartId: cartId);
 
   Future<void> getOrderSummary(context, id, cId, route) async {
+
+    print(route);
     if (route == 'cartDetail') {
       expectedDateController.clear();
       slotGroupValue = "";
@@ -184,15 +189,21 @@ class OrderSummaryController extends ChangeNotifier {
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         shopDeliveryTypes = result.orderSummaryData?.shopDeliveryTypes;
-        customerPickup = result
-                .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ??
-            "";
-
+        if(route!="orderSummary") {
+          customerPickup = result
+              .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ??
+              "";
+        }
         shopDetailData = result.orderSummaryData?.shopDetails;
-        shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
+        if(route!="orderSummary"){
+          shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
+        }
+
         favAllShop = shopDetailData?.shopFavourite == "yes" ? true : false;
-        expectedDateController.text =
-            DateFormat('dd-MM-yyy').format(DateTime.now());
+        if(route!="orderSummary"){
+          expectedDateController.text =DateFormat('dd-MM-yyy').format(DateTime.now());
+        }
+
 
         // if(slotGroupValue==""){
         //   slotGroupValue=shopDeliverySlots?[0];
@@ -213,24 +224,27 @@ class OrderSummaryController extends ChangeNotifier {
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
         totalAmount = orderFinalTotals?.total.toString() ?? "";
-        if (groupValue != "") {
-          if (result.orderSummaryData?.shopDeliveryTypes
-                  ?.shopOwnerCustomerPickup ==
-              "active") {
-            groupValue = "self_pickup";
-            print("heloo");
-            print(totalAmount.toString());
-            print((int.parse(totalAmount.toString()) -
-                int.parse(deliveryCharges.toString())));
-            selfPickupTotalAmount = (int.parse(totalAmount.toString()) -
-                    int.parse(deliveryCharges.toString()))
-                .toString();
-            print("selfPickupTotalAmount${selfPickupTotalAmount}");
-            selfPickupDeliveryCharges = "0";
-          } else {
-            groupValue = "delivery_to";
+        if(route!="orderSummary"){
+          if (groupValue != "") {
+            if (result.orderSummaryData?.shopDeliveryTypes
+                ?.shopOwnerCustomerPickup ==
+                "active") {
+              groupValue = "self_pickup";
+              print("heloo");
+              print(totalAmount.toString());
+              print((int.parse(totalAmount.toString()) -
+                  int.parse(deliveryCharges.toString())));
+              selfPickupTotalAmount = (int.parse(totalAmount.toString()) -
+                  int.parse(deliveryCharges.toString()))
+                  .toString();
+              print("selfPickupTotalAmount${selfPickupTotalAmount}");
+              selfPickupDeliveryCharges = "0";
+            } else {
+              groupValue = "delivery_to";
+            }
           }
         }
+
 
         productTotalDiscount =
             orderFinalTotals?.productTotalDiscount.toString() ?? "";
@@ -239,11 +253,14 @@ class OrderSummaryController extends ChangeNotifier {
         totalDiscount = orderFinalTotals?.totalDiscount.toString() ?? "";
         customerAddress = result.orderSummaryData?.customerAddresses;
         int addressListLength = customerAddress?.length ?? 0;
-        for (int i = 0; i < addressListLength; i++) {
-          if (customerAddress?[i].deliveryAddressIsDefault == "yes") {
-            addressGroupValue = customerAddress?[i].addressId.toString() ?? "";
+        if(route!="orderSummary"){
+          for (int i = 0; i < addressListLength; i++) {
+            if (customerAddress?[i].deliveryAddressIsDefault == "yes") {
+              addressGroupValue = customerAddress?[i].addressId.toString() ?? "";
+            }
           }
         }
+
         cartItemList = result.orderSummaryData?.cartItemList;
         finalCouponList = result.orderSummaryData?.finalCouponList;
         int couponListLength = finalCouponList?.length ?? 0;
@@ -286,33 +303,36 @@ class OrderSummaryController extends ChangeNotifier {
           notifyListeners();
         }
         var currentHour = DateTime.now().hour;
-        print(currentHour);
-        for (int i = 0; i < deliverySlotLength; i++) {
-          if (shopDeliverySlots?[i] == "shop_owner_slot_9_to_12") {
-            if (currentHour <= 12) {
-              slotGroupValue = "shop_owner_slot_9_to_12";
-              return;
+        print("currentHour${currentHour}");
+        if(route!="orderSummary"){
+          for (int i = 0; i < deliverySlotLength; i++) {
+            if (shopDeliverySlots?[i] == "shop_owner_slot_9_to_12") {
+              if (currentHour <= 11) {
+                slotGroupValue = "shop_owner_slot_9_to_12";
+                return;
+              }
             }
-          }
-          if (shopDeliverySlots?[i] == "shop_owner_slot_12_to_3") {
-            if (currentHour <= 15) {
-              slotGroupValue = "shop_owner_slot_12_to_3";
-              return;
+            if (shopDeliverySlots?[i] == "shop_owner_slot_12_to_3") {
+              if (currentHour <= 14) {
+                slotGroupValue = "shop_owner_slot_12_to_3";
+                return;
+              }
             }
-          }
-          if (shopDeliverySlots?[i] == "shop_owner_slot_3_to_6") {
-            if (currentHour <= 18) {
-              slotGroupValue = "shop_owner_slot_3_to_6";
-              return;
+            if (shopDeliverySlots?[i] == "shop_owner_slot_3_to_6") {
+              if (currentHour <= 17) {
+                slotGroupValue = "shop_owner_slot_3_to_6";
+                return;
+              }
             }
-          }
-          if (shopDeliverySlots?[i] == "shop_owner_slot_6_to_9") {
-            if (currentHour <= 21) {
-              slotGroupValue = "shop_owner_slot_6_to_9";
-              return;
+            if (shopDeliverySlots?[i] == "shop_owner_slot_6_to_9") {
+              if (currentHour <= 20) {
+                slotGroupValue = "shop_owner_slot_6_to_9";
+                return;
+              }
             }
           }
         }
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -434,7 +454,7 @@ class OrderSummaryController extends ChangeNotifier {
           shopId,
           cartId,
           true,
-          "cartDetail",
+          "orderSummary",
         );
         // isFulFilProductAdded[index] = false;
         Utils.showPrimarySnackbar(context, result.message,
@@ -746,7 +766,7 @@ class OrderSummaryController extends ChangeNotifier {
           shopId,
           cartId,
           true,
-          "cartDetail",
+          "orderSummary",
         );
         // isFulFilProductAdded[index] = false;
         // await getAllOfferes(context, sId);

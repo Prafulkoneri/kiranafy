@@ -107,19 +107,15 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                             )),
                     (Route<dynamic> route) => false,
                   )
-                : Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                              index: 0,
-                              screenName: OrderDeliveryView(
-                                orderId: widget.orderId,
-                                isRefresh: true,
-                                screenName: 'orderdeliveryview',
-                              ),
-                            )),
-                    (Route<dynamic> route) => false,
-                  );
+                :  Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => OrderDeliveryView(
+                    screenName: "myorderview",
+                    orderId: widget.orderId,
+                    isRefresh: true,
+                  )),
+            );
           },
           title: "Order Status",
         ),

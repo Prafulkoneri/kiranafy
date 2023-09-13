@@ -217,16 +217,20 @@ class OrderPaymentController extends ChangeNotifier {
         LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },

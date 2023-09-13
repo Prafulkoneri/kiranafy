@@ -2001,7 +2001,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(

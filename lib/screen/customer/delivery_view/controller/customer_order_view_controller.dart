@@ -436,12 +436,12 @@ class CustomerOrderViewController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
+        Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) =>
                   MainScreenView(index: 4, screenName: MyOrderView())),
-          (Route<dynamic> route) => false,
+          // (Route<dynamic> route) => false,
         );
 
         print("hello");
