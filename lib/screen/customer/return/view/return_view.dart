@@ -160,16 +160,31 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                                   .toString());
                                         },
                                       ),
-                                      AppNetworkImages(
-                                        // '${element}',
-                                        imageUrl:
-                                            "${element?.productImagePath}",
-                                        // images[pagePosition],
-                                        width: 44.w,
-                                        height: 44.w,
-                                        // width: 102.w,
-                                        fit: BoxFit.cover,
-                                      ),
+                                      // AppNetworkImages(
+                                      //   // '${element}',
+                                      //   imageUrl:
+                                      //       "${element?.productImagePath}",
+                                      //   // images[pagePosition],
+                                      // width: 44.w,
+                                      // height: 44.w,
+                                      //   // width: 102.w,
+                                      //   fit: BoxFit.cover,
+                                      // ),
+                                      element?.productImagePath == ""
+                                          ? Image.asset(
+                                              'assets/images/profile_image.png',
+                                              width: 44.w,
+                                              height: 44.w,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : AppNetworkImages(
+                                              imageUrl:
+                                                  element?.productImagePath ??
+                                                      "",
+                                              width: 44.w,
+                                              height: 44.w,
+                                              fit: BoxFit.cover,
+                                            ),
                                       SizedBox(
                                         width: 16.w,
                                       ),

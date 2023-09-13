@@ -817,15 +817,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  SharedPreferences pref =
-                      await SharedPreferences.getInstance();
-                  pref.clear();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const OnBoardingScreenView()),
-                  );
-                  // read.customerSignOut(context);
+                  // SharedPreferences pref =
+                  //     await SharedPreferences.getInstance();
+                  // pref.clear();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const OnBoardingScreenView()),
+                  // );
+                  read.customerSignOut(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

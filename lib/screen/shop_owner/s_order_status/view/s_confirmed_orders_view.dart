@@ -59,15 +59,15 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
             itemBuilder: (BuildContext, index) {
               final element = watch.confirmedOrdersList?[index];
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ShopOrderView(
-                          orderId: element?.id.toString(),
-                          fromOrderStatus: true,
-                          selectedIndex: watch.selectedIndex,
-                        )),
+                              orderId: element?.id.toString(),
+                              fromOrderStatus: true,
+                              selectedIndex: watch.selectedIndex,
+                            )),
                   );
                 },
                 child: Container(
@@ -140,8 +140,6 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                           InkWell(
                             onTap: () {
                               // Within the `FirstRoute` widget
-
-
                             },
                             child: Row(
                               children: [
@@ -155,7 +153,8 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                                 SizedBox(
                                   width: 7.w,
                                 ),
-                                SvgPicture.asset("assets/icons/arrow_right.svg"),
+                                SvgPicture.asset(
+                                    "assets/icons/arrow_right.svg"),
                               ],
                             ),
                           ),

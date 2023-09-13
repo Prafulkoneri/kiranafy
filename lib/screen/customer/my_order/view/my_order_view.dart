@@ -375,7 +375,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                     : element?.orderStatus ==
                                                             "Refund"
                                                         ? Text(
-                                                            "${element?.refundProductCount} products return request",
+                                                            "${element?.refundProductCount} Products Return Request",
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight

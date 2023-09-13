@@ -1,3 +1,5 @@
+import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_owner_model.dart';
+
 ///////////////REQUEST MODEL//////////////
 class AddRemoveProductFromOrderReqModel {
   String? orderProductId;
@@ -18,7 +20,7 @@ class AddRemoveProductFromOrderReqModel {
 class AddRemoveProductFromOrderResModel {
   int? status;
   String? message;
-  AddRemoveData ? data;
+  AddRemoveData? data;
 
   AddRemoveProductFromOrderResModel({
     required this.status,
@@ -31,24 +33,29 @@ class AddRemoveProductFromOrderResModel {
   }
 }
 
-class AddRemoveData{
-  String ? subTotalAmount;
-  String ? totalAmount;
-  String ? totalDiscount;
-  String ? deliveryCharges;
-  String ?totalRefundAmount;
+class AddRemoveData {
+  String? subTotalAmount;
+  String? totalAmount;
+  String? totalDiscount;
+  String? deliveryCharges;
+  String? totalRefundAmount;
+  CouponDetails? couponDetails;
   AddRemoveData({
     this.totalAmount,
     this.totalDiscount,
     this.deliveryCharges,
     this.subTotalAmount,
     this.totalRefundAmount,
-});
-  AddRemoveData.fromJson(Map<String,dynamic>json){
-    subTotalAmount=json["sub_total_amount"];
-    totalAmount=json["total_amount"];
-    totalDiscount=json["total_discount"];
-    deliveryCharges=json["delivery_charges"];
-    totalRefundAmount=json["order_refund_amount"];
+    this.couponDetails,
+  });
+  AddRemoveData.fromJson(Map<String, dynamic> json) {
+    subTotalAmount = json["sub_total_amount"];
+    totalAmount = json["total_amount"];
+    totalDiscount = json["total_discount"];
+    deliveryCharges = json["delivery_charges"];
+    totalRefundAmount = json["order_refund_amount"];
+    couponDetails = json['coupon_details'] != null
+        ? CouponDetails.fromJson(json['coupon_details'])
+        : null;
   }
 }
