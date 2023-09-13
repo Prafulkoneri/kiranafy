@@ -214,8 +214,9 @@ class ProductCategoryController extends ChangeNotifier {
       if (response.statusCode == 200) {
         allCategoryList = result.data?.allCategoryList;
         productList = result.data?.productList;
+        customProductList=result.data?.customProductList;
         Navigator.pop(context);
-        if (productList!.isEmpty) {
+        if (productList?.isEmpty==true && customProductList?.isEmpty==true) {
           Utils.showPrimarySnackbar(context, "No Product Found",
               type: SnackType.error);
         }
