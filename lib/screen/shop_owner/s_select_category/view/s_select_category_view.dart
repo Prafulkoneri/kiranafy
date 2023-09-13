@@ -61,11 +61,11 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                   left: 50.w, right: 50.w, top: 40.w, bottom: 90.w),
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 30,
                   mainAxisSpacing: 20,
-                  mainAxisExtent: 120),
+                  mainAxisExtent: 115.w),
               itemCount: watch.categoriesList?.length,
               itemBuilder: (BuildContext context, int index) {
                 final element = watch.categoriesList?[index];
@@ -76,6 +76,8 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                   child: Container(
                     decoration: BoxDecoration(),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Stack(
                           clipBehavior: Clip.none,
@@ -100,13 +102,16 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                         SizedBox(
                           height: 5.w,
                         ),
-                        Text(
-                          "${element?.categoryName}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12.sp,
-                              color: Black1),
+                        Flexible(
+                          child: Text(
+                            "${element?.categoryName}",
+                            maxLines: 3,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12.sp,
+                                color: Black1),
+                          ),
                         ),
                       ],
                     ),

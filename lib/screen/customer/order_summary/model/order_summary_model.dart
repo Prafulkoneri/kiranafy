@@ -47,6 +47,7 @@ class OrderSummaryData {
   OrderFinalTotals? orderFinalTotals; //
   List<FinalCouponList>? finalCouponList; //
   List<FullFillYourCraving>? fullFillYourCravings;
+  List<FullFillYourCraving>? fullFillYourCravingsCustom;
 
   OrderSummaryData({
     required this.shopDetails,
@@ -57,6 +58,7 @@ class OrderSummaryData {
     required this.orderFinalTotals,
     required this.finalCouponList,
     required this.fullFillYourCravings,
+    required this.fullFillYourCravingsCustom,
   });
   OrderSummaryData.fromJson(Map<String, dynamic> json) {
     shopDetails = json['shop_details'] != null
@@ -105,6 +107,13 @@ class OrderSummaryData {
       fullFillYourCravings = <FullFillYourCraving>[];
       json["full_fill_your_cravings"].forEach((v) {
         fullFillYourCravings!.add(FullFillYourCraving.fromJson(v));
+      });
+    }
+    //////////
+    if (json["full_fill_your_cravings_custom_products"] != null) {
+      fullFillYourCravingsCustom = <FullFillYourCraving>[];
+      json["full_fill_your_cravings_custom_products"].forEach((v) {
+        fullFillYourCravingsCustom!.add(FullFillYourCraving.fromJson(v));
       });
     }
   }
