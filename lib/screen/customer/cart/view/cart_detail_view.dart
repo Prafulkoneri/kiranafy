@@ -215,22 +215,28 @@ class _CartDetailViewState extends State<CartDetailView> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       GestureDetector(
-                                        onTap: (){
+                                        onTap: () {
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => MainScreenView(
-                                                    index: 1,
-                                                    screenName: ShopProfileView(
-                                                      refreshPage: true,
-                                                      routeName: '',
-                                                      shopId: watch.shopDetailData?.id.toString(),
-                                                    ))),
-                                                (Route<dynamic> route) => false,
+                                                builder: (context) =>
+                                                    MainScreenView(
+                                                        index: 1,
+                                                        screenName:
+                                                            ShopProfileView(
+                                                          refreshPage: true,
+                                                          routeName: '',
+                                                          shopId: watch
+                                                              .shopDetailData
+                                                              ?.id
+                                                              .toString(),
+                                                        ))),
+                                            (Route<dynamic> route) => false,
                                           );
                                         },
                                         child: Column(
-                                          crossAxisAlignment:CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Container(
                                               padding: EdgeInsets.only(
@@ -243,7 +249,8 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                       color: Black1,
                                                       letterSpacing: .5,
                                                       fontSize: 18,
-                                                      fontWeight: FontWeight.w600),
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                                 ),
                                               ),
                                             ),
@@ -264,7 +271,8 @@ class _CartDetailViewState extends State<CartDetailView> {
                                               // color: Colors.white,
                                               child: Row(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Row(
                                                     children: [
@@ -280,13 +288,18 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                         width: 200.w,
                                                         child: Text(
                                                           "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
-                                                          style: GoogleFonts.roboto(
-                                                            textStyle: TextStyle(
-                                                                color: Black,
-                                                                // letterSpacing: .5,
-                                                                fontSize: 13.sp,
-                                                                fontWeight:
-                                                                FontWeight.w400),
+                                                          style: GoogleFonts
+                                                              .roboto(
+                                                            textStyle:
+                                                                TextStyle(
+                                                                    color:
+                                                                        Black,
+                                                                    // letterSpacing: .5,
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
                                                           ),
                                                         ),
                                                       ),
@@ -298,22 +311,27 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                         onTap: () {
                                                           read.launchPhone(
                                                               watch.shopDetailData
-                                                                  ?.shopOwnerSupportNumber ??
+                                                                      ?.shopOwnerSupportNumber ??
                                                                   "",
                                                               context);
                                                         },
                                                         child: Container(
-                                                            padding: EdgeInsets.only(
-                                                                left: 13.w,
-                                                                right: 13.w,
-                                                                top: 14.w,
-                                                                bottom: 14.w),
-                                                            decoration: BoxDecoration(
-                                                              shape: BoxShape.circle,
-                                                              color:
-                                                              Color(0xff23AA49),
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 13.w,
+                                                                    right: 13.w,
+                                                                    top: 14.w,
+                                                                    bottom:
+                                                                        14.w),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              color: Color(
+                                                                  0xff23AA49),
                                                             ),
-                                                            child: SvgPicture.asset(
+                                                            child: SvgPicture
+                                                                .asset(
                                                               "assets/icons/new_call.svg",
                                                               width: 26.w,
                                                               height: 14.h,
@@ -326,35 +344,44 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                         onTap: () {
                                                           watch.favAllShop
                                                               ? read.removeAllShopFavList(
-                                                              context,
-                                                              watch.shopDetailData
-                                                                  ?.id)
+                                                                  context,
+                                                                  watch
+                                                                      .shopDetailData
+                                                                      ?.id)
                                                               : read.updateAllShopFavList(
-                                                              context,
-                                                              watch.shopDetailData
-                                                                  ?.id);
+                                                                  context,
+                                                                  watch
+                                                                      .shopDetailData
+                                                                      ?.id);
                                                         },
                                                         child: Container(
-                                                          padding: EdgeInsets.only(
-                                                              left: 13.w,
-                                                              right: 13.w,
-                                                              top: 14.w,
-                                                              bottom: 14.w),
-                                                          decoration: BoxDecoration(
-                                                            shape: BoxShape.circle,
-                                                            color: Color(0xff4689EC),
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 13.w,
+                                                                  right: 13.w,
+                                                                  top: 14.w,
+                                                                  bottom: 14.w),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color: Color(
+                                                                0xff4689EC),
                                                           ),
-                                                          child: watch.favAllShop
-                                                              ? SvgPicture.asset(
-                                                            "assets/icons/fav_selected.svg",
-                                                            width: 26.w,
-                                                            height: 14.h,
-                                                          )
-                                                              : SvgPicture.asset(
-                                                            "assets/images/favorite.svg",
-                                                            width: 26.w,
-                                                            height: 14.h,
-                                                          ),
+                                                          child: watch
+                                                                  .favAllShop
+                                                              ? SvgPicture
+                                                                  .asset(
+                                                                  "assets/icons/fav_selected.svg",
+                                                                  width: 26.w,
+                                                                  height: 14.h,
+                                                                )
+                                                              : SvgPicture
+                                                                  .asset(
+                                                                  "assets/images/favorite.svg",
+                                                                  width: 26.w,
+                                                                  height: 14.h,
+                                                                ),
                                                         ),
                                                       )
                                                     ],
@@ -365,7 +392,6 @@ class _CartDetailViewState extends State<CartDetailView> {
                                           ],
                                         ),
                                       ),
-
                                       Container(
                                         // height: 360.h,
                                         // width: 352.w,
@@ -826,7 +852,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                               textStyle: TextStyle(
                                                   color: Colors.white,
                                                   // letterSpacing: .5,
-                                                  fontSize: 16.sp,
+                                                  fontSize: 14.sp,
                                                   fontWeight: FontWeight.w500),
                                             )),
                                       ],
@@ -843,7 +869,9 @@ class _CartDetailViewState extends State<CartDetailView> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                contentPadding: EdgeInsets.symmetric(horizontal: 5.w),
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 5.w),
                                                 scrollable: true,
                                                 title: Text("Conditions",
                                                     style: GoogleFonts.dmSans(

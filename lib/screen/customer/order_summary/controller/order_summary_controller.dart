@@ -55,6 +55,7 @@ class OrderSummaryController extends ChangeNotifier {
   List<CartItemList>? cartItemList;
   List<FinalCouponList>? finalCouponList;
   List<FullFillYourCraving>? fullFillYourCravings;
+  List<FullFillYourCraving>? fullFillYourCravingsCustom;
   bool isLoading = true;
   bool isStackLoaderVisible = false;
   bool favAllShop = true;
@@ -76,6 +77,7 @@ class OrderSummaryController extends ChangeNotifier {
   TextEditingController couponCodeController = TextEditingController();
   int selectedAddressId = 0;
   List<bool> isFulFilProductAdded = [];
+  List<bool> isFulFilProductAddedCustome = [];
   Future<void> initState(
     context,
     cId,
@@ -90,7 +92,7 @@ class OrderSummaryController extends ChangeNotifier {
     print(route);
 
     if (refresh) {
-      if(route!="orderSummary"){
+      if (route != "orderSummary") {
         if (customerPickup == "active" && route == "addAddress") {
           groupValue = "self_pickup";
         } else {
@@ -167,7 +169,6 @@ class OrderSummaryController extends ChangeNotifier {
       OrderSummaryReqModel(shopId: shopId, cartId: cartId);
 
   Future<void> getOrderSummary(context, id, cId, route) async {
-
     print(route);
     if (route == 'cartDetail') {
       expectedDateController.clear();
@@ -189,21 +190,21 @@ class OrderSummaryController extends ChangeNotifier {
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         shopDeliveryTypes = result.orderSummaryData?.shopDeliveryTypes;
-        if(route!="orderSummary") {
-          customerPickup = result
-              .orderSummaryData?.shopDeliveryTypes?.shopOwnerCustomerPickup ??
+        if (route != "orderSummary") {
+          customerPickup = result.orderSummaryData?.shopDeliveryTypes
+                  ?.shopOwnerCustomerPickup ??
               "";
         }
         shopDetailData = result.orderSummaryData?.shopDetails;
-        if(route!="orderSummary"){
+        if (route != "orderSummary") {
           shopDeliverySlots = result.orderSummaryData?.shopDeliverySlots;
         }
 
         favAllShop = shopDetailData?.shopFavourite == "yes" ? true : false;
-        if(route!="orderSummary"){
-          expectedDateController.text =DateFormat('dd-MM-yyy').format(DateTime.now());
+        if (route != "orderSummary") {
+          expectedDateController.text =
+              DateFormat('dd-MM-yyy').format(DateTime.now());
         }
-
 
         // if(slotGroupValue==""){
         //   slotGroupValue=shopDeliverySlots?[0];
@@ -224,10 +225,10 @@ class OrderSummaryController extends ChangeNotifier {
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
         totalAmount = orderFinalTotals?.total.toString() ?? "";
-        if(route!="orderSummary"){
+        if (route != "orderSummary") {
           if (groupValue != "") {
             if (result.orderSummaryData?.shopDeliveryTypes
-                ?.shopOwnerCustomerPickup ==
+                    ?.shopOwnerCustomerPickup ==
                 "active") {
               groupValue = "self_pickup";
               print("heloo");
@@ -235,7 +236,7 @@ class OrderSummaryController extends ChangeNotifier {
               print((int.parse(totalAmount.toString()) -
                   int.parse(deliveryCharges.toString())));
               selfPickupTotalAmount = (int.parse(totalAmount.toString()) -
-                  int.parse(deliveryCharges.toString()))
+                      int.parse(deliveryCharges.toString()))
                   .toString();
               print("selfPickupTotalAmount${selfPickupTotalAmount}");
               selfPickupDeliveryCharges = "0";
@@ -245,7 +246,6 @@ class OrderSummaryController extends ChangeNotifier {
           }
         }
 
-
         productTotalDiscount =
             orderFinalTotals?.productTotalDiscount.toString() ?? "";
         subTotal = orderFinalTotals?.subTotal.toString() ?? "";
@@ -253,10 +253,11 @@ class OrderSummaryController extends ChangeNotifier {
         totalDiscount = orderFinalTotals?.totalDiscount.toString() ?? "";
         customerAddress = result.orderSummaryData?.customerAddresses;
         int addressListLength = customerAddress?.length ?? 0;
-        if(route!="orderSummary"){
+        if (route != "orderSummary") {
           for (int i = 0; i < addressListLength; i++) {
             if (customerAddress?[i].deliveryAddressIsDefault == "yes") {
-              addressGroupValue = customerAddress?[i].addressId.toString() ?? "";
+              addressGroupValue =
+                  customerAddress?[i].addressId.toString() ?? "";
             }
           }
         }
@@ -276,6 +277,22 @@ class OrderSummaryController extends ChangeNotifier {
             isFulFilProductAdded.insert(i, true);
           } else {
             isFulFilProductAdded.insert(i, false);
+          }
+        }
+        //////////////////////////////////////////////
+        fullFillYourCravingsCustom =
+            result.orderSummaryData?.fullFillYourCravingsCustom;
+        //////////////
+        int fulfilcravingListCustomeLength =
+            fullFillYourCravingsCustom?.length ?? 0;
+        isFulFilProductAddedCustome = List<bool>.filled(
+            fulfilcravingListCustomeLength, false,
+            growable: true);
+        for (int i = 0; i < fulfilcravingListCustomeLength; i++) {
+          if (fullFillYourCravingsCustom?[i].addToCartCheck == "yes") {
+            isFulFilProductAddedCustome.insert(i, true);
+          } else {
+            isFulFilProductAddedCustome.insert(i, false);
           }
         }
         showLoader(false);
@@ -304,7 +321,7 @@ class OrderSummaryController extends ChangeNotifier {
         }
         var currentHour = DateTime.now().hour;
         print("currentHour${currentHour}");
-        if(route!="orderSummary"){
+        if (route != "orderSummary") {
           for (int i = 0; i < deliverySlotLength; i++) {
             if (shopDeliverySlots?[i] == "shop_owner_slot_9_to_12") {
               if (currentHour <= 11) {
@@ -360,6 +377,12 @@ class OrderSummaryController extends ChangeNotifier {
 
   void onFulFilCarvingsSelected(index) {
     isFulFilProductAdded[index] = true;
+    notifyListeners();
+  }
+
+  ////////////////
+  void onFulFilCarvingsCustomeSelected(index) {
+    isFulFilProductAddedCustome[index] = true;
     notifyListeners();
   }
 
@@ -513,12 +536,15 @@ class OrderSummaryController extends ChangeNotifier {
           deliveryCharges =
               double.parse(data?.deliveryCharges ?? "0").toInt().toString();
           selfPickupDeliveryCharges = "0";
-          subTotal = double.parse(data?.subTotal ?? "0").toInt().toString() ?? "";
+          subTotal =
+              double.parse(data?.subTotal ?? "0").toInt().toString() ?? "";
           couponDiscount =
-              double.parse(data?.couponDiscount ?? "0").toInt().toString() ?? "";
+              double.parse(data?.couponDiscount ?? "0").toInt().toString() ??
+                  "";
           totalAmount = double.parse(data?.total ?? "0").toInt().toString();
           selfPickupTotalAmount =
-              (double.parse(totalAmount) - double.parse(deliveryCharges)).toInt()
+              (double.parse(totalAmount) - double.parse(deliveryCharges))
+                      .toInt()
                       .toString() ??
                   "";
           totalDiscount =
@@ -534,9 +560,8 @@ class OrderSummaryController extends ChangeNotifier {
           showOnPageLoader(false);
           showLoader(false);
           Navigator.pop(context);
-          couponDiscount="0";
-            removeCoupon(context,false);
-
+          couponDiscount = "0";
+          removeCoupon(context, false);
 
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
@@ -572,13 +597,13 @@ class OrderSummaryController extends ChangeNotifier {
         shopId: shopId,
       );
 
-  Future<void> removeCoupon(context,loading) async {
+  Future<void> removeCoupon(context, loading) async {
     if (couponCodeController.text == "") {
       Utils.showPrimarySnackbar(context, "No Coupon Added",
           type: SnackType.error);
       return;
     }
-    if(loading){
+    if (loading) {
       showOnPageLoader(true);
     }
 
@@ -609,11 +634,10 @@ class OrderSummaryController extends ChangeNotifier {
         discountPercentage = "";
         showOnPageLoader(false);
         notifyListeners();
-        if(loading){
+        if (loading) {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
         }
-
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -669,7 +693,7 @@ class OrderSummaryController extends ChangeNotifier {
                     : totalAmount,
                 finalTotalDiscount: totalDiscount,
                 totalItems: orderFinalTotals?.itemCount.toString(),
-            couponDiscountAmount: couponDiscount,
+                couponDiscountAmount: couponDiscount,
               )),
     );
     showOnPageLoader(false);
