@@ -1555,7 +1555,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
@@ -1566,7 +1566,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                     routeName: '',
                                     shopId: watch.shopDetailData?.id.toString(),
                                   ))),
-                              (Route<dynamic> route) => false,
+                          (Route<dynamic> route) => false,
                         );
                       },
                       child: Column(
@@ -1634,7 +1634,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                       onTap: () {
                                         read.launchPhone(
                                             watch.shopDetailData
-                                                ?.shopOwnerSupportNumber ??
+                                                    ?.shopOwnerSupportNumber ??
                                                 "",
                                             context);
                                       },
@@ -1657,10 +1657,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                       // },
                                       onTap: () {
                                         watch.favAllShop
-                                            ? read.removeAllShopFavList(
-                                            context, watch.shopDetailData?.id)
-                                            : read.updateAllShopFavList(
-                                            context, watch.shopDetailData?.id);
+                                            ? read.removeAllShopFavList(context,
+                                                watch.shopDetailData?.id)
+                                            : read.updateAllShopFavList(context,
+                                                watch.shopDetailData?.id);
                                       },
                                       child: Container(
                                         padding: EdgeInsets.only(
@@ -1674,15 +1674,15 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         ),
                                         child: watch.favAllShop
                                             ? SvgPicture.asset(
-                                          "assets/icons/fav_selected.svg",
-                                          width: 26.w,
-                                          height: 14.h,
-                                        )
+                                                "assets/icons/fav_selected.svg",
+                                                width: 26.w,
+                                                height: 14.h,
+                                              )
                                             : SvgPicture.asset(
-                                          "assets/images/favorite.svg",
-                                          width: 26.w,
-                                          height: 14.h,
-                                        ),
+                                                "assets/images/favorite.svg",
+                                                width: 26.w,
+                                                height: 14.h,
+                                              ),
                                       ),
                                     )
                                   ],
@@ -2690,12 +2690,6 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                     ),
                                   ),
                                 ),
-                                // Padding(
-                                //   padding: EdgeInsets.only(
-                                //     top: 19.w,
-                                //   ),
-                                //   child: CarvingProducts(),
-                                // )
                               ],
                             ),
                           )

@@ -1277,7 +1277,8 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         deliveryCharges = result.data?.deliveryCharges.toString() ?? "";
 
         totalRefundAmount = result.data?.totalRefundAmount.toString() ?? "";
-
+        // couponDetails = result.data?.couponDetails ?? "";
+//
         LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
