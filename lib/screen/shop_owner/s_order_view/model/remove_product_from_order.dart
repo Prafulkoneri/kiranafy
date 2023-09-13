@@ -1,4 +1,4 @@
-import '../../../customer/delivery_view/model/order_view_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/model/shop_owner_model.dart';
 
 ///////////////REQUEST MODEL//////////////
 class AddRemoveProductFromOrderReqModel {

@@ -424,6 +424,13 @@ class _MyAppState extends State<MyApp> {
                 textDirection: TextDirection.ltr,
                 child: LoadingOverlay(
                   child: MaterialApp(
+                    builder: (context, child) {
+                      return MediaQuery(
+                        data: MediaQuery.of(context)
+                            .copyWith(textScaleFactor: 1.0),
+                        child: child!,
+                      );
+                    },
                     title: 'Local Supermart',
                     theme: ThemeData(
                       primarySwatch: Colors.blue,
