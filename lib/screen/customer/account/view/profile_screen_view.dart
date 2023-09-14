@@ -34,7 +34,8 @@ import 'package:provider/provider.dart';
 // import '../controller/profile_controller.dart';
 
 class ProfileScreenView extends StatefulWidget {
-  const ProfileScreenView({super.key});
+  final bool ? isRefreshed;
+  const ProfileScreenView({super.key,required this.isRefreshed});
 
   @override
   State<ProfileScreenView> createState() => _ProfileScreenViewState();
@@ -44,7 +45,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileController>().initState(context);
+      context.read<ProfileController>().initState(context,widget.isRefreshed);
     });
   }
 
@@ -144,15 +145,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 InkWell(
                                   onTap: () {
                                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
-                                    // readMain.onNavigation(4,UpdateProfileView(), context);
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => MainScreenView(
-                                              index: 4,
-                                              screenName: UpdateProfileView())),
-                                      (Route<dynamic> route) => false,
-                                    );
+                                    readMain.onNavigation(4,UpdateProfileView(), context);
+                                    // Navigator.pushAndRemoveUntil(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) => MainScreenView(
+                                    //           index: 4,
+                                    //           screenName: UpdateProfileView())),
+                                    //   (Route<dynamic> route) => false,
+                                    // );
                                   },
                                   child: SvgPicture.asset(
                                     'assets/icons/edit.svg',
@@ -236,15 +237,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
 
               GestureDetector(
                 onTap: () {
-                  // readMain.onNavigation(4,UpdateProfileView(), context);
+                  readMain.onNavigation(4,UpdateProfileView(), context);
 
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: UpdateProfileView())),
-                    (Route<dynamic> route) => false,
-                  );
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4, screenName: UpdateProfileView())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 20.w),
@@ -333,14 +334,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ///////////////////////
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4,
-                            screenName: CustomerNotificationsScreenView())),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(4, CustomerNotificationsScreenView(), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4,
+                  //           screenName: CustomerNotificationsScreenView())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -380,14 +382,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
 
               GestureDetector(
                 onTap: () {
-                  // readMain.onNavigation(4,UpdateProfileView(), context);
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: CFavouritesView())),
-                    (Route<dynamic> route) => true,
-                  );
+                  readMain.onNavigation(4,CFavouritesView(), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4, screenName: CFavouritesView())),
+                  //   (Route<dynamic> route) => true,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -428,15 +430,16 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
 
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4,
-                            screenName:
-                                MyDeliveryAddressView(isRefresh: true))),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4,
+                  //           screenName:
+                  //               MyDeliveryAddressView(isRefresh: true))),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -474,13 +477,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: HelpCenterView())),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(4, HelpCenterView(), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4, screenName: HelpCenterView())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -518,13 +522,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: CAboutUsView())),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(4, CAboutUsView(), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4, screenName: CAboutUsView())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -562,13 +567,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: CustomerFAQView())),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(4, CustomerFAQView(), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4, screenName: CustomerFAQView())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -645,13 +651,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: CustomerPrivacyPolicy())),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(4, CustomerPrivacyPolicy(), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4, screenName: CustomerPrivacyPolicy())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -773,13 +780,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: CustomerSetting())),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(4, CustomerSetting(), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 4, screenName: CustomerSetting())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -817,15 +825,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  // SharedPreferences pref =
-                  //     await SharedPreferences.getInstance();
-                  // pref.clear();
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const OnBoardingScreenView()),
-                  // );
-                  read.customerSignOut(context);
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  pref.clear();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const OnBoardingScreenView()),
+                  );
+                  // read.customerSignOut(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

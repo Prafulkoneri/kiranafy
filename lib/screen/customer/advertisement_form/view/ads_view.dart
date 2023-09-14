@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/controller/ads_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/promotion_request/controller/promotion_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
@@ -33,6 +34,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
   Widget build(BuildContext context) {
     final watch = context.watch<customerAdscontroller>();
     final read = context.read<customerAdscontroller>();
+    final readMain = context.read<MainScreenController>();
 
     return Scaffold(
         appBar: PreferredSize(
@@ -41,16 +43,19 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
             child: PrimaryAppBar(
               title: "Advertisement form",
               onBackBtnPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MainScreenView(
-                          index: 0,
-                          screenName: HomeScreenView(
-                            refreshPage: true,
-                          ))),
-                  (Route<dynamic> route) => false,
-                );
+                readMain.onNavigation(0, HomeScreenView(
+                  refreshPage: true,
+                ), context);
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => MainScreenView(
+                //           index: 0,
+                //           screenName: HomeScreenView(
+                //             refreshPage: true,
+                //           ))),
+                //   (Route<dynamic> route) => false,
+                // );
               },
             ),
           ),

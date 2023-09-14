@@ -60,6 +60,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
     final read = context.read<AllCategoryShopController>();
     final watchMain = context.watch<MainScreenController>();
     final watchHome = context.watch<HomeScreenController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       body: watch.isLoading
           ? Center(
@@ -67,17 +68,20 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
             )
           : WillPopScope(
               onWillPop: () async {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MainScreenView(
-                            index: 0,
-                            screenName: HomeScreenView(
-                              refreshPage: true,
-                            ),
-                          )),
-                  (Route<dynamic> route) => false,
-                );
+                readMain.onNavigation(0,HomeScreenView(
+                  refreshPage: true,
+                ), context);
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => MainScreenView(
+                //             index: 0,
+                //             screenName: HomeScreenView(
+                //               refreshPage: true,
+                //             ),
+                //           )),
+                //   (Route<dynamic> route) => false,
+                // );
 
                 return false;
               },
@@ -165,23 +169,32 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                   final element = watch.nearByShop?[index];
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                MainScreenView(
-                                                    index: 1,
-                                                    screenName: ShopProfileView(
-                                                      shopId: element?.id
-                                                          .toString(),
-                                                      routeName:
-                                                          "nearShopsCategory",
-                                                      categoryId:
-                                                          widget.categoryId,
-                                                      refreshPage: true,
-                                                    ))),
-                                        (Route<dynamic> route) => false,
-                                      );
+                                      readMain.onNavigation(1,ShopProfileView(
+                                        shopId: element?.id
+                                            .toString(),
+                                        routeName:
+                                        "nearShopsCategory",
+                                        categoryId:
+                                        widget.categoryId,
+                                        refreshPage: true,
+                                      ), context);
+                                      // Navigator.pushAndRemoveUntil(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           MainScreenView(
+                                      //               index: 1,
+                                      //               screenName: ShopProfileView(
+                                      //                 shopId: element?.id
+                                      //                     .toString(),
+                                      //                 routeName:
+                                      //                     "nearShopsCategory",
+                                      //                 categoryId:
+                                      //                     widget.categoryId,
+                                      //                 refreshPage: true,
+                                      //               ))),
+                                      //   (Route<dynamic> route) => false,
+                                      // );
                                     },
                                     child: Stack(
                                       children: [
@@ -339,24 +352,33 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                         final element = watch.allShops[index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      MainScreenView(
-                                                          index: 1,
-                                                          screenName:
-                                                              ShopProfileView(
-                                                            shopId: element?.id
-                                                                .toString(),
-                                                            routeName:
-                                                                "nearShopsCategory",
-                                                            categoryId: widget
-                                                                .categoryId,
-                                                            refreshPage: true,
-                                                          ))),
-                                              (Route<dynamic> route) => false,
-                                            );
+                                            readMain.onNavigation(1,ShopProfileView(
+                                              shopId: element?.id
+                                                  .toString(),
+                                              routeName:
+                                              "nearShopsCategory",
+                                              categoryId: widget
+                                                  .categoryId,
+                                              refreshPage: true,
+                                            ), context);
+                                            // Navigator.pushAndRemoveUntil(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           MainScreenView(
+                                            //               index: 1,
+                                            //               screenName:
+                                            //                   ShopProfileView(
+                                            //                 shopId: element?.id
+                                            //                     .toString(),
+                                            //                 routeName:
+                                            //                     "nearShopsCategory",
+                                            //                 categoryId: widget
+                                            //                     .categoryId,
+                                            //                 refreshPage: true,
+                                            //               ))),
+                                            //   (Route<dynamic> route) => false,
+                                            // );
                                           },
                                           child: Stack(
                                             children: [
@@ -605,6 +627,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                     children: [
                                       InkWell(
                                         onTap: () {
+                                          readMain.onNavigation(0,CustomerAdsView(), context);
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(

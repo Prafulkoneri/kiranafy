@@ -240,17 +240,21 @@ class _CartScreenViewState extends State<CartScreenView> {
                           ),
                           // style: style,
                           onPressed: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MainScreenView(
-                                      index: 2,
-                                      screenName: AllNearShopsView(
-                                        isSearchFocus: false,
-                                        refreshPage: true,
-                                      ))),
-                              (Route<dynamic> route) => false,
-                            );
+                            readMain.onNavigation(1, AllNearShopsView(
+                              isSearchFocus: false,
+                              refreshPage: true,
+                            ), context);
+                            // Navigator.pushAndRemoveUntil(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => MainScreenView(
+                            //           index: 2,
+                            //           screenName: AllNearShopsView(
+                            //             isSearchFocus: false,
+                            //             refreshPage: true,
+                            //           ))),
+                            //   (Route<dynamic> route) => false,
+                            // );
                           },
                           child: Text(
                             'Browse Products',
@@ -269,16 +273,19 @@ class _CartScreenViewState extends State<CartScreenView> {
                 )
               : WillPopScope(
                   onWillPop: () async {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainScreenView(
-                              index: 0,
-                              screenName: HomeScreenView(
-                                refreshPage: false,
-                              ))),
-                      (Route<dynamic> route) => false,
-                    );
+                    readMain.onNavigation(1, HomeScreenView(
+                      refreshPage: false,
+                    ), context);
+                    // Navigator.pushAndRemoveUntil(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => MainScreenView(
+                    //           index: 0,
+                    //           screenName: HomeScreenView(
+                    //             refreshPage: false,
+                    //           ))),
+                    //   (Route<dynamic> route) => false,
+                    // );
                     return false;
                   },
                   child: SingleChildScrollView(
@@ -294,16 +301,23 @@ class _CartScreenViewState extends State<CartScreenView> {
                               final element = watch.cartList?[index];
                               return GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => CartDetailView(
-                                              isRefresh: true,
-                                              cartId: element?.id.toString(),
-                                              shopId:
-                                                  element?.shopId.toString(),
-                                            )),
-                                  );
+                                  readMain.onNavigation(1, CartDetailView(
+                                    isRefresh: true,
+                                    cartId: element?.id.toString(),
+                                    shopId:
+                                    element?.shopId.toString(),
+                                  ), context);
+                                  readMain.hideBottomNavigationBar();
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => CartDetailView(
+                                  //             isRefresh: true,
+                                  //             cartId: element?.id.toString(),
+                                  //             shopId:
+                                  //                 element?.shopId.toString(),
+                                  //           )),
+                                  // );
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
@@ -409,20 +423,30 @@ class _CartScreenViewState extends State<CartScreenView> {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            CartDetailView(
-                                                              isRefresh: true,
-                                                              cartId: element
-                                                                  ?.id
-                                                                  .toString(),
-                                                              shopId: element
-                                                                  ?.shopId
-                                                                  .toString(),
-                                                            )),
-                                                  );
+                                                  readMain.onNavigation(1, CartDetailView(
+                                                    isRefresh: true,
+                                                    cartId: element
+                                                        ?.id
+                                                        .toString(),
+                                                    shopId: element
+                                                        ?.shopId
+                                                        .toString(),
+                                                  ), context);
+                                                  readMain.hideBottomNavigationBar();
+                                                  // Navigator.push(
+                                                  //   context,
+                                                  //   MaterialPageRoute(
+                                                  //       builder: (context) =>
+                                                  //           CartDetailView(
+                                                  //             isRefresh: true,
+                                                  //             cartId: element
+                                                  //                 ?.id
+                                                  //                 .toString(),
+                                                  //             shopId: element
+                                                  //                 ?.shopId
+                                                  //                 .toString(),
+                                                  //           )),
+                                                  // );
                                                 },
                                                 child: Container(
                                                   padding: EdgeInsets.symmetric(

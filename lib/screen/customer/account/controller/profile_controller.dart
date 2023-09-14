@@ -31,9 +31,12 @@ class ProfileController extends ChangeNotifier {
   }
 
   Future<void> initState(
-    context,
+    context,isRefreshed
   ) async {
-    await getCustomerProfileDetails(context);
+    if(isRefreshed){
+      await getCustomerProfileDetails(context);
+    }
+
   }
 
   CustomerProfileRepo customerProfileRepo = CustomerProfileRepo(); ////;

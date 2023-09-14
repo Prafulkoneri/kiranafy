@@ -335,19 +335,25 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                         final element = watch.allShops[index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => MainScreenView(
-                                                      index: 1,
-                                                      screenName: ShopProfileView(
-                                                          shopId: element.id
-                                                              .toString(),
-                                                          refreshPage: true,
-                                                          routeName:
-                                                              "allNearShopView"))),
-                                              (Route<dynamic> route) => false,
-                                            );
+                                            readMain.onNavigation(1, ShopProfileView(
+                                                shopId: element.id
+                                                    .toString(),
+                                                refreshPage: true,
+                                                routeName:
+                                                "allNearShopView"), context);
+                                            // Navigator.pushAndRemoveUntil(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //       builder: (context) => MainScreenView(
+                                            //           index: 1,
+                                            //           screenName: ShopProfileView(
+                                            //               shopId: element.id
+                                            //                   .toString(),
+                                            //               refreshPage: true,
+                                            //               routeName:
+                                            //                   "allNearShopView"))),
+                                            //   (Route<dynamic> route) => false,
+                                            // );
                                           },
                                           child: Stack(
                                             children: [
@@ -592,16 +598,17 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainScreenView(
-                                                        index: 0,
-                                                        screenName:
-                                                            CustomerAdsView())),
-                                            (Route<dynamic> route) => false,
-                                          );
+                                          readMain.onNavigation(1,CustomerAdsView(), context);
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           MainScreenView(
+                                          //               index: 0,
+                                          //               screenName:
+                                          //                   CustomerAdsView())),
+                                          //   (Route<dynamic> route) => false,
+                                          // );
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(

@@ -47,13 +47,14 @@ class _MyOrderViewState extends State<MyOrderView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 1, screenName: ProfileScreenView())),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //           index: 1, screenName: ProfileScreenView(isRefreshed: false,))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "My Orders",
           action: InkWell(
@@ -95,6 +96,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                         final element = watch.orderList?[index];
                         return GestureDetector(
                           onTap: () {
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(

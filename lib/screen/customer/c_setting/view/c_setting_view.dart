@@ -36,6 +36,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
   Widget build(BuildContext context) {
     final watch = context.watch<CustomerSettingController>();
     final read = context.read<CustomerSettingController>();
+    final readMain = context.read<MainScreenController>();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -43,16 +44,21 @@ class _CustomerSettingState extends State<CustomerSetting> {
         child: PrimaryAppBar(
           title: "Settings",
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 4,
-                      screenName: ProfileScreenView(
-                          // refresh: false,
-                          ))),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(4, ProfileScreenView(
+              isRefreshed: false,
+              // refresh: false,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //           index: 4,
+            //           screenName: ProfileScreenView(
+            //             isRefreshed: false,
+            //               // refresh: false,
+            //               ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
         ),
       ),

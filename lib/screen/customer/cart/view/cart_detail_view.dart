@@ -176,13 +176,16 @@ class _CartDetailViewState extends State<CartDetailView> {
                   });
             },
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        MainScreenView(index: 2, screenName: CartScreenView())),
-                (Route<dynamic> route) => false,
-              );
+              Navigator.pop(context);
+              readMain.onNavigation(2, CartScreenView(), context);
+              readMain.showBottomNavigationBar();
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) =>
+              //           MainScreenView(index: 2, screenName: CartScreenView())),
+              //   (Route<dynamic> route) => false,
+              // );
             },
           ),
         ),
@@ -194,13 +197,14 @@ class _CartDetailViewState extends State<CartDetailView> {
                 ? Container()
                 : WillPopScope(
                     onWillPop: () async {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainScreenView(
-                                index: 2, screenName: CartScreenView())),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMain.onNavigation(2, CartScreenView(), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => MainScreenView(
+                      //           index: 2, screenName: CartScreenView())),
+                      //   (Route<dynamic> route) => false,
+                      // );
                       return false;
                     },
                     child: Column(
@@ -216,23 +220,31 @@ class _CartDetailViewState extends State<CartDetailView> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainScreenView(
-                                                        index: 1,
-                                                        screenName:
-                                                            ShopProfileView(
-                                                          refreshPage: true,
-                                                          routeName: '',
-                                                          shopId: watch
-                                                              .shopDetailData
-                                                              ?.id
-                                                              .toString(),
-                                                        ))),
-                                            (Route<dynamic> route) => false,
-                                          );
+                                          readMain.onNavigation(1, ShopProfileView(
+                                            refreshPage: true,
+                                            routeName: '',
+                                            shopId: watch
+                                                .shopDetailData
+                                                ?.id
+                                                .toString(),
+                                          ), context);
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           MainScreenView(
+                                          //               index: 1,
+                                          //               screenName:
+                                          //                   ShopProfileView(
+                                          //                 refreshPage: true,
+                                          //                 routeName: '',
+                                          //                 shopId: watch
+                                          //                     .shopDetailData
+                                          //                     ?.id
+                                          //                     .toString(),
+                                          //               ))),
+                                          //   (Route<dynamic> route) => false,
+                                          // );
                                         },
                                         child: Column(
                                           crossAxisAlignment:
@@ -412,42 +424,62 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                   readProductViewController
                                                       .updateProductId(
                                                     element?.productId
-                                                        .toString(),
+                                                        .toString(),context,false
                                                   );
                                                   print("anobot");
                                                   readProductViewController
                                                       .getCartId(
                                                           watch.orderCartId);
-                                                  Navigator.pushAndRemoveUntil(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            MainScreenView(
-                                                              index: 1,
-                                                              screenName:
-                                                                  ProductScreenView(
-                                                                // selectedUnitId: element?.productUnitId.toString(),
-                                                                categoryId: element
-                                                                    ?.categoryId
-                                                                    .toString(),
-                                                                // categoryId: watch.categoryId,
-                                                                productId: element
-                                                                    ?.productId
-                                                                    .toString(),
-                                                                shopId: watch
-                                                                    .shopDetailData
-                                                                    ?.id
-                                                                    .toString(),
-                                                                // widget.shopId,
-                                                                productType: element
-                                                                    ?.productType,
-                                                                routeName:
-                                                                    "cart_details",
-                                                              ),
-                                                            )),
-                                                    (Route<dynamic> route) =>
-                                                        false,
-                                                  );
+                                                  readMain.onNavigation(1,   ProductScreenView(
+                                                      // selectedUnitId: element?.productUnitId.toString(),
+                                                      categoryId: element
+                                                      ?.categoryId
+                                                      .toString(),
+                                                  // categoryId: watch.categoryId,
+                                                  productId: element
+                                                      ?.productId
+                                                      .toString(),
+                                                  shopId: watch
+                                                      .shopDetailData
+                                                      ?.id
+                                                      .toString(),
+                                                  // widget.shopId,
+                                                  productType: element
+                                                      ?.productType,
+                                                  routeName:
+                                                  "cart_details",
+                                                  ), context);
+
+                                                  // Navigator.pushAndRemoveUntil(
+                                                  //   context,
+                                                  //   MaterialPageRoute(
+                                                  //       builder: (context) =>
+                                                  //           MainScreenView(
+                                                  //             index: 1,
+                                                  //             screenName:
+                                                  //                 ProductScreenView(
+                                                  //               // selectedUnitId: element?.productUnitId.toString(),
+                                                  //               categoryId: element
+                                                  //                   ?.categoryId
+                                                  //                   .toString(),
+                                                  //               // categoryId: watch.categoryId,
+                                                  //               productId: element
+                                                  //                   ?.productId
+                                                  //                   .toString(),
+                                                  //               shopId: watch
+                                                  //                   .shopDetailData
+                                                  //                   ?.id
+                                                  //                   .toString(),
+                                                  //               // widget.shopId,
+                                                  //               productType: element
+                                                  //                   ?.productType,
+                                                  //               routeName:
+                                                  //                   "cart_details",
+                                                  //             ),
+                                                  //           )),
+                                                  //   (Route<dynamic> route) =>
+                                                  //       false,
+                                                  // );
                                                 },
                                                 child: Column(
                                                   children: [
@@ -972,24 +1004,41 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                       child: Text("Continue"),
                                                       onPressed: () {
                                                         Navigator.pop(context);
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  OrderSummaryView(
-                                                                    route:
-                                                                        "cartDetail",
-                                                                    isRefresh:
-                                                                        true,
-                                                                    cartId: watch
-                                                                        .orderCartId
-                                                                        .toString(),
-                                                                    shopId: watch
-                                                                        .shopDetailData
-                                                                        ?.id
-                                                                        .toString(),
-                                                                  )),
-                                                        );
+                                                        readMain.onNavigation(4,   OrderSummaryView(
+                                                          route:
+                                                          "cartDetail",
+                                                          isRefresh:
+                                                          true,
+                                                          cartId: watch
+                                                              .orderCartId
+                                                              .toString(),
+                                                          shopId: watch
+                                                              .shopDetailData
+                                                              ?.id
+                                                              .toString(),
+                                                        ), context);
+
+                                                        readMain.hideBottomNavigationBar();
+
+                                                        // Navigator.pop(context);
+                                                        // Navigator.push(
+                                                        //   context,
+                                                        //   MaterialPageRoute(
+                                                        //       builder: (context) =>
+                                                        //           OrderSummaryView(
+                                                        //             route:
+                                                        //                 "cartDetail",
+                                                        //             isRefresh:
+                                                        //                 true,
+                                                        //             cartId: watch
+                                                        //                 .orderCartId
+                                                        //                 .toString(),
+                                                        //             shopId: watch
+                                                        //                 .shopDetailData
+                                                        //                 ?.id
+                                                        //                 .toString(),
+                                                        //           )),
+                                                        // );
                                                         // your code
                                                       })
                                                 ],

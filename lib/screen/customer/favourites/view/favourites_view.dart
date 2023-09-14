@@ -879,15 +879,16 @@ class _CFavouritesViewState extends State<CFavouritesView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                        index: 4,
-                        screenName: ProfileScreenView(),
-                      )),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //             index: 4,
+            //             screenName: ProfileScreenView(isRefreshed: false,),
+            //           )),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Favourites",
         ),
@@ -992,23 +993,29 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                       final element = watch.favShopList?[index];
                                       return GestureDetector(
                                         onTap: () {
-                                          // readMain.onNavigation(0, ShopProfileView(shopId: element?.id.toString()), context);
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainScreenView(
-                                                        index: 1,
-                                                        screenName:
-                                                            ShopProfileView(
-                                                          shopId: element?.id
-                                                              .toString(),
-                                                          routeName:
-                                                              "favouriteView",
-                                                          refreshPage: true,
-                                                        ))),
-                                            (Route<dynamic> route) => false,
-                                          );
+                                          readMain.onNavigation(1, ShopProfileView(
+                                            shopId: element?.id
+                                                .toString(),
+                                            routeName:
+                                            "favouriteView",
+                                            refreshPage: true,
+                                          ), context);
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           MainScreenView(
+                                          //               index: 1,
+                                          //               screenName:
+                                          //                   ShopProfileView(
+                                          //                 shopId: element?.id
+                                          //                     .toString(),
+                                          //                 routeName:
+                                          //                     "favouriteView",
+                                          //                 refreshPage: true,
+                                          //               ))),
+                                          //   (Route<dynamic> route) => false,
+                                          // );
                                         },
                                         child: Stack(
                                           children: [
@@ -1282,36 +1289,54 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                             onTap: () {
                                               readProductViewController
                                                   .updateProductId(
-                                                element.id.toString(),
+                                                element.id.toString(),context,false
                                               );
-                                              Navigator.pushAndRemoveUntil(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        MainScreenView(
-                                                          index: 1,
-                                                          screenName:
-                                                              ProductScreenView(
-                                                            selectedUnitId:
-                                                                element
-                                                                    .productUnitId
-                                                                    .toString(),
-                                                            categoryId: element
-                                                                .categoryId
-                                                                .toString(),
-                                                            productId: element
-                                                                .id
-                                                                .toString(),
-                                                            shopId: element
-                                                                .shopId
-                                                                .toString(),
-                                                            productType: element
-                                                                .productType
-                                                                .toString(),
-                                                          ),
-                                                        )),
-                                                (Route<dynamic> route) => false,
-                                              );
+                                              readMain.onNavigation(1, ProductScreenView(
+                                                selectedUnitId:
+                                                element
+                                                    .productUnitId
+                                                    .toString(),
+                                                categoryId: element
+                                                    .categoryId
+                                                    .toString(),
+                                                productId: element
+                                                    .id
+                                                    .toString(),
+                                                shopId: element
+                                                    .shopId
+                                                    .toString(),
+                                                productType: element
+                                                    .productType
+                                                    .toString(),
+                                              ), context);
+                                              // Navigator.pushAndRemoveUntil(
+                                              //   context,
+                                              //   MaterialPageRoute(
+                                              //       builder: (context) =>
+                                              //           MainScreenView(
+                                              //             index: 1,
+                                              //             screenName:
+                                              //                 ProductScreenView(
+                                              //               selectedUnitId:
+                                              //                   element
+                                              //                       .productUnitId
+                                              //                       .toString(),
+                                              //               categoryId: element
+                                              //                   .categoryId
+                                              //                   .toString(),
+                                              //               productId: element
+                                              //                   .id
+                                              //                   .toString(),
+                                              //               shopId: element
+                                              //                   .shopId
+                                              //                   .toString(),
+                                              //               productType: element
+                                              //                   .productType
+                                              //                   .toString(),
+                                              //             ),
+                                              //           )),
+                                              //   (Route<dynamic> route) => false,
+                                              // );
                                             },
                                             child: Container(
                                               //                                           padding: EdgeInsets.only(

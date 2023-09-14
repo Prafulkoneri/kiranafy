@@ -130,28 +130,7 @@ class ProductViewController extends ChangeNotifier {
   }
 
   onBackPressed(context) {
-    if (routeName == "cart_details") {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CartDetailView(
-                  isRefresh: true,
-                  shopId: shopDetails?.id.toString(),
-                  cartId: cartId)));
-    } else {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MainScreenView(
-                index: 1,
-                screenName: ShopProfileView(
-                  refreshPage: true,
-                  routeName: '',
-                  shopId: shopDetails?.id.toString(),
-                ))),
-        (Route<dynamic> route) => false,
-      );
-    }
+
   }
 
   CartItemQuantityReqModel get cartItemQuantityRequestModel =>
@@ -763,9 +742,12 @@ class ProductViewController extends ChangeNotifier {
   }
 
   void updateProductId(
-    value,
+    pId,context,refresh
   ) {
-    productId = value;
+    productId = pId;
+    if(refresh){
+      initState(context, shopId, categoryId, pId, selectedUnitId, productType,"");
+    }
 
     notifyListeners();
   }

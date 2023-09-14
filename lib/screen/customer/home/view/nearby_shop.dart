@@ -24,6 +24,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
+    final readMainScreen = context.watch<MainScreenController>();
     return watch.nearByShopList?.isNotEmpty ?? false
         ? WillPopScope(
             onWillPop: () async {
@@ -40,18 +41,23 @@ class _HomeCarousalState extends State<HomeCarousal> {
                     final element = watch.nearByShopList?[index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainScreenView(
-                                  index: 1,
-                                  screenName: ShopProfileView(
-                                    shopId: element?.id.toString(),
-                                    routeName: "homeNearbyShop",
-                                    refreshPage: true,
-                                  ))),
-                          (Route<dynamic> route) => false,
-                        );
+                        readMainScreen.onNavigation(1,ShopProfileView(
+                                        shopId: element?.id.toString(),
+                                        routeName: "homeNearbyShop",
+                                        refreshPage: true,
+                                      ), context);
+                        // Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => MainScreenView(
+                        //           index: 1,
+                        //           screenName: ShopProfileView(
+                        //             shopId: element?.id.toString(),
+                        //             routeName: "homeNearbyShop",
+                        //             refreshPage: true,
+                        //           ))),
+                        //   (Route<dynamic> route) => false,
+                        // );
                       },
                       child: Stack(
                         children: [

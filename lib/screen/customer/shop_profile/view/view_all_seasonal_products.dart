@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
@@ -57,24 +58,30 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
   Widget build(BuildContext context) {
     final watch = context.watch<ShopAllSeasonalController>();
     final read = context.read<ShopAllSeasonalController>();
+    final readMain = context.read<MainScreenController>();
     final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => MainScreenView(
-                        index: 1,
-                        screenName: ShopProfileView(
-                          shopId: widget.shopId.toString(),
-                          routeName: "viewAllSeasonalProduct",
-                          refreshPage: true,
-                        ))),
-                (Route<dynamic> route) => false,
-              );
+              readMain.onNavigation(1,   ShopProfileView(
+                shopId: widget.shopId.toString(),
+                routeName: "viewAllSeasonalProduct",
+                refreshPage: true,
+              ), context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => MainScreenView(
+              //           index: 1,
+              //           screenName: ShopProfileView(
+              //             shopId: widget.shopId.toString(),
+              //             routeName: "viewAllSeasonalProduct",
+              //             refreshPage: true,
+              //           ))),
+              //   (Route<dynamic> route) => false,
+              // );
             },
             title: "Seasonal Products",
           ),
@@ -121,33 +128,48 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                           onTap: () {
                                             readProductViewController
                                                 .updateProductId(
-                                              element?.id.toString(),
+                                              element?.id.toString(),context,false
                                             );
-                                            Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      MainScreenView(
-                                                        index: 1,
-                                                        screenName:
-                                                            ProductScreenView(
-                                                                selectedUnitId: element
-                                                                    ?.productUnitId
-                                                                    .toString(),
-                                                                categoryId: element
-                                                                    ?.categoryId
-                                                                    .toString(),
-                                                                // categoryId: watch.categoryId,
-                                                                productId: element
-                                                                    ?.id
-                                                                    .toString(),
-                                                                shopId: element
-                                                                    ?.shopId,
-                                                                productType: element
-                                                                    ?.productType),
-                                                      )),
-                                              (Route<dynamic> route) => false,
-                                            );
+                                            readMain.onNavigation(1,        ProductScreenView(
+                                                selectedUnitId: element
+                                                    ?.productUnitId
+                                                    .toString(),
+                                                categoryId: element
+                                                    ?.categoryId
+                                                    .toString(),
+                                                // categoryId: watch.categoryId,
+                                                productId: element
+                                                    ?.id
+                                                    .toString(),
+                                                shopId: element
+                                                    ?.shopId,
+                                                productType: element
+                                                    ?.productType), context);
+                                            // Navigator.pushAndRemoveUntil(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           MainScreenView(
+                                            //             index: 1,
+                                            //             screenName:
+                                            //                 ProductScreenView(
+                                            //                     selectedUnitId: element
+                                            //                         ?.productUnitId
+                                            //                         .toString(),
+                                            //                     categoryId: element
+                                            //                         ?.categoryId
+                                            //                         .toString(),
+                                            //                     // categoryId: watch.categoryId,
+                                            //                     productId: element
+                                            //                         ?.id
+                                            //                         .toString(),
+                                            //                     shopId: element
+                                            //                         ?.shopId,
+                                            //                     productType: element
+                                            //                         ?.productType),
+                                            //           )),
+                                            //   (Route<dynamic> route) => false,
+                                            // );
                                           },
                                           child: Container(
                                             padding: EdgeInsets.only(

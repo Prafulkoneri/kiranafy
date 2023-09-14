@@ -46,17 +46,21 @@ class _ShopCategoryState extends State<ShopCategory> {
                         final element = watch.categoryFirstList[index];
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MainScreenView(
-                                      index: 1,
-                                      screenName: AllNearCategoryShopsView(
-                                        categoryId: element.id.toString(),
-                                        refresh: true,
-                                      ))),
-                              (Route<dynamic> route) => false,
-                            );
+                            readMain.onNavigation(1,AllNearCategoryShopsView(
+                              categoryId: element.id.toString(),
+                              refresh: true,
+                            ), context);
+                            // Navigator.pushAndRemoveUntil(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => MainScreenView(
+                            //           index: 1,
+                            //           screenName: AllNearCategoryShopsView(
+                            //             categoryId: element.id.toString(),
+                            //             refresh: true,
+                            //           ))),
+                            //   (Route<dynamic> route) => false,
+                            // );
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -125,17 +129,21 @@ class _ShopCategoryState extends State<ShopCategory> {
                         final element = watch.categorySecondList[index];
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MainScreenView(
-                                      index: 1,
-                                      screenName: AllNearCategoryShopsView(
-                                        categoryId: element.id.toString(),
-                                        refresh: true,
-                                      ))),
-                              (Route<dynamic> route) => false,
-                            );
+                            readMain.onNavigation(1,AllNearCategoryShopsView(
+                              categoryId: element.id.toString(),
+                              refresh: true,
+                            ), context);
+                            // Navigator.pushAndRemoveUntil(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => MainScreenView(
+                            //           index: 1,
+                            //           screenName: AllNearCategoryShopsView(
+                            //             categoryId: element.id.toString(),
+                            //             refresh: true,
+                            //           ))),
+                            //   (Route<dynamic> route) => false,
+                            // );
                             // readMain.onBackPressed(
                             //     1,
                             //     AllNearCategoryShops(

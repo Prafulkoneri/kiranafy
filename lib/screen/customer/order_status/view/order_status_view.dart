@@ -96,17 +96,21 @@ class _OrderStatusViewState extends State<OrderStatusView> {
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
             widget.screenName == "orderSummary"
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                              index: 0,
-                              screenName: HomeScreenView(
-                                refreshPage: true,
-                              ),
-                            )),
-                    (Route<dynamic> route) => false,
-                  )
+                ?readMain.onNavigation(0, HomeScreenView(
+              refreshPage: true,
+            ), context)
+
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => MainScreenView(
+            //                   index: 0,
+            //                   screenName: HomeScreenView(
+            //                     refreshPage: true,
+            //                   ),
+            //                 )),
+            //         (Route<dynamic> route) => false,
+            //       )
                 :  Navigator.push(
               context,
               MaterialPageRoute(
@@ -144,18 +148,23 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                   children: [
                     GestureDetector(
                      onTap: (){
-                       Navigator.pushAndRemoveUntil(
-                         context,
-                         MaterialPageRoute(
-                             builder: (context) => MainScreenView(
-                                 index: 1,
-                                 screenName: ShopProfileView(
-                                   refreshPage: true,
-                                   routeName: '',
-                                   shopId: watch.shopDetails?.id.toString(),
-                                 ))),
-                             (Route<dynamic> route) => false,
-                       );
+                       readMain.onNavigation(1, ShopProfileView(
+                         refreshPage: true,
+                         routeName: '',
+                         shopId: watch.shopDetails?.id.toString(),
+                       ), context);
+                       // Navigator.pushAndRemoveUntil(
+                       //   context,
+                       //   MaterialPageRoute(
+                       //       builder: (context) => MainScreenView(
+                       //           index: 1,
+                       //           screenName: ShopProfileView(
+                       //             refreshPage: true,
+                       //             routeName: '',
+                       //             shopId: watch.shopDetails?.id.toString(),
+                       //           ))),
+                       //       (Route<dynamic> route) => false,
+                       // );
                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),

@@ -9,7 +9,9 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/controller/add_address_controller.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
@@ -48,12 +50,49 @@ class _AddAddressViewState extends State<AddAddressView> {
   Widget build(BuildContext context) {
     final watch = context.watch<AddAddressController>();
     final read = context.read<AddAddressController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            read.onBackBtnPressed(context, widget.cartId, widget.shopId);
+            // if (widget.route == "addressView") {
+            //   print("hello");
+            //
+            //   print("hellos");
+            //   Navigator.pop(context);
+            //   readMain.onNavigation(4, MyDeliveryAddressView(isRefresh: false), context);
+            //   // Navigator.pushAndRemoveUntil(
+            //   //   context,
+            //   //   MaterialPageRoute(
+            //   //       builder: (context) => MainScreenView(
+            //   //           index: 4, screenName: MyDeliveryAddressView(isRefresh: false))),
+            //   //   (Route<dynamic> route) => false,
+            //   // );
+            // }
+            // if (widget.route == "orderAddress") {
+            //   Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (context) => OrderSummaryView(
+            //             isRefresh: false,
+            //             route: "editAddress",
+            //             cartId: widget.cartId,
+            //             shopId: widget.shopId,
+            //           )));
+            // }
+            // if (widget.route == "orderAddAddress") {
+            //   Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (context) => OrderSummaryView(
+            //             isRefresh: false,
+            //             route: "addAddress",
+            //             cartId: widget.cartId,
+            //             shopId: widget.shopId,
+            //           )));
+            // }
+            read.onBackBtnPressed(context, widget.cartId, widget.shopId,readMain);
           },
           title: widget.isEditAdress == false ? "Add Address" : "Edit Address",
           action: SvgPicture.asset("assets/icons/forward.svg"),

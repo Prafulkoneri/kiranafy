@@ -178,6 +178,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/cms_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
@@ -204,6 +205,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
   @override
   Widget build(BuildContext context) {
     final read = context.read<ProfileController>();
+    final readMain = context.read<MainScreenController>();
     final watch = context.watch<ProfileController>();
     return Scaffold(
       appBar: PreferredSize(
@@ -211,13 +213,17 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
         child: PrimaryAppBar(
           title: "FAQ",
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 4, screenName: ProfileScreenView())),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(4, ProfileScreenView(
+              isRefreshed: false,
+              // refresh: false,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //           index: 4, screenName: ProfileScreenView(isRefreshed: false,))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
         ),
       ),
