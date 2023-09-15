@@ -96,15 +96,19 @@ class _MyOrderViewState extends State<MyOrderView> {
                         final element = watch.orderList?[index];
                         return GestureDetector(
                           onTap: () {
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OrderDeliveryView(
-                                      screenName: "myorderView",
-                                      isRefresh: true,
-                                      orderId: element?.id.toString())),
-                            );
+readMain.onNavigation(4, OrderDeliveryView(
+    screenName: "myorderView",
+    isRefresh: true,
+    orderId: element?.id.toString()), context);
+readMain.hideBottomNavigationBar();
+//                             Navigator.push(
+//                               context,
+//                               MaterialPageRoute(
+//                                   builder: (context) => OrderDeliveryView(
+//                                       screenName: "myorderView",
+//                                       isRefresh: true,
+//                                       orderId: element?.id.toString())),
+//                             );
                           },
                           child: Container(
                             margin: EdgeInsets.only(

@@ -11,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
+import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/model/set_pincode_model.dart';
 import 'package:local_supper_market/screen/customer/main_screen/repository/set_pincode_repo.dart';
@@ -19,6 +20,7 @@ import 'package:local_supper_market/screen/customer/notifications/view/notificat
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/maps/view/map_view.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../account/view/profile_screen_view.dart';
@@ -253,16 +255,20 @@ class MainScreenController extends ChangeNotifier {
         notifyListeners();
       });
     } else {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MainScreenView(
-                index: 0,
-                screenName: HomeScreenView(
-                  refreshPage: true,
-                ))),
-        (Route<dynamic> route) => false,
-      );
+
+      final read=Provider.of<HomeScreenController>(context,listen: false);
+      read.initState(context,true);
+      Navigator.pop(context);
+      // Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => MainScreenView(
+      //           index: 0,
+      //           screenName: HomeScreenView(
+      //             refreshPage: true,
+      //           ))),
+      //   (Route<dynamic> route) => false,
+      // );
       notifyListeners();
     }
   }

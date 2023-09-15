@@ -10,8 +10,10 @@ import 'package:local_supper_market/screen/customer/auth/repository/customer_sig
 import 'package:local_supper_market/screen/customer/auth/repository/mobile_number_check_repo.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -130,16 +132,20 @@ class CustomerSignUpController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "customerLoggedIn");
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MainScreenView(
-                  index: 0,
-                  screenName: HomeScreenView(
-                    refreshPage: true,
-                  ))),
-              (Route<dynamic> route) => false,
-        );
+        final read=Provider.of<MainScreenController>(context,listen: false);
+        read.onNavigation(0, HomeScreenView(
+          refreshPage: true,
+        ), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => MainScreenView(
+        //           index: 0,
+        //           screenName: HomeScreenView(
+        //             refreshPage: true,
+        //           ))),
+        //       (Route<dynamic> route) => false,
+        // );
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

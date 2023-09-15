@@ -628,16 +628,16 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                       InkWell(
                                         onTap: () {
                                           readMain.onNavigation(0,CustomerAdsView(), context);
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainScreenView(
-                                                        index: 0,
-                                                        screenName:
-                                                            CustomerAdsView())),
-                                            (Route<dynamic> route) => false,
-                                          );
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           MainScreenView(
+                                          //               index: 0,
+                                          //               screenName:
+                                          //                   CustomerAdsView())),
+                                          //   (Route<dynamic> route) => false,
+                                          // );
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(

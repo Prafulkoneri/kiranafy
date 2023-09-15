@@ -28,6 +28,7 @@ import 'package:local_supper_market/screen/customer/delivery_view/repository/rev
 import 'package:local_supper_market/screen/customer/delivery_view/repository/submit_review_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/update_refund_status_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
@@ -39,6 +40,7 @@ import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -95,6 +97,8 @@ class CustomerOrderViewController extends ChangeNotifier {
     context,
     orId,
   ) async {
+    final read =Provider.of<MainScreenController>(context,listen: false);
+    read.hideBottomNavigationBar();
     orderId = "";
     orderCancelledReason = "";
     orderCancelledReasonId = "";
@@ -120,6 +124,7 @@ class CustomerOrderViewController extends ChangeNotifier {
         .showOrderView(
             customerOrderViewRequestModel, pref.getString("successToken"))
         .then((response) {
+          print("hello");
       log(response.body);
       final result =
           CustomerOrderViewResponseModel.fromJson(jsonDecode(response.body));
@@ -436,13 +441,16 @@ class CustomerOrderViewController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  MainScreenView(index: 4, screenName: MyOrderView())),
-          // (Route<dynamic> route) => false,
-        );
+        final read=Provider.of<MainScreenController>(context,listen: false);
+
+        read.onNavigation(4,MyOrderView(), context);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) =>
+        //           MainScreenView(index: 4, screenName: MyOrderView())),
+        //   // (Route<dynamic> route) => false,
+        // );
 
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
@@ -482,13 +490,15 @@ class CustomerOrderViewController extends ChangeNotifier {
       final result =
           CustomerReorderResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  MainScreenView(index: 2, screenName: CartScreenView())),
-          (Route<dynamic> route) => false,
-        );
+        final read=Provider.of<MainScreenController>(context,listen: false);
+        read.onNavigation(2, CartScreenView(), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) =>
+        //           MainScreenView(index: 2, screenName: CartScreenView())),
+        //   (Route<dynamic> route) => false,
+        // );
 
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,

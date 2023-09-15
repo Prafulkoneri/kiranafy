@@ -81,31 +81,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
             // },
             onBackBtnPressed: () {
               widget.screenName == "notification"
-                  ?      readMain.onNavigation(4, CustomerNotificationsScreenView(
-                                    isRefresh: false), context)
-              // Navigator.pushAndRemoveUntil(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => MainScreenView(
-              //                   index: 4,
-              //                   screenName: CustomerNotificationsScreenView(
-              //                     isRefresh: false,
-              //                   ),
-              //                 )),
-              //         (Route<dynamic> route) => false,
-              //       )
-                  :
-              readMain.onNavigation(4, MyOrderView(), context);
-
-              // Navigator.pushAndRemoveUntil(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => MainScreenView(
-              //                   index: 0,
-              //                   screenName: MyOrderView(),
-              //                 )),
-              //         (Route<dynamic> route) => false,
-              //       );
+                  ?
+              readMain.onNavigation(4, CustomerNotificationsScreenView(
+                isRefresh: false,
+              ), context):
+              readMain.onNavigation(4,MyOrderView(), context);
               readMain.showBottomNavigationBar();
             },
             title: "Order",
@@ -117,32 +97,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
               )
             : WillPopScope(
                 onWillPop: () async {
-                  widget.screenName == "notification"
-                      ?      readMain.onNavigation(4, CustomerNotificationsScreenView(
-                      isRefresh: false), context)
-                  // Navigator.pushAndRemoveUntil(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) => MainScreenView(
-                  //                   index: 4,
-                  //                   screenName: CustomerNotificationsScreenView(
-                  //                     isRefresh: false,
-                  //                   ),
-                  //                 )),
-                  //         (Route<dynamic> route) => false,
-                  //       )
-                      :
-                  readMain.onNavigation(4, MyOrderView(), context);
-
-                  // Navigator.pushAndRemoveUntil(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) => MainScreenView(
-                  //                   index: 0,
-                  //                   screenName: MyOrderView(),
-                  //                 )),
-                  //         (Route<dynamic> route) => false,
-                  //       );
+                  widget.screenName == "notification"?
+                  readMain.onNavigation(4, CustomerNotificationsScreenView(
+                    isRefresh: false,
+                  ), context):
+                  readMain.onNavigation(4,MyOrderView(), context);
                   readMain.showBottomNavigationBar();
                   return true;
                 },
@@ -1038,6 +997,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         orderId: watch.orderId,
                                         screenName: "orderView",
                                       ), context);
+                                      readMain.showBottomNavigationBar();
                                       // Navigator.pushAndRemoveUntil(
                                       //   context,
                                       //   MaterialPageRoute(

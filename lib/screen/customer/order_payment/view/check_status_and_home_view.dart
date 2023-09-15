@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
@@ -35,6 +36,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
   Widget build(BuildContext context) {
     final watch = context.watch<TrackOrderStatusController>();
     final read = context.read<TrackOrderStatusController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: WillPopScope(
@@ -118,17 +120,21 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
                     // );
                     // },
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainScreenView(
-                                index: 2,
-                                screenName: OrderStatusView(
-                                  orderId: widget.orderId,
-                                  screenName: "orderSummary",
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMain.onNavigation(2, OrderStatusView(
+                        orderId: widget.orderId,
+                        screenName: "orderSummary",
+                      ), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => MainScreenView(
+                      //           index: 2,
+                      //           screenName: OrderStatusView(
+                      //             orderId: widget.orderId,
+                      //             screenName: "orderSummary",
+                      //           ))),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Text(
                       'Check Order Status',
@@ -148,14 +154,15 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 0,
-                            screenName: HomeScreenView(refreshPage: true))),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(0, HomeScreenView(refreshPage: true), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 0,
+                  //           screenName: HomeScreenView(refreshPage: true))),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 child: Text(
                   'Back to Home',

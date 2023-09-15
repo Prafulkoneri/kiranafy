@@ -210,19 +210,20 @@ class OrderPaymentController extends ChangeNotifier {
         final read =
         Provider.of<MainScreenController>(context, listen: false);
         // Navigator.pop(context);
-        // read.onNavigation(4, CheckOrderStatusView(
-        //   orderId: result.orderId.toString(),
-        // ), context);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MainScreenView(
-                  index: 2,
-                  screenName: CheckOrderStatusView(
-                    orderId: result.orderId.toString(),
-                  ))),
-          // (Route<dynamic> route) => false,
-        );
+        // Navigator.pop(context);
+        // Navigator.pop(context);
+        read.onNavigation(2, CheckOrderStatusView(
+          orderId: result.orderId.toString(),
+        ), context);
+        read.showBottomNavigationBar();
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => MainScreenView(index: 2,screenName: CheckOrderStatusView(
+        //     orderId: result.orderId.toString(),
+        //   ),)),
+        //   (Route<dynamic> route) => false,
+        // );
         LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {

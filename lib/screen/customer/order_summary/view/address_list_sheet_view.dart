@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
@@ -21,6 +22,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
   Widget build(BuildContext context) {
     final watch = context.watch<OrderSummaryController>();
     final read = context.read<OrderSummaryController>();
+    final readMain = context.read<MainScreenController>();
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -114,25 +116,36 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                MainScreenView(
-                                                    index: 4,
-                                                    screenName: AddAddressView(
-                                                      isEditAdress: true,
-                                                      route: "orderAddress",
-                                                      shopId: watch
-                                                          .shopDetailData?.id
-                                                          .toString(),
-                                                      cartId: watch.cartId,
-                                                      addressId: element
-                                                          ?.addressId
-                                                          .toString(),
-                                                    ))),
-                                        (Route<dynamic> route) => false,
-                                      );
+                                      readMain.onNavigation(1,AddAddressView(
+                                        isEditAdress: true,
+                                        route: "orderAddress",
+                                        shopId: watch
+                                            .shopDetailData?.id
+                                            .toString(),
+                                        cartId: watch.cartId,
+                                        addressId: element
+                                            ?.addressId
+                                            .toString(),
+                                      ), context);
+                                      // Navigator.pushAndRemoveUntil(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           MainScreenView(
+                                      //               index: 4,
+                                      //               screenName: AddAddressView(
+                                      //                 isEditAdress: true,
+                                      //                 route: "orderAddress",
+                                      //                 shopId: watch
+                                      //                     .shopDetailData?.id
+                                      //                     .toString(),
+                                      //                 cartId: watch.cartId,
+                                      //                 addressId: element
+                                      //                     ?.addressId
+                                      //                     .toString(),
+                                      //               ))),
+                                      //   (Route<dynamic> route) => false,
+                                      // );
                                     },
                                     child: SvgPicture.asset(
                                         "assets/icons/edit_address.svg"),

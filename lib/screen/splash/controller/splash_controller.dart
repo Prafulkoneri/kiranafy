@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:local_supper_market/bottom_navigation_bar.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
@@ -16,6 +17,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/screen/update/view/update_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -73,16 +75,20 @@ class SplashController extends ChangeNotifier {
                     SShopConfigurationView(initialShopConfigration: true)));
       }
       if (pref.getString("status") == "customerLoggedIn") {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MainScreenView(
-                  index: 0,
-                  screenName: HomeScreenView(
-                    refreshPage: true,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
+        final read=Provider.of<MainScreenController>(context,listen: false);
+        read.onNavigation(0, HomeScreenView(
+          refreshPage: true,
+        ), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => MainScreenView(
+        //           index: 0,
+        //           screenName: HomeScreenView(
+        //             refreshPage: true,
+        //           ))),
+        //   (Route<dynamic> route) => false,
+        // );
       }
       if (pref.getString("status") == null) {
         Navigator.pushReplacement(context,

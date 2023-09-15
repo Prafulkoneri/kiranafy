@@ -176,7 +176,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                   });
             },
             onBackBtnPressed: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
               readMain.onNavigation(2, CartScreenView(), context);
               readMain.showBottomNavigationBar();
               // Navigator.pushAndRemoveUntil(
@@ -228,6 +228,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                 ?.id
                                                 .toString(),
                                           ), context);
+                                          readMain.showBottomNavigationBar();
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,
                                           //   MaterialPageRoute(
@@ -449,6 +450,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                   routeName:
                                                   "cart_details",
                                                   ), context);
+                                                  readMain.showBottomNavigationBar();
 
                                                   // Navigator.pushAndRemoveUntil(
                                                   //   context,
@@ -1004,21 +1006,14 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                       child: Text("Continue"),
                                                       onPressed: () {
                                                         Navigator.pop(context);
-                                                        readMain.onNavigation(4,   OrderSummaryView(
-                                                          route:
-                                                          "cartDetail",
-                                                          isRefresh:
-                                                          true,
-                                                          cartId: watch
-                                                              .orderCartId
-                                                              .toString(),
-                                                          shopId: watch
-                                                              .shopDetailData
-                                                              ?.id
-                                                              .toString(),
-                                                        ), context);
-
-                                                        readMain.hideBottomNavigationBar();
+                                                        readMain.onNavigation(2,OrderSummaryView(
+                                                          route: "cartDetail",
+                                                          isRefresh: true,
+                                                          cartId: watch.orderCartId.toString(),
+                                                          shopId: watch.shopDetailData?.id.toString(),
+                                                        ),context);
+                                                        //
+                                                        // readMain.hideBottomNavigationBar();
 
                                                         // Navigator.pop(context);
                                                         // Navigator.push(

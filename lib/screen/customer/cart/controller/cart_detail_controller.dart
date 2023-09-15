@@ -19,12 +19,15 @@ import 'package:local_supper_market/screen/customer/cart/repository/cart_detail_
 import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/cart_list_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -156,13 +159,16 @@ class CartDetailController extends ChangeNotifier {
         if (result.status == 200) {
           print("helloooo");
           Navigator.pop(context);
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    MainScreenView(index: 2, screenName: CartScreenView())),
-            (Route<dynamic> route) => false,
-          );
+          final read=Provider.of<MainScreenController>(context,listen: false);
+          read.onNavigation(2, CartScreenView(), context);
+          read.showBottomNavigationBar();
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) =>
+          //           MainScreenView(index: 2, screenName: CartScreenView())),
+          //   (Route<dynamic> route) => false,
+          // );
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
         } else {
@@ -330,13 +336,15 @@ class CartDetailController extends ChangeNotifier {
           cartItemList?.removeAt(index);
         }
         if (cartItemList!.isEmpty) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    MainScreenView(index: 2, screenName: CartScreenView())),
-            (Route<dynamic> route) => false,
-          );
+          final read=Provider.of<MainScreenController>(context,listen: false);
+          read.onNavigation(2, CartScreenView(), context);
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) =>
+          //           MainScreenView(index: 2, screenName: CartScreenView())),
+          //   (Route<dynamic> route) => false,
+          // );
         }
         quantityBtnPressed(false);
         notifyListeners();
