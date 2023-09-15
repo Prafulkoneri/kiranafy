@@ -1,8 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 import 'dart:developer';
-
-import 'package:local_supper_market/screen/shop_owner/s_coupons/model/add_coupons_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/delete_coupons_model.dart';
 
 class DeleteCouponsRepo {

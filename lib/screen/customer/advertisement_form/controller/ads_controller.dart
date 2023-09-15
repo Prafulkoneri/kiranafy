@@ -1,18 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/model/c_ads_model.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/repository/c_ads_repo.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
-import 'package:local_supper_market/screen/shop_owner/promotion_request/model/promotion_request_model.dart';
-import 'package:local_supper_market/screen/shop_owner/promotion_request/repository/promotion_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,12 +33,13 @@ class customerAdscontroller extends ChangeNotifier {
   }
 
   CustomerAdsRequestmodel get customerAdsrequestModel =>
-      CustomerAdsRequestmodel( name: adsNameController.text,shopName: adsShopNamecontroller.text,
+      CustomerAdsRequestmodel(
+        name: adsNameController.text,
+        shopName: adsShopNamecontroller.text,
         number: adsMobileNumberController.text,
-          adsPlan: groupValue,
-          adsContent: adsContentController.text,
+        adsPlan: groupValue,
+        adsContent: adsContentController.text,
         planStartDateFrom: planToStartController.text,
-
       );
 
   Future<void> customerAdsForm(context) async {
@@ -80,12 +75,13 @@ class customerAdscontroller extends ChangeNotifier {
     }
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
-    cadsRequestRepo.cpramotionRequest(customerAdsrequestModel,  pref.getString("successToken"))
-
+    cadsRequestRepo
+        .cpramotionRequest(
+            customerAdsrequestModel, pref.getString("successToken"))
         .then((response) {
       print(response.body);
       final result =
-      CustomerAdsResponsemodel.fromJson(jsonDecode(response.body));
+          CustomerAdsResponsemodel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
         groupValue = "";
@@ -100,9 +96,9 @@ class customerAdscontroller extends ChangeNotifier {
               builder: (context) => MainScreenView(
                   index: 4,
                   screenName: HomeScreenView(
-                 refreshPage: true,
+                    refreshPage: true,
                   ))),
-              (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -117,7 +113,7 @@ class customerAdscontroller extends ChangeNotifier {
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {

@@ -1,25 +1,13 @@
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_in_controller.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_otp_sheet.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_view.dart';
-import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
-import 'package:provider/provider.dart';
-import '../../main_screen/views/main_screen_view.dart';
 
-// enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET }
+import 'package:provider/provider.dart';
 
 class CustomerSignInView extends StatefulWidget {
   const CustomerSignInView({Key? key}) : super(key: key);
@@ -35,7 +23,7 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
     final watch = context.watch<CustomerSignInController>();
     return Scaffold(
       body: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(

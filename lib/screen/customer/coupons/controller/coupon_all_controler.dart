@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:local_supper_market/screen/customer/auth/model/customer_sign_in_model.dart';
 import 'package:local_supper_market/screen/customer/coupons/model/coupon_all_model.dart';
 import 'package:local_supper_market/screen/customer/coupons/model/coupon_filtter_model.dart';
 import 'package:local_supper_market/screen/customer/coupons/repository/coupon_all_repo.dart';
 import 'package:local_supper_market/screen/customer/coupons/repository/coupon_filtter_repo.dart';
-import 'package:local_supper_market/screen/customer/my_order/repository/my_order_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

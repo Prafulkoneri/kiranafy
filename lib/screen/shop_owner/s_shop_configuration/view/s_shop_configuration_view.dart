@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
@@ -11,9 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/contr
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/shop_delivery_area_dialog.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
-import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';

@@ -1,21 +1,3 @@
-// class CustomerCouponListRequestModel {
-//   int? uptoValue;
-//   String? shopId;
-//   String? categoryId;
-//   CustomerCouponListRequestModel({
-//     this.categoryId,
-//     this.shopId,
-//   });
-//   Map<String, dynamic> toJson() {
-//     Map<String, dynamic> data = {};
-//     data["uptoValue"] = uptoValue;
-//     data["shop_id"] = shopId;
-//     data["category_id"] = categoryId;
-//     return data;
-//   }
-// }
-
-/////////////////////////////////
 class CustomerCouponListResponseModel {
   int? status;
   String? message;

@@ -1,15 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/model/remove_srf_model.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/model/seasonal_recommanded_fulfil_model.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/repository/remove_srf_products_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/repository/seasonal_fulFil_recommanded_repo.dart';
-
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,27 +25,26 @@ class ShopSeasonalRecommandedOfferProductsController extends ChangeNotifier {
   String productId = "";
   String productsType = "";
   String removeFrom = "";
-  Future<void> initState(context,selectedProduct,refresh) async {
-    if(selectedProduct=="recommended"){
+  Future<void> initState(context, selectedProduct, refresh) async {
+    if (selectedProduct == "recommended") {
       isRecommadedPressed = true;
       isSeasonalPressed = false;
       isFulFilPressed = false;
     }
-    if(selectedProduct=="seasonal"){
+    if (selectedProduct == "seasonal") {
       isSeasonalPressed = true;
       isRecommadedPressed = false;
       isFulFilPressed = false;
     }
-    if(selectedProduct=="fullFill"){
+    if (selectedProduct == "fullFill") {
       isSeasonalPressed = false;
       isRecommadedPressed = false;
       isFulFilPressed = true;
     }
     showLoader(false);
-if(refresh){
-  await getAllProductsList(context);
-}
-
+    if (refresh) {
+      await getAllProductsList(context);
+    }
   }
 
   showLoader(value) {

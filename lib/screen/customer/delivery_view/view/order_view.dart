@@ -2,9 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,9 +13,8 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
-import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
-import 'package:local_supper_market/screen/customer/order_summary/order_products.dart';
+
 import 'package:local_supper_market/screen/customer/return/view/return_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -127,20 +123,21 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           GestureDetector(
-                           onTap: (){
-                             Navigator.pushAndRemoveUntil(
-                               context,
-                               MaterialPageRoute(
-                                   builder: (context) => MainScreenView(
-                                       index: 1,
-                                       screenName: ShopProfileView(
-                                         refreshPage: true,
-                                         routeName: '',
-                                         shopId: watch.shopDetails?.id.toString(),
-                                       ))),
-                                   (Route<dynamic> route) => false,
-                             );
-                           },
+                            onTap: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainScreenView(
+                                        index: 1,
+                                        screenName: ShopProfileView(
+                                          refreshPage: true,
+                                          routeName: '',
+                                          shopId:
+                                              watch.shopDetails?.id.toString(),
+                                        ))),
+                                (Route<dynamic> route) => false,
+                              );
+                            },
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 15.w),
                               child: Column(
@@ -196,70 +193,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             ],
                                           ),
                                         )),
-                                        // Row(
-                                        //   children: [
-                                        //     InkWell(
-                                        //       onTap: () {
-                                        //         read.launchPhone(
-                                        //             watch.shopDetails
-                                        //                     ?.shopOwnerSupportNumber ??
-                                        //                 "",
-                                        //             context);
-                                        //       },
-                                        //       child: Container(
-                                        //           padding: EdgeInsets.only(
-                                        //               left: 11.w,
-                                        //               right: 11.w,
-                                        //               top: 13.w,
-                                        //               bottom: 13.w),
-                                        //           decoration: BoxDecoration(
-                                        //             shape: BoxShape.circle,
-                                        //             color: Color(0xff23AA49),
-                                        //           ),
-                                        //           child: SvgPicture.asset(
-                                        //             "assets/icons/new_call.svg",
-                                        //             width: 26.w,
-                                        //             height: 14.h,
-                                        //           )),
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: 13.w,
-                                        //     ),
-                                        //     InkWell(
-                                        //       onTap: () {
-                                        //         watch.favAllShop
-                                        //             ? read.removeAllShopFavList(
-                                        //                 context,
-                                        //                 watch.shopDetails?.id)
-                                        //             : read.updateAllShopFavList(
-                                        //                 context,
-                                        //                 watch.shopDetails?.id);
-                                        //       },
-                                        //       child: Container(
-                                        //         padding: EdgeInsets.only(
-                                        //             left: 13.w,
-                                        //             right: 13.w,
-                                        //             top: 14.w,
-                                        //             bottom: 14.w),
-                                        //         decoration: const BoxDecoration(
-                                        //           shape: BoxShape.circle,
-                                        //           color: Color(0xff4689EC),
-                                        //         ),
-                                        //         child: watch.favAllShop
-                                        //             ? SvgPicture.asset(
-                                        //                 "assets/icons/fav_selected.svg",
-                                        //                 width: 26.w,
-                                        //                 height: 14.h,
-                                        //               )
-                                        //             : SvgPicture.asset(
-                                        //                 "assets/images/favorite.svg",
-                                        //                 width: 26.w,
-                                        //                 height: 14.h,
-                                        //               ),
-                                        //       ),
-                                        //     )
-                                        //   ],
-                                        // ),
                                         Row(
                                           children: [
                                             InkWell(
@@ -289,39 +222,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             SizedBox(
                                               width: 13.w,
                                             ),
-                                            // InkWell(
-                                            //   onTap: () {
-                                            //     watch.favAllShop
-                                            //         ? read.removeAllShopFavList(
-                                            //             context,
-                                            //             watch.shopDetails?.id)
-                                            //         : read.updateAllShopFavList(
-                                            //             context,
-                                            //             watch.shopDetails?.id);
-                                            //   },
-                                            //   child: Container(
-                                            //     padding: EdgeInsets.only(
-                                            //         left: 13.w,
-                                            //         right: 13.w,
-                                            //         top: 14.w,
-                                            //         bottom: 14.w),
-                                            //     decoration: BoxDecoration(
-                                            //       shape: BoxShape.circle,
-                                            //       color: Color(0xff4689EC),
-                                            //     ),
-                                            //     child: watch.favAllShop
-                                            //         ? SvgPicture.asset(
-                                            //             "assets/icons/fav_selected.svg",
-                                            //             width: 26.w,
-                                            //             height: 14.h,
-                                            //           )
-                                            //         : SvgPicture.asset(
-                                            //             "assets/images/favorite.svg",
-                                            //             width: 26.w,
-                                            //             height: 14.h,
-                                            //           ),
-                                            //   ),
-                                            // )
                                             InkWell(
                                               onTap: () {
                                                 watch.favAllShop
@@ -1494,78 +1394,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                       print(rating);
                                                     }),
                                               ),
-                                              //                                                             Container(
-                                              //                               padding: EdgeInsets.only(left: 19.w),
-                                              //                               child: Row(
-                                              //                                 children: [
-                                              //                                   GestureDetector(
-                                              //                                       onTap: () {
-                                              //                                         read.onRatingSelect(1);
-                                              //                                       },
-                                              //                                       child: SvgPicture.asset(
-                                              //                                         "assets/icons/order_rating.svg",
-                                              //                                         color: watch.ratingValue == null
-                                              //                                             ? Color(0xffDBDBDB)
-                                              //                                             : Colors.yellow,
-                                              //                                       )),
-                                              //                                   SizedBox(
-                                              //                                     width: 9.77.w,
-                                              //                                   ),
-                                              //                                   GestureDetector(
-                                              //                                       onTap: () {
-                                              //                                         read.onRatingSelect(2);
-                                              //                                       },
-                                              //                                       child: SvgPicture.asset(
-                                              //                                         "assets/icons/order_rating.svg",
-                                              //                                         color: watch.ratingValue == 2 &&
-                                              //                                                 watch.ratingValue == 3 &&
-                                              //                                                 watch.ratingValue == 4 &&
-                                              //                                                 watch.ratingValue == 5
-                                              //                                             ? Colors.yellow
-                                              //                                             : Color(0xffDBDBDB),
-                                              //                                       )),
-                                              //                                   SizedBox(
-                                              //                                     width: 9.77.w,
-                                              //                                   ),
-                                              //                                   GestureDetector(
-                                              //                                       onTap: () {
-                                              //                                         read.onRatingSelect(3);
-                                              //                                       },
-                                              //                                       child: SvgPicture.asset(
-                                              //                                           "assets/icons/order_rating.svg", color:
-                                              //                                           watch.ratingValue == 3 &&
-                                              //                                           watch.ratingValue == 4 &&
-                                              //                                           watch.ratingValue == 5
-                                              //                                           ? Colors.yellow
-                                              //                                           : Color(0xffDBDBDB),)),
-                                              //                                   SizedBox(
-                                              //                                     width: 9.77.w,
-                                              //                                   ),
-                                              //                                   GestureDetector(
-                                              //                                       onTap: () {
-                                              //                                         read.onRatingSelect(4);
-                                              //                                       },
-                                              //                                       child: SvgPicture.asset(
-                                              //                                           "assets/icons/order_rating.svg", color:
-                                              // watch.ratingValue == 4 &&
-                                              // watch.ratingValue == 5
-                                              // ? Colors.yellow
-                                              //     : Color(0xffDBDBDB),)),
-                                              //                                   SizedBox(
-                                              //                                     width: 9.77.w,
-                                              //                                   ),
-                                              //                                   GestureDetector(
-                                              //                                       onTap: () {
-                                              //                                         read.onRatingSelect(5);
-                                              //                                       },
-                                              //                                       child: SvgPicture.asset(
-                                              //                                           "assets/icons/order_rating.svg", color:
-                                              //                                           watch.ratingValue == 5
-                                              //                                           ? Colors.yellow
-                                              //                                           : Color(0xffDBDBDB),))
-                                              //                                 ],
-                                              //                               ),
-                                              //                             ),
                                               SizedBox(
                                                 height: 10.h,
                                               ),

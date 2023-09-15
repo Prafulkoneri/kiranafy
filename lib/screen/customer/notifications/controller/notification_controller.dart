@@ -6,7 +6,6 @@ import 'package:local_supper_market/screen/customer/notifications/model/delete_n
 import 'package:local_supper_market/screen/customer/notifications/repository/c_delete_notification_repo.dart';
 import 'package:local_supper_market/screen/customer/notifications/repository/get_notification_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/model/get_notification_model.dart';
-import 'package:local_supper_market/screen/shop_owner/notification/repository/get_notification_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

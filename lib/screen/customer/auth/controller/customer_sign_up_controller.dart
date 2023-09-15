@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/auth/model/customer_sign_up_model.dart';
 import 'package:local_supper_market/screen/customer/auth/model/mobile_number_check_model.dart';
@@ -94,8 +93,7 @@ class CustomerSignUpController extends ChangeNotifier {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
       print(authCred.user);
       if (authCred.user != null) {
-          onsignUp(context);
-
+        onsignUp(context);
       } else {
         showOtpErrorMsg();
         notifyListeners();
@@ -138,7 +136,7 @@ class CustomerSignUpController extends ChangeNotifier {
                   screenName: HomeScreenView(
                     refreshPage: true,
                   ))),
-              (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
         );
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -219,6 +217,7 @@ class CustomerSignUpController extends ChangeNotifier {
     isOtpErrorVisible = false;
     notifyListeners();
   }
+
   launchTermsAndConditionURL() async {
     final Uri url = Uri.parse('https://localsupermart.com/terms-condition.php');
     if (!await launchUrl(url)) {

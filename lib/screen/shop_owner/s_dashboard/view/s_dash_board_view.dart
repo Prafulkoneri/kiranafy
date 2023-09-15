@@ -1,14 +1,10 @@
-import 'package:carousel_nullsafety/carousel_nullsafety.dart';
-import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/payment_refund/controller/payment_refund_controller.dart';
@@ -148,36 +144,27 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   ),
                           ),
                           Positioned(
-
                               child: Container(
-                                // margin: EdgeInsets.only(
-                                //     left: index == 0 ? 19.w : 0,
-                                //     right: index == 2 ? 19.w : 5.w),
-                                height: 191.w,
-                                width: ScreenUtil().screenWidth,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius
-                                        .circular(13.w),
-                                    gradient:
-                                    LinearGradient(
-                                      begin: Alignment
-                                          .topCenter,
-                                      end: Alignment
-                                          .bottomCenter,
-                                      stops: [
-                                        0.1,
-                                        0.9,
-                                      ],
-                                      colors: [
-                                        Colors.white
-                                            .withOpacity(0),
-                                        Colors.black
-                                            .withOpacity(0.15),
-                                      ],
-                                    )),
-
-                              )),
+                            // margin: EdgeInsets.only(
+                            //     left: index == 0 ? 19.w : 0,
+                            //     right: index == 2 ? 19.w : 5.w),
+                            height: 191.w,
+                            width: ScreenUtil().screenWidth,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(13.w),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  stops: [
+                                    0.1,
+                                    0.9,
+                                  ],
+                                  colors: [
+                                    Colors.white.withOpacity(0),
+                                    Colors.black.withOpacity(0.15),
+                                  ],
+                                )),
+                          )),
                           Positioned(
                             //<-- SEE HERE
                             // right: 15.w,

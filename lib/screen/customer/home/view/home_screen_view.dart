@@ -1,11 +1,5 @@
-import 'package:expandable_page_view/expandable_page_view.dart';
-import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +12,6 @@ import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
 import 'package:local_supper_market/screen/customer/home/view/offers.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -336,7 +329,13 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                   width: 352.w,
                                   fit: BoxFit.cover,
                                 )
-                              : Container()),
+                              : Image.asset(
+                                  "assets/images/profile_image.png",
+                                  height: 170.w,
+                                  // width: 340.w,
+                                  // scale: 0.5,
+                                  fit: BoxFit.cover,
+                                )),
 
                       SizedBox(
                         height: 20.h,
@@ -384,22 +383,3 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               ));
   }
 }
-// SingleChildScrollView(
-// scrollDirection: Axis.horizontal,
-// physics: BouncingScrollPhysics(),
-// child: Row(
-// children: List.generate(
-// widget.items?.length ?? 0,
-// (index) => Container(
-// padding: EdgeInsets.only(
-// left: 15,
-// bottom: 10,
-// right: index + 1 == widget.items?.length ? 20 : 0),
-// child: AppNetworkImages(
-// widget.items?[index]["image"],
-// fit: BoxFit.cover,
-// ),
-// )
-// ),
-// ),
-// ),

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
@@ -16,12 +15,10 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registra
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
-import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
@@ -71,7 +68,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   bool showValueCityField = false;
   bool showValueAreaField = false;
   bool showValueStateField = false;
-  List<File> images = [File(""),File(""),File(""),File("")];
+  List<File> images = [File(""), File(""), File(""), File("")];
   bool isLoading = true;
   String shopBannerSequence = "";
   List shopBannerSequenceList = ["0", "0", "0", "0"];
@@ -81,7 +78,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   Future<void> initState(
     context,
   ) async {
-    images=[File(""),File(""),File(""),File("")];
+    images = [File(""), File(""), File(""), File("")];
     networkImage1 = "";
     networkImage2 = "";
     networkImage3 = "";
@@ -119,7 +116,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         countryCode = shopDetails?.shopOwnerCountryCode ?? "";
         emailIdController.text = shopDetails?.shopOwnerEmail ?? "";
         shopAddressController.text = shopDetails?.shopAddress ?? "";
-        selectedPincode = int.parse(shopDetails?.shopPincode.toString() ?? "0") ?? 0;
+        selectedPincode =
+            int.parse(shopDetails?.shopPincode.toString() ?? "0") ?? 0;
         selectedCountryId = shopDetails?.selectedCountryId.toString() ?? "";
         selectedStateId = shopDetails?.selectedStateId.toString() ?? "";
         selectedCityId = shopDetails?.selectedCityId.toString() ?? "";
@@ -130,26 +128,26 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         areaDataList = result.areas;
         pincodeList = result.pincode;
 
-        var containState = stateDataList?.where((element) => element.id.toString() ==selectedStateId);
-        if(containState?.isNotEmpty??false){
-          showValueStateField=true;
+        var containState = stateDataList
+            ?.where((element) => element.id.toString() == selectedStateId);
+        if (containState?.isNotEmpty ?? false) {
+          showValueStateField = true;
+        } else {
+          showValueStateField = false;
         }
-        else{
-          showValueStateField=false;
+        var containArea = areaDataList
+            ?.where((element) => element.id.toString() == selectedAreaId);
+        if (containArea?.isNotEmpty ?? false) {
+          showValueAreaField = true;
+        } else {
+          showValueAreaField = false;
         }
-        var containArea = areaDataList?.where((element) => element.id.toString() ==selectedAreaId);
-        if(containArea?.isNotEmpty??false){
-          showValueAreaField=true;
-        }
-        else{
-          showValueAreaField=false;
-        }
-        var containCity = cityDataList?.where((element) => element.id.toString() ==selectedCityId);
-        if(containCity?.isNotEmpty??false){
-          showValueCityField=true;
-        }
-        else{
-          showValueCityField=false;
+        var containCity = cityDataList
+            ?.where((element) => element.id.toString() == selectedCityId);
+        if (containCity?.isNotEmpty ?? false) {
+          showValueCityField = true;
+        } else {
+          showValueCityField = false;
         }
 
         if (pincodeList?.contains(selectedPincode.toString()) ?? false) {
@@ -276,14 +274,17 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onBackPressed(context,fromDashBoard){
+  void onBackPressed(context, fromDashBoard) {
     if (fromDashBoard ?? true) {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                SMainScreenView(index: 0, screenName: ShopDashBoardView(refresh: false,))),
-            (Route<dynamic> route) => false,
+            builder: (context) => SMainScreenView(
+                index: 0,
+                screenName: ShopDashBoardView(
+                  refresh: false,
+                ))),
+        (Route<dynamic> route) => false,
       );
       return;
     } else {
@@ -291,8 +292,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         context,
         MaterialPageRoute(
             builder: (context) => SMainScreenView(
-                index: 4, screenName: SAccountScreenView(refresh: false,))),
-            (Route<dynamic> route) => false,
+                index: 4,
+                screenName: SAccountScreenView(
+                  refresh: false,
+                ))),
+        (Route<dynamic> route) => false,
       );
       return;
     }
@@ -334,8 +338,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: true,))),
+              builder: (context) => SMainScreenView(
+                  index: 4,
+                  screenName: SAccountScreenView(
+                    refresh: true,
+                  ))),
           (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,
@@ -377,18 +384,17 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     LoadingOverlay.of(context).show();
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
-     print("cityResponse${response.body}");
+      print("cityResponse${response.body}");
       if (response.statusCode == 200) {
-
         cityDataList = result.cityData;
-        var contain = cityDataList?.where((element) => element.id.toString() ==selectedCityId);
-       if(contain?.isNotEmpty??false){
-         showValueCityField=true;
-       }
-       else{
-         showValueCityField=false;
-       }
-         // showValuePincodeField = true;
+        var contain = cityDataList
+            ?.where((element) => element.id.toString() == selectedCityId);
+        if (contain?.isNotEmpty ?? false) {
+          showValueCityField = true;
+        } else {
+          showValueCityField = false;
+        }
+        // showValuePincodeField = true;
 
         if (result.cityData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No City Found",
@@ -433,12 +439,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       final result = GetAreaListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         areaDataList = result.areaData;
-        var contain = areaDataList?.where((element) => element.id.toString() ==selectedAreaId);
-        if(contain?.isNotEmpty??false){
-          showValueAreaField=true;
-        }
-        else{
-          showValueAreaField=false;
+        var contain = areaDataList
+            ?.where((element) => element.id.toString() == selectedAreaId);
+        if (contain?.isNotEmpty ?? false) {
+          showValueAreaField = true;
+        } else {
+          showValueAreaField = false;
         }
         if (result.areaData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No Area Found",
@@ -546,12 +552,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       final result = GetStateListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         stateDataList = result.stateData;
-        var contain = stateDataList?.where((element) => element.id.toString() ==selectedStateId);
-        if(contain?.isNotEmpty??false){
-          showValueStateField=true;
-        }
-        else{
-          showValueStateField=false;
+        var contain = stateDataList
+            ?.where((element) => element.id.toString() == selectedStateId);
+        if (contain?.isNotEmpty ?? false) {
+          showValueStateField = true;
+        } else {
+          showValueStateField = false;
         }
         if (result.stateData!.isEmpty) {
           stateDataList?.clear();
@@ -646,10 +652,12 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     print("fileImage3.path${fileImage3.path}");
     print("fileImage4.path${fileImage4.path}");
     print("22222222");
-    if (fileImage1.path == ""&&fileImage2.path == ""&&fileImage3.path==""&&fileImage4.path=="") {
+    if (fileImage1.path == "" &&
+        fileImage2.path == "" &&
+        fileImage3.path == "" &&
+        fileImage4.path == "") {
       await UpdateProfile(context);
-    }
-    else {
+    } else {
       shopBannerSequence = "";
       for (int i = 0; i < shopBannerSequenceList.length; i++) {
         if (shopBannerSequenceList[i] != "0") {
@@ -694,7 +702,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       networkImage1 = "";
       fileImage1 = File(pickedFile.path);
       images.removeAt(0);
-        images.insert(0,fileImage1);
+      images.insert(0, fileImage1);
 
       shopBannerSequenceList.removeAt(0);
       shopBannerSequenceList.insert(0, "1");
@@ -717,8 +725,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       }
       networkImage2 = "";
       fileImage2 = File(pickedFile.path);
-        images.removeAt(1);
-        images.insert(1,fileImage2);
+      images.removeAt(1);
+      images.insert(1, fileImage2);
 
       shopBannerSequenceList.removeAt(1);
       shopBannerSequenceList.insert(1, "2");
@@ -743,7 +751,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       fileImage3 = File(pickedFile.path);
 
       images.removeAt(2);
-        images.insert(2,fileImage3);
+      images.insert(2, fileImage3);
 
       shopBannerSequenceList.removeAt(2);
       shopBannerSequenceList.insert(2, "3");
@@ -767,7 +775,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       networkImage4 = "";
       fileImage4 = File(pickedFile.path);
       images.removeAt(3);
-        images.insert(3,fileImage4);
+      images.insert(3, fileImage4);
       shopBannerSequenceList.removeAt(3);
       shopBannerSequenceList.insert(3, "4");
     }
@@ -802,16 +810,16 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     print(images);
     print("444444");
     for (int i = 0; i < images.length; i++) {
-      if(images[i].path!=""){
+      if (images[i].path != "") {
         File imageFile = images[i];
-      print(imageFile);
-      var stream =
-          new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-      var length = await imageFile.length();
-      var multipartFile = new http.MultipartFile(
-          "shop_banner_image_path[$i]", stream, length,
-          filename: basename(imageFile.path));
-      newList.add(multipartFile);
+        print(imageFile);
+        var stream =
+            new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+        var length = await imageFile.length();
+        var multipartFile = new http.MultipartFile(
+            "shop_banner_image_path[$i]", stream, length,
+            filename: basename(imageFile.path));
+        newList.add(multipartFile);
       }
     }
 
@@ -836,8 +844,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: true,))),
+              builder: (context) => SMainScreenView(
+                  index: 4,
+                  screenName: SAccountScreenView(
+                    refresh: true,
+                  ))),
           (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, "Updated Successfully",

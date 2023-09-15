@@ -1,16 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
-import 'package:local_supper_market/screen/customer/category/model/filtter_model.dart';
-import 'package:local_supper_market/screen/customer/category/model/product_as_per_category_model.dart';
-import 'package:local_supper_market/screen/customer/category/model/seach_product_as_per_category_model.dart';
-import 'package:local_supper_market/screen/customer/category/repository/product_as_per_category_repo.dart';
-import 'package:local_supper_market/screen/customer/category/repository/product_as_per_filter_repo.dart';
-import 'package:local_supper_market/screen/customer/category/repository/search_product_as_per_category_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/model/delete_address_model.dart';
-import 'package:local_supper_market/screen/customer/delivery_address/model/delivery_address_list_model.dart';
-import 'package:local_supper_market/screen/customer/delivery_address/model/delivery_address_list_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/model/delivery_address_list_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/model/mark_default_address_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/repository/delete_address_repo.dart';
@@ -36,20 +27,16 @@ class DeliveryAddressController extends ChangeNotifier {
 
   bool isLoading = true;
   bool defaultAddress = true;
-  Future<void> initState(
-    context,
-      isRefresh
-  ) async {
-    if(isRefresh){
+  Future<void> initState(context, isRefresh) async {
+    if (isRefresh) {
       await getDeliveryAddressList(context);
     }
-
   }
 
-showLoader(value){
-  isLoading=value;
-  notifyListeners();
-}
+  showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
 
   //////////Start Get Address List////
   Future<void> getDeliveryAddressList(
@@ -70,9 +57,8 @@ showLoader(value){
             growable: true);
         int length = deliveryAddressList?.length ?? 0;
         for (int i = 0; i < length; i++) {
-          
           if (deliveryAddressList?[i].deliveryAddressIsDefault == "yes") {
-            defaultSelectedAddress.insert(i,true);
+            defaultSelectedAddress.insert(i, true);
           } else {}
         }
         showLoader(false);
@@ -96,7 +82,7 @@ showLoader(value){
   ////////////END////////////////
 
   ////Mark Default Address///////
-  Future<void> markDefaultAddress(context, addressId,index) async {
+  Future<void> markDefaultAddress(context, addressId, index) async {
     deliveryAddressId = addressId.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     DefaultAddressMarkRepo.markDefaultAddress(
@@ -109,7 +95,7 @@ showLoader(value){
         defaultSelectedAddress = List<bool>.filled(
             deliveryAddressList?.length ?? 0, false,
             growable: true);
-        defaultSelectedAddress.insert(index,true);
+        defaultSelectedAddress.insert(index, true);
 
         notifyListeners();
       } else {
@@ -150,7 +136,6 @@ showLoader(value){
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
-
 
         notifyListeners();
       } else {

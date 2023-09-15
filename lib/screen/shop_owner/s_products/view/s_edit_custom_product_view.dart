@@ -111,25 +111,26 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  Container(
-                    width: ScreenUtil().screenWidth,
-                    padding: EdgeInsets.symmetric(horizontal: 19.w),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20.w,
-                        ),
-                        SDropDownField(
-                          value: watch.categoryId,
-                          onChanged: (value) {
-                            read.onCategorySelected(value);
-                          },
-                          items:
-                              selectedCategoryListWatch.selectedCategoriesList!
+          : watch.isDetailsAvailable
+              ? SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: ScreenUtil().screenWidth,
+                        padding: EdgeInsets.symmetric(horizontal: 19.w),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 20.w,
+                            ),
+                            SDropDownField(
+                              value: watch.categoryId,
+                              onChanged: (value) {
+                                read.onCategorySelected(value);
+                              },
+                              items: selectedCategoryListWatch
+                                  .selectedCategoriesList!
                                   .map((item) => DropdownMenuItem<String>(
                                         value: item.categoryId.toString(),
                                         child: Text(
@@ -140,276 +141,310 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                         ),
                                       ))
                                   .toList(),
-                          hint: "Select Category ",
-                        ),
-                        SizedBox(
-                          height: 15.w,
-                        ),
-                        PrimarySTextFormField(
-                          controller: watch.productNameController,
-                          // titleHeader: "Shop Name",
-                          hintText: "Product Name",
-                        ),
-                        SizedBox(
-                          height: 15.w,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: SDropDownField(
-                                value: watch.brandId,
-                                onChanged: (value) {
-                                  read.onBrandSelected(value);
-                                },
-                                items: watch.brandData
-                                    ?.map((item) => DropdownMenuItem<String>(
-                                          value: item.id.toString(),
-                                          child: Text(
-                                            item.brandName ?? "",
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
-                                hint: "Brand",
-                              ),
+                              hint: "Select Category ",
                             ),
                             SizedBox(
-                              width: 12.w,
+                              height: 15.w,
                             ),
-                            Expanded(
-                              child: SDropDownField(
-                                value: watch.taxId,
-                                onChanged: (value) {
-                                  read.onTax(value);
-                                },
-                                items: watch.taxData
-                                    ?.map((item) => DropdownMenuItem<String>(
-                                          value: item.id.toString(),
-                                          child: Text(
-                                            item.igstTax ?? "",
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
-                                hint: "Tax",
-                              ),
+                            PrimarySTextFormField(
+                              controller: watch.productNameController,
+                              // titleHeader: "Shop Name",
+                              hintText: "Product Name",
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 21.w,
-                        ),
-                        Column(
-                          children: [
+                            SizedBox(
+                              height: 15.w,
+                            ),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                PrimaryCheckBox(
-                                  onChanged: (value) {
-                                    read.onUnderRecommendedProductSelected(
-                                        value);
-                                  },
-                                  value: watch.showUnderRecommendedProducts,
+                                Expanded(
+                                  child: SDropDownField(
+                                    value: watch.brandId,
+                                    onChanged: (value) {
+                                      read.onBrandSelected(value);
+                                    },
+                                    items: watch.brandData
+                                        ?.map(
+                                            (item) => DropdownMenuItem<String>(
+                                                  value: item.id.toString(),
+                                                  child: Text(
+                                                    item.brandName ?? "",
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                ))
+                                        .toList(),
+                                    hint: "Brand",
+                                  ),
                                 ),
-                                Text(
-                                  'Show Under Recommended Product',
-                                  style: TextStyle(
-                                      color: Black1,
-                                      // letterSpacing: .5,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Expanded(
+                                  child: SDropDownField(
+                                    value: watch.taxId,
+                                    onChanged: (value) {
+                                      read.onTax(value);
+                                    },
+                                    items: watch.taxData
+                                        ?.map(
+                                            (item) => DropdownMenuItem<String>(
+                                                  value: item.id.toString(),
+                                                  child: Text(
+                                                    item.igstTax ?? "",
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                ))
+                                        .toList(),
+                                    hint: "Tax",
+                                  ),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              height: 19.h,
+                              height: 21.w,
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            Column(
                               children: [
-                                PrimaryCheckBox(
-                                  onChanged: (value) {
-                                    // read.onUnderSeasonalProductSelected(value);
-                                    if (watchDashBoardScreen.specialBenifitlist
-                                        .contains("seasonal_products")) {
-                                      read.onUnderSeasonalProductSelected(
-                                          value);
-                                    } else {
-                                      Utils.showPrimarySnackbar(context,
-                                          "Subscribe to Advanced Plan to use this feature!",
-                                          type: SnackType.error);
-                                      return;
-                                    }
-                                  },
-                                  value: watch.showUnderSeasonalProducts,
-                                ),
-                                Text(
-                                  'Show Under Seasonal Product',
-                                  style: TextStyle(
-                                      color: Black1,
-                                      // letterSpacing: .5,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 19.h,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                PrimaryCheckBox(
-                                  onChanged: (value) {
-                                    // read.onFullFillCraving(value);
-                                    if (watchDashBoardScreen.specialBenifitlist
-                                        .contains(
-                                            "fullfill_craving_products")) {
-                                      read.onFullFillCraving(value);
-                                    } else {
-                                      Utils.showPrimarySnackbar(context,
-                                          "Subscribe to Advanced Plan to use this feature!",
-                                          type: SnackType.error);
-                                      return;
-                                    }
-                                  },
-                                  value: watch.fullFillCravings,
-                                ),
-                                Text(
-                                  'Fulfill Your Cravings',
-                                  style: TextStyle(
-                                      color: Black1,
-                                      // letterSpacing: .5,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                // SizedBox(
-                                //   width: 30.w,
-                                // ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 22.h,
-                        ),
-                        Container(
-                          child: PrimarySTextFormField(
-                            controller: watch.productDescriptionController,
-                            height: 150.w,
-                            maxLines: 8,
-                            hintText: "Product Details",
-                          ),
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Product Feature Image",
-                              style: TextStyle(
-                                  color: Color(0xff717171),
-                                  // letterSpacing: .5,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 11.h,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        read.openCameras(context);
+                                    PrimaryCheckBox(
+                                      onChanged: (value) {
+                                        read.onUnderRecommendedProductSelected(
+                                            value);
                                       },
-                                      child: Text("Camera"),
+                                      value: watch.showUnderRecommendedProducts,
                                     ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        read.openGallery(context);
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Gallery "),
+                                    Text(
+                                      'Show Under Recommended Product',
+                                      style: TextStyle(
+                                          color: Black1,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: 19.h,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    PrimaryCheckBox(
+                                      onChanged: (value) {
+                                        // read.onUnderSeasonalProductSelected(value);
+                                        if (watchDashBoardScreen
+                                            .specialBenifitlist
+                                            .contains("seasonal_products")) {
+                                          read.onUnderSeasonalProductSelected(
+                                              value);
+                                        } else {
+                                          Utils.showPrimarySnackbar(context,
+                                              "Subscribe to Advanced Plan to use this feature!",
+                                              type: SnackType.error);
+                                          return;
+                                        }
+                                      },
+                                      value: watch.showUnderSeasonalProducts,
+                                    ),
+                                    Text(
+                                      'Show Under Seasonal Product',
+                                      style: TextStyle(
+                                          color: Black1,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 19.h,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    PrimaryCheckBox(
+                                      onChanged: (value) {
+                                        // read.onFullFillCraving(value);
+                                        if (watchDashBoardScreen
+                                            .specialBenifitlist
+                                            .contains(
+                                                "fullfill_craving_products")) {
+                                          read.onFullFillCraving(value);
+                                        } else {
+                                          Utils.showPrimarySnackbar(context,
+                                              "Subscribe to Advanced Plan to use this feature!",
+                                              type: SnackType.error);
+                                          return;
+                                        }
+                                      },
+                                      value: watch.fullFillCravings,
+                                    ),
+                                    Text(
+                                      'Fulfill Your Cravings',
+                                      style: TextStyle(
+                                          color: Black1,
+                                          // letterSpacing: .5,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    // SizedBox(
+                                    //   width: 30.w,
+                                    // ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 22.h,
+                            ),
+                            Container(
+                              child: PrimarySTextFormField(
+                                controller: watch.productDescriptionController,
+                                height: 150.w,
+                                maxLines: 8,
+                                hintText: "Product Details",
                               ),
-                            );
-                          },
-                          child: Container(
-                            height: 185.h,
-                            width: ScreenUtil().screenWidth,
-                            decoration: BoxDecoration(boxShadow: [
-                              BoxShadow(
-                                color: Colors.red.withOpacity(0.05),
-                                blurRadius: 10.0,
-                              ),
-                            ]),
-                            child: Card(
-                              elevation: 0.3,
-                              child: watch.productImage.path == "" &&
-                                      watch.productFeatureImage == ""
-                                  ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                            ),
+                            SizedBox(
+                              height: 12.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Product Feature Image",
+                                  style: TextStyle(
+                                      color: Color(0xff717171),
+                                      // letterSpacing: .5,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 11.h,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        SvgPicture.asset(
-                                          "assets/icons/gallary.svg",
-                                          // height: 19.w,
-                                          // width: 21.w,
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            read.openCameras(context);
+                                          },
+                                          child: Text("Camera"),
                                         ),
                                         SizedBox(
-                                          height: 10.h,
+                                          height: 20,
                                         ),
-                                        Text(
-                                          "Add Image",
-                                          style: TextStyle(
-                                              color: Color(0xffB3B3B3),
-                                              // letterSpacing: .5,
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w400),
-                                        )
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            read.openGallery(context);
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Gallery "),
+                                        ),
                                       ],
-                                    )
-                                  : watch.productImage.path == ""
-                                      ? AppNetworkImages(
-                                          imageUrl: watch.productFeatureImage,
-                                          fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 185.h,
+                                width: ScreenUtil().screenWidth,
+                                decoration: BoxDecoration(boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.red.withOpacity(0.05),
+                                    blurRadius: 10.0,
+                                  ),
+                                ]),
+                                child: Card(
+                                  elevation: 0.3,
+                                  child: watch.productImage.path == "" &&
+                                          watch.productFeatureImage == ""
+                                      ? Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              "assets/icons/gallary.svg",
+                                              // height: 19.w,
+                                              // width: 21.w,
+                                            ),
+                                            SizedBox(
+                                              height: 10.h,
+                                            ),
+                                            Text(
+                                              "Add Image",
+                                              style: TextStyle(
+                                                  color: Color(0xffB3B3B3),
+                                                  // letterSpacing: .5,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w400),
+                                            )
+                                          ],
                                         )
-                                      : Image.file(
-                                          watch.productImage,
-                                          fit: BoxFit.cover,
-                                        ),
+                                      : watch.productImage.path == ""
+                                          ? AppNetworkImages(
+                                              imageUrl:
+                                                  watch.productFeatureImage,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.file(
+                                              watch.productImage,
+                                              fit: BoxFit.cover,
+                                            ),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 100.h,
+                      )
+                    ],
+                  ),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/empty_order.png",
+                          width: 250.w,
+                          height: 250.h,
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 100.h,
-                  )
-                ],
-              ),
-            ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Text(
+                      "Product details not found",
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                            color: Black1,
+                            letterSpacing: .5,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
+                ),
     );
   }
 

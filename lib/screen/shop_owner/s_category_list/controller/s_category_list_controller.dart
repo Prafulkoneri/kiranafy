@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/model/s_get_selected_categories_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/repository/s_get_selected_categories_repo.dart';
@@ -8,8 +7,6 @@ import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../s_products/view/s_custom_products_view.dart';
 
 class SCategoryListController extends ChangeNotifier {
   ShopSelectedCategoriesRepo SelectedCategoriesListRepo =

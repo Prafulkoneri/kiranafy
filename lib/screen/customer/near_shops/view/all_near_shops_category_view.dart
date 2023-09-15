@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -217,7 +214,6 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                           image: NetworkImage(
                                                               "${element?.shopBannerImagePath}"),
                                                           fit: BoxFit.fill)),
-
                                             ),
                                           ],
                                         ),
@@ -245,48 +241,44 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                 ],
                                                 colors: [
                                                   Colors.white.withOpacity(0),
-                                                  Colors.black
-                                                      .withOpacity( 0.3),
+                                                  Colors.black.withOpacity(0.3),
                                                 ],
                                               )),
-                                              child: Padding(
-                                                padding: EdgeInsets.all(10.h),
-                                                child: Column(
-                                                  crossAxisAlignment:
+                                          child: Padding(
+                                            padding: EdgeInsets.all(10.h),
+                                            child: Column(
+                                              crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
+                                              mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
+                                              children: [
+                                                Container(),
+                                                Column(
                                                   children: [
-                                                    Container(),
-                                                    Column(
-                                                      children: [
-                                                        Text(
-                                                            "${element?.shopName}",
-                                                            style: GoogleFonts.roboto(
-                                                                textStyle: TextStyle(
-                                                                    color: Colors.white,
-                                                                    // letterSpacing: .5,
-                                                                    fontSize: 13.sp,
-                                                                    fontWeight: FontWeight.w600))),
-                                                        // ),
-                                                        Text(
-                                                            "${element?.areaName}",
-                                                            style: GoogleFonts.roboto(
-                                                                textStyle: TextStyle(
-                                                                    color: Colors.white,
-                                                                    // letterSpacing: .5,
-                                                                    fontSize: 12.sp,
-                                                                    // height: 10,
-                                                                    fontWeight: FontWeight.w400))),
-                                                      ],
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
-                                                    ),
+                                                    Text("${element?.shopName}",
+                                                        style: GoogleFonts.roboto(
+                                                            textStyle: TextStyle(
+                                                                color: Colors.white,
+                                                                // letterSpacing: .5,
+                                                                fontSize: 13.sp,
+                                                                fontWeight: FontWeight.w600))),
+                                                    // ),
+                                                    Text("${element?.areaName}",
+                                                        style: GoogleFonts.roboto(
+                                                            textStyle: TextStyle(
+                                                                color: Colors.white,
+                                                                // letterSpacing: .5,
+                                                                fontSize: 12.sp,
+                                                                // height: 10,
+                                                                fontWeight: FontWeight.w400))),
                                                   ],
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                 ),
-                                              ),
+                                              ],
+                                            ),
+                                          ),
                                         )),
                                         Positioned(
                                           right: 25.w,
@@ -387,7 +379,6 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                   '${element.shopBannerImagePath}'),
                                                               fit: BoxFit
                                                                   .cover)),
-
                                                 ),
                                               ),
                                               Positioned(
@@ -423,19 +414,19 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                         )),
                                                     child: Padding(
                                                       padding:
-                                                      EdgeInsets.all(10.h),
+                                                          EdgeInsets.all(10.h),
                                                       child: Column(
                                                         crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
                                                           Row(
                                                             mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
+                                                                MainAxisAlignment
+                                                                    .end,
                                                             children: [],
                                                           ),
                                                           Column(
@@ -454,8 +445,8 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                               ),
                                                               Row(
                                                                 mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
                                                                 children: [
                                                                   Row(
                                                                     children: [
@@ -464,11 +455,10 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                           width: 12
                                                                               .w,
                                                                           height:
-                                                                          16.h),
+                                                                              16.h),
                                                                       Padding(
-                                                                        padding: EdgeInsets.only(
-                                                                            left:
-                                                                            8.w),
+                                                                        padding:
+                                                                            EdgeInsets.only(left: 8.w),
                                                                         child: Text(
                                                                             "${element.areaName}, ${element.cityName}",
                                                                             style: GoogleFonts.roboto(
@@ -483,42 +473,41 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                   ),
                                                                   Container(
                                                                     height:
-                                                                    21.49.h,
+                                                                        21.49.h,
                                                                     width: 49.w,
                                                                     decoration:
-                                                                    BoxDecoration(
+                                                                        BoxDecoration(
                                                                       color:
-                                                                      yellow,
+                                                                          yellow,
                                                                       borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(15)),
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(15)),
                                                                     ),
                                                                     child: Row(
                                                                       mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
+                                                                          MainAxisAlignment
+                                                                              .center,
                                                                       children: [
                                                                         SvgPicture
                                                                             .asset(
                                                                           "assets/images/star.svg",
                                                                           height:
-                                                                          12.h,
+                                                                              12.h,
                                                                           width:
-                                                                          12.w,
+                                                                              12.w,
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                          4.3.w,
+                                                                              4.3.w,
                                                                         ),
                                                                         Text(
                                                                           // "${element.ratings}",
                                                                           // "${element.ratings ?? "0.0"}",
-                                                                          double.parse(element.ratings.toString() ??
-                                                                              "0.0")
+                                                                          double.parse(element.ratings.toString() ?? "0.0")
                                                                               .toStringAsFixed(1),
                                                                           // "0.0",
-                                                                          style: GoogleFonts
-                                                                              .dmSans(
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
                                                                                 color: Black,
                                                                                 letterSpacing: .5,

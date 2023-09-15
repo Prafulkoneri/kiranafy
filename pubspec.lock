@@ -422,14 +422,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.7"
-  flutter_file_downloader:
-    dependency: "direct main"
-    description:
-      name: flutter_file_downloader
-      sha256: "383d1fda8ab7d9bc4314db20ab322c135ab9f616545eca4b19592b3428e2ecca"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.2"
   flutter_image_compress:
     dependency: "direct main"
     description:
@@ -1056,14 +1048,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0+4"
-  otp_autofill:
-    dependency: "direct main"
-    description:
-      name: otp_autofill
-      sha256: "4757f7c58b0a5acaf89083015efc119df09671a5e937161961e8c4c5a51dc83f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   otp_text_field:
     dependency: "direct main"
     description:
@@ -1176,14 +1160,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.10.0"
-  persistent_bottom_nav_bar:
-    dependency: "direct main"
-    description:
-      name: persistent_bottom_nav_bar
-      sha256: e2e031e3366fde01511e372a9a19d720a9b252bb456e5c8d77a30d7a4a2ddfb0
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.2"
   petitparser:
     dependency: transitive
     description:
@@ -1192,14 +1168,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
-  pin_input_text_field:
-    dependency: transitive
-    description:
-      name: pin_input_text_field
-      sha256: "8d6fc670aa673a4df5976086f0e8039972a5b2bcb783c8db8dd3b9b4b072ca90"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.5.1"
   platform:
     dependency: transitive
     description:
@@ -1333,14 +1301,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  sms_autofill:
-    dependency: "direct main"
-    description:
-      name: sms_autofill
-      sha256: "2eb159f53ed7d76002d6c15cad99e14dbd5f997f3bb7f9bcad9bd44ba5fcd6c3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
   source_span:
     dependency: transitive
     description:

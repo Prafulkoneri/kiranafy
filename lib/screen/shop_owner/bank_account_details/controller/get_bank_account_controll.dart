@@ -1,27 +1,14 @@
 import 'dart:convert';
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/model/get_bank_account_model.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/model/update_account_detail.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/repository/get_bank_account_detail_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/repository/update_add_bank_account_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_fav_model.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_list_model.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/repository/customer_fav_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/repository/customer_list_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SBankAccountController extends ChangeNotifier {
   bool isLoading = true;
@@ -153,8 +140,11 @@ class SBankAccountController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  SMainScreenView(index: 4, screenName: SAccountScreenView(refresh: true,))),
+              builder: (context) => SMainScreenView(
+                  index: 4,
+                  screenName: SAccountScreenView(
+                    refresh: true,
+                  ))),
           (Route<dynamic> route) => false,
         );
         Utils.showPrimarySnackbar(context, result.message,

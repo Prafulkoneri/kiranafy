@@ -62,11 +62,12 @@ class EditCustomProductController extends ChangeNotifier {
   String status = "";
   String statusCard = "";
   String categoryId = "";
-
+  bool isDetailsAvailable = false;
   String productFeatureImage = "";
 
   UploadCustomProductRepo uploadCustomProductRepo = UploadCustomProductRepo();
-  UploadEditCustomProductRepo uploadEditCustomProductRepo = UploadEditCustomProductRepo();
+  UploadEditCustomProductRepo uploadEditCustomProductRepo =
+      UploadEditCustomProductRepo();
   String productId = "";
 
   //for adminProduct
@@ -102,7 +103,7 @@ class EditCustomProductController extends ChangeNotifier {
         .getCustomProductDetails(
             editCustomProductsRequestModel, pref.getString("successToken"))
         .then((response) {
-          log(response.body);
+      log(response.body);
       final result =
           CustomProductDataResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -152,45 +153,54 @@ class EditCustomProductController extends ChangeNotifier {
       final result =
           EditCustomProductsResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        customProductData = result.data;
-        categoryData = customProductData?.categoryData ?? [];
-        brandData = customProductData?.brandData;
-        taxData = customProductData?.taxData;
-        productNameController.text =
-            customProductData?.productDetails?.productName.toString() ?? "";
-        categoryId =
-            customProductData?.productDetails?.categoryId.toString() ?? "";
-        brandId = customProductData?.productDetails?.brandId.toString() ?? "";
-        print("fjafsdf");
-        print(brandId);
+        if (result.status == 200) {
+          customProductData = result.data;
+          categoryData = customProductData?.categoryData ?? [];
+          brandData = customProductData?.brandData;
+          taxData = customProductData?.taxData;
+          productNameController.text =
+              customProductData?.productDetails?.productName.toString() ?? "";
+          categoryId =
+              customProductData?.productDetails?.categoryId.toString() ?? "";
+          brandId = customProductData?.productDetails?.brandId.toString() ?? "";
+          print("fjafsdf");
+          print(brandId);
 
-        taxId = customProductData?.productDetails?.taxId.toString() ?? "";
-        print(taxId);
-        showUnderRecommendedProducts =
-            customProductData?.productDetails?.showUnderRecommandedProducts ==
-                    "yes"
-                ? true
-                : false;
-        showUnderSeasonalProducts =
-            customProductData?.productDetails?.showUnderSeasonalProducts ==
-                    "yes"
-                ? true
-                : false;
-        fullFillCravings =
-            customProductData?.productDetails?.showUnderFullfillYourCravings ==
-                    "yes"
-                ? true
-                : false;
-        productDescriptionController.text =
-            customProductData?.productDetails?.productDescription.toString() ??
-                "";
-        productFeatureImage =
-            customProductData?.productDetails?.productImagePath ?? "";
-        showLoader(false);
+          taxId = customProductData?.productDetails?.taxId.toString() ?? "";
+          print(taxId);
+          showUnderRecommendedProducts =
+              customProductData?.productDetails?.showUnderRecommandedProducts ==
+                      "yes"
+                  ? true
+                  : false;
+          showUnderSeasonalProducts =
+              customProductData?.productDetails?.showUnderSeasonalProducts ==
+                      "yes"
+                  ? true
+                  : false;
+          fullFillCravings = customProductData
+                      ?.productDetails?.showUnderFullfillYourCravings ==
+                  "yes"
+              ? true
+              : false;
+          productDescriptionController.text = customProductData
+                  ?.productDetails?.productDescription
+                  .toString() ??
+              "";
+          productFeatureImage =
+              customProductData?.productDetails?.productImagePath ?? "";
+          showLoader(false);
 
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          isDetailsAvailable = true;
+          notifyListeners();
+        } else {
+          isDetailsAvailable = false;
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          showLoader(false);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -207,8 +217,6 @@ class EditCustomProductController extends ChangeNotifier {
       },
     );
   }
-
-
 
   void onCategorySelected(value) {
     selectedCategory = value;
@@ -229,6 +237,7 @@ class EditCustomProductController extends ChangeNotifier {
     fullFillCravings = value;
     notifyListeners();
   }
+
   void openCameras(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
@@ -240,23 +249,23 @@ class EditCustomProductController extends ChangeNotifier {
       final croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
         aspectRatioPresets: Platform.isAndroid
-        ? [
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio16x9
-        ]
-        : [
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio5x3,
-        CropAspectRatioPreset.ratio5x4,
-        CropAspectRatioPreset.ratio7x5,
-        CropAspectRatioPreset.ratio16x9
-        ],
+            ? [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
+            : [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
       );
       productImage = File(croppedFile!.path);
     }
@@ -276,23 +285,23 @@ class EditCustomProductController extends ChangeNotifier {
       final croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
         aspectRatioPresets: Platform.isAndroid
-        ? [
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio16x9
-        ]
-        : [
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio5x3,
-        CropAspectRatioPreset.ratio5x4,
-        CropAspectRatioPreset.ratio7x5,
-        CropAspectRatioPreset.ratio16x9
-        ],
+            ? [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
+            : [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
       );
       productImage = File(croppedFile!.path);
     }
@@ -300,7 +309,6 @@ class EditCustomProductController extends ChangeNotifier {
     notifyListeners();
     Navigator.of(context, rootNavigator: true).pop();
   }
-
 
   void openProductImage() async {
     final ImagePicker imgpicker = ImagePicker();
@@ -337,40 +345,40 @@ class EditCustomProductController extends ChangeNotifier {
       final result =
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200){
+        if (result.status == 200) {
           if (isNavFromAccount) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                    index: 4,
-                    screenName: ShopSeasonalRecommandedOfferProductsView(
-                      selectedProduct: selectedIndex == 0
-                          ? "recommended"
-                          : selectedIndex == 1
-                              ? "seasonal"
-                              : "fullFill",
-                      isRefresh: true,
-                    ))),
-            (Route<dynamic> route) => false,
-          );
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                      index: 4,
+                      screenName: ShopSeasonalRecommandedOfferProductsView(
+                        selectedProduct: selectedIndex == 0
+                            ? "recommended"
+                            : selectedIndex == 1
+                                ? "seasonal"
+                                : "fullFill",
+                        isRefresh: true,
+                      ))),
+              (Route<dynamic> route) => false,
+            );
+          } else {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SMainScreenView(
+                        index: 0,
+                        screenName: SSelectedProductView(
+                            categoryId: categoryId, isRefresh: true),
+                      )),
+              (Route<dynamic> route) => false,
+            );
+          }
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          LoadingOverlay.of(context).hide();
+          notifyListeners();
         } else {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                      index: 0,
-                      screenName: SSelectedProductView(
-                          categoryId: categoryId, isRefresh: true),
-                    )),
-            (Route<dynamic> route) => false,
-          );
-        }
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        LoadingOverlay.of(context).hide();
-        notifyListeners();
-        }else{
           LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
@@ -464,7 +472,7 @@ class EditCustomProductController extends ChangeNotifier {
     await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
       print("respStr${respStr}");
-      var res=jsonDecode(respStr);
+      var res = jsonDecode(respStr);
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         // var splitText = respStr.split(",");
@@ -472,7 +480,7 @@ class EditCustomProductController extends ChangeNotifier {
         // var splitText2=splitText[0].toString();
         // print(splitText2);
         // return;
-        if(res["status"]==200){
+        if (res["status"] == 200) {
           if (isNavFromAccount) {
             Navigator.pushAndRemoveUntil(
               context,
@@ -483,29 +491,27 @@ class EditCustomProductController extends ChangeNotifier {
                         selectedProduct: "recommended",
                         isRefresh: true,
                       ))),
-                  (Route<dynamic> route) => false,
+              (Route<dynamic> route) => false,
             );
           } else {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                   builder: (context) => SMainScreenView(
-                    index: 0,
-                    screenName: SSelectedProductView(
-                        categoryId: categoryId, isRefresh: true),
-                  )),
-                  (Route<dynamic> route) => false,
+                        index: 0,
+                        screenName: SSelectedProductView(
+                            categoryId: categoryId, isRefresh: true),
+                      )),
+              (Route<dynamic> route) => false,
             );
           }
           Utils.showPrimarySnackbar(context, res["message"],
               type: SnackType.success);
           print("Updated Successfully");
-        }
-        else{
+        } else {
           Utils.showPrimarySnackbar(context, res["message"],
               type: SnackType.error);
         }
-
       } else {
         Utils.showPrimarySnackbar(context, "Error on uploading",
             type: SnackType.error);

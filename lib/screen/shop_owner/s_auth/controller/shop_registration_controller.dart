@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/main.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
@@ -33,7 +32,7 @@ class ShopRegistrationController extends ChangeNotifier {
   String message = "";
   int countryId = 0;
   int stateId = 0;
-  int  cityId=0;
+  int cityId = 0;
   int areaId = 0;
   int shopId = 0;
   String countryCode = "+91";
@@ -121,7 +120,7 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> onStateSelected(value) async {
-    cityId=0;
+    cityId = 0;
     stateId = int.parse(value.toString());
     notifyListeners();
   }
@@ -143,8 +142,7 @@ class ShopRegistrationController extends ChangeNotifier {
         }
         LoadingOverlay.of(context).hide();
         notifyListeners();
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

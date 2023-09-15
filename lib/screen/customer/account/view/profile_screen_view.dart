@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,14 +20,13 @@ import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
-import 'package:local_supper_market/utils/maps/view/map_view.dart';
+
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../products/views/product_screen_view.dart';
 import 'package:provider/provider.dart';
 
 // import '../controller/profile_controller.dart';
@@ -817,15 +815,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  // SharedPreferences pref =
-                  //     await SharedPreferences.getInstance();
-                  // pref.clear();
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const OnBoardingScreenView()),
-                  // );
-                  read.customerSignOut(context);
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  pref.clear();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const OnBoardingScreenView()),
+                  );
+                  // read.customerSignOut(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

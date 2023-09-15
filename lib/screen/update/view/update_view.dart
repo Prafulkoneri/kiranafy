@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/widget/buttons.dart';

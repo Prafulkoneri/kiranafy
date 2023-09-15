@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
@@ -134,7 +133,9 @@ class SShopConfigurationController extends ChangeNotifier {
 
   void onDeliveryAreaSubmit(context) {
     selectedAreaId = "";
-    deliveryAreasController.clear();
+    print(selectedDeliveryAreaName);
+    // return;
+    // deliveryAreasController.clear();
     for (int i = 0; i < selectedDeliveryAreaName.length; i++) {
       deliveryAreasController.text += selectedDeliveryAreaName[i] + ", ";
     }

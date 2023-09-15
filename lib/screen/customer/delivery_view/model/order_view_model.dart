@@ -40,9 +40,9 @@ class OrderViewData {
   ShopDetails? shopDetails;
   DeliveryAddressDetails? deliveryAddressDetails;
   List<OrderProductDetail>? orderProductDetails;
-  bool ? orderRefundStatus;
-  String ? orderRefundAmount;
-  String ? orderRefundProductCount;
+  bool? orderRefundStatus;
+  String? orderRefundAmount;
+  String? orderRefundProductCount;
 
   OrderViewData({
     required this.orderDetails,
@@ -74,9 +74,9 @@ class OrderViewData {
         orderProductDetails!.add(OrderProductDetail.fromJson(v));
       });
     }
-    orderRefundStatus=json["order_refund_status"];
-    orderRefundProductCount=json["order_refund_product_count"];
-    orderRefundAmount=json["order_refund_amount"];
+    orderRefundStatus = json["order_refund_status"];
+    orderRefundProductCount = json["order_refund_product_count"];
+    orderRefundAmount = json["order_refund_amount"];
   }
 }
 
@@ -155,11 +155,11 @@ class OrderDetails {
   String? customerCancelledReason;
   String? customerCancelledStatus;
   String? shopCancelledStatus;
-  String ? shopDeliveredRefundStatus;
-  int ? shopDeliveredPayableAmount;
-  String ? shopDeliveredPayableType;
-  String ? shopDeliveredTransactionId;
-  String ? shopDeliveredCustomerPaymentStatus;
+  String? shopDeliveredRefundStatus;
+  int? shopDeliveredPayableAmount;
+  String? shopDeliveredPayableType;
+  String? shopDeliveredTransactionId;
+  String? shopDeliveredCustomerPaymentStatus;
 
   OrderDetails(
       {required this.id,
@@ -190,12 +190,12 @@ class OrderDetails {
       this.shopOwnerRefundRejectReason,
       this.deliveryType,
       this.shopOwnerRefundTransactionId,
-        required this.shopDeliveredCustomerPaymentStatus,
-        required this.shopDeliveredPayableAmount,
-        required this.shopDeliveredPayableType,
-        required this.shopDeliveredRefundStatus,
-        required this.shopDeliveredTransactionId,
-        required this.shopCancelledStatus,
+      required this.shopDeliveredCustomerPaymentStatus,
+      required this.shopDeliveredPayableAmount,
+      required this.shopDeliveredPayableType,
+      required this.shopDeliveredRefundStatus,
+      required this.shopDeliveredTransactionId,
+      required this.shopCancelledStatus,
       this.customerCancelledStatus});
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -227,12 +227,13 @@ class OrderDetails {
     shopOwnerCancelledReason = json["shop_owner_order_cancelled_reason"];
     customerCancelledReason = json["customer_order_cancelled_reason"];
     customerCancelledStatus = json["customer_cancelled_status"];
-    shopDeliveredCustomerPaymentStatus=json["shop_de_customer_payment_status"];
-    shopDeliveredPayableAmount=json["shop_de_payable_amount"];
-    shopDeliveredPayableType=json["shop_de_payment_type"];
-    shopDeliveredRefundStatus=json["shop_de_refund_status"];
-    shopDeliveredTransactionId=json["shop_de_transaction_id"];
-    shopCancelledStatus=json["shop_owner_cancelled_status"];
+    shopDeliveredCustomerPaymentStatus =
+        json["shop_de_customer_payment_status"];
+    shopDeliveredPayableAmount = json["shop_de_payable_amount"];
+    shopDeliveredPayableType = json["shop_de_payment_type"];
+    shopDeliveredRefundStatus = json["shop_de_refund_status"];
+    shopDeliveredTransactionId = json["shop_de_transaction_id"];
+    shopCancelledStatus = json["shop_owner_cancelled_status"];
   }
 }
 
@@ -250,7 +251,7 @@ class OrderProductDetail {
   String? productOfferPrice;
   int? productTotalPrice;
   String? returnStatus;
-  String ? status;
+  String? status;
 
   OrderProductDetail({
     required this.id,
@@ -285,25 +286,3 @@ class OrderProductDetail {
     status = json["status"];
   }
 }
-
-// class ShopDetails {
-//   int id;
-//   String shopName;
-//   String shopAddress;
-//   String areaName;
-//   String cityName;
-//   int shopPincode;
-//   String shopOwnerSupportNumber;
-//   String isFavourite;
-
-//   ShopDetails({
-//     required this.id,
-//     required this.shopName,
-//     required this.shopAddress,
-//     required this.areaName,
-//     required this.cityName,
-//     required this.shopPincode,
-//     required this.shopOwnerSupportNumber,
-//     required this.isFavourite,
-//   });
-// }

@@ -1,25 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/customer/auth/controller/customer_sign_up_controller.dart';
-import 'package:local_supper_market/screen/customer/auth/view/customer_otp_sheet.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_otp_sheet.dart';
-import 'package:local_supper_market/utils/Utils.dart';
-
 import 'package:local_supper_market/widget/buttons.dart';
-import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
+
 import 'package:provider/provider.dart';
-import '../../main_screen/views/main_screen_view.dart';
 
 enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET } //otp
 
@@ -37,7 +28,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
     final watch = context.watch<CustomerSignUpController>();
     return Scaffold(
       body: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(
@@ -294,7 +285,8 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => CustomerSignInView()),
+                                      builder: (context) =>
+                                          CustomerSignInView()),
                                 );
                               },
                               child: Text(

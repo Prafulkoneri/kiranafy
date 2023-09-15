@@ -1,30 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_fav_model.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_list_model.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/repository/customer_fav_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/repository/customer_list_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/model/create_ticket_model.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/model/get_ticket_list_model.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/model/ticket_type_model.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/repository/create_ticket_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/repository/get_ticket_list_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/repository/ticket_type_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/raise_ticket_form.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SGetTicketListController extends ChangeNotifier {
   TicketListRepo ticketListRepo = TicketListRepo();
@@ -37,7 +24,7 @@ class SGetTicketListController extends ChangeNotifier {
   bool isLoading = true;
   String description = ""; //
   bool isTickedError = false;
-  String errorMsgForRaiseTicket="";
+  String errorMsgForRaiseTicket = "";
 
   List<TicketListData>? ticketList;
   Future<void> initState(context) async {
@@ -50,24 +37,22 @@ class SGetTicketListController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onOpenBottomSheet(context){
-    ticketTypeId=0;
-     subjectController.clear();
- descriptionController.clear();
+  void onOpenBottomSheet(context) {
+    ticketTypeId = 0;
+    subjectController.clear();
+    descriptionController.clear();
     showModalBottomSheet(
         backgroundColor: Colors.white,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30))),
+                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         context: context,
         builder: (context) {
           // using a scaffold helps to more easily position the FAB
           return SRaiseTicketView();
         });
- notifyListeners();
-
+    notifyListeners();
   }
 
   Future<void> onTicketTypeSelected(value) async {
@@ -147,7 +132,7 @@ class SGetTicketListController extends ChangeNotifier {
   ) async {
     if (ticketTypeId == 0) {
       isTickedError = true;
-      errorMsgForRaiseTicket="Select Ticket Type";
+      errorMsgForRaiseTicket = "Select Ticket Type";
       notifyListeners();
       Timer(Duration(seconds: 3), () async {
         isTickedError = false;
@@ -158,7 +143,7 @@ class SGetTicketListController extends ChangeNotifier {
     }
     if (subjectController.text == "") {
       isTickedError = true;
-      errorMsgForRaiseTicket="Enter Subject";
+      errorMsgForRaiseTicket = "Enter Subject";
       notifyListeners();
       Timer(Duration(seconds: 3), () async {
         isTickedError = false;
@@ -168,7 +153,7 @@ class SGetTicketListController extends ChangeNotifier {
     }
     if (descriptionController.text == "") {
       isTickedError = true;
-      errorMsgForRaiseTicket="Enter Description";
+      errorMsgForRaiseTicket = "Enter Description";
       notifyListeners();
       Timer(Duration(seconds: 3), () async {
         isTickedError = false;
@@ -186,11 +171,10 @@ class SGetTicketListController extends ChangeNotifier {
       final result = CreateTicketResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-
         getTicketList(context);
         LoadingOverlay.of(context).hide();
         Navigator.pop(context);
-        ticketTypeId=0;
+        ticketTypeId = 0;
         descriptionController.clear();
         subjectController.clear();
         Utils.showPrimarySnackbar(context, result.message,

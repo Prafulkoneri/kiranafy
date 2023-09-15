@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/model/faq_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/repository/faq_repo.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/customer/about_us/model/cms_model.dart';
 import 'package:local_supper_market/screen/customer/about_us/repository/cms_repo.dart';

@@ -1,14 +1,12 @@
-import 'package:local_supper_market/screen/shop_owner/s_auth/model/shop_owner_register_model.dart';
-
 class LoginReqModel {
   String? countryCode;
   String? mobileNo;
-  String ? fcmToken;
+  String? fcmToken;
 
   LoginReqModel({
     this.countryCode,
     this.mobileNo,
-   required this.fcmToken,
+    required this.fcmToken,
   });
 
   Map<String, dynamic> toJson() {

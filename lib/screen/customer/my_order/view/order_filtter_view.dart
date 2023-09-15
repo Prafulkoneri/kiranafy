@@ -1,13 +1,6 @@
-import 'dart:ui';
-
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
 import 'package:local_supper_market/screen/customer/my_order/controller/my_orders_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
-import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
-import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:local_supper_market/widget/stack_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -83,106 +76,191 @@ class _MyOrderFiltterViewState extends State<MyOrderFiltterView> {
                 endIndent: 19,
                 color: grey1,
               ),
-
-
-             Container(
-               padding: EdgeInsets.only(left: 20.w,right: 20.w),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-               Text(
-                       "Shops",
-                       style: GoogleFonts.dmSans(
-                         textStyle: const TextStyle(
-                             color: Black,
-                             letterSpacing: .5,
-                             fontSize: 16,
-                             fontWeight: FontWeight.w500),
-                       ),
-                     ),
-                   SizedBox(
-                     height: 15.h,
-                   ),
-                  watch.shopId==""?CDropDownField(
-                     onChanged: (value){
-                       read.onShopSelected(value);
-                     },
-                     items:watch.orderedShopsList?.map((item) => DropdownMenuItem<String>(
-                       value: item.id.toString(),
-                       child: Text(
-                         item.shopName??"",
-                         style:  TextStyle(
-                           fontSize: 14.sp,
-                         ),
-                       ),
-                     ))
-                         .toList(),
-                   ):
-                  CDropDownField(
-                    value: watch.shopId,
-                    onChanged: (value){
-                      read.onShopSelected(value);
-                    },
-                    items:watch.orderedShopsList?.map((item) => DropdownMenuItem<String>(
-                      value: item.id.toString(),
-                      child: Text(
-                        item.shopName??"",
-                        style:  TextStyle(
-                          fontSize: 14.sp,
-                        ),
+              Container(
+                padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Shops",
+                      style: GoogleFonts.dmSans(
+                        textStyle: const TextStyle(
+                            color: Black,
+                            letterSpacing: .5,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
                       ),
-                    ))
-                        .toList(),
-                  ),
-                   SizedBox(
-                     height: 20.h,
-                   ),
-                   Text(
-                       "Status",
-                       style: GoogleFonts.dmSans(
-                         textStyle: const TextStyle(
-                             color: Black,
-                             letterSpacing: .5,
-                             fontSize: 16,
-                             fontWeight: FontWeight.w500),
-                       ),
-                     ),
-                   SizedBox(
-                     height: 15.h,
-                   ),
-                  watch.orderStatus==""?CDropDownField(
-                     onChanged: (value){
-                       read.onStatusSelected(value);
-                     },
-                     items:[
-                       DropdownMenuItem(value: "order_placed",child: Text("Pending",style: TextStyle(fontSize: 14.sp,),)),
-                       DropdownMenuItem(value: "order_confirmed",child: Text("Confirmed",style: TextStyle(fontSize: 14.sp,),)),
-                       DropdownMenuItem(value: "order_packing",child: Text("Packing",style: TextStyle(fontSize: 14.sp,),)),
-                       DropdownMenuItem(value: "order_dispatched",child: Text("Dispatched",style: TextStyle(fontSize: 14.sp,),)),
-                       DropdownMenuItem(value: "order_delivered",child: Text("Delivered",style: TextStyle(fontSize: 14.sp,),)),
-                       DropdownMenuItem(value: "order_cancelled",child: Text("Cancelled",style: TextStyle(fontSize: 14.sp,),)),
-                     ],
-                   ):CDropDownField(
-                    value: watch.orderStatus,
-                    onChanged: (value){
-                      read.onStatusSelected(value);
-                    },
-                    items:[
-                      DropdownMenuItem(value: "order_placed",child: Text("Pending",style: TextStyle(fontSize: 14.sp,),)),
-                      DropdownMenuItem(value: "order_confirmed",child: Text("Confirmed",style: TextStyle(fontSize: 14.sp,),)),
-                      DropdownMenuItem(value: "order_packing",child: Text("Packing",style: TextStyle(fontSize: 14.sp,),)),
-                      DropdownMenuItem(value: "order_dispatched",child: Text("Dispatched",style: TextStyle(fontSize: 14.sp,),)),
-                      DropdownMenuItem(value: "order_delivered",child: Text("Delivered",style: TextStyle(fontSize: 14.sp,),)),
-                      DropdownMenuItem(value: "order_cancelled",child: Text("Cancelled",style: TextStyle(fontSize: 14.sp,),)),
-                    ],
-                  ),
-                 ],
-               ),
-             ),
-
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    watch.shopId == ""
+                        ? CDropDownField(
+                            onChanged: (value) {
+                              read.onShopSelected(value);
+                            },
+                            items: watch.orderedShopsList
+                                ?.map((item) => DropdownMenuItem<String>(
+                                      value: item.id.toString(),
+                                      child: Text(
+                                        item.shopName ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                          )
+                        : CDropDownField(
+                            value: watch.shopId,
+                            onChanged: (value) {
+                              read.onShopSelected(value);
+                            },
+                            items: watch.orderedShopsList
+                                ?.map((item) => DropdownMenuItem<String>(
+                                      value: item.id.toString(),
+                                      child: Text(
+                                        item.shopName ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                          ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      "Status",
+                      style: GoogleFonts.dmSans(
+                        textStyle: const TextStyle(
+                            color: Black,
+                            letterSpacing: .5,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    watch.orderStatus == ""
+                        ? CDropDownField(
+                            onChanged: (value) {
+                              read.onStatusSelected(value);
+                            },
+                            items: [
+                              DropdownMenuItem(
+                                  value: "order_placed",
+                                  child: Text(
+                                    "Pending",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_confirmed",
+                                  child: Text(
+                                    "Confirmed",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_packing",
+                                  child: Text(
+                                    "Packing",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_dispatched",
+                                  child: Text(
+                                    "Dispatched",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_delivered",
+                                  child: Text(
+                                    "Delivered",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_cancelled",
+                                  child: Text(
+                                    "Cancelled",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                            ],
+                          )
+                        : CDropDownField(
+                            value: watch.orderStatus,
+                            onChanged: (value) {
+                              read.onStatusSelected(value);
+                            },
+                            items: [
+                              DropdownMenuItem(
+                                  value: "order_placed",
+                                  child: Text(
+                                    "Pending",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_confirmed",
+                                  child: Text(
+                                    "Confirmed",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_packing",
+                                  child: Text(
+                                    "Packing",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_dispatched",
+                                  child: Text(
+                                    "Dispatched",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_delivered",
+                                  child: Text(
+                                    "Delivered",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "order_cancelled",
+                                  child: Text(
+                                    "Cancelled",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                    ),
+                                  )),
+                            ],
+                          ),
+                  ],
+                ),
+              ),
               Padding(
-                padding: EdgeInsets.only(
-                    left: 20.w, top: 24.w, right: 19.w),
+                padding: EdgeInsets.only(left: 20.w, top: 24.w, right: 19.w),
                 child: SizedBox(
                   width: 352.w, // <-- Your width
                   height: 35.h,
@@ -198,7 +276,9 @@ class _MyOrderFiltterViewState extends State<MyOrderFiltterView> {
                     ),
                     // style: style,
                     onPressed: () {
-                      read.clearFilter(context,);
+                      read.clearFilter(
+                        context,
+                      );
                     },
                     child: Text(
                       'Clear Filter',
@@ -231,7 +311,9 @@ class _MyOrderFiltterViewState extends State<MyOrderFiltterView> {
                     ),
                     // style: style,
                     onPressed: () {
-                      read.applyFilter(context,);
+                      read.applyFilter(
+                        context,
+                      );
                     },
                     child: Text(
                       'Filter',

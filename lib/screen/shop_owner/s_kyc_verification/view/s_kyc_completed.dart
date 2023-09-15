@@ -1,56 +1,15 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter/src/widgets/placeholder.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:local_supper_market/widget/app_bar.dart';
 
-// class KycCompletedView extends StatefulWidget {
-//   const KycCompletedView({super.key});
-
-//   @override
-//   State<KycCompletedView> createState() => _KycCompletedViewState();
-// }
-
-// class _KycCompletedViewState extends State<KycCompletedView> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-// appBar: PreferredSize(
-//   preferredSize: Size.fromHeight(66.w),
-//   child: PrimaryAppBar(title: "KYC Verification"),
-// ),
-// body: Center(
-//   child: Image.asset(
-//     "assets/images/kycone.png",
-//     height: 150.h,
-//     width: 150.w,
-//   ),
-// ),
-//     );
-//   }
-// }
-
-import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/controller/shop_sign_in_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
-import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
-import 'package:local_supper_market/widget/textfield.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
-// import 'package:country_code_picker/country_code_picker.dart';
 
 class KycCompletedView extends StatefulWidget {
   @override

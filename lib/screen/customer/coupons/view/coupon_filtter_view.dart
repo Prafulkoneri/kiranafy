@@ -1,15 +1,6 @@
-import 'dart:ui';
-
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
 import 'package:local_supper_market/screen/customer/coupons/controller/coupon_all_controler.dart';
-import 'package:local_supper_market/screen/customer/my_order/controller/my_orders_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/s_bank_account_details_view.dart';
-import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
-import 'package:local_supper_market/widget/radio_button.dart';
-import 'package:local_supper_market/widget/stack_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -116,35 +116,3 @@ class CartItemList {
     unit = json["unit"];
   }
 }
-
-// class ShopDetails {
-//   int? id;
-//   String? shopName;
-//   String? shopAddress;
-//   String? areaName;
-//   String? cityName;
-//   int? shopPincode;
-//   String? shopOwnerSupportNumber;
-//   String? isFavourite;
-
-//   ShopDetails({
-//     required this.id,
-//     required this.shopName,
-//     required this.shopAddress,
-//     required this.areaName,
-//     required this.cityName,
-//     required this.shopPincode,
-//     required this.shopOwnerSupportNumber,
-//     required this.isFavourite,
-//   });
-//   ShopDetails.fromJson(Map<String, dynamic> json) {
-//     id = json["id"];
-//     shopName = json["shop_name"];
-//     shopAddress = json["shop_address"];
-//     areaName = json["area_name"];
-//     cityName = json["city_name"];
-//     shopPincode = json["shop_pincode"];
-//     shopOwnerSupportNumber = json["shop_owner_support_number"];
-//     isFavourite = json["is_favourite"];
-//   }
-// }

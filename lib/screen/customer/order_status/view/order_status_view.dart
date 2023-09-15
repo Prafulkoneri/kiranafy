@@ -2,27 +2,20 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/view/delivery_view_second.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
-import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
+
 import 'package:local_supper_market/screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
-import 'package:order_tracker/order_tracker.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
-import 'package:local_supper_market/widget/track_order.dart';
 import 'package:provider/provider.dart';
 
 class OrderStatusView extends StatefulWidget {
@@ -35,25 +28,6 @@ class OrderStatusView extends StatefulWidget {
 }
 
 class _OrderStatusViewState extends State<OrderStatusView> {
-  // List<TextDto> orderList = [
-  //   TextDto("Your order has been placed", "Fri, 25th Mar '22 - 10:47pm"),
-  //   TextDto("Seller ha processed your order", "Sun, 27th Mar '22 - 10:19am"),
-  //   TextDto("Your item has been picked up by courier partner.",
-  //       "Tue, 29th Mar '22 - 5:00pm"),
-  // ];
-
-  // List<TextDto> shippedList = [
-  //   TextDto("Your order has been shipped", "Tue, 29th Mar '22 - 5:04pm"),
-  //   TextDto("Your item has been received in the nearest hub to you.", null),
-  // ];
-
-  // List<TextDto> outOfDeliveryList = [
-  //   TextDto("Your order is out for delivery", "Thu, 31th Mar '22 - 2:27pm"),
-  // ];
-
-  // List<TextDto> deliveredList = [
-  //   TextDto("Your order has been delivered", "Thu, 31th Mar '22 - 3:58pm"),
-  // ];
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -107,15 +81,15 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                             )),
                     (Route<dynamic> route) => false,
                   )
-                :  Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => OrderDeliveryView(
-                    screenName: "myorderview",
-                    orderId: widget.orderId,
-                    isRefresh: true,
-                  )),
-            );
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OrderDeliveryView(
+                              screenName: "myorderview",
+                              orderId: widget.orderId,
+                              isRefresh: true,
+                            )),
+                  );
           },
           title: "Order Status",
         ),
@@ -143,20 +117,20 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                     onTap: (){
-                       Navigator.pushAndRemoveUntil(
-                         context,
-                         MaterialPageRoute(
-                             builder: (context) => MainScreenView(
-                                 index: 1,
-                                 screenName: ShopProfileView(
-                                   refreshPage: true,
-                                   routeName: '',
-                                   shopId: watch.shopDetails?.id.toString(),
-                                 ))),
-                             (Route<dynamic> route) => false,
-                       );
-                     },
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainScreenView(
+                                  index: 1,
+                                  screenName: ShopProfileView(
+                                    refreshPage: true,
+                                    routeName: '',
+                                    shopId: watch.shopDetails?.id.toString(),
+                                  ))),
+                          (Route<dynamic> route) => false,
+                        );
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
                         child: Column(
@@ -177,7 +151,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                             ),
                             Container(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                       child: Container(
@@ -257,9 +232,11 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                         onTap: () {
                                           watch.favAllShop
                                               ? read.removeAllShopFavList(
-                                                  context, watch.shopDetails?.id)
+                                                  context,
+                                                  watch.shopDetails?.id)
                                               : read.updateAllShopFavList(
-                                                  context, watch.shopDetails?.id);
+                                                  context,
+                                                  watch.shopDetails?.id);
                                         },
                                         child: Container(
                                           padding: EdgeInsets.only(
@@ -483,7 +460,6 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                             ],
                           )
                         : Container(),
-
                     Container(
                       padding:
                           EdgeInsets.only(left: 19.w, top: 20.w, bottom: 30.w),
@@ -498,7 +474,6 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                         ),
                       ),
                     ),
-
                     Row(
                       children: [
                         Container(
@@ -560,7 +535,6 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                         )),
                       ],
                     ),
-
                     Row(
                       children: [
                         Container(
@@ -626,7 +600,6 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                         )),
                       ],
                     ),
-
                     Row(
                       children: [
                         Container(
@@ -694,7 +667,6 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                         )),
                       ],
                     ),
-
                     Row(
                       children: [
                         Container(
@@ -763,7 +735,6 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                         )),
                       ],
                     ),
-
                     Row(
                       children: [
                         Container(
@@ -823,68 +794,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                         )),
                       ],
                     ),
-
-                    // Row(
-                    //   children: [
-                    //     TweenAnimationBuilder(
-                    //       builder: (context, value, child) {
-                    //         print(value);
-                    //         return  Container(
-                    //           margin: EdgeInsets.only(left: 11.w),
-                    //           height: 21.w,
-                    //           width: 21.w,
-                    //           decoration: BoxDecoration(
-                    //               color: Color(0xff39C19D),
-                    //               shape: BoxShape.circle
-                    //           ),
-                    //         );
-                    //       },
-                    //       tween: Tween<double>(begin: 3, end: 1),
-                    //       duration: Duration(milliseconds: 1500),
-                    //     ),
-                    //
-                    //   ],
-                    // ),
-                    // Container(
-                    //   margin: EdgeInsets.only(left: 20.w),
-                    //   width: 3,
-                    //   height: 100,
-                    //   child: RotatedBox(
-                    //     quarterTurns: 1,
-                    //     child: TweenAnimationBuilder(
-                    //       builder: (context, value, child) {
-                    //         return LinearProgressIndicator(
-                    //           value: value,
-                    //           color: Color(0xff39C19D),
-                    //           backgroundColor: Colors.grey[400],
-                    //         );
-                    //       },
-                    //       tween: Tween<double>(begin: 0, end: 1),
-                    //       duration: Duration(milliseconds: 1500),
-                    //     ),
-                    //   ),
-                    // ),
-
                     SizedBox(height: 80.h)
-                    // ListView.builder(
-                    //     physics: NeverScrollableScrollPhysics(),
-                    //     // physics: BouncingScrollPhysics(),
-                    //     shrinkWrap: true,
-                    //     itemCount: 1,
-                    //     itemBuilder: (context, index) {
-                    //       return Padding(
-                    //         padding: const EdgeInsets.all(20),
-                    //         child: OrderTracker(
-                    //           status: Status.delivered,
-                    //           activeColor: Colors.green,
-                    //           inActiveColor: Colors.grey[300],
-                    //           orderTitleAndDateList: orderList,
-                    //           shippedTitleAndDateList: shippedList,
-                    //           outOfDeliveryTitleAndDateList: outOfDeliveryList,
-                    //           deliveredTitleAndDateList: deliveredList,
-                    //         ),
-                    //       );
-                    //     }),
                   ],
                 ),
               ),
@@ -892,69 +802,3 @@ class _OrderStatusViewState extends State<OrderStatusView> {
     );
   }
 }
-
-
-
-   
-
-
-
-
-
-
-
-
-//  Column(
-//             crossAxisAlignment: CrossAxisAlignment.center,
-//             children: [
-//               // Add padding around the OrderTrackerZen widget for better presentation.
-//               Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-//                 // OrderTrackerZen is the main widget of the package which displays the order tracking information.
-//                 child: OrderTrackerZen(
-//                   // Provide an array of TrackerData objects to display the order tracking information.
-//                   tracker_data: [
-//                     // TrackerData represents a single step in the order tracking process.
-//                     TrackerData(
-//                       title: "Order Placed",
-//                       date: "Sat, 8 Apr '22",
-//                       // Provide an array of TrackerDetails objects to display more details about this step.
-//                       tracker_details: [
-//                         // TrackerDetails contains detailed information about a specific event in the order tracking process.
-//                         TrackerDetails(
-//                           title: "Your order was placed on Zenzzen",
-//                           datetime: "Sat, 8 Apr '22 - 17:17",
-//                         ),
-//                         TrackerDetails(
-//                           title: "Zenzzen Arranged A Callback Request",
-//                           datetime: "Sat, 8 Apr '22 - 17:42",
-//                         ),
-//                       ],
-//                     ),
-//                     // yet another TrackerData object
-//                     TrackerData(
-//                       title: "Order Shipped",
-//                       date: "Sat, 8 Apr '22",
-//                       tracker_details: [
-//                         TrackerDetails(
-//                           title: "Your order was shipped with MailDeli",
-//                           datetime: "Sat, 8 Apr '22 - 17:50",
-//                         ),
-//                       ],
-//                     ),
-//                     // And yet another TrackerData object
-//                     TrackerData(
-//                       title: "Order Delivered",
-//                       date: "Sat,8 Apr '22",
-//                       tracker_details: [
-//                         TrackerDetails(
-//                           title: "You received your order, by MailDeli",
-//                           datetime: "Sat, 8 Apr '22 - 17:51",
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),

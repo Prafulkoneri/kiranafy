@@ -1,15 +1,15 @@
-// import 'package:local_supper_market/screen/customer/near_shops/model/all_near_shops_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/customer_view_all_shop_model.dart';
-// import 'package:local_supper_market/screen/customer/near_shops/model/customer_view_all_shop_model.dart';
 
 class SearchShopRequestModel {
   String? shopName;
+
   SearchShopRequestModel({
     this.shopName,
   });
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
     data["shop_name"] = shopName;
+
     return data;
   }
 }
@@ -56,27 +56,3 @@ class SearchShopData {
     }
   }
 }
-
-// class AllShops {
-//     int id;
-//     String shopName;
-//     String areaName;
-//     String cityName;
-//     String shopAddress;
-//     String shopBannerImagePath;
-//     String shopBannerImageName;
-
-//     AllShops({
-//         required this.id,
-//         required this.shopName,
-//         required this.areaName,
-//         required this.cityName,
-//         required this.shopAddress,
-//         required this.shopBannerImagePath,
-//         required this.shopBannerImageName,
-//     });
-
-// }
-
-
-

@@ -1,10 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:local_supper_market/screen/shop_owner/promotion_request/model/promotion_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/promotion_request/repository/promotion_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';

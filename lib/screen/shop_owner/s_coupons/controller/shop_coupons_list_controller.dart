@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -188,10 +186,4 @@ class SCouponsListController extends ChangeNotifier {
       },
     );
   }
-
-  // bool isOtpErrorVisible = false;
-  // void onOtpDismiss() {
-  //   isOtpErrorVisible = false;
-  //   notifyListeners();
-  // }
 }

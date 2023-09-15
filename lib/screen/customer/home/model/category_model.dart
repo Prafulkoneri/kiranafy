@@ -1,19 +1,3 @@
-// class AllCategoriesReqModel {
-//   String ? pincode;
-
-//   AllCategoriesReqModel({
-//     required this.pincode,
-//   });
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = {};
-
-//     data["pincode"] = pincode;
-
-//     return data;
-//   }
-// }
-
 /////Response Model
 
 ///////////////////////////////

@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/main_screen/model/set_pincode_model.dart';
-import 'package:local_supper_market/screen/customer/my_order/model/my_order_model.dart';
 
 class SetPincodeRepo {
   Future<http.Response> setPincode(SetPincodeReqModel reqModel, token) async {

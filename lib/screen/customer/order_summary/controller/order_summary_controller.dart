@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
@@ -25,7 +24,6 @@ import 'package:local_supper_market/screen/customer/shop_profile/repository/remo
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:intl/intl.dart';
 
 class OrderSummaryController extends ChangeNotifier {
   OrderSummaryRepo orderSummaryRepo = OrderSummaryRepo();

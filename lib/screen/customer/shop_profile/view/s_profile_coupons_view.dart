@@ -1,17 +1,10 @@
-import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/customer/coupons/view/coupon_all_view.dart';
-import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
-import 'package:local_supper_market/utils/coupans_info.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:provider/provider.dart';
 

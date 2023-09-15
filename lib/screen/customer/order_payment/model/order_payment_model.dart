@@ -107,26 +107,3 @@ class OrderPaymentData {
     customerDeliveryAddressId = json["customer_delivery_address_id"];
   }
 }
-
-// class ShopDetails {
-//     int id;
-//     String shopName;
-//     String shopAddress;
-//     String areaName;
-//     String cityName;
-//     int shopPincode;
-//     String shopOwnerPaymentQrCodeImagePath;
-//     String shopOwnerPaymentQrCodeImageName;
-
-//     ShopDetails({
-//         required this.id,
-//         required this.shopName,
-//         required this.shopAddress,
-//         required this.areaName,
-//         required this.cityName,
-//         required this.shopPincode,
-//         required this.shopOwnerPaymentQrCodeImagePath,
-//         required this.shopOwnerPaymentQrCodeImageName,
-//     });
-
-// }
