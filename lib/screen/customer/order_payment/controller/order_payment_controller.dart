@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/model/c_place_order_model.dart';
 import 'package:local_supper_market/screen/customer/order_payment/model/order_payment_model.dart';
@@ -12,6 +13,7 @@ import 'package:local_supper_market/screen/customer/order_payment/view/check_sta
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderPaymentController extends ChangeNotifier {
@@ -175,6 +177,7 @@ class OrderPaymentController extends ChangeNotifier {
     double totalOrderAmount =
         double.parse(orderPaymentData?.finalTotalAmount.toString() ?? "0");
     if (minAmount > totalOrderAmount) {
+      LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context,
           "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
           type: SnackType.error);
@@ -204,7 +207,13 @@ class OrderPaymentController extends ChangeNotifier {
           CustomerPlaceOrderResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         transactionIdController.clear();
-        Navigator.pushAndRemoveUntil(
+        final read =
+        Provider.of<MainScreenController>(context, listen: false);
+        // Navigator.pop(context);
+        // read.onNavigation(4, CheckOrderStatusView(
+        //   orderId: result.orderId.toString(),
+        // ), context);
+        Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => MainScreenView(
@@ -212,7 +221,7 @@ class OrderPaymentController extends ChangeNotifier {
                   screenName: CheckOrderStatusView(
                     orderId: result.orderId.toString(),
                   ))),
-          (Route<dynamic> route) => false,
+          // (Route<dynamic> route) => false,
         );
         LoadingOverlay.of(context).hide();
         notifyListeners();

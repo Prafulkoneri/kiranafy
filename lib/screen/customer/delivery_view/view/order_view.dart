@@ -77,26 +77,32 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
             // },
             onBackBtnPressed: () {
               widget.screenName == "notification"
-                  ? Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainScreenView(
-                                index: 4,
-                                screenName: CustomerNotificationsScreenView(
-                                  isRefresh: false,
-                                ),
-                              )),
-                      (Route<dynamic> route) => false,
-                    )
-                  : Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainScreenView(
-                                index: 0,
-                                screenName: MyOrderView(),
-                              )),
-                      (Route<dynamic> route) => false,
-                    );
+                  ? readMain.onNavigation(
+                      4,
+                      CustomerNotificationsScreenView(isRefresh: false),
+                      context)
+                  // Navigator.pushAndRemoveUntil(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => MainScreenView(
+                  //                   index: 4,
+                  //                   screenName: CustomerNotificationsScreenView(
+                  //                     isRefresh: false,
+                  //                   ),
+                  //                 )),
+                  //         (Route<dynamic> route) => false,
+                  //       )
+                  : readMain.onNavigation(4, MyOrderView(), context);
+
+              // Navigator.pushAndRemoveUntil(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => MainScreenView(
+              //                   index: 0,
+              //                   screenName: MyOrderView(),
+              //                 )),
+              //         (Route<dynamic> route) => false,
+              //       );
               readMain.showBottomNavigationBar();
             },
             title: "Order",
@@ -108,13 +114,34 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
               )
             : WillPopScope(
                 onWillPop: () async {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                            index: 4, screenName: MyOrderView())),
-                    (Route<dynamic> route) => false,
-                  );
+                  widget.screenName == "notification"
+                      ? readMain.onNavigation(
+                          4,
+                          CustomerNotificationsScreenView(isRefresh: false),
+                          context)
+                      // Navigator.pushAndRemoveUntil(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) => MainScreenView(
+                      //                   index: 4,
+                      //                   screenName: CustomerNotificationsScreenView(
+                      //                     isRefresh: false,
+                      //                   ),
+                      //                 )),
+                      //         (Route<dynamic> route) => false,
+                      //       )
+                      : readMain.onNavigation(4, MyOrderView(), context);
+
+                  // Navigator.pushAndRemoveUntil(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => MainScreenView(
+                  //                   index: 0,
+                  //                   screenName: MyOrderView(),
+                  //                 )),
+                  //         (Route<dynamic> route) => false,
+                  //       );
+                  readMain.showBottomNavigationBar();
                   return true;
                 },
                 child: SingleChildScrollView(
@@ -904,18 +931,25 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                MainScreenView(
-                                                    index: 4,
-                                                    screenName: OrderStatusView(
-                                                      orderId: watch.orderId,
-                                                      screenName: "orderView",
-                                                    ))),
-                                        (Route<dynamic> route) => false,
-                                      );
+                                      readMain.onNavigation(
+                                          4,
+                                          OrderStatusView(
+                                            orderId: watch.orderId,
+                                            screenName: "orderView",
+                                          ),
+                                          context);
+                                      // Navigator.pushAndRemoveUntil(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           MainScreenView(
+                                      //               index: 4,
+                                      //               screenName: OrderStatusView(
+                                      //                 orderId: watch.orderId,
+                                      //                 screenName: "orderView",
+                                      //               ))),
+                                      //   (Route<dynamic> route) => false,
+                                      // );
                                       // Navigator.push(
                                       //     context,
                                       //     MaterialPageRoute(

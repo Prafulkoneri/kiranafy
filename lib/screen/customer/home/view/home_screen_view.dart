@@ -63,6 +63,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
     final mainScreenWatch = context.watch<MainScreenController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
         body: watch.isLoading
             ? Center(
@@ -95,17 +96,21 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           height: 36.h,
                           child: TextField(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainScreenView(
-                                        index: 1,
-                                        screenName: AllNearShopsView(
-                                          isSearchFocus: true,
-                                          refreshPage: true,
-                                        ))),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(1, AllNearShopsView(
+                                isSearchFocus: true,
+                                refreshPage: true,
+                              ), context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => MainScreenView(
+                              //           index: 1,
+                              //           screenName: AllNearShopsView(
+                              //             isSearchFocus: true,
+                              //             refreshPage: true,
+                              //           ))),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             readOnly: true,
                             decoration: InputDecoration(
@@ -224,19 +229,23 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainScreenView(
-                                                        index: 1,
-                                                        screenName:
-                                                            AllNearShopsView(
-                                                          isSearchFocus: false,
-                                                          refreshPage: true,
-                                                        ))),
-                                            (Route<dynamic> route) => false,
-                                          );
+                                          readMain.onNavigation(1, AllNearShopsView(
+                                            isSearchFocus: false,
+                                            refreshPage: true,
+                                          ), context);
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           MainScreenView(
+                                          //               index: 1,
+                                          //               screenName:
+                                          //                   AllNearShopsView(
+                                          //                 isSearchFocus: false,
+                                          //                 refreshPage: true,
+                                          //               ))),
+                                          //   (Route<dynamic> route) => false,
+                                          // );
                                         },
                                         child: Text(
                                           "View All",
@@ -346,14 +355,15 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         children: [
                           InkWell(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainScreenView(
-                                        index: 0,
-                                        screenName: CustomerAdsView())),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(0, CustomerAdsView(), context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => MainScreenView(
+                              //           index: 0,
+                              //           screenName: CustomerAdsView())),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               decoration: BoxDecoration(

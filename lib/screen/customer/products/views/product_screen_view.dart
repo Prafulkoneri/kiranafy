@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
@@ -84,6 +86,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
   Widget build(BuildContext context) {
     final watch = context.watch<ProductViewController>();
     final read = context.read<ProductViewController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       body: watch.isLoading
           ? const Center(
@@ -101,7 +104,33 @@ class _ProductScreenViewState extends State<ProductScreenView> {
           //   },
           WillPopScope(
               onWillPop: () async {
-                read.onBackPressed(context);
+                if (widget.routeName == "cart_details") {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CartDetailView(
+                              isRefresh: true,
+                              shopId: watch.shopDetails?.id.toString(),
+                              cartId: watch.cartId)));
+                } else {
+                  readMain.onNavigation(1,  ShopProfileView(
+                                  refreshPage: true,
+                                  routeName: '',
+                                  shopId: watch.shopDetails?.id.toString(),
+                                ), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => MainScreenView(
+                  //           index: 1,
+                  //           screenName: ShopProfileView(
+                  //             refreshPage: true,
+                  //             routeName: '',
+                  //             shopId: watch.shopDetails?.id.toString(),
+                  //           ))),
+                  //       (Route<dynamic> route) => false,
+                  // );
+                }
                 return false;
               },
               child: SingleChildScrollView(
@@ -111,18 +140,23 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                   children: [
                     GestureDetector(
                       onTap:(){
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainScreenView(
-                                  index: 1,
-                                  screenName: ShopProfileView(
-                                    refreshPage: true,
-                                    routeName: '',
-                                    shopId: watch.shopDetails?.id.toString(),
-                                  ))),
-                              (Route<dynamic> route) => false,
-                        );
+                        readMain.onNavigation(1,  ShopProfileView(
+                          refreshPage: true,
+                          routeName: '',
+                          shopId: watch.shopDetails?.id.toString(),
+                        ), context);
+                        // Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => MainScreenView(
+                        //           index: 1,
+                        //           screenName: ShopProfileView(
+                        //             refreshPage: true,
+                        //             routeName: '',
+                        //             shopId: watch.shopDetails?.id.toString(),
+                        //           ))),
+                        //       (Route<dynamic> route) => false,
+                        // );
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -828,39 +862,80 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                   onTap: () {
                                                     print(element?.id);
                                                     watch.updateProductId(
-                                                      element?.id.toString(),
+                                                      element?.id.toString(),context,true
                                                     );
-                                                    Navigator
-                                                        .pushAndRemoveUntil(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              MainScreenView(
-                                                                index: 1,
-                                                                screenName:
-                                                                    ProductScreenView(
-                                                                        selectedUnitId: element
-                                                                            ?.productUnitId
-                                                                            .toString(),
-                                                                        categoryId: element
-                                                                            ?.categoryId
-                                                                            .toString(),
-                                                                        // categoryId: watch.categoryId,
-                                                                        productId: element
-                                                                            ?.id
-                                                                            .toString(),
-                                                                        shopId: element
-                                                                            ?.shopId
-                                                                            .toString(),
-                                                                        routeName:
-                                                                            "",
-                                                                        // widget.shopId,
-                                                                        productType:
-                                                                            element?.productType),
-                                                              )),
-                                                      (Route<dynamic> route) =>
-                                                          false,
-                                                    );
+                                                    // Navigator.push(context,MaterialPageRoute(builder: (context)=>MainScreenView(index: 1,screenName: ProductScreenView(
+                                                    //     selectedUnitId: element
+                                                    //         ?.productUnitId
+                                                    //         .toString(),
+                                                    //     categoryId: element
+                                                    //         ?.categoryId
+                                                    //         .toString(),
+                                                    //     // categoryId: watch.categoryId,
+                                                    //     productId: element
+                                                    //         ?.id
+                                                    //         .toString(),
+                                                    //     shopId: element
+                                                    //         ?.shopId
+                                                    //         .toString(),
+                                                    //     routeName:
+                                                    //     "",
+                                                    //     // widget.shopId,
+                                                    //     productType:
+                                                    //     element?.productType),)));
+
+
+
+                                                    // readMain.onNavigation(1,   ProductScreenView(
+                                                    //     selectedUnitId: element
+                                                    //         ?.productUnitId
+                                                    //         .toString(),
+                                                    //     categoryId: element
+                                                    //         ?.categoryId
+                                                    //         .toString(),
+                                                    //     // categoryId: watch.categoryId,
+                                                    //     productId: element
+                                                    //         ?.id
+                                                    //         .toString(),
+                                                    //     shopId: element
+                                                    //         ?.shopId
+                                                    //         .toString(),
+                                                    //     routeName:
+                                                    //     "",
+                                                    //     // widget.shopId,
+                                                    //     productType:
+                                                    //     element?.productType), context);
+                                                    // Navigator
+                                                    //     .pushAndRemoveUntil(
+                                                    //   context,
+                                                    //   MaterialPageRoute(
+                                                    //       builder: (context) =>
+                                                    //           MainScreenView(
+                                                    //             index: 1,
+                                                    //             screenName:
+                                                    //                 ProductScreenView(
+                                                    //                     selectedUnitId: element
+                                                    //                         ?.productUnitId
+                                                    //                         .toString(),
+                                                    //                     categoryId: element
+                                                    //                         ?.categoryId
+                                                    //                         .toString(),
+                                                    //                     // categoryId: watch.categoryId,
+                                                    //                     productId: element
+                                                    //                         ?.id
+                                                    //                         .toString(),
+                                                    //                     shopId: element
+                                                    //                         ?.shopId
+                                                    //                         .toString(),
+                                                    //                     routeName:
+                                                    //                         "",
+                                                    //                     // widget.shopId,
+                                                    //                     productType:
+                                                    //                         element?.productType),
+                                                    //           )),
+                                                    //   (Route<dynamic> route) =>
+                                                    //       false,
+                                                    // );
                                                   },
                                                   child: Container(
                                                     decoration: BoxDecoration(

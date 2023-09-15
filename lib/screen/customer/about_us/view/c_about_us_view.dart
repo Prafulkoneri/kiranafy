@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:local_supper_market/screen/customer/about_us/controller/cms_controller.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -28,19 +29,24 @@ class _CAboutUsViewState extends State<CAboutUsView> {
   Widget build(BuildContext context) {
     final read = context.read<CmsController>();
     final watch = context.watch<CmsController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "About Us",
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 4, screenName: ProfileScreenView())),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(4, ProfileScreenView(
+              isRefreshed: false,
+              // refresh: false,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //           index: 4, screenName: ProfileScreenView(isRefreshed: false,))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
         ),
       ),

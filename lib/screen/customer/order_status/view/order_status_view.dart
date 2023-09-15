@@ -70,17 +70,24 @@ class _OrderStatusViewState extends State<OrderStatusView> {
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
             widget.screenName == "orderSummary"
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScreenView(
-                              index: 0,
-                              screenName: HomeScreenView(
-                                refreshPage: true,
-                              ),
-                            )),
-                    (Route<dynamic> route) => false,
-                  )
+                ? readMain.onNavigation(
+                    0,
+                    HomeScreenView(
+                      refreshPage: true,
+                    ),
+                    context)
+
+                // Navigator.pushAndRemoveUntil(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => MainScreenView(
+                //                   index: 0,
+                //                   screenName: HomeScreenView(
+                //                     refreshPage: true,
+                //                   ),
+                //                 )),
+                //         (Route<dynamic> route) => false,
+                //       )
                 : Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/view/help_center_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -41,18 +42,21 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
   Widget build(BuildContext context) {
     final watch = context.watch<TicketController>();
     final read = context.read<TicketController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        MainScreenView(index: 4, screenName: HelpCenterView())),
-                (Route<dynamic> route) => false,
-              );
+              Navigator.pop(context);
+              readMain.onNavigation(4, HelpCenterView(), context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) =>
+              //           MainScreenView(index: 4, screenName: HelpCenterView())),
+              //   (Route<dynamic> route) => false,
+              // );
             },
             title: "Help & Support",
           ),

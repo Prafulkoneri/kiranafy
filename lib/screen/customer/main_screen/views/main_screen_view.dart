@@ -26,7 +26,7 @@ class _MainScreenViewState extends State<MainScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileController>().initState(context);
+      context.read<ProfileController>().initState(context,true);
       context.read<AllShopController>().initState(context, true);
       context.read<CartListController>().initState(context);
     });

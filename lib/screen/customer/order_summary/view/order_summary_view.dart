@@ -986,7 +986,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                 readProductViewController
                                                                     .updateProductId(
                                                                   element?.id
-                                                                      .toString(),
+                                                                      .toString(),context,false
                                                                 );
                                                                 Navigator
                                                                     .pushAndRemoveUntil(
@@ -1284,7 +1284,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                 readProductViewController
                                                                     .updateProductId(
                                                                   element?.id
-                                                                      .toString(),
+                                                                      .toString(),context,false
                                                                 );
                                                                 Navigator
                                                                     .pushAndRemoveUntil(

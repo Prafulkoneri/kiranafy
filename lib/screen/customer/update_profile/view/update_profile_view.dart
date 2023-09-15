@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/controller/edit_profile_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -34,18 +35,21 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
   Widget build(BuildContext context) {
     final read = context.read<UpdateProfileController>();
     final watch = context.watch<UpdateProfileController>();
+    final readMain = context.watch<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 4, screenName: ProfileScreenView())),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(
+                4, ProfileScreenView(isRefreshed: false), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //           index: 4, screenName: ProfileScreenView())),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Update Profile",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -60,13 +64,15 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
             )
           : WillPopScope(
               onWillPop: () async {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MainScreenView(
-                          index: 4, screenName: ProfileScreenView())),
-                  (Route<dynamic> route) => false,
-                );
+                readMain.onNavigation(
+                    4, ProfileScreenView(isRefreshed: false), context);
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => MainScreenView(
+                //           index: 4, screenName: ProfileScreenView())),
+                //   (Route<dynamic> route) => false,
+                // );
 
                 return false;
               },

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/delivery_address/controller/delivery_address_controller.dart';
 
 import 'package:local_supper_market/screen/customer/delivery_address/model/edit_address_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/repository/edit_address_repo.dart';
@@ -11,6 +12,7 @@ import 'package:local_supper_market/screen/customer/delivery_address/model/updat
 import 'package:local_supper_market/screen/customer/delivery_address/repository/add_delivery_address_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/repository/update_delivery_address_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
 
@@ -22,6 +24,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.d
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddAddressController extends ChangeNotifier {
@@ -102,19 +105,26 @@ class AddAddressController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onBackBtnPressed(context, cId, sId) {
+  void onBackBtnPressed(context, cId, sId,readMain) {
     print("shopidddddddddddddd");
     print(cId);
     print(sId);
+    print(pageRoute);
     print("shopidddddddddddddd");
     if (pageRoute == "addressView") {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MainScreenView(
-                index: 4, screenName: MyDeliveryAddressView(isRefresh: false))),
-        (Route<dynamic> route) => false,
-      );
+      print("hello");
+      final read =
+      Provider.of<MainScreenController>(context, listen: false);
+      print("hellos");
+      Navigator.pop(context);
+      read.onNavigation(4, MyDeliveryAddressView(isRefresh: false), context);
+      // Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => MainScreenView(
+      //           index: 4, screenName: MyDeliveryAddressView(isRefresh: false))),
+      //   (Route<dynamic> route) => false,
+      // );
     }
     if (pageRoute == "orderAddress") {
       Navigator.push(
@@ -509,15 +519,20 @@ class AddAddressController extends ChangeNotifier {
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         if (pageRoute == "addressView") {
+          final read = Provider.of<MainScreenController>(context, listen: false);
+          final readDeliveryAddressController = Provider.of<DeliveryAddressController>(context, listen: false);
+          Navigator.pop(context);
+          read.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
+          readDeliveryAddressController.initState(context,true);
 
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MainScreenView(
-                    index: 4,
-                    screenName: MyDeliveryAddressView(isRefresh: true))),
-            (Route<dynamic> route) => false,
-          );
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => MainScreenView(
+          //           index: 4,
+          //           screenName: MyDeliveryAddressView(isRefresh: true))),
+          //   (Route<dynamic> route) => false,
+          // );
         }
         if (pageRoute == "orderAddAddress") {
           Navigator.push(
@@ -590,15 +605,20 @@ class AddAddressController extends ChangeNotifier {
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         if (pageRoute == "addressView") {
-
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MainScreenView(
-                    index: 4,
-                    screenName: MyDeliveryAddressView(isRefresh: true))),
-            (Route<dynamic> route) => false,
-          );
+          final read =
+          Provider.of<MainScreenController>(context, listen: false);
+          final readDeliveryAddressController = Provider.of<DeliveryAddressController>(context, listen: false);
+          Navigator.pop(context);
+          read.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
+          readDeliveryAddressController.initState(context,true);
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => MainScreenView(
+          //           index: 4,
+          //           screenName: MyDeliveryAddressView(isRefresh: true))),
+          //   (Route<dynamic> route) => false,
+          // );
         }
         if (pageRoute == "orderAddress") {
           Navigator.push(

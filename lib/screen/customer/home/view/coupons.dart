@@ -24,6 +24,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
     final watch = context.watch<HomeScreenController>();
     final read = context.watch<HomeScreenController>();
     final mainScreenWatch = context.watch<MainScreenController>();
+    final readMainScreen = context.read<MainScreenController>();
     return Container(
       decoration: BoxDecoration(color: Coupons),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -47,13 +48,14 @@ class _CouponsScreenState extends State<CouponsScreen> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            MainScreenView(index: 0, screenName: AllCoupons())),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMainScreen.onNavigation(0,AllCoupons, context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) =>
+                  //           MainScreenView(index: 0, screenName: AllCoupons())),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 },
                 // Navigator.push(
                 //   context,

@@ -43,20 +43,21 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
   Widget build(BuildContext context) {
     final watch = context.watch<CustomerReviewListControler>();
     final read = context.read<CustomerReviewListControler>();
-    final watchMain = context.watch<MainScreenController>();
+    final readMain = context.watch<MainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      MainScreenView(index: 1, screenName: ShopProfileView())),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(1, ShopProfileView(refreshPage:false), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) =>
+            //           MainScreenView(index: 1, screenName: ShopProfileView())),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Reviews",
           onActionTap: () {},

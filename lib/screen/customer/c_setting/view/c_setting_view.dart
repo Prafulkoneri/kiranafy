@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/c_setting/controller/c_setting_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
   Widget build(BuildContext context) {
     final watch = context.watch<CustomerSettingController>();
     final read = context.read<CustomerSettingController>();
+    final readMain = context.read<MainScreenController>();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -37,16 +39,24 @@ class _CustomerSettingState extends State<CustomerSetting> {
         child: PrimaryAppBar(
           title: "Settings",
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 4,
-                      screenName: ProfileScreenView(
-                          // refresh: false,
-                          ))),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(
+                4,
+                ProfileScreenView(
+                  isRefreshed: false,
+                  // refresh: false,
+                ),
+                context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //           index: 4,
+            //           screenName: ProfileScreenView(
+            //             isRefreshed: false,
+            //               // refresh: false,
+            //               ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
         ),
       ),

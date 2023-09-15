@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<HomeScreenController>();
+    final readMainScreen = context.watch<MainScreenController>();
     return watch.nearByShopList?.isNotEmpty ?? false
         ? WillPopScope(
             onWillPop: () async {
@@ -34,18 +36,26 @@ class _HomeCarousalState extends State<HomeCarousal> {
                     final element = watch.nearByShopList?[index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainScreenView(
-                                  index: 1,
-                                  screenName: ShopProfileView(
-                                    shopId: element?.id.toString(),
-                                    routeName: "homeNearbyShop",
-                                    refreshPage: true,
-                                  ))),
-                          (Route<dynamic> route) => false,
-                        );
+                        readMainScreen.onNavigation(
+                            1,
+                            ShopProfileView(
+                              shopId: element?.id.toString(),
+                              routeName: "homeNearbyShop",
+                              refreshPage: true,
+                            ),
+                            context);
+                        // Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => MainScreenView(
+                        //           index: 1,
+                        //           screenName: ShopProfileView(
+                        //             shopId: element?.id.toString(),
+                        //             routeName: "homeNearbyShop",
+                        //             refreshPage: true,
+                        //           ))),
+                        //   (Route<dynamic> route) => false,
+                        // );
                       },
                       child: Stack(
                         children: [

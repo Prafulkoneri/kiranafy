@@ -8,6 +8,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/view/customer_support_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -32,21 +33,30 @@ class _HelpCenterViewState extends State<HelpCenterView> {
   Widget build(BuildContext context) {
     final watch = context.watch<GetTicketListController>();
     final read = context.read<GetTicketListController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => MainScreenView(
-                        index: 4,
-                        screenName: ProfileScreenView(
-                            // refresh: false,
-                            ))),
-                (Route<dynamic> route) => false,
-              );
+              readMain.onNavigation(
+                  4,
+                  ProfileScreenView(
+                    isRefreshed: false,
+                    // refresh: false,
+                  ),
+                  context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => MainScreenView(
+              //           index: 4,
+              //           screenName: ProfileScreenView(
+              //             isRefreshed: false,
+              //               // refresh: false,
+              //               ))),
+              //   (Route<dynamic> route) => false,
+              // );
             },
             title: "Help & Support",
             action: SvgPicture.asset("assets/icons/addressadd.svg"),

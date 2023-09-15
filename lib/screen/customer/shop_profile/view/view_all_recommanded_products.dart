@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
@@ -53,24 +54,30 @@ class _AllRecommandedProductsViewState
   Widget build(BuildContext context) {
     final watch = context.watch<SAllRecommandedProductsController>();
     final read = context.read<SAllRecommandedProductsController>();
+    final readMain = context.read<MainScreenController>();
     final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainScreenView(
-                      index: 1,
-                      screenName: ShopProfileView(
-                        shopId: widget.shopId.toString(),
-                        routeName: "viewAllRecommandedProduct",
-                        refreshPage: true,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(1,  ShopProfileView(
+              shopId: widget.shopId.toString(),
+              routeName: "viewAllRecommandedProduct",
+              refreshPage: true,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MainScreenView(
+            //           index: 1,
+            //           screenName: ShopProfileView(
+            //             shopId: widget.shopId.toString(),
+            //             routeName: "viewAllRecommandedProduct",
+            //             refreshPage: true,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Recommanded Product",
         ),
@@ -114,33 +121,48 @@ class _AllRecommandedProductsViewState
                                         onTap: () {
                                           readProductViewController
                                               .updateProductId(
-                                            element?.id.toString(),
+                                            element?.id.toString(),context,false
                                           );
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainScreenView(
-                                                      index: 1,
-                                                      screenName:
-                                                          ProductScreenView(
-                                                              selectedUnitId: element
-                                                                  ?.productUnitId
-                                                                  .toString(),
-                                                              categoryId: element
-                                                                  ?.categoryId
-                                                                  .toString(),
-                                                              // categoryId: watch.categoryId,
-                                                              productId: element
-                                                                  ?.id
-                                                                  .toString(),
-                                                              shopId:
-                                                                  widget.shopId,
-                                                              productType: element
-                                                                  ?.productType),
-                                                    )),
-                                            (Route<dynamic> route) => false,
-                                          );
+                                          readMain.onNavigation(1,  ProductScreenView(
+                                              selectedUnitId: element
+                                                  ?.productUnitId
+                                                  .toString(),
+                                              categoryId: element
+                                                  ?.categoryId
+                                                  .toString(),
+                                              // categoryId: watch.categoryId,
+                                              productId: element
+                                                  ?.id
+                                                  .toString(),
+                                              shopId:
+                                              widget.shopId,
+                                              productType: element
+                                                  ?.productType), context);
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           MainScreenView(
+                                          //             index: 1,
+                                          //             screenName:
+                                          //                 ProductScreenView(
+                                          //                     selectedUnitId: element
+                                          //                         ?.productUnitId
+                                          //                         .toString(),
+                                          //                     categoryId: element
+                                          //                         ?.categoryId
+                                          //                         .toString(),
+                                          //                     // categoryId: watch.categoryId,
+                                          //                     productId: element
+                                          //                         ?.id
+                                          //                         .toString(),
+                                          //                     shopId:
+                                          //                         widget.shopId,
+                                          //                     productType: element
+                                          //                         ?.productType),
+                                          //           )),
+                                          //   (Route<dynamic> route) => false,
+                                          // );
                                         },
                                         child: Card(
                                           shape: RoundedRectangleBorder(

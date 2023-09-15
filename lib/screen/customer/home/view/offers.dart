@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
@@ -23,6 +24,8 @@ class _OfferPageState extends State<OfferPage> {
     final watch = context.watch<HomeScreenController>();
     final watchProductView =
         Provider.of<ProductViewController>(context, listen: false);
+    final readMainScreen =
+        Provider.of<MainScreenController>(context, listen: false);
     return Padding(
         padding: EdgeInsets.only(
           top: 20.h,
@@ -98,24 +101,33 @@ class _OfferPageState extends State<OfferPage> {
                                   element?.productType.toString(),
                                 );
                                 watchProductView.updateProductId(
-                                  element?.id.toString(),
+                                  element?.id.toString(),context,false
                                 );
                                 print("22222222222222222222222222222");
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MainScreenView(
-                                          index: 0,
-                                          screenName: ProductScreenView(
-                                            categoryId:
-                                                element?.categoryId.toString(),
-                                            productId: element?.id.toString(),
-                                            shopId: element?.shopId.toString(),
-                                            productType:
-                                                element?.productType.toString(),
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                readMainScreen.onNavigation(0,ProductScreenView(
+                                  categoryId:
+                                  element?.categoryId.toString(),
+                                  productId: element?.id.toString(),
+                                  shopId: element?.shopId.toString(),
+                                  productType:
+                                  element?.productType.toString(),
+                                ), context);
+
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => MainScreenView(
+                                //           index: 0,
+                                //           screenName: ProductScreenView(
+                                //             categoryId:
+                                //                 element?.categoryId.toString(),
+                                //             productId: element?.id.toString(),
+                                //             shopId: element?.shopId.toString(),
+                                //             productType:
+                                //                 element?.productType.toString(),
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               },
                               child: Container(
                                 padding: EdgeInsets.only(

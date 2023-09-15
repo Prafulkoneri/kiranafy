@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/model/edit_profile_model.dart';
 import 'package:local_supper_market/screen/customer/update_profile/model/update_profile_model.dart';
@@ -22,6 +23,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.d
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/common_functions.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../shop_owner/s_auth/model/country_model.dart';
@@ -61,12 +63,17 @@ class UpdateProfileController extends ChangeNotifier {
   Future<void> initState(
     context,
   ) async {
+
     await getCountryList(context);
     await getCustomerProfileDetails(context);
   }
+  showLoader(value){
+    isLoading=value;
+    notifyListeners();
+  }
 
   Future<void> getCustomerProfileDetails(context) async {
-    isLoading = true;
+
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -111,19 +118,23 @@ class UpdateProfileController extends ChangeNotifier {
         if (pincodeList?.contains(pincode.toString())==false) {
           pincode = "";
         }
-        isLoading = false;
+        showLoader(false);
         notifyListeners();
       } else {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      showLoader(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
@@ -276,6 +287,7 @@ class UpdateProfileController extends ChangeNotifier {
   }
 
   Future<void> getCountryList(context) async {
+    showLoader(true);
     registrationDataRepo.getCountryList(context).then((response) {
       print(response.statusCode);
       print(response.body);
@@ -364,13 +376,16 @@ class UpdateProfileController extends ChangeNotifier {
       print(response.body);
       if (response.statusCode == 200) {
         pref.setString("pincode", pincode);
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  MainScreenView(index: 4, screenName: ProfileScreenView())),
-          (Route<dynamic> route) => false,
-        );
+        final read =
+        Provider.of<MainScreenController>(context, listen: false);
+        read.onNavigation(4,  ProfileScreenView(isRefreshed: true,), context);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) =>
+        //           MainScreenView(index: 4, screenName: ProfileScreenView(isRefreshed: true,))),
+          // (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {
@@ -504,13 +519,16 @@ class UpdateProfileController extends ChangeNotifier {
     request.files.addAll(newList);
     await request.send().then((response) {
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  MainScreenView(index: 4, screenName: ProfileScreenView())),
-          (Route<dynamic> route) => false,
-        );
+        final read =
+        Provider.of<MainScreenController>(context, listen: false);
+        read.onNavigation(4,  ProfileScreenView(isRefreshed: true,), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) =>
+        //           MainScreenView(index: 4, screenName: ProfileScreenView(isRefreshed: true,))),
+        //   (Route<dynamic> route) => false,
+        // );
         print("sucesss");
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);

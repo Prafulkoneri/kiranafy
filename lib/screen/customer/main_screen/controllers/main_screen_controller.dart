@@ -55,8 +55,9 @@ class MainScreenController extends ChangeNotifier {
   }
 
   onNavigation(index, screen, context) {
-    currentIndex = index;
+
     currentScreen = screen;
+    currentTab = index;
     notifyListeners();
   }
 
@@ -139,6 +140,10 @@ class MainScreenController extends ChangeNotifier {
     hideBottomNavigation = false;
     notifyListeners();
   }
+  hideBottomNavigationBar(){
+    hideBottomNavigation=true;
+    notifyListeners();
+  }
 
   void onShopPressed() {
     currentTab = 1;
@@ -163,7 +168,7 @@ class MainScreenController extends ChangeNotifier {
 
   void onAccountPressed() {
     currentTab = 4;
-    currentScreen = ProfileScreenView();
+    currentScreen = ProfileScreenView(isRefreshed: true,);
     notifyListeners();
   }
 
