@@ -1,8 +1,4 @@
-import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +8,6 @@ import 'package:local_supper_market/screen/customer/coupons/view/coupon_all_view
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/utils/coupans_info.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:provider/provider.dart';
 
@@ -262,41 +257,6 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                 SizedBox(
                                   height: 6.w,
                                 ),
-                                // Row(
-                                //   mainAxisSize: MainAxisSize.min,
-                                //   children: [
-                                //     Container(
-                                //       padding: EdgeInsets.symmetric(
-                                //           horizontal: 10.33.w, vertical: 6.w),
-                                //       decoration: BoxDecoration(
-                                //           borderRadius:
-                                //               BorderRadius.circular(5.w),
-                                //           border:
-                                //               Border.all(color: SplashText)),
-                                //       child: Center(
-                                //         child: Row(
-                                //           children: [
-                                //             Text(
-                                //               element?.couponCode ?? "",
-                                //               style: TextStyle(
-                                //                   fontWeight: FontWeight.w700,
-                                //                   fontSize: 12.sp,
-                                //                   color: SplashText),
-                                //             ),
-                                //             SizedBox(
-                                //               width: 19.w,
-                                //             ),
-                                //             SvgPicture.asset(
-                                //               'assets/images/svg2.svg',
-                                //               width: 14.w,
-                                //               height: 14.w,
-                                //             ),
-                                //           ],
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
                                 SizedBox(
                                   width: 115.w,
                                   height: 30.h,

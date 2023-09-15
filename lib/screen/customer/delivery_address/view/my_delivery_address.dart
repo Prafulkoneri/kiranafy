@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,11 +10,10 @@ import 'package:local_supper_market/screen/customer/delivery_address/controller/
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:provider/provider.dart';
-
-import '../../near_shops/view/all_near_shops_view.dart';
 
 class MyDeliveryAddressView extends StatefulWidget {
   final bool? isRefresh;
@@ -45,7 +43,12 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);
+            readMain.onNavigation(
+                4,
+                ProfileScreenView(
+                  isRefreshed: false,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -286,27 +289,21 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                                   children: [
                                     GestureDetector(
                                         onTap: () {
-                                          readMain.onNavigation(4, AddAddressView(
-                                            route: "addressView",
-                                            isEditAdress: true,
-                                            addressId: element?.id
-                                                .toString(),
-                                          ), context);
-                                          // Navigator.pushAndRemoveUntil(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //       builder: (context) =>
-                                          //           MainScreenView(
-                                          //               index: 4,
-                                          //               screenName:
-                                          //                   AddAddressView(
-                                          //                 route: "addressView",
-                                          //                 isEditAdress: true,
-                                          //                 addressId: element?.id
-                                          //                     .toString(),
-                                          //               ))),
-                                          //   (Route<dynamic> route) => false,
-                                          // );
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MainScreenView(
+                                                        index: 4,
+                                                        screenName:
+                                                            AddAddressView(
+                                                          route: "addressView",
+                                                          isEditAdress: true,
+                                                          addressId: element?.id
+                                                              .toString(),
+                                                        ))),
+                                            (Route<dynamic> route) => false,
+                                          );
                                         },
                                         child: SvgPicture.asset(
                                             "assets/icons/edit1.svg")),

@@ -9,7 +9,6 @@ import 'package:local_supper_market/screen/customer/account/repository/c_profile
 import 'package:local_supper_market/screen/customer/account/repository/faq_repository_repo.dart';
 import 'package:local_supper_market/screen/customer/account/repository/sign_out_repo.dart';
 
-import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';

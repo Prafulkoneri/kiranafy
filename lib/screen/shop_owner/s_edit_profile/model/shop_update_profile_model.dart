@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class ShopUpdateProfileReqModel {
   String? shopName;
   String? shopOwnerName;
@@ -16,8 +14,8 @@ class ShopUpdateProfileReqModel {
 
   String? shopAddress;
   String? shopPincode;
-  String ? shopBannerSequence;
-  String ? bannerNotToBeDeletedIds;
+  String? shopBannerSequence;
+  String? bannerNotToBeDeletedIds;
 
   ShopUpdateProfileReqModel({
     this.selectedAreaId,

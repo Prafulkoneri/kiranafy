@@ -5,17 +5,17 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class HeaderView extends StatelessWidget {
-  final String ? areaName;
-  final String ? cityName;
-  const HeaderView({super.key,required this.cityName,required this.areaName});
+  final String? areaName;
+  final String? cityName;
+  const HeaderView({super.key, required this.cityName, required this.areaName});
 
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainScreenController>();
     return Container(
-      padding:
-      EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
+      padding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -38,8 +38,8 @@ class HeaderView extends StatelessWidget {
                 width: 5.w,
               ),
               GestureDetector(
-                onTap: (){
-                  read.showMap(context,false);
+                onTap: () {
+                  read.showMap(context, false);
                 },
                 child: Text(
                   "${areaName},${cityName}",
@@ -58,4 +58,3 @@ class HeaderView extends StatelessWidget {
     );
   }
 }
-

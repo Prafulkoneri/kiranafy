@@ -117,37 +117,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
       final result =
           ShopConfigrationInvoiceResModel.fromJson(jsonDecode(response.body));
       log(response.body);
-      // if (response.statusCode == 200) {
-      //   subscriptioninvoicedata = result.subscriptioninvoicedata;
-      //   Map<Permission, PermissionStatus> statuses = await [
-      //     Permission.storage,
-      //     //add more permission to request here.
-      //   ].request();
-      //   var dir;
-      //   if (Platform.isIOS) {
-      //     dir = await getApplicationDocumentsDirectory();
-      //   } else {
-      //     directory = Directory('/storage/emulated/0/Download');
-      //     // Put file in global download folder, if for an unknown reason it didn't exist, we fallback
-      //     // ignore: avoid_slow_async_io
-      //     if (!await directory!.exists()){
-      //       directory = await getExternalStorageDirectory();
-
-      //     }
-      //     dir = Directory(directory!.path);
-      //     // Directory tempDir = await getTemporaryDirectory();
-
-      //   }
-
-      //   if (dir != null) {
-      //     String fullPath=subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()??"";
-      //     List splitPath = fullPath.split("/");
-      //     print(splitPath);
-      //     String saveName=splitPath[splitPath.length-1];
-      //     print("savename${saveName}");
-      //     String savePath = dir.path + "/$saveName";
-      //     print("Save path");
-      //     print(savePath);
+    
       fileurl = Endpoint.baseUrl
               .toString()
               .substring(0, Endpoint.baseUrl.toString().length - 4)
@@ -160,33 +130,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
           subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString() ??
               "";
       print(subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString());
-      //     //output:  /storage/emulated/0/Download/banner.png
-
-      //     try {
-      //       await Dio().download(fileurl, savePath,
-      //           onReceiveProgress: (received, total) {
-      //         if (total != -1) {
-      //           print((received / total * 100).toStringAsFixed(0) + "%");
-      //           //you can build progressbar feature too
-      //         }
-      //       });
-      //       print("File is saved to download folder.");
-      //     } on DioError catch (e) {
-      //       Utils.showPrimarySnackbar(context,"Invalid Url",
-      //           type: SnackType.error);
-      //       return;
-      //     }
-      //     print(saveName);
-      //     print("000000");
-      //     print(savePath);
-      //     _showNotification(saveName,savePath);
-      //   }
-      //   print("No permission to read and write.");
-      //   print(directory?.path.toString());
-      //   print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
-
-      //   notifyListeners();
-      // }
+    
       if (response.statusCode == 200) {
         subscriptioninvoicedata = result.subscriptioninvoicedata;
         Map<Permission, PermissionStatus> statuses = await [

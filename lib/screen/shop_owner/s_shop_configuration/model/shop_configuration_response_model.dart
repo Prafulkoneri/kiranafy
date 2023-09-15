@@ -1,5 +1,3 @@
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/shop_delivery_area_dialog.dart';
-
 class ShopConfigurationResponse {
   int? status;
   String? message;

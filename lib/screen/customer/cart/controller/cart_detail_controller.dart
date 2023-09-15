@@ -1,15 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/main.dart';
-import 'package:local_supper_market/screen/customer/auth/model/customer_sign_in_model.dart';
-import 'package:local_supper_market/screen/customer/auth/model/mobile_number_check_model.dart';
-import 'package:local_supper_market/screen/customer/auth/repository/customer_sign_in_repo.dart';
-import 'package:local_supper_market/screen/customer/auth/repository/mobile_number_check_repo.dart';
-import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
-import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_view.dart';
 import 'package:local_supper_market/screen/customer/cart/model/cart_detail_delete_model.dart';
 import 'package:local_supper_market/screen/customer/cart/model/cart_detail_model.dart';
 import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';

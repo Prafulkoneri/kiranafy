@@ -1,14 +1,8 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/on_boarding/controller/on_boarding_controller.dart';
-
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -225,80 +219,6 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                   color: Color(0xff4EEFC1),
                                   onTap: () {
                                     read.onCustomerBtnPressed(context);
-                                    // showDialog(
-                                    //     context: context,
-                                    //     builder: (BuildContext context) {
-                                    //       return Dialog(
-                                    //         backgroundColor: Color(0xffD9D9D9),
-                                    //         // shape: ,
-                                    //         shape: RoundedRectangleBorder(
-                                    //             borderRadius: BorderRadius.all(
-                                    //                 Radius.circular(10))),
-                                    //
-                                    //         // scrollable: true,
-                                    //         child: Container(
-                                    //           padding: EdgeInsets.only(
-                                    //               left: 18.w,
-                                    //               right: 18.w,
-                                    //               top: 16.w,
-                                    //               bottom: 0.w),
-                                    //           height: 127.h,
-                                    //           width: 173.w,
-                                    //           child: Column(
-                                    //             // crossAxisAlignment:
-                                    //             //     CrossAxisAlignment.center,
-                                    //             mainAxisAlignment:
-                                    //                 MainAxisAlignment.center,
-                                    //             children: <Widget>[
-                                    //               Flexible(
-                                    //                 child: Text(
-                                    //                   "This is pre - launch for \nShop Owner, app\nfor customers will be\nlaunched soon !",
-                                    //
-                                    //                   // softWrap: true,
-                                    //                   // maxLines: 3,//
-                                    //                   textAlign:
-                                    //                       TextAlign.center,
-                                    //                   style: GoogleFonts.dmSans(
-                                    //                     textStyle: TextStyle(
-                                    //                         color: Black1,
-                                    //
-                                    //                         // letterSpacing: .05,
-                                    //                         // overflow:
-                                    //                         //     TextOverflow
-                                    //                         //         .ellipsis,
-                                    //                         fontSize: 13.sp,
-                                    //                         fontWeight:
-                                    //                             FontWeight
-                                    //                                 .w500),
-                                    //                   ),
-                                    //                 ),
-                                    //               ),
-                                    //               TextButton(
-                                    //                   onPressed: () {
-                                    //                     Navigator.pop(context);
-                                    //                   },
-                                    //                   child: Text(
-                                    //                     "Dismiss",
-                                    //                     style:
-                                    //                         GoogleFonts.dmSans(
-                                    //                       textStyle: TextStyle(
-                                    //                           color: Black1,
-                                    //
-                                    //                           // letterSpacing: .05,
-                                    //                           // overflow:
-                                    //                           //     TextOverflow
-                                    //                           //         .ellipsis,
-                                    //                           fontSize: 13.sp,
-                                    //                           fontWeight:
-                                    //                               FontWeight
-                                    //                                   .w500),
-                                    //                     ),
-                                    //                   ))
-                                    //             ],
-                                    //           ),
-                                    //         ),
-                                    //       );
-                                    //     });
                                   },
                                   textColor: Colors.black,
                                   text: "Customer",

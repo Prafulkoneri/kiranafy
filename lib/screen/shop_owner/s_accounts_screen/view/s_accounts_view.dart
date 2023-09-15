@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +9,6 @@ import 'package:local_supper_market/screen/shop_owner/bank_account_details/view/
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
-import 'package:local_supper_market/screen/shop_owner/promotion_request/controller/promotion_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_cms_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
@@ -152,9 +150,14 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                             //           )),
                                             //   (Route<dynamic> route) => false,
                                             // );
-                                            Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>SEditProfileView(
-                                              fromDashBoard: false,
-                                            ), ));
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SEditProfileView(
+                                                    fromDashBoard: false,
+                                                  ),
+                                                ));
                                             // Navigator.pushAndRemoveUntil(
                                             //     context,
                                             //     MaterialPageRoute(

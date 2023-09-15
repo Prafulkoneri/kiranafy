@@ -1,11 +1,5 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,10 +11,8 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
-import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
-import '../../../shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import '../../products/views/product_screen_view.dart';
 
 class CategoryScreenView extends StatefulWidget {

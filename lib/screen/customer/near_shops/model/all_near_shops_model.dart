@@ -1,20 +1,3 @@
-// class AllNearShopsReqModel {
-//   String? pincode;
-
-//   AllNearShopsReqModel({
-//     required this.pincode,
-//   });
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = {};
-
-//     data["pincode"] = pincode;
-
-//     return data;
-//   }
-// }
-
-////Response Model
 class AllNearShopsResModel {
   int? status;
   String? message;

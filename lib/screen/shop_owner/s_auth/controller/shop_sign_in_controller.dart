@@ -2,21 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:local_supper_market/main.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/check_mob_no_exist_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/login_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/mobile_no_register_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/check_mob_no_exist_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/mob_no_register_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/shop_login_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_auth/repository/shop_owner_register_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_registration_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_sign_in_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
@@ -312,8 +306,11 @@ class ShopSignInController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  SMainScreenView(index: 0, screenName: ShopDashBoardView(refresh: true,))),
+              builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: ShopDashBoardView(
+                    refresh: true,
+                  ))),
           (Route<dynamic> route) => false,
         );
       } else {

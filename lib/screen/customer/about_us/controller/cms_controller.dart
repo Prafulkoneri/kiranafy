@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/customer/about_us/model/cms_model.dart';
 import 'package:local_supper_market/screen/customer/about_us/repository/cms_repo.dart';
-
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

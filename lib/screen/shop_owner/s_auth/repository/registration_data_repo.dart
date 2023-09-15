@@ -2,10 +2,8 @@ import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
-import 'package:local_supper_market/utils/utils.dart';
 
 class RegistrationDataRepo {
   Future<http.Response> getCountryList(context) async {

@@ -85,29 +85,6 @@ class DeliveryAddressDetails {
   }
 }
 
-// class ShopDetails {
-//     int? id;
-//     String? shopName;
-//     String? shopAddress;
-//     String? areaName;
-//     String? cityName;
-//     int? shopPincode;
-//     String? shopOwnerSupportNumber;
-//     String? isFavourite;
-
-//     ShopDetails({
-//         required this.id,
-//         required this.shopName,
-//         required this.shopAddress,
-//         required this.areaName,
-//         required this.cityName,
-//         required this.shopPincode,
-//         required this.shopOwnerSupportNumber,
-//         required this.isFavourite,
-//     });
-
-// }
-
 class TrackOrderDetails {
   String? orderStatus;
   String? orderPlacedDateAndTime;

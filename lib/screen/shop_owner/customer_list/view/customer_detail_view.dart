@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_detail_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
 
 import 'package:provider/provider.dart';
 
@@ -226,7 +222,11 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                       return Container(
                         padding: const EdgeInsets.all(20),
                         margin: const EdgeInsets.only(
-                            left: 19.0, right: 19.0, top: 10.0),
+                          left: 19.0,
+                          right: 19.0,
+                          bottom: 10,
+                          top: 10.0,
+                        ),
                         // padding: const EdgeInsets.all(3.0),
                         decoration: BoxDecoration(
                           border: Border.all(color: Color(0xffEFEFEF)),

@@ -2,9 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_add_categories_model.dart';
@@ -13,7 +11,6 @@ import 'package:local_supper_market/screen/shop_owner/s_select_category/reposito
 import 'package:local_supper_market/screen/shop_owner/s_select_category/repository/s_categories_list_repo.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
 
 class SSelectCategoryController extends ChangeNotifier {
   ShopAllCategoriesRepo categoriesListRepo = ShopAllCategoriesRepo();

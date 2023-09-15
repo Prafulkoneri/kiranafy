@@ -38,13 +38,13 @@ class HomeScreenController extends ChangeNotifier {
   Future<void> initState(context, refresh) async {
     if (refresh) {
       placeAd.clear();
-    final a=  await getBannerImage(context);
-    print("HELLO1");
-      final b=   await getCategoryList(context);
+      final a = await getBannerImage(context);
+      print("HELLO1");
+      final b = await getCategoryList(context);
       print("HELLO2");
-      final c=   await getAllNearByShops(context);
+      final c = await getAllNearByShops(context);
       print("HELLO3");
-      final d=   await getPlaceAd(context);
+      final d = await getPlaceAd(context);
     } else {
       showLoader(false);
     }
@@ -187,7 +187,7 @@ class HomeScreenController extends ChangeNotifier {
 
   //////////////////////////////////////
   Future<void> getPlaceAd(context) async {
-    // showLoader(true);
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("bnvuuiwveuciiutwmibijmiuey");
     print(pref.getString("successToken"));

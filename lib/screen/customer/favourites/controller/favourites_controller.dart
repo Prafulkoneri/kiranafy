@@ -11,7 +11,6 @@ import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_mod
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
-import 'package:local_supper_market/screen/customer/near_shops/repository/shop_as_per_pincode_all_near_shops.dart';
 import 'package:local_supper_market/screen/customer/products/model/remove_admin_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/remove_custom_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_admin_product_fav_repo.dart';
@@ -28,7 +27,7 @@ class FavouritesController extends ChangeNotifier {
   FavProductData? favProductData; //product
   List<AdminProduct>? adminProductList; //product
   List<AdminProduct>? customProductList;
-  List <AdminProduct> allProduct=[];//product
+  List<AdminProduct> allProduct = []; //product
   bool isLoading = true;
   String shopId = "";
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
@@ -185,10 +184,10 @@ class FavouritesController extends ChangeNotifier {
         adminProductList = favProductData?.adminProducts;
         customProductList = favProductData?.customProducts;
         allProduct.clear();
-        allProduct.addAll(adminProductList??[]);
-        allProduct.addAll(customProductList??[]);
-        favAllproduct= List<bool>.filled(allProduct.length, true,
-                growable: true);
+        allProduct.addAll(adminProductList ?? []);
+        allProduct.addAll(customProductList ?? []);
+        favAllproduct =
+            List<bool>.filled(allProduct.length, true, growable: true);
         // favAdminproduct = List<bool>.filled(adminProductList?.length ?? 0, true,
         //     growable: true);
         // favCustomproduct = List<bool>.filled(
@@ -232,15 +231,14 @@ class FavouritesController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200) {
+        if (result.status == 200) {
           favAllproduct[index] = false;
           allProduct.removeAt(index);
           print("hello");
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
           notifyListeners();
-        }
-        else{
+        } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
@@ -273,18 +271,16 @@ class FavouritesController extends ChangeNotifier {
       final result =
           RemoveCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200){
+        if (result.status == 200) {
           favAllproduct[index] = false;
           allProduct.removeAt(index);
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
           notifyListeners();
-        }
-        else{
+        } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
-
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

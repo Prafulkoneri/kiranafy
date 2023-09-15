@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/customer/c_setting/repository/change_setting_repo.dart';
 import 'package:local_supper_market/screen/customer/c_setting/repository/delete_account_repo.dart';
 import 'package:local_supper_market/screen/customer/c_setting/repository/setting_repo.dart';
@@ -46,37 +43,6 @@ class CustomerSettingController extends ChangeNotifier {
     packageInfo = info;
     appVersion = packageInfo.version;
     notifyListeners();
-
-    // SharedPreferences pref = await SharedPreferences.getInstance();
-    // print(pref.getString("successToken"));
-    // appVersionRepo.appVersion(pref.getString("successToken")).then((response) {
-    //   print(response.body);
-    //   final result = AppVersionModel.fromJson(jsonDecode(response.body));
-    //   print(response.statusCode);
-    //   if (response.statusCode == 200) {
-    //     appversiondata = result.appversiondata;
-    //
-    //     // isAppNotificationEnable =
-    //     //     result.settingData?.appNotification == "on" ? true : false;
-    //     Utils.showPrimarySnackbar(context, result.message,
-    //         type: SnackType.success);
-    //     notifyListeners();
-    //   } else {
-    //     LoadingOverlay.of(context).hide();
-    //     Utils.showPrimarySnackbar(context, result.message,
-    //         type: SnackType.error);
-    //   }
-    // }).onError((error, stackTrace) {
-    //   Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    // }).catchError(
-    //   (Object e) {
-    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-    //   },
-    //   test: (Object e) {
-    //     Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-    //     return false;
-    //   },
-    // );
   }
 
   showLoader(value) {

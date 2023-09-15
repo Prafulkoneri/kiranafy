@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/on_boarding/model/on_boarding_response_model.dart';

@@ -1,14 +1,11 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/controller/customer_order_view_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_list_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
-import 'package:local_supper_market/widget/app_bar.dart';
+
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';

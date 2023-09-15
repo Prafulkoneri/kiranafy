@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:local_supper_market/bottom_navigation_bar.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
@@ -41,7 +39,6 @@ class SplashController extends ChangeNotifier {
 
     await appVersionCheck(context);
     Timer(Duration(seconds: 3), () async {
-
       if (isUpdateRequired) {
         Navigator.pushReplacement(
           context,
@@ -133,9 +130,9 @@ class SplashController extends ChangeNotifier {
                 builder: (context) => SMainScreenView(
                     index: 0,
                     screenName: ShopDashBoardView(
-                    refresh: true,
+                      refresh: true,
                     ))),
-                (Route<dynamic> route) => false,
+            (Route<dynamic> route) => false,
           );
           // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavigationBarScreen()));
         }

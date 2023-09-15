@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
-import 'package:local_supper_market/screen/customer/favourites/model/customer_favourites_shop_model.dart';
 import 'package:local_supper_market/screen/customer/favourites/model/remove_fvrt_shops.dart';
 
 class RemoveFvrtShopRepo {

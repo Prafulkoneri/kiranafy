@@ -45,7 +45,7 @@ class PrimaryAppBar extends StatelessWidget {
         style: GoogleFonts.dmSans(
           textStyle: TextStyle(
               color: Black,
-              letterSpacing: .5,
+              // letterSpacing: .5,
               fontSize: 14.sp,
               fontWeight: FontWeight.w700),
         ),

@@ -1,6 +1,4 @@
-import 'package:local_supper_market/screen/shop_owner/s_category_list/model/s_get_selected_categories_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/product_as_per_category_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_categories_list_model.dart';
 
 class EditCouponRequestModel {
   String? couponId;
@@ -70,16 +68,13 @@ class EditCouponsData {
   }
 }
 
-class EditCategoryList{
-  int ? id;
-  String ? categoryName;
-  EditCategoryList({
-    this.id,
-    this.categoryName
-});
-  EditCategoryList.fromJson(Map<String,dynamic>json){
-    id=json["id"];
-    categoryName=json["category_name"];
+class EditCategoryList {
+  int? id;
+  String? categoryName;
+  EditCategoryList({this.id, this.categoryName});
+  EditCategoryList.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    categoryName = json["category_name"];
   }
 }
 

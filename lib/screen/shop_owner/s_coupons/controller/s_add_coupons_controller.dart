@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/model/s_get_selected_categories_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/repository/s_get_selected_categories_repo.dart';
@@ -11,16 +10,11 @@ import 'package:local_supper_market/screen/shop_owner/s_coupons/model/coupons_up
 import 'package:local_supper_market/screen/shop_owner/s_coupons/model/product_as_per_category_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/add_coupons_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/coupon_code_exists_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/coupon_view_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/edit_coupons_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/product_as_per_category_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/update_coupons_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_add_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_categories_list_model.dart';
-
-import 'package:local_supper_market/screen/shop_owner/s_select_category/repository/s_categories_list_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -88,7 +82,7 @@ class SAddCouponsController extends ChangeNotifier {
 
   void onCategorySelect(value, context) async {
     categoryId = value;
-    productId="";
+    productId = "";
     await getProductList(context);
     notifyListeners();
   }
@@ -374,7 +368,7 @@ class SAddCouponsController extends ChangeNotifier {
         termsAndConditionController.text =
             details?.couponTermsAndConditions.toString() ?? "";
         groupValue = details?.couponType ?? "";
-        editCategoryList=result.editCouponsData?.categoryList;
+        editCategoryList = result.editCouponsData?.categoryList;
 
         print(selectedcategorydata);
         print("99999999");

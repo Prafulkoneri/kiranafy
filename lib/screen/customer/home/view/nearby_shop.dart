@@ -1,14 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:provider/provider.dart';
 
@@ -41,11 +36,14 @@ class _HomeCarousalState extends State<HomeCarousal> {
                     final element = watch.nearByShopList?[index];
                     return GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(1,ShopProfileView(
-                                        shopId: element?.id.toString(),
-                                        routeName: "homeNearbyShop",
-                                        refreshPage: true,
-                                      ), context);
+                        readMainScreen.onNavigation(
+                            1,
+                            ShopProfileView(
+                              shopId: element?.id.toString(),
+                              routeName: "homeNearbyShop",
+                              refreshPage: true,
+                            ),
+                            context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -81,7 +79,6 @@ class _HomeCarousalState extends State<HomeCarousal> {
                                               "${element?.shopBannerImagePath}"),
                                           fit: BoxFit.cover),
                                 ),
-
                               ),
                             ],
                           ),
@@ -108,33 +105,30 @@ class _HomeCarousalState extends State<HomeCarousal> {
                                     Colors.black.withOpacity(0.3),
                                   ],
                                 )),
-                                child: Container(
-                                  padding: EdgeInsets.all(10.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text("${element?.shopName}",
-                                          style: GoogleFonts.roboto(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 13.sp,
-                                                  fontWeight:
-                                                  FontWeight.w600))),
-                                      Text("${element?.areaName}",
-                                          style: GoogleFonts.roboto(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  // height: 10,
-                                                  fontWeight:
-                                                  FontWeight.w400))),
-                                    ],
-                                  ),
-                                ),
+                            child: Container(
+                              padding: EdgeInsets.all(10.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("${element?.shopName}",
+                                      style: GoogleFonts.roboto(
+                                          textStyle: TextStyle(
+                                              color: Colors.white,
+                                              // letterSpacing: .5,
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w600))),
+                                  Text("${element?.areaName}",
+                                      style: GoogleFonts.roboto(
+                                          textStyle: TextStyle(
+                                              color: Colors.white,
+                                              // letterSpacing: .5,
+                                              fontSize: 12.sp,
+                                              // height: 10,
+                                              fontWeight: FontWeight.w400))),
+                                ],
+                              ),
+                            ),
                           )),
                         ],
                       ),

@@ -1,20 +1,14 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/model/s_kyc_verification_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/repositrory/s_kyc_verification_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_completed.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
-import 'package:local_supper_market/utils/common_functions.dart';
+
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -70,7 +64,6 @@ class SKycVerificationController extends ChangeNotifier {
     }
     notifyListeners();
   }
-
 
   void onChooseFile2() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -355,5 +348,4 @@ class SKycVerificationController extends ChangeNotifier {
       return;
     }
   }
-  
 }

@@ -1,18 +1,12 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -21,7 +15,6 @@ import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
-import 'package:image_picker/image_picker.dart';
 
 class SEditProfileView extends StatefulWidget {
   final bool? fromDashBoard;
@@ -104,66 +97,6 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                       ],
                     ),
                   ),
-                  // Container(
-                  //     width: ScreenUtil().screenWidth,
-                  //     height: 70.h,
-                  //     child: ListView.builder(
-                  //       padding: EdgeInsets.only(left: 19.w),
-                  //       scrollDirection: Axis.horizontal,
-                  //       physics: BouncingScrollPhysics(),
-                  //       shrinkWrap: true,
-                  //       itemCount: watch.bannerImageList?.length,
-                  //       itemBuilder: (BuildContext, index) {
-                  //         return watch.bannerImageList!.isEmpty
-                  //             ? Row(
-                  //                 children: [
-                  //                   index == 0
-                  //                       ? GestureDetector(
-                  //                     onTap:(){
-                  //                       read.openGallery();
-                  //                     },
-                  //                         child: Container(
-                  //                             height: 70.h,
-                  //                             width: 84.41.w,
-                  //                             decoration: BoxDecoration(
-                  //                                 borderRadius:
-                  //                                     BorderRadius.circular(8),
-                  //                                 border: Border.all(
-                  //                                     width: 1, color: grey6)),
-                  //
-                  //                               child: Image.file(watch.imageFileList[index],fit: BoxFit.cover,)
-                  //
-                  //                           ),
-                  //                       )
-                  //                       :
-                  //                   GestureDetector(
-                  //                     onTap:(){
-                  //                       read.openGallery();
-                  //                     },
-                  //                     child:Container(
-                  //                       height: 70.h,
-                  //                       width: 84.41.w,
-                  //                       decoration: BoxDecoration(
-                  //                           borderRadius:
-                  //                           BorderRadius.circular(8),
-                  //                           border: Border.all(
-                  //                               width: 1, color: grey6)),
-                  //                     ),
-                  //                   ),
-                  //
-                  //                   SizedBox(
-                  //                     width: 5.w,
-                  //                   ),
-                  //                 ],
-                  //               )
-                  //             : Row(
-                  //           children: [
-                  //
-                  //           ],
-                  //         );
-                  //       },
-                  //     )),
-
                   Container(
                     width: ScreenUtil().screenWidth,
                     height: 70.h,
@@ -366,7 +299,6 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                       ],
                     ),
                   ),
-
                   Container(
                     width: ScreenUtil().screenWidth,
                     padding: EdgeInsets.symmetric(horizontal: 19.w),

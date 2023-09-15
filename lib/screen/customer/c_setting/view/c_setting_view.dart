@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,10 +10,6 @@ import 'package:local_supper_market/screen/customer/account/view/profile_screen_
 import 'package:local_supper_market/screen/customer/c_setting/controller/c_setting_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_setting/controller/setting_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -44,10 +39,13 @@ class _CustomerSettingState extends State<CustomerSetting> {
         child: PrimaryAppBar(
           title: "Settings",
           onBackBtnPressed: () {
-            readMain.onNavigation(4, ProfileScreenView(
-              isRefreshed: false,
-              // refresh: false,
-            ), context);
+            readMain.onNavigation(
+                4,
+                ProfileScreenView(
+                  isRefreshed: false,
+                  // refresh: false,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -101,45 +99,6 @@ class _CustomerSettingState extends State<CustomerSetting> {
                         fontWeight: FontWeight.w400,
                         color: Black1),
                   ),
-                  // SizedBox(
-                  //   height: 40.h,
-                  // ),
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //       crossAxisAlignment: CrossAxisAlignment.center,
-                  //       children: [
-                  //         Text(
-                  //           "Email Notification",
-                  //           style: TextStyle(
-                  //               fontSize: 18.sp,
-                  //               fontWeight: FontWeight.w400,
-                  //               color: Black1),
-                  //         ),
-                  //         CupertinoSwitch(
-                  //           // This bool value toggles the switch.
-                  //           value: watch.switchValue,
-                  //           activeColor: DarkGreen,
-                  //           onChanged: (bool? value) {
-                  //             // This is called when the user toggles the switch.
-                  //             setState(() {
-                  //               value = value ?? false;
-                  //             });
-                  //           },
-                  //         ),
-                  //       ],
-                  //     ),
-                  //     Text(
-                  //       "Enable or disable  the  Email notifications",
-                  //       style: TextStyle(
-                  //           fontSize: 13.sp,
-                  //           fontWeight: FontWeight.w400,
-                  //           color: Black1),
-                  //     ),
-                  //   ],
-                  // ),
                   SizedBox(
                     height: 41.h,
                   ),

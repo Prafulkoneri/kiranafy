@@ -334,23 +334,3 @@ class FinalCouponList {
     minOrderAmount = json["coupon_minimum_order_amount"];
   }
 }
-
-// class ShopDetails {
-//   int id;
-//   String shopName;
-//   String shopAddress;
-//   String areaName;
-//   String cityName;
-//   int shopPincode;
-//   String shopOwnerSupportNumber;
-
-//   ShopDetails({
-//     required this.id,
-//     required this.shopName,
-//     required this.shopAddress,
-//     required this.areaName,
-//     required this.cityName,
-//     required this.shopPincode,
-//     required this.shopOwnerSupportNumber,
-//   });
-// }

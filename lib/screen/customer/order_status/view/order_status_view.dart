@@ -8,7 +8,6 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/view/delivery_view_second.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
@@ -20,9 +19,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profi
 import 'package:order_tracker/order_tracker.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
-
 import 'package:local_supper_market/widget/app_bar.dart';
-import 'package:local_supper_market/widget/track_order.dart';
 import 'package:provider/provider.dart';
 
 class OrderStatusView extends StatefulWidget {

@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -17,7 +15,6 @@ import 'package:local_supper_market/screen/customer/main_screen/model/set_pincod
 import 'package:local_supper_market/screen/customer/main_screen/repository/set_pincode_repo.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
-import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/maps/view/map_view.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +44,7 @@ class MainScreenController extends ChangeNotifier {
   bool locationNotFound = false;
   bool isLocationFound = false;
   String locationErrorMessage = "";
-  bool hideBottomNavigation=false;
+  bool hideBottomNavigation = false;
 
   void initState(context, index, currentScreen) async {
     onMyCartPressed();
@@ -125,7 +122,7 @@ class MainScreenController extends ChangeNotifier {
       screenName: "main",
       isRefresh: true,
     );
-    hideBottomNavigation=true;
+    hideBottomNavigation = true;
     // Navigator.push(context,MaterialPageRoute(builder: (context)=> OrderDeliveryView(
     //   orderId: id.toString(),
     //   screenName: "main",
@@ -137,12 +134,12 @@ class MainScreenController extends ChangeNotifier {
   onCustomTypeNotification(context) {
     print("hello");
     currentScreen = CustomerNotificationsScreenView();
-    hideBottomNavigation=false;
+    hideBottomNavigation = false;
     notifyListeners();
   }
 
-  showBottomNavigationBar(){
-    hideBottomNavigation=false;
+  showBottomNavigationBar() {
+    hideBottomNavigation = false;
     notifyListeners();
   }
   hideBottomNavigationBar(){

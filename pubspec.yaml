@@ -71,19 +71,10 @@ dependencies:
   package_info_plus: ^3.1.2
   flutter_downloader:
   flutter_inappwebview: ^5.7.2+3
-  # sms_autofill: ^2.3.0
-  sms_autofill: ^2.2.0
-  otp_autofill: ^3.0.0
-
-
-
-  # country_picker: ^2.0.20
-  # country_code_picker: ^3.0.0
-  persistent_bottom_nav_bar: ^5.0.2
+ 
   # firebase_messaging
   firebase_messaging: ^14.6.1
   path_provider: ^2.0.15
-  flutter_file_downloader: ^1.1.2
 
   # Check permission_handler:
   permission_handler:
