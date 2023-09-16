@@ -1,24 +1,15 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
-import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
 import 'package:local_supper_market/screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
-import 'package:order_tracker/order_tracker.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -93,27 +84,32 @@ class _OrderStatusViewState extends State<OrderStatusView> {
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
             widget.screenName == "orderSummary"
-                ?readMain.onNavigation(0, HomeScreenView(
-              refreshPage: true,
-            ), context)
+                ? readMain.onNavigation(
+                    0,
+                    HomeScreenView(
+                      refreshPage: true,
+                    ),
+                    context)
 
-            // Navigator.pushAndRemoveUntil(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => MainScreenView(
-            //                   index: 0,
-            //                   screenName: HomeScreenView(
-            //                     refreshPage: true,
-            //                   ),
-            //                 )),
-            //         (Route<dynamic> route) => false,
-            //       )
-                :
-            readMain.onNavigation(0, OrderDeliveryView(
-              screenName: "myorderview",
-              orderId: widget.orderId,
-              isRefresh: true,
-            ), context);
+                // Navigator.pushAndRemoveUntil(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => MainScreenView(
+                //                   index: 0,
+                //                   screenName: HomeScreenView(
+                //                     refreshPage: true,
+                //                   ),
+                //                 )),
+                //         (Route<dynamic> route) => false,
+                //       )
+                : readMain.onNavigation(
+                    0,
+                    OrderDeliveryView(
+                      screenName: "myorderview",
+                      orderId: widget.orderId,
+                      isRefresh: true,
+                    ),
+                    context);
             // Navigator.push(
             //   context,
             //   MaterialPageRoute(
@@ -123,7 +119,6 @@ class _OrderStatusViewState extends State<OrderStatusView> {
             //         isRefresh: true,
             //       )),
             // );
-
           },
           title: "Order Status",
         ),
@@ -151,25 +146,28 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                     onTap: (){
-                       readMain.onNavigation(1, ShopProfileView(
-                         refreshPage: true,
-                         routeName: '',
-                         shopId: watch.shopDetails?.id.toString(),
-                       ), context);
-                       // Navigator.pushAndRemoveUntil(
-                       //   context,
-                       //   MaterialPageRoute(
-                       //       builder: (context) => MainScreenView(
-                       //           index: 1,
-                       //           screenName: ShopProfileView(
-                       //             refreshPage: true,
-                       //             routeName: '',
-                       //             shopId: watch.shopDetails?.id.toString(),
-                       //           ))),
-                       //       (Route<dynamic> route) => false,
-                       // );
-                     },
+                      onTap: () {
+                        readMain.onNavigation(
+                            1,
+                            ShopProfileView(
+                              refreshPage: true,
+                              routeName: '',
+                              shopId: watch.shopDetails?.id.toString(),
+                            ),
+                            context);
+                        // Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => MainScreenView(
+                        //           index: 1,
+                        //           screenName: ShopProfileView(
+                        //             refreshPage: true,
+                        //             routeName: '',
+                        //             shopId: watch.shopDetails?.id.toString(),
+                        //           ))),
+                        //       (Route<dynamic> route) => false,
+                        // );
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
                         child: Column(
@@ -190,7 +188,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                             ),
                             Container(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                       child: Container(
@@ -270,9 +269,11 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                         onTap: () {
                                           watch.favAllShop
                                               ? read.removeAllShopFavList(
-                                                  context, watch.shopDetails?.id)
+                                                  context,
+                                                  watch.shopDetails?.id)
                                               : read.updateAllShopFavList(
-                                                  context, watch.shopDetails?.id);
+                                                  context,
+                                                  watch.shopDetails?.id);
                                         },
                                         child: Container(
                                           padding: EdgeInsets.only(

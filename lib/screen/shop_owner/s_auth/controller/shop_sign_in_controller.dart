@@ -17,7 +17,7 @@ import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_bo
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:otp_text_field/otp_text_field.dart';
+// import 'package:otp_text_field/otp_text_field.dart';/
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,7 +28,7 @@ class ShopSignInController extends ChangeNotifier {
 
   bool isVerifyChecked = false;
   TextEditingController mobController = TextEditingController();
-  OtpFieldController otpController = OtpFieldController();
+  // OtpFieldController otpController = OtpFieldController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   String verificationID = "";
   String countryCode = "+91";

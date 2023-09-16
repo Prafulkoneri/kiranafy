@@ -274,6 +274,16 @@ class _CustomerNotificationsScreenViewState
                                                   color: Black1),
                                             ),
                                             SizedBox(
+                                              height: 5.w,
+                                            ),
+                                            Text(
+                                              "${element?.notificationDescription}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 11.sp,
+                                                  color: Black1),
+                                            ),
+                                            SizedBox(
                                               height: 18.w,
                                             ),
                                             Row(

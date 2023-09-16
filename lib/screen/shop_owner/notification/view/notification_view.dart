@@ -254,7 +254,17 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 18.w,
+                                            height: 5.w,
+                                          ),
+                                          Text(
+                                            "${element?.notificationDescription}",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 11.sp,
+                                                color: Black1),
+                                          ),
+                                          SizedBox(
+                                            height: 15.w,
                                           ),
                                           Row(
                                             children: [
