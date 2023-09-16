@@ -7,7 +7,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/controller/notification_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +41,12 @@ class _CustomerNotificationsScreenViewState
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);
+              readMain.onNavigation(
+                  4,
+                  ProfileScreenView(
+                    isRefreshed: false,
+                  ),
+                  context);
               // Navigator.pushAndRemoveUntil(
               //   context,
               //   MaterialPageRoute(
@@ -191,141 +195,159 @@ class _CustomerNotificationsScreenViewState
                 child: CircularProgressIndicator(),
               )
             : WillPopScope(
-          onWillPop: ()async{
-            readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);
-            return false;
-          },
-              child: Container(
-                  child: watch.notificationList?.isNotEmpty == true
-                      ? ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          // padding: EdgeInsets.symmetric(
-                          //     vertical: 19.w, horizontal: 19.w),
-                          padding: EdgeInsets.only(
-                              left: 19.w, right: 19.w, bottom: 80.w, top: 10),
-                          shrinkWrap: true,
-                          itemCount: watch.notificationList?.length ?? 0,
-                          itemBuilder: (BuildContext, index) {
-                            final element = watch.notificationList?[index];
-                            return GestureDetector(
-                              onTap: () {
-                                if (element?.notificationType == "order") {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => OrderDeliveryView(
-                                                orderId:
-                                                    element?.orderId.toString(),
-                                                screenName: "notification",
-                                              )));
-                                }
-                              },
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    right: 16.w,
-                                    left: 16.w,
-                                    top: 19.w,
-                                    bottom: 15.w),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.w),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black.withOpacity(0.04),
-                                        blurRadius: 5,
-                                        offset: Offset(-.0, 5.0),
-                                        spreadRadius: 0),
-                                  ],
-                                ),
-                                margin: EdgeInsets.only(bottom: 19.w),
-                                child: IntrinsicHeight(
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SvgPicture.asset(
-                                          "assets/icons/notification_bell_icon.svg"),
-                                      SizedBox(
-                                        width: 15.2.w,
-                                      ),
-                                      VerticalDivider(
-                                        color: Color(0xffEFEFEF),
-                                        thickness: 1,
-                                      ),
-                                      SizedBox(
-                                        width: 15.w,
-                                      ),
-                                      Flexible(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "${element?.title}",
-                                              // "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi semper egestas at cursus maecenas",
-                                              style: TextStyle(
-                                                  fontSize: 11.5.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Black1),
-                                            ),
-                                            SizedBox(
-                                              height: 18.w,
-                                            ),
-                                            Row(
-                                              children: [
-                                                SvgPicture.asset(
-                                                    "assets/icons/calendar1.svg"),
-                                                SizedBox(
-                                                  width: 8.87.w,
-                                                ),
-                                                Text(
-                                                  "${element?.createdAt}",
-                                                  style: TextStyle(
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 11.sp,
-                                                      color: Black1),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                onWillPop: () async {
+                  readMain.onNavigation(
+                      4,
+                      ProfileScreenView(
+                        isRefreshed: false,
+                      ),
+                      context);
+                  return false;
+                },
+                child: Container(
+                    child: watch.notificationList?.isNotEmpty == true
+                        ? ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            // padding: EdgeInsets.symmetric(
+                            //     vertical: 19.w, horizontal: 19.w),
+                            padding: EdgeInsets.only(
+                                left: 19.w, right: 19.w, bottom: 80.w, top: 10),
+                            shrinkWrap: true,
+                            itemCount: watch.notificationList?.length ?? 0,
+                            itemBuilder: (BuildContext, index) {
+                              final element = watch.notificationList?[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  if (element?.notificationType == "order") {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                OrderDeliveryView(
+                                                  orderId: element?.orderId
+                                                      .toString(),
+                                                  screenName: "notification",
+                                                )));
+                                  }
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      right: 16.w,
+                                      left: 16.w,
+                                      top: 19.w,
+                                      bottom: 15.w),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.w),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black.withOpacity(0.04),
+                                          blurRadius: 5,
+                                          offset: Offset(-.0, 5.0),
+                                          spreadRadius: 0),
                                     ],
                                   ),
-                                ),
-                              ),
-                            );
-                          })
-                      : Container(
-                          child: Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/images/emptycart.png",
-                                height: 151.h,
-                                width: 151.w,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 20.w,
-                                    right: 20.w,
-                                    top: 15.w,
-                                    bottom: 50.w),
-                                child: Text(
-                                  "Looks like you don't have any Notification",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black1,
-                                        letterSpacing: .5,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
+                                  margin: EdgeInsets.only(bottom: 19.w),
+                                  child: IntrinsicHeight(
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SvgPicture.asset(
+                                            "assets/icons/notification_bell_icon.svg"),
+                                        SizedBox(
+                                          width: 15.2.w,
+                                        ),
+                                        VerticalDivider(
+                                          color: Color(0xffEFEFEF),
+                                          thickness: 1,
+                                        ),
+                                        SizedBox(
+                                          width: 15.w,
+                                        ),
+                                        Flexible(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${element?.title}",
+                                                // "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi semper egestas at cursus maecenas",
+                                                style: TextStyle(
+                                                    fontSize: 11.5.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Black1),
+                                              ),
+                                              SizedBox(
+                                                height: 5.w,
+                                              ),
+                                              Text(
+                                                "${element?.notificationDescription}",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 11.sp,
+                                                    color: Black1),
+                                              ),
+                                              SizedBox(
+                                                height: 18.w,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                      "assets/icons/calendar1.svg"),
+                                                  SizedBox(
+                                                    width: 8.87.w,
+                                                  ),
+                                                  Text(
+                                                    "${element?.createdAt}",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 11.sp,
+                                                        color: Black1),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ))),
-            ));
+                              );
+                            })
+                        : Container(
+                            child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/emptycart.png",
+                                  height: 151.h,
+                                  width: 151.w,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 20.w,
+                                      right: 20.w,
+                                      top: 15.w,
+                                      bottom: 50.w),
+                                  child: Text(
+                                    "Looks like you don't have any Notification",
+                                    style: GoogleFonts.dmSans(
+                                      textStyle: TextStyle(
+                                          color: Black1,
+                                          letterSpacing: .5,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ))),
+              ));
   }
 }

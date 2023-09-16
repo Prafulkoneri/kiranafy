@@ -419,15 +419,17 @@ class _AllCouponsState extends State<AllCoupons> {
                                                           "${element?.couponCode}",
                                                           style: GoogleFonts
                                                               .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color:
-                                                                    SplashText,
-                                                                letterSpacing:
-                                                                    .5,
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
+                                                            textStyle:
+                                                                TextStyle(
+                                                                    color:
+                                                                        SplashText,
+                                                                    // letterSpacing:
+                                                                    //     .5,
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700),
                                                           ),
                                                         ),
                                                       ), // <-- Text
