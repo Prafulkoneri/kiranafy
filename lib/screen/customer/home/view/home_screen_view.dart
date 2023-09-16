@@ -11,10 +11,10 @@ import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
 import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
 import 'package:local_supper_market/screen/customer/home/view/offers.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/widget/network_image.dart';
+import 'package:local_supper_market/widget/text.dart';
 
 import 'package:provider/provider.dart';
 
@@ -96,10 +96,13 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           height: 36.h,
                           child: TextField(
                             onTap: () {
-                              readMain.onNavigation(1, AllNearShopsView(
-                                isSearchFocus: true,
-                                refreshPage: true,
-                              ), context);
+                              readMain.onNavigation(
+                                  1,
+                                  AllNearShopsView(
+                                    isSearchFocus: true,
+                                    refreshPage: true,
+                                  ),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -218,21 +221,27 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "Nearby Shops",
-                                        style: GoogleFonts.roboto(
-                                          textStyle: TextStyle(
-                                              color: DarkBlack,
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.w600),
-                                        ),
+                                      HomeSideHeading(
+                                        text: 'Nearby Shops',
                                       ),
+                                      // Text(
+                                      //   "Nearby Shops",
+                                      //   style: GoogleFonts.roboto(
+                                      //     textStyle: TextStyle(
+                                      //         color: DarkBlack,
+                                      //         fontSize: 18.sp,
+                                      //         fontWeight: FontWeight.w600),
+                                      //   ),
+                                      // ),
                                       InkWell(
                                         onTap: () {
-                                          readMain.onNavigation(1, AllNearShopsView(
-                                            isSearchFocus: false,
-                                            refreshPage: true,
-                                          ), context);
+                                          readMain.onNavigation(
+                                              1,
+                                              AllNearShopsView(
+                                                isSearchFocus: false,
+                                                refreshPage: true,
+                                              ),
+                                              context);
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,
                                           //   MaterialPageRoute(
@@ -278,15 +287,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 right: 19.0.w,
                                 left: 19.0.w,
                               ),
-                              child: Text(
-                                "Shop By Category",
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
-                                      color: DarkBlack,
-                                      letterSpacing: .5,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              child: HomeSideHeading(
+                                text: 'Shop By Category',
                               ),
                             )
                           : Container(),
@@ -355,7 +357,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         children: [
                           InkWell(
                             onTap: () {
-                              readMain.onNavigation(0, CustomerAdsView(), context);
+                              readMain.onNavigation(
+                                  0, CustomerAdsView(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(

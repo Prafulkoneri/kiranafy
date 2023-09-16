@@ -6,8 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -37,10 +35,13 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
         child: PrimaryAppBar(
           title: "FAQ",
           onBackBtnPressed: () {
-            readMain.onNavigation(4, ProfileScreenView(
-              isRefreshed: false,
-              // refresh: false,
-            ), context);
+            readMain.onNavigation(
+                4,
+                ProfileScreenView(
+                  isRefreshed: false,
+                  // refresh: false,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(

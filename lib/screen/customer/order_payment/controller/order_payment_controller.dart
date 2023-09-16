@@ -67,6 +67,12 @@ class OrderPaymentController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void showErrorMessage(context) {
+    Utils.showPrimarySnackbar(context, "QR Code is Not Available",
+        type: SnackType.error);
+    notifyListeners();
+  }
+
   void showLoader(value) {
     isLoading = value;
     notifyListeners();
@@ -209,14 +215,16 @@ class OrderPaymentController extends ChangeNotifier {
           CustomerPlaceOrderResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         transactionIdController.clear();
-        final read =
-        Provider.of<MainScreenController>(context, listen: false);
+        final read = Provider.of<MainScreenController>(context, listen: false);
         // Navigator.pop(context);
         // Navigator.pop(context);
         // Navigator.pop(context);
-        read.onNavigation(2, CheckOrderStatusView(
-          orderId: result.orderId.toString(),
-        ), context);
+        read.onNavigation(
+            2,
+            CheckOrderStatusView(
+              orderId: result.orderId.toString(),
+            ),
+            context);
         read.showBottomNavigationBar();
         // Navigator.pushAndRemoveUntil(
         //   context,

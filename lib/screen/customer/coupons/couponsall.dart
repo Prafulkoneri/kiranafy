@@ -426,7 +426,7 @@ class _AllCouponsState extends State<AllCoupons> {
                                                                     // letterSpacing:
                                                                     //     .5,
                                                                     fontSize:
-                                                                        12.sp,
+                                                                        11.5.sp,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w700),

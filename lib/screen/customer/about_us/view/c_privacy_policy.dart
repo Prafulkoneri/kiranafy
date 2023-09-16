@@ -28,17 +28,20 @@ class _CustomerPrivacyPolicyState extends State<CustomerPrivacyPolicy> {
   Widget build(BuildContext context) {
     final read = context.read<CmsController>();
     final watch = context.watch<CmsController>();
-    final readMain=context.read<MainScreenController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "Privacy Policy",
           onBackBtnPressed: () {
-            readMain.onNavigation(4, ProfileScreenView(
-              isRefreshed: false,
-              // refresh: false,
-            ), context);
+            readMain.onNavigation(
+                4,
+                ProfileScreenView(
+                  isRefreshed: false,
+                  // refresh: false,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -52,7 +55,8 @@ class _CustomerPrivacyPolicyState extends State<CustomerPrivacyPolicy> {
       body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
-              padding: EdgeInsets.all(20.w),
+              padding: EdgeInsets.only(
+                  left: 20.w, right: 20, top: 20.w, bottom: 35.w),
               child: HtmlWidget(
                 watch.privacyPolicy?.description ?? "",
               ))),

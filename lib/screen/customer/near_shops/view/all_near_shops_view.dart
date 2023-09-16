@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,12 +8,11 @@ import 'package:local_supper_market/screen/customer/advertisement_form/view/ads_
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
-import 'package:local_supper_market/screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/widget/network_image.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class AllNearShopsView extends StatefulWidget {
@@ -67,7 +63,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
             )
           : WillPopScope(
               onWillPop: () async {
-                readMain.onNavigation(0, HomeScreenView(refreshPage: false), context);
+                readMain.onNavigation(
+                    0, HomeScreenView(refreshPage: false), context);
                 // Navigator.of(context).popUntil(
                 //     (route) => route.settings.name == "MainScreenView");
                 return true;
@@ -135,15 +132,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                         Padding(
                           padding: EdgeInsets.only(
                               top: 20.w, left: 19.0.w, bottom: 15.w),
-                          child: Text(
-                            "Nearby Shops",
-                            style: GoogleFonts.roboto(
-                              textStyle: TextStyle(
-                                  color: Black,
-                                  // letterSpacing: .5,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                          child: HomeSideHeading(
+                            text: 'Nearby Shops',
                           ),
                         ),
                         SingleChildScrollView(
@@ -157,12 +147,13 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                   final element = watch.nearByShop?[index];
                                   return GestureDetector(
                                     onTap: () {
-                                      readMain.onNavigation(1,ShopProfileView(
-                                          shopId:
-                                          element?.id.toString(),
-                                          refreshPage: true,
-                                          routeName:
-                                          "allNearShopView"), context);
+                                      readMain.onNavigation(
+                                          1,
+                                          ShopProfileView(
+                                              shopId: element?.id.toString(),
+                                              refreshPage: true,
+                                              routeName: "allNearShopView"),
+                                          context);
                                       // Navigator.pushReplacement(
                                       //   context,
                                       //   MaterialPageRoute(
@@ -211,7 +202,6 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                           image: NetworkImage(
                                                               "${element?.shopBannerImagePath}"),
                                                           fit: BoxFit.fill)),
-
                                             ),
                                           ],
                                         ),
@@ -239,48 +229,36 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                 ],
                                                 colors: [
                                                   Colors.white.withOpacity(0),
-                                                  Colors.black
-                                                      .withOpacity(0.3),
+                                                  Colors.black.withOpacity(0.3),
                                                 ],
                                               )),
-                                              child: Padding(
-                                                padding: EdgeInsets.all(10.h),
-                                                child: Column(
-                                                  crossAxisAlignment:
+                                          child: Padding(
+                                            padding: EdgeInsets.all(10.h),
+                                            child: Column(
+                                              crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
+                                              mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
+                                              children: [
+                                                Container(),
+                                                Column(
                                                   children: [
-                                                    Container(),
-                                                    Column(
-                                                      children: [
-                                                        Text(
-                                                            "${element?.shopName}",
-                                                            style: GoogleFonts.roboto(
-                                                                textStyle: TextStyle(
-                                                                    color: Colors.white,
-                                                                    // letterSpacing: .5,
-                                                                    fontSize: 13.sp,
-                                                                    fontWeight: FontWeight.w600))),
-                                                        // ),
-                                                        Text(
-                                                            "${element?.areaName}",
-                                                            style: GoogleFonts.roboto(
-                                                                textStyle: TextStyle(
-                                                                    color: Colors.white,
-                                                                    // letterSpacing: .5,
-                                                                    fontSize: 12.sp,
-                                                                    // height: 10,
-                                                                    fontWeight: FontWeight.w400))),
-                                                      ],
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                    NearByShops(
+                                                      text:
+                                                          '${element?.shopName}',
+                                                    ),
+                                                    NearByShopslocation(
+                                                      text:
+                                                          '${element?.areaName}',
                                                     ),
                                                   ],
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                 ),
-                                              ),
+                                              ],
+                                            ),
+                                          ),
                                         )),
                                         Positioned(
                                           right: 25.w,
@@ -335,12 +313,15 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                         final element = watch.allShops[index];
                                         return GestureDetector(
                                           onTap: () {
-                                            readMain.onNavigation(1, ShopProfileView(
-                                                shopId: element.id
-                                                    .toString(),
-                                                refreshPage: true,
-                                                routeName:
-                                                "allNearShopView"), context);
+                                            readMain.onNavigation(
+                                                1,
+                                                ShopProfileView(
+                                                    shopId:
+                                                        element.id.toString(),
+                                                    refreshPage: true,
+                                                    routeName:
+                                                        "allNearShopView"),
+                                                context);
                                             // Navigator.pushAndRemoveUntil(
                                             //   context,
                                             //   MaterialPageRoute(
@@ -384,7 +365,6 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                   '${element.shopBannerImagePath}'),
                                                               fit: BoxFit
                                                                   .cover)),
-
                                                 ),
                                               ),
                                               Positioned(
@@ -414,44 +394,50 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                             Colors.white
                                                                 .withOpacity(0),
                                                             Colors.black
-                                                                .withOpacity(0.3),
+                                                                .withOpacity(
+                                                                    0.3),
                                                           ],
                                                         )),
                                                     child: Padding(
                                                       padding:
-                                                      EdgeInsets.all(10.h),
+                                                          EdgeInsets.all(10.h),
                                                       child: Column(
                                                         crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
                                                           Row(
                                                             mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
+                                                                MainAxisAlignment
+                                                                    .end,
                                                             children: [],
                                                           ),
                                                           Column(
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text(
-                                                                      "${element.shopName}",
-                                                                      style: GoogleFonts.roboto(
-                                                                          textStyle: TextStyle(
-                                                                              color: Colors.white,
-                                                                              // letterSpacing: .5,
-                                                                              fontSize: 15.sp,
-                                                                              fontWeight: FontWeight.w600))),
+                                                                  NearByShops(
+                                                                      text:
+                                                                          '${element.shopName}',
+                                                                      fontSize:
+                                                                          15.sp),
+                                                                  // Text(
+                                                                  //     "${element.shopName}",
+                                                                  //     style: GoogleFonts.roboto(
+                                                                  //         textStyle: TextStyle(
+                                                                  //             color: Colors.white,
+                                                                  //             // letterSpacing: .5,
+                                                                  //             fontSize: 15.sp,
+                                                                  //             fontWeight: FontWeight.w600))),
                                                                 ],
                                                               ),
                                                               Row(
                                                                 mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
                                                                 children: [
                                                                   Row(
                                                                     children: [
@@ -460,11 +446,10 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                           width: 12
                                                                               .w,
                                                                           height:
-                                                                          16.h),
+                                                                              16.h),
                                                                       Padding(
-                                                                        padding: EdgeInsets.only(
-                                                                            left:
-                                                                            8.w),
+                                                                        padding:
+                                                                            EdgeInsets.only(left: 8.w),
                                                                         child: Text(
                                                                             "${element.areaName}, ${element.cityName}",
                                                                             style: GoogleFonts.roboto(
@@ -479,42 +464,41 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                   ),
                                                                   Container(
                                                                     height:
-                                                                    21.49.h,
+                                                                        21.49.h,
                                                                     width: 49.w,
                                                                     decoration:
-                                                                    BoxDecoration(
+                                                                        BoxDecoration(
                                                                       color:
-                                                                      yellow,
+                                                                          yellow,
                                                                       borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(15)),
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(15)),
                                                                     ),
                                                                     child: Row(
                                                                       mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
+                                                                          MainAxisAlignment
+                                                                              .center,
                                                                       children: [
                                                                         SvgPicture
                                                                             .asset(
                                                                           "assets/images/star.svg",
                                                                           height:
-                                                                          12.h,
+                                                                              12.h,
                                                                           width:
-                                                                          12.w,
+                                                                              12.w,
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                          4.3.w,
+                                                                              4.3.w,
                                                                         ),
                                                                         Text(
                                                                           // "${element.ratings}",
                                                                           // "${element.ratings ?? "0.0"}",
                                                                           // "0.0",
-                                                                          double.parse(element.ratings.toString() ??
-                                                                              "0.0")
+                                                                          double.parse(element.ratings.toString() ?? "0.0")
                                                                               .toStringAsFixed(1),
-                                                                          style: GoogleFonts
-                                                                              .dmSans(
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
                                                                                 color: Black,
                                                                                 letterSpacing: .5,
@@ -598,7 +582,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          readMain.onNavigation(1,CustomerAdsView(), context);
+                                          readMain.onNavigation(
+                                              1, CustomerAdsView(), context);
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,
                                           //   MaterialPageRoute(

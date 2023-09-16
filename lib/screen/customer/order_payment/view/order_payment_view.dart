@@ -9,9 +9,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/controller/order_payment_controller.dart';
-import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
-import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
-import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
+
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 
@@ -93,8 +91,11 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMain.onNavigation(2,const OrderSummaryView(
-                            isRefresh: false, route: "paymentView"), context);
+              readMain.onNavigation(
+                  2,
+                  const OrderSummaryView(
+                      isRefresh: false, route: "paymentView"),
+                  context);
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(
@@ -114,12 +115,15 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                 child: CircularProgressIndicator(),
               )
             : WillPopScope(
-          onWillPop: ()async{
-            readMain.onNavigation(2,const OrderSummaryView(
-                isRefresh: false, route: "paymentView"), context);
-            return false;
-          },
-              child: StackLoader(
+                onWillPop: () async {
+                  readMain.onNavigation(
+                      2,
+                      const OrderSummaryView(
+                          isRefresh: false, route: "paymentView"),
+                      context);
+                  return false;
+                },
+                child: StackLoader(
                   showLoader: watch.isStackLoading,
                   child: Column(
                     children: [
@@ -130,12 +134,16 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 GestureDetector(
-                                  onTap:(){
-                                    readMain.onNavigation(1,ShopProfileView(
-                                      refreshPage: true,
-                                      routeName: '',
-                                      shopId: watch.shopDetailData?.id.toString(),
-                                    ), context);
+                                  onTap: () {
+                                    readMain.onNavigation(
+                                        1,
+                                        ShopProfileView(
+                                          refreshPage: true,
+                                          routeName: '',
+                                          shopId: watch.shopDetailData?.id
+                                              .toString(),
+                                        ),
+                                        context);
                                     // Navigator.pushAndRemoveUntil(
                                     //   context,
                                     //   MaterialPageRoute(
@@ -155,7 +163,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                       top: 20.w,
                                     ),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "${watch.shopDetailData?.shopName}",
@@ -189,7 +198,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                   textStyle: TextStyle(
                                                       color: Black,
                                                       fontSize: 13.sp,
-                                                      fontWeight: FontWeight.w400),
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
                                               ),
                                             ),
@@ -242,7 +252,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Flexible(
                                         child: Text(
@@ -302,7 +313,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                               children: [
                                                 SecondaryRadioButton(
                                                     value: "cash",
-                                                    groupValue: watch.groupValue,
+                                                    groupValue:
+                                                        watch.groupValue,
                                                     // groupValue: watch.radioGroupValue,
                                                     onChanged: (value) {
                                                       read.onRadioButtonSelected(
@@ -334,7 +346,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                               children: [
                                                 SecondaryRadioButton(
                                                     value: "upi",
-                                                    groupValue: watch.groupValue,
+                                                    groupValue:
+                                                        watch.groupValue,
                                                     onChanged: (value) {
                                                       read.onRadioButtonSelected(
                                                           value);
@@ -380,7 +393,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                         "Copy",
                                                         textAlign:
                                                             TextAlign.start,
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
                                                               color: SplashText,
                                                               // letterSpacing: .5,
@@ -410,10 +424,18 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                               children: [
                                                 SecondaryRadioButton(
                                                     value: "qr_code",
-                                                    groupValue: watch.groupValue,
+                                                    groupValue:
+                                                        watch.groupValue,
                                                     onChanged: (value) {
-                                                      read.onRadioButtonSelected(
-                                                          value);
+                                                      watch.shopDetailData
+                                                                  ?.shopOwnerQrCodeImage ==
+                                                              ""
+                                                          ? read
+                                                              .showErrorMessage(
+                                                                  context)
+                                                          : read
+                                                              .onRadioButtonSelected(
+                                                                  value);
                                                     },
                                                     leading: ""),
                                                 SizedBox(
@@ -467,7 +489,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                             letterSpacing: .5,
                                                             fontSize: 14.sp,
                                                             fontWeight:
-                                                                FontWeight.w700),
+                                                                FontWeight
+                                                                    .w700),
                                                       ),
                                                     ),
                                                   ],
@@ -491,8 +514,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                       children: [
                                                         SecondaryRadioButton(
                                                             value: "upi",
-                                                            groupValue:
-                                                                watch.groupValue,
+                                                            groupValue: watch
+                                                                .groupValue,
                                                             onChanged: (value) {
                                                               read.onRadioButtonSelected(
                                                                   value);
@@ -510,7 +533,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                                   color: Black,
                                                                   letterSpacing:
                                                                       .5,
-                                                                  fontSize: 14.sp,
+                                                                  fontSize:
+                                                                      14.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700),
@@ -523,7 +547,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                         PrimaryButton(
                                                           width: 58.w,
                                                           height: 19.h,
-                                                          borderColor: SplashText,
+                                                          borderColor:
+                                                              SplashText,
                                                           color: Colors.white,
                                                           onTap: () {
                                                             read.copyCodeForCoupanList(
@@ -534,7 +559,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                           },
                                                           child: Row(
                                                             mainAxisSize:
-                                                                MainAxisSize.min,
+                                                                MainAxisSize
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .start,
@@ -544,17 +570,14 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .start,
-                                                                style: GoogleFonts
-                                                                    .dmSans(
-                                                                  textStyle:
-                                                                      TextStyle(
-                                                                          color:
-                                                                              SplashText,
-                                                                          // letterSpacing: .5,
-                                                                          fontSize: 11
-                                                                              .sp,
-                                                                          fontWeight:
-                                                                              FontWeight.w700),
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      color: SplashText,
+                                                                      // letterSpacing: .5,
+                                                                      fontSize: 11.sp,
+                                                                      fontWeight: FontWeight.w700),
                                                                 ),
                                                               ), // <-- Text
                                                               SizedBox(
@@ -577,8 +600,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                       children: [
                                                         SecondaryRadioButton(
                                                             value: "qr_code",
-                                                            groupValue:
-                                                                watch.groupValue,
+                                                            groupValue: watch
+                                                                .groupValue,
                                                             onChanged: (value) {
                                                               read.onRadioButtonSelected(
                                                                   value);
@@ -589,11 +612,12 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                         ),
                                                         Text(
                                                           'Payment QR Code',
-                                                          style:
-                                                              GoogleFonts.dmSans(
+                                                          style: GoogleFonts
+                                                              .dmSans(
                                                             textStyle: TextStyle(
                                                                 color: Black,
-                                                                letterSpacing: .5,
+                                                                letterSpacing:
+                                                                    .5,
                                                                 fontSize: 14.sp,
                                                                 fontWeight:
                                                                     FontWeight
@@ -615,8 +639,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                       children: [
                                                         SecondaryRadioButton(
                                                             value: "cash",
-                                                            groupValue:
-                                                                watch.groupValue,
+                                                            groupValue: watch
+                                                                .groupValue,
                                                             // groupValue: watch.radioGroupValue,
                                                             onChanged: (value) {
                                                               read.onRadioButtonSelected(
@@ -628,11 +652,12 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                         ),
                                                         Text(
                                                           'Cash on Delivery',
-                                                          style:
-                                                              GoogleFonts.dmSans(
+                                                          style: GoogleFonts
+                                                              .dmSans(
                                                             textStyle: TextStyle(
                                                                 color: Black,
-                                                                letterSpacing: .5,
+                                                                letterSpacing:
+                                                                    .5,
                                                                 fontSize: 14.sp,
                                                                 fontWeight:
                                                                     FontWeight
@@ -651,8 +676,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                       children: [
                                                         SecondaryRadioButton(
                                                             value: "upi",
-                                                            groupValue:
-                                                                watch.groupValue,
+                                                            groupValue: watch
+                                                                .groupValue,
                                                             onChanged: (value) {
                                                               read.onRadioButtonSelected(
                                                                   value);
@@ -670,7 +695,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                                   color: Black,
                                                                   letterSpacing:
                                                                       .5,
-                                                                  fontSize: 14.sp,
+                                                                  fontSize:
+                                                                      14.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700),
@@ -683,7 +709,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                         PrimaryButton(
                                                           width: 58.w,
                                                           height: 19.h,
-                                                          borderColor: SplashText,
+                                                          borderColor:
+                                                              SplashText,
                                                           color: Colors.white,
                                                           onTap: () {
                                                             read.copyCodeForCoupanList(
@@ -694,7 +721,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                           },
                                                           child: Row(
                                                             mainAxisSize:
-                                                                MainAxisSize.min,
+                                                                MainAxisSize
+                                                                    .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .start,
@@ -704,17 +732,14 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .start,
-                                                                style: GoogleFonts
-                                                                    .dmSans(
-                                                                  textStyle:
-                                                                      TextStyle(
-                                                                          color:
-                                                                              SplashText,
-                                                                          // letterSpacing: .5,
-                                                                          fontSize: 11
-                                                                              .sp,
-                                                                          fontWeight:
-                                                                              FontWeight.w700),
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      color: SplashText,
+                                                                      // letterSpacing: .5,
+                                                                      fontSize: 11.sp,
+                                                                      fontWeight: FontWeight.w700),
                                                                 ),
                                                               ), // <-- Text
                                                               SizedBox(
@@ -737,8 +762,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                       children: [
                                                         SecondaryRadioButton(
                                                             value: "qr_code",
-                                                            groupValue:
-                                                                watch.groupValue,
+                                                            groupValue: watch
+                                                                .groupValue,
                                                             onChanged: (value) {
                                                               read.onRadioButtonSelected(
                                                                   value);
@@ -749,11 +774,12 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                         ),
                                                         Text(
                                                           'Payment QR Code',
-                                                          style:
-                                                              GoogleFonts.dmSans(
+                                                          style: GoogleFonts
+                                                              .dmSans(
                                                             textStyle: TextStyle(
                                                                 color: Black,
-                                                                letterSpacing: .5,
+                                                                letterSpacing:
+                                                                    .5,
                                                                 fontSize: 14.sp,
                                                                 fontWeight:
                                                                     FontWeight
@@ -792,7 +818,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                     width: 165.w,
                                                     height: 150.h,
                                                     fit: BoxFit.cover,
-                                                    imageUrl: watch.shopDetailData
+                                                    imageUrl: watch
+                                                            .shopDetailData
                                                             ?.shopOwnerQrCodeImage ??
                                                         "",
                                                   ),
@@ -814,7 +841,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                   visible:
                                       watch.groupValue == "cash" ? false : true,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         padding: EdgeInsets.only(
@@ -921,6 +949,6 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                     ],
                   ),
                 ),
-            ));
+              ));
   }
 }

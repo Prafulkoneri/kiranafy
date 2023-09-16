@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/address_list_sheet_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/coupons_list_sheet_view.dart';
@@ -54,7 +52,12 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
   void initState() {
     print(widget.shopId);
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<OrderSummaryController>().initState(context,widget.shopId,widget.cartId,widget.isRefresh, widget.route,
+      context.read<OrderSummaryController>().initState(
+            context,
+            widget.shopId,
+            widget.cartId,
+            widget.isRefresh,
+            widget.route,
           );
       if (widget.route == "editAddress") {
         showModalBottomSheet(
@@ -85,11 +88,14 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
         child: PrimaryAppBar(
           title: "Order Summary",
           onBackBtnPressed: () {
-            readMain.onNavigation(2, CartDetailView(
-                              isRefresh: true,
-                              shopId: watch.shopId,
-                              cartId: watch.cartId,
-                            ), context);
+            readMain.onNavigation(
+                2,
+                CartDetailView(
+                  isRefresh: true,
+                  shopId: watch.shopId,
+                  cartId: watch.cartId,
+                ),
+                context);
             // Navigator.push(
             //     context,
             //     MaterialPageRoute(
@@ -106,15 +112,18 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
               child: CircularProgressIndicator(),
             )
           : WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(2, CartDetailView(
-            isRefresh: true,
-            shopId: watch.shopId,
-            cartId: watch.cartId,
-          ), context);
-          return false;
-        },
-            child: StackLoader(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    2,
+                    CartDetailView(
+                      isRefresh: true,
+                      shopId: watch.shopId,
+                      cartId: watch.cartId,
+                    ),
+                    context);
+                return false;
+              },
+              child: StackLoader(
                 showLoader: watch.isStackLoaderVisible,
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
@@ -123,11 +132,14 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          readMain.onNavigation(1, ShopProfileView(
-                            refreshPage: true,
-                            routeName: '',
-                            shopId: watch.shopDetailData?.id.toString(),
-                          ), context);
+                          readMain.onNavigation(
+                              1,
+                              ShopProfileView(
+                                refreshPage: true,
+                                routeName: '',
+                                shopId: watch.shopDetailData?.id.toString(),
+                              ),
+                              context);
                           readMain.showBottomNavigationBar();
                           // Navigator.pushAndRemoveUntil(
                           //   context,
@@ -173,7 +185,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
 
                               // color: Colors.white,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -230,9 +243,11 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         // },
                                         onTap: () {
                                           watch.favAllShop
-                                              ? read.removeAllShopFavList(context,
+                                              ? read.removeAllShopFavList(
+                                                  context,
                                                   watch.shopDetailData?.id)
-                                              : read.updateAllShopFavList(context,
+                                              : read.updateAllShopFavList(
+                                                  context,
                                                   watch.shopDetailData?.id);
                                         },
                                         child: Container(
@@ -381,10 +396,11 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                         ),
                       ),
                       Visibility(
-                        visible: watch.groupValue == "self_pickup" ? false : true,
+                        visible:
+                            watch.groupValue == "self_pickup" ? false : true,
                         child: Padding(
-                          padding:
-                              EdgeInsets.only(left: 16.w, top: 20.w, right: 19.w),
+                          padding: EdgeInsets.only(
+                              left: 16.w, top: 20.w, right: 19.w),
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
@@ -442,11 +458,12 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                         Text(
                                                           "${element.customerName}",
                                                           // 'Rachel Green',
-                                                          style:
-                                                              GoogleFonts.dmSans(
+                                                          style: GoogleFonts
+                                                              .dmSans(
                                                             textStyle: TextStyle(
                                                                 color: Black,
-                                                                letterSpacing: .5,
+                                                                letterSpacing:
+                                                                    .5,
                                                                 fontSize: 16.sp,
                                                                 fontWeight:
                                                                     FontWeight
@@ -483,7 +500,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                             letterSpacing: .5,
                                                             fontSize: 13.sp,
                                                             fontWeight:
-                                                                FontWeight.w400),
+                                                                FontWeight
+                                                                    .w400),
                                                       ),
                                                     ),
                                                   ],
@@ -510,7 +528,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                         "${element.address1} \n${element.address2} ",
                                                         // "Nand Nivas Building floor 3 B-3,Lane No.13 Bhatrau Nivas Vishrantwadi Pune -411015.",
                                                         // textAlign: TextAlign.start,
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
                                                               // height: 1.5,
                                                               color: black,
@@ -604,7 +623,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         ? Row(
                                             children: [
                                               Text(
-                                                watch.expectedDateController.text,
+                                                watch.expectedDateController
+                                                    .text,
                                                 style: GoogleFonts.dmSans(
                                                   textStyle: TextStyle(
                                                       // height: 1.5,
@@ -859,7 +879,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                       filled: true,
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide.none,
-                                        borderRadius: BorderRadius.circular(10.0),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
                                     ),
                                   ),
@@ -911,7 +932,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: 'Coupon Applied successfully.',
+                                            text:
+                                                'Coupon Applied successfully.',
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: SplashText,
@@ -954,8 +976,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                     ),
                                   ),
                                   Container(
-                                    padding:
-                                        EdgeInsets.only(top: 15.w, bottom: 15.w),
+                                    padding: EdgeInsets.only(
+                                        top: 15.w, bottom: 15.w),
                                     child: SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       physics: BouncingScrollPhysics(),
@@ -981,9 +1003,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                               : element
                                                                       ?.offerPrice ??
                                                                   "0") <
-                                                          int.parse(
-                                                              element?.mrpPrice ??
-                                                                  "0")
+                                                          int.parse(element
+                                                                  ?.mrpPrice ??
+                                                              "0")
                                                   ? Row(
                                                       children: [
                                                         SizedBox(
@@ -1001,20 +1023,25 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                             ? Container()
                                                             : GestureDetector(
                                                                 onTap: () {
-                                                                  readProductViewController
-                                                                      .updateProductId(
-                                                                    element?.id
-                                                                        .toString(),context,false
-                                                                  );
-                                                                  readMain.onNavigation(1,  ProductScreenView(
-                                                                      routeName: "",
-                                                                      selectedUnitId: element?.productUnitId.toString(),
-                                                                      categoryId: element?.categoryId.toString(),
-                                                                      // categoryId: watch.categoryId,
-                                                                      productId: element?.id.toString(),
-                                                                      shopId: element?.shopId,
-                                                                      productType: element?.productType), context);
-                                                                  readMain.showBottomNavigationBar();
+                                                                  readProductViewController.updateProductId(
+                                                                      element
+                                                                          ?.id
+                                                                          .toString(),
+                                                                      context,
+                                                                      false);
+                                                                  readMain.onNavigation(
+                                                                      1,
+                                                                      ProductScreenView(
+                                                                          routeName: "",
+                                                                          selectedUnitId: element?.productUnitId.toString(),
+                                                                          categoryId: element?.categoryId.toString(),
+                                                                          // categoryId: watch.categoryId,
+                                                                          productId: element?.id.toString(),
+                                                                          shopId: element?.shopId,
+                                                                          productType: element?.productType),
+                                                                      context);
+                                                                  readMain
+                                                                      .showBottomNavigationBar();
                                                                   // Navigator
                                                                   //     .pushAndRemoveUntil(
                                                                   //   context,
@@ -1037,7 +1064,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                   //       false,
                                                                   // );
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   decoration: BoxDecoration(
                                                                       // color: Colors.white,
                                                                       // boxShadow: [
@@ -1052,16 +1080,15 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                   child: Card(
                                                                     shape: RoundedRectangleBorder(
                                                                         borderRadius:
-                                                                            BorderRadius.circular(
-                                                                                10.w)),
-                                                                    elevation: 0,
+                                                                            BorderRadius.circular(10.w)),
+                                                                    elevation:
+                                                                        0,
                                                                     child:
                                                                         Container(
                                                                       decoration:
                                                                           BoxDecoration(
                                                                         borderRadius:
-                                                                            BorderRadius.circular(
-                                                                                20.w),
+                                                                            BorderRadius.circular(20.w),
                                                                       ),
                                                                       width:
                                                                           156.w,
@@ -1288,9 +1315,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                               : element
                                                                       ?.offerPrice ??
                                                                   "0") <
-                                                          int.parse(
-                                                              element?.mrpPrice ??
-                                                                  "0")
+                                                          int.parse(element
+                                                                  ?.mrpPrice ??
+                                                              "0")
                                                   ? Row(
                                                       children: [
                                                         SizedBox(
@@ -1308,20 +1335,25 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                             ? Container()
                                                             : GestureDetector(
                                                                 onTap: () {
-                                                                  readProductViewController
-                                                                      .updateProductId(
-                                                                    element?.id
-                                                                        .toString(),context,false
-                                                                  );
-                                                                  readMain.onNavigation(1, ProductScreenView(
-                                                                      routeName: "",
-                                                                      selectedUnitId: element?.productUnitId.toString(),
-                                                                      categoryId: element?.categoryId.toString(),
-                                                                      // categoryId: watch.categoryId,
-                                                                      productId: element?.id.toString(),
-                                                                      shopId: element?.shopId,
-                                                                      productType: element?.productType), context);
-                                                                  readMain.showBottomNavigationBar();
+                                                                  readProductViewController.updateProductId(
+                                                                      element
+                                                                          ?.id
+                                                                          .toString(),
+                                                                      context,
+                                                                      false);
+                                                                  readMain.onNavigation(
+                                                                      1,
+                                                                      ProductScreenView(
+                                                                          routeName: "",
+                                                                          selectedUnitId: element?.productUnitId.toString(),
+                                                                          categoryId: element?.categoryId.toString(),
+                                                                          // categoryId: watch.categoryId,
+                                                                          productId: element?.id.toString(),
+                                                                          shopId: element?.shopId,
+                                                                          productType: element?.productType),
+                                                                      context);
+                                                                  readMain
+                                                                      .showBottomNavigationBar();
                                                                   // Navigator
                                                                   //     .pushAndRemoveUntil(
                                                                   //   context,
@@ -1344,7 +1376,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                   //       false,
                                                                   // );
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   decoration: BoxDecoration(
                                                                       // color: Colors.white,
                                                                       // boxShadow: [
@@ -1359,16 +1392,15 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                   child: Card(
                                                                     shape: RoundedRectangleBorder(
                                                                         borderRadius:
-                                                                            BorderRadius.circular(
-                                                                                10.w)),
-                                                                    elevation: 0,
+                                                                            BorderRadius.circular(10.w)),
+                                                                    elevation:
+                                                                        0,
                                                                     child:
                                                                         Container(
                                                                       decoration:
                                                                           BoxDecoration(
                                                                         borderRadius:
-                                                                            BorderRadius.circular(
-                                                                                20.w),
+                                                                            BorderRadius.circular(20.w),
                                                                       ),
                                                                       width:
                                                                           156.w,
@@ -1820,7 +1852,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }
