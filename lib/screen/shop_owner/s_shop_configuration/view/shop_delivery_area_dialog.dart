@@ -110,6 +110,7 @@ class _ShopDeliveryAreaDialogViewState
                   SizedBox(
                     height: 15.h,
                   ),
+                  watch.isLoading?Center(child: CircularProgressIndicator()):
                   ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

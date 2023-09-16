@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
@@ -13,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_cat
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
@@ -45,6 +47,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
     final readOrderStatus = context.watch<SOrderStatusController>();
     final watchDashBoardScreen = context.read<SDashBoardController>();
     final watchRefundOrderList = context.read<PaymentRefundListController>();
+    final readMain = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: watch.isLoading
@@ -75,11 +78,13 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           ),
                           GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            NotificationsScreenView()));
+                                readMain.onNavigation(0,NotificationsScreenView(),context);
+                                readMain.hideBottomNavigationBar();
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             NotificationsScreenView()));
                               },
                               child: SvgPicture.asset(
                                   "assets/icons/notification_shop.svg"))
@@ -192,19 +197,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SMainScreenView(
-                                                  index: 0,
-                                                  screenName:
-                                                      ShopReviewScreenView(
-                                                    fromDashBoard: true,
-                                                  ),
-                                                )),
-                                        (Route<dynamic> route) => false,
-                                      );
+                                      readMain.onNavigation(0, ShopReviewScreenView(
+                                        fromDashBoard: true,
+                                      ),context);
+
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(right: 15.w),
@@ -325,17 +321,20 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           Container(
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                            index: 0,
-                                            screenName: SEditProfileView(
-                                              fromDashBoard: true,
-                                            ),
-                                          )),
-                                  (Route<dynamic> route) => false,
-                                );
+                                readMain.onNavigation(0,SEditProfileView(
+                                  fromDashBoard: true,
+                                ),context);
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //             index: 0,
+                                //             screenName: SEditProfileView(
+                                //               fromDashBoard: true,
+                                //             ),
+                                //           )),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               },
                               child: SvgPicture.asset(
                                 "assets/icons/shop_edit.svg",
@@ -371,17 +370,21 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 0,
-                                        screenName: CustomerListView(
-                                          isRefresh: true,
-                                          fromPage: "dashboardProduct",
-                                        ))),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(0,CustomerListView(
+                                isRefresh: true,
+                                fromPage: "dashboardProduct",
+                              ),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 0,
+                              //           screenName: CustomerListView(
+                              //             isRefresh: true,
+                              //             fromPage: "dashboardProduct",
+                              //           ))),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -427,17 +430,21 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 0,
-                                        screenName: CustomerListView(
-                                          isRefresh: true,
-                                          fromPage: "dashboardFavCustomer",
-                                        ))),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(0,CustomerListView(
+                                isRefresh: true,
+                                fromPage: "dashboardFavCustomer",
+                              ),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 0,
+                              //           screenName: CustomerListView(
+                              //             isRefresh: true,
+                              //             fromPage: "dashboardFavCustomer",
+                              //           ))),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -552,17 +559,21 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 3,
-                                        screenName: ShopCouponsView(
-                                          isNavFromDashBoard: true,
-                                          isRefresh: true,
-                                        ))),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(3,ShopCouponsView(
+                                isNavFromDashBoard: true,
+                                isRefresh: true,
+                              ),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 3,
+                              //           screenName: ShopCouponsView(
+                              //             isNavFromDashBoard: true,
+                              //             isRefresh: true,
+                              //           ))),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -635,14 +646,15 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 0,
-                                        screenName: SSCategoryListView())),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(0,SSCategoryListView(),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 0,
+                              //           screenName: SSCategoryListView())),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -700,14 +712,15 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               // read.onProductSelect(context);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                        index: 0,
-                                        screenName: SSCategoryListView())),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(0,SSCategoryListView(),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //           index: 0,
+                              //           screenName: SSCategoryListView())),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -775,18 +788,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               if (watchDashBoardScreen.specialBenifitlist
                                   .contains("seasonal_products")) {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                          index: 0,
-                                          screenName:
-                                              ShopSeasonalRecommandedOfferProductsView(
-                                            selectedProduct: "seasonal",
-                                            isRefresh: true,
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                readMain.onNavigation(0, ShopSeasonalRecommandedOfferProductsView(
+                                  selectedProduct: "seasonal",
+                                  isRefresh: true,
+                                ),context);
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //           index: 0,
+                                //           screenName:
+                                //               ShopSeasonalRecommandedOfferProductsView(
+                                //             selectedProduct: "seasonal",
+                                //             isRefresh: true,
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               } else {
                                 Utils.showPrimarySnackbar(context,
                                     "Subscribe to Advanced Plan to use this feature!",
@@ -848,6 +865,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
+                              // readMain.onNavigation(0,NotificationsScreenView(),context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -862,18 +880,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               // );
                               if (watchDashBoardScreen.specialBenifitlist
                                   .contains("fullfill_craving_products")) {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                          index: 0,
-                                          screenName:
-                                              ShopSeasonalRecommandedOfferProductsView(
-                                            selectedProduct: "fullFill",
-                                            isRefresh: true,
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                readMain.onNavigation(0, ShopSeasonalRecommandedOfferProductsView(
+                                  selectedProduct: "fullFill",
+                                  isRefresh: true,
+                                ),context);
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //           index: 0,
+                                //           screenName:
+                                //               ShopSeasonalRecommandedOfferProductsView(
+                                //             selectedProduct: "fullFill",
+                                //             isRefresh: true,
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               } else {
                                 Utils.showPrimarySnackbar(context,
                                     "Subscribe to Advanced Plan to use this feature!",
@@ -1009,17 +1031,20 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(0);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 0,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(1,SOrderStatusView(
+                                  selectedIndex: 0,
+                                  isFromOrderView: false),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 0,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1066,17 +1091,20 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(1);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 1,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(1,SOrderStatusView(
+                                  selectedIndex: 1,
+                                  isFromOrderView: false),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 1,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1135,17 +1163,20 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(2);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 2,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(1,SOrderStatusView(
+                                  selectedIndex: 2,
+                                  isFromOrderView: false),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 2,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1196,17 +1227,20 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(3);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 3,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(1,SOrderStatusView(
+                                  selectedIndex: 3,
+                                  isFromOrderView: false),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 3,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1263,17 +1297,20 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(4);
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 1,
-                                          screenName: SOrderStatusView(
-                                              selectedIndex: 4,
-                                              isFromOrderView: false),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(1,SOrderStatusView(
+                                  selectedIndex: 4,
+                                  isFromOrderView: false),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 4,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1354,15 +1391,16 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               watchRefundOrderList
                                   .onNavigationFromDashboard("pending");
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 0,
-                                          screenName: SPaymentRefundList(),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(0,SPaymentRefundList(),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 0,
+                              //             screenName: SPaymentRefundList(),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1417,15 +1455,16 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               watchRefundOrderList
                                   .onNavigationFromDashboard("completed");
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SMainScreenView(
-                                          index: 0,
-                                          screenName: SPaymentRefundList(),
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
+                              readMain.onNavigation(0,SPaymentRefundList(),context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 0,
+                              //             screenName: SPaymentRefundList(),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(
@@ -1667,16 +1706,19 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 bottom: 80.w),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                          index: 4,
-                                          screenName: SMySubscriptionView(
-                                            screenName: "dashboard",
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                readMain.onNavigation(4,SMySubscriptionView(
+                                  screenName: "dashboard",
+                                ),context);
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //           index: 4,
+                                //           screenName: SMySubscriptionView(
+                                //             screenName: "dashboard",
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               },
                               child: Stack(
                                 alignment: Alignment.topCenter,
@@ -1834,16 +1876,19 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 bottom: 80.w),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SMainScreenView(
-                                          index: 4,
-                                          screenName: SMySubscriptionView(
-                                            screenName: "dashboard",
-                                          ))),
-                                  (Route<dynamic> route) => false,
-                                );
+                                readMain.onNavigation(4,SMySubscriptionView(
+                                  screenName: "dashboard",
+                                ),context);
+                                // Navigator.pushAndRemoveUntil(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => SMainScreenView(
+                                //           index: 4,
+                                //           screenName: SMySubscriptionView(
+                                //             screenName: "dashboard",
+                                //           ))),
+                                //   (Route<dynamic> route) => false,
+                                // );
                               },
                               child: Stack(
                                 alignment: Alignment.topCenter,

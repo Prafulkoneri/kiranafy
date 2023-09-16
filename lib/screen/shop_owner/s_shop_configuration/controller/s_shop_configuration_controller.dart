@@ -670,6 +670,10 @@ class SShopConfigurationController extends ChangeNotifier {
     print(selectedDeliveryAreaName);
     notifyListeners();
   }
+ onAddDeliveryAreaTap(){
+   areaSearchController.clear();
+    notifyListeners();
+ }
 
   List selectedCategoryId = [];
   List<bool> selectedCategoryList = [];

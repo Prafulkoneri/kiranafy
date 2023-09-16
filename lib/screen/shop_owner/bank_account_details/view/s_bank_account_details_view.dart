@@ -42,16 +42,19 @@ class _ShopBankAccountDetailsViewState
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 4,
-                      screenName: SAccountScreenView(
-                        refresh: false,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+            readMainScreen.onNavigation(4, SAccountScreenView(
+              refresh: false,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 4,
+            //           screenName: SAccountScreenView(
+            //             refresh: false,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Bank A/C Details",
           action: SvgPicture.asset("assets/icons/forward.svg"),

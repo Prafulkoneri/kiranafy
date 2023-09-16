@@ -43,6 +43,8 @@ class SMainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   void onCategoryPressed(context) {
     currentIndex = 0;
     currentScreen = SSCategoryListView();
@@ -104,10 +106,6 @@ class SMainScreenController extends ChangeNotifier {
   }
 
   void onNavigation(tabIndex, screenName, context) {
-    print("hello");
-    print(screenName);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SMainScreenView()));
     currentTab = tabIndex;
     currentScreen = screenName;
     notifyListeners();
@@ -133,6 +131,10 @@ class SMainScreenController extends ChangeNotifier {
 
   showBottomNavigationBar(){
     hideBottomNavigation=false;
+    notifyListeners();
+  }
+  hideBottomNavigationBar(){
+    hideBottomNavigation=true;
     notifyListeners();
   }
 

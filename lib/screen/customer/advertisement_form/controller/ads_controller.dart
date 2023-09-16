@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/model/c_ads_model.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/repository/c_ads_repo.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/promotion_request/model/promotion_request_model.dart';
@@ -96,7 +97,7 @@ class customerAdscontroller extends ChangeNotifier {
         adsMobileNumberController.clear();
         planToStartController.clear();
         adsContentController.clear();
-        final read=Provider.of<SMainScreenController>(context,listen: false);
+        final read=Provider.of<MainScreenController>(context,listen: false);
         read.onNavigation(2, HomeScreenView(
           refreshPage: true,
         ), context);

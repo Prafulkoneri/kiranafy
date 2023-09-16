@@ -69,7 +69,6 @@ class SDashBoardController extends ChangeNotifier {
       print(response.statusCode);
       log(response.body);
       final result = DashBoardModel.fromJson(jsonDecode(response.body));
-      log("${response.body}");
       if (response.statusCode == 200) {
         dashBoardData = result.data;
         int imageLength = dashBoardData?.bannerImages?.length ?? 0;

@@ -56,7 +56,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
               widget.initialShopConfigration == true ? false : true,
           onBackBtnPressed: () {
             widget.initialShopConfigration == false
-                ? Navigator.pushAndRemoveUntil(
+                ?
+            Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                         builder: (context) => SMainScreenView(
@@ -702,6 +703,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                           ),
                           GestureDetector(
                               onTap: () {
+                                read.onClearAreaSearch();
                                 showDialog(
                                   context: context,
                                   builder: (context) {

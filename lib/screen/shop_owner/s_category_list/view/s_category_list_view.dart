@@ -39,27 +39,31 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 0,
-                      screenName: ShopDashBoardView(
-                        refresh: true,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+            readMainScreen.onNavigation(0, ShopDashBoardView(
+              refresh: true,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 0,
+            //           screenName: ShopDashBoardView(
+            //             refresh: true,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Categories",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 0, screenName: SSelectCategoryView())),
-              (Route<dynamic> route) => false,
-            );
+            readMainScreen.onNavigation(0, SSelectCategoryView(), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 0, screenName: SSelectCategoryView())),
+            //   (Route<dynamic> route) => false,
+            // );
           },
         ),
       ),
@@ -96,18 +100,23 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SMainScreenView(
-                                              index: 0,
-                                              screenName: SSelectedProductView(
-                                                  isRefresh: true,
-                                                  categoryId: element
-                                                      ?.categoryId
-                                                      .toString()))),
-                                      (Route<dynamic> route) => false,
-                                    );
+                                    readMainScreen.onNavigation(0, SSelectedProductView(
+                                        isRefresh: true,
+                                        categoryId: element
+                                            ?.categoryId
+                                            .toString()), context);
+                                    // Navigator.pushAndRemoveUntil(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) => SMainScreenView(
+                                    //           index: 0,
+                                    //           screenName: SSelectedProductView(
+                                    //               isRefresh: true,
+                                    //               categoryId: element
+                                    //                   ?.categoryId
+                                    //                   .toString()))),
+                                    //   (Route<dynamic> route) => false,
+                                    // );
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

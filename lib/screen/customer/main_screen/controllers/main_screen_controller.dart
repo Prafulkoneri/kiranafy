@@ -30,7 +30,7 @@ class MainScreenController extends ChangeNotifier {
   SetPincodeRepo setPincodeRepo = SetPincodeRepo();
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = HomeScreenView(
-    refreshPage: true,
+    refreshPage: false,
   );
   bool isLocationServiceEnabled = false;
   bool isPincodeSnackBarVisible = false;
@@ -47,8 +47,7 @@ class MainScreenController extends ChangeNotifier {
   bool hideBottomNavigation = false;
 
   void initState(context, index, currentScreen) async {
-    onMyCartPressed();
-    navigation(index, currentScreen);
+    // navigation(index, currentScreen);
     if (isFirstLoad) {
       showMap(context, true);
     }
