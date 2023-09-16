@@ -135,7 +135,7 @@ class SShopConfigurationController extends ChangeNotifier {
     selectedAreaId = "";
     print(selectedDeliveryAreaName);
     // return;
-    // deliveryAreasController.clear();
+    deliveryAreasController.clear();
     for (int i = 0; i < selectedDeliveryAreaName.length; i++) {
       deliveryAreasController.text += selectedDeliveryAreaName[i] + ", ";
     }
@@ -655,6 +655,7 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   void onSelectedDeliveryArea(index, id, name) {
+    print(selectedDeliveryAreaName);
     selectedDeliveryAreaList[index] = !selectedDeliveryAreaList[index];
     if (selectedDeliveryAreaList[index]) {
       selectedDeliveryAreaId.removeWhere((item) => item == id);
@@ -705,6 +706,7 @@ class SShopConfigurationController extends ChangeNotifier {
           for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
             selectedDeliveryAreaList[ids.indexOf(selectedDeliveryAreaId[i])] =
                 true;
+            selectedDeliveryAreaName.add(name[ids.indexOf(selectedDeliveryAreaId[i])]);
             deliveryAreasController.text +=
                 name[ids.indexOf(selectedDeliveryAreaId[i])] + ", ";
           }

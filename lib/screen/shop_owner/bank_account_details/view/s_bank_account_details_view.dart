@@ -113,7 +113,7 @@ class _ShopBankAccountDetailsViewState
                                 hint: "Select Type of Account",
                                 items: [
                                   DropdownMenuItem(
-                                    value: "Current",
+                                    value: "current",
                                     child: Text(
                                       "Current",
                                       style: TextStyle(
@@ -122,7 +122,7 @@ class _ShopBankAccountDetailsViewState
                                     ),
                                   ),
                                   DropdownMenuItem(
-                                    value: "Saving",
+                                    value: "saving",
                                     child: Text(
                                       "Saving",
                                       style: TextStyle(
@@ -141,7 +141,7 @@ class _ShopBankAccountDetailsViewState
                                 hint: "Select Type of Account",
                                 items: [
                                   DropdownMenuItem(
-                                    value: "Current",
+                                    value: "current",
                                     child: Text(
                                       "Current",
                                       style: TextStyle(
@@ -150,7 +150,7 @@ class _ShopBankAccountDetailsViewState
                                     ),
                                   ),
                                   DropdownMenuItem(
-                                    value: "Saving",
+                                    value: "saving",
                                     child: Text(
                                       "Saving",
                                       style: TextStyle(

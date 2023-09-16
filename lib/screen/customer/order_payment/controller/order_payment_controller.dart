@@ -185,12 +185,14 @@ class OrderPaymentController extends ChangeNotifier {
     }
 
     if (groupValue == "") {
+      LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, "please select Payment Mode",
           type: SnackType.error);
       return;
     }
     if (groupValue == "upi" || groupValue == "qr_code") {
       if (transactionIdController.text.isEmpty) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, "Enter Payment Transaction ID",
             type: SnackType.error);
         return;

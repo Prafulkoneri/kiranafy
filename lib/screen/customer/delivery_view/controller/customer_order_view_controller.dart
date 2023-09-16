@@ -441,9 +441,22 @@ class CustomerOrderViewController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        final read=Provider.of<MainScreenController>(context,listen: false);
+        if(result.status==200){
+          final read=Provider.of<MainScreenController>(context,listen: false);
+          Navigator.pop(context);
+          read.onNavigation(4,MyOrderView(), context);
+          print("hello");
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          read.showBottomNavigationBar();
+          notifyListeners();
+        }
+        else{
+          Navigator.pop(context);
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
 
-        read.onNavigation(4,MyOrderView(), context);
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(
@@ -452,10 +465,7 @@ class CustomerOrderViewController extends ChangeNotifier {
         //   // (Route<dynamic> route) => false,
         // );
 
-        print("hello");
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
-        notifyListeners();
+
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

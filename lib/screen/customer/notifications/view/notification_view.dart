@@ -210,14 +210,20 @@ class _CustomerNotificationsScreenViewState
                             return GestureDetector(
                               onTap: () {
                                 if (element?.notificationType == "order") {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => OrderDeliveryView(
-                                                orderId:
-                                                    element?.orderId.toString(),
-                                                screenName: "notification",
-                                              )));
+                                  readMain.onNavigation(4, OrderDeliveryView(
+                                    orderId:
+                                    element?.orderId.toString(),
+                                    screenName: "notification",
+                                  ), context);
+                                  readMain.hideBottomNavigationBar();
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => OrderDeliveryView(
+                                  //               orderId:
+                                  //                   element?.orderId.toString(),
+                                  //               screenName: "notification",
+                                  //             )));
                                 }
                               },
                               child: Container(
