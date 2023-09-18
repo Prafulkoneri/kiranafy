@@ -131,28 +131,37 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
           title: "My Subscription",
           onBackBtnPressed: () {
             widget.screenName == "accounts"
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                              index: 4,
-                              screenName: SAccountScreenView(
-                                refresh: false,
-                              ),
-                            )),
-                    (Route<dynamic> route) => false,
-                  )
-                : Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                              index: 0,
-                              screenName: ShopDashBoardView(
-                                refresh: false,
-                              ),
-                            )),
-                    (Route<dynamic> route) => false,
-                  );
+
+                ?
+            readMainScreen.onNavigation(4, SAccountScreenView(
+              refresh: false,
+            ), context)
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => SMainScreenView(
+            //                   index: 4,
+            //                   screenName: SAccountScreenView(
+            //                     refresh: false,
+            //                   ),
+            //                 )),
+            //         (Route<dynamic> route) => false,
+            //       )
+                :
+            readMainScreen.onNavigation(4, ShopDashBoardView(
+              refresh: false,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => SMainScreenView(
+            //                   index: 0,
+            //                   screenName: ShopDashBoardView(
+            //                     refresh: false,
+            //                   ),
+            //                 )),
+            //         (Route<dynamic> route) => false,
+            //       );
           },
         ),
       ),
@@ -675,12 +684,14 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                             // color: Colors.transparent,
                             color: Color(0xff4689EC),
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          SSubscriptionScreenView(
-                                              loggedIn: true)));
+                              readMainScreen.onNavigation(0,SSubscriptionScreenView(loggedIn: true), context);
+                           readMainScreen.hideBottomNavigationBar();
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             SSubscriptionScreenView(
+                              //                 loggedIn: true)));
                             },
                             textColor: Colors.white,
                             text: "New Plan",

@@ -105,13 +105,18 @@ class _ProductScreenViewState extends State<ProductScreenView> {
           WillPopScope(
               onWillPop: () async {
                 if (widget.routeName == "cart_details") {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CartDetailView(
-                              isRefresh: true,
-                              shopId: watch.shopDetails?.id.toString(),
-                              cartId: watch.cartId)));
+                  readMain.onNavigation(2,  CartDetailView(
+                      isRefresh: true,
+                      shopId: watch.shopDetails?.id.toString(),
+                      cartId: watch.cartId), context);
+                  readMain.hideBottomNavigationBar();
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => CartDetailView(
+                  //             isRefresh: true,
+                  //             shopId: watch.shopDetails?.id.toString(),
+                  //             cartId: watch.cartId)));
                 } else {
                   readMain.onNavigation(1,  ShopProfileView(
                                   refreshPage: true,

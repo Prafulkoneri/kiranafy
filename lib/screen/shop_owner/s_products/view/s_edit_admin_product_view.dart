@@ -70,33 +70,47 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             widget.isFromAccountScreen == false
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 0,
-                            screenName: SSelectedProductView(
-                              isRefresh: false,
-                              categoryId: widget.categoryId,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  )
-                : Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 4,
-                            screenName:
-                                ShopSeasonalRecommandedOfferProductsView(
-                              selectedProduct: widget.selectedIndex == 0
-                                  ? "recommended"
-                                  : widget.selectedIndex == 1
-                                      ? "seasonal"
-                                      : "fullFill",
-                              isRefresh: false,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  );
+                ?
+            readMain.onNavigation(0, SSelectedProductView(
+              isRefresh: false,
+              categoryId: widget.categoryId,
+            ), context)
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => SMainScreenView(
+            //                 index: 0,
+            //                 screenName: SSelectedProductView(
+            //                   isRefresh: false,
+            //                   categoryId: widget.categoryId,
+            //                 ))),
+            //         (Route<dynamic> route) => false,
+            //       )
+                :
+            readMain.onNavigation(0, ShopSeasonalRecommandedOfferProductsView(
+              selectedProduct: widget.selectedIndex == 0
+                  ? "recommended"
+                  : widget.selectedIndex == 1
+                  ? "seasonal"
+                  : "fullFill",
+              isRefresh: false,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => SMainScreenView(
+            //                 index: 4,
+            //                 screenName:
+            //                     ShopSeasonalRecommandedOfferProductsView(
+            //                   selectedProduct: widget.selectedIndex == 0
+            //                       ? "recommended"
+            //                       : widget.selectedIndex == 1
+            //                           ? "seasonal"
+            //                           : "fullFill",
+            //                   isRefresh: false,
+            //                 ))),
+            //         (Route<dynamic> route) => false,
+            //       );
           },
           title: "Edit Product",
           action: SvgPicture.asset("assets/icons/forward.svg"),

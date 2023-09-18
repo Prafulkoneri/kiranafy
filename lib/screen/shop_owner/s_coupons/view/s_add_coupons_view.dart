@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/controller/s_add_coupons_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -43,6 +45,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
   Widget build(BuildContext context) {
     final watch = context.watch<SAddCouponsController>();
     final read = context.read<SAddCouponsController>();
+    final readMain = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
@@ -50,29 +53,38 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
           title: widget.isEditCoupon == false ? "Add Coupon" : "Edit Coupon",
           onBackBtnPressed: () {
             if (widget.isNavFromDashboard == true) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 3,
-                        screenName: ShopCouponsView(
-                          isRefresh: false,
-                          isNavFromDashBoard: true,
-                        ))),
-                (Route<dynamic> route) => false,
-              );
+
+              readMain.onNavigation(3, ShopCouponsView(
+                isRefresh: false,
+                isNavFromDashBoard: true,
+              ), context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 3,
+              //           screenName: ShopCouponsView(
+              //             isRefresh: false,
+              //             isNavFromDashBoard: true,
+              //           ))),
+              //   (Route<dynamic> route) => false,
+              // );
             } else {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 4,
-                        screenName: ShopCouponsView(
-                          isRefresh: false,
-                          isNavFromDashBoard: false,
-                        ))),
-                (Route<dynamic> route) => false,
-              );
+              readMain.onNavigation(3, ShopCouponsView(
+                isRefresh: false,
+                isNavFromDashBoard: false,
+              ), context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 4,
+              //           screenName: ShopCouponsView(
+              //             isRefresh: false,
+              //             isNavFromDashBoard: false,
+              //           ))),
+              //   (Route<dynamic> route) => false,
+              // );
             }
           },
         ),

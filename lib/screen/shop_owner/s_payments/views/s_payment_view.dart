@@ -45,15 +45,16 @@ class _SPaymentsViewState extends State<SPaymentsView> {
             isBackButtonEnabled:
                 widget.isNavFromAccounts == true ? true : false,
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                          index: 4,
-                          screenName: SAccountScreenView(refresh: true),
-                        )),
-                (Route<dynamic> route) => false,
-              );
+              readMainScreen.onNavigation(4, SAccountScreenView(refresh: true), context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //             index: 4,
+              //             screenName: SAccountScreenView(refresh: true),
+              //           )),
+              //   (Route<dynamic> route) => false,
+              // );
             },
             title: "Payments",
             // isBackButtonEnabled: false,

@@ -54,28 +54,35 @@ class _ShopSeasonalRecommandedOfferProductsViewState
         child: PrimaryAppBar(
             onBackBtnPressed: () {
               widget.selectedProduct == "recommended"
-                  ? Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName: SAccountScreenView(
-                                  refresh: false,
-                                ),
-                              )),
-                      (Route<dynamic> route) => false,
-                    )
-                  : Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SMainScreenView(
-                                index: 0,
-                                screenName: ShopDashBoardView(
-                                  refresh: false,
-                                ),
-                              )),
-                      (Route<dynamic> route) => false,
-                    );
+                  ?
+              readMainScreen.onNavigation(4, SAccountScreenView(
+                refresh: false,
+              ), context)
+              // Navigator.pushAndRemoveUntil(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => SMainScreenView(
+              //                   index: 4,
+              //                   screenName: SAccountScreenView(
+              //                     refresh: false,
+              //                   ),
+              //                 )),
+              //         (Route<dynamic> route) => false,
+              //       )
+                  : readMainScreen.onNavigation(0, ShopDashBoardView(
+                refresh: false,
+              ), context);
+              // Navigator.pushAndRemoveUntil(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => SMainScreenView(
+              //                   index: 0,
+              //                   screenName: ShopDashBoardView(
+              //                     refresh: false,
+              //                   ),
+              //                 )),
+              //         (Route<dynamic> route) => false,
+              //       );
             },
             title: watch.isRecommadedPressed
                 ? "Recommended"
@@ -318,47 +325,65 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             if (element
                                                                     ?.productType ==
                                                                 "admin_product") {
-                                                              Navigator
-                                                                  .pushAndRemoveUntil(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder: (context) => SMainScreenView(
-                                                                        index:
-                                                                            0,
-                                                                        screenName: SEditAdminProductView(
-                                                                            selectedIndex:
-                                                                                0,
-                                                                            productId: element?.id
-                                                                                .toString(),
-                                                                            isFromAccountScreen:
-                                                                                true,
-                                                                            categoryId:
-                                                                                ""))),
-                                                                (Route<dynamic>
-                                                                        route) =>
-                                                                    false,
-                                                              );
+                                                              readMainScreen.onNavigation(0, SEditAdminProductView(
+                                                                  selectedIndex:
+                                                                  0,
+                                                                  productId: element?.id
+                                                                      .toString(),
+                                                                  isFromAccountScreen:
+                                                                  true,
+                                                                  categoryId:
+                                                                  ""), context);
+                                                              // Navigator
+                                                              //     .pushAndRemoveUntil(
+                                                              //   context,
+                                                              //   MaterialPageRoute(
+                                                              //       builder: (context) => SMainScreenView(
+                                                              //           index:
+                                                              //               0,
+                                                              //           screenName: SEditAdminProductView(
+                                                              //               selectedIndex:
+                                                              //                   0,
+                                                              //               productId: element?.id
+                                                              //                   .toString(),
+                                                              //               isFromAccountScreen:
+                                                              //                   true,
+                                                              //               categoryId:
+                                                              //                   ""))),
+                                                              //   (Route<dynamic>
+                                                              //           route) =>
+                                                              //       false,
+                                                              // );
                                                             } else {
-                                                              Navigator
-                                                                  .pushAndRemoveUntil(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder: (context) => SMainScreenView(
-                                                                        index:
-                                                                            0,
-                                                                        screenName: SEditCustomProductView(
-                                                                            selectedIndex:
-                                                                                0,
-                                                                            productId: element?.id
-                                                                                .toString(),
-                                                                            isFromAccountScreen:
-                                                                                true,
-                                                                            categoryId:
-                                                                                ""))),
-                                                                (Route<dynamic>
-                                                                        route) =>
-                                                                    false,
-                                                              );
+                                                              readMainScreen.onNavigation(0, SEditCustomProductView(
+                                                                  selectedIndex:
+                                                                  0,
+                                                                  productId: element?.id
+                                                                      .toString(),
+                                                                  isFromAccountScreen:
+                                                                  true,
+                                                                  categoryId:
+                                                                  ""), context);
+                                                              // Navigator
+                                                              //     .pushAndRemoveUntil(
+                                                              //   context,
+                                                              //   MaterialPageRoute(
+                                                              //       builder: (context) => SMainScreenView(
+                                                              //           index:
+                                                              //               0,
+                                                              //           screenName: SEditCustomProductView(
+                                                              //               selectedIndex:
+                                                              //                   0,
+                                                              //               productId: element?.id
+                                                              //                   .toString(),
+                                                              //               isFromAccountScreen:
+                                                              //                   true,
+                                                              //               categoryId:
+                                                              //                   ""))),
+                                                              //   (Route<dynamic>
+                                                              //           route) =>
+                                                              //       false,
+                                                              // );
                                                             }
                                                           },
                                                           child: Container(
@@ -803,39 +828,51 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 if (element
                                                                         ?.productType ==
                                                                     "admin_product") {
-                                                                  Navigator
-                                                                      .pushAndRemoveUntil(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) => SMainScreenView(
-                                                                            index: 0,
-                                                                            screenName: SEditAdminProductView(
-                                                                              selectedIndex: 1,
-                                                                              productId: element?.id.toString(),
-                                                                              categoryId: "",
-                                                                              isFromAccountScreen: true,
-                                                                            ))),
-                                                                    (Route<dynamic>
-                                                                            route) =>
-                                                                        false,
-                                                                  );
+                                                                  readMainScreen.onNavigation(0, SEditAdminProductView(
+                                                                    selectedIndex: 1,
+                                                                    productId: element?.id.toString(),
+                                                                    categoryId: "",
+                                                                    isFromAccountScreen: true,
+                                                                  ), context);
+                                                                  // Navigator
+                                                                  //     .pushAndRemoveUntil(
+                                                                  //   context,
+                                                                  //   MaterialPageRoute(
+                                                                  //       builder: (context) => SMainScreenView(
+                                                                  //           index: 0,
+                                                                  //           screenName: SEditAdminProductView(
+                                                                  //             selectedIndex: 1,
+                                                                  //             productId: element?.id.toString(),
+                                                                  //             categoryId: "",
+                                                                  //             isFromAccountScreen: true,
+                                                                  //           ))),
+                                                                  //   (Route<dynamic>
+                                                                  //           route) =>
+                                                                  //       false,
+                                                                  // );
                                                                 } else {
-                                                                  Navigator
-                                                                      .pushAndRemoveUntil(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) => SMainScreenView(
-                                                                            index: 0,
-                                                                            screenName: SEditCustomProductView(
-                                                                              selectedIndex: 1,
-                                                                              productId: element?.id.toString(),
-                                                                              categoryId: "",
-                                                                              isFromAccountScreen: true,
-                                                                            ))),
-                                                                    (Route<dynamic>
-                                                                            route) =>
-                                                                        false,
-                                                                  );
+                                                                  readMainScreen.onNavigation(0, SEditCustomProductView(
+                                                                    selectedIndex: 1,
+                                                                    productId: element?.id.toString(),
+                                                                    categoryId: "",
+                                                                    isFromAccountScreen: true,
+                                                                  ), context);
+                                                                  // Navigator
+                                                                  //     .pushAndRemoveUntil(
+                                                                  //   context,
+                                                                  //   MaterialPageRoute(
+                                                                  //       builder: (context) => SMainScreenView(
+                                                                  //           index: 0,
+                                                                  //           screenName: SEditCustomProductView(
+                                                                  //             selectedIndex: 1,
+                                                                  //             productId: element?.id.toString(),
+                                                                  //             categoryId: "",
+                                                                  //             isFromAccountScreen: true,
+                                                                  //           ))),
+                                                                  //   (Route<dynamic>
+                                                                  //           route) =>
+                                                                  //       false,
+                                                                  // );
                                                                 }
                                                               },
                                                               child: Container(
@@ -1271,39 +1308,51 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 if (element
                                                                         ?.productType ==
                                                                     "admin_product") {
-                                                                  Navigator
-                                                                      .pushAndRemoveUntil(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) => SMainScreenView(
-                                                                            index: 0,
-                                                                            screenName: SEditAdminProductView(
-                                                                              selectedIndex: 2,
-                                                                              productId: element?.id.toString(),
-                                                                              categoryId: "",
-                                                                              isFromAccountScreen: true,
-                                                                            ))),
-                                                                    (Route<dynamic>
-                                                                            route) =>
-                                                                        false,
-                                                                  );
+                                                                  readMainScreen.onNavigation(0, SEditAdminProductView(
+                                                                    selectedIndex: 2,
+                                                                    productId: element?.id.toString(),
+                                                                    categoryId: "",
+                                                                    isFromAccountScreen: true,
+                                                                  ), context);
+                                                                  // Navigator
+                                                                  //     .pushAndRemoveUntil(
+                                                                  //   context,
+                                                                  //   MaterialPageRoute(
+                                                                  //       builder: (context) => SMainScreenView(
+                                                                  //           index: 0,
+                                                                  //           screenName: SEditAdminProductView(
+                                                                  //             selectedIndex: 2,
+                                                                  //             productId: element?.id.toString(),
+                                                                  //             categoryId: "",
+                                                                  //             isFromAccountScreen: true,
+                                                                  //           ))),
+                                                                  //   (Route<dynamic>
+                                                                  //           route) =>
+                                                                  //       false,
+                                                                  // );
                                                                 } else {
-                                                                  Navigator
-                                                                      .pushAndRemoveUntil(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) => SMainScreenView(
-                                                                            index: 0,
-                                                                            screenName: SEditCustomProductView(
-                                                                              selectedIndex: 2,
-                                                                              productId: element?.id.toString(),
-                                                                              categoryId: "",
-                                                                              isFromAccountScreen: true,
-                                                                            ))),
-                                                                    (Route<dynamic>
-                                                                            route) =>
-                                                                        false,
-                                                                  );
+                                                                  readMainScreen.onNavigation(0, SEditCustomProductView(
+                                                                  selectedIndex: 2,
+                                                                  productId: element?.id.toString(),
+                                                                categoryId: "",
+                                                                isFromAccountScreen: true,
+                                                                ), context);
+                                                            //       Navigator
+                                                            //           .pushAndRemoveUntil(
+                                                            //         context,
+                                                            // 0        MaterialPageRoute(
+                                                            //             builder: (context) => SMainScreenView(
+                                                            //                 index: 0,
+                                                            //                 screenName: SEditCustomProductView(
+                                                            //                   selectedIndex: 2,
+                                                            //                   productId: element?.id.toString(),
+                                                            //                   categoryId: "",
+                                                            //                   isFromAccountScreen: true,
+                                                            //                 ))),
+                                                            //         (Route<dynamic>
+                                                            //                 route) =>
+                                                            //             false,
+                                                            //       );
                                                                 }
                                                               },
                                                               child: Container(

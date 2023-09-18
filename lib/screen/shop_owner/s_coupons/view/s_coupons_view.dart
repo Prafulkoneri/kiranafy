@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/s_coupons/controller/shop_
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_add_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view_details.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -41,6 +42,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
   @override
   Widget build(BuildContext context) {
     final read = context.read<SCouponsListController>();
+    final readMain = context.read<SMainScreenController>();
     final watch = context.watch<SCouponsListController>();
     final watchDashBoardScreen = context.read<SDashBoardController>();
     // final key = new GlobalKey<ScaffoldState>();
@@ -52,16 +54,21 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
             isBackButtonEnabled:
                 widget.isNavFromDashBoard == true ? false : true,
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 4,
-                        screenName: SAccountScreenView(
-                          refresh: false,
-                        ))),
-                (Route<dynamic> route) => false,
-              );
+
+              readMain.onNavigation(4, SAccountScreenView(
+                refresh: false,
+              ), context);
+
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 4,
+              //           screenName: SAccountScreenView(
+              //             refresh: false,
+              //           ))),
+              //   (Route<dynamic> route) => false,
+              // );
             },
             title: "Coupon",
             action: SvgPicture.asset("assets/icons/addressadd.svg"),
@@ -69,29 +76,37 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
               if (watchDashBoardScreen.specialBenifitlist
                   .contains("create_offer_coupons")) {
                 if (widget.isNavFromDashBoard == true) {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 3,
-                            screenName: SAddCouponsView(
-                              isEditCoupon: false,
-                              isNavFromDashboard: true,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(3, SAddCouponsView(
+                    isEditCoupon: false,
+                    isNavFromDashboard: true,
+                  ), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => SMainScreenView(
+                  //           index: 3,
+                  //           screenName: SAddCouponsView(
+                  //             isEditCoupon: false,
+                  //             isNavFromDashboard: true,
+                  //           ))),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 } else {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 4,
-                            screenName: SAddCouponsView(
-                              isEditCoupon: false,
-                              isNavFromDashboard: false,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  );
+                  readMain.onNavigation(4, SAddCouponsView(
+                    isEditCoupon: false,
+                    isNavFromDashboard: false,
+                  ), context);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => SMainScreenView(
+                  //           index: 4,
+                  //           screenName: SAddCouponsView(
+                  //             isEditCoupon: false,
+                  //             isNavFromDashboard: false,
+                  //           ))),
+                  //   (Route<dynamic> route) => false,
+                  // );
                 }
               } else {
                 Utils.showPrimarySnackbar(
@@ -385,43 +400,59 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                               if (widget
                                                                       .isNavFromDashBoard ==
                                                                   true) {
-                                                                Navigator
-                                                                    .pushAndRemoveUntil(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) => SMainScreenView(
-                                                                          index: 3,
-                                                                          screenName: SAddCouponsView(
-                                                                            isEditCoupon:
-                                                                                true,
-                                                                            couponId:
-                                                                                element?.id.toString(),
-                                                                            isNavFromDashboard:
-                                                                                true,
-                                                                          ))),
-                                                                  (Route<dynamic>
-                                                                          route) =>
-                                                                      false,
-                                                                );
+                                                                readMain.onNavigation(3, SAddCouponsView(
+                                                                  isEditCoupon:
+                                                                  true,
+                                                                  couponId:
+                                                                  element?.id.toString(),
+                                                                  isNavFromDashboard:
+                                                                  true,
+                                                                ), context);
+                                                                // Navigator
+                                                                //     .pushAndRemoveUntil(
+                                                                //   context,
+                                                                //   MaterialPageRoute(
+                                                                //       builder: (context) => SMainScreenView(
+                                                                //           index: 3,
+                                                                //           screenName: SAddCouponsView(
+                                                                //             isEditCoupon:
+                                                                //                 true,
+                                                                //             couponId:
+                                                                //                 element?.id.toString(),
+                                                                //             isNavFromDashboard:
+                                                                //                 true,
+                                                                //           ))),
+                                                                //   (Route<dynamic>
+                                                                //           route) =>
+                                                                //       false,
+                                                                // );
                                                               } else {
-                                                                Navigator
-                                                                    .pushAndRemoveUntil(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) => SMainScreenView(
-                                                                          index: 4,
-                                                                          screenName: SAddCouponsView(
-                                                                            isEditCoupon:
-                                                                                true,
-                                                                            couponId:
-                                                                                element?.id.toString(),
-                                                                            isNavFromDashboard:
-                                                                                false,
-                                                                          ))),
-                                                                  (Route<dynamic>
-                                                                          route) =>
-                                                                      false,
-                                                                );
+                                                                readMain.onNavigation(3, SAddCouponsView(
+                                                                  isEditCoupon:
+                                                                  true,
+                                                                  couponId:
+                                                                  element?.id.toString(),
+                                                                  isNavFromDashboard:
+                                                                  false,
+                                                                ), context);
+                                                                // Navigator
+                                                                //     .pushAndRemoveUntil(
+                                                                //   context,
+                                                                //   MaterialPageRoute(
+                                                                //       builder: (context) => SMainScreenView(
+                                                                //           index: 4,
+                                                                //           screenName: SAddCouponsView(
+                                                                //             isEditCoupon:
+                                                                //                 true,
+                                                                //             couponId:
+                                                                //                 element?.id.toString(),
+                                                                //             isNavFromDashboard:
+                                                                //                 false,
+                                                                //           ))),
+                                                                //   (Route<dynamic>
+                                                                //           route) =>
+                                                                //       false,
+                                                                // );
                                                               }
                                                             } else {
                                                               Utils.showPrimarySnackbar(

@@ -21,6 +21,7 @@ import 'package:local_supper_market/screen/customer/order_status/view/order_stat
 import 'package:local_supper_market/screen/customer/order_summary/order_products.dart';
 import 'package:local_supper_market/screen/customer/return/view/return_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
+import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/rating.dart';
@@ -686,7 +687,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                       ),
                                                       onPressed: () {},
                                                       child: Text(
-                                                        "${watch.deliveryAddressDetails?.deliveryAddressType}",
+                                                        "${watch.deliveryAddressDetails?.deliveryAddressType}".capitalize(),
                                                         // "${element.deliveryAddressType}",
                                                         // "Home",
                                                         style:
@@ -1338,14 +1339,17 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     child: PrimaryButton(
                                       color: Color(0xffD1D1D1),
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CustomerProductReturnView(
-                                                      orderId: watch.orderId
-                                                          .toString())),
-                                        );
+                                        readMain.onNavigation(0,      CustomerProductReturnView(
+                                            orderId: watch.orderId
+                                                .toString()), context);
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           CustomerProductReturnView(
+                                        //               orderId: watch.orderId
+                                        //                   .toString())),
+                                        // );
                                       },
 
                                       // style: style,
@@ -1383,14 +1387,17 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     child: PrimaryButton(
                                       color: Color(0xffD1D1D1),
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CustomerProductReturnView(
-                                                      orderId: watch.orderId
-                                                          .toString())),
-                                        );
+                                        readMain.onNavigation(0,      CustomerProductReturnView(
+                                            orderId: watch.orderId
+                                                .toString()), context);
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           CustomerProductReturnView(
+                                        //               orderId: watch.orderId
+                                        //                   .toString())),
+                                        // );
                                       },
 
                                       // style: style,

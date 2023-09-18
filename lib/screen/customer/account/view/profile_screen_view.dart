@@ -15,7 +15,6 @@ import 'package:local_supper_market/screen/customer/delivery_address/view/my_del
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/view/update_profile_view.dart';
@@ -23,6 +22,7 @@ import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_v
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,8 +32,8 @@ import 'package:provider/provider.dart';
 // import '../controller/profile_controller.dart';
 
 class ProfileScreenView extends StatefulWidget {
-  final bool ? isRefreshed;
-  const ProfileScreenView({super.key,required this.isRefreshed});
+  final bool? isRefreshed;
+  const ProfileScreenView({super.key, required this.isRefreshed});
 
   @override
   State<ProfileScreenView> createState() => _ProfileScreenViewState();
@@ -43,7 +43,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileController>().initState(context,widget.isRefreshed);
+      context.read<ProfileController>().initState(context, widget.isRefreshed);
     });
   }
 
@@ -143,7 +143,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 InkWell(
                                   onTap: () {
                                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
-                                    readMain.onNavigation(4,UpdateProfileView(), context);
+                                    readMain.onNavigation(
+                                        4, UpdateProfileView(), context);
                                     // Navigator.pushAndRemoveUntil(
                                     //   context,
                                     //   MaterialPageRoute(
@@ -235,7 +236,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
 
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4,UpdateProfileView(), context);
+                  readMain.onNavigation(4, UpdateProfileView(), context);
 
                   // Navigator.pushAndRemoveUntil(
                   //   context,
@@ -269,14 +270,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'Edit Profile',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Edit Profile',
                       ),
                     ],
                   ),
@@ -316,15 +311,19 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'My Orders',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'My Orders',
                       ),
+
+                      // Text(
+                      //   'My Orders',
+                      //   style: GoogleFonts.dmSans(
+                      //     textStyle: TextStyle(
+                      //         color: Black,
+                      //         fontSize: 14.sp,
+                      //         fontWeight: FontWeight.w400),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -332,15 +331,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ///////////////////////
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, CustomerNotificationsScreenView(), context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 4,
-                  //           screenName: CustomerNotificationsScreenView())),
-                  //   (Route<dynamic> route) => false,
-                  // );
+                  readMain.onNavigation(
+                      4, CustomerNotificationsScreenView(), context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -363,14 +355,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'Notifications',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Notifications',
                       ),
                     ],
                   ),
@@ -380,14 +366,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
 
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4,CFavouritesView(), context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 4, screenName: CFavouritesView())),
-                  //   (Route<dynamic> route) => true,
-                  // );
+                  readMain.onNavigation(4, CFavouritesView(), context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -410,14 +389,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'Favourites',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Favourites',
                       ),
                     ],
                   ),
@@ -428,16 +401,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
 
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 4,
-                  //           screenName:
-                  //               MyDeliveryAddressView(isRefresh: true))),
-                  //   (Route<dynamic> route) => false,
-                  // );
+                  readMain.onNavigation(
+                      4, MyDeliveryAddressView(isRefresh: true), context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -460,14 +425,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 14.w,
                       ),
-                      Text(
-                        'My Delivery Addresses',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'My Delivery Addresses',
                       ),
                     ],
                   ),
@@ -505,14 +464,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 14.w,
                       ),
-                      Text(
-                        'Customer Support',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Customer Support',
                       ),
                     ],
                   ),
@@ -550,14 +503,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'About Us',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'About Us',
                       ),
                     ],
                   ),
@@ -595,15 +542,18 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'FAQ',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'FAQ',
                       ),
+                      // Text(
+                      //   'FAQ',
+                      //   style: GoogleFonts.dmSans(
+                      //     textStyle: TextStyle(
+                      //         color: Black,
+                      //         fontSize: 14.sp,
+                      //         fontWeight: FontWeight.w400),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -634,14 +584,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'Share App',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Share App',
                       ),
                     ],
                   ),
@@ -679,52 +623,13 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'Privacy Policy',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Privacy Policy',
                       ),
                     ],
                   ),
                 ),
               ),
-              // Container(
-              // margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-              // padding: EdgeInsets.only(bottom: 15.w),
-              // decoration: BoxDecoration(
-              //   border: Border(
-              //     bottom: BorderSide(width: 1, color: grey10),
-              //   ),
-              //   // color: Colors.white,
-              // ),
-              // child: Row(
-              //   mainAxisAlignment: MainAxisAlignment.start,
-              //   crossAxisAlignment: CrossAxisAlignment.end,
-              //   children: [
-              //     SvgPicture.asset(
-              //       'assets/icons/rateus.svg',
-              //       // width: 14.w,
-              //       // height: 13.h,
-              //     ),
-              //     SizedBox(
-              //       width: 18.w,
-              //     ),
-              //     Text(
-              //       'Rate Us',
-              //       style: GoogleFonts.dmSans(
-              //         textStyle: TextStyle(
-              //             color: Black,
-              //             fontSize: 14.sp,
-              //             fontWeight: FontWeight.w400),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // ),
               GestureDetector(
                 onTap: () async {
                   if (await canLaunch(
@@ -763,14 +668,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'Rate Us',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Rate Us',
                       ),
                     ],
                   ),
@@ -808,14 +707,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'Settings',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Settings',
                       ),
                     ],
                   ),
@@ -854,14 +747,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      Text(
-                        'Sign Out',
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      AccountScreen(
+                        text: 'Sign Out',
                       ),
                     ],
                   ),

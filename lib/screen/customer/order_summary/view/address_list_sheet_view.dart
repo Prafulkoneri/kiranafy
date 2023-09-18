@@ -3,6 +3,7 @@ import 'package:local_supper_market/screen/customer/delivery_address/view/add_ad
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
+import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,7 +64,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            element?.deliveryAddressType ?? "",
+                            "${element?.deliveryAddressType.toString()}".capitalize(),
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17.sp,

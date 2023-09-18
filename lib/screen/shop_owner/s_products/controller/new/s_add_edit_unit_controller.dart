@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/add_update_unit_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/edit_unit_product_category_model.dart';
@@ -19,6 +20,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/unit_list_to_create_product_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -439,14 +441,16 @@ class AddEditUnitController extends ChangeNotifier{
       log(response.body);
       print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
-              (Route<dynamic> route) => false,
-        );
+        final read=Provider.of<SMainScreenController>(context,listen: false);
+        read.onNavigation(0,  UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 0,
+        //           screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
+        //       (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         showLoader(false);
@@ -559,14 +563,16 @@ class AddEditUnitController extends ChangeNotifier{
     await request.send().then((response) {
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
-              (Route<dynamic> route) => false,
-        );
+        final read=Provider.of<SMainScreenController>(context,listen: false);
+        read.onNavigation(0, UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 0,
+        //           screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
+        //       (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
       } else {

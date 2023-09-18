@@ -38,23 +38,27 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
   Widget build(BuildContext context) {
     final watch = context.watch<SShopReviewListController>();
     final read = context.read<SShopReviewListController>();
-    final watchMain = context.watch<SMainScreenController>();
+
+    final readMain = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 0,
-                      screenName: ShopDashBoardView(
-                        refresh: true,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(0, ShopDashBoardView(
+              refresh: true,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 0,
+            //           screenName: ShopDashBoardView(
+            //             refresh: true,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Reviews",
           onActionTap: () {},

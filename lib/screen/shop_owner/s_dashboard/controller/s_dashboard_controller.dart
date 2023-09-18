@@ -33,10 +33,10 @@ class SDashBoardController extends ChangeNotifier {
   List<SubscriptionHistory>? subscriptionHistory;
   List specialBenifitlist = [];
 
-  void onCategorySelect(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SSCategoryListView()));
-  }
+  // void onCategorySelect(context) {
+  //   Navigator.push(
+  //       context, MaterialPageRoute(builder: (context) => SSCategoryListView()));
+  // }
 
   // void onEditBtnClicked(context) {
   //   Navigator.push(

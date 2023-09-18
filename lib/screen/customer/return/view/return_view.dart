@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/return/controller/return_view_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -36,12 +38,16 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
   Widget build(BuildContext context) {
     final watch = context.watch<ReturnOrderController>();
     final read = context.read<ReturnOrderController>();
+    final readMain = context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pop(context);
+            readMain.onNavigation(0,OrderDeliveryView(
+              screenName: "myorderview",
+                isRefresh: false,
+                orderId: watch.orderId.toString()), context);
           },
           title: "Product Return Request",
         ),

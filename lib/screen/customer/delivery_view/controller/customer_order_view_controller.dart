@@ -502,6 +502,7 @@ class CustomerOrderViewController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final read=Provider.of<MainScreenController>(context,listen: false);
         read.onNavigation(2, CartScreenView(), context);
+        read.showBottomNavigationBar();
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
@@ -509,7 +510,6 @@ class CustomerOrderViewController extends ChangeNotifier {
         //           MainScreenView(index: 2, screenName: CartScreenView())),
         //   (Route<dynamic> route) => false,
         // );
-
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

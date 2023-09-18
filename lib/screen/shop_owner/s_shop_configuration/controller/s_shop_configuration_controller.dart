@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_response_model.dart';
@@ -17,6 +19,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/repos
 import 'package:local_supper_market/utils/common_functions.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -496,32 +499,40 @@ class SShopConfigurationController extends ChangeNotifier {
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        final read =Provider.of<SMainScreenController>(context,listen: false);
         LoadingOverlay.of(context).hide();
         pref.setString("status", "loggedIn");
         if (isInitialConfiguration) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                      index: 0,
-                      screenName: ShopDashBoardView(
-                        refresh: true,
-                      ),
-                    )),
-            (Route<dynamic> route) => false,
-          );
+          read.onNavigation(0,ShopDashBoardView(
+            refresh: true,
+          ), context);
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => SMainScreenView(
+          //             index: 0,
+          //             screenName: ShopDashBoardView(
+          //               refresh: true,
+          //             ),
+          //           )),
+          //   (Route<dynamic> route) => false,
+          // );
         } else {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                      index: 4,
-                      screenName: SAccountScreenView(
-                        refresh: true,
-                      ),
-                    )),
-            (Route<dynamic> route) => false,
-          );
+
+          read.onNavigation(4,SAccountScreenView(
+            refresh: true,
+          ), context);
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => SMainScreenView(
+          //             index: 4,
+          //             screenName: SAccountScreenView(
+          //               refresh: true,
+          //             ),
+          //           )),
+          //   (Route<dynamic> route) => false,
+          // );
         }
         // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>SMainScreenView(index: 4,screenName:SAccountScreenView(),)));
 
@@ -607,33 +618,38 @@ class SShopConfigurationController extends ChangeNotifier {
     await request.send().then((response) {
       print(response.statusCode);
       if (response.statusCode == 200) {
+        final read=Provider.of<SMainScreenController>(context,listen: false);
         print("sucesss");
         LoadingOverlay.of(context).hide();
         pref.setString("status", "loggedIn");
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         if (isInitialConfiguration) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                      index: 0,
-                      screenName: ShopDashBoardView(
-                        refresh: true,
-                      ),
-                    )),
-            (Route<dynamic> route) => false,
-          );
+          read.onNavigation(0,ShopDashBoardView(
+            refresh: true,
+          ), context);
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => SMainScreenView(
+          //             index: 0,
+          //             screenName: ShopDashBoardView(
+          //               refresh: true,
+          //             ),
+          //           )),
+          //   (Route<dynamic> route) => false,
+          // );
         } else {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                      index: 4,
-                      screenName: SAccountScreenView(refresh: true),
-                    )),
-            (Route<dynamic> route) => false,
-          );
+          read.onNavigation(4,SAccountScreenView(refresh: true), context);
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => SMainScreenView(
+          //             index: 4,
+          //             screenName: SAccountScreenView(refresh: true),
+          //           )),
+          //   (Route<dynamic> route) => false,
+          // );
         }
       } else {
         LoadingOverlay.of(context).hide();

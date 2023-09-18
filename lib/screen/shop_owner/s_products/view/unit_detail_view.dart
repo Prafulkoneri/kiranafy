@@ -52,37 +52,50 @@ class _UnitDetailViewState extends State<UnitDetailView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
               onBackBtnPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SMainScreenView(
-                          index: 0,
-                          screenName: SSelectedProductView(
-                              isRefresh: true, //
-                              categoryId: widget.categoryId))),
-                  (Route<dynamic> route) => false,
-                );
+                readMainScreen.onNavigation(0, SSelectedProductView(
+                    isRefresh: true, //
+                    categoryId: widget.categoryId), context);
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => SMainScreenView(
+                //           index: 0,
+                //           screenName: SSelectedProductView(
+                //               isRefresh: true, //
+                //               categoryId: widget.categoryId))),
+                //   (Route<dynamic> route) => false,
+                // );
               },
               title: "Unit Details",
               action: SvgPicture.asset("assets/icons/addressadd.svg"),
               onActionTap: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SMainScreenView(
-                          index: 0,
-                          screenName: AddUnitView(
-                            isEdit: false,
-                            categoryId: widget.categoryId,
-                            productId: widget.productId,
-                            productType: widget.productType,
-                            productName: watch.getproductunitlistdata
-                                ?.productDetails?.productName
-                                .toString(),
-                            productUnitId: "",
-                          ))),
-                  (Route<dynamic> route) => false,
-                );
+                readMainScreen.onNavigation(0, AddUnitView(
+                  isEdit: false,
+                  categoryId: widget.categoryId,
+                  productId: widget.productId,
+                  productType: widget.productType,
+                  productName: watch.getproductunitlistdata
+                      ?.productDetails?.productName
+                      .toString(),
+                  productUnitId: "",
+                ), context);
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => SMainScreenView(
+                //           index: 0,
+                //           screenName: AddUnitView(
+                //             isEdit: false,
+                //             categoryId: widget.categoryId,
+                //             productId: widget.productId,
+                //             productType: widget.productType,
+                //             productName: watch.getproductunitlistdata
+                //                 ?.productDetails?.productName
+                //                 .toString(),
+                //             productUnitId: "",
+                //           ))),
+                //   (Route<dynamic> route) => false,
+                // );
               }),
         ),
         body: watch.isLoading
@@ -283,33 +296,48 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                       children: [
                                                         InkWell(
                                                           onTap: () {
-                                                            Navigator
-                                                                .pushAndRemoveUntil(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      SMainScreenView(
-                                                                          index:
-                                                                              0,
-                                                                          screenName:
-                                                                              AddUnitView(
-                                                                            categoryId:
-                                                                                widget.categoryId,
-                                                                            productType:
-                                                                                watch.getproductunitlistdata?.productDetails?.productType ?? "",
-                                                                            productId:
-                                                                                watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
-                                                                            productName:
-                                                                                watch.getproductunitlistdata?.productDetails?.productName.toString(),
-                                                                            productUnitId:
-                                                                                element?.id.toString(),
-                                                                            isEdit:
-                                                                                true,
-                                                                          ))),
-                                                              (Route<dynamic>
-                                                                      route) =>
-                                                                  false,
-                                                            );
+
+                                                            readMainScreen.onNavigation(0,AddUnitView(
+                                                              categoryId:
+                                                              widget.categoryId,
+                                                              productType:
+                                                              watch.getproductunitlistdata?.productDetails?.productType ?? "",
+                                                              productId:
+                                                              watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
+                                                              productName:
+                                                              watch.getproductunitlistdata?.productDetails?.productName.toString(),
+                                                              productUnitId:
+                                                              element?.id.toString(),
+                                                              isEdit:
+                                                              true,
+                                                            ), context);
+                                                            // Navigator
+                                                            //     .pushAndRemoveUntil(
+                                                            //   context,
+                                                            //   MaterialPageRoute(
+                                                            //       builder: (context) =>
+                                                            //           SMainScreenView(
+                                                            //               index:
+                                                            //                   0,
+                                                            //               screenName:
+                                                            //                   AddUnitView(
+                                                            //                 categoryId:
+                                                            //                     widget.categoryId,
+                                                            //                 productType:
+                                                            //                     watch.getproductunitlistdata?.productDetails?.productType ?? "",
+                                                            //                 productId:
+                                                            //                     watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
+                                                            //                 productName:
+                                                            //                     watch.getproductunitlistdata?.productDetails?.productName.toString(),
+                                                            //                 productUnitId:
+                                                            //                     element?.id.toString(),
+                                                            //                 isEdit:
+                                                            //                     true,
+                                                            //               ))),
+                                                            //   (Route<dynamic>
+                                                            //           route) =>
+                                                            //       false,
+                                                            // );
                                                           },
                                                           child: Container(
                                                             padding:

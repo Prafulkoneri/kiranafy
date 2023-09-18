@@ -195,15 +195,22 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                             onTap: () {
                               if (element?.notificationType == "order") {
                                 readOrderStatus.onTabClicked(0);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShopOrderView(
-                                              fromOrderStatus: true,
-                                              selectedIndex: 0,
-                                              orderId:
-                                                  element?.orderId.toString(),
-                                            )));
+                                readMainScreen.onNavigation(1, ShopOrderView(
+                                  fromOrderStatus: true,
+                                  selectedIndex: 0,
+                                  orderId:
+                                  element?.orderId.toString(),
+                                ), context);
+                                readMainScreen.hideBottomNavigationBar();
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => ShopOrderView(
+                                //               fromOrderStatus: true,
+                                //               selectedIndex: 0,
+                                //               orderId:
+                                //                   element?.orderId.toString(),
+                                //             )));
                               }
                             },
                             child: Container(

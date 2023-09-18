@@ -12,6 +12,7 @@ import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/model/order_invoice_download_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_invoiec_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/payment_refund/view/payment_refund_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/cancel_model.dart';
@@ -33,6 +34,7 @@ import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopOwnerOrderViewController extends ChangeNotifier {
@@ -643,17 +645,21 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         refundPayableAmount.clear();
         upiIdController.clear();
         reasonController.clear();
-
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 2,
-                  screenName: SPaymentRefundList(
-                    isNavFromAccounts: false,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
+    final read=Provider.of<SMainScreenController>(context,listen: false);
+        read.onNavigation(2, SPaymentRefundList(
+          isNavFromAccounts: false,
+        ), context);
+        read.showBottomNavigationBar();
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 2,
+        //           screenName: SPaymentRefundList(
+        //             isNavFromAccounts: false,
+        //           ))),
+        //   (Route<dynamic> route) => false,
+        // );
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();

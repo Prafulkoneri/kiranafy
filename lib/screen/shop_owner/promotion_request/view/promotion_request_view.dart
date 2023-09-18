@@ -35,16 +35,19 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
           child: PrimaryAppBar(
             title: "Promotion form",
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 4,
-                        screenName: SAccountScreenView(
-                          refresh: false,
-                        ))),
-                (Route<dynamic> route) => false,
-              );
+              readMainScreen.onNavigation(4, SAccountScreenView(
+                refresh: false,
+              ), context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 4,
+              //           screenName: SAccountScreenView(
+              //             refresh: false,
+              //           ))),
+              //   (Route<dynamic> route) => false,
+              // );
             },
           ),
         ),

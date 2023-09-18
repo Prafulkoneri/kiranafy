@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/return/model/check_product_model.dart';
 import 'package:local_supper_market/screen/customer/return/model/return_model.dart';
 import 'package:local_supper_market/screen/customer/return/model/sumbit_return_order_model.dart';
@@ -10,6 +11,7 @@ import 'package:local_supper_market/screen/customer/return/repository/submit_ret
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReturnOrderController extends ChangeNotifier {
@@ -211,13 +213,18 @@ class ReturnOrderController extends ChangeNotifier {
       final result =
           SubmitReturnOrderResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => OrderDeliveryView(
-                      screenName: "myorderview",
-                      orderId: orderId,
-                    )));
+        final read=Provider.of<MainScreenController>(context,listen: false);
+        read.onNavigation(0, OrderDeliveryView(
+                        screenName: "myorderview",
+                        orderId: orderId,
+                      ), context);
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => OrderDeliveryView(
+        //               screenName: "myorderview",
+        //               orderId: orderId,
+        //             )));
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         LoadingOverlay.of(context).hide();

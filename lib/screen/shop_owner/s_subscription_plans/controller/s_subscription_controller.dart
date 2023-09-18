@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
@@ -10,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repos
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/subscription_plan_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SSubscriptionController extends ChangeNotifier {
@@ -176,16 +178,19 @@ class SSubscriptionController extends ChangeNotifier {
           BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
+        final read=Provider.of<SMainScreenController>(context,listen: false);
         LoadingOverlay.of(context).hide();
         if (loggedIn) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                    index: 4,
-                    screenName: SMySubscriptionView(screenName: "accounts"))),
-            (Route<dynamic> route) => false,
-          );
+          read.onNavigation(4, SMySubscriptionView(screenName: "accounts"), context);
+          read.showBottomNavigationBar();
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => SMainScreenView(
+          //           index: 4,
+          //           screenName: SMySubscriptionView(screenName: "accounts"))),
+          //   (Route<dynamic> route) => false,
+          // );
         } else {
           SharedPreferences pref = await SharedPreferences.getInstance();
           pref.setString('status', 'subscriptionCompleted');

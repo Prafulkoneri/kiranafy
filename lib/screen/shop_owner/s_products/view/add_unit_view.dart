@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_add_coupons_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/new/s_add_edit_unit_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
@@ -57,25 +58,32 @@ class _AddUnitViewState extends State<AddUnitView> {
   Widget build(BuildContext context) {
     final watch = context.watch<AddEditUnitController>();
     final read = context.read<AddEditUnitController>();
+    final readMain = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 0,
-                        screenName: UnitDetailView(
-                          refresh: false, //
-                          categoryId: widget.categoryId,
-                          productType: widget.productType,
-                          productId: widget.productId,
-                        ))),
-                (Route<dynamic> route) => false,
-              );
+              readMain.onNavigation(0, UnitDetailView(
+                refresh: false, //
+                categoryId: widget.categoryId,
+                productType: widget.productType,
+                productId: widget.productId,
+              ), context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 0,
+              //           screenName: UnitDetailView(
+              //             refresh: false, //
+              //             categoryId: widget.categoryId,
+              //             productType: widget.productType,
+              //             productId: widget.productId,
+              //           ))),
+              //   (Route<dynamic> route) => false,
+              // );
             },
             title: "Add Unit",
             action: SvgPicture.asset("assets/icons/forward.svg"),

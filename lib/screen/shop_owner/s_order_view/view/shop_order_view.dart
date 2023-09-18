@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_view/controller/sh
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/cancel_reason_bottom_sheet_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/delivery_code_bottom_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_products.dart';
+import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -61,25 +62,31 @@ class _ShopOrderViewState extends State<ShopOrderView> {
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             widget.fromOrderStatus == true
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 0,
-                            screenName: SOrderStatusView(
-                                selectedIndex: widget.selectedIndex))),
-                    (Route<dynamic> route) => false,
-                  )
-                : Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 0,
-                            screenName: SPaymentRefundList(
-                              isNavFromAccounts: false,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  );
+                ? readMainScreen.onNavigation(1, SOrderStatusView(
+                selectedIndex: widget.selectedIndex), context)
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => SMainScreenView(
+            //                 index: 0,
+            //                 screenName: SOrderStatusView(
+            //                     selectedIndex: widget.selectedIndex))),
+            //         (Route<dynamic> route) => false,
+            //       )
+                :
+            readMainScreen.onNavigation(1, SPaymentRefundList(
+              isNavFromAccounts: false,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => SMainScreenView(
+            //                 index: 0,
+            //                 screenName: SPaymentRefundList(
+            //                   isNavFromAccounts: false,
+            //                 ))),
+            //         (Route<dynamic> route) => false,
+            //       );
             readMainScreen.showBottomNavigationBar();
           },
           title: "Order",
@@ -670,7 +677,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               ),
                                               onPressed: () {},
                                               child: Text(
-                                                "${watch.deliveryAddressDetails?.deliveryAddressType}",
+                                                "${watch.deliveryAddressDetails?.deliveryAddressType}".capitalize(),
                                                 // "${element.deliveryAddressType}",
                                                 // "Home",
                                                 style: GoogleFonts.dmSans(

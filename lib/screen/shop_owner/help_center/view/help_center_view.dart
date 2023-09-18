@@ -37,16 +37,19 @@ class _SHelpCenterViewState extends State<SHelpCenterView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 4,
-                        screenName: SAccountScreenView(
-                          refresh: false,
-                        ))),
-                (Route<dynamic> route) => false,
-              );
+              readMainScreen.onNavigation(4, SAccountScreenView(
+                refresh: false,
+              ), context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 4,
+              //           screenName: SAccountScreenView(
+              //             refresh: false,
+              //           ))),
+              //   (Route<dynamic> route) => false,
+              // );
             },
             title: "Help & Support",
             action: SvgPicture.asset("assets/icons/addressadd.svg"),
@@ -76,13 +79,15 @@ class _SHelpCenterViewState extends State<SHelpCenterView> {
                             onTap: () {
                               print("jfgvrhbhewuirhuiewruiyhwrme");
                               // Within the `FirstRoute` widget
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SCustomerSupportView(
-                                        ticketId: element?.id.toString())),
-                              );
+                              readMainScreen.onNavigation(4, SCustomerSupportView(
+                                  ticketId: element?.id.toString()), context);
+                              readMainScreen.hideBottomNavigationBar();
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SCustomerSupportView(
+                              //           ticketId: element?.id.toString())),
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(

@@ -37,16 +37,20 @@ class _ShopSettingViewState extends State<ShopSettingView> {
         child: PrimaryAppBar(
           title: "Settings",
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 4,
-                      screenName: SAccountScreenView(
-                        refresh: false,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+            final read =Provider.of<SMainScreenController>(context,listen: false);
+            read.onNavigation(0,SAccountScreenView(
+              refresh: false,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 4,
+            //           screenName: SAccountScreenView(
+            //             refresh: false,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
         ),
       ),

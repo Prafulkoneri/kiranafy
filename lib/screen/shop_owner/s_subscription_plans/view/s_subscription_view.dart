@@ -7,6 +7,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/controller/s_subscription_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -26,17 +27,7 @@ class SSubscriptionScreenView extends StatefulWidget {
       _SSubscriptionScreenViewState();
 }
 
-// String? selectedValue;
 
-// String radioButtonItem = '';
-
-// bool _isChecked = true;
-// String _currText = '';
-
-// int id = 1;
-// bool _checkbox = false;
-
-// List<String> text = ["InduceSmile.com", "Flutter.io", "google.com"];
 
 class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
   void initState() {
@@ -58,7 +49,14 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
           isBackButtonEnabled: widget.loggedIn == true ? true : false,
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
-            Navigator.pop(context);
+            if(widget.loggedIn==true){
+              readMainScreen.onNavigation(4,SMySubscriptionView(screenName: "accounts"), context);
+              readMainScreen.showBottomNavigationBar();
+            }
+            else{
+              Navigator.pop(context);
+            }
+
           },
           title: "Subscription Plans",
         ),

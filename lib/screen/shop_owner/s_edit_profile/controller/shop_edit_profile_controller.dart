@@ -17,9 +17,11 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_update_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -276,28 +278,36 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
   void onBackPressed(context, fromDashBoard) {
     if (fromDashBoard ?? true) {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SMainScreenView(
-                index: 0,
-                screenName: ShopDashBoardView(
-                  refresh: false,
-                ))),
-        (Route<dynamic> route) => false,
-      );
+      final read=Provider.of<SMainScreenController>(context,listen: false);
+      read.onNavigation(4, ShopDashBoardView(
+        refresh: false,
+      ), context);
+      // Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => SMainScreenView(
+      //           index: 0,
+      //           screenName: ShopDashBoardView(
+      //             refresh: false,
+      //           ))),
+      //   (Route<dynamic> route) => false,
+      // );
       return;
     } else {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SMainScreenView(
-                index: 4,
-                screenName: SAccountScreenView(
-                  refresh: false,
-                ))),
-        (Route<dynamic> route) => false,
-      );
+      final read=Provider.of<SMainScreenController>(context,listen: false);
+      read.onNavigation(4, SAccountScreenView(
+        refresh: false,
+      ), context);
+      // Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => SMainScreenView(
+      //           index: 4,
+      //           screenName: SAccountScreenView(
+      //             refresh: false,
+      //           ))),
+      //   (Route<dynamic> route) => false,
+      // );
       return;
     }
   }
@@ -335,16 +345,20 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 4,
-                  screenName: SAccountScreenView(
-                    refresh: true,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
+        final read=Provider.of<SMainScreenController>(context,listen: false);
+        read.onNavigation(4, SAccountScreenView(
+          refresh: true,
+        ), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 4,
+        //           screenName: SAccountScreenView(
+        //             refresh: true,
+        //           ))),
+        //   (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
 
@@ -841,16 +855,20 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         fileImage2 = File("");
         fileImage3 = File("");
         fileImage4 = File("");
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 4,
-                  screenName: SAccountScreenView(
-                    refresh: true,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
+        final read=Provider.of(context,listen: false);
+        read.onNavigation(4,SAccountScreenView(
+          refresh: true,
+        ), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 4,
+        //           screenName: SAccountScreenView(
+        //             refresh: true,
+        //           ))),
+        //   (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         print("Updated Successfully");

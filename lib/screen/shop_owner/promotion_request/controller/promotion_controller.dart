@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/promotion_request/model/promotion_request_model.dart';
 import 'package:local_supper_market/screen/shop_owner/promotion_request/repository/promotion_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class shopPromotionController extends ChangeNotifier {
@@ -71,16 +73,20 @@ class shopPromotionController extends ChangeNotifier {
         promotionSubjectController.clear();
         planToStartController.clear();
         adsContentController.clear();
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 4,
-                  screenName: SAccountScreenView(
-                    refresh: true,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
+        final read=Provider.of<SMainScreenController>(context,listen: false);
+        read.onNavigation(4, SAccountScreenView(
+          refresh: true,
+        ), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => SMainScreenView(
+        //           index: 4,
+        //           screenName: SAccountScreenView(
+        //             refresh: true,
+        //           ))),
+        //   (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         print(response.body);

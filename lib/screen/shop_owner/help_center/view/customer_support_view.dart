@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -39,18 +41,21 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
   Widget build(BuildContext context) {
     final watch = context.watch<ShopViewTicketController>();
     final read = context.read<ShopViewTicketController>();
+    final readMain = context.read<SMainScreenController>();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SMainScreenView(
-                        index: 4, screenName: SHelpCenterView())),
-                (Route<dynamic> route) => false,
-              );
+              readMain.onNavigation(4, SHelpCenterView(), context);
+              readMain.showBottomNavigationBar();
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 4, screenName: SHelpCenterView())),
+              //   (Route<dynamic> route) => false,
+              // );
             },
             title: "Help & Support",
           ),

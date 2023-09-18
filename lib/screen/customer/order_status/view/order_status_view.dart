@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -410,7 +411,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                                 ),
                                                 onPressed: () {},
                                                 child: Text(
-                                                  "${watch.deliveryAddressDetails?.deliveryAddressType}",
+                                                  "${watch.deliveryAddressDetails?.deliveryAddressType}".capitalize(),
                                                   // "${element.deliveryAddressType}",
                                                   // "Home",
                                                   style: GoogleFonts.dmSans(

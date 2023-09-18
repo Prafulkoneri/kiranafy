@@ -59,17 +59,21 @@ class _SCustomProductViewState extends State<SCustomProductView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 0,
-                      screenName: SSelectedProductView(
-                        isRefresh: false,
-                        categoryId: widget.categoryId,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+            readMain.onNavigation(0, SSelectedProductView(
+              isRefresh: false,
+              categoryId: widget.categoryId,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 0,
+            //           screenName: SSelectedProductView(
+            //             isRefresh: false,
+            //             categoryId: widget.categoryId,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Custom Products",
           action: SvgPicture.asset("assets/icons/forward.svg"),

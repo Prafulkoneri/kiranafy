@@ -4,15 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/about_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/faq_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/privacy_policy_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/terms_and_condition_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 
 class SAccountCmsPagesView extends StatefulWidget {
   const SAccountCmsPagesView({super.key});
@@ -24,6 +27,7 @@ class SAccountCmsPagesView extends StatefulWidget {
 class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
   @override
   Widget build(BuildContext context) {
+    final readMain=context.read<SMainScreenController>();
     // final read = context.read<ProfileController>();
     // final watch = context.watch<ProfileController>();
     return Scaffold(
@@ -32,16 +36,19 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
         child: PrimaryAppBar(
           title: "Accounts",
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 4,
-                      screenName: SAccountScreenView(
-                        refresh: false,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+    readMain.onNavigation(4, SAccountScreenView(
+                refresh: false,
+              ),context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 4,
+            //           screenName: SAccountScreenView(
+            //             refresh: false,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
         ),
       ),
@@ -53,8 +60,10 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AboutScreenView()));
+    readMain.onNavigation(4, AboutScreenView(),context);
+    readMain.hideBottomNavigationBar();
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => AboutScreenView()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
@@ -98,8 +107,10 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
 
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ShopFAQView()));
+                readMain.onNavigation(4,ShopFAQView(),context);
+                readMain.hideBottomNavigationBar();
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => ShopFAQView()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
@@ -141,10 +152,12 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
             ///////////////////////
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PrivacyPolicyView()));
+                readMain.onNavigation(4, PrivacyPolicyView(),context);
+                readMain.hideBottomNavigationBar();
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => PrivacyPolicyView()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 20.w, right: 28.w, top: 16.w),
@@ -183,10 +196,12 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TermsAndConditionView()));
+                readMain.onNavigation(4, TermsAndConditionView(), context);
+                readMain.hideBottomNavigationBar();
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => TermsAndConditionView()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 20.w, right: 28.w, top: 16.w),

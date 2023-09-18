@@ -98,7 +98,7 @@ class customerAdscontroller extends ChangeNotifier {
         planToStartController.clear();
         adsContentController.clear();
         final read=Provider.of<MainScreenController>(context,listen: false);
-        read.onNavigation(2, HomeScreenView(
+        read.onNavigation(0, HomeScreenView(
           refreshPage: true,
         ), context);
         // Navigator.pushAndRemoveUntil(

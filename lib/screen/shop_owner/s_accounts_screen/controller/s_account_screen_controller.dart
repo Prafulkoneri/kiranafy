@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/model/faq_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/model/sign_out_model.dart';
@@ -9,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/reposito
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SAccountScreenController extends ChangeNotifier {
@@ -54,6 +56,8 @@ class SAccountScreenController extends ChangeNotifier {
   void onLogout(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.clear();
+    // final read=Provider.of<MainScreenController>(context,listen: false);
+    // read.onNavigation(0, OnBoardingScreenView(), context);
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
   }
@@ -117,6 +121,8 @@ class SAccountScreenController extends ChangeNotifier {
       );
       if (response.statusCode == 200) {
         pref.clear();
+        // final read=Provider.of<MainScreenController>(context,listen: false);
+        // read.onNavigation(0, OnBoardingScreenView(), context);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const OnBoardingScreenView()),

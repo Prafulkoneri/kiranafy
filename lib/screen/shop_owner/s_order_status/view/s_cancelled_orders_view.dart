@@ -60,15 +60,21 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
               final element = watch.cancelledOrdersList?[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ShopOrderView(
-                              orderId: element?.id.toString(),
-                              fromOrderStatus: true,
-                              selectedIndex: watch.selectedIndex,
-                            )),
-                  );
+                  readMainScreen.onNavigation(0,ShopOrderView(
+                    orderId: element?.id.toString(),
+                    fromOrderStatus: true,
+                    selectedIndex: watch.selectedIndex,
+                  ), context);
+                  readMainScreen.hideBottomNavigationBar();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => ShopOrderView(
+                  //             orderId: element?.id.toString(),
+                  //             fromOrderStatus: true,
+                  //             selectedIndex: watch.selectedIndex,
+                  //           )),
+                  // );
                 },
                 child: Container(
                   padding: EdgeInsets.all(14.w),

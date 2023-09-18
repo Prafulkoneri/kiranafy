@@ -4,11 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_filter_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -44,33 +46,49 @@ class _CustomerListViewState extends State<CustomerListView> {
   Widget build(BuildContext context) {
     final read = context.read<SCustomerListController>();
     final watch = context.watch<SCustomerListController>();
+    final readMain = context.read<SMainScreenController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            widget.fromPage == "account"
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 4,
-                            screenName: SAccountScreenView(
-                              refresh: false,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  )
-                : Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SMainScreenView(
-                            index: 0,
-                            screenName: ShopDashBoardView(
-                              refresh: false,
-                            ))),
-                    (Route<dynamic> route) => false,
-                  );
+            print(widget.fromPage);
+            // widget.fromPage == "account"
+            //     ? readMain.onNavigation(4, SAccountScreenView(
+            //   refresh: false,
+            // ), context)
+            // // Navigator.pushAndRemoveUntil(
+            // //         context,
+            // //         MaterialPageRoute(
+            // //             builder: (context) => SMainScreenView(
+            // //                 index: 4,
+            // //                 screenName: SAccountScreenView(
+            // //                   refresh: false,
+            // //                 ))),
+            // //         (Route<dynamic> route) => false,
+            // //       )
+            //     :
+
+
+
+            readMain.onNavigation(0, ShopDashBoardView(
+              refresh: false,
+            ), context);
+
+
+
+
+            // Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => SMainScreenView(
+            //                 index: 0,
+            //                 screenName: ShopDashBoardView(
+            //                   refresh: false,
+            //                 ))),
+            //         (Route<dynamic> route) => false,
+            //       );
           },
           title: "Customers",
           action: SvgPicture.asset("assets/images/filter.svg"),
@@ -272,24 +290,31 @@ class _CustomerListViewState extends State<CustomerListView> {
                                             children: [
                                               InkWell(
                                                 onTap: () {
-                                                  Navigator.pushAndRemoveUntil(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            SMainScreenView(
-                                                              index: 4,
-                                                              screenName:
-                                                                  CustomerDetailView(
-                                                                screenName: widget
-                                                                    .fromPage,
-                                                                customerId: element
-                                                                    ?.id
-                                                                    .toString(),
-                                                              ),
-                                                            )),
-                                                    (Route<dynamic> route) =>
-                                                        false,
-                                                  );
+                                                  readMain.onNavigation(4, CustomerDetailView(
+                                                    screenName: widget
+                                                        .fromPage,
+                                                    customerId: element
+                                                        ?.id
+                                                        .toString(),
+                                                  ), context);
+                                                  // Navigator.pushAndRemoveUntil(
+                                                  //   context,
+                                                  //   MaterialPageRoute(
+                                                  //       builder: (context) =>
+                                                  //           SMainScreenView(
+                                                  //             index: 4,
+                                                  //             screenName:
+                                                  //                 CustomerDetailView(
+                                                  //               screenName: widget
+                                                  //                   .fromPage,
+                                                  //               customerId: element
+                                                  //                   ?.id
+                                                  //                   .toString(),
+                                                  //             ),
+                                                  //           )),
+                                                  //   (Route<dynamic> route) =>
+                                                  //       false,
+                                                  // );
                                                 },
                                                 child: Text(
                                                   'View Details',

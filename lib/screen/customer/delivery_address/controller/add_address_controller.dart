@@ -105,7 +105,9 @@ class AddAddressController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onBackBtnPressed(context, cId, sId,readMain) {
+  void onBackBtnPressed(context, cId, sId) {
+    final read =
+    Provider.of<MainScreenController>(context, listen: false);
     print("shopidddddddddddddd");
     print(cId);
     print(sId);
@@ -113,10 +115,9 @@ class AddAddressController extends ChangeNotifier {
     print("shopidddddddddddddd");
     if (pageRoute == "addressView") {
       print("hello");
-      final read =
-      Provider.of<MainScreenController>(context, listen: false);
+
       print("hellos");
-      Navigator.pop(context);
+      // Navigator.pop(context);
       read.onNavigation(4, MyDeliveryAddressView(isRefresh: false), context);
       // Navigator.pushAndRemoveUntil(
       //   context,
@@ -127,26 +128,40 @@ class AddAddressController extends ChangeNotifier {
       // );
     }
     if (pageRoute == "orderAddress") {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => OrderSummaryView(
-                    isRefresh: false,
-                    route: "editAddress",
-                    cartId: cId,
-                    shopId: sId,
-                  )));
+      read.onNavigation(4, OrderSummaryView(
+        isRefresh: false,
+        route: "editAddress",
+        cartId: cId,
+        shopId: sId,
+      ), context);
+      read.hideBottomNavigationBar();
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => OrderSummaryView(
+      //               isRefresh: false,
+      //               route: "editAddress",
+      //               cartId: cId,
+      //               shopId: sId,
+      //             )));
     }
     if (pageRoute == "orderAddAddress") {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => OrderSummaryView(
-                    isRefresh: false,
-                    route: "addAddress",
-                    cartId: cId,
-                    shopId: sId,
-                  )));
+      read.onNavigation(4, OrderSummaryView(
+        isRefresh: false,
+        route: "addAddress",
+        cartId: cId,
+        shopId: sId,
+      ), context);
+      read.hideBottomNavigationBar();
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => OrderSummaryView(
+      //               isRefresh: false,
+      //               route: "addAddress",
+      //               cartId: cId,
+      //               shopId: sId,
+      //             )));
     }
   }
 
@@ -517,11 +532,12 @@ class AddAddressController extends ChangeNotifier {
           AddAddressResponseModel.fromJson(jsonDecode(response.body));
       print(response.body);
       if (response.statusCode == 200) {
+        final read = Provider.of<MainScreenController>(context, listen: false);
         LoadingOverlay.of(context).hide();
         if (pageRoute == "addressView") {
-          final read = Provider.of<MainScreenController>(context, listen: false);
+
           final readDeliveryAddressController = Provider.of<DeliveryAddressController>(context, listen: false);
-          Navigator.pop(context);
+
           read.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
           readDeliveryAddressController.initState(context,true);
 
@@ -535,15 +551,22 @@ class AddAddressController extends ChangeNotifier {
           // );
         }
         if (pageRoute == "orderAddAddress") {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => OrderSummaryView(
-                        isRefresh: true,
-                        route: "addAddress",
-                        cartId: cId,
-                        shopId: sId,
-                      )));
+          read.onNavigation(4, OrderSummaryView(
+            isRefresh: true,
+            route: "addAddress",
+            cartId: cId,
+            shopId: sId,
+          ), context);
+          read.hideBottomNavigationBar();
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => OrderSummaryView(
+          //               isRefresh: true,
+          //               route: "addAddress",
+          //               cartId: cId,
+          //               shopId: sId,
+          //             )));
         }
 
         // pref.setString("pincode", pincode);
@@ -604,11 +627,12 @@ class AddAddressController extends ChangeNotifier {
       print(response.body);
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
+        final read =
+        Provider.of<MainScreenController>(context, listen: false);
         if (pageRoute == "addressView") {
-          final read =
-          Provider.of<MainScreenController>(context, listen: false);
+
           final readDeliveryAddressController = Provider.of<DeliveryAddressController>(context, listen: false);
-          Navigator.pop(context);
+
           read.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
           readDeliveryAddressController.initState(context,true);
           // Navigator.pushAndRemoveUntil(
@@ -621,15 +645,22 @@ class AddAddressController extends ChangeNotifier {
           // );
         }
         if (pageRoute == "orderAddress") {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => OrderSummaryView(
-                        isRefresh: true,
-                        route: "editAddress",
-                        cartId: cId,
-                        shopId: sId,
-                      )));
+          read.onNavigation(4, OrderSummaryView(
+            isRefresh: true,
+            route: "editAddress",
+            cartId: cId,
+            shopId: sId,
+          ), context);
+          read.hideBottomNavigationBar();
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => OrderSummaryView(
+          //               isRefresh: true,
+          //               route: "editAddress",
+          //               cartId: cId,
+          //               shopId: sId,
+          //             )));
         }
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

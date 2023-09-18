@@ -137,6 +137,9 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                         ),
                                         GestureDetector(
                                           onTap: () {
+                                            readMainScreen.onNavigation(4, SEditProfileView(
+                                              fromDashBoard: false,
+                                            ), context);
                                             // Navigator.pushAndRemoveUntil(
                                             //   context,
                                             //   MaterialPageRoute(
@@ -150,14 +153,14 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                             //           )),
                                             //   (Route<dynamic> route) => false,
                                             // );
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SEditProfileView(
-                                                    fromDashBoard: false,
-                                                  ),
-                                                ));
+                                            // Navigator.pushReplacement(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           SEditProfileView(
+                                            //         fromDashBoard: false,
+                                            //       ),
+                                            //     ));
                                             // Navigator.pushAndRemoveUntil(
                                             //     context,
                                             //     MaterialPageRoute(
@@ -275,16 +278,19 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName: SShopConfigurationView(
-                                  initialShopConfigration: false,
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, SShopConfigurationView(
+                        initialShopConfigration: false,
+                      ), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4,
+                      //           screenName: SShopConfigurationView(
+                      //             initialShopConfigration: false,
+                      //           ))),
+                      //   (Route<dynamic> route) => false,
+                      // );
                       // read.onShopConfigurationClicked(context);
                     },
                     child: Container(
@@ -336,17 +342,21 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ////////////////////////
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName: CustomerListView(
-                                  isRefresh: true,
-                                  fromPage: "account",
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, CustomerListView(
+                        isRefresh: true,
+                        fromPage: "account",
+                      ), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4,
+                      //           screenName: CustomerListView(
+                      //             isRefresh: true,
+                      //             fromPage: "account",
+                      //           ))),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:
@@ -391,17 +401,21 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ///////////////////////
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName: ShopCouponsView(
-                                  isRefresh: true,
-                                  isNavFromDashBoard: false,
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, ShopCouponsView(
+                        isRefresh: true,
+                        isNavFromDashBoard: false,
+                      ), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4,
+                      //           screenName: ShopCouponsView(
+                      //             isRefresh: true,
+                      //             isNavFromDashBoard: false,
+                      //           ))),
+                      //   (Route<dynamic> route) => false,
+                      // );
                       // read.onShopConfigurationClicked(context);
                     },
                     child: Container(
@@ -457,18 +471,22 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ////////////////////
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName:
-                                    ShopSeasonalRecommandedOfferProductsView(
-                                  selectedProduct: "recommended",
-                                  isRefresh: true,
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, ShopSeasonalRecommandedOfferProductsView(
+                        selectedProduct: "recommended",
+                        isRefresh: true,
+                      ), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4,
+                      //           screenName:
+                      //               ShopSeasonalRecommandedOfferProductsView(
+                      //             selectedProduct: "recommended",
+                      //             isRefresh: true,
+                      //           ))),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:
@@ -523,14 +541,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   /////////////////////
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName: shopPromotionRequestView())),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, shopPromotionRequestView(), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4,
+                      //           screenName: shopPromotionRequestView())),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:
@@ -584,16 +603,19 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName: SMySubscriptionView(
-                                  screenName: "accounts",
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4,SMySubscriptionView(
+                        screenName: "accounts",
+                      ), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4,
+                      //           screenName: SMySubscriptionView(
+                      //             screenName: "accounts",
+                      //           ))),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:
@@ -647,14 +669,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4,
-                                screenName: ShopBankAccountDetailsView())),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, ShopBankAccountDetailsView(), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4,
+                      //           screenName: ShopBankAccountDetailsView())),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:
@@ -708,16 +731,19 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 2,
-                                screenName: SPaymentsView(
-                                  isNavFromAccounts: true,
-                                ))),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, SPaymentsView(
+                        isNavFromAccounts: true,
+                      ), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 2,
+                      //           screenName: SPaymentsView(
+                      //             isNavFromAccounts: true,
+                      //           ))),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:
@@ -819,13 +845,14 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   // ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4, screenName: SHelpCenterView())),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, SHelpCenterView(), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4, screenName: SHelpCenterView())),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:
@@ -879,10 +906,14 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NotificationsScreenView()));
+                      readMainScreen.onNavigation(4, NotificationsScreenView(), context);
+                      readMainScreen.hideBottomNavigationBar();
+
+
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => NotificationsScreenView()));
                       // Navigator.pushAndRemoveUntil(
                       //   context,
                       //   MaterialPageRoute(
@@ -934,13 +965,14 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4, screenName: SAccountCmsPagesView())),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, SAccountCmsPagesView(), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4, screenName: SAccountCmsPagesView())),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:
@@ -990,13 +1022,15 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   // ShopSettingView
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SMainScreenView(
-                                index: 4, screenName: ShopSettingView())),
-                        (Route<dynamic> route) => false,
-                      );
+                      readMainScreen.onNavigation(4, SMainScreenView(
+                          index: 4, screenName: ShopSettingView()), context);
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => SMainScreenView(
+                      //           index: 4, screenName: ShopSettingView())),
+                      //   (Route<dynamic> route) => false,
+                      // );
                     },
                     child: Container(
                       margin:

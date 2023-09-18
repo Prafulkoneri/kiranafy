@@ -43,7 +43,12 @@ class _MyOrderViewState extends State<MyOrderView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);
+            readMain.onNavigation(
+                4,
+                ProfileScreenView(
+                  isRefreshed: false,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -92,11 +97,14 @@ class _MyOrderViewState extends State<MyOrderView> {
                         final element = watch.orderList?[index];
                         return GestureDetector(
                           onTap: () {
-readMain.onNavigation(4, OrderDeliveryView(
-    screenName: "myorderView",
-    isRefresh: true,
-    orderId: element?.id.toString()), context);
-readMain.hideBottomNavigationBar();
+                            readMain.onNavigation(
+                                4,
+                                OrderDeliveryView(
+                                    screenName: "myorderView",
+                                    isRefresh: true,
+                                    orderId: element?.id.toString()),
+                                context);
+                            readMain.hideBottomNavigationBar();
 //                             Navigator.push(
 //                               context,
 //                               MaterialPageRoute(
@@ -137,7 +145,7 @@ readMain.hideBottomNavigationBar();
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
                                               color: Black1,
-                                              fontSize: 15.5.sp,
+                                              fontSize: 15.sp,
                                               fontWeight: FontWeight.w700),
                                         ),
                                       ),

@@ -48,7 +48,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
               ),
               InkWell(
                 onTap: () {
-                  readMainScreen.onNavigation(0,AllCoupons, context);
+                  readMainScreen.onNavigation(0,AllCoupons(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(

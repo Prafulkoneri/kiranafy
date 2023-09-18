@@ -12,6 +12,7 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -160,11 +161,14 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       ),
                       Row(
                         children: [
-                          Text(
-                            "Mobile No.",
-                            style: TextStyle(
-                                fontSize: 14.sp, fontWeight: FontWeight.w500),
-                          )
+                          UpdateProfile(
+                            text: 'Mobile No.',
+                          ),
+                          // Text(
+                          //   "Mobile No.",
+                          //   style: TextStyle(
+                          //       fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -184,11 +188,14 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       ),
                       Row(
                         children: [
-                          Text(
-                            "Alternate Mobile No.",
-                            style: TextStyle(
-                                fontSize: 14.sp, fontWeight: FontWeight.w500),
-                          )
+                          UpdateProfile(
+                            text: 'Alternate Mobile No.',
+                          ),
+                          // Text(
+                          //   "Alternate Mobile No.",
+                          //   style: TextStyle(
+                          //       fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -218,11 +225,14 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       ),
                       Row(
                         children: [
-                          Text(
-                            "Gender",
-                            style: TextStyle(
-                                fontSize: 14.sp, fontWeight: FontWeight.w500),
-                          )
+                          UpdateProfile(
+                            text: 'Gender',
+                          ),
+                          // Text(
+                          //   "Gender",
+                          //   style: TextStyle(
+                          //       fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -243,16 +253,19 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               SizedBox(
                                 width: 10.w,
                               ),
-                              Text(
-                                'Male',
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              AccountScreen(
+                                text: 'Male',
                               ),
+                              // Text(
+                              //   'Male',
+                              //   style: GoogleFonts.dmSans(
+                              //     textStyle: TextStyle(
+                              //         color: Black,
+                              //         letterSpacing: .5,
+                              //         fontSize: 14.sp,
+                              //         fontWeight: FontWeight.w400),
+                              //   ),
+                              // ),
                             ],
                           ),
                           Row(
@@ -267,16 +280,19 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               SizedBox(
                                 width: 10.w,
                               ),
-                              Text(
-                                'Female',
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              AccountScreen(
+                                text: 'Female',
                               ),
+                              // Text(
+                              //   'Female',
+                              //   style: GoogleFonts.dmSans(
+                              //     textStyle: TextStyle(
+                              //         color: Black,
+                              //         letterSpacing: .5,
+                              //         fontSize: 14.sp,
+                              //         fontWeight: FontWeight.w400),
+                              //   ),
+                              // ),
                             ],
                           ),
                           Row(
@@ -291,16 +307,19 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               SizedBox(
                                 width: 10.w,
                               ),
-                              Text(
-                                'Other',
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              AccountScreen(
+                                text: 'Other',
                               ),
+                              // Text(
+                              //   'Other',
+                              //   style: GoogleFonts.dmSans(
+                              //     textStyle: TextStyle(
+                              //         color: Black,
+                              //         letterSpacing: .5,
+                              //         fontSize: 14.sp,
+                              //         fontWeight: FontWeight.w400),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ],

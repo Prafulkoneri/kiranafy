@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_select_category/model/s_
 import 'package:local_supper_market/screen/shop_owner/s_select_category/repository/s_add_category_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/repository/s_categories_list_repo.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SSelectCategoryController extends ChangeNotifier {
@@ -103,13 +105,15 @@ class SSelectCategoryController extends ChangeNotifier {
       print(response.body);
       final result = SAddCategoriesResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  SMainScreenView(index: 0, screenName: SSCategoryListView())),
-          (Route<dynamic> route) => false,
-        );
+        final read =Provider.of<SMainScreenController>(context,listen: false);
+        read.onNavigation(0,SSCategoryListView(), context);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) =>
+        //           SMainScreenView(index: 0, screenName: SSCategoryListView())),
+        //   (Route<dynamic> route) => false,
+        // );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
       } else {

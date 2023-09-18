@@ -60,6 +60,14 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
           title: "My Addresses",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
+            readMain.onNavigation(
+                4,
+                AddAddressView(
+                            route: "addressView",
+                            isEditAdress: false,
+                          ),
+                context);
+
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -71,14 +79,14 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
             //           ))),
             //   (Route<dynamic> route) => false,
             // );
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const AddAddressView(
-                        route: "addressView",
-                        isEditAdress: false,
-                      )),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => const AddAddressView(
+            //             route: "addressView",
+            //             isEditAdress: false,
+            //           )),
+            // );
           },
           // action: ,
         ),
@@ -176,7 +184,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                                     ),
                                     onPressed: () {},
                                     child: Text(
-                                      "${element?.deliveryAddressType}",
+                                      "${element?.deliveryAddressType}".capitalize(),
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: SplashText1,
@@ -289,21 +297,31 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                                   children: [
                                     GestureDetector(
                                         onTap: () {
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainScreenView(
-                                                        index: 4,
-                                                        screenName:
-                                                            AddAddressView(
-                                                          route: "addressView",
-                                                          isEditAdress: true,
-                                                          addressId: element?.id
-                                                              .toString(),
-                                                        ))),
-                                            (Route<dynamic> route) => false,
-                                          );
+                                          print("hello");
+                                          readMain.onNavigation(
+                                              4,
+                                              AddAddressView(
+                                                              route: "addressView",
+                                                              isEditAdress: true,
+                                                              addressId: element?.id
+                                                                  .toString(),
+                                                            ),
+                                              context);
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           MainScreenView(
+                                          //               index: 4,
+                                          //               screenName:
+                                          //                   AddAddressView(
+                                          //                 route: "addressView",
+                                          //                 isEditAdress: true,
+                                          //                 addressId: element?.id
+                                          //                     .toString(),
+                                          //               ))),
+                                          //   (Route<dynamic> route) => false,
+                                          // );
                                         },
                                         child: SvgPicture.asset(
                                             "assets/icons/edit1.svg")),

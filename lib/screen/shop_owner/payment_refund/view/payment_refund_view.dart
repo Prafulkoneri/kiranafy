@@ -45,16 +45,19 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
           isBackButtonEnabled: true,
           // widget.isNavFromAccounts == true ? true : false,
           onBackBtnPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SMainScreenView(
-                      index: 0,
-                      screenName: ShopDashBoardView(
-                        refresh: true,
-                      ))),
-              (Route<dynamic> route) => false,
-            );
+            readMainScreen.onNavigation(0, ShopDashBoardView(
+              refresh: true,
+            ), context);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => SMainScreenView(
+            //           index: 0,
+            //           screenName: ShopDashBoardView(
+            //             refresh: true,
+            //           ))),
+            //   (Route<dynamic> route) => false,
+            // );
           },
           title: "Refunds",
           // isBackButtonEnabled: false,
@@ -286,15 +289,22 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                 final element = watch.pendingOrdersList?[index];
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ShopOrderView(
-                                                  fromOrderStatus: false,
-                                                  selectedIndex: 0,
-                                                  orderId:
-                                                      element?.id.toString(),
-                                                )));
+                                    readMainScreen.onNavigation(0, ShopOrderView(
+                                      fromOrderStatus: false,
+                                      selectedIndex: 0,
+                                      orderId:
+                                      element?.id.toString(),
+                                    ), context);
+                                    readMainScreen.hideBottomNavigationBar();
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => ShopOrderView(
+                                    //               fromOrderStatus: false,
+                                    //               selectedIndex: 0,
+                                    //               orderId:
+                                    //                   element?.id.toString(),
+                                    //             )));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(14.w),
@@ -432,15 +442,22 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                     watch.confirmedOrdersList?[index];
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ShopOrderView(
-                                                  fromOrderStatus: false,
-                                                  selectedIndex: 0,
-                                                  orderId:
-                                                      element?.id.toString(),
-                                                )));
+                                    readMainScreen.onNavigation(0, ShopOrderView(
+                                      fromOrderStatus: false,
+                                      selectedIndex: 0,
+                                      orderId:
+                                      element?.id.toString(),
+                                    ), context);
+                                    readMainScreen.hideBottomNavigationBar();
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => ShopOrderView(
+                                    //               fromOrderStatus: false,
+                                    //               selectedIndex: 0,
+                                    //               orderId:
+                                    //                   element?.id.toString(),
+                                    //             )));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(14.w),
