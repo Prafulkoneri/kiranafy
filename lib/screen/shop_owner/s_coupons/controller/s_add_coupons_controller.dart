@@ -298,7 +298,7 @@ class SAddCouponsController extends ChangeNotifier {
       if (response.statusCode == 200) {
         if (isNavFromDashBoard) {
           final read=Provider.of<SMainScreenController>(context,listen: false);
-          read.onNavigation(4, ShopCouponsView(
+          read.onNavigation(3, ShopCouponsView(
             isRefresh: true,
             isNavFromDashBoard: true,
           ), context);
@@ -484,7 +484,9 @@ class SAddCouponsController extends ChangeNotifier {
       final result =
           UpdateEditCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        print("isNavFromDashBoard${isNavFromDashBoard}");
         if (isNavFromDashBoard) {
+
           final read=Provider.of<SMainScreenController>(context,listen: false);
           read.onNavigation(3, ShopCouponsView(
             isRefresh: true,

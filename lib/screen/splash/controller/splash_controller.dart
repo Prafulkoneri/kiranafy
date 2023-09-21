@@ -101,6 +101,18 @@ class SplashController extends ChangeNotifier {
       } else {
         SharedPreferences pref = await SharedPreferences.getInstance();
         print(pref.getString("status"));
+        if(pref.getString("status")=="guestLoggedIn"){
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MainScreenView(
+                    index: 0,
+                    screenName: HomeScreenView(
+                      refreshPage: true,
+                    ))),
+                (Route<dynamic> route) => false,
+          );
+        }
         if (pref.getString("status") == "numberRegistered") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => ShopRegistrationView()));

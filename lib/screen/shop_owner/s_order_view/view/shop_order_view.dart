@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/payment_refund/view/payment_refund_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
@@ -24,6 +25,7 @@ import 'package:provider/provider.dart';
 
 class ShopOrderView extends StatefulWidget {
   final String? orderId;
+  final  String ?  route;
   final int? selectedIndex;
   final bool? fromOrderStatus;
 
@@ -32,6 +34,7 @@ class ShopOrderView extends StatefulWidget {
     this.orderId,
     required this.selectedIndex,
     required this.fromOrderStatus,
+  required this.route,
   });
 
   @override
@@ -61,22 +64,37 @@ class _ShopOrderViewState extends State<ShopOrderView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            widget.fromOrderStatus == true
-                ? readMainScreen.onNavigation(1, SOrderStatusView(
-                selectedIndex: widget.selectedIndex), context)
-            // Navigator.pushAndRemoveUntil(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => SMainScreenView(
-            //                 index: 0,
-            //                 screenName: SOrderStatusView(
-            //                     selectedIndex: widget.selectedIndex))),
-            //         (Route<dynamic> route) => false,
-            //       )
-                :
-            readMainScreen.onNavigation(1, SPaymentRefundList(
-              isNavFromAccounts: false,
-            ), context);
+            if(widget.route=="notification"){
+              readMainScreen.onNavigation(0, NotificationsScreenView(route:""),context);
+              readMainScreen.hideBottomNavigationBar();
+            }
+            if(widget.route=="orderStatus"){
+              readMainScreen.onNavigation(1, SOrderStatusView(selectedIndex: widget.selectedIndex), context);
+              readMainScreen.showBottomNavigationBar();
+            }
+            if(widget.route=="paymentRefund"){
+              readMainScreen.onNavigation(1, SPaymentRefundList(
+                isNavFromAccounts: false,
+              ), context);
+              readMainScreen.showBottomNavigationBar();
+            }
+
+            // widget.fromOrderStatus == true
+            //     ? readMainScreen.onNavigation(1, SOrderStatusView(
+            //     selectedIndex: widget.selectedIndex), context)
+            // // Navigator.pushAndRemoveUntil(
+            // //         context,
+            // //         MaterialPageRoute(
+            // //             builder: (context) => SMainScreenView(
+            // //                 index: 0,
+            // //                 screenName: SOrderStatusView(
+            // //                     selectedIndex: widget.selectedIndex))),
+            // //         (Route<dynamic> route) => false,
+            // //       )
+            //     :
+            // readMainScreen.onNavigation(1, SPaymentRefundList(
+            //   isNavFromAccounts: false,
+            // ), context);
             // Navigator.pushAndRemoveUntil(
             //         context,
             //         MaterialPageRoute(
@@ -87,7 +105,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             //                 ))),
             //         (Route<dynamic> route) => false,
             //       );
-            readMainScreen.showBottomNavigationBar();
+
           },
           title: "Order",
           onActionTap: () {},
@@ -1317,19 +1335,19 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             // maxLines: 3,
                                             watch.orderDetails?.deliverySlot ==
                                                     "shop_owner_slot_9_to_12"
-                                                ? "09:00 AM - 12:00 PM"
+                                                ? " 09:00 AM - 12:00 PM"
                                                 : watch.orderDetails
                                                             ?.deliverySlot ==
                                                         "shop_owner_slot_12_to_3"
-                                                    ? "12:00 PM - 03:00 PM"
+                                                    ? " 12:00 PM - 03:00 PM"
                                                     : watch.orderDetails
                                                                 ?.deliverySlot ==
                                                             "shop_owner_slot_3_to_6"
-                                                        ? "03:00 PM - 06:00 PM"
+                                                        ? " 03:00 PM - 06:00 PM"
                                                         : watch.orderDetails
                                                                     ?.deliverySlot ==
                                                                 "shop_owner_slot_6_to_9"
-                                                            ? "06:00 PM - 09:00 PM"
+                                                            ? " 06:00 PM - 09:00 PM"
                                                             : "",
                                             // textAlign: TextAlign.start,
                                             style: GoogleFonts.dmSans(
@@ -2021,6 +2039,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       height: 10.w,
                                                     ),
                                                     PrimaryCTextFormField(
+                                                      textInputType: TextInputType.number,
                                                       controller: watch
                                                           .refundPayableAmount,
                                                       hintText:
@@ -2680,6 +2699,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       height: 10.w,
                                                     ),
                                                     PrimaryCTextFormField(
+                                                        textInputType: TextInputType.number,
                                                       controller: watch
                                                           .refundPayableAmount,
                                                       hintText:
@@ -3261,6 +3281,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 height: 10.w,
                                               ),
                                               PrimaryCTextFormField(
+                                                  textInputType: TextInputType.number,
                                                 controller:
                                                     watch.refundPayableAmount,
                                                 hintText: "Type Refund Amount",

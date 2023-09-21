@@ -13,6 +13,7 @@ class SKycVerificationView extends StatefulWidget {
   SKycVerificationView({super.key});
 
   @override
+  @override
   State<SKycVerificationView> createState() => _SKycVerificationViewState();
 // String dropdownValue = 'Dog';
 }
@@ -420,7 +421,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                                 MainAxisAlignment.end,
                                             children: [
                                               Text(
-                                                "Upload \nShop Act\n(Optional)",
+                                                "Upload \nShop Act\nDocument\n(Optional)",
                                                 textAlign: TextAlign.center,
                                                 style: GoogleFonts.dmSans(
                                                   textStyle: TextStyle(

@@ -73,8 +73,8 @@ if(refresh){
 
         unitDetails = getproductunitlistdata?.unitDetails;
 
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        // Utils.showPrimarySnackbar(context, result.message,
+        //     type: SnackType.success);
         showLoader(false);
         notifyListeners();
       } else {

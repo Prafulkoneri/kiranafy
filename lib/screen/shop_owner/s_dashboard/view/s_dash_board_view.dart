@@ -78,7 +78,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           ),
                           GestureDetector(
                               onTap: () {
-                                readMain.onNavigation(0,NotificationsScreenView(),context);
+                                readMain.onNavigation(0,NotificationsScreenView(route: "dashboard"),context);
                                 readMain.hideBottomNavigationBar();
                                 // Navigator.push(
                                 //     context,

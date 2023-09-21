@@ -61,6 +61,7 @@ class _SCancelledOrdersViewState extends State<SCancelledOrdersView> {
               return GestureDetector(
                 onTap: () {
                   readMainScreen.onNavigation(0,ShopOrderView(
+                    route: "orderStatus",
                     orderId: element?.id.toString(),
                     fromOrderStatus: true,
                     selectedIndex: watch.selectedIndex,

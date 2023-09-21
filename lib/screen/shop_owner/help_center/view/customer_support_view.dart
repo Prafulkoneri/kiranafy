@@ -321,7 +321,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                       ),
                     ),
                   ),
-                  Container(
+                  watch.ticketDetails?.ticketStatus!="Closed"?Container(
                     child: PrimarySTextFormField(
                       controller: watch.remarkController,
                       height: 65.h,
@@ -338,7 +338,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                       ),
                       enableBorder: false,
                     ),
-                  ),
+                  ):Container(),
                 ],
               ));
   }

@@ -561,6 +561,10 @@ class AllOffersController extends ChangeNotifier {
 
   Future<void> addToCart(pType, pId, sId, index, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to add product to cart");
+      return;
+    }
     addProductToCartRepo
         .addProductToCart(
             AddProductToCartReqModel(

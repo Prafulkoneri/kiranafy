@@ -113,7 +113,7 @@ class SShopConfigurationController extends ChangeNotifier {
       context,
       initialConfiguration,
     );
-    shopDeliveryArea(context);
+
     notifyListeners();
   }
 
@@ -247,7 +247,7 @@ class SShopConfigurationController extends ChangeNotifier {
     supportNumberController.text = pref.getString("mobileNo").toString();
     shopConfigRepo
         .shopCongurationDetails(pref.getString("successToken"))
-        .then((response) {
+        .then((response) async{
       log(response.body);
       final result = ShopConfigurationResponse.fromJson(
         jsonDecode(response.body),
@@ -341,7 +341,7 @@ class SShopConfigurationController extends ChangeNotifier {
           isDeliveryChargesSelected = false;
           ifFreePickupSelected = false;
         }
-        showLoader(false);
+        await shopDeliveryArea(context);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -369,6 +369,11 @@ class SShopConfigurationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+    if (!isOnlinePaymentSelected && !isCODPaymentSelected) {
+      Utils.showPrimarySnackbar(context, "Select Payment Mode",
+          type: SnackType.error);
+      return;
+    }
     if (startShopTimeController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter Shop Opening Time",
           type: SnackType.error);
@@ -376,6 +381,17 @@ class SShopConfigurationController extends ChangeNotifier {
     }
     if (endShopTimeController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter Shop Closing Time",
+          type: SnackType.error);
+      return;
+    }
+    if (supportNumberController.text.length < 10) {
+      Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+    if (!isCustomerPickupSelected && !isDeliveryCustomerSelected) {
+      Utils.showPrimarySnackbar(context, "Select Any Delivery Type",
           type: SnackType.error);
       return;
     }
@@ -392,13 +408,47 @@ class SShopConfigurationController extends ChangeNotifier {
         return;
       }
     }
+    if (!isCustomerPickupSelected) {
+      if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
+        Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
+            type: SnackType.error);
+        return;
+      }
+      if (minimumDeliveryAmountController.text == "") {
+        Utils.showPrimarySnackbar(
+            context, "Please Enter Minimum Delivery Order Value",
+            type: SnackType.error);
+        return;
+      }
+      ///////////////Delivery Type///////////
+
+      ////////////////////
+
+    }
+    if (isCustomerPickupSelected&&isDeliveryCustomerSelected) {
+      if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
+        Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
+            type: SnackType.error);
+        return;
+      }
+      if (minimumDeliveryAmountController.text == "") {
+        Utils.showPrimarySnackbar(
+            context, "Please Enter Minimum Delivery Order Value",
+            type: SnackType.error);
+        return;
+      }
+      ///////////////Delivery Type///////////
+
+      ////////////////////
+
+    }
 
     /////////////////////
-    if (endShopTimeController.text == "") {
-      Utils.showPrimarySnackbar(context, "Enter Shop Closing Time",
-          type: SnackType.error);
-      return;
-    }
+    // if (endShopTimeController.text == "") {
+    //   Utils.showPrimarySnackbar(context, "Enter Shop Closing Time",
+    //       type: SnackType.error);
+    //   return;
+    // }
     //////////////////
 
     //////////////////
@@ -408,45 +458,17 @@ class SShopConfigurationController extends ChangeNotifier {
       return;
     }
 //////////////
-    if (supportNumberController.text.length < 10) {
-      Utils.showPrimarySnackbar(context, "Please Enter Mobile Number",
-          type: SnackType.error);
-      notifyListeners();
-      return;
-    }
+
 
     // if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
     //   Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
     //       type: SnackType.error);
     //   return;
     // }
-    if (!isOnlinePaymentSelected && !isCODPaymentSelected) {
-      Utils.showPrimarySnackbar(context, "Select Payment Mode",
-          type: SnackType.error);
-      return;
-    }
+
 //////////////////////Minimum Order value/////////////
 
-    if (!isCustomerPickupSelected) {
-      if (minimumDeliveryAmountController.text == "") {
-        Utils.showPrimarySnackbar(
-            context, "Please Enter Minimum Delivery Order Value",
-            type: SnackType.error);
-        return;
-      }
-      ///////////////Delivery Type///////////
-      if (!isCustomerPickupSelected && !isDeliveryCustomerSelected) {
-        Utils.showPrimarySnackbar(context, "Select Any Delivery Type",
-            type: SnackType.error);
-        return;
-      }
-      ////////////////////
-      if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
-        Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
-            type: SnackType.error);
-        return;
-      }
-    }
+
     if (!isNineToTwelve && !isThreeToSix && !isTwelveToThree && !isSixToNine) {
       Utils.showPrimarySnackbar(context, "Select Any Slot",
           type: SnackType.error);
@@ -503,20 +525,20 @@ class SShopConfigurationController extends ChangeNotifier {
         LoadingOverlay.of(context).hide();
         pref.setString("status", "loggedIn");
         if (isInitialConfiguration) {
-          read.onNavigation(0,ShopDashBoardView(
-            refresh: true,
-          ), context);
-          // Navigator.pushAndRemoveUntil(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => SMainScreenView(
-          //             index: 0,
-          //             screenName: ShopDashBoardView(
-          //               refresh: true,
-          //             ),
-          //           )),
-          //   (Route<dynamic> route) => false,
-          // );
+          // read.onNavigation(0,ShopDashBoardView(
+          //   refresh: true,
+          // ), context);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                      index: 0,
+                      screenName: ShopDashBoardView(
+                        refresh: true,
+                      ),
+                    )),
+            (Route<dynamic> route) => false,
+          );
         } else {
 
           read.onNavigation(4,SAccountScreenView(

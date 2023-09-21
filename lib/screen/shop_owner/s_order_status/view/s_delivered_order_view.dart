@@ -63,6 +63,7 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
               return GestureDetector(
                 onTap: () {
                   readMainScreen.onNavigation(0,ShopOrderView(
+                    route: "orderStatus",
                     orderId: element?.id.toString(),
                     fromOrderStatus: true,
                     selectedIndex: watch.selectedIndex,

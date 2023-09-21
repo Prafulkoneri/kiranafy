@@ -26,6 +26,7 @@ class PrimaryCTextFormField extends StatelessWidget {
   final void Function()? onTap;
   final TextStyle? hintStyle;
   final TextStyle? textStyle;
+  final TextInputType ? textInputType;
 
   PrimaryCTextFormField(
       {Key? key,
@@ -42,6 +43,7 @@ class PrimaryCTextFormField extends StatelessWidget {
       this.controller,
       this.titleHeader,
       this.readOnly,
+        this.textInputType,
       this.onChanged,
       this.lengthLimitingTextInputFormatter,
       this.hintText})
@@ -73,6 +75,7 @@ class PrimaryCTextFormField extends StatelessWidget {
           height: height ?? 48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
+            keyboardType: textInputType,
             style: textStyle,
             onTap: onTap,
             maxLines: maxLines ?? 1,

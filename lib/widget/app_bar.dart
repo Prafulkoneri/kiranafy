@@ -10,6 +10,7 @@ class PrimaryAppBar extends StatelessWidget {
   final String? title;
   final Widget? action;
   final bool? isBackButtonEnabled;
+  final EdgeInsets ? titlePadding;
   void Function()? onActionTap;
   final void Function()? onBackBtnPressed;
   PrimaryAppBar(
@@ -18,36 +19,39 @@ class PrimaryAppBar extends StatelessWidget {
       required this.title,
       this.onBackBtnPressed,
       this.action,
+      this.titlePadding,
       this.onActionTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      titleSpacing: 0,
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       toolbarHeight: 65.w,
       // backgroundColor: kappbar,
       leading: isBackButtonEnabled ?? true
           ? Container(
-              // width: 50.w,
-              // height: 65.w,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                onPressed: onBackBtnPressed,
-              ),
-            )
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                  onPressed: onBackBtnPressed,
+                ),
+              )
           : Container(),
-      title: Text(
-        maxLines: 2,
-        title ?? "",
-        textAlign: TextAlign.center,
-        style: GoogleFonts.dmSans(
-          textStyle: TextStyle(
-              color: Black,
-              // letterSpacing: .5,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w700),
+      title: Container(
+        padding: titlePadding,
+        child: Text(
+          maxLines: 2,
+          title ?? "",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.dmSans(
+            textStyle: TextStyle(
+                color: Black,
+                // letterSpacing: .5,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700),
+          ),
         ),
       ),
       centerTitle: true,

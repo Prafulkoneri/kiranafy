@@ -33,7 +33,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
-            title: "Promotion form",
+            title: "Promotion Request form",
             onBackBtnPressed: () {
               readMainScreen.onNavigation(4, SAccountScreenView(
                 refresh: false,

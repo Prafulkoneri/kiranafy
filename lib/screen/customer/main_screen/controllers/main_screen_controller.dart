@@ -62,6 +62,13 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
+  onSignOut(){
+    currentTab=0;
+    isFirstLoad=true;
+    currentScreen=HomeScreenView(refreshPage:false);
+    notifyListeners();
+  }
+
   void onBottomNavChanged(index) {
     currentIndex = index;
     notifyListeners();
@@ -141,6 +148,7 @@ class MainScreenController extends ChangeNotifier {
     hideBottomNavigation = false;
     notifyListeners();
   }
+
   hideBottomNavigationBar(){
     hideBottomNavigation=true;
     notifyListeners();
@@ -251,7 +259,6 @@ class MainScreenController extends ChangeNotifier {
         notifyListeners();
       });
     } else {
-
       final read=Provider.of<HomeScreenController>(context,listen: false);
       read.initState(context,true);
       Navigator.pop(context);

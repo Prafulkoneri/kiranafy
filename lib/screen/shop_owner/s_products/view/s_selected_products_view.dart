@@ -85,8 +85,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
               //   (Route<dynamic> route) => false,
               // );
             },
+            titlePadding: EdgeInsets.only(left:watch.categoryName.length>16?50.w:0.w),
             title: watch.categoryName != ""
-                ? '${watch.categoryName ?? ""} - ${watch.totalSelectedAndCustomProducts ?? ""}'
+                ? '${watch.categoryName} - ${watch.totalSelectedAndCustomProducts ?? ""}'
                 : "",
             // "Cold Drinks & Juices - 2",
             // action: SvgPicture.asset("assets/icons/forward.svg"),

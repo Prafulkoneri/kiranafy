@@ -121,7 +121,9 @@ class SAccountScreenController extends ChangeNotifier {
       );
       if (response.statusCode == 200) {
         pref.clear();
-        // final read=Provider.of<MainScreenController>(context,listen: false);
+
+        final read=Provider.of<MainScreenController>(context,listen: false);
+
         // read.onNavigation(0, OnBoardingScreenView(), context);
         Navigator.push(
           context,

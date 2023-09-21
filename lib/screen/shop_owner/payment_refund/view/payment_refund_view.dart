@@ -290,6 +290,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                 return GestureDetector(
                                   onTap: () {
                                     readMainScreen.onNavigation(0, ShopOrderView(
+                                      route: "paymentRefund",
                                       fromOrderStatus: false,
                                       selectedIndex: 0,
                                       orderId:
@@ -443,6 +444,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                 return GestureDetector(
                                   onTap: () {
                                     readMainScreen.onNavigation(0, ShopOrderView(
+                                      route: "paymentRefund",
                                       fromOrderStatus: false,
                                       selectedIndex: 0,
                                       orderId:

@@ -124,6 +124,8 @@ class Endpoint {
   static const String customerSignup = "${baseUrl}lsm-customer-signup";
   ////Customer Sign Up
   static const String customerSignIn = "${baseUrl}lsm-customer-login";
+  ////Customer Guest Login
+  static const String customerGuestLogin= "${baseUrl}lsm-guest-login";
 //Customer Profile
   static const String customerProfile = "${baseUrl}lsm-customer-profile";
   ////Edit Customer Profile
@@ -169,9 +171,11 @@ class Endpoint {
 //////////Banner
 
   static const String bannerAds = "${baseUrl}lsm-customer-get-banner-ads";
+
   //////////Customer view Shop
 
   static const String customerViewShop = "${baseUrl}lsm-customer-view-shop";
+
   //////////Customer view All Shop
 
   static const String customerViewAllShop =

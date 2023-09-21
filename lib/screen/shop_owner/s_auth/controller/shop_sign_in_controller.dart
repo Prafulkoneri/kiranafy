@@ -270,6 +270,9 @@ class ShopSignInController extends ChangeNotifier {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => ShopRegistrationView()));
         }
+        isLoginBtnEnabled=false;
+        isVerifyChecked=false;
+        notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

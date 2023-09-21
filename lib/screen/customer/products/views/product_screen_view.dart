@@ -10,8 +10,10 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductScreenView extends StatefulWidget {
   final String? shopId;
@@ -691,7 +693,12 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                               //   ),
                                               // ),
                                               GestureDetector(
-                                                onTap: () {
+                                                onTap: () async{
+                                                  SharedPreferences pref = await SharedPreferences.getInstance();
+                                                  if(pref.getString("status")=="guestLoggedIn"){
+                                                    Utils().showLoginDialog(context,"Please Login to add product to cart");
+                                                    return;
+                                                  }
                                                   //  read.addToCart(watch.productDetails?.id,
                                                   //  watch?.productUnitId,element?.shopId,context);
                                                   watch.onUnitImagesSelected(
@@ -1167,6 +1174,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                     ? GestureDetector(
                                                                         onTap:
                                                                             () {
+
                                                                           read.addToCart(
                                                                               element?.productType.toString(),
                                                                               // element

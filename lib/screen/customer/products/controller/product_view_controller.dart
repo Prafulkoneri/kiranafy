@@ -225,6 +225,10 @@ class ProductViewController extends ChangeNotifier {
   Future<void> addToCart(pType, pId, sId, index, context) async {
     print("quantityList1${quantityList}");
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to add product to cart");
+      return;
+    }
     addProductToCartRepo
         .addProductToCart(
             AddProductToCartReqModel(
@@ -449,8 +453,12 @@ class ProductViewController extends ChangeNotifier {
       );
 
   Future addToFavProduct(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to add product to favourite");
+      return;
+    }
     if (productType == "admin_product") {
-      SharedPreferences pref = await SharedPreferences.getInstance();
       addAdminProductToFavRepo
           .addAdminProductToFav(
               addAdminProductToFavReqModel, pref.getString("successToken"))
@@ -599,8 +607,12 @@ class ProductViewController extends ChangeNotifier {
         shopId: shopId.toString(),
       );
   Future<void> updateAllShopFavList(context, id) async {
-    shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to add shop to favourite");
+      return;
+    }
+    shopId = id.toString();
     print(pref.getString("successToken"));
     addFavShopRepo
         .updateAddFavShop(addFavReqModel, pref.getString("successToken"))

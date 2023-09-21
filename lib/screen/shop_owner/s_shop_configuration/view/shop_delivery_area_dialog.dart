@@ -26,6 +26,7 @@ class _ShopDeliveryAreaDialogViewState
     final watch = context.watch<SShopConfigurationController>();
     final read = context.watch<SShopConfigurationController>();
     return Dialog(
+
       backgroundColor: Color(0xffFFFFFF),
       // shape: ,
       shape: RoundedRectangleBorder(
@@ -37,6 +38,37 @@ class _ShopDeliveryAreaDialogViewState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(
+              height: 10.w,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 20.w,
+                    width: 20.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        'assets/images/Cross.svg',
+                        width: 8.w,
+                        height: 8.h,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 8.w,
+                ),
+              ],
+            ),
             Container(
               width: ScreenUtil().screenWidth,
               child: Column(
@@ -47,7 +79,7 @@ class _ShopDeliveryAreaDialogViewState
                     padding: EdgeInsets.only(
                       right: 18.0.w,
                       left: 18.0.w,
-                      top: 27.h,
+                      top: 15.h,
                     ),
                     child: SizedBox(
                       width: 351.w,

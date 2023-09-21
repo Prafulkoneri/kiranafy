@@ -120,9 +120,12 @@ class AllCategoryShopController extends ChangeNotifier {
       );
 
   Future<void> updateNearByFavList(context, id, index) async {
-    shopId = id.toString();
-
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to add shop to favourite");
+      return;
+    }
+    shopId = id.toString();
     print(pref.getString("successToken"));
     addFavShopRepo
         .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
@@ -153,8 +156,12 @@ class AllCategoryShopController extends ChangeNotifier {
   }
 
   Future<void> updateAllShopFavList(context, id, index) async {
-    shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to add shop to favourite");
+      return;
+    }
+    shopId = id.toString();
     print(pref.getString("successToken"));
     addFavShopRepo
         .updateAddFavShop(addFavReqModel, pref.getString("successToken"))

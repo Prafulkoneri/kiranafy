@@ -9,8 +9,10 @@ import 'package:local_supper_market/screen/customer/home/view/home_screen_view.d
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'cart_detail_view.dart';
 
 class CartScreenView extends StatefulWidget {
@@ -234,7 +236,12 @@ class _CartScreenViewState extends State<CartScreenView> {
                             minimumSize: const Size(100, 40), //////// HERE
                           ),
                           // style: style,
-                          onPressed: () {
+                          onPressed: () async{
+                            SharedPreferences pref = await SharedPreferences.getInstance();
+                            if(pref.getString("status")=="guestLoggedIn"){
+                              Utils().showLoginDialog(context,"Please Login to add product to favourite");
+                              return;
+                            }
                             readMain.onNavigation(1, AllNearShopsView(
                               isSearchFocus: false,
                               refreshPage: true,

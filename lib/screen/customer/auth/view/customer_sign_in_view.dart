@@ -117,6 +117,44 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                     ),
                   ),
                   SizedBox(
+                    height: 10.w,
+                  ),
+                  Text("OR",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp),),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Login as",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              letterSpacing: .5,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                      // Text("data")
+                      InkWell(
+                        onTap: () {
+read.guestLogin(context);
+                        },
+                        child: Text(
+                          " Guest",
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                                color: Custlogin,
+                                letterSpacing: .5,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
                     height: 16.h,
                   ),
                   Padding(

@@ -19,6 +19,7 @@ import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
+import 'package:local_supper_market/utils/utils.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -141,7 +142,12 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: () {
+                                  onTap: () async{
+                                    SharedPreferences pref = await SharedPreferences.getInstance();
+                                    if(pref.getString("status")=="guestLoggedIn"){
+                                      Utils().showLoginDialog(context,"Please Login to continue");
+                                      return;
+                                    }
                                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
                                     readMain.onNavigation(
                                         4, UpdateProfileView(), context);
@@ -206,7 +212,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                             SizedBox(
                               height: 11.h,
                             ),
-                            Row(
+                            watch.customerData?.customerMobileNumber!=0 ?Row(
                               children: [
                                 SvgPicture.asset(
                                   'assets/icons/call.svg',
@@ -225,7 +231,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                 ),
                               ],
                               // ),
-                            ),
+                            ):Container(),
                           ],
                         ),
                       )
@@ -235,7 +241,12 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
 
               GestureDetector(
-                onTap: () {
+                onTap: ()async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  if(pref.getString("status")=="guestLoggedIn"){
+                    Utils().showLoginDialog(context,"Please Login to continue");
+                    return;
+                  }
                   readMain.onNavigation(4, UpdateProfileView(), context);
 
                   // Navigator.pushAndRemoveUntil(
@@ -279,7 +290,12 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               /////////////
               GestureDetector(
-                onTap: () {
+                onTap: () async{
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  if(pref.getString("status")=="guestLoggedIn"){
+                    Utils().showLoginDialog(context,"Please Login to continue");
+                    return;
+                  }
                   readMain.onNavigation(4, MyOrderView(), context);
 
                   // Navigator.pushAndRemoveUntil(
@@ -365,7 +381,12 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ////////////////////
 
               GestureDetector(
-                onTap: () {
+                onTap: () async{
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  if(pref.getString("status")=="guestLoggedIn"){
+                    Utils().showLoginDialog(context,"Please Login to continue");
+                    return;
+                  }
                   readMain.onNavigation(4, CFavouritesView(), context);
                 },
                 child: Container(
@@ -400,7 +421,12 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               /////////////////////
 
               GestureDetector(
-                onTap: () {
+                onTap: ()async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  if(pref.getString("status")=="guestLoggedIn"){
+                    Utils().showLoginDialog(context,"Please Login to continue");
+                    return;
+                  }
                   readMain.onNavigation(
                       4, MyDeliveryAddressView(isRefresh: true), context);
                 },
@@ -677,6 +703,11 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  if(pref.getString("status")=="guestLoggedIn"){
+                    Utils().showLoginDialog(context,"Please Login to continue");
+                    return;
+                  }
                   readMain.onNavigation(4, CustomerSetting(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
@@ -716,15 +747,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  SharedPreferences pref =
-                      await SharedPreferences.getInstance();
-                  pref.clear();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const OnBoardingScreenView()),
-                  );
-                  // read.customerSignOut(context);
+                  // SharedPreferences pref =
+                  //     await SharedPreferences.getInstance();
+                  // pref.clear();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const OnBoardingScreenView()),
+                  // );
+                  read.customerSignOut(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

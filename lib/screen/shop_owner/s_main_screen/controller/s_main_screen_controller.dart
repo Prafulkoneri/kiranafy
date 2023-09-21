@@ -113,7 +113,7 @@ class SMainScreenController extends ChangeNotifier {
 
   onCustomTypeNotification(context) {
     print("hello");
-    currentScreen = NotificationsScreenView();
+    currentScreen = NotificationsScreenView(route: "dashboard",);
     currentIndex = 0;
     hideBottomNavigation=false;
     notifyListeners();
@@ -121,6 +121,7 @@ class SMainScreenController extends ChangeNotifier {
 
   onOrderTypeNotification(context, id) {
     currentScreen = ShopOrderView(
+      route: "notification",
       selectedIndex: 0,
       orderId: id.toString(),
       fromOrderStatus: true,

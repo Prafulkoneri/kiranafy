@@ -245,7 +245,7 @@ class SKycVerificationController extends ChangeNotifier {
     print(token);
     print("hujikkkk");
     if (fileImage1.path == "") {
-      Utils.showPrimarySnackbar(context, "Please Select Adhar Card Image",
+      Utils.showPrimarySnackbar(context, "Please Select Aadhar Card Image",
           type: SnackType.error);
       notifyListeners();
       return;
@@ -257,12 +257,11 @@ class SKycVerificationController extends ChangeNotifier {
       return;
     }
     if (adharCardController.text.length < 12) {
-      Utils.showPrimarySnackbar(context, "Please Enter Adhar Card Number",
+      Utils.showPrimarySnackbar(context, "Please Enter Aadhar Card Number",
           type: SnackType.error);
       notifyListeners();
       return;
     }
-
     if (panCardController.text.length < 10) {
       Utils.showPrimarySnackbar(context, "Please Enter Pan Card Number",
           type: SnackType.error);

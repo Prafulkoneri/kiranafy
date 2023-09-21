@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/controller/notification_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
@@ -13,7 +14,8 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class NotificationsScreenView extends StatefulWidget {
-  const NotificationsScreenView({Key? key}) : super(key: key);
+  final String ? route;
+  const NotificationsScreenView({Key? key,required this.route}) : super(key: key);
 
   @override
   _NotificationsScreenViewState createState() =>
@@ -40,7 +42,12 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMainScreen.onNavigation(0, ShopDashBoardView(refresh:true), context);
+              if(widget.route=="accounts"){
+                readMainScreen.onNavigation(4, SAccountScreenView(refresh:false), context);
+              }
+              else{
+                readMainScreen.onNavigation(0, ShopDashBoardView(refresh:true), context);
+              }
               readMainScreen.showBottomNavigationBar();
             },
             title: "Notifications",
@@ -198,8 +205,8 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                                 readMainScreen.onNavigation(1, ShopOrderView(
                                   fromOrderStatus: true,
                                   selectedIndex: 0,
-                                  orderId:
-                                  element?.orderId.toString(),
+                                  route: "notification",
+                                  orderId: element?.orderId.toString(),
                                 ), context);
                                 readMainScreen.hideBottomNavigationBar();
                                 // Navigator.push(
@@ -299,21 +306,25 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                             ),
                           );
                         })
-                    : Container(
+                    :
+                Container(
                         child: Center(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              "assets/images/emptycart.png",
-                              height: 151.h,
-                              width: 151.w,
+                            Container(
+                              padding: EdgeInsets.only(right: 30.w),
+                              child: Image.asset(
+                                "assets/images/emptycart.png",
+                                height: 151.h,
+                                width: 151.w,
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsets.only(
                                   left: 20.w,
-                                  right: 20.w,
+                                  // right: 20.w,
                                   top: 15.w,
                                   bottom: 50.w),
                               child: Text(
@@ -329,6 +340,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
                             ),
                           ],
                         ),
-                      ))));
+                      ))
+        ));
   }
 }

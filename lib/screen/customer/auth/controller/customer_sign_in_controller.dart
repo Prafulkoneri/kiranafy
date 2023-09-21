@@ -4,20 +4,25 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/main.dart';
+import 'package:local_supper_market/screen/customer/auth/model/customer_guest_login_model.dart';
 import 'package:local_supper_market/screen/customer/auth/model/customer_sign_in_model.dart';
 import 'package:local_supper_market/screen/customer/auth/model/mobile_number_check_model.dart';
+import 'package:local_supper_market/screen/customer/auth/repository/customer_guest_login_repo.dart';
 import 'package:local_supper_market/screen/customer/auth/repository/customer_sign_in_repo.dart';
 import 'package:local_supper_market/screen/customer/auth/repository/mobile_number_check_repo.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerSignInController extends ChangeNotifier {
   TextEditingController mobileController = TextEditingController();
   MobileNumberCheckRepo mobileNumberCheckRepo = MobileNumberCheckRepo();
   CustomerSignInRepo customerSignInRepo = CustomerSignInRepo();
+  CustomerGuestLoginInRepo customerGuestLoginInRepo = CustomerGuestLoginInRepo();
   String countryCode = "+91";
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isOtpErrorVisible = false;
@@ -43,6 +48,53 @@ class CustomerSignInController extends ChangeNotifier {
 
   void onCountryCodeSelected(value) {
     countryCode = value.toString();
+  }
+
+  CustomerGuestLoginReqModel get customerGuestLoginReqModel=>CustomerGuestLoginReqModel(
+    loginType: "guest"
+  );
+
+  Future<void> guestLogin(context) async {
+    LoadingOverlay.of(context).show();
+    await customerGuestLoginInRepo.customerGuestLoginIn(customerGuestLoginReqModel).then((response)async {
+        print(response.body);
+        final result = CustomerGuestLoginResModel.fromJson(jsonDecode(response.body));
+        if (response.statusCode == 200) {
+          SharedPreferences pref=await SharedPreferences.getInstance();
+          pref.setString("successToken", result.successToken?.token ?? "");
+          pref.setString("status","guestLoggedIn");
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MainScreenView(
+                    index: 0,
+                    screenName: HomeScreenView(
+                      refreshPage: true,
+                    ))),
+                (Route<dynamic> route) => false,
+          );
+          LoadingOverlay.of(context).hide();
+          notifyListeners();
+        } else {
+          LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+      }).onError((error, stackTrace) {
+      LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      }).catchError(
+            (Object e) {
+              LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        },
+        test: (Object e) {
+          LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+          return false;
+        },
+      );
+
   }
 
   //mobile Number Check

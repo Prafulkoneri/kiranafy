@@ -86,6 +86,10 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> onCountrySelected(value) async {
+    stateId=0;
+    cityId=0;
+    areaId=0;
+    pincode="";
     countryId = int.parse(value.toString());
     notifyListeners();
   }
@@ -120,7 +124,9 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> onStateSelected(value) async {
-    cityId = 0;
+    cityId=0;
+    areaId=0;
+    pincode="";
     stateId = int.parse(value.toString());
     notifyListeners();
   }
@@ -160,6 +166,9 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> onCitySelected(value) async {
+    areaId=0;
+    pincode="";
+
     cityId = int.parse(value.toString());
     notifyListeners();
   }
@@ -169,6 +178,7 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> onAreaSelected(value) async {
+    pincode="";
     areaId = int.parse(value.toString());
     notifyListeners();
   }

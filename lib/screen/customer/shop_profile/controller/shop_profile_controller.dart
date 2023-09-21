@@ -260,8 +260,12 @@ class ShopProfileViewController extends ChangeNotifier {
         shopId: shopId.toString(),
       );
   Future<void> updateAllShopFavList(context, id) async {
-    shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to add shop to favourite");
+      return;
+    }
+    shopId = id.toString();
     print(pref.getString("successToken"));
     addFavShopRepo
         .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
@@ -292,6 +296,10 @@ class ShopProfileViewController extends ChangeNotifier {
 
   Future<void> addToCart(pType, pId, sId, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to add product to cart");
+      return;
+    }
     LoadingOverlay.of(context).show();
     addProductToCartRepo
         .addProductToCart(

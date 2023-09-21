@@ -70,7 +70,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
               //         (Route<dynamic> route) => false,
               //       )
                   : readMainScreen.onNavigation(0, ShopDashBoardView(
-                refresh: false,
+                refresh: true,
               ), context);
               // Navigator.pushAndRemoveUntil(
               //         context,
@@ -85,10 +85,10 @@ class _ShopSeasonalRecommandedOfferProductsViewState
               //       );
             },
             title: watch.isRecommadedPressed
-                ? "Recommended"
+                ? "Recommended Products"
                 : watch.isSeasonalPressed
                     ? "Seasonal Products"
-                    : "Fulfil your cravings"),
+                    : "Fulfil your cravings\nProducts"),
       ),
       body: watch.isLoading
           ? Center(
@@ -105,25 +105,39 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                     children: [
                       Expanded(
                           child: Container(
-                        padding: EdgeInsets.only(
-                            left: 6.w, right: 6.w, bottom: 0.w, top: 0.w),
-                        child: PrimaryButton(
+                        padding: EdgeInsets.only(bottom: 0.w, top: 0.w),
+                        child: GestureDetector(
                             onTap: () {
                               read.onRecommendedTapped();
                             },
-                            child: Text(
-                              "Recommended",
-                              style: TextStyle(
-                                  color: watch.isRecommadedPressed
-                                      ? Color(0xff39C19D)
-                                      : Black1,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500),
+                            child: Container(
+                              padding: EdgeInsets.all(4.w),
+                              height: 45.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.w),
+                                  color: Colors.transparent,
+                                  border: Border.all(
+
+                                      color: watch.isRecommadedPressed
+                                          ? Color(0xff39C19D)
+                                          : Colors.transparent),
+                                  ),
+
+                              child: Center(
+                                child: Text(
+                                  "Recommended",
+                                  style: TextStyle(
+                                      color: watch.isRecommadedPressed
+                                          ? Color(0xff39C19D)
+                                          : Black1,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              ),
+
                             ),
-                            color: Colors.transparent,
-                            borderColor: watch.isRecommadedPressed
-                                ? Color(0xff39C19D)
-                                : Colors.transparent),
+
                       )),
                       Expanded(
                           child: Container(
@@ -157,8 +171,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                       )),
                       Expanded(
                           child: Container(
-                        padding: EdgeInsets.only(
-                            left: 7.w, right: 7.w, bottom: 6.w, top: 6.w),
+                        padding: EdgeInsets.only(right: 7.w, bottom: 6.w, top: 6.w),
                         child: PrimaryButton(
                             onTap: () {
                               // read.onFullFilProductTapped();

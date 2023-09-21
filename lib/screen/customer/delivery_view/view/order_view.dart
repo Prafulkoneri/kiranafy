@@ -118,6 +118,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                routeName: '',
                                shopId: watch.shopDetails?.id.toString(),
                              ), context);
+                             readMain.showBottomNavigationBar();
                              // Navigator.pushAndRemoveUntil(
                              //   context,
                              //   MaterialPageRoute(

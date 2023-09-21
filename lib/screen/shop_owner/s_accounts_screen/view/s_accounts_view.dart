@@ -906,7 +906,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      readMainScreen.onNavigation(4, NotificationsScreenView(), context);
+                      readMainScreen.onNavigation(4, NotificationsScreenView(route: "accounts"), context);
                       readMainScreen.hideBottomNavigationBar();
 
 
@@ -1022,8 +1022,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   // ShopSettingView
                   GestureDetector(
                     onTap: () {
-                      readMainScreen.onNavigation(4, SMainScreenView(
-                          index: 4, screenName: ShopSettingView()), context);
+                      readMainScreen.onNavigation(4,ShopSettingView(), context);
                       // Navigator.pushAndRemoveUntil(
                       //   context,
                       //   MaterialPageRoute(
