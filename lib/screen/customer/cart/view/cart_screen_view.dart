@@ -275,7 +275,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                 )
               : WillPopScope(
                   onWillPop: () async {
-                    readMain.onNavigation(1, HomeScreenView(
+                    readMain.onNavigation(0, HomeScreenView(
                       refreshPage: false,
                     ), context);
                     // Navigator.pushAndRemoveUntil(

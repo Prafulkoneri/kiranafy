@@ -20,11 +20,13 @@ import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_recommanded_products.dart';
 import 'package:local_supper_market/utils/header.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/s_profile_coupons_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_offer_products.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_seasonal_products.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopProfileView extends StatefulWidget {
   const ShopProfileView(
@@ -114,7 +116,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                 }
                 if (widget.routeName == "homeNearbyShop") {
                   readMain.onNavigation(
-                      1,
+                      0,
                       HomeScreenView(
                         refreshPage: false,
                       ),
@@ -1209,31 +1211,19 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   MainAxisAlignment
                                                                       .center,
                                                               children: [
-                                                                element?.productImagePath ==
-                                                                        ""
-                                                                    ? Container(
-                                                                        height:
-                                                                            89.w,
-                                                                        width:
-                                                                            89.w,
-                                                                        child: Image
-                                                                            .asset(
-                                                                          "assets/images/profile_image.png",
-                                                                          fit: BoxFit
-                                                                              .cover,
+                                                                element?.productImagePath == ""
+                                                                    ? Container(height: 89.w,
+                                                                        width: 89.w,
+                                                                        child: Image.asset("assets/images/profile_image.png",
+                                                                          fit: BoxFit.cover,
                                                                         ),
                                                                       )
-                                                                    : Container(
-                                                                        height:
-                                                                            89.w,
-                                                                        width:
-                                                                            89.w,
-                                                                        child:
-                                                                            AppNetworkImages(
-                                                                          imageUrl:
-                                                                              "${element?.productImagePath}",
-                                                                          fit: BoxFit
-                                                                              .cover,
+                                                                    :
+                                                                Container(height: 89.w,
+                                                                        width: 89.w,
+                                                                        child: AppNetworkImages(imageUrl: "${element?.productImagePath}",
+                                                                          fit: BoxFit.cover,
+
                                                                         ),
                                                                       ),
                                                               ],
@@ -2147,15 +2137,18 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               ),
                             )
                           : Container(),
-                      Container(
+                      watchHome.placeAd.isNotEmpty==true ? Container(
                         padding: EdgeInsets.only(
                           right: 19.0.w,
                           left: 19.0.w,
                         ),
                         width: ScreenUtil().screenWidth,
                         // height: 100.h,
-                        child: watchHome.placeAd.isNotEmpty
+                        child:  (watchHome.placeAd.toList()
+                          ..shuffle())
+                            .first!=""
                             ? AppNetworkImages(
+                          showShopImage: true,
                                 imageUrl: (watchHome.placeAd.toList()
                                       ..shuffle())
                                     .first,
@@ -2163,7 +2156,27 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                 width: 352.w,
                                 fit: BoxFit.cover,
                               )
-                            : Container(),
+                            : Image.asset(
+                          "assets/images/profile_image.png",
+                          height: 170.w,
+                          // width: 340.w,
+                          // scale: 0.5,
+                          fit: BoxFit.cover,
+                        ),
+                      ):Container(
+                        padding: EdgeInsets.only(
+                          right: 19.0.w,
+                          left: 19.0.w,
+                        ),
+                        width: ScreenUtil().screenWidth,
+                        // height: 100.h,
+                        child:   Image.asset(
+                          "assets/images/profile_image.png",
+                          height: 170.w,
+                          // width: 340.w,
+                          // scale: 0.5,
+                          fit: BoxFit.cover,
+                        ),
                       ),
 
                       SizedBox(
@@ -2174,7 +2187,12 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                            onTap: () {
+                            onTap: () async{
+                              SharedPreferences pref = await SharedPreferences.getInstance();
+                              if(pref.getString("status")=="guestLoggedIn"){
+                                Utils().showLoginDialog(context,"Please Login to continue");
+                                return;
+                              }
                               readMain.onNavigation(
                                   1, CustomerAdsView(), context);
                               // Navigator.pushAndRemoveUntil(

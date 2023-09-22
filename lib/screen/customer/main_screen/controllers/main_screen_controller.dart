@@ -102,7 +102,8 @@ class MainScreenController extends ChangeNotifier {
       builder: (BuildContext context) {
         return WillPopScope(
             onWillPop: () async {
-              return false;
+              print("hello");
+              return true;
             },
             child: MapScreenView(
               isLocationEnabled: isLocationServiceEnabled,

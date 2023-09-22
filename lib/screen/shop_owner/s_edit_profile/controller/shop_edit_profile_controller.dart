@@ -277,9 +277,10 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   void onBackPressed(context, fromDashBoard) {
+    print(fromDashBoard);
     if (fromDashBoard ?? true) {
       final read=Provider.of<SMainScreenController>(context,listen: false);
-      read.onNavigation(4, ShopDashBoardView(
+      read.onNavigation(0, ShopDashBoardView(
         refresh: false,
       ), context);
       // Navigator.pushAndRemoveUntil(

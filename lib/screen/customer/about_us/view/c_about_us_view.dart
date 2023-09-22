@@ -50,13 +50,25 @@ class _CAboutUsViewState extends State<CAboutUsView> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
-              padding: EdgeInsets.all(20.w),
-              child: HtmlWidget(
-                watch.aboutUs?.description ?? "",
-              ))),
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      WillPopScope(
+        onWillPop: ()async{
+          readMain.onNavigation(4, ProfileScreenView(
+            isRefreshed: false,
+            // refresh: false,
+          ), context);
+          return false;
+        },
+        child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Container(
+                padding: EdgeInsets.all(20.w),
+                child: HtmlWidget(
+                  watch.aboutUs?.description ?? "",
+                ))),
+      ),
     );
   }
 }

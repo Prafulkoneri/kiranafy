@@ -11,9 +11,11 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AllNearShopsView extends StatefulWidget {
   final bool? refreshPage;
@@ -67,7 +69,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                     0, HomeScreenView(refreshPage: false), context);
                 // Navigator.of(context).popUntil(
                 //     (route) => route.settings.name == "MainScreenView");
-                return true;
+                return false;
               },
               child: SingleChildScrollView(
                   controller: scrollController,
@@ -554,7 +556,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                   SizedBox(
                                     height: 30,
                                   ),
-                                  Container(
+                                  watchHome.placeAd.isNotEmpty==true?   Container(
                                     padding: EdgeInsets.only(
                                       right: 19.0.w,
                                       left: 19.0.w,
@@ -562,17 +564,29 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     width: ScreenUtil().screenWidth,
 
                                     // height: 100.h,
-                                    child: watchHome.placeAd.isNotEmpty
+                                    child: (watchHome.placeAd.toList()
+                                      ..shuffle())
+                                        .first!=""
                                         ? AppNetworkImages(
                                             imageUrl:
                                                 (watchHome.placeAd.toList()
                                                       ..shuffle())
                                                     .first,
+                                            showShopImage: true,
                                             height: 163.h,
                                             width: 352.w,
                                             fit: BoxFit.cover,
                                           )
-                                        : Container(),
+                                        : Image.asset("assets/images/shop_image.png"),
+                                  ): Container(
+                                    padding: EdgeInsets.only(
+                                      right: 19.0.w,
+                                      left: 19.0.w,
+                                    ),
+                                    width: ScreenUtil().screenWidth,
+                                    height: 163.h,
+                                    // height: 100.h,
+                                    child: Image.asset("assets/images/shop_image.png",fit: BoxFit.fill,height: 163.h, width: ScreenUtil().screenWidth,),
                                   ),
                                   SizedBox(
                                     height: 20.h,
@@ -581,7 +595,12 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       InkWell(
-                                        onTap: () {
+                                        onTap: ()async {
+                                          SharedPreferences pref = await SharedPreferences.getInstance();
+                                          if(pref.getString("status")=="guestLoggedIn"){
+                                            Utils().showLoginDialog(context,"Please Login to continue");
+                                            return;
+                                          }
                                           readMain.onNavigation(
                                               1, CustomerAdsView(), context);
                                           // Navigator.pushAndRemoveUntil(

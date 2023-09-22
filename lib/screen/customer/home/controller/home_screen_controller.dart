@@ -196,7 +196,7 @@ class HomeScreenController extends ChangeNotifier {
       print(response.body);
       final result = PlaceAdBannerModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("placed ad${response.body}");
+        log("placed ad${response.body}");
         cplacead = result.cplacead;
         customerplacead = cplacead?.customerplacead;
         int imageLength = customerplacead?.length ?? 0;

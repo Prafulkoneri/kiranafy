@@ -94,6 +94,7 @@ class TrackOrderDetails {
   String? orderDeliveredDateAndTime;
   String? orderCancelledDateAndTime;
   String? deliveryType;
+  String ? trackOrderCancelledStatus;
 
   TrackOrderDetails({
     required this.orderStatus,
@@ -104,6 +105,7 @@ class TrackOrderDetails {
     required this.orderDeliveredDateAndTime,
     required this.orderCancelledDateAndTime,
     required this.deliveryType,
+    required this.trackOrderCancelledStatus,
   });
   TrackOrderDetails.fromJson(Map<String, dynamic> json) {
     orderStatus = json["order_status"];
@@ -114,5 +116,6 @@ class TrackOrderDetails {
     orderDeliveredDateAndTime = json["order_delivered_date_and_time"];
     orderCancelledDateAndTime = json["order_cancelled_date_and_time"];
     deliveryType = json["delivery_type"];
+    trackOrderCancelledStatus = json["track_order_cancelled_status"];
   }
 }

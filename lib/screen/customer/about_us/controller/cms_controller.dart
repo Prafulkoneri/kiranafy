@@ -13,11 +13,16 @@ class CmsController extends ChangeNotifier {
   AboutUs? termsAndCondition;
   String privacyPolicyHtml = "";
   String raw = "";
+  bool isLoading=true;
   Future<void> initState(context) async {
     await getCmsPages(context);
   }
-
+void showLoader(value){
+    isLoading=value;
+    notifyListeners();
+}
   Future<void> getCmsPages(context) async {
+    showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     cartListRepo.cmsData(pref.getString("successToken")).then((response) {
@@ -35,19 +40,23 @@ class CmsController extends ChangeNotifier {
         print("yrvuyuiweuiytuiwuivbyhiuyeruiyvuiweryiuy");
         print(termsAndCondition);
         raw = privacyPolicyHtml.replaceAll('\n', r'\n');
-
+        showLoader(false);
         notifyListeners();
       } else {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      showLoader(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },

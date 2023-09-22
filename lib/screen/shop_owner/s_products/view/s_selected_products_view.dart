@@ -318,8 +318,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   child: Stack(
                                                     children: [
                                                       ExpansionTile(
-                                                        trailing:
-                                                            SizedBox.shrink(),
+                                                        trailing: SizedBox.shrink(),
                                                         title: Container(
                                                           width: ScreenUtil()
                                                               .screenWidth,

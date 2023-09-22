@@ -106,8 +106,8 @@ class CustomerOrderViewController extends ChangeNotifier {
     print("rvmjioureicvnwcy");
     print(orId);
     await customerOrderView(context, orId);
-    await   getCancelOrderList(context);
-    await  OReviewList(context);
+    // await   getCancelOrderList(context);
+    // await  OReviewList(context);
     notifyListeners();
   }
 
@@ -123,7 +123,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     orderViewRepo
         .showOrderView(
             customerOrderViewRequestModel, pref.getString("successToken"))
-        .then((response) {
+        .then((response) async{
           print("hello");
       log(response.body);
       final result =
@@ -137,6 +137,7 @@ class CustomerOrderViewController extends ChangeNotifier {
         favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
         deliveryAddressDetails = orderData?.deliveryAddressDetails;
         orderProductDetails = orderData?.orderProductDetails;
+        await getCancelOrderList(context);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -326,7 +327,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     getcustomerCancelOrderRepo
         .cOrderCancelReason(pref.getString("successToken"))
-        .then((response) {
+        .then((response) async{
       log(response.body);
       final result =
           CustomerCancelOrderModel.fromJson(jsonDecode(response.body));
@@ -334,6 +335,7 @@ class CustomerOrderViewController extends ChangeNotifier {
         cancelReasondata = result.cancelReasondata;
         int cancelOrderLength = cancelReasondata?.length ?? 0;
         isSelectedReason = List<bool>.filled(cancelOrderLength, false);
+        await  OReviewList(context);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

@@ -12,8 +12,10 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
+import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AllNearCategoryShopsView extends StatefulWidget {
   final String? categoryId;
@@ -66,7 +68,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(0,HomeScreenView(
-                  refreshPage: true,
+                  refreshPage: false,
                 ), context);
                 // Navigator.pushAndRemoveUntil(
                 //   context,
@@ -595,7 +597,10 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                           ),
                                           width: ScreenUtil().screenWidth,
                                           // height: 100.h,
-                                          child: AppNetworkImages(
+                                          child:  (watchHome.placeAd.toList()
+                                            ..shuffle())
+                                              .first!=""?AppNetworkImages(
+                                            showShopImage: true,
                                             imageUrl:
                                                 (watchHome.placeAd.toList()
                                                       ..shuffle())
@@ -603,9 +608,17 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                             height: 163.h,
                                             width: 352.w,
                                             fit: BoxFit.cover,
-                                          ),
+                                          ):Image.asset("assets/images/shop_image.png",width: ScreenUtil().screenWidth,  height: 163.h,),
                                         )
-                                      : Container(),
+                                      : Container(
+                                    padding: EdgeInsets.only(
+                                      right: 19.0.w,
+                                      left: 19.0.w,
+                                    ),
+                                    width: ScreenUtil().screenWidth,
+                                    // height: 100.h,
+                                    child:Image.asset("assets/images/shop_image.png",width: ScreenUtil().screenWidth,  height: 163.h,),
+                                  ),
 
                                   SizedBox(
                                     height: 10.h,
@@ -615,7 +628,12 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       InkWell(
-                                        onTap: () {
+                                        onTap: () async{
+                                          SharedPreferences pref = await SharedPreferences.getInstance();
+                                          if(pref.getString("status")=="guestLoggedIn"){
+                                            Utils().showLoginDialog(context,"Please Login to continue");
+                                            return;
+                                          }
                                           readMain.onNavigation(0,CustomerAdsView(), context);
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,

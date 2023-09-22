@@ -235,7 +235,7 @@ class CustomerSignInController extends ChangeNotifier {
       print("888");
       showOtpErrorMsg();
       print("888");
-      Utils.showPrimarySnackbar(context, "e.message", type: SnackType.error);
+      // Utils.showPrimarySnackbar(context, "E", type: SnackType.error);
     }
   }
 

@@ -646,7 +646,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         upiIdController.clear();
         reasonController.clear();
     final read=Provider.of<SMainScreenController>(context,listen: false);
-        read.onNavigation(2, SPaymentRefundList(
+        read.onNavigation(0, SPaymentRefundList(
           isNavFromAccounts: false,
         ), context);
         read.showBottomNavigationBar();

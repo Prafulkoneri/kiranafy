@@ -1706,7 +1706,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 bottom: 80.w),
                             child: GestureDetector(
                               onTap: () {
-                                readMain.onNavigation(4,SMySubscriptionView(
+                                readMain.onNavigation(0,SMySubscriptionView(
                                   screenName: "dashboard",
                                 ),context);
                                 // Navigator.pushAndRemoveUntil(
@@ -1876,7 +1876,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 bottom: 80.w),
                             child: GestureDetector(
                               onTap: () {
-                                readMain.onNavigation(4,SMySubscriptionView(
+                                readMain.onNavigation(0,SMySubscriptionView(
                                   screenName: "dashboard",
                                 ),context);
                                 // Navigator.pushAndRemoveUntil(

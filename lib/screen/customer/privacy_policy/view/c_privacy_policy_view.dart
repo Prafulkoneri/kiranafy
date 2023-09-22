@@ -17,7 +17,8 @@ class CPriacyPolicyView extends StatelessWidget {
           onActionTap: () {},
         ),
       ),
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 19.w, right: 19.0.w, top: 20.w),
           child: Column(

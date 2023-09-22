@@ -459,7 +459,12 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async{
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  if(pref.getString("status")=="guestLoggedIn"){
+                    Utils().showLoginDialog(context,"Please Login to continue");
+                    return;
+                  }
                   readMain.onNavigation(4, HelpCenterView(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,

@@ -118,6 +118,10 @@ class CustomerReviewListControler extends ChangeNotifier {
       );
   Future<void> removeAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to continue");
+      return;
+    }
     removeFavShopRepo
         .updateRemoveFavShop(removeFavReqModel, pref.getString("successToken"))
         .then((response) {
@@ -148,6 +152,10 @@ class CustomerReviewListControler extends ChangeNotifier {
 
   Future<void> updateAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getString("status")=="guestLoggedIn"){
+      Utils().showLoginDialog(context,"Please Login to continue");
+      return;
+    }
     print(pref.getString("successToken"));
     addFavShopRepo
         .updateAddFavShop(addFavReqModel, pref.getString("successToken"))

@@ -542,7 +542,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           margin: EdgeInsets.only(left: 21.w),
                           height: 78.w,
                           width: 1.w,
-                          color: Color(0xffC4C4C4),
+                          color:(watch.trackOrderDetails?.trackOrderCancelledStatus=="order_placed_cancelled")&&watch.trackOrderDetails?.orderStatus=="order_cancelled"?Colors.red: Color(0xffC4C4C4),
                         ),
                         SizedBox(
                           width: 28.5.w,
@@ -583,10 +583,11 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           height: 21.w,
                           width: 21.w,
                           decoration: BoxDecoration(
-                              color: watch.trackOrderDetails?.orderStatus !=
-                                      "order_placed"
-                                  ? Color(0xff39C19D)
-                                  : Color(0xffC4C4C4),
+                              color:
+                                (watch.trackOrderDetails?.trackOrderCancelledStatus=="order_placed_cancelled")&&watch.trackOrderDetails?.orderStatus=="order_cancelled"?Colors.red
+                               : watch.trackOrderDetails?.orderStatus !=
+                                    "order_placed"
+                                    ? Color(0xff39C19D): Color(0xffC4C4C4),
                               shape: BoxShape.circle),
                         ),
                         SizedBox(
@@ -608,7 +609,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           margin: EdgeInsets.only(left: 21.w),
                           height: 75.w,
                           width: 1.w,
-                          color: Color(0xffC4C4C4),
+                          color: (watch.trackOrderDetails?.trackOrderCancelledStatus=="order_placed_cancelled"||watch.trackOrderDetails?.trackOrderCancelledStatus=="order_confirmed_cancelled")&&watch.trackOrderDetails?.orderStatus=="order_cancelled"?Colors.red:Color(0xffC4C4C4),
                         ),
                         SizedBox(
                           width: 28.5.w,
@@ -653,7 +654,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                           "order_placed" ||
                                       watch.trackOrderDetails?.orderStatus ==
                                           "order_confirmed"
-                                  ? Color(0xffC4C4C4)
+                                  ? Color(0xffC4C4C4):
+                              (watch.trackOrderDetails?.trackOrderCancelledStatus=="order_placed_cancelled"||watch.trackOrderDetails?.trackOrderCancelledStatus=="order_confirmed_cancelled")&&watch.trackOrderDetails?.orderStatus=="order_cancelled"?Colors.red
                                   : Color(0xff39C19D),
                               shape: BoxShape.circle),
                         ),
@@ -676,7 +678,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           margin: EdgeInsets.only(left: 21.w),
                           height: 78.w,
                           width: 1.w,
-                          color: Color(0xffC4C4C4),
+                          color:(watch.trackOrderDetails?.trackOrderCancelledStatus=="order_placed_cancelled"||watch.trackOrderDetails?.trackOrderCancelledStatus=="order_confirmed_cancelled")&&watch.trackOrderDetails?.orderStatus=="order_cancelled"?Colors.red:Color(0xffC4C4C4),
                         ),
                         SizedBox(
                           width: 28.5.w,
@@ -722,7 +724,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                   ? Color(0xff39C19D)
                                   : watch.trackOrderDetails?.orderStatus ==
                                           "order_delivered"
-                                      ? Color(0xff39C19D)
+                                      ? Color(0xff39C19D):
+                              (watch.trackOrderDetails?.trackOrderCancelledStatus=="order_placed_cancelled"||watch.trackOrderDetails?.trackOrderCancelledStatus=="order_confirmed_cancelled")&&watch.trackOrderDetails?.orderStatus=="order_cancelled"?Colors.red
                                       : Color(0xffC4C4C4),
                               shape: BoxShape.circle),
                         ),
@@ -745,7 +748,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           margin: EdgeInsets.only(left: 21.w),
                           height: 78.w,
                           width: 1.w,
-                          color: Color(0xffC4C4C4),
+                          color:(watch.trackOrderDetails?.trackOrderCancelledStatus=="order_placed_cancelled"||watch.trackOrderDetails?.trackOrderCancelledStatus=="order_confirmed_cancelled")&&watch.trackOrderDetails?.orderStatus=="order_cancelled"?Colors.red:Color(0xffC4C4C4),
                         ),
                         SizedBox(
                           width: 28.5.w,
@@ -788,7 +791,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           decoration: BoxDecoration(
                               color: watch.trackOrderDetails?.orderStatus ==
                                       "order_delivered"
-                                  ? Color(0xff39C19D)
+                                  ? Color(0xff39C19D):
+                              (watch.trackOrderDetails?.trackOrderCancelledStatus=="order_placed_cancelled"||watch.trackOrderDetails?.trackOrderCancelledStatus=="order_confirmed_cancelled")&&watch.trackOrderDetails?.orderStatus=="order_cancelled"?Colors.red
                                   : Color(0xffC4C4C4),
                               shape: BoxShape.circle),
                         ),

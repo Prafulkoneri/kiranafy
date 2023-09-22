@@ -52,14 +52,29 @@ class _CustomerPrivacyPolicyState extends State<CustomerPrivacyPolicy> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
-              padding: EdgeInsets.only(
-                  left: 20.w, right: 20, top: 20.w, bottom: 35.w),
-              child: HtmlWidget(
-                watch.privacyPolicy?.description ?? "",
-              ))),
+      body:watch.isLoading?Center(
+        child: CircularProgressIndicator(),
+      ):
+      WillPopScope(
+        onWillPop: ()async{
+          readMain.onNavigation(
+              4,
+              ProfileScreenView(
+                isRefreshed: false,
+                // refresh: false,
+              ),
+              context);
+          return false;
+        },
+        child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Container(
+                padding: EdgeInsets.only(
+                    left: 20.w, right: 20, top: 20.w, bottom: 35.w),
+                child: HtmlWidget(
+                  watch.privacyPolicy?.description ?? "",
+                ))),
+      ),
     );
   }
 }

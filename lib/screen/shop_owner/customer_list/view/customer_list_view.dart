@@ -71,10 +71,17 @@ class _CustomerListViewState extends State<CustomerListView> {
             //     :
 
 
+           if( widget.fromPage == "account"){
+             readMain.onNavigation(4, SAccountScreenView(
+               refresh: false,
+             ), context);
+           }
+           else{
+             readMain.onNavigation(0, ShopDashBoardView(
+               refresh: false,
+             ), context);
+           }
 
-            readMain.onNavigation(0, ShopDashBoardView(
-              refresh: false,
-            ), context);
 
 
 
@@ -114,6 +121,12 @@ class _CustomerListViewState extends State<CustomerListView> {
             )
           : WillPopScope(
               onWillPop: () async {
+                if( widget.fromPage == "account"){
+                  readMain.onNavigation(4, SAccountScreenView(refresh: false,), context);
+                }
+                else{
+                  readMain.onNavigation(0,ShopDashBoardView(refresh: false,), context);
+                }
                 return false;
               },
               child: SingleChildScrollView(

@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
+import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class OfferPage extends StatefulWidget {
@@ -142,6 +143,9 @@ class _OfferPageState extends State<OfferPage> {
                                     bottom: index == 2 ? 5 : 10.h),
                                 child: Row(
                                   children: [
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
                                     element?.productImagePath == ""
                                         ? Container(
                                             height: 68.w,
@@ -155,8 +159,8 @@ class _OfferPageState extends State<OfferPage> {
                                         : Container(
                                             height: 68.w,
                                             width: 68.w,
-                                            child: Image.network(
-                                              "${element?.productImagePath}",
+                                            child: AppNetworkImages(
+                                              imageUrl: "${element?.productImagePath}",
                                               fit: BoxFit.cover,
                                             ),
                                           ),
