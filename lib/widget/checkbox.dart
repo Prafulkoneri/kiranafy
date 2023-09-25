@@ -52,7 +52,7 @@ class _PrimaryCheckBoxState extends State<PrimaryCheckBox> {
             height: widget.size ?? 18.w,
             width: widget.size ?? 18.w,
             decoration: BoxDecoration(
-                color: widget.value ?? false ? Color(0xff4689EC) : Colors.white,
+                color: widget.value ?? false ? Color(0xff39C19D) : Colors.white,
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
                     color: widget.value ?? false

@@ -190,7 +190,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(bottom: 15.w),
-                            child: PrimaryCheckBox(
+                            child: SeconderyCheckBox(
                               value: watch.isVerifyChecked,
                               onChanged: (value) {
                                 read.onVerifyChecked(value);

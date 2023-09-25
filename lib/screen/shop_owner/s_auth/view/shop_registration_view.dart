@@ -173,130 +173,134 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                             width: 13.w,
                           ),
                           Expanded(
-                              child:
-
-                            watch.stateId==0 ?
-                            SDropDownField(
-                            onChanged: (value) async {
-                              await read.onStateSelected(value);
-                              await read.getCityList(context);
-                            },
-                            items: watch.stateList
-                                ?.map((item) => DropdownMenuItem<String>(
-                                      value: item.id.toString(),
-                                      child: Text(
-                                        item.stateName ?? "",
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                            hint: "State",
-                          ):SDropDownField(
-                              value: watch.stateId.toString(),
-                              onChanged: (value) async {
-                                await read.onStateSelected(value);
-                                await read.getCityList(context);
-                              },
-                              items: watch.stateList
-                                  ?.map((item) => DropdownMenuItem<String>(
-                                value: item.id.toString(),
-                                child: Text(
-                                  item.stateName ?? "",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                              ))
-                                  .toList(),
-                              hint: "State",
-                            )),
+                              child: watch.stateId == 0
+                                  ? SDropDownField(
+                                      onChanged: (value) async {
+                                        await read.onStateSelected(value);
+                                        await read.getCityList(context);
+                                      },
+                                      items: watch.stateList
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.stateName ?? "",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ))
+                                          .toList(),
+                                      hint: "State",
+                                    )
+                                  : SDropDownField(
+                                      value: watch.stateId.toString(),
+                                      onChanged: (value) async {
+                                        await read.onStateSelected(value);
+                                        await read.getCityList(context);
+                                      },
+                                      items: watch.stateList
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.stateName ?? "",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ))
+                                          .toList(),
+                                      hint: "State",
+                                    )),
                         ],
                       ),
                       SizedBox(
                         height: 18.w,
                       ),
-                     watch.cityId==0? SDropDownField(
-                        onChanged: (value) async {
-                          await read.onCitySelected(value);
-                          await read.getAreaList(context);
-                        },
-                        items: watch.cityList
-                            ?.map((item) => DropdownMenuItem<String>(
-                                  value: item.id.toString(),
-                                  child: Text(
-                                    item.cityName ?? "",
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                        hint: "City",
-                      ):
-                     SDropDownField(
-                       value: watch.cityId.toString(),
-                       onChanged: (value) async {
-                         await read.onCitySelected(value);
-                         await read.getAreaList(context);
-                       },
-                       items: watch.cityList
-                           ?.map((item) => DropdownMenuItem<String>(
-                         value: item.id.toString(),
-                         child: Text(
-                           item.cityName ?? "",
-                           style: TextStyle(
-                             fontSize: 14.sp,
-                           ),
-                         ),
-                       ))
-                           .toList(),
-                       hint: "City",
-                     ),
+                      watch.cityId == 0
+                          ? SDropDownField(
+                              onChanged: (value) async {
+                                await read.onCitySelected(value);
+                                await read.getAreaList(context);
+                              },
+                              items: watch.cityList
+                                  ?.map((item) => DropdownMenuItem<String>(
+                                        value: item.id.toString(),
+                                        child: Text(
+                                          item.cityName ?? "",
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              hint: "City",
+                            )
+                          : SDropDownField(
+                              value: watch.cityId.toString(),
+                              onChanged: (value) async {
+                                await read.onCitySelected(value);
+                                await read.getAreaList(context);
+                              },
+                              items: watch.cityList
+                                  ?.map((item) => DropdownMenuItem<String>(
+                                        value: item.id.toString(),
+                                        child: Text(
+                                          item.cityName ?? "",
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              hint: "City",
+                            ),
                       SizedBox(
                         height: 18.w,
                       ),
-                    watch.areaId==0?  SDropDownField(
-                        onChanged: (value) async {
-                          read.onAreaSelected(value);
-                          read.getPinCodeList(context);
-                        },
-                        items: watch.areaList
-                            ?.map(
-                              (item) => DropdownMenuItem<String>(
-                                value: item.id.toString(),
-                                child: Text(
-                                  item.areaName ?? "",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                              ),
+                      watch.areaId == 0
+                          ? SDropDownField(
+                              onChanged: (value) async {
+                                read.onAreaSelected(value);
+                                read.getPinCodeList(context);
+                              },
+                              items: watch.areaList
+                                  ?.map(
+                                    (item) => DropdownMenuItem<String>(
+                                      value: item.id.toString(),
+                                      child: Text(
+                                        item.areaName ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                              hint: "Area",
                             )
-                            .toList(),
-                        hint: "Area",
-                      ): SDropDownField(
-                      value: watch.areaId.toString(),
-                      onChanged: (value) async {
-                        read.onAreaSelected(value);
-                        read.getPinCodeList(context);
-                      },
-                      items: watch.areaList
-                          ?.map(
-                            (item) => DropdownMenuItem<String>(
-                          value: item.id.toString(),
-                          child: Text(
-                            item.areaName ?? "",
-                            style: TextStyle(
-                              fontSize: 14.sp,
+                          : SDropDownField(
+                              value: watch.areaId.toString(),
+                              onChanged: (value) async {
+                                read.onAreaSelected(value);
+                                read.getPinCodeList(context);
+                              },
+                              items: watch.areaList
+                                  ?.map(
+                                    (item) => DropdownMenuItem<String>(
+                                      value: item.id.toString(),
+                                      child: Text(
+                                        item.areaName ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                              hint: "Area",
                             ),
-                          ),
-                        ),
-                      )
-                          .toList(),
-                      hint: "Area",
-                    ),
 
                       SizedBox(
                         height: 18.w,
@@ -313,46 +317,48 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
 
-                    watch.pincode==""?  SDropDownField(
-                        onChanged: (value) async {
-                          print(value);
-                          read.onPincodeSelected(value);
-                        },
-                        items: watch.pincodeList
-                            ?.map(
-                              (item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item ?? "",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                              ),
+                      watch.pincode == ""
+                          ? SDropDownField(
+                              onChanged: (value) async {
+                                print(value);
+                                read.onPincodeSelected(value);
+                              },
+                              items: watch.pincodeList
+                                  ?.map(
+                                    (item) => DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                              hint: "Pincode",
                             )
-                            .toList(),
-                        hint: "Pincode",
-                      ): SDropDownField(
-                      value: watch.pincode,
-                      onChanged: (value) async {
-                        print(value);
-                        read.onPincodeSelected(value);
-                      },
-                      items: watch.pincodeList
-                          ?.map(
-                            (item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item ?? "",
-                            style: TextStyle(
-                              fontSize: 14.sp,
+                          : SDropDownField(
+                              value: watch.pincode,
+                              onChanged: (value) async {
+                                print(value);
+                                read.onPincodeSelected(value);
+                              },
+                              items: watch.pincodeList
+                                  ?.map(
+                                    (item) => DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                              hint: "Pincode",
                             ),
-                          ),
-                        ),
-                      )
-                          .toList(),
-                      hint: "Pincode",
-                    ),
                       SizedBox(
                         height: 18.w,
                       ),
