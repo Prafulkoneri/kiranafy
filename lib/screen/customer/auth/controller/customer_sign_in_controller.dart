@@ -22,7 +22,8 @@ class CustomerSignInController extends ChangeNotifier {
   TextEditingController mobileController = TextEditingController();
   MobileNumberCheckRepo mobileNumberCheckRepo = MobileNumberCheckRepo();
   CustomerSignInRepo customerSignInRepo = CustomerSignInRepo();
-  CustomerGuestLoginInRepo customerGuestLoginInRepo = CustomerGuestLoginInRepo();
+  CustomerGuestLoginInRepo customerGuestLoginInRepo =
+      CustomerGuestLoginInRepo();
   String countryCode = "+91";
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isOtpErrorVisible = false;
@@ -50,51 +51,52 @@ class CustomerSignInController extends ChangeNotifier {
     countryCode = value.toString();
   }
 
-  CustomerGuestLoginReqModel get customerGuestLoginReqModel=>CustomerGuestLoginReqModel(
-    loginType: "guest"
-  );
+  CustomerGuestLoginReqModel get customerGuestLoginReqModel =>
+      CustomerGuestLoginReqModel(loginType: "guest");
 
   Future<void> guestLogin(context) async {
     LoadingOverlay.of(context).show();
-    await customerGuestLoginInRepo.customerGuestLoginIn(customerGuestLoginReqModel).then((response)async {
-        print(response.body);
-        final result = CustomerGuestLoginResModel.fromJson(jsonDecode(response.body));
-        if (response.statusCode == 200) {
-          SharedPreferences pref=await SharedPreferences.getInstance();
-          pref.setString("successToken", result.successToken?.token ?? "");
-          pref.setString("status","guestLoggedIn");
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MainScreenView(
-                    index: 0,
-                    screenName: HomeScreenView(
-                      refreshPage: true,
-                    ))),
-                (Route<dynamic> route) => false,
-          );
-          LoadingOverlay.of(context).hide();
-          notifyListeners();
-        } else {
-          LoadingOverlay.of(context).hide();
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.error);
-        }
-      }).onError((error, stackTrace) {
+    await customerGuestLoginInRepo
+        .customerGuestLoginIn(customerGuestLoginReqModel)
+        .then((response) async {
+      print(response.body);
+      final result =
+          CustomerGuestLoginResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        pref.setString("successToken", result.successToken?.token ?? "");
+        pref.setString("status", "guestLoggedIn");
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                  index: 0,
+                  screenName: HomeScreenView(
+                    refreshPage: true,
+                  ))),
+          (Route<dynamic> route) => false,
+        );
+        LoadingOverlay.of(context).hide();
+        notifyListeners();
+      } else {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
       LoadingOverlay.of(context).hide();
-        Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-      }).catchError(
-            (Object e) {
-              LoadingOverlay.of(context).hide();
-          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        },
-        test: (Object e) {
-          LoadingOverlay.of(context).hide();
-          Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-          return false;
-        },
-      );
-
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        LoadingOverlay.of(context).hide();
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 
   //mobile Number Check

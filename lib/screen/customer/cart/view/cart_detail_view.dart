@@ -198,6 +198,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                 : WillPopScope(
                     onWillPop: () async {
                       readMain.onNavigation(2, CartScreenView(), context);
+                      readMain.showBottomNavigationBar();
                       // Navigator.pushAndRemoveUntil(
                       //   context,
                       //   MaterialPageRoute(
@@ -220,14 +221,15 @@ class _CartDetailViewState extends State<CartDetailView> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          readMain.onNavigation(1, ShopProfileView(
-                                            refreshPage: true,
-                                            routeName: '',
-                                            shopId: watch
-                                                .shopDetailData
-                                                ?.id
-                                                .toString(),
-                                          ), context);
+                                          readMain.onNavigation(
+                                              1,
+                                              ShopProfileView(
+                                                refreshPage: true,
+                                                routeName: '',
+                                                shopId: watch.shopDetailData?.id
+                                                    .toString(),
+                                              ),
+                                              context);
                                           readMain.showBottomNavigationBar();
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,
@@ -291,8 +293,8 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                     children: [
                                                       SvgPicture.asset(
                                                         'assets/images/location2.svg',
-                                                        width: 23.w,
-                                                        height: 28.h,
+                                                        // width: 23.w,
+                                                        // height: 28.h,
                                                       ),
                                                       SizedBox(
                                                         width: 8.w,
@@ -424,33 +426,37 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                 onTap: () {
                                                   readProductViewController
                                                       .updateProductId(
-                                                    element?.productId
-                                                        .toString(),context,false
-                                                  );
+                                                          element?.productId
+                                                              .toString(),
+                                                          context,
+                                                          false);
                                                   print("anobot");
                                                   readProductViewController
                                                       .getCartId(
                                                           watch.orderCartId);
-                                                  readMain.onNavigation(1,   ProductScreenView(
-                                                      // selectedUnitId: element?.productUnitId.toString(),
-                                                      categoryId: element
-                                                      ?.categoryId
-                                                      .toString(),
-                                                  // categoryId: watch.categoryId,
-                                                  productId: element
-                                                      ?.productId
-                                                      .toString(),
-                                                  shopId: watch
-                                                      .shopDetailData
-                                                      ?.id
-                                                      .toString(),
-                                                  // widget.shopId,
-                                                  productType: element
-                                                      ?.productType,
-                                                  routeName:
-                                                  "cart_details",
-                                                  ), context);
-                                                  readMain.showBottomNavigationBar();
+                                                  readMain.onNavigation(
+                                                      1,
+                                                      ProductScreenView(
+                                                        // selectedUnitId: element?.productUnitId.toString(),
+                                                        categoryId: element
+                                                            ?.categoryId
+                                                            .toString(),
+                                                        // categoryId: watch.categoryId,
+                                                        productId: element
+                                                            ?.productId
+                                                            .toString(),
+                                                        shopId: watch
+                                                            .shopDetailData?.id
+                                                            .toString(),
+                                                        // widget.shopId,
+                                                        productType: element
+                                                            ?.productType,
+                                                        routeName:
+                                                            "cart_details",
+                                                      ),
+                                                      context);
+                                                  readMain
+                                                      .showBottomNavigationBar();
 
                                                   // Navigator.pushAndRemoveUntil(
                                                   //   context,
@@ -1006,12 +1012,21 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                       child: Text("Continue"),
                                                       onPressed: () {
                                                         Navigator.pop(context);
-                                                        readMain.onNavigation(2,OrderSummaryView(
-                                                          route: "cartDetail",
-                                                          isRefresh: true,
-                                                          cartId: watch.orderCartId.toString(),
-                                                          shopId: watch.shopDetailData?.id.toString(),
-                                                        ),context);
+                                                        readMain.onNavigation(
+                                                            2,
+                                                            OrderSummaryView(
+                                                              route:
+                                                                  "cartDetail",
+                                                              isRefresh: true,
+                                                              cartId: watch
+                                                                  .orderCartId
+                                                                  .toString(),
+                                                              shopId: watch
+                                                                  .shopDetailData
+                                                                  ?.id
+                                                                  .toString(),
+                                                            ),
+                                                            context);
                                                         //
                                                         // readMain.hideBottomNavigationBar();
 

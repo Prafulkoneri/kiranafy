@@ -60,20 +60,20 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
 
     return Scaffold(
       body: watch.isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
-                    0, HomeScreenView(refreshPage: false), context);
+                    0, const HomeScreenView(refreshPage: false), context);
                 // Navigator.of(context).popUntil(
                 //     (route) => route.settings.name == "MainScreenView");
                 return false;
               },
               child: SingleChildScrollView(
                   controller: scrollController,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,8 +99,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                               controller: watch.searchController,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(width: 1, color: splashnone),
+                                    borderSide: const BorderSide(
+                                        width: 1, color: splashnone),
                                     borderRadius: BorderRadius.circular(8.w)),
                                 hintText: 'Search your shop.......',
                                 hintStyle: GoogleFonts.dmSans(
@@ -140,7 +140,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                         ),
                         SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: List.generate(
@@ -194,7 +194,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                   index]
                                                               .shopBannerImagePath ==
                                                           ""
-                                                      ? DecorationImage(
+                                                      ? const DecorationImage(
                                                           scale: 1.0,
                                                           image: AssetImage(
                                                               'assets/images/nearshop2.png'),
@@ -307,7 +307,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                       padding: EdgeInsets.zero,
 
                                       // scrollDirection: Axis.vertical,p
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       // physics: BouncingScrollPhysics(),
                                       shrinkWrap: true,
                                       itemCount: watch.allShops.length ?? 0,
@@ -356,7 +357,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                       image: element
                                                                   .shopBannerImagePath ==
                                                               ""
-                                                          ? DecorationImage(
+                                                          ? const DecorationImage(
                                                               // scale: 1.0,
                                                               image: AssetImage(
                                                                   'assets/images/nearshop2.png'),
@@ -411,7 +412,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Row(
+                                                          const Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .end,
@@ -472,9 +473,10 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                         BoxDecoration(
                                                                       color:
                                                                           yellow,
-                                                                      borderRadius:
-                                                                          BorderRadius.all(
-                                                                              Radius.circular(15)),
+                                                                      borderRadius: const BorderRadius
+                                                                              .all(
+                                                                          Radius.circular(
+                                                                              15)),
                                                                     ),
                                                                     child: Row(
                                                                       mainAxisAlignment:
@@ -553,41 +555,50 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                           ),
                                         );
                                       }),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 30,
                                   ),
-                                  watchHome.placeAd.isNotEmpty==true?   Container(
-                                    padding: EdgeInsets.only(
-                                      right: 19.0.w,
-                                      left: 19.0.w,
-                                    ),
-                                    width: ScreenUtil().screenWidth,
+                                  watchHome.placeAd.isNotEmpty == true
+                                      ? Container(
+                                          padding: EdgeInsets.only(
+                                            right: 19.0.w,
+                                            left: 19.0.w,
+                                          ),
+                                          width: ScreenUtil().screenWidth,
 
-                                    // height: 100.h,
-                                    child: (watchHome.placeAd.toList()
-                                      ..shuffle())
-                                        .first!=""
-                                        ? AppNetworkImages(
-                                            imageUrl:
-                                                (watchHome.placeAd.toList()
-                                                      ..shuffle())
-                                                    .first,
-                                            showShopImage: true,
+                                          // height: 100.h,
+                                          child: (watchHome.placeAd.toList()
+                                                        ..shuffle())
+                                                      .first !=
+                                                  ""
+                                              ? AppNetworkImages(
+                                                  imageUrl: (watchHome.placeAd
+                                                          .toList()
+                                                        ..shuffle())
+                                                      .first,
+                                                  showShopImage: true,
+                                                  height: 163.h,
+                                                  width: 352.w,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Image.asset(
+                                                  "assets/images/shop_image.png"),
+                                        )
+                                      : Container(
+                                          padding: EdgeInsets.only(
+                                            right: 19.0.w,
+                                            left: 19.0.w,
+                                          ),
+                                          width: ScreenUtil().screenWidth,
+                                          height: 163.h,
+                                          // height: 100.h,
+                                          child: Image.asset(
+                                            "assets/images/shop_image.png",
+                                            fit: BoxFit.fill,
                                             height: 163.h,
-                                            width: 352.w,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Image.asset("assets/images/shop_image.png"),
-                                  ): Container(
-                                    padding: EdgeInsets.only(
-                                      right: 19.0.w,
-                                      left: 19.0.w,
-                                    ),
-                                    width: ScreenUtil().screenWidth,
-                                    height: 163.h,
-                                    // height: 100.h,
-                                    child: Image.asset("assets/images/shop_image.png",fit: BoxFit.fill,height: 163.h, width: ScreenUtil().screenWidth,),
-                                  ),
+                                            width: ScreenUtil().screenWidth,
+                                          ),
+                                        ),
                                   SizedBox(
                                     height: 20.h,
                                   ),
@@ -595,14 +606,18 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       InkWell(
-                                        onTap: ()async {
-                                          SharedPreferences pref = await SharedPreferences.getInstance();
-                                          if(pref.getString("status")=="guestLoggedIn"){
-                                            Utils().showLoginDialog(context,"Please Login to continue");
+                                        onTap: () async {
+                                          SharedPreferences pref =
+                                              await SharedPreferences
+                                                  .getInstance();
+                                          if (pref.getString("status") ==
+                                              "guestLoggedIn") {
+                                            Utils().showLoginDialog(context,
+                                                "Please Login to continue");
                                             return;
                                           }
-                                          readMain.onNavigation(
-                                              1, CustomerAdsView(), context);
+                                          readMain.onNavigation(1,
+                                              const CustomerAdsView(), context);
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,
                                           //   MaterialPageRoute(
@@ -616,7 +631,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color: Color(0xff39C19D),
+                                              color: const Color(0xff39C19D),
                                               borderRadius:
                                                   BorderRadius.circular(7.w)),
                                           padding: EdgeInsets.symmetric(
@@ -653,7 +668,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                       child: Container(
                                         width: 20,
                                         height: 20,
-                                        child: CircularProgressIndicator(
+                                        child: const CircularProgressIndicator(
                                           color: SplashText,
                                         ),
                                       ),

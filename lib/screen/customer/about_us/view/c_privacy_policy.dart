@@ -4,7 +4,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:local_supper_market/screen/customer/about_us/controller/cms_controller.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +36,7 @@ class _CustomerPrivacyPolicyState extends State<CustomerPrivacyPolicy> {
           onBackBtnPressed: () {
             readMain.onNavigation(
                 4,
-                ProfileScreenView(
+                const ProfileScreenView(
                   isRefreshed: false,
                   // refresh: false,
                 ),
@@ -52,29 +51,30 @@ class _CustomerPrivacyPolicyState extends State<CustomerPrivacyPolicy> {
           },
         ),
       ),
-      body:watch.isLoading?Center(
-        child: CircularProgressIndicator(),
-      ):
-      WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(
-              4,
-              ProfileScreenView(
-                isRefreshed: false,
-                // refresh: false,
-              ),
-              context);
-          return false;
-        },
-        child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Container(
-                padding: EdgeInsets.only(
-                    left: 20.w, right: 20, top: 20.w, bottom: 35.w),
-                child: HtmlWidget(
-                  watch.privacyPolicy?.description ?? "",
-                ))),
-      ),
+      body: watch.isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : WillPopScope(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    4,
+                    const ProfileScreenView(
+                      isRefreshed: false,
+                      // refresh: false,
+                    ),
+                    context);
+                return false;
+              },
+              child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 20.w, right: 20, top: 20.w, bottom: 35.w),
+                      child: HtmlWidget(
+                        watch.privacyPolicy?.description ?? "",
+                      ))),
+            ),
     );
   }
 }
