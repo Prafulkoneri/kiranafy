@@ -225,6 +225,7 @@ class CustomerSignUpController extends ChangeNotifier {
     isOtpErrorVisible = false;
     notifyListeners();
   }
+
   launchTermsAndConditionURL() async {
     final Uri url = Uri.parse('https://localsupermart.com/terms-condition.php');
     if (!await launchUrl(url)) {

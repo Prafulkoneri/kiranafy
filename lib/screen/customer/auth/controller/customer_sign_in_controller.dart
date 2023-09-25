@@ -196,6 +196,7 @@ class CustomerSignInController extends ChangeNotifier {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "customerLoggedIn");
         print("token ${pref.getString("successToken")}");
+        isLoginBtnEnabled = false;
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -203,6 +204,7 @@ class CustomerSignInController extends ChangeNotifier {
                       index: 0,
                       screenName: HomeScreenView(refreshPage: true),
                     )));
+        mobileController.clear();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
