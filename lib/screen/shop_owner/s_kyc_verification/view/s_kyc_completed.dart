@@ -120,6 +120,7 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                             MaterialPageRoute(
                                 builder: (context) => SSubscriptionScreenView(
                                       loggedIn: false,
+                                  routeName: "kyc",
                                     )),
                             (Route<dynamic> route) => false,
                           );

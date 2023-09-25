@@ -102,6 +102,11 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
       ),
       body: WillPopScope(
         onWillPop: () async {
+          readMain.onNavigation(1, ShopProfileView(
+            shopId: widget.shopId.toString(),
+            routeName: "categoryView",
+            refreshPage: true,
+          ), context);
           return false;
         },
         child: Column(

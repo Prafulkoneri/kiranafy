@@ -69,6 +69,7 @@ class AddAddressController extends ChangeNotifier {
     cityId = 0;
     areaId = 0;
     shopId = 0;
+    pincode="";
     nameController.clear();
     mobNoController.clear();
 
@@ -321,7 +322,10 @@ class AddAddressController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print("${response.body}");
         countryList = result.countryData;
-        showLoader(false);
+        if(!isEditingAddress){
+          showLoader(false);
+        }
+
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -497,7 +501,7 @@ class AddAddressController extends ChangeNotifier {
         } else {
           showPincodeValueField = false;
         }
-        isLoading = false;
+        showLoader(false);
         notifyListeners();
       }
     });

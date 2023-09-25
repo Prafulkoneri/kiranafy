@@ -72,7 +72,7 @@ class ProfileController extends ChangeNotifier {
 
   void onFavouritesClicked(context) async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CFavouritesView()));
+        context, MaterialPageRoute(builder: (context) => CFavouritesView(selectedIndex: 0,)));
   }
 
 ////Detail Profile

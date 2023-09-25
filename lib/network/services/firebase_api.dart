@@ -2,12 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:local_supper_market/main.dart';
-import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
-import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 
 Future<void> handleBackGroundMessage(RemoteMessage message) async {
   print("Title : ${message.notification?.title}");

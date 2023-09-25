@@ -39,302 +39,300 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
     readMain.onNavigation(4, SAccountScreenView(
                 refresh: false,
               ),context);
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => SMainScreenView(
-            //           index: 4,
-            //           screenName: SAccountScreenView(
-            //             refresh: false,
-            //           ))),
-            //   (Route<dynamic> route) => false,
-            // );
+
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 25,
-            ),
-            GestureDetector(
-              onTap: () {
+      body: WillPopScope(
+        onWillPop: ()async{
+          readMain.onNavigation(4, SAccountScreenView(
+            refresh: false,
+          ),context);
+          return false;
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 25,
+              ),
+              GestureDetector(
+                onTap: () {
     readMain.onNavigation(4, AboutScreenView(),context);
     readMain.hideBottomNavigationBar();
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => AboutScreenView()));
-              },
-              child: Container(
-                margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: underline),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/about.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'About',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
 
-            ////////////////////////ShopFAQView
-
-            GestureDetector(
-              onTap: () {
-                readMain.onNavigation(4,ShopFAQView(),context);
-                readMain.hideBottomNavigationBar();
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => ShopFAQView()));
-              },
-              child: Container(
-                margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: underline),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: underline),
                     ),
-                    SvgPicture.asset(
-                      'assets/icons/faq.svg',
-                      // width: 14.w,
-                      // height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'FAQ',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            ///////////////////////
-            GestureDetector(
-              onTap: () {
-                readMain.onNavigation(4, PrivacyPolicyView(),context);
-                readMain.hideBottomNavigationBar();
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => PrivacyPolicyView()));
-              },
-              child: Container(
-                margin: EdgeInsets.only(left: 20.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: underline),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/privacy.svg',
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Privacy Policy',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                readMain.onNavigation(4, TermsAndConditionView(), context);
-                readMain.hideBottomNavigationBar();
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => TermsAndConditionView()));
-              },
-              child: Container(
-                margin: EdgeInsets.only(left: 20.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: underline),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/terms.svg',
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Terms & Conditions',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            /////////////////////
-
-            GestureDetector(
-              onTap: () {
-                // Share.shareFiles(['assets/icons/share.svg'], text: 'Great picture');
-
-                Share.share(
-                    'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
-              },
-              child: Container(
-                margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: underline),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/share.svg',
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Share App',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            /////Rate Us////
-            GestureDetector(
-              onTap: () async {
-                if (await canLaunch(
-                    "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
-                  await launch(
-                      "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
-                } else {
-                  throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
-                }
-                LaunchReview.launch(
-                    androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
-                    iOSAppId: "585027354");
-                // StoreRedirect.redirect(
-                //   androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
-                //   iOSAppId: "585027354",
-                // );
-              },
-              child: Container(
-                margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
-                padding: EdgeInsets.only(bottom: 15.w),
-                decoration: BoxDecoration(
-
                     // color: Colors.white,
-                    ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(
-                      'assets/icons/star.svg',
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Text(
-                      'Rate Us',
-                      style: GoogleFonts.dmSans(
-                        textStyle: TextStyle(
-                            color: Black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 5,
                       ),
-                    ),
-                  ],
+                      SvgPicture.asset(
+                        'assets/icons/about.svg',
+                        // width: 14.w,
+                        // height: 13.h,
+                      ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'About',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+
+              ////////////////////////ShopFAQView
+
+              GestureDetector(
+                onTap: () {
+                  readMain.onNavigation(4,ShopFAQView(),context);
+                  readMain.hideBottomNavigationBar();
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => ShopFAQView()));
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: underline),
+                    ),
+                    // color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 5,
+                      ),
+                      SvgPicture.asset(
+                        'assets/icons/faq.svg',
+                        // width: 14.w,
+                        // height: 13.h,
+                      ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'FAQ',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ///////////////////////
+              GestureDetector(
+                onTap: () {
+                  readMain.onNavigation(4, PrivacyPolicyView(),context);
+                  readMain.hideBottomNavigationBar();
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => PrivacyPolicyView()));
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 20.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: underline),
+                    ),
+                    // color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 5,
+                      ),
+                      SvgPicture.asset(
+                        'assets/icons/privacy.svg',
+                      ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Privacy Policy',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  readMain.onNavigation(4, TermsAndConditionView(), context);
+                  readMain.hideBottomNavigationBar();
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => TermsAndConditionView()));
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 20.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: underline),
+                    ),
+                    // color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 5,
+                      ),
+                      SvgPicture.asset(
+                        'assets/icons/terms.svg',
+                      ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Terms & Conditions',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              /////////////////////
+
+              GestureDetector(
+                onTap: () {
+                  // Share.shareFiles(['assets/icons/share.svg'], text: 'Great picture');
+
+                  Share.share(
+                      'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: underline),
+                    ),
+                    // color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 5,
+                      ),
+                      SvgPicture.asset(
+                        'assets/icons/share.svg',
+                      ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Share App',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              /////Rate Us////
+              GestureDetector(
+                onTap: () async {
+                  if (await canLaunch(
+                      "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
+                    await launch(
+                        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+                  } else {
+                    throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
+                  }
+                  LaunchReview.launch(
+                      androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                      iOSAppId: "585027354");
+                  // StoreRedirect.redirect(
+                  //   androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                  //   iOSAppId: "585027354",
+                  // );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+
+                      // color: Colors.white,
+                      ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 5,
+                      ),
+                      SvgPicture.asset(
+                        'assets/icons/star.svg',
+                      ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      Text(
+                        'Rate Us',
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

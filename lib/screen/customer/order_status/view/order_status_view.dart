@@ -91,35 +91,15 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                       refreshPage: true,
                     ),
                     context)
-
-                // Navigator.pushAndRemoveUntil(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => MainScreenView(
-                //                   index: 0,
-                //                   screenName: HomeScreenView(
-                //                     refreshPage: true,
-                //                   ),
-                //                 )),
-                //         (Route<dynamic> route) => false,
-                //       )
                 : readMain.onNavigation(
                     0,
                     OrderDeliveryView(
                       screenName: "myorderview",
                       orderId: widget.orderId,
-                      isRefresh: true,
+                      isRefresh: false,
                     ),
                     context);
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => OrderDeliveryView(
-            //         screenName: "myorderview",
-            //         orderId: widget.orderId,
-            //         isRefresh: true,
-            //       )),
-            // );
+
           },
           title: "Order Status",
         ),
@@ -130,16 +110,22 @@ class _OrderStatusViewState extends State<OrderStatusView> {
             )
           : WillPopScope(
               onWillPop: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => OrderDeliveryView(
-                            screenName: "myorderview",
-                            orderId: widget.orderId,
-                            isRefresh: true,
-                          )),
-                );
-                return true;
+                widget.screenName == "orderSummary"
+                    ? readMain.onNavigation(
+                    0,
+                    HomeScreenView(
+                      refreshPage: true,
+                    ),
+                    context)
+                    : readMain.onNavigation(
+                    0,
+                    OrderDeliveryView(
+                      screenName: "myorderview",
+                      orderId: widget.orderId,
+                      isRefresh: false,
+                    ),
+                    context);
+                return false;
               },
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),

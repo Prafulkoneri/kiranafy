@@ -18,8 +18,9 @@ import 'package:provider/provider.dart';
 
 class SSubscriptionScreenView extends StatefulWidget {
   final bool? loggedIn;
+  final String ? routeName;
 
-  const SSubscriptionScreenView({Key? key, required this.loggedIn})
+  const SSubscriptionScreenView({Key? key, required this.loggedIn,required this.routeName})
       : super(key: key);
 
   @override
@@ -49,8 +50,15 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
           isBackButtonEnabled: widget.loggedIn == true ? true : false,
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
+            print(widget.routeName);
             if(widget.loggedIn==true){
-              readMainScreen.onNavigation(4,SMySubscriptionView(screenName: "accounts"), context);
+              if(widget.routeName=="accounts"){
+                readMainScreen.onNavigation(4,SMySubscriptionView(screenName: "accounts"), context);
+              }
+              else{
+                readMainScreen.onNavigation(0,SMySubscriptionView(screenName: "dashboard"), context);
+              }
+
               readMainScreen.showBottomNavigationBar();
             }
             else{
@@ -67,6 +75,20 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
             )
           : WillPopScope(
               onWillPop: () async {
+                print(widget.routeName);
+                if(widget.loggedIn==true){
+                  if(widget.routeName=="accounts"){
+                    readMainScreen.onNavigation(4,SMySubscriptionView(screenName: "accounts"), context);
+                  }
+                  else{
+                    readMainScreen.onNavigation(0,SMySubscriptionView(screenName: "dashboard"), context);
+                  }
+
+                  readMainScreen.showBottomNavigationBar();
+                }
+                else{
+                  Navigator.pop(context);
+                }
                 return false;
               },
               child: Column(

@@ -37,7 +37,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
           onBackBtnPressed: () {
             readMain.onNavigation(
                 4,
-                ProfileScreenView(
+                const ProfileScreenView(
                   isRefreshed: false,
                   // refresh: false,
                 ),
@@ -53,22 +53,22 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(
-              4,
-              ProfileScreenView(
-                isRefreshed: false,
-                // refresh: false,
-              ),
-              context);
-          return false;
-        },
-            child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+              onWillPop: () async {
+                readMain.onNavigation(
+                    4,
+                    const ProfileScreenView(
+                      isRefreshed: false,
+                      // refresh: false,
+                    ),
+                    context);
+                return false;
+              },
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Container(
                   padding: EdgeInsets.only(
                     left: 20,
@@ -78,7 +78,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       ListView.builder(
@@ -92,7 +92,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(22),
                                 color: watch.isFaqExpanded[index]
-                                    ? Color(0xff44B8CA)
+                                    ? const Color(0xff44B8CA)
                                     : Colors.white,
                               ),
                               width: MediaQuery.of(context).size.width,
@@ -121,7 +121,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
                                             ? Colors.white
                                             : Colors.black,
                                       ),
-                                      tilePadding: EdgeInsets.only(
+                                      tilePadding: const EdgeInsets.only(
                                           left: 10, right: 10, bottom: 0),
                                       title: Row(
                                         crossAxisAlignment:
@@ -135,9 +135,10 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
                                                 fontWeight: FontWeight.w700,
                                                 letterSpacing: 1,
                                                 fontSize: 13,
-                                                color: watch.isFaqExpanded[index]
-                                                    ? Colors.white
-                                                    : Colors.black,
+                                                color:
+                                                    watch.isFaqExpanded[index]
+                                                        ? Colors.white
+                                                        : Colors.black,
                                               ),
                                             ),
                                           ),
@@ -146,7 +147,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
                                       children: <Widget>[
                                         Container(
                                           width: ScreenUtil().screenWidth,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Color.fromARGB(
                                                 255, 214, 251, 255),
                                             borderRadius: BorderRadius.only(
@@ -169,10 +170,11 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
                                                 // "gfgheryhjyurt",
                                                 "${element?.answer}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 13,
                                                     color: Colors.black,
-                                                    fontWeight: FontWeight.w400),
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                             ],
                                           ),
@@ -188,7 +190,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }

@@ -73,6 +73,9 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
             )
           : WillPopScope(
               onWillPop: () async {
+                readMainScreen.onNavigation(0, ShopDashBoardView(
+                  refresh: true,
+                ), context);
                 return false;
               },
               child: SingleChildScrollView(

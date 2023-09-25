@@ -677,7 +677,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               // color: Colors.transparent,
                               color: Color(0xff4689EC),
                               onTap: () {
-                                readMainScreen.onNavigation(0,SSubscriptionScreenView(loggedIn: true), context);
+                                readMainScreen.onNavigation(0,SSubscriptionScreenView(loggedIn: true,routeName: widget.screenName.toString()), context);
                              readMainScreen.hideBottomNavigationBar();
                                 // Navigator.push(
                                 //     context,

@@ -18,7 +18,8 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class CFavouritesView extends StatefulWidget {
-  const CFavouritesView({super.key});
+  final int ? selectedIndex;
+  const CFavouritesView({super.key,required this.selectedIndex});
 
   @override
   State<CFavouritesView> createState() => _CFavouritesViewState();
@@ -27,7 +28,7 @@ class CFavouritesView extends StatefulWidget {
 class _CFavouritesViewState extends State<CFavouritesView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<FavouritesController>().initState(context);
+      context.read<FavouritesController>().initState(context,widget.selectedIndex);
     });
   }
 
@@ -457,6 +458,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                   element.id.toString(),context,false
                                                 );
                                                 readMain.onNavigation(1, ProductScreenView(
+                                                  routeName: "favouriteProduct",
                                                   selectedUnitId:
                                                   element
                                                       .productUnitId

@@ -38,80 +38,44 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
               readMainScreen.onNavigation(4, SAccountScreenView(
                 refresh: false,
               ), context);
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => SMainScreenView(
-              //           index: 4,
-              //           screenName: SAccountScreenView(
-              //             refresh: false,
-              //           ))),
-              //   (Route<dynamic> route) => false,
-              // );
+
             },
           ),
         ),
         backgroundColor: Colors.white,
         body: StackLoader(
           showLoader: watch.isStackLoading,
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Container(
-                  width: ScreenUtil().screenWidth,
-                  padding: EdgeInsets.symmetric(horizontal: 19.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 20.w,
-                      ),
-                      PrimarySTextFormField(
-                        controller: watch.promotionSubjectController,
-                        titleHeader: "Promotion Subject",
-                      ),
-                      SizedBox(
-                        height: 20.w,
-                      ),
-                      PrimarySTextFormField(
-                        controller: watch.planToStartController,
-                        titleHeader: "Plan for Start",
-                        readOnly: true,
-                        onTap: () async {
-                          var pickedDate = await showDatePicker(
-                            builder: (BuildContext, child) {
-                              return Theme(
-                                data: Theme.of(context).copyWith(
-                                  colorScheme: ColorScheme.light(
-                                    primary: Color(0xff1767B1),
-                                    // <-- SEE HERE
-                                    onPrimary: Colors.white,
-                                    // <-- SEE HERE
-                                    onSurface: Colors.black, // <-- SEE HERE
-                                  ),
-                                  textButtonTheme: TextButtonThemeData(
-                                    style: TextButton.styleFrom(
-                                      primary: Color(
-                                          0xff1767B1), // button text color
-                                    ),
-                                  ),
-                                ),
-                                child: child!,
-                              );
-                            },
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(2100),
-                          );
-                          if (pickedDate != null) {
-                            String date = DateFormat('dd-MM-yyy')
-                                .format(pickedDate ?? DateTime.now());
-                            read.onToDateSelected(date);
-                          }
-                        },
-                        suffix: GestureDetector(
+          child: WillPopScope(
+            onWillPop: ()async{
+              readMainScreen.onNavigation(4, SAccountScreenView(
+                refresh: false,
+              ), context);
+              return false;
+            },
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Container(
+                    width: ScreenUtil().screenWidth,
+                    padding: EdgeInsets.symmetric(horizontal: 19.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 20.w,
+                        ),
+                        PrimarySTextFormField(
+                          controller: watch.promotionSubjectController,
+                          titleHeader: "Promotion Subject",
+                        ),
+                        SizedBox(
+                          height: 20.w,
+                        ),
+                        PrimarySTextFormField(
+                          controller: watch.planToStartController,
+                          titleHeader: "Plan for Start",
+                          readOnly: true,
                           onTap: () async {
                             var pickedDate = await showDatePicker(
                               builder: (BuildContext, child) {
@@ -145,269 +109,304 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                               read.onToDateSelected(date);
                             }
                           },
-                          child: Container(
-                            width: 15.h,
-                            height: 17.w,
-                            child: Center(
-                              child: SvgPicture.asset(
-                                "assets/icons/shop_cal.svg",
-                              ),
-                            ),
-                          ),
-                        ),
-                        hintFontSize: 15.sp,
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Text(
-                        "Ads Plan",
-                        style: GoogleFonts.dmSans(
-                          textStyle: const TextStyle(
-                              color: Black,
-                              letterSpacing: .5,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Row(
-                        children: [
-                          FilterRadioButton(
-                              value: "7",
-                              groupValue: read.groupValue,
-                              onChanged: (value) {
-                                read.onRadioBtnToggled(value);
-                              },
-                              leading: ""),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            '7 days',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      Row(
-                        children: [
-                          FilterRadioButton(
-                              value: "15",
-                              groupValue: read.groupValue,
-                              onChanged: (value) {
-                                read.onRadioBtnToggled(value);
-                              },
-                              leading: ""),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            '15 days',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      Row(
-                        children: [
-                          FilterRadioButton(
-                              value: "30",
-                              groupValue: read.groupValue,
-                              onChanged: (value) {
-                                read.onRadioBtnToggled(value);
-                              },
-                              leading: ""),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            '30 days',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      Row(
-                        children: [
-                          FilterRadioButton(
-                              value: "60",
-                              groupValue: read.groupValue,
-                              onChanged: (value) {
-                                read.onRadioBtnToggled(value);
-                              },
-                              leading: ""),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            '60 days',
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black,
-                                  // letterSpacing: .5,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 19.h,
-                      ),
-                      Text(
-                        "Ads Content",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black,
-                              // letterSpacing: .5,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      PrimarySTextFormField(
-                        controller: watch.adsContentController,
-                        // controller: watch.termsAndConditionController,
-                        height: 150.w,
-                        maxLines: 10,
-                        // hintText: "Address",/
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      PrimaryButton(
-                          fontSize: 20.sp,
-                          height: 50.w,
-                          text: "Submit",
-                          color: Color(0xff4689EC),
-                          onTap: () {
-                            watch.promotionRequestForm(context);
-                          }),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Text(
-                        "Note",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black1,
-                              // letterSpacing: .5,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 6.w),
-                        child: Row(
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                                padding: EdgeInsets.only(bottom: 20.w),
-                                child: Icon(
-                                  Icons.circle_rounded,
-                                  size: 5.w,
-                                )),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Flexible(
-                              child: Text(
-                                // softWrap: true,
-                                // maxLines: 3,//
-                                "For pricing and further details,Local Supermart will contact you within 48 hours.",
-                                textAlign: TextAlign.justify,
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black1,
-
-                                      // letterSpacing: .05,
-                                      // overflow: TextOverflow.ellipsis,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
+                          suffix: GestureDetector(
+                            onTap: () async {
+                              var pickedDate = await showDatePicker(
+                                builder: (BuildContext, child) {
+                                  return Theme(
+                                    data: Theme.of(context).copyWith(
+                                      colorScheme: ColorScheme.light(
+                                        primary: Color(0xff1767B1),
+                                        // <-- SEE HERE
+                                        onPrimary: Colors.white,
+                                        // <-- SEE HERE
+                                        onSurface: Colors.black, // <-- SEE HERE
+                                      ),
+                                      textButtonTheme: TextButtonThemeData(
+                                        style: TextButton.styleFrom(
+                                          primary: Color(
+                                              0xff1767B1), // button text color
+                                        ),
+                                      ),
+                                    ),
+                                    child: child!,
+                                  );
+                                },
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2100),
+                              );
+                              if (pickedDate != null) {
+                                String date = DateFormat('dd-MM-yyy')
+                                    .format(pickedDate ?? DateTime.now());
+                                read.onToDateSelected(date);
+                              }
+                            },
+                            child: Container(
+                              width: 15.h,
+                              height: 17.w,
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  "assets/icons/shop_cal.svg",
                                 ),
                               ),
                             ),
-                            // For advertisement advance payment is required.
-                          ],
+                          ),
+                          hintFontSize: 15.sp,
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 6.w),
-                        child: Row(
-                          // crossAxisAlignment: CrossAxisAlignment.start,
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                          "Ads Plan",
+                          style: GoogleFonts.dmSans(
+                            textStyle: const TextStyle(
+                                color: Black,
+                                letterSpacing: .5,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Row(
                           children: [
-                            Padding(
-                                padding: EdgeInsets.only(bottom: 0.w),
-                                child: Icon(
-                                  Icons.circle_rounded,
-                                  size: 5.w,
-                                )),
+                            FilterRadioButton(
+                                value: "7",
+                                groupValue: read.groupValue,
+                                onChanged: (value) {
+                                  read.onRadioBtnToggled(value);
+                                },
+                                leading: ""),
                             SizedBox(
-                              width: 10,
+                              width: 10.w,
                             ),
-                            Flexible(
-                              child: Text(
-                                "For advertisement advance payment is required.",
-                                // softWrap: true,
-                                // maxLines: 3,//
-                                textAlign: TextAlign.justify,
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black1,
-
-                                      // letterSpacing: .05,
-                                      // overflow: TextOverflow.ellipsis,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                            Text(
+                              '7 days',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    // letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
                               ),
                             ),
-                            // For advertisement advance payment is required.
                           ],
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                        Row(
+                          children: [
+                            FilterRadioButton(
+                                value: "15",
+                                groupValue: read.groupValue,
+                                onChanged: (value) {
+                                  read.onRadioBtnToggled(value);
+                                },
+                                leading: ""),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              '15 days',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    // letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                        Row(
+                          children: [
+                            FilterRadioButton(
+                                value: "30",
+                                groupValue: read.groupValue,
+                                onChanged: (value) {
+                                  read.onRadioBtnToggled(value);
+                                },
+                                leading: ""),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              '30 days',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    // letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                        Row(
+                          children: [
+                            FilterRadioButton(
+                                value: "60",
+                                groupValue: read.groupValue,
+                                onChanged: (value) {
+                                  read.onRadioBtnToggled(value);
+                                },
+                                leading: ""),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              '60 days',
+                              style: GoogleFonts.dmSans(
+                                textStyle: TextStyle(
+                                    color: Black,
+                                    // letterSpacing: .5,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 19.h,
+                        ),
+                        Text(
+                          "Ads Content",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black,
+                                // letterSpacing: .5,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        PrimarySTextFormField(
+                          controller: watch.adsContentController,
+                          // controller: watch.termsAndConditionController,
+                          height: 150.w,
+                          maxLines: 10,
+                          // hintText: "Address",/
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        PrimaryButton(
+                            fontSize: 20.sp,
+                            height: 50.w,
+                            text: "Submit",
+                            color: Color(0xff4689EC),
+                            onTap: () {
+                              watch.promotionRequestForm(context);
+                            }),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                          "Note",
+                          style: GoogleFonts.dmSans(
+                            textStyle: TextStyle(
+                                color: Black1,
+                                // letterSpacing: .5,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 6.w),
+                          child: Row(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(bottom: 20.w),
+                                  child: Icon(
+                                    Icons.circle_rounded,
+                                    size: 5.w,
+                                  )),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  // softWrap: true,
+                                  // maxLines: 3,//
+                                  "For pricing and further details,Local Supermart will contact you within 48 hours.",
+                                  textAlign: TextAlign.justify,
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+
+                                        // letterSpacing: .05,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ),
+                              // For advertisement advance payment is required.
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 6.w),
+                          child: Row(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(bottom: 0.w),
+                                  child: Icon(
+                                    Icons.circle_rounded,
+                                    size: 5.w,
+                                  )),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  "For advertisement advance payment is required.",
+                                  // softWrap: true,
+                                  // maxLines: 3,//
+                                  textAlign: TextAlign.justify,
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+
+                                        // letterSpacing: .05,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ),
+                              // For advertisement advance payment is required.
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 100.h,
-                )
-              ],
+                  SizedBox(
+                    height: 100.h,
+                  )
+                ],
+              ),
             ),
           ),
         ));

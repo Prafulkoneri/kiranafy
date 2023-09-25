@@ -21,7 +21,6 @@ import 'package:local_supper_market/screen/customer/notifications/view/notificat
 import 'package:local_supper_market/screen/customer/update_profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
-
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/text.dart';
@@ -69,7 +68,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
           return false;
         },
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               Container(
@@ -144,15 +143,18 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: () async{
-                                    SharedPreferences pref = await SharedPreferences.getInstance();
-                                    if(pref.getString("status")=="guestLoggedIn"){
-                                      Utils().showLoginDialog(context,"Please Login to continue");
+                                  onTap: () async {
+                                    SharedPreferences pref =
+                                        await SharedPreferences.getInstance();
+                                    if (pref.getString("status") ==
+                                        "guestLoggedIn") {
+                                      Utils().showLoginDialog(
+                                          context, "Please Login to continue");
                                       return;
                                     }
                                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateProfileView()));
                                     readMain.onNavigation(
-                                        4, UpdateProfileView(), context);
+                                        4, const UpdateProfileView(), context);
                                     // Navigator.pushAndRemoveUntil(
                                     //   context,
                                     //   MaterialPageRoute(
@@ -214,26 +216,28 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                             SizedBox(
                               height: 11.h,
                             ),
-                            watch.customerData?.customerMobileNumber!=0 ?Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/icons/call.svg',
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Text(
-                                  '${watch.customerData?.customerCountryCode} ${watch.customerData?.customerMobileNumber}',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                              // ),
-                            ):Container(),
+                            watch.customerData?.customerMobileNumber != 0
+                                ? Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/icons/call.svg',
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      Text(
+                                        '${watch.customerData?.customerCountryCode} ${watch.customerData?.customerMobileNumber}',
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black,
+                                              fontSize: 15.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ],
+                                    // ),
+                                  )
+                                : Container(),
                           ],
                         ),
                       )
@@ -243,13 +247,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
 
               GestureDetector(
-                onTap: ()async {
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  if(pref.getString("status")=="guestLoggedIn"){
-                    Utils().showLoginDialog(context,"Please Login to continue");
+                onTap: () async {
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  if (pref.getString("status") == "guestLoggedIn") {
+                    Utils()
+                        .showLoginDialog(context, "Please Login to continue");
                     return;
                   }
-                  readMain.onNavigation(4, UpdateProfileView(), context);
+                  readMain.onNavigation(4, const UpdateProfileView(), context);
 
                   // Navigator.pushAndRemoveUntil(
                   //   context,
@@ -292,13 +298,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               /////////////
               GestureDetector(
-                onTap: () async{
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  if(pref.getString("status")=="guestLoggedIn"){
-                    Utils().showLoginDialog(context,"Please Login to continue");
+                onTap: () async {
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  if (pref.getString("status") == "guestLoggedIn") {
+                    Utils()
+                        .showLoginDialog(context, "Please Login to continue");
                     return;
                   }
-                  readMain.onNavigation(4, MyOrderView(), context);
+                  readMain.onNavigation(4, const MyOrderView(), context);
 
                   // Navigator.pushAndRemoveUntil(
                   //   context,
@@ -350,7 +358,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               GestureDetector(
                 onTap: () {
                   readMain.onNavigation(
-                      4, CustomerNotificationsScreenView(), context);
+                      4, const CustomerNotificationsScreenView(), context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -383,13 +391,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ////////////////////
 
               GestureDetector(
-                onTap: () async{
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  if(pref.getString("status")=="guestLoggedIn"){
-                    Utils().showLoginDialog(context,"Please Login to continue");
+                onTap: () async {
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  if (pref.getString("status") == "guestLoggedIn") {
+                    Utils()
+                        .showLoginDialog(context, "Please Login to continue");
                     return;
                   }
-                  readMain.onNavigation(4, CFavouritesView(), context);
+                  readMain.onNavigation(4, const CFavouritesView(selectedIndex: 0), context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -423,14 +433,16 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               /////////////////////
 
               GestureDetector(
-                onTap: ()async {
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  if(pref.getString("status")=="guestLoggedIn"){
-                    Utils().showLoginDialog(context,"Please Login to continue");
+                onTap: () async {
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  if (pref.getString("status") == "guestLoggedIn") {
+                    Utils()
+                        .showLoginDialog(context, "Please Login to continue");
                     return;
                   }
                   readMain.onNavigation(
-                      4, MyDeliveryAddressView(isRefresh: true), context);
+                      4, const MyDeliveryAddressView(isRefresh: true), context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -461,13 +473,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 ),
               ),
               GestureDetector(
-                onTap: () async{
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  if(pref.getString("status")=="guestLoggedIn"){
-                    Utils().showLoginDialog(context,"Please Login to continue");
+                onTap: () async {
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  if (pref.getString("status") == "guestLoggedIn") {
+                    Utils()
+                        .showLoginDialog(context, "Please Login to continue");
                     return;
                   }
-                  readMain.onNavigation(4, HelpCenterView(), context);
+                  readMain.onNavigation(4, const HelpCenterView(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -506,7 +520,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, CAboutUsView(), context);
+                  readMain.onNavigation(4, const CAboutUsView(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -545,7 +559,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, CustomerFAQView(), context);
+                  readMain.onNavigation(4, const CustomerFAQView(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -626,7 +640,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, CustomerPrivacyPolicy(), context);
+                  readMain.onNavigation(
+                      4, const CustomerPrivacyPolicy(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -710,12 +725,14 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  if(pref.getString("status")=="guestLoggedIn"){
-                    Utils().showLoginDialog(context,"Please Login to continue");
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  if (pref.getString("status") == "guestLoggedIn") {
+                    Utils()
+                        .showLoginDialog(context, "Please Login to continue");
                     return;
                   }
-                  readMain.onNavigation(4, CustomerSetting(), context);
+                  readMain.onNavigation(4, const CustomerSetting(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(

@@ -62,7 +62,7 @@ class SplashController extends ChangeNotifier {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    SSubscriptionScreenView(loggedIn: false)));
+                    SSubscriptionScreenView(loggedIn: false,routeName: "kyc",)));
       }
       if (pref.getString("status") == "subscriptionCompleted") {
         Navigator.pushReplacement(
@@ -126,7 +126,7 @@ class SplashController extends ChangeNotifier {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      SSubscriptionScreenView(loggedIn: false)));
+                      SSubscriptionScreenView(loggedIn: false,routeName: "kyc",)));
         }
         if (pref.getString("status") == "subscriptionCompleted") {
           Navigator.pushReplacement(

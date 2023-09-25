@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/view/ads_view.dart';
 import 'package:local_supper_market/screen/customer/category/view/category_view.dart';
+import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
@@ -72,6 +73,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
             )
           : WillPopScope(
               onWillPop: () async {
+                print("widget.routeName ${widget.routeName}");
                 // read.onBackPressed(
                 //     widget.routeName, context, widget.categoryId);
                 if (widget.routeName == "allNearShopView") {
@@ -82,19 +84,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         refreshPage: false,
                       ),
                       context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 1,
-                  //           screenName: AllNearShopsView(
-                  //             isSearchFocus: false,
-                  //             refreshPage: false,
-                  //           ))),
-                  //       (Route<dynamic> route) => false,
-                  // );
                 }
-                if (widget.routeName == "nearShopsCategory") {
+               else if (widget.routeName == "nearShopsCategory") {
                   readMain.onNavigation(
                       1,
                       AllNearCategoryShopsView(
@@ -102,36 +93,23 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         refresh: false,
                       ),
                       context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 1,
-                  //           screenName: AllNearCategoryShopsView(
-                  //             categoryId: widget.categoryId,
-                  //             refresh: false,
-                  //           ))),
-                  //       (Route<dynamic> route) => false,
-                  // );
                 }
-                if (widget.routeName == "homeNearbyShop") {
+                else if (widget.routeName == "homeNearbyShop") {
                   readMain.onNavigation(
                       0,
                       HomeScreenView(
                         refreshPage: false,
                       ),
                       context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 0,
-                  //           screenName: HomeScreenView(
-                  //             refreshPage: false,
-                  //           ))),
-                  //       (Route<dynamic> route) => false,
-                  // );
-                } else {
+                }
+                else if( widget.routeName=="favouriteView"){
+                  readMain.onNavigation(
+                      4,
+                      CFavouritesView(selectedIndex: 0),
+                      context);
+                }
+
+                else {
                   readMain.onNavigation(
                       0, HomeScreenView(refreshPage: false), context);
                   // Navigator.pushAndRemoveUntil(

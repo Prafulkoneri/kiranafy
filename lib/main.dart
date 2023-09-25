@@ -115,9 +115,9 @@ Future<void> initNotification(context) async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
   final IOSInitializationSettings initializationSettingsIOS =
-      IOSInitializationSettings();
+      const IOSInitializationSettings();
   final MacOSInitializationSettings initializationSettingsMacOS =
-      MacOSInitializationSettings();
+      const MacOSInitializationSettings();
   final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
@@ -172,7 +172,7 @@ void main() async {
   await FlutterDownloader.initialize();
   if (Platform.isIOS) {
     await Firebase.initializeApp(
-        options: FirebaseOptions(
+        options: const FirebaseOptions(
             apiKey: "AIzaSyBaOZbarFqV16r_fceIjrSAlNtgvddAFgg",
             appId: "1:110985117622:ios:1a970d32e1e8e861868b17",
             messagingSenderId: "110985117622",
@@ -225,8 +225,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(create: (_) => ProductViewController()),
         ChangeNotifierProvider(create: (_) => SCustomerListController()),
-        ChangeNotifierProvider(create: (_) => SAllRecommandedProductsController()),
-        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(
+            create: (_) => SAllRecommandedProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
         ChangeNotifierProvider(create: (_) => DeliveryAddressController()),
         ChangeNotifierProvider(create: (_) => AddAddressController()),
@@ -269,7 +271,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => PaymentRefundListController()),
         ChangeNotifierProvider(create: (_) => SShopReviewListController()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -361,7 +363,7 @@ class _MyAppState extends State<MyApp> {
         channelDescription: 'channel description',
         importance: Importance.max,
         icon: '');
-    final iOS = IOSNotificationDetails();
+    final iOS = const IOSNotificationDetails();
     final platform = NotificationDetails(android: android, iOS: iOS);
 
     await flutterLocalNotificationsPlugin.show(
