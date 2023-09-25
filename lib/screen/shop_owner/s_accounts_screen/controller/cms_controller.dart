@@ -38,7 +38,11 @@ class CmsController extends ChangeNotifier {
         print("3q2423424");
         termsAndCondition = cmsdata?.termsAndCondition;
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

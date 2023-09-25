@@ -118,7 +118,11 @@ class EditCustomProductController extends ChangeNotifier {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

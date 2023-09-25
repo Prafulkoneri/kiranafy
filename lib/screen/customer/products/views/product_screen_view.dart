@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
@@ -119,7 +120,11 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                   //             isRefresh: true,
                   //             shopId: watch.shopDetails?.id.toString(),
                   //             cartId: watch.cartId)));
-                } else {
+                }
+                if(widget.routeName == "homeScreen"){
+                  readMain.onNavigation(0,HomeScreenView(refreshPage: false), context);
+                }
+                else {
                   readMain.onNavigation(1,  ShopProfileView(
                                   refreshPage: true,
                                   routeName: '',
@@ -145,40 +150,30 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap:(){
-                        readMain.onNavigation(1,  ShopProfileView(
-                          refreshPage: true,
-                          routeName: '',
-                          shopId: watch.shopDetails?.id.toString(),
-                        ), context);
-                        // Navigator.pushAndRemoveUntil(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => MainScreenView(
-                        //           index: 1,
-                        //           screenName: ShopProfileView(
-                        //             refreshPage: true,
-                        //             routeName: '',
-                        //             shopId: watch.shopDetails?.id.toString(),
-                        //           ))),
-                        //       (Route<dynamic> route) => false,
-                        // );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(30.w),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.20),
-                                blurRadius: 8,
-                                spreadRadius: 3),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(30.w),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.20),
+                              blurRadius: 8,
+                              spreadRadius: 3),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: (){
+                              print(watch.shopDetails?.id.toString());
+                              readMain.onNavigation(1,  ShopProfileView(
+                                refreshPage: true,
+                                routeName: 'homeNearbyShop',
+                                // categoryId: watch.shopDetails?..toString(),
+                                shopId: watch.shopDetails?.id.toString(),
+                              ), context);
+                            },
+                            child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 15.w),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,125 +297,125 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 17.w,
-                            ),
-                            Divider(
-                              thickness: 1.w,
-                              color: const Color(0xffDADADA),
-                            ),
-                            SizedBox(
-                              height: 10.w,
-                            ),
-                            SizedBox(
-                                // width: MediaQuery.of(context).size.width,
-                                height: 241.w,
-                                child: watch.isUnitImagesVisible
-                                    ? PageView.builder(
-                                        itemCount: watch.unitImages.length,
-                                        // watch.productViewData?.productUnitDetails?.length ??
-                                        //     0,
-                                        physics: const BouncingScrollPhysics(),
-                                        padEnds: false,
-                                        pageSnapping: true,
-                                        // controller: _pageController,
-                                        onPageChanged: (page) {
-                                          setState(() {
-                                            activePage = page;
-                                          });
-                                        },
-                                        itemBuilder: (context, pagePosition) {
-                                          final element =
-                                              watch.unitImages[pagePosition];
-                                          return Container(
-                                            child: Center(
-                                              child: AppNetworkImages(
-                                                imageUrl: '${element}',
-                                                height: 241.w,
-                                                // width: 102.w,
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                            margin: EdgeInsets.only(
-                                                left:
-                                                    pagePosition == 0 ? 19.w : 0,
-                                                // top: 15.w,
-                                                right: pagePosition ==
-                                                        watch.unitImages.length -
-                                                            1
-                                                    ? 19.w
-                                                    : 10.w),
-                                          );
-                                        })
-                                    : Container(
-                                        child: AppNetworkImages(
-                                          // '${element}',
-                                          imageUrl:
-                                              "${watch.productDetails?.productImagePath}",
-                                          // images[pagePosition],
-                                          height: 241.w,
-                                          // width: 102.w,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      )),
-                            SizedBox(
-                              height: 10.w,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(),
-                                SizedBox(
-                                  width: 0.w,
-                                ),
-                                Row(
-                                    // crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: indicators(
-                                        watch.unitImages.length, activePage)),
-                                Row(
-                                  children: [
-                                    GestureDetector(
-                                        onTap: () {
-                                          read.shareProduct(watch
-                                              .productDetails?.productImagePath);
-                                        },
-                                        child: SvgPicture.asset(
-                                            "assets/icons/share.svg")),
-                                    SizedBox(
-                                      width: 25.w,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        watch.isFavProduct
-                                            ? read.removeFavProduct(context)
-                                            : read.addToFavProduct(context);
+                          ),
+                          SizedBox(
+                            height: 17.w,
+                          ),
+                          Divider(
+                            thickness: 1.w,
+                            color: const Color(0xffDADADA),
+                          ),
+                          SizedBox(
+                            height: 10.w,
+                          ),
+                          SizedBox(
+                              // width: MediaQuery.of(context).size.width,
+                              height: 241.w,
+                              child: watch.isUnitImagesVisible
+                                  ? PageView.builder(
+                                      itemCount: watch.unitImages.length,
+                                      // watch.productViewData?.productUnitDetails?.length ??
+                                      //     0,
+                                      physics: const BouncingScrollPhysics(),
+                                      padEnds: false,
+                                      pageSnapping: true,
+                                      // controller: _pageController,
+                                      onPageChanged: (page) {
+                                        setState(() {
+                                          activePage = page;
+                                        });
                                       },
-                                      child: watch.isFavProduct
-                                          ? SvgPicture.asset(
-                                              "assets/icons/fvrtproduct.svg",
-                                              width: 26.w,
-                                              height: 14.h,
-                                            )
-                                          : SvgPicture.asset(
-                                              "assets/icons/remove_fav.svg",
-                                              width: 26.w,
-                                              height: 14.h,
+                                      itemBuilder: (context, pagePosition) {
+                                        final element =
+                                            watch.unitImages[pagePosition];
+                                        return Container(
+                                          child: Center(
+                                            child: AppNetworkImages(
+                                              imageUrl: '${element}',
+                                              height: 241.w,
+                                              // width: 102.w,
+                                              fit: BoxFit.fill,
                                             ),
-                                    ), /////fvrtproduct
-                                    SizedBox(
-                                      width: 25.w,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            ///////////////////
+                                          ),
+                                          margin: EdgeInsets.only(
+                                              left:
+                                                  pagePosition == 0 ? 19.w : 0,
+                                              // top: 15.w,
+                                              right: pagePosition ==
+                                                      watch.unitImages.length -
+                                                          1
+                                                  ? 19.w
+                                                  : 10.w),
+                                        );
+                                      })
+                                  : Container(
+                                      child: AppNetworkImages(
+                                        // '${element}',
+                                        imageUrl:
+                                            "${watch.productDetails?.productImagePath}",
+                                        // images[pagePosition],
+                                        height: 241.w,
+                                        // width: 102.w,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    )),
+                          SizedBox(
+                            height: 10.w,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(),
+                              SizedBox(
+                                width: 0.w,
+                              ),
+                              Row(
+                                  // crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: indicators(
+                                      watch.unitImages.length, activePage)),
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        read.shareProduct(watch
+                                            .productDetails?.productImagePath);
+                                      },
+                                      child: SvgPicture.asset(
+                                          "assets/icons/share.svg")),
+                                  SizedBox(
+                                    width: 25.w,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      watch.isFavProduct
+                                          ? read.removeFavProduct(context)
+                                          : read.addToFavProduct(context);
+                                    },
+                                    child: watch.isFavProduct
+                                        ? SvgPicture.asset(
+                                            "assets/icons/fvrtproduct.svg",
+                                            width: 26.w,
+                                            height: 14.h,
+                                          )
+                                        : SvgPicture.asset(
+                                            "assets/icons/remove_fav.svg",
+                                            width: 26.w,
+                                            height: 14.h,
+                                          ),
+                                  ), /////fvrtproduct
+                                  SizedBox(
+                                    width: 25.w,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          ///////////////////
 
-                            SizedBox(
-                              height: 25.w,
-                            ),
-                          ],
-                        ),
+                          SizedBox(
+                            height: 25.w,
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(

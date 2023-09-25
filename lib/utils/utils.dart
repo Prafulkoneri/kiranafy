@@ -1,8 +1,11 @@
+
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
+import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum SnackType {
@@ -139,6 +142,12 @@ class Utils {
             ),
           );
         });
+  }
+
+  logoutUser(BuildContext context)async{
+    SharedPreferences pref=await SharedPreferences.getInstance();
+    pref.clear();
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>OnBoardingScreenView()));
   }
 
 

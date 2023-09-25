@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/model/get_bank_account_model.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/model/update_account_detail.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/repository/get_bank_account_detail_repo.dart';
@@ -59,7 +60,11 @@ class SBankAccountController extends ChangeNotifier {
 
         showLoader(false);
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

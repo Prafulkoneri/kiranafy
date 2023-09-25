@@ -192,7 +192,11 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
               type: SnackType.error);
           showLoader(false);
         }
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

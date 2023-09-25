@@ -56,7 +56,11 @@ class ShopSettingController extends ChangeNotifier {
             result.settingData?.appNotification == "on" ? true : false;
         showLoader(false);
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

@@ -43,7 +43,11 @@ class SShopReviewListController extends ChangeNotifier {
 
         showLoader(false);
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

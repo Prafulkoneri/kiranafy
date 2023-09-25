@@ -81,7 +81,11 @@ class SubscriptionHistoryController extends ChangeNotifier {
         subscriptionHistory = subscriptiondata?.subscriptionHistory;
         showLoader(false);
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

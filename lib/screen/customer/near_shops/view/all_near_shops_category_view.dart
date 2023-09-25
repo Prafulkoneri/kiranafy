@@ -634,7 +634,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                             Utils().showLoginDialog(context,"Please Login to continue");
                                             return;
                                           }
-                                          readMain.onNavigation(0,CustomerAdsView(), context);
+                                          readMain.onNavigation(0,CustomerAdsView(route: "categoryShops"), context);
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,
                                           //   MaterialPageRoute(

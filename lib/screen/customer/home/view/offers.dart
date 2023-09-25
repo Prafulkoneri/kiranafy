@@ -106,6 +106,7 @@ class _OfferPageState extends State<OfferPage> {
                                 );
                                 print("22222222222222222222222222222");
                                 readMainScreen.onNavigation(0,ProductScreenView(
+                                  routeName: "homeScreen",
                                   categoryId:
                                   element?.categoryId.toString(),
                                   productId: element?.id.toString(),

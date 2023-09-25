@@ -109,7 +109,11 @@ class CustomProductController extends ChangeNotifier {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

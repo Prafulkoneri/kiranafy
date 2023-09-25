@@ -385,7 +385,7 @@ showShopImage: true,
                           return;
                         }
                         readMain.onNavigation(
-                            0, CustomerAdsView(), context);
+                            0, CustomerAdsView(route: "home"), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(

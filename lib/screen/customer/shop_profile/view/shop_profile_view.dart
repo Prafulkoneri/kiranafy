@@ -2194,7 +2194,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                 return;
                               }
                               readMain.onNavigation(
-                                  1, CustomerAdsView(), context);
+                                  1, CustomerAdsView(route: "shopProfile"), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(

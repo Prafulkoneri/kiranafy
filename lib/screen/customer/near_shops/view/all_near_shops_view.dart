@@ -602,7 +602,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                             return;
                                           }
                                           readMain.onNavigation(
-                                              1, CustomerAdsView(), context);
+                                              1, CustomerAdsView(route: "allShops"), context);
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,
                                           //   MaterialPageRoute(

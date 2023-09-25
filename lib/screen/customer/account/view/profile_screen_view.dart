@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/customer/c_setting/view/c_setting_vie
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/help_center/view/help_center_view.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
@@ -64,6 +65,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
       ),
       body: WillPopScope(
         onWillPop: () async {
+          readMain.onNavigation(0,HomeScreenView(refreshPage: false), context);
           return false;
         },
         child: SingleChildScrollView(
@@ -752,15 +754,15 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  // SharedPreferences pref =
-                  //     await SharedPreferences.getInstance();
-                  // pref.clear();
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const OnBoardingScreenView()),
-                  // );
-                  read.customerSignOut(context);
+                  SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                  pref.clear();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const OnBoardingScreenView()),
+                  );
+                  // read.customerSignOut(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

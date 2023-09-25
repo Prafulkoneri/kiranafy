@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
@@ -69,6 +70,7 @@ class SDashBoardController extends ChangeNotifier {
       print(response.statusCode);
       log(response.body);
       final result = DashBoardModel.fromJson(jsonDecode(response.body));
+      print(response.statusCode);
       if (response.statusCode == 200) {
         dashBoardData = result.data;
         int imageLength = dashBoardData?.bannerImages?.length ?? 0;
@@ -87,7 +89,12 @@ class SDashBoardController extends ChangeNotifier {
           });
         }
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
+print("this is it");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

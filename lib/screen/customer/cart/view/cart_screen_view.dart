@@ -174,120 +174,118 @@ class _CartScreenViewState extends State<CartScreenView> {
               child: CircularProgressIndicator(),
             )
           : watch.cartList!.isEmpty
-              ? Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 120.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      // mainAxisAlignment: MainAxisAlignment.center,/
-                      children: [
-                        Image.asset(
-                          "assets/images/emptycart.png",
-                          height: 151.h,
-                          width: 151.w,
-                        ),
-                        Text(
-                          "Your Cart is Empty",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black1,
-                                letterSpacing: .5,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w600),
+              ? WillPopScope(
+        onWillPop: () async {
+          readMain.onNavigation(0, HomeScreenView(
+            refreshPage: false,
+          ), context);
+          return false;
+        },
+                child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 120.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.center,/
+                        children: [
+                          Image.asset(
+                            "assets/images/emptycart.png",
+                            height: 151.h,
+                            width: 151.w,
                           ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(
-                          "Looks like you have not added anything to your",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black1,
-                                // letterSpacing: .5,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        // SizedBox(
-                        //   height: 5.h,
-                        // ),
-                        Text(
-                          "cart. Go ahead explore top categories",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black1,
-                                letterSpacing: .5,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: SplashText,
-                            // onPrimary: Colors.white,
-                            // shadowColor: Colors.greenAccent,
-                            elevation: 3,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14.0)),
-                            minimumSize: const Size(100, 40), //////// HERE
-                          ),
-                          // style: style,
-                          onPressed: () async{
-                            SharedPreferences pref = await SharedPreferences.getInstance();
-                            if(pref.getString("status")=="guestLoggedIn"){
-                              Utils().showLoginDialog(context,"Please Login to add product to favourite");
-                              return;
-                            }
-                            readMain.onNavigation(1, AllNearShopsView(
-                              isSearchFocus: false,
-                              refreshPage: true,
-                            ), context);
-                            // Navigator.pushAndRemoveUntil(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => MainScreenView(
-                            //           index: 2,
-                            //           screenName: AllNearShopsView(
-                            //             isSearchFocus: false,
-                            //             refreshPage: true,
-                            //           ))),
-                            //   (Route<dynamic> route) => false,
-                            // );
-                          },
-                          child: Text(
-                            'Browse Products',
+                          Text(
+                            "Your Cart is Empty",
                             style: GoogleFonts.dmSans(
-                              textStyle: const TextStyle(
-                                  // color: SplashTex
+                              textStyle: TextStyle(
+                                  color: Black1,
                                   letterSpacing: .5,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Text(
+                            "Looks like you have not added anything to your",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black1,
+                                  // letterSpacing: .5,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   height: 5.h,
+                          // ),
+                          Text(
+                            "cart. Go ahead explore top categories",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black1,
+                                  letterSpacing: .5,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: SplashText,
+                              // onPrimary: Colors.white,
+                              // shadowColor: Colors.greenAccent,
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14.0)),
+                              minimumSize: const Size(100, 40), //////// HERE
+                            ),
+                            // style: style,
+                            onPressed: () async{
+                              SharedPreferences pref = await SharedPreferences.getInstance();
+                              if(pref.getString("status")=="guestLoggedIn"){
+                                Utils().showLoginDialog(context,"Please Login to add product to favourite");
+                                return;
+                              }
+                              readMain.onNavigation(1, AllNearShopsView(
+                                isSearchFocus: false,
+                                refreshPage: true,
+                              ), context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => MainScreenView(
+                              //           index: 2,
+                              //           screenName: AllNearShopsView(
+                              //             isSearchFocus: false,
+                              //             refreshPage: true,
+                              //           ))),
+                              //   (Route<dynamic> route) => false,
+                              // );
+                            },
+                            child: Text(
+                              'Browse Products',
+                              style: GoogleFonts.dmSans(
+                                textStyle: const TextStyle(
+                                    // color: SplashTex
+                                    letterSpacing: .5,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                )
+              )
               : WillPopScope(
                   onWillPop: () async {
                     readMain.onNavigation(0, HomeScreenView(
                       refreshPage: false,
                     ), context);
-                    // Navigator.pushAndRemoveUntil(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => MainScreenView(
-                    //           index: 0,
-                    //           screenName: HomeScreenView(
-                    //             refreshPage: false,
-                    //           ))),
-                    //   (Route<dynamic> route) => false,
-                    // );
                     return false;
                   },
                   child: SingleChildScrollView(

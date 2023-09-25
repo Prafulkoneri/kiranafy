@@ -327,8 +327,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                         "${element?.productImagePath}",
                                                                     height: 60.h,
                                                                     width: 60.w,
-                                                                    fit: BoxFit
-                                                                        .cover,
+                                                                    fit: BoxFit.cover,
                                                                   )
                                                                 : Image(
                                                                     image:
@@ -337,8 +336,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     ),
                                                                     height: 60.h,
                                                                     width: 60.w,
-                                                                    fit: BoxFit
-                                                                        .fill,
+                                                                    fit: BoxFit.fill,
                                                                   ),
                                                             SizedBox(
                                                               width: 8.w,
@@ -354,11 +352,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   textStyle: TextStyle(
                                                                       color:
                                                                           Black1,
-                                                                      fontSize:
-                                                                          16.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700),
+                                                                      fontSize: 16.sp,
+                                                                      fontWeight: FontWeight.w700),
                                                                 ),
                                                               ),
                                                             ),
@@ -373,14 +368,10 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                       ?.productType ==
                                                                   "admin_product") {
                                                                 readMainScreen.onNavigation(0, SEditAdminProductView(
-                                                                    selectedIndex:
-                                                                    0,
-                                                                    productId: element?.id
-                                                                        .toString(),
-                                                                    isFromAccountScreen:
-                                                                    true,
-                                                                    categoryId:
-                                                                    ""), context);
+                                                                    selectedIndex: 0,
+                                                                    productId: element?.id.toString(),
+                                                                    isFromAccountScreen: true,
+                                                                    categoryId: ""), context);
                                                                 // Navigator
                                                                 //     .pushAndRemoveUntil(
                                                                 //   context,

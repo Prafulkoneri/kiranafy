@@ -60,7 +60,11 @@ class SCustomerDetailController extends ChangeNotifier {
         // customerDetail = result.data;
         showLoader(false);
         notifyListeners();
-      } else {
+      }
+      else if(response.statusCode == 401){
+        Utils().logoutUser(context);
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

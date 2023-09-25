@@ -67,6 +67,7 @@ class ShopProfileViewController extends ChangeNotifier {
   Future<void> initState(context, id, refresh) async {
     if (refresh) {
       showLoader(true);
+      print("kkkkkkkk");
       await getShopDetails(context, id, refresh);
     } else {
       showLoader(false);
