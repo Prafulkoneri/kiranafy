@@ -115,9 +115,9 @@ Future<void> initNotification(context) async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
   final IOSInitializationSettings initializationSettingsIOS =
-      const IOSInitializationSettings();
+      IOSInitializationSettings();
   final MacOSInitializationSettings initializationSettingsMacOS =
-      const MacOSInitializationSettings();
+      MacOSInitializationSettings();
   final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
@@ -172,7 +172,7 @@ void main() async {
   await FlutterDownloader.initialize();
   if (Platform.isIOS) {
     await Firebase.initializeApp(
-        options: const FirebaseOptions(
+        options: FirebaseOptions(
             apiKey: "AIzaSyBaOZbarFqV16r_fceIjrSAlNtgvddAFgg",
             appId: "1:110985117622:ios:1a970d32e1e8e861868b17",
             messagingSenderId: "110985117622",
@@ -271,7 +271,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => PaymentRefundListController()),
         ChangeNotifierProvider(create: (_) => SShopReviewListController()),
       ],
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
@@ -363,7 +363,7 @@ class _MyAppState extends State<MyApp> {
         channelDescription: 'channel description',
         importance: Importance.max,
         icon: '');
-    final iOS = const IOSNotificationDetails();
+    final iOS = IOSNotificationDetails();
     final platform = NotificationDetails(android: android, iOS: iOS);
 
     await flutterLocalNotificationsPlugin.show(

@@ -56,16 +56,15 @@ class MainScreenController extends ChangeNotifier {
   }
 
   onNavigation(index, screen, context) {
-
     currentScreen = screen;
     currentTab = index;
     notifyListeners();
   }
 
-  onSignOut(){
-    currentTab=0;
-    isFirstLoad=true;
-    currentScreen=HomeScreenView(refreshPage:false);
+  onSignOut() {
+    currentTab = 0;
+    isFirstLoad = true;
+    currentScreen = HomeScreenView(refreshPage: false);
     notifyListeners();
   }
 
@@ -150,8 +149,8 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-  hideBottomNavigationBar(){
-    hideBottomNavigation=true;
+  hideBottomNavigationBar() {
+    hideBottomNavigation = true;
     notifyListeners();
   }
 
@@ -178,7 +177,9 @@ class MainScreenController extends ChangeNotifier {
 
   void onAccountPressed() {
     currentTab = 4;
-    currentScreen = ProfileScreenView(isRefreshed: true,);
+    currentScreen = ProfileScreenView(
+      isRefreshed: true,
+    );
     notifyListeners();
   }
 
@@ -260,8 +261,8 @@ class MainScreenController extends ChangeNotifier {
         notifyListeners();
       });
     } else {
-      final read=Provider.of<HomeScreenController>(context,listen: false);
-      read.initState(context,true);
+      final read = Provider.of<HomeScreenController>(context, listen: false);
+      read.initState(context, true);
       Navigator.pop(context);
       // Navigator.pushAndRemoveUntil(
       //   context,
